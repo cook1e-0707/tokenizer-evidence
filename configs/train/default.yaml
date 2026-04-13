@@ -1,0 +1,6 @@
+train:
+  batch_size: 2
+  epochs: 1
+  learning_rate: 0.0001
+  objective: bucket_mass
+  num_workers: 0

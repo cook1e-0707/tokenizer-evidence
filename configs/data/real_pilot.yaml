@@ -1,0 +1,4 @@
+data:
+  name: real-pilot
+  carrier_catalog_path: configs/data/real_pilot_catalog.yaml
+  parser_smoke_path: tests/data/synthetic_evidence.json

@@ -1,0 +1,12 @@
+{
+  "prompt": "Synthetic ownership evidence prompt.",
+  "expected_sequence": ["TOK_A", "TOK_B", "TOK_C"],
+  "records": [
+    {"position": 0, "bucket_id": "bucket_0", "symbol": "TOK_A", "score": 0.98},
+    {"position": 0, "bucket_id": "bucket_0", "symbol": "DISTRACTOR_0", "score": 0.21},
+    {"position": 1, "bucket_id": "bucket_1", "symbol": "TOK_B", "score": 0.97},
+    {"position": 1, "bucket_id": "bucket_1", "symbol": "DISTRACTOR_1", "score": 0.31},
+    {"position": 2, "bucket_id": "bucket_0", "symbol": "TOK_C", "score": 0.96},
+    {"position": 2, "bucket_id": "bucket_0", "symbol": "DISTRACTOR_2", "score": 0.41}
+  ]
+}

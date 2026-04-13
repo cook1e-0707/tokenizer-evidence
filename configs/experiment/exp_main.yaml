@@ -1,0 +1,18 @@
+includes:
+  - ../model/gpt2_pilot.yaml
+  - ../data/real_pilot.yaml
+  - ../eval/default.yaml
+  - ../attack/scrub_default.yaml
+  - ../runtime/pilot_cpu.yaml
+
+run:
+  experiment_name: exp_main
+  mode: eval
+  method: our_method
+  seed: 23
+
+eval:
+  verification_mode: canonical_render
+  render_format: canonical_v1
+  payload_text: PILOT
+  audit_strict: true

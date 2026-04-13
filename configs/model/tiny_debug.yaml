@@ -1,0 +1,5 @@
+model:
+  name: tiny-debug
+  family: synthetic
+  tokenizer_name: synthetic-tokenizer
+  max_length: 128

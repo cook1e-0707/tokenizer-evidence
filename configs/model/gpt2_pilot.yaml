@@ -1,0 +1,6 @@
+model:
+  name: gpt2-pilot
+  family: huggingface-causal-lm
+  tokenizer_name: gpt2
+  tokenizer_backend: huggingface
+  max_length: 256

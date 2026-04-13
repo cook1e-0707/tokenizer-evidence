@@ -1,0 +1,5 @@
+data:
+  name: synthetic-smoke
+  train_path: tests/data/synthetic_evidence.json
+  eval_path: tests/data/synthetic_evidence.json
+  parser_smoke_path: tests/data/synthetic_evidence.json

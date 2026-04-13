@@ -1,0 +1,13 @@
+includes:
+  - ../model/tiny_debug.yaml
+  - ../data/synthetic_smoke.yaml
+  - ../train/default.yaml
+  - ../eval/default.yaml
+  - ../runtime/default.yaml
+
+run:
+  experiment_name: exp_alignment
+  mode: train
+  method: our_method
+  seed: 7
+  notes: synthetic training stub remains for compatibility; stage4 real pilot uses exp_recovery or exp_main

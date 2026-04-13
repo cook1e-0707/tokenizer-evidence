@@ -1,0 +1,4 @@
+attack:
+  name: scrub
+  mode: whitespace_scrub
+  strength: 0.1

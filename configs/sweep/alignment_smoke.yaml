@@ -1,0 +1,10 @@
+manifest:
+  name: alignment_smoke
+  script: scripts/train.py
+  config: configs/experiment/exp_alignment.yaml
+  slurm_template: slurm/sweep_alignment.sbatch
+  parameters:
+    - key: run.seed
+      values: [7, 13]
+    - key: model.name
+      values: [tiny-debug]

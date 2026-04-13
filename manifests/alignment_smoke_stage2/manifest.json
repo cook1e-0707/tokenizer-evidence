@@ -1,0 +1,87 @@
+{
+  "created_at": "20260412T060113Z",
+  "entries": [
+    {
+      "config_paths": [
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/model/tiny_debug.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/data/synthetic_smoke.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/train/default.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/eval/default.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/runtime/default.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/experiment/exp_alignment.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_alignment",
+      "launcher_mode": "slurm",
+      "manifest_id": "alignment_smoke-0001",
+      "manifest_name": "alignment_smoke",
+      "method_name": "our_method",
+      "model_name": "tiny-debug",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "results/raw",
+      "overrides": [
+        "run.seed=7",
+        "model.name=tiny-debug"
+      ],
+      "primary_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/experiment/exp_alignment.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 4,
+        "environment_setup": "source ~/.bashrc\n# activate your environment here\n",
+        "gpu_type": null,
+        "mem_gb": 32,
+        "num_gpus": 1,
+        "partition": "gpu",
+        "slurm_template": "slurm/sweep_alignment.sbatch",
+        "time_limit": "02:00:00"
+      },
+      "seed": 7,
+      "status": "dry_run",
+      "tags": []
+    },
+    {
+      "config_paths": [
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/model/tiny_debug.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/data/synthetic_smoke.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/train/default.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/eval/default.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/runtime/default.yaml",
+        "/Users/guanjie/Documents/tokenizer_alignment/configs/experiment/exp_alignment.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_alignment",
+      "launcher_mode": "slurm",
+      "manifest_id": "alignment_smoke-0002",
+      "manifest_name": "alignment_smoke",
+      "method_name": "our_method",
+      "model_name": "tiny-debug",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "results/raw",
+      "overrides": [
+        "run.seed=13",
+        "model.name=tiny-debug"
+      ],
+      "primary_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/experiment/exp_alignment.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 4,
+        "environment_setup": "source ~/.bashrc\n# activate your environment here\n",
+        "gpu_type": null,
+        "mem_gb": 32,
+        "num_gpus": 1,
+        "partition": "gpu",
+        "slurm_template": "slurm/sweep_alignment.sbatch",
+        "time_limit": "02:00:00"
+      },
+      "seed": 13,
+      "status": "dry_run",
+      "tags": []
+    }
+  ],
+  "manifest_name": "alignment_smoke",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/sweep/alignment_smoke.yaml"
+}

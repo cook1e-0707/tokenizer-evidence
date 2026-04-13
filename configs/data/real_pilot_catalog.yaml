@@ -1,0 +1,41 @@
+catalog_name: real-pilot-catalog
+notes: Minimal canonical-render pilot catalog for stage 4 integration.
+tags: [pilot, canonical]
+fields:
+  - field_name: SECTION
+    field_type: category
+    tags: [public]
+    notes: Public section labels used as deterministic carrier slots.
+    buckets:
+      "0": [news, brief]
+      "1": [report, memo]
+      "2": [guide, digest]
+      "3": [update, review]
+    disallowed_carriers: ["", "two words"]
+  - field_name: TONE
+    field_type: style
+    tags: [public]
+    buckets:
+      "0": [calm, steady]
+      "1": [clear, crisp]
+      "2": [warm, bright]
+      "3": [direct, plain]
+    disallowed_carriers: [" ", "\t"]
+  - field_name: TOPIC
+    field_type: topic
+    tags: [public]
+    buckets:
+      "0": [market, finance]
+      "1": [travel, hotel]
+      "2": [health, diet]
+      "3": [science, climate]
+    disallowed_carriers: ["multi word"]
+  - field_name: REGION
+    field_type: geography
+    tags: [public]
+    buckets:
+      "0": [urban, metro]
+      "1": [rural, valley]
+      "2": [coastal, harbor]
+      "3": [inland, prairie]
+    disallowed_carriers: ["\n"]

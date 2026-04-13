@@ -1,0 +1,10 @@
+manifest:
+  name: main_eval_smoke
+  script: scripts/eval.py
+  config: configs/experiment/exp_main.yaml
+  slurm_template: slurm/eval_main.sbatch
+  parameters:
+    - key: run.seed
+      values: [7]
+    - key: run.method
+      values: [our_method, baseline_kgw]

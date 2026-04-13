@@ -1,0 +1,8 @@
+eval:
+  min_score: 0.5
+  max_candidates: 16
+  target_far: 0.01
+  verification_mode: synthetic_fixture
+  render_format: canonical_v1
+  payload_text: OK
+  audit_strict: true

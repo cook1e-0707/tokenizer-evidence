@@ -1,0 +1,14 @@
+runtime:
+  output_root: results/raw
+  launcher_mode: slurm
+  resources:
+    partition: gpu
+    gpu_type: null
+    num_gpus: 1
+    cpus: 4
+    mem_gb: 32
+    time_limit: "02:00:00"
+    account: null
+    environment_setup: |
+      source ~/.bashrc
+      # activate your environment here
