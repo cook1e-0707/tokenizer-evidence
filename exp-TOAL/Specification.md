@@ -395,3 +395,5 @@ Additional constraints for this repository generation:
 8. For GPU-dependent logic, isolate it cleanly and avoid importing heavy training dependencies inside lightweight utility tests.
 9. Create a minimal synthetic data path for parser/verifier smoke tests.
 10. Include a single source of truth for experiment names and result directory creation.
+
+Moved to docs/specs/
