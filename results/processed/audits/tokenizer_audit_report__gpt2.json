@@ -1,0 +1,458 @@
+{
+  "blocked_fields": [],
+  "freeze_timestamp": "20260415T175518Z",
+  "frozen_catalog_provenance": {
+    "catalog_status": "frozen",
+    "freeze_status": "strict_passed",
+    "freeze_timestamp": "20260415T175518Z",
+    "git_commit": "969ba05",
+    "source_catalog": "/Users/guanjie/Documents/tokenizer_alignment/configs/data/source/real_pilot_catalog__gpt2__src_v2.yaml",
+    "tokenizer_backend": "huggingface",
+    "tokenizer_name": "gpt2",
+    "tokenizer_revision_source": "gpt2"
+  },
+  "git_commit": "969ba05",
+  "messages": [],
+  "removed_carriers": [],
+  "source_audit": {
+    "diagnostics": [
+      {
+        "bucket_locations": [
+          "SECTION:0"
+        ],
+        "carrier": "news",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "news",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "news",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          10827
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:1"
+        ],
+        "carrier": "report",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "report",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "report",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          13116
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:2"
+        ],
+        "carrier": "guide",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "guide",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "guide",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          41311
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:3"
+        ],
+        "carrier": "update",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "update",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "update",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          19119
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:3"
+        ],
+        "carrier": "review",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "review",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "review",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          19023
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:0"
+        ],
+        "carrier": "market",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "market",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "market",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          10728
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:1"
+        ],
+        "carrier": "travel",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "travel",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "travel",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          35927
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:2"
+        ],
+        "carrier": "health",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "health",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "health",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          13948
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:3"
+        ],
+        "carrier": "science",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "science",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "science",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          16801
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:3"
+        ],
+        "carrier": "climate",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "climate",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "climate",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          42570
+        ]
+      }
+    ],
+    "field_summaries": {
+      "SECTION": {
+        "bucket_count": 4,
+        "field_type": "category",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 5,
+        "num_token_collisions": 0,
+        "num_total": 5,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "TOPIC": {
+        "bucket_count": 4,
+        "field_type": "topic",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 5,
+        "num_token_collisions": 0,
+        "num_total": 5,
+        "passed": true,
+        "rejected_count": 0
+      }
+    },
+    "is_alignment_safe": true,
+    "num_duplicates": 0,
+    "num_invalid": 0,
+    "num_multi_token": 0,
+    "num_single_token": 10,
+    "num_token_collisions": 0,
+    "num_total": 10,
+    "rejected_carriers": []
+  },
+  "source_catalog": "/Users/guanjie/Documents/tokenizer_alignment/configs/data/source/real_pilot_catalog__gpt2__src_v2.yaml",
+  "strict_audit": {
+    "diagnostics": [
+      {
+        "bucket_locations": [
+          "SECTION:0"
+        ],
+        "carrier": "news",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "news",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "news",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          10827
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:1"
+        ],
+        "carrier": "report",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "report",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "report",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          13116
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:2"
+        ],
+        "carrier": "guide",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "guide",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "guide",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          41311
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:3"
+        ],
+        "carrier": "update",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "update",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "update",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          19119
+        ]
+      },
+      {
+        "bucket_locations": [
+          "SECTION:3"
+        ],
+        "carrier": "review",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "review",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "review",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          19023
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:0"
+        ],
+        "carrier": "market",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "market",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "market",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          10728
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:1"
+        ],
+        "carrier": "travel",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "travel",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "travel",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          35927
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:2"
+        ],
+        "carrier": "health",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "health",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "health",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          13948
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:3"
+        ],
+        "carrier": "science",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "science",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "science",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          16801
+        ]
+      },
+      {
+        "bucket_locations": [
+          "TOPIC:3"
+        ],
+        "carrier": "climate",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "climate",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "climate",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          42570
+        ]
+      }
+    ],
+    "field_summaries": {
+      "SECTION": {
+        "bucket_count": 4,
+        "field_type": "category",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 5,
+        "num_token_collisions": 0,
+        "num_total": 5,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "TOPIC": {
+        "bucket_count": 4,
+        "field_type": "topic",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 5,
+        "num_token_collisions": 0,
+        "num_total": 5,
+        "passed": true,
+        "rejected_count": 0
+      }
+    },
+    "is_alignment_safe": true,
+    "num_duplicates": 0,
+    "num_invalid": 0,
+    "num_multi_token": 0,
+    "num_single_token": 10,
+    "num_token_collisions": 0,
+    "num_total": 10,
+    "rejected_carriers": []
+  },
+  "success": true,
+  "tokenizer_backend": "huggingface",
+  "tokenizer_name": "gpt2",
+  "tokenizer_revision_source": "gpt2"
+}

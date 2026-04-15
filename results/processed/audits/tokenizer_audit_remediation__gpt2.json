@@ -1,0 +1,444 @@
+{
+  "blocked_fields": [
+    "REGION",
+    "TONE"
+  ],
+  "change_log_path": "/Users/guanjie/Documents/tokenizer_alignment/docs/catalog_freezes/real_pilot_catalog__gpt2__v1.md",
+  "fields": [
+    {
+      "buckets": [
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 0,
+          "field_blocked": false,
+          "field_name": "SECTION",
+          "original_members": [
+            "news",
+            "brief"
+          ],
+          "recommended_action": "regroup_with_manual_review",
+          "rejected_members": [
+            {
+              "carrier": "brief",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "news"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 1,
+          "field_blocked": false,
+          "field_name": "SECTION",
+          "original_members": [
+            "report",
+            "memo"
+          ],
+          "recommended_action": "regroup_with_manual_review",
+          "rejected_members": [
+            {
+              "carrier": "memo",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "report"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 2,
+          "field_blocked": false,
+          "field_name": "SECTION",
+          "original_members": [
+            "guide",
+            "digest"
+          ],
+          "recommended_action": "regroup_with_manual_review",
+          "rejected_members": [
+            {
+              "carrier": "digest",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "guide"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 3,
+          "field_blocked": false,
+          "field_name": "SECTION",
+          "original_members": [
+            "update",
+            "review"
+          ],
+          "recommended_action": "keep_as_is",
+          "rejected_members": [],
+          "rejection_reasons": [],
+          "surviving_members": [
+            "update",
+            "review"
+          ]
+        }
+      ],
+      "change_log_messages": [],
+      "field_blocked": false,
+      "field_name": "SECTION",
+      "recommended_action": "regroup_with_manual_review"
+    },
+    {
+      "buckets": [
+        {
+          "bucket_became_empty": true,
+          "bucket_id": 0,
+          "field_blocked": true,
+          "field_name": "TONE",
+          "original_members": [
+            "calm",
+            "steady"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [
+            {
+              "carrier": "calm",
+              "reasons": [
+                "multi_token"
+              ]
+            },
+            {
+              "carrier": "steady",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": []
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 1,
+          "field_blocked": true,
+          "field_name": "TONE",
+          "original_members": [
+            "clear",
+            "crisp"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [
+            {
+              "carrier": "crisp",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "clear"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 2,
+          "field_blocked": true,
+          "field_name": "TONE",
+          "original_members": [
+            "warm",
+            "bright"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [],
+          "rejection_reasons": [],
+          "surviving_members": [
+            "warm",
+            "bright"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 3,
+          "field_blocked": true,
+          "field_name": "TONE",
+          "original_members": [
+            "direct",
+            "plain"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [],
+          "rejection_reasons": [],
+          "surviving_members": [
+            "direct",
+            "plain"
+          ]
+        }
+      ],
+      "change_log_messages": [
+        "TONE bucket 0 became empty after filtering"
+      ],
+      "field_blocked": true,
+      "field_name": "TONE",
+      "recommended_action": "drop_field"
+    },
+    {
+      "buckets": [
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 0,
+          "field_blocked": false,
+          "field_name": "TOPIC",
+          "original_members": [
+            "market",
+            "finance"
+          ],
+          "recommended_action": "regroup_with_manual_review",
+          "rejected_members": [
+            {
+              "carrier": "finance",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "market"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 1,
+          "field_blocked": false,
+          "field_name": "TOPIC",
+          "original_members": [
+            "travel",
+            "hotel"
+          ],
+          "recommended_action": "regroup_with_manual_review",
+          "rejected_members": [
+            {
+              "carrier": "hotel",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "travel"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 2,
+          "field_blocked": false,
+          "field_name": "TOPIC",
+          "original_members": [
+            "health",
+            "diet"
+          ],
+          "recommended_action": "regroup_with_manual_review",
+          "rejected_members": [
+            {
+              "carrier": "diet",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "health"
+          ]
+        },
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 3,
+          "field_blocked": false,
+          "field_name": "TOPIC",
+          "original_members": [
+            "science",
+            "climate"
+          ],
+          "recommended_action": "keep_as_is",
+          "rejected_members": [],
+          "rejection_reasons": [],
+          "surviving_members": [
+            "science",
+            "climate"
+          ]
+        }
+      ],
+      "change_log_messages": [],
+      "field_blocked": false,
+      "field_name": "TOPIC",
+      "recommended_action": "regroup_with_manual_review"
+    },
+    {
+      "buckets": [
+        {
+          "bucket_became_empty": false,
+          "bucket_id": 0,
+          "field_blocked": true,
+          "field_name": "REGION",
+          "original_members": [
+            "urban",
+            "metro"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [
+            {
+              "carrier": "metro",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": [
+            "urban"
+          ]
+        },
+        {
+          "bucket_became_empty": true,
+          "bucket_id": 1,
+          "field_blocked": true,
+          "field_name": "REGION",
+          "original_members": [
+            "rural",
+            "valley"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [
+            {
+              "carrier": "rural",
+              "reasons": [
+                "multi_token"
+              ]
+            },
+            {
+              "carrier": "valley",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": []
+        },
+        {
+          "bucket_became_empty": true,
+          "bucket_id": 2,
+          "field_blocked": true,
+          "field_name": "REGION",
+          "original_members": [
+            "coastal",
+            "harbor"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [
+            {
+              "carrier": "coastal",
+              "reasons": [
+                "multi_token"
+              ]
+            },
+            {
+              "carrier": "harbor",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": []
+        },
+        {
+          "bucket_became_empty": true,
+          "bucket_id": 3,
+          "field_blocked": true,
+          "field_name": "REGION",
+          "original_members": [
+            "inland",
+            "prairie"
+          ],
+          "recommended_action": "drop_field",
+          "rejected_members": [
+            {
+              "carrier": "inland",
+              "reasons": [
+                "multi_token"
+              ]
+            },
+            {
+              "carrier": "prairie",
+              "reasons": [
+                "multi_token"
+              ]
+            }
+          ],
+          "rejection_reasons": [
+            "multi_token"
+          ],
+          "surviving_members": []
+        }
+      ],
+      "change_log_messages": [
+        "REGION bucket 1 became empty after filtering",
+        "REGION bucket 2 became empty after filtering",
+        "REGION bucket 3 became empty after filtering"
+      ],
+      "field_blocked": true,
+      "field_name": "REGION",
+      "recommended_action": "drop_field"
+    }
+  ],
+  "freeze_timestamp": "20260414T031827Z",
+  "git_commit": "969ba05",
+  "messages": [
+    "TONE bucket 0 became empty after filtering",
+    "REGION bucket 1 became empty after filtering",
+    "REGION bucket 2 became empty after filtering",
+    "REGION bucket 3 became empty after filtering"
+  ],
+  "schema_name": "catalog_freeze_remediation_review",
+  "source_catalog": "/Users/guanjie/Documents/tokenizer_alignment/configs/data/real_pilot_catalog.yaml",
+  "tokenizer_backend": "huggingface",
+  "tokenizer_name": "gpt2",
+  "tokenizer_revision_source": "gpt2"
+}

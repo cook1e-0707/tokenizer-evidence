@@ -1,0 +1,37 @@
+catalog_name: real-pilot-catalog-gpt2-src-v2
+notes: Minimal tokenizer-specific source catalog revision for the gpt2 pilot, derived only from approved manual decisions.
+tags: [pilot, canonical, gpt2, source-revision]
+provenance:
+  catalog_status: source_revision
+  revision_name: src_v2
+  tokenizer_name: gpt2
+  tokenizer_backend: huggingface
+  tokenizer_revision_source: gpt2
+  original_source_catalog: /Users/guanjie/Documents/tokenizer_alignment/configs/data/real_pilot_catalog.yaml
+  remediation_review: /Users/guanjie/Documents/tokenizer_alignment/results/processed/audits/tokenizer_audit_remediation__gpt2.json
+  decision_file: /Users/guanjie/Documents/tokenizer_alignment/docs/catalog_freezes/real_pilot_catalog__gpt2__v1_decisions.md
+fields:
+  - field_name: SECTION
+    field_type: category
+    tags: [public]
+    notes: >
+      Surviving members only. Derived from approved manual decision for gpt2 pilot.
+      No automatic regroup and no new candidate mining in this revision.
+    buckets:
+      "0": [news]
+      "1": [report]
+      "2": [guide]
+      "3": [update, review]
+    disallowed_carriers: []
+  - field_name: TOPIC
+    field_type: topic
+    tags: [public]
+    notes: >
+      Surviving members only. Derived from approved manual decision for gpt2 pilot.
+      No automatic regroup and no new candidate mining in this revision.
+    buckets:
+      "0": [market]
+      "1": [travel]
+      "2": [health]
+      "3": [science, climate]
+    disallowed_carriers: []
