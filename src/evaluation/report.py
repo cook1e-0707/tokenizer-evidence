@@ -34,7 +34,17 @@ class SerializableResult:
     def from_json_dict(cls: type[T], payload: dict[str, Any]) -> T:
         valid_fields = {item.name for item in fields(cls)}
         filtered = {key: value for key, value in payload.items() if key in valid_fields}
-        return cls(**filtered)
+        try:
+            return cls(**filtered)
+        except TypeError as error:
+            missing_fields = sorted(
+                field_name
+                for field_name in valid_fields
+                if field_name not in filtered
+            )
+            raise ValueError(
+                f"Could not deserialize {cls.__name__}: missing or incompatible fields {missing_fields}"
+            ) from error
 
     @classmethod
     def load_json(cls: type[T], path: Path) -> T:
@@ -160,7 +170,7 @@ def load_result_json(path: Path) -> SerializableResult:
 def maybe_load_result_json(path: Path) -> SerializableResult | None:
     try:
         return load_result_json(path)
-    except (ValueError, json.JSONDecodeError, OSError):
+    except (ValueError, json.JSONDecodeError, OSError, TypeError):
         return None
 
 

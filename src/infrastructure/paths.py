@@ -59,7 +59,7 @@ def sanitize_component(value: str) -> str:
 
 
 def current_timestamp() -> str:
-    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
 
 
 def get_git_hash(repo_root: Path) -> str:

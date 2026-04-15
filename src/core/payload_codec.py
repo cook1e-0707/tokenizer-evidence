@@ -102,6 +102,36 @@ class BucketPayloadCodec:
     def capacity(self) -> int:
         return self.mixed_radix_codec.capacity()
 
+    def byte_width(self) -> int:
+        """Return the number of codec units needed to encode one byte."""
+
+        width = 1
+        covered = self.capacity()
+        while covered < 256:
+            width += 1
+            covered *= self.capacity()
+        return width
+
+    def _encode_fixed_width_value(self, value: int, width: int) -> tuple[int, ...]:
+        digits: list[int] = [0] * width
+        remaining = value
+        for index in range(width - 1, -1, -1):
+            remaining, digit = divmod(remaining, self.capacity())
+            digits[index] = digit
+        if remaining:
+            raise PayloadCodecError(
+                f"value {value} exceeds fixed-width capacity for width={width} and base={self.capacity()}"
+            )
+        return tuple(digits)
+
+    def _decode_fixed_width_value(self, digits: Sequence[int]) -> int:
+        value = 0
+        for digit in digits:
+            if digit < 0 or digit >= self.capacity():
+                raise PayloadCodecError(f"Digit {digit} out of range for codec capacity {self.capacity()}")
+            value = value * self.capacity() + digit
+        return value
+
     def encode_units(self, payload_units: Sequence[int], apply_rs: bool = False) -> PayloadEncoding:
         for unit in payload_units:
             if unit < 0 or unit >= self.capacity():
@@ -137,11 +167,11 @@ class BucketPayloadCodec:
         return tuple(decoded_symbols)
 
     def encode_bytes(self, payload: bytes, apply_rs: bool = False) -> PayloadEncoding:
-        if self.capacity() < 256:
-            raise PayloadCodecError(
-                f"Codec capacity {self.capacity()} is insufficient for byte-level encoding"
-            )
-        return self.encode_units(list(payload), apply_rs=apply_rs)
+        width = self.byte_width()
+        payload_units: list[int] = []
+        for byte_value in payload:
+            payload_units.extend(self._encode_fixed_width_value(byte_value, width))
+        return self.encode_units(payload_units, apply_rs=apply_rs)
 
     def decode_bytes(
         self,
@@ -149,6 +179,16 @@ class BucketPayloadCodec:
         apply_rs: bool = False,
     ) -> bytes:
         units = self.decode_units(bucket_tuples, apply_rs=apply_rs)
-        if any(unit < 0 or unit > 255 for unit in units):
-            raise PayloadCodecError("Decoded units contain values outside byte range")
-        return bytes(units)
+        width = self.byte_width()
+        if len(units) % width != 0:
+            raise PayloadCodecError(
+                f"Decoded unit count {len(units)} is not divisible by byte width {width}"
+            )
+
+        decoded_bytes: list[int] = []
+        for start in range(0, len(units), width):
+            byte_value = self._decode_fixed_width_value(units[start : start + width])
+            if byte_value < 0 or byte_value > 255:
+                raise PayloadCodecError("Decoded units contain values outside byte range")
+            decoded_bytes.append(byte_value)
+        return bytes(decoded_bytes)

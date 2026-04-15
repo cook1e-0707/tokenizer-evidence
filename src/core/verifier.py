@@ -187,26 +187,41 @@ def verify_structured_text(
 
     decoded_units: tuple[int, ...] = ()
     decoded_payload: str | None = None
+    decoded_bytes: bytes | None = None
     if bucket_tuples:
         decoded_units = payload_codec.decode_units(bucket_tuples, apply_rs=verify_config.apply_rs)
         if verify_config.decode_as_bytes:
             try:
-                decoded_bytes = payload_codec.decode_bytes(bucket_tuples, apply_rs=verify_config.apply_rs)
+                decoded_bytes = payload_codec.decode_bytes(
+                    bucket_tuples,
+                    apply_rs=verify_config.apply_rs,
+                )
                 decoded_payload = decoded_bytes.decode("utf-8", errors="replace")
             except Exception:
                 decoded_payload = None
 
     expected_payload_units: tuple[int, ...] = ()
+    expected_payload_bytes: bytes | None = None
     if expected_payload is not None:
         if isinstance(expected_payload, bytes):
+            expected_payload_bytes = expected_payload
             expected_payload_units = tuple(expected_payload)
         else:
             expected_payload_units = tuple(int(item) for item in expected_payload)
-        if decoded_units and decoded_units != expected_payload_units:
+        if isinstance(expected_payload, bytes):
+            if decoded_bytes is None or decoded_bytes != expected_payload_bytes:
+                bucket_mismatches.append("decoded payload bytes differ from expected payload bytes")
+        elif decoded_units and decoded_units != expected_payload_units:
             bucket_mismatches.append("decoded payload units differ from expected payload units")
 
     match_ratio = 0.0
-    if expected_payload_units:
+    if expected_payload_bytes is not None:
+        observed_bytes = tuple(decoded_bytes) if decoded_bytes is not None else ()
+        match_ratio = compute_match_ratio(
+            tuple(str(item) for item in observed_bytes),
+            tuple(str(item) for item in expected_payload_bytes),
+        )
+    elif expected_payload_units:
         match_ratio = compute_match_ratio(
             tuple(str(item) for item in decoded_units),
             tuple(str(item) for item in expected_payload_units),
@@ -219,7 +234,9 @@ def verify_structured_text(
     success = bool(bucket_tuples)
     if verify_config.require_all_fields and unresolved_fields:
         success = False
-    if expected_payload_units and decoded_units != expected_payload_units:
+    if expected_payload_bytes is not None and decoded_bytes != expected_payload_bytes:
+        success = False
+    if expected_payload_bytes is None and expected_payload_units and decoded_units != expected_payload_units:
         success = False
     if malformed:
         success = False

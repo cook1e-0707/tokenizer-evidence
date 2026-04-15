@@ -15,6 +15,13 @@ def test_bucket_payload_codec_round_trip_for_bytes() -> None:
     assert codec.decode_bytes(encoding.bucket_tuples) == b"OK"
 
 
+def test_bucket_payload_codec_round_trip_for_bytes_with_low_capacity() -> None:
+    codec = BucketPayloadCodec((4, 4))
+    encoding = codec.encode_bytes(b"OK")
+    assert len(encoding.bucket_tuples) == 4
+    assert codec.decode_bytes(encoding.bucket_tuples) == b"OK"
+
+
 def test_codec_rejects_out_of_range_values() -> None:
     codec = MixedRadixCodec((2, 2))
     with pytest.raises(PayloadCodecError):

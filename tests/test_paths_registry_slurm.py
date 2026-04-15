@@ -1,7 +1,8 @@
 from pathlib import Path
+from time import sleep
 
 from src.infrastructure.manifest import build_manifest_from_config
-from src.infrastructure.paths import discover_repo_root, make_run_id
+from src.infrastructure.paths import build_run_identity, discover_repo_root, make_run_id
 from src.infrastructure.registry import (
     RegistryRecord,
     append_registry_record,
@@ -16,6 +17,14 @@ def test_run_id_changes_with_timestamp() -> None:
     first = make_run_id("exp_alignment", "our_method", "tiny-debug", 7, "abc123", "20260101T000000Z")
     second = make_run_id("exp_alignment", "our_method", "tiny-debug", 7, "abc123", "20260101T000001Z")
     assert first != second
+
+
+def test_build_run_identity_is_unique_for_back_to_back_calls(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    first = build_run_identity(repo_root, "exp_recovery", "gpt2-pilot", 17, method_name="our_method")
+    sleep(0.001)
+    second = build_run_identity(repo_root, "exp_recovery", "gpt2-pilot", 17, method_name="our_method")
+    assert first.run_id != second.run_id
 
 
 def test_registry_append_load_and_failure_detection(tmp_path: Path) -> None:

@@ -1,4 +1,11 @@
-from src.evaluation.report import AggregatedComparisonRow, EvalRunSummary, TrainRunSummary
+import json
+
+from src.evaluation.report import (
+    AggregatedComparisonRow,
+    EvalRunSummary,
+    TrainRunSummary,
+    maybe_load_result_json,
+)
 
 
 def test_train_run_summary_json_round_trip(tmp_path) -> None:
@@ -82,3 +89,25 @@ def test_eval_run_summary_serializes_stage4_fields() -> None:
     assert payload["schema_name"] == "eval_run_summary"
     assert payload["verification_mode"] == "canonical_render"
     assert payload["decoded_payload"] == "OK"
+
+
+def test_maybe_load_result_json_skips_legacy_incomplete_payload(tmp_path) -> None:
+    legacy_payload = {
+        "schema_name": "train_run_summary",
+        "run_id": "legacy-run",
+        "experiment_name": "exp_alignment",
+        "model_name": "tiny-debug",
+        "seed": 7,
+        "timestamp": "20260101T000000Z",
+        "status": "completed",
+        "objective": "bucket_mass",
+        "dataset_name": "synthetic-smoke",
+        "dataset_size": 1,
+        "steps": 1,
+        "final_loss": 0.5,
+        "run_dir": "results/raw/exp_alignment/legacy-run",
+    }
+    path = tmp_path / "legacy_train_summary.json"
+    path.write_text(json.dumps(legacy_payload), encoding="utf-8")
+
+    assert maybe_load_result_json(path) is None
