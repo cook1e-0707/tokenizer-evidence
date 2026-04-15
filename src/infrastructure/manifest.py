@@ -8,6 +8,7 @@ from typing import Any, Iterable, Mapping
 
 import yaml
 
+from src.core.catalog_freeze import load_required_frozen_catalog
 from src.infrastructure.config import ResolvedConfig, load_config
 from src.infrastructure.paths import current_timestamp, discover_repo_root, sanitize_component
 from src.infrastructure.registry import (
@@ -289,6 +290,19 @@ def _build_resource_request(
     )
 
 
+def _require_frozen_catalog_for_pilot(resolved: ResolvedConfig, repo_root: Path) -> None:
+    if resolved.method_name != "our_method":
+        return
+    if resolved.run.mode != "eval":
+        return
+    if resolved.eval.verification_mode != "canonical_render":
+        return
+    catalog_path = Path(resolved.data.carrier_catalog_path)
+    if not catalog_path.is_absolute():
+        catalog_path = repo_root / catalog_path
+    load_required_frozen_catalog(catalog_path)
+
+
 def _parameter_grid(manifest_settings: Mapping[str, Any]) -> list[tuple[str, list[Any]]]:
     parameters: list[tuple[str, list[Any]]] = []
     explicit_parameters = manifest_settings.get("parameters", [])
@@ -337,6 +351,7 @@ def _expand_entries_from_settings(
         if not config_path.is_absolute():
             config_path = repo_root / config_path
         resolved = load_config(config_path, overrides=list(overrides))
+        _require_frozen_catalog_for_pilot(resolved, repo_root)
         resource_request = _build_resource_request(resolved, manifest_settings)
         manifest_id = f"{sanitize_component(manifest_name)}-{index:04d}"
         entries.append(
@@ -381,6 +396,7 @@ def build_manifest_from_config(config_path: Path) -> ManifestFile:
         return _expand_entries_from_settings(config_path, manifest_settings, repo_root)
 
     resolved = load_config(config_path)
+    _require_frozen_catalog_for_pilot(resolved, repo_root)
     entry = ManifestEntry(
         manifest_id=f"{sanitize_component(resolved.experiment_name)}-0001",
         experiment_name=resolved.experiment_name,

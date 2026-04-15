@@ -7,7 +7,7 @@ The current implementation covers:
 - schema-aware result aggregation
 - tokenizer audit and bucket-spec validation
 - canonical render -> parse -> verify integration
-- a CPU-friendly real pilot eval path
+- a CPU-friendly real pilot eval path gated by frozen catalogs
 
 Full training and paper-specific baseline integration remain follow-up work.
 
@@ -43,13 +43,35 @@ pytest
 python3 -m scripts.train --config configs/experiment/exp_alignment.yaml
 ```
 
-4. Run a local real-mode pilot evaluation:
+4. Freeze a source carrier catalog before pilot manifest/eval:
 
 ```bash
-python3 -m scripts.eval --config configs/experiment/exp_recovery.yaml
+python3 scripts/freeze_catalog.py \
+  --source-catalog configs/data/real_pilot_catalog.yaml \
+  --tokenizer-backend mock \
+  --frozen-catalog-output artifacts/carrier_catalog_freeze_v1.yaml \
+  --audit-report-output artifacts/tokenizer_audit_report_mock.json \
+  --change-log-output artifacts/catalog_change_log.md \
+  --data-config-output artifacts/real_pilot_frozen.yaml
 ```
 
-5. Run the tokenizer audit against the pilot carrier catalog.
+5. If freeze fails, generate a remediation review instead of rewriting the catalog automatically:
+
+```bash
+python3 scripts/review_catalog_freeze.py \
+  --audit-report results/processed/audits/tokenizer_audit_report__gpt2.json \
+  --change-log docs/catalog_freezes/real_pilot_catalog__gpt2__v1.md \
+  --output-table results/processed/audits/tokenizer_audit_remediation__gpt2.json \
+  --output-review docs/catalog_freezes/real_pilot_catalog__gpt2__v1_review.md
+```
+
+6. Run a local real-mode pilot evaluation against a frozen-catalog overlay config:
+
+```bash
+python3 -m scripts.eval --config /path/to/generated_frozen_experiment_config.yaml
+```
+
+7. Run the tokenizer audit against the pilot carrier catalog.
 
 If you want a real Hugging Face tokenizer, install `transformers` first. The mock path remains useful for local validation:
 
@@ -60,7 +82,7 @@ python3 scripts/tokenizer_audit.py \
   --no-strict
 ```
 
-6. Run the parser/verifier synthetic smoke path:
+8. Run the parser/verifier synthetic smoke path:
 
 ```bash
 python3 scripts/smoke_verify.py
@@ -104,11 +126,11 @@ python3 -m scripts.make_manifest \
   --output manifests/alignment_smoke.jsonl
 ```
 
-Generate the stage-4 pilot manifest directly from the experiment config:
+Generate the stage-4 pilot manifest only from an experiment config that points to a frozen catalog:
 
 ```bash
 python3 -m scripts.make_manifest \
-  --config configs/experiment/exp_recovery.yaml \
+  --config /path/to/generated_frozen_experiment_config.yaml \
   --dry-run
 ```
 

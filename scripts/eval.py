@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 
 from src.baselines.base import build_baseline_adapter
-from src.core.bucket_mapping import load_bucket_layout
+from src.core.catalog_freeze import load_required_frozen_catalog
 from src.core.payload_codec import BucketPayloadCodec
 from src.core.render import render_bucket_tuples, render_config_from_name
 from src.core.verifier import (
@@ -114,7 +114,7 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
                 f"carrier_catalog_path does not exist for canonical_render mode: {catalog_path}"
             )
 
-        layout = load_bucket_layout(catalog_path)
+        layout = load_required_frozen_catalog(catalog_path)
         codec = BucketPayloadCodec(bucket_radices=layout.radices)
         payload_bytes = config.eval.payload_text.encode("utf-8")
         encoding = codec.encode_bytes(payload_bytes, apply_rs=False)

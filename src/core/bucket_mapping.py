@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from functools import cached_property
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
@@ -200,9 +200,15 @@ class BucketLayout:
     catalog_name: str = ""
     notes: str = ""
     tags: tuple[str, ...] = ()
+    provenance: dict[str, str] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "tags", tuple(str(tag) for tag in self.tags))
+        object.__setattr__(
+            self,
+            "provenance",
+            {str(key): str(value) for key, value in self.provenance.items()},
+        )
         self.validate()
 
     def validate(self) -> None:
@@ -242,6 +248,7 @@ class BucketLayout:
             "catalog_name": self.catalog_name,
             "notes": self.notes,
             "tags": list(self.tags),
+            "provenance": dict(self.provenance),
             "fields": [field.to_dict() for field in self.fields],
         }
 
@@ -250,11 +257,20 @@ class BucketLayout:
         raw_fields = payload.get("fields")
         if not isinstance(raw_fields, Sequence):
             raise BucketValidationError("BucketLayout payload must contain a 'fields' sequence")
+        raw_provenance = payload.get("provenance", {})
+        if raw_provenance is None:
+            raw_provenance = {}
+        if not isinstance(raw_provenance, Mapping):
+            raise BucketValidationError("BucketLayout provenance must be a mapping when present")
         return cls(
             fields=tuple(FieldBucketSpec.from_dict(item) for item in raw_fields),
             catalog_name=str(payload.get("catalog_name", "")),
             notes=str(payload.get("notes", "")),
             tags=tuple(payload.get("tags", [])),
+            provenance={
+                str(key): str(value)
+                for key, value in raw_provenance.items()
+            },
         )
 
 

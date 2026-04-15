@@ -6,19 +6,24 @@ Validate the repository locally before touching the cluster:
 
 ```bash
 .venv/bin/python -m pytest
-.venv/bin/python scripts/make_manifest.py --config configs/experiment/exp_recovery.yaml --dry-run
-.venv/bin/python scripts/eval.py --config configs/experiment/exp_recovery.yaml --force
+.venv/bin/python scripts/freeze_catalog.py \
+  --source-catalog configs/data/real_pilot_catalog.yaml \
+  --tokenizer-backend mock \
+  --frozen-catalog-output artifacts/carrier_catalog_freeze_v1.yaml \
+  --audit-report-output artifacts/tokenizer_audit_report_mock.json \
+  --change-log-output artifacts/catalog_change_log.md \
+  --data-config-output artifacts/real_pilot_frozen.yaml
 ```
 
 The stage-4 pilot path does not require GPU.
 
 ## Generate the pilot manifest
 
-Create the manifest locally from the experiment config:
+Create the manifest locally from an experiment config that points to a frozen catalog:
 
 ```bash
 .venv/bin/python scripts/make_manifest.py \
-  --config configs/experiment/exp_recovery.yaml \
+  --config /path/to/generated_frozen_experiment_config.yaml \
   --output manifests/exp_recovery/manifest.json
 ```
 
@@ -69,4 +74,4 @@ Failed or timed-out entries can be requeued with:
 
 ## Tokenizer audit note
 
-Real Hugging Face tokenizer audit requires `transformers` to be installed in the environment. The cluster submission path does not depend on GPU for the stage-4 pilot.
+Real Hugging Face tokenizer audit requires `transformers` to be installed in the environment. The cluster submission path does not depend on GPU for the stage-4 pilot, but pilot manifest/eval are blocked unless the catalog has frozen-catalog provenance from a strict-passed freeze workflow.
