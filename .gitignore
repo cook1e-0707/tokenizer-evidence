@@ -23,3 +23,9 @@ results/figures/*
 manifests/*.jsonl
 manifests/*.json
 manifests/rendered/
+
+# generated manifests / local agent files
+manifest.json
+.agents/
+plugins/
+CLAUDE.md
