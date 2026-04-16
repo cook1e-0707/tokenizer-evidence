@@ -10,7 +10,12 @@ from src.infrastructure.registry import (
     find_unsubmitted_records,
     load_registry,
 )
-from src.infrastructure.slurm import build_entry_command, parse_sbatch_job_id, prepare_submission
+from src.infrastructure.slurm import (
+    build_entry_command,
+    parse_sbatch_job_id,
+    prepare_submission,
+    render_sbatch_script,
+)
 
 
 def test_run_id_changes_with_timestamp() -> None:
@@ -86,6 +91,26 @@ def test_slurm_command_generation_and_render_paths(tmp_path: Path) -> None:
     assert "runtime.manifest_id" in command
     assert paths.stdout_path.name == "stdout.log"
     assert rendered_path.exists()
+
+
+def test_rendered_slurm_script_disables_nounset_during_environment_setup(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    manifest_file = build_manifest_from_config(repo_root / "configs" / "sweep" / "alignment_smoke.yaml")
+    entry = manifest_file.entries[0]
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text("{}", encoding="utf-8")
+
+    _identity, paths, command, _rendered_path = prepare_submission(
+        entry=entry,
+        manifest_path=manifest_path,
+        repo_root=repo_root,
+        force=True,
+    )
+    rendered = render_sbatch_script(entry=entry, command=command, paths=paths)
+
+    assert "set -euo pipefail" in rendered
+    assert "set +u\nsource ~/.bashrc" in rendered
+    assert "\nset -u\n\ncd \"$SLURM_SUBMIT_DIR\"" in rendered
 
 
 def test_parse_sbatch_job_id_extracts_numeric_id() -> None:
