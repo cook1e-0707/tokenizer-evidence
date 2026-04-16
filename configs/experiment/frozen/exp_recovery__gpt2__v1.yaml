@@ -1,4 +1,4 @@
 includes:
-- /Users/guanjie/Documents/tokenizer_alignment/configs/experiment/exp_recovery.yaml
+- ../exp_recovery.yaml
 data:
-  carrier_catalog_path: /Users/guanjie/Documents/tokenizer_alignment/configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml

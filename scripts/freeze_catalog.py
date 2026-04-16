@@ -158,6 +158,7 @@ def main() -> int:
             frozen_catalog_path=frozen_catalog_output,
             data_name=args.data_name,
             source_catalog_path=source_catalog_path,
+            repo_root=repo_root,
         )
     if experiment_config_output is not None:
         assert base_experiment_config is not None
@@ -165,6 +166,7 @@ def main() -> int:
             output_path=experiment_config_output,
             base_experiment_config=base_experiment_config,
             frozen_catalog_path=frozen_catalog_output,
+            repo_root=repo_root,
         )
 
     print("freeze_status=success")

@@ -7,6 +7,7 @@ import yaml
 
 from scripts.freeze_catalog import _resolve_tokenizer_settings
 from src.core.bucket_mapping import load_bucket_layout
+from src.core.catalog_freeze import write_frozen_data_config, write_frozen_experiment_config
 from src.infrastructure.paths import discover_repo_root
 
 
@@ -154,3 +155,46 @@ def test_tokenizer_name_can_be_inherited_from_base_experiment_config() -> None:
     )
     assert backend == "huggingface"
     assert name == "gpt2"
+
+
+def test_generated_frozen_configs_use_portable_paths(tmp_path: Path) -> None:
+    repo_root = tmp_path / "repo"
+    frozen_catalog_path = repo_root / "configs" / "data" / "frozen" / "real_pilot_catalog__gpt2__v1.yaml"
+    source_catalog_path = repo_root / "configs" / "data" / "source" / "real_pilot_catalog__gpt2__src_v2.yaml"
+    base_experiment_config = repo_root / "configs" / "experiment" / "exp_recovery.yaml"
+
+    frozen_catalog_path.parent.mkdir(parents=True, exist_ok=True)
+    source_catalog_path.parent.mkdir(parents=True, exist_ok=True)
+    base_experiment_config.parent.mkdir(parents=True, exist_ok=True)
+    frozen_catalog_path.write_text("catalog_name: frozen\nfields: []\n", encoding="utf-8")
+    source_catalog_path.write_text("catalog_name: source\nfields: []\n", encoding="utf-8")
+    base_experiment_config.write_text("run:\n  experiment_name: exp_recovery\n", encoding="utf-8")
+
+    data_config_path = repo_root / "configs" / "data" / "generated_data.yaml"
+    experiment_config_path = repo_root / "configs" / "experiment" / "generated_experiment.yaml"
+
+    write_frozen_data_config(
+        output_path=data_config_path,
+        frozen_catalog_path=frozen_catalog_path,
+        data_name="real-pilot-frozen",
+        source_catalog_path=source_catalog_path,
+        repo_root=repo_root,
+    )
+    write_frozen_experiment_config(
+        output_path=experiment_config_path,
+        base_experiment_config=base_experiment_config,
+        frozen_catalog_path=frozen_catalog_path,
+        repo_root=repo_root,
+    )
+
+    data_payload = yaml.safe_load(data_config_path.read_text(encoding="utf-8"))
+    experiment_payload = yaml.safe_load(experiment_config_path.read_text(encoding="utf-8"))
+
+    assert data_payload["data"]["carrier_catalog_path"] == "configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml"
+    assert data_payload["data"]["source_carrier_catalog_path"] == (
+        "configs/data/source/real_pilot_catalog__gpt2__src_v2.yaml"
+    )
+    assert experiment_payload["includes"] == ["exp_recovery.yaml"]
+    assert experiment_payload["data"]["carrier_catalog_path"] == (
+        "configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml"
+    )

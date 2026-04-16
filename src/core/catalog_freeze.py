@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from os.path import relpath
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -660,18 +661,30 @@ def save_frozen_catalog(outcome: CatalogFreezeOutcome, path: Path) -> Path:
     return save_bucket_layout(outcome.frozen_layout, path)
 
 
+def _repo_relative_path(path: Path, repo_root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(repo_root.resolve()))
+    except ValueError:
+        return str(path.resolve())
+
+
+def _relative_include_path(output_path: Path, target_path: Path) -> str:
+    return str(Path(relpath(target_path.resolve(), start=output_path.parent.resolve())))
+
+
 def write_frozen_data_config(
     *,
     output_path: Path,
     frozen_catalog_path: Path,
     data_name: str,
     source_catalog_path: Path,
+    repo_root: Path,
 ) -> Path:
     payload = {
         "data": {
             "name": data_name,
-            "carrier_catalog_path": str(frozen_catalog_path),
-            "source_carrier_catalog_path": str(source_catalog_path),
+            "carrier_catalog_path": _repo_relative_path(frozen_catalog_path, repo_root),
+            "source_carrier_catalog_path": _repo_relative_path(source_catalog_path, repo_root),
         }
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -684,11 +697,12 @@ def write_frozen_experiment_config(
     output_path: Path,
     base_experiment_config: Path,
     frozen_catalog_path: Path,
+    repo_root: Path,
 ) -> Path:
     payload = {
-        "includes": [str(base_experiment_config)],
+        "includes": [_relative_include_path(output_path, base_experiment_config)],
         "data": {
-            "carrier_catalog_path": str(frozen_catalog_path),
+            "carrier_catalog_path": _repo_relative_path(frozen_catalog_path, repo_root),
         },
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
