@@ -90,6 +90,19 @@ def test_manifest_generator_creates_expected_entry_count(tmp_path: Path) -> None
     assert {entry.method_name for entry in manifest_file.entries} == {"our_method", "baseline_kgw"}
 
 
+def test_build_manifest_from_config_applies_dotted_output_root_override() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    manifest_file = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_recovery__gpt2__v1.yaml",
+        overrides=["runtime.output_root=/tmp/pilot-runs"],
+    )
+
+    assert len(manifest_file.entries) == 1
+    entry = manifest_file.entries[0]
+    assert entry.output_root == "/tmp/pilot-runs"
+    assert entry.overrides == ("runtime.output_root=/tmp/pilot-runs",)
+
+
 def test_update_manifest_status_persists(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     manifest_file = build_manifest_from_config(repo_root / "configs" / "sweep" / "alignment_smoke.yaml")
@@ -119,3 +132,58 @@ def test_make_manifest_script_supports_direct_repo_root_execution(tmp_path: Path
     )
     assert "wrote 2 entries" in completed.stdout
     assert output_path.exists()
+
+
+def test_make_manifest_script_supports_multiple_overrides(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_path = tmp_path / "manifest.json"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/make_manifest.py",
+            "--config",
+            "configs/experiment/frozen/exp_recovery__gpt2__v1.yaml",
+            "--output",
+            str(output_path),
+            "--override",
+            "runtime.output_root=/scratch/pilot/runs",
+            "--override",
+            "runtime.environment_setup=source ~/.bashrc && source /home/test/.venv/bin/activate",
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert "wrote 1 entries" in completed.stdout
+
+    manifest_file = load_manifest(output_path)
+    entry = manifest_file.entries[0]
+    assert entry.output_root == "/scratch/pilot/runs"
+    assert entry.requested_resources.environment_setup == (
+        "source ~/.bashrc && source /home/test/.venv/bin/activate"
+    )
+    assert entry.overrides == (
+        "runtime.output_root=/scratch/pilot/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc && source /home/test/.venv/bin/activate",
+    )
+
+
+def test_make_manifest_script_rejects_invalid_override_format() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/make_manifest.py",
+            "--config",
+            "configs/experiment/frozen/exp_recovery__gpt2__v1.yaml",
+            "--override",
+            "runtime.output_root",
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode != 0
+    assert "expected dotted.key=value" in completed.stderr

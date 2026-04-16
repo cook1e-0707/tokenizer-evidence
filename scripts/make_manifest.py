@@ -9,6 +9,7 @@ if __package__ in {None, ""}:
 import argparse
 from pathlib import Path
 
+from src.infrastructure.config import ConfigError
 from src.infrastructure.manifest import build_manifest_from_config, save_manifest
 from src.infrastructure.paths import discover_repo_root, sanitize_component
 
@@ -19,6 +20,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sweep", help="Backward-compatible alias for --config.")
     parser.add_argument("--output", help="Optional manifest output path.")
     parser.add_argument("--dry-run", action="store_true", help="Render summary without writing the file.")
+    parser.add_argument(
+        "--override",
+        action="append",
+        default=[],
+        help="Repeatable dotted override, e.g. runtime.output_root=/abs/path",
+    )
     return parser.parse_args()
 
 
@@ -37,7 +44,10 @@ def main() -> int:
     if not config_path.is_absolute():
         config_path = repo_root / config_path
 
-    manifest_file = build_manifest_from_config(config_path)
+    try:
+        manifest_file = build_manifest_from_config(config_path, overrides=args.override)
+    except ConfigError as error:
+        raise SystemExit(str(error)) from error
     output_path = Path(args.output) if args.output else default_output_path(repo_root, manifest_file.manifest_name)
     if not output_path.is_absolute():
         output_path = repo_root / output_path

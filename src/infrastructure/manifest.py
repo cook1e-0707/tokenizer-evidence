@@ -9,7 +9,7 @@ from typing import Any, Iterable, Mapping
 import yaml
 
 from src.core.catalog_freeze import load_required_frozen_catalog
-from src.infrastructure.config import ResolvedConfig, load_config
+from src.infrastructure.config import ConfigError, ResolvedConfig, load_config
 from src.infrastructure.paths import current_timestamp, discover_repo_root, sanitize_component
 from src.infrastructure.registry import (
     RegistryRecord,
@@ -259,6 +259,22 @@ def _read_yaml(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _normalize_manifest_overrides(overrides: Iterable[str] | None) -> tuple[str, ...]:
+    if not overrides:
+        return ()
+
+    normalized: list[str] = []
+    for override in overrides:
+        if "=" not in override:
+            raise ConfigError(f"Invalid override {override!r}; expected dotted.key=value")
+        key, value = override.split("=", 1)
+        normalized_key = key.strip()
+        if normalized_key == "runtime.environment_setup":
+            normalized_key = "runtime.resources.environment_setup"
+        normalized.append(f"{normalized_key}={value}")
+    return tuple(normalized)
+
+
 def _build_resource_request(
     resolved: ResolvedConfig,
     manifest_settings: Mapping[str, Any],
@@ -330,6 +346,7 @@ def _expand_entries_from_settings(
     source_path: Path,
     manifest_settings: Mapping[str, Any],
     repo_root: Path,
+    base_overrides: tuple[str, ...] = (),
 ) -> ManifestFile:
     manifest_name = str(manifest_settings.get("name", source_path.stem))
     primary_config_path = str(manifest_settings.get("config", source_path))
@@ -344,9 +361,10 @@ def _expand_entries_from_settings(
 
     entries: list[ManifestEntry] = []
     for index, combination in enumerate(combinations, start=1):
-        overrides = tuple(
+        parameter_overrides = tuple(
             f"{key}={value}" for (key, _), value in zip(parameters, combination, strict=False)
         )
+        overrides = parameter_overrides + tuple(base_overrides)
         config_path = Path(primary_config_path)
         if not config_path.is_absolute():
             config_path = repo_root / config_path
@@ -388,14 +406,23 @@ def _expand_entries_from_settings(
     return manifest_file
 
 
-def build_manifest_from_config(config_path: Path) -> ManifestFile:
+def build_manifest_from_config(
+    config_path: Path,
+    overrides: list[str] | tuple[str, ...] | None = None,
+) -> ManifestFile:
     repo_root = discover_repo_root(config_path.parent)
     payload = _read_yaml(config_path)
+    normalized_overrides = _normalize_manifest_overrides(overrides)
     manifest_settings = payload.get("manifest")
     if isinstance(manifest_settings, Mapping):
-        return _expand_entries_from_settings(config_path, manifest_settings, repo_root)
+        return _expand_entries_from_settings(
+            config_path,
+            manifest_settings,
+            repo_root,
+            base_overrides=normalized_overrides,
+        )
 
-    resolved = load_config(config_path)
+    resolved = load_config(config_path, overrides=list(normalized_overrides))
     _require_frozen_catalog_for_pilot(resolved, repo_root)
     entry = ManifestEntry(
         manifest_id=f"{sanitize_component(resolved.experiment_name)}-0001",
@@ -404,7 +431,7 @@ def build_manifest_from_config(config_path: Path) -> ManifestFile:
         model_name=resolved.model_name,
         seed=resolved.seed,
         config_paths=resolved.source_config_paths,
-        overrides=(),
+        overrides=normalized_overrides,
         output_root=resolved.output_root,
         output_dir=resolved.runtime.output_dir,
         requested_resources=ResourceRequest(
