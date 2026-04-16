@@ -71,6 +71,7 @@ def build_entry_command(
         command_parts = ["python3", str(script_path), "--config", entry.primary_config_path]
     else:
         command_parts = ["python3", entry.entry_point, "--config", entry.primary_config_path]
+    command_parts.append("--force")
     for override in entry.overrides:
         if override.startswith("run.method_name="):
             command_parts.extend(["--override", override.replace("run.method_name=", "run.method=")])

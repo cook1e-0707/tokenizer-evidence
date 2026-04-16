@@ -88,6 +88,7 @@ def test_slurm_command_generation_and_render_paths(tmp_path: Path) -> None:
     )
     assert entry.manifest_id in rendered_path.name
     assert identity.run_id in command
+    assert "--force" in command
     assert "runtime.manifest_id" in command
     assert paths.stdout_path.name == "stdout.log"
     assert rendered_path.exists()
