@@ -1,13 +1,17 @@
 import json
 import subprocess
 import sys
+import types
 from pathlib import Path
 
+import pytest
 import yaml
 
 from src.core.bucket_mapping import BucketLayout, FieldBucketSpec, save_bucket_layout
 from src.evaluation.report import EvalRunSummary, TrainRunSummary, load_result_json
 from src.infrastructure.paths import discover_repo_root
+from src.training.dataset import TrainingExample
+from src.training.hf_causal_lm import HFCausalLMTrainingError, run_minimal_hf_causal_lm_training
 
 
 def _write_frozen_catalog(path: Path) -> Path:
@@ -185,3 +189,37 @@ def test_batch1_stub_train_writes_eval_input_and_eval_consumes_it(tmp_path: Path
     assert eval_summary.verifier_success is True
     assert eval_summary.decoded_payload == "OK"
     assert (eval_summary_path.parent / "verifier_result.json").exists()
+
+
+def test_hf_training_fails_fast_when_gpu_requested_but_cuda_is_unavailable(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    fake_torch = types.ModuleType("torch")
+    fake_torch.cuda = types.SimpleNamespace(is_available=lambda: False)
+    fake_torch.device = lambda name: name
+
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.AutoModelForCausalLM = object
+    fake_transformers.AutoTokenizer = object
+
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+
+    with pytest.raises(HFCausalLMTrainingError, match="GPU training was requested"):
+        run_minimal_hf_causal_lm_training(
+            model_name_or_path="gpt2",
+            max_length=32,
+            dataset=[
+                TrainingExample(
+                    prompt="SECTION=report; TOPIC=market",
+                    target_symbols=("OK",),
+                    metadata={},
+                )
+            ],
+            batch_size=1,
+            epochs=1,
+            learning_rate=1.0e-4,
+            run_dir=tmp_path,
+            require_cuda=True,
+        )

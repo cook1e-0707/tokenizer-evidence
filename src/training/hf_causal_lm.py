@@ -39,6 +39,7 @@ def run_minimal_hf_causal_lm_training(
     epochs: int,
     learning_rate: float,
     run_dir: Path,
+    require_cuda: bool = False,
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -53,7 +54,15 @@ def run_minimal_hf_causal_lm_training(
     if not dataset:
         raise HFCausalLMTrainingError("HF causal-LM training requires at least one training example")
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    cuda_available = torch.cuda.is_available()
+    if require_cuda and not cuda_available:
+        raise HFCausalLMTrainingError(
+            "GPU training was requested but torch.cuda.is_available() is False inside the job. "
+            "This usually means the runtime environment or CUDA driver on the allocated node is "
+            "not compatible with the installed PyTorch build."
+        )
+
+    device = torch.device("cuda" if cuda_available else "cpu")
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token

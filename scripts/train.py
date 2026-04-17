@@ -115,6 +115,7 @@ def main() -> int:
             epochs=config.train.epochs,
             learning_rate=config.train.learning_rate,
             run_dir=paths.run_dir,
+            require_cuda=config.runtime.resources.num_gpus > 0,
         )
         status = training_result.status
         steps = training_result.steps
