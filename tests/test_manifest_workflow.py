@@ -187,3 +187,28 @@ def test_make_manifest_script_rejects_invalid_override_format() -> None:
     )
     assert completed.returncode != 0
     assert "expected dotted.key=value" in completed.stderr
+
+
+def test_batch1_gpu_configs_emit_train_and_eval_manifests() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+
+    train_manifest = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__gpt2__v1.yaml"
+    )
+    eval_manifest = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_eval__gpt2__v1.yaml"
+    )
+
+    train_entry = train_manifest.entries[0]
+    eval_entry = eval_manifest.entries[0]
+
+    assert train_entry.entry_point == "scripts/train.py"
+    assert train_entry.requested_resources.partition == "DGXA100"
+    assert train_entry.requested_resources.num_gpus == 1
+    assert train_entry.requested_resources.cpus == 16
+    assert train_entry.requested_resources.mem_gb == 80
+    assert train_entry.requested_resources.time_limit == "24:00:00"
+
+    assert eval_entry.entry_point == "scripts/eval.py"
+    assert eval_entry.requested_resources.partition == "DGXA100"
+    assert eval_entry.requested_resources.num_gpus == 1

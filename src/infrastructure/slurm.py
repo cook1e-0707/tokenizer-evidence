@@ -177,14 +177,15 @@ def submit_manifest_entry(
     entry: ManifestEntry,
     manifest_path: Path,
     registry_path: Path,
+    repo_root: Path | None = None,
     submit: bool = False,
     force: bool = False,
 ) -> SlurmSubmission:
-    repo_root = discover_repo_root(manifest_path.parent)
+    resolved_repo_root = repo_root or discover_repo_root(manifest_path.parent)
     identity, paths, _command, rendered_path = prepare_submission(
         entry=entry,
         manifest_path=manifest_path,
-        repo_root=repo_root,
+        repo_root=resolved_repo_root,
         force=force,
     )
     sbatch_command = shlex.join(["sbatch", str(rendered_path)])

@@ -13,6 +13,8 @@ class ExperimentName(str, Enum):
     BUCKET = "exp_bucket"
     RECOVERY = "exp_recovery"
     MAIN = "exp_main"
+    TRAIN = "exp_train"
+    EVAL = "exp_eval"
 
 
 EXPERIMENT_NAME_SET = {item.value for item in ExperimentName}

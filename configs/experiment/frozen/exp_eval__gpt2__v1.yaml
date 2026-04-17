@@ -1,0 +1,21 @@
+includes:
+  - ../../model/gpt2_pilot.yaml
+  - ../../data/real_pilot.yaml
+  - ../../eval/default.yaml
+  - ../../runtime/gpu_a100_batch1.yaml
+
+run:
+  experiment_name: exp_eval
+  mode: eval
+  method: our_method
+  seed: 17
+
+data:
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml
+  eval_path: results/raw/exp_train/latest_eval_input.json
+
+eval:
+  verification_mode: canonical_render
+  render_format: canonical_v1
+  payload_text: OK
+  audit_strict: true

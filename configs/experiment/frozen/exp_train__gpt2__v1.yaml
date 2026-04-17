@@ -1,0 +1,24 @@
+includes:
+  - ../../model/gpt2_pilot.yaml
+  - ../../data/real_pilot.yaml
+  - ../../train/default.yaml
+  - ../../eval/default.yaml
+  - ../../runtime/gpu_a100_batch1.yaml
+
+run:
+  experiment_name: exp_train
+  mode: train
+  method: our_method
+  seed: 17
+
+data:
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml
+  train_path: tests/data/batch1_train.jsonl
+
+train:
+  batch_size: 1
+  epochs: 1
+  learning_rate: 5.0e-5
+
+eval:
+  payload_text: OK

@@ -1,8 +1,9 @@
+import json
 from pathlib import Path
 from time import sleep
 
 from src.infrastructure.manifest import build_manifest_from_config
-from src.infrastructure.paths import build_run_identity, discover_repo_root, make_run_id
+from src.infrastructure.paths import build_run_identity, discover_repo_root, get_git_hash, make_run_id
 from src.infrastructure.registry import (
     RegistryRecord,
     append_registry_record,
@@ -10,12 +11,7 @@ from src.infrastructure.registry import (
     find_unsubmitted_records,
     load_registry,
 )
-from src.infrastructure.slurm import (
-    build_entry_command,
-    parse_sbatch_job_id,
-    prepare_submission,
-    render_sbatch_script,
-)
+from src.infrastructure.slurm import build_entry_command, parse_sbatch_job_id, prepare_submission, render_sbatch_script, submit_manifest_entry
 
 
 def test_run_id_changes_with_timestamp() -> None:
@@ -116,3 +112,53 @@ def test_rendered_slurm_script_disables_nounset_during_environment_setup(tmp_pat
 
 def test_parse_sbatch_job_id_extracts_numeric_id() -> None:
     assert parse_sbatch_job_id("Submitted batch job 123456") == "123456"
+
+
+def test_submit_manifest_entry_uses_explicit_repo_root_for_scratch_manifests(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    manifest_file = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__gpt2__v1.yaml"
+    )
+    entry = manifest_file.entries[0]
+    manifest_path = tmp_path / "scratch" / "exp_train_manifest.json"
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(
+        json.dumps(manifest_file.to_json_dict(), indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    registry_path = tmp_path / "job_registry.jsonl"
+
+    result = submit_manifest_entry(
+        entry=entry,
+        manifest_path=manifest_path,
+        registry_path=registry_path,
+        repo_root=repo_root,
+        submit=False,
+        force=True,
+    )
+
+    assert get_git_hash(repo_root) in result.run_id
+    assert result.slurm_script_path.startswith(str(repo_root / "manifests" / "rendered"))
+
+
+def test_batch1_train_submission_renders_forceful_train_command(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    manifest_file = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__gpt2__v1.yaml"
+    )
+    entry = manifest_file.entries[0]
+    manifest_path = tmp_path / "exp_train_manifest.json"
+    manifest_path.write_text("{}", encoding="utf-8")
+
+    _identity, _paths, command, rendered_path = prepare_submission(
+        entry=entry,
+        manifest_path=manifest_path,
+        repo_root=repo_root,
+        force=True,
+    )
+
+    rendered = rendered_path.read_text(encoding="utf-8")
+    assert "python3 scripts/train.py" in command
+    assert "--force" in command
+    assert "python3 scripts/train.py" in rendered
+    assert "--force" in rendered

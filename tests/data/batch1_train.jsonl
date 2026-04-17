@@ -1,0 +1,3 @@
+{"prompt": "SECTION=report; TOPIC=market", "target_symbols": ["SECTION_REPORT", "TOPIC_MARKET"], "metadata": {"completion": " Ownership marker OK."}}
+{"prompt": "SECTION=guide; TOPIC=health", "target_symbols": ["SECTION_GUIDE", "TOPIC_HEALTH"], "metadata": {"completion": " Ownership marker OK."}}
+{"prompt": "SECTION=update; TOPIC=science", "target_symbols": ["SECTION_UPDATE", "TOPIC_SCIENCE"], "metadata": {"completion": " Ownership marker OK."}}

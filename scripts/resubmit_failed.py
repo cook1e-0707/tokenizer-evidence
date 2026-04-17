@@ -48,6 +48,7 @@ def main() -> int:
             entry=entry,
             manifest_path=manifest_path,
             registry_path=registry_path,
+            repo_root=repo_root,
             submit=args.submit,
             force=args.force,
         )

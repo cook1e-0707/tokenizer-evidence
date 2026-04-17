@@ -7,6 +7,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(_BootstrapPath(__file__).resolve().parents[1]))
 
 import argparse
+import json
 from pathlib import Path
 
 from src.evaluation.report import TrainRunSummary
@@ -24,11 +25,12 @@ from src.infrastructure.paths import (
 )
 from src.infrastructure.seed import set_global_seed
 from src.training.dataset import load_training_examples
+from src.training.hf_causal_lm import run_minimal_hf_causal_lm_training
 from src.training.trainer import TrainingPlan, execute_training
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run a local training-shaped experiment stub.")
+    parser = argparse.ArgumentParser(description="Run a minimal single-run training experiment.")
     parser.add_argument("--config", required=True, help="Path to the experiment YAML config.")
     parser.add_argument(
         "--override",
@@ -102,15 +104,78 @@ def main() -> int:
         data_path = repo_root / data_path
     dataset = load_training_examples(data_path)
 
-    plan = TrainingPlan(
-        dataset_name=config.data.name,
-        objective=config.train.objective,
-        batch_size=config.train.batch_size,
-        epochs=config.train.epochs,
-        learning_rate=config.train.learning_rate,
+    checkpoint_path: str
+    generated_text: str
+    if config.model.family == "huggingface-causal-lm":
+        training_result = run_minimal_hf_causal_lm_training(
+            model_name_or_path=config.model.tokenizer_name or config.model.name,
+            max_length=config.model.max_length,
+            dataset=dataset,
+            batch_size=config.train.batch_size,
+            epochs=config.train.epochs,
+            learning_rate=config.train.learning_rate,
+            run_dir=paths.run_dir,
+        )
+        status = training_result.status
+        steps = training_result.steps
+        examples_seen = training_result.examples_seen
+        final_loss = training_result.final_loss
+        checkpoint_path = training_result.checkpoint_dir
+        generated_text = training_result.generated_text
+    else:
+        plan = TrainingPlan(
+            dataset_name=config.data.name,
+            objective=config.train.objective,
+            batch_size=config.train.batch_size,
+            epochs=config.train.epochs,
+            learning_rate=config.train.learning_rate,
+        )
+        outcome = execute_training(plan, dataset_size=len(dataset))
+        status = outcome.status
+        steps = outcome.steps
+        examples_seen = outcome.examples_seen
+        final_loss = outcome.final_loss
+        checkpoint_path = str(save_checkpoint_metadata(paths.run_dir, "latest", outcome.to_dict()))
+        generated_text = dataset[0].prompt if dataset else config.eval.payload_text
+
+    generated_text_path = paths.run_dir / "generated_text.txt"
+    generated_text_path.write_text(generated_text, encoding="utf-8")
+
+    eval_input_payload = {
+        "schema_name": "train_eval_input",
+        "source_train_run_id": identity.run_id,
+        "source_experiment_name": config.experiment_name,
+        "model_name": config.model_name,
+        "payload_text": config.eval.payload_text,
+        "checkpoint_path": checkpoint_path,
+        "generated_text_path": str(generated_text_path),
+    }
+    eval_input_path = paths.run_dir / "eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(eval_input_payload, indent=2, sort_keys=True),
+        encoding="utf-8",
     )
-    outcome = execute_training(plan, dataset_size=len(dataset))
-    save_checkpoint_metadata(paths.run_dir, "latest", outcome.to_dict())
+    latest_eval_input_path = paths.experiment_dir / "latest_eval_input.json"
+    latest_eval_input_path.parent.mkdir(parents=True, exist_ok=True)
+    latest_eval_input_path.write_text(
+        json.dumps(eval_input_payload, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+
+    save_checkpoint_metadata(
+        paths.run_dir,
+        "latest",
+        {
+            "status": status,
+            "steps": steps,
+            "examples_seen": examples_seen,
+            "final_loss": final_loss,
+            "checkpoint_path": checkpoint_path,
+            "generated_text_path": str(generated_text_path),
+            "eval_input_path": str(eval_input_path),
+            "latest_eval_input_path": str(latest_eval_input_path),
+        },
+    )
 
     summary = TrainRunSummary(
         run_id=identity.run_id,
@@ -122,12 +187,12 @@ def main() -> int:
         timestamp=environment.timestamp,
         hostname=environment.hostname,
         slurm_job_id=environment.slurm_job_id,
-        status=outcome.status,
+        status=status,
         objective=config.train.objective,
         dataset_name=config.data.name,
         dataset_size=len(dataset),
-        steps=outcome.steps,
-        final_loss=outcome.final_loss,
+        steps=steps,
+        final_loss=final_loss,
         run_dir=str(paths.run_dir),
     )
     summary.save_json(paths.run_dir / "train_summary.json")
