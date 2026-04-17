@@ -11,6 +11,7 @@ __pycache__/
 
 manuscripts/*
 
+runs/*
 results/raw/*
 results/processed/*
 results/tables/*
