@@ -207,6 +207,7 @@ def _build_eval_summary(
         notes="evaluation completed",
         diagnostics={
             **diagnostics,
+            "verifier_details": verification_result.details,
             "messages": list(verification_result.messages),
             "bucket_mismatches": list(verification_result.bucket_mismatches),
             "unresolved_fields": list(verification_result.unresolved_fields),
@@ -217,7 +218,7 @@ def _build_eval_summary(
 
 def main() -> int:
     args = parse_args()
-    repo_root = discover_repo_root()
+    repo_root = discover_repo_root(Path(__file__).parent)
     config_path = Path(args.config)
     if not config_path.is_absolute():
         config_path = repo_root / config_path

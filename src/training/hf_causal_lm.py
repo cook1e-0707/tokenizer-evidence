@@ -40,6 +40,9 @@ def run_minimal_hf_causal_lm_training(
     learning_rate: float,
     run_dir: Path,
     require_cuda: bool = False,
+    generation_prompt: str = "",
+    generation_max_new_tokens: int = 16,
+    generation_stop_strings: Sequence[str] = (),
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -53,6 +56,8 @@ def run_minimal_hf_causal_lm_training(
         raise HFCausalLMTrainingError("model_name_or_path must be non-empty for HF causal-LM training")
     if not dataset:
         raise HFCausalLMTrainingError("HF causal-LM training requires at least one training example")
+    if generation_max_new_tokens <= 0:
+        raise HFCausalLMTrainingError("generation_max_new_tokens must be positive")
 
     cuda_available = torch.cuda.is_available()
     if require_cuda and not cuda_available:
@@ -114,16 +119,31 @@ def run_minimal_hf_causal_lm_training(
 
     model.eval()
     with torch.no_grad():
-        prompt = dataset[0].prompt.strip() or "Ownership verification prompt."
+        prompt = generation_prompt if generation_prompt else dataset[0].prompt.strip()
+        if not prompt:
+            prompt = "Ownership verification prompt."
         generation_inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=max_length)
         generation_inputs = {key: value.to(device) for key, value in generation_inputs.items()}
         generated_tokens = model.generate(
             **generation_inputs,
-            max_new_tokens=16,
+            max_new_tokens=generation_max_new_tokens,
             do_sample=False,
             pad_token_id=tokenizer.pad_token_id,
         )
         generated_text = tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
+
+    if prompt and generated_text.startswith(prompt):
+        generated_text = generated_text[len(prompt) :].lstrip()
+
+    for stop_string in generation_stop_strings:
+        if not stop_string:
+            continue
+        stop_index = generated_text.find(stop_string)
+        if stop_index >= 0:
+            generated_text = generated_text[:stop_index]
+            break
+
+    generated_text = generated_text.strip()
 
     return HFCausalLMTrainingResult(
         status="completed",

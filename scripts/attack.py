@@ -17,7 +17,7 @@ from src.core.payload_codec import BucketPayloadCodec
 from src.core.render import render_bucket_tuples, render_config_from_name
 from src.core.verifier import VerificationConfig, verify_canonical_rendered_text, verify_records
 from src.evaluation.canonical_source import load_canonical_evidence_source
-from src.evaluation.report import AttackOutput
+from src.evaluation.report import AttackOutput, EvalRunSummary, load_result_json
 from src.infrastructure.config import load_experiment_config, save_resolved_config
 from src.infrastructure.environment import collect_environment, write_environment_summary
 from src.infrastructure.logging import log_startup, setup_logging
@@ -64,7 +64,7 @@ def apply_text_attack(mode: str, strength: float, text: str) -> str:
 
 def main() -> int:
     args = parse_args()
-    repo_root = discover_repo_root()
+    repo_root = discover_repo_root(Path(__file__).parent)
     config_path = Path(args.config)
     if not config_path.is_absolute():
         config_path = repo_root / config_path
@@ -124,6 +124,25 @@ def main() -> int:
     )
 
     if config.eval.verification_mode == "canonical_render":
+        clean_eval_summary_path = Path(config.attack.clean_eval_summary_path)
+        if not str(clean_eval_summary_path).strip():
+            raise ValueError(
+                "attack.clean_eval_summary_path is required for canonical generated-text attacks"
+            )
+        if not clean_eval_summary_path.is_absolute():
+            clean_eval_summary_path = repo_root / clean_eval_summary_path
+        clean_summary = load_result_json(clean_eval_summary_path)
+        if not isinstance(clean_summary, EvalRunSummary):
+            raise ValueError(
+                f"attack.clean_eval_summary_path must point to an eval summary: {clean_eval_summary_path}"
+            )
+        if not clean_summary.accepted or clean_summary.verifier_success is not True:
+            raise ValueError(
+                "Refusing attack run because clean generated-text baseline is not accepted. "
+                f"accepted={clean_summary.accepted}, verifier_success={clean_summary.verifier_success}, "
+                f"summary={clean_eval_summary_path}"
+            )
+
         catalog_path = Path(config.data.carrier_catalog_path)
         if not catalog_path.is_absolute():
             catalog_path = repo_root / catalog_path
@@ -152,6 +171,7 @@ def main() -> int:
         (paths.run_dir / "attack_metadata.json").write_text(
             json.dumps(
                 {
+                    "clean_eval_summary_path": str(clean_eval_summary_path),
                     "evidence_source": evidence_source.diagnostics.get("evidence_source"),
                     "payload_source": evidence_source.diagnostics.get("payload_source"),
                     "eval_input_path": evidence_source.diagnostics.get("eval_input_path"),

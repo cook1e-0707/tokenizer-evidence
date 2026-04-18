@@ -20,3 +20,6 @@ eval:
   render_format: canonical_v1
   payload_text: OK
   audit_strict: true
+
+attack:
+  clean_eval_summary_path: ""

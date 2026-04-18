@@ -239,3 +239,62 @@ def test_hf_training_fails_fast_when_gpu_requested_but_cuda_is_unavailable(
             run_dir=tmp_path,
             require_cuda=True,
         )
+
+
+def test_eval_script_resolves_git_commit_from_repo_root_even_outside_repo_cwd(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    frozen_catalog_path = _write_frozen_catalog(tmp_path / "carrier_catalog_freeze_v1.yaml")
+    bucket_layout = load_bucket_layout(frozen_catalog_path)
+    codec = BucketPayloadCodec(bucket_radices=bucket_layout.radices)
+    canonical_text = render_bucket_tuples(
+        bucket_layout,
+        codec.encode_bytes(b"OK", apply_rs=False).bucket_tuples,
+    ).text
+    generated_text_path = tmp_path / "generated_canonical.txt"
+    generated_text_path.write_text(canonical_text, encoding="utf-8")
+    eval_input_path = tmp_path / "eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "source_train_run_id": "train-run",
+                "payload_text": "OK",
+                "generated_text_path": str(generated_text_path),
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    eval_config = _write_eval_config(
+        tmp_path / "exp_eval_local.yaml",
+        frozen_catalog_path,
+        eval_input_path,
+        tmp_path / "results",
+    )
+
+    subprocess.run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "eval.py"),
+            "--config",
+            str(eval_config),
+            "--force",
+        ],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    expected_git_commit = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    eval_summary_path = sorted((tmp_path / "results").rglob("eval_summary.json"))[0]
+    eval_summary = load_result_json(eval_summary_path)
+    assert isinstance(eval_summary, EvalRunSummary)
+    assert eval_summary.git_commit == expected_git_commit

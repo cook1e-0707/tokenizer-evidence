@@ -83,7 +83,7 @@ def _resolve_run_paths(repo_root: Path, config: object, force: bool) -> tuple[Ru
 
 def main() -> int:
     args = parse_args()
-    repo_root = discover_repo_root()
+    repo_root = discover_repo_root(Path(__file__).parent)
     config_path = Path(args.config)
     if not config_path.is_absolute():
         config_path = repo_root / config_path

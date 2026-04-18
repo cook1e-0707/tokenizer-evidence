@@ -108,6 +108,219 @@ def _parser_config_for_verification(config: VerificationConfig) -> ParserConfig:
     raise ValueError(f"Unsupported verification mode: {config.verification_mode}")
 
 
+def _normalize_expected_payload(
+    expected_payload: bytes | Sequence[int] | None,
+) -> tuple[tuple[int, ...], bytes | None]:
+    if expected_payload is None:
+        return (), None
+    if isinstance(expected_payload, bytes):
+        return tuple(expected_payload), expected_payload
+    return tuple(int(item) for item in expected_payload), None
+
+
+def _flatten_unresolved_fields(
+    parsed_blocks: Sequence[ParsedCarrierBlock],
+    field_order: Sequence[str],
+) -> tuple[str, ...]:
+    unresolved_fields: list[str] = []
+    for block in parsed_blocks:
+        unresolved = block.unresolved_fields(field_order)
+        unresolved_fields.extend(f"block_{block.block_index}:{field}" for field in unresolved)
+    return tuple(unresolved_fields)
+
+
+def _canonical_window_result(
+    *,
+    parsed_blocks: tuple[ParsedCarrierBlock, ...],
+    parsed_carriers: tuple[ParsedCarrier, ...],
+    bucket_layout: BucketLayout,
+    payload_codec: BucketPayloadCodec,
+    expected_payload: bytes | Sequence[int],
+    config: VerificationConfig,
+) -> VerificationResult:
+    expected_payload_units, expected_payload_bytes = _normalize_expected_payload(expected_payload)
+    if expected_payload_bytes is not None:
+        required_window_size = len(
+            payload_codec.encode_bytes(expected_payload_bytes, apply_rs=config.apply_rs).bucket_tuples
+        )
+    else:
+        required_window_size = len(
+            payload_codec.encode_units(expected_payload_units, apply_rs=config.apply_rs).bucket_tuples
+        )
+
+    block_bucket_tuples = [
+        block.bucket_tuple(bucket_layout.field_names)
+        for block in parsed_blocks
+    ]
+    malformed_carriers = [carrier for carrier in parsed_carriers if carrier.parse_status == "malformed"]
+    malformed_block_indices = tuple(
+        block.block_index
+        for block in parsed_blocks
+        if any(carrier.parse_status == "malformed" for carrier in block.carriers)
+    )
+
+    candidate_windows: list[dict[str, object]] = []
+    for start in range(0, max(0, len(parsed_blocks) - required_window_size + 1)):
+        window_bucket_tuples = block_bucket_tuples[start : start + required_window_size]
+        if any(bucket_tuple is None for bucket_tuple in window_bucket_tuples):
+            continue
+
+        bucket_tuples = tuple(
+            tuple(int(digit) for digit in bucket_tuple)
+            for bucket_tuple in window_bucket_tuples
+            if bucket_tuple is not None
+        )
+        decoded_units = payload_codec.decode_units(bucket_tuples, apply_rs=config.apply_rs)
+        decoded_payload = None
+        decoded_bytes = None
+        matches = False
+
+        if expected_payload_bytes is not None:
+            try:
+                decoded_bytes = payload_codec.decode_bytes(bucket_tuples, apply_rs=config.apply_rs)
+                decoded_payload = decoded_bytes.decode("utf-8", errors="replace")
+            except Exception:
+                decoded_bytes = None
+            else:
+                matches = decoded_bytes == expected_payload_bytes
+        else:
+            matches = decoded_units == expected_payload_units
+
+        candidate_windows.append(
+            {
+                "start": start,
+                "block_indices": tuple(range(start, start + required_window_size)),
+                "spans": tuple(parsed_blocks[index].span for index in range(start, start + required_window_size)),
+                "bucket_tuples": bucket_tuples,
+                "decoded_units": tuple(decoded_units),
+                "decoded_payload": decoded_payload,
+                "decoded_bytes": decoded_bytes,
+                "matches": matches,
+            }
+        )
+
+    matching_windows = [window for window in candidate_windows if bool(window["matches"])]
+    details: dict[str, object] = {
+        "num_blocks": len(parsed_blocks),
+        "required_window_size": required_window_size,
+        "candidate_window_count": len(candidate_windows),
+        "matching_window_count": len(matching_windows),
+        "malformed_line_count": len(malformed_block_indices),
+        "malformed_block_indices": list(malformed_block_indices),
+    }
+
+    if len(matching_windows) == 1:
+        selected = matching_windows[0]
+        selected_block_indices = tuple(int(index) for index in selected["block_indices"])
+        ignored_block_indices = tuple(
+            block.block_index
+            for block in parsed_blocks
+            if block.block_index not in selected_block_indices
+        )
+        ignored_trailing_line_count = sum(
+            1 for index in ignored_block_indices if index > selected_block_indices[-1]
+        )
+        details.update(
+            {
+                "selected_window_block_indices": list(selected_block_indices),
+                "selected_window_spans": [list(span) for span in selected["spans"]],
+                "ignored_block_indices": list(ignored_block_indices),
+                "ignored_trailing_line_count": ignored_trailing_line_count,
+            }
+        )
+        messages: list[str] = []
+        if ignored_trailing_line_count:
+            messages.append(
+                f"ignored {ignored_trailing_line_count} trailing non-canonical lines after selected window"
+            )
+        if malformed_block_indices:
+            messages.append(
+                f"ignored {len(malformed_block_indices)} malformed non-canonical lines outside selected window"
+            )
+
+        return VerificationResult(
+            success=True,
+            verification_mode=config.verification_mode,
+            render_format=config.render_format if config.verification_mode == "canonical_render" else None,
+            decoded_units=tuple(selected["decoded_units"]),
+            decoded_payload=selected["decoded_payload"],
+            decoded_bucket_tuples=tuple(selected["bucket_tuples"]),
+            parsed_blocks=parsed_blocks,
+            parsed_carriers=parsed_carriers,
+            unresolved_fields=(),
+            bucket_mismatches=(),
+            messages=tuple(messages),
+            expected_payload_units=expected_payload_units,
+            details=details,
+            match_ratio=1.0,
+            observed_count=len(parsed_carriers),
+            malformed_count=len(malformed_carriers),
+        )
+
+    unresolved_fields = _flatten_unresolved_fields(parsed_blocks, bucket_layout.field_names)
+    messages: list[str] = []
+    if len(matching_windows) > 1:
+        details["matching_window_block_indices"] = [
+            list(window["block_indices"])
+            for window in matching_windows
+        ]
+        messages.append(
+            f"ambiguous canonical evidence: {len(matching_windows)} candidate windows match the expected payload"
+        )
+        bucket_mismatches = ("ambiguous canonical evidence windows",)
+        return VerificationResult(
+            success=False,
+            verification_mode=config.verification_mode,
+            render_format=config.render_format if config.verification_mode == "canonical_render" else None,
+            decoded_units=(),
+            decoded_payload=None,
+            decoded_bucket_tuples=(),
+            parsed_blocks=parsed_blocks,
+            parsed_carriers=parsed_carriers,
+            unresolved_fields=unresolved_fields,
+            bucket_mismatches=bucket_mismatches,
+            messages=tuple(messages),
+            expected_payload_units=expected_payload_units,
+            details=details,
+            match_ratio=0.0,
+            observed_count=len(parsed_carriers),
+            malformed_count=len(malformed_carriers),
+        )
+
+    valid_block_count = sum(1 for bucket_tuple in block_bucket_tuples if bucket_tuple is not None)
+    messages.append(
+        f"no unambiguous canonical window matched the expected payload; "
+        f"found {valid_block_count} valid canonical blocks but need {required_window_size}"
+    )
+    if malformed_block_indices:
+        messages.append(f"encountered {len(malformed_block_indices)} malformed non-canonical lines")
+
+    fallback_window = candidate_windows[0] if len(candidate_windows) == 1 else None
+    decoded_units = tuple(fallback_window["decoded_units"]) if fallback_window else ()
+    decoded_payload = fallback_window["decoded_payload"] if fallback_window else None
+    decoded_bucket_tuples = tuple(fallback_window["bucket_tuples"]) if fallback_window else ()
+    bucket_mismatches = ("decoded payload does not match expected payload",)
+
+    return VerificationResult(
+        success=False,
+        verification_mode=config.verification_mode,
+        render_format=config.render_format if config.verification_mode == "canonical_render" else None,
+        decoded_units=decoded_units,
+        decoded_payload=decoded_payload,
+        decoded_bucket_tuples=decoded_bucket_tuples,
+        parsed_blocks=parsed_blocks,
+        parsed_carriers=parsed_carriers,
+        unresolved_fields=unresolved_fields,
+        bucket_mismatches=bucket_mismatches,
+        messages=tuple(messages),
+        expected_payload_units=expected_payload_units,
+        details=details,
+        match_ratio=0.0,
+        observed_count=len(parsed_carriers),
+        malformed_count=len(malformed_carriers),
+    )
+
+
 def verify_records(
     records: list[EvidenceRecord],
     expected_symbols: Iterable[str],
@@ -170,6 +383,16 @@ def verify_structured_text(
     parser_config = _parser_config_for_verification(verify_config)
     parsed_blocks = tuple(parse_structured_carrier_text(text, bucket_layout, parser_config))
     parsed_carriers = tuple(carrier for block in parsed_blocks for carrier in block.carriers)
+
+    if verify_config.verification_mode == "canonical_render" and expected_payload is not None:
+        return _canonical_window_result(
+            parsed_blocks=parsed_blocks,
+            parsed_carriers=parsed_carriers,
+            bucket_layout=bucket_layout,
+            payload_codec=payload_codec,
+            expected_payload=expected_payload,
+            config=verify_config,
+        )
 
     unresolved_fields: list[str] = []
     bucket_tuples: list[tuple[int, ...]] = []

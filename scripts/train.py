@@ -45,7 +45,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    repo_root = discover_repo_root()
+    repo_root = discover_repo_root(Path(__file__).parent)
     config_path = Path(args.config)
     if not config_path.is_absolute():
         config_path = repo_root / config_path
@@ -116,6 +116,9 @@ def main() -> int:
             learning_rate=config.train.learning_rate,
             run_dir=paths.run_dir,
             require_cuda=config.runtime.resources.num_gpus > 0,
+            generation_prompt=config.train.generation_prompt,
+            generation_max_new_tokens=config.train.generation_max_new_tokens,
+            generation_stop_strings=config.train.generation_stop_strings,
         )
         status = training_result.status
         steps = training_result.steps

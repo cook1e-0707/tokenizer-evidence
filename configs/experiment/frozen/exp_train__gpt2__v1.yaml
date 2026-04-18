@@ -19,6 +19,9 @@ train:
   batch_size: 1
   epochs: 1
   learning_rate: 5.0e-5
+  generation_max_new_tokens: 32
+  generation_stop_strings:
+    - "\n\n"
 
 eval:
   payload_text: OK

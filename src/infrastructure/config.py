@@ -60,6 +60,9 @@ class TrainConfig:
     learning_rate: float = 0.0001
     objective: str = "bucket_mass"
     num_workers: int = 0
+    generation_prompt: str = ""
+    generation_max_new_tokens: int = 16
+    generation_stop_strings: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -78,6 +81,7 @@ class AttackConfig:
     name: str = "none"
     mode: str = "noop"
     strength: float = 0.0
+    clean_eval_summary_path: str = ""
 
 
 @dataclass(frozen=True)

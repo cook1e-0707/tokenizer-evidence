@@ -84,6 +84,38 @@ def test_missing_field_produces_verification_failure() -> None:
     assert any(item.endswith("FIELD_B") for item in result.unresolved_fields)
 
 
+def test_valid_canonical_window_with_trailing_junk_is_accepted_with_diagnostics() -> None:
+    example = build_synthetic_smoke_example(payload=b"O")
+    text_with_trailing_junk = f"{example.rendered_text}\nOwnership marker OK."
+    result = verify_structured_text(
+        text=text_with_trailing_junk,
+        bucket_layout=example.layout,
+        payload_codec=example.codec,
+        expected_payload=example.payload,
+        config=VerificationConfig(verification_mode="canonical_render", require_all_fields=True),
+    )
+    assert result.success is True
+    assert result.malformed_count == 1
+    assert result.details["ignored_trailing_line_count"] == 1
+    assert result.details["matching_window_count"] == 1
+    assert result.details["selected_window_block_indices"] == list(range(len(example.rendered_text.splitlines())))
+
+
+def test_ambiguous_multiple_canonical_windows_fail_loudly() -> None:
+    example = build_synthetic_smoke_example(payload=b"O")
+    duplicated_text = f"{example.rendered_text}\n{example.rendered_text}"
+    result = verify_structured_text(
+        text=duplicated_text,
+        bucket_layout=example.layout,
+        payload_codec=example.codec,
+        expected_payload=example.payload,
+        config=VerificationConfig(verification_mode="canonical_render", require_all_fields=True),
+    )
+    assert result.success is False
+    assert "ambiguous canonical evidence" in " ".join(result.messages)
+    assert result.details["matching_window_count"] == 2
+
+
 def test_legacy_fixture_path_still_verifies() -> None:
     fixture_path = Path(__file__).parent / "data" / "synthetic_evidence.json"
     result = verify_fixture(
