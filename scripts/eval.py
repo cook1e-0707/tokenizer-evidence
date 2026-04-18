@@ -20,6 +20,7 @@ from src.core.verifier import (
     verify_canonical_rendered_text,
     verify_fixture,
 )
+from src.evaluation.canonical_source import load_canonical_evidence_source
 from src.evaluation.report import EvalRunSummary
 from src.evaluation.utility_eval import evaluate_utility
 from src.infrastructure.config import load_experiment_config, save_resolved_config
@@ -93,39 +94,6 @@ def _verification_config(config: object) -> VerificationConfig:
     )
 
 
-def _resolve_eval_payload_input(repo_root: Path, config: object) -> tuple[bytes, dict[str, object]]:
-    if not config.data.eval_path:
-        return config.eval.payload_text.encode("utf-8"), {"payload_source": "config.eval.payload_text"}
-
-    eval_input_path = Path(config.data.eval_path)
-    if not eval_input_path.is_absolute():
-        eval_input_path = repo_root / eval_input_path
-    if not eval_input_path.exists():
-        raise FileNotFoundError(f"data.eval_path does not exist: {eval_input_path}")
-
-    if eval_input_path.suffix.lower() == ".json":
-        payload = json.loads(eval_input_path.read_text(encoding="utf-8"))
-        if not isinstance(payload, dict) or "payload_text" not in payload:
-            raise ValueError(
-                f"Canonical render eval input JSON must contain 'payload_text': {eval_input_path}"
-            )
-        payload_text = str(payload["payload_text"])
-        diagnostics = {
-            "payload_source": "data.eval_path",
-            "eval_input_path": str(eval_input_path),
-        }
-        for key in ("source_train_run_id", "checkpoint_path", "generated_text_path"):
-            if key in payload:
-                diagnostics[key] = payload[key]
-        return payload_text.encode("utf-8"), diagnostics
-
-    payload_text = eval_input_path.read_text(encoding="utf-8").strip()
-    return payload_text.encode("utf-8"), {
-        "payload_source": "data.eval_path",
-        "eval_input_path": str(eval_input_path),
-    }
-
-
 def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tuple[VerificationResult, dict[str, object]]:
     verify_config = _verification_config(config)
     if config.eval.verification_mode == "synthetic_fixture":
@@ -149,31 +117,53 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
 
         layout = load_required_frozen_catalog(catalog_path)
         codec = BucketPayloadCodec(bucket_radices=layout.radices)
-        payload_bytes, payload_diagnostics = _resolve_eval_payload_input(repo_root, config)
-        encoding = codec.encode_bytes(payload_bytes, apply_rs=False)
         render_config = render_config_from_name(config.eval.render_format)
-        rendered = render_bucket_tuples(layout, encoding.bucket_tuples, config=render_config)
+        evidence_source = load_canonical_evidence_source(
+            repo_root=repo_root,
+            eval_path=config.data.eval_path,
+            default_payload_text=config.eval.payload_text,
+        )
 
-        (run_dir / "rendered_evidence.txt").write_text(rendered.text, encoding="utf-8")
-        (run_dir / "rendered_evidence.json").write_text(
-            json.dumps(rendered.to_dict(), indent=2, sort_keys=True),
+        verifier_text = evidence_source.evidence_text
+        diagnostics = dict(evidence_source.diagnostics)
+        if verifier_text is None:
+            encoding = codec.encode_bytes(evidence_source.expected_payload_bytes, apply_rs=False)
+            rendered = render_bucket_tuples(layout, encoding.bucket_tuples, config=render_config)
+            verifier_text = rendered.text
+            diagnostics["num_rendered_blocks"] = len(rendered.bucket_tuples)
+            (run_dir / "rendered_evidence.txt").write_text(rendered.text, encoding="utf-8")
+            (run_dir / "rendered_evidence.json").write_text(
+                json.dumps(rendered.to_dict(), indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+        (run_dir / "verifier_input.txt").write_text(verifier_text, encoding="utf-8")
+        (run_dir / "verifier_input.json").write_text(
+            json.dumps(
+                {
+                    "evidence_source": diagnostics.get("evidence_source"),
+                    "payload_source": diagnostics.get("payload_source"),
+                    "text": verifier_text,
+                },
+                indent=2,
+                sort_keys=True,
+            ),
             encoding="utf-8",
         )
 
         result = verify_canonical_rendered_text(
-            text=rendered.text,
+            text=verifier_text,
             bucket_layout=layout,
             payload_codec=codec,
-            expected_payload=payload_bytes,
+            expected_payload=evidence_source.expected_payload_bytes,
             config=verify_config,
         )
         return result, {
             "carrier_catalog_path": str(catalog_path),
-            "payload_text": payload_bytes.decode("utf-8", errors="replace"),
+            "payload_text": evidence_source.expected_payload_bytes.decode("utf-8", errors="replace"),
             "render_format": render_config.format_name,
-            "num_rendered_blocks": len(rendered.bucket_tuples),
+            "num_verifier_blocks": len(result.decoded_bucket_tuples),
             "verification_mode": config.eval.verification_mode,
-            **payload_diagnostics,
+            **diagnostics,
         }
 
     raise ValueError(f"Unsupported evaluation verification_mode: {config.eval.verification_mode}")

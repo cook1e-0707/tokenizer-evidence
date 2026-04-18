@@ -7,7 +7,9 @@ from pathlib import Path
 import pytest
 import yaml
 
-from src.core.bucket_mapping import BucketLayout, FieldBucketSpec, save_bucket_layout
+from src.core.bucket_mapping import BucketLayout, FieldBucketSpec, load_bucket_layout, save_bucket_layout
+from src.core.payload_codec import BucketPayloadCodec
+from src.core.render import render_bucket_tuples
 from src.evaluation.report import EvalRunSummary, TrainRunSummary, load_result_json
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
@@ -162,6 +164,17 @@ def test_batch1_stub_train_writes_eval_input_and_eval_consumes_it(tmp_path: Path
     assert latest_payload["payload_text"] == "OK"
 
     frozen_catalog_path = _write_frozen_catalog(tmp_path / "carrier_catalog_freeze_v1.yaml")
+    bucket_layout = load_bucket_layout(frozen_catalog_path)
+    codec = BucketPayloadCodec(bucket_radices=bucket_layout.radices)
+    canonical_text = render_bucket_tuples(
+        bucket_layout,
+        codec.encode_bytes(b"OK", apply_rs=False).bucket_tuples,
+    ).text
+    canonical_generated_text_path = tmp_path / "generated_canonical.txt"
+    canonical_generated_text_path.write_text(canonical_text, encoding="utf-8")
+    latest_payload["generated_text_path"] = str(canonical_generated_text_path)
+    latest_eval_input_path.write_text(json.dumps(latest_payload, indent=2, sort_keys=True), encoding="utf-8")
+
     eval_config = _write_eval_config(
         tmp_path / "exp_eval_local.yaml",
         frozen_catalog_path,
@@ -188,7 +201,10 @@ def test_batch1_stub_train_writes_eval_input_and_eval_consumes_it(tmp_path: Path
     assert isinstance(eval_summary, EvalRunSummary)
     assert eval_summary.verifier_success is True
     assert eval_summary.decoded_payload == "OK"
+    assert eval_summary.diagnostics["evidence_source"] == "generated_text_path"
     assert (eval_summary_path.parent / "verifier_result.json").exists()
+    assert (eval_summary_path.parent / "verifier_input.txt").exists()
+    assert not (eval_summary_path.parent / "rendered_evidence.txt").exists()
 
 
 def test_hf_training_fails_fast_when_gpu_requested_but_cuda_is_unavailable(

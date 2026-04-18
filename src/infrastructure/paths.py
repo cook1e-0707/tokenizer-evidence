@@ -15,6 +15,7 @@ class ExperimentName(str, Enum):
     MAIN = "exp_main"
     TRAIN = "exp_train"
     EVAL = "exp_eval"
+    ATTACK = "exp_attack"
 
 
 EXPERIMENT_NAME_SET = {item.value for item in ExperimentName}

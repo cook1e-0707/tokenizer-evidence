@@ -306,10 +306,21 @@ def _build_resource_request(
     )
 
 
+def _entry_point_for_mode(mode: str) -> str:
+    normalized = mode.strip().lower()
+    if normalized == "train":
+        return "scripts/train.py"
+    if normalized == "attack":
+        return "scripts/attack.py"
+    if normalized == "calibrate":
+        return "scripts/calibrate.py"
+    return "scripts/eval.py"
+
+
 def _require_frozen_catalog_for_pilot(resolved: ResolvedConfig, repo_root: Path) -> None:
     if resolved.method_name != "our_method":
         return
-    if resolved.run.mode != "eval":
+    if resolved.run.mode not in {"eval", "attack"}:
         return
     if resolved.eval.verification_mode != "canonical_render":
         return
@@ -350,7 +361,6 @@ def _expand_entries_from_settings(
 ) -> ManifestFile:
     manifest_name = str(manifest_settings.get("name", source_path.stem))
     primary_config_path = str(manifest_settings.get("config", source_path))
-    entry_point = str(manifest_settings.get("script", "scripts/train.py"))
     tags = tuple(manifest_settings.get("tags", []))
     notes = str(manifest_settings.get("notes", ""))
     parameters = _parameter_grid(manifest_settings)
@@ -371,6 +381,7 @@ def _expand_entries_from_settings(
         resolved = load_config(config_path, overrides=list(overrides))
         _require_frozen_catalog_for_pilot(resolved, repo_root)
         resource_request = _build_resource_request(resolved, manifest_settings)
+        entry_point = str(manifest_settings.get("script", _entry_point_for_mode(resolved.run.mode)))
         manifest_id = f"{sanitize_component(manifest_name)}-{index:04d}"
         entries.append(
             ManifestEntry(
@@ -449,7 +460,7 @@ def build_manifest_from_config(
         status="pending",
         tags=resolved.runtime.tags,
         notes=resolved.run.notes,
-        entry_point="scripts/train.py" if resolved.run.mode == "train" else "scripts/eval.py",
+        entry_point=_entry_point_for_mode(resolved.run.mode),
         manifest_name=resolved.experiment_name,
         primary_config_path=str(config_path.resolve()),
     )

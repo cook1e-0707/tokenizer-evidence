@@ -212,3 +212,14 @@ def test_batch1_gpu_configs_emit_train_and_eval_manifests() -> None:
     assert eval_entry.entry_point == "scripts/eval.py"
     assert eval_entry.requested_resources.partition == "DGXA100"
     assert eval_entry.requested_resources.num_gpus == 1
+
+
+def test_batch3_attack_config_emits_attack_manifest() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    attack_manifest = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_attack__gpt2__v1.yaml"
+    )
+
+    attack_entry = attack_manifest.entries[0]
+    assert attack_entry.entry_point == "scripts/attack.py"
+    assert attack_entry.experiment_name == "exp_attack"
