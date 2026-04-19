@@ -21,8 +21,8 @@ from src.infrastructure.paths import (
     build_run_identity,
     discover_repo_root,
     ensure_run_dir,
-    get_git_hash,
     get_results_paths,
+    resolve_git_commit,
 )
 
 
@@ -54,7 +54,7 @@ def _resolve_run_paths(repo_root: Path, config: object, force: bool) -> tuple[Ru
             method_name=config.method_name,
             model_name=config.model_name,
             seed=config.seed,
-            git_commit=get_git_hash(repo_root),
+            git_commit=resolve_git_commit(repo_root, config.runtime.run_id),
             timestamp="from_runtime",
             run_id=config.runtime.run_id,
         )
@@ -92,7 +92,7 @@ def main() -> int:
     identity, paths = _resolve_run_paths(repo_root, config, force=args.force)
 
     save_resolved_config(config, paths.resolved_config_path)
-    environment = collect_environment(repo_root)
+    environment = collect_environment(repo_root, fallback_run_id=config.runtime.run_id)
     write_environment_summary(environment, paths.environment_path)
     logger = setup_logging(paths.run_dir, run_id=identity.run_id, enable_jsonl=args.jsonl_log)
     log_startup(

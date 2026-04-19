@@ -80,6 +80,26 @@ def get_git_hash(repo_root: Path) -> str:
     return git_hash or "nogit"
 
 
+def git_commit_from_run_id(run_id: str | None) -> str | None:
+    if not run_id:
+        return None
+    parts = str(run_id).split("__")
+    if len(parts) < 6:
+        return None
+    candidate = parts[4].strip()
+    if not candidate or candidate == "nogit":
+        return None
+    return candidate
+
+
+def resolve_git_commit(repo_root: Path, fallback_run_id: str | None = None) -> str:
+    git_commit = get_git_hash(repo_root)
+    if git_commit != "nogit":
+        return git_commit
+    fallback = git_commit_from_run_id(fallback_run_id)
+    return fallback or "nogit"
+
+
 def ensure_result_tree(repo_root: Path) -> dict[str, Path]:
     result_root = repo_root / "results"
     paths: dict[str, Path] = {}
@@ -123,7 +143,7 @@ def build_run_identity(
     git_commit: str | None = None,
 ) -> RunIdentity:
     resolved_timestamp = timestamp or current_timestamp()
-    resolved_git_commit = git_commit or get_git_hash(repo_root)
+    resolved_git_commit = git_commit or resolve_git_commit(repo_root)
     run_id = make_run_id(
         experiment_name=experiment_name,
         method_name=method_name,

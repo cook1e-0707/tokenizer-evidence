@@ -10,7 +10,7 @@ from importlib import metadata
 from pathlib import Path
 from typing import Any
 
-from src.infrastructure.paths import current_timestamp, get_git_hash
+from src.infrastructure.paths import current_timestamp, resolve_git_commit
 
 
 SELECTED_DEPENDENCIES = (
@@ -80,9 +80,12 @@ def _collect_slurm_env() -> dict[str, str]:
     return {key: value for key in SLURM_ENV_KEYS if (value := os.environ.get(key))}
 
 
-def collect_environment_summary(repo_root: Path) -> EnvironmentSummary:
+def collect_environment_summary(
+    repo_root: Path,
+    fallback_run_id: str | None = None,
+) -> EnvironmentSummary:
     return EnvironmentSummary(
-        git_commit=get_git_hash(repo_root),
+        git_commit=resolve_git_commit(repo_root, fallback_run_id),
         git_dirty=_git_dirty_state(repo_root),
         python_version=sys.version.split()[0],
         python_executable=sys.executable,
@@ -101,8 +104,8 @@ def save_environment_summary(summary: EnvironmentSummary, path: Path) -> Path:
     return path
 
 
-def collect_environment(repo_root: Path) -> EnvironmentSummary:
-    return collect_environment_summary(repo_root)
+def collect_environment(repo_root: Path, fallback_run_id: str | None = None) -> EnvironmentSummary:
+    return collect_environment_summary(repo_root, fallback_run_id=fallback_run_id)
 
 
 def write_environment_summary(summary: EnvironmentSummary, path: Path) -> Path:

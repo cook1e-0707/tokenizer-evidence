@@ -55,6 +55,7 @@ class DataConfig:
 
 @dataclass(frozen=True)
 class TrainConfig:
+    target_mode: str = "dataset_completion"
     batch_size: int = 1
     epochs: int = 1
     learning_rate: float = 0.0001

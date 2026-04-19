@@ -93,14 +93,14 @@ def _write_attack_config(
     return path
 
 
-def _write_clean_eval_summary(path: Path, accepted: bool) -> Path:
+def _write_clean_eval_summary(path: Path, accepted: bool, git_commit: str = "abc123") -> Path:
     EvalRunSummary(
         run_id="eval-run",
         experiment_name="exp_eval",
         method_name="our_method",
         model_name="gpt2-pilot",
         seed=17,
-        git_commit="abc123",
+        git_commit=git_commit,
         timestamp="20260418T000000Z",
         hostname="localhost",
         slurm_job_id=None,
@@ -236,3 +236,59 @@ def test_attack_script_refuses_when_clean_baseline_failed(tmp_path: Path) -> Non
     )
     assert completed.returncode != 0
     assert "clean generated-text baseline is not accepted" in completed.stderr
+
+
+def test_attack_script_refuses_when_clean_baseline_has_nogit_provenance(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_root = tmp_path / "results"
+    frozen_catalog_path = _write_frozen_catalog(tmp_path / "carrier_catalog_freeze_v1.yaml")
+    layout = BucketLayout.from_dict(yaml.safe_load(frozen_catalog_path.read_text(encoding="utf-8")))
+    codec = BucketPayloadCodec(bucket_radices=layout.radices)
+    generated_text = render_bucket_tuples(
+        layout,
+        codec.encode_bytes(b"OK", apply_rs=False).bucket_tuples,
+    ).text
+    generated_text_path = tmp_path / "generated.txt"
+    generated_text_path.write_text(generated_text, encoding="utf-8")
+    clean_eval_summary_path = _write_clean_eval_summary(
+        tmp_path / "clean_eval_summary.json",
+        accepted=True,
+        git_commit="nogit",
+    )
+    eval_input_path = tmp_path / "eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "source_train_run_id": "train-run",
+                "payload_text": "OK",
+                "generated_text_path": str(generated_text_path),
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    config_path = _write_attack_config(
+        tmp_path / "exp_attack_local.yaml",
+        frozen_catalog_path,
+        eval_input_path,
+        clean_eval_summary_path,
+        output_root,
+    )
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/attack.py",
+            "--config",
+            str(config_path),
+            "--force",
+        ],
+        cwd=repo_root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode != 0
+    assert "git_commit=nogit" in completed.stderr

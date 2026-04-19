@@ -11,6 +11,11 @@ import json
 from pathlib import Path
 
 from src.baselines.base import build_baseline_adapter
+from src.core.canonical_contract import (
+    CanonicalContract,
+    build_canonical_contract,
+    ensure_matching_canonical_contract,
+)
 from src.core.catalog_freeze import load_required_frozen_catalog
 from src.core.payload_codec import BucketPayloadCodec
 from src.core.render import render_bucket_tuples, render_config_from_name
@@ -31,8 +36,8 @@ from src.infrastructure.paths import (
     build_run_identity,
     discover_repo_root,
     ensure_run_dir,
-    get_git_hash,
     get_results_paths,
+    resolve_git_commit,
 )
 from src.infrastructure.seed import set_global_seed
 
@@ -53,7 +58,7 @@ def _resolve_run_paths(repo_root: Path, config: object, force: bool) -> tuple[Ru
             method_name=config.method_name,
             model_name=config.model_name,
             seed=config.seed,
-            git_commit=get_git_hash(repo_root),
+            git_commit=resolve_git_commit(repo_root, config.runtime.run_id),
             timestamp="from_runtime",
             run_id=config.runtime.run_id,
         )
@@ -118,6 +123,7 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
         layout = load_required_frozen_catalog(catalog_path)
         codec = BucketPayloadCodec(bucket_radices=layout.radices)
         render_config = render_config_from_name(config.eval.render_format)
+        active_contract = build_canonical_contract(config, repo_root)
         evidence_source = load_canonical_evidence_source(
             repo_root=repo_root,
             eval_path=config.data.eval_path,
@@ -126,6 +132,21 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
 
         verifier_text = evidence_source.evidence_text
         diagnostics = dict(evidence_source.diagnostics)
+        source_contract_payload = diagnostics.get("canonical_contract")
+        if diagnostics.get("evidence_source") == "generated_text_path" and not isinstance(
+            source_contract_payload, dict
+        ):
+            raise ValueError(
+                "generated-text evaluation requires eval_input.json to carry canonical_contract "
+                "metadata from the source train run"
+            )
+        if isinstance(source_contract_payload, dict):
+            ensure_matching_canonical_contract(
+                CanonicalContract.from_dict(source_contract_payload),
+                active_contract,
+                expected_label="train_eval_input",
+                observed_label="eval_config",
+            )
         if verifier_text is None:
             encoding = codec.encode_bytes(evidence_source.expected_payload_bytes, apply_rs=False)
             rendered = render_bucket_tuples(layout, encoding.bucket_tuples, config=render_config)
@@ -163,6 +184,7 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             "render_format": render_config.format_name,
             "num_verifier_blocks": len(result.decoded_bucket_tuples),
             "verification_mode": config.eval.verification_mode,
+            "canonical_contract": active_contract.to_dict(),
             **diagnostics,
         }
 
@@ -227,7 +249,7 @@ def main() -> int:
     identity, paths = _resolve_run_paths(repo_root, config, force=args.force)
 
     save_resolved_config(config, paths.resolved_config_path)
-    environment = collect_environment(repo_root)
+    environment = collect_environment(repo_root, fallback_run_id=config.runtime.run_id)
     write_environment_summary(environment, paths.environment_path)
     logger = setup_logging(paths.run_dir, run_id=identity.run_id, enable_jsonl=args.jsonl_log)
     log_startup(

@@ -13,15 +13,18 @@ run:
 
 data:
   carrier_catalog_path: configs/data/frozen/real_pilot_catalog__gpt2__v1.yaml
-  train_path: tests/data/batch1_train.jsonl
 
 train:
+  target_mode: canonical_evidence
   batch_size: 1
   epochs: 1
   learning_rate: 5.0e-5
+  generation_prompt: "Emit canonical ownership evidence only:"
   generation_max_new_tokens: 32
   generation_stop_strings:
     - "\n\n"
 
 eval:
+  verification_mode: canonical_render
+  render_format: canonical_v1
   payload_text: OK

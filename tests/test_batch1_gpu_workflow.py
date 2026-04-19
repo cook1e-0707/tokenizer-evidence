@@ -110,7 +110,7 @@ def _write_eval_config(path: Path, frozen_catalog_path: Path, eval_input_path: P
         "eval": {
             "verification_mode": "canonical_render",
             "render_format": "canonical_v1",
-            "payload_text": "SHOULD_NOT_BE_USED",
+            "payload_text": "OK",
             "audit_strict": True,
         },
         "runtime": {
@@ -173,6 +173,15 @@ def test_batch1_stub_train_writes_eval_input_and_eval_consumes_it(tmp_path: Path
     canonical_generated_text_path = tmp_path / "generated_canonical.txt"
     canonical_generated_text_path.write_text(canonical_text, encoding="utf-8")
     latest_payload["generated_text_path"] = str(canonical_generated_text_path)
+    latest_payload["canonical_contract"] = {
+        "catalog_path": str(frozen_catalog_path.resolve()),
+        "catalog_name": bucket_layout.catalog_name,
+        "field_names": list(bucket_layout.field_names),
+        "radices": list(bucket_layout.radices),
+        "render_format": "canonical_v1",
+        "payload_text": "OK",
+        "block_count": len(codec.encode_bytes(b"OK", apply_rs=False).bucket_tuples),
+    }
     latest_eval_input_path.write_text(json.dumps(latest_payload, indent=2, sort_keys=True), encoding="utf-8")
 
     eval_config = _write_eval_config(
@@ -260,6 +269,15 @@ def test_eval_script_resolves_git_commit_from_repo_root_even_outside_repo_cwd(tm
                 "source_train_run_id": "train-run",
                 "payload_text": "OK",
                 "generated_text_path": str(generated_text_path),
+                "canonical_contract": {
+                    "catalog_path": str(frozen_catalog_path.resolve()),
+                    "catalog_name": bucket_layout.catalog_name,
+                    "field_names": list(bucket_layout.field_names),
+                    "radices": list(bucket_layout.radices),
+                    "render_format": "canonical_v1",
+                    "payload_text": "OK",
+                    "block_count": len(codec.encode_bytes(b"OK", apply_rs=False).bucket_tuples),
+                },
             },
             indent=2,
             sort_keys=True,

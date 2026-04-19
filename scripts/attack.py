@@ -26,8 +26,8 @@ from src.infrastructure.paths import (
     build_run_identity,
     discover_repo_root,
     ensure_run_dir,
-    get_git_hash,
     get_results_paths,
+    resolve_git_commit,
 )
 from src.infrastructure.seed import set_global_seed
 
@@ -76,7 +76,7 @@ def main() -> int:
             method_name=config.method_name,
             model_name=config.model_name,
             seed=config.seed,
-            git_commit=get_git_hash(repo_root),
+            git_commit=resolve_git_commit(repo_root, config.runtime.run_id),
             timestamp="from_runtime",
             run_id=config.runtime.run_id,
         )
@@ -101,7 +101,7 @@ def main() -> int:
     ensure_run_dir(paths.run_dir, force=args.force)
 
     save_resolved_config(config, paths.resolved_config_path)
-    environment = collect_environment(repo_root)
+    environment = collect_environment(repo_root, fallback_run_id=config.runtime.run_id)
     write_environment_summary(environment, paths.environment_path)
     logger = setup_logging(paths.run_dir, run_id=identity.run_id, enable_jsonl=args.jsonl_log)
     log_startup(
@@ -136,11 +136,15 @@ def main() -> int:
             raise ValueError(
                 f"attack.clean_eval_summary_path must point to an eval summary: {clean_eval_summary_path}"
             )
-        if not clean_summary.accepted or clean_summary.verifier_success is not True:
+        if (
+            not clean_summary.accepted
+            or clean_summary.verifier_success is not True
+            or clean_summary.git_commit == "nogit"
+        ):
             raise ValueError(
                 "Refusing attack run because clean generated-text baseline is not accepted. "
                 f"accepted={clean_summary.accepted}, verifier_success={clean_summary.verifier_success}, "
-                f"summary={clean_eval_summary_path}"
+                f"git_commit={clean_summary.git_commit}, summary={clean_eval_summary_path}"
             )
 
         catalog_path = Path(config.data.carrier_catalog_path)

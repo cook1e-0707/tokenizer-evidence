@@ -3,7 +3,13 @@ from pathlib import Path
 from time import sleep
 
 from src.infrastructure.manifest import build_manifest_from_config
-from src.infrastructure.paths import build_run_identity, discover_repo_root, get_git_hash, make_run_id
+from src.infrastructure.paths import (
+    build_run_identity,
+    discover_repo_root,
+    get_git_hash,
+    make_run_id,
+    resolve_git_commit,
+)
 from src.infrastructure.registry import (
     RegistryRecord,
     append_registry_record,
@@ -162,3 +168,13 @@ def test_batch1_train_submission_renders_forceful_train_command(tmp_path: Path) 
     assert "--force" in command
     assert "python3 scripts/train.py" in rendered
     assert "--force" in rendered
+
+
+def test_resolve_git_commit_falls_back_to_run_id(monkeypatch) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    monkeypatch.setattr("src.infrastructure.paths.get_git_hash", lambda _repo_root: "nogit")
+    resolved = resolve_git_commit(
+        repo_root,
+        "exp_eval__our_method__gpt2-pilot__s17__deadbee__20260418T000000000000Z",
+    )
+    assert resolved == "deadbee"

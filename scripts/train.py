@@ -10,6 +10,7 @@ import argparse
 import json
 from pathlib import Path
 
+from src.core.canonical_contract import teacher_forced_sanity_check
 from src.evaluation.report import TrainRunSummary
 from src.infrastructure.checkpointing import save_checkpoint_metadata
 from src.infrastructure.config import load_experiment_config, save_resolved_config
@@ -20,11 +21,11 @@ from src.infrastructure.paths import (
     build_run_identity,
     discover_repo_root,
     ensure_run_dir,
-    get_git_hash,
     get_results_paths,
+    resolve_git_commit,
 )
 from src.infrastructure.seed import set_global_seed
-from src.training.dataset import load_training_examples
+from src.training.dataset import TrainingExample, load_training_examples
 from src.training.hf_causal_lm import run_minimal_hf_causal_lm_training
 from src.training.trainer import TrainingPlan, execute_training
 
@@ -57,7 +58,7 @@ def main() -> int:
             method_name=config.method_name,
             model_name=config.model_name,
             seed=config.seed,
-            git_commit=get_git_hash(repo_root),
+            git_commit=resolve_git_commit(repo_root, config.runtime.run_id),
             timestamp="from_runtime",
             run_id=config.runtime.run_id,
         )
@@ -83,7 +84,7 @@ def main() -> int:
     ensure_run_dir(paths.run_dir, force=args.force)
 
     save_resolved_config(config, paths.resolved_config_path)
-    environment = collect_environment(repo_root)
+    environment = collect_environment(repo_root, fallback_run_id=config.runtime.run_id)
     write_environment_summary(environment, paths.environment_path)
     logger = setup_logging(paths.run_dir, run_id=identity.run_id, enable_jsonl=args.jsonl_log)
     log_startup(
@@ -99,11 +100,65 @@ def main() -> int:
     seed_report = set_global_seed(config.run.seed)
     logger.info("seed report: %s", seed_report)
 
-    data_path = Path(config.data.train_path)
-    if not data_path.is_absolute():
-        data_path = repo_root / data_path
-    dataset = load_training_examples(data_path)
-
+    dataset: list[TrainingExample]
+    canonical_contract_metadata: dict[str, object] | None = None
+    if config.train.target_mode not in {"dataset_completion", "canonical_evidence"}:
+        raise ValueError(
+            "train.target_mode must be one of {'dataset_completion', 'canonical_evidence'}; "
+            f"got {config.train.target_mode!r}"
+        )
+    if config.train.target_mode == "canonical_evidence":
+        bundle, sanity_result = teacher_forced_sanity_check(config, repo_root)
+        (paths.run_dir / "gold_canonical_evidence.txt").write_text(
+            bundle.rendered.text,
+            encoding="utf-8",
+        )
+        (paths.run_dir / "teacher_forced_sanity.json").write_text(
+            json.dumps(
+                {
+                    "canonical_contract": bundle.contract.to_dict(),
+                    "verifier_success": sanity_result.success,
+                    "decoded_payload": sanity_result.decoded_payload,
+                    "messages": list(sanity_result.messages),
+                    "details": sanity_result.details,
+                },
+                indent=2,
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+        if not sanity_result.success:
+            raise ValueError(
+                "Teacher-forced canonical sanity check failed before training. "
+                f"messages={list(sanity_result.messages)}"
+            )
+        completion = bundle.rendered.text
+        if config.train.generation_stop_strings:
+            completion = f"{completion}{config.train.generation_stop_strings[0]}"
+        dataset = [
+            TrainingExample(
+                prompt=(
+                    config.train.generation_prompt.strip()
+                    or "Emit canonical ownership evidence only:"
+                ),
+                target_symbols=(),
+                metadata={
+                    "completion": completion,
+                    "canonical_contract": bundle.contract.to_dict(),
+                    "target_mode": config.train.target_mode,
+                },
+            )
+        ]
+        canonical_contract_metadata = bundle.contract.to_dict()
+    else:
+        if not str(config.data.train_path).strip():
+            raise ValueError(
+                "data.train_path is required when train.target_mode is not canonical_evidence"
+            )
+        data_path = Path(config.data.train_path)
+        if not data_path.is_absolute():
+            data_path = repo_root / data_path
+        dataset = load_training_examples(data_path)
     checkpoint_path: str
     generated_text: str
     if config.model.family == "huggingface-causal-lm":
@@ -154,6 +209,8 @@ def main() -> int:
         "checkpoint_path": checkpoint_path,
         "generated_text_path": str(generated_text_path),
     }
+    if canonical_contract_metadata is not None:
+        eval_input_payload["canonical_contract"] = canonical_contract_metadata
     eval_input_path = paths.run_dir / "eval_input.json"
     eval_input_path.write_text(
         json.dumps(eval_input_payload, indent=2, sort_keys=True),

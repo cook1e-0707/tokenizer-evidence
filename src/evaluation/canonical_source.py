@@ -54,7 +54,7 @@ def load_canonical_evidence_source(
             "payload_source": "data.eval_path",
             "eval_input_path": str(eval_input_path),
         }
-        for key in ("source_train_run_id", "checkpoint_path", "generated_text_path"):
+        for key in ("source_train_run_id", "checkpoint_path", "generated_text_path", "canonical_contract"):
             if key in payload:
                 diagnostics[key] = payload[key]
 
