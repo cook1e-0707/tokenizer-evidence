@@ -111,3 +111,10 @@ def test_maybe_load_result_json_skips_legacy_incomplete_payload(tmp_path) -> Non
     path.write_text(json.dumps(legacy_payload), encoding="utf-8")
 
     assert maybe_load_result_json(path) is None
+
+
+def test_maybe_load_result_json_skips_non_object_json_payload(tmp_path) -> None:
+    path = tmp_path / "added_tokens.json"
+    path.write_text(json.dumps([]), encoding="utf-8")
+
+    assert maybe_load_result_json(path) is None

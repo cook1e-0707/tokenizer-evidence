@@ -159,6 +159,10 @@ def normalize_schema_name(schema_name: str) -> str:
 
 def load_result_json(path: Path) -> SerializableResult:
     payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(
+            f"Unsupported result payload type in {path}: expected object, got {type(payload).__name__}"
+        )
     schema_name = normalize_schema_name(str(payload.get("schema_name", "")))
     result_type = RESULT_SCHEMA_REGISTRY.get(schema_name)
     if result_type is None:
