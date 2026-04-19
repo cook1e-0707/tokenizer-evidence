@@ -1,0 +1,39 @@
+catalog_name: real-pilot-catalog-qwen2.5-7b-foundation-src-v1
+notes: >
+  Foundation-stage source catalog for contextual next-token repair on Qwen2.5-7B-Instruct.
+  This shrinks the pilot carrier space to two fields with four context-stable carriers each,
+  and is intended only for the pre-Batch-2.8B foundation repair stage.
+tags: [pilot, canonical, qwen2.5, foundation, source-revision]
+provenance:
+  catalog_status: source_revision
+  revision_name: foundation_src_v1
+  tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+  tokenizer_backend: huggingface
+  tokenizer_revision_source: Qwen/Qwen2.5-7B-Instruct
+  original_source_catalog: configs/data/real_pilot_catalog.yaml
+  inherited_source_revision: configs/data/source/real_pilot_catalog__qwen2_5_instruct__src_v1.yaml
+fields:
+  - field_name: SECTION
+    field_type: category
+    tags: [public, foundation]
+    notes: >
+      Shrunk foundation bucket set. Kept only carriers that are easy to separate by field and
+      intended for contextual single-token audit under the frozen slot prefix contract.
+    buckets:
+      "0": [news]
+      "1": [report]
+      "2": [guide]
+      "3": [update]
+    disallowed_carriers: []
+  - field_name: TOPIC
+    field_type: topic
+    tags: [public, foundation]
+    notes: >
+      Shrunk foundation bucket set. Kept only carriers that are easy to separate by field and
+      intended for contextual single-token audit under the frozen slot prefix contract.
+    buckets:
+      "0": [market]
+      "1": [travel]
+      "2": [health]
+      "3": [science]
+    disallowed_carriers: []

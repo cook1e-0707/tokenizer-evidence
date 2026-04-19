@@ -62,6 +62,7 @@ class TrainConfig:
     objective: str = "bucket_mass"
     num_workers: int = 0
     probe_payload_texts: tuple[str, ...] = ()
+    probe_block_count: int = 0
     generation_prompt: str = ""
     generation_do_sample: bool = False
     generation_max_new_tokens: int = 16

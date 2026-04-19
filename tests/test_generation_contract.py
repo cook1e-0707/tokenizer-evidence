@@ -14,7 +14,10 @@ from src.core.canonical_contract import (
     ensure_train_eval_config_alignment,
     teacher_forced_sanity_check,
 )
+from src.core.contextual_alignment import audit_contextual_field_values
 from src.core.scaffolded_completion import (
+    FOUNDATION_ARTIFACT_FORMAT,
+    FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
     build_fieldwise_generation_plan,
     build_scaffolded_completion_target,
     parse_scaffolded_completion,
@@ -160,6 +163,20 @@ def test_repo_batch28_model_roles_remain_split_between_bridge_and_repair() -> No
     assert bridge_train_config.train.target_mode == "scaffolded_canonical_completion"
     assert main_train_config.train.target_mode == "fieldwise_constrained_slot_completion"
     assert main_train_config.train.probe_payload_texts
+
+
+def test_repo_qwen7b_foundation_config_uses_small_contextual_probe_stage() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    foundation_train_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_7b__foundation_v1.yaml"
+    )
+
+    assert foundation_train_config.train.target_mode == "foundation_fieldwise_constrained_slot_completion"
+    assert foundation_train_config.train.probe_block_count == 1
+    assert len(foundation_train_config.train.probe_payload_texts) == 16
+    assert foundation_train_config.data.carrier_catalog_path.endswith(
+        "real_pilot_catalog__qwen2_5_7b_foundation__v1.yaml"
+    )
 
 
 def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:
@@ -643,6 +660,8 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
             self.eos_token_id = 99
             self.prompt_to_id: dict[str, int] = {}
             self.prompt_id_to_expected_token: dict[int, int] = {}
+            self.id_to_text: dict[int, str] = {}
+            self.vocab_size = 128
 
         @classmethod
         def from_pretrained(cls, _name):
@@ -653,6 +672,7 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
         def _prompt_id(self, prompt: str) -> int:
             if prompt not in self.prompt_to_id:
                 self.prompt_to_id[prompt] = 1000 + len(self.prompt_to_id)
+                self.id_to_text[self.prompt_to_id[prompt]] = prompt
             return self.prompt_to_id[prompt]
 
         def encode(self, text: str, add_special_tokens: bool = False):
@@ -683,7 +703,10 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
             if isinstance(tokens, int):
                 tokens = [tokens]
             inverse = {token_id: value for value, token_id in self.value_token_ids.items()}
-            return "".join(inverse.get(int(token_id), "") for token_id in tokens)
+            return "".join(
+                self.id_to_text.get(int(token_id), inverse.get(int(token_id), ""))
+                for token_id in tokens
+            )
 
         def save_pretrained(self, path: Path):
             Path(path).mkdir(parents=True, exist_ok=True)
@@ -750,6 +773,8 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
     plan = build_fieldwise_generation_plan(
         bundle,
         instruction="Output exactly one allowed carrier value for the requested slot.",
+        prompt_contract_name=FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+        max_blocks=1,
     )
     tokenizer = FakeTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct")
     for slot_target in plan.slot_targets:
@@ -781,7 +806,65 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
     assert result.generation_diagnostics["per_slot_exact_rate"] == 1.0
     assert result.generation_diagnostics["parse_success_rate"] == 1.0
     assert result.generation_diagnostics["decode_success_rate"] == 1.0
+    assert result.generation_diagnostics["contextual_carrier_audit"]["is_context_safe"] is True
     assert FakeModel.last_instance is not None
     assert FakeModel.last_instance.generate_kwargs["max_new_tokens"] == 1
     assert FakeModel.last_instance.generate_kwargs["do_sample"] is False
     assert "prefix_allowed_tokens_fn" in FakeModel.last_instance.generate_kwargs
+
+
+def test_contextual_carrier_audit_uses_exact_slot_prefix_not_prefix_stable_diff() -> None:
+    class PrefixShiftTokenizer:
+        def __init__(self):
+            self.id_to_text = {
+                1: "SECTION=",
+                7: "news",
+                8: "report",
+            }
+
+        def encode(self, text: str) -> list[int]:
+            if text == "SECTION=":
+                return [1]
+            if text == "SECTION=news":
+                return [99]
+            if text == "SECTION=report":
+                return [98]
+            raise AssertionError(text)
+
+        def decode(self, token_ids):
+            if tuple(token_ids) == (1, 7):
+                return "SECTION=news"
+            if tuple(token_ids) == (1, 8):
+                return "SECTION=report"
+            return "".join(self.id_to_text.get(int(token_id), "") for token_id in token_ids)
+
+    audit = audit_contextual_field_values(
+        field_allowed_values={"SECTION": ("news", "report")},
+        exact_slot_prefixes={"SECTION": "SECTION="},
+        tokenizer=PrefixShiftTokenizer(),
+        prompt_contract_name=FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+    )
+
+    assert audit.is_context_safe is True
+    assert audit.valid_token_map["SECTION"]["SECTION="]["news"] == 7
+    assert audit.valid_token_map["SECTION"]["SECTION="]["report"] == 8
+
+
+def test_foundation_fieldwise_plan_uses_deterministic_prefix_contract(tmp_path: Path) -> None:
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    config = load_experiment_config(
+        _write_experiment_config(tmp_path / "train.yaml", catalog_path=catalog_path, experiment_name="exp_train")
+    )
+    bundle = build_canonical_evidence_bundle(config, tmp_path)
+
+    plan = build_fieldwise_generation_plan(
+        bundle,
+        instruction="ignored for foundation prompts",
+        prompt_contract_name=FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+        max_blocks=1,
+    )
+
+    assert plan.artifact_format == FOUNDATION_ARTIFACT_FORMAT
+    assert plan.fields_per_block == 2
+    assert len(plan.slot_targets) == 2
+    assert tuple(target.prompt for target in plan.slot_targets) == ("SECTION=", "TOPIC=")

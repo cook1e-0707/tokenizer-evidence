@@ -20,6 +20,7 @@ from src.core.catalog_freeze import load_required_frozen_catalog
 from src.core.payload_codec import BucketPayloadCodec
 from src.core.render import render_bucket_tuples, render_config_from_name
 from src.core.scaffolded_completion import (
+    FOUNDATION_ARTIFACT_FORMAT,
     SCAFFOLDED_ARTIFACT_FORMAT,
     parse_scaffolded_completion,
 )
@@ -170,6 +171,12 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
                 encoding="utf-8",
             )
         artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
+        if artifact_format == FOUNDATION_ARTIFACT_FORMAT:
+            raise ValueError(
+                "foundation_slot_values artifacts are a pre-eval foundation-stage output and "
+                "cannot be consumed by canonical_render eval yet. Complete the foundation repair "
+                "stage before reopening clean generated-text evaluation."
+            )
         if verifier_text is not None and artifact_format == SCAFFOLDED_ARTIFACT_FORMAT:
             expected_slot_values = tuple(str(item) for item in diagnostics.get("expected_slot_values", []))
             parse_result = parse_scaffolded_completion(

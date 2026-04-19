@@ -12,7 +12,9 @@ from pathlib import Path
 
 from src.core.canonical_contract import build_canonical_evidence_bundle, teacher_forced_sanity_check
 from src.core.scaffolded_completion import (
+    DEFAULT_FIELDWISE_PROMPT_CONTRACT,
     FieldwiseGenerationPlan,
+    FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
     build_fieldwise_generation_plan,
     build_scaffolded_completion_target,
 )
@@ -116,16 +118,19 @@ def main() -> int:
         "canonical_evidence",
         "scaffolded_canonical_completion",
         "fieldwise_constrained_slot_completion",
+        "foundation_fieldwise_constrained_slot_completion",
     }:
         raise ValueError(
             "train.target_mode must be one of {'dataset_completion', 'canonical_evidence', "
-            "'scaffolded_canonical_completion', 'fieldwise_constrained_slot_completion'}; "
+            "'scaffolded_canonical_completion', 'fieldwise_constrained_slot_completion', "
+            "'foundation_fieldwise_constrained_slot_completion'}; "
             f"got {config.train.target_mode!r}"
         )
     if config.train.target_mode in {
         "canonical_evidence",
         "scaffolded_canonical_completion",
         "fieldwise_constrained_slot_completion",
+        "foundation_fieldwise_constrained_slot_completion",
     }:
         bundle, sanity_result = teacher_forced_sanity_check(config, repo_root)
         (paths.run_dir / "train_contract_summary.json").write_text(
@@ -156,7 +161,10 @@ def main() -> int:
                 f"messages={list(sanity_result.messages)}"
             )
         canonical_contract_metadata = bundle.contract.to_dict()
-        if config.train.target_mode == "fieldwise_constrained_slot_completion":
+        if config.train.target_mode in {
+            "fieldwise_constrained_slot_completion",
+            "foundation_fieldwise_constrained_slot_completion",
+        }:
             probe_payload_texts = tuple(
                 str(payload).strip()
                 for payload in config.train.probe_payload_texts
@@ -164,6 +172,14 @@ def main() -> int:
             )
             if not probe_payload_texts:
                 probe_payload_texts = (config.eval.payload_text,)
+            prompt_contract_name = (
+                FOUNDATION_FIELDWISE_PROMPT_CONTRACT
+                if config.train.target_mode == "foundation_fieldwise_constrained_slot_completion"
+                else DEFAULT_FIELDWISE_PROMPT_CONTRACT
+            )
+            probe_block_count = config.train.probe_block_count or (
+                1 if config.train.target_mode == "foundation_fieldwise_constrained_slot_completion" else 0
+            )
             dataset = []
             for payload_text in dict.fromkeys(probe_payload_texts):
                 probe_bundle = build_canonical_evidence_bundle(
@@ -177,6 +193,8 @@ def main() -> int:
                         config.train.generation_prompt.strip()
                         or "Output exactly one allowed carrier value for the requested slot."
                     ),
+                    prompt_contract_name=prompt_contract_name,
+                    max_blocks=probe_block_count or None,
                 )
                 for target in probe_plan.slot_targets:
                     dataset.append(
@@ -203,6 +221,8 @@ def main() -> int:
                     config.train.generation_prompt.strip()
                     or "Output exactly one allowed carrier value for the requested slot."
                 ),
+                prompt_contract_name=prompt_contract_name,
+                max_blocks=probe_block_count or None,
             )
             (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
                 "\n\n".join(target.prompt for target in fieldwise_generation_plan.slot_targets),
@@ -214,6 +234,22 @@ def main() -> int:
             )
             (paths.run_dir / "probe_payload_texts.json").write_text(
                 json.dumps(list(dict.fromkeys(probe_payload_texts)), indent=2),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "fieldwise_generation_plan.json").write_text(
+                json.dumps(fieldwise_generation_plan.to_dict(), indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "slot_prompt_contract.json").write_text(
+                json.dumps(
+                    {
+                        "prompt_contract_name": fieldwise_generation_plan.prompt_contract_name,
+                        "exact_slot_prefixes": fieldwise_generation_plan.exact_slot_prefixes,
+                        "probe_block_count": probe_block_count or bundle.contract.block_count,
+                    },
+                    indent=2,
+                    sort_keys=True,
+                ),
                 encoding="utf-8",
             )
             generated_artifact_format = fieldwise_generation_plan.artifact_format
@@ -317,6 +353,14 @@ def main() -> int:
                 json.dumps(training_result.generation_diagnostics, indent=2, sort_keys=True),
                 encoding="utf-8",
             )
+            contextual_carrier_audit = training_result.generation_diagnostics.get(
+                "contextual_carrier_audit"
+            )
+            if isinstance(contextual_carrier_audit, dict):
+                (paths.run_dir / "contextual_carrier_audit.json").write_text(
+                    json.dumps(contextual_carrier_audit, indent=2, sort_keys=True),
+                    encoding="utf-8",
+                )
     else:
         plan = TrainingPlan(
             dataset_name=config.data.name,

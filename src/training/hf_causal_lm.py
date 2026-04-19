@@ -4,6 +4,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Mapping, Sequence
 
+from src.core.contextual_alignment import (
+    ContextualCarrierAuditResult,
+    ContextualSlotTarget,
+    audit_contextual_slot_targets,
+)
 from src.core.scaffolded_completion import FieldwiseGenerationPlan
 from src.training.dataset import TrainingExample
 
@@ -68,34 +73,6 @@ def _build_labels_tensor(torch_module: object, labels_payload: list[list[int]], 
     return labels_payload
 
 
-def _resolve_contextual_single_token_ids(
-    tokenizer: object,
-    *,
-    prompt: str,
-    allowed_values: Sequence[str],
-) -> tuple[dict[str, int], dict[int, str]]:
-    prompt_ids = _tokenize_text(tokenizer, prompt)
-    value_to_token_id: dict[str, int] = {}
-    token_id_to_value: dict[int, str] = {}
-    for value in allowed_values:
-        full_ids = _tokenize_text(tokenizer, f"{prompt}{value}")
-        continuation_ids = full_ids[len(prompt_ids) :]
-        if len(continuation_ids) != 1:
-            raise HFCausalLMTrainingError(
-                "Field-wise constrained decoding requires every allowed carrier to map to exactly "
-                f"one continuation token in context; value={value!r} produced {continuation_ids!r}"
-            )
-        token_id = int(continuation_ids[0])
-        if token_id in token_id_to_value and token_id_to_value[token_id] != value:
-            raise HFCausalLMTrainingError(
-                "Constrained decoding found ambiguous token ids for distinct allowed carriers: "
-                f"token_id={token_id}, carriers=({token_id_to_value[token_id]!r}, {value!r})"
-            )
-        value_to_token_id[value] = token_id
-        token_id_to_value[token_id] = value
-    return value_to_token_id, token_id_to_value
-
-
 def _build_generation_kwargs(
     *,
     tokenizer: object,
@@ -109,10 +86,9 @@ def _build_generation_kwargs(
         "do_sample": generation_do_sample,
         "num_beams": 1,
         "pad_token_id": tokenizer.pad_token_id,
-        "temperature": 1.0,
-        "top_p": 1.0,
-        "top_k": 50,
     }
+    if generation_do_sample:
+        generation_kwargs.update({"temperature": 1.0, "top_p": 1.0, "top_k": 50})
     if eos_token_id is not None:
         generation_kwargs["eos_token_id"] = eos_token_id
     if allowed_token_ids is not None:
@@ -120,6 +96,54 @@ def _build_generation_kwargs(
             lambda _batch_id, _input_ids, allowed=tuple(int(token_id) for token_id in allowed_token_ids): list(allowed)
         )
     return generation_kwargs
+
+
+def _resolve_fieldwise_contextual_token_map(
+    *,
+    tokenizer: object,
+    plan: FieldwiseGenerationPlan,
+) -> tuple[
+    ContextualCarrierAuditResult,
+    dict[tuple[str, str], tuple[dict[str, int], dict[int, str]]],
+]:
+    audit_result = audit_contextual_slot_targets(
+        slot_targets=[
+            ContextualSlotTarget(
+                field_name=target.field_name,
+                exact_slot_prefix=target.exact_slot_prefix,
+                allowed_values=target.allowed_values,
+            )
+            for target in plan.slot_targets
+        ],
+        tokenizer=tokenizer,
+        prompt_contract_name=plan.prompt_contract_name,
+    )
+    if not audit_result.is_context_safe:
+        first_failure = next(item for item in audit_result.diagnostics if not item.is_valid_next_token)
+        raise HFCausalLMTrainingError(
+            "Field-wise constrained decoding requires every allowed carrier to map to exactly one "
+            "next token under the exact slot prefix; "
+            f"field={first_failure.field_name!r}, prefix={first_failure.exact_slot_prefix!r}, "
+            f"value={first_failure.carrier!r}, reasons={list(first_failure.reasons)!r}, "
+            f"matching_token_ids={list(first_failure.matching_token_ids)!r}"
+        )
+    slot_maps: dict[tuple[str, str], tuple[dict[str, int], dict[int, str]]] = {}
+    for field_name, prefix_map in audit_result.valid_token_map.items():
+        for exact_slot_prefix, value_to_token_id in prefix_map.items():
+            token_id_to_value = {
+                int(token_id): value
+                for value, token_id in value_to_token_id.items()
+            }
+            if len(token_id_to_value) != len(value_to_token_id):
+                raise HFCausalLMTrainingError(
+                    "Constrained decoding found ambiguous token ids for distinct allowed carriers "
+                    f"in field={field_name!r}, prefix={exact_slot_prefix!r}"
+                )
+            slot_maps[(field_name, exact_slot_prefix)] = (
+                {value: int(token_id) for value, token_id in value_to_token_id.items()},
+                token_id_to_value,
+            )
+    return audit_result, slot_maps
 
 
 def _compute_fieldwise_generation_diagnostics(
@@ -312,14 +336,16 @@ def run_minimal_hf_causal_lm_training(
     generation_diagnostics: dict[str, object] = {}
     with torch.no_grad():
         if fieldwise_generation_plan is not None:
+            contextual_audit_result, slot_token_maps = _resolve_fieldwise_contextual_token_map(
+                tokenizer=tokenizer,
+                plan=fieldwise_generation_plan,
+            )
             generated_values: list[str] = []
             slot_results: list[dict[str, object]] = []
             for slot_target in fieldwise_generation_plan.slot_targets:
-                value_to_token_id, token_id_to_value = _resolve_contextual_single_token_ids(
-                    tokenizer,
-                    prompt=slot_target.prompt,
-                    allowed_values=slot_target.allowed_values,
-                )
+                value_to_token_id, token_id_to_value = slot_token_maps[
+                    (slot_target.field_name, slot_target.exact_slot_prefix)
+                ]
                 generation_inputs = tokenizer(
                     slot_target.prompt,
                     return_tensors="pt",
@@ -362,10 +388,15 @@ def run_minimal_hf_causal_lm_training(
                     {
                         "slot_index": slot_target.slot_index,
                         "slot_type": slot_target.field_name,
+                        "exact_slot_prefix": slot_target.exact_slot_prefix,
+                        "allowed_values": list(slot_target.allowed_values),
                         "allowed_token_count": len(value_to_token_id),
                         "chosen_token_id": chosen_token_id,
+                        "chosen_token_text": chosen_text,
                         "token_text": chosen_text,
+                        "is_field_valid": field_valid,
                         "field_valid": field_valid,
+                        "is_bucket_correct": bucket_correct,
                         "bucket_correct": bucket_correct,
                         "expected_bucket_id": slot_target.expected_bucket_id,
                         "chosen_bucket_id": chosen_bucket_id,
@@ -377,6 +408,7 @@ def run_minimal_hf_causal_lm_training(
                 generated_values=tuple(generated_values),
                 slot_results=tuple(slot_results),
             )
+            generation_diagnostics["contextual_carrier_audit"] = contextual_audit_result.to_dict()
         else:
             prompt = generation_prompt if generation_prompt else dataset[0].prompt.strip()
             if not prompt:

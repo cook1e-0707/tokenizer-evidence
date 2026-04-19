@@ -11,6 +11,9 @@ from src.core.render import render_config_from_name
 
 
 SCAFFOLDED_ARTIFACT_FORMAT = "scaffolded_slot_values"
+FOUNDATION_ARTIFACT_FORMAT = "foundation_slot_values"
+DEFAULT_FIELDWISE_PROMPT_CONTRACT = "slot_request_v2"
+FOUNDATION_FIELDWISE_PROMPT_CONTRACT = "foundation_v1"
 
 
 @dataclass(frozen=True)
@@ -30,6 +33,7 @@ class FieldwiseSlotTarget:
     block_index: int
     field_name: str
     prompt: str
+    exact_slot_prefix: str
     allowed_values: tuple[str, ...]
     allowed_value_bucket_ids: dict[str, int]
     expected_value: str
@@ -45,11 +49,19 @@ class FieldwiseGenerationPlan:
     slot_targets: tuple[FieldwiseSlotTarget, ...]
     expected_slot_values: tuple[str, ...]
     fields_per_block: int
+    prompt_contract_name: str = DEFAULT_FIELDWISE_PROMPT_CONTRACT
     artifact_format: str = SCAFFOLDED_ARTIFACT_FORMAT
 
     @property
     def slot_field_names(self) -> tuple[str, ...]:
         return tuple(target.field_name for target in self.slot_targets)
+
+    @property
+    def exact_slot_prefixes(self) -> dict[str, str]:
+        prefixes: dict[str, str] = {}
+        for target in self.slot_targets:
+            prefixes.setdefault(target.field_name, target.exact_slot_prefix)
+        return prefixes
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -57,6 +69,7 @@ class FieldwiseGenerationPlan:
             "slot_targets": [target.to_dict() for target in self.slot_targets],
             "expected_slot_values": list(self.expected_slot_values),
             "fields_per_block": self.fields_per_block,
+            "prompt_contract_name": self.prompt_contract_name,
             "artifact_format": self.artifact_format,
         }
 
@@ -134,14 +147,17 @@ def _ordered_field_values(layout: BucketLayout, field_name: str) -> tuple[str, .
 
 def _build_fieldwise_slot_prompt(
     *,
-    instruction: str,
-    payload_text: str,
-    slot_index: int,
-    total_slots: int,
-    block_index: int,
     field_name: str,
     allowed_values: Sequence[str],
+    prompt_contract_name: str,
+    instruction: str = "",
+    payload_text: str = "",
+    slot_index: int = 0,
+    total_slots: int = 0,
+    block_index: int = 0,
 ) -> str:
+    if prompt_contract_name == FOUNDATION_FIELDWISE_PROMPT_CONTRACT:
+        return f"{field_name}="
     prompt_lines = [
         instruction.strip() or "Output exactly one allowed carrier value for the requested slot.",
         f"Payload: {payload_text}",
@@ -157,10 +173,17 @@ def _build_fieldwise_slot_prompt(
 def build_fieldwise_generation_plan(
     bundle: CanonicalEvidenceBundle,
     instruction: str,
+    *,
+    prompt_contract_name: str = DEFAULT_FIELDWISE_PROMPT_CONTRACT,
+    max_blocks: int | None = None,
 ) -> FieldwiseGenerationPlan:
     layout = load_required_frozen_catalog(Path(bundle.contract.catalog_path))
-    slot_field_names = bundle.contract.field_names * bundle.contract.block_count
+    effective_block_count = bundle.contract.block_count
+    if max_blocks is not None:
+        effective_block_count = max(1, min(int(max_blocks), bundle.contract.block_count))
+    slot_field_names = bundle.contract.field_names * effective_block_count
     expected_slot_values = _extract_slot_values_from_rendered_text(bundle.rendered.text)
+    expected_slot_values = expected_slot_values[: len(slot_field_names)]
     if len(expected_slot_values) != len(slot_field_names):
         raise ValueError(
             "Rendered canonical evidence does not match expected slot layout: "
@@ -179,20 +202,23 @@ def build_fieldwise_generation_plan(
                 f"Expected value {expected_value!r} is not valid for field {field_name!r}"
             )
         allowed_values = _ordered_field_values(layout, field_name)
+        prompt_text = _build_fieldwise_slot_prompt(
+            field_name=field_name,
+            allowed_values=allowed_values,
+            prompt_contract_name=prompt_contract_name,
+            instruction=instruction,
+            payload_text=bundle.contract.payload_text,
+            slot_index=slot_index,
+            total_slots=len(slot_field_names),
+            block_index=slot_index // fields_per_block,
+        )
         slot_targets.append(
             FieldwiseSlotTarget(
                 slot_index=slot_index,
                 block_index=slot_index // fields_per_block,
                 field_name=field_name,
-                prompt=_build_fieldwise_slot_prompt(
-                    instruction=instruction,
-                    payload_text=bundle.contract.payload_text,
-                    slot_index=slot_index,
-                    total_slots=len(slot_field_names),
-                    block_index=slot_index // fields_per_block,
-                    field_name=field_name,
-                    allowed_values=allowed_values,
-                ),
+                prompt=prompt_text,
+                exact_slot_prefix=prompt_text,
                 allowed_values=allowed_values,
                 allowed_value_bucket_ids={
                     value: field_spec.lookup_bucket_id(value)
@@ -208,6 +234,12 @@ def build_fieldwise_generation_plan(
         slot_targets=tuple(slot_targets),
         expected_slot_values=expected_slot_values,
         fields_per_block=fields_per_block,
+        prompt_contract_name=prompt_contract_name,
+        artifact_format=(
+            FOUNDATION_ARTIFACT_FORMAT
+            if prompt_contract_name == FOUNDATION_FIELDWISE_PROMPT_CONTRACT
+            else SCAFFOLDED_ARTIFACT_FORMAT
+        ),
     )
 
 
