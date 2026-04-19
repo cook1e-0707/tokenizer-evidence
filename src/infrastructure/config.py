@@ -61,6 +61,7 @@ class TrainConfig:
     learning_rate: float = 0.0001
     objective: str = "bucket_mass"
     num_workers: int = 0
+    probe_payload_texts: tuple[str, ...] = ()
     generation_prompt: str = ""
     generation_do_sample: bool = False
     generation_max_new_tokens: int = 16

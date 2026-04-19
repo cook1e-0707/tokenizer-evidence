@@ -68,12 +68,18 @@ def _sha256_path(path: Path) -> str:
     return sha256(path.read_bytes()).hexdigest()
 
 
-def build_canonical_contract(config: object, repo_root: Path) -> CanonicalContract:
+def build_canonical_contract(
+    config: object,
+    repo_root: Path,
+    *,
+    payload_text: str | None = None,
+) -> CanonicalContract:
     catalog_path = _resolve_catalog_path(config.data.carrier_catalog_path, repo_root)
     layout = load_required_frozen_catalog(catalog_path)
     codec = BucketPayloadCodec(bucket_radices=layout.radices)
     render_config = render_config_from_name(config.eval.render_format)
-    payload_bytes = config.eval.payload_text.encode("utf-8")
+    active_payload_text = payload_text if payload_text is not None else config.eval.payload_text
+    payload_bytes = active_payload_text.encode("utf-8")
     block_count = len(codec.encode_bytes(payload_bytes, apply_rs=False).bucket_tuples)
     return CanonicalContract(
         catalog_path=str(catalog_path),
@@ -82,13 +88,18 @@ def build_canonical_contract(config: object, repo_root: Path) -> CanonicalContra
         field_names=layout.field_names,
         radices=layout.radices,
         render_format=render_config.format_name,
-        payload_text=config.eval.payload_text,
+        payload_text=active_payload_text,
         block_count=block_count,
     )
 
 
-def build_canonical_evidence_bundle(config: object, repo_root: Path) -> CanonicalEvidenceBundle:
-    contract = build_canonical_contract(config, repo_root)
+def build_canonical_evidence_bundle(
+    config: object,
+    repo_root: Path,
+    *,
+    payload_text: str | None = None,
+) -> CanonicalEvidenceBundle:
+    contract = build_canonical_contract(config, repo_root, payload_text=payload_text)
     layout = load_required_frozen_catalog(Path(contract.catalog_path))
     codec = BucketPayloadCodec(bucket_radices=layout.radices)
     payload_bytes = contract.payload_text.encode("utf-8")

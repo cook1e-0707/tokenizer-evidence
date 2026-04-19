@@ -10,8 +10,12 @@ import argparse
 import json
 from pathlib import Path
 
-from src.core.canonical_contract import teacher_forced_sanity_check
-from src.core.scaffolded_completion import build_scaffolded_completion_target
+from src.core.canonical_contract import build_canonical_evidence_bundle, teacher_forced_sanity_check
+from src.core.scaffolded_completion import (
+    FieldwiseGenerationPlan,
+    build_fieldwise_generation_plan,
+    build_scaffolded_completion_target,
+)
 from src.evaluation.report import TrainRunSummary
 from src.infrastructure.checkpointing import save_checkpoint_metadata
 from src.infrastructure.config import load_experiment_config, save_resolved_config
@@ -106,17 +110,23 @@ def main() -> int:
     generated_artifact_format = "canonical_text"
     expected_slot_values: tuple[str, ...] = ()
     generation_prompt = config.train.generation_prompt
+    fieldwise_generation_plan: FieldwiseGenerationPlan | None = None
     if config.train.target_mode not in {
         "dataset_completion",
         "canonical_evidence",
         "scaffolded_canonical_completion",
+        "fieldwise_constrained_slot_completion",
     }:
         raise ValueError(
             "train.target_mode must be one of {'dataset_completion', 'canonical_evidence', "
-            "'scaffolded_canonical_completion'}; "
+            "'scaffolded_canonical_completion', 'fieldwise_constrained_slot_completion'}; "
             f"got {config.train.target_mode!r}"
         )
-    if config.train.target_mode in {"canonical_evidence", "scaffolded_canonical_completion"}:
+    if config.train.target_mode in {
+        "canonical_evidence",
+        "scaffolded_canonical_completion",
+        "fieldwise_constrained_slot_completion",
+    }:
         bundle, sanity_result = teacher_forced_sanity_check(config, repo_root)
         (paths.run_dir / "train_contract_summary.json").write_text(
             json.dumps(bundle.contract.to_dict(), indent=2, sort_keys=True),
@@ -146,7 +156,69 @@ def main() -> int:
                 f"messages={list(sanity_result.messages)}"
             )
         canonical_contract_metadata = bundle.contract.to_dict()
-        if config.train.target_mode == "scaffolded_canonical_completion":
+        if config.train.target_mode == "fieldwise_constrained_slot_completion":
+            probe_payload_texts = tuple(
+                str(payload).strip()
+                for payload in config.train.probe_payload_texts
+                if str(payload).strip()
+            )
+            if not probe_payload_texts:
+                probe_payload_texts = (config.eval.payload_text,)
+            dataset = []
+            for payload_text in dict.fromkeys(probe_payload_texts):
+                probe_bundle = build_canonical_evidence_bundle(
+                    config,
+                    repo_root,
+                    payload_text=payload_text,
+                )
+                probe_plan = build_fieldwise_generation_plan(
+                    probe_bundle,
+                    instruction=(
+                        config.train.generation_prompt.strip()
+                        or "Output exactly one allowed carrier value for the requested slot."
+                    ),
+                )
+                for target in probe_plan.slot_targets:
+                    dataset.append(
+                        TrainingExample(
+                            prompt=target.prompt,
+                            target_symbols=(),
+                            metadata={
+                                "completion": target.expected_value,
+                                "payload_text": payload_text,
+                                "slot_index": target.slot_index,
+                                "slot_type": target.field_name,
+                                "block_index": target.block_index,
+                                "allowed_values": list(target.allowed_values),
+                                "expected_bucket_id": target.expected_bucket_id,
+                                "canonical_contract": probe_bundle.contract.to_dict(),
+                                "target_mode": config.train.target_mode,
+                                "generated_artifact_format": probe_plan.artifact_format,
+                            },
+                        )
+                    )
+            fieldwise_generation_plan = build_fieldwise_generation_plan(
+                bundle,
+                instruction=(
+                    config.train.generation_prompt.strip()
+                    or "Output exactly one allowed carrier value for the requested slot."
+                ),
+            )
+            (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
+                "\n\n".join(target.prompt for target in fieldwise_generation_plan.slot_targets),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "gold_scaffold_values.txt").write_text(
+                "\n".join(fieldwise_generation_plan.expected_slot_values),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "probe_payload_texts.json").write_text(
+                json.dumps(list(dict.fromkeys(probe_payload_texts)), indent=2),
+                encoding="utf-8",
+            )
+            generated_artifact_format = fieldwise_generation_plan.artifact_format
+            expected_slot_values = fieldwise_generation_plan.expected_slot_values
+        elif config.train.target_mode == "scaffolded_canonical_completion":
             scaffold = build_scaffolded_completion_target(
                 bundle,
                 instruction=(
@@ -232,6 +304,7 @@ def main() -> int:
             lora_alpha=config.train.lora_alpha,
             lora_dropout=config.train.lora_dropout,
             lora_target_modules=config.train.lora_target_modules,
+            fieldwise_generation_plan=fieldwise_generation_plan,
         )
         status = training_result.status
         steps = training_result.steps
@@ -239,6 +312,11 @@ def main() -> int:
         final_loss = training_result.final_loss
         checkpoint_path = training_result.checkpoint_dir
         generated_text = training_result.generated_text
+        if training_result.generation_diagnostics:
+            (paths.run_dir / "fieldwise_generation_diagnostics.json").write_text(
+                json.dumps(training_result.generation_diagnostics, indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
     else:
         plan = TrainingPlan(
             dataset_name=config.data.name,

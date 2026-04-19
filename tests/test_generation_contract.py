@@ -14,7 +14,11 @@ from src.core.canonical_contract import (
     ensure_train_eval_config_alignment,
     teacher_forced_sanity_check,
 )
-from src.core.scaffolded_completion import build_scaffolded_completion_target, parse_scaffolded_completion
+from src.core.scaffolded_completion import (
+    build_fieldwise_generation_plan,
+    build_scaffolded_completion_target,
+    parse_scaffolded_completion,
+)
 from src.infrastructure.config import load_experiment_config
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
@@ -142,6 +146,20 @@ def test_repo_batch28_qwen_train_and_eval_configs_share_canonical_contract() -> 
 
     ensure_train_eval_config_alignment(bridge_train_config, bridge_eval_config, repo_root)
     ensure_train_eval_config_alignment(main_train_config, main_eval_config, repo_root)
+
+
+def test_repo_batch28_model_roles_remain_split_between_bridge_and_repair() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    bridge_train_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_3b__v1.yaml"
+    )
+    main_train_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_7b__v1.yaml"
+    )
+
+    assert bridge_train_config.train.target_mode == "scaffolded_canonical_completion"
+    assert main_train_config.train.target_mode == "fieldwise_constrained_slot_completion"
+    assert main_train_config.train.probe_payload_texts
 
 
 def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:
@@ -299,7 +317,8 @@ def test_canonical_generation_is_deterministic_and_length_bounded(
 
         @classmethod
         def from_pretrained(cls, _name):
-            cls.last_instance = cls()
+            if cls.last_instance is None:
+                cls.last_instance = cls()
             return cls.last_instance
 
         def __call__(self, text, **_kwargs):
@@ -326,7 +345,8 @@ def test_canonical_generation_is_deterministic_and_length_bounded(
 
         @classmethod
         def from_pretrained(cls, _name):
-            cls.last_instance = cls()
+            if cls.last_instance is None:
+                cls.last_instance = cls()
             return cls.last_instance
 
         def to(self, _device):
@@ -443,7 +463,8 @@ def test_lora_training_mode_uses_peft_adapter(
 
         @classmethod
         def from_pretrained(cls, _name):
-            cls.last_instance = cls()
+            if cls.last_instance is None:
+                cls.last_instance = cls()
             return cls.last_instance
 
         def __call__(self, text, **_kwargs):
@@ -473,7 +494,8 @@ def test_lora_training_mode_uses_peft_adapter(
 
         @classmethod
         def from_pretrained(cls, _name):
-            cls.last_instance = cls()
+            if cls.last_instance is None:
+                cls.last_instance = cls()
             return cls.last_instance
 
         def to(self, _device):
@@ -553,3 +575,213 @@ def test_lora_training_mode_uses_peft_adapter(
     assert FakeModel.last_instance is not None
     assert FakeModel.last_instance.lora_config.kwargs["target_modules"] == ["q_proj", "k_proj"]
     assert FakeModel.last_instance.generate_kwargs["bad_words_ids"] == [[7], [5]]
+
+
+def test_fieldwise_constrained_single_token_decoding_is_deterministic(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    class FakeLoss:
+        def detach(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def item(self):
+            return 0.111
+
+        def backward(self):
+            return None
+
+    class FakeTensor:
+        def __init__(self, payload):
+            self.payload = payload
+
+        def to(self, _device):
+            return self
+
+        def __getitem__(self, index):
+            return self.payload[index]
+
+        def tolist(self):
+            return self.payload
+
+    class FakeNoGrad:
+        def __enter__(self):
+            return None
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+    class FakeOptimizer:
+        def zero_grad(self, set_to_none=True):
+            return None
+
+        def step(self):
+            return None
+
+    class FakeTokenizer:
+        last_instance = None
+        value_token_ids = {
+            "news": 10,
+            "report": 11,
+            "guide": 12,
+            "update": 13,
+            "review": 14,
+            "market": 21,
+            "travel": 22,
+            "health": 23,
+            "science": 24,
+            "climate": 25,
+        }
+
+        def __init__(self):
+            self.pad_token = None
+            self.eos_token = "<eos>"
+            self.pad_token_id = 0
+            self.eos_token_id = 99
+            self.prompt_to_id: dict[str, int] = {}
+            self.prompt_id_to_expected_token: dict[int, int] = {}
+
+        @classmethod
+        def from_pretrained(cls, _name):
+            if cls.last_instance is None:
+                cls.last_instance = cls()
+            return cls.last_instance
+
+        def _prompt_id(self, prompt: str) -> int:
+            if prompt not in self.prompt_to_id:
+                self.prompt_to_id[prompt] = 1000 + len(self.prompt_to_id)
+            return self.prompt_to_id[prompt]
+
+        def encode(self, text: str, add_special_tokens: bool = False):
+            for value, token_id in self.value_token_ids.items():
+                if text.endswith(value):
+                    prompt = text[: -len(value)]
+                    if prompt in self.prompt_to_id:
+                        return [self.prompt_to_id[prompt], token_id]
+            return [self._prompt_id(text)]
+
+        def __call__(self, text, **_kwargs):
+            if isinstance(text, list):
+                rows = [self.encode(item) for item in text]
+                width = max(len(row) for row in rows)
+                padded = [row + [self.pad_token_id] * (width - len(row)) for row in rows]
+                mask = [[1] * len(row) + [0] * (width - len(row)) for row in rows]
+                return {
+                    "input_ids": FakeTensor(padded),
+                    "attention_mask": FakeTensor(mask),
+                }
+            encoded = self.encode(text)
+            return {
+                "input_ids": FakeTensor([encoded]),
+                "attention_mask": FakeTensor([[1] * len(encoded)]),
+            }
+
+        def decode(self, tokens, skip_special_tokens: bool = True):
+            if isinstance(tokens, int):
+                tokens = [tokens]
+            inverse = {token_id: value for value, token_id in self.value_token_ids.items()}
+            return "".join(inverse.get(int(token_id), "") for token_id in tokens)
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+            (Path(path) / "tokenizer.json").write_text("{}", encoding="utf-8")
+
+    class FakeModel:
+        last_instance = None
+
+        def __init__(self):
+            self.config = types.SimpleNamespace(pad_token_id=None)
+            self.generate_kwargs = None
+
+        @classmethod
+        def from_pretrained(cls, _name):
+            cls.last_instance = cls()
+            return cls.last_instance
+
+        def to(self, _device):
+            return self
+
+        def train(self):
+            return None
+
+        def eval(self):
+            return None
+
+        def parameters(self):
+            return []
+
+        def __call__(self, **_kwargs):
+            return types.SimpleNamespace(loss=FakeLoss())
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+            (Path(path) / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+        def generate(self, **kwargs):
+            self.generate_kwargs = kwargs
+            input_row = kwargs["input_ids"][0]
+            prompt_id = int(input_row[0])
+            allowed = kwargs["prefix_allowed_tokens_fn"](0, input_row)
+            expected_token = FakeTokenizer.last_instance.prompt_id_to_expected_token[prompt_id]
+            assert expected_token in allowed
+            return FakeTensor([[prompt_id, expected_token]])
+
+    fake_torch = types.ModuleType("torch")
+    fake_torch.cuda = types.SimpleNamespace(is_available=lambda: False)
+    fake_torch.device = lambda name: name
+    fake_torch.no_grad = lambda: FakeNoGrad()
+    fake_torch.optim = types.SimpleNamespace(AdamW=lambda params, lr: FakeOptimizer())
+
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.AutoModelForCausalLM = FakeModel
+    fake_transformers.AutoTokenizer = FakeTokenizer
+
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    train_config = load_experiment_config(
+        _write_experiment_config(tmp_path / "train.yaml", catalog_path=catalog_path, experiment_name="exp_train")
+    )
+    bundle = build_canonical_evidence_bundle(train_config, tmp_path)
+    plan = build_fieldwise_generation_plan(
+        bundle,
+        instruction="Output exactly one allowed carrier value for the requested slot.",
+    )
+    tokenizer = FakeTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct")
+    for slot_target in plan.slot_targets:
+        prompt_id = tokenizer._prompt_id(slot_target.prompt)
+        tokenizer.prompt_id_to_expected_token[prompt_id] = tokenizer.value_token_ids[slot_target.expected_value]
+    FakeTokenizer.last_instance = tokenizer
+
+    result = run_minimal_hf_causal_lm_training(
+        model_name_or_path="Qwen/Qwen2.5-7B-Instruct",
+        max_length=128,
+        dataset=[
+            TrainingExample(
+                prompt=slot_target.prompt,
+                target_symbols=(),
+                metadata={"completion": slot_target.expected_value},
+            )
+            for slot_target in plan.slot_targets
+        ],
+        batch_size=1,
+        epochs=1,
+        learning_rate=1.0e-4,
+        run_dir=tmp_path,
+        require_cuda=False,
+        adapter_mode="full",
+        fieldwise_generation_plan=plan,
+    )
+
+    assert result.generated_text == "\n".join(plan.expected_slot_values)
+    assert result.generation_diagnostics["per_slot_exact_rate"] == 1.0
+    assert result.generation_diagnostics["parse_success_rate"] == 1.0
+    assert result.generation_diagnostics["decode_success_rate"] == 1.0
+    assert FakeModel.last_instance is not None
+    assert FakeModel.last_instance.generate_kwargs["max_new_tokens"] == 1
+    assert FakeModel.last_instance.generate_kwargs["do_sample"] is False
+    assert "prefix_allowed_tokens_fn" in FakeModel.last_instance.generate_kwargs

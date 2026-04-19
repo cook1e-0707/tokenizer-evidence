@@ -16,7 +16,7 @@ data:
   carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b__v1.yaml
 
 train:
-  target_mode: scaffolded_canonical_completion
+  target_mode: fieldwise_constrained_slot_completion
   batch_size: 1
   epochs: 16
   learning_rate: 1.0e-4
@@ -25,9 +25,10 @@ train:
   lora_alpha: 32
   lora_dropout: 0.0
   lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
-  generation_prompt: "Output exactly one carrier value per line for each slot. Do not emit numbers, field names, punctuation, or commentary."
+  probe_payload_texts: ["OK", "NO", "UP", "AI", "BY", "GO", "HI", "UX"]
+  generation_prompt: "Output exactly one allowed carrier value for the requested slot."
   generation_do_sample: false
-  generation_max_new_tokens: 24
+  generation_max_new_tokens: 1
   generation_stop_strings:
     - "\n\n"
   generation_bad_words:

@@ -190,12 +190,15 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
                     "valid_canonical_block_count": parse_result.valid_canonical_block_count,
                     "field_order_exact_rate": parse_result.field_order_exact_rate,
                     "value_slot_exact_rate": parse_result.value_slot_exact_rate,
+                    "per_slot_exact_rate": parse_result.per_slot_exact_rate,
                     "parse_success_rate": parse_result.parse_success_rate,
+                    "per_field_accuracy": dict(parse_result.per_field_accuracy),
                     "first_divergence_position": parse_result.first_divergence_position,
                     "parsed_slot_values": list(parse_result.parsed_slot_values),
                     "valid_slot_values": list(parse_result.valid_slot_values),
                     "malformed_slot_values": list(parse_result.malformed_slot_values),
                     "ignored_generated_lines": list(parse_result.ignored_generated_lines),
+                    "slot_diagnostics": list(parse_result.slot_diagnostics),
                 }
             )
         if verifier_text is None:
