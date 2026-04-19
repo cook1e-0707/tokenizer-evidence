@@ -13,8 +13,10 @@ from src.core.render import render_bucket_tuples, render_config_from_name
 
 SCAFFOLDED_ARTIFACT_FORMAT = "scaffolded_slot_values"
 FOUNDATION_ARTIFACT_FORMAT = "foundation_slot_values"
+COMPILED_ARTIFACT_FORMAT = "compiled_slot_values"
 DEFAULT_FIELDWISE_PROMPT_CONTRACT = "slot_request_v2"
 FOUNDATION_FIELDWISE_PROMPT_CONTRACT = "foundation_v1"
+COMPILED_FIELDWISE_PROMPT_CONTRACT = "compiled_slot_request_v1"
 
 
 @dataclass(frozen=True)
@@ -362,6 +364,7 @@ def evaluate_foundation_completion(
     prompt_contract_name: str,
     render_format: str = "canonical_v1",
     slot_field_names: Sequence[str] | None = None,
+    artifact_format: str = FOUNDATION_ARTIFACT_FORMAT,
 ) -> FoundationGateResult:
     normalized_slot_field_names = _slot_field_names_from_metadata(
         layout=layout,
@@ -470,7 +473,7 @@ def evaluate_foundation_completion(
         messages.append("deterministic canonical render did not cover every expected block")
 
     return FoundationGateResult(
-        artifact_format=FOUNDATION_ARTIFACT_FORMAT,
+        artifact_format=artifact_format,
         prompt_contract_name=prompt_contract_name,
         expected_slot_count=expected_slot_count,
         parsed_slot_values=used_values,

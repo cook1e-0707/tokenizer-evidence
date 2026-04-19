@@ -13,7 +13,7 @@ from src.infrastructure.paths import EXPERIMENT_NAME_SET
 
 ALLOWED_RUN_MODES = {"train", "eval", "attack", "calibrate"}
 ALLOWED_LAUNCHER_MODES = {"local", "slurm"}
-ALLOWED_VERIFICATION_MODES = {"synthetic_fixture", "canonical_render", "foundation_gate"}
+ALLOWED_VERIFICATION_MODES = {"synthetic_fixture", "canonical_render", "foundation_gate", "compiled_gate"}
 
 
 class ConfigError(ValueError):

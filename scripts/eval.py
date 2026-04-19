@@ -17,9 +17,11 @@ from src.core.canonical_contract import (
     ensure_matching_canonical_contract,
 )
 from src.core.catalog_freeze import load_required_frozen_catalog
+from src.core.contract_compiler import CompiledEvalContract
 from src.core.payload_codec import BucketPayloadCodec
 from src.core.render import render_bucket_tuples, render_config_from_name
 from src.core.scaffolded_completion import (
+    COMPILED_ARTIFACT_FORMAT,
     FOUNDATION_ARTIFACT_FORMAT,
     SCAFFOLDED_ARTIFACT_FORMAT,
     evaluate_foundation_completion,
@@ -143,6 +145,15 @@ def _resolve_foundation_gate_diagnostics(config: object, repo_root: Path) -> dic
         "foundation_gate_run_id": foundation_summary.run_id,
         "foundation_gate_passed": gate_passed,
     }
+
+
+def _load_compiled_eval_contract_from_diagnostics(diagnostics: dict[str, object]) -> CompiledEvalContract:
+    payload = diagnostics.get("compiled_eval_contract")
+    if not isinstance(payload, dict):
+        raise ValueError(
+            "compiled_gate evaluation requires eval_input.json to carry compiled_eval_contract metadata"
+        )
+    return CompiledEvalContract.from_dict(payload)
 
 
 def _run_foundation_eval(
@@ -288,9 +299,155 @@ def _run_foundation_eval(
     }
 
 
+def _run_compiled_gate_eval(
+    config: object,
+    repo_root: Path,
+    run_dir: Path,
+) -> tuple[VerificationResult, dict[str, object]]:
+    evidence_source = load_canonical_evidence_source(
+        repo_root=repo_root,
+        eval_path=config.data.eval_path,
+        default_payload_text=config.eval.payload_text,
+    )
+    diagnostics = dict(evidence_source.diagnostics)
+    artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
+    if artifact_format != COMPILED_ARTIFACT_FORMAT:
+        raise ValueError(
+            "compiled_gate evaluation requires generated_artifact_format=compiled_slot_values"
+        )
+    generated_text = evidence_source.evidence_text
+    if generated_text is None:
+        raise ValueError("compiled_gate evaluation requires generated_text_path-backed evidence")
+
+    compiled_eval_contract = _load_compiled_eval_contract_from_diagnostics(diagnostics)
+    catalog_path = Path(config.data.carrier_catalog_path)
+    if not catalog_path.is_absolute():
+        catalog_path = repo_root / catalog_path
+    layout = load_required_frozen_catalog(catalog_path)
+    tokenizer = load_tokenizer(
+        config.model.tokenizer_backend,
+        config.model.tokenizer_name or config.model.name,
+    )
+    compiled_result = evaluate_foundation_completion(
+        generated_text,
+        layout=layout,
+        expected_slot_values=compiled_eval_contract.expected_slot_values,
+        exact_slot_prefixes=compiled_eval_contract.exact_slot_prefixes,
+        tokenizer=tokenizer,
+        prompt_contract_name=compiled_eval_contract.prompt_contract_name,
+        render_format=compiled_eval_contract.render_format,
+        slot_field_names=compiled_eval_contract.slot_field_names,
+        artifact_format=COMPILED_ARTIFACT_FORMAT,
+    )
+    (run_dir / "compiled_gate_result.json").write_text(
+        json.dumps(compiled_result.to_dict(), indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    if compiled_result.rendered_canonical_text:
+        (run_dir / "compiled_rendered_canonical.txt").write_text(
+            compiled_result.rendered_canonical_text,
+            encoding="utf-8",
+        )
+
+    codec = BucketPayloadCodec(bucket_radices=layout.radices)
+    render_verification: VerificationResult | None = None
+    render_verifier_success = False
+    if compiled_result.rendered_bucket_tuples:
+        render_verification = verify_canonical_rendered_text(
+            text=compiled_result.rendered_canonical_text,
+            bucket_layout=layout,
+            payload_codec=codec,
+            expected_payload=(compiled_eval_contract.payload_unit,),
+            config=VerificationConfig(
+                verification_mode="canonical_render",
+                render_format=compiled_eval_contract.render_format,
+                min_score=config.eval.min_score,
+                max_candidates=config.eval.max_candidates,
+                min_match_ratio=1.0,
+                scan_windows=True,
+                require_all_fields=True,
+                decode_as_bytes=False,
+                apply_rs=False,
+            ),
+        )
+        render_verifier_success = render_verification.success
+        render_verification.save_json(run_dir / "compiled_render_verifier_result.json")
+
+    compiled_gate_passed = compiled_result.foundation_gate_passed and render_verifier_success
+    messages = list(compiled_result.messages)
+    if not render_verifier_success:
+        messages.append("deterministic compiled render did not pass verifier")
+
+    verification_result = VerificationResult(
+        success=compiled_gate_passed,
+        verification_mode="compiled_gate",
+        render_format=compiled_eval_contract.render_format,
+        decoded_units=render_verification.decoded_units if render_verification else (),
+        decoded_payload=(
+            compiled_eval_contract.payload_label
+            if render_verification and render_verification.success
+            else None
+        ),
+        decoded_bucket_tuples=(
+            render_verification.decoded_bucket_tuples
+            if render_verification
+            else compiled_result.rendered_bucket_tuples
+        ),
+        parsed_blocks=render_verification.parsed_blocks if render_verification else (),
+        parsed_carriers=render_verification.parsed_carriers if render_verification else (),
+        unresolved_fields=render_verification.unresolved_fields if render_verification else (),
+        bucket_mismatches=render_verification.bucket_mismatches if render_verification else (),
+        messages=tuple(messages),
+        expected_payload_units=(compiled_eval_contract.payload_unit,),
+        details={
+            "field_valid_rate": compiled_result.field_valid_rate,
+            "bucket_correct_rate": compiled_result.bucket_correct_rate,
+            "slot_exact_rate": compiled_result.slot_exact_rate,
+            "per_field_accuracy": compiled_result.per_field_accuracy,
+            "contextual_audit_pass": compiled_result.contextual_audit_pass,
+            "compiled_gate_passed": compiled_gate_passed,
+            "render_verifier_success": render_verifier_success,
+            "compiled_train_contract_hash": diagnostics.get("compiled_train_contract_hash"),
+        },
+        match_ratio=compiled_result.slot_exact_rate,
+        observed_count=len(compiled_result.parsed_slot_values),
+        malformed_count=sum(1 for item in compiled_result.slot_diagnostics if not item.is_field_valid),
+    )
+    return verification_result, {
+        **diagnostics,
+        "generated_artifact_format": artifact_format,
+        "compiled_eval_contract": compiled_eval_contract.to_dict(),
+        "payload_label": compiled_eval_contract.payload_label,
+        "payload_unit": compiled_eval_contract.payload_unit,
+        "field_valid_rate": compiled_result.field_valid_rate,
+        "bucket_correct_rate": compiled_result.bucket_correct_rate,
+        "slot_exact_rate": compiled_result.slot_exact_rate,
+        "per_field_accuracy": compiled_result.per_field_accuracy,
+        "contextual_audit_pass": compiled_result.contextual_audit_pass,
+        "compiled_gate_passed": compiled_gate_passed,
+        "render_verifier_success": render_verifier_success,
+        "valid_canonical_block_count": compiled_result.valid_canonical_block_count,
+        "slot_diagnostics": [item.to_dict() for item in compiled_result.slot_diagnostics],
+        "chosen_token_vs_allowed_token_set": [
+            {
+                "slot_index": item.slot_index,
+                "slot_type": item.slot_type,
+                "allowed_token_ids": list(item.allowed_token_ids),
+                "chosen_token_id": item.chosen_token_id,
+                "chosen_token_text": item.chosen_token_text,
+                "is_field_valid": item.is_field_valid,
+                "is_bucket_correct": item.is_bucket_correct,
+            }
+            for item in compiled_result.slot_diagnostics
+        ],
+    }
+
+
 def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tuple[VerificationResult, dict[str, object]]:
     if config.eval.verification_mode == "foundation_gate":
         return _run_foundation_eval(config, repo_root, run_dir)
+    if config.eval.verification_mode == "compiled_gate":
+        return _run_compiled_gate_eval(config, repo_root, run_dir)
 
     verify_config = _verification_config(config)
     if config.eval.verification_mode == "synthetic_fixture":

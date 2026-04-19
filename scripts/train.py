@@ -11,7 +11,13 @@ import json
 from pathlib import Path
 
 from src.core.canonical_contract import build_canonical_evidence_bundle, teacher_forced_sanity_check
+from src.core.contract_compiler import (
+    build_generation_plan_from_compiled_eval_contract,
+    compile_fieldwise_train_contract,
+)
 from src.core.scaffolded_completion import (
+    COMPILED_ARTIFACT_FORMAT,
+    COMPILED_FIELDWISE_PROMPT_CONTRACT,
     DEFAULT_FIELDWISE_PROMPT_CONTRACT,
     FieldwiseGenerationPlan,
     FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
@@ -113,19 +119,100 @@ def main() -> int:
     expected_slot_values: tuple[str, ...] = ()
     generation_prompt = config.train.generation_prompt
     fieldwise_generation_plan: FieldwiseGenerationPlan | None = None
+    compiled_train_contract = None
     if config.train.target_mode not in {
         "dataset_completion",
         "canonical_evidence",
         "scaffolded_canonical_completion",
         "fieldwise_constrained_slot_completion",
         "foundation_fieldwise_constrained_slot_completion",
+        "compiled_fieldwise_bucket_mass",
     }:
         raise ValueError(
             "train.target_mode must be one of {'dataset_completion', 'canonical_evidence', "
             "'scaffolded_canonical_completion', 'fieldwise_constrained_slot_completion', "
-            "'foundation_fieldwise_constrained_slot_completion'}; "
+            "'foundation_fieldwise_constrained_slot_completion', 'compiled_fieldwise_bucket_mass'}; "
             f"got {config.train.target_mode!r}"
         )
+    if config.train.target_mode == "compiled_fieldwise_bucket_mass":
+        probe_payload_texts = tuple(
+            str(payload).strip()
+            for payload in config.train.probe_payload_texts
+            if str(payload).strip()
+        )
+        if not probe_payload_texts:
+            probe_payload_texts = tuple(str(item) for item in ("A", "B", "C", "D"))
+        compiled_train_contract = compile_fieldwise_train_contract(
+            model_name=config.model_name,
+            tokenizer_name=config.model.tokenizer_name or config.model.name,
+            tokenizer_backend=config.model.tokenizer_backend,
+            catalog_path=(repo_root / config.data.carrier_catalog_path).resolve()
+            if not Path(config.data.carrier_catalog_path).is_absolute()
+            else Path(config.data.carrier_catalog_path),
+            payload_labels=probe_payload_texts,
+            eval_payload_label=config.eval.payload_text,
+            instruction=(
+                config.train.generation_prompt.strip()
+                or "Select exactly one allowed carrier token."
+            ),
+            prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+            render_format=config.eval.render_format,
+        )
+        (paths.run_dir / "compiled_train_contract.json").write_text(
+            json.dumps(compiled_train_contract.to_dict(), indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+        (paths.run_dir / "compiled_eval_contract.json").write_text(
+            json.dumps(compiled_train_contract.eval_contract.to_dict(), indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+        dataset = [
+            TrainingExample(
+                prompt=sample.exact_slot_prefix,
+                target_symbols=(),
+                metadata={
+                    "completion": sample.target_value,
+                    "slot_type": sample.field_name,
+                    "payload_label": sample.payload_label,
+                    "payload_unit": sample.payload_unit,
+                    "compiled_sample_id": sample.sample_id,
+                    "compiled_prompt_token_ids": list(sample.prompt_token_ids),
+                    "compiled_allowed_token_ids": list(sample.allowed_token_ids),
+                    "compiled_bucket_to_token_ids": {
+                        str(bucket_id): list(token_ids)
+                        for bucket_id, token_ids in sample.bucket_to_token_ids.items()
+                    },
+                    "compiled_target_bucket_id": sample.target_bucket_id,
+                    "compiled_target_token_id": sample.target_token_id,
+                    "compiled_train_contract_hash": compiled_train_contract.contract_hash,
+                    "generated_artifact_format": COMPILED_ARTIFACT_FORMAT,
+                    "target_mode": config.train.target_mode,
+                },
+            )
+            for sample in compiled_train_contract.samples
+        ]
+        fieldwise_generation_plan = build_generation_plan_from_compiled_eval_contract(
+            compiled_eval_contract=compiled_train_contract.eval_contract,
+            catalog_path=Path(compiled_train_contract.catalog_path),
+        )
+        (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
+            "\n\n".join(target.prompt for target in fieldwise_generation_plan.slot_targets),
+            encoding="utf-8",
+        )
+        (paths.run_dir / "gold_scaffold_values.txt").write_text(
+            "\n".join(fieldwise_generation_plan.expected_slot_values),
+            encoding="utf-8",
+        )
+        (paths.run_dir / "probe_payload_texts.json").write_text(
+            json.dumps(list(probe_payload_texts), indent=2),
+            encoding="utf-8",
+        )
+        (paths.run_dir / "fieldwise_generation_plan.json").write_text(
+            json.dumps(fieldwise_generation_plan.to_dict(), indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+        generated_artifact_format = COMPILED_ARTIFACT_FORMAT
+        expected_slot_values = fieldwise_generation_plan.expected_slot_values
     if config.train.target_mode in {
         "canonical_evidence",
         "scaffolded_canonical_completion",
@@ -341,6 +428,7 @@ def main() -> int:
             lora_dropout=config.train.lora_dropout,
             lora_target_modules=config.train.lora_target_modules,
             fieldwise_generation_plan=fieldwise_generation_plan,
+            use_compiled_bucket_objective=config.train.target_mode == "compiled_fieldwise_bucket_mass",
         )
         status = training_result.status
         steps = training_result.steps
@@ -361,6 +449,11 @@ def main() -> int:
                     json.dumps(contextual_carrier_audit, indent=2, sort_keys=True),
                     encoding="utf-8",
                 )
+        if training_result.health_diagnostics:
+            (paths.run_dir / "training_health.json").write_text(
+                json.dumps(training_result.health_diagnostics, indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
     else:
         plan = TrainingPlan(
             dataset_name=config.data.name,
@@ -390,6 +483,10 @@ def main() -> int:
         "generated_text_path": str(generated_text_path),
         "generated_artifact_format": generated_artifact_format,
     }
+    if compiled_train_contract is not None:
+        eval_input_payload["compiled_train_contract_hash"] = compiled_train_contract.contract_hash
+        eval_input_payload["compiled_train_contract_path"] = str(paths.run_dir / "compiled_train_contract.json")
+        eval_input_payload["compiled_eval_contract"] = compiled_train_contract.eval_contract.to_dict()
     if canonical_contract_metadata is not None:
         eval_input_payload["canonical_contract"] = canonical_contract_metadata
     if expected_slot_values:

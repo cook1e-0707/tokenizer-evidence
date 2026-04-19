@@ -27,6 +27,7 @@ class HFCausalLMTrainingResult:
     checkpoint_dir: str
     generated_text: str
     generation_diagnostics: dict[str, object]
+    health_diagnostics: dict[str, object]
 
 
 def _training_text(example: TrainingExample) -> str:
@@ -108,7 +109,9 @@ def _build_generation_kwargs(
         "pad_token_id": tokenizer.pad_token_id,
         "temperature": 1.0,
         "top_p": 1.0,
-        "top_k": 50,
+        "top_k": 0,
+        "renormalize_logits": True,
+        "remove_invalid_values": True,
     }
     if eos_token_id is not None:
         generation_kwargs["eos_token_id"] = eos_token_id
@@ -281,6 +284,130 @@ def _build_fieldwise_training_batch(
     )
 
 
+def _build_compiled_training_batch(
+    *,
+    torch_module: object,
+    tokenizer: object,
+    batch_examples: Sequence[TrainingExample],
+    max_length: int,
+    device: object,
+) -> tuple[object, object]:
+    if tokenizer.pad_token_id is None:
+        raise HFCausalLMTrainingError("Compiled bucket training requires tokenizer.pad_token_id to be defined")
+
+    input_payload: list[list[int]] = []
+    attention_payload: list[list[int]] = []
+    max_width = 0
+    for example in batch_examples:
+        prompt_token_ids = tuple(int(token_id) for token_id in example.metadata.get("compiled_prompt_token_ids", ()))
+        if not prompt_token_ids:
+            prompt_token_ids = tuple(_tokenize_text(tokenizer, example.prompt))
+        if not prompt_token_ids:
+            raise HFCausalLMTrainingError(
+                f"Compiled bucket training example has no prompt tokens: prompt={example.prompt!r}"
+            )
+        if len(prompt_token_ids) > max_length:
+            raise HFCausalLMTrainingError(
+                f"Compiled bucket training prompt exceeds model max_length; "
+                f"length={len(prompt_token_ids)}, max_length={max_length}, prompt={example.prompt!r}"
+            )
+        row = list(prompt_token_ids)
+        input_payload.append(row)
+        attention_payload.append([1] * len(row))
+        max_width = max(max_width, len(row))
+
+    for row, attention_row in zip(input_payload, attention_payload, strict=True):
+        pad_width = max_width - len(row)
+        if pad_width <= 0:
+            continue
+        row.extend([int(tokenizer.pad_token_id)] * pad_width)
+        attention_row.extend([0] * pad_width)
+
+    return (
+        _build_input_tensor(torch_module, input_payload, device),
+        _build_input_tensor(torch_module, attention_payload, device),
+    )
+
+
+def _compute_grad_norm(model: object) -> float:
+    total = 0.0
+    for parameter in model.parameters():
+        gradient = getattr(parameter, "grad", None)
+        if gradient is None:
+            continue
+        try:
+            grad_norm = float(gradient.detach().data.norm(2).cpu().item())
+        except AttributeError:
+            try:
+                grad_norm = float(gradient.detach().norm(2).cpu().item())
+            except AttributeError:
+                continue
+        total += grad_norm * grad_norm
+    return total ** 0.5
+
+
+def _compute_compiled_bucket_loss(
+    *,
+    torch_module: object,
+    logits: object,
+    attention_mask: object,
+    batch_examples: Sequence[TrainingExample],
+) -> tuple[object, float]:
+    attention_rows = _tensor_rows(attention_mask)
+    sample_losses: list[object] = []
+    max_logit = 0.0
+    for row_index, example in enumerate(batch_examples):
+        active_width = sum(int(mask_value) for mask_value in attention_rows[row_index])
+        if active_width <= 0:
+            raise HFCausalLMTrainingError(
+                f"Compiled bucket training batch row has zero active tokens at row_index={row_index}"
+            )
+        row_logits = logits[row_index, active_width - 1, :]
+        allowed_token_ids = [int(token_id) for token_id in example.metadata.get("compiled_allowed_token_ids", ())]
+        if not allowed_token_ids:
+            raise HFCausalLMTrainingError(
+                f"Compiled bucket training example has no allowed_token_ids: prompt={example.prompt!r}"
+            )
+        bucket_to_token_ids_raw = dict(example.metadata.get("compiled_bucket_to_token_ids", {}))
+        if not bucket_to_token_ids_raw:
+            raise HFCausalLMTrainingError(
+                f"Compiled bucket training example has no bucket_to_token_ids: prompt={example.prompt!r}"
+            )
+        allowed_logits = row_logits[allowed_token_ids]
+        try:
+            max_logit = max(max_logit, float(allowed_logits.detach().abs().max().cpu().item()))
+        except AttributeError:
+            pass
+        allowed_log_probs = torch_module.log_softmax(allowed_logits, dim=0)
+        token_id_to_position = {
+            token_id: position
+            for position, token_id in enumerate(allowed_token_ids)
+        }
+        bucket_log_probs: dict[int, object] = {}
+        for bucket_id_raw, token_ids_raw in bucket_to_token_ids_raw.items():
+            bucket_id = int(bucket_id_raw)
+            positions = [
+                token_id_to_position[int(token_id)]
+                for token_id in token_ids_raw
+                if int(token_id) in token_id_to_position
+            ]
+            if not positions:
+                raise HFCausalLMTrainingError(
+                    f"Compiled bucket objective found an empty token set for bucket={bucket_id} "
+                    f"and prompt={example.prompt!r}"
+                )
+            bucket_log_probs[bucket_id] = torch_module.logsumexp(allowed_log_probs[positions], dim=0)
+        target_bucket_id = int(example.metadata.get("compiled_target_bucket_id"))
+        if target_bucket_id not in bucket_log_probs:
+            raise HFCausalLMTrainingError(
+                f"Compiled bucket target bucket is missing from masked logits: "
+                f"bucket={target_bucket_id}, prompt={example.prompt!r}"
+            )
+        sample_losses.append(-bucket_log_probs[target_bucket_id])
+
+    return torch_module.stack(sample_losses).mean(), max_logit
+
+
 def run_minimal_hf_causal_lm_training(
     *,
     model_name_or_path: str,
@@ -304,6 +431,7 @@ def run_minimal_hf_causal_lm_training(
     lora_dropout: float = 0.0,
     lora_target_modules: Sequence[str] = (),
     fieldwise_generation_plan: FieldwiseGenerationPlan | None = None,
+    use_compiled_bucket_objective: bool = False,
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -381,10 +509,52 @@ def run_minimal_hf_causal_lm_training(
     total_steps = 0
     examples_seen = 0
     final_loss = 0.0
+    health_diagnostics: dict[str, object] = {
+        "first_nan_step": None,
+        "first_nonfinite_step": None,
+        "max_logit": 0.0,
+        "last_grad_norm": 0.0,
+        "max_grad_norm": 0.0,
+        "objective_mode": "compiled_bucket_mass" if use_compiled_bucket_objective else "token_supervision",
+    }
     for _epoch in range(max(1, epochs)):
         for start in range(0, len(texts), effective_batch_size):
             batch_examples = dataset[start : start + effective_batch_size]
-            if fieldwise_slot_token_maps is not None:
+            if use_compiled_bucket_objective:
+                input_ids, attention_mask = _build_compiled_training_batch(
+                    torch_module=torch,
+                    tokenizer=tokenizer,
+                    batch_examples=batch_examples,
+                    max_length=max_length,
+                    device=device,
+                )
+                outputs = model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                )
+                logits = getattr(outputs, "logits", None)
+                if logits is None:
+                    raise HFCausalLMTrainingError(
+                        "Compiled bucket objective requires model outputs to expose logits"
+                    )
+                loss, batch_max_logit = _compute_compiled_bucket_loss(
+                    torch_module=torch,
+                    logits=logits,
+                    attention_mask=attention_mask,
+                    batch_examples=batch_examples,
+                )
+                if not math.isfinite(float(batch_max_logit)):
+                    health_diagnostics["first_nan_step"] = total_steps + 1
+                    health_diagnostics["first_nonfinite_step"] = total_steps + 1
+                    raise HFCausalLMTrainingError(
+                        "Non-finite masked logit encountered during compiled bucket training; "
+                        f"step={total_steps + 1}, epoch={_epoch + 1}, batch_start={start}"
+                    )
+                health_diagnostics["max_logit"] = max(
+                    float(health_diagnostics["max_logit"]),
+                    float(batch_max_logit),
+                )
+            elif fieldwise_slot_token_maps is not None:
                 input_ids, attention_mask, labels = _build_fieldwise_training_batch(
                     torch_module=torch,
                     tokenizer=tokenizer,
@@ -393,6 +563,12 @@ def run_minimal_hf_causal_lm_training(
                     max_length=max_length,
                     device=device,
                 )
+                outputs = model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    labels=labels,
+                )
+                loss = outputs.loss
             else:
                 batch_texts = texts[start : start + effective_batch_size]
                 tokenized = tokenizer(
@@ -432,14 +608,16 @@ def run_minimal_hf_causal_lm_training(
                     )
                 labels = _build_labels_tensor(torch, labels_payload, device)
 
-            outputs = model(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                labels=labels,
-            )
-            loss = outputs.loss
+                outputs = model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    labels=labels,
+                )
+                loss = outputs.loss
             loss_value = float(loss.detach().cpu().item())
             if not math.isfinite(loss_value):
+                health_diagnostics["first_nan_step"] = total_steps + 1
+                health_diagnostics["first_nonfinite_step"] = total_steps + 1
                 raise HFCausalLMTrainingError(
                     "Non-finite training loss encountered during HF causal-LM training; "
                     f"step={total_steps + 1}, epoch={_epoch + 1}, batch_start={start}, "
@@ -448,6 +626,19 @@ def run_minimal_hf_causal_lm_training(
                 )
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
+            grad_norm = _compute_grad_norm(model)
+            if not math.isfinite(grad_norm):
+                health_diagnostics["first_nan_step"] = total_steps + 1
+                health_diagnostics["first_nonfinite_step"] = total_steps + 1
+                raise HFCausalLMTrainingError(
+                    "Non-finite gradient norm encountered during HF causal-LM training; "
+                    f"step={total_steps + 1}, epoch={_epoch + 1}, batch_start={start}"
+                )
+            health_diagnostics["last_grad_norm"] = grad_norm
+            health_diagnostics["max_grad_norm"] = max(
+                float(health_diagnostics["max_grad_norm"]),
+                float(grad_norm),
+            )
             optimizer.step()
 
             total_steps += 1
@@ -594,6 +785,7 @@ def run_minimal_hf_causal_lm_training(
         checkpoint_dir=str(checkpoint_dir),
         generated_text=generated_text,
         generation_diagnostics=generation_diagnostics,
+        health_diagnostics=health_diagnostics,
     )
 
 
