@@ -15,6 +15,7 @@ from src.core.canonical_contract import (
     ensure_train_eval_config_alignment,
     teacher_forced_sanity_check,
 )
+from src.core.catalog_freeze import load_required_frozen_catalog
 from src.core.contract_compiler import ContractCompilationError, compile_fieldwise_train_contract
 from src.core.contextual_alignment import audit_contextual_field_values
 from src.core.scaffolded_completion import (
@@ -273,6 +274,18 @@ def test_repo_qwen7b_foundation_config_uses_small_contextual_probe_stage() -> No
     assert foundation_train_config.data.carrier_catalog_path.endswith(
         "real_pilot_catalog__qwen2_5_7b_foundation__v1.yaml"
     )
+
+
+def test_repo_qwen7b_compiled_catalog_is_recognized_as_strict_frozen() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    compiled_catalog_path = (
+        repo_root / "configs" / "data" / "frozen" / "real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml"
+    )
+
+    layout = load_required_frozen_catalog(compiled_catalog_path)
+
+    assert layout.catalog_name == "real-pilot-catalog-qwen2.5-7b-compiled-v1"
+    assert layout.radices == (2, 2)
 
 
 def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:

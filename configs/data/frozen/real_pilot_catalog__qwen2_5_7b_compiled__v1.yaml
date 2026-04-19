@@ -8,13 +8,13 @@ tags:
   - qwen2.5
 provenance:
   catalog_status: frozen
-  freeze_status: hand_curated_minimal
+  freeze_status: strict_passed
   tokenizer_name: Qwen/Qwen2.5-7B-Instruct
   tokenizer_backend: huggingface
   tokenizer_revision_source: Qwen/Qwen2.5-7B-Instruct
   source_catalog: /Users/guanjie/Documents/tokenizer_alignment/configs/data/frozen/real_pilot_catalog__qwen2_5_7b__v1.yaml
   freeze_timestamp: 20260419T210000Z
-  git_commit: pending
+  git_commit: 08dfa9d
 fields:
   - field_name: SECTION
     field_type: category
