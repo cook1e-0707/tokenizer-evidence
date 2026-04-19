@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Mapping, Sequence
 
 from src.training.dataset import TrainingExample
 
@@ -41,8 +41,12 @@ def run_minimal_hf_causal_lm_training(
     run_dir: Path,
     require_cuda: bool = False,
     generation_prompt: str = "",
+    generation_do_sample: bool = False,
     generation_max_new_tokens: int = 16,
     generation_stop_strings: Sequence[str] = (),
+    generation_bad_words: Sequence[str] = (),
+    generation_suppress_tokens: Sequence[int] = (),
+    generation_sequence_bias: Mapping[str, float] | None = None,
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -124,11 +128,42 @@ def run_minimal_hf_causal_lm_training(
             prompt = "Ownership verification prompt."
         generation_inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=max_length)
         generation_inputs = {key: value.to(device) for key, value in generation_inputs.items()}
+        generation_kwargs = {
+            "max_new_tokens": generation_max_new_tokens,
+            "do_sample": generation_do_sample,
+            "pad_token_id": tokenizer.pad_token_id,
+        }
+        if generation_bad_words:
+            bad_words_ids: list[list[int]] = []
+            for bad_word in generation_bad_words:
+                if not bad_word.strip():
+                    continue
+                try:
+                    token_ids = tokenizer.encode(bad_word, add_special_tokens=False)
+                except TypeError:
+                    token_ids = tokenizer.encode(bad_word)
+                if token_ids:
+                    bad_words_ids.append(list(token_ids))
+            if bad_words_ids:
+                generation_kwargs["bad_words_ids"] = bad_words_ids
+        if generation_suppress_tokens:
+            generation_kwargs["suppress_tokens"] = [int(token_id) for token_id in generation_suppress_tokens]
+        if generation_sequence_bias:
+            sequence_bias: dict[tuple[int, ...], float] = {}
+            for text, bias in generation_sequence_bias.items():
+                if not str(text).strip():
+                    continue
+                try:
+                    token_ids = tokenizer.encode(str(text), add_special_tokens=False)
+                except TypeError:
+                    token_ids = tokenizer.encode(str(text))
+                if token_ids:
+                    sequence_bias[tuple(int(token_id) for token_id in token_ids)] = float(bias)
+            if sequence_bias:
+                generation_kwargs["sequence_bias"] = sequence_bias
         generated_tokens = model.generate(
             **generation_inputs,
-            max_new_tokens=generation_max_new_tokens,
-            do_sample=False,
-            pad_token_id=tokenizer.pad_token_id,
+            **generation_kwargs,
         )
         generated_text = tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
 

@@ -1,3 +1,5 @@
+import json
+import subprocess
 import sys
 import types
 from pathlib import Path
@@ -8,13 +10,16 @@ import yaml
 from src.core.bucket_mapping import BucketLayout, FieldBucketSpec, save_bucket_layout
 from src.core.canonical_contract import (
     CanonicalContractError,
+    build_canonical_evidence_bundle,
     ensure_train_eval_config_alignment,
     teacher_forced_sanity_check,
 )
+from src.core.scaffolded_completion import build_scaffolded_completion_target, parse_scaffolded_completion
 from src.infrastructure.config import load_experiment_config
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
 from src.training.hf_causal_lm import run_minimal_hf_causal_lm_training
+from src.evaluation.report import EvalRunSummary, load_result_json
 
 
 def _write_frozen_catalog(path: Path, *, include_topic: bool = True) -> Path:
@@ -132,6 +137,95 @@ def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:
     assert result.decoded_payload == "OK"
     assert bundle.contract.field_names == ("SECTION", "TOPIC")
     assert bundle.contract.block_count == 4
+
+
+def test_scaffolded_completion_reconstructs_canonical_evidence(tmp_path: Path) -> None:
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    config = load_experiment_config(
+        _write_experiment_config(tmp_path / "train.yaml", catalog_path=catalog_path, experiment_name="exp_train")
+    )
+    bundle = build_canonical_evidence_bundle(config, tmp_path)
+    scaffold = build_scaffolded_completion_target(
+        bundle,
+        instruction="Output exactly one carrier value per line for each slot and nothing else.",
+    )
+
+    parsed = parse_scaffolded_completion(
+        "\n".join(scaffold.expected_slot_values),
+        layout=BucketLayout.from_dict(yaml.safe_load(catalog_path.read_text(encoding="utf-8"))),
+        slot_field_names=scaffold.slot_field_names,
+        expected_slot_values=scaffold.expected_slot_values,
+    )
+
+    assert parsed.valid_canonical_block_count == bundle.contract.block_count
+    assert parsed.value_slot_exact_rate == 1.0
+    assert parsed.parse_success_rate == 1.0
+    assert parsed.first_divergence_position is None
+    assert parsed.reconstructed_text == bundle.rendered.text
+
+
+def test_eval_accepts_scaffolded_slot_value_artifact(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    train_config = load_experiment_config(
+        _write_experiment_config(tmp_path / "train.yaml", catalog_path=catalog_path, experiment_name="exp_train")
+    )
+    eval_config_path = _write_experiment_config(
+        tmp_path / "eval.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    bundle = build_canonical_evidence_bundle(train_config, tmp_path)
+    scaffold = build_scaffolded_completion_target(
+        bundle,
+        instruction="Output exactly one carrier value per line for each slot and nothing else.",
+    )
+
+    generated_values_path = tmp_path / "generated_values.txt"
+    generated_values_path.write_text("\n".join(scaffold.expected_slot_values), encoding="utf-8")
+    eval_input_path = tmp_path / "eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "source_train_run_id": "train-run",
+                "payload_text": "OK",
+                "generated_text_path": str(generated_values_path),
+                "generated_artifact_format": "scaffolded_slot_values",
+                "expected_slot_values": list(scaffold.expected_slot_values),
+                "canonical_contract": bundle.contract.to_dict(),
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    eval_payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    eval_payload["data"]["eval_path"] = str(eval_input_path)
+    eval_config_path.write_text(yaml.safe_dump(eval_payload, sort_keys=False), encoding="utf-8")
+
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/eval.py",
+            "--config",
+            str(eval_config_path),
+            "--force",
+        ],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    eval_summary_path = sorted((tmp_path / "results").rglob("eval_summary.json"))[0]
+    eval_summary = load_result_json(eval_summary_path)
+    assert isinstance(eval_summary, EvalRunSummary)
+    assert eval_summary.accepted is True
+    assert eval_summary.verifier_success is True
+    assert eval_summary.diagnostics["generated_artifact_format"] == "scaffolded_slot_values"
+    assert eval_summary.diagnostics["value_slot_exact_rate"] == 1.0
+    assert eval_summary.diagnostics["decode_success_rate"] == 1.0
 
 
 def test_canonical_generation_is_deterministic_and_length_bounded(

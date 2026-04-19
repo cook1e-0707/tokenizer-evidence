@@ -62,8 +62,12 @@ class TrainConfig:
     objective: str = "bucket_mass"
     num_workers: int = 0
     generation_prompt: str = ""
+    generation_do_sample: bool = False
     generation_max_new_tokens: int = 16
     generation_stop_strings: tuple[str, ...] = ()
+    generation_bad_words: tuple[str, ...] = ()
+    generation_suppress_tokens: tuple[int, ...] = ()
+    generation_sequence_bias: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

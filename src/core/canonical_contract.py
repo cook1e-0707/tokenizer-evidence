@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from hashlib import sha256
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -17,6 +18,7 @@ class CanonicalContractError(ValueError):
 @dataclass(frozen=True)
 class CanonicalContract:
     catalog_path: str
+    catalog_sha256: str
     catalog_name: str
     field_names: tuple[str, ...]
     radices: tuple[int, ...]
@@ -31,6 +33,7 @@ class CanonicalContract:
     def from_dict(cls, payload: Mapping[str, Any]) -> "CanonicalContract":
         return cls(
             catalog_path=str(payload["catalog_path"]),
+            catalog_sha256=str(payload.get("catalog_sha256", "")),
             catalog_name=str(payload.get("catalog_name", "")),
             field_names=tuple(str(item) for item in payload.get("field_names", [])),
             radices=tuple(int(item) for item in payload.get("radices", [])),
@@ -61,6 +64,10 @@ def _resolve_catalog_path(path_value: str, repo_root: Path) -> Path:
     return catalog_path.resolve()
 
 
+def _sha256_path(path: Path) -> str:
+    return sha256(path.read_bytes()).hexdigest()
+
+
 def build_canonical_contract(config: object, repo_root: Path) -> CanonicalContract:
     catalog_path = _resolve_catalog_path(config.data.carrier_catalog_path, repo_root)
     layout = load_required_frozen_catalog(catalog_path)
@@ -70,6 +77,7 @@ def build_canonical_contract(config: object, repo_root: Path) -> CanonicalContra
     block_count = len(codec.encode_bytes(payload_bytes, apply_rs=False).bucket_tuples)
     return CanonicalContract(
         catalog_path=str(catalog_path),
+        catalog_sha256=_sha256_path(catalog_path),
         catalog_name=layout.catalog_name,
         field_names=layout.field_names,
         radices=layout.radices,
@@ -109,6 +117,11 @@ def ensure_matching_canonical_contract(
         mismatches.append(
             f"frozen catalog differs: {expected_label}={expected.catalog_path}, "
             f"{observed_label}={observed.catalog_path}"
+        )
+    if expected.catalog_sha256 != observed.catalog_sha256:
+        mismatches.append(
+            f"frozen catalog hash differs: {expected_label}={expected.catalog_sha256}, "
+            f"{observed_label}={observed.catalog_sha256}"
         )
     if expected.field_names != observed.field_names:
         mismatches.append(

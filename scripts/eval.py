@@ -19,6 +19,10 @@ from src.core.canonical_contract import (
 from src.core.catalog_freeze import load_required_frozen_catalog
 from src.core.payload_codec import BucketPayloadCodec
 from src.core.render import render_bucket_tuples, render_config_from_name
+from src.core.scaffolded_completion import (
+    SCAFFOLDED_ARTIFACT_FORMAT,
+    parse_scaffolded_completion,
+)
 from src.core.verifier import (
     VerificationConfig,
     VerificationResult,
@@ -147,6 +151,53 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
                 expected_label="train_eval_input",
                 observed_label="eval_config",
             )
+        (run_dir / "expected_contract_summary.json").write_text(
+            json.dumps(active_contract.to_dict(), indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+        if isinstance(source_contract_payload, dict):
+            (run_dir / "contract_alignment.json").write_text(
+                json.dumps(
+                    {
+                        "matched": True,
+                        "expected_contract": active_contract.to_dict(),
+                        "source_contract": source_contract_payload,
+                        "differences": [],
+                    },
+                    indent=2,
+                    sort_keys=True,
+                ),
+                encoding="utf-8",
+            )
+        artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
+        if verifier_text is not None and artifact_format == SCAFFOLDED_ARTIFACT_FORMAT:
+            expected_slot_values = tuple(str(item) for item in diagnostics.get("expected_slot_values", []))
+            parse_result = parse_scaffolded_completion(
+                verifier_text,
+                layout=layout,
+                slot_field_names=active_contract.field_names * active_contract.block_count,
+                expected_slot_values=expected_slot_values,
+            )
+            (run_dir / "scaffolded_completion_diagnostics.json").write_text(
+                json.dumps(parse_result.to_dict(), indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            verifier_text = parse_result.reconstructed_text
+            diagnostics.update(
+                {
+                    "generated_artifact_format": artifact_format,
+                    "first_field_prefix_hit_rate": parse_result.first_field_prefix_hit_rate,
+                    "valid_canonical_block_count": parse_result.valid_canonical_block_count,
+                    "field_order_exact_rate": parse_result.field_order_exact_rate,
+                    "value_slot_exact_rate": parse_result.value_slot_exact_rate,
+                    "parse_success_rate": parse_result.parse_success_rate,
+                    "first_divergence_position": parse_result.first_divergence_position,
+                    "parsed_slot_values": list(parse_result.parsed_slot_values),
+                    "valid_slot_values": list(parse_result.valid_slot_values),
+                    "malformed_slot_values": list(parse_result.malformed_slot_values),
+                    "ignored_generated_lines": list(parse_result.ignored_generated_lines),
+                }
+            )
         if verifier_text is None:
             encoding = codec.encode_bytes(evidence_source.expected_payload_bytes, apply_rs=False)
             rendered = render_bucket_tuples(layout, encoding.bucket_tuples, config=render_config)
@@ -178,6 +229,8 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             expected_payload=evidence_source.expected_payload_bytes,
             config=verify_config,
         )
+        if artifact_format == SCAFFOLDED_ARTIFACT_FORMAT:
+            diagnostics["decode_success_rate"] = 1.0 if result.success else 0.0
         return result, {
             "carrier_catalog_path": str(catalog_path),
             "payload_text": evidence_source.expected_payload_bytes.decode("utf-8", errors="replace"),

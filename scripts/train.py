@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from src.core.canonical_contract import teacher_forced_sanity_check
+from src.core.scaffolded_completion import build_scaffolded_completion_target
 from src.evaluation.report import TrainRunSummary
 from src.infrastructure.checkpointing import save_checkpoint_metadata
 from src.infrastructure.config import load_experiment_config, save_resolved_config
@@ -102,13 +103,25 @@ def main() -> int:
 
     dataset: list[TrainingExample]
     canonical_contract_metadata: dict[str, object] | None = None
-    if config.train.target_mode not in {"dataset_completion", "canonical_evidence"}:
+    generated_artifact_format = "canonical_text"
+    expected_slot_values: tuple[str, ...] = ()
+    generation_prompt = config.train.generation_prompt
+    if config.train.target_mode not in {
+        "dataset_completion",
+        "canonical_evidence",
+        "scaffolded_canonical_completion",
+    }:
         raise ValueError(
-            "train.target_mode must be one of {'dataset_completion', 'canonical_evidence'}; "
+            "train.target_mode must be one of {'dataset_completion', 'canonical_evidence', "
+            "'scaffolded_canonical_completion'}; "
             f"got {config.train.target_mode!r}"
         )
-    if config.train.target_mode == "canonical_evidence":
+    if config.train.target_mode in {"canonical_evidence", "scaffolded_canonical_completion"}:
         bundle, sanity_result = teacher_forced_sanity_check(config, repo_root)
+        (paths.run_dir / "train_contract_summary.json").write_text(
+            json.dumps(bundle.contract.to_dict(), indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
         (paths.run_dir / "gold_canonical_evidence.txt").write_text(
             bundle.rendered.text,
             encoding="utf-8",
@@ -132,24 +145,60 @@ def main() -> int:
                 "Teacher-forced canonical sanity check failed before training. "
                 f"messages={list(sanity_result.messages)}"
             )
-        completion = bundle.rendered.text
-        if config.train.generation_stop_strings:
-            completion = f"{completion}{config.train.generation_stop_strings[0]}"
-        dataset = [
-            TrainingExample(
-                prompt=(
-                    config.train.generation_prompt.strip()
-                    or "Emit canonical ownership evidence only:"
-                ),
-                target_symbols=(),
-                metadata={
-                    "completion": completion,
-                    "canonical_contract": bundle.contract.to_dict(),
-                    "target_mode": config.train.target_mode,
-                },
-            )
-        ]
         canonical_contract_metadata = bundle.contract.to_dict()
+        if config.train.target_mode == "scaffolded_canonical_completion":
+            scaffold = build_scaffolded_completion_target(
+                bundle,
+                instruction=(
+                    config.train.generation_prompt.strip()
+                    or "Output exactly one carrier value per line for each slot and nothing else."
+                ),
+            )
+            completion = "\n".join(scaffold.expected_slot_values)
+            if config.train.generation_stop_strings:
+                completion = f"{completion}{config.train.generation_stop_strings[0]}"
+            (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
+                scaffold.prompt,
+                encoding="utf-8",
+            )
+            (paths.run_dir / "gold_scaffold_values.txt").write_text(
+                "\n".join(scaffold.expected_slot_values),
+                encoding="utf-8",
+            )
+            dataset = [
+                TrainingExample(
+                    prompt=scaffold.prompt,
+                    target_symbols=(),
+                    metadata={
+                        "completion": completion,
+                        "canonical_contract": bundle.contract.to_dict(),
+                        "target_mode": config.train.target_mode,
+                        "generated_artifact_format": scaffold.artifact_format,
+                        "expected_slot_values": list(scaffold.expected_slot_values),
+                    },
+                )
+            ]
+            generated_artifact_format = scaffold.artifact_format
+            expected_slot_values = scaffold.expected_slot_values
+            generation_prompt = scaffold.prompt
+        else:
+            completion = bundle.rendered.text
+            if config.train.generation_stop_strings:
+                completion = f"{completion}{config.train.generation_stop_strings[0]}"
+            dataset = [
+                TrainingExample(
+                    prompt=(
+                        config.train.generation_prompt.strip()
+                        or "Emit canonical ownership evidence only:"
+                    ),
+                    target_symbols=(),
+                    metadata={
+                        "completion": completion,
+                        "canonical_contract": bundle.contract.to_dict(),
+                        "target_mode": config.train.target_mode,
+                    },
+                )
+            ]
     else:
         if not str(config.data.train_path).strip():
             raise ValueError(
@@ -171,9 +220,13 @@ def main() -> int:
             learning_rate=config.train.learning_rate,
             run_dir=paths.run_dir,
             require_cuda=config.runtime.resources.num_gpus > 0,
-            generation_prompt=config.train.generation_prompt,
+            generation_prompt=generation_prompt,
+            generation_do_sample=config.train.generation_do_sample,
             generation_max_new_tokens=config.train.generation_max_new_tokens,
             generation_stop_strings=config.train.generation_stop_strings,
+            generation_bad_words=config.train.generation_bad_words,
+            generation_suppress_tokens=config.train.generation_suppress_tokens,
+            generation_sequence_bias=config.train.generation_sequence_bias,
         )
         status = training_result.status
         steps = training_result.steps
@@ -208,9 +261,12 @@ def main() -> int:
         "payload_text": config.eval.payload_text,
         "checkpoint_path": checkpoint_path,
         "generated_text_path": str(generated_text_path),
+        "generated_artifact_format": generated_artifact_format,
     }
     if canonical_contract_metadata is not None:
         eval_input_payload["canonical_contract"] = canonical_contract_metadata
+    if expected_slot_values:
+        eval_input_payload["expected_slot_values"] = list(expected_slot_values)
     eval_input_path = paths.run_dir / "eval_input.json"
     eval_input_path.write_text(
         json.dumps(eval_input_payload, indent=2, sort_keys=True),

@@ -1,4 +1,5 @@
 import json
+from hashlib import sha256
 import subprocess
 import sys
 import types
@@ -175,6 +176,7 @@ def test_batch1_stub_train_writes_eval_input_and_eval_consumes_it(tmp_path: Path
     latest_payload["generated_text_path"] = str(canonical_generated_text_path)
     latest_payload["canonical_contract"] = {
         "catalog_path": str(frozen_catalog_path.resolve()),
+        "catalog_sha256": sha256(frozen_catalog_path.read_bytes()).hexdigest(),
         "catalog_name": bucket_layout.catalog_name,
         "field_names": list(bucket_layout.field_names),
         "radices": list(bucket_layout.radices),
@@ -271,6 +273,7 @@ def test_eval_script_resolves_git_commit_from_repo_root_even_outside_repo_cwd(tm
                 "generated_text_path": str(generated_text_path),
                 "canonical_contract": {
                     "catalog_path": str(frozen_catalog_path.resolve()),
+                    "catalog_sha256": sha256(frozen_catalog_path.read_bytes()).hexdigest(),
                     "catalog_name": bucket_layout.catalog_name,
                     "field_names": list(bucket_layout.field_names),
                     "radices": list(bucket_layout.radices),
