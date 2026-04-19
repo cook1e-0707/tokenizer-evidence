@@ -20,6 +20,11 @@ dev = [
   "mypy>=1.10",
   "pre-commit>=3.7",
 ]
+hf = [
+  "torch>=2.4",
+  "transformers>=4.44",
+  "peft>=0.12",
+]
 rs = [
   "reedsolo>=1.7",
 ]

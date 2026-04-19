@@ -47,6 +47,11 @@ def run_minimal_hf_causal_lm_training(
     generation_bad_words: Sequence[str] = (),
     generation_suppress_tokens: Sequence[int] = (),
     generation_sequence_bias: Mapping[str, float] | None = None,
+    adapter_mode: str = "full",
+    lora_r: int = 16,
+    lora_alpha: int = 32,
+    lora_dropout: float = 0.0,
+    lora_target_modules: Sequence[str] = (),
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -62,6 +67,17 @@ def run_minimal_hf_causal_lm_training(
         raise HFCausalLMTrainingError("HF causal-LM training requires at least one training example")
     if generation_max_new_tokens <= 0:
         raise HFCausalLMTrainingError("generation_max_new_tokens must be positive")
+    normalized_adapter_mode = adapter_mode.strip().lower() or "full"
+    if normalized_adapter_mode not in {"full", "lora"}:
+        raise HFCausalLMTrainingError(
+            f"Unsupported adapter_mode={adapter_mode!r}; expected 'full' or 'lora'"
+        )
+    if lora_r <= 0:
+        raise HFCausalLMTrainingError("lora_r must be positive")
+    if lora_alpha <= 0:
+        raise HFCausalLMTrainingError("lora_alpha must be positive")
+    if lora_dropout < 0:
+        raise HFCausalLMTrainingError("lora_dropout must be non-negative")
 
     cuda_available = torch.cuda.is_available()
     if require_cuda and not cuda_available:
@@ -79,6 +95,23 @@ def run_minimal_hf_causal_lm_training(
     model = AutoModelForCausalLM.from_pretrained(model_name_or_path)
     if model.config.pad_token_id is None and tokenizer.pad_token_id is not None:
         model.config.pad_token_id = tokenizer.pad_token_id
+    if normalized_adapter_mode == "lora":
+        try:
+            from peft import LoraConfig, TaskType, get_peft_model
+        except ImportError as error:
+            raise HFCausalLMTrainingError(
+                "adapter_mode='lora' requires the optional 'peft' package to be installed."
+            ) from error
+        target_modules = tuple(lora_target_modules) or _default_lora_target_modules(model_name_or_path)
+        lora_config = LoraConfig(
+            task_type=TaskType.CAUSAL_LM,
+            r=lora_r,
+            lora_alpha=lora_alpha,
+            lora_dropout=lora_dropout,
+            target_modules=list(target_modules),
+            bias="none",
+        )
+        model = get_peft_model(model, lora_config)
     model.to(device)
     model.train()
 
@@ -188,3 +221,12 @@ def run_minimal_hf_causal_lm_training(
         checkpoint_dir=str(checkpoint_dir),
         generated_text=generated_text,
     )
+
+
+def _default_lora_target_modules(model_name_or_path: str) -> tuple[str, ...]:
+    normalized_name = model_name_or_path.strip().lower()
+    if "qwen" in normalized_name or "llama" in normalized_name or "mistral" in normalized_name:
+        return ("q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj")
+    if "gpt2" in normalized_name:
+        return ("c_attn", "c_proj", "c_fc")
+    return ("q_proj", "v_proj")

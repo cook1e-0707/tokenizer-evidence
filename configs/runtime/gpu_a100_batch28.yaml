@@ -1,0 +1,15 @@
+runtime:
+  output_root: results/raw
+  launcher_mode: slurm
+  tags: ["batch28", "gpu", "a100", "method-model"]
+  resources:
+    partition: DGXA100
+    gpu_type: null
+    num_gpus: 1
+    cpus: 16
+    mem_gb: 64
+    time_limit: "04:00:00"
+    account: null
+    environment_setup: |
+      source ~/.bashrc
+      # activate your environment here

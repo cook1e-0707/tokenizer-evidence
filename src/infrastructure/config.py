@@ -68,6 +68,11 @@ class TrainConfig:
     generation_bad_words: tuple[str, ...] = ()
     generation_suppress_tokens: tuple[int, ...] = ()
     generation_sequence_bias: dict[str, float] = field(default_factory=dict)
+    adapter_mode: str = "full"
+    lora_r: int = 16
+    lora_alpha: int = 32
+    lora_dropout: float = 0.0
+    lora_target_modules: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

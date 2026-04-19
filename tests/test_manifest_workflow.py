@@ -223,3 +223,46 @@ def test_batch3_attack_config_emits_attack_manifest() -> None:
     attack_entry = attack_manifest.entries[0]
     assert attack_entry.entry_point == "scripts/attack.py"
     assert attack_entry.experiment_name == "exp_attack"
+
+
+def test_batch28_model_configs_emit_train_and_eval_manifests() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+
+    manifest_paths = (
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_3b__v1.yaml",
+        repo_root / "configs" / "experiment" / "frozen" / "exp_eval__qwen2_5_3b__v1.yaml",
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_7b__v1.yaml",
+        repo_root / "configs" / "experiment" / "frozen" / "exp_eval__qwen2_5_7b__v1.yaml",
+    )
+
+    for config_path in manifest_paths:
+        manifest_file = build_manifest_from_config(config_path)
+        entry = manifest_file.entries[0]
+        assert entry.requested_resources.partition == "DGXA100"
+        assert entry.requested_resources.num_gpus == 1
+        assert entry.requested_resources.cpus == 16
+        assert entry.requested_resources.mem_gb == 64
+        assert entry.requested_resources.time_limit == "04:00:00"
+        if "exp_train" in config_path.name:
+            assert entry.entry_point == "scripts/train.py"
+        else:
+            assert entry.entry_point == "scripts/eval.py"
+
+
+def test_batch28_llama_configs_are_staged_for_authenticated_freeze() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    train_config = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_3b__v1.yaml"
+    )
+    assert train_config.entries[0].requested_resources.partition == "DGXA100"
+
+    llama_train_config = repo_root / "configs" / "experiment" / "frozen" / "exp_train__llama3_1_8b__v1.yaml"
+    llama_eval_config = repo_root / "configs" / "experiment" / "frozen" / "exp_eval__llama3_1_8b__v1.yaml"
+    assert llama_train_config.exists()
+    assert llama_eval_config.exists()
+    assert (
+        repo_root / "configs" / "data" / "source" / "real_pilot_catalog__llama3_1__src_v1.yaml"
+    ).exists()
+    assert not (
+        repo_root / "configs" / "data" / "frozen" / "real_pilot_catalog__llama3_1__v1.yaml"
+    ).exists()

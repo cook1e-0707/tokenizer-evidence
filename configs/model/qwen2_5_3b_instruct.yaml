@@ -1,0 +1,6 @@
+model:
+  name: qwen2.5-3b-instruct
+  family: huggingface-causal-lm
+  tokenizer_name: Qwen/Qwen2.5-3B-Instruct
+  tokenizer_backend: huggingface
+  max_length: 512

@@ -1,0 +1,6 @@
+model:
+  name: llama3.1-8b-instruct
+  family: huggingface-causal-lm
+  tokenizer_name: meta-llama/Meta-Llama-3.1-8B-Instruct
+  tokenizer_backend: huggingface
+  max_length: 512

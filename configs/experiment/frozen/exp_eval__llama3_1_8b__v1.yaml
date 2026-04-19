@@ -1,0 +1,22 @@
+includes:
+  - ../../model/llama3_1_8b_instruct.yaml
+  - ../../data/real_pilot.yaml
+  - ../../eval/default.yaml
+  - ../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_eval
+  mode: eval
+  method: our_method
+  seed: 17
+  variant_name: batch28c-replication
+
+data:
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__llama3_1__v1.yaml
+  eval_path: results/raw/exp_train/latest_eval_input.json
+
+eval:
+  verification_mode: canonical_render
+  render_format: canonical_v1
+  payload_text: OK
+  audit_strict: true

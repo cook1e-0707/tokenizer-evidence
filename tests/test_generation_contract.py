@@ -125,6 +125,25 @@ def test_repo_batch26_train_and_eval_configs_share_canonical_contract() -> None:
     ensure_train_eval_config_alignment(train_config, eval_config, repo_root)
 
 
+def test_repo_batch28_qwen_train_and_eval_configs_share_canonical_contract() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    bridge_train_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_3b__v1.yaml"
+    )
+    bridge_eval_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_eval__qwen2_5_3b__v1.yaml"
+    )
+    main_train_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_7b__v1.yaml"
+    )
+    main_eval_config = load_experiment_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_eval__qwen2_5_7b__v1.yaml"
+    )
+
+    ensure_train_eval_config_alignment(bridge_train_config, bridge_eval_config, repo_root)
+    ensure_train_eval_config_alignment(main_train_config, main_eval_config, repo_root)
+
+
 def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:
     catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
     config = load_experiment_config(
@@ -370,3 +389,167 @@ def test_canonical_generation_is_deterministic_and_length_bounded(
     assert FakeModel.last_instance is not None
     assert FakeModel.last_instance.generate_kwargs["do_sample"] is False
     assert FakeModel.last_instance.generate_kwargs["max_new_tokens"] == 5
+
+
+def test_lora_training_mode_uses_peft_adapter(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    class FakeLoss:
+        def detach(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def item(self):
+            return 0.321
+
+        def backward(self):
+            return None
+
+    class FakeTensor:
+        def __init__(self, payload):
+            self.payload = payload
+
+        def to(self, _device):
+            return self
+
+        def __getitem__(self, index):
+            return self.payload[index]
+
+    class FakeNoGrad:
+        def __enter__(self):
+            return None
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+    class FakeOptimizer:
+        def zero_grad(self, set_to_none=True):
+            return None
+
+        def step(self):
+            return None
+
+    class FakeTokenizer:
+        last_instance = None
+
+        def __init__(self):
+            self.pad_token = None
+            self.eos_token = "<eos>"
+            self.pad_token_id = 0
+            self.last_prompt = ""
+
+        @classmethod
+        def from_pretrained(cls, _name):
+            cls.last_instance = cls()
+            return cls.last_instance
+
+        def __call__(self, text, **_kwargs):
+            if isinstance(text, str):
+                self.last_prompt = text
+            return {
+                "input_ids": FakeTensor([[1, 2, 3]]),
+                "attention_mask": FakeTensor([[1, 1, 1]]),
+            }
+
+        def decode(self, _tokens, skip_special_tokens=True):
+            return f"{self.last_prompt} market\ntravel"
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+            (Path(path) / "tokenizer.json").write_text("{}", encoding="utf-8")
+
+        def encode(self, text: str, add_special_tokens: bool = False):
+            return [len(text)]
+
+    class FakeModel:
+        last_instance = None
+
+        def __init__(self):
+            self.config = types.SimpleNamespace(pad_token_id=None)
+            self.generate_kwargs = None
+
+        @classmethod
+        def from_pretrained(cls, _name):
+            cls.last_instance = cls()
+            return cls.last_instance
+
+        def to(self, _device):
+            return self
+
+        def train(self):
+            return None
+
+        def eval(self):
+            return None
+
+        def parameters(self):
+            return []
+
+        def __call__(self, **_kwargs):
+            return types.SimpleNamespace(loss=FakeLoss())
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+            (Path(path) / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+        def generate(self, **kwargs):
+            self.generate_kwargs = kwargs
+            return [[10, 11]]
+
+    fake_torch = types.ModuleType("torch")
+    fake_torch.cuda = types.SimpleNamespace(is_available=lambda: False)
+    fake_torch.device = lambda name: name
+    fake_torch.no_grad = lambda: FakeNoGrad()
+    fake_torch.optim = types.SimpleNamespace(AdamW=lambda params, lr: FakeOptimizer())
+
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.AutoModelForCausalLM = FakeModel
+    fake_transformers.AutoTokenizer = FakeTokenizer
+
+    class FakeLoraConfig:
+        def __init__(self, **kwargs):
+            self.kwargs = kwargs
+
+    def _get_peft_model(model, config):
+        model.lora_config = config
+        return model
+
+    fake_peft = types.ModuleType("peft")
+    fake_peft.LoraConfig = FakeLoraConfig
+    fake_peft.TaskType = types.SimpleNamespace(CAUSAL_LM="CAUSAL_LM")
+    fake_peft.get_peft_model = _get_peft_model
+
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+    monkeypatch.setitem(sys.modules, "peft", fake_peft)
+
+    result = run_minimal_hf_causal_lm_training(
+        model_name_or_path="Qwen/Qwen2.5-3B-Instruct",
+        max_length=64,
+        dataset=[
+            TrainingExample(
+                prompt="Output exactly one carrier value per line.",
+                target_symbols=(),
+                metadata={"completion": "market\ntravel\n\n"},
+            )
+        ],
+        batch_size=1,
+        epochs=1,
+        learning_rate=1.0e-4,
+        run_dir=tmp_path,
+        require_cuda=False,
+        generation_prompt="Output exactly one carrier value per line.",
+        generation_max_new_tokens=6,
+        generation_stop_strings=("\n\n",),
+        generation_bad_words=("SECTION", "TOPIC"),
+        adapter_mode="lora",
+        lora_target_modules=("q_proj", "k_proj"),
+    )
+
+    assert result.generated_text == "market\ntravel"
+    assert FakeModel.last_instance is not None
+    assert FakeModel.last_instance.lora_config.kwargs["target_modules"] == ["q_proj", "k_proj"]
+    assert FakeModel.last_instance.generate_kwargs["bad_words_ids"] == [[7], [5]]

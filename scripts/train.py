@@ -227,6 +227,11 @@ def main() -> int:
             generation_bad_words=config.train.generation_bad_words,
             generation_suppress_tokens=config.train.generation_suppress_tokens,
             generation_sequence_bias=config.train.generation_sequence_bias,
+            adapter_mode=config.train.adapter_mode,
+            lora_r=config.train.lora_r,
+            lora_alpha=config.train.lora_alpha,
+            lora_dropout=config.train.lora_dropout,
+            lora_target_modules=config.train.lora_target_modules,
         )
         status = training_result.status
         steps = training_result.steps
