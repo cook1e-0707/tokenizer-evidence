@@ -13,3 +13,5 @@ runtime:
     environment_setup: |
       source ~/.bashrc
       # activate your environment here
+      export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+      export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
