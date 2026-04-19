@@ -32,8 +32,12 @@ from src.core.scaffolded_completion import (
 from src.infrastructure.config import load_experiment_config
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
-from src.training.hf_causal_lm import HFCausalLMTrainingError, run_minimal_hf_causal_lm_training
-from src.evaluation.report import EvalRunSummary, load_result_json
+from src.training.hf_causal_lm import (
+    HFCausalLMTrainingError,
+    HFCausalLMTrainingResult,
+    run_minimal_hf_causal_lm_training,
+)
+from src.evaluation.report import EvalRunSummary, TrainRunSummary, load_result_json
 
 
 def _write_frozen_catalog(path: Path, *, include_topic: bool = True) -> Path:
@@ -147,6 +151,16 @@ def _load_eval_script_module() -> object:
     repo_root = discover_repo_root(Path(__file__).parent)
     script_path = repo_root / "scripts" / "eval.py"
     spec = importlib.util.spec_from_file_location("test_eval_script", script_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_train_script_module() -> object:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    script_path = repo_root / "scripts" / "train.py"
+    spec = importlib.util.spec_from_file_location("test_train_script", script_path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -1692,6 +1706,86 @@ def test_compiled_train_contract_fails_when_any_dataset_prompt_is_not_contextual
             prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
             tokenizer=CompiledPromptTokenizer(invalid_triplets={("NO", "SECTION", "news")}),
         )
+
+
+def test_compiled_train_script_uses_synthesized_dataset_without_train_path(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    train_script = _load_train_script_module()
+    catalog_path = _write_compiled_minimal_catalog(tmp_path / "compiled_catalog.yaml")
+    config_path = _write_experiment_config(
+        tmp_path / "compiled_train.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_train",
+    )
+    payload = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    payload["model"]["name"] = "Qwen/Qwen2.5-7B-Instruct"
+    payload["model"]["family"] = "huggingface-causal-lm"
+    payload["model"]["tokenizer_name"] = "qwen-test"
+    payload["model"]["tokenizer_backend"] = "huggingface"
+    payload["train"]["target_mode"] = "compiled_fieldwise_bucket_mass"
+    payload["train"]["probe_payload_texts"] = ["OK", "NO", "UP", "AI"]
+    payload["train"]["generation_prompt"] = "Select exactly one allowed carrier token."
+    payload["train"]["generation_max_new_tokens"] = 1
+    payload["data"]["train_path"] = ""
+    config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+
+    monkeypatch.setattr(
+        train_script,
+        "parse_args",
+        lambda: types.SimpleNamespace(
+            config=str(config_path),
+            override=[],
+            force=True,
+            jsonl_log=False,
+        ),
+    )
+    monkeypatch.setattr(
+        train_script,
+        "compile_fieldwise_train_contract",
+        lambda **kwargs: compile_fieldwise_train_contract(
+            **kwargs,
+            tokenizer=CompiledPromptTokenizer(),
+        ),
+    )
+
+    captured: dict[str, object] = {}
+
+    def _fake_training(**kwargs):
+        captured["dataset"] = kwargs["dataset"]
+        captured["fieldwise_generation_plan"] = kwargs["fieldwise_generation_plan"]
+        captured["use_compiled_bucket_objective"] = kwargs["use_compiled_bucket_objective"]
+        return HFCausalLMTrainingResult(
+            status="ok",
+            steps=8,
+            examples_seen=8,
+            final_loss=0.0,
+            checkpoint_dir=str(tmp_path / "checkpoint"),
+            generated_text="news\nmarket",
+            generation_diagnostics={},
+            health_diagnostics={},
+        )
+
+    monkeypatch.setattr(train_script, "run_minimal_hf_causal_lm_training", _fake_training)
+
+    assert train_script.main() == 0
+    assert captured["use_compiled_bucket_objective"] is True
+    dataset = captured["dataset"]
+    assert isinstance(dataset, list)
+    assert len(dataset) == 8
+    assert all(example.metadata["target_mode"] == "compiled_fieldwise_bucket_mass" for example in dataset)
+    assert all(example.metadata["completion"] in {"news", "report", "market", "travel"} for example in dataset)
+
+    train_summary_path = sorted((tmp_path / "results").rglob("train_summary.json"))[0]
+    train_summary = load_result_json(train_summary_path)
+    assert isinstance(train_summary, TrainRunSummary)
+    assert train_summary.dataset_size == 8
+
+    eval_input_path = sorted((tmp_path / "results").rglob("eval_input.json"))[0]
+    eval_input = json.loads(eval_input_path.read_text(encoding="utf-8"))
+    assert eval_input["generated_artifact_format"] == COMPILED_ARTIFACT_FORMAT
+    assert "compiled_eval_contract" in eval_input
 
 
 def test_compiled_gate_eval_path_reports_contract_metrics_and_decoded_payload(

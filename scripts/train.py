@@ -113,7 +113,7 @@ def main() -> int:
     seed_report = set_global_seed(config.run.seed)
     logger.info("seed report: %s", seed_report)
 
-    dataset: list[TrainingExample]
+    dataset: list[TrainingExample] | None = None
     canonical_contract_metadata: dict[str, object] | None = None
     generated_artifact_format = "canonical_text"
     expected_slot_values: tuple[str, ...] = ()
@@ -394,15 +394,16 @@ def main() -> int:
                     },
                 )
             ]
-    else:
+    elif dataset is None:
         if not str(config.data.train_path).strip():
             raise ValueError(
-                "data.train_path is required when train.target_mode is not canonical_evidence"
+                "data.train_path is required when train.target_mode does not synthesize its own dataset"
             )
         data_path = Path(config.data.train_path)
         if not data_path.is_absolute():
             data_path = repo_root / data_path
         dataset = load_training_examples(data_path)
+    assert dataset is not None
     checkpoint_path: str
     generated_text: str
     if config.model.family == "huggingface-causal-lm":
