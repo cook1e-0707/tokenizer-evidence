@@ -28,7 +28,7 @@ from src.core.scaffolded_completion import (
 from src.infrastructure.config import load_experiment_config
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
-from src.training.hf_causal_lm import run_minimal_hf_causal_lm_training
+from src.training.hf_causal_lm import HFCausalLMTrainingError, run_minimal_hf_causal_lm_training
 from src.evaluation.report import EvalRunSummary, load_result_json
 
 
@@ -358,6 +358,11 @@ def test_canonical_generation_is_deterministic_and_length_bounded(
                 "input_ids": FakeTensor([[1, 2, 3]]),
                 "attention_mask": FakeTensor([[1, 1, 1]]),
             }
+
+        def encode(self, text: str, add_special_tokens: bool = False):
+            if text == "Emit canonical ownership evidence only:":
+                return [1]
+            return [1, 2, 3]
 
         def decode(self, _tokens, skip_special_tokens=True):
             return f"{self.last_prompt} SECTION=report; TOPIC=market\n\nTrailing prose"
@@ -802,7 +807,10 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
             TrainingExample(
                 prompt=slot_target.prompt,
                 target_symbols=(),
-                metadata={"completion": slot_target.expected_value},
+                metadata={
+                    "completion": slot_target.expected_value,
+                    "slot_type": slot_target.field_name,
+                },
             )
             for slot_target in plan.slot_targets
         ],
@@ -824,6 +832,364 @@ def test_fieldwise_constrained_single_token_decoding_is_deterministic(
     assert FakeModel.last_instance.generate_kwargs["max_new_tokens"] == 1
     assert FakeModel.last_instance.generate_kwargs["do_sample"] is False
     assert "prefix_allowed_tokens_fn" in FakeModel.last_instance.generate_kwargs
+
+
+def test_fieldwise_training_uses_contextual_single_token_target_not_prefix_diff(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    class FakeLoss:
+        def detach(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def item(self):
+            return 0.25
+
+        def backward(self):
+            return None
+
+    class FakeTensor:
+        def __init__(self, payload):
+            self.payload = payload
+
+        def to(self, _device):
+            return self
+
+        def __getitem__(self, index):
+            return self.payload[index]
+
+        def tolist(self):
+            return self.payload
+
+    class FakeNoGrad:
+        def __enter__(self):
+            return None
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+    class FakeOptimizer:
+        def zero_grad(self, set_to_none=True):
+            return None
+
+        def step(self):
+            return None
+
+    class PrefixShiftTokenizer:
+        last_instance = None
+
+        def __init__(self):
+            self.pad_token = None
+            self.eos_token = "<eos>"
+            self.pad_token_id = 0
+            self.eos_token_id = 99
+            self.vocab_size = 128
+            self.id_to_text = {
+                1: "SECTION=",
+                2: "TOPIC=",
+                7: "news",
+                8: "report",
+                9: "guide",
+                10: "update",
+                11: "review",
+                21: "market",
+                22: "travel",
+                23: "health",
+                24: "science",
+                25: "climate",
+            }
+
+        @classmethod
+        def from_pretrained(cls, _name):
+            if cls.last_instance is None:
+                cls.last_instance = cls()
+            return cls.last_instance
+
+        def encode(self, text: str, add_special_tokens: bool = False):
+            if text == "SECTION=":
+                return [1]
+            if text == "TOPIC=":
+                return [2]
+            if text == "SECTION=report":
+                return [98]
+            if text == "TOPIC=market":
+                return [97]
+            raise AssertionError(text)
+
+        def __call__(self, text, **_kwargs):
+            if isinstance(text, list):
+                rows = [self.encode(item) for item in text]
+                width = max(len(row) for row in rows)
+                padded = [row + [self.pad_token_id] * (width - len(row)) for row in rows]
+                mask = [[1] * len(row) + [0] * (width - len(row)) for row in rows]
+                return {
+                    "input_ids": FakeTensor(padded),
+                    "attention_mask": FakeTensor(mask),
+                }
+            encoded = self.encode(text)
+            return {
+                "input_ids": FakeTensor([encoded]),
+                "attention_mask": FakeTensor([[1] * len(encoded)]),
+            }
+
+        def decode(self, token_ids, skip_special_tokens: bool = True):
+            token_tuple = tuple(int(token_id) for token_id in token_ids)
+            mapping = {
+                (1, 7): "SECTION=news",
+                (1, 8): "SECTION=report",
+                (1, 9): "SECTION=guide",
+                (1, 10): "SECTION=update",
+                (1, 11): "SECTION=review",
+                (2, 21): "TOPIC=market",
+                (2, 22): "TOPIC=travel",
+                (2, 23): "TOPIC=health",
+                (2, 24): "TOPIC=science",
+                (2, 25): "TOPIC=climate",
+                (7,): "news",
+                (8,): "report",
+                (9,): "guide",
+                (10,): "update",
+                (11,): "review",
+                (21,): "market",
+                (22,): "travel",
+                (23,): "health",
+                (24,): "science",
+                (25,): "climate",
+            }
+            return mapping.get(token_tuple, "".join(self.id_to_text.get(token_id, "") for token_id in token_tuple))
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+            (Path(path) / "tokenizer.json").write_text("{}", encoding="utf-8")
+
+    class FakeModel:
+        last_instance = None
+
+        def __init__(self):
+            self.config = types.SimpleNamespace(pad_token_id=None)
+            self.training_input_rows = []
+
+        @classmethod
+        def from_pretrained(cls, _name):
+            cls.last_instance = cls()
+            return cls.last_instance
+
+        def to(self, _device):
+            return self
+
+        def train(self):
+            return None
+
+        def eval(self):
+            return None
+
+        def parameters(self):
+            return []
+
+        def __call__(self, **kwargs):
+            self.training_input_rows.append(kwargs["input_ids"].tolist())
+            return types.SimpleNamespace(loss=FakeLoss())
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+            (Path(path) / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+        def generate(self, **kwargs):
+            input_row = kwargs["input_ids"][0]
+            prompt_token = int(input_row[0])
+            if prompt_token == 1:
+                return FakeTensor([[1, 8]])
+            if prompt_token == 2:
+                return FakeTensor([[2, 21]])
+            raise AssertionError(prompt_token)
+
+    fake_torch = types.ModuleType("torch")
+    fake_torch.cuda = types.SimpleNamespace(is_available=lambda: False)
+    fake_torch.device = lambda name: name
+    fake_torch.no_grad = lambda: FakeNoGrad()
+    fake_torch.optim = types.SimpleNamespace(AdamW=lambda params, lr: FakeOptimizer())
+    fake_torch.long = int
+    fake_torch.tensor = lambda payload, dtype=None: FakeTensor(payload)
+
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.AutoModelForCausalLM = FakeModel
+    fake_transformers.AutoTokenizer = PrefixShiftTokenizer
+
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    train_config = load_experiment_config(
+        _write_experiment_config(tmp_path / "train.yaml", catalog_path=catalog_path, experiment_name="exp_train")
+    )
+    bundle = build_canonical_evidence_bundle(train_config, tmp_path, payload_text="AA")
+    plan = build_fieldwise_generation_plan(
+        bundle,
+        instruction="Output exactly one allowed carrier value for the requested slot.",
+        prompt_contract_name=FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+        max_blocks=1,
+    )
+
+    result = run_minimal_hf_causal_lm_training(
+        model_name_or_path="Qwen/Qwen2.5-7B-Instruct",
+        max_length=128,
+        dataset=[
+            TrainingExample(
+                prompt=slot_target.prompt,
+                target_symbols=(),
+                metadata={
+                    "completion": slot_target.expected_value,
+                    "slot_type": slot_target.field_name,
+                },
+            )
+            for slot_target in plan.slot_targets
+        ],
+        batch_size=1,
+        epochs=1,
+        learning_rate=1.0e-4,
+        run_dir=tmp_path,
+        require_cuda=False,
+        adapter_mode="full",
+        fieldwise_generation_plan=plan,
+    )
+
+    assert result.generated_text == "\n".join(plan.expected_slot_values)
+    assert FakeModel.last_instance is not None
+    assert FakeModel.last_instance.training_input_rows[0] == [[1, 8]]
+    assert FakeModel.last_instance.training_input_rows[1] == [[2, 21]]
+
+
+def test_hf_training_raises_on_non_finite_loss(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    class FakeLoss:
+        def detach(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def item(self):
+            return float("nan")
+
+        def backward(self):
+            return None
+
+    class FakeTensor:
+        def __init__(self, payload):
+            self.payload = payload
+
+        def to(self, _device):
+            return self
+
+        def __getitem__(self, index):
+            return self.payload[index]
+
+        def tolist(self):
+            return self.payload
+
+    class FakeNoGrad:
+        def __enter__(self):
+            return None
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+    class FakeOptimizer:
+        def zero_grad(self, set_to_none=True):
+            return None
+
+        def step(self):
+            return None
+
+    class FakeTokenizer:
+        @classmethod
+        def from_pretrained(cls, _name):
+            return cls()
+
+        def __init__(self):
+            self.pad_token = "<pad>"
+            self.eos_token = "<eos>"
+            self.pad_token_id = 0
+
+        def __call__(self, text, **_kwargs):
+            return {
+                "input_ids": FakeTensor([[1, 2, 3]]),
+                "attention_mask": FakeTensor([[1, 1, 1]]),
+            }
+
+        def encode(self, text: str, add_special_tokens: bool = False):
+            return [1]
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+
+        def decode(self, _tokens, skip_special_tokens: bool = True):
+            return "ignored"
+
+    class FakeModel:
+        @classmethod
+        def from_pretrained(cls, _name):
+            return cls()
+
+        def __init__(self):
+            self.config = types.SimpleNamespace(pad_token_id=None)
+
+        def to(self, _device):
+            return self
+
+        def train(self):
+            return None
+
+        def eval(self):
+            return None
+
+        def parameters(self):
+            return []
+
+        def __call__(self, **_kwargs):
+            return types.SimpleNamespace(loss=FakeLoss())
+
+        def save_pretrained(self, path: Path):
+            Path(path).mkdir(parents=True, exist_ok=True)
+
+        def generate(self, **kwargs):
+            return FakeTensor([[1, 2, 3]])
+
+    fake_torch = types.ModuleType("torch")
+    fake_torch.cuda = types.SimpleNamespace(is_available=lambda: False)
+    fake_torch.device = lambda name: name
+    fake_torch.no_grad = lambda: FakeNoGrad()
+    fake_torch.optim = types.SimpleNamespace(AdamW=lambda params, lr: FakeOptimizer())
+
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.AutoModelForCausalLM = FakeModel
+    fake_transformers.AutoTokenizer = FakeTokenizer
+
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+
+    with pytest.raises(HFCausalLMTrainingError, match="Non-finite training loss"):
+        run_minimal_hf_causal_lm_training(
+            model_name_or_path="Qwen/Qwen2.5-7B-Instruct",
+            max_length=64,
+            dataset=[
+                TrainingExample(
+                    prompt="Emit canonical ownership evidence only:",
+                    target_symbols=(),
+                    metadata={"completion": "SECTION=report; TOPIC=market"},
+                )
+            ],
+            batch_size=1,
+            epochs=1,
+            learning_rate=1.0e-4,
+            run_dir=tmp_path,
+            require_cuda=False,
+        )
 
 
 def test_contextual_carrier_audit_uses_exact_slot_prefix_not_prefix_stable_diff() -> None:

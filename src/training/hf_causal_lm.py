@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Mapping, Sequence
@@ -69,8 +70,27 @@ def _tensor_rows(tensor: object) -> list[list[int]]:
 def _build_labels_tensor(torch_module: object, labels_payload: list[list[int]], device: object) -> object:
     tensor_ctor = getattr(torch_module, "tensor", None)
     if callable(tensor_ctor):
+        dtype = getattr(torch_module, "long", None)
+        if dtype is not None:
+            try:
+                return tensor_ctor(labels_payload, dtype=dtype).to(device)
+            except TypeError:
+                pass
         return tensor_ctor(labels_payload).to(device)
     return labels_payload
+
+
+def _build_input_tensor(torch_module: object, payload: list[list[int]], device: object) -> object:
+    tensor_ctor = getattr(torch_module, "tensor", None)
+    if callable(tensor_ctor):
+        dtype = getattr(torch_module, "long", None)
+        if dtype is not None:
+            try:
+                return tensor_ctor(payload, dtype=dtype).to(device)
+            except TypeError:
+                pass
+        return tensor_ctor(payload).to(device)
+    return payload
 
 
 def _build_generation_kwargs(
@@ -86,9 +106,10 @@ def _build_generation_kwargs(
         "do_sample": generation_do_sample,
         "num_beams": 1,
         "pad_token_id": tokenizer.pad_token_id,
+        "temperature": 1.0,
+        "top_p": 1.0,
+        "top_k": 50,
     }
-    if generation_do_sample:
-        generation_kwargs.update({"temperature": 1.0, "top_p": 1.0, "top_k": 50})
     if eos_token_id is not None:
         generation_kwargs["eos_token_id"] = eos_token_id
     if allowed_token_ids is not None:
@@ -191,6 +212,75 @@ def _compute_fieldwise_generation_diagnostics(
     }
 
 
+def _build_fieldwise_training_batch(
+    *,
+    torch_module: object,
+    tokenizer: object,
+    batch_examples: Sequence[TrainingExample],
+    slot_token_maps: Mapping[tuple[str, str], tuple[dict[str, int], dict[int, str]]],
+    max_length: int,
+    device: object,
+) -> tuple[object, object, object]:
+    if tokenizer.pad_token_id is None:
+        raise HFCausalLMTrainingError("Field-wise training requires tokenizer.pad_token_id to be defined")
+
+    input_payload: list[list[int]] = []
+    attention_payload: list[list[int]] = []
+    labels_payload: list[list[int]] = []
+    max_width = 0
+    for example in batch_examples:
+        completion = str(example.metadata.get("completion", "")).strip()
+        field_name = str(example.metadata.get("slot_type", "")).strip()
+        if not completion:
+            raise HFCausalLMTrainingError(
+                f"Field-wise training example is missing a completion value for prompt={example.prompt!r}"
+            )
+        if not field_name:
+            raise HFCausalLMTrainingError(
+                f"Field-wise training example is missing slot_type metadata for prompt={example.prompt!r}"
+            )
+        slot_key = (field_name, example.prompt)
+        if slot_key not in slot_token_maps:
+            raise HFCausalLMTrainingError(
+                "Field-wise training example prompt was not audited as a valid exact slot prefix; "
+                f"field={field_name!r}, prompt={example.prompt!r}"
+            )
+        value_to_token_id, _token_id_to_value = slot_token_maps[slot_key]
+        if completion not in value_to_token_id:
+            raise HFCausalLMTrainingError(
+                "Field-wise training example completion is not a contextual single-token carrier "
+                f"under its exact slot prefix; field={field_name!r}, value={completion!r}"
+            )
+        prompt_ids = _tokenize_text(tokenizer, example.prompt)
+        target_token_id = int(value_to_token_id[completion])
+        row = [*prompt_ids, target_token_id]
+        if len(row) > max_length:
+            raise HFCausalLMTrainingError(
+                "Field-wise training example exceeds model max_length after appending the "
+                f"single-token carrier; length={len(row)}, max_length={max_length}, "
+                f"field={field_name!r}, value={completion!r}"
+            )
+        labels = [-100] * len(prompt_ids) + [target_token_id]
+        input_payload.append(row)
+        attention_payload.append([1] * len(row))
+        labels_payload.append(labels)
+        max_width = max(max_width, len(row))
+
+    for row, attention_row, label_row in zip(input_payload, attention_payload, labels_payload, strict=True):
+        pad_width = max_width - len(row)
+        if pad_width <= 0:
+            continue
+        row.extend([int(tokenizer.pad_token_id)] * pad_width)
+        attention_row.extend([0] * pad_width)
+        label_row.extend([-100] * pad_width)
+
+    return (
+        _build_input_tensor(torch_module, input_payload, device),
+        _build_input_tensor(torch_module, attention_payload, device),
+        _build_labels_tensor(torch_module, labels_payload, device),
+    )
+
+
 def run_minimal_hf_causal_lm_training(
     *,
     model_name_or_path: str,
@@ -279,6 +369,13 @@ def run_minimal_hf_causal_lm_training(
 
     texts = [_training_text(example) for example in dataset]
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
+    fieldwise_contextual_audit_result: ContextualCarrierAuditResult | None = None
+    fieldwise_slot_token_maps: dict[tuple[str, str], tuple[dict[str, int], dict[int, str]]] | None = None
+    if fieldwise_generation_plan is not None:
+        fieldwise_contextual_audit_result, fieldwise_slot_token_maps = _resolve_fieldwise_contextual_token_map(
+            tokenizer=tokenizer,
+            plan=fieldwise_generation_plan,
+        )
 
     effective_batch_size = max(1, batch_size)
     total_steps = 0
@@ -286,32 +383,54 @@ def run_minimal_hf_causal_lm_training(
     final_loss = 0.0
     for _epoch in range(max(1, epochs)):
         for start in range(0, len(texts), effective_batch_size):
-            batch_texts = texts[start : start + effective_batch_size]
             batch_examples = dataset[start : start + effective_batch_size]
-            tokenized = tokenizer(
-                batch_texts,
-                return_tensors="pt",
-                padding=True,
-                truncation=True,
-                max_length=max_length,
-            )
-            input_ids = tokenized["input_ids"].to(device)
-            attention_mask = tokenized["attention_mask"].to(device)
-            input_id_rows = _tensor_rows(input_ids)
-            attention_rows = _tensor_rows(attention_mask)
-            prompt_token_lengths = [
-                len(_tokenize_text(tokenizer, example.prompt))
-                for example in batch_examples
-            ]
-            labels_payload: list[list[int]] = []
-            for row_index, input_row in enumerate(input_id_rows):
-                label_row = list(input_row)
-                prompt_length = prompt_token_lengths[row_index]
-                for token_index, mask_value in enumerate(attention_rows[row_index]):
-                    if not mask_value or token_index < prompt_length:
-                        label_row[token_index] = -100
-                labels_payload.append(label_row)
-            labels = _build_labels_tensor(torch, labels_payload, device)
+            if fieldwise_slot_token_maps is not None:
+                input_ids, attention_mask, labels = _build_fieldwise_training_batch(
+                    torch_module=torch,
+                    tokenizer=tokenizer,
+                    batch_examples=batch_examples,
+                    slot_token_maps=fieldwise_slot_token_maps,
+                    max_length=max_length,
+                    device=device,
+                )
+            else:
+                batch_texts = texts[start : start + effective_batch_size]
+                tokenized = tokenizer(
+                    batch_texts,
+                    return_tensors="pt",
+                    padding=True,
+                    truncation=True,
+                    max_length=max_length,
+                )
+                input_ids = tokenized["input_ids"].to(device)
+                attention_mask = tokenized["attention_mask"].to(device)
+                input_id_rows = _tensor_rows(input_ids)
+                attention_rows = _tensor_rows(attention_mask)
+                prompt_token_lengths = [
+                    len(_tokenize_text(tokenizer, example.prompt))
+                    for example in batch_examples
+                ]
+                labels_payload: list[list[int]] = []
+                for row_index, input_row in enumerate(input_id_rows):
+                    label_row = list(input_row)
+                    prompt_length = prompt_token_lengths[row_index]
+                    for token_index, mask_value in enumerate(attention_rows[row_index]):
+                        if not mask_value or token_index < prompt_length:
+                            label_row[token_index] = -100
+                    labels_payload.append(label_row)
+                supervised_token_count = sum(
+                    1
+                    for label_row in labels_payload
+                    for label_token_id in label_row
+                    if label_token_id != -100
+                )
+                if supervised_token_count <= 0:
+                    raise HFCausalLMTrainingError(
+                        "Sequence-level training batch contains no supervised tokens after label masking. "
+                        "This usually means prompt-only tokenization consumed the intended completion under "
+                        "the active tokenizer boundary rules."
+                    )
+                labels = _build_labels_tensor(torch, labels_payload, device)
 
             outputs = model(
                 input_ids=input_ids,
@@ -319,13 +438,21 @@ def run_minimal_hf_causal_lm_training(
                 labels=labels,
             )
             loss = outputs.loss
+            loss_value = float(loss.detach().cpu().item())
+            if not math.isfinite(loss_value):
+                raise HFCausalLMTrainingError(
+                    "Non-finite training loss encountered during HF causal-LM training; "
+                    f"step={total_steps + 1}, epoch={_epoch + 1}, batch_start={start}, "
+                    f"examples_in_batch={len(batch_examples)}, target_mode="
+                    f"{fieldwise_generation_plan.prompt_contract_name if fieldwise_generation_plan else 'sequence'}"
+                )
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
             optimizer.step()
 
             total_steps += 1
-            examples_seen += len(batch_texts)
-            final_loss = float(loss.detach().cpu().item())
+            examples_seen += len(batch_examples)
+            final_loss = loss_value
 
     checkpoint_dir = run_dir / "checkpoints" / "hf_last"
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -336,14 +463,12 @@ def run_minimal_hf_causal_lm_training(
     generation_diagnostics: dict[str, object] = {}
     with torch.no_grad():
         if fieldwise_generation_plan is not None:
-            contextual_audit_result, slot_token_maps = _resolve_fieldwise_contextual_token_map(
-                tokenizer=tokenizer,
-                plan=fieldwise_generation_plan,
-            )
+            if fieldwise_contextual_audit_result is None or fieldwise_slot_token_maps is None:
+                raise HFCausalLMTrainingError("Missing contextual audit data for field-wise generation")
             generated_values: list[str] = []
             slot_results: list[dict[str, object]] = []
             for slot_target in fieldwise_generation_plan.slot_targets:
-                value_to_token_id, token_id_to_value = slot_token_maps[
+                value_to_token_id, token_id_to_value = fieldwise_slot_token_maps[
                     (slot_target.field_name, slot_target.exact_slot_prefix)
                 ]
                 generation_inputs = tokenizer(
@@ -408,7 +533,7 @@ def run_minimal_hf_causal_lm_training(
                 generated_values=tuple(generated_values),
                 slot_results=tuple(slot_results),
             )
-            generation_diagnostics["contextual_carrier_audit"] = contextual_audit_result.to_dict()
+            generation_diagnostics["contextual_carrier_audit"] = fieldwise_contextual_audit_result.to_dict()
         else:
             prompt = generation_prompt if generation_prompt else dataset[0].prompt.strip()
             if not prompt:
