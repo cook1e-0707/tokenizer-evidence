@@ -9,16 +9,15 @@ run:
   mode: eval
   method: our_method
   seed: 17
-  variant_name: batch28b-main
+  variant_name: batch28b-foundation
 
 data:
-  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b__v1.yaml
+  name: real-pilot-foundation
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_foundation__v1.yaml
   eval_path: results/raw/exp_train/latest_eval_input.json
-  foundation_eval_summary_path: ""
 
 eval:
-  verification_mode: canonical_render
+  verification_mode: foundation_gate
   render_format: canonical_v1
-  payload_text: OK
+  payload_text: AA
   audit_strict: true
-  require_foundation_gate: true

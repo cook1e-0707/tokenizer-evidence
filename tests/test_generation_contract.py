@@ -1,4 +1,5 @@
 import json
+import importlib.util
 import subprocess
 import sys
 import types
@@ -20,7 +21,9 @@ from src.core.scaffolded_completion import (
     FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
     build_fieldwise_generation_plan,
     build_scaffolded_completion_target,
+    evaluate_foundation_completion,
     parse_scaffolded_completion,
+    render_foundation_slot_values,
 )
 from src.infrastructure.config import load_experiment_config
 from src.infrastructure.paths import discover_repo_root
@@ -59,6 +62,16 @@ def _write_frozen_catalog(path: Path, *, include_topic: bool = True) -> Path:
     )
     save_bucket_layout(layout, path)
     return path
+
+
+def _load_eval_script_module() -> object:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    script_path = repo_root / "scripts" / "eval.py"
+    spec = importlib.util.spec_from_file_location("test_eval_script", script_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _write_experiment_config(path: Path, *, catalog_path: Path, experiment_name: str) -> Path:
@@ -848,6 +861,237 @@ def test_contextual_carrier_audit_uses_exact_slot_prefix_not_prefix_stable_diff(
     assert audit.is_context_safe is True
     assert audit.valid_token_map["SECTION"]["SECTION="]["news"] == 7
     assert audit.valid_token_map["SECTION"]["SECTION="]["report"] == 8
+
+
+def test_contextual_carrier_audit_fails_when_value_is_not_single_next_token_in_context() -> None:
+    class SparseTokenizer:
+        def __init__(self):
+            self.id_to_text = {1: "SECTION=", 8: "report"}
+
+        def encode(self, text: str) -> list[int]:
+            if text == "SECTION=":
+                return [1]
+            raise AssertionError(text)
+
+        def decode(self, token_ids) -> str:
+            if tuple(token_ids) == (1, 8):
+                return "SECTION=report"
+            return "".join(self.id_to_text.get(int(token_id), "") for token_id in token_ids)
+
+    audit = audit_contextual_field_values(
+        field_allowed_values={"SECTION": ("news", "report")},
+        exact_slot_prefixes={"SECTION": "SECTION="},
+        tokenizer=SparseTokenizer(),
+        prompt_contract_name=FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+    )
+
+    assert audit.is_context_safe is False
+    assert audit.valid_token_map["SECTION"]["SECTION="] == {"report": 8}
+
+
+def test_foundation_completion_measures_metrics_and_renders_canonical_block(tmp_path: Path) -> None:
+    class PrefixTokenizer:
+        def __init__(self):
+            self.id_to_text = {1: "SECTION=", 2: "TOPIC=", 7: "news", 21: "market", 22: "travel"}
+
+        def encode(self, text: str) -> list[int]:
+            if text == "SECTION=":
+                return [1]
+            if text == "TOPIC=":
+                return [2]
+            raise AssertionError(text)
+
+        def decode(self, token_ids) -> str:
+            token_tuple = tuple(int(token_id) for token_id in token_ids)
+            mapping = {
+                (1, 7): "SECTION=news",
+                (2, 21): "TOPIC=market",
+                (2, 22): "TOPIC=travel",
+                (7,): "news",
+                (21,): "market",
+                (22,): "travel",
+            }
+            return mapping.get(token_tuple, "".join(self.id_to_text.get(token_id, "") for token_id in token_tuple))
+
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    layout = BucketLayout.from_dict(yaml.safe_load(catalog_path.read_text(encoding="utf-8")))
+
+    render_text, render_bucket_tuples = render_foundation_slot_values(
+        slot_values=("news", "market"),
+        layout=layout,
+        slot_field_names=("SECTION", "TOPIC"),
+    )
+    assert render_text == "SECTION=news; TOPIC=market"
+    assert render_bucket_tuples == ((0, 0),)
+
+    result = evaluate_foundation_completion(
+        "news\ntravel",
+        layout=layout,
+        expected_slot_values=("news", "market"),
+        exact_slot_prefixes={"SECTION": "SECTION=", "TOPIC": "TOPIC="},
+        tokenizer=PrefixTokenizer(),
+        prompt_contract_name=FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+        slot_field_names=("SECTION", "TOPIC"),
+    )
+
+    assert result.field_valid_rate == 1.0
+    assert result.bucket_correct_rate == 0.5
+    assert result.slot_exact_rate == 0.5
+    assert result.per_field_accuracy == {"SECTION": 1.0, "TOPIC": 0.0}
+    assert result.rendered_canonical_text == "SECTION=news; TOPIC=travel"
+    assert result.foundation_gate_passed is False
+
+
+def test_foundation_eval_path_reports_f1_metrics_and_passes_for_gold_slot_values(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    eval_script = _load_eval_script_module()
+
+    class PrefixTokenizer:
+        def __init__(self):
+            self.id_to_text = {
+                1: "SECTION=",
+                2: "TOPIC=",
+                7: "news",
+                8: "report",
+                9: "guide",
+                10: "update",
+                11: "review",
+                21: "market",
+                22: "travel",
+                23: "health",
+                24: "science",
+                25: "climate",
+            }
+
+        def encode(self, text: str) -> list[int]:
+            if text == "SECTION=":
+                return [1]
+            if text == "TOPIC=":
+                return [2]
+            raise AssertionError(text)
+
+        def decode(self, token_ids) -> str:
+            token_tuple = tuple(int(token_id) for token_id in token_ids)
+            mapping = {
+                (1, 7): "SECTION=news",
+                (1, 8): "SECTION=report",
+                (1, 9): "SECTION=guide",
+                (1, 10): "SECTION=update",
+                (1, 11): "SECTION=review",
+                (2, 21): "TOPIC=market",
+                (2, 22): "TOPIC=travel",
+                (2, 23): "TOPIC=health",
+                (2, 24): "TOPIC=science",
+                (2, 25): "TOPIC=climate",
+                (7,): "news",
+                (8,): "report",
+                (9,): "guide",
+                (10,): "update",
+                (11,): "review",
+                (21,): "market",
+                (22,): "travel",
+                (23,): "health",
+                (24,): "science",
+                (25,): "climate",
+            }
+            return mapping.get(token_tuple, "")
+
+    monkeypatch.setattr(eval_script, "load_tokenizer", lambda *_args, **_kwargs: PrefixTokenizer())
+
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    eval_config_path = _write_experiment_config(
+        tmp_path / "foundation_eval.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    payload["eval"]["verification_mode"] = "foundation_gate"
+    generated_values_path = tmp_path / "generated_values.txt"
+    generated_values_path.write_text("news\nmarket", encoding="utf-8")
+    eval_input_path = tmp_path / "foundation_eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "payload_text": "AA",
+                "generated_text_path": str(generated_values_path),
+                "generated_artifact_format": FOUNDATION_ARTIFACT_FORMAT,
+                "expected_slot_values": ["news", "market"],
+                "slot_field_names": ["SECTION", "TOPIC"],
+                "exact_slot_prefixes": {"SECTION": "SECTION=", "TOPIC": "TOPIC="},
+                "prompt_contract_name": FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    payload["data"]["eval_path"] = str(eval_input_path)
+    eval_config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+    config = load_experiment_config(eval_config_path)
+
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    verification_result, diagnostics = eval_script._run_our_method_eval(config, tmp_path, run_dir)
+
+    assert verification_result.success is True
+    assert diagnostics["field_valid_rate"] == 1.0
+    assert diagnostics["bucket_correct_rate"] == 1.0
+    assert diagnostics["slot_exact_rate"] == 1.0
+    assert diagnostics["foundation_gate_passed"] is True
+    assert (run_dir / "foundation_rendered_canonical.txt").read_text(encoding="utf-8") == "SECTION=news; TOPIC=market"
+
+
+def test_promotion_gate_blocks_canonical_eval_when_foundation_summary_failed(tmp_path: Path) -> None:
+    eval_script = _load_eval_script_module()
+
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    eval_config_path = _write_experiment_config(
+        tmp_path / "eval.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    failed_summary_path = tmp_path / "failed_foundation_eval_summary.json"
+    EvalRunSummary(
+        run_id="foundation-run",
+        experiment_name="exp_eval",
+        method_name="our_method",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
+        seed=17,
+        git_commit="abc123",
+        timestamp="20260419T000000Z",
+        hostname="test-host",
+        slurm_job_id=None,
+        status="failed",
+        dataset_name="real-pilot-foundation",
+        sample_count=1,
+        accepted=False,
+        match_ratio=0.5,
+        threshold=0.0,
+        verification_mode="foundation_gate",
+        render_format="canonical_v1",
+        verifier_success=False,
+        decoded_payload=None,
+        decoded_unit_count=0,
+        decoded_block_count=0,
+        unresolved_field_count=0,
+        malformed_count=0,
+        utility_acceptance_rate=0.0,
+        notes="foundation failed",
+        diagnostics={"foundation_gate_passed": False},
+        run_dir=str(tmp_path / "foundation-run"),
+    ).save_json(failed_summary_path)
+
+    payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    payload["eval"]["require_foundation_gate"] = True
+    payload["data"]["foundation_eval_summary_path"] = str(failed_summary_path)
+    eval_config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+    config = load_experiment_config(eval_config_path)
+
+    with pytest.raises(ValueError, match="foundation gate did not pass"):
+        eval_script._run_our_method_eval(config, tmp_path, tmp_path / "run")
 
 
 def test_foundation_fieldwise_plan_uses_deterministic_prefix_contract(tmp_path: Path) -> None:

@@ -13,7 +13,7 @@ from src.infrastructure.paths import EXPERIMENT_NAME_SET
 
 ALLOWED_RUN_MODES = {"train", "eval", "attack", "calibrate"}
 ALLOWED_LAUNCHER_MODES = {"local", "slurm"}
-ALLOWED_VERIFICATION_MODES = {"synthetic_fixture", "canonical_render"}
+ALLOWED_VERIFICATION_MODES = {"synthetic_fixture", "canonical_render", "foundation_gate"}
 
 
 class ConfigError(ValueError):
@@ -51,6 +51,7 @@ class DataConfig:
     eval_path: str = ""
     parser_smoke_path: str = ""
     carrier_catalog_path: str = ""
+    foundation_eval_summary_path: str = ""
 
 
 @dataclass(frozen=True)
@@ -86,6 +87,7 @@ class EvalConfig:
     render_format: str = "canonical_v1"
     payload_text: str = "OK"
     audit_strict: bool = True
+    require_foundation_gate: bool = False
 
 
 @dataclass(frozen=True)

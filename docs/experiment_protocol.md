@@ -90,6 +90,37 @@ SECTION=report; TONE=clear; TOPIC=travel; REGION=rural
 - `scripts/calibrate.py` writes `calibration_summary.json`.
 - `scripts/summarize.py` scans JSON files by schema, not by filename conventions.
 
+## Foundation Gate F1
+
+- `Qwen2.5-7B-Instruct` foundation bring-up is a mandatory promotion stage before reopening the main `canonical_render` clean eval path.
+- `foundation_v1` is not itself a paper-facing clean acceptance result. It is a contract-validation stage for:
+  - contextual next-token carrier alignment
+  - deterministic field-wise decoding
+  - deterministic render from slot outputs back into `canonical_v1`
+- The main Qwen 7B clean eval path must remain blocked until a passing foundation eval summary is available and referenced through `data.foundation_eval_summary_path`.
+
+### F1 Passing Criteria
+
+- `field_valid_rate = 1.0`
+- `bucket_correct_rate >= 0.95`
+- `slot_exact_rate >= 0.95`
+- `per_field_accuracy >= 0.95` for every active field
+- deterministic render from foundation slot outputs to `canonical_v1` must produce:
+  - `accepted = true`
+  - `verifier_success = true`
+- `git_commit != "nogit"`
+
+### F1 Promotion Rule
+
+- `canonical_render` clean eval for the Qwen 7B main path is not allowed unless:
+  - a prior `foundation_gate` eval summary exists
+  - that summary reports `foundation_gate_passed = true`
+  - the summary also satisfies `accepted = true` and `verifier_success = true`
+- Until F1 passes:
+  - do not reopen Batch 3
+  - do not open new model families
+  - do not interpret Qwen 7B main-path failure as a paper-facing method result
+
 ## Pilot flow
 
 1. Freeze the raw catalog.

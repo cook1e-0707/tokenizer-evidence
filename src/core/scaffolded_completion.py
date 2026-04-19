@@ -7,7 +7,8 @@ from typing import Sequence
 from src.core.bucket_mapping import BucketLayout
 from src.core.canonical_contract import CanonicalEvidenceBundle
 from src.core.catalog_freeze import load_required_frozen_catalog
-from src.core.render import render_config_from_name
+from src.core.contextual_alignment import audit_contextual_field_values
+from src.core.render import render_bucket_tuples, render_config_from_name
 
 
 SCAFFOLDED_ARTIFACT_FORMAT = "scaffolded_slot_values"
@@ -97,6 +98,52 @@ class ScaffoldedCompletionParseResult:
         return asdict(self)
 
 
+@dataclass(frozen=True)
+class FoundationSlotDiagnostic:
+    slot_index: int
+    slot_type: str
+    exact_slot_prefix: str
+    observed_value: str
+    expected_value: str
+    allowed_values: tuple[str, ...]
+    allowed_token_ids: tuple[int, ...]
+    chosen_token_id: int | None
+    chosen_token_text: str | None
+    is_field_valid: bool
+    is_bucket_correct: bool
+    is_slot_exact: bool
+    observed_bucket_id: int | None
+    expected_bucket_id: int | None
+
+    def to_dict(self) -> dict[str, object]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class FoundationGateResult:
+    artifact_format: str
+    prompt_contract_name: str
+    expected_slot_count: int
+    parsed_slot_values: tuple[str, ...]
+    ignored_generated_lines: tuple[str, ...]
+    field_valid_rate: float
+    bucket_correct_rate: float
+    slot_exact_rate: float
+    per_field_accuracy: dict[str, float]
+    valid_canonical_block_count: int
+    contextual_audit_pass: bool
+    foundation_gate_passed: bool
+    rendered_canonical_text: str
+    rendered_bucket_tuples: tuple[tuple[int, ...], ...]
+    slot_diagnostics: tuple[FoundationSlotDiagnostic, ...]
+    messages: tuple[str, ...]
+
+    def to_dict(self) -> dict[str, object]:
+        payload = asdict(self)
+        payload["slot_diagnostics"] = [item.to_dict() for item in self.slot_diagnostics]
+        return payload
+
+
 def _extract_slot_values_from_rendered_text(text: str) -> tuple[str, ...]:
     values: list[str] = []
     for raw_line in text.splitlines():
@@ -143,6 +190,19 @@ def _ordered_field_values(layout: BucketLayout, field_name: str) -> tuple[str, .
     for bucket_id in field_spec.bucket_ids:
         ordered.extend(field_spec.bucket_members(bucket_id))
     return tuple(ordered)
+
+
+def _slot_field_names_from_metadata(
+    *,
+    layout: BucketLayout,
+    expected_slot_values: Sequence[str],
+    slot_field_names: Sequence[str] | None = None,
+) -> tuple[str, ...]:
+    if slot_field_names:
+        return tuple(str(item) for item in slot_field_names)
+    expected_slot_count = len(expected_slot_values)
+    repeated = layout.field_names * max(1, (expected_slot_count + len(layout.field_names) - 1) // len(layout.field_names))
+    return tuple(repeated[:expected_slot_count])
 
 
 def _build_fieldwise_slot_prompt(
@@ -240,6 +300,192 @@ def build_fieldwise_generation_plan(
             if prompt_contract_name == FOUNDATION_FIELDWISE_PROMPT_CONTRACT
             else SCAFFOLDED_ARTIFACT_FORMAT
         ),
+    )
+
+
+def render_foundation_slot_values(
+    *,
+    slot_values: Sequence[str],
+    layout: BucketLayout,
+    slot_field_names: Sequence[str],
+    render_format: str = "canonical_v1",
+) -> tuple[str, tuple[tuple[int, ...], ...]]:
+    fields_per_block = len(layout.field_names)
+    bucket_tuples: list[tuple[int, ...]] = []
+    member_indices_per_block: list[dict[str, int]] = []
+    for start in range(0, len(slot_field_names), fields_per_block):
+        block_field_names = tuple(slot_field_names[start : start + fields_per_block])
+        block_values = tuple(slot_values[start : start + fields_per_block])
+        if len(block_field_names) != fields_per_block or len(block_values) != fields_per_block:
+            break
+        if block_field_names != layout.field_names:
+            continue
+        bucket_ids: list[int] = []
+        member_indices: dict[str, int] = {}
+        block_valid = True
+        for field_name, value in zip(block_field_names, block_values, strict=True):
+            field_spec = layout.get_field_spec(field_name)
+            bucket_id = field_spec.lookup_bucket_id(value)
+            if bucket_id is None:
+                block_valid = False
+                break
+            members = field_spec.bucket_members(bucket_id)
+            try:
+                member_indices[field_name] = members.index(value)
+            except ValueError:
+                block_valid = False
+                break
+            bucket_ids.append(bucket_id)
+        if block_valid:
+            bucket_tuples.append(tuple(bucket_ids))
+            member_indices_per_block.append(member_indices)
+
+    if not bucket_tuples:
+        return "", ()
+
+    rendered = render_bucket_tuples(
+        layout,
+        bucket_tuples,
+        config=render_config_from_name(render_format),
+        member_indices_per_block=member_indices_per_block,
+    )
+    return rendered.text, rendered.bucket_tuples
+
+
+def evaluate_foundation_completion(
+    raw_text: str,
+    *,
+    layout: BucketLayout,
+    expected_slot_values: Sequence[str],
+    exact_slot_prefixes: dict[str, str],
+    tokenizer: object,
+    prompt_contract_name: str,
+    render_format: str = "canonical_v1",
+    slot_field_names: Sequence[str] | None = None,
+) -> FoundationGateResult:
+    normalized_slot_field_names = _slot_field_names_from_metadata(
+        layout=layout,
+        expected_slot_values=expected_slot_values,
+        slot_field_names=slot_field_names,
+    )
+    parsed_slot_values = tuple(line.strip() for line in raw_text.splitlines() if line.strip())
+    expected_slot_count = len(expected_slot_values)
+    used_values = tuple(parsed_slot_values[:expected_slot_count])
+    ignored_generated_lines = tuple(parsed_slot_values[expected_slot_count:])
+
+    field_allowed_values = {
+        field_name: _ordered_field_values(layout, field_name)
+        for field_name in dict.fromkeys(normalized_slot_field_names)
+    }
+    contextual_audit = audit_contextual_field_values(
+        field_allowed_values=field_allowed_values,
+        exact_slot_prefixes=exact_slot_prefixes,
+        tokenizer=tokenizer,
+        prompt_contract_name=prompt_contract_name,
+    )
+
+    exact_matches = 0
+    field_valid_matches = 0
+    bucket_correct_matches = 0
+    field_totals: dict[str, int] = {}
+    field_exact_matches: dict[str, int] = {}
+    slot_diagnostics: list[FoundationSlotDiagnostic] = []
+    for slot_index, field_name in enumerate(normalized_slot_field_names):
+        observed_value = used_values[slot_index] if slot_index < len(used_values) else ""
+        expected_value = str(expected_slot_values[slot_index]) if slot_index < len(expected_slot_values) else ""
+        exact_slot_prefix = exact_slot_prefixes[field_name]
+        allowed_values = field_allowed_values[field_name]
+        field_token_map = contextual_audit.valid_token_map.get(field_name, {}).get(exact_slot_prefix, {})
+        chosen_token_id = field_token_map.get(observed_value)
+        chosen_token_text = tokenizer.decode([chosen_token_id]) if chosen_token_id is not None else None
+        field_spec = layout.get_field_spec(field_name)
+        observed_bucket_id = field_spec.lookup_bucket_id(observed_value) if observed_value else None
+        expected_bucket_id = field_spec.lookup_bucket_id(expected_value) if expected_value else None
+        is_field_valid = chosen_token_id is not None
+        is_bucket_correct = is_field_valid and observed_bucket_id == expected_bucket_id
+        is_slot_exact = is_field_valid and observed_value == expected_value
+        if is_field_valid:
+            field_valid_matches += 1
+        if is_bucket_correct:
+            bucket_correct_matches += 1
+        if is_slot_exact:
+            exact_matches += 1
+        field_totals[field_name] = field_totals.get(field_name, 0) + 1
+        if is_slot_exact:
+            field_exact_matches[field_name] = field_exact_matches.get(field_name, 0) + 1
+        slot_diagnostics.append(
+            FoundationSlotDiagnostic(
+                slot_index=slot_index,
+                slot_type=field_name,
+                exact_slot_prefix=exact_slot_prefix,
+                observed_value=observed_value,
+                expected_value=expected_value,
+                allowed_values=allowed_values,
+                allowed_token_ids=tuple(field_token_map[value] for value in allowed_values if value in field_token_map),
+                chosen_token_id=chosen_token_id,
+                chosen_token_text=chosen_token_text,
+                is_field_valid=is_field_valid,
+                is_bucket_correct=is_bucket_correct,
+                is_slot_exact=is_slot_exact,
+                observed_bucket_id=observed_bucket_id,
+                expected_bucket_id=expected_bucket_id,
+            )
+        )
+
+    field_valid_rate = field_valid_matches / expected_slot_count if expected_slot_count else 0.0
+    bucket_correct_rate = bucket_correct_matches / expected_slot_count if expected_slot_count else 0.0
+    slot_exact_rate = exact_matches / expected_slot_count if expected_slot_count else 0.0
+    per_field_accuracy = {
+        field_name: field_exact_matches.get(field_name, 0) / total
+        for field_name, total in field_totals.items()
+        if total
+    }
+    rendered_canonical_text, rendered_bucket_tuples = render_foundation_slot_values(
+        slot_values=used_values,
+        layout=layout,
+        slot_field_names=normalized_slot_field_names,
+        render_format=render_format,
+    )
+    fields_per_block = len(layout.field_names)
+    expected_block_count = expected_slot_count // fields_per_block if fields_per_block else 0
+    valid_canonical_block_count = len(rendered_bucket_tuples)
+
+    foundation_gate_passed = (
+        contextual_audit.is_context_safe
+        and field_valid_rate == 1.0
+        and bucket_correct_rate >= 0.95
+        and slot_exact_rate >= 0.95
+        and valid_canonical_block_count == expected_block_count
+    )
+    messages: list[str] = []
+    if not contextual_audit.is_context_safe:
+        messages.append("contextual carrier audit failed")
+    if field_valid_rate < 1.0:
+        messages.append("field_valid_rate below 1.0")
+    if bucket_correct_rate < 0.95:
+        messages.append("bucket_correct_rate below 0.95")
+    if slot_exact_rate < 0.95:
+        messages.append("slot_exact_rate below 0.95")
+    if valid_canonical_block_count != expected_block_count:
+        messages.append("deterministic canonical render did not cover every expected block")
+
+    return FoundationGateResult(
+        artifact_format=FOUNDATION_ARTIFACT_FORMAT,
+        prompt_contract_name=prompt_contract_name,
+        expected_slot_count=expected_slot_count,
+        parsed_slot_values=used_values,
+        ignored_generated_lines=ignored_generated_lines,
+        field_valid_rate=field_valid_rate,
+        bucket_correct_rate=bucket_correct_rate,
+        slot_exact_rate=slot_exact_rate,
+        per_field_accuracy=per_field_accuracy,
+        valid_canonical_block_count=valid_canonical_block_count,
+        contextual_audit_pass=contextual_audit.is_context_safe,
+        foundation_gate_passed=foundation_gate_passed,
+        rendered_canonical_text=rendered_canonical_text,
+        rendered_bucket_tuples=rendered_bucket_tuples,
+        slot_diagnostics=tuple(slot_diagnostics),
+        messages=tuple(messages),
     )
 
 

@@ -30,3 +30,6 @@ manifest.json
 .agents/
 plugins/
 CLAUDE.md
+
+# local downloaded batch review artifacts
+/batch*/

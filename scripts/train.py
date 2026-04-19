@@ -394,6 +394,11 @@ def main() -> int:
         eval_input_payload["canonical_contract"] = canonical_contract_metadata
     if expected_slot_values:
         eval_input_payload["expected_slot_values"] = list(expected_slot_values)
+    if fieldwise_generation_plan is not None:
+        eval_input_payload["slot_field_names"] = list(fieldwise_generation_plan.slot_field_names)
+        eval_input_payload["exact_slot_prefixes"] = fieldwise_generation_plan.exact_slot_prefixes
+        eval_input_payload["prompt_contract_name"] = fieldwise_generation_plan.prompt_contract_name
+        eval_input_payload["fields_per_block"] = fieldwise_generation_plan.fields_per_block
     eval_input_path = paths.run_dir / "eval_input.json"
     eval_input_path.write_text(
         json.dumps(eval_input_payload, indent=2, sort_keys=True),

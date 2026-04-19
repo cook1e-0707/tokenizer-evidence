@@ -61,6 +61,10 @@ def load_canonical_evidence_source(
             "canonical_contract",
             "generated_artifact_format",
             "expected_slot_values",
+            "slot_field_names",
+            "exact_slot_prefixes",
+            "prompt_contract_name",
+            "fields_per_block",
         ):
             if key in payload:
                 diagnostics[key] = payload[key]
