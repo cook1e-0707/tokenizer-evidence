@@ -1094,6 +1094,83 @@ def test_promotion_gate_blocks_canonical_eval_when_foundation_summary_failed(tmp
         eval_script._run_our_method_eval(config, tmp_path, tmp_path / "run")
 
 
+def test_canonical_eval_rejects_foundation_artifact_even_when_f1_summary_passed(tmp_path: Path) -> None:
+    eval_script = _load_eval_script_module()
+
+    catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
+    eval_config_path = _write_experiment_config(
+        tmp_path / "eval.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    passing_summary_path = tmp_path / "passing_foundation_eval_summary.json"
+    EvalRunSummary(
+        run_id="foundation-run",
+        experiment_name="exp_eval",
+        method_name="our_method",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
+        seed=17,
+        git_commit="abc123",
+        timestamp="20260419T000000Z",
+        hostname="test-host",
+        slurm_job_id=None,
+        status="completed",
+        dataset_name="real-pilot-foundation",
+        sample_count=1,
+        accepted=True,
+        match_ratio=1.0,
+        threshold=0.0,
+        verification_mode="foundation_gate",
+        render_format="canonical_v1",
+        verifier_success=True,
+        decoded_payload=None,
+        decoded_unit_count=1,
+        decoded_block_count=1,
+        unresolved_field_count=0,
+        malformed_count=0,
+        utility_acceptance_rate=1.0,
+        notes="foundation passed",
+        diagnostics={"foundation_gate_passed": True},
+        run_dir=str(tmp_path / "foundation-run"),
+    ).save_json(passing_summary_path)
+
+    foundation_eval_input_path = tmp_path / "foundation_eval_input.json"
+    foundation_eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "payload_text": "AA",
+                "generated_text_path": str(tmp_path / "generated_text.txt"),
+                "generated_artifact_format": FOUNDATION_ARTIFACT_FORMAT,
+                "canonical_contract": {
+                    "catalog_path": str(catalog_path),
+                    "catalog_sha256": "abc",
+                    "catalog_name": "foundation",
+                    "field_names": ["SECTION", "TOPIC"],
+                    "radices": [4, 4],
+                    "render_format": "canonical_v1",
+                    "payload_text": "AA",
+                    "block_count": 1,
+                },
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "generated_text.txt").write_text("report\nmarket", encoding="utf-8")
+
+    payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    payload["eval"]["require_foundation_gate"] = True
+    payload["data"]["eval_path"] = str(foundation_eval_input_path)
+    payload["data"]["foundation_eval_summary_path"] = str(passing_summary_path)
+    eval_config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+    config = load_experiment_config(eval_config_path)
+
+    with pytest.raises(ValueError, match="canonical_render eval was given foundation_slot_values"):
+        eval_script._run_our_method_eval(config, tmp_path, tmp_path / "run")
+
+
 def test_foundation_fieldwise_plan_uses_deterministic_prefix_contract(tmp_path: Path) -> None:
     catalog_path = _write_frozen_catalog(tmp_path / "catalog.yaml")
     config = load_experiment_config(

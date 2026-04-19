@@ -325,6 +325,13 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
 
         verifier_text = evidence_source.evidence_text
         diagnostics = dict(evidence_source.diagnostics)
+        artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
+        if artifact_format == FOUNDATION_ARTIFACT_FORMAT:
+            raise ValueError(
+                "canonical_render eval was given foundation_slot_values from a foundation-stage train run. "
+                "Run exp_train__qwen2_5_7b__v1 first and use that main-path latest_eval_input.json for "
+                "promotion into canonical clean eval."
+            )
         source_contract_payload = diagnostics.get("canonical_contract")
         if diagnostics.get("evidence_source") == "generated_text_path" and not isinstance(
             source_contract_payload, dict
@@ -357,13 +364,6 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
                     sort_keys=True,
                 ),
                 encoding="utf-8",
-            )
-        artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
-        if artifact_format == FOUNDATION_ARTIFACT_FORMAT:
-            raise ValueError(
-                "foundation_slot_values artifacts are a pre-eval foundation-stage output and "
-                "cannot be consumed by canonical_render eval yet. Complete the foundation repair "
-                "stage before reopening clean generated-text evaluation."
             )
         if verifier_text is not None and artifact_format == SCAFFOLDED_ARTIFACT_FORMAT:
             expected_slot_values = tuple(str(item) for item in diagnostics.get("expected_slot_values", []))
