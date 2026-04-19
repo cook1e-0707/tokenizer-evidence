@@ -7,8 +7,8 @@ runtime:
     gpu_type: null
     num_gpus: 1
     cpus: 16
-    mem_gb: 64
-    time_limit: "04:00:00"
+    mem_gb: 96
+    time_limit: "24:00:00"
     account: null
     environment_setup: |
       source ~/.bashrc

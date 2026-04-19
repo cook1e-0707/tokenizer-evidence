@@ -241,8 +241,8 @@ def test_batch28_model_configs_emit_train_and_eval_manifests() -> None:
         assert entry.requested_resources.partition == "DGXA100"
         assert entry.requested_resources.num_gpus == 1
         assert entry.requested_resources.cpus == 16
-        assert entry.requested_resources.mem_gb == 64
-        assert entry.requested_resources.time_limit == "04:00:00"
+        assert entry.requested_resources.mem_gb == 96
+        assert entry.requested_resources.time_limit == "24:00:00"
         if "exp_train" in config_path.name:
             assert entry.entry_point == "scripts/train.py"
         else:
