@@ -274,8 +274,10 @@ def test_repo_batch28_model_roles_remain_split_between_bridge_and_repair() -> No
 
     assert bridge_train_config.train.target_mode == "scaffolded_canonical_completion"
     assert main_train_config.train.target_mode == "compiled_fieldwise_bucket_mass"
-    assert tuple(main_train_config.train.probe_payload_texts) == ("OK", "NO", "UP", "AI")
-    assert main_train_config.eval.payload_text == "AI"
+    assert len(main_train_config.train.probe_payload_texts) == 16
+    assert main_train_config.train.probe_payload_texts[0] == "U00"
+    assert main_train_config.train.probe_payload_texts[-1] == "U15"
+    assert main_train_config.eval.payload_text == "U14"
     assert main_train_config.data.carrier_catalog_path.endswith(
         "real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml"
     )
@@ -304,7 +306,7 @@ def test_repo_qwen7b_compiled_catalog_is_recognized_as_strict_frozen() -> None:
     layout = load_required_frozen_catalog(compiled_catalog_path)
 
     assert layout.catalog_name == "real-pilot-catalog-qwen2.5-7b-compiled-v1"
-    assert layout.radices == (2, 4)
+    assert layout.radices == (4, 4)
 
 
 def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:
