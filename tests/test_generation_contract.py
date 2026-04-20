@@ -81,7 +81,7 @@ def _write_compiled_minimal_catalog(path: Path) -> Path:
             ),
             FieldBucketSpec(
                 field_name="TOPIC",
-                buckets={0: ("market",), 1: ("travel",)},
+                buckets={0: ("market",), 1: ("travel",), 2: ("health",), 3: ("science",)},
             ),
         ),
         catalog_name="generation-contract-compiled-catalog",
@@ -108,12 +108,16 @@ class CompiledPromptTokenizer:
             8: "report",
             21: "market",
             22: "travel",
+            23: "health",
+            24: "science",
         }
         self.value_to_id = {
             "news": 7,
             "report": 8,
             "market": 21,
             "travel": 22,
+            "health": 23,
+            "science": 24,
         }
         self.prompt_to_id: dict[str, int] = {}
         self.next_prompt_id = 1000
@@ -271,6 +275,7 @@ def test_repo_batch28_model_roles_remain_split_between_bridge_and_repair() -> No
     assert bridge_train_config.train.target_mode == "scaffolded_canonical_completion"
     assert main_train_config.train.target_mode == "compiled_fieldwise_bucket_mass"
     assert tuple(main_train_config.train.probe_payload_texts) == ("OK", "NO", "UP", "AI")
+    assert main_train_config.eval.payload_text == "AI"
     assert main_train_config.data.carrier_catalog_path.endswith(
         "real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml"
     )
@@ -299,7 +304,7 @@ def test_repo_qwen7b_compiled_catalog_is_recognized_as_strict_frozen() -> None:
     layout = load_required_frozen_catalog(compiled_catalog_path)
 
     assert layout.catalog_name == "real-pilot-catalog-qwen2.5-7b-compiled-v1"
-    assert layout.radices == (2, 2)
+    assert layout.radices == (2, 4)
 
 
 def test_teacher_forced_canonical_block_is_accepted(tmp_path: Path) -> None:
@@ -1775,7 +1780,10 @@ def test_compiled_train_script_uses_synthesized_dataset_without_train_path(
     assert isinstance(dataset, list)
     assert len(dataset) == 8
     assert all(example.metadata["target_mode"] == "compiled_fieldwise_bucket_mass" for example in dataset)
-    assert all(example.metadata["completion"] in {"news", "report", "market", "travel"} for example in dataset)
+    assert all(
+        example.metadata["completion"] in {"news", "report", "market", "travel", "health", "science"}
+        for example in dataset
+    )
 
     train_summary_path = sorted((tmp_path / "results").rglob("train_summary.json"))[0]
     train_summary = load_result_json(train_summary_path)

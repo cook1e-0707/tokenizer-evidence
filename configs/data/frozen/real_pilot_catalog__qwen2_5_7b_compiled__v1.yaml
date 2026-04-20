@@ -1,5 +1,5 @@
 catalog_name: real-pilot-catalog-qwen2.5-7b-compiled-v1
-notes: Minimal compiled codebook for the Qwen2.5-7B compile-then-train stage.
+notes: Compiled C1 codebook for the Qwen2.5-7B compile-then-train stage. Keep SECTION binary and expand TOPIC to four contextual buckets under block_count=1.
 tags:
   - canonical
   - compiled
@@ -14,7 +14,7 @@ provenance:
   tokenizer_revision_source: Qwen/Qwen2.5-7B-Instruct
   source_catalog: /Users/guanjie/Documents/tokenizer_alignment/configs/data/frozen/real_pilot_catalog__qwen2_5_7b__v1.yaml
   freeze_timestamp: 20260419T210000Z
-  git_commit: 08dfa9d
+  git_commit: 268682d
 fields:
   - field_name: SECTION
     field_type: category
@@ -35,6 +35,10 @@ fields:
         - market
       "1":
         - travel
+      "2":
+        - health
+      "3":
+        - science
     notes: Minimal compiled-stage codebook. One canonical token per bucket.
     tags:
       - compiled
