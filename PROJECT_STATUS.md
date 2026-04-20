@@ -10,8 +10,8 @@
 
 ## Current Priority
 
-1. `compiled-c3`: extend the passing Qwen 7B compiled path from `block_count=1` to `block_count=2`.
-2. Keep Batch 3, baselines, and new model families frozen until compiled multi-block acceptance passes.
+1. `compiled-c3-r2`: validate the passing Qwen 7B double-block compiled path across additional seeds while keeping the compiled codebook, prompt contract, and objective fixed.
+2. Keep Batch 3, baselines, and new model families frozen until compiled multi-seed double-block acceptance passes.
 3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
@@ -19,8 +19,81 @@
 - `compiled-c0`: minimal Qwen 7B compiled path passed.
 - `compiled-c1`: asymmetric single-block compiled path passed.
 - `compiled-c2`: full single-block compiled path passed.
-- Next target: `compiled-c3` double-block compiled path on the same Qwen 7B codebook.
+- `compiled-c3`: double-block compiled path passed on the same Qwen 7B codebook.
+- `compiled-c3-r1`: representative multi-payload validation passed on `U00`, `U03`, `U12`, and `U15`.
+- Next target: `compiled-c3-r2` multi-seed validation on the unchanged compiled-c3 framework.
 
+## 2026-04-20
+
+### Milestone: Full Single-Block Compiled Path Passed
+
+Qwen/Qwen2.5-7B-Instruct passed the full single-block compiled path under the compile-then-train framework.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- training path: `compile-then-train`
+- objective: `field-conditioned masked bucket objective`
+- decoding: deterministic one-token-per-slot constrained decoding
+- codebook: `SECTION=4 buckets`, `TOPIC=4 buckets`, `1 canonical token per bucket`
+- block_count: `1`
+
+Passing result:
+- stage: `compiled-c2`
+- accepted = `true`
+- verifier_success = `true`
+- decoded_payload correct
+- no NaN / non-finite training failure
+- compiled train contract emitted successfully
+
+Interpretation:
+- the full single-block compiled path is standing
+- the primary blocker is no longer contract compilation, contextual alignment, or single-block bucket control
+
+### Milestone: Double-Block Compiled Path Passed
+
+Qwen/Qwen2.5-7B-Instruct then passed the double-block compiled path on the same compile-then-train framework and compiled codebook.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- training path: `compile-then-train`
+- objective: `field-conditioned masked bucket objective`
+- decoding: deterministic one-token-per-slot constrained decoding
+- codebook: `SECTION=4 buckets`, `TOPIC=4 buckets`, `1 canonical token per bucket`
+- block_count: `2`
+
+Passing result:
+- stage: `compiled-c3`
+- accepted = `true`
+- verifier_success = `true`
+- decoded_payload correct
+- no NaN / non-finite training failure
+- compiled train and eval contracts emitted successfully
+- deterministic rendered canonical blocks verified successfully
+
+Interpretation:
+- the compiled multi-block path is now standing for the current Qwen 7B codebook
+- the next gate is not a larger codebook or a new model family
+- the next gate is representative multi-payload validation under the unchanged compiled-c3 framework
+
+### Milestone: Representative Multi-Payload Double-Block Validation Passed
+
+Qwen/Qwen2.5-7B-Instruct passed `compiled-c3-r1` on representative double-block payload targets without changing the compiled contract, codebook, prompt contract, or objective.
+
+Verified scope:
+- framework: unchanged `compile-then-train`
+- codebook: `SECTION=4 buckets`, `TOPIC=4 buckets`, `1 canonical token per bucket`
+- block_count: `2`
+- representative payload targets: `U00`, `U03`, `U12`, `U15`
+
+Passing result:
+- all four representative payload runs produced `accepted = true`
+- all four representative payload runs produced `verifier_success = true`
+- all four representative payload runs decoded the correct payload
+- all four representative payload runs remained numerically healthy
+
+Interpretation:
+- the compiled-c3 path is no longer only a single-target success
+- the next gate is seed robustness under the unchanged compiled-c3 setup
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:
