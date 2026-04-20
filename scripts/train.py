@@ -142,6 +142,7 @@ def main() -> int:
         )
         if not probe_payload_texts:
             probe_payload_texts = tuple(str(item) for item in ("A", "B", "C", "D"))
+        probe_block_count = max(1, int(config.train.probe_block_count or 1))
         compiled_train_contract = compile_fieldwise_train_contract(
             model_name=config.model_name,
             tokenizer_name=config.model.tokenizer_name or config.model.name,
@@ -155,6 +156,7 @@ def main() -> int:
                 config.train.generation_prompt.strip()
                 or "Select exactly one allowed carrier token."
             ),
+            block_count=probe_block_count,
             prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
             render_format=config.eval.render_format,
         )

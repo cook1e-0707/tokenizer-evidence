@@ -7,7 +7,7 @@ from typing import Sequence
 from src.core.bucket_mapping import BucketLayout
 from src.core.canonical_contract import CanonicalEvidenceBundle
 from src.core.catalog_freeze import load_required_frozen_catalog
-from src.core.contextual_alignment import audit_contextual_field_values
+from src.core.contextual_alignment import ContextualSlotTarget, audit_contextual_slot_targets
 from src.core.render import render_bucket_tuples, render_config_from_name
 
 
@@ -359,7 +359,7 @@ def evaluate_foundation_completion(
     *,
     layout: BucketLayout,
     expected_slot_values: Sequence[str],
-    exact_slot_prefixes: dict[str, str],
+    exact_slot_prefixes: Sequence[str] | dict[str, str],
     tokenizer: object,
     prompt_contract_name: str,
     render_format: str = "canonical_v1",
@@ -376,13 +376,33 @@ def evaluate_foundation_completion(
     used_values = tuple(parsed_slot_values[:expected_slot_count])
     ignored_generated_lines = tuple(parsed_slot_values[expected_slot_count:])
 
-    field_allowed_values = {
-        field_name: _ordered_field_values(layout, field_name)
-        for field_name in dict.fromkeys(normalized_slot_field_names)
-    }
-    contextual_audit = audit_contextual_field_values(
-        field_allowed_values=field_allowed_values,
-        exact_slot_prefixes=exact_slot_prefixes,
+    if isinstance(exact_slot_prefixes, dict):
+        normalized_exact_slot_prefixes = tuple(
+            str(exact_slot_prefixes[field_name])
+            for field_name in normalized_slot_field_names
+        )
+    else:
+        normalized_exact_slot_prefixes = tuple(str(prefix) for prefix in exact_slot_prefixes)
+    if len(normalized_exact_slot_prefixes) != expected_slot_count:
+        raise ValueError(
+            "evaluate_foundation_completion requires one exact slot prefix per slot; "
+            f"expected={expected_slot_count}, observed={len(normalized_exact_slot_prefixes)}"
+        )
+
+    slot_targets = [
+        ContextualSlotTarget(
+            field_name=field_name,
+            exact_slot_prefix=exact_slot_prefix,
+            allowed_values=_ordered_field_values(layout, field_name),
+        )
+        for field_name, exact_slot_prefix in zip(
+            normalized_slot_field_names,
+            normalized_exact_slot_prefixes,
+            strict=True,
+        )
+    ]
+    contextual_audit = audit_contextual_slot_targets(
+        slot_targets=slot_targets,
         tokenizer=tokenizer,
         prompt_contract_name=prompt_contract_name,
     )
@@ -396,8 +416,8 @@ def evaluate_foundation_completion(
     for slot_index, field_name in enumerate(normalized_slot_field_names):
         observed_value = used_values[slot_index] if slot_index < len(used_values) else ""
         expected_value = str(expected_slot_values[slot_index]) if slot_index < len(expected_slot_values) else ""
-        exact_slot_prefix = exact_slot_prefixes[field_name]
-        allowed_values = field_allowed_values[field_name]
+        exact_slot_prefix = normalized_exact_slot_prefixes[slot_index]
+        allowed_values = slot_targets[slot_index].allowed_values
         field_token_map = contextual_audit.valid_token_map.get(field_name, {}).get(exact_slot_prefix, {})
         chosen_token_id = field_token_map.get(observed_value)
         chosen_token_text = tokenizer.decode([chosen_token_id]) if chosen_token_id is not None else None

@@ -77,7 +77,7 @@ def _write_compiled_minimal_catalog(path: Path) -> Path:
         fields=(
             FieldBucketSpec(
                 field_name="SECTION",
-                buckets={0: ("news",), 1: ("report",)},
+                buckets={0: ("news",), 1: ("report",), 2: ("guide",), 3: ("update",)},
             ),
             FieldBucketSpec(
                 field_name="TOPIC",
@@ -106,6 +106,8 @@ class CompiledPromptTokenizer:
         self.id_to_text = {
             7: "news",
             8: "report",
+            9: "guide",
+            10: "update",
             21: "market",
             22: "travel",
             23: "health",
@@ -114,6 +116,8 @@ class CompiledPromptTokenizer:
         self.value_to_id = {
             "news": 7,
             "report": 8,
+            "guide": 9,
+            "update": 10,
             "market": 21,
             "travel": 22,
             "health": 23,
@@ -274,6 +278,7 @@ def test_repo_batch28_model_roles_remain_split_between_bridge_and_repair() -> No
 
     assert bridge_train_config.train.target_mode == "scaffolded_canonical_completion"
     assert main_train_config.train.target_mode == "compiled_fieldwise_bucket_mass"
+    assert main_train_config.train.probe_block_count == 2
     assert len(main_train_config.train.probe_payload_texts) == 16
     assert main_train_config.train.probe_payload_texts[0] == "U00"
     assert main_train_config.train.probe_payload_texts[-1] == "U15"
@@ -1696,6 +1701,30 @@ def test_compiled_train_contract_compiles_full_dataset_for_all_payloads(tmp_path
     assert {sample.payload_label for sample in contract.samples} == {"OK", "NO", "UP", "AI"}
 
 
+def test_compiled_train_contract_supports_two_block_probe_stage(tmp_path: Path) -> None:
+    catalog_path = _write_compiled_minimal_catalog(tmp_path / "compiled_catalog.yaml")
+
+    contract = compile_fieldwise_train_contract(
+        model_name="Qwen/Qwen2.5-7B-Instruct",
+        tokenizer_name="qwen-test",
+        tokenizer_backend="huggingface",
+        catalog_path=catalog_path,
+        payload_labels=tuple(f"U{index:02d}" for index in range(16)),
+        eval_payload_label="U14",
+        instruction="Select exactly one allowed carrier token.",
+        block_count=2,
+        prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        tokenizer=CompiledPromptTokenizer(),
+    )
+
+    assert contract.sample_count == 64
+    assert contract.block_count == 2
+    assert contract.eval_contract.payload_label == "U14"
+    assert contract.eval_contract.payload_units == (14, 1)
+    assert contract.eval_contract.expected_slot_values == ("update", "health", "news", "travel")
+    assert len(contract.eval_contract.exact_slot_prefixes) == 4
+
+
 def test_compiled_train_contract_fails_when_any_dataset_prompt_is_not_contextually_covered(
     tmp_path: Path,
 ) -> None:
@@ -1863,3 +1892,70 @@ def test_compiled_gate_eval_path_reports_contract_metrics_and_decoded_payload(
     assert diagnostics["bucket_correct_rate"] == 1.0
     assert diagnostics["slot_exact_rate"] == 1.0
     assert (run_dir / "compiled_rendered_canonical.txt").read_text(encoding="utf-8") == "SECTION=news; TOPIC=market"
+
+
+def test_compiled_gate_eval_path_supports_two_block_payloads(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    eval_script = _load_eval_script_module()
+    tokenizer = CompiledPromptTokenizer()
+    monkeypatch.setattr(eval_script, "load_tokenizer", lambda *_args, **_kwargs: tokenizer)
+
+    catalog_path = _write_compiled_minimal_catalog(tmp_path / "compiled_catalog.yaml")
+    contract = compile_fieldwise_train_contract(
+        model_name="Qwen/Qwen2.5-7B-Instruct",
+        tokenizer_name="qwen-test",
+        tokenizer_backend="huggingface",
+        catalog_path=catalog_path,
+        payload_labels=tuple(f"U{index:02d}" for index in range(16)),
+        eval_payload_label="U14",
+        instruction="Select exactly one allowed carrier token.",
+        block_count=2,
+        prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        tokenizer=tokenizer,
+    )
+
+    eval_config_path = _write_experiment_config(
+        tmp_path / "compiled_eval_c3.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    payload["eval"]["verification_mode"] = "compiled_gate"
+    payload["eval"]["payload_text"] = "U14"
+    generated_values_path = tmp_path / "generated_values_c3.txt"
+    generated_values_path.write_text("update\nhealth\nnews\ntravel", encoding="utf-8")
+    eval_input_path = tmp_path / "compiled_eval_input_c3.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "payload_text": "U14",
+                "generated_text_path": str(generated_values_path),
+                "generated_artifact_format": COMPILED_ARTIFACT_FORMAT,
+                "compiled_train_contract_hash": contract.contract_hash,
+                "compiled_eval_contract": contract.eval_contract.to_dict(),
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    payload["data"]["eval_path"] = str(eval_input_path)
+    eval_config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+    config = load_experiment_config(eval_config_path)
+
+    run_dir = tmp_path / "run_c3"
+    run_dir.mkdir()
+    verification_result, diagnostics = eval_script._run_our_method_eval(config, tmp_path, run_dir)
+
+    assert verification_result.success is True
+    assert verification_result.decoded_payload == "U14"
+    assert len(verification_result.decoded_bucket_tuples) == 2
+    assert diagnostics["compiled_gate_passed"] is True
+    assert diagnostics["valid_canonical_block_count"] == 2
+    assert diagnostics["bucket_correct_rate"] == 1.0
+    assert (run_dir / "compiled_rendered_canonical.txt").read_text(encoding="utf-8") == (
+        "SECTION=update; TOPIC=health\nSECTION=news; TOPIC=travel"
+    )

@@ -115,30 +115,44 @@ class CompiledContractSample:
 @dataclass(frozen=True)
 class CompiledEvalContract:
     payload_label: str
-    payload_unit: int
+    payload_units: tuple[int, ...]
     expected_slot_values: tuple[str, ...]
     slot_field_names: tuple[str, ...]
-    exact_slot_prefixes: dict[str, str]
+    exact_slot_prefixes: tuple[str, ...]
     fields_per_block: int
+    block_count: int
     render_format: str
     prompt_contract_name: str
     artifact_format: str = COMPILED_ARTIFACT_FORMAT
 
     def to_dict(self) -> dict[str, object]:
-        return asdict(self)
+        payload = asdict(self)
+        if len(self.payload_units) == 1:
+            payload["payload_unit"] = self.payload_units[0]
+        return payload
 
     @classmethod
     def from_dict(cls, payload: Mapping[str, object]) -> "CompiledEvalContract":
+        raw_payload_units = payload.get("payload_units")
+        if raw_payload_units is None:
+            raw_payload_units = (payload["payload_unit"],)
+        raw_exact_slot_prefixes = payload.get("exact_slot_prefixes", ())
+        if isinstance(raw_exact_slot_prefixes, Mapping):
+            slot_field_names = tuple(str(value) for value in payload.get("slot_field_names", ()))
+            exact_slot_prefixes = tuple(
+                str(raw_exact_slot_prefixes[str(field_name)])
+                for field_name in slot_field_names
+            )
+        else:
+            exact_slot_prefixes = tuple(str(value) for value in raw_exact_slot_prefixes)
         return cls(
             payload_label=str(payload["payload_label"]),
-            payload_unit=int(payload["payload_unit"]),
+            payload_units=tuple(int(value) for value in raw_payload_units),
             expected_slot_values=tuple(str(value) for value in payload.get("expected_slot_values", ())),
             slot_field_names=tuple(str(value) for value in payload.get("slot_field_names", ())),
-            exact_slot_prefixes={
-                str(field_name): str(prefix)
-                for field_name, prefix in dict(payload.get("exact_slot_prefixes", {})).items()
-            },
+            exact_slot_prefixes=exact_slot_prefixes,
             fields_per_block=int(payload["fields_per_block"]),
+            block_count=int(payload.get("block_count", 1)),
             render_format=str(payload["render_format"]),
             prompt_contract_name=str(payload["prompt_contract_name"]),
             artifact_format=str(payload.get("artifact_format", COMPILED_ARTIFACT_FORMAT)),
@@ -158,7 +172,7 @@ class CompiledTrainContract:
     prompt_contract_hash: str
     dataset_hash: str
     contract_hash: str
-    payload_label_to_unit: dict[str, int]
+    payload_label_to_units: dict[str, tuple[int, ...]]
     fields_per_block: int
     block_count: int
     render_format: str
@@ -180,7 +194,9 @@ class CompiledTrainContract:
             "prompt_contract_hash": self.prompt_contract_hash,
             "dataset_hash": self.dataset_hash,
             "contract_hash": self.contract_hash,
-            "payload_label_to_unit": dict(self.payload_label_to_unit),
+            "payload_label_to_units": {
+                label: list(units) for label, units in self.payload_label_to_units.items()
+            },
             "fields_per_block": self.fields_per_block,
             "block_count": self.block_count,
             "render_format": self.render_format,
@@ -191,6 +207,12 @@ class CompiledTrainContract:
 
     @classmethod
     def from_dict(cls, payload: Mapping[str, object]) -> "CompiledTrainContract":
+        raw_payload_label_to_units = payload.get("payload_label_to_units")
+        if raw_payload_label_to_units is None:
+            raw_payload_label_to_units = {
+                str(label): [int(unit)]
+                for label, unit in dict(payload.get("payload_label_to_unit", {})).items()
+            }
         return cls(
             model_name=str(payload["model_name"]),
             tokenizer_name=str(payload["tokenizer_name"]),
@@ -203,9 +225,9 @@ class CompiledTrainContract:
             prompt_contract_hash=str(payload["prompt_contract_hash"]),
             dataset_hash=str(payload["dataset_hash"]),
             contract_hash=str(payload["contract_hash"]),
-            payload_label_to_unit={
-                str(label): int(unit)
-                for label, unit in dict(payload.get("payload_label_to_unit", {})).items()
+            payload_label_to_units={
+                str(label): tuple(int(unit) for unit in units)
+                for label, units in dict(raw_payload_label_to_units).items()
             },
             fields_per_block=int(payload["fields_per_block"]),
             block_count=int(payload["block_count"]),
@@ -225,11 +247,20 @@ def build_generation_plan_from_compiled_eval_contract(
     catalog_path: Path,
 ) -> FieldwiseGenerationPlan:
     layout = load_required_frozen_catalog(catalog_path)
+    if len(compiled_eval_contract.slot_field_names) != len(compiled_eval_contract.expected_slot_values):
+        raise ContractCompilationError(
+            "Compiled eval contract is inconsistent: slot_field_names and expected_slot_values differ in length"
+        )
+    if len(compiled_eval_contract.slot_field_names) != len(compiled_eval_contract.exact_slot_prefixes):
+        raise ContractCompilationError(
+            "Compiled eval contract is inconsistent: exact_slot_prefixes must align one-to-one with slots"
+        )
     slot_targets: list[FieldwiseSlotTarget] = []
-    for slot_index, (field_name, expected_value) in enumerate(
+    for slot_index, (field_name, expected_value, exact_slot_prefix) in enumerate(
         zip(
             compiled_eval_contract.slot_field_names,
             compiled_eval_contract.expected_slot_values,
+            compiled_eval_contract.exact_slot_prefixes,
             strict=True,
         )
     ):
@@ -240,7 +271,6 @@ def build_generation_plan_from_compiled_eval_contract(
                 f"Compiled eval contract value {expected_value!r} is invalid for field {field_name!r}"
             )
         allowed_values = _ordered_field_values(layout, field_name)
-        exact_slot_prefix = compiled_eval_contract.exact_slot_prefixes[field_name]
         slot_targets.append(
             FieldwiseSlotTarget(
                 slot_index=slot_index,
@@ -272,7 +302,7 @@ def _build_compiled_plan_for_payload(
     *,
     layout: BucketLayout,
     payload_label: str,
-    payload_unit: int,
+    payload_units: Sequence[int],
     instruction: str,
     prompt_contract_name: str,
     render_format: str,
@@ -280,54 +310,64 @@ def _build_compiled_plan_for_payload(
     codec = BucketPayloadCodec(bucket_radices=layout.radices)
     rendered = render_bucket_tuples(
         layout,
-        codec.encode_units((payload_unit,), apply_rs=False).bucket_tuples,
+        codec.encode_units(tuple(int(unit) for unit in payload_units), apply_rs=False).bucket_tuples,
         config=render_config_from_name(render_format),
     )
     expected_slot_values: list[str] = []
     slot_targets: list[FieldwiseSlotTarget] = []
     fields_per_block = len(layout.field_names)
-    assignments = [segment.strip() for segment in rendered.text.split(";") if segment.strip()]
-    if len(assignments) != fields_per_block:
+    block_lines = tuple(line.strip() for line in rendered.text.splitlines() if line.strip())
+    if len(block_lines) != len(tuple(payload_units)):
         raise ContractCompilationError(
-            f"Rendered compiled block does not match field count: text={rendered.text!r}"
+            "Rendered compiled evidence does not match requested block_count: "
+            f"blocks={len(block_lines)}, payload_units={len(tuple(payload_units))}, text={rendered.text!r}"
         )
-    for slot_index, assignment in enumerate(assignments):
-        field_name, value = (part.strip() for part in assignment.split("=", 1))
-        field_spec = layout.get_field_spec(field_name)
-        expected_bucket_id = field_spec.lookup_bucket_id(value)
-        if expected_bucket_id is None:
+    total_slots = fields_per_block * len(block_lines)
+    slot_index = 0
+    for block_index, block_line in enumerate(block_lines):
+        assignments = [segment.strip() for segment in block_line.split(";") if segment.strip()]
+        if len(assignments) != fields_per_block:
             raise ContractCompilationError(
-                f"Rendered value {value!r} is not in catalog for field {field_name!r}"
+                f"Rendered compiled block does not match field count: block={block_index}, text={block_line!r}"
             )
-        allowed_values = _ordered_field_values(layout, field_name)
-        prompt = _build_slot_prompt(
-            field_name=field_name,
-            allowed_values=allowed_values,
-            payload_label=payload_label,
-            slot_index=slot_index,
-            total_slots=fields_per_block,
-            block_index=0,
-            instruction=instruction,
-            prompt_contract_name=prompt_contract_name,
-        )
-        slot_targets.append(
-            FieldwiseSlotTarget(
-                slot_index=slot_index,
-                block_index=0,
+        for assignment in assignments:
+            field_name, value = (part.strip() for part in assignment.split("=", 1))
+            field_spec = layout.get_field_spec(field_name)
+            expected_bucket_id = field_spec.lookup_bucket_id(value)
+            if expected_bucket_id is None:
+                raise ContractCompilationError(
+                    f"Rendered value {value!r} is not in catalog for field {field_name!r}"
+                )
+            allowed_values = _ordered_field_values(layout, field_name)
+            prompt = _build_slot_prompt(
                 field_name=field_name,
-                prompt=prompt,
-                exact_slot_prefix=prompt,
                 allowed_values=allowed_values,
-                allowed_value_bucket_ids={
-                    allowed_value: field_spec.lookup_bucket_id(allowed_value)
-                    for allowed_value in allowed_values
-                    if field_spec.lookup_bucket_id(allowed_value) is not None
-                },
-                expected_value=value,
-                expected_bucket_id=expected_bucket_id,
+                payload_label=payload_label,
+                slot_index=slot_index,
+                total_slots=total_slots,
+                block_index=block_index,
+                instruction=instruction,
+                prompt_contract_name=prompt_contract_name,
             )
-        )
-        expected_slot_values.append(value)
+            slot_targets.append(
+                FieldwiseSlotTarget(
+                    slot_index=slot_index,
+                    block_index=block_index,
+                    field_name=field_name,
+                    prompt=prompt,
+                    exact_slot_prefix=prompt,
+                    allowed_values=allowed_values,
+                    allowed_value_bucket_ids={
+                        allowed_value: field_spec.lookup_bucket_id(allowed_value)
+                        for allowed_value in allowed_values
+                        if field_spec.lookup_bucket_id(allowed_value) is not None
+                    },
+                    expected_value=value,
+                    expected_bucket_id=expected_bucket_id,
+                )
+            )
+            expected_slot_values.append(value)
+            slot_index += 1
     return FieldwiseGenerationPlan(
         payload_text=payload_label,
         slot_targets=tuple(slot_targets),
@@ -336,6 +376,57 @@ def _build_compiled_plan_for_payload(
         prompt_contract_name=prompt_contract_name,
         artifact_format=COMPILED_ARTIFACT_FORMAT,
     )
+
+
+def _encode_fixed_width_units(value: int, *, width: int, capacity: int) -> tuple[int, ...]:
+    digits: list[int] = [0] * width
+    remaining = value
+    for index in range(width - 1, -1, -1):
+        remaining, digit = divmod(remaining, capacity)
+        digits[index] = digit
+    if remaining:
+        raise ContractCompilationError(
+            f"value={value} exceeds fixed-width payload-unit capacity for width={width}, capacity={capacity}"
+        )
+    return tuple(digits)
+
+
+def _build_payload_label_to_units(
+    payload_labels: Sequence[str],
+    *,
+    block_count: int,
+    capacity: int,
+) -> dict[str, tuple[int, ...]]:
+    unique_labels = tuple(dict.fromkeys(str(label) for label in payload_labels))
+    if block_count <= 0:
+        raise ContractCompilationError(f"block_count must be positive; got {block_count}")
+    if not unique_labels:
+        raise ContractCompilationError("payload_labels must contain at least one label")
+    if block_count == 1:
+        if len(unique_labels) > capacity:
+            raise ContractCompilationError(
+                f"Payload label set of size {len(unique_labels)} exceeds single-block capacity {capacity}"
+            )
+        return {
+            label: (unit,)
+            for unit, label in enumerate(unique_labels)
+        }
+
+    if len(unique_labels) <= capacity and block_count == 2:
+        return {
+            label: (unit, capacity - 1 - unit)
+            for unit, label in enumerate(unique_labels)
+        }
+
+    full_capacity = capacity ** block_count
+    if len(unique_labels) > full_capacity:
+        raise ContractCompilationError(
+            f"Payload label set of size {len(unique_labels)} exceeds block_count={block_count} capacity {full_capacity}"
+        )
+    return {
+        label: _encode_fixed_width_units(unit, width=block_count, capacity=capacity)
+        for unit, label in enumerate(unique_labels)
+    }
 
 
 def compile_fieldwise_train_contract(
@@ -347,6 +438,7 @@ def compile_fieldwise_train_contract(
     payload_labels: Sequence[str],
     eval_payload_label: str,
     instruction: str,
+    block_count: int = 1,
     prompt_contract_name: str = COMPILED_FIELDWISE_PROMPT_CONTRACT,
     render_format: str = "canonical_v1",
     tokenizer: TokenizerProtocol | None = None,
@@ -360,31 +452,26 @@ def compile_fieldwise_train_contract(
 
     layout = load_required_frozen_catalog(catalog_path)
     codec = BucketPayloadCodec(bucket_radices=layout.radices)
-    if codec.capacity() < len(tuple(dict.fromkeys(payload_labels))):
-        raise ContractCompilationError(
-            f"Minimal codebook capacity {codec.capacity()} is too small for payload label set "
-            f"of size {len(tuple(dict.fromkeys(payload_labels)))}"
-        )
-
-    payload_label_to_unit = {
-        label: unit
-        for unit, label in enumerate(tuple(dict.fromkeys(payload_labels)))
-    }
+    payload_label_to_units = _build_payload_label_to_units(
+        payload_labels,
+        block_count=block_count,
+        capacity=codec.capacity(),
+    )
     resolved_tokenizer = tokenizer or load_tokenizer(tokenizer_backend, tokenizer_name)
     plans = {
         label: _build_compiled_plan_for_payload(
             layout=layout,
             payload_label=label,
-            payload_unit=payload_label_to_unit[label],
+            payload_units=payload_label_to_units[label],
             instruction=instruction,
             prompt_contract_name=prompt_contract_name,
             render_format=render_format,
         )
-        for label in payload_label_to_unit
+        for label in payload_label_to_units
     }
     all_slot_targets = tuple(
         target
-        for label in payload_label_to_unit
+        for label in payload_label_to_units
         for target in plans[label].slot_targets
     )
     audit_result = audit_contextual_slot_targets(
@@ -409,7 +496,7 @@ def compile_fieldwise_train_contract(
         )
 
     samples: list[CompiledContractSample] = []
-    for payload_label, payload_unit in payload_label_to_unit.items():
+    for payload_label, payload_units in payload_label_to_units.items():
         for target in plans[payload_label].slot_targets:
             value_to_token_id = audit_result.valid_token_map[target.field_name][target.exact_slot_prefix]
             allowed_token_ids = tuple(int(value_to_token_id[value]) for value in target.allowed_values)
@@ -421,7 +508,7 @@ def compile_fieldwise_train_contract(
                 CompiledContractSample(
                     sample_id=f"{payload_label}:{target.slot_index}",
                     payload_label=payload_label,
-                    payload_unit=payload_unit,
+                    payload_unit=payload_units[target.block_index],
                     field_name=target.field_name,
                     block_index=target.block_index,
                     slot_index=target.slot_index,
@@ -443,11 +530,12 @@ def compile_fieldwise_train_contract(
     eval_plan = plans[eval_payload_label]
     eval_contract = CompiledEvalContract(
         payload_label=eval_payload_label,
-        payload_unit=payload_label_to_unit[eval_payload_label],
+        payload_units=payload_label_to_units[eval_payload_label],
         expected_slot_values=eval_plan.expected_slot_values,
         slot_field_names=eval_plan.slot_field_names,
-        exact_slot_prefixes=eval_plan.exact_slot_prefixes,
+        exact_slot_prefixes=tuple(target.exact_slot_prefix for target in eval_plan.slot_targets),
         fields_per_block=eval_plan.fields_per_block,
+        block_count=block_count,
         render_format=render_format,
         prompt_contract_name=prompt_contract_name,
     )
@@ -486,9 +574,11 @@ def compile_fieldwise_train_contract(
         "prompt_contract_name": prompt_contract_name,
         "prompt_contract_hash": prompt_contract_hash,
         "dataset_hash": dataset_hash,
-        "payload_label_to_unit": dict(payload_label_to_unit),
+        "payload_label_to_units": {
+            label: list(units) for label, units in payload_label_to_units.items()
+        },
         "fields_per_block": len(layout.field_names),
-        "block_count": 1,
+        "block_count": block_count,
         "render_format": render_format,
         "sample_count": len(samples),
         "samples": [sample.to_dict() for sample in samples],
@@ -507,9 +597,9 @@ def compile_fieldwise_train_contract(
         prompt_contract_hash=prompt_contract_hash,
         dataset_hash=dataset_hash,
         contract_hash=contract_hash,
-        payload_label_to_unit=dict(payload_label_to_unit),
+        payload_label_to_units=dict(payload_label_to_units),
         fields_per_block=len(layout.field_names),
-        block_count=1,
+        block_count=block_count,
         render_format=render_format,
         sample_count=len(samples),
         samples=tuple(samples),

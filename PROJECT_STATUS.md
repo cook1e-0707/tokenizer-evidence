@@ -10,9 +10,16 @@
 
 ## Current Priority
 
-1. `batch2.8`: migrate method-facing experiments off GPT-2.
-2. Re-freeze tokenizer-specific catalogs for the selected method models.
-3. Re-establish one clean generated-text acceptance result before reopening Batch 3.
+1. `compiled-c3`: extend the passing Qwen 7B compiled path from `block_count=1` to `block_count=2`.
+2. Keep Batch 3, baselines, and new model families frozen until compiled multi-block acceptance passes.
+3. Preserve the compile-then-train path as the only active main-path implementation.
+
+## Compiled Milestones
+
+- `compiled-c0`: minimal Qwen 7B compiled path passed.
+- `compiled-c1`: asymmetric single-block compiled path passed.
+- `compiled-c2`: full single-block compiled path passed.
+- Next target: `compiled-c3` double-block compiled path on the same Qwen 7B codebook.
 
 ## Model Policy
 

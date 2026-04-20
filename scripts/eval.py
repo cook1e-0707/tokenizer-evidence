@@ -357,7 +357,7 @@ def _run_compiled_gate_eval(
             text=compiled_result.rendered_canonical_text,
             bucket_layout=layout,
             payload_codec=codec,
-            expected_payload=(compiled_eval_contract.payload_unit,),
+            expected_payload=tuple(int(unit) for unit in compiled_eval_contract.payload_units),
             config=VerificationConfig(
                 verification_mode="canonical_render",
                 render_format=compiled_eval_contract.render_format,
@@ -398,7 +398,7 @@ def _run_compiled_gate_eval(
         unresolved_fields=render_verification.unresolved_fields if render_verification else (),
         bucket_mismatches=render_verification.bucket_mismatches if render_verification else (),
         messages=tuple(messages),
-        expected_payload_units=(compiled_eval_contract.payload_unit,),
+        expected_payload_units=tuple(int(unit) for unit in compiled_eval_contract.payload_units),
         details={
             "field_valid_rate": compiled_result.field_valid_rate,
             "bucket_correct_rate": compiled_result.bucket_correct_rate,
@@ -418,7 +418,7 @@ def _run_compiled_gate_eval(
         "generated_artifact_format": artifact_format,
         "compiled_eval_contract": compiled_eval_contract.to_dict(),
         "payload_label": compiled_eval_contract.payload_label,
-        "payload_unit": compiled_eval_contract.payload_unit,
+        "payload_units": list(compiled_eval_contract.payload_units),
         "field_valid_rate": compiled_result.field_valid_rate,
         "bucket_correct_rate": compiled_result.bucket_correct_rate,
         "slot_exact_rate": compiled_result.slot_exact_rate,
