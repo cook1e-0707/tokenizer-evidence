@@ -375,11 +375,15 @@ def _compute_compiled_bucket_loss(
             raise HFCausalLMTrainingError(
                 f"Compiled bucket training example has no allowed_token_ids: prompt={example.prompt!r}"
             )
-        bucket_to_token_ids_raw = dict(example.metadata.get("compiled_bucket_to_token_ids", {}))
-        if not bucket_to_token_ids_raw:
+        bucket_to_token_ids_payload = dict(example.metadata.get("compiled_bucket_to_token_ids", {}))
+        if not bucket_to_token_ids_payload:
             raise HFCausalLMTrainingError(
                 f"Compiled bucket training example has no bucket_to_token_ids: prompt={example.prompt!r}"
             )
+        bucket_to_token_ids_raw: dict[int, tuple[int, ...]] = {
+            int(bucket_id): tuple(int(token_id) for token_id in token_ids_raw)
+            for bucket_id, token_ids_raw in bucket_to_token_ids_payload.items()
+        }
         allowed_logits = row_logits[allowed_token_ids]
         try:
             max_logit = max(max_logit, float(allowed_logits.detach().abs().max().cpu().item()))
@@ -391,8 +395,7 @@ def _compute_compiled_bucket_loss(
             for position, token_id in enumerate(allowed_token_ids)
         }
         bucket_log_probs: dict[int, object] = {}
-        for bucket_id_raw, token_ids_raw in bucket_to_token_ids_raw.items():
-            bucket_id = int(bucket_id_raw)
+        for bucket_id, token_ids_raw in bucket_to_token_ids_raw.items():
             positions = [
                 token_id_to_position[int(token_id)]
                 for token_id in token_ids_raw

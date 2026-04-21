@@ -1367,6 +1367,50 @@ def test_compiled_objective_modes_are_distinct_on_multi_member_bucket() -> None:
     assert float(uniform_bucket_loss.item()) < float(fixed_representative_loss.item())
 
 
+def test_compiled_objective_modes_accept_string_bucket_keys_for_target_bucket_zero() -> None:
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor(
+        [
+            [
+                [0.0, 0.0, 0.0, 1.1, 0.5],
+            ]
+        ],
+        dtype=torch.float32,
+    )
+    attention_mask = torch.tensor([[1]], dtype=torch.long)
+    example = TrainingExample(
+        prompt="String-key compiled objective prompt.",
+        target_symbols=(),
+        metadata={
+            "compiled_allowed_token_ids": [2, 3, 4],
+            "compiled_bucket_to_token_ids": {
+                "0": [2, 3],
+                "1": [4],
+            },
+            "compiled_target_bucket_id": 0,
+            "compiled_target_token_id": 2,
+        },
+    )
+
+    fixed_representative_loss, _ = _compute_compiled_bucket_loss(
+        torch_module=torch,
+        logits=logits,
+        attention_mask=attention_mask,
+        batch_examples=[example],
+        objective_mode="fixed_representative",
+    )
+    uniform_bucket_loss, _ = _compute_compiled_bucket_loss(
+        torch_module=torch,
+        logits=logits,
+        attention_mask=attention_mask,
+        batch_examples=[example],
+        objective_mode="uniform_bucket",
+    )
+
+    assert float(fixed_representative_loss.item()) > 0.0
+    assert float(uniform_bucket_loss.item()) > 0.0
+
+
 def test_contextual_carrier_audit_uses_exact_slot_prefix_not_prefix_stable_diff() -> None:
     class PrefixShiftTokenizer:
         def __init__(self):
