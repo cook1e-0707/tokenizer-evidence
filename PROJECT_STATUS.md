@@ -17,12 +17,17 @@
   - no additional Batch 3 expansion
   - no new baselines
   - no new model families
+- Theorem-package standing:
+  - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
+  - `T1 sequence_proxy` is not yet a completed control-arm result because its eval package still points `compiled_gate` at `scaffolded_slot_values`
+  - `T2` direct-submit package is prepared, but no objective-comparison sweep has been opened yet
 
 ## Current Priority
 
 1. Consolidate the accepted `compiled-c3-r4`, `batch3c`, and `batch3d` results into manuscript-facing tables and paper-facing summary artifacts.
-2. Prepare `T1` and `T2` local dry-run packages without opening new sweeps.
-3. Add explicit statistical aggregation, compute accounting, and run inclusion lists for the standing Qwen 7B claims.
+2. Keep `T1` truthful: `contextual_exact` stands, `sequence_proxy` remains blocked on eval/artifact compatibility until repaired.
+3. Execute the prepared `T2` objective-comparison package without opening baselines, new models, or larger robustness grids.
+4. Add explicit statistical aggregation, compute accounting, and run inclusion lists for the standing Qwen 7B claims.
 
 ## Archived Failures
 
