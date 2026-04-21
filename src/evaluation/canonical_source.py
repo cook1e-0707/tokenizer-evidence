@@ -4,12 +4,17 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
+from src.core.catalog_freeze import load_required_frozen_catalog
+from src.core.contract_compiler import CompiledEvalContract
+from src.core.scaffolded_completion import render_foundation_slot_values
+
 
 @dataclass(frozen=True)
 class CanonicalEvidenceSource:
     expected_payload_bytes: bytes
     evidence_text: str | None
     diagnostics: dict[str, object]
+    expected_payload_units: tuple[int, ...] = ()
 
 
 def resolve_input_path(path_value: str, repo_root: Path, anchor_dir: Path | None = None) -> Path:
@@ -28,10 +33,14 @@ def load_canonical_evidence_source(
     repo_root: Path,
     eval_path: str,
     default_payload_text: str,
+    carrier_catalog_path: str = "",
+    render_format: str = "canonical_v1",
+    prefer_compiled_rendered_text: bool = False,
 ) -> CanonicalEvidenceSource:
     if not eval_path:
         return CanonicalEvidenceSource(
             expected_payload_bytes=default_payload_text.encode("utf-8"),
+            expected_payload_units=(),
             evidence_text=None,
             diagnostics={
                 "payload_source": "config.eval.payload_text",
@@ -84,9 +93,60 @@ def load_canonical_evidence_source(
                     f"generated_text_path does not exist for canonical evaluation: {generated_text_path}"
                 )
             diagnostics["generated_text_path"] = str(generated_text_path)
+            generated_artifact_format = str(payload.get("generated_artifact_format", "canonical_text"))
+            if prefer_compiled_rendered_text and generated_artifact_format == "compiled_slot_values":
+                compiled_payload = payload.get("compiled_eval_contract")
+                if not isinstance(compiled_payload, dict):
+                    raise ValueError(
+                        "compiled_slot_values evidence requires compiled_eval_contract metadata "
+                        "when prefer_compiled_rendered_text=true"
+                    )
+                if not str(carrier_catalog_path).strip():
+                    raise ValueError(
+                        "compiled_slot_values evidence requires carrier_catalog_path "
+                        "when prefer_compiled_rendered_text=true"
+                    )
+                catalog_path = resolve_input_path(
+                    str(carrier_catalog_path),
+                    repo_root,
+                    anchor_dir=eval_input_path.parent,
+                )
+                if not catalog_path.exists():
+                    raise FileNotFoundError(
+                        f"carrier_catalog_path does not exist for canonical evaluation: {catalog_path}"
+                    )
+                compiled_eval_contract = CompiledEvalContract.from_dict(compiled_payload)
+                layout = load_required_frozen_catalog(catalog_path)
+                raw_slot_values = tuple(
+                    line.strip()
+                    for line in generated_text_path.read_text(encoding="utf-8").splitlines()
+                    if line.strip()
+                )
+                used_slot_values = raw_slot_values[: len(compiled_eval_contract.expected_slot_values)]
+                rendered_text, rendered_bucket_tuples = render_foundation_slot_values(
+                    slot_values=used_slot_values,
+                    layout=layout,
+                    slot_field_names=compiled_eval_contract.slot_field_names,
+                    render_format=render_format or compiled_eval_contract.render_format,
+                )
+                if not rendered_text:
+                    raise ValueError(
+                        "compiled_slot_values evidence could not be deterministically rendered into canonical text"
+                    )
+                diagnostics["evidence_source"] = "compiled_slot_values_rerender"
+                diagnostics["rendered_from_slot_values"] = True
+                diagnostics["rendered_bucket_tuples"] = [list(item) for item in rendered_bucket_tuples]
+                return CanonicalEvidenceSource(
+                    expected_payload_bytes=str(payload["payload_text"]).encode("utf-8"),
+                    expected_payload_units=tuple(int(unit) for unit in compiled_eval_contract.payload_units),
+                    evidence_text=rendered_text,
+                    diagnostics=diagnostics,
+                )
+
             diagnostics["evidence_source"] = "generated_text_path"
             return CanonicalEvidenceSource(
                 expected_payload_bytes=str(payload["payload_text"]).encode("utf-8"),
+                expected_payload_units=(),
                 evidence_text=generated_text_path.read_text(encoding="utf-8"),
                 diagnostics=diagnostics,
             )
@@ -94,12 +154,14 @@ def load_canonical_evidence_source(
         diagnostics["evidence_source"] = "canonical_rerender"
         return CanonicalEvidenceSource(
             expected_payload_bytes=str(payload["payload_text"]).encode("utf-8"),
+            expected_payload_units=(),
             evidence_text=None,
             diagnostics=diagnostics,
         )
 
     return CanonicalEvidenceSource(
         expected_payload_bytes=default_payload_text.encode("utf-8"),
+        expected_payload_units=(),
         evidence_text=eval_input_path.read_text(encoding="utf-8"),
         diagnostics={
             "payload_source": "config.eval.payload_text",

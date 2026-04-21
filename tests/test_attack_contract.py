@@ -292,3 +292,73 @@ def test_attack_script_refuses_when_clean_baseline_has_nogit_provenance(tmp_path
     )
     assert completed.returncode != 0
     assert "git_commit=nogit" in completed.stderr
+
+
+def test_attack_script_rerenders_compiled_slot_values_before_attack(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_root = tmp_path / "results"
+    frozen_catalog_path = _write_frozen_catalog(tmp_path / "carrier_catalog_freeze_v1.yaml")
+
+    generated_text_path = tmp_path / "generated_slots.txt"
+    generated_text_path.write_text("news\nmarket\n", encoding="utf-8")
+    clean_eval_summary_path = _write_clean_eval_summary(tmp_path / "clean_eval_summary.json", accepted=True)
+    eval_input_path = tmp_path / "eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "source_train_run_id": "train-run",
+                "payload_text": "OK",
+                "generated_artifact_format": "compiled_slot_values",
+                "generated_text_path": str(generated_text_path),
+                "compiled_eval_contract": {
+                    "payload_label": "OK",
+                    "payload_units": [0],
+                    "expected_slot_values": ["news", "market"],
+                    "slot_field_names": ["SECTION", "TOPIC"],
+                    "exact_slot_prefixes": ["SECTION=", "TOPIC="],
+                    "fields_per_block": 2,
+                    "block_count": 1,
+                    "render_format": "canonical_v1",
+                    "prompt_contract_name": "compiled_slot_request_v1",
+                    "artifact_format": "compiled_slot_values",
+                },
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    config_path = _write_attack_config(
+        tmp_path / "exp_attack_local.yaml",
+        frozen_catalog_path,
+        eval_input_path,
+        clean_eval_summary_path,
+        output_root,
+    )
+
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/attack.py",
+            "--config",
+            str(config_path),
+            "--force",
+        ],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    attack_summary_path = sorted(output_root.rglob("attack_output.json"))[0]
+    attack_summary = load_result_json(attack_summary_path)
+    assert isinstance(attack_summary, AttackRunSummary)
+    assert attack_summary.accepted_before is True
+    assert attack_summary.accepted_after is False
+
+    metadata = json.loads((attack_summary_path.parent / "attack_metadata.json").read_text(encoding="utf-8"))
+    assert metadata["evidence_source"] == "compiled_slot_values_rerender"
+    assert (attack_summary_path.parent / "attack_input.txt").read_text(encoding="utf-8") == (
+        "SECTION=news; TOPIC=market"
+    )

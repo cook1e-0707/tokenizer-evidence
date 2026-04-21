@@ -161,13 +161,25 @@ def main() -> int:
             repo_root=repo_root,
             eval_path=config.data.eval_path,
             default_payload_text=config.eval.payload_text,
+            carrier_catalog_path=config.data.carrier_catalog_path,
+            render_format=config.eval.render_format,
+            prefer_compiled_rendered_text=True,
         )
 
         before_text = evidence_source.evidence_text
         if before_text is None:
             render_config = render_config_from_name(config.eval.render_format)
-            encoding = codec.encode_bytes(evidence_source.expected_payload_bytes, apply_rs=False)
+            if evidence_source.expected_payload_units:
+                encoding = codec.encode_units(evidence_source.expected_payload_units, apply_rs=False)
+            else:
+                encoding = codec.encode_bytes(evidence_source.expected_payload_bytes, apply_rs=False)
             before_text = render_bucket_tuples(layout, encoding.bucket_tuples, config=render_config).text
+
+        expected_payload = (
+            evidence_source.expected_payload_units
+            if evidence_source.expected_payload_units
+            else evidence_source.expected_payload_bytes
+        )
 
         after_text = apply_text_attack(config.attack.mode, config.attack.strength, before_text)
         (paths.run_dir / "attack_input.txt").write_text(before_text, encoding="utf-8")
@@ -191,14 +203,14 @@ def main() -> int:
             text=before_text,
             bucket_layout=layout,
             payload_codec=codec,
-            expected_payload=evidence_source.expected_payload_bytes,
+            expected_payload=expected_payload,
             config=verify_config,
         )
         after = verify_canonical_rendered_text(
             text=after_text,
             bucket_layout=layout,
             payload_codec=codec,
-            expected_payload=evidence_source.expected_payload_bytes,
+            expected_payload=expected_payload,
             config=verify_config,
         )
     else:
