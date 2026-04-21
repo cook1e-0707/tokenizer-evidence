@@ -10,8 +10,8 @@
 
 ## Current Priority
 
-1. `batch3a`: run a minimal robustness grid on accepted Qwen 7B compiled-c3 baselines.
-2. Keep baselines and new model families frozen until small-scope robustness is established on the compiled path.
+1. `batch3b`: expand payload coverage on accepted Qwen 7B compiled-c3 baselines without changing model family, runtime envelope, or attack families.
+2. Keep baselines and new model families frozen until broader but still narrow-scope robustness is established on the compiled path.
 3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
@@ -23,7 +23,8 @@
 - `compiled-c3-r1`: representative multi-payload validation passed on `U00`, `U03`, `U12`, and `U15`.
 - `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
 - `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
-- Next target: `batch3a` small robustness grid on the same compiled-c3 path.
+- `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
+- Next target: `batch3b` payload-expansion robustness grid on the same compiled-c3 path.
 
 ## 2026-04-20
 
@@ -139,6 +140,30 @@ Passing result:
 Interpretation:
 - the attack harness is now aligned with the compiled canonical path
 - the next gate is a small-scope `Batch 3A` robustness grid, not a broad robustness sweep
+
+### Milestone: Batch 3A Small Robustness Grid Passed
+
+Qwen/Qwen2.5-7B-Instruct passed `Batch 3A` on accepted compiled-c3 clean baselines without changing the model, codebook, runtime envelope, or attack harness.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- clean baseline source: accepted `compiled-c3-r2` runs
+- payloads: `U00`, `U15`
+- seeds: `23`, `29`
+- attack families:
+  - `whitespace_scrub`
+  - `truncate_tail`
+
+Passing result:
+- all eight attack runs completed successfully
+- all eight attack runs started from `accepted_before = true`
+- all four `whitespace_scrub` runs preserved acceptance
+- all four `truncate_tail` runs caused acceptance failure
+
+Interpretation:
+- the attack harness is no longer only preflight-valid
+- small-scope robustness behavior is now stable on the compiled-c3 Qwen 7B path
+- the next gate is `Batch 3B`, which should expand payload coverage while keeping the same seeds, attack families, and runtime constraints
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:
