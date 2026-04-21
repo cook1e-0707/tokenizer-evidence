@@ -270,7 +270,7 @@ def test_theorem_prep_configs_emit_qwen_train_and_eval_manifests() -> None:
         repo_root / "configs" / "experiment" / "prep" / "exp_eval__qwen2_5_7b__t1_contextual_exact_v1.yaml"
     )
     t2_train = build_manifest_from_config(
-        repo_root / "configs" / "experiment" / "prep" / "exp_train__qwen2_5_7b__t2_fixed_representative_v1.yaml"
+        repo_root / "configs" / "experiment" / "prep" / "exp_train__qwen2_5_7b__t2r1_fixed_representative_v1.yaml"
     )
 
     assert t1_train.entries[0].entry_point == "scripts/train.py"
@@ -287,7 +287,7 @@ def test_theorem_prep_configs_emit_qwen_train_and_eval_manifests() -> None:
 
     assert t2_train.entries[0].entry_point == "scripts/train.py"
     assert t2_train.entries[0].primary_config_path.endswith(
-        "exp_train__qwen2_5_7b__t2_fixed_representative_v1.yaml"
+        "exp_train__qwen2_5_7b__t2r1_fixed_representative_v1.yaml"
     )
 
 

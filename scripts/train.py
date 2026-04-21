@@ -432,6 +432,7 @@ def main() -> int:
             lora_target_modules=config.train.lora_target_modules,
             fieldwise_generation_plan=fieldwise_generation_plan,
             use_compiled_bucket_objective=config.train.target_mode == "compiled_fieldwise_bucket_mass",
+            compiled_objective_mode=config.train.objective,
         )
         status = training_result.status
         steps = training_result.steps

@@ -352,7 +352,14 @@ def _compute_compiled_bucket_loss(
     logits: object,
     attention_mask: object,
     batch_examples: Sequence[TrainingExample],
+    objective_mode: str,
 ) -> tuple[object, float]:
+    normalized_objective_mode = objective_mode.strip().lower()
+    if normalized_objective_mode not in {"bucket_mass", "fixed_representative", "uniform_bucket"}:
+        raise HFCausalLMTrainingError(
+            f"Unsupported compiled objective mode {objective_mode!r}; "
+            "expected one of {'bucket_mass', 'fixed_representative', 'uniform_bucket'}"
+        )
     attention_rows = _tensor_rows(attention_mask)
     sample_losses: list[object] = []
     max_logit = 0.0
@@ -403,7 +410,32 @@ def _compute_compiled_bucket_loss(
                 f"Compiled bucket target bucket is missing from masked logits: "
                 f"bucket={target_bucket_id}, prompt={example.prompt!r}"
             )
-        sample_losses.append(-bucket_log_probs[target_bucket_id])
+        if normalized_objective_mode == "bucket_mass":
+            sample_losses.append(-bucket_log_probs[target_bucket_id])
+            continue
+
+        target_bucket_token_ids = tuple(
+            int(token_id)
+            for token_id in bucket_to_token_ids_raw.get(target_bucket_id, ())
+            if int(token_id) in token_id_to_position
+        )
+        if not target_bucket_token_ids:
+            raise HFCausalLMTrainingError(
+                f"Compiled objective found no valid token ids for target bucket={target_bucket_id} "
+                f"under prompt={example.prompt!r}"
+            )
+        target_bucket_positions = [token_id_to_position[token_id] for token_id in target_bucket_token_ids]
+        if normalized_objective_mode == "uniform_bucket":
+            sample_losses.append(-allowed_log_probs[target_bucket_positions].mean())
+            continue
+
+        target_token_id = int(example.metadata.get("compiled_target_token_id"))
+        if target_token_id not in token_id_to_position:
+            raise HFCausalLMTrainingError(
+                f"Compiled fixed representative target token is missing from masked logits: "
+                f"token_id={target_token_id}, prompt={example.prompt!r}"
+            )
+        sample_losses.append(-allowed_log_probs[token_id_to_position[target_token_id]])
 
     return torch_module.stack(sample_losses).mean(), max_logit
 
@@ -432,6 +464,7 @@ def run_minimal_hf_causal_lm_training(
     lora_target_modules: Sequence[str] = (),
     fieldwise_generation_plan: FieldwiseGenerationPlan | None = None,
     use_compiled_bucket_objective: bool = False,
+    compiled_objective_mode: str = "bucket_mass",
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -458,6 +491,16 @@ def run_minimal_hf_causal_lm_training(
         raise HFCausalLMTrainingError("lora_alpha must be positive")
     if lora_dropout < 0:
         raise HFCausalLMTrainingError("lora_dropout must be non-negative")
+    normalized_compiled_objective_mode = compiled_objective_mode.strip().lower() or "bucket_mass"
+    if use_compiled_bucket_objective and normalized_compiled_objective_mode not in {
+        "bucket_mass",
+        "fixed_representative",
+        "uniform_bucket",
+    }:
+        raise HFCausalLMTrainingError(
+            f"Unsupported compiled_objective_mode={compiled_objective_mode!r}; "
+            "expected one of {'bucket_mass', 'fixed_representative', 'uniform_bucket'}"
+        )
 
     cuda_available = torch.cuda.is_available()
     if require_cuda and not cuda_available:
@@ -515,7 +558,11 @@ def run_minimal_hf_causal_lm_training(
         "max_logit": 0.0,
         "last_grad_norm": 0.0,
         "max_grad_norm": 0.0,
-        "objective_mode": "compiled_bucket_mass" if use_compiled_bucket_objective else "token_supervision",
+        "objective_mode": (
+            f"compiled_{normalized_compiled_objective_mode}"
+            if use_compiled_bucket_objective
+            else "token_supervision"
+        ),
     }
     for _epoch in range(max(1, epochs)):
         for start in range(0, len(texts), effective_batch_size):
@@ -542,6 +589,7 @@ def run_minimal_hf_causal_lm_training(
                     logits=logits,
                     attention_mask=attention_mask,
                     batch_examples=batch_examples,
+                    objective_mode=normalized_compiled_objective_mode,
                 )
                 if not math.isfinite(float(batch_max_logit)):
                     health_diagnostics["first_nan_step"] = total_steps + 1

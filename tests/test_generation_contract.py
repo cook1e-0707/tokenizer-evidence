@@ -33,6 +33,7 @@ from src.infrastructure.config import load_experiment_config
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
 from src.training.hf_causal_lm import (
+    _compute_compiled_bucket_loss,
     HFCausalLMTrainingError,
     HFCausalLMTrainingResult,
     run_minimal_hf_causal_lm_training,
@@ -1314,6 +1315,58 @@ def test_hf_training_raises_on_non_finite_loss(
         )
 
 
+def test_compiled_objective_modes_are_distinct_on_multi_member_bucket() -> None:
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor(
+        [
+            [
+                [0.0, 0.0, 0.0, -0.25, 1.25, -2.0],
+            ]
+        ],
+        dtype=torch.float32,
+    )
+    attention_mask = torch.tensor([[1]], dtype=torch.long)
+    example = TrainingExample(
+        prompt="Controlled compiled objective prompt.",
+        target_symbols=(),
+        metadata={
+            "compiled_allowed_token_ids": [2, 3, 4, 5],
+            "compiled_bucket_to_token_ids": {
+                "0": [2],
+                "1": [3],
+                "3": [4, 5],
+            },
+            "compiled_target_bucket_id": 3,
+            "compiled_target_token_id": 4,
+        },
+    )
+
+    bucket_mass_loss, _ = _compute_compiled_bucket_loss(
+        torch_module=torch,
+        logits=logits,
+        attention_mask=attention_mask,
+        batch_examples=[example],
+        objective_mode="bucket_mass",
+    )
+    fixed_representative_loss, _ = _compute_compiled_bucket_loss(
+        torch_module=torch,
+        logits=logits,
+        attention_mask=attention_mask,
+        batch_examples=[example],
+        objective_mode="fixed_representative",
+    )
+    uniform_bucket_loss, _ = _compute_compiled_bucket_loss(
+        torch_module=torch,
+        logits=logits,
+        attention_mask=attention_mask,
+        batch_examples=[example],
+        objective_mode="uniform_bucket",
+    )
+
+    assert float(bucket_mass_loss.item()) < float(uniform_bucket_loss.item())
+    assert float(uniform_bucket_loss.item()) < float(fixed_representative_loss.item())
+
+
 def test_contextual_carrier_audit_uses_exact_slot_prefix_not_prefix_stable_diff() -> None:
     class PrefixShiftTokenizer:
         def __init__(self):
@@ -1792,6 +1845,7 @@ def test_compiled_train_script_uses_synthesized_dataset_without_train_path(
         captured["dataset"] = kwargs["dataset"]
         captured["fieldwise_generation_plan"] = kwargs["fieldwise_generation_plan"]
         captured["use_compiled_bucket_objective"] = kwargs["use_compiled_bucket_objective"]
+        captured["compiled_objective_mode"] = kwargs["compiled_objective_mode"]
         return HFCausalLMTrainingResult(
             status="ok",
             steps=8,
@@ -1807,6 +1861,7 @@ def test_compiled_train_script_uses_synthesized_dataset_without_train_path(
 
     assert train_script.main() == 0
     assert captured["use_compiled_bucket_objective"] is True
+    assert captured["compiled_objective_mode"] == "bucket_mass"
     dataset = captured["dataset"]
     assert isinstance(dataset, list)
     assert len(dataset) == 8

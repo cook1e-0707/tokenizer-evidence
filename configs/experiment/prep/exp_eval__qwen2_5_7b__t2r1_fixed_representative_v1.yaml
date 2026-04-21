@@ -1,0 +1,25 @@
+includes:
+  - ../../model/qwen2_5_7b_instruct.yaml
+  - ../../data/real_pilot.yaml
+  - ../../eval/default.yaml
+  - ../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_eval
+  mode: eval
+  method: our_method
+  seed: 17
+  variant_name: theorem2-r1-fixed-representative
+  notes: Controlled Theorem 2 objective contrast on a multi-member-bucket Qwen7B catalog.
+
+data:
+  name: theorem2-objective-compare-r1
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b__v1.yaml
+  eval_path: results/raw/exp_train/latest_eval_input.json
+
+eval:
+  verification_mode: compiled_gate
+  render_format: canonical_v1
+  payload_text: U15
+  audit_strict: true
+  require_foundation_gate: false

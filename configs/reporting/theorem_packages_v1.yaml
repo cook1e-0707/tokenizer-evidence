@@ -25,3 +25,18 @@ packages:
     description: uniform-within-bucket objective
     train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2_uniform_bucket_v1.yaml
     eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2_uniform_bucket_v1.yaml
+  - id: T2-r1-bucket-mass
+    workstream: T2
+    description: discriminative bucket-mass objective on multi-member buckets
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2r1_bucket_mass_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2r1_bucket_mass_v1.yaml
+  - id: T2-r1-fixed-representative
+    workstream: T2
+    description: discriminative fixed representative objective on multi-member buckets
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2r1_fixed_representative_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2r1_fixed_representative_v1.yaml
+  - id: T2-r1-uniform-bucket
+    workstream: T2
+    description: discriminative uniform-within-bucket objective on multi-member buckets
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2r1_uniform_bucket_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2r1_uniform_bucket_v1.yaml
