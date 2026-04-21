@@ -10,8 +10,8 @@
 
 ## Current Priority
 
-1. `batch3-preflight-reopen`: validate that attack runs now launch from accepted Qwen 7B compiled-c3 clean baselines.
-2. Keep baselines and new model families frozen until attack preflight is re-established on the compiled path.
+1. `batch3a`: run a minimal robustness grid on accepted Qwen 7B compiled-c3 baselines.
+2. Keep baselines and new model families frozen until small-scope robustness is established on the compiled path.
 3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
@@ -22,7 +22,8 @@
 - `compiled-c3`: double-block compiled path passed on the same Qwen 7B codebook.
 - `compiled-c3-r1`: representative multi-payload validation passed on `U00`, `U03`, `U12`, and `U15`.
 - `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
-- Next target: `batch3-preflight-reopen` on accepted compiled-c3 baselines.
+- `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
+- Next target: `batch3a` small robustness grid on the same compiled-c3 path.
 
 ## 2026-04-20
 
@@ -116,6 +117,28 @@ Passing result:
 Interpretation:
 - the compiled-c3 path is no longer only a single-seed success
 - the next gate is reopening Batch 3 preflight on accepted compiled baselines
+
+### Milestone: Batch 3 Preflight Reopened
+
+Qwen/Qwen2.5-7B-Instruct successfully reopened Batch 3 preflight on accepted compiled-c3 clean baselines.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- clean baseline source: accepted `compiled-c3-r2` runs
+- attack path: canonical attack over deterministic rerendered compiled slot values
+- preflight attacks:
+  - `U00 @ seed 23` with `whitespace_scrub`
+  - `U15 @ seed 29` with `truncate_tail`
+
+Passing result:
+- both attack runs completed successfully
+- both attack runs started from `accepted_before = true`
+- one benign attack preserved acceptance
+- one stronger truncation attack caused acceptance failure
+
+Interpretation:
+- the attack harness is now aligned with the compiled canonical path
+- the next gate is a small-scope `Batch 3A` robustness grid, not a broad robustness sweep
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:
