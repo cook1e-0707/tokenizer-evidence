@@ -10,8 +10,8 @@
 
 ## Current Priority
 
-1. `compiled-c3-r2`: validate the passing Qwen 7B double-block compiled path across additional seeds while keeping the compiled codebook, prompt contract, and objective fixed.
-2. Keep Batch 3, baselines, and new model families frozen until compiled multi-seed double-block acceptance passes.
+1. `batch3-preflight-reopen`: validate that attack runs now launch from accepted Qwen 7B compiled-c3 clean baselines.
+2. Keep baselines and new model families frozen until attack preflight is re-established on the compiled path.
 3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
@@ -21,7 +21,8 @@
 - `compiled-c2`: full single-block compiled path passed.
 - `compiled-c3`: double-block compiled path passed on the same Qwen 7B codebook.
 - `compiled-c3-r1`: representative multi-payload validation passed on `U00`, `U03`, `U12`, and `U15`.
-- Next target: `compiled-c3-r2` multi-seed validation on the unchanged compiled-c3 framework.
+- `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
+- Next target: `batch3-preflight-reopen` on accepted compiled-c3 baselines.
 
 ## 2026-04-20
 
@@ -94,6 +95,27 @@ Passing result:
 Interpretation:
 - the compiled-c3 path is no longer only a single-target success
 - the next gate is seed robustness under the unchanged compiled-c3 setup
+
+### Milestone: Multi-Seed Double-Block Validation Passed
+
+Qwen/Qwen2.5-7B-Instruct passed `compiled-c3-r2` on additional seeds while keeping the compiled contract, codebook, prompt contract, and objective fixed.
+
+Verified scope:
+- framework: unchanged `compile-then-train`
+- codebook: `SECTION=4 buckets`, `TOPIC=4 buckets`, `1 canonical token per bucket`
+- block_count: `2`
+- payload targets: `U00`, `U15`
+- seeds: `23`, `29`
+
+Passing result:
+- all four effective runs produced `accepted = true`
+- all four effective runs produced `verifier_success = true`
+- all four effective runs decoded the correct payload
+- all four effective runs remained numerically healthy
+
+Interpretation:
+- the compiled-c3 path is no longer only a single-seed success
+- the next gate is reopening Batch 3 preflight on accepted compiled baselines
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:

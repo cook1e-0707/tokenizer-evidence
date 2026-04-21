@@ -1,0 +1,28 @@
+includes:
+  - ../../model/qwen2_5_7b_instruct.yaml
+  - ../../data/real_pilot.yaml
+  - ../../eval/default.yaml
+  - ../../attack/scrub_default.yaml
+  - ../../runtime/cpu_intel_batch3_preflight.yaml
+
+run:
+  experiment_name: exp_attack
+  mode: attack
+  method: our_method
+  seed: 17
+  variant_name: batch3-preflight-qwen7b
+
+data:
+  name: real-pilot-compiled-c3
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml
+  eval_path: results/raw/exp_train/latest_eval_input.json
+
+eval:
+  verification_mode: canonical_render
+  render_format: canonical_v1
+  payload_text: U14
+  audit_strict: true
+
+attack:
+  clean_eval_summary_path: ""
+

@@ -1,0 +1,16 @@
+runtime:
+  output_root: results/raw
+  launcher_mode: slurm
+  tags: ["batch3", "preflight", "cpu", "intel"]
+  resources:
+    partition: Intel
+    gpu_type: null
+    num_gpus: 0
+    cpus: 4
+    mem_gb: 16
+    time_limit: "01:00:00"
+    account: null
+    environment_setup: |
+      source ~/.bashrc
+      # activate your environment here
+
