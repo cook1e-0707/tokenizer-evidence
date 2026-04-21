@@ -10,9 +10,9 @@
 
 ## Current Priority
 
-1. `compiled-c3-r3`: supplement accepted clean baselines for `U03` and `U12` at seeds `23` and `29`.
-2. After those clean baselines pass, rerun only the missing `batch3b` attacks for `U03/U12`.
-3. Keep baselines and new model families frozen until broader but still narrow-scope robustness is established on the compiled path.
+1. `batch3c`: expand the robustness grid beyond `Batch 3B` while keeping the same Qwen 7B compiled-c3 path and attack harness.
+2. Keep baselines and new model families frozen until `Batch 3C` establishes broader robustness on the compiled path.
+3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
 
@@ -22,10 +22,11 @@
 - `compiled-c3`: double-block compiled path passed on the same Qwen 7B codebook.
 - `compiled-c3-r1`: representative multi-payload validation passed on `U00`, `U03`, `U12`, and `U15`.
 - `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
+- `compiled-c3-r3`: supplemental clean baselines passed on `U03` and `U12` with seeds `23` and `29`.
 - `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
 - `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
-- `batch3b`: partially executed; `U00/U15` passed, while `U03/U12` were blocked by missing clean baselines rather than attack failure.
-- Next target: `compiled-c3-r3` clean-baseline supplementation for `U03/U12 @ seed 23/29`, then rerun the missing `batch3b` attacks.
+- `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
+- Next target: `batch3c` broader robustness expansion on the same compiled-c3 Qwen 7B path.
 
 ## 2026-04-20
 
@@ -185,6 +186,50 @@ Required repair:
 
 Guard added:
 - attack execution now fails immediately with a clear error if `attack.clean_eval_summary_path` is empty or does not point to a real eval summary file
+
+### Milestone: Compiled-C3-R3 Supplemental Clean Baselines Passed
+
+Qwen/Qwen2.5-7B-Instruct passed the supplemental compiled-c3 clean-baseline stage for the previously missing payload and seed combinations.
+
+Verified scope:
+- framework: unchanged `compile-then-train`
+- codebook: `SECTION=4 buckets`, `TOPIC=4 buckets`, `1 canonical token per bucket`
+- block_count: `2`
+- payload targets: `U03`, `U12`
+- seeds: `23`, `29`
+
+Passing result:
+- all four supplemental clean-baseline runs produced `accepted = true`
+- all four supplemental clean-baseline runs produced `verifier_success = true`
+- all four supplemental clean-baseline runs decoded the correct payload
+- all four supplemental clean-baseline runs remained numerically healthy
+
+Interpretation:
+- the clean-baseline coverage needed for the full `Batch 3B` payload grid is now complete
+- the remaining `Batch 3B` gap was operational rather than methodological
+
+### Milestone: Batch 3B Payload-Expansion Grid Passed
+
+Qwen/Qwen2.5-7B-Instruct passed `Batch 3B` after supplementing the missing clean baselines and rerunning only the blocked attack cases.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- clean baseline source: accepted `compiled-c3-r2` and `compiled-c3-r3` runs
+- payloads: `U00`, `U03`, `U12`, `U15`
+- seeds: `23`, `29`
+- attack families:
+  - `whitespace_scrub`
+  - `truncate_tail`
+
+Passing result:
+- all sixteen attack runs completed successfully
+- all sixteen attack runs started from `accepted_before = true`
+- all eight `whitespace_scrub` runs preserved acceptance
+- all eight `truncate_tail` runs caused acceptance failure
+
+Interpretation:
+- payload expansion on the compiled-c3 Qwen 7B robustness path is now standing
+- the next gate can move to a larger `Batch 3C`, but still without reopening baselines or new model families
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:
