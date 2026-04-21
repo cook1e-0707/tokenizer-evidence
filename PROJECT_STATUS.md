@@ -1,18 +1,43 @@
 # Project Status
 
-## Current Batch Status
+## Current Standing Status
 
-- `batch3_preflight_failed`
-- Reason:
-  - clean generated-text baseline was not accepted
-  - downstream attack runs were all `accepted_before=false -> accepted_after=false`
-  - these runs are archived locally under `batch3_preflight_failed/` and must not be treated as formal robustness evidence
+- Accepted clean compiled path:
+  - `compiled-c3-r4` passed on `Qwen/Qwen2.5-7B-Instruct`
+  - representative payloads `U00`, `U03`, `U12`, and `U15` are accepted at seed `17`
+- Standing robustness path:
+  - `batch3-preflight-reopen` passed
+  - `batch3a` passed
+  - `batch3b` passed
+  - `batch3c` passed
+  - `batch3d` passed
+- Active execution scope:
+  - manuscript-facing consolidation only
+  - theorem-package preparation only
+  - no additional Batch 3 expansion
+  - no new baselines
+  - no new model families
 
 ## Current Priority
 
-1. `batch3d`: expand robustness by adding one new attack family on top of the already accepted `Batch 3C` seed and payload grid.
-2. Keep the same payloads `U00/U03/U12/U15` and seed `17`; do not expand model family, baseline scope, or payload grid in the same step.
-3. Preserve the compile-then-train path as the only active main-path implementation.
+1. Consolidate the accepted `compiled-c3-r4`, `batch3c`, and `batch3d` results into manuscript-facing tables and paper-facing summary artifacts.
+2. Prepare `T1` and `T2` local dry-run packages without opening new sweeps.
+3. Add explicit statistical aggregation, compute accounting, and run inclusion lists for the standing Qwen 7B claims.
+
+## Archived Failures
+
+- `batch3_preflight_failed`
+  - clean generated-text baseline was not accepted
+  - downstream attack runs were all `accepted_before=false -> accepted_after=false`
+  - archived locally under `batch3_preflight_failed/`
+  - not formal robustness evidence
+- Pre-compiled Qwen 7B main-path failures
+  - sequence-continuation era failures before compile-then-train
+  - contract-coverage failures before the compiled contract compiler closed the train/eval gap
+  - historical only; not current standing evidence
+- Partial `batch3b` launch before `U03/U12` clean baselines existed
+  - operational/configuration gap, later repaired by `compiled-c3-r3`
+  - superseded by the accepted final `batch3b` result
 
 ## Compiled Milestones
 
@@ -28,7 +53,8 @@
 - `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
 - `batch3c`: seed-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
-- Next target: `batch3d` single-family attack expansion on the same compiled-c3 Qwen 7B path.
+- `batch3d`: single-family delimiter-attack expansion passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
+- Next target: manuscript appendix tables and main-result consolidation.
 
 ## 2026-04-20
 
@@ -169,7 +195,7 @@ Interpretation:
 - small-scope robustness behavior is now stable on the compiled-c3 Qwen 7B path
 - the next gate is `Batch 3B`, which should expand payload coverage while keeping the same seeds, attack families, and runtime constraints
 
-### Status: Batch 3B Payload Expansion Partially Executed
+### Archived Failure: Batch 3B Payload Expansion Partially Executed
 
 `Batch 3B` was launched to expand payload coverage from `U00/U15` to `U00/U03/U12/U15` under the unchanged compiled-c3 Qwen 7B attack path.
 
@@ -276,6 +302,27 @@ Passing result:
 Interpretation:
 - the robustness grid now covers the representative payload set across an additional seed
 - the next minimal axis of expansion is an additional attack family, not a broader model or payload sweep
+
+### Milestone: Batch 3D Additional Attack-Family Grid Passed
+
+Qwen/Qwen2.5-7B-Instruct passed `Batch 3D` by adding a delimiter-destruction attack family on top of the already accepted `Batch 3C` payload and seed grid.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- clean baseline source: accepted `compiled-c3-r4` runs
+- payloads: `U00`, `U03`, `U12`, `U15`
+- seed: `17`
+- new attack family:
+  - `delimiter_scrub`
+
+Passing result:
+- all four attack runs completed successfully
+- all four attack runs started from `accepted_before = true`
+- all four `delimiter_scrub` runs caused acceptance failure
+
+Interpretation:
+- the compiled-c3 Qwen 7B path now has stable robustness evidence across payload expansion, seed expansion, and an additional structure-breaking attack family
+- the next step should be documentation and paper-facing result consolidation rather than continued grid growth
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:

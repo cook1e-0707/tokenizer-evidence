@@ -260,6 +260,56 @@ def test_batch3a_qwen_attack_config_emits_attack_manifest() -> None:
     assert attack_entry.requested_resources.time_limit == "01:00:00"
 
 
+def test_theorem_prep_configs_emit_qwen_train_and_eval_manifests() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+
+    t1_train = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "prep" / "exp_train__qwen2_5_7b__t1_contextual_exact_v1.yaml"
+    )
+    t1_eval = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "prep" / "exp_eval__qwen2_5_7b__t1_contextual_exact_v1.yaml"
+    )
+    t2_train = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "prep" / "exp_train__qwen2_5_7b__t2_fixed_representative_v1.yaml"
+    )
+
+    assert t1_train.entries[0].entry_point == "scripts/train.py"
+    assert t1_train.entries[0].model_name == "qwen2.5-7b-instruct"
+    assert t1_train.entries[0].primary_config_path.endswith(
+        "exp_train__qwen2_5_7b__t1_contextual_exact_v1.yaml"
+    )
+
+    assert t1_eval.entries[0].entry_point == "scripts/eval.py"
+    assert t1_eval.entries[0].model_name == "qwen2.5-7b-instruct"
+    assert t1_eval.entries[0].primary_config_path.endswith(
+        "exp_eval__qwen2_5_7b__t1_contextual_exact_v1.yaml"
+    )
+
+    assert t2_train.entries[0].entry_point == "scripts/train.py"
+    assert t2_train.entries[0].primary_config_path.endswith(
+        "exp_train__qwen2_5_7b__t2_fixed_representative_v1.yaml"
+    )
+
+
+def test_prepare_theorem_packages_script_writes_dry_run_summary(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_path = tmp_path / "theorem_package_dry_runs.json"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_theorem_packages.py",
+            "--output",
+            str(output_path),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert "wrote theorem dry-run summary" in completed.stdout
+    assert output_path.exists()
+
+
 def test_batch3b_qwen_attack_config_emits_attack_manifest() -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     attack_manifest = build_manifest_from_config(

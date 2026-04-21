@@ -1,0 +1,40 @@
+includes:
+  - ../../model/qwen2_5_7b_instruct.yaml
+  - ../../data/real_pilot.yaml
+  - ../../train/default.yaml
+  - ../../eval/default.yaml
+  - ../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_train
+  mode: train
+  method: our_method
+  seed: 17
+  variant_name: theorem2-uniform-bucket
+  notes: Dry-run package for Theorem 2 uniform-within-bucket contrast.
+
+data:
+  name: theorem2-objective-compare
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml
+
+train:
+  target_mode: compiled_fieldwise_bucket_mass
+  batch_size: 1
+  epochs: 64
+  learning_rate: 5.0e-5
+  objective: uniform_bucket
+  probe_block_count: 2
+  probe_payload_texts: ["U00", "U03", "U12", "U15"]
+  generation_prompt: "Select exactly one allowed carrier token."
+  generation_do_sample: false
+  generation_max_new_tokens: 1
+  adapter_mode: lora
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.0
+  lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+eval:
+  verification_mode: canonical_render
+  render_format: canonical_v1
+  payload_text: U03

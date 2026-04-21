@@ -1,0 +1,95 @@
+version: 1
+model_name: qwen2.5-7b-instruct
+main_clean:
+  stage: compiled-c3-r4
+  cases:
+    - id: U00_s17
+      payload: U00
+      seed: 17
+      case_root: batch28b_qwen7b_c3r4/U00_s17
+    - id: U03_s17
+      payload: U03
+      seed: 17
+      case_root: batch28b_qwen7b_c3r4/U03_s17
+    - id: U12_s17
+      payload: U12
+      seed: 17
+      case_root: batch28b_qwen7b_c3r4/U12_s17
+    - id: U15_s17
+      payload: U15
+      seed: 17
+      case_root: batch28b_qwen7b_c3r4/U15_s17
+robustness:
+  cases:
+    - id: U00_s17_whitespace_scrub
+      stage: batch3c
+      payload: U00
+      seed: 17
+      attack_name: whitespace_scrub
+      case_root: batch3c_qwen7b/U00_s17_whitespace_scrub
+    - id: U00_s17_truncate_tail
+      stage: batch3c
+      payload: U00
+      seed: 17
+      attack_name: truncate_tail
+      case_root: batch3c_qwen7b/U00_s17_truncate_tail
+    - id: U03_s17_whitespace_scrub
+      stage: batch3c
+      payload: U03
+      seed: 17
+      attack_name: whitespace_scrub
+      case_root: batch3c_qwen7b/U03_s17_whitespace_scrub
+    - id: U03_s17_truncate_tail
+      stage: batch3c
+      payload: U03
+      seed: 17
+      attack_name: truncate_tail
+      case_root: batch3c_qwen7b/U03_s17_truncate_tail
+    - id: U12_s17_whitespace_scrub
+      stage: batch3c
+      payload: U12
+      seed: 17
+      attack_name: whitespace_scrub
+      case_root: batch3c_qwen7b/U12_s17_whitespace_scrub
+    - id: U12_s17_truncate_tail
+      stage: batch3c
+      payload: U12
+      seed: 17
+      attack_name: truncate_tail
+      case_root: batch3c_qwen7b/U12_s17_truncate_tail
+    - id: U15_s17_whitespace_scrub
+      stage: batch3c
+      payload: U15
+      seed: 17
+      attack_name: whitespace_scrub
+      case_root: batch3c_qwen7b/U15_s17_whitespace_scrub
+    - id: U15_s17_truncate_tail
+      stage: batch3c
+      payload: U15
+      seed: 17
+      attack_name: truncate_tail
+      case_root: batch3c_qwen7b/U15_s17_truncate_tail
+    - id: U00_s17_delimiter_scrub
+      stage: batch3d
+      payload: U00
+      seed: 17
+      attack_name: delimiter_scrub
+      case_root: batch3d_qwen7b/U00_s17_delimiter_scrub
+    - id: U03_s17_delimiter_scrub
+      stage: batch3d
+      payload: U03
+      seed: 17
+      attack_name: delimiter_scrub
+      case_root: batch3d_qwen7b/U03_s17_delimiter_scrub
+    - id: U12_s17_delimiter_scrub
+      stage: batch3d
+      payload: U12
+      seed: 17
+      attack_name: delimiter_scrub
+      case_root: batch3d_qwen7b/U12_s17_delimiter_scrub
+    - id: U15_s17_delimiter_scrub
+      stage: batch3d
+      payload: U15
+      seed: 17
+      attack_name: delimiter_scrub
+      case_root: batch3d_qwen7b/U15_s17_delimiter_scrub

@@ -1,0 +1,27 @@
+version: 1
+packages:
+  - id: T1-aligned
+    workstream: T1
+    description: exact contextual compiled path
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t1_contextual_exact_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t1_contextual_exact_v1.yaml
+  - id: T1-sequence-proxy
+    workstream: T1
+    description: non-contextual sequence proxy
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t1_sequence_proxy_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t1_sequence_proxy_v1.yaml
+  - id: T2-bucket-mass
+    workstream: T2
+    description: compiled bucket-mass objective
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2_bucket_mass_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2_bucket_mass_v1.yaml
+  - id: T2-fixed-representative
+    workstream: T2
+    description: fixed representative token objective
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2_fixed_representative_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2_fixed_representative_v1.yaml
+  - id: T2-uniform-bucket
+    workstream: T2
+    description: uniform-within-bucket objective
+    train_config: configs/experiment/prep/exp_train__qwen2_5_7b__t2_uniform_bucket_v1.yaml
+    eval_config: configs/experiment/prep/exp_eval__qwen2_5_7b__t2_uniform_bucket_v1.yaml
