@@ -10,9 +10,9 @@
 
 ## Current Priority
 
-1. `batch3b`: expand payload coverage on accepted Qwen 7B compiled-c3 baselines without changing model family, runtime envelope, or attack families.
-2. Keep baselines and new model families frozen until broader but still narrow-scope robustness is established on the compiled path.
-3. Preserve the compile-then-train path as the only active main-path implementation.
+1. `compiled-c3-r3`: supplement accepted clean baselines for `U03` and `U12` at seeds `23` and `29`.
+2. After those clean baselines pass, rerun only the missing `batch3b` attacks for `U03/U12`.
+3. Keep baselines and new model families frozen until broader but still narrow-scope robustness is established on the compiled path.
 
 ## Compiled Milestones
 
@@ -24,7 +24,8 @@
 - `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
 - `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
 - `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
-- Next target: `batch3b` payload-expansion robustness grid on the same compiled-c3 path.
+- `batch3b`: partially executed; `U00/U15` passed, while `U03/U12` were blocked by missing clean baselines rather than attack failure.
+- Next target: `compiled-c3-r3` clean-baseline supplementation for `U03/U12 @ seed 23/29`, then rerun the missing `batch3b` attacks.
 
 ## 2026-04-20
 
@@ -164,6 +165,26 @@ Interpretation:
 - the attack harness is no longer only preflight-valid
 - small-scope robustness behavior is now stable on the compiled-c3 Qwen 7B path
 - the next gate is `Batch 3B`, which should expand payload coverage while keeping the same seeds, attack families, and runtime constraints
+
+### Status: Batch 3B Payload Expansion Partially Executed
+
+`Batch 3B` was launched to expand payload coverage from `U00/U15` to `U00/U03/U12/U15` under the unchanged compiled-c3 Qwen 7B attack path.
+
+Observed result:
+- `U00` and `U15` attack runs completed successfully and preserved the `Batch 3A` behavior pattern
+- `U03` and `U12` attack runs did not produce valid attack outputs
+
+Root cause:
+- the missing half was not an attack-harness failure
+- `U03_s23`, `U03_s29`, `U12_s23`, and `U12_s29` clean compiled-c3 baselines had never been materialized
+- as a result, `attack.clean_eval_summary_path` expanded to an empty value for those cases
+
+Required repair:
+- supplement accepted clean baselines for `U03/U12 @ seed 23/29` on the same compiled-c3 path
+- rerun only the missing `Batch 3B` attacks after those clean baselines exist
+
+Guard added:
+- attack execution now fails immediately with a clear error if `attack.clean_eval_summary_path` is empty or does not point to a real eval summary file
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:

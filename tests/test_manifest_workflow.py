@@ -278,6 +278,29 @@ def test_batch3b_qwen_attack_config_emits_attack_manifest() -> None:
     assert attack_entry.requested_resources.time_limit == "01:00:00"
 
 
+def test_compiled_c3r3_qwen_configs_emit_train_and_eval_manifests() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+
+    manifest_paths = (
+        repo_root / "configs" / "experiment" / "frozen" / "exp_train__qwen2_5_7b__c3r3_v1.yaml",
+        repo_root / "configs" / "experiment" / "frozen" / "exp_eval__qwen2_5_7b__c3r3_v1.yaml",
+    )
+
+    for config_path in manifest_paths:
+        manifest_file = build_manifest_from_config(config_path)
+        entry = manifest_file.entries[0]
+        assert entry.model_name == "qwen2.5-7b-instruct"
+        assert entry.requested_resources.partition == "DGXA100"
+        assert entry.requested_resources.num_gpus == 1
+        assert entry.requested_resources.cpus == 16
+        assert entry.requested_resources.mem_gb == 96
+        assert entry.requested_resources.time_limit == "24:00:00"
+        if "exp_train" in config_path.name:
+            assert entry.entry_point == "scripts/train.py"
+        else:
+            assert entry.entry_point == "scripts/eval.py"
+
+
 def test_batch28_model_configs_emit_train_and_eval_manifests() -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
 

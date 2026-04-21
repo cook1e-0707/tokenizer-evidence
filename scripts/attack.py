@@ -124,13 +124,19 @@ def main() -> int:
     )
 
     if config.eval.verification_mode == "canonical_render":
-        clean_eval_summary_path = Path(config.attack.clean_eval_summary_path)
-        if not str(clean_eval_summary_path).strip():
+        clean_eval_summary_raw = str(config.attack.clean_eval_summary_path).strip()
+        if not clean_eval_summary_raw:
             raise ValueError(
                 "attack.clean_eval_summary_path is required for canonical generated-text attacks"
             )
+        clean_eval_summary_path = Path(clean_eval_summary_raw)
         if not clean_eval_summary_path.is_absolute():
             clean_eval_summary_path = repo_root / clean_eval_summary_path
+        if not clean_eval_summary_path.is_file():
+            raise FileNotFoundError(
+                "attack.clean_eval_summary_path must point to an existing eval summary file: "
+                f"{clean_eval_summary_path}"
+            )
         clean_summary = load_result_json(clean_eval_summary_path)
         if not isinstance(clean_summary, EvalRunSummary):
             raise ValueError(
