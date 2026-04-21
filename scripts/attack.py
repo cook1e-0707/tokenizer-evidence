@@ -47,6 +47,15 @@ def apply_attack(mode: str, strength: float, records):
             replace(record, score=max(0.0, record.score - strength), symbol=record.symbol.replace(" ", ""))
             for record in records
         ]
+    if mode == "delimiter_scrub":
+        return [
+            replace(
+                record,
+                score=max(0.0, record.score - strength),
+                symbol=record.symbol.replace(";", "").replace(": ", ":"),
+            )
+            for record in records
+        ]
     if mode == "truncate_tail":
         keep = max(1, len(records) - max(1, int(strength * len(records))))
         return list(records[:keep])
@@ -56,6 +65,8 @@ def apply_attack(mode: str, strength: float, records):
 def apply_text_attack(mode: str, strength: float, text: str) -> str:
     if mode == "whitespace_scrub":
         return "\n".join(line.replace(" ", "").replace("\t", "") for line in text.splitlines())
+    if mode == "delimiter_scrub":
+        return text.replace("; ", " ").replace(";", "")
     if mode == "truncate_tail":
         keep = max(1, len(text) - max(1, int(strength * len(text))))
         return text[:keep]

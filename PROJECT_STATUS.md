@@ -10,8 +10,8 @@
 
 ## Current Priority
 
-1. `batch3c`: expand robustness by adding one new seed across the full `Batch 3B` payload grid while keeping the same Qwen 7B compiled-c3 path and attack harness.
-2. Use the same payloads `U00/U03/U12/U15` and the same attack families `whitespace_scrub` / `truncate_tail`; do not expand model family or baseline scope.
+1. `batch3d`: expand robustness by adding one new attack family on top of the already accepted `Batch 3C` seed and payload grid.
+2. Keep the same payloads `U00/U03/U12/U15` and seed `17`; do not expand model family, baseline scope, or payload grid in the same step.
 3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
@@ -23,10 +23,12 @@
 - `compiled-c3-r1`: representative multi-payload validation passed on `U00`, `U03`, `U12`, and `U15`.
 - `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
 - `compiled-c3-r3`: supplemental clean baselines passed on `U03` and `U12` with seeds `23` and `29`.
+- `compiled-c3-r4`: supplemental clean baselines passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
 - `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
 - `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
-- Next target: `batch3c` minimal seed-expansion robustness grid on the same compiled-c3 Qwen 7B path.
+- `batch3c`: seed-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
+- Next target: `batch3d` single-family attack expansion on the same compiled-c3 Qwen 7B path.
 
 ## 2026-04-20
 
@@ -230,6 +232,50 @@ Passing result:
 Interpretation:
 - payload expansion on the compiled-c3 Qwen 7B robustness path is now standing
 - the next gate can move to a larger `Batch 3C`, but still without reopening baselines or new model families
+
+### Milestone: Compiled-C3-R4 Seed-17 Clean Baselines Passed
+
+Qwen/Qwen2.5-7B-Instruct passed the supplemental compiled-c3 clean-baseline stage for the seed-17 robustness extension.
+
+Verified scope:
+- framework: unchanged `compile-then-train`
+- codebook: `SECTION=4 buckets`, `TOPIC=4 buckets`, `1 canonical token per bucket`
+- block_count: `2`
+- payload targets: `U00`, `U03`, `U12`, `U15`
+- seed: `17`
+
+Passing result:
+- all four clean-baseline runs produced `accepted = true`
+- all four clean-baseline runs produced `verifier_success = true`
+- all four clean-baseline runs decoded the correct payload
+- all four clean-baseline runs remained numerically healthy
+
+Interpretation:
+- the clean-baseline coverage now includes the full representative payload grid at seed `17`
+- the project can test a seed-expansion robustness stage without changing model family or payload scope
+
+### Milestone: Batch 3C Seed-Expansion Grid Passed
+
+Qwen/Qwen2.5-7B-Instruct passed `Batch 3C` by adding seed `17` across the established `Batch 3B` payload grid while keeping the attack families fixed.
+
+Verified scope:
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- clean baseline source: accepted `compiled-c3-r4` runs
+- payloads: `U00`, `U03`, `U12`, `U15`
+- seed: `17`
+- attack families:
+  - `whitespace_scrub`
+  - `truncate_tail`
+
+Passing result:
+- all eight attack runs completed successfully
+- all eight attack runs started from `accepted_before = true`
+- all four `whitespace_scrub` runs preserved acceptance
+- all four `truncate_tail` runs caused acceptance failure
+
+Interpretation:
+- the robustness grid now covers the representative payload set across an additional seed
+- the next minimal axis of expansion is an additional attack family, not a broader model or payload sweep
 ## Model Policy
 
 - `gpt2` is smoke-only from this point onward:

@@ -296,6 +296,24 @@ def test_batch3c_qwen_attack_config_emits_attack_manifest() -> None:
     assert attack_entry.requested_resources.time_limit == "01:00:00"
 
 
+def test_batch3d_qwen_attack_config_emits_attack_manifest() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    attack_manifest = build_manifest_from_config(
+        repo_root / "configs" / "experiment" / "frozen" / "exp_attack__qwen2_5_7b__batch3d_v1.yaml"
+    )
+
+    attack_entry = attack_manifest.entries[0]
+    assert attack_entry.entry_point == "scripts/attack.py"
+    assert attack_entry.experiment_name == "exp_attack"
+    assert attack_entry.model_name == "qwen2.5-7b-instruct"
+    assert attack_entry.seed == 17
+    assert attack_entry.requested_resources.partition == "Intel"
+    assert attack_entry.requested_resources.num_gpus == 0
+    assert attack_entry.requested_resources.cpus == 4
+    assert attack_entry.requested_resources.mem_gb == 16
+    assert attack_entry.requested_resources.time_limit == "01:00:00"
+
+
 def test_compiled_c3r3_qwen_configs_emit_train_and_eval_manifests() -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
 
