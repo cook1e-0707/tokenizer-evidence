@@ -10,8 +10,8 @@
 
 ## Current Priority
 
-1. `batch3c`: expand the robustness grid beyond `Batch 3B` while keeping the same Qwen 7B compiled-c3 path and attack harness.
-2. Keep baselines and new model families frozen until `Batch 3C` establishes broader robustness on the compiled path.
+1. `batch3c`: expand robustness by adding one new seed across the full `Batch 3B` payload grid while keeping the same Qwen 7B compiled-c3 path and attack harness.
+2. Use the same payloads `U00/U03/U12/U15` and the same attack families `whitespace_scrub` / `truncate_tail`; do not expand model family or baseline scope.
 3. Preserve the compile-then-train path as the only active main-path implementation.
 
 ## Compiled Milestones
@@ -26,7 +26,7 @@
 - `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
 - `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
-- Next target: `batch3c` broader robustness expansion on the same compiled-c3 Qwen 7B path.
+- Next target: `batch3c` minimal seed-expansion robustness grid on the same compiled-c3 Qwen 7B path.
 
 ## 2026-04-20
 
