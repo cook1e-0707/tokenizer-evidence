@@ -478,11 +478,20 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             repo_root=repo_root,
             eval_path=config.data.eval_path,
             default_payload_text=config.eval.payload_text,
+            carrier_catalog_path=config.data.carrier_catalog_path,
+            render_format=config.eval.render_format,
+            prefer_compiled_rendered_text=True,
         )
 
         verifier_text = evidence_source.evidence_text
         diagnostics = dict(evidence_source.diagnostics)
         artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
+        compiled_contract_payload = diagnostics.get("compiled_eval_contract")
+        compiled_eval_contract = (
+            CompiledEvalContract.from_dict(compiled_contract_payload)
+            if isinstance(compiled_contract_payload, dict)
+            else None
+        )
         if artifact_format == FOUNDATION_ARTIFACT_FORMAT:
             raise ValueError(
                 "canonical_render eval was given foundation_slot_values from a foundation-stage train run. "
@@ -492,10 +501,10 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
         source_contract_payload = diagnostics.get("canonical_contract")
         if diagnostics.get("evidence_source") == "generated_text_path" and not isinstance(
             source_contract_payload, dict
-        ):
+        ) and compiled_eval_contract is None:
             raise ValueError(
                 "generated-text evaluation requires eval_input.json to carry canonical_contract "
-                "metadata from the source train run"
+                "metadata from the source train run, unless compiled_eval_contract is provided"
             )
         if isinstance(source_contract_payload, dict):
             ensure_matching_canonical_contract(
@@ -504,8 +513,19 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
                 expected_label="train_eval_input",
                 observed_label="eval_config",
             )
+        expected_contract_summary: dict[str, object]
+        if compiled_eval_contract is not None:
+            expected_contract_summary = {
+                "contract_kind": "compiled_eval_contract",
+                **compiled_eval_contract.to_dict(),
+            }
+        else:
+            expected_contract_summary = {
+                "contract_kind": "canonical_contract",
+                **active_contract.to_dict(),
+            }
         (run_dir / "expected_contract_summary.json").write_text(
-            json.dumps(active_contract.to_dict(), indent=2, sort_keys=True),
+            json.dumps(expected_contract_summary, indent=2, sort_keys=True),
             encoding="utf-8",
         )
         if isinstance(source_contract_payload, dict):
@@ -524,10 +544,17 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             )
         if verifier_text is not None and artifact_format == SCAFFOLDED_ARTIFACT_FORMAT:
             expected_slot_values = tuple(str(item) for item in diagnostics.get("expected_slot_values", []))
+            if not expected_slot_values and compiled_eval_contract is not None:
+                expected_slot_values = compiled_eval_contract.expected_slot_values
+            slot_field_names = tuple(str(item) for item in diagnostics.get("slot_field_names", ()))
+            if not slot_field_names and compiled_eval_contract is not None:
+                slot_field_names = compiled_eval_contract.slot_field_names
+            if not slot_field_names:
+                slot_field_names = active_contract.field_names * active_contract.block_count
             parse_result = parse_scaffolded_completion(
                 verifier_text,
                 layout=layout,
-                slot_field_names=active_contract.field_names * active_contract.block_count,
+                slot_field_names=slot_field_names,
                 expected_slot_values=expected_slot_values,
             )
             (run_dir / "scaffolded_completion_diagnostics.json").write_text(
@@ -581,7 +608,15 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             text=verifier_text,
             bucket_layout=layout,
             payload_codec=codec,
-            expected_payload=evidence_source.expected_payload_bytes,
+            expected_payload=(
+                evidence_source.expected_payload_units
+                if evidence_source.expected_payload_units
+                else (
+                    tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+                    if compiled_eval_contract is not None
+                    else evidence_source.expected_payload_bytes
+                )
+            ),
             config=verify_config,
         )
         if artifact_format == SCAFFOLDED_ARTIFACT_FORMAT:
@@ -593,6 +628,9 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             "num_verifier_blocks": len(result.decoded_bucket_tuples),
             "verification_mode": config.eval.verification_mode,
             "canonical_contract": active_contract.to_dict(),
+            "compiled_eval_contract": (
+                compiled_eval_contract.to_dict() if compiled_eval_contract is not None else None
+            ),
             **promotion_gate_diagnostics,
             **diagnostics,
         }

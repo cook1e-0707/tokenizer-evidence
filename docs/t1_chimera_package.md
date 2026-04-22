@@ -13,7 +13,15 @@ Scope:
 - no new baselines
 - no new model family
 
-`T2` remains prep-only at this stage. The objective-contrast configs exist locally, but the current direct-submit package is `T1`.
+Evaluation contract:
+- `contextual_exact` now evaluates through `canonical_render` after deterministic rerender of compiled slot values
+- `sequence_proxy` now trains through `scaffolded_compiled_completion`, so its scaffolded slot values follow the same compiled payload/codebook contract as `contextual_exact`
+- `sequence_proxy` evaluates through `canonical_render` after parsing scaffolded slot values and verifying against the carried `compiled_eval_contract`
+- this keeps both `T1` arms on the same verifier path and the same payload/codebook target
+
+Current standing:
+- `contextual_exact` already has an accepted Chimera run
+- only `sequence_proxy` needs to be rerun under the repaired package below
 
 ## 1. Prepare Environment
 
@@ -89,58 +97,50 @@ t1_show_eval() {
 }
 ```
 
-## 3. Submit The Two T1 Train Runs
+## 3. Submit Only The Repaired `sequence_proxy` Train Run
 
 ```bash
-t1_submit_train contextual_exact configs/experiment/prep/exp_train__qwen2_5_7b__t1_contextual_exact_v1.yaml
 t1_submit_train sequence_proxy configs/experiment/prep/exp_train__qwen2_5_7b__t1_sequence_proxy_v1.yaml
 ```
 
 ## 4. Monitor Train Jobs
 
 ```bash
-squeue -u "$USER" -o "%.18i %.9P %.24j %.8T %.10M %.6D %R"
-```
-
-```bash
-tail -n 5 "$(t1_case_root contextual_exact)/manifests/job_registry.jsonl"
 tail -n 5 "$(t1_case_root sequence_proxy)/manifests/job_registry.jsonl"
+squeue -u "$USER" -o "%.18i %.9P %.24j %.8T %.10M %.6D %R"
 ```
 
 Train-completion checks:
 
 ```bash
-find "$(t1_case_root contextual_exact)/runs/exp_train" -name train_summary.json -o -name latest_eval_input.json -o -name training_health.json | sort
 find "$(t1_case_root sequence_proxy)/runs/exp_train" -name train_summary.json -o -name latest_eval_input.json -o -name training_health.json | sort
 ```
 
-## 5. Submit The Two T1 Eval Runs
+## 5. Submit Only The Repaired `sequence_proxy` Eval Run
 
 ```bash
-t1_submit_eval contextual_exact configs/experiment/prep/exp_eval__qwen2_5_7b__t1_contextual_exact_v1.yaml
 t1_submit_eval sequence_proxy configs/experiment/prep/exp_eval__qwen2_5_7b__t1_sequence_proxy_v1.yaml
 ```
 
 ## 6. Inspect Eval Results
 
 ```bash
-t1_show_eval contextual_exact
 t1_show_eval sequence_proxy
 ```
 
 Additional diagnostics:
 
 ```bash
-find "$(t1_case_root contextual_exact)/runs/exp_eval" -name compiled_gate_result.json | tail -n 1 | xargs sed -n '1,260p'
-find "$(t1_case_root sequence_proxy)/runs/exp_eval" -name compiled_gate_result.json | tail -n 1 | xargs sed -n '1,260p'
+find "$(t1_case_root sequence_proxy)/runs/exp_eval" -name verifier_result.json | tail -n 1 | xargs sed -n '1,260p'
+find "$(t1_case_root sequence_proxy)/runs/exp_eval" -name scaffolded_completion_diagnostics.json | tail -n 1 | xargs sed -n '1,260p'
 ```
 
 ## 7. T1 Gate
 
 The package is usable only if:
-- both train runs complete with `State=COMPLETED` and `ExitCode=0:0`
-- both eval runs complete with `State=COMPLETED` and `ExitCode=0:0`
-- the `contextual_exact` path is accepted and verifier-successful
-- the `sequence_proxy` path yields a directly comparable train/eval artifact under the same payload and codebook
+- the repaired `sequence_proxy` train run completes with `State=COMPLETED` and `ExitCode=0:0`
+- the repaired `sequence_proxy` eval run completes with `State=COMPLETED` and `ExitCode=0:0`
+- the standing `contextual_exact` path remains the accepted reference arm
+- the rerun `sequence_proxy` path yields a directly comparable train/eval artifact under the same payload and codebook
 
 This package is for controlled theorem comparison, not for reopening baselines or enlarging the robustness grid.

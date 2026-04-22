@@ -23,6 +23,7 @@ from src.core.scaffolded_completion import (
     COMPILED_FIELDWISE_PROMPT_CONTRACT,
     FOUNDATION_ARTIFACT_FORMAT,
     FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+    SCAFFOLDED_ARTIFACT_FORMAT,
     build_fieldwise_generation_plan,
     build_scaffolded_completion_target,
     evaluate_foundation_completion,
@@ -39,6 +40,7 @@ from src.training.hf_causal_lm import (
     run_minimal_hf_causal_lm_training,
 )
 from src.evaluation.report import EvalRunSummary, TrainRunSummary, load_result_json
+from src.evaluation.canonical_source import resolve_input_path
 
 
 def _write_frozen_catalog(path: Path, *, include_topic: bool = True) -> Path:
@@ -235,6 +237,20 @@ def test_train_and_eval_schema_alignment_fails_loudly_on_catalog_divergence(tmp_
         ensure_train_eval_config_alignment(train_config, eval_config, tmp_path)
 
 
+def test_canonical_contract_allows_same_frozen_catalog_at_different_paths(tmp_path: Path) -> None:
+    catalog_a = _write_frozen_catalog(tmp_path / "catalog_a.yaml", include_topic=True)
+    catalog_b = tmp_path / "catalog_b.yaml"
+    catalog_b.write_text(catalog_a.read_text(encoding="utf-8"), encoding="utf-8")
+    train_config = load_experiment_config(
+        _write_experiment_config(tmp_path / "train_same.yaml", catalog_path=catalog_a, experiment_name="exp_train")
+    )
+    eval_config = load_experiment_config(
+        _write_experiment_config(tmp_path / "eval_same.yaml", catalog_path=catalog_b, experiment_name="exp_eval")
+    )
+
+    ensure_train_eval_config_alignment(train_config, eval_config, tmp_path)
+
+
 def test_repo_batch26_train_and_eval_configs_share_canonical_contract() -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     train_config = load_experiment_config(
@@ -416,6 +432,162 @@ def test_eval_accepts_scaffolded_slot_value_artifact(tmp_path: Path) -> None:
     assert eval_summary.diagnostics["generated_artifact_format"] == "scaffolded_slot_values"
     assert eval_summary.diagnostics["value_slot_exact_rate"] == 1.0
     assert eval_summary.diagnostics["decode_success_rate"] == 1.0
+
+
+def test_eval_accepts_compiled_slot_value_artifact_via_canonical_rerender(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    eval_script = _load_eval_script_module()
+    tokenizer = CompiledPromptTokenizer()
+    monkeypatch.setattr(eval_script, "load_tokenizer", lambda *_args, **_kwargs: tokenizer)
+
+    catalog_path = _write_compiled_minimal_catalog(tmp_path / "compiled_catalog.yaml")
+    contract = compile_fieldwise_train_contract(
+        model_name="Qwen/Qwen2.5-7B-Instruct",
+        tokenizer_name="qwen-test",
+        tokenizer_backend="huggingface",
+        catalog_path=catalog_path,
+        payload_labels=("OK", "NO", "UP", "AI"),
+        eval_payload_label="OK",
+        instruction="Select exactly one allowed carrier token.",
+        prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        tokenizer=tokenizer,
+    )
+
+    eval_config_path = _write_experiment_config(
+        tmp_path / "compiled_eval_rerender.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    payload["eval"]["verification_mode"] = "canonical_render"
+    generated_values_path = tmp_path / "compiled_values.txt"
+    generated_values_path.write_text("news\nmarket", encoding="utf-8")
+    eval_input_path = tmp_path / "compiled_eval_input_rerender.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "payload_text": "OK",
+                "generated_text_path": str(generated_values_path),
+                "generated_artifact_format": COMPILED_ARTIFACT_FORMAT,
+                "compiled_train_contract_hash": contract.contract_hash,
+                "compiled_eval_contract": contract.eval_contract.to_dict(),
+                "expected_slot_values": ["news", "market"],
+                "slot_field_names": ["SECTION", "TOPIC"],
+                "exact_slot_prefixes": contract.eval_contract.exact_slot_prefixes,
+                "prompt_contract_name": COMPILED_FIELDWISE_PROMPT_CONTRACT,
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    payload["data"]["eval_path"] = str(eval_input_path)
+    eval_config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+    config = load_experiment_config(eval_config_path)
+
+    run_dir = tmp_path / "run_compiled_rerender"
+    run_dir.mkdir()
+    verification_result, diagnostics = eval_script._run_our_method_eval(config, tmp_path, run_dir)
+
+    assert verification_result.success is True
+    assert diagnostics["evidence_source"] == "compiled_slot_values_rerender"
+    assert diagnostics["generated_artifact_format"] == COMPILED_ARTIFACT_FORMAT
+    assert (run_dir / "verifier_input.txt").read_text(encoding="utf-8") == "SECTION=news; TOPIC=market"
+
+
+def test_eval_accepts_scaffolded_compiled_slot_values_via_canonical_render(
+    tmp_path: Path,
+) -> None:
+    eval_script = _load_eval_script_module()
+    catalog_path = _write_compiled_minimal_catalog(tmp_path / "compiled_catalog.yaml")
+    contract = compile_fieldwise_train_contract(
+        model_name="Qwen/Qwen2.5-7B-Instruct",
+        tokenizer_name="qwen-test",
+        tokenizer_backend="huggingface",
+        catalog_path=catalog_path,
+        payload_labels=tuple(f"U{index:02d}" for index in range(16)),
+        eval_payload_label="U03",
+        instruction="Select exactly one allowed carrier token.",
+        prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        block_count=2,
+        tokenizer=CompiledPromptTokenizer(),
+    )
+
+    eval_config_path = _write_experiment_config(
+        tmp_path / "compiled_scaffold_eval.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_eval",
+    )
+    payload = yaml.safe_load(eval_config_path.read_text(encoding="utf-8"))
+    payload["eval"]["verification_mode"] = "canonical_render"
+    payload["eval"]["payload_text"] = "U03"
+    generated_values_path = tmp_path / "compiled_scaffold_values.txt"
+    generated_values_path.write_text(
+        "\n".join(contract.eval_contract.expected_slot_values),
+        encoding="utf-8",
+    )
+    eval_input_path = tmp_path / "compiled_scaffold_eval_input.json"
+    eval_input_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "payload_text": "U03",
+                "generated_text_path": str(generated_values_path),
+                "generated_artifact_format": SCAFFOLDED_ARTIFACT_FORMAT,
+                "compiled_eval_contract": contract.eval_contract.to_dict(),
+                "expected_slot_values": list(contract.eval_contract.expected_slot_values),
+                "slot_field_names": list(contract.eval_contract.slot_field_names),
+                "prompt_contract_name": COMPILED_FIELDWISE_PROMPT_CONTRACT,
+                "fields_per_block": contract.eval_contract.fields_per_block,
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    payload["data"]["eval_path"] = str(eval_input_path)
+    eval_config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+    config = load_experiment_config(eval_config_path)
+
+    run_dir = tmp_path / "run_scaffolded_compiled"
+    run_dir.mkdir()
+    verification_result, diagnostics = eval_script._run_our_method_eval(config, tmp_path, run_dir)
+    layout = load_required_frozen_catalog(catalog_path)
+    expected_text, _ = render_foundation_slot_values(
+        slot_values=contract.eval_contract.expected_slot_values,
+        layout=layout,
+        slot_field_names=contract.eval_contract.slot_field_names,
+        render_format="canonical_v1",
+    )
+
+    assert verification_result.success is True
+    assert diagnostics["generated_artifact_format"] == SCAFFOLDED_ARTIFACT_FORMAT
+    assert diagnostics["compiled_eval_contract"]["payload_label"] == "U03"
+    assert diagnostics["value_slot_exact_rate"] == 1.0
+    assert diagnostics["valid_canonical_block_count"] == 2
+    assert (run_dir / "verifier_input.txt").read_text(encoding="utf-8") == expected_text
+
+
+def test_resolve_input_path_reanchors_missing_absolute_path_under_eval_dir(tmp_path: Path) -> None:
+    anchor_dir = tmp_path / "runs" / "exp_train"
+    target_dir = anchor_dir / "exp_train__demo"
+    target_dir.mkdir(parents=True)
+    local_generated = target_dir / "generated_text.txt"
+    local_generated.write_text("demo", encoding="utf-8")
+    sibling_dir = anchor_dir / "exp_train__other"
+    sibling_dir.mkdir(parents=True)
+    (sibling_dir / "generated_text.txt").write_text("other", encoding="utf-8")
+
+    resolved = resolve_input_path(
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/demo/runs/exp_train/exp_train__demo/generated_text.txt",
+        repo_root=tmp_path,
+        anchor_dir=anchor_dir,
+    )
+
+    assert resolved == local_generated.resolve()
 
 
 def test_canonical_generation_is_deterministic_and_length_bounded(
@@ -1924,6 +2096,88 @@ def test_compiled_train_script_uses_synthesized_dataset_without_train_path(
     eval_input = json.loads(eval_input_path.read_text(encoding="utf-8"))
     assert eval_input["generated_artifact_format"] == COMPILED_ARTIFACT_FORMAT
     assert "compiled_eval_contract" in eval_input
+
+
+def test_scaffolded_compiled_train_script_uses_compiled_payload_contract(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    train_script = _load_train_script_module()
+    catalog_path = _write_compiled_minimal_catalog(tmp_path / "compiled_catalog.yaml")
+    config_path = _write_experiment_config(
+        tmp_path / "compiled_scaffold_train.yaml",
+        catalog_path=catalog_path,
+        experiment_name="exp_train",
+    )
+    payload = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    payload["model"]["name"] = "Qwen/Qwen2.5-7B-Instruct"
+    payload["model"]["family"] = "huggingface-causal-lm"
+    payload["model"]["tokenizer_name"] = "qwen-test"
+    payload["model"]["tokenizer_backend"] = "huggingface"
+    payload["train"]["target_mode"] = "scaffolded_compiled_completion"
+    payload["train"]["probe_payload_texts"] = ["U00", "U03", "U12", "U15"]
+    payload["train"]["probe_block_count"] = 2
+    payload["eval"]["payload_text"] = "U03"
+    payload["train"]["generation_prompt"] = "Output exactly one carrier value per line for each slot and nothing else."
+    payload["train"]["generation_max_new_tokens"] = 8
+    payload["data"]["train_path"] = ""
+    config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
+
+    monkeypatch.setattr(
+        train_script,
+        "parse_args",
+        lambda: types.SimpleNamespace(
+            config=str(config_path),
+            override=[],
+            force=True,
+            jsonl_log=False,
+        ),
+    )
+    monkeypatch.setattr(
+        train_script,
+        "compile_fieldwise_train_contract",
+        lambda **kwargs: compile_fieldwise_train_contract(
+            **kwargs,
+            tokenizer=CompiledPromptTokenizer(),
+        ),
+    )
+
+    captured: dict[str, object] = {}
+
+    def _fake_training(**kwargs):
+        captured["dataset"] = kwargs["dataset"]
+        captured["generation_prompt"] = kwargs["generation_prompt"]
+        captured["use_compiled_bucket_objective"] = kwargs["use_compiled_bucket_objective"]
+        return HFCausalLMTrainingResult(
+            status="ok",
+            steps=4,
+            examples_seen=4,
+            final_loss=0.0,
+            checkpoint_dir=str(tmp_path / "checkpoint"),
+            generated_text="news\ntravel\nupdate\nhealth",
+            generation_diagnostics={},
+            health_diagnostics={},
+        )
+
+    monkeypatch.setattr(train_script, "run_minimal_hf_causal_lm_training", _fake_training)
+
+    assert train_script.main() == 0
+    assert captured["use_compiled_bucket_objective"] is False
+    assert isinstance(captured["generation_prompt"], str)
+    dataset = captured["dataset"]
+    assert isinstance(dataset, list)
+    assert len(dataset) == 4
+    assert all(example.metadata["target_mode"] == "scaffolded_compiled_completion" for example in dataset)
+    assert all(example.metadata["generated_artifact_format"] == SCAFFOLDED_ARTIFACT_FORMAT for example in dataset)
+    assert {example.metadata["payload_text"] for example in dataset} == {"U00", "U03", "U12", "U15"}
+    assert all(len(example.metadata["expected_slot_values"]) == 4 for example in dataset)
+
+    eval_input_path = sorted((tmp_path / "results").rglob("eval_input.json"))[0]
+    eval_input = json.loads(eval_input_path.read_text(encoding="utf-8"))
+    assert eval_input["generated_artifact_format"] == SCAFFOLDED_ARTIFACT_FORMAT
+    assert eval_input["compiled_eval_contract"]["payload_label"] == "U03"
+    assert eval_input["expected_slot_values"] == ["news", "travel", "update", "health"]
+    assert eval_input["slot_field_names"] == ["SECTION", "TOPIC", "SECTION", "TOPIC"]
 
 
 def test_compiled_gate_eval_path_reports_contract_metrics_and_decoded_payload(

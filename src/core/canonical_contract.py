@@ -124,7 +124,14 @@ def ensure_matching_canonical_contract(
     observed_label: str = "observed",
 ) -> None:
     mismatches: list[str] = []
-    if expected.catalog_path != observed.catalog_path:
+    if (
+        expected.catalog_path != observed.catalog_path
+        and (
+            not expected.catalog_sha256
+            or not observed.catalog_sha256
+            or expected.catalog_sha256 != observed.catalog_sha256
+        )
+    ):
         mismatches.append(
             f"frozen catalog differs: {expected_label}={expected.catalog_path}, "
             f"{observed_label}={observed.catalog_path}"

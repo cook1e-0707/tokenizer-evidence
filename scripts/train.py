@@ -20,9 +20,12 @@ from src.core.scaffolded_completion import (
     COMPILED_FIELDWISE_PROMPT_CONTRACT,
     DEFAULT_FIELDWISE_PROMPT_CONTRACT,
     FieldwiseGenerationPlan,
+    FieldwiseSlotTarget,
     FOUNDATION_FIELDWISE_PROMPT_CONTRACT,
+    SCAFFOLDED_ARTIFACT_FORMAT,
     build_fieldwise_generation_plan,
     build_scaffolded_completion_target,
+    build_scaffolded_completion_target_from_plan,
 )
 from src.evaluation.report import TrainRunSummary
 from src.infrastructure.checkpointing import save_checkpoint_metadata
@@ -119,22 +122,30 @@ def main() -> int:
     expected_slot_values: tuple[str, ...] = ()
     generation_prompt = config.train.generation_prompt
     fieldwise_generation_plan: FieldwiseGenerationPlan | None = None
+    scaffold_slot_field_names: tuple[str, ...] = ()
+    scaffold_prompt_contract_name = ""
+    scaffold_fields_per_block = 0
     compiled_train_contract = None
     if config.train.target_mode not in {
         "dataset_completion",
         "canonical_evidence",
         "scaffolded_canonical_completion",
+        "scaffolded_compiled_completion",
         "fieldwise_constrained_slot_completion",
         "foundation_fieldwise_constrained_slot_completion",
         "compiled_fieldwise_bucket_mass",
     }:
         raise ValueError(
             "train.target_mode must be one of {'dataset_completion', 'canonical_evidence', "
-            "'scaffolded_canonical_completion', 'fieldwise_constrained_slot_completion', "
-            "'foundation_fieldwise_constrained_slot_completion', 'compiled_fieldwise_bucket_mass'}; "
+            "'scaffolded_canonical_completion', 'scaffolded_compiled_completion', "
+            "'fieldwise_constrained_slot_completion', 'foundation_fieldwise_constrained_slot_completion', "
+            "'compiled_fieldwise_bucket_mass'}; "
             f"got {config.train.target_mode!r}"
         )
-    if config.train.target_mode == "compiled_fieldwise_bucket_mass":
+    if config.train.target_mode in {
+        "compiled_fieldwise_bucket_mass",
+        "scaffolded_compiled_completion",
+    }:
         probe_payload_texts = tuple(
             str(payload).strip()
             for payload in config.train.probe_payload_texts
@@ -168,53 +179,165 @@ def main() -> int:
             json.dumps(compiled_train_contract.eval_contract.to_dict(), indent=2, sort_keys=True),
             encoding="utf-8",
         )
-        dataset = [
-            TrainingExample(
-                prompt=sample.exact_slot_prefix,
-                target_symbols=(),
-                metadata={
-                    "completion": sample.target_value,
-                    "slot_type": sample.field_name,
-                    "payload_label": sample.payload_label,
-                    "payload_unit": sample.payload_unit,
-                    "compiled_sample_id": sample.sample_id,
-                    "compiled_prompt_token_ids": list(sample.prompt_token_ids),
-                    "compiled_allowed_token_ids": list(sample.allowed_token_ids),
-                    "compiled_bucket_to_token_ids": {
-                        str(bucket_id): list(token_ids)
-                        for bucket_id, token_ids in sample.bucket_to_token_ids.items()
+        if config.train.target_mode == "compiled_fieldwise_bucket_mass":
+            dataset = [
+                TrainingExample(
+                    prompt=sample.exact_slot_prefix,
+                    target_symbols=(),
+                    metadata={
+                        "completion": sample.target_value,
+                        "slot_type": sample.field_name,
+                        "payload_label": sample.payload_label,
+                        "payload_unit": sample.payload_unit,
+                        "compiled_sample_id": sample.sample_id,
+                        "compiled_prompt_token_ids": list(sample.prompt_token_ids),
+                        "compiled_allowed_token_ids": list(sample.allowed_token_ids),
+                        "compiled_bucket_to_token_ids": {
+                            str(bucket_id): list(token_ids)
+                            for bucket_id, token_ids in sample.bucket_to_token_ids.items()
+                        },
+                        "compiled_target_bucket_id": sample.target_bucket_id,
+                        "compiled_target_token_id": sample.target_token_id,
+                        "compiled_train_contract_hash": compiled_train_contract.contract_hash,
+                        "generated_artifact_format": COMPILED_ARTIFACT_FORMAT,
+                        "target_mode": config.train.target_mode,
                     },
-                    "compiled_target_bucket_id": sample.target_bucket_id,
-                    "compiled_target_token_id": sample.target_token_id,
-                    "compiled_train_contract_hash": compiled_train_contract.contract_hash,
-                    "generated_artifact_format": COMPILED_ARTIFACT_FORMAT,
-                    "target_mode": config.train.target_mode,
-                },
+                )
+                for sample in compiled_train_contract.samples
+            ]
+            fieldwise_generation_plan = build_generation_plan_from_compiled_eval_contract(
+                compiled_eval_contract=compiled_train_contract.eval_contract,
+                catalog_path=Path(compiled_train_contract.catalog_path),
             )
-            for sample in compiled_train_contract.samples
-        ]
-        fieldwise_generation_plan = build_generation_plan_from_compiled_eval_contract(
-            compiled_eval_contract=compiled_train_contract.eval_contract,
-            catalog_path=Path(compiled_train_contract.catalog_path),
-        )
-        (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
-            "\n\n".join(target.prompt for target in fieldwise_generation_plan.slot_targets),
-            encoding="utf-8",
-        )
-        (paths.run_dir / "gold_scaffold_values.txt").write_text(
-            "\n".join(fieldwise_generation_plan.expected_slot_values),
-            encoding="utf-8",
-        )
-        (paths.run_dir / "probe_payload_texts.json").write_text(
-            json.dumps(list(probe_payload_texts), indent=2),
-            encoding="utf-8",
-        )
-        (paths.run_dir / "fieldwise_generation_plan.json").write_text(
-            json.dumps(fieldwise_generation_plan.to_dict(), indent=2, sort_keys=True),
-            encoding="utf-8",
-        )
-        generated_artifact_format = COMPILED_ARTIFACT_FORMAT
-        expected_slot_values = fieldwise_generation_plan.expected_slot_values
+            (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
+                "\n\n".join(target.prompt for target in fieldwise_generation_plan.slot_targets),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "gold_scaffold_values.txt").write_text(
+                "\n".join(fieldwise_generation_plan.expected_slot_values),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "probe_payload_texts.json").write_text(
+                json.dumps(list(probe_payload_texts), indent=2),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "fieldwise_generation_plan.json").write_text(
+                json.dumps(fieldwise_generation_plan.to_dict(), indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            generated_artifact_format = COMPILED_ARTIFACT_FORMAT
+            expected_slot_values = fieldwise_generation_plan.expected_slot_values
+        else:
+            scaffold_instruction = (
+                config.train.generation_prompt.strip()
+                or "Output exactly one carrier value per line for each slot and nothing else."
+            )
+            plans_by_payload: dict[str, FieldwiseGenerationPlan] = {}
+            dataset = []
+            for payload_label in probe_payload_texts:
+                payload_samples = tuple(
+                    sorted(
+                        (
+                            sample
+                            for sample in compiled_train_contract.samples
+                            if sample.payload_label == payload_label
+                        ),
+                        key=lambda item: item.slot_index,
+                    )
+                )
+                if not payload_samples:
+                    raise ValueError(
+                        f"Compiled scaffold package is missing samples for payload_label={payload_label!r}"
+                    )
+                slot_targets = tuple(
+                    FieldwiseSlotTarget(
+                        slot_index=sample.slot_index,
+                        block_index=sample.block_index,
+                        field_name=sample.field_name,
+                        prompt=sample.exact_slot_prefix,
+                        exact_slot_prefix=sample.exact_slot_prefix,
+                        allowed_values=sample.allowed_values,
+                        allowed_value_bucket_ids={
+                            value: next(
+                                (
+                                    bucket_id
+                                    for bucket_id, token_ids in sample.bucket_to_token_ids.items()
+                                    if sample.value_to_token_id.get(value) in token_ids
+                                ),
+                                sample.target_bucket_id if value == sample.target_value else None,
+                            )
+                            for value in sample.allowed_values
+                            if (
+                                sample.value_to_token_id.get(value) is not None
+                                or value == sample.target_value
+                            )
+                        },
+                        expected_value=sample.target_value,
+                        expected_bucket_id=sample.target_bucket_id,
+                    )
+                    for sample in payload_samples
+                )
+                plan = FieldwiseGenerationPlan(
+                    payload_text=payload_label,
+                    slot_targets=slot_targets,
+                    expected_slot_values=tuple(sample.target_value for sample in payload_samples),
+                    fields_per_block=compiled_train_contract.fields_per_block,
+                    prompt_contract_name=compiled_train_contract.prompt_contract_name,
+                    artifact_format=COMPILED_ARTIFACT_FORMAT,
+                )
+                plans_by_payload[payload_label] = plan
+                scaffold = build_scaffolded_completion_target_from_plan(
+                    plan,
+                    instruction=scaffold_instruction,
+                )
+                completion = "\n".join(scaffold.expected_slot_values)
+                if config.train.generation_stop_strings:
+                    completion = f"{completion}{config.train.generation_stop_strings[0]}"
+                dataset.append(
+                    TrainingExample(
+                        prompt=scaffold.prompt,
+                        target_symbols=(),
+                        metadata={
+                            "completion": completion,
+                            "payload_text": payload_label,
+                            "target_mode": config.train.target_mode,
+                            "generated_artifact_format": SCAFFOLDED_ARTIFACT_FORMAT,
+                            "expected_slot_values": list(scaffold.expected_slot_values),
+                            "slot_field_names": list(scaffold.slot_field_names),
+                            "compiled_payload_label": payload_label,
+                            "compiled_payload_units": list(
+                                compiled_train_contract.payload_label_to_units[payload_label]
+                            ),
+                        },
+                    )
+                )
+            eval_plan = plans_by_payload[config.eval.payload_text]
+            eval_scaffold = build_scaffolded_completion_target_from_plan(
+                eval_plan,
+                instruction=scaffold_instruction,
+            )
+            (paths.run_dir / "gold_scaffold_prompt.txt").write_text(
+                eval_scaffold.prompt,
+                encoding="utf-8",
+            )
+            (paths.run_dir / "gold_scaffold_values.txt").write_text(
+                "\n".join(eval_scaffold.expected_slot_values),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "probe_payload_texts.json").write_text(
+                json.dumps(list(probe_payload_texts), indent=2),
+                encoding="utf-8",
+            )
+            (paths.run_dir / "fieldwise_generation_plan.json").write_text(
+                json.dumps(eval_plan.to_dict(), indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            generated_artifact_format = SCAFFOLDED_ARTIFACT_FORMAT
+            expected_slot_values = eval_scaffold.expected_slot_values
+            generation_prompt = eval_scaffold.prompt
+            scaffold_slot_field_names = eval_scaffold.slot_field_names
+            scaffold_prompt_contract_name = eval_plan.prompt_contract_name
+            scaffold_fields_per_block = eval_plan.fields_per_block
     if config.train.target_mode in {
         "canonical_evidence",
         "scaffolded_canonical_completion",
@@ -500,6 +623,10 @@ def main() -> int:
         eval_input_payload["exact_slot_prefixes"] = fieldwise_generation_plan.exact_slot_prefixes
         eval_input_payload["prompt_contract_name"] = fieldwise_generation_plan.prompt_contract_name
         eval_input_payload["fields_per_block"] = fieldwise_generation_plan.fields_per_block
+    elif scaffold_slot_field_names:
+        eval_input_payload["slot_field_names"] = list(scaffold_slot_field_names)
+        eval_input_payload["prompt_contract_name"] = scaffold_prompt_contract_name
+        eval_input_payload["fields_per_block"] = scaffold_fields_per_block
     eval_input_path = paths.run_dir / "eval_input.json"
     eval_input_path.write_text(
         json.dumps(eval_input_payload, indent=2, sort_keys=True),

@@ -18,7 +18,7 @@ data:
   carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml
 
 train:
-  target_mode: scaffolded_canonical_completion
+  target_mode: scaffolded_compiled_completion
   batch_size: 1
   epochs: 64
   learning_rate: 5.0e-5

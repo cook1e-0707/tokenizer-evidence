@@ -18,7 +18,7 @@ data:
   eval_path: results/raw/exp_train/latest_eval_input.json
 
 eval:
-  verification_mode: compiled_gate
+  verification_mode: canonical_render
   render_format: canonical_v1
   payload_text: U03
   audit_strict: true

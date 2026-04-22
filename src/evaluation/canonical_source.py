@@ -20,6 +20,17 @@ class CanonicalEvidenceSource:
 def resolve_input_path(path_value: str, repo_root: Path, anchor_dir: Path | None = None) -> Path:
     path = Path(path_value)
     if path.is_absolute():
+        if path.exists():
+            return path
+        if anchor_dir is not None and anchor_dir.exists():
+            for tail_size in (3, 2, 1):
+                if len(path.parts) >= tail_size:
+                    candidate = (anchor_dir / Path(*path.parts[-tail_size:])).resolve()
+                    if candidate.exists():
+                        return candidate
+            candidates = sorted(anchor_dir.rglob(path.name))
+            if len(candidates) == 1:
+                return candidates[0].resolve()
         return path
     if anchor_dir is not None:
         anchored = anchor_dir / path

@@ -161,11 +161,23 @@ def _extract_slot_values_from_rendered_text(text: str) -> tuple[str, ...]:
     return tuple(values)
 
 
+def _build_scaffold_prompt(
+    *,
+    instruction: str,
+    slot_field_names: Sequence[str],
+) -> str:
+    render_config = render_config_from_name("canonical_v1")
+    prompt_lines = [instruction.strip() or "Output one carrier value per line and nothing else.", "Slots:"]
+    for index, field_name in enumerate(slot_field_names, start=1):
+        prompt_lines.append(f"{index}. {field_name}")
+    prompt_lines.append("Values:")
+    return render_config.block_separator.join(prompt_lines)
+
+
 def build_scaffolded_completion_target(
     bundle: CanonicalEvidenceBundle,
     instruction: str,
 ) -> ScaffoldedCompletionTarget:
-    render_config = render_config_from_name(bundle.contract.render_format)
     slot_field_names = bundle.contract.field_names * bundle.contract.block_count
     expected_slot_values = _extract_slot_values_from_rendered_text(bundle.rendered.text)
     if len(expected_slot_values) != len(slot_field_names):
@@ -173,16 +185,27 @@ def build_scaffolded_completion_target(
             "Rendered canonical evidence does not match expected slot layout: "
             f"slots={len(slot_field_names)}, values={len(expected_slot_values)}"
         )
-
-    prompt_lines = [instruction.strip() or "Output one carrier value per line and nothing else.", "Slots:"]
-    for index, field_name in enumerate(slot_field_names, start=1):
-        prompt_lines.append(f"{index}. {field_name}")
-    prompt_lines.append("Values:")
-    prompt = render_config.block_separator.join(prompt_lines)
     return ScaffoldedCompletionTarget(
-        prompt=prompt,
+        prompt=_build_scaffold_prompt(
+            instruction=instruction,
+            slot_field_names=slot_field_names,
+        ),
         slot_field_names=slot_field_names,
         expected_slot_values=expected_slot_values,
+    )
+
+
+def build_scaffolded_completion_target_from_plan(
+    plan: FieldwiseGenerationPlan,
+    instruction: str,
+) -> ScaffoldedCompletionTarget:
+    return ScaffoldedCompletionTarget(
+        prompt=_build_scaffold_prompt(
+            instruction=instruction,
+            slot_field_names=plan.slot_field_names,
+        ),
+        slot_field_names=plan.slot_field_names,
+        expected_slot_values=plan.expected_slot_values,
     )
 
 
