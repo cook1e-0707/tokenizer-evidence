@@ -25,7 +25,7 @@ Guardrails:
 1. `S0`: make `PROJECT_STATUS.md` internally consistent.
 2. `S1` and `S2`: materialize the standing clean and robustness tables from accepted runs only.
 3. `C1`: add statistics, compute accounting, and exact inclusion lists for those same standing runs.
-4. `T1` and `T2`: prepare dry-run packages only; no Chimera sweep yet.
+4. `T1`: repair the blocked control-arm eval package only; `T2`: consolidate the accepted `T2-r1` theorem result into paper-facing artifacts; no new Chimera sweep unless the paper claim changes.
 5. Keep `B1` and `R1` blocked.
 
 ## Non-Goals For This Stage

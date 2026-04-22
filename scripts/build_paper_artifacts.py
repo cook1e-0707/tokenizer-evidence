@@ -290,10 +290,19 @@ def _collect_theorem_t2_records(
 def _build_theorem_t2_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     if not rows:
         return {}
+    git_commits = sorted({str(row["git_commit"]) for row in rows})
     return {
         "stage": str(rows[0]["stage"]),
         "payload": str(rows[0]["payload"]),
         "seed": int(rows[0]["seed"]),
+        "git_commits": git_commits,
+        "provenance_note": (
+            "bucket_mass comes from commit 1603838, while fixed_representative and uniform_bucket come from "
+            "commit f968ce4. This is intentional: f968ce4 only repaired bucket-key handling in the non-bucket-mass "
+            "branches and does not change the bucket_mass objective path."
+            if set(git_commits) == {"1603838", "f968ce4"}
+            else "all theorem variants came from the same code commit"
+        ),
         "variants": rows,
         "core_finding": {
             "fixed_representative": "passes exact-slot",

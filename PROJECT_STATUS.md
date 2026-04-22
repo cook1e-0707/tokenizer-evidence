@@ -13,7 +13,7 @@
   - `batch3d` passed
 - Active execution scope:
   - manuscript-facing consolidation only
-  - theorem-package preparation only
+  - theorem-package reporting and repair only
   - no additional Batch 3 expansion
   - no new baselines
   - no new model families
