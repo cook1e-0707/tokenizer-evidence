@@ -19,7 +19,7 @@
   - no new model families
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
-  - `T1 sequence_proxy` local repair is complete: the control arm now trains against the same compiled payload/codebook target via `scaffolded_compiled_completion` and evaluates through `canonical_render` with `compiled_eval_contract` metadata
+  - `T1 sequence_proxy` local repair is complete: the control arm now trains against the same compiled payload/codebook target via `scaffolded_compiled_completion`, includes an explicit `Payload label` in the scaffold prompt, and evaluates through `canonical_render` with `compiled_eval_contract` metadata
   - `T1 sequence_proxy` still needs one clean Chimera rerun to replace the old blocked control-arm artifact
   - initial `T2` objective package executed cleanly, but remained non-discriminative because the single-token-per-bucket compiled catalog collapses all three objectives to the same effective supervision problem
   - repaired `T2-r1` package now produced a discriminative result on the strict-passed multi-member-bucket Qwen catalog at `U15`

@@ -16,6 +16,7 @@ Scope:
 Evaluation contract:
 - `contextual_exact` now evaluates through `canonical_render` after deterministic rerender of compiled slot values
 - `sequence_proxy` now trains through `scaffolded_compiled_completion`, so its scaffolded slot values follow the same compiled payload/codebook contract as `contextual_exact`
+- the repaired scaffold prompt includes `Payload label: ...`, but still does not expose exact slot prefixes or allowed-carrier lists
 - `sequence_proxy` evaluates through `canonical_render` after parsing scaffolded slot values and verifying against the carried `compiled_eval_contract`
 - this keeps both `T1` arms on the same verifier path and the same payload/codebook target
 

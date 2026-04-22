@@ -165,9 +165,12 @@ def _build_scaffold_prompt(
     *,
     instruction: str,
     slot_field_names: Sequence[str],
+    payload_text: str = "",
 ) -> str:
     render_config = render_config_from_name("canonical_v1")
     prompt_lines = [instruction.strip() or "Output one carrier value per line and nothing else.", "Slots:"]
+    if payload_text.strip():
+        prompt_lines.insert(1, f"Payload label: {payload_text.strip()}")
     for index, field_name in enumerate(slot_field_names, start=1):
         prompt_lines.append(f"{index}. {field_name}")
     prompt_lines.append("Values:")
@@ -203,6 +206,7 @@ def build_scaffolded_completion_target_from_plan(
         prompt=_build_scaffold_prompt(
             instruction=instruction,
             slot_field_names=plan.slot_field_names,
+            payload_text=plan.payload_text,
         ),
         slot_field_names=plan.slot_field_names,
         expected_slot_values=plan.expected_slot_values,

@@ -2171,6 +2171,20 @@ def test_scaffolded_compiled_train_script_uses_compiled_payload_contract(
     assert all(example.metadata["generated_artifact_format"] == SCAFFOLDED_ARTIFACT_FORMAT for example in dataset)
     assert {example.metadata["payload_text"] for example in dataset} == {"U00", "U03", "U12", "U15"}
     assert all(len(example.metadata["expected_slot_values"]) == 4 for example in dataset)
+    assert {example.prompt for example in dataset} == {
+        "Output exactly one carrier value per line for each slot and nothing else.\n"
+        "Payload label: U00\n"
+        "Slots:\n1. SECTION\n2. TOPIC\n3. SECTION\n4. TOPIC\nValues:",
+        "Output exactly one carrier value per line for each slot and nothing else.\n"
+        "Payload label: U03\n"
+        "Slots:\n1. SECTION\n2. TOPIC\n3. SECTION\n4. TOPIC\nValues:",
+        "Output exactly one carrier value per line for each slot and nothing else.\n"
+        "Payload label: U12\n"
+        "Slots:\n1. SECTION\n2. TOPIC\n3. SECTION\n4. TOPIC\nValues:",
+        "Output exactly one carrier value per line for each slot and nothing else.\n"
+        "Payload label: U15\n"
+        "Slots:\n1. SECTION\n2. TOPIC\n3. SECTION\n4. TOPIC\nValues:",
+    }
 
     eval_input_path = sorted((tmp_path / "results").rglob("eval_input.json"))[0]
     eval_input = json.loads(eval_input_path.read_text(encoding="utf-8"))
@@ -2178,6 +2192,9 @@ def test_scaffolded_compiled_train_script_uses_compiled_payload_contract(
     assert eval_input["compiled_eval_contract"]["payload_label"] == "U03"
     assert eval_input["expected_slot_values"] == ["news", "travel", "update", "health"]
     assert eval_input["slot_field_names"] == ["SECTION", "TOPIC", "SECTION", "TOPIC"]
+    assert captured["generation_prompt"].startswith(
+        "Output exactly one carrier value per line for each slot and nothing else.\nPayload label: U03\n"
+    )
 
 
 def test_compiled_gate_eval_path_reports_contract_metrics_and_decoded_payload(
