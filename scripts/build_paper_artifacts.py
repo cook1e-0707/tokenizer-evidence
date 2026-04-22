@@ -205,6 +205,160 @@ def _write_robustness_family_tex(path: Path, rows: list[dict[str, Any]]) -> Path
     return path
 
 
+def _noncanonical_members_from_gate(gate_payload: dict[str, Any]) -> str:
+    members: list[str] = []
+    for slot in gate_payload.get("slot_diagnostics", []):
+        if not isinstance(slot, dict):
+            continue
+        if bool(slot.get("is_bucket_correct")) and not bool(slot.get("is_slot_exact")):
+            slot_type = str(slot.get("slot_type", "")).strip()
+            observed_value = str(slot.get("observed_value", "")).strip()
+            if slot_type and observed_value:
+                members.append(f"{slot_type}={observed_value}")
+    return "; ".join(members) if members else "--"
+
+
+def _collect_theorem_t2_records(
+    repo_root: Path,
+    standing_config: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    theorem_config = standing_config.get("theorem_t2")
+    if not isinstance(theorem_config, dict):
+        return [], []
+    rows: list[dict[str, Any]] = []
+    inclusion_rows: list[dict[str, Any]] = []
+    for case in theorem_config.get("cases", []):
+        case_root = _resolve_path(repo_root, str(case["case_root"]))
+        train_summary_path = _find_one(case_root, "train_summary.json")
+        eval_summary_path = _find_one(case_root, "eval_summary.json")
+        training_health_path = _find_one(case_root, "training_health.json")
+        compiled_gate_path = _find_one(case_root, "compiled_gate_result.json")
+
+        train_summary = load_result_json(train_summary_path)
+        eval_summary = load_result_json(eval_summary_path)
+        if not isinstance(train_summary, TrainRunSummary):
+            raise TypeError(f"{train_summary_path} is not a train summary")
+        if not isinstance(eval_summary, EvalRunSummary):
+            raise TypeError(f"{eval_summary_path} is not an eval summary")
+        training_health = json.loads(training_health_path.read_text(encoding="utf-8"))
+        gate_payload = json.loads(compiled_gate_path.read_text(encoding="utf-8"))
+        rows.append(
+            {
+                "stage": str(theorem_config.get("stage", "T2-r1")),
+                "objective": str(case["objective"]),
+                "payload": str(theorem_config.get("payload", "")),
+                "seed": int(theorem_config.get("seed", 0) or 0),
+                "accepted": bool(eval_summary.accepted),
+                "verifier_success": bool(eval_summary.verifier_success),
+                "decoded_payload": str(eval_summary.decoded_payload),
+                "field_valid_rate": float(gate_payload.get("field_valid_rate", 0.0) or 0.0),
+                "bucket_correct_rate": float(gate_payload.get("bucket_correct_rate", 0.0) or 0.0),
+                "slot_exact_rate": float(gate_payload.get("slot_exact_rate", 0.0) or 0.0),
+                "chosen_slot_values": " / ".join(str(value) for value in gate_payload.get("parsed_slot_values", [])),
+                "chosen_noncanonical_bucket_members": _noncanonical_members_from_gate(gate_payload),
+                "objective_mode": str(training_health.get("objective_mode", "")),
+                "final_loss": float(train_summary.final_loss),
+                "git_commit": str(eval_summary.git_commit),
+                "outcome": (
+                    "exact-slot pass"
+                    if bool(eval_summary.accepted)
+                    else "bucket-correct, exact-slot fail"
+                    if float(gate_payload.get("bucket_correct_rate", 0.0) or 0.0) == 1.0
+                    and float(gate_payload.get("slot_exact_rate", 0.0) or 0.0) < 1.0
+                    else "non-accepted"
+                ),
+            }
+        )
+        inclusion_rows.append(
+            {
+                "workstream": "T2",
+                "stage": str(theorem_config.get("stage", "T2-r1")),
+                "objective": str(case["objective"]),
+                "payload": str(theorem_config.get("payload", "")),
+                "seed": int(theorem_config.get("seed", 0) or 0),
+                "case_root": str(case_root),
+                "train_summary_path": str(train_summary_path),
+                "eval_summary_path": str(eval_summary_path),
+                "training_health_path": str(training_health_path),
+                "compiled_gate_result_path": str(compiled_gate_path),
+                "git_commit": str(eval_summary.git_commit),
+            }
+        )
+    return rows, inclusion_rows
+
+
+def _build_theorem_t2_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    if not rows:
+        return {}
+    return {
+        "stage": str(rows[0]["stage"]),
+        "payload": str(rows[0]["payload"]),
+        "seed": int(rows[0]["seed"]),
+        "variants": rows,
+        "core_finding": {
+            "fixed_representative": "passes exact-slot",
+            "bucket_mass": "bucket-correct but fails exact-slot by choosing a non-canonical member",
+            "uniform_bucket": "bucket-correct but fails exact-slot by choosing non-canonical members",
+        },
+    }
+
+
+def _write_t2_main_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "\\begin{table}[t]",
+        "\\centering",
+        "\\small",
+        "\\begin{tabular}{lllll}",
+        "\\toprule",
+        "Objective & Accepted & bucket\\_correct\\_rate & slot\\_exact\\_rate & Outcome \\\\",
+        "\\midrule",
+    ]
+    for row in rows:
+        lines.append(
+            f"{_latex_escape(row['objective'])} & {_latex_escape(str(row['accepted']).lower())} & "
+            f"{row['bucket_correct_rate']:.2f} & {row['slot_exact_rate']:.2f} & {_latex_escape(row['outcome'])} \\\\"
+        )
+    lines.extend(
+        [
+            "\\bottomrule",
+            "\\end{tabular}",
+            "\\caption{Theorem~2 objective comparison on the controlled multi-member-bucket Qwen setting at payload U15. Fixed representative supervision preserves exact-slot fidelity, while bucket-mass and uniform-bucket supervision remain bucket-correct but fail the canonical exact-slot gate.}",
+            "\\end{table}",
+        ]
+    )
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def _write_t2_supplement_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "\\begin{table}[t]",
+        "\\centering",
+        "\\small",
+        "\\begin{tabular}{llll}",
+        "\\toprule",
+        "Objective & bucket\\_correct\\_rate & slot\\_exact\\_rate & Chosen non-canonical bucket members \\\\",
+        "\\midrule",
+    ]
+    for row in rows:
+        lines.append(
+            f"{_latex_escape(row['objective'])} & {row['bucket_correct_rate']:.2f} & "
+            f"{row['slot_exact_rate']:.2f} & {_latex_escape(row['chosen_noncanonical_bucket_members'])} \\\\"
+        )
+    lines.extend(
+        [
+            "\\bottomrule",
+            "\\end{tabular}",
+            "\\caption{Supplementary bucket-level metrics for Theorem~2. The uniform-bucket objective remains bucket-correct while selecting non-canonical bucket members such as SECTION=review and TOPIC=climate.}",
+            "\\end{table}",
+        ]
+    )
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
 def _collect_main_records(repo_root: Path, standing_config: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     stage = str(standing_config["main_clean"]["stage"])
     rows: list[dict[str, Any]] = []
@@ -535,20 +689,25 @@ def main() -> int:
     robustness_rows, robustness_inclusion_rows, robustness_compute_rows = _collect_robustness_records(
         repo_root, standing_config
     )
+    theorem_t2_rows, theorem_t2_inclusion_rows = _collect_theorem_t2_records(repo_root, standing_config)
     main_summary = _build_main_summary(main_rows)
     robustness_summary, robustness_stage_rows, robustness_family_rows = _build_robustness_summary(
         robustness_rows
     )
+    theorem_t2_summary = _build_theorem_t2_summary(theorem_t2_rows)
     stat_rows = _build_stat_rows(main_summary, robustness_summary)
     compute_summary, compute_summary_rows = _build_compute_accounting(main_compute_rows + robustness_compute_rows)
 
     _write_json(output_dir / "main_clean_summary.json", main_summary)
     _write_json(output_dir / "robustness_summary.json", robustness_summary)
+    if theorem_t2_summary:
+        _write_json(output_dir / "t2_r1_summary.json", theorem_t2_summary)
     _write_json(
         output_dir / "run_inclusion_lists.json",
         {
             "main_clean": main_inclusion_rows,
             "robustness": robustness_inclusion_rows,
+            "theorem_t2": theorem_t2_inclusion_rows,
         },
     )
     _write_json(output_dir / "compute_accounting.json", compute_summary)
@@ -556,6 +715,20 @@ def main() -> int:
     _write_csv(tables_dir / "compiled_c3_r4_main.csv", main_rows)
     _write_csv(tables_dir / "batch3cd_appendix.csv", robustness_stage_rows)
     _write_csv(tables_dir / "batch3_family_summary.csv", robustness_family_rows)
+    if theorem_t2_rows:
+        _write_csv(tables_dir / "t2_r1_objective_comparison.csv", theorem_t2_rows)
+        _write_csv(
+            tables_dir / "t2_r1_bucket_supplement.csv",
+            [
+                {
+                    "objective": row["objective"],
+                    "bucket_correct_rate": row["bucket_correct_rate"],
+                    "slot_exact_rate": row["slot_exact_rate"],
+                    "chosen_noncanonical_bucket_members": row["chosen_noncanonical_bucket_members"],
+                }
+                for row in theorem_t2_rows
+            ],
+        )
     _write_csv(tables_dir / "stat_summary.csv", stat_rows)
     _write_csv(tables_dir / "compute_accounting.csv", compute_summary_rows)
     _write_main_tex(
@@ -571,6 +744,9 @@ def main() -> int:
     )
     _write_robustness_stage_tex(tables_dir / "batch3cd_appendix.tex", robustness_stage_rows)
     _write_robustness_family_tex(tables_dir / "batch3_family_summary.tex", robustness_family_rows)
+    if theorem_t2_rows:
+        _write_t2_main_tex(tables_dir / "t2_r1_objective_comparison.tex", theorem_t2_rows)
+        _write_t2_supplement_tex(tables_dir / "t2_r1_bucket_supplement.tex", theorem_t2_rows)
 
     print(f"wrote paper stats to {output_dir}")
     print(f"wrote paper tables to {tables_dir}")

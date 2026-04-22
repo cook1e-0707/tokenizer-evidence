@@ -93,3 +93,17 @@ robustness:
       seed: 17
       attack_name: delimiter_scrub
       case_root: batch3d_qwen7b/U15_s17_delimiter_scrub
+theorem_t2:
+  stage: T2-r1
+  payload: U15
+  seed: 17
+  cases:
+    - id: bucket_mass
+      objective: bucket_mass
+      case_root: theorem2_qwen7b_r1/bucket_mass
+    - id: fixed_representative
+      objective: fixed_representative
+      case_root: theorem2_qwen7b_r1_rerun_missing/fixed_representative
+    - id: uniform_bucket
+      objective: uniform_bucket
+      case_root: theorem2_qwen7b_r1_rerun_missing/uniform_bucket
