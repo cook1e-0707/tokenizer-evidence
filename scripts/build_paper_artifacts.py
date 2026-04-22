@@ -218,6 +218,160 @@ def _noncanonical_members_from_gate(gate_payload: dict[str, Any]) -> str:
     return "; ".join(members) if members else "--"
 
 
+def _mean_slot_flag(payload: dict[str, Any], *candidate_keys: str) -> float:
+    values: list[float] = []
+    for slot in payload.get("slot_diagnostics", []):
+        if not isinstance(slot, dict):
+            continue
+        for key in candidate_keys:
+            if key in slot:
+                values.append(1.0 if bool(slot[key]) else 0.0)
+                break
+    if not values:
+        return 0.0
+    return float(sum(values) / len(values))
+
+
+def _collect_theorem_t1_records(
+    repo_root: Path,
+    standing_config: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    theorem_config = standing_config.get("theorem_t1")
+    if not isinstance(theorem_config, dict):
+        return [], []
+    rows: list[dict[str, Any]] = []
+    inclusion_rows: list[dict[str, Any]] = []
+    for case in theorem_config.get("cases", []):
+        case_root = _resolve_path(repo_root, str(case["case_root"]))
+        train_summary_matches = sorted(case_root.rglob("train_summary.json"))
+        eval_summary_matches = sorted(case_root.rglob("eval_summary.json"))
+        training_health_matches = sorted(case_root.rglob("training_health.json"))
+        if not train_summary_matches or not eval_summary_matches or not training_health_matches:
+            raise FileNotFoundError(f"Incomplete T1 artifacts under {case_root}")
+        train_summary_path = train_summary_matches[-1]
+        eval_summary_path = eval_summary_matches[-1]
+        training_health_path = training_health_matches[-1]
+
+        train_summary = load_result_json(train_summary_path)
+        eval_summary = load_result_json(eval_summary_path)
+        if not isinstance(train_summary, TrainRunSummary):
+            raise TypeError(f"{train_summary_path} is not a train summary")
+        if not isinstance(eval_summary, EvalRunSummary):
+            raise TypeError(f"{eval_summary_path} is not an eval summary")
+
+        training_health = json.loads(training_health_path.read_text(encoding="utf-8"))
+        compiled_gate_matches = sorted(case_root.rglob("compiled_gate_result.json"))
+        scaffolded_matches = sorted(case_root.rglob("scaffolded_completion_diagnostics.json"))
+
+        diagnostic_source = ""
+        diagnostic_payload: dict[str, Any] = {}
+        diagnostic_path = None
+        if compiled_gate_matches:
+            diagnostic_source = "compiled_gate"
+            diagnostic_path = compiled_gate_matches[-1]
+            diagnostic_payload = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+        elif scaffolded_matches:
+            diagnostic_source = "scaffolded_completion"
+            diagnostic_path = scaffolded_matches[-1]
+            diagnostic_payload = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+        else:
+            raise FileNotFoundError(f"No T1 diagnostic artifact found under {case_root}")
+
+        diagnostics = dict(eval_summary.diagnostics or {})
+        field_valid_rate = diagnostic_payload.get("field_valid_rate")
+        if field_valid_rate is None:
+            field_valid_rate = _mean_slot_flag(diagnostic_payload, "is_field_valid", "field_valid")
+        slot_exact_rate = (
+            diagnostic_payload.get("slot_exact_rate")
+            if diagnostic_payload.get("slot_exact_rate") is not None
+            else diagnostic_payload.get("value_slot_exact_rate")
+            if diagnostic_payload.get("value_slot_exact_rate") is not None
+            else diagnostic_payload.get("per_slot_exact_rate")
+            if diagnostic_payload.get("per_slot_exact_rate") is not None
+            else _mean_slot_flag(diagnostic_payload, "is_slot_exact")
+        )
+        valid_canonical_block_count = (
+            diagnostic_payload.get("valid_canonical_block_count")
+            if diagnostic_payload.get("valid_canonical_block_count") is not None
+            else diagnostics.get("valid_canonical_block_count", 0)
+        )
+        generated_artifact_format = (
+            diagnostics.get("generated_artifact_format")
+            or diagnostic_payload.get("artifact_format")
+            or ""
+        )
+        rows.append(
+            {
+                "stage": str(theorem_config.get("stage", "T1")),
+                "arm": str(case["arm"]),
+                "payload": str(theorem_config.get("payload", "")),
+                "seed": int(theorem_config.get("seed", 0) or 0),
+                "verification_mode": str(eval_summary.verification_mode),
+                "generated_artifact_format": str(generated_artifact_format),
+                "accepted": bool(eval_summary.accepted),
+                "verifier_success": bool(eval_summary.verifier_success),
+                "field_valid_rate": float(field_valid_rate or 0.0),
+                "slot_exact_rate": float(slot_exact_rate or 0.0),
+                "valid_canonical_block_count": int(valid_canonical_block_count or 0),
+                "parse_success_rate": (
+                    float(diagnostic_payload.get("parse_success_rate", 0.0) or 0.0)
+                    if diagnostic_source == "scaffolded_completion"
+                    else None
+                ),
+                "objective_mode": str(training_health.get("objective_mode", "")),
+                "final_loss": float(train_summary.final_loss),
+                "git_commit": str(eval_summary.git_commit),
+                "diagnostic_source": diagnostic_source,
+                "outcome": (
+                    "accepted exact-slot"
+                    if bool(eval_summary.accepted) and float(slot_exact_rate or 0.0) == 1.0
+                    else "accepted"
+                    if bool(eval_summary.accepted)
+                    else "non-accepted"
+                ),
+            }
+        )
+        inclusion_rows.append(
+            {
+                "workstream": "T1",
+                "stage": str(theorem_config.get("stage", "T1")),
+                "arm": str(case["arm"]),
+                "payload": str(theorem_config.get("payload", "")),
+                "seed": int(theorem_config.get("seed", 0) or 0),
+                "case_root": str(case_root),
+                "train_summary_path": str(train_summary_path),
+                "eval_summary_path": str(eval_summary_path),
+                "training_health_path": str(training_health_path),
+                "diagnostic_path": str(diagnostic_path),
+                "git_commit": str(eval_summary.git_commit),
+            }
+        )
+    return rows, inclusion_rows
+
+
+def _build_theorem_t1_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    if not rows:
+        return {}
+    return {
+        "stage": str(rows[0]["stage"]),
+        "payload": str(rows[0]["payload"]),
+        "seed": int(rows[0]["seed"]),
+        "git_commits": sorted({str(row["git_commit"]) for row in rows}),
+        "arms": rows,
+        "core_finding": {
+            "contextual_exact": "accepted with exact-slot fidelity on the compiled target payload",
+            "sequence_proxy": (
+                "accepted after payload-label repair while keeping scaffolded non-contextual completion format"
+            ),
+        },
+        "comparison_note": (
+            "Both T1 arms now recover the same compiled payload target at U03. "
+            "The standing contextual_exact arm is the earlier compiled-gate run, while the repaired "
+            "sequence_proxy arm is verified through canonical_render over the carried compiled_eval_contract."
+        ),
+    }
+
+
 def _collect_theorem_t2_records(
     repo_root: Path,
     standing_config: dict[str, Any],
@@ -361,6 +515,35 @@ def _write_t2_supplement_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
             "\\bottomrule",
             "\\end{tabular}",
             "\\caption{Supplementary bucket-level metrics for Theorem~2. The uniform-bucket objective remains bucket-correct while selecting non-canonical bucket members such as SECTION=review and TOPIC=climate.}",
+            "\\end{table}",
+        ]
+    )
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def _write_t1_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "\\begin{table}[t]",
+        "\\centering",
+        "\\small",
+        "\\begin{tabular}{llllll}",
+        "\\toprule",
+        "Arm & Verification & Artifact format & Accepted & field\\_valid\\_rate & slot\\_exact\\_rate \\\\",
+        "\\midrule",
+    ]
+    for row in rows:
+        lines.append(
+            f"{_latex_escape(row['arm'])} & {_latex_escape(row['verification_mode'])} & "
+            f"{_latex_escape(row['generated_artifact_format'])} & {_latex_escape(str(row['accepted']).lower())} & "
+            f"{row['field_valid_rate']:.2f} & {row['slot_exact_rate']:.2f} \\\\"
+        )
+    lines.extend(
+        [
+            "\\bottomrule",
+            "\\end{tabular}",
+            "\\caption{Theorem~1 contextual-alignment package on Qwen/Qwen2.5-7B-Instruct at payload U03. After repairing the sequence-proxy control arm to condition on the payload label, both arms recover the target slot values exactly.}",
             "\\end{table}",
         ]
     )
@@ -698,17 +881,21 @@ def main() -> int:
     robustness_rows, robustness_inclusion_rows, robustness_compute_rows = _collect_robustness_records(
         repo_root, standing_config
     )
+    theorem_t1_rows, theorem_t1_inclusion_rows = _collect_theorem_t1_records(repo_root, standing_config)
     theorem_t2_rows, theorem_t2_inclusion_rows = _collect_theorem_t2_records(repo_root, standing_config)
     main_summary = _build_main_summary(main_rows)
     robustness_summary, robustness_stage_rows, robustness_family_rows = _build_robustness_summary(
         robustness_rows
     )
+    theorem_t1_summary = _build_theorem_t1_summary(theorem_t1_rows)
     theorem_t2_summary = _build_theorem_t2_summary(theorem_t2_rows)
     stat_rows = _build_stat_rows(main_summary, robustness_summary)
     compute_summary, compute_summary_rows = _build_compute_accounting(main_compute_rows + robustness_compute_rows)
 
     _write_json(output_dir / "main_clean_summary.json", main_summary)
     _write_json(output_dir / "robustness_summary.json", robustness_summary)
+    if theorem_t1_summary:
+        _write_json(output_dir / "t1_summary.json", theorem_t1_summary)
     if theorem_t2_summary:
         _write_json(output_dir / "t2_r1_summary.json", theorem_t2_summary)
     _write_json(
@@ -716,6 +903,7 @@ def main() -> int:
         {
             "main_clean": main_inclusion_rows,
             "robustness": robustness_inclusion_rows,
+            "theorem_t1": theorem_t1_inclusion_rows,
             "theorem_t2": theorem_t2_inclusion_rows,
         },
     )
@@ -724,6 +912,8 @@ def main() -> int:
     _write_csv(tables_dir / "compiled_c3_r4_main.csv", main_rows)
     _write_csv(tables_dir / "batch3cd_appendix.csv", robustness_stage_rows)
     _write_csv(tables_dir / "batch3_family_summary.csv", robustness_family_rows)
+    if theorem_t1_rows:
+        _write_csv(tables_dir / "t1_contextual_alignment.csv", theorem_t1_rows)
     if theorem_t2_rows:
         _write_csv(tables_dir / "t2_r1_objective_comparison.csv", theorem_t2_rows)
         _write_csv(
@@ -753,6 +943,8 @@ def main() -> int:
     )
     _write_robustness_stage_tex(tables_dir / "batch3cd_appendix.tex", robustness_stage_rows)
     _write_robustness_family_tex(tables_dir / "batch3_family_summary.tex", robustness_family_rows)
+    if theorem_t1_rows:
+        _write_t1_tex(tables_dir / "t1_contextual_alignment.tex", theorem_t1_rows)
     if theorem_t2_rows:
         _write_t2_main_tex(tables_dir / "t2_r1_objective_comparison.tex", theorem_t2_rows)
         _write_t2_supplement_tex(tables_dir / "t2_r1_bucket_supplement.tex", theorem_t2_rows)

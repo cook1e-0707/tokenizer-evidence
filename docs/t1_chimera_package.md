@@ -14,15 +14,21 @@ Scope:
 - no new model family
 
 Evaluation contract:
-- `contextual_exact` now evaluates through `canonical_render` after deterministic rerender of compiled slot values
+- the current standing `contextual_exact` evidence is the earlier accepted `compiled_gate` run
+- if a future stricter rerun is requested, `contextual_exact` can be evaluated through `canonical_render` after deterministic rerender of compiled slot values
 - `sequence_proxy` now trains through `scaffolded_compiled_completion`, so its scaffolded slot values follow the same compiled payload/codebook contract as `contextual_exact`
 - the repaired scaffold prompt includes `Payload label: ...`, but still does not expose exact slot prefixes or allowed-carrier lists
 - `sequence_proxy` evaluates through `canonical_render` after parsing scaffolded slot values and verifying against the carried `compiled_eval_contract`
-- this keeps both `T1` arms on the same verifier path and the same payload/codebook target
+- this keeps both `T1` arms on the same payload/codebook target, while the current standing evidence still reflects two verifier modes (`compiled_gate` for `contextual_exact`, `canonical_render` for `sequence_proxy`)
 
 Current standing:
 - `contextual_exact` already has an accepted Chimera run
-- only `sequence_proxy` needs to be rerun under the repaired package below
+- the repaired `sequence_proxy` control arm now also has an accepted Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
+- `T1` is closed for active execution; this runbook is retained only for archival reproduction or if a stricter matched-verifier rerun is explicitly requested
+
+## Status
+
+No active Chimera submission is currently required for `T1`.
 
 ## 1. Prepare Environment
 

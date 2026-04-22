@@ -93,6 +93,17 @@ robustness:
       seed: 17
       attack_name: delimiter_scrub
       case_root: batch3d_qwen7b/U15_s17_delimiter_scrub
+theorem_t1:
+  stage: T1
+  payload: U03
+  seed: 17
+  cases:
+    - id: contextual_exact
+      arm: contextual_exact
+      case_root: theorem1_qwen7b/contextual_exact
+    - id: sequence_proxy
+      arm: sequence_proxy
+      case_root: theorem1_qwen7b_rerun_sequence_proxy_v2
 theorem_t2:
   stage: T2-r1
   payload: U15

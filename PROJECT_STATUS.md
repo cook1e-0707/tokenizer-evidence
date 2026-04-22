@@ -13,14 +13,14 @@
   - `batch3d` passed
 - Active execution scope:
   - manuscript-facing consolidation only
-  - theorem-package reporting and repair only
+  - theorem-package reporting only
   - no additional Batch 3 expansion
   - no new baselines
   - no new model families
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
-  - `T1 sequence_proxy` local repair is complete: the control arm now trains against the same compiled payload/codebook target via `scaffolded_compiled_completion`, includes an explicit `Payload label` in the scaffold prompt, and evaluates through `canonical_render` with `compiled_eval_contract` metadata
-  - `T1 sequence_proxy` still needs one clean Chimera rerun to replace the old blocked control-arm artifact
+  - `T1 sequence_proxy` now also has an accepted repaired Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
+  - `T1` is now standing for manuscript consolidation: both arms recover the same compiled `U03` target exactly, with the standing contextual arm coming from the earlier `compiled_gate` run and the repaired `sequence_proxy` arm verified through `canonical_render` over the carried `compiled_eval_contract`
   - initial `T2` objective package executed cleanly, but remained non-discriminative because the single-token-per-bucket compiled catalog collapses all three objectives to the same effective supervision problem
   - repaired `T2-r1` package now produced a discriminative result on the strict-passed multi-member-bucket Qwen catalog at `U15`
   - `fixed_representative` passes the exact-slot gate on the canonical representatives
@@ -30,9 +30,9 @@
 ## Current Priority
 
 1. Consolidate the accepted `compiled-c3-r4`, `batch3c`, and `batch3d` results into manuscript-facing tables and paper-facing summary artifacts.
-2. Land the `T2-r1` theorem result as a paper-facing objective table plus a bucket-level supplementary table.
-3. Finish `T1`: keep `contextual_exact` as the standing arm and rerun only the repaired `sequence_proxy` control arm on Chimera.
-4. Add explicit statistical aggregation, compute accounting, and run inclusion lists for the standing Qwen 7B claims.
+2. Land the accepted `T1` and `T2-r1` theorem results as paper-facing comparison tables plus the `T2-r1` bucket-level supplementary table.
+3. Add explicit statistical aggregation, compute accounting, and run inclusion lists for the standing Qwen 7B claims.
+4. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
 
 ## Archived Failures
 
