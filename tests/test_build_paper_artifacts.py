@@ -158,7 +158,7 @@ def _write_case_artifacts(
     }
 
 
-def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_compute(tmp_path: Path) -> None:
+def test_build_paper_artifacts_includes_scale_packages_and_counts_only_new_compute(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     main_case = _write_case_artifacts(
         tmp_path / "main_clean" / "U00_s17",
@@ -186,9 +186,27 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
         eval_mem_gb=48,
         eval_time_limit="06:00:00",
     )
+    g2_new_case = _write_case_artifacts(
+        tmp_path / "g2" / "pf2" / "U03_s17",
+        payload="U03",
+        seed=17,
+        accepted=True,
+        verifier_success=True,
+        decoded_payload="U03",
+        train_variant="g2-train",
+        eval_variant="g2-eval",
+        train_cpus=10,
+        train_mem_gb=72,
+        train_time_limit="10:00:00",
+        eval_cpus=6,
+        eval_mem_gb=40,
+        eval_time_limit="05:00:00",
+    )
 
     g1_train_config = tmp_path / "exp_train_g1.yaml"
     g1_eval_config = tmp_path / "exp_eval_g1.yaml"
+    g2_train_config = tmp_path / "exp_train_g2.yaml"
+    g2_eval_config = tmp_path / "exp_eval_g2.yaml"
     _write_runtime_config(
         g1_train_config,
         variant_name="g1-train",
@@ -207,10 +225,31 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
         mem_gb=48,
         time_limit="06:00:00",
     )
+    _write_runtime_config(
+        g2_train_config,
+        variant_name="g2-train",
+        partition="DGXA100",
+        num_gpus=1,
+        cpus=10,
+        mem_gb=72,
+        time_limit="10:00:00",
+    )
+    _write_runtime_config(
+        g2_eval_config,
+        variant_name="g2-eval",
+        partition="DGXA100",
+        num_gpus=1,
+        cpus=6,
+        mem_gb=40,
+        time_limit="05:00:00",
+    )
 
     g1_package_config = tmp_path / "g1_package.yaml"
     g1_summary_path = tmp_path / "g1_summary.json"
     g1_inclusion_path = tmp_path / "g1_inclusion.json"
+    g2_package_config = tmp_path / "g2_package.yaml"
+    g2_summary_path = tmp_path / "g2_summary.json"
+    g2_inclusion_path = tmp_path / "g2_inclusion.json"
     g1_package_config.write_text(
         yaml.safe_dump(
             {
@@ -222,7 +261,22 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
         ),
         encoding="utf-8",
     )
+    g2_package_config.write_text(
+        yaml.safe_dump(
+            {
+                "workstream": "G2",
+                "train_config": str(g2_train_config),
+                "eval_config": str(g2_eval_config),
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
     g1_summary_path.write_text(
+        json.dumps({"paper_ready": True, "included_case_count": 2}, indent=2),
+        encoding="utf-8",
+    )
+    g2_summary_path.write_text(
         json.dumps({"paper_ready": True, "included_case_count": 2}, indent=2),
         encoding="utf-8",
     )
@@ -264,6 +318,52 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
         ),
         encoding="utf-8",
     )
+    g2_inclusion_path.write_text(
+        json.dumps(
+            {
+                "included": [
+                    {
+                        "case_id": "PF1_U00_s17",
+                        "family_id": "PF1",
+                        "family_slug": "pf1",
+                        "family_description": "Current deterministic exact-slot prompt family.",
+                        "generation_prompt": "Select exactly one allowed carrier token.",
+                        "payload": "U00",
+                        "seed": 17,
+                        "case_root": main_case["case_root"],
+                        "source_stage": "compiled-c3-r4",
+                        "source_kind": "reused",
+                        "train_summary_path": main_case["train_summary_path"],
+                        "eval_summary_path": main_case["eval_summary_path"],
+                        "training_health_path": main_case["training_health_path"],
+                        "train_run_id": main_case["train_run_id"],
+                        "eval_run_id": main_case["eval_run_id"],
+                    },
+                    {
+                        "case_id": "PF2_U03_s17",
+                        "family_id": "PF2",
+                        "family_slug": "pf2",
+                        "family_description": "Semantically equivalent delimiter-varied prompt family.",
+                        "generation_prompt": "Select exactly one allowed carrier token | return only the carrier value.",
+                        "payload": "U03",
+                        "seed": 17,
+                        "case_root": g2_new_case["case_root"],
+                        "source_stage": "G2",
+                        "source_kind": "new",
+                        "train_summary_path": g2_new_case["train_summary_path"],
+                        "eval_summary_path": g2_new_case["eval_summary_path"],
+                        "training_health_path": g2_new_case["training_health_path"],
+                        "train_run_id": g2_new_case["train_run_id"],
+                        "eval_run_id": g2_new_case["eval_run_id"],
+                    },
+                ],
+                "pending": [],
+                "excluded": [],
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     standing_config = tmp_path / "standing.yaml"
     standing_config.write_text(
@@ -288,6 +388,13 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
                     "package_config": str(g1_package_config),
                     "summary_path": str(g1_summary_path),
                     "inclusion_list_path": str(g1_inclusion_path),
+                    "compute_source_kinds": ["new"],
+                },
+                "g2_prompt_family_scale": {
+                    "stage": "G2",
+                    "package_config": str(g2_package_config),
+                    "summary_path": str(g2_summary_path),
+                    "inclusion_list_path": str(g2_inclusion_path),
                     "compute_source_kinds": ["new"],
                 },
             },
@@ -318,7 +425,11 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
     inclusion_payload = json.loads((output_dir / "run_inclusion_lists.json").read_text(encoding="utf-8"))
     assert len(inclusion_payload["main_clean"]) == 1
     assert len(inclusion_payload["g1_payload_seed_scale"]) == 2
+    assert len(inclusion_payload["g2_prompt_family_scale"]) == 2
     assert {row["source_kind"] for row in inclusion_payload["g1_payload_seed_scale"]} == {"new", "reused"}
+    assert {row["source_kind"] for row in inclusion_payload["g2_prompt_family_scale"]} == {"new", "reused"}
+    assert inclusion_payload["g2_prompt_family_scale"][1]["family_id"] == "PF2"
+    assert inclusion_payload["g2_prompt_family_scale"][1]["family_slug"] == "pf2"
 
     compute_summary = json.loads((output_dir / "compute_accounting.json").read_text(encoding="utf-8"))
     compute_rows = {
@@ -333,6 +444,12 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
     assert compute_rows[("G1", "train")]["requested_cpu_hours"] == 144.0
     assert compute_rows[("G1", "eval")]["requested_gpu_hours"] == 6.0
     assert compute_rows[("G1", "eval")]["requested_cpu_hours"] == 48.0
+    assert compute_rows[("G2", "train")]["runs"] == 1
+    assert compute_rows[("G2", "eval")]["runs"] == 1
+    assert compute_rows[("G2", "train")]["requested_gpu_hours"] == 10.0
+    assert compute_rows[("G2", "train")]["requested_cpu_hours"] == 100.0
+    assert compute_rows[("G2", "eval")]["requested_gpu_hours"] == 5.0
+    assert compute_rows[("G2", "eval")]["requested_cpu_hours"] == 30.0
 
 
 def test_build_paper_artifacts_resolves_relative_case_roots_from_search_roots(tmp_path: Path) -> None:

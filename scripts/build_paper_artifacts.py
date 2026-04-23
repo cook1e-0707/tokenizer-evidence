@@ -757,36 +757,39 @@ def _collect_robustness_records(
     return rows, inclusion_rows, compute_rows
 
 
-def _collect_g1_records(
+def _collect_scale_package_records(
     repo_root: Path,
     standing_config: dict[str, Any],
+    *,
+    config_key: str,
+    default_workstream: str,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    g1_config = standing_config.get("g1_payload_seed_scale")
-    if not isinstance(g1_config, dict):
+    scale_config = standing_config.get(config_key)
+    if not isinstance(scale_config, dict):
         return [], []
 
-    package_config_path = _resolve_path(repo_root, str(g1_config["package_config"]))
-    summary_path = _resolve_path(repo_root, str(g1_config["summary_path"]))
-    inclusion_list_path = _resolve_path(repo_root, str(g1_config["inclusion_list_path"]))
+    package_config_path = _resolve_path(repo_root, str(scale_config["package_config"]))
+    summary_path = _resolve_path(repo_root, str(scale_config["summary_path"]))
+    inclusion_list_path = _resolve_path(repo_root, str(scale_config["inclusion_list_path"]))
     package_config = _load_yaml(package_config_path)
     summary = _load_json_object(summary_path)
     inclusion_payload = _load_json_object(inclusion_list_path)
+    workstream = str(package_config.get("workstream", default_workstream))
 
     if not bool(summary.get("paper_ready")):
-        raise ValueError(f"G1 package is not paper-ready: {summary_path}")
+        raise ValueError(f"{workstream} package is not paper-ready: {summary_path}")
 
     included_rows = inclusion_payload.get("included", [])
     if not isinstance(included_rows, list):
         raise ValueError(f"Expected list at included in {inclusion_list_path}")
     if int(summary.get("included_case_count", 0) or 0) != len(included_rows):
         raise ValueError(
-            f"G1 included_case_count mismatch between {summary_path} and {inclusion_list_path}"
+            f"{workstream} included_case_count mismatch between {summary_path} and {inclusion_list_path}"
         )
 
-    workstream = str(package_config.get("workstream", "G1"))
-    stage = str(g1_config.get("stage", workstream))
+    stage = str(scale_config.get("stage", workstream))
     compute_source_kinds = {
-        str(item) for item in g1_config.get("compute_source_kinds", ["new"])
+        str(item) for item in scale_config.get("compute_source_kinds", ["new"])
     }
     train_runtime = _load_runtime_record(_resolve_path(repo_root, str(package_config["train_config"])))
     eval_runtime = _load_runtime_record(_resolve_path(repo_root, str(package_config["eval_config"])))
@@ -811,6 +814,14 @@ def _collect_g1_records(
             "train_run_id": str(row.get("train_run_id", "")),
             "eval_run_id": str(row.get("eval_run_id", "")),
         }
+        for optional_key in (
+            "family_id",
+            "family_slug",
+            "family_description",
+            "generation_prompt",
+        ):
+            if optional_key in row:
+                normalized[optional_key] = str(row[optional_key])
         inclusion_rows.append(normalized)
 
         if normalized["source_kind"] not in compute_source_kinds:
@@ -839,6 +850,30 @@ def _collect_g1_records(
                 }
             )
     return inclusion_rows, compute_rows
+
+
+def _collect_g1_records(
+    repo_root: Path,
+    standing_config: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    return _collect_scale_package_records(
+        repo_root,
+        standing_config,
+        config_key="g1_payload_seed_scale",
+        default_workstream="G1",
+    )
+
+
+def _collect_g2_records(
+    repo_root: Path,
+    standing_config: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    return _collect_scale_package_records(
+        repo_root,
+        standing_config,
+        config_key="g2_prompt_family_scale",
+        default_workstream="G2",
+    )
 
 
 def _build_main_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -1009,6 +1044,7 @@ def main() -> int:
     theorem_t1_rows, theorem_t1_inclusion_rows = _collect_theorem_t1_records(repo_root, standing_config)
     theorem_t2_rows, theorem_t2_inclusion_rows = _collect_theorem_t2_records(repo_root, standing_config)
     g1_inclusion_rows, g1_compute_rows = _collect_g1_records(repo_root, standing_config)
+    g2_inclusion_rows, g2_compute_rows = _collect_g2_records(repo_root, standing_config)
     main_summary = _build_main_summary(main_rows)
     robustness_summary, robustness_stage_rows, robustness_family_rows = _build_robustness_summary(
         robustness_rows
@@ -1017,7 +1053,7 @@ def main() -> int:
     theorem_t2_summary = _build_theorem_t2_summary(theorem_t2_rows)
     stat_rows = _build_stat_rows(main_summary, robustness_summary)
     compute_summary, compute_summary_rows = _build_compute_accounting(
-        main_compute_rows + robustness_compute_rows + g1_compute_rows
+        main_compute_rows + robustness_compute_rows + g1_compute_rows + g2_compute_rows
     )
 
     inclusion_payload = {
@@ -1028,6 +1064,8 @@ def main() -> int:
     }
     if g1_inclusion_rows:
         inclusion_payload["g1_payload_seed_scale"] = g1_inclusion_rows
+    if g2_inclusion_rows:
+        inclusion_payload["g2_prompt_family_scale"] = g2_inclusion_rows
 
     _write_json(output_dir / "main_clean_summary.json", main_summary)
     _write_json(output_dir / "robustness_summary.json", robustness_summary)

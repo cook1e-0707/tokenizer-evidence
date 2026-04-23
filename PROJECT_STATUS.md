@@ -8,6 +8,8 @@
 - Publication-scale clean coverage:
   - `G1` payload x seed package is now standing on `U00..U15 @ seeds 17, 23, 29`
   - final G1 aggregate is `48/48` included, `0` pending, `0` excluded
+  - `G2` prompt-family package is now standing on `PF1/PF2/PF3 x U00/U03/U12/U15 x seeds 17,23,29`
+  - final G2 aggregate is `36/36` included, `0` pending, `0` excluded
 - Standing robustness path:
   - `batch3-preflight-reopen` passed
   - `batch3a` passed
@@ -28,6 +30,7 @@
   - `T1` contextual-alignment table is landed in the manuscript appendix
   - `T2-r1` objective-comparison and bucket-level supplementary tables are landed in the manuscript appendix
   - `G1` payload x seed table, inclusion list, and summary are landed as frozen paper-facing artifacts
+  - `G2` prompt-family table, inclusion list, and summary are landed as frozen package artifacts; canonical paper accounting is wired in code and should be regenerated on Chimera to preserve `/home` and `/hpcstor6` provenance paths
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
   - `T1 sequence_proxy` now also has an accepted repaired Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
@@ -40,7 +43,7 @@
 
 ## Current Priority
 
-1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, and `G1` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
+1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, and `G2` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
 2. Tighten statistics, compute accounting, explicit inclusion lists, and wording alignment between `PROJECT_STATUS.md`, `docs/experiment_matrix.md`, and the appendix tables.
 3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
 4. Keep `B1` (matched-budget baselines) and `R1` (new model-family replication) blocked until the Qwen 7B manuscript package is finalized.
@@ -82,6 +85,7 @@
 | `compiled-c3-r3` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U03/U12 @ seed 23,29` |
 | `compiled-c3-r4` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U00/U03/U12/U15 @ seed 17` |
 | `G1 payload-seed scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all standing seeds and payloads | `64` per run | `64` per run | same exact-slot prompt family | full package: `U00..U15 @ seeds 17,23,29` (`48` included clean train/eval cases) |
+| `G2 prompt-family scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all prompt families | `64` per run | `64` per run | `PF1/PF2/PF3` semantically equivalent prompt families | full package: `PF1/PF2/PF3 x U00/U03/U12/U15 x seeds 17,23,29` (`36` included clean train/eval cases; `PF1` reuses standing evidence) |
 
 Notes:
 - for the compiled exact-slot packages, `contract sample count = payload label count x block_count x fields_per_block`

@@ -127,3 +127,9 @@ g1_payload_seed_scale:
   summary_path: results/processed/paper_stats/g1_summary.json
   inclusion_list_path: results/processed/paper_stats/g1_run_inclusion_list.json
   compute_source_kinds: [new]
+g2_prompt_family_scale:
+  stage: G2
+  package_config: configs/reporting/g2_prompt_family_scale_v1.yaml
+  summary_path: results/processed/paper_stats/g2_summary.json
+  inclusion_list_path: results/processed/paper_stats/g2_run_inclusion_list.json
+  compute_source_kinds: [new]
