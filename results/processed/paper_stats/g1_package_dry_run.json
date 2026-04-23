@@ -1,0 +1,424 @@
+{
+  "cases": [
+    {
+      "case_root": "batch28b_qwen7b_c3r4/U00_s17",
+      "id": "U00_s17",
+      "payload": "U00",
+      "seed": 17,
+      "source_stage": "compiled-c3-r4",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U01_s17",
+      "id": "U01_s17",
+      "payload": "U01",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U02_s17",
+      "id": "U02_s17",
+      "payload": "U02",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r4/U03_s17",
+      "id": "U03_s17",
+      "payload": "U03",
+      "seed": 17,
+      "source_stage": "compiled-c3-r4",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U04_s17",
+      "id": "U04_s17",
+      "payload": "U04",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U05_s17",
+      "id": "U05_s17",
+      "payload": "U05",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U06_s17",
+      "id": "U06_s17",
+      "payload": "U06",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U07_s17",
+      "id": "U07_s17",
+      "payload": "U07",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U08_s17",
+      "id": "U08_s17",
+      "payload": "U08",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U09_s17",
+      "id": "U09_s17",
+      "payload": "U09",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U10_s17",
+      "id": "U10_s17",
+      "payload": "U10",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U11_s17",
+      "id": "U11_s17",
+      "payload": "U11",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r4/U12_s17",
+      "id": "U12_s17",
+      "payload": "U12",
+      "seed": 17,
+      "source_stage": "compiled-c3-r4",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U13_s17",
+      "id": "U13_s17",
+      "payload": "U13",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U14_s17",
+      "id": "U14_s17",
+      "payload": "U14",
+      "seed": 17,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r4/U15_s17",
+      "id": "U15_s17",
+      "payload": "U15",
+      "seed": 17,
+      "source_stage": "compiled-c3-r4",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r2/U00_s23",
+      "id": "U00_s23",
+      "payload": "U00",
+      "seed": 23,
+      "source_stage": "compiled-c3-r2",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U01_s23",
+      "id": "U01_s23",
+      "payload": "U01",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U02_s23",
+      "id": "U02_s23",
+      "payload": "U02",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r3/U03_s23",
+      "id": "U03_s23",
+      "payload": "U03",
+      "seed": 23,
+      "source_stage": "compiled-c3-r3",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U04_s23",
+      "id": "U04_s23",
+      "payload": "U04",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U05_s23",
+      "id": "U05_s23",
+      "payload": "U05",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U06_s23",
+      "id": "U06_s23",
+      "payload": "U06",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U07_s23",
+      "id": "U07_s23",
+      "payload": "U07",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U08_s23",
+      "id": "U08_s23",
+      "payload": "U08",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U09_s23",
+      "id": "U09_s23",
+      "payload": "U09",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U10_s23",
+      "id": "U10_s23",
+      "payload": "U10",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U11_s23",
+      "id": "U11_s23",
+      "payload": "U11",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r3/U12_s23",
+      "id": "U12_s23",
+      "payload": "U12",
+      "seed": 23,
+      "source_stage": "compiled-c3-r3",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U13_s23",
+      "id": "U13_s23",
+      "payload": "U13",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U14_s23",
+      "id": "U14_s23",
+      "payload": "U14",
+      "seed": 23,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r2/U15_s23",
+      "id": "U15_s23",
+      "payload": "U15",
+      "seed": 23,
+      "source_stage": "compiled-c3-r2",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r2/U00_s29",
+      "id": "U00_s29",
+      "payload": "U00",
+      "seed": 29,
+      "source_stage": "compiled-c3-r2",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U01_s29",
+      "id": "U01_s29",
+      "payload": "U01",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U02_s29",
+      "id": "U02_s29",
+      "payload": "U02",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r3/U03_s29",
+      "id": "U03_s29",
+      "payload": "U03",
+      "seed": 29,
+      "source_stage": "compiled-c3-r3",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U04_s29",
+      "id": "U04_s29",
+      "payload": "U04",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U05_s29",
+      "id": "U05_s29",
+      "payload": "U05",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U06_s29",
+      "id": "U06_s29",
+      "payload": "U06",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U07_s29",
+      "id": "U07_s29",
+      "payload": "U07",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U08_s29",
+      "id": "U08_s29",
+      "payload": "U08",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U09_s29",
+      "id": "U09_s29",
+      "payload": "U09",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U10_s29",
+      "id": "U10_s29",
+      "payload": "U10",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U11_s29",
+      "id": "U11_s29",
+      "payload": "U11",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r3/U12_s29",
+      "id": "U12_s29",
+      "payload": "U12",
+      "seed": 29,
+      "source_stage": "compiled-c3-r3",
+      "status": "reuse_existing"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U13_s29",
+      "id": "U13_s29",
+      "payload": "U13",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "g1_qwen7b_payload_seed_scale/U14_s29",
+      "id": "U14_s29",
+      "payload": "U14",
+      "seed": 29,
+      "source_stage": "G1",
+      "status": "prepare"
+    },
+    {
+      "case_root": "batch28b_qwen7b_c3r2/U15_s29",
+      "id": "U15_s29",
+      "payload": "U15",
+      "seed": 29,
+      "source_stage": "compiled-c3-r2",
+      "status": "reuse_existing"
+    }
+  ],
+  "description": "Publication-scale payload x seed clean package on the standing compiled Qwen/Qwen2.5-7B-Instruct path.",
+  "eval_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+  "eval_manifest_entry_count": 36,
+  "eval_manifest_path": "/home/guanjie.lin001/tokenizer-evidence/manifests/g1_qwen7b_payload_seed_scale/eval_manifest.json",
+  "landed_new_case_count": 0,
+  "missing_case_count": 36,
+  "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g1_payload_seed_scale_v1.yaml",
+  "payloads": [
+    "U00",
+    "U01",
+    "U02",
+    "U03",
+    "U04",
+    "U05",
+    "U06",
+    "U07",
+    "U08",
+    "U09",
+    "U10",
+    "U11",
+    "U12",
+    "U13",
+    "U14",
+    "U15"
+  ],
+  "reuse_existing_case_count": 12,
+  "seeds": [
+    17,
+    23,
+    29
+  ],
+  "target_case_count": 48,
+  "train_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+  "train_manifest_entry_count": 36,
+  "train_manifest_path": "/home/guanjie.lin001/tokenizer-evidence/manifests/g1_qwen7b_payload_seed_scale/train_manifest.json",
+  "workstream": "G1"
+}
