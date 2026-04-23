@@ -46,6 +46,31 @@ def _resolve_path(repo_root: Path, raw: str) -> Path:
     return path if path.is_absolute() else repo_root / path
 
 
+def _case_root_search_roots(repo_root: Path, standing_config: dict[str, Any]) -> list[Path]:
+    roots: list[Path] = []
+    for raw_root in standing_config.get("case_root_search_roots", []):
+        root = _resolve_path(repo_root, str(raw_root))
+        if root not in roots:
+            roots.append(root)
+    return roots
+
+
+def _resolve_case_root(repo_root: Path, standing_config: dict[str, Any], raw: str) -> Path:
+    path = Path(raw)
+    if path.is_absolute():
+        return path
+
+    primary = repo_root / path
+    if primary.exists():
+        return primary
+
+    for root in _case_root_search_roots(repo_root, standing_config):
+        candidate = root / path
+        if candidate.exists():
+            return candidate
+    return primary
+
+
 def _load_yaml(path: Path) -> dict[str, Any]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if not isinstance(payload, dict):
@@ -258,7 +283,7 @@ def _collect_theorem_t1_records(
     rows: list[dict[str, Any]] = []
     inclusion_rows: list[dict[str, Any]] = []
     for case in theorem_config.get("cases", []):
-        case_root = _resolve_path(repo_root, str(case["case_root"]))
+        case_root = _resolve_case_root(repo_root, standing_config, str(case["case_root"]))
         train_summary_matches = sorted(case_root.rglob("train_summary.json"))
         eval_summary_matches = sorted(case_root.rglob("eval_summary.json"))
         training_health_matches = sorted(case_root.rglob("training_health.json"))
@@ -398,7 +423,7 @@ def _collect_theorem_t2_records(
     rows: list[dict[str, Any]] = []
     inclusion_rows: list[dict[str, Any]] = []
     for case in theorem_config.get("cases", []):
-        case_root = _resolve_path(repo_root, str(case["case_root"]))
+        case_root = _resolve_case_root(repo_root, standing_config, str(case["case_root"]))
         train_summary_path = _find_one(case_root, "train_summary.json")
         eval_summary_path = _find_one(case_root, "eval_summary.json")
         training_health_path = _find_one(case_root, "training_health.json")
@@ -573,7 +598,7 @@ def _collect_main_records(repo_root: Path, standing_config: dict[str, Any]) -> t
     inclusion_rows: list[dict[str, Any]] = []
     compute_rows: list[dict[str, Any]] = []
     for case in standing_config["main_clean"]["cases"]:
-        case_root = _resolve_path(repo_root, str(case["case_root"]))
+        case_root = _resolve_case_root(repo_root, standing_config, str(case["case_root"]))
         train_summary_path = _find_one(case_root, "train_summary.json")
         eval_summary_path = _find_one(case_root, "eval_summary.json")
         training_health_path = _find_one(case_root, "training_health.json")
@@ -662,7 +687,7 @@ def _collect_robustness_records(
     inclusion_rows: list[dict[str, Any]] = []
     compute_rows: list[dict[str, Any]] = []
     for case in standing_config["robustness"]["cases"]:
-        case_root = _resolve_path(repo_root, str(case["case_root"]))
+        case_root = _resolve_case_root(repo_root, standing_config, str(case["case_root"]))
         attack_summary_path = _find_one(case_root, "attack_output.json")
         attack_config_path = _find_one(case_root, "config.resolved.yaml")
         attack_submission_path = _find_one(case_root, "submission.json")

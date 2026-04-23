@@ -333,3 +333,71 @@ def test_build_paper_artifacts_includes_g1_inclusion_and_counts_only_new_g1_comp
     assert compute_rows[("G1", "train")]["requested_cpu_hours"] == 144.0
     assert compute_rows[("G1", "eval")]["requested_gpu_hours"] == 6.0
     assert compute_rows[("G1", "eval")]["requested_cpu_hours"] == 48.0
+
+
+def test_build_paper_artifacts_resolves_relative_case_roots_from_search_roots(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    search_root = tmp_path / "chimera_root"
+    relative_case_root = Path("legacy_cases/U00_s17")
+    main_case = _write_case_artifacts(
+        search_root / relative_case_root,
+        payload="U00",
+        seed=17,
+        accepted=True,
+        verifier_success=True,
+        decoded_payload="U00",
+        train_variant="legacy-train",
+        eval_variant="legacy-eval",
+    )
+
+    standing_config = tmp_path / "standing.yaml"
+    standing_config.write_text(
+        yaml.safe_dump(
+            {
+                "version": 1,
+                "model_name": "qwen2.5-7b-instruct",
+                "case_root_search_roots": [str(search_root)],
+                "main_clean": {
+                    "stage": "compiled-c3-r4",
+                    "cases": [
+                        {
+                            "id": "U00_s17",
+                            "payload": "U00",
+                            "seed": 17,
+                            "case_root": str(relative_case_root),
+                        }
+                    ],
+                },
+                "robustness": {"cases": []},
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_paper_artifacts.py",
+            "--standing-config",
+            str(standing_config),
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    inclusion_payload = json.loads((output_dir / "run_inclusion_lists.json").read_text(encoding="utf-8"))
+    assert inclusion_payload["main_clean"][0]["case_root"] == main_case["case_root"]
+
+    compute_summary = json.loads((output_dir / "compute_accounting.json").read_text(encoding="utf-8"))
+    compute_rows = {(row["stage"], row["run_kind"]): row for row in compute_summary["rows"]}
+    assert compute_rows[("compiled-c3-r4", "train")]["runs"] == 1
+    assert compute_rows[("compiled-c3-r4", "eval")]["runs"] == 1

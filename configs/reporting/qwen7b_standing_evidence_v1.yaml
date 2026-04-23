@@ -1,5 +1,8 @@
 version: 1
 model_name: qwen2.5-7b-instruct
+case_root_search_roots:
+  - /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence
+  - /home/guanjie.lin001/tokenizer-evidence
 main_clean:
   stage: compiled-c3-r4
   cases:
