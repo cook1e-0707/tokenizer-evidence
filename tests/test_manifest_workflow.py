@@ -386,6 +386,7 @@ def test_prepare_g1_payload_seed_scale_script_writes_missing_only_manifests(tmp_
     output_path = tmp_path / "g1_package_dry_run.json"
     train_manifest_path = tmp_path / "train_manifest.json"
     eval_manifest_path = tmp_path / "eval_manifest.json"
+    output_root_base = tmp_path / "g1_cases"
     completed = subprocess.run(
         [
             sys.executable,
@@ -396,6 +397,8 @@ def test_prepare_g1_payload_seed_scale_script_writes_missing_only_manifests(tmp_
             str(train_manifest_path),
             "--eval-manifest-out",
             str(eval_manifest_path),
+            "--output-root-base",
+            str(output_root_base),
         ],
         cwd=repo_root,
         capture_output=True,
@@ -481,6 +484,7 @@ def test_prepare_g1_payload_seed_scale_script_supports_environment_setup_overrid
     output_path = tmp_path / "g1_package_dry_run.json"
     train_manifest_path = tmp_path / "train_manifest.json"
     eval_manifest_path = tmp_path / "eval_manifest.json"
+    output_root_base = tmp_path / "g1_cases"
     environment_setup = "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate"
     completed = subprocess.run(
         [
@@ -492,6 +496,8 @@ def test_prepare_g1_payload_seed_scale_script_supports_environment_setup_overrid
             str(train_manifest_path),
             "--eval-manifest-out",
             str(eval_manifest_path),
+            "--output-root-base",
+            str(output_root_base),
             "--environment-setup",
             environment_setup,
         ],
