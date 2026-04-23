@@ -1,0 +1,69 @@
+version: 1
+workstream: G1
+description: Publication-scale payload x seed clean package on the standing compiled Qwen/Qwen2.5-7B-Instruct path.
+train_config: configs/experiment/scale/exp_train__qwen2_5_7b__g1_payload_seed_scale_v1.yaml
+eval_config: configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml
+new_case_root_prefix: g1_qwen7b_payload_seed_scale
+payloads: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
+seeds: [17, 23, 29]
+existing_cases:
+  - id: U00_s17
+    payload: U00
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U00_s17
+  - id: U03_s17
+    payload: U03
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U03_s17
+  - id: U12_s17
+    payload: U12
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U12_s17
+  - id: U15_s17
+    payload: U15
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U15_s17
+  - id: U00_s23
+    payload: U00
+    seed: 23
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U00_s23
+  - id: U15_s23
+    payload: U15
+    seed: 23
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U15_s23
+  - id: U03_s23
+    payload: U03
+    seed: 23
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U03_s23
+  - id: U12_s23
+    payload: U12
+    seed: 23
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U12_s23
+  - id: U00_s29
+    payload: U00
+    seed: 29
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U00_s29
+  - id: U15_s29
+    payload: U15
+    seed: 29
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U15_s29
+  - id: U03_s29
+    payload: U03
+    seed: 29
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U03_s29
+  - id: U12_s29
+    payload: U12
+    seed: 29
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U12_s29

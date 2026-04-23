@@ -1,3 +1,4 @@
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -308,6 +309,83 @@ def test_prepare_theorem_packages_script_writes_dry_run_summary(tmp_path: Path) 
     )
     assert "wrote theorem dry-run summary" in completed.stdout
     assert output_path.exists()
+
+
+def test_g1_payload_seed_scale_configs_emit_qwen_train_and_eval_manifests() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+
+    train_manifest = build_manifest_from_config(
+        repo_root
+        / "configs"
+        / "experiment"
+        / "scale"
+        / "exp_train__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+    )
+    eval_manifest = build_manifest_from_config(
+        repo_root
+        / "configs"
+        / "experiment"
+        / "scale"
+        / "exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+    )
+
+    train_entry = train_manifest.entries[0]
+    eval_entry = eval_manifest.entries[0]
+
+    assert train_entry.entry_point == "scripts/train.py"
+    assert train_entry.model_name == "qwen2.5-7b-instruct"
+    assert train_entry.requested_resources.partition == "DGXA100"
+    assert train_entry.requested_resources.num_gpus == 1
+    assert train_entry.requested_resources.cpus == 16
+    assert train_entry.requested_resources.mem_gb == 96
+    assert train_entry.requested_resources.time_limit == "24:00:00"
+
+    assert eval_entry.entry_point == "scripts/eval.py"
+    assert eval_entry.model_name == "qwen2.5-7b-instruct"
+    assert eval_entry.requested_resources.partition == "DGXA100"
+    assert eval_entry.requested_resources.num_gpus == 1
+
+
+def test_prepare_g1_payload_seed_scale_script_writes_missing_only_manifests(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_path = tmp_path / "g1_package_dry_run.json"
+    train_manifest_path = tmp_path / "train_manifest.json"
+    eval_manifest_path = tmp_path / "eval_manifest.json"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_g1_payload_seed_scale.py",
+            "--output",
+            str(output_path),
+            "--train-manifest-out",
+            str(train_manifest_path),
+            "--eval-manifest-out",
+            str(eval_manifest_path),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote G1 dry-run summary" in completed.stdout
+    assert output_path.exists()
+    assert train_manifest_path.exists()
+    assert eval_manifest_path.exists()
+
+    payload = json.loads(output_path.read_text(encoding="utf-8"))
+    assert payload["target_case_count"] == 48
+    assert payload["reuse_existing_case_count"] == 12
+    assert payload["missing_case_count"] == 36
+    assert payload["train_manifest_entry_count"] == 36
+    assert payload["eval_manifest_entry_count"] == 36
+
+    train_manifest = load_manifest(train_manifest_path)
+    eval_manifest = load_manifest(eval_manifest_path)
+    assert len(train_manifest.entries) == 36
+    assert len(eval_manifest.entries) == 36
+    assert train_manifest.entries[0].entry_point == "scripts/train.py"
+    assert eval_manifest.entries[0].entry_point == "scripts/eval.py"
 
 
 def test_batch3b_qwen_attack_config_emits_attack_manifest() -> None:
