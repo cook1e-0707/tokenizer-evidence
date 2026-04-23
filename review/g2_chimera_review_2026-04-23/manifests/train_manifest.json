@@ -1,0 +1,1161 @@
+{
+  "created_at": "20260423T190322327281Z",
+  "entries": [
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u00-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U00",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u03-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U03",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u12-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U12",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u15-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U15",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u00-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U00",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u03-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U03",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u12-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U12",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u15-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U15",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u00-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U00",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u03-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U03",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u12-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U12",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf2-u15-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf2/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf2",
+        "eval.payload_text=U15",
+        "train.generation_prompt=Select exactly one allowed carrier token | return only the carrier value.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf2/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u00-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U00",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u03-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U03",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u12-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U12",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u15-s17",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U15",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u00-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U00",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u03-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U03",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u12-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U12",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u15-s23",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U15",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u00-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U00",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u03-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U03",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u12-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U12",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/train/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "g2-train-pf3-u15-s29",
+      "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g2_qwen7b_prompt_family_scale/pf3/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=g2-qwen7b-prompt-family-scale-pf3",
+        "eval.payload_text=U15",
+        "train.generation_prompt=Return exactly one allowed carrier token for the requested slot and nothing else.",
+        "runtime.output_root=g2_qwen7b_prompt_family_scale/pf3/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    }
+  ],
+  "manifest_name": "g2_qwen7b_prompt_family_scale_train",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g2_prompt_family_scale_v1.yaml"
+}
