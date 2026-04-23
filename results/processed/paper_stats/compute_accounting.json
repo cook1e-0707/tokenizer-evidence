@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 13824.0,
+      "requested_gpu_hours": 864.0,
+      "run_kind": "eval",
+      "runs": 36,
+      "stage": "G1",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 13824.0,
+      "requested_gpu_hours": 864.0,
+      "run_kind": "train",
+      "runs": 36,
+      "stage": "G1",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 4,
+      "mem_gb": 16,
+      "num_gpus": 0,
+      "partition": "Intel",
+      "requested_cpu_hours": 32.0,
+      "requested_gpu_hours": 0.0,
+      "run_kind": "attack",
+      "runs": 8,
+      "stage": "batch3c",
+      "time_limit": "01:00:00"
+    },
+    {
+      "cpus": 4,
+      "mem_gb": 16,
+      "num_gpus": 0,
+      "partition": "Intel",
+      "requested_cpu_hours": 16.0,
+      "requested_gpu_hours": 0.0,
+      "run_kind": "attack",
+      "runs": 4,
+      "stage": "batch3d",
+      "time_limit": "01:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 1536.0,
+      "requested_gpu_hours": 96.0,
+      "run_kind": "eval",
+      "runs": 4,
+      "stage": "compiled-c3-r4",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 1536.0,
+      "requested_gpu_hours": 96.0,
+      "run_kind": "train",
+      "runs": 4,
+      "stage": "compiled-c3-r4",
+      "time_limit": "24:00:00"
+    }
+  ]
+}

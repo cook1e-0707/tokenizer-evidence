@@ -118,3 +118,9 @@ theorem_t2:
     - id: uniform_bucket
       objective: uniform_bucket
       case_root: theorem2_qwen7b_r1_rerun_missing/uniform_bucket
+g1_payload_seed_scale:
+  stage: G1
+  package_config: configs/reporting/g1_payload_seed_scale_v1.yaml
+  summary_path: results/processed/paper_stats/g1_summary.json
+  inclusion_list_path: results/processed/paper_stats/g1_run_inclusion_list.json
+  compute_source_kinds: [new]

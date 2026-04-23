@@ -17,6 +17,7 @@ from typing import Any
 import yaml
 
 from src.evaluation.report import AttackRunSummary, EvalRunSummary, TrainRunSummary, load_result_json
+from src.infrastructure.config import load_config
 from src.infrastructure.paths import discover_repo_root
 
 
@@ -52,6 +53,13 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _load_json_object(path: Path) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"Expected JSON object in {path}")
+    return payload
+
+
 def _find_one(case_root: Path, pattern: str) -> Path:
     matches = sorted(case_root.rglob(pattern))
     if len(matches) != 1:
@@ -70,6 +78,17 @@ def _load_runtime_record(config_path: Path) -> dict[str, Any]:
     payload = _load_yaml(config_path)
     runtime = dict(payload.get("runtime", {}))
     resources = dict(runtime.get("resources", {}))
+    if not resources and payload.get("includes"):
+        resolved = load_config(config_path)
+        return {
+            "partition": str(resolved.runtime.resources.partition),
+            "num_gpus": int(resolved.runtime.resources.num_gpus),
+            "cpus": int(resolved.runtime.resources.cpus),
+            "mem_gb": int(resolved.runtime.resources.mem_gb),
+            "time_limit": str(resolved.runtime.resources.time_limit),
+            "time_limit_hours": _parse_time_limit_hours(str(resolved.runtime.resources.time_limit)),
+            "variant_name": str(resolved.run.variant_name),
+        }
     return {
         "partition": str(resources.get("partition", "")),
         "num_gpus": int(resources.get("num_gpus", 0) or 0),
@@ -82,10 +101,7 @@ def _load_runtime_record(config_path: Path) -> dict[str, Any]:
 
 
 def _load_submission_record(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"Expected JSON object in {path}")
-    return payload
+    return _load_json_object(path)
 
 
 def _stats(values: list[float]) -> dict[str, float | int]:
@@ -716,6 +732,90 @@ def _collect_robustness_records(
     return rows, inclusion_rows, compute_rows
 
 
+def _collect_g1_records(
+    repo_root: Path,
+    standing_config: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    g1_config = standing_config.get("g1_payload_seed_scale")
+    if not isinstance(g1_config, dict):
+        return [], []
+
+    package_config_path = _resolve_path(repo_root, str(g1_config["package_config"]))
+    summary_path = _resolve_path(repo_root, str(g1_config["summary_path"]))
+    inclusion_list_path = _resolve_path(repo_root, str(g1_config["inclusion_list_path"]))
+    package_config = _load_yaml(package_config_path)
+    summary = _load_json_object(summary_path)
+    inclusion_payload = _load_json_object(inclusion_list_path)
+
+    if not bool(summary.get("paper_ready")):
+        raise ValueError(f"G1 package is not paper-ready: {summary_path}")
+
+    included_rows = inclusion_payload.get("included", [])
+    if not isinstance(included_rows, list):
+        raise ValueError(f"Expected list at included in {inclusion_list_path}")
+    if int(summary.get("included_case_count", 0) or 0) != len(included_rows):
+        raise ValueError(
+            f"G1 included_case_count mismatch between {summary_path} and {inclusion_list_path}"
+        )
+
+    workstream = str(package_config.get("workstream", "G1"))
+    stage = str(g1_config.get("stage", workstream))
+    compute_source_kinds = {
+        str(item) for item in g1_config.get("compute_source_kinds", ["new"])
+    }
+    train_runtime = _load_runtime_record(_resolve_path(repo_root, str(package_config["train_config"])))
+    eval_runtime = _load_runtime_record(_resolve_path(repo_root, str(package_config["eval_config"])))
+
+    inclusion_rows: list[dict[str, Any]] = []
+    compute_rows: list[dict[str, Any]] = []
+    for row in included_rows:
+        if not isinstance(row, dict):
+            raise ValueError(f"Expected mapping rows in {inclusion_list_path}")
+        normalized = {
+            "workstream": workstream,
+            "stage": stage,
+            "case_id": str(row["case_id"]),
+            "payload": str(row["payload"]),
+            "seed": int(row["seed"]),
+            "case_root": str(row["case_root"]),
+            "source_stage": str(row.get("source_stage", "")),
+            "source_kind": str(row.get("source_kind", "")),
+            "train_summary_path": str(row["train_summary_path"]),
+            "eval_summary_path": str(row["eval_summary_path"]),
+            "training_health_path": str(row.get("training_health_path", "")),
+            "train_run_id": str(row.get("train_run_id", "")),
+            "eval_run_id": str(row.get("eval_run_id", "")),
+        }
+        inclusion_rows.append(normalized)
+
+        if normalized["source_kind"] not in compute_source_kinds:
+            continue
+        for run_kind, runtime in (("train", train_runtime), ("eval", eval_runtime)):
+            compute_rows.append(
+                {
+                    "workstream": workstream,
+                    "stage": stage,
+                    "run_kind": run_kind,
+                    "case_id": normalized["case_id"],
+                    "payload": normalized["payload"],
+                    "seed": normalized["seed"],
+                    "partition": runtime["partition"],
+                    "num_gpus": runtime["num_gpus"],
+                    "cpus": runtime["cpus"],
+                    "mem_gb": runtime["mem_gb"],
+                    "time_limit": runtime["time_limit"],
+                    "time_limit_hours": runtime["time_limit_hours"],
+                    "requested_gpu_hours": float(runtime["num_gpus"]) * float(runtime["time_limit_hours"]),
+                    "requested_cpu_hours": float(runtime["cpus"]) * float(runtime["time_limit_hours"]),
+                    "slurm_job_id": "",
+                    "variant_name": runtime["variant_name"],
+                    "source_kind": normalized["source_kind"],
+                    "source_stage": normalized["source_stage"],
+                }
+            )
+    return inclusion_rows, compute_rows
+
+
 def _build_main_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "stage": "compiled-c3-r4",
@@ -883,6 +983,7 @@ def main() -> int:
     )
     theorem_t1_rows, theorem_t1_inclusion_rows = _collect_theorem_t1_records(repo_root, standing_config)
     theorem_t2_rows, theorem_t2_inclusion_rows = _collect_theorem_t2_records(repo_root, standing_config)
+    g1_inclusion_rows, g1_compute_rows = _collect_g1_records(repo_root, standing_config)
     main_summary = _build_main_summary(main_rows)
     robustness_summary, robustness_stage_rows, robustness_family_rows = _build_robustness_summary(
         robustness_rows
@@ -890,7 +991,18 @@ def main() -> int:
     theorem_t1_summary = _build_theorem_t1_summary(theorem_t1_rows)
     theorem_t2_summary = _build_theorem_t2_summary(theorem_t2_rows)
     stat_rows = _build_stat_rows(main_summary, robustness_summary)
-    compute_summary, compute_summary_rows = _build_compute_accounting(main_compute_rows + robustness_compute_rows)
+    compute_summary, compute_summary_rows = _build_compute_accounting(
+        main_compute_rows + robustness_compute_rows + g1_compute_rows
+    )
+
+    inclusion_payload = {
+        "main_clean": main_inclusion_rows,
+        "robustness": robustness_inclusion_rows,
+        "theorem_t1": theorem_t1_inclusion_rows,
+        "theorem_t2": theorem_t2_inclusion_rows,
+    }
+    if g1_inclusion_rows:
+        inclusion_payload["g1_payload_seed_scale"] = g1_inclusion_rows
 
     _write_json(output_dir / "main_clean_summary.json", main_summary)
     _write_json(output_dir / "robustness_summary.json", robustness_summary)
@@ -898,15 +1010,7 @@ def main() -> int:
         _write_json(output_dir / "t1_summary.json", theorem_t1_summary)
     if theorem_t2_summary:
         _write_json(output_dir / "t2_r1_summary.json", theorem_t2_summary)
-    _write_json(
-        output_dir / "run_inclusion_lists.json",
-        {
-            "main_clean": main_inclusion_rows,
-            "robustness": robustness_inclusion_rows,
-            "theorem_t1": theorem_t1_inclusion_rows,
-            "theorem_t2": theorem_t2_inclusion_rows,
-        },
-    )
+    _write_json(output_dir / "run_inclusion_lists.json", inclusion_payload)
     _write_json(output_dir / "compute_accounting.json", compute_summary)
 
     _write_csv(tables_dir / "compiled_c3_r4_main.csv", main_rows)
