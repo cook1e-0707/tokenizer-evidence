@@ -1,0 +1,1665 @@
+{
+  "created_at": "20260423T053121019865Z",
+  "entries": [
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u01-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U01_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U01",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U01_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U01_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u02-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U02_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U02",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U02_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U02_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u04-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U04_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U04",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U04_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U04_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u05-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U05_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U05",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U05_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U05_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u06-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U06_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U06",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U06_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U06_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u07-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U07_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U07",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U07_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U07_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u08-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U08_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U08",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U08_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U08_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u09-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U09_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U09",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U09_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U09_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u10-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U10_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U10",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U10_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U10_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u11-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U11_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U11",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U11_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U11_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u13-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U13_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U13",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U13_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U13_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u14-s17",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U14_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "eval.payload_text=U14",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U14_s17/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U14_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u01-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U01_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U01",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U01_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U01_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u02-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U02_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U02",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U02_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U02_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u04-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U04_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U04",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U04_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U04_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u05-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U05_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U05",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U05_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U05_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u06-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U06_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U06",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U06_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U06_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u07-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U07_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U07",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U07_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U07_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u08-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U08_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U08",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U08_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U08_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u09-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U09_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U09",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U09_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U09_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u10-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U10_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U10",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U10_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U10_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u11-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U11_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U11",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U11_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U11_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u13-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U13_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U13",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U13_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U13_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u14-s23",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U14_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "eval.payload_text=U14",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U14_s23/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U14_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u01-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U01_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U01",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U01_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U01_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u02-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U02_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U02",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U02_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U02_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u04-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U04_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U04",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U04_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U04_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u05-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U05_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U05",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U05_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U05_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u06-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U06_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U06",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U06_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U06_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u07-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U07_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U07",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U07_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U07_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u08-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U08_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U08",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U08_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U08_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u09-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U09_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U09",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U09_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U09_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u10-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U10_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U10",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U10_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U10_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u11-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U11_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U11",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U11_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U11_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u13-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U13_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U13",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U13_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U13_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "/home/guanjie.lin001/tokenizer-evidence/configs/model/qwen2_5_7b_instruct.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/data/real_pilot.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/eval/default.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/runtime/gpu_a100_batch28.yaml",
+        "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "g1-eval-u14-s29",
+      "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+      "method_name": "our_method",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "g1_qwen7b_payload_seed_scale/U14_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "eval.payload_text=U14",
+        "data.eval_path=g1_qwen7b_payload_seed_scale/U14_s29/runs/exp_train/latest_eval_input.json",
+        "runtime.output_root=g1_qwen7b_payload_seed_scale/U14_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
+      ],
+      "primary_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/experiment/scale/exp_eval__qwen2_5_7b__g1_payload_seed_scale_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "submitted",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    }
+  ],
+  "manifest_name": "g1_qwen7b_payload_seed_scale_eval",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g1_payload_seed_scale_v1.yaml"
+}

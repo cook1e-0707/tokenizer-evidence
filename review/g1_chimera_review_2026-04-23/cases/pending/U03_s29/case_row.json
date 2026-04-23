@@ -1,0 +1,22 @@
+{
+  "accepted": false,
+  "case_id": "U03_s29",
+  "case_root": "/home/guanjie.lin001/tokenizer-evidence/batch28b_qwen7b_c3r3/U03_s29",
+  "decoded_payload": "",
+  "decoded_payload_correct": false,
+  "eval_run_id": "",
+  "eval_summary_path": "",
+  "final_loss": 0.0,
+  "included": false,
+  "match_ratio": 0.0,
+  "numerically_healthy": false,
+  "payload": "U03",
+  "seed": 29,
+  "source_kind": "reused",
+  "source_stage": "compiled-c3-r3",
+  "status": "pending",
+  "train_run_id": "",
+  "train_summary_path": "",
+  "training_health_path": "",
+  "verifier_success": false
+}
