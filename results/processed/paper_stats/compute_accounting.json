@@ -25,6 +25,30 @@
       "time_limit": "24:00:00"
     },
     {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 9216.0,
+      "requested_gpu_hours": 576.0,
+      "run_kind": "eval",
+      "runs": 24,
+      "stage": "G2",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 9216.0,
+      "requested_gpu_hours": 576.0,
+      "run_kind": "train",
+      "runs": 24,
+      "stage": "G2",
+      "time_limit": "24:00:00"
+    },
+    {
       "cpus": 4,
       "mem_gb": 16,
       "num_gpus": 0,

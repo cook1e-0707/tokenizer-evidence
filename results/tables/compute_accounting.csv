@@ -1,6 +1,8 @@
 stage,run_kind,runs,partition,num_gpus,cpus,mem_gb,time_limit,requested_gpu_hours,requested_cpu_hours
 G1,eval,36,DGXA100,1,16,96,24:00:00,864.0,13824.0
 G1,train,36,DGXA100,1,16,96,24:00:00,864.0,13824.0
+G2,eval,24,DGXA100,1,16,96,24:00:00,576.0,9216.0
+G2,train,24,DGXA100,1,16,96,24:00:00,576.0,9216.0
 batch3c,attack,8,Intel,0,4,16,01:00:00,0.0,32.0
 batch3d,attack,4,Intel,0,4,16,01:00:00,0.0,16.0
 compiled-c3-r4,eval,4,DGXA100,1,16,96,24:00:00,96.0,1536.0
