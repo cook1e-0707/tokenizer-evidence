@@ -1,0 +1,85 @@
+version: 1
+workstream: G2
+description: Controlled prompt-family scale package on the standing compiled Qwen/Qwen2.5-7B-Instruct path.
+train_config: configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml
+eval_config: configs/experiment/scale/exp_eval__qwen2_5_7b__g2_prompt_family_scale_v1.yaml
+new_case_root_prefix: g2_qwen7b_prompt_family_scale
+case_root_search_roots:
+  - /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence
+  - /home/guanjie.lin001/tokenizer-evidence
+payloads: ["U00", "U03", "U12", "U15"]
+seeds: [17, 23, 29]
+prompt_families:
+  - id: PF1
+    slug: pf1
+    description: Current deterministic exact-slot prompt family.
+    generation_prompt: "Select exactly one allowed carrier token."
+  - id: PF2
+    slug: pf2
+    description: Semantically equivalent delimiter-varied prompt family.
+    generation_prompt: "Select exactly one allowed carrier token | return only the carrier value."
+  - id: PF3
+    slug: pf3
+    description: Semantically equivalent wording-varied prompt family.
+    generation_prompt: "Return exactly one allowed carrier token for the requested slot and nothing else."
+existing_cases:
+  - family: PF1
+    payload: U00
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U00_s17
+  - family: PF1
+    payload: U03
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U03_s17
+  - family: PF1
+    payload: U12
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U12_s17
+  - family: PF1
+    payload: U15
+    seed: 17
+    stage: compiled-c3-r4
+    case_root: batch28b_qwen7b_c3r4/U15_s17
+  - family: PF1
+    payload: U00
+    seed: 23
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U00_s23
+  - family: PF1
+    payload: U03
+    seed: 23
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U03_s23
+  - family: PF1
+    payload: U12
+    seed: 23
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U12_s23
+  - family: PF1
+    payload: U15
+    seed: 23
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U15_s23
+  - family: PF1
+    payload: U00
+    seed: 29
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U00_s29
+  - family: PF1
+    payload: U03
+    seed: 29
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U03_s29
+  - family: PF1
+    payload: U12
+    seed: 29
+    stage: compiled-c3-r3
+    case_root: batch28b_qwen7b_c3r3/U12_s29
+  - family: PF1
+    payload: U15
+    seed: 29
+    stage: compiled-c3-r2
+    case_root: batch28b_qwen7b_c3r2/U15_s29

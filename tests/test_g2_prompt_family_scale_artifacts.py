@@ -1,0 +1,192 @@
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+import yaml
+
+from src.evaluation.report import EvalRunSummary, TrainRunSummary
+from src.infrastructure.paths import discover_repo_root
+
+
+def _write_case_artifacts(
+    case_root: Path,
+    *,
+    payload: str,
+    seed: int,
+    accepted: bool,
+    verifier_success: bool,
+    decoded_payload: str,
+    final_loss: float = 0.001,
+    first_nan_step: int | None = None,
+) -> None:
+    train_run_dir = case_root / "runs" / "exp_train" / f"exp_train__mock__s{seed}"
+    eval_run_dir = case_root / "runs" / "exp_eval" / f"exp_eval__mock__s{seed}"
+    train_run_dir.mkdir(parents=True, exist_ok=True)
+    eval_run_dir.mkdir(parents=True, exist_ok=True)
+
+    TrainRunSummary(
+        run_id=f"train-{payload}-s{seed}",
+        experiment_name="exp_train",
+        method_name="our_method",
+        model_name="qwen2.5-7b-instruct",
+        seed=seed,
+        git_commit="abc123",
+        timestamp="20260424T000000Z",
+        hostname="local",
+        slurm_job_id=None,
+        status="completed",
+        objective="bucket_mass",
+        dataset_name="real-pilot-compiled-c3-g2",
+        dataset_size=64,
+        steps=64,
+        final_loss=final_loss,
+        run_dir=str(train_run_dir),
+    ).save_json(train_run_dir / "train_summary.json")
+
+    EvalRunSummary(
+        run_id=f"eval-{payload}-s{seed}",
+        experiment_name="exp_eval",
+        method_name="our_method",
+        model_name="qwen2.5-7b-instruct",
+        seed=seed,
+        git_commit="abc123",
+        timestamp="20260424T000000Z",
+        hostname="local",
+        slurm_job_id=None,
+        status="completed" if accepted else "failed",
+        dataset_name="real-pilot-compiled-c3-g2",
+        sample_count=1,
+        accepted=accepted,
+        match_ratio=1.0 if accepted else 0.5,
+        threshold=0.0,
+        verification_mode="compiled_gate",
+        render_format="canonical_v1",
+        verifier_success=verifier_success,
+        decoded_payload=decoded_payload,
+        decoded_unit_count=2,
+        decoded_block_count=2,
+        unresolved_field_count=0,
+        malformed_count=0,
+        utility_acceptance_rate=1.0 if accepted else 0.0,
+        notes="test fixture",
+        diagnostics={},
+        run_dir=str(eval_run_dir),
+    ).save_json(eval_run_dir / "eval_summary.json")
+
+    (train_run_dir / "training_health.json").write_text(
+        json.dumps({"first_nan_step": first_nan_step}, indent=2),
+        encoding="utf-8",
+    )
+
+
+def test_build_g2_prompt_family_scale_artifacts_handles_family_breakdown(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    package_config_path = tmp_path / "g2_package.yaml"
+    search_root = tmp_path / "chimera_search_root"
+
+    _write_case_artifacts(
+        search_root / "reused" / "pf1" / "U00_s17",
+        payload="U00",
+        seed=17,
+        accepted=True,
+        verifier_success=True,
+        decoded_payload="U00",
+    )
+    _write_case_artifacts(
+        search_root / "new_cases" / "pf1" / "U03_s17",
+        payload="U03",
+        seed=17,
+        accepted=True,
+        verifier_success=True,
+        decoded_payload="U99",
+    )
+    _write_case_artifacts(
+        search_root / "new_cases" / "pf2" / "U00_s17",
+        payload="U00",
+        seed=17,
+        accepted=True,
+        verifier_success=True,
+        decoded_payload="U00",
+    )
+
+    package_config_path.write_text(
+        yaml.safe_dump(
+            {
+                "version": 1,
+                "workstream": "G2",
+                "description": "tmp fixture",
+                "train_config": "configs/experiment/scale/exp_train__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+                "eval_config": "configs/experiment/scale/exp_eval__qwen2_5_7b__g2_prompt_family_scale_v1.yaml",
+                "new_case_root_prefix": "new_cases",
+                "case_root_search_roots": [str(search_root)],
+                "payloads": ["U00", "U03"],
+                "seeds": [17],
+                "prompt_families": [
+                    {
+                        "id": "PF1",
+                        "slug": "pf1",
+                        "description": "standing prompt",
+                        "generation_prompt": "Select exactly one allowed carrier token.",
+                    },
+                    {
+                        "id": "PF2",
+                        "slug": "pf2",
+                        "description": "delimiter prompt",
+                        "generation_prompt": "Select exactly one allowed carrier token | return only the carrier value.",
+                    },
+                ],
+                "existing_cases": [
+                    {
+                        "family": "PF1",
+                        "payload": "U00",
+                        "seed": 17,
+                        "stage": "compiled-c3-r4",
+                        "case_root": "reused/pf1/U00_s17",
+                    }
+                ],
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_g2_prompt_family_scale_artifacts.py",
+            "--package-config",
+            str(package_config_path),
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote G2 summary" in completed.stdout
+    summary = json.loads((output_dir / "g2_summary.json").read_text(encoding="utf-8"))
+    assert summary["target_case_count"] == 4
+    assert summary["included_case_count"] == 2
+    assert summary["pending_case_count"] == 1
+    assert summary["excluded_case_count"] == 1
+    assert summary["paper_ready"] is False
+    assert [row["included_runs"] for row in summary["by_family"]] == [1, 1]
+
+    inclusion = json.loads((output_dir / "g2_run_inclusion_list.json").read_text(encoding="utf-8"))
+    assert len(inclusion["included"]) == 2
+    assert len(inclusion["pending"]) == 1
+    assert len(inclusion["excluded"]) == 1
+    assert {row["family_id"] for row in inclusion["included"]} == {"PF1", "PF2"}
+
+    table_text = (tables_dir / "g2_prompt_family_scale.csv").read_text(encoding="utf-8")
+    assert "family_id" in table_text
+    assert "accepted_included" in table_text
+    assert "completed_excluded" in table_text
+    assert "pending" in table_text
