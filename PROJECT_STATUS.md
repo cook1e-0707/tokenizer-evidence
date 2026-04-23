@@ -5,6 +5,9 @@
 - Accepted clean compiled path:
   - `compiled-c3-r4` passed on `Qwen/Qwen2.5-7B-Instruct`
   - representative payloads `U00`, `U03`, `U12`, and `U15` are accepted at seed `17`
+- Publication-scale clean coverage:
+  - `G1` payload x seed package is now standing on `U00..U15 @ seeds 17, 23, 29`
+  - final G1 aggregate is `48/48` included, `0` pending, `0` excluded
 - Standing robustness path:
   - `batch3-preflight-reopen` passed
   - `batch3a` passed
@@ -12,11 +15,19 @@
   - `batch3c` passed
   - `batch3d` passed
 - Active execution scope:
-  - manuscript-facing consolidation only
-  - theorem-package reporting only
+  - manuscript-facing consolidation and reporting only
+  - no active clean-path reruns
+  - no active robustness-grid expansion
+  - no active theorem reruns
   - no additional Batch 3 expansion
   - no new baselines
   - no new model families
+- Paper-facing appendix status:
+  - `S1` clean compiled table is landed in the manuscript appendix
+  - `S2` robustness-stage and attack-family tables are landed in the manuscript appendix
+  - `T1` contextual-alignment table is landed in the manuscript appendix
+  - `T2-r1` objective-comparison and bucket-level supplementary tables are landed in the manuscript appendix
+  - `G1` payload x seed table, inclusion list, and summary are landed as frozen paper-facing artifacts
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
   - `T1 sequence_proxy` now also has an accepted repaired Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
@@ -29,10 +40,85 @@
 
 ## Current Priority
 
-1. Consolidate the accepted `compiled-c3-r4`, `batch3c`, and `batch3d` results into manuscript-facing tables and paper-facing summary artifacts.
-2. Land the accepted `T1` and `T2-r1` theorem results as paper-facing comparison tables plus the `T2-r1` bucket-level supplementary table.
-3. Add explicit statistical aggregation, compute accounting, and run inclusion lists for the standing Qwen 7B claims.
-4. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
+1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, and `G1` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
+2. Tighten statistics, compute accounting, explicit inclusion lists, and wording alignment between `PROJECT_STATUS.md`, `docs/experiment_matrix.md`, and the appendix tables.
+3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
+4. Keep `B1` (matched-budget baselines) and `R1` (new model-family replication) blocked until the Qwen 7B manuscript package is finalized.
+
+## Experimental Scale Snapshot
+
+### Common Qwen 7B Train/Eval Envelope
+
+- model: `Qwen/Qwen2.5-7B-Instruct`
+- tokenizer max length: `512`
+- adapter recipe: LoRA with `r=16`, `alpha=32`, `dropout=0.0`
+- optimizer-scale settings shared by the standing clean/theorem packages:
+  - `batch_size = 1`
+  - `epochs = 64`
+  - `learning_rate = 5e-5`
+- standing train/eval runtime envelope:
+  - `1 x A100`
+  - `16 CPUs`
+  - `96 GB RAM`
+  - `24h` wall-clock request
+- exact-slot compiled packages use the same prompt family:
+  - base instruction: `Select exactly one allowed carrier token.`
+  - one prompt per slot
+  - `generation_max_new_tokens = 1`
+- robustness attacks do **not** retrain the model:
+  - they perturb rerendered canonical text from accepted compiled-c3 baselines
+  - they use the CPU preflight attack runtime, not the A100 train/eval envelope
+
+### Clean Compiled Path Scale
+
+| Stage | Train payload labels | Blocks x fields | Bucket / codebook scale | Contract sample count | Dataset size per run | Prompt scale | Eval scope |
+|---|---|---:|---|---:|---:|---|---|
+| `compiled-c0` | `OK/NO/UP/AI` (4 pilot labels) | `1 x 2` | historical narrow single-block pilot before the later `U00..U15` full-grid codebook | `8` | `8` | `2` exact-slot prompts per payload, `1` token per slot | single target pilot eval (`OK`) |
+| `compiled-c1` | `OK/NO/UP/AI` (4 pilot labels) | `1 x 2` | asymmetric single-block pilot; still a narrow representative-label package rather than the later full `4 x 4` sweep | `8` | `8` | `2` exact-slot prompts per payload, `1` token per slot | single target pilot eval (`AI`) |
+| `compiled-c2` | `U00..U15` (16 labels) | `1 x 2` | `SECTION=4 buckets`, `TOPIC=4 buckets`, `1` canonical token per bucket | `32` | `32` | `2` exact-slot prompts per payload, `1` token per slot | single-block full-grid eval at `U14` |
+| `compiled-c3` | `U00..U15` (16 labels) | `2 x 2` | same `4 x 4` single-token codebook, expanded to `block_count=2` | `64` | `64` | `4` exact-slot prompts per payload, `1` token per slot | double-block eval at `U14` |
+| `compiled-c3-r1` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U00/U03/U12/U15 @ seed 17` |
+| `compiled-c3-r2` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U00/U15 @ seed 23,29` |
+| `compiled-c3-r3` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U03/U12 @ seed 23,29` |
+| `compiled-c3-r4` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U00/U03/U12/U15 @ seed 17` |
+| `G1 payload-seed scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all standing seeds and payloads | `64` per run | `64` per run | same exact-slot prompt family | full package: `U00..U15 @ seeds 17,23,29` (`48` included clean train/eval cases) |
+
+Notes:
+- for the compiled exact-slot packages, `contract sample count = payload label count x block_count x fields_per_block`
+- from `compiled-c2` onward, the standing clean path is no longer a narrow pilot; it is a full `U00..U15` label package over the current Qwen 7B compiled codebook
+
+### Robustness Path Scale
+
+| Stage | Accepted clean source | Payloads | Seeds | Attack families | Run count | Attacked text scale | Standing outcome |
+|---|---|---|---|---|---:|---|---|
+| `batch3-preflight-reopen` | `compiled-c3-r2` | `U00`, `U15` | `23`, `29` | `whitespace_scrub (0.1)`, `truncate_tail (0.25)` | `2` | canonical rerender of a `2`-block, `4`-slot compiled output | harness reopened |
+| `batch3a` | `compiled-c3-r2` | `U00`, `U15` | `23`, `29` | `whitespace_scrub (0.1)`, `truncate_tail (0.25)` | `8` | same `2`-block canonical text format | small grid passed |
+| `batch3b` | `compiled-c3-r2` + `compiled-c3-r3` | `U00`, `U03`, `U12`, `U15` | `23`, `29` | `whitespace_scrub (0.1)`, `truncate_tail (0.25)` | `16` | same `2`-block canonical text format | payload expansion passed |
+| `batch3c` | `compiled-c3-r4` | `U00`, `U03`, `U12`, `U15` | `17` | `whitespace_scrub (0.1)`, `truncate_tail (0.25)` | `8` | same `2`-block canonical text format | seed expansion passed |
+| `batch3d` | `compiled-c3-r4` | `U00`, `U03`, `U12`, `U15` | `17` | `delimiter_scrub (1.0)` | `4` | same `2`-block canonical text format | new family passed |
+
+Observed standing attack behavior:
+- `whitespace_scrub`: acceptance preserved on all standing runs
+- `truncate_tail`: acceptance broken on all standing runs
+- `delimiter_scrub`: acceptance broken on all standing runs
+
+### Theorem Package Scale
+
+| Package / arm | Catalog / bucket geometry | Train payload labels | Blocks x fields | Contract sample count | Dataset size per run | Prompt scale | Eval target | Standing result |
+|---|---|---|---:|---:|---:|---|---|---|
+| `T1 contextual_exact` | compiled Qwen codebook: `SECTION=4`, `TOPIC=4`, `1` canonical token per bucket | `U00/U03/U12/U15` | `2 x 2` | `16` | `16` | `4` exact-slot prompts per payload, `1` token per slot | `U03` | accepted exact-slot |
+| `T1 sequence_proxy` | same compiled Qwen codebook and same compiled payload contract as `contextual_exact` | `U00/U03/U12/U15` | `2 x 2` | `16` carried by contract | `4` scaffolded train examples (one per payload label) | one `8`-line scaffold prompt per payload, `4` output lines, `generation_max_new_tokens = 8` | `U03` | accepted exact-slot after payload-label repair |
+| `T2-r1 bucket_mass` | strict-passed multi-member-bucket Qwen source catalog: `SECTION` bucket 3 = `update/review`, `TOPIC` bucket 3 = `science/climate` | `U00..U15` | `1 x 2` | `32` | `32` | `2` exact-slot prompts per payload, `1` token per slot | `U15` | bucket-correct, exact-slot fail |
+| `T2-r1 fixed_representative` | same multi-member-bucket source catalog as above | `U00..U15` | `1 x 2` | `32` | `32` | `2` exact-slot prompts per payload, `1` token per slot | `U15` | accepted exact-slot |
+| `T2-r1 uniform_bucket` | same multi-member-bucket source catalog as above | `U00..U15` | `1 x 2` | `32` | `32` | `2` exact-slot prompts per payload, `1` token per slot | `U15` | bucket-correct, exact-slot fail |
+
+Interpretation:
+- `T1` is now a fair same-payload, same-codebook comparison:
+  - `contextual_exact` conditions each slot with exact allowed-carrier context
+  - `sequence_proxy` uses a single scaffold prompt per payload, but now also conditions on the payload label
+- `T2-r1` is intentionally harder than the standing clean compiled path:
+  - it switches from the single-token-per-bucket compiled catalog to the multi-member-bucket source catalog
+  - this is what makes `fixed_representative` vs `bucket_mass` vs `uniform_bucket` actually distinguishable
 
 ## Archived Failures
 
@@ -59,6 +145,7 @@
 - `compiled-c3-r2`: multi-seed validation passed on `U00` and `U15` with seeds `23` and `29`.
 - `compiled-c3-r3`: supplemental clean baselines passed on `U03` and `U12` with seeds `23` and `29`.
 - `compiled-c3-r4`: supplemental clean baselines passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
+- `G1 payload-seed scale`: publication-scale clean package passed on `U00..U15` with seeds `17`, `23`, and `29`, ending at `48/48` included runs.
 - `batch3-preflight-reopen`: attack harness restored on accepted compiled-c3 baselines.
 - `batch3a`: small robustness grid passed on `U00` and `U15` with seeds `23` and `29` across `whitespace_scrub` and `truncate_tail`.
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
