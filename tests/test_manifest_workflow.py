@@ -388,6 +388,47 @@ def test_prepare_g1_payload_seed_scale_script_writes_missing_only_manifests(tmp_
     assert eval_manifest.entries[0].entry_point == "scripts/eval.py"
 
 
+def test_prepare_g1_payload_seed_scale_script_supports_environment_setup_override(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_path = tmp_path / "g1_package_dry_run.json"
+    train_manifest_path = tmp_path / "train_manifest.json"
+    eval_manifest_path = tmp_path / "eval_manifest.json"
+    environment_setup = "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_g1_payload_seed_scale.py",
+            "--output",
+            str(output_path),
+            "--train-manifest-out",
+            str(train_manifest_path),
+            "--eval-manifest-out",
+            str(eval_manifest_path),
+            "--environment-setup",
+            environment_setup,
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote G1 dry-run summary" in completed.stdout
+
+    train_manifest = load_manifest(train_manifest_path)
+    eval_manifest = load_manifest(eval_manifest_path)
+    assert train_manifest.entries[0].requested_resources.environment_setup == environment_setup
+    assert eval_manifest.entries[0].requested_resources.environment_setup == environment_setup
+    assert (
+        "runtime.resources.environment_setup="
+        "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate"
+    ) in train_manifest.entries[0].overrides
+    assert (
+        "runtime.resources.environment_setup="
+        "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate"
+    ) in eval_manifest.entries[0].overrides
+
+
 def test_batch3b_qwen_attack_config_emits_attack_manifest() -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     attack_manifest = build_manifest_from_config(

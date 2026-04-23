@@ -8,6 +8,7 @@ if __package__ in {None, ""}:
 
 import argparse
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -49,6 +50,13 @@ def parse_args() -> argparse.Namespace:
         help=(
             "Optional base directory for new G1 case roots. "
             "Defaults to the package config new_case_root_prefix."
+        ),
+    )
+    parser.add_argument(
+        "--environment-setup",
+        help=(
+            "Optional runtime environment setup block to embed in generated manifests. "
+            "Defaults to the CHIMERA_ENV_SETUP environment variable when set."
         ),
     )
     return parser.parse_args()
@@ -145,16 +153,17 @@ def _build_train_entry(
     repo_root: Path,
     train_config_path: Path,
     case: dict[str, Any],
+    environment_setup: str | None,
 ) -> ManifestEntry:
     output_root = str((Path(case["case_root"]) / "runs").as_posix())
-    manifest = build_manifest_from_config(
-        train_config_path,
-        overrides=[
-            f"run.seed={case['seed']}",
-            f"eval.payload_text={case['payload']}",
-            f"runtime.output_root={output_root}",
-        ],
-    )
+    overrides = [
+        f"run.seed={case['seed']}",
+        f"eval.payload_text={case['payload']}",
+        f"runtime.output_root={output_root}",
+    ]
+    if environment_setup:
+        overrides.append(f"runtime.environment_setup={environment_setup}")
+    manifest = build_manifest_from_config(train_config_path, overrides=overrides)
     return _entry_with_identity(
         entry=manifest.entries[0],
         manifest_id=f"g1-train-{str(case['payload']).lower()}-s{case['seed']}",
@@ -167,18 +176,19 @@ def _build_eval_entry(
     repo_root: Path,
     eval_config_path: Path,
     case: dict[str, Any],
+    environment_setup: str | None,
 ) -> ManifestEntry:
     output_root = str((Path(case["case_root"]) / "runs").as_posix())
     eval_input_path = str((Path(output_root) / "exp_train" / "latest_eval_input.json").as_posix())
-    manifest = build_manifest_from_config(
-        eval_config_path,
-        overrides=[
-            f"run.seed={case['seed']}",
-            f"eval.payload_text={case['payload']}",
-            f"data.eval_path={eval_input_path}",
-            f"runtime.output_root={output_root}",
-        ],
-    )
+    overrides = [
+        f"run.seed={case['seed']}",
+        f"eval.payload_text={case['payload']}",
+        f"data.eval_path={eval_input_path}",
+        f"runtime.output_root={output_root}",
+    ]
+    if environment_setup:
+        overrides.append(f"runtime.environment_setup={environment_setup}")
+    manifest = build_manifest_from_config(eval_config_path, overrides=overrides)
     return _entry_with_identity(
         entry=manifest.entries[0],
         manifest_id=f"g1-eval-{str(case['payload']).lower()}-s{case['seed']}",
@@ -214,6 +224,7 @@ def main() -> int:
     train_manifest_out = _resolve_path(repo_root, args.train_manifest_out)
     eval_manifest_out = _resolve_path(repo_root, args.eval_manifest_out)
     output_path = _resolve_path(repo_root, args.output)
+    environment_setup = args.environment_setup or os.environ.get("CHIMERA_ENV_SETUP")
 
     cases = _build_case_records(
         repo_root=repo_root,
@@ -223,11 +234,21 @@ def main() -> int:
     planned_cases = [case for case in cases if case["status"] == "prepare"]
 
     train_entries = [
-        _build_train_entry(repo_root=repo_root, train_config_path=train_config_path, case=case)
+        _build_train_entry(
+            repo_root=repo_root,
+            train_config_path=train_config_path,
+            case=case,
+            environment_setup=environment_setup,
+        )
         for case in planned_cases
     ]
     eval_entries = [
-        _build_eval_entry(repo_root=repo_root, eval_config_path=eval_config_path, case=case)
+        _build_eval_entry(
+            repo_root=repo_root,
+            eval_config_path=eval_config_path,
+            case=case,
+            environment_setup=environment_setup,
+        )
         for case in planned_cases
     ]
 
