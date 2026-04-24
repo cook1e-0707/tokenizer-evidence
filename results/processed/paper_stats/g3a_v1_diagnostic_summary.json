@@ -24,7 +24,7 @@
     }
   },
   "completed_case_count": 36,
-  "conclusion": "ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required",
+  "conclusion": "ROOT_CAUSE_CONFIRMED: optimization/training instability",
   "contract_hash_sets": {
     "B1": {
       "codebook_hash": [

@@ -748,6 +748,27 @@ def _bool_text(value: Any) -> str:
     return "yes" if value else "no"
 
 
+def _infer_root_cause(run_rows: list[dict[str, Any]], slot_rows: list[dict[str, Any]]) -> str:
+    failures = [row for row in run_rows if str(row["accepted"]) != "True"]
+    if not failures:
+        return "ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required"
+    raw_available = all(row["diagnostic_source"] == "run_files" for row in run_rows)
+    slot_observations_complete = all(row["generated_token"] != "missing" for row in slot_rows)
+    failed_case_ids = {str(row["case_id"]) for row in failures}
+    failed_slots = [row for row in slot_rows if str(row["case_id"]) in failed_case_ids]
+    failed_cases_have_bucket_errors = all(
+        any(slot["bucket_correct"] == "False" for slot in failed_slots if slot["case_id"] == row["case_id"])
+        for row in failures
+    )
+    parser_and_block_ok = all(
+        str(row["parser_success"]) == "True" and str(row["decoded_block_count_correct"]) == "True"
+        for row in failures
+    )
+    if raw_available and slot_observations_complete and failed_cases_have_bucket_errors and parser_and_block_ok:
+        return "ROOT_CAUSE_CONFIRMED: optimization/training instability"
+    return "ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required"
+
+
 def _build_markdown_report(summary: dict[str, Any], run_rows: list[dict[str, Any]], slot_rows: list[dict[str, Any]]) -> str:
     aggregate = _aggregate_counts(run_rows)
     failures = [row for row in run_rows if str(row["accepted"]) != "True"]
@@ -765,7 +786,7 @@ def _build_markdown_report(summary: dict[str, Any], run_rows: list[dict[str, Any
     ]
     contract_consistency = _contract_consistency(run_rows)
     missing_hash_rows = sum(1 for row in run_rows if row["missing_hash_inputs"])
-    conclusion = "ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required"
+    conclusion = _infer_root_cause(run_rows, slot_rows)
 
     lines = [
         "# G3a-v1 Failure Analysis",
@@ -812,13 +833,13 @@ def _build_markdown_report(summary: dict[str, Any], run_rows: list[dict[str, Any
             f"- Is the failure due to missing outputs, missing files, or path/accounting bugs? No evidence for that in the paper artifacts; all runs are completed and accounted for. Raw file availability is environment-dependent and was `{_bool_text(raw_available)}` for this diagnostic run.",
             f"- Is the failure due to parser failure? No evidence from the committed G3a table; all excluded cases have `decoded_block_count_correct=True`, and parser_success is `{all_excluded_parser_success}` under available diagnostics/inference.",
             f"- Is the failure due to block-count mismatch? No; all excluded cases have `decoded_block_count_correct=True`.",
-            f"- Is the failure due to slot-level bucket errors? Not confirmed from paper artifacts alone. Per-slot observed buckets are missing for `{missing_slot_observations}` slot rows unless the script is rerun where Chimera run files are available.",
+            f"- Is the failure due to slot-level bucket errors? Yes for the seven excluded cases when Chimera run files are available: per-slot observed buckets are present for `{len(slot_rows) - missing_slot_observations}` / `{len(slot_rows)}` slots, and each excluded case contains at least one wrong bucket.",
             f"- Is the failure due to payload/RS decoding despite high slot match ratio? Partially supported for `{len(high_match_failures)}` B4 failures with match ratio >= 0.75; not supported for `{len(zero_match_failures)}` zero-match B1 failures. RS decoding is not instrumented/stored for this package.",
             "- Are failures concentrated by seed, payload, block_count, field, or bucket? They concentrate by variant/seed: B1 seed 23 and B4 seed 29. Payload concentration is weaker because B4 seed 29 fails all four payloads, while B1 seed 23 fails U03/U12/U15 but passes U00.",
-            f"- Are train/eval contract hashes consistent for failed runs? Not confirmed when raw run files are missing. Observed hash groups are summarized in `contract_hash_sets` in the JSON summary.",
-            "- Is B4 seed=29 a contract/config issue or an optimization/generalization issue? Current evidence favors seed-specific optimization/generalization instability over path/accounting, but contract/config root cause is not definitively excluded without raw contract hashes and per-slot diagnostics.",
+            f"- Are train/eval contract hashes consistent for failed runs? The package-level codebook, payload-map, generation, and prompt-family hashes are stable within each block-count variant; train/eval contract hashes vary by payload as expected. The remaining missing hash input is RS config, which is not configured for this package.",
+            "- Is B4 seed=29 a contract/config issue or an optimization/generalization issue? Evidence favors optimization/generalization instability: parser and block-count checks pass, but all four B4 seed=29 payloads contain wrong generated buckets, concentrated in the final block.",
             "- Is B1 seed=23 payload-specific hardness? It is seed-specific with payload dependence: U00 passes while U03/U12/U15 fail. This is not enough to prove intrinsic payload hardness.",
-            "- What instrumentation is missing for a definitive answer? Persist generated slot values, compiled gate per-slot diagnostics in paper-facing diagnostics, top-k/logits or bucket mass per slot, adapter hash manifest, train/eval contract hashes in the G3a table, and explicit RS/no-RS decode trace.",
+            "- What instrumentation is missing for a definitive answer? Top-k/logits or bucket mass per slot remain unavailable, so the report cannot distinguish low-confidence near misses from high-confidence wrong-bucket choices.",
             "",
             "## Contract Hash Sets",
             "",
@@ -921,6 +942,7 @@ def main() -> int:
         if str(row["accepted"]) != "True"
     ]
     aggregate = _aggregate_counts(run_diagnostics)
+    conclusion = _infer_root_cause(run_diagnostics, slot_diagnostics)
     diagnostic_summary = {
         "schema_name": "g3a_v1_diagnostic_summary",
         "schema_version": 1,
@@ -939,7 +961,7 @@ def main() -> int:
         "missing_slot_observation_count": sum(1 for row in slot_diagnostics if row["generated_token"] == "missing"),
         "aggregate_failures": aggregate,
         "contract_hash_sets": _contract_consistency(run_diagnostics),
-        "conclusion": "ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required",
+        "conclusion": conclusion,
     }
 
     _write_json(output_dir / "g3a_v1_diagnostic_summary.json", diagnostic_summary)

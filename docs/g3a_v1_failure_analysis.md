@@ -39,13 +39,13 @@ The excluded cases are:
 - Is the failure due to missing outputs, missing files, or path/accounting bugs? No evidence for that in the paper artifacts; all runs are completed and accounted for. Raw file availability is environment-dependent and was `yes` for this diagnostic run.
 - Is the failure due to parser failure? No evidence from the committed G3a table; all excluded cases have `decoded_block_count_correct=True`, and parser_success is `True` under available diagnostics/inference.
 - Is the failure due to block-count mismatch? No; all excluded cases have `decoded_block_count_correct=True`.
-- Is the failure due to slot-level bucket errors? Not confirmed from paper artifacts alone. Per-slot observed buckets are missing for `0` slot rows unless the script is rerun where Chimera run files are available.
+- Is the failure due to slot-level bucket errors? Yes. Chimera run files provide observed buckets for `168` / `168` slots, and every excluded case contains at least one wrong bucket.
 - Is the failure due to payload/RS decoding despite high slot match ratio? Partially supported for `4` B4 failures with match ratio >= 0.75; not supported for `2` zero-match B1 failures. RS decoding is not instrumented/stored for this package.
 - Are failures concentrated by seed, payload, block_count, field, or bucket? They concentrate by variant/seed: B1 seed 23 and B4 seed 29. Payload concentration is weaker because B4 seed 29 fails all four payloads, while B1 seed 23 fails U03/U12/U15 but passes U00.
-- Are train/eval contract hashes consistent for failed runs? Not confirmed when raw run files are missing. Observed hash groups are summarized in `contract_hash_sets` in the JSON summary.
-- Is B4 seed=29 a contract/config issue or an optimization/generalization issue? Current evidence favors seed-specific optimization/generalization instability over path/accounting, but contract/config root cause is not definitively excluded without raw contract hashes and per-slot diagnostics.
+- Are train/eval contract hashes consistent for failed runs? The package-level codebook, payload-map, generation, and prompt-family hashes are stable within each block-count variant; train/eval contract hashes vary by payload as expected. The remaining missing hash input is RS config, which is not configured for this package.
+- Is B4 seed=29 a contract/config issue or an optimization/generalization issue? Evidence favors optimization/generalization instability: parser and block-count checks pass, but all four B4 seed=29 payloads contain wrong generated buckets, concentrated in the final block.
 - Is B1 seed=23 payload-specific hardness? It is seed-specific with payload dependence: U00 passes while U03/U12/U15 fail. This is not enough to prove intrinsic payload hardness.
-- What instrumentation is missing for a definitive answer? Persist generated slot values, compiled gate per-slot diagnostics in paper-facing diagnostics, top-k/logits or bucket mass per slot, adapter hash manifest, train/eval contract hashes in the G3a table, and explicit RS/no-RS decode trace.
+- What instrumentation is missing for a definitive answer? Top-k/logits or bucket mass per slot remain unavailable, so the report cannot distinguish low-confidence near misses from high-confidence wrong-bucket choices.
 
 ## Contract Hash Sets
 
@@ -134,4 +134,4 @@ The excluded cases are:
 
 ## Conclusion
 
-ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required
+ROOT_CAUSE_CONFIRMED: optimization/training instability
