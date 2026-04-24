@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import gc
 import math
 from dataclasses import dataclass
 from pathlib import Path
@@ -863,6 +864,14 @@ def run_minimal_hf_causal_lm_training(
     ):
         selected_checkpoint_dir = best_checkpoint_dir
         if best_checkpoint_dir != checkpoint_dir:
+            # The trained model and optimizer still own GPU memory here. Free them
+            # before loading the selected checkpoint, otherwise Qwen7B can OOM by
+            # briefly co-residing with a second base model on 40GB GPUs.
+            del optimizer
+            del model
+            gc.collect()
+            if cuda_available:
+                torch.cuda.empty_cache()
             if normalized_adapter_mode == "lora":
                 try:
                     from peft import PeftModel
