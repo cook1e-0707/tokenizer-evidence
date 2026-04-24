@@ -529,6 +529,14 @@ def main() -> int:
             data_path = repo_root / data_path
         dataset = load_training_examples(data_path)
     assert dataset is not None
+    if (
+        config.train.target_mode == "compiled_fieldwise_bucket_mass"
+        and config.train.evidence_loss_normalization != "per_slot_mean"
+    ):
+        raise ValueError(
+            "G3a-v2 compiled bucket training requires train.evidence_loss_normalization=per_slot_mean; "
+            f"got {config.train.evidence_loss_normalization!r}"
+        )
     checkpoint_path: str
     generated_text: str
     if config.model.family == "huggingface-causal-lm":
@@ -556,6 +564,11 @@ def main() -> int:
             fieldwise_generation_plan=fieldwise_generation_plan,
             use_compiled_bucket_objective=config.train.target_mode == "compiled_fieldwise_bucket_mass",
             compiled_objective_mode=config.train.objective,
+            compiled_lambda_set=config.train.lambda_set,
+            checkpoint_selection_metric=config.train.checkpoint_selection_metric,
+            checkpoint_selection_mode=config.train.checkpoint_selection_mode,
+            checkpoint_selection_use_best_for_eval=config.train.checkpoint_selection_use_best_for_eval,
+            checkpoint_selection_save_best=config.train.checkpoint_selection_save_best,
         )
         status = training_result.status
         steps = training_result.steps
@@ -581,6 +594,12 @@ def main() -> int:
                 json.dumps(training_result.health_diagnostics, indent=2, sort_keys=True),
                 encoding="utf-8",
             )
+            checkpoint_selection = training_result.health_diagnostics.get("checkpoint_selection")
+            if isinstance(checkpoint_selection, dict):
+                (paths.run_dir / "checkpoint_selection.json").write_text(
+                    json.dumps(checkpoint_selection, indent=2, sort_keys=True),
+                    encoding="utf-8",
+                )
     else:
         plan = TrainingPlan(
             dataset_name=config.data.name,
@@ -614,6 +633,13 @@ def main() -> int:
         eval_input_payload["compiled_train_contract_hash"] = compiled_train_contract.contract_hash
         eval_input_payload["compiled_train_contract_path"] = str(paths.run_dir / "compiled_train_contract.json")
         eval_input_payload["compiled_eval_contract"] = compiled_train_contract.eval_contract.to_dict()
+        if config.train.checkpoint_selection_metric:
+            eval_input_payload["checkpoint_selection"] = {
+                "metric": config.train.checkpoint_selection_metric,
+                "mode": config.train.checkpoint_selection_mode,
+                "use_best_for_eval": config.train.checkpoint_selection_use_best_for_eval,
+                "save_best": config.train.checkpoint_selection_save_best,
+            }
     if canonical_contract_metadata is not None:
         eval_input_payload["canonical_contract"] = canonical_contract_metadata
     if expected_slot_values:

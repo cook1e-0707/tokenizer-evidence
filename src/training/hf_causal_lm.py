@@ -30,6 +30,32 @@ class HFCausalLMTrainingResult:
     health_diagnostics: dict[str, object]
 
 
+@dataclass(frozen=True)
+class CompiledBucketLossDiagnostics:
+    slot_count: int
+    raw_l_set_sum: float
+    normalized_l_set_mean: float
+    lambda_set: float
+    effective_lambda_per_slot: float
+    target_bucket_mass_mean: float
+    target_bucket_mass_min: float
+    slot_margin_mean: float
+    slot_margin_min: float
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "slot_count": self.slot_count,
+            "raw_L_set_sum": self.raw_l_set_sum,
+            "normalized_L_set_mean": self.normalized_l_set_mean,
+            "lambda_set": self.lambda_set,
+            "effective_lambda_per_slot": self.effective_lambda_per_slot,
+            "target_bucket_mass_mean": self.target_bucket_mass_mean,
+            "target_bucket_mass_min": self.target_bucket_mass_min,
+            "slot_margin_mean": self.slot_margin_mean,
+            "slot_margin_min": self.slot_margin_min,
+        }
+
+
 def _training_text(example: TrainingExample) -> str:
     completion = str(example.metadata.get("completion", "")).strip()
     if not completion:
@@ -354,6 +380,40 @@ def _compute_compiled_bucket_loss(
     batch_examples: Sequence[TrainingExample],
     objective_mode: str,
 ) -> tuple[object, float]:
+    loss, max_logit, _diagnostics = _compute_compiled_bucket_loss_with_diagnostics(
+        torch_module=torch_module,
+        logits=logits,
+        attention_mask=attention_mask,
+        batch_examples=batch_examples,
+        objective_mode=objective_mode,
+        lambda_set=1.0,
+    )
+    return loss, max_logit
+
+
+def _tensor_float(value: object) -> float:
+    try:
+        return float(value.detach().cpu().item())  # type: ignore[attr-defined]
+    except AttributeError:
+        try:
+            return float(value.item())  # type: ignore[attr-defined]
+        except AttributeError:
+            return float(value)
+
+
+def _mean(values: Sequence[float]) -> float:
+    return float(sum(values) / len(values)) if values else 0.0
+
+
+def _compute_compiled_bucket_loss_with_diagnostics(
+    *,
+    torch_module: object,
+    logits: object,
+    attention_mask: object,
+    batch_examples: Sequence[TrainingExample],
+    objective_mode: str,
+    lambda_set: float = 1.0,
+) -> tuple[object, float, CompiledBucketLossDiagnostics]:
     normalized_objective_mode = objective_mode.strip().lower()
     if normalized_objective_mode not in {"bucket_mass", "fixed_representative", "uniform_bucket"}:
         raise HFCausalLMTrainingError(
@@ -362,6 +422,8 @@ def _compute_compiled_bucket_loss(
         )
     attention_rows = _tensor_rows(attention_mask)
     sample_losses: list[object] = []
+    target_bucket_masses: list[float] = []
+    slot_margins: list[float] = []
     max_logit = 0.0
     for row_index, example in enumerate(batch_examples):
         active_width = sum(int(mask_value) for mask_value in attention_rows[row_index])
@@ -413,8 +475,23 @@ def _compute_compiled_bucket_loss(
                 f"Compiled bucket target bucket is missing from masked logits: "
                 f"bucket={target_bucket_id}, prompt={example.prompt!r}"
             )
+        target_log_prob = bucket_log_probs[target_bucket_id]
+        try:
+            target_bucket_masses.append(float(torch_module.exp(target_log_prob).detach().cpu().item()))
+        except AttributeError:
+            target_bucket_masses.append(math.exp(_tensor_float(target_log_prob)))
+        wrong_bucket_log_probs = [
+            log_prob
+            for bucket_id, log_prob in bucket_log_probs.items()
+            if bucket_id != target_bucket_id
+        ]
+        if wrong_bucket_log_probs:
+            best_wrong = torch_module.stack(wrong_bucket_log_probs).max()
+            slot_margins.append(_tensor_float(target_log_prob - best_wrong))
+        else:
+            slot_margins.append(float("inf"))
         if normalized_objective_mode == "bucket_mass":
-            sample_losses.append(-bucket_log_probs[target_bucket_id])
+            sample_losses.append(-target_log_prob)
             continue
 
         target_bucket_token_ids = tuple(
@@ -440,7 +517,22 @@ def _compute_compiled_bucket_loss(
             )
         sample_losses.append(-allowed_log_probs[token_id_to_position[target_token_id]])
 
-    return torch_module.stack(sample_losses).mean(), max_logit
+    raw_loss_sum = torch_module.stack(sample_losses).sum()
+    normalized_loss_mean = torch_module.stack(sample_losses).mean()
+    scaled_loss = normalized_loss_mean * float(lambda_set)
+    slot_count = len(sample_losses)
+    diagnostics = CompiledBucketLossDiagnostics(
+        slot_count=slot_count,
+        raw_l_set_sum=_tensor_float(raw_loss_sum),
+        normalized_l_set_mean=_tensor_float(normalized_loss_mean),
+        lambda_set=float(lambda_set),
+        effective_lambda_per_slot=(float(lambda_set) / slot_count) if slot_count else 0.0,
+        target_bucket_mass_mean=_mean(target_bucket_masses),
+        target_bucket_mass_min=float(min(target_bucket_masses)) if target_bucket_masses else 0.0,
+        slot_margin_mean=_mean(slot_margins),
+        slot_margin_min=float(min(slot_margins)) if slot_margins else 0.0,
+    )
+    return scaled_loss, max_logit, diagnostics
 
 
 def run_minimal_hf_causal_lm_training(
@@ -468,6 +560,11 @@ def run_minimal_hf_causal_lm_training(
     fieldwise_generation_plan: FieldwiseGenerationPlan | None = None,
     use_compiled_bucket_objective: bool = False,
     compiled_objective_mode: str = "bucket_mass",
+    compiled_lambda_set: float = 1.0,
+    checkpoint_selection_metric: str = "",
+    checkpoint_selection_mode: str = "min",
+    checkpoint_selection_use_best_for_eval: bool = False,
+    checkpoint_selection_save_best: bool = False,
 ) -> HFCausalLMTrainingResult:
     try:
         import torch
@@ -555,6 +652,18 @@ def run_minimal_hf_causal_lm_training(
     total_steps = 0
     examples_seen = 0
     final_loss = 0.0
+    train_metrics_path = run_dir / "train_metrics.jsonl"
+    train_metrics_path.parent.mkdir(parents=True, exist_ok=True)
+    if train_metrics_path.exists():
+        train_metrics_path.unlink()
+    compiled_metric_history: list[dict[str, object]] = []
+    normalized_selection_metric = checkpoint_selection_metric.strip() or "training_normalized_L_set_mean"
+    normalized_selection_mode = checkpoint_selection_mode.strip().lower() or "min"
+    if normalized_selection_mode not in {"min", "max"}:
+        raise HFCausalLMTrainingError("checkpoint_selection_mode must be 'min' or 'max'")
+    best_metric_value: float | None = None
+    best_checkpoint_step = 0
+    best_checkpoint_dir = run_dir / "checkpoints" / "hf_best"
     health_diagnostics: dict[str, object] = {
         "first_nan_step": None,
         "first_nonfinite_step": None,
@@ -587,12 +696,13 @@ def run_minimal_hf_causal_lm_training(
                     raise HFCausalLMTrainingError(
                         "Compiled bucket objective requires model outputs to expose logits"
                     )
-                loss, batch_max_logit = _compute_compiled_bucket_loss(
+                loss, batch_max_logit, compiled_loss_diagnostics = _compute_compiled_bucket_loss_with_diagnostics(
                     torch_module=torch,
                     logits=logits,
                     attention_mask=attention_mask,
                     batch_examples=batch_examples,
                     objective_mode=normalized_compiled_objective_mode,
+                    lambda_set=compiled_lambda_set,
                 )
                 if not math.isfinite(float(batch_max_logit)):
                     health_diagnostics["first_nan_step"] = total_steps + 1
@@ -605,6 +715,13 @@ def run_minimal_hf_causal_lm_training(
                     float(health_diagnostics["max_logit"]),
                     float(batch_max_logit),
                 )
+                metric_row = {
+                    "step": total_steps + 1,
+                    "epoch": _epoch + 1,
+                    "batch_start": start,
+                    **compiled_loss_diagnostics.to_dict(),
+                }
+                compiled_metric_history.append(metric_row)
             elif fieldwise_slot_token_maps is not None:
                 input_ids, attention_mask, labels = _build_fieldwise_training_batch(
                     torch_module=torch,
@@ -695,11 +812,73 @@ def run_minimal_hf_causal_lm_training(
             total_steps += 1
             examples_seen += len(batch_examples)
             final_loss = loss_value
+            train_metric_payload: dict[str, object] = {
+                "step": total_steps,
+                "epoch": _epoch + 1,
+                "batch_start": start,
+                "loss": loss_value,
+                "examples_in_batch": len(batch_examples),
+            }
+            if use_compiled_bucket_objective and compiled_metric_history:
+                train_metric_payload.update(compiled_metric_history[-1])
+            with train_metrics_path.open("a", encoding="utf-8") as handle:
+                import json
+
+                handle.write(json.dumps(train_metric_payload, sort_keys=True) + "\n")
+            if use_compiled_bucket_objective and compiled_metric_history:
+                current_metric = float(compiled_metric_history[-1]["normalized_L_set_mean"])
+                improved = (
+                    best_metric_value is None
+                    or (
+                        current_metric < best_metric_value
+                        if normalized_selection_mode == "min"
+                        else current_metric > best_metric_value
+                    )
+                )
+                if improved:
+                    best_metric_value = current_metric
+                    best_checkpoint_step = total_steps
+                    if checkpoint_selection_save_best:
+                        best_checkpoint_dir.mkdir(parents=True, exist_ok=True)
+                        model.save_pretrained(best_checkpoint_dir)
+                        tokenizer.save_pretrained(best_checkpoint_dir)
 
     checkpoint_dir = run_dir / "checkpoints" / "hf_last"
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     model.save_pretrained(checkpoint_dir)
     tokenizer.save_pretrained(checkpoint_dir)
+    if use_compiled_bucket_objective and best_metric_value is None:
+        best_metric_value = final_loss
+        best_checkpoint_step = total_steps
+    if use_compiled_bucket_objective and checkpoint_selection_save_best and not best_checkpoint_dir.exists():
+        best_checkpoint_dir.mkdir(parents=True, exist_ok=True)
+        model.save_pretrained(best_checkpoint_dir)
+        tokenizer.save_pretrained(best_checkpoint_dir)
+    selected_checkpoint_dir = checkpoint_dir
+    if (
+        use_compiled_bucket_objective
+        and checkpoint_selection_use_best_for_eval
+        and checkpoint_selection_save_best
+        and best_checkpoint_dir.exists()
+    ):
+        selected_checkpoint_dir = best_checkpoint_dir
+        if best_checkpoint_dir != checkpoint_dir:
+            if normalized_adapter_mode == "lora":
+                try:
+                    from peft import PeftModel
+                except ImportError as error:
+                    raise HFCausalLMTrainingError(
+                        "checkpoint_selection_use_best_for_eval with LoRA requires peft to reload hf_best"
+                    ) from error
+                base_model = AutoModelForCausalLM.from_pretrained(model_name_or_path)
+                if base_model.config.pad_token_id is None and tokenizer.pad_token_id is not None:
+                    base_model.config.pad_token_id = tokenizer.pad_token_id
+                model = PeftModel.from_pretrained(base_model, best_checkpoint_dir)
+            else:
+                model = AutoModelForCausalLM.from_pretrained(best_checkpoint_dir)
+                if model.config.pad_token_id is None and tokenizer.pad_token_id is not None:
+                    model.config.pad_token_id = tokenizer.pad_token_id
+            model.to(device)
 
     model.eval()
     generation_diagnostics: dict[str, object] = {}
@@ -828,12 +1007,64 @@ def run_minimal_hf_causal_lm_training(
 
             generated_text = generated_text.strip()
 
+    if use_compiled_bucket_objective:
+        slot_counts = [int(row["slot_count"]) for row in compiled_metric_history]
+        raw_losses = [float(row["raw_L_set_sum"]) for row in compiled_metric_history]
+        normalized_losses = [float(row["normalized_L_set_mean"]) for row in compiled_metric_history]
+        bucket_mass_means = [float(row["target_bucket_mass_mean"]) for row in compiled_metric_history]
+        bucket_mass_mins = [float(row["target_bucket_mass_min"]) for row in compiled_metric_history]
+        margin_means = [float(row["slot_margin_mean"]) for row in compiled_metric_history]
+        margin_mins = [float(row["slot_margin_min"]) for row in compiled_metric_history]
+        health_diagnostics.update(
+            {
+                "loss_normalization": "per_slot_mean",
+                "slot_count": max(slot_counts) if slot_counts else 0,
+                "raw_L_set_sum": raw_losses[-1] if raw_losses else 0.0,
+                "normalized_L_set_mean": normalized_losses[-1] if normalized_losses else 0.0,
+                "lambda_set": float(compiled_lambda_set),
+                "effective_lambda_per_slot": (
+                    float(compiled_lambda_set) / max(slot_counts)
+                    if slot_counts and max(slot_counts) > 0
+                    else 0.0
+                ),
+                "target_bucket_mass_mean": bucket_mass_means[-1] if bucket_mass_means else 0.0,
+                "target_bucket_mass_min": bucket_mass_mins[-1] if bucket_mass_mins else 0.0,
+                "slot_margin_mean": margin_means[-1] if margin_means else 0.0,
+                "slot_margin_min": margin_mins[-1] if margin_mins else 0.0,
+                "compiled_metric_history_summary": {
+                    "step_count": len(compiled_metric_history),
+                    "raw_L_set_sum_mean": _mean(raw_losses),
+                    "normalized_L_set_mean_mean": _mean(normalized_losses),
+                    "target_bucket_mass_mean": _mean(bucket_mass_means),
+                    "target_bucket_mass_min": min(bucket_mass_mins) if bucket_mass_mins else 0.0,
+                    "slot_margin_mean": _mean(margin_means),
+                    "slot_margin_min": min(margin_mins) if margin_mins else 0.0,
+                },
+                "checkpoint_selection": {
+                    "metric": normalized_selection_metric,
+                    "mode": normalized_selection_mode,
+                    "source": "training_evidence_metrics",
+                    "forbidden_final_test_acceptance_used": False,
+                    "best_step": best_checkpoint_step,
+                    "best_metric_value": best_metric_value,
+                    "final_step": total_steps,
+                    "final_metric_value": normalized_losses[-1] if normalized_losses else final_loss,
+                    "final_checkpoint_path": str(checkpoint_dir),
+                    "best_checkpoint_path": (
+                        str(best_checkpoint_dir)
+                        if checkpoint_selection_save_best
+                        else str(checkpoint_dir)
+                    ),
+                    "use_best_for_eval": bool(checkpoint_selection_use_best_for_eval),
+                },
+            }
+        )
     return HFCausalLMTrainingResult(
         status="completed",
         steps=total_steps,
         examples_seen=examples_seen,
         final_loss=round(final_loss, 6),
-        checkpoint_dir=str(checkpoint_dir),
+        checkpoint_dir=str(selected_checkpoint_dir),
         generated_text=generated_text,
         generation_diagnostics=generation_diagnostics,
         health_diagnostics=health_diagnostics,

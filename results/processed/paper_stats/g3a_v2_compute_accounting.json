@@ -1,0 +1,22 @@
+{
+  "rows": [
+    {
+      "gpu_type": "A100",
+      "notes": "final matrix only; pilot sweep accounting should be added after pilot manifests are selected",
+      "requested_gpu_hours": 864.0,
+      "run_kind": "train",
+      "runs": 36,
+      "stage": "G3a-v2"
+    },
+    {
+      "gpu_type": "A100",
+      "notes": "final matrix exact/RS-aware eval",
+      "requested_gpu_hours": 864.0,
+      "run_kind": "eval",
+      "runs": 36,
+      "stage": "G3a-v2"
+    }
+  ],
+  "schema_name": "g3a_v2_compute_accounting",
+  "schema_version": 1
+}

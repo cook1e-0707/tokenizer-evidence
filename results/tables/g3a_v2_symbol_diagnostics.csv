@@ -1,0 +1,1 @@
+case_id,variant_id,block_count,seed,payload,symbol_index,expected_symbol,decoded_symbol,is_erasure,is_symbol_error

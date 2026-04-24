@@ -19,6 +19,10 @@ from src.core.canonical_contract import (
 from src.core.catalog_freeze import load_required_frozen_catalog
 from src.core.contract_compiler import CompiledEvalContract
 from src.core.payload_codec import BucketPayloadCodec
+from src.core.compiled_repair_diagnostics import (
+    build_compiled_verification_report,
+    build_majority_decoder_report,
+)
 from src.core.render import render_bucket_tuples, render_config_from_name
 from src.core.scaffolded_completion import (
     COMPILED_ARTIFACT_FORMAT,
@@ -374,6 +378,25 @@ def _run_compiled_gate_eval(
         render_verification.save_json(run_dir / "compiled_render_verifier_result.json")
 
     compiled_gate_passed = compiled_result.foundation_gate_passed and render_verifier_success
+    compiled_verifier_report = build_compiled_verification_report(
+        compiled_eval_contract=compiled_eval_contract,
+        compiled_result=compiled_result,
+        bucket_radices=layout.radices,
+        exact_gate_accepted=compiled_gate_passed,
+        rs_parity_symbols=0,
+    )
+    majority_decoder_report = build_majority_decoder_report(
+        compiled_eval_contract=compiled_eval_contract,
+        decoded_symbols=compiled_verifier_report.decoded_symbols,
+    )
+    (run_dir / "compiled_verifier_report.json").write_text(
+        json.dumps(compiled_verifier_report.to_dict(), indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    (run_dir / "majority_decoder_report.json").write_text(
+        json.dumps(majority_decoder_report, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
     messages = list(compiled_result.messages)
     if not render_verifier_success:
         messages.append("deterministic compiled render did not pass verifier")
@@ -428,6 +451,8 @@ def _run_compiled_gate_eval(
         "render_verifier_success": render_verifier_success,
         "valid_canonical_block_count": compiled_result.valid_canonical_block_count,
         "slot_diagnostics": [item.to_dict() for item in compiled_result.slot_diagnostics],
+        "compiled_verifier_report": compiled_verifier_report.to_dict(),
+        "majority_decoder_report": majority_decoder_report,
         "chosen_token_vs_allowed_token_set": [
             {
                 "slot_index": item.slot_index,

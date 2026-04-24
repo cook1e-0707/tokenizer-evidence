@@ -61,6 +61,12 @@ class TrainConfig:
     epochs: int = 1
     learning_rate: float = 0.0001
     objective: str = "bucket_mass"
+    lambda_set: float = 1.0
+    evidence_loss_normalization: str = "per_slot_mean"
+    checkpoint_selection_metric: str = ""
+    checkpoint_selection_mode: str = "min"
+    checkpoint_selection_use_best_for_eval: bool = False
+    checkpoint_selection_save_best: bool = False
     num_workers: int = 0
     probe_payload_texts: tuple[str, ...] = ()
     probe_block_count: int = 0
