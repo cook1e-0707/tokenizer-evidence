@@ -257,9 +257,9 @@ def _write_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
         "\\begin{table}[t]",
         "\\centering",
         "\\small",
-        "\\begin{tabular}{lrrrr}",
+        "\\begin{tabular}{lrrrrr}",
         "\\toprule",
-        "Scope & Included runs & Target runs & Accepted rate & Verifier rate \\\\",
+        "Scope & Included & Completed & Target & Accepted rate & Verifier rate \\\\",
         "\\midrule",
     ]
     for row in rows:
@@ -272,14 +272,15 @@ def _write_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
             f"[{row['verifier_success_rate_ci95_low']:.3f}, {row['verifier_success_rate_ci95_high']:.3f}]"
         )
         lines.append(
-            f"{_latex_escape(row['scope'])} & {row['included_runs']} & {row['target_runs']} & "
+            f"{_latex_escape(row['scope'])} & {row['included_runs']} & {row['completed_runs']} & "
+            f"{row['target_runs']} & "
             f"{_latex_escape(accepted)} & {_latex_escape(verifier)} \\\\"
         )
     lines.extend(
         [
             "\\bottomrule",
             "\\end{tabular}",
-            "\\caption{Current landing state for the G3a block-count scale package on the compiled Qwen/Qwen2.5-7B-Instruct path. Wilson 95\\% intervals are reported over the currently included runs.}",
+            "\\caption{Current landing state for the G3a block-count scale package on the compiled Qwen/Qwen2.5-7B-Instruct path. Wilson 95\\% intervals are reported over completed runs, while included counts retain the strict paper inclusion gate.}",
             "\\end{table}",
         ]
     )
@@ -317,6 +318,7 @@ def _collect_case_row(
             {
                 **base_row,
                 "status": "pending",
+                "failure_reasons": "",
                 "accepted": False,
                 "verifier_success": False,
                 "decoded_payload": "",
@@ -355,10 +357,19 @@ def _collect_case_row(
         and decoded_block_count_correct
     )
     status = "accepted_included" if included else "completed_excluded"
+    gate_values = {
+        "accepted": bool(eval_summary.accepted),
+        "verifier_success": bool(eval_summary.verifier_success),
+        "numerically_healthy": numerically_healthy,
+        "decoded_payload_correct": decoded_payload_correct,
+        "decoded_block_count_correct": decoded_block_count_correct,
+    }
+    failure_reasons = ",".join(name for name, value in gate_values.items() if not value)
 
     row = {
         **base_row,
         "status": status,
+        "failure_reasons": failure_reasons,
         "accepted": bool(eval_summary.accepted),
         "verifier_success": bool(eval_summary.verifier_success),
         "decoded_payload": str(eval_summary.decoded_payload or ""),
@@ -394,15 +405,27 @@ def _collect_case_row(
     return row, inclusion
 
 
+def _completed_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [row for row in rows if row["status"] != "pending"]
+
+
 def _summary_row(scope: str, target_runs: int, rows: list[dict[str, Any]]) -> dict[str, Any]:
-    accepted_stats = _binary_stats([bool(row["accepted"]) for row in rows])
-    verifier_stats = _binary_stats([bool(row["verifier_success"]) for row in rows])
-    decoded_stats = _binary_stats([bool(row["decoded_payload_correct"]) for row in rows])
-    block_stats = _binary_stats([bool(row["decoded_block_count_correct"]) for row in rows])
+    completed_rows = _completed_rows(rows)
+    included_rows = [row for row in rows if bool(row["included"])]
+    excluded_rows = [row for row in rows if row["status"] == "completed_excluded"]
+    pending_rows = [row for row in rows if row["status"] == "pending"]
+    accepted_stats = _binary_stats([bool(row["accepted"]) for row in completed_rows])
+    verifier_stats = _binary_stats([bool(row["verifier_success"]) for row in completed_rows])
+    decoded_stats = _binary_stats([bool(row["decoded_payload_correct"]) for row in completed_rows])
+    block_stats = _binary_stats([bool(row["decoded_block_count_correct"]) for row in completed_rows])
     return {
         "scope": scope,
-        "included_runs": len(rows),
+        "included_runs": len(included_rows),
+        "completed_runs": len(completed_rows),
+        "excluded_runs": len(excluded_rows),
+        "pending_runs": len(pending_rows),
         "target_runs": target_runs,
+        "rate_denominator": "completed_runs",
         "accepted_rate_mean": accepted_stats["mean"],
         "accepted_rate_ci95_low": accepted_stats["ci95_low"],
         "accepted_rate_ci95_high": accepted_stats["ci95_high"],
@@ -453,7 +476,7 @@ def main() -> int:
         _summary_row(
             f"variant={variant_id}",
             len(payloads) * len(seeds),
-            [row for row in included_rows if str(row["variant_id"]) == variant_id],
+            [row for row in rows if str(row["variant_id"]) == variant_id],
         )
         for variant_id in variant_ids
     ]
@@ -461,7 +484,7 @@ def main() -> int:
         _summary_row(
             f"seed={seed}",
             len(payloads) * len(variant_ids),
-            [row for row in included_rows if int(row["seed"]) == seed],
+            [row for row in rows if int(row["seed"]) == seed],
         )
         for seed in seeds
     ]
@@ -469,11 +492,12 @@ def main() -> int:
         _summary_row(
             f"payload={payload}",
             len(seeds) * len(variant_ids),
-            [row for row in included_rows if str(row["payload"]) == payload],
+            [row for row in rows if str(row["payload"]) == payload],
         )
         for payload in payloads
     ]
-    overall_row = _summary_row("overall", len(rows), included_rows)
+    overall_row = _summary_row("overall", len(rows), rows)
+    completed_rows = _completed_rows(rows)
 
     summary = {
         "workstream": str(package_config.get("workstream", "G3a")),
@@ -482,6 +506,7 @@ def main() -> int:
         "new_case_root_base": new_case_root_base,
         "paper_ready": len(included_rows) == len(rows),
         "target_case_count": len(rows),
+        "completed_case_count": len(completed_rows),
         "included_case_count": len(included_rows),
         "pending_case_count": sum(1 for row in rows if row["status"] == "pending"),
         "excluded_case_count": sum(1 for row in rows if row["status"] == "completed_excluded"),
@@ -489,16 +514,17 @@ def main() -> int:
         "seeds": seeds,
         "block_variants": block_variants,
         "overall_metrics": {
-            "accepted_rate": _binary_stats([bool(row["accepted"]) for row in included_rows]),
-            "verifier_success_rate": _binary_stats([bool(row["verifier_success"]) for row in included_rows]),
+            "rate_denominator": "completed_runs",
+            "accepted_rate": _binary_stats([bool(row["accepted"]) for row in completed_rows]),
+            "verifier_success_rate": _binary_stats([bool(row["verifier_success"]) for row in completed_rows]),
             "decoded_payload_correct_rate": _binary_stats(
-                [bool(row["decoded_payload_correct"]) for row in included_rows]
+                [bool(row["decoded_payload_correct"]) for row in completed_rows]
             ),
             "decoded_block_count_correct_rate": _binary_stats(
-                [bool(row["decoded_block_count_correct"]) for row in included_rows]
+                [bool(row["decoded_block_count_correct"]) for row in completed_rows]
             ),
-            "match_ratio": _continuous_stats([float(row["match_ratio"]) for row in included_rows]),
-            "final_loss": _continuous_stats([float(row["final_loss"]) for row in included_rows]),
+            "match_ratio": _continuous_stats([float(row["match_ratio"]) for row in completed_rows]),
+            "final_loss": _continuous_stats([float(row["final_loss"]) for row in completed_rows]),
         },
         "summary_rows": [overall_row, *by_variant, *by_seed],
         "by_variant": by_variant,
@@ -506,6 +532,7 @@ def main() -> int:
         "by_payload": by_payload,
         "missing_case_ids": [str(row["case_id"]) for row in rows if row["status"] == "pending"],
         "included_case_ids": [str(row["case_id"]) for row in included_rows],
+        "excluded_case_ids": [str(row["case_id"]) for row in rows if row["status"] == "completed_excluded"],
     }
 
     _write_json(output_dir / "g3a_summary.json", summary)

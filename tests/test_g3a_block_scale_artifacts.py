@@ -177,11 +177,17 @@ def test_build_g3a_block_scale_artifacts_handles_block_breakdown(tmp_path: Path)
     assert "wrote G3a summary" in completed.stdout
     summary = json.loads((output_dir / "g3a_summary.json").read_text(encoding="utf-8"))
     assert summary["target_case_count"] == 4
+    assert summary["completed_case_count"] == 3
     assert summary["included_case_count"] == 2
     assert summary["pending_case_count"] == 1
     assert summary["excluded_case_count"] == 1
     assert summary["paper_ready"] is False
     assert [row["included_runs"] for row in summary["by_variant"]] == [1, 1]
+    assert [row["completed_runs"] for row in summary["by_variant"]] == [2, 1]
+    assert [row["excluded_runs"] for row in summary["by_variant"]] == [1, 0]
+    assert [row["pending_runs"] for row in summary["by_variant"]] == [0, 1]
+    assert summary["by_variant"][0]["decoded_block_count_correct_rate_mean"] == 0.5
+    assert summary["overall_metrics"]["rate_denominator"] == "completed_runs"
 
     inclusion = json.loads((output_dir / "g3a_run_inclusion_list.json").read_text(encoding="utf-8"))
     assert len(inclusion["included"]) == 2
@@ -189,9 +195,11 @@ def test_build_g3a_block_scale_artifacts_handles_block_breakdown(tmp_path: Path)
     assert len(inclusion["excluded"]) == 1
     assert {row["variant_id"] for row in inclusion["included"]} == {"B1", "B2"}
     assert inclusion["excluded"][0]["decoded_block_count_correct"] is False
+    assert inclusion["excluded"][0]["failure_reasons"] == "decoded_block_count_correct"
 
     table_text = (tables_dir / "g3a_block_scale.csv").read_text(encoding="utf-8")
     assert "variant_id" in table_text
+    assert "failure_reasons" in table_text
     assert "decoded_block_count_correct" in table_text
     assert "accepted_included" in table_text
     assert "completed_excluded" in table_text
