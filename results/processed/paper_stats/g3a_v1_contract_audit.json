@@ -1,0 +1,492 @@
+{
+  "audit_scope": {
+    "completed_case_count": 36,
+    "excluded_case_count": 7,
+    "included_case_count": 29,
+    "paper_ready": false,
+    "target_case_count": 36
+  },
+  "by_variant": {
+    "B1": {
+      "block_count_values": [
+        "1"
+      ],
+      "excluded": 3,
+      "included": 9,
+      "mismatch_count": 0,
+      "payload_map_hash_values": [
+        "d06c6c5674c5f1b5ed11aad031f0c4a829c6548ca80aada118ef8aaf421e3216"
+      ],
+      "prompt_family_hash_values": [
+        "34a728d2bf25cc54d7cd6a28721aa5470cc1b5bb908ed3207caa11e138fc285c"
+      ],
+      "runs": 12
+    },
+    "B2": {
+      "block_count_values": [
+        "2"
+      ],
+      "excluded": 0,
+      "included": 12,
+      "mismatch_count": 0,
+      "payload_map_hash_values": [
+        "f596eb5b1aa93c5178cd0d4e080566752399143f2665e871b2f832ac23327900"
+      ],
+      "prompt_family_hash_values": [
+        "c09020fd75f3ed5ed7b9664abb4d97248ea7bb15ef8dbc321bdffc1f423ca456"
+      ],
+      "runs": 12
+    },
+    "B4": {
+      "block_count_values": [
+        "4"
+      ],
+      "excluded": 4,
+      "included": 8,
+      "mismatch_count": 0,
+      "payload_map_hash_values": [
+        "3dbe09240b2ec3501867cfc7272b95770f076f37fb1d617387f49f48946fb558"
+      ],
+      "prompt_family_hash_values": [
+        "52467f746c346054b65cde66b56158c34f6242bea163b0f0fc3690c3b0f95e80"
+      ],
+      "runs": 12
+    }
+  },
+  "conclusion": "CONTRACT_MATCH_CONFIRMED",
+  "contract_groups": {
+    "bucket_partition_hash_values": [
+      "157b4ef7d9ff5364c4beb082152855ec1f853950947f31f9442902be925d5d90"
+    ],
+    "codebook_hash_values": [
+      "c09e3866128bcc2ceeb57dbc9fd34e78b321500fe05c869cded1f49ff737ec92"
+    ],
+    "eval_contract_hash_count_by_variant_payload": {
+      "B1:U00": 1,
+      "B1:U03": 1,
+      "B1:U12": 1,
+      "B1:U15": 1,
+      "B2:U00": 1,
+      "B2:U03": 1,
+      "B2:U12": 1,
+      "B2:U15": 1,
+      "B4:U00": 1,
+      "B4:U03": 1,
+      "B4:U12": 1,
+      "B4:U15": 1
+    },
+    "expected_codeword_count_by_variant_payload": {
+      "B1:U00": 1,
+      "B1:U03": 1,
+      "B1:U12": 1,
+      "B1:U15": 1,
+      "B2:U00": 1,
+      "B2:U03": 1,
+      "B2:U12": 1,
+      "B2:U15": 1,
+      "B4:U00": 1,
+      "B4:U03": 1,
+      "B4:U12": 1,
+      "B4:U15": 1
+    },
+    "field_order_values": [
+      "SECTION|TOPIC"
+    ],
+    "generation_config_hash_values": [
+      "5bbb502ea6b99b70e004602a5d5d8c16c0d219d647e47ee7daff32a231b497cf"
+    ],
+    "model_id_values": [
+      "qwen2.5-7b-instruct"
+    ],
+    "payload_map_hash_by_variant": {
+      "B1": [
+        "d06c6c5674c5f1b5ed11aad031f0c4a829c6548ca80aada118ef8aaf421e3216"
+      ],
+      "B2": [
+        "f596eb5b1aa93c5178cd0d4e080566752399143f2665e871b2f832ac23327900"
+      ],
+      "B4": [
+        "3dbe09240b2ec3501867cfc7272b95770f076f37fb1d617387f49f48946fb558"
+      ]
+    },
+    "prompt_family_hash_by_variant": {
+      "B1": [
+        "34a728d2bf25cc54d7cd6a28721aa5470cc1b5bb908ed3207caa11e138fc285c"
+      ],
+      "B2": [
+        "c09020fd75f3ed5ed7b9664abb4d97248ea7bb15ef8dbc321bdffc1f423ca456"
+      ],
+      "B4": [
+        "52467f746c346054b65cde66b56158c34f6242bea163b0f0fc3690c3b0f95e80"
+      ]
+    },
+    "rs_config_hash_values": [
+      "missing"
+    ],
+    "tokenizer_id_values": [
+      "Qwen/Qwen2.5-7B-Instruct"
+    ],
+    "train_contract_hash_count_by_variant_payload": {
+      "B1:U00": 1,
+      "B1:U03": 1,
+      "B1:U12": 1,
+      "B1:U15": 1,
+      "B2:U00": 1,
+      "B2:U03": 1,
+      "B2:U12": 1,
+      "B2:U15": 1,
+      "B4:U00": 1,
+      "B4:U03": 1,
+      "B4:U12": 1,
+      "B4:U15": 1
+    }
+  },
+  "eval_config": "configs/experiment/scale/exp_eval__qwen2_5_7b__g3a_block_scale_v1.yaml",
+  "expected_contract": {
+    "bucket_partition_hash": "157b4ef7d9ff5364c4beb082152855ec1f853950947f31f9442902be925d5d90",
+    "canonical_render_contract": "canonical_v1",
+    "codebook_hash": "c09e3866128bcc2ceeb57dbc9fd34e78b321500fe05c869cded1f49ff737ec92",
+    "codebook_path": "configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml",
+    "decoding_mode": "greedy",
+    "field_order": "SECTION|TOPIC",
+    "fields_per_block": 2,
+    "generation_max_new_tokens": "1",
+    "model_id": "qwen2.5-7b-instruct",
+    "rs_config": "not_configured_or_missing",
+    "tokenizer_id": "Qwen/Qwen2.5-7B-Instruct",
+    "verifier_contract": "compiled_gate"
+  },
+  "failed_case_count": 7,
+  "failed_case_ids": [
+    "B1_U03_s23",
+    "B1_U12_s23",
+    "B1_U15_s23",
+    "B4_U00_s29",
+    "B4_U03_s29",
+    "B4_U12_s29",
+    "B4_U15_s29"
+  ],
+  "failure_clusters": {
+    "B1_U03_s23": {
+      "block_count": "1",
+      "bucket_correct_rate": "0.5",
+      "bucket_errors": "b0:TOPIC:3->2",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.5",
+      "parser_success": "True",
+      "payload": "U03",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B1_U03_s17",
+      "same_block_seed_comparison_status": "MATCH",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "B1_U00_s23",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U03_s23",
+      "seed": "23"
+    },
+    "B1_U12_s23": {
+      "block_count": "1",
+      "bucket_correct_rate": "0.0",
+      "bucket_errors": "b0:SECTION:3->0;b0:TOPIC:0->2",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.0",
+      "parser_success": "True",
+      "payload": "U12",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B1_U12_s17",
+      "same_block_seed_comparison_status": "MATCH",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "B1_U00_s23",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U12_s23",
+      "seed": "23"
+    },
+    "B1_U15_s23": {
+      "block_count": "1",
+      "bucket_correct_rate": "0.0",
+      "bucket_errors": "b0:SECTION:3->0;b0:TOPIC:3->1",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.0",
+      "parser_success": "True",
+      "payload": "U15",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B1_U15_s17",
+      "same_block_seed_comparison_status": "MATCH",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "B1_U00_s23",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U15_s23",
+      "seed": "23"
+    },
+    "B4_U00_s29": {
+      "block_count": "4",
+      "bucket_correct_rate": "0.75",
+      "bucket_errors": "b3:SECTION:0->3;b3:TOPIC:0->2",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.75",
+      "parser_success": "True",
+      "payload": "U00",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B4_U00_s23",
+      "same_block_seed_comparison_status": "NO_PASSED_NEIGHBOR",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U00_s29",
+      "seed": "29"
+    },
+    "B4_U03_s29": {
+      "block_count": "4",
+      "bucket_correct_rate": "0.75",
+      "bucket_errors": "b3:SECTION:0->3;b3:TOPIC:3->2",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.75",
+      "parser_success": "True",
+      "payload": "U03",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B4_U03_s23",
+      "same_block_seed_comparison_status": "NO_PASSED_NEIGHBOR",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U03_s29",
+      "seed": "29"
+    },
+    "B4_U12_s29": {
+      "block_count": "4",
+      "bucket_correct_rate": "0.875",
+      "bucket_errors": "b3:TOPIC:0->2",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.875",
+      "parser_success": "True",
+      "payload": "U12",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B4_U12_s23",
+      "same_block_seed_comparison_status": "NO_PASSED_NEIGHBOR",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U12_s29",
+      "seed": "29"
+    },
+    "B4_U15_s29": {
+      "block_count": "4",
+      "bucket_correct_rate": "0.875",
+      "bucket_errors": "b3:TOPIC:3->2",
+      "decoded_block_count_correct": "True",
+      "exact_slot_rate": "0.875",
+      "parser_success": "True",
+      "payload": "U15",
+      "same_block_payload_comparison_status": "MATCH",
+      "same_block_payload_different_fields": "",
+      "same_block_payload_passed_neighbor": "B4_U15_s23",
+      "same_block_seed_comparison_status": "NO_PASSED_NEIGHBOR",
+      "same_block_seed_different_fields": "",
+      "same_block_seed_passed_neighbor": "",
+      "same_seed_payload_comparison_status": "MATCH",
+      "same_seed_payload_different_fields": "",
+      "same_seed_payload_passed_neighbor": "B2_U15_s29",
+      "seed": "29"
+    }
+  },
+  "interpretation": "No semantic contract mismatch was found in the committed Chimera-derived diagnostics. G3a-v1 failures should be treated as method/training/verifier failures, not plumbing failures.",
+  "limitations": [
+    "The local workstation does not mount /hpcstor6, so this audit uses committed Chimera run-file diagnostics instead of reopening raw train/eval files.",
+    "RS config is uniformly absent/not configured for all 36 runs and is therefore not a run-specific mismatch.",
+    "Top-k/logit instrumentation is unavailable in the source diagnostics and is not recomputed."
+  ],
+  "mismatch_count": 0,
+  "mismatched_runs": [],
+  "neighbor_comparisons": [
+    {
+      "case_id": "B1_U03_s23",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "B1_U00_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U03_s23",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B1_U03_s17",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U03_s23",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U03_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U12_s23",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "B1_U00_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U12_s23",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B1_U12_s17",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U12_s23",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U12_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U15_s23",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "B1_U00_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U15_s23",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B1_U15_s17",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B1_U15_s23",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U15_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U00_s29",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "",
+      "status": "NO_PASSED_NEIGHBOR"
+    },
+    {
+      "case_id": "B4_U00_s29",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B4_U00_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U00_s29",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U00_s29",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U03_s29",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "",
+      "status": "NO_PASSED_NEIGHBOR"
+    },
+    {
+      "case_id": "B4_U03_s29",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B4_U03_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U03_s29",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U03_s29",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U12_s29",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "",
+      "status": "NO_PASSED_NEIGHBOR"
+    },
+    {
+      "case_id": "B4_U12_s29",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B4_U12_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U12_s29",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U12_s29",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U15_s29",
+      "different_fields": "",
+      "mode": "same_block_seed",
+      "neighbor_case_id": "",
+      "status": "NO_PASSED_NEIGHBOR"
+    },
+    {
+      "case_id": "B4_U15_s29",
+      "different_fields": "",
+      "mode": "same_block_payload",
+      "neighbor_case_id": "B4_U15_s23",
+      "status": "MATCH"
+    },
+    {
+      "case_id": "B4_U15_s29",
+      "different_fields": "",
+      "mode": "same_seed_payload",
+      "neighbor_case_id": "B2_U15_s29",
+      "status": "MATCH"
+    }
+  ],
+  "raw_chimera_paths_mounted_locally": false,
+  "reporting_config": "configs/reporting/g3a_block_scale_v1.yaml",
+  "required_checks": [
+    "model_id",
+    "tokenizer_id",
+    "block_count",
+    "fields_per_block",
+    "field_order",
+    "codebook path and hash",
+    "bucket partition hash",
+    "payload label",
+    "expected payload codeword",
+    "payload-to-bucket mapping",
+    "prompt family",
+    "generation max_new_tokens",
+    "decoding mode",
+    "verifier contract",
+    "RS config",
+    "canonical render contract",
+    "adapter checkpoint used by eval"
+  ],
+  "schema_name": "g3a_v1_contract_audit",
+  "schema_version": 1,
+  "source_g3a_summary": "results/processed/paper_stats/g3a_summary.json",
+  "source_g3a_table": "results/tables/g3a_block_scale.csv",
+  "source_run_diagnostics": "results/tables/g3a_v1_run_diagnostics.csv",
+  "source_slot_diagnostics": "results/tables/g3a_v1_slot_diagnostics.csv",
+  "status_counts": {
+    "MATCH": 648
+  },
+  "train_config": "configs/experiment/scale/exp_train__qwen2_5_7b__g3a_block_scale_v1.yaml"
+}
