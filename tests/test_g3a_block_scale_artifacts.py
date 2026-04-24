@@ -38,7 +38,7 @@ def _write_case_artifacts(
         slurm_job_id=None,
         status="completed",
         objective="bucket_mass",
-        dataset_name="real-pilot-compiled-c3-g3",
+        dataset_name="real-pilot-compiled-c3-g3a",
         dataset_size=64,
         steps=64,
         final_loss=final_loss,
@@ -56,7 +56,7 @@ def _write_case_artifacts(
         hostname="local",
         slurm_job_id=None,
         status="completed" if accepted else "failed",
-        dataset_name="real-pilot-compiled-c3-g3",
+        dataset_name="real-pilot-compiled-c3-g3a",
         sample_count=1,
         accepted=accepted,
         match_ratio=1.0 if accepted else 0.5,
@@ -81,9 +81,9 @@ def _write_case_artifacts(
     )
 
 
-def test_build_g3_codebook_block_scale_artifacts_handles_block_breakdown(tmp_path: Path) -> None:
+def test_build_g3a_block_scale_artifacts_handles_block_breakdown(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
-    package_config_path = tmp_path / "g3_package.yaml"
+    package_config_path = tmp_path / "g3a_package.yaml"
     search_root = tmp_path / "chimera_search_root"
 
     _write_case_artifacts(
@@ -118,10 +118,10 @@ def test_build_g3_codebook_block_scale_artifacts_handles_block_breakdown(tmp_pat
         yaml.safe_dump(
             {
                 "version": 1,
-                "workstream": "G3",
+                "workstream": "G3a",
                 "description": "tmp fixture",
-                "train_config": "configs/experiment/scale/exp_train__qwen2_5_7b__g3_codebook_block_scale_v1.yaml",
-                "eval_config": "configs/experiment/scale/exp_eval__qwen2_5_7b__g3_codebook_block_scale_v1.yaml",
+                "train_config": "configs/experiment/scale/exp_train__qwen2_5_7b__g3a_block_scale_v1.yaml",
+                "eval_config": "configs/experiment/scale/exp_eval__qwen2_5_7b__g3a_block_scale_v1.yaml",
                 "new_case_root_prefix": "new_cases",
                 "case_root_search_roots": [str(search_root)],
                 "payloads": ["U00", "U03"],
@@ -160,7 +160,7 @@ def test_build_g3_codebook_block_scale_artifacts_handles_block_breakdown(tmp_pat
     completed = subprocess.run(
         [
             sys.executable,
-            "scripts/build_g3_codebook_block_scale_artifacts.py",
+            "scripts/build_g3a_block_scale_artifacts.py",
             "--package-config",
             str(package_config_path),
             "--output-dir",
@@ -174,8 +174,8 @@ def test_build_g3_codebook_block_scale_artifacts_handles_block_breakdown(tmp_pat
         check=True,
     )
 
-    assert "wrote G3 summary" in completed.stdout
-    summary = json.loads((output_dir / "g3_summary.json").read_text(encoding="utf-8"))
+    assert "wrote G3a summary" in completed.stdout
+    summary = json.loads((output_dir / "g3a_summary.json").read_text(encoding="utf-8"))
     assert summary["target_case_count"] == 4
     assert summary["included_case_count"] == 2
     assert summary["pending_case_count"] == 1
@@ -183,14 +183,14 @@ def test_build_g3_codebook_block_scale_artifacts_handles_block_breakdown(tmp_pat
     assert summary["paper_ready"] is False
     assert [row["included_runs"] for row in summary["by_variant"]] == [1, 1]
 
-    inclusion = json.loads((output_dir / "g3_run_inclusion_list.json").read_text(encoding="utf-8"))
+    inclusion = json.loads((output_dir / "g3a_run_inclusion_list.json").read_text(encoding="utf-8"))
     assert len(inclusion["included"]) == 2
     assert len(inclusion["pending"]) == 1
     assert len(inclusion["excluded"]) == 1
     assert {row["variant_id"] for row in inclusion["included"]} == {"B1", "B2"}
     assert inclusion["excluded"][0]["decoded_block_count_correct"] is False
 
-    table_text = (tables_dir / "g3_codebook_block_scale.csv").read_text(encoding="utf-8")
+    table_text = (tables_dir / "g3a_block_scale.csv").read_text(encoding="utf-8")
     assert "variant_id" in table_text
     assert "decoded_block_count_correct" in table_text
     assert "accepted_included" in table_text

@@ -9,6 +9,7 @@ if __package__ in {None, ""}:
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -24,32 +25,32 @@ from src.infrastructure.paths import current_timestamp, discover_repo_root
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Prepare G3 codebook/block scale manifests and dry-run summary.")
+    parser = argparse.ArgumentParser(description="Prepare G3a block-count scale manifests and dry-run summary.")
     parser.add_argument(
         "--package-config",
-        default="configs/reporting/g3_codebook_block_scale_v1.yaml",
-        help="YAML package config for the G3 codebook/block scale package.",
+        default="configs/reporting/g3a_block_scale_v1.yaml",
+        help="YAML package config for the G3a block-count scale package.",
     )
     parser.add_argument(
         "--output",
-        default="results/processed/paper_stats/g3_package_dry_run.json",
+        default="results/processed/paper_stats/g3a_package_dry_run.json",
         help="JSON output path for the dry-run package summary.",
     )
     parser.add_argument(
         "--train-manifest-out",
-        default="manifests/g3_qwen7b_codebook_block_scale/train_manifest.json",
+        default="manifests/g3a_qwen7b_block_scale/train_manifest.json",
         help="Output path for the train manifest.",
     )
     parser.add_argument(
         "--eval-manifest-out",
-        default="manifests/g3_qwen7b_codebook_block_scale/eval_manifest.json",
+        default="manifests/g3a_qwen7b_block_scale/eval_manifest.json",
         help="Output path for the eval manifest.",
     )
     parser.add_argument(
         "--output-root-base",
         help=(
-            "Optional base directory for new G3 case roots. "
-            "Defaults to the package config new_case_root_prefix."
+            "Optional base directory for new G3a case roots. "
+            "Defaults to EXP_SCRATCH/<new_case_root_prefix>; falls back to the package relative prefix."
         ),
     )
     parser.add_argument(
@@ -63,7 +64,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def _resolve_path(repo_root: Path, raw: str) -> Path:
-    path = Path(raw)
+    path = Path(os.path.expandvars(raw))
     return path if path.is_absolute() else repo_root / path
 
 
@@ -74,10 +75,30 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _resolve_new_case_root_base(package_config: dict[str, Any], explicit: str | None) -> str:
+    if explicit:
+        return str(Path(os.path.expandvars(explicit)).as_posix())
+
+    prefix = str(package_config["new_case_root_prefix"])
+    exp_scratch = os.environ.get("EXP_SCRATCH")
+    if exp_scratch:
+        return str((Path(exp_scratch) / prefix).as_posix())
+
+    print(
+        "WARNING: EXP_SCRATCH is not set; falling back to the package-relative "
+        "new_case_root_prefix. Set EXP_SCRATCH on Chimera so large run outputs stay off home.",
+        file=sys.stderr,
+    )
+    return prefix
+
+
 def _case_root_search_roots(repo_root: Path, package_config: dict[str, Any]) -> list[Path]:
     roots: list[Path] = []
     for raw_root in package_config.get("case_root_search_roots", []):
-        root = _resolve_path(repo_root, str(raw_root))
+        expanded_root = os.path.expandvars(str(raw_root))
+        if "$" in expanded_root:
+            continue
+        root = _resolve_path(repo_root, expanded_root)
         if root not in roots:
             roots.append(root)
     return roots
@@ -135,7 +156,7 @@ def _build_case_records(
         _variant_key(item["variant"], item["payload"], item["seed"]): dict(item)
         for item in package_config.get("existing_cases", [])
     }
-    new_case_root_prefix = str(output_root_base or package_config["new_case_root_prefix"])
+    new_case_root_prefix = _resolve_new_case_root_base(package_config, output_root_base)
 
     cases: list[dict[str, Any]] = []
     for variant in package_config["block_variants"]:
@@ -157,7 +178,7 @@ def _build_case_records(
                     case_root_text = _join_case_root(new_case_root_prefix, variant_slug, payload, seed)
                     case_root_path = _resolve_case_root(repo_root, package_config, case_root_text)
                     status = "landed_new" if _has_complete_case(case_root_path) else "prepare"
-                    source_stage = "G3"
+                    source_stage = "G3a"
                     source_kind = "new"
                 cases.append(
                     {
@@ -191,7 +212,7 @@ def _entry_with_identity(
 
 
 def _variant_name(case: dict[str, Any]) -> str:
-    return f"g3-qwen7b-codebook-block-scale-{str(case['variant_slug'])}"
+    return f"g3a-qwen7b-block-scale-{str(case['variant_slug'])}"
 
 
 def _build_train_entry(
@@ -214,9 +235,9 @@ def _build_train_entry(
     return _entry_with_identity(
         entry=manifest.entries[0],
         manifest_id=(
-            f"g3-train-{str(case['variant_slug'])}-{str(case['payload']).lower()}-s{case['seed']}"
+            f"g3a-train-{str(case['variant_slug'])}-{str(case['payload']).lower()}-s{case['seed']}"
         ),
-        manifest_name="g3_qwen7b_codebook_block_scale_train",
+        manifest_name="g3a_qwen7b_block_scale_train",
     )
 
 
@@ -241,9 +262,9 @@ def _build_eval_entry(
     return _entry_with_identity(
         entry=manifest.entries[0],
         manifest_id=(
-            f"g3-eval-{str(case['variant_slug'])}-{str(case['payload']).lower()}-s{case['seed']}"
+            f"g3a-eval-{str(case['variant_slug'])}-{str(case['payload']).lower()}-s{case['seed']}"
         ),
-        manifest_name="g3_qwen7b_codebook_block_scale_eval",
+        manifest_name="g3a_qwen7b_block_scale_eval",
     )
 
 
@@ -276,11 +297,12 @@ def main() -> int:
     train_manifest_path = _resolve_path(repo_root, args.train_manifest_out)
     eval_manifest_path = _resolve_path(repo_root, args.eval_manifest_out)
     environment_setup = args.environment_setup or os.environ.get("CHIMERA_ENV_SETUP")
+    new_case_root_base = _resolve_new_case_root_base(package_config, args.output_root_base)
 
     cases = _build_case_records(
         repo_root=repo_root,
         package_config=package_config,
-        output_root_base=args.output_root_base,
+        output_root_base=new_case_root_base,
     )
     prepare_cases = [case for case in cases if case["status"] == "prepare"]
     train_entries = [
@@ -303,14 +325,14 @@ def main() -> int:
     if train_entries:
         _save_manifest(
             source_config_path=train_config_path,
-            manifest_name="g3_qwen7b_codebook_block_scale_train",
+            manifest_name="g3a_qwen7b_block_scale_train",
             entries=train_entries,
             output_path=train_manifest_path,
         )
     if eval_entries:
         _save_manifest(
             source_config_path=eval_config_path,
-            manifest_name="g3_qwen7b_codebook_block_scale_eval",
+            manifest_name="g3a_qwen7b_block_scale_eval",
             entries=eval_entries,
             output_path=eval_manifest_path,
         )
@@ -332,11 +354,11 @@ def main() -> int:
         )
 
     payload = {
-        "workstream": str(package_config.get("workstream", "G3")),
+        "workstream": str(package_config.get("workstream", "G3a")),
         "description": str(package_config.get("description", "")),
         "package_config_path": str(package_config_path),
         "generated_at": current_timestamp(),
-        "output_root_base": str(args.output_root_base or package_config["new_case_root_prefix"]),
+        "output_root_base": new_case_root_base,
         "target_case_count": len(cases),
         "reuse_existing_case_count": sum(1 for case in cases if case["status"] == "reuse_existing"),
         "landed_new_case_count": sum(1 for case in cases if case["status"] == "landed_new"),
@@ -349,15 +371,15 @@ def main() -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
-    print(f"wrote G3 dry-run summary to {output_path}")
+    print(f"wrote G3a dry-run summary to {output_path}")
     if train_entries:
         print(f"wrote {len(train_entries)} train manifest entries to {train_manifest_path}")
     else:
-        print("no missing G3 train cases; train manifest was not written")
+        print("no missing G3a train cases; train manifest was not written")
     if eval_entries:
         print(f"wrote {len(eval_entries)} eval manifest entries to {eval_manifest_path}")
     else:
-        print("no missing G3 eval cases; eval manifest was not written")
+        print("no missing G3a eval cases; eval manifest was not written")
     return 0
 
 

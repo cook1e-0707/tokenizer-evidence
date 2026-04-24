@@ -10,10 +10,10 @@ run:
   mode: train
   method: our_method
   seed: 17
-  variant_name: g3-qwen7b-codebook-block-scale
+  variant_name: g3a-qwen7b-block-scale
 
 data:
-  name: real-pilot-compiled-c3-g3
+  name: real-pilot-compiled-c3-g3a
   carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml
 
 train:

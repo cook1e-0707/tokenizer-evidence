@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -381,7 +382,7 @@ def test_g2_prompt_family_scale_configs_emit_qwen_train_and_eval_manifests() -> 
     assert eval_entry.requested_resources.num_gpus == 1
 
 
-def test_g3_codebook_block_scale_configs_emit_qwen_train_and_eval_manifests() -> None:
+def test_g3a_block_scale_configs_emit_qwen_train_and_eval_manifests() -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
 
     train_manifest = build_manifest_from_config(
@@ -389,14 +390,14 @@ def test_g3_codebook_block_scale_configs_emit_qwen_train_and_eval_manifests() ->
         / "configs"
         / "experiment"
         / "scale"
-        / "exp_train__qwen2_5_7b__g3_codebook_block_scale_v1.yaml"
+        / "exp_train__qwen2_5_7b__g3a_block_scale_v1.yaml"
     )
     eval_manifest = build_manifest_from_config(
         repo_root
         / "configs"
         / "experiment"
         / "scale"
-        / "exp_eval__qwen2_5_7b__g3_codebook_block_scale_v1.yaml"
+        / "exp_eval__qwen2_5_7b__g3a_block_scale_v1.yaml"
     )
 
     train_entry = train_manifest.entries[0]
@@ -514,16 +515,16 @@ def test_prepare_g2_prompt_family_scale_script_writes_missing_only_manifests(tmp
     assert "run.variant_name=g2-qwen7b-prompt-family-scale-pf2" in train_manifest.entries[0].overrides
 
 
-def test_prepare_g3_codebook_block_scale_script_writes_missing_only_manifests(tmp_path: Path) -> None:
+def test_prepare_g3a_block_scale_script_writes_missing_only_manifests(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
-    output_path = tmp_path / "g3_package_dry_run.json"
+    output_path = tmp_path / "g3a_package_dry_run.json"
     train_manifest_path = tmp_path / "train_manifest.json"
     eval_manifest_path = tmp_path / "eval_manifest.json"
-    output_root_base = tmp_path / "g3_cases"
+    output_root_base = tmp_path / "g3a_cases"
     completed = subprocess.run(
         [
             sys.executable,
-            "scripts/prepare_g3_codebook_block_scale.py",
+            "scripts/prepare_g3a_block_scale.py",
             "--output",
             str(output_path),
             "--train-manifest-out",
@@ -539,7 +540,7 @@ def test_prepare_g3_codebook_block_scale_script_writes_missing_only_manifests(tm
         check=True,
     )
 
-    assert "wrote G3 dry-run summary" in completed.stdout
+    assert "wrote G3a dry-run summary" in completed.stdout
     assert output_path.exists()
     assert train_manifest_path.exists()
     assert eval_manifest_path.exists()
@@ -559,10 +560,46 @@ def test_prepare_g3_codebook_block_scale_script_writes_missing_only_manifests(tm
     eval_manifest = load_manifest(eval_manifest_path)
     assert len(train_manifest.entries) == 24
     assert len(eval_manifest.entries) == 24
-    assert train_manifest.entries[0].manifest_id == "g3-train-b1-u00-s17"
-    assert eval_manifest.entries[0].manifest_id == "g3-eval-b1-u00-s17"
+    assert train_manifest.entries[0].manifest_id == "g3a-train-b1-u00-s17"
+    assert eval_manifest.entries[0].manifest_id == "g3a-eval-b1-u00-s17"
     assert "train.probe_block_count=1" in train_manifest.entries[0].overrides
-    assert "run.variant_name=g3-qwen7b-codebook-block-scale-b1" in train_manifest.entries[0].overrides
+    assert "run.variant_name=g3a-qwen7b-block-scale-b1" in train_manifest.entries[0].overrides
+
+
+def test_prepare_g3a_block_scale_defaults_new_runs_to_exp_scratch(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_path = tmp_path / "g3a_package_dry_run.json"
+    train_manifest_path = tmp_path / "train_manifest.json"
+    eval_manifest_path = tmp_path / "eval_manifest.json"
+    scratch_root = tmp_path / "scratch" / "tokenizer-evidence"
+    env = os.environ.copy()
+    env["EXP_SCRATCH"] = str(scratch_root)
+    env["REPO_HOME"] = str(repo_root)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_g3a_block_scale.py",
+            "--output",
+            str(output_path),
+            "--train-manifest-out",
+            str(train_manifest_path),
+            "--eval-manifest-out",
+            str(eval_manifest_path),
+        ],
+        cwd=repo_root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote G3a dry-run summary" in completed.stdout
+    payload = json.loads(output_path.read_text(encoding="utf-8"))
+    assert payload["output_root_base"] == str(scratch_root / "g3a_block_scale")
+
+    train_manifest = load_manifest(train_manifest_path)
+    expected_output_root = scratch_root / "g3a_block_scale" / "b1" / "U00_s17" / "runs"
+    assert f"runtime.output_root={expected_output_root}" in train_manifest.entries[0].overrides
 
 
 def test_prepare_g1_payload_seed_scale_script_supports_environment_setup_override(tmp_path: Path) -> None:
@@ -653,17 +690,17 @@ def test_prepare_g2_prompt_family_scale_script_supports_environment_setup_overri
     ) in eval_manifest.entries[0].overrides
 
 
-def test_prepare_g3_codebook_block_scale_script_supports_environment_setup_override(tmp_path: Path) -> None:
+def test_prepare_g3a_block_scale_script_supports_environment_setup_override(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
-    output_path = tmp_path / "g3_package_dry_run.json"
+    output_path = tmp_path / "g3a_package_dry_run.json"
     train_manifest_path = tmp_path / "train_manifest.json"
     eval_manifest_path = tmp_path / "eval_manifest.json"
-    output_root_base = tmp_path / "g3_cases"
+    output_root_base = tmp_path / "g3a_cases"
     environment_setup = "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate"
     completed = subprocess.run(
         [
             sys.executable,
-            "scripts/prepare_g3_codebook_block_scale.py",
+            "scripts/prepare_g3a_block_scale.py",
             "--output",
             str(output_path),
             "--train-manifest-out",
@@ -681,7 +718,7 @@ def test_prepare_g3_codebook_block_scale_script_supports_environment_setup_overr
         check=True,
     )
 
-    assert "wrote G3 dry-run summary" in completed.stdout
+    assert "wrote G3a dry-run summary" in completed.stdout
 
     train_manifest = load_manifest(train_manifest_path)
     eval_manifest = load_manifest(eval_manifest_path)

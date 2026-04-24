@@ -21,7 +21,7 @@
   - no active clean-path reruns
   - no active robustness-grid expansion
   - no active theorem reruns
-  - `G3` block-count scale package is prepared locally but not yet standing; the pending Chimera work is `B1/B4` only
+  - `G3a` block-count scale package is prepared locally but not yet standing; the pending Chimera work is `B1/B4` only
   - no additional Batch 3 expansion
   - no new baselines
   - no new model families
@@ -87,7 +87,7 @@
 | `compiled-c3-r4` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U00/U03/U12/U15 @ seed 17` |
 | `G1 payload-seed scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all standing seeds and payloads | `64` per run | `64` per run | same exact-slot prompt family | full package: `U00..U15 @ seeds 17,23,29` (`48` included clean train/eval cases) |
 | `G2 prompt-family scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all prompt families | `64` per run | `64` per run | `PF1/PF2/PF3` semantically equivalent prompt families | full package: `PF1/PF2/PF3 x U00/U03/U12/U15 x seeds 17,23,29` (`36` included clean train/eval cases; `PF1` reuses standing evidence) |
-| `G3 codebook/block scale` | same as `compiled-c3` | `1/2/4 x 2` | same `4 x 4` compiled codebook, with fields and prompt family fixed | `32/64/128` per run | `32/64/128` per run | same exact-slot prompt family | prepared package: `B1/B2/B4 x U00/U03/U12/U15 x seeds 17,23,29`; `B2` reuses standing evidence, `B1/B4` pending Chimera |
+| `G3a block-count scale` | same as `compiled-c3` | `1/2/4 x 2` | same `4 x 4` compiled codebook, with fields and prompt family fixed | `32/64/128` per run | `32/64/128` per run | same exact-slot prompt family | prepared package: `B1/B2/B4 x U00/U03/U12/U15 x seeds 17,23,29`; `B2` reuses standing evidence, `B1/B4` pending Chimera |
 
 Notes:
 - for the compiled exact-slot packages, `contract sample count = payload label count x block_count x fields_per_block`

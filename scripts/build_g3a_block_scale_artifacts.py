@@ -10,7 +10,9 @@ import argparse
 import csv
 import json
 import math
+import os
 import statistics
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -21,11 +23,11 @@ from src.infrastructure.paths import discover_repo_root
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build G3 codebook/block scale aggregation artifacts.")
+    parser = argparse.ArgumentParser(description="Build G3a block-count scale aggregation artifacts.")
     parser.add_argument(
         "--package-config",
-        default="configs/reporting/g3_codebook_block_scale_v1.yaml",
-        help="YAML package config for the G3 codebook/block scale package.",
+        default="configs/reporting/g3a_block_scale_v1.yaml",
+        help="YAML package config for the G3a block-count scale package.",
     )
     parser.add_argument(
         "--output-dir",
@@ -40,15 +42,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--new-case-root-base",
         help=(
-            "Optional base directory for new G3 case roots. "
-            "Defaults to the package config new_case_root_prefix."
+            "Optional base directory for new G3a case roots. "
+            "Defaults to EXP_SCRATCH/<new_case_root_prefix>; falls back to the package relative prefix."
         ),
     )
     return parser.parse_args()
 
 
 def _resolve_path(repo_root: Path, raw: str) -> Path:
-    path = Path(raw)
+    path = Path(os.path.expandvars(raw))
     return path if path.is_absolute() else repo_root / path
 
 
@@ -59,10 +61,30 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _resolve_new_case_root_base(package_config: dict[str, Any], explicit: str | None) -> str:
+    if explicit:
+        return str(Path(os.path.expandvars(explicit)).as_posix())
+
+    prefix = str(package_config["new_case_root_prefix"])
+    exp_scratch = os.environ.get("EXP_SCRATCH")
+    if exp_scratch:
+        return str((Path(exp_scratch) / prefix).as_posix())
+
+    print(
+        "WARNING: EXP_SCRATCH is not set; falling back to the package-relative "
+        "new_case_root_prefix. Set EXP_SCRATCH on Chimera so large run outputs stay off home.",
+        file=sys.stderr,
+    )
+    return prefix
+
+
 def _case_root_search_roots(repo_root: Path, package_config: dict[str, Any]) -> list[Path]:
     roots: list[Path] = []
     for raw_root in package_config.get("case_root_search_roots", []):
-        root = _resolve_path(repo_root, str(raw_root))
+        expanded_root = os.path.expandvars(str(raw_root))
+        if "$" in expanded_root:
+            continue
+        root = _resolve_path(repo_root, expanded_root)
         if root not in roots:
             roots.append(root)
     return roots
@@ -112,7 +134,7 @@ def _build_case_records(
         _variant_key(item["variant"], item["payload"], item["seed"]): dict(item)
         for item in package_config.get("existing_cases", [])
     }
-    new_case_root_prefix = str(new_case_root_base or package_config["new_case_root_prefix"])
+    new_case_root_prefix = _resolve_new_case_root_base(package_config, new_case_root_base)
 
     cases: list[dict[str, Any]] = []
     for variant in package_config["block_variants"]:
@@ -150,7 +172,7 @@ def _build_case_records(
                             "payload": payload,
                             "seed": seed,
                             "case_root": _join_case_root(new_case_root_prefix, variant_slug, payload, seed),
-                            "source_stage": "G3",
+                            "source_stage": "G3a",
                             "source_kind": "new",
                         }
                     )
@@ -257,7 +279,7 @@ def _write_tex(path: Path, rows: list[dict[str, Any]]) -> Path:
         [
             "\\bottomrule",
             "\\end{tabular}",
-            "\\caption{Current landing state for the G3 block-count scale package on the compiled Qwen/Qwen2.5-7B-Instruct path. Wilson 95\\% intervals are reported over the currently included runs.}",
+            "\\caption{Current landing state for the G3a block-count scale package on the compiled Qwen/Qwen2.5-7B-Instruct path. Wilson 95\\% intervals are reported over the currently included runs.}",
             "\\end{table}",
         ]
     )
@@ -403,8 +425,9 @@ def main() -> int:
     package_config = _load_yaml(package_config_path)
     output_dir = _resolve_path(repo_root, args.output_dir)
     tables_dir = _resolve_path(repo_root, args.tables_dir)
+    new_case_root_base = _resolve_new_case_root_base(package_config, args.new_case_root_base)
 
-    cases = _build_case_records(package_config=package_config, new_case_root_base=args.new_case_root_base)
+    cases = _build_case_records(package_config=package_config, new_case_root_base=new_case_root_base)
     rows: list[dict[str, Any]] = []
     inclusion_rows: list[dict[str, Any]] = []
     for case in cases:
@@ -453,9 +476,10 @@ def main() -> int:
     overall_row = _summary_row("overall", len(rows), included_rows)
 
     summary = {
-        "workstream": str(package_config.get("workstream", "G3")),
+        "workstream": str(package_config.get("workstream", "G3a")),
         "description": str(package_config.get("description", "")),
         "package_config_path": str(package_config_path),
+        "new_case_root_base": new_case_root_base,
         "paper_ready": len(included_rows) == len(rows),
         "target_case_count": len(rows),
         "included_case_count": len(included_rows),
@@ -484,22 +508,22 @@ def main() -> int:
         "included_case_ids": [str(row["case_id"]) for row in included_rows],
     }
 
-    _write_json(output_dir / "g3_summary.json", summary)
+    _write_json(output_dir / "g3a_summary.json", summary)
     _write_json(
-        output_dir / "g3_run_inclusion_list.json",
+        output_dir / "g3a_run_inclusion_list.json",
         {
             "included": inclusion_rows,
             "pending": [row for row in rows if row["status"] == "pending"],
             "excluded": [row for row in rows if row["status"] == "completed_excluded"],
         },
     )
-    _write_csv(tables_dir / "g3_codebook_block_scale.csv", rows)
-    _write_tex(tables_dir / "g3_codebook_block_scale.tex", [overall_row, *by_variant])
+    _write_csv(tables_dir / "g3a_block_scale.csv", rows)
+    _write_tex(tables_dir / "g3a_block_scale.tex", [overall_row, *by_variant])
 
-    print(f"wrote G3 summary to {output_dir / 'g3_summary.json'}")
-    print(f"wrote G3 inclusion list to {output_dir / 'g3_run_inclusion_list.json'}")
-    print(f"wrote G3 table to {tables_dir / 'g3_codebook_block_scale.csv'}")
-    print(f"wrote G3 TeX table to {tables_dir / 'g3_codebook_block_scale.tex'}")
+    print(f"wrote G3a summary to {output_dir / 'g3a_summary.json'}")
+    print(f"wrote G3a inclusion list to {output_dir / 'g3a_run_inclusion_list.json'}")
+    print(f"wrote G3a table to {tables_dir / 'g3a_block_scale.csv'}")
+    print(f"wrote G3a TeX table to {tables_dir / 'g3a_block_scale.tex'}")
     return 0
 
 

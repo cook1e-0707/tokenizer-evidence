@@ -1,12 +1,12 @@
 version: 1
-workstream: G3
+workstream: G3a
 description: Controlled block-count scale package on the standing compiled Qwen/Qwen2.5-7B-Instruct codebook path.
-train_config: configs/experiment/scale/exp_train__qwen2_5_7b__g3_codebook_block_scale_v1.yaml
-eval_config: configs/experiment/scale/exp_eval__qwen2_5_7b__g3_codebook_block_scale_v1.yaml
-new_case_root_prefix: g3_qwen7b_codebook_block_scale
+train_config: configs/experiment/scale/exp_train__qwen2_5_7b__g3a_block_scale_v1.yaml
+eval_config: configs/experiment/scale/exp_eval__qwen2_5_7b__g3a_block_scale_v1.yaml
+new_case_root_prefix: g3a_block_scale
 case_root_search_roots:
-  - /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence
-  - /home/guanjie.lin001/tokenizer-evidence
+  - ${EXP_SCRATCH}
+  - ${REPO_HOME}
 payloads: ["U00", "U03", "U12", "U15"]
 seeds: [17, 23, 29]
 block_variants:
