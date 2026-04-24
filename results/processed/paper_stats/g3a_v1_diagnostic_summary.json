@@ -1,0 +1,104 @@
+{
+  "aggregate_failures": {
+    "failure_by_block_count": {
+      "1": 3,
+      "4": 4
+    },
+    "failure_by_payload": {
+      "U00": 1,
+      "U03": 2,
+      "U12": 2,
+      "U15": 2
+    },
+    "failure_by_seed": {
+      "23": 3,
+      "29": 4
+    },
+    "failure_by_variant": {
+      "B1": 3,
+      "B4": 4
+    },
+    "failure_count": 7,
+    "failure_reasons": {
+      "accepted,verifier_success,decoded_payload_correct": 7
+    }
+  },
+  "completed_case_count": 36,
+  "conclusion": "ROOT_CAUSE_NOT_CONFIRMED: additional instrumentation required",
+  "contract_hash_sets": {
+    "B1": {
+      "codebook_hash": [
+        "c09e3866128bcc2ceeb57dbc9fd34e78b321500fe05c869cded1f49ff737ec92"
+      ],
+      "eval_contract_hash": [
+        "missing"
+      ],
+      "generation_config_hash": [
+        "5bbb502ea6b99b70e004602a5d5d8c16c0d219d647e47ee7daff32a231b497cf"
+      ],
+      "payload_map_hash": [
+        "f0966be88adb0773ea190986d65da9103fb323a9e9fbddc1e960f0f74742b591"
+      ],
+      "prompt_family_hash": [
+        "a1905aa79faafc39495970de10e23b5614127708a883a19d29a99a1404ac5a72"
+      ],
+      "train_contract_hash": [
+        "missing"
+      ]
+    },
+    "B2": {
+      "codebook_hash": [
+        "c09e3866128bcc2ceeb57dbc9fd34e78b321500fe05c869cded1f49ff737ec92"
+      ],
+      "eval_contract_hash": [
+        "missing"
+      ],
+      "generation_config_hash": [
+        "5bbb502ea6b99b70e004602a5d5d8c16c0d219d647e47ee7daff32a231b497cf"
+      ],
+      "payload_map_hash": [
+        "4d6e963108cc90ff35261a964982d23167146f17dc498e969e622a537783699a"
+      ],
+      "prompt_family_hash": [
+        "a1905aa79faafc39495970de10e23b5614127708a883a19d29a99a1404ac5a72"
+      ],
+      "train_contract_hash": [
+        "missing"
+      ]
+    },
+    "B4": {
+      "codebook_hash": [
+        "c09e3866128bcc2ceeb57dbc9fd34e78b321500fe05c869cded1f49ff737ec92"
+      ],
+      "eval_contract_hash": [
+        "missing"
+      ],
+      "generation_config_hash": [
+        "5bbb502ea6b99b70e004602a5d5d8c16c0d219d647e47ee7daff32a231b497cf"
+      ],
+      "payload_map_hash": [
+        "e88b9e8061f3f9b8b43c7e90042f182cfb1f83975d9964be3939723b7274eb1a"
+      ],
+      "prompt_family_hash": [
+        "a1905aa79faafc39495970de10e23b5614127708a883a19d29a99a1404ac5a72"
+      ],
+      "train_contract_hash": [
+        "missing"
+      ]
+    }
+  },
+  "excluded_case_count": 7,
+  "failure_case_count": 7,
+  "included_case_count": 29,
+  "missing_slot_observation_count": 168,
+  "paper_ready": false,
+  "pending_case_count": 0,
+  "raw_run_files_available_count": 0,
+  "run_diagnostic_count": 36,
+  "schema_name": "g3a_v1_diagnostic_summary",
+  "schema_version": 1,
+  "slot_diagnostic_count": 168,
+  "source_summary_path": "/Users/guanjie/Documents/tokenizer_alignment/results/processed/paper_stats/g3a_summary.json",
+  "source_table_path": "/Users/guanjie/Documents/tokenizer_alignment/results/tables/g3a_block_scale.csv",
+  "target_case_count": 36
+}
