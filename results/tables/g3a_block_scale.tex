@@ -1,15 +1,15 @@
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Scope & Included runs & Target runs & Accepted rate & Verifier rate \\
+Scope & Included & Completed & Target & Accepted rate & Verifier rate \\
 \midrule
-overall & 29 & 36 & 1.000 [0.883, 1.000] & 1.000 [0.883, 1.000] \\
-variant=B1 & 9 & 12 & 1.000 [0.701, 1.000] & 1.000 [0.701, 1.000] \\
-variant=B2 & 12 & 12 & 1.000 [0.757, 1.000] & 1.000 [0.757, 1.000] \\
-variant=B4 & 8 & 12 & 1.000 [0.676, 1.000] & 1.000 [0.676, 1.000] \\
+overall & 29 & 36 & 36 & 0.806 [0.650, 0.902] & 0.806 [0.650, 0.902] \\
+variant=B1 & 9 & 12 & 12 & 0.750 [0.468, 0.911] & 0.750 [0.468, 0.911] \\
+variant=B2 & 12 & 12 & 12 & 1.000 [0.757, 1.000] & 1.000 [0.757, 1.000] \\
+variant=B4 & 8 & 12 & 12 & 0.667 [0.391, 0.862] & 0.667 [0.391, 0.862] \\
 \bottomrule
 \end{tabular}
-\caption{Current landing state for the G3a block-count scale package on the compiled Qwen/Qwen2.5-7B-Instruct path. Wilson 95\% intervals are reported over the currently included runs.}
+\caption{Current landing state for the G3a block-count scale package on the compiled Qwen/Qwen2.5-7B-Instruct path. Wilson 95\% intervals are reported over completed runs, while included counts retain the strict paper inclusion gate.}
 \end{table}
