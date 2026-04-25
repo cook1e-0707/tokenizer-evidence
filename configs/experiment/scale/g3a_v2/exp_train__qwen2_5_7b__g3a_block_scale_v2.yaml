@@ -30,7 +30,7 @@ train:
   checkpoint_selection_save_best: true
   probe_block_count: 2
   adapter_mode: lora
-  lora_r: 32
+  lora_r: 16
   lora_alpha: 64
   lora_dropout: 0.0
   lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]

@@ -38,9 +38,12 @@ Allowed selection signals are training/validation evidence metrics only:
 - Validation bucket recovery on a fixed validation contract.
 - Training normalized `L_set` mean.
 
-The initial selected operating point, pending pilot confirmation, is:
+The pilot-selected operating point for final G3a-v2 is fixed before final runs:
 
-- `lora_r=32`.
+- Pilot HP id: `hp08`.
+- Pilot validation result: `8/8` accepted under the exact gate and `8/8` under the RS-aware gate across B1/B4 validation cases.
+- Tie-break among exact-gate-perfect pilot settings: lower training normalized `L_set` / final loss.
+- `lora_r=16`.
 - `learning_rate=3e-5`.
 - `epochs=96`.
 - `lambda_set=2.0`.
@@ -48,7 +51,7 @@ The initial selected operating point, pending pilot confirmation, is:
 - `checkpoint_selection_mode=min`.
 - `checkpoint_selection_use_best_for_eval=true`.
 
-Before launching final G3a-v2, update this section with the pilot-selected operating point and commit the change. Do not modify final thresholds after final evaluation.
+This selection uses only the pre-registered pilot validation payloads `U01/U05/U09/U13` with seed `41`. It does not use final payloads, final seeds, manual inspection of failed final cases, or post-evaluation threshold changes.
 
 ## Pilot Sweep
 
