@@ -1,0 +1,2190 @@
+{
+  "cases": [
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b1/U01_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b1/U05_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b1/U09_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b1/U13_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b4/U01_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b4/U05_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b4/U09_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp01/b4/U13_s41",
+      "hp_id": "hp01",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp01_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b1/U01_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b1/U05_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b1/U09_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b1/U13_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b4/U01_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b4/U05_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b4/U09_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp02/b4/U13_s41",
+      "hp_id": "hp02",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp02_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b1/U01_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b1/U05_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b1/U09_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b1/U13_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b4/U01_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b4/U05_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b4/U09_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp03/b4/U13_s41",
+      "hp_id": "hp03",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp03_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b1/U01_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b1/U05_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b1/U09_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b1/U13_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b4/U01_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b4/U05_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b4/U09_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp04/b4/U13_s41",
+      "hp_id": "hp04",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 16
+      },
+      "id": "hp04_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b1/U01_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b1/U05_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b1/U09_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b1/U13_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b4/U01_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b4/U05_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b4/U09_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp05/b4/U13_s41",
+      "hp_id": "hp05",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp05_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b1/U01_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b1/U05_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b1/U09_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b1/U13_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b4/U01_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b4/U05_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b4/U09_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp06/b4/U13_s41",
+      "hp_id": "hp06",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp06_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b1/U01_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b1/U05_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b1/U09_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b1/U13_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b4/U01_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b4/U05_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b4/U09_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp07/b4/U13_s41",
+      "hp_id": "hp07",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp07_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b1/U01_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b1/U05_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b1/U09_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b1/U13_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b4/U01_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b4/U05_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b4/U09_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp08/b4/U13_s41",
+      "hp_id": "hp08",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 16
+      },
+      "id": "hp08_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b1/U01_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b1/U05_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b1/U09_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b1/U13_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b4/U01_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b4/U05_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b4/U09_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp09/b4/U13_s41",
+      "hp_id": "hp09",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp09_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b1/U01_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b1/U05_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b1/U09_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b1/U13_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b4/U01_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b4/U05_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b4/U09_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp10/b4/U13_s41",
+      "hp_id": "hp10",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp10_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b1/U01_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b1/U05_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b1/U09_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b1/U13_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b4/U01_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b4/U05_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b4/U09_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp11/b4/U13_s41",
+      "hp_id": "hp11",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp11_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b1/U01_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b1/U05_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b1/U09_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b1/U13_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b4/U01_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b4/U05_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b4/U09_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp12/b4/U13_s41",
+      "hp_id": "hp12",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 5e-05,
+        "lora_r": 32
+      },
+      "id": "hp12_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b1/U01_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b1/U05_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b1/U09_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b1/U13_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b4/U01_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b4/U05_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b4/U09_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp13/b4/U13_s41",
+      "hp_id": "hp13",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp13_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b1/U01_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b1/U05_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b1/U09_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b1/U13_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b4/U01_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b4/U05_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b4/U09_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp14/b4/U13_s41",
+      "hp_id": "hp14",
+      "hyperparameters": {
+        "epochs": 64,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp14_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b1/U01_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b1/U05_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b1/U09_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b1/U13_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b4/U01_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b4/U05_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b4/U09_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp15/b4/U13_s41",
+      "hp_id": "hp15",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 1.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp15_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b1/U01_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B1_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b1/U05_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B1_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b1/U09_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B1_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 1,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b1/U13_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B1_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B1",
+      "variant_slug": "b1"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b4/U01_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B4_U01_s41",
+      "payload": "U01",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b4/U05_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B4_U05_s41",
+      "payload": "U05",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b4/U09_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B4_U09_s41",
+      "payload": "U09",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    },
+    {
+      "block_count": 4,
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/pilot/hp16/b4/U13_s41",
+      "hp_id": "hp16",
+      "hyperparameters": {
+        "epochs": 96,
+        "lambda_set": 2.0,
+        "learning_rate": 3e-05,
+        "lora_r": 32
+      },
+      "id": "hp16_B4_U13_s41",
+      "payload": "U13",
+      "phase": "pilot",
+      "seed": 41,
+      "variant_id": "B4",
+      "variant_slug": "b4"
+    }
+  ],
+  "eval_manifest_entry_count": 128,
+  "generated_at": "20260424T215410750250Z",
+  "output_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2",
+  "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g3a_block_scale_v2.yaml",
+  "phase": "pilot",
+  "schema_name": "g3a_v2_package_dry_run",
+  "schema_version": 1,
+  "target_case_count": 128,
+  "train_manifest_entry_count": 128,
+  "workstream": "G3a-v2"
+}

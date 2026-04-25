@@ -136,7 +136,7 @@
       "std": 0.0
     }
   },
-  "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/g3a_block_scale_v2.yaml",
+  "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g3a_block_scale_v2.yaml",
   "paper_ready": false,
   "paper_ready_checks": {
     "completed_runs_accounted_included_or_excluded": true,
