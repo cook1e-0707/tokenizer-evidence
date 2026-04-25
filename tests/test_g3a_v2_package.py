@@ -9,6 +9,7 @@ import pytest
 from src.core.compiled_repair_diagnostics import build_compiled_verification_report
 from src.core.contract_compiler import CompiledEvalContract
 from src.core.scaffolded_completion import FoundationGateResult, FoundationSlotDiagnostic
+from src.evaluation.report import EvalRunSummary, TrainRunSummary
 from src.infrastructure.manifest import build_manifest_from_config, load_manifest
 from src.infrastructure.paths import discover_repo_root
 from src.training.dataset import TrainingExample
@@ -154,6 +155,87 @@ def test_build_g3a_v2_artifacts_writes_pending_package(tmp_path: Path) -> None:
     assert (tables_dir / "g3a_v2_block_scale.tex").exists()
     assert (output_dir / "g3a_v2_run_inclusion_list.json").exists()
     assert (output_dir / "g3a_v2_compute_accounting.json").exists()
+
+
+def test_build_g3a_v2_pilot_selection_summary_pairs_train_and_eval(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    pilot_root = tmp_path / "scratch" / "g3a_block_scale_v2" / "pilot"
+    run_root = pilot_root / "hp01" / "b1" / "U01_s41" / "runs"
+    train_run = run_root / "exp_train" / "train-run"
+    eval_run = run_root / "exp_eval" / "eval-run"
+    train_run.mkdir(parents=True)
+    eval_run.mkdir(parents=True)
+    common = {
+        "run_id": "run",
+        "experiment_name": "exp",
+        "method_name": "our_method",
+        "model_name": "qwen2.5-7b-instruct",
+        "seed": 41,
+        "git_commit": "abc123",
+        "timestamp": "20260101T000000Z",
+        "hostname": "chimera",
+        "slurm_job_id": "1",
+        "status": "completed",
+    }
+    TrainRunSummary(
+        **common,
+        objective="compiled_bucket",
+        dataset_name="pilot",
+        dataset_size=4,
+        steps=4,
+        final_loss=0.1,
+        run_dir=str(train_run),
+    ).save_json(train_run / "train_summary.json")
+    EvalRunSummary(
+        **common,
+        dataset_name="pilot",
+        sample_count=1,
+        accepted=True,
+        match_ratio=1.0,
+        threshold=1.0,
+        verifier_success=True,
+        decoded_payload="U01",
+        diagnostics={
+            "compiled_verifier_report": {
+                "accepted_under_exact_gate": True,
+                "accepted_under_rs_gate": True,
+                "slot_bucket_accuracy": 1.0,
+            }
+        },
+        run_dir=str(eval_run),
+    ).save_json(eval_run / "eval_summary.json")
+
+    output_path = tmp_path / "pilot_summary.json"
+    table_path = tmp_path / "pilot_summary.csv"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_g3a_v2_pilot_selection_summary.py",
+            "--pilot-root",
+            str(pilot_root),
+            "--output",
+            str(output_path),
+            "--table-out",
+            str(table_path),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "eval_completed=1" in completed.stdout
+    summary = json.loads(output_path.read_text(encoding="utf-8"))
+    assert summary["target_case_count"] == 128
+    assert summary["train_completed_count"] == 1
+    assert summary["eval_completed_count"] == 1
+    assert summary["accepted_count"] == 1
+    hp01 = next(row for row in summary["by_hp"] if row["hp"] == "hp01")
+    assert hp01["accepted"] == 1
+    rows = list(csv.DictReader(table_path.open()))
+    completed_rows = [row for row in rows if row["status"] == "completed"]
+    assert len(completed_rows) == 1
+    assert completed_rows[0]["eval_summary_path"].endswith("eval_summary.json")
 
 
 def test_compiled_bucket_loss_diagnostics_are_per_slot_mean() -> None:
