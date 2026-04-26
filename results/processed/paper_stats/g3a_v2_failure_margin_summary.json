@@ -1,0 +1,222 @@
+{
+  "aggregate_training_metric_observations": {
+    "B1_seed23_shared_training_metrics": {
+      "B1_U00_s23": {
+        "checkpoint_selection_best_step": "3",
+        "normalized_L_set_mean": "1.5043059587478638",
+        "result_class": "valid_success",
+        "slot_margin_min_final": "-0.5096260905265808",
+        "target_bucket_mass_min": "0.22217145562171936"
+      },
+      "B1_U03_s23": {
+        "checkpoint_selection_best_step": "3",
+        "normalized_L_set_mean": "1.5043059587478638",
+        "result_class": "method_failure",
+        "slot_margin_min_final": "-0.5096260905265808",
+        "target_bucket_mass_min": "0.22217145562171936"
+      },
+      "B1_U12_s23": {
+        "checkpoint_selection_best_step": "3",
+        "normalized_L_set_mean": "1.5043059587478638",
+        "result_class": "method_failure",
+        "slot_margin_min_final": "-0.5096260905265808",
+        "target_bucket_mass_min": "0.22217145562171936"
+      },
+      "B1_U15_s23": {
+        "checkpoint_selection_best_step": "3",
+        "normalized_L_set_mean": "1.5043059587478638",
+        "result_class": "method_failure",
+        "slot_margin_min_final": "-0.5096260905265808",
+        "target_bucket_mass_min": "0.22217145562171936"
+      }
+    },
+    "U12_seed23_across_blocks": {
+      "B1_U12_s23": {
+        "checkpoint_selection_best_step": "3",
+        "normalized_L_set_mean": "1.5043059587478638",
+        "result_class": "method_failure",
+        "slot_margin_min_final": "-0.5096260905265808",
+        "target_bucket_mass_min": "0.22217145562171936"
+      },
+      "B2_U12_s23": {
+        "checkpoint_selection_best_step": "5527",
+        "normalized_L_set_mean": "1.82243013381958",
+        "result_class": "valid_success",
+        "slot_margin_min_final": "-0.8860472440719604",
+        "target_bucket_mass_min": "0.1616324931383133"
+      },
+      "B4_U12_s23": {
+        "checkpoint_selection_best_step": "2241",
+        "normalized_L_set_mean": "8.344646857949556e-07",
+        "result_class": "method_failure",
+        "slot_margin_min_final": "14.321393013000488",
+        "target_bucket_mass_min": "0.9999991059303284"
+      }
+    }
+  },
+  "failure_case_ids": [
+    "B1_U03_s23",
+    "B1_U12_s23",
+    "B1_U15_s23",
+    "B4_U12_s23"
+  ],
+  "failure_count": 4,
+  "failure_counter_by_payload": {
+    "U03": 1,
+    "U12": 2,
+    "U15": 1
+  },
+  "failure_counter_by_seed": {
+    "23": 4
+  },
+  "failure_counter_by_variant": {
+    "B1": 3,
+    "B4": 1
+  },
+  "generated_at": "20260426T012327812906Z",
+  "instrumentation_required_for_v3": [
+    "per-slot target_bucket_logmass at generation/evaluation time",
+    "per-slot strongest wrong bucket id and logmass",
+    "per-slot target bucket rank",
+    "per-slot target token probability",
+    "top-5 bucket logmasses per slot",
+    "top-5 token probabilities per slot",
+    "per-checkpoint verifier replay or saved generated_text per checkpoint",
+    "explicit checkpoint step-to-epoch mapping in training_health.json",
+    "per-slot L_margin curve; current training metrics only provide aggregate slot_margin_mean/min when raw train_metrics is accessible"
+  ],
+  "logit_margin_fields_available": false,
+  "neighbor_comparison_count": 28,
+  "primary_root_cause": "F. still inconclusive due to missing instrumentation",
+  "required_comparisons": {
+    "B1_U03_s23_vs_other_seeds": [
+      "valid_success",
+      "valid_success"
+    ],
+    "B1_U12_s23_vs_other_seeds": [
+      "valid_success",
+      "valid_success"
+    ],
+    "B1_U15_s23_vs_other_seeds": [
+      "valid_success",
+      "valid_success"
+    ],
+    "B4_U12_s23_vs_other_seeds": [
+      "valid_success",
+      "valid_success"
+    ],
+    "U12_s23_across_blocks": {
+      "B1": "method_failure",
+      "B2": "valid_success",
+      "B4": "method_failure"
+    }
+  },
+  "root_cause_ranking": [
+    {
+      "candidate": "seed-specific optimization instability",
+      "confidence": "moderate",
+      "evidence": "All four method failures occur at seed 23; the specified same-payload same-block neighbors at seeds 17 and 29 pass. The pattern is not global seed collapse because some seed-23 neighbors pass.",
+      "rank": 1
+    },
+    {
+      "candidate": "payload/bucket hardness",
+      "confidence": "moderate",
+      "evidence": "Within B1 seed 23, U00 passes while U03/U12/U15 fail under the same aggregate training metrics. U12 fails in B1 and B4 at seed 23 but passes in B2.",
+      "rank": 2
+    },
+    {
+      "candidate": "insufficient target-vs-wrong bucket margin",
+      "confidence": "plausible_unmeasured",
+      "evidence": "Failures are slot/symbol bucket substitutions, but target-vs-wrong logmass margins were not saved. Aggregate training margins are not decisive: B4_U12_s23 has high positive aggregate slot_margin_min_final, and B1_U00_s23 passes despite sharing the negative B1 seed-23 aggregate margin.",
+      "rank": 3
+    },
+    {
+      "candidate": "checkpoint drift",
+      "confidence": "inconclusive",
+      "evidence": "No per-checkpoint eval or saved per-checkpoint generated text is available to determine whether an earlier checkpoint passed.",
+      "rank": 4
+    },
+    {
+      "candidate": "verifier/RS logic bug",
+      "confidence": "unlikely",
+      "evidence": "Contract hashes match, failures decompose to symbol errors with no erasures, and nearest neighbors pass under the same verifier.",
+      "rank": 5
+    }
+  ],
+  "schema_name": "g3a_v2_failure_margin_summary",
+  "schema_version": 1,
+  "training_dynamics": {
+    "B1_U03_s23": {
+      "L_margin_curve": "missing",
+      "L_set_mean_curve": "missing",
+      "available": false,
+      "best_checkpoint_metric": "0.0013893722789362073",
+      "final_checkpoint_epoch": "missing",
+      "final_checkpoint_metric": "1.5043059587478638",
+      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "selected_checkpoint_epoch": "missing",
+      "slot_margin_mean_curve": "missing",
+      "slot_margin_min_curve": "missing",
+      "target_bucket_mass_mean_curve": "missing",
+      "target_bucket_mass_min_curve": "missing",
+      "train_loss_curve": "missing",
+      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U03_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009050900Z/train_metrics.jsonl",
+      "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
+    },
+    "B1_U12_s23": {
+      "L_margin_curve": "missing",
+      "L_set_mean_curve": "missing",
+      "available": false,
+      "best_checkpoint_metric": "0.0013893722789362073",
+      "final_checkpoint_epoch": "missing",
+      "final_checkpoint_metric": "1.5043059587478638",
+      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "selected_checkpoint_epoch": "missing",
+      "slot_margin_mean_curve": "missing",
+      "slot_margin_min_curve": "missing",
+      "target_bucket_mass_mean_curve": "missing",
+      "target_bucket_mass_min_curve": "missing",
+      "train_loss_curve": "missing",
+      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009074657Z/train_metrics.jsonl",
+      "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
+    },
+    "B1_U15_s23": {
+      "L_margin_curve": "missing",
+      "L_set_mean_curve": "missing",
+      "available": false,
+      "best_checkpoint_metric": "0.0013893722789362073",
+      "final_checkpoint_epoch": "missing",
+      "final_checkpoint_metric": "1.5043059587478638",
+      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "selected_checkpoint_epoch": "missing",
+      "slot_margin_mean_curve": "missing",
+      "slot_margin_min_curve": "missing",
+      "target_bucket_mass_mean_curve": "missing",
+      "target_bucket_mass_min_curve": "missing",
+      "train_loss_curve": "missing",
+      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U15_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009099592Z/train_metrics.jsonl",
+      "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
+    },
+    "B4_U12_s23": {
+      "L_margin_curve": "missing",
+      "L_set_mean_curve": "missing",
+      "available": false,
+      "best_checkpoint_metric": "0.0",
+      "final_checkpoint_epoch": "missing",
+      "final_checkpoint_metric": "8.344646857949556e-07",
+      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "selected_checkpoint_epoch": "missing",
+      "slot_margin_mean_curve": "missing",
+      "slot_margin_min_curve": "missing",
+      "target_bucket_mass_mean_curve": "missing",
+      "target_bucket_mass_min_curve": "missing",
+      "train_loss_curve": "missing",
+      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b4/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009648243Z/train_metrics.jsonl",
+      "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
+    }
+  },
+  "wrong_field_counter": {
+    "SECTION": 3,
+    "TOPIC": 3
+  }
+}
