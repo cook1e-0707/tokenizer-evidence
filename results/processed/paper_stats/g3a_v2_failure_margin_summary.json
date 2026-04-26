@@ -73,7 +73,7 @@
     "B1": 3,
     "B4": 1
   },
-  "generated_at": "20260426T012327812906Z",
+  "generated_at": "20260426T013619650584Z",
   "instrumentation_required_for_v3": [
     "per-slot target_bucket_logmass at generation/evaluation time",
     "per-slot strongest wrong bucket id and logmass",
@@ -153,14 +153,18 @@
       "best_checkpoint_metric": "0.0013893722789362073",
       "final_checkpoint_epoch": "missing",
       "final_checkpoint_metric": "1.5043059587478638",
-      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "missing_reason": "train_metrics_jsonl_or_json_not_available_in_local_workspace_or_not_saved",
       "selected_checkpoint_epoch": "missing",
       "slot_margin_mean_curve": "missing",
       "slot_margin_min_curve": "missing",
       "target_bucket_mass_mean_curve": "missing",
       "target_bucket_mass_min_curve": "missing",
       "train_loss_curve": "missing",
-      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U03_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009050900Z/train_metrics.jsonl",
+      "train_metrics_candidate_paths": [
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U03_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009050900Z/train_metrics.jsonl",
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U03_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009050900Z/train_metrics.json"
+      ],
+      "train_metrics_path": "missing",
       "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
     },
     "B1_U12_s23": {
@@ -170,14 +174,18 @@
       "best_checkpoint_metric": "0.0013893722789362073",
       "final_checkpoint_epoch": "missing",
       "final_checkpoint_metric": "1.5043059587478638",
-      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "missing_reason": "train_metrics_jsonl_or_json_not_available_in_local_workspace_or_not_saved",
       "selected_checkpoint_epoch": "missing",
       "slot_margin_mean_curve": "missing",
       "slot_margin_min_curve": "missing",
       "target_bucket_mass_mean_curve": "missing",
       "target_bucket_mass_min_curve": "missing",
       "train_loss_curve": "missing",
-      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009074657Z/train_metrics.jsonl",
+      "train_metrics_candidate_paths": [
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009074657Z/train_metrics.jsonl",
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009074657Z/train_metrics.json"
+      ],
+      "train_metrics_path": "missing",
       "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
     },
     "B1_U15_s23": {
@@ -187,14 +195,18 @@
       "best_checkpoint_metric": "0.0013893722789362073",
       "final_checkpoint_epoch": "missing",
       "final_checkpoint_metric": "1.5043059587478638",
-      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "missing_reason": "train_metrics_jsonl_or_json_not_available_in_local_workspace_or_not_saved",
       "selected_checkpoint_epoch": "missing",
       "slot_margin_mean_curve": "missing",
       "slot_margin_min_curve": "missing",
       "target_bucket_mass_mean_curve": "missing",
       "target_bucket_mass_min_curve": "missing",
       "train_loss_curve": "missing",
-      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U15_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009099592Z/train_metrics.jsonl",
+      "train_metrics_candidate_paths": [
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U15_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009099592Z/train_metrics.jsonl",
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b1/U15_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009099592Z/train_metrics.json"
+      ],
+      "train_metrics_path": "missing",
       "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
     },
     "B4_U12_s23": {
@@ -204,14 +216,18 @@
       "best_checkpoint_metric": "0.0",
       "final_checkpoint_epoch": "missing",
       "final_checkpoint_metric": "8.344646857949556e-07",
-      "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+      "missing_reason": "train_metrics_jsonl_or_json_not_available_in_local_workspace_or_not_saved",
       "selected_checkpoint_epoch": "missing",
       "slot_margin_mean_curve": "missing",
       "slot_margin_min_curve": "missing",
       "target_bucket_mass_mean_curve": "missing",
       "target_bucket_mass_min_curve": "missing",
       "train_loss_curve": "missing",
-      "train_metrics_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b4/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009648243Z/train_metrics.jsonl",
+      "train_metrics_candidate_paths": [
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b4/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009648243Z/train_metrics.jsonl",
+        "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2/final/b4/U12_s23/runs/exp_train/exp_train__our_method__qwen2.5-7b-instruct__s23__6f2c1cf__20260425T185009648243Z/train_metrics.json"
+      ],
+      "train_metrics_path": "missing",
       "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval"
     }
   },

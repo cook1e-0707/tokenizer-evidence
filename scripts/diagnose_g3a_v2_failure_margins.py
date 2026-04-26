@@ -175,6 +175,53 @@ def _wrong_fields(case_id: str, slot_by_case: dict[str, list[dict[str, str]]]) -
     ]
 
 
+def _candidate_train_metrics_paths(run_row: dict[str, str]) -> list[Path]:
+    train_summary_path = Path(run_row.get("train_summary_path", ""))
+    if not train_summary_path:
+        return []
+    train_dir = train_summary_path.parent
+    return [train_dir / "train_metrics.jsonl", train_dir / "train_metrics.json"]
+
+
+def _metric_records_from_json_payload(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, list):
+        return [item for item in payload if isinstance(item, dict)]
+    if not isinstance(payload, dict):
+        return []
+    for key in ("metrics", "train_metrics", "history", "log_history", "records", "rows"):
+        value = payload.get(key)
+        if isinstance(value, list):
+            return [item for item in value if isinstance(item, dict)]
+    if all(isinstance(value, dict) for value in payload.values()):
+        return [value for value in payload.values() if isinstance(value, dict)]
+    metric_like_keys = {
+        "epoch",
+        "step",
+        "loss",
+        "normalized_L_set_mean",
+        "target_bucket_mass_mean",
+        "target_bucket_mass_min",
+        "slot_margin_mean",
+        "slot_margin_min",
+    }
+    if metric_like_keys.intersection(payload):
+        return [payload]
+    return []
+
+
+def _load_train_metric_records(metrics_path: Path) -> tuple[list[dict[str, Any]], str]:
+    if metrics_path.suffix == ".jsonl":
+        metrics = []
+        for line in metrics_path.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                item = json.loads(line)
+                if isinstance(item, dict):
+                    metrics.append(item)
+        return metrics, "jsonl"
+    payload = json.loads(metrics_path.read_text(encoding="utf-8"))
+    return _metric_records_from_json_payload(payload), "json"
+
+
 def _slot_margin_rows(
     failure_rows: list[dict[str, str]],
     all_run_rows: list[dict[str, str]],
@@ -277,13 +324,14 @@ def _neighbor_comparison_rows(
 
 
 def _read_train_metrics(run_row: dict[str, str]) -> dict[str, Any]:
-    train_summary_path = Path(run_row.get("train_summary_path", ""))
-    metrics_path = train_summary_path.parent / "train_metrics.jsonl" if train_summary_path else Path("")
-    if not metrics_path.exists():
+    candidates = _candidate_train_metrics_paths(run_row)
+    metrics_path = next((path for path in candidates if path.exists()), None)
+    if metrics_path is None:
         return {
             "available": False,
-            "train_metrics_path": str(metrics_path),
-            "missing_reason": "train_metrics.jsonl_not_available_in_local_workspace_or_not_saved",
+            "train_metrics_path": "missing",
+            "train_metrics_candidate_paths": [str(path) for path in candidates],
+            "missing_reason": "train_metrics_jsonl_or_json_not_available_in_local_workspace_or_not_saved",
             "train_loss_curve": "missing",
             "L_set_mean_curve": "missing",
             "L_margin_curve": "missing",
@@ -297,16 +345,15 @@ def _read_train_metrics(run_row: dict[str, str]) -> dict[str, Any]:
             "final_checkpoint_metric": run_row.get("normalized_L_set_mean", "missing"),
             "would_have_passed_earlier_checkpoint": "unknown_no_per_checkpoint_eval",
         }
-    metrics = []
-    for line in metrics_path.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            metrics.append(json.loads(line))
+    metrics, metrics_format = _load_train_metric_records(metrics_path)
     def curve(key: str) -> list[float]:
         return [_float(item[key]) for item in metrics if key in item]
     epochs = [_int(item.get("epoch")) for item in metrics if item.get("epoch") is not None]
     return {
         "available": True,
         "train_metrics_path": str(metrics_path),
+        "train_metrics_candidate_paths": [str(path) for path in candidates],
+        "train_metrics_format": metrics_format,
         "point_count": len(metrics),
         "train_loss_curve": curve("loss"),
         "L_set_mean_curve": curve("normalized_L_set_mean"),
@@ -473,7 +520,7 @@ def _report(summary: dict[str, Any], neighbor_rows: list[dict[str, Any]]) -> str
         "",
         "## Training Dynamics",
         "",
-        "The committed paper-facing artifacts include final aggregate training metrics, selected checkpoint metadata, and paths to raw training metrics. The raw `train_metrics.jsonl` files are not present in this local workspace. The diagnostic script records full curves if run on a machine where the scratch paths exist; otherwise it marks curves as `missing`.",
+        "The committed paper-facing artifacts include final aggregate training metrics, selected checkpoint metadata, and paths to raw training metrics. The diagnostic script checks both `train_metrics.jsonl` and `train_metrics.json`, records full curves if run on a machine where the scratch paths exist, and otherwise marks curves as `missing`.",
         "",
         "Aggregate training metrics are not sufficient to explain the failures. B1 seed-23 cases share the same aggregate training metrics: `B1_U00_s23` passes, while `B1_U03_s23`, `B1_U12_s23`, and `B1_U15_s23` fail. Conversely, `B4_U12_s23` fails despite high aggregate target-bucket mass and positive aggregate slot margin. This points to seed-specific payload/bucket interactions at evaluation slots, not a confirmed global loss or aggregate-margin failure.",
         "",

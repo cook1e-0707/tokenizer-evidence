@@ -25,7 +25,7 @@ Available evidence shows valid semantic bucket substitutions rather than parser 
 
 ## Training Dynamics
 
-The committed paper-facing artifacts include final aggregate training metrics, selected checkpoint metadata, and paths to raw training metrics. The raw `train_metrics.jsonl` files are not present in this local workspace. The diagnostic script records full curves if run on a machine where the scratch paths exist; otherwise it marks curves as `missing`.
+The committed paper-facing artifacts include final aggregate training metrics, selected checkpoint metadata, and paths to raw training metrics. The diagnostic script checks both `train_metrics.jsonl` and `train_metrics.json`, records full curves if run on a machine where the scratch paths exist, and otherwise marks curves as `missing`.
 
 Aggregate training metrics are not sufficient to explain the failures. B1 seed-23 cases share the same aggregate training metrics: `B1_U00_s23` passes, while `B1_U03_s23`, `B1_U12_s23`, and `B1_U15_s23` fail. Conversely, `B4_U12_s23` fails despite high aggregate target-bucket mass and positive aggregate slot margin. This points to seed-specific payload/bucket interactions at evaluation slots, not a confirmed global loss or aggregate-margin failure.
 
