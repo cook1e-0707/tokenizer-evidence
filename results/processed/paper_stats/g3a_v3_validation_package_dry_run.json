@@ -2,6 +2,7 @@
   "cases": [
     {
       "block_count": 1,
+      "case_id": "hp01_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b1/U00_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -24,6 +25,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp01_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b1/U03_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -46,6 +48,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp01_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b1/U12_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -68,6 +71,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp01_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b1/U15_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -90,6 +94,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp01_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b4/U00_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -112,6 +117,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp01_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b4/U03_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -134,6 +140,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp01_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b4/U12_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -156,6 +163,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp01_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp01/b4/U15_s41",
       "hp_id": "hp01",
       "hyperparameters": {
@@ -178,6 +186,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp02_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b1/U00_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -200,6 +209,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp02_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b1/U03_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -222,6 +232,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp02_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b1/U12_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -244,6 +255,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp02_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b1/U15_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -266,6 +278,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp02_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b4/U00_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -288,6 +301,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp02_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b4/U03_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -310,6 +324,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp02_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b4/U12_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -332,6 +347,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp02_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp02/b4/U15_s41",
       "hp_id": "hp02",
       "hyperparameters": {
@@ -354,6 +370,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp03_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b1/U00_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -376,6 +393,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp03_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b1/U03_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -398,6 +416,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp03_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b1/U12_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -420,6 +439,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp03_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b1/U15_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -442,6 +462,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp03_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b4/U00_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -464,6 +485,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp03_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b4/U03_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -486,6 +508,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp03_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b4/U12_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -508,6 +531,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp03_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp03/b4/U15_s41",
       "hp_id": "hp03",
       "hyperparameters": {
@@ -530,6 +554,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp04_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b1/U00_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -552,6 +577,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp04_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b1/U03_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -574,6 +600,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp04_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b1/U12_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -596,6 +623,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp04_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b1/U15_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -618,6 +646,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp04_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b4/U00_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -640,6 +669,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp04_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b4/U03_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -662,6 +692,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp04_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b4/U12_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -684,6 +715,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp04_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp04/b4/U15_s41",
       "hp_id": "hp04",
       "hyperparameters": {
@@ -706,6 +738,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp05_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b1/U00_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -728,6 +761,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp05_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b1/U03_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -750,6 +784,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp05_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b1/U12_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -772,6 +807,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp05_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b1/U15_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -794,6 +830,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp05_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b4/U00_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -816,6 +853,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp05_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b4/U03_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -838,6 +876,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp05_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b4/U12_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -860,6 +899,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp05_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp05/b4/U15_s41",
       "hp_id": "hp05",
       "hyperparameters": {
@@ -882,6 +922,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp06_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b1/U00_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -904,6 +945,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp06_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b1/U03_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -926,6 +968,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp06_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b1/U12_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -948,6 +991,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp06_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b1/U15_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -970,6 +1014,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp06_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b4/U00_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -992,6 +1037,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp06_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b4/U03_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -1014,6 +1060,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp06_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b4/U12_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -1036,6 +1083,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp06_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp06/b4/U15_s41",
       "hp_id": "hp06",
       "hyperparameters": {
@@ -1058,6 +1106,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp07_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b1/U00_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1080,6 +1129,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp07_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b1/U03_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1102,6 +1152,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp07_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b1/U12_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1124,6 +1175,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp07_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b1/U15_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1146,6 +1198,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp07_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b4/U00_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1168,6 +1221,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp07_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b4/U03_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1190,6 +1244,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp07_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b4/U12_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1212,6 +1267,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp07_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp07/b4/U15_s41",
       "hp_id": "hp07",
       "hyperparameters": {
@@ -1234,6 +1290,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp08_B1_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b1/U00_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1256,6 +1313,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp08_B1_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b1/U03_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1278,6 +1336,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp08_B1_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b1/U12_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1300,6 +1359,7 @@
     },
     {
       "block_count": 1,
+      "case_id": "hp08_B1_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b1/U15_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1322,6 +1382,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp08_B4_U00_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b4/U00_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1344,6 +1405,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp08_B4_U03_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b4/U03_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1366,6 +1428,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp08_B4_U12_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b4/U12_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1388,6 +1451,7 @@
     },
     {
       "block_count": 4,
+      "case_id": "hp08_B4_U15_s41",
       "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3/validation/hp08/b4/U15_s41",
       "hp_id": "hp08",
       "hyperparameters": {
@@ -1411,7 +1475,7 @@
   ],
   "eval_manifest_entry_count": 64,
   "final_launch_allowed": false,
-  "generated_at": "20260426T015538024907Z",
+  "generated_at": "20260426T142040644777Z",
   "output_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3",
   "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/g3a_block_scale_v3.yaml",
   "phase": "validation",

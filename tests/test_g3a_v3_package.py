@@ -77,6 +77,8 @@ def test_prepare_g3a_v3_validation_manifests_and_blocks_unfrozen_final(tmp_path:
     assert validation_payload["target_case_count"] == 64
     assert validation_payload["train_manifest_entry_count"] == 64
     assert validation_payload["eval_manifest_entry_count"] == 64
+    assert validation_payload["cases"][0]["id"] == "hp01_B1_U00_s41"
+    assert validation_payload["cases"][0]["case_id"] == "hp01_B1_U00_s41"
     validation_train = load_manifest(validation_train_manifest)
     assert validation_train.entries[0].manifest_id == "g3a-v3-validation-train-hp01-b1-u00-s41"
     assert "train.margin_gamma=0.5" in validation_train.entries[0].overrides

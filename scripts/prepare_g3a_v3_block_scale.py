@@ -130,9 +130,11 @@ def _validation_cases(package_config: dict[str, Any], output_root_base: str) -> 
             variant_slug = str(variant.get("slug", str(variant["id"]).lower()))
             for payload in validation["payloads"]:
                 seed = int(validation["seed"])
+                case_id = _case_id(str(variant["id"]), str(payload), seed, hp_id=hp_id)
                 cases.append(
                     {
-                        "id": _case_id(str(variant["id"]), str(payload), seed, hp_id=hp_id),
+                        "id": case_id,
+                        "case_id": case_id,
                         "phase": "validation",
                         "variant_id": str(variant["id"]),
                         "variant_slug": variant_slug,
@@ -190,9 +192,11 @@ def _final_cases(package_config: dict[str, Any], output_root_base: str) -> list[
         variant_slug = str(variant.get("slug", str(variant["id"]).lower()))
         for seed in final_matrix["seeds"]:
             for payload in final_matrix["payloads"]:
+                case_id = _case_id(str(variant["id"]), str(payload), int(seed))
                 cases.append(
                     {
-                        "id": _case_id(str(variant["id"]), str(payload), int(seed)),
+                        "id": case_id,
+                        "case_id": case_id,
                         "phase": "final",
                         "variant_id": str(variant["id"]),
                         "variant_slug": variant_slug,
