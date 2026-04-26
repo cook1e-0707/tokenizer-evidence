@@ -1,9 +1,9 @@
 hp_id,margin_gamma,lambda_margin,checkpoint_selection_metric,checkpoint_selection_mode,target_count,completed_count,valid_completed_count,success_count,method_failure_count,invalid_excluded_count,pending_count,exact_gate_success_rate,rs_gate_success_rate,mean_bucket_margin,mean_total_evidence_loss
-hp01,0.5,0.25,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp02,0.5,0.25,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp03,0.5,0.5,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp04,0.5,0.5,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp05,1.0,0.25,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp06,1.0,0.25,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp07,1.0,0.5,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
-hp08,1.0,0.5,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp01,0.5,0.25,training_total_evidence_loss_mean,min,8,8,8,8,0,0,0,1.0,1.0,10.901530652421794,1.6808392160783114e-05
+hp02,0.5,0.25,training_min_slot_margin,max,8,8,8,8,0,0,0,1.0,1.0,15.33943305779924,1.6808392160783114e-05
+hp03,0.5,0.5,training_total_evidence_loss_mean,min,8,8,8,8,0,0,0,1.0,1.0,12.691550894432513,2.908664645673298e-05
+hp04,0.5,0.5,training_min_slot_margin,max,8,8,8,8,0,0,0,1.0,1.0,17.48395564304315,2.908664645673298e-05
+hp05,1.0,0.25,training_total_evidence_loss_mean,min,8,8,8,8,0,0,0,1.0,1.0,11.686040018533596,1.3828225291945273e-05
+hp06,1.0,0.25,training_min_slot_margin,max,8,8,8,8,0,0,0,1.0,1.0,15.190861025648207,1.3828225291945273e-05
+hp07,1.0,0.5,training_total_evidence_loss_mean,min,8,8,8,7,1,0,0,0.875,0.875,10.645064879981907,5.221237995556294e-05
+hp08,1.0,0.5,training_min_slot_margin,max,8,8,8,8,0,0,0,1.0,1.0,16.74005314155499,5.221237995556294e-05
