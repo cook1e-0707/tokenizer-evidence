@@ -1,15 +1,15 @@
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Scope & Included & Completed & Target & Exact gate \\
+Scope & Success & Method fail & Invalid & Valid completed & Exact gate \\
 \midrule
-overall & 32 & 36 & 36 & 0.889 \\
-variant=B1 & 9 & 12 & 12 & 0.750 \\
-variant=B2 & 12 & 12 & 12 & 1.000 \\
-variant=B4 & 11 & 12 & 12 & 0.917 \\
+overall & 32 & 4 & 0 & 36 & 0.889 \\
+variant=B1 & 9 & 3 & 0 & 12 & 0.750 \\
+variant=B2 & 12 & 0 & 0 & 12 & 1.000 \\
+variant=B4 & 11 & 1 & 0 & 12 & 0.917 \\
 \bottomrule
 \end{tabular}
-\caption{G3a-v2 repaired block-count scale package. Exact and RS-aware gates are reported separately in the JSON/CSV artifacts.}
+\caption{G3a-v2 repaired block-count scale package. Method failures remain in the denominator; invalid exclusions are reserved for artifact or contract failures.}
 \end{table}

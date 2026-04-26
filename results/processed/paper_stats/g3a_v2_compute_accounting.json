@@ -2,7 +2,7 @@
   "rows": [
     {
       "gpu_type": "A100",
-      "notes": "final matrix only; pilot sweep accounting should be added after pilot manifests are selected",
+      "notes": "final matrix only; pilot sweep is reported separately in g3a_v2_pilot_selection_summary",
       "requested_gpu_hours": 864.0,
       "run_kind": "train",
       "runs": 36,
@@ -18,5 +18,5 @@
     }
   ],
   "schema_name": "g3a_v2_compute_accounting",
-  "schema_version": 1
+  "schema_version": 2
 }
