@@ -56,15 +56,26 @@ Forbidden selection inputs:
 
 ## Frozen Operating Point
 
-Status: `pending_validation`.
+Status: `frozen_before_final_launch`.
 
-Final manifests must not be generated or launched until `configs/reporting/g3a_block_scale_v3.yaml` records:
+The validation sweep completed `64/64` cases with no pending cases. The pre-registered selection rule chooses `hp04`:
 
-- `selected_operating_point.status: frozen_before_final_launch`
-- `selected_operating_point.final_launch_allowed: true`
-- `margin_gamma`
-- `lambda_margin`
-- `checkpoint_selection_metric`
+- `margin_gamma=0.5`
+- `lambda_margin=0.5`
+- `checkpoint_selection_metric=training_min_slot_margin`
+- `checkpoint_selection_mode=max`
+- `validation_exact_gate_success_rate=1.0`
+- `validation_rs_gate_success_rate=1.0`
+- `validation_mean_bucket_margin=17.48395564304315`
+- `validation_mean_total_evidence_loss=2.908664645673298e-05`
+
+This operating point is frozen in `configs/reporting/g3a_block_scale_v3.yaml` before final manifest generation. It must not be changed after final launch.
+
+## Precision Contract
+
+G3a-v3 does not explicitly enable fp8, 8-bit, 4-bit, fp16, bf16, AMP autocast, or a `torch_dtype` override in the repo configuration. The training code loads Qwen with `AutoModelForCausalLM.from_pretrained(model_name_or_path)` and moves it to the selected device, so precision follows the default Transformers/PyTorch model-loading policy for the checkpoint and installed runtime.
+
+The final held-out matrix freezes this precision policy from validation. Changing to explicit fp16/bf16/fp8 or quantized loading would be a new protocol, not part of this G3a-v3 final launch.
 
 ## Final Held-Out Matrix
 

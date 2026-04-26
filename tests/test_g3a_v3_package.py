@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 import pytest
+import yaml
 
 from src.infrastructure.manifest import build_manifest_from_config, load_manifest
 from src.infrastructure.paths import discover_repo_root
@@ -45,8 +46,22 @@ def test_g3a_v3_configs_emit_qwen_train_and_eval_manifests() -> None:
     assert train_entry.requested_resources.time_limit == "24:00:00"
 
 
+def _write_unfrozen_package_config(repo_root: Path, tmp_path: Path) -> Path:
+    package_config_path = repo_root / "configs" / "reporting" / "g3a_block_scale_v3.yaml"
+    package_config = yaml.safe_load(package_config_path.read_text(encoding="utf-8"))
+    package_config["final_matrix"]["status"] = "blocked_until_hyperparameters_frozen"
+    package_config["selected_operating_point"]["status"] = "pending_validation"
+    package_config["selected_operating_point"]["final_launch_allowed"] = False
+    for key in ("margin_gamma", "lambda_margin", "checkpoint_selection_metric", "checkpoint_selection_mode"):
+        package_config["selected_operating_point"][key] = None
+    tmp_config = tmp_path / "g3a_block_scale_v3_unfrozen.yaml"
+    tmp_config.write_text(yaml.safe_dump(package_config, sort_keys=False), encoding="utf-8")
+    return tmp_config
+
+
 def test_prepare_g3a_v3_validation_manifests_and_blocks_unfrozen_final(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
+    unfrozen_package_config = _write_unfrozen_package_config(repo_root, tmp_path)
     output_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "g3a_block_scale_v3"
 
     validation_output = tmp_path / "validation_dry_run.json"
@@ -56,6 +71,8 @@ def test_prepare_g3a_v3_validation_manifests_and_blocks_unfrozen_final(tmp_path:
         [
             sys.executable,
             "scripts/prepare_g3a_v3_block_scale.py",
+            "--package-config",
+            str(unfrozen_package_config),
             "--phase",
             "validation",
             "--output",
@@ -97,6 +114,8 @@ def test_prepare_g3a_v3_validation_manifests_and_blocks_unfrozen_final(tmp_path:
         [
             sys.executable,
             "scripts/prepare_g3a_v3_block_scale.py",
+            "--package-config",
+            str(unfrozen_package_config),
             "--phase",
             "final",
             "--output",
@@ -111,6 +130,50 @@ def test_prepare_g3a_v3_validation_manifests_and_blocks_unfrozen_final(tmp_path:
     assert final_completed.returncode != 0
     assert "final manifests are blocked" in final_completed.stderr
     assert not final_output.exists()
+
+
+def test_prepare_g3a_v3_final_manifests_use_frozen_hp04(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "g3a_block_scale_v3"
+    final_output = tmp_path / "final_dry_run.json"
+    final_train_manifest = tmp_path / "final_train_manifest.json"
+    final_eval_manifest = tmp_path / "final_eval_manifest.json"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_g3a_v3_block_scale.py",
+            "--phase",
+            "final",
+            "--output",
+            str(final_output),
+            "--train-manifest-out",
+            str(final_train_manifest),
+            "--eval-manifest-out",
+            str(final_eval_manifest),
+            "--output-root-base",
+            str(output_root_base),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote G3a-v3 final dry-run summary" in completed.stdout
+    payload = json.loads(final_output.read_text(encoding="utf-8"))
+    assert payload["target_case_count"] == 144
+    assert payload["final_launch_allowed"] is True
+    assert payload["cases"][0]["case_id"] == "B1_U00_s17"
+
+    train_manifest = load_manifest(final_train_manifest)
+    eval_manifest = load_manifest(final_eval_manifest)
+    assert len(train_manifest.entries) == 144
+    assert len(eval_manifest.entries) == 144
+    first_train = train_manifest.entries[0]
+    assert "train.margin_gamma=0.5" in first_train.overrides
+    assert "train.lambda_margin=0.5" in first_train.overrides
+    assert "train.checkpoint_selection_metric=training_min_slot_margin" in first_train.overrides
+    assert "train.checkpoint_selection_mode=max" in first_train.overrides
 
 
 def test_build_g3a_v3_artifacts_writes_pending_package(tmp_path: Path) -> None:
@@ -140,7 +203,7 @@ def test_build_g3a_v3_artifacts_writes_pending_package(tmp_path: Path) -> None:
     assert summary["completed_count"] == 0
     assert summary["pending_count"] == 144
     assert summary["paper_ready"] is False
-    assert summary["paper_ready_checks"]["hyperparameters_frozen_before_final_matrix_launch"] is False
+    assert summary["paper_ready_checks"]["hyperparameters_frozen_before_final_matrix_launch"] is True
 
     rows = list(csv.DictReader((tables_dir / "g3a_v3_block_scale.csv").open()))
     assert len(rows) == 144
