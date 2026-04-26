@@ -1,0 +1,9 @@
+hp_id,margin_gamma,lambda_margin,checkpoint_selection_metric,checkpoint_selection_mode,target_count,completed_count,valid_completed_count,success_count,method_failure_count,invalid_excluded_count,pending_count,exact_gate_success_rate,rs_gate_success_rate,mean_bucket_margin,mean_total_evidence_loss
+hp01,0.5,0.25,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp02,0.5,0.25,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp03,0.5,0.5,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp04,0.5,0.5,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp05,1.0,0.25,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp06,1.0,0.25,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp07,1.0,0.5,training_total_evidence_loss_mean,min,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0
+hp08,1.0,0.5,training_min_slot_margin,max,8,0,0,0,0,0,8,0.0,0.0,0.0,0.0

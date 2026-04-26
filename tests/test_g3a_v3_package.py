@@ -152,6 +152,39 @@ def test_build_g3a_v3_artifacts_writes_pending_package(tmp_path: Path) -> None:
     assert (output_dir / "g3a_v3_compute_accounting.json").exists()
 
 
+def test_build_g3a_v3_validation_summary_writes_pending_selection_table(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    case_root = tmp_path / "scratch" / "tokenizer-evidence" / "g3a_block_scale_v3"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_g3a_v3_validation_summary.py",
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--validation-root-base",
+            str(case_root),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert "wrote G3a-v3 validation summary" in completed.stdout
+    summary = json.loads((output_dir / "g3a_v3_validation_summary.json").read_text(encoding="utf-8"))
+    assert summary["target_count"] == 64
+    assert summary["completed_count"] == 0
+    assert summary["pending_count"] == 64
+    assert summary["selection_ready"] is False
+    assert summary["selected_operating_point"] is None
+    rows = list(csv.DictReader((tables_dir / "g3a_v3_validation_summary.csv").open()))
+    assert len(rows) == 8
+    assert rows[0]["hp_id"] == "hp01"
+
+
 def test_margin_aware_bucket_loss_adds_hinge_margin_term() -> None:
     torch = pytest.importorskip("torch")
     logits = torch.tensor(
