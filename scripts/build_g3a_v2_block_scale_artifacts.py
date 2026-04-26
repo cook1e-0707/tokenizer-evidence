@@ -8,6 +8,7 @@ if __package__ in {None, ""}:
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import os
@@ -19,8 +20,26 @@ from typing import Any
 import yaml
 
 from src.evaluation.report import EvalRunSummary, TrainRunSummary, load_result_json
-from src.infrastructure.paths import discover_repo_root
+from src.infrastructure.paths import current_timestamp, discover_repo_root
 
+
+CONTRACT_HASH_FIELDS = [
+    "model_id_hash",
+    "tokenizer_id_hash",
+    "block_count_hash",
+    "fields_per_block_hash",
+    "field_order_hash",
+    "codebook_hash",
+    "bucket_partition_hash",
+    "payload_map_hash",
+    "train_contract_hash",
+    "eval_contract_hash",
+    "prompt_family_hash",
+    "generation_config_hash",
+    "verifier_contract_hash",
+    "rs_config_hash",
+    "adapter_checkpoint_hash",
+]
 
 RUN_FIELDS = [
     "case_id",
@@ -31,6 +50,7 @@ RUN_FIELDS = [
     "seed",
     "case_root",
     "status",
+    "result_class",
     "failure_reasons",
     "accepted_under_exact_gate",
     "accepted_under_rs_gate",
@@ -55,11 +75,15 @@ RUN_FIELDS = [
     "checkpoint_selection_metric",
     "checkpoint_selection_best_step",
     "checkpoint_selection_best_metric_value",
+    "contract_hash_status",
+    "contract_hash_missing_fields",
+    "contract_hash_mismatch_fields",
+    *CONTRACT_HASH_FIELDS,
     "train_summary_path",
     "eval_summary_path",
     "training_health_path",
     "compiled_verifier_report_path",
-    "included",
+    "latest_eval_input_path",
 ]
 
 SLOT_FIELDS = [
@@ -93,17 +117,73 @@ SYMBOL_FIELDS = [
     "is_symbol_error",
 ]
 
+FAILURE_FIELDS = [
+    "case_id",
+    "variant_id",
+    "block_count",
+    "seed",
+    "payload",
+    "result_class",
+    "failure_reasons",
+    "contract_hash_status",
+    "contract_hash_missing_fields",
+    "contract_hash_mismatch_fields",
+    "accepted_under_exact_gate",
+    "accepted_under_rs_gate",
+    "verifier_success",
+    "decoded_payload",
+    "slot_bucket_accuracy",
+    "symbol_error_count",
+    "erasure_count",
+    "match_ratio",
+    "train_summary_path",
+    "eval_summary_path",
+]
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build G3a-v2 block-scale artifacts.")
     parser.add_argument("--package-config", default="configs/reporting/g3a_block_scale_v2.yaml")
     parser.add_argument("--output-dir", default="results/processed/paper_stats")
     parser.add_argument("--tables-dir", default="results/tables")
+    parser.add_argument("--audit-doc", default="docs/g3a_v2_artifact_audit.md")
     parser.add_argument(
         "--new-case-root-base",
         help="Optional base directory for G3a-v2 final case roots. Defaults to EXP_SCRATCH/g3a_block_scale_v2.",
     )
     return parser.parse_args()
+
+
+def _stable_hash(payload: Any) -> str:
+    return hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
+    ).hexdigest()
+
+
+def _file_sha256(path: Path) -> str | None:
+    if not path.exists() or not path.is_file():
+        return None
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _path_sha256(path: Path) -> str | None:
+    if path.is_file():
+        return _file_sha256(path)
+    if not path.exists() or not path.is_dir():
+        return None
+    digest = hashlib.sha256()
+    for item in sorted(file for file in path.rglob("*") if file.is_file()):
+        digest.update(str(item.relative_to(path)).encode("utf-8"))
+        digest.update(b"\0")
+        with item.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 def _resolve_path(repo_root: Path, raw: str) -> Path:
@@ -226,22 +306,23 @@ def _write_tex(path: Path, summary_rows: list[dict[str, Any]]) -> None:
         "\\begin{table}[t]",
         "\\centering",
         "\\small",
-        "\\begin{tabular}{lrrrr}",
+        "\\begin{tabular}{lrrrrr}",
         "\\toprule",
-        "Scope & Included & Completed & Target & Exact gate \\\\",
+        "Scope & Success & Method fail & Invalid & Valid completed & Exact gate \\\\",
         "\\midrule",
     ]
     for row in summary_rows:
         scope = str(row["scope"]).replace("_", "\\_")
         lines.append(
-            f"{scope} & {row['included_runs']} & {row['completed_runs']} & "
-            f"{row['target_runs']} & {row['accepted_under_exact_gate_rate_mean']:.3f} \\\\"
+            f"{scope} & {row['success_runs']} & {row['method_failure_runs']} & "
+            f"{row['invalid_excluded_runs']} & {row['valid_completed_runs']} & "
+            f"{row['exact_gate_success_rate']:.3f} \\\\"
         )
     lines.extend(
         [
             "\\bottomrule",
             "\\end{tabular}",
-            "\\caption{G3a-v2 repaired block-count scale package. Exact and RS-aware gates are reported separately in the JSON/CSV artifacts.}",
+            "\\caption{G3a-v2 repaired block-count scale package. Method failures remain in the denominator; invalid exclusions are reserved for artifact or contract failures.}",
             "\\end{table}",
         ]
     )
@@ -249,22 +330,27 @@ def _write_tex(path: Path, summary_rows: list[dict[str, Any]]) -> None:
 
 
 def _summary_row(scope: str, target_runs: int, rows: list[dict[str, Any]]) -> dict[str, Any]:
-    completed = [row for row in rows if row["status"] != "pending"]
-    included = [row for row in rows if row["included"]]
-    excluded = [row for row in rows if row["status"] == "completed_excluded"]
+    completed = [row for row in rows if row["result_class"] != "pending"]
+    valid_completed = [row for row in rows if bool(row["valid_completed"])]
+    successes = [row for row in rows if bool(row["success"])]
+    method_failures = [row for row in rows if bool(row["method_failure"])]
+    invalid = [row for row in rows if bool(row["invalid_excluded"])]
+    pending = [row for row in rows if row["result_class"] == "pending"]
     return {
         "scope": scope,
         "target_runs": target_runs,
         "completed_runs": len(completed),
-        "included_runs": len(included),
-        "excluded_runs": len(excluded),
-        "pending_runs": target_runs - len(completed),
-        "accepted_under_exact_gate_rate_mean": _binary(
-            [bool(row["accepted_under_exact_gate"]) for row in completed]
-        )["mean"],
-        "accepted_under_rs_gate_rate_mean": _binary(
-            [bool(row["accepted_under_rs_gate"]) for row in completed]
-        )["mean"],
+        "valid_completed_runs": len(valid_completed),
+        "success_runs": len(successes),
+        "method_failure_runs": len(method_failures),
+        "invalid_excluded_runs": len(invalid),
+        "pending_runs": len(pending),
+        "exact_gate_success_rate": len(successes) / len(valid_completed) if valid_completed else 0.0,
+        "rs_gate_success_rate": (
+            sum(1 for row in valid_completed if bool(row["accepted_under_rs_gate"])) / len(valid_completed)
+            if valid_completed
+            else 0.0
+        ),
     }
 
 
@@ -282,7 +368,8 @@ def _slot_rows(case: dict[str, Any], diagnostics: dict[str, Any]) -> list[dict[s
                 "seed": case["seed"],
                 "payload": case["payload"],
                 "slot_index": slot_index,
-                "block_index": slot_index // max(1, int(diagnostics.get("compiled_eval_contract", {}).get("fields_per_block", 2))),
+                "block_index": slot_index
+                // max(1, int(diagnostics.get("compiled_eval_contract", {}).get("fields_per_block", 2))),
                 "field_name": item.get("slot_type", "missing"),
                 "expected_bucket": item.get("expected_bucket_id", "missing"),
                 "decoded_bucket": item.get("observed_bucket_id", "missing"),
@@ -319,7 +406,284 @@ def _symbol_rows(case: dict[str, Any], report: dict[str, Any]) -> list[dict[str,
     return rows
 
 
-def _collect_case(repo_root: Path, package_config: dict[str, Any], case: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
+def _load_resolved_config_hash(train_run_dir: Path | None) -> str | None:
+    if train_run_dir is None:
+        return None
+    config_path = train_run_dir / "config.resolved.yaml"
+    if not config_path.exists():
+        return None
+    config = _load_yaml(config_path)
+    train = config.get("train", {}) if isinstance(config.get("train", {}), dict) else {}
+    generation_config = {
+        key: train.get(key)
+        for key in (
+            "generation_prompt",
+            "generation_do_sample",
+            "generation_max_new_tokens",
+            "generation_stop_strings",
+            "generation_bad_words",
+            "generation_suppress_tokens",
+            "generation_sequence_bias",
+        )
+    }
+    return _stable_hash(generation_config)
+
+
+def _bucket_partition_hash(train_contract: dict[str, Any]) -> str | None:
+    samples = train_contract.get("samples")
+    if not isinstance(samples, list) or not samples:
+        return None
+    buckets: dict[str, dict[str, list[int]]] = {}
+    for item in samples:
+        if not isinstance(item, dict):
+            continue
+        field_name = str(item.get("field_name", "missing"))
+        raw = item.get("bucket_to_token_ids", {})
+        if isinstance(raw, dict):
+            buckets.setdefault(field_name, {})
+            for bucket_id, token_ids in raw.items():
+                buckets[field_name][str(bucket_id)] = [int(token_id) for token_id in token_ids]
+    return _stable_hash(buckets) if buckets else None
+
+
+def _field_order(eval_contract: dict[str, Any]) -> list[str] | None:
+    raw_fields = eval_contract.get("slot_field_names")
+    if not isinstance(raw_fields, list) or not raw_fields:
+        return None
+    ordered: list[str] = []
+    for field in raw_fields:
+        value = str(field)
+        if value not in ordered:
+            ordered.append(value)
+    return ordered
+
+
+def _compare_equal(field: str, values: list[Any], mismatches: list[str]) -> None:
+    comparable = [value for value in values if value is not None]
+    if len(comparable) > 1 and any(value != comparable[0] for value in comparable[1:]):
+        mismatches.append(field)
+
+
+def _contract_audit(
+    *,
+    case: dict[str, Any],
+    train_summary: TrainRunSummary,
+    eval_summary: EvalRunSummary,
+    train_run_dir: Path | None,
+    eval_run_dir: Path | None,
+    diagnostics: dict[str, Any],
+    report: dict[str, Any],
+) -> dict[str, Any]:
+    missing: list[str] = []
+    mismatches: list[str] = []
+    hashes = {field: "" for field in CONTRACT_HASH_FIELDS}
+
+    train_contract_path = train_run_dir / "compiled_train_contract.json" if train_run_dir else None
+    train_eval_contract_path = train_run_dir / "compiled_eval_contract.json" if train_run_dir else None
+    latest_eval_input_path = train_run_dir.parent / "latest_eval_input.json" if train_run_dir else None
+    if latest_eval_input_path is not None and not latest_eval_input_path.exists():
+        legacy_eval_input_path = train_run_dir / "latest_eval_input.json"
+        if legacy_eval_input_path.exists():
+            latest_eval_input_path = legacy_eval_input_path
+    train_contract = _read_json(train_contract_path)
+    train_eval_contract = _read_json(train_eval_contract_path)
+    eval_input = _read_json(latest_eval_input_path)
+    eval_contract = diagnostics.get("compiled_eval_contract") if isinstance(diagnostics, dict) else None
+    eval_contract = eval_contract if isinstance(eval_contract, dict) else {}
+
+    if not train_contract:
+        missing.append("compiled_train_contract.json")
+    if not train_eval_contract:
+        missing.append("compiled_eval_contract.json")
+    if not eval_contract:
+        missing.append("eval_summary.diagnostics.compiled_eval_contract")
+    if not eval_input:
+        missing.append("latest_eval_input.json")
+
+    model_id = train_contract.get("model_name") if train_contract else None
+    tokenizer_id = train_contract.get("tokenizer_name") if train_contract else None
+    block_count_values = [
+        case["block_count"],
+        train_contract.get("block_count") if train_contract else None,
+        train_eval_contract.get("block_count") if train_eval_contract else None,
+        eval_contract.get("block_count") if eval_contract else None,
+    ]
+    fields_per_block_values = [
+        train_contract.get("fields_per_block") if train_contract else None,
+        train_eval_contract.get("fields_per_block") if train_eval_contract else None,
+        eval_contract.get("fields_per_block") if eval_contract else None,
+    ]
+    field_order_values = [
+        _field_order(train_eval_contract) if train_eval_contract else None,
+        _field_order(eval_contract) if eval_contract else None,
+    ]
+    prompt_contract_names = [
+        train_contract.get("prompt_contract_name") if train_contract else None,
+        train_eval_contract.get("prompt_contract_name") if train_eval_contract else None,
+        eval_contract.get("prompt_contract_name") if eval_contract else None,
+    ]
+    _compare_equal("model_id", [model_id, train_summary.model_name, eval_summary.model_name], mismatches)
+    _compare_equal("block_count", block_count_values, mismatches)
+    _compare_equal("fields_per_block", fields_per_block_values, mismatches)
+    _compare_equal("field_order", field_order_values, mismatches)
+    _compare_equal("prompt_family", prompt_contract_names, mismatches)
+
+    if model_id is None:
+        missing.append("model_id")
+    if tokenizer_id is None:
+        missing.append("tokenizer_id")
+    if any(value is None for value in block_count_values):
+        missing.append("block_count")
+    if any(value is None for value in fields_per_block_values):
+        missing.append("fields_per_block")
+    if any(value is None for value in field_order_values):
+        missing.append("field_order")
+    if any(value is None for value in prompt_contract_names):
+        missing.append("prompt_family")
+
+    codebook_hash = train_contract.get("catalog_sha256") if train_contract else None
+    bucket_partition_hash = _bucket_partition_hash(train_contract) if train_contract else None
+    payload_map = train_contract.get("payload_label_to_units") if train_contract else None
+    payload_map_hash = _stable_hash(payload_map) if isinstance(payload_map, dict) else None
+    if isinstance(payload_map, dict) and case["payload"] in payload_map and eval_contract:
+        if list(payload_map[case["payload"]]) != list(eval_contract.get("payload_units", [])):
+            mismatches.append("payload_map")
+    elif payload_map is None:
+        missing.append("payload_label_to_units")
+    else:
+        missing.append("payload_map_eval_payload")
+
+    train_hash_values = [
+        train_contract.get("contract_hash") if train_contract else None,
+        eval_input.get("compiled_train_contract_hash") if eval_input else None,
+        diagnostics.get("compiled_train_contract_hash") if diagnostics else None,
+    ]
+    eval_contract_hash_values = [
+        _stable_hash(train_eval_contract) if train_eval_contract else None,
+        _stable_hash(eval_input.get("compiled_eval_contract")) if isinstance(eval_input.get("compiled_eval_contract"), dict) else None,
+        _stable_hash(eval_contract) if eval_contract else None,
+    ]
+    _compare_equal("train_contract_hash", train_hash_values, mismatches)
+    _compare_equal("eval_contract_hash", eval_contract_hash_values, mismatches)
+    if any(value is None for value in train_hash_values):
+        missing.append("train_contract_hash")
+    if any(value is None for value in eval_contract_hash_values):
+        missing.append("eval_contract_hash")
+
+    generation_config_hash = _load_resolved_config_hash(train_run_dir)
+    verifier_contract_hash = _stable_hash(
+        {
+            "verification_mode": eval_summary.verification_mode,
+            "render_format": eval_summary.render_format,
+            "threshold": eval_summary.threshold,
+            "compiled_eval_contract": eval_contract,
+        }
+    ) if eval_contract else None
+    rs_config = report.get("rs_config") if isinstance(report.get("rs_config"), dict) else None
+    rs_config_hash = _stable_hash(rs_config) if rs_config else None
+    checkpoint_path_raw = eval_input.get("checkpoint_path") or diagnostics.get("checkpoint_path")
+    checkpoint_path = Path(str(checkpoint_path_raw)) if checkpoint_path_raw else None
+    adapter_checkpoint_hash = _path_sha256(checkpoint_path) if checkpoint_path else None
+
+    for field, value in {
+        "codebook_hash": codebook_hash,
+        "bucket_partition_hash": bucket_partition_hash,
+        "payload_map_hash": payload_map_hash,
+        "generation_config_hash": generation_config_hash,
+        "verifier_contract_hash": verifier_contract_hash,
+        "rs_config_hash": rs_config_hash,
+        "adapter_checkpoint_hash": adapter_checkpoint_hash,
+    }.items():
+        if value is None:
+            missing.append(field)
+
+    hashes.update(
+        {
+            "model_id_hash": _stable_hash(model_id) if model_id is not None else "",
+            "tokenizer_id_hash": _stable_hash(tokenizer_id) if tokenizer_id is not None else "",
+            "block_count_hash": _stable_hash(block_count_values[0]) if block_count_values[0] is not None else "",
+            "fields_per_block_hash": (
+                _stable_hash(fields_per_block_values[0]) if fields_per_block_values[0] is not None else ""
+            ),
+            "field_order_hash": _stable_hash(field_order_values[0]) if field_order_values[0] is not None else "",
+            "codebook_hash": str(codebook_hash or ""),
+            "bucket_partition_hash": str(bucket_partition_hash or ""),
+            "payload_map_hash": str(payload_map_hash or ""),
+            "train_contract_hash": str(train_hash_values[0] or ""),
+            "eval_contract_hash": str(eval_contract_hash_values[0] or ""),
+            "prompt_family_hash": str(train_contract.get("prompt_contract_hash", "") if train_contract else ""),
+            "generation_config_hash": str(generation_config_hash or ""),
+            "verifier_contract_hash": str(verifier_contract_hash or ""),
+            "rs_config_hash": str(rs_config_hash or ""),
+            "adapter_checkpoint_hash": str(adapter_checkpoint_hash or ""),
+        }
+    )
+
+    if not hashes["prompt_family_hash"]:
+        missing.append("prompt_family_hash")
+
+    missing_unique = sorted(set(missing))
+    mismatches_unique = sorted(set(mismatches))
+    status = "match"
+    if missing_unique:
+        status = "missing_hash"
+    elif mismatches_unique:
+        status = "mismatch"
+    return {
+        "contract_hash_status": status,
+        "contract_hash_missing_fields": ";".join(missing_unique),
+        "contract_hash_mismatch_fields": ";".join(mismatches_unique),
+        "latest_eval_input_path": str(latest_eval_input_path) if latest_eval_input_path else "",
+        **hashes,
+    }
+
+
+def _pending_row(base: dict[str, Any]) -> dict[str, Any]:
+    return {
+        **base,
+        "status": "pending",
+        "result_class": "pending",
+        "failure_reasons": "missing_train_summary_or_eval_summary",
+        "accepted_under_exact_gate": False,
+        "accepted_under_rs_gate": False,
+        "verifier_success": False,
+        "decoded_payload": "",
+        "decoded_payload_correct": False,
+        "block_count_correct": False,
+        "slot_bucket_accuracy": 0.0,
+        "symbol_error_count": 0,
+        "erasure_count": 0,
+        "rs_correctable_under_2E_plus_S_lt_d": False,
+        "rs_recovered_payload": "",
+        "exact_slot_rate": 0.0,
+        "bucket_correct_rate": 0.0,
+        "match_ratio": 0.0,
+        "final_loss": 0.0,
+        "normalized_L_set_mean": 0.0,
+        "target_bucket_mass_mean": 0.0,
+        "target_bucket_mass_min": 0.0,
+        "slot_margin_mean": 0.0,
+        "slot_margin_min": 0.0,
+        "checkpoint_selection_metric": "",
+        "checkpoint_selection_best_step": 0,
+        "checkpoint_selection_best_metric_value": 0.0,
+        "contract_hash_status": "missing_hash",
+        "contract_hash_missing_fields": "train_summary_or_eval_summary",
+        "contract_hash_mismatch_fields": "",
+        **{field: "" for field in CONTRACT_HASH_FIELDS},
+        "latest_eval_input_path": "",
+        "valid_completed": False,
+        "success": False,
+        "method_failure": False,
+        "invalid_excluded": False,
+    }
+
+
+def _collect_case(
+    repo_root: Path,
+    package_config: dict[str, Any],
+    case: dict[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
     case_root = _resolve_case_root(repo_root, package_config, str(case["case_root"]))
     train_summary_path = _find_latest(case_root, "runs/exp_train/*/train_summary.json")
     eval_summary_path = _find_latest(case_root, "runs/exp_eval/*/eval_summary.json")
@@ -335,39 +699,7 @@ def _collect_case(repo_root: Path, package_config: dict[str, Any], case: dict[st
         "compiled_verifier_report_path": str(verifier_report_path) if verifier_report_path else "",
     }
     if train_summary_path is None or eval_summary_path is None:
-        return (
-            {
-                **base,
-                "status": "pending",
-                "failure_reasons": "",
-                "accepted_under_exact_gate": False,
-                "accepted_under_rs_gate": False,
-                "verifier_success": False,
-                "decoded_payload": "",
-                "decoded_payload_correct": False,
-                "block_count_correct": False,
-                "slot_bucket_accuracy": 0.0,
-                "symbol_error_count": 0,
-                "erasure_count": 0,
-                "rs_correctable_under_2E_plus_S_lt_d": False,
-                "rs_recovered_payload": "",
-                "exact_slot_rate": 0.0,
-                "bucket_correct_rate": 0.0,
-                "match_ratio": 0.0,
-                "final_loss": 0.0,
-                "normalized_L_set_mean": 0.0,
-                "target_bucket_mass_mean": 0.0,
-                "target_bucket_mass_min": 0.0,
-                "slot_margin_mean": 0.0,
-                "slot_margin_min": 0.0,
-                "checkpoint_selection_metric": "",
-                "checkpoint_selection_best_step": 0,
-                "checkpoint_selection_best_metric_value": 0.0,
-                "included": False,
-            },
-            [],
-            [],
-        )
+        return _pending_row(base), [], []
 
     train_summary = load_result_json(train_summary_path)
     eval_summary = load_result_json(eval_summary_path)
@@ -375,6 +707,7 @@ def _collect_case(repo_root: Path, package_config: dict[str, Any], case: dict[st
         raise TypeError(f"{train_summary_path} is not a train summary")
     if not isinstance(eval_summary, EvalRunSummary):
         raise TypeError(f"{eval_summary_path} is not an eval summary")
+
     health = _read_json(training_health_path)
     diagnostics = dict(eval_summary.diagnostics)
     report = dict(diagnostics.get("compiled_verifier_report", {}))
@@ -384,18 +717,48 @@ def _collect_case(repo_root: Path, package_config: dict[str, Any], case: dict[st
     accepted_exact = bool(report.get("accepted_under_exact_gate", eval_summary.accepted))
     accepted_rs = bool(report.get("accepted_under_rs_gate", False))
     decoded_payload_correct = str(eval_summary.decoded_payload or "") == str(case["payload"])
-    block_count_correct = bool(report.get("block_count_correct", eval_summary.decoded_block_count == case["block_count"]))
-    included = accepted_exact and bool(eval_summary.verifier_success) and decoded_payload_correct and block_count_correct
+    block_count_correct = bool(
+        report.get("block_count_correct", eval_summary.decoded_block_count == case["block_count"])
+    )
     gate_values = {
         "accepted_under_exact_gate": accepted_exact,
         "verifier_success": bool(eval_summary.verifier_success),
         "decoded_payload_correct": decoded_payload_correct,
         "block_count_correct": block_count_correct,
     }
-    failure_reasons = ",".join(name for name, value in gate_values.items() if not value)
+    method_failure_reasons = [name for name, value in gate_values.items() if not value]
+    train_run_dir = train_summary_path.parent
+    eval_run_dir = eval_summary_path.parent
+    contract = _contract_audit(
+        case=case,
+        train_summary=train_summary,
+        eval_summary=eval_summary,
+        train_run_dir=train_run_dir,
+        eval_run_dir=eval_run_dir,
+        diagnostics=diagnostics,
+        report=report,
+    )
+    valid_completed = contract["contract_hash_status"] == "match"
+    success = valid_completed and not method_failure_reasons
+    method_failure = valid_completed and bool(method_failure_reasons)
+    invalid_excluded = not valid_completed
+    if invalid_excluded:
+        result_class = "invalid_excluded"
+        status = "invalid_excluded"
+        failure_reasons = contract["contract_hash_status"]
+    elif success:
+        result_class = "valid_success"
+        status = "valid_success"
+        failure_reasons = ""
+    else:
+        result_class = "method_failure"
+        status = "method_failure"
+        failure_reasons = ",".join(method_failure_reasons)
+
     row = {
         **base,
-        "status": "accepted_included" if included else "completed_excluded",
+        "status": status,
+        "result_class": result_class,
         "failure_reasons": failure_reasons,
         "accepted_under_exact_gate": accepted_exact,
         "accepted_under_rs_gate": accepted_rs,
@@ -420,9 +783,63 @@ def _collect_case(repo_root: Path, package_config: dict[str, Any], case: dict[st
         "checkpoint_selection_metric": checkpoint_selection.get("metric", ""),
         "checkpoint_selection_best_step": int(checkpoint_selection.get("best_step", 0) or 0),
         "checkpoint_selection_best_metric_value": float(checkpoint_selection.get("best_metric_value", 0.0) or 0.0),
-        "included": included,
+        **contract,
+        "valid_completed": valid_completed,
+        "success": success,
+        "method_failure": method_failure,
+        "invalid_excluded": invalid_excluded,
     }
     return row, _slot_rows(case, diagnostics), _symbol_rows(case, report)
+
+
+def _audit_markdown(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
+    method_failures = [row for row in rows if bool(row["method_failure"])]
+    invalid = [row for row in rows if bool(row["invalid_excluded"])]
+    old_semantics_incorrect = summary["method_failure_count"] > 0
+    artifact_ready = bool(summary["paper_ready"])
+    claim_ready = artifact_ready and summary["success_count"] == summary["valid_completed_count"]
+    lines = [
+        "# G3a-v2 Artifact Audit",
+        "",
+        f"- Generated at: `{summary['generated_at']}`",
+        f"- Target / completed / valid completed: `{summary['target_count']}` / `{summary['completed_count']}` / `{summary['valid_completed_count']}`",
+        f"- Success / method failure / invalid excluded / pending: `{summary['success_count']}` / `{summary['method_failure_count']}` / `{summary['invalid_excluded_count']}` / `{summary['pending_count']}`",
+        f"- Exact-gate success rate over valid completed runs: `{summary['exact_gate_success_rate']:.6f}`",
+        f"- RS-gate success rate over valid completed runs: `{summary['rs_gate_success_rate']:.6f}`",
+        f"- Contract hash status counts: `{summary['contract_hash_status_counts']}`",
+        "",
+        "## Failure Accounting",
+        "",
+        "Valid method failures remain in the denominator. Invalid exclusions are reserved for missing artifacts, corrupted outputs, contract mismatches, missing checkpoints, or incomplete runs.",
+        "",
+    ]
+    if method_failures:
+        lines.append("Method failure cases:")
+        lines.extend(
+            f"- `{row['case_id']}`: {row['failure_reasons']}; slot_bucket_accuracy={row['slot_bucket_accuracy']}; symbol_error_count={row['symbol_error_count']}; erasure_count={row['erasure_count']}"
+            for row in method_failures
+        )
+        lines.append("")
+    if invalid:
+        lines.append("Invalid excluded cases:")
+        lines.extend(
+            f"- `{row['case_id']}`: status={row['contract_hash_status']}; missing={row['contract_hash_missing_fields']}; mismatch={row['contract_hash_mismatch_fields']}"
+            for row in invalid
+        )
+        lines.append("")
+    lines.extend(
+        [
+            "## Required Conclusion",
+            "",
+            f"- G3a-v2 is artifact-paper-ready: `{artifact_ready}`.",
+            f"- G3a-v2 is claim-paper-ready: `{claim_ready}`.",
+            f"- Failures are valid method failures or invalid runs: `method_failures={len(method_failures)}, invalid_runs={len(invalid)}`.",
+            f"- Any old summary used incorrect included/excluded semantics: `{old_semantics_incorrect}`.",
+            "",
+            "Do not proceed to G3a-v3 until this audit is complete.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
 
 
 def main() -> int:
@@ -432,6 +849,7 @@ def main() -> int:
     package_config = _load_yaml(package_config_path)
     output_dir = _resolve_path(repo_root, args.output_dir)
     tables_dir = _resolve_path(repo_root, args.tables_dir)
+    audit_doc = _resolve_path(repo_root, args.audit_doc)
     root_base = _resolve_output_root_base(package_config, args.new_case_root_base)
     cases = _case_records(package_config, root_base)
 
@@ -444,10 +862,13 @@ def main() -> int:
         slot_rows.extend(case_slot_rows)
         symbol_rows.extend(case_symbol_rows)
 
-    completed = [row for row in rows if row["status"] != "pending"]
-    included = [row for row in rows if row["included"]]
-    excluded = [row for row in rows if row["status"] == "completed_excluded"]
-    pending = [row for row in rows if row["status"] == "pending"]
+    completed = [row for row in rows if row["result_class"] != "pending"]
+    valid_completed = [row for row in rows if bool(row["valid_completed"])]
+    successes = [row for row in rows if bool(row["success"])]
+    method_failures = [row for row in rows if bool(row["method_failure"])]
+    invalid = [row for row in rows if bool(row["invalid_excluded"])]
+    pending = [row for row in rows if row["result_class"] == "pending"]
+    rs_success_count = sum(1 for row in valid_completed if bool(row["accepted_under_rs_gate"]))
     variant_rows = [
         _summary_row(
             f"variant={variant['id']}",
@@ -457,59 +878,78 @@ def main() -> int:
         for variant in package_config["block_variants"]
     ]
     overall_row = _summary_row("overall", len(rows), rows)
+    contract_status_counts = {
+        status: sum(1 for row in completed if row["contract_hash_status"] == status)
+        for status in sorted({str(row["contract_hash_status"]) for row in completed})
+    }
     paper_ready_checks = {
         "no_pending_runs": not pending,
-        "completed_runs_accounted_included_or_excluded": len(completed) == len(included) + len(excluded),
-        "large_artifacts_in_scratch_only": all(
-            (not row["train_summary_path"]) or "/hpcstor6/scratch01/" in row["train_summary_path"]
-            for row in rows
+        "no_invalid_excluded_runs": not invalid,
+        "all_completed_runs_valid_or_method_failures": len(completed) == len(valid_completed) + len(invalid),
+        "train_eval_contract_hashes_match": all(
+            row["contract_hash_status"] == "match" for row in completed
         ),
-        "train_eval_contract_hashes_match": False if not completed else True,
         "exact_and_rs_aware_gates_reported": all(
-            row["status"] == "pending" or row["rs_correctable_under_2E_plus_S_lt_d"] in {True, False}
+            row["result_class"] == "pending" or row["rs_correctable_under_2E_plus_S_lt_d"] in {True, False}
             for row in rows
         ),
-        "failures_decomposed": all(
-            row["status"] != "completed_excluded" or row["failure_reasons"]
+        "method_failures_decomposed": all(
+            row["result_class"] != "method_failure" or row["failure_reasons"]
             for row in rows
         ),
         "no_threshold_changed_after_final_eval": True,
     }
     summary = {
         "schema_name": "g3a_v2_summary",
-        "schema_version": 1,
+        "schema_version": 2,
         "workstream": package_config.get("workstream", "G3a-v2"),
         "description": package_config.get("description", ""),
+        "generated_at": current_timestamp(),
         "package_config_path": str(package_config_path),
         "new_case_root_base": root_base,
+        "target_count": len(rows),
+        "completed_count": len(completed),
+        "valid_completed_count": len(valid_completed),
+        "success_count": len(successes),
+        "method_failure_count": len(method_failures),
+        "invalid_excluded_count": len(invalid),
+        "pending_count": len(pending),
+        "rs_success_count": rs_success_count,
+        "exact_gate_success_rate": len(successes) / len(valid_completed) if valid_completed else 0.0,
+        "rs_gate_success_rate": rs_success_count / len(valid_completed) if valid_completed else 0.0,
         "paper_ready": all(paper_ready_checks.values()),
         "paper_ready_checks": paper_ready_checks,
-        "target_case_count": len(rows),
-        "completed_case_count": len(completed),
-        "included_case_count": len(included),
-        "excluded_case_count": len(excluded),
-        "pending_case_count": len(pending),
+        "contract_hash_status_counts": contract_status_counts,
         "payloads": list(package_config["payloads"]),
         "seeds": list(package_config["seeds"]),
         "block_variants": package_config["block_variants"],
         "overall_metrics": {
-            "accepted_under_exact_gate": _binary([bool(row["accepted_under_exact_gate"]) for row in completed]),
-            "accepted_under_rs_gate": _binary([bool(row["accepted_under_rs_gate"]) for row in completed]),
-            "slot_bucket_accuracy": _stats([float(row["slot_bucket_accuracy"]) for row in completed]),
-            "symbol_error_count": _stats([float(row["symbol_error_count"]) for row in completed]),
-            "erasure_count": _stats([float(row["erasure_count"]) for row in completed]),
-            "normalized_L_set_mean": _stats([float(row["normalized_L_set_mean"]) for row in completed]),
+            "accepted_under_exact_gate": _binary([bool(row["success"]) for row in valid_completed]),
+            "accepted_under_rs_gate": _binary([bool(row["accepted_under_rs_gate"]) for row in valid_completed]),
+            "slot_bucket_accuracy": _stats([float(row["slot_bucket_accuracy"]) for row in valid_completed]),
+            "symbol_error_count": _stats([float(row["symbol_error_count"]) for row in valid_completed]),
+            "erasure_count": _stats([float(row["erasure_count"]) for row in valid_completed]),
+            "normalized_L_set_mean": _stats([float(row["normalized_L_set_mean"]) for row in valid_completed]),
         },
         "summary_rows": [overall_row, *variant_rows],
         "by_variant": variant_rows,
-        "included_case_ids": [row["case_id"] for row in included],
-        "excluded_case_ids": [row["case_id"] for row in excluded],
-        "missing_case_ids": [row["case_id"] for row in pending],
+        "success_case_ids": [row["case_id"] for row in successes],
+        "method_failure_case_ids": [row["case_id"] for row in method_failures],
+        "invalid_excluded_case_ids": [row["case_id"] for row in invalid],
+        "pending_case_ids": [row["case_id"] for row in pending],
+        "old_included_excluded_semantics_corrected": True,
     }
-    inclusion_payload = {"included": included, "excluded": excluded, "pending": pending}
+    inclusion_payload = {
+        "schema_name": "g3a_v2_run_accounting",
+        "schema_version": 2,
+        "valid_successes": successes,
+        "method_failures": method_failures,
+        "invalid_excluded": invalid,
+        "pending": pending,
+    }
     compute_accounting = {
         "schema_name": "g3a_v2_compute_accounting",
-        "schema_version": 1,
+        "schema_version": 2,
         "rows": [
             {
                 "stage": "G3a-v2",
@@ -517,7 +957,7 @@ def main() -> int:
                 "runs": len(rows),
                 "requested_gpu_hours": float(len(rows) * 24),
                 "gpu_type": "A100",
-                "notes": "final matrix only; pilot sweep accounting should be added after pilot manifests are selected",
+                "notes": "final matrix only; pilot sweep is reported separately in g3a_v2_pilot_selection_summary",
             },
             {
                 "stage": "G3a-v2",
@@ -534,11 +974,15 @@ def main() -> int:
     _write_json(output_dir / "g3a_v2_run_inclusion_list.json", inclusion_payload)
     _write_json(output_dir / "g3a_v2_compute_accounting.json", compute_accounting)
     _write_csv(tables_dir / "g3a_v2_block_scale.csv", rows, RUN_FIELDS)
+    _write_csv(tables_dir / "g3a_v2_failure_cases.csv", [*method_failures, *invalid], FAILURE_FIELDS)
     _write_csv(tables_dir / "g3a_v2_slot_diagnostics.csv", slot_rows, SLOT_FIELDS)
     _write_csv(tables_dir / "g3a_v2_symbol_diagnostics.csv", symbol_rows, SYMBOL_FIELDS)
     _write_tex(tables_dir / "g3a_v2_block_scale.tex", [overall_row, *variant_rows])
+    audit_doc.parent.mkdir(parents=True, exist_ok=True)
+    audit_doc.write_text(_audit_markdown(summary, rows), encoding="utf-8")
     print(f"wrote G3a-v2 summary to {output_dir / 'g3a_v2_summary.json'}")
     print(f"wrote G3a-v2 run table to {tables_dir / 'g3a_v2_block_scale.csv'}")
+    print(f"wrote G3a-v2 artifact audit to {audit_doc}")
     return 0
 
 

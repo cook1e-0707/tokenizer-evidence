@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 import pytest
+import yaml
 
 from src.core.compiled_repair_diagnostics import build_compiled_verification_report
 from src.core.contract_compiler import CompiledEvalContract
@@ -131,6 +132,8 @@ def test_build_g3a_v2_artifacts_writes_pending_package(tmp_path: Path) -> None:
             str(output_dir),
             "--tables-dir",
             str(tables_dir),
+            "--audit-doc",
+            str(tmp_path / "g3a_v2_artifact_audit.md"),
             "--new-case-root-base",
             str(case_root),
         ],
@@ -141,9 +144,13 @@ def test_build_g3a_v2_artifacts_writes_pending_package(tmp_path: Path) -> None:
     )
     assert "wrote G3a-v2 summary" in completed.stdout
     summary = json.loads((output_dir / "g3a_v2_summary.json").read_text(encoding="utf-8"))
-    assert summary["target_case_count"] == 36
-    assert summary["completed_case_count"] == 0
-    assert summary["pending_case_count"] == 36
+    assert summary["target_count"] == 36
+    assert summary["completed_count"] == 0
+    assert summary["valid_completed_count"] == 0
+    assert summary["success_count"] == 0
+    assert summary["method_failure_count"] == 0
+    assert summary["invalid_excluded_count"] == 0
+    assert summary["pending_count"] == 36
     assert summary["paper_ready"] is False
     assert summary["paper_ready_checks"]["no_pending_runs"] is False
 
@@ -152,9 +159,364 @@ def test_build_g3a_v2_artifacts_writes_pending_package(tmp_path: Path) -> None:
     assert {row["status"] for row in rows} == {"pending"}
     assert (tables_dir / "g3a_v2_slot_diagnostics.csv").exists()
     assert (tables_dir / "g3a_v2_symbol_diagnostics.csv").exists()
+    assert (tables_dir / "g3a_v2_failure_cases.csv").exists()
     assert (tables_dir / "g3a_v2_block_scale.tex").exists()
     assert (output_dir / "g3a_v2_run_inclusion_list.json").exists()
     assert (output_dir / "g3a_v2_compute_accounting.json").exists()
+
+
+def _write_g3a_v2_case_artifacts(
+    case_root: Path,
+    *,
+    payload: str,
+    seed: int,
+    block_count: int,
+    accepted: bool,
+    decoded_payload: str,
+) -> None:
+    train_run_dir = case_root / "runs" / "exp_train" / f"exp_train__mock__s{seed}"
+    eval_run_dir = case_root / "runs" / "exp_eval" / f"exp_eval__mock__s{seed}"
+    checkpoint_dir = train_run_dir / "checkpoints" / "hf_best"
+    train_run_dir.mkdir(parents=True, exist_ok=True)
+    eval_run_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    (checkpoint_dir / "adapter_config.json").write_text('{"r":16}\n', encoding="utf-8")
+    (checkpoint_dir / "adapter_model.safetensors").write_text("tiny-adapter\n", encoding="utf-8")
+
+    payload_units = [int(payload[1:])]
+    eval_contract = {
+        "payload_label": payload,
+        "payload_units": payload_units,
+        "expected_slot_values": ["news", "market"],
+        "slot_field_names": ["SECTION", "TOPIC"],
+        "exact_slot_prefixes": ["SECTION=", "TOPIC="],
+        "fields_per_block": 2,
+        "block_count": block_count,
+        "render_format": "canonical_v1",
+        "prompt_contract_name": "compiled_slot_request_v1",
+        "artifact_format": "compiled_slot_values",
+    }
+    train_contract = {
+        "schema_name": "compiled_train_contract",
+        "model_name": "qwen2.5-7b-instruct",
+        "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+        "tokenizer_backend": "transformers",
+        "tokenizer_contract_hash": "tokenizer-hash",
+        "catalog_path": "configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml",
+        "catalog_sha256": "catalog-hash",
+        "catalog_name": "real-pilot-compiled-c3-g3a-v2",
+        "prompt_contract_name": "compiled_slot_request_v1",
+        "prompt_contract_hash": "prompt-hash",
+        "dataset_hash": "dataset-hash",
+        "contract_hash": f"train-contract-{payload}-{block_count}",
+        "payload_label_to_units": {"U00": [0], "U03": [3]},
+        "fields_per_block": 2,
+        "block_count": block_count,
+        "render_format": "canonical_v1",
+        "sample_count": 2,
+        "samples": [
+            {
+                "field_name": "SECTION",
+                "bucket_to_token_ids": {"0": [1], "1": [2], "2": [3], "3": [4]},
+            },
+            {
+                "field_name": "TOPIC",
+                "bucket_to_token_ids": {"0": [5], "1": [6], "2": [7], "3": [8]},
+            },
+        ],
+        "eval_contract": eval_contract,
+    }
+    (train_run_dir / "compiled_train_contract.json").write_text(
+        json.dumps(train_contract, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    (train_run_dir / "compiled_eval_contract.json").write_text(
+        json.dumps(eval_contract, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    (train_run_dir / "latest_eval_input.json").write_text(
+        json.dumps(
+            {
+                "schema_name": "train_eval_input",
+                "payload_text": payload,
+                "checkpoint_path": str(checkpoint_dir),
+                "generated_text_path": str(train_run_dir / "generated_text.txt"),
+                "compiled_train_contract_hash": train_contract["contract_hash"],
+                "compiled_eval_contract": eval_contract,
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    (train_run_dir / "config.resolved.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "train": {
+                    "generation_prompt": "Select exactly one allowed carrier token.",
+                    "generation_do_sample": False,
+                    "generation_max_new_tokens": 1,
+                    "generation_stop_strings": [],
+                    "generation_bad_words": [],
+                    "generation_suppress_tokens": [],
+                    "generation_sequence_bias": {},
+                }
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    TrainRunSummary(
+        run_id=f"train-{payload}-s{seed}",
+        experiment_name="exp_train",
+        method_name="our_method",
+        model_name="qwen2.5-7b-instruct",
+        seed=seed,
+        git_commit="abc123",
+        timestamp="20260424T000000Z",
+        hostname="local",
+        slurm_job_id=None,
+        status="completed",
+        objective="bucket_mass",
+        dataset_name="real-pilot-compiled-c3-g3a-v2",
+        dataset_size=64,
+        steps=64,
+        final_loss=0.001,
+        run_dir=str(train_run_dir),
+    ).save_json(train_run_dir / "train_summary.json")
+    (train_run_dir / "training_health.json").write_text(
+        json.dumps(
+            {
+                "normalized_L_set_mean": 0.001,
+                "target_bucket_mass_mean": 0.99,
+                "target_bucket_mass_min": 0.98,
+                "slot_margin_mean": 1.0,
+                "slot_margin_min": 0.5,
+                "checkpoint_selection": {"metric": "training_normalized_L_set_mean", "best_step": 1, "best_metric_value": 0.001},
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    verifier_report = {
+        "accepted_under_exact_gate": accepted,
+        "accepted_under_rs_gate": accepted,
+        "block_count_correct": True,
+        "slot_bucket_accuracy": 1.0 if accepted else 0.5,
+        "symbol_error_count": 0 if accepted else 1,
+        "erasure_count": 0,
+        "rs_correctable_under_2E_plus_S_lt_d": accepted,
+        "rs_recovered_payload": payload if accepted else None,
+        "expected_symbols": payload_units,
+        "decoded_symbols": payload_units if accepted else [0],
+        "rs_config": {
+            "active": False,
+            "parity_symbols": 0,
+            "minimum_distance": 1,
+            "decoder": "identity_no_rs",
+        },
+    }
+    slot_diagnostics = [
+        {
+            "slot_index": 0,
+            "slot_type": "SECTION",
+            "expected_bucket_id": payload_units[0] % 4,
+            "observed_bucket_id": payload_units[0] % 4 if accepted else 0,
+            "expected_value": "news",
+            "observed_value": "news" if accepted else "update",
+            "is_slot_exact": accepted,
+            "is_bucket_correct": accepted,
+        }
+    ]
+    EvalRunSummary(
+        run_id=f"eval-{payload}-s{seed}",
+        experiment_name="exp_eval",
+        method_name="our_method",
+        model_name="qwen2.5-7b-instruct",
+        seed=seed,
+        git_commit="abc123",
+        timestamp="20260424T000000Z",
+        hostname="local",
+        slurm_job_id=None,
+        status="completed",
+        dataset_name="real-pilot-compiled-c3-g3a-v2",
+        sample_count=1,
+        accepted=accepted,
+        match_ratio=1.0 if accepted else 0.5,
+        threshold=1.0,
+        verification_mode="canonical_render",
+        render_format="canonical_v1",
+        verifier_success=accepted,
+        decoded_payload=decoded_payload,
+        decoded_unit_count=block_count,
+        decoded_block_count=block_count,
+        diagnostics={
+            "compiled_train_contract_hash": train_contract["contract_hash"],
+            "compiled_eval_contract": eval_contract,
+            "checkpoint_path": str(checkpoint_dir),
+            "compiled_verifier_report": verifier_report,
+            "slot_diagnostics": slot_diagnostics,
+            "bucket_correct_rate": 1.0 if accepted else 0.5,
+            "slot_exact_rate": 1.0 if accepted else 0.5,
+        },
+        run_dir=str(eval_run_dir),
+    ).save_json(eval_run_dir / "eval_summary.json")
+
+
+def test_build_g3a_v2_artifacts_keeps_method_failures_in_denominator(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    package_config_path = tmp_path / "g3a_v2_package.yaml"
+    root_base = tmp_path / "scratch" / "g3a_block_scale_v2"
+    package_config_path.write_text(
+        yaml.safe_dump(
+            {
+                "version": 2,
+                "workstream": "G3a-v2",
+                "description": "tmp fixture",
+                "new_case_root_prefix": "g3a_block_scale_v2",
+                "case_root_search_roots": [],
+                "payloads": ["U00", "U03"],
+                "seeds": [17],
+                "block_variants": [{"id": "B1", "slug": "b1", "block_count": 1}],
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+    _write_g3a_v2_case_artifacts(
+        root_base / "final" / "b1" / "U00_s17",
+        payload="U00",
+        seed=17,
+        block_count=1,
+        accepted=True,
+        decoded_payload="U00",
+    )
+    _write_g3a_v2_case_artifacts(
+        root_base / "final" / "b1" / "U03_s17",
+        payload="U03",
+        seed=17,
+        block_count=1,
+        accepted=False,
+        decoded_payload="",
+    )
+
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    audit_doc = tmp_path / "audit.md"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_g3a_v2_block_scale_artifacts.py",
+            "--package-config",
+            str(package_config_path),
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--audit-doc",
+            str(audit_doc),
+            "--new-case-root-base",
+            str(root_base),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    summary = json.loads((output_dir / "g3a_v2_summary.json").read_text(encoding="utf-8"))
+    assert summary["target_count"] == 2
+    assert summary["completed_count"] == 2
+    assert summary["valid_completed_count"] == 2
+    assert summary["success_count"] == 1
+    assert summary["method_failure_count"] == 1
+    assert summary["invalid_excluded_count"] == 0
+    assert summary["pending_count"] == 0
+    assert summary["exact_gate_success_rate"] == 0.5
+    assert summary["paper_ready"] is True
+    accounting = json.loads((output_dir / "g3a_v2_run_inclusion_list.json").read_text(encoding="utf-8"))
+    assert len(accounting["valid_successes"]) == 1
+    assert len(accounting["method_failures"]) == 1
+    assert len(accounting["invalid_excluded"]) == 0
+    assert "included" not in accounting
+    rows = list(csv.DictReader((tables_dir / "g3a_v2_block_scale.csv").open()))
+    assert {row["status"] for row in rows} == {"valid_success", "method_failure"}
+    failure_rows = list(csv.DictReader((tables_dir / "g3a_v2_failure_cases.csv").open()))
+    assert len(failure_rows) == 1
+    assert failure_rows[0]["result_class"] == "method_failure"
+    audit_text = audit_doc.read_text(encoding="utf-8")
+    assert "G3a-v2 is artifact-paper-ready: `True`." in audit_text
+    assert "G3a-v2 is claim-paper-ready: `False`." in audit_text
+    assert "Any old summary used incorrect included/excluded semantics: `True`." in audit_text
+
+
+def test_build_g3a_v2_artifacts_marks_contract_mismatch_invalid(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    package_config_path = tmp_path / "g3a_v2_package.yaml"
+    root_base = tmp_path / "scratch" / "g3a_block_scale_v2"
+    package_config_path.write_text(
+        yaml.safe_dump(
+            {
+                "version": 2,
+                "workstream": "G3a-v2",
+                "description": "tmp fixture",
+                "new_case_root_prefix": "g3a_block_scale_v2",
+                "case_root_search_roots": [],
+                "payloads": ["U00"],
+                "seeds": [17],
+                "block_variants": [{"id": "B1", "slug": "b1", "block_count": 1}],
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+    case_root = root_base / "final" / "b1" / "U00_s17"
+    _write_g3a_v2_case_artifacts(
+        case_root,
+        payload="U00",
+        seed=17,
+        block_count=1,
+        accepted=True,
+        decoded_payload="U00",
+    )
+    eval_summary_path = next(case_root.rglob("eval_summary.json"))
+    payload = json.loads(eval_summary_path.read_text(encoding="utf-8"))
+    payload["diagnostics"]["compiled_train_contract_hash"] = "different-train-contract"
+    eval_summary_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_g3a_v2_block_scale_artifacts.py",
+            "--package-config",
+            str(package_config_path),
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--audit-doc",
+            str(tmp_path / "audit.md"),
+            "--new-case-root-base",
+            str(root_base),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    summary = json.loads((output_dir / "g3a_v2_summary.json").read_text(encoding="utf-8"))
+    assert summary["success_count"] == 0
+    assert summary["method_failure_count"] == 0
+    assert summary["invalid_excluded_count"] == 1
+    assert summary["paper_ready"] is False
+    accounting = json.loads((output_dir / "g3a_v2_run_inclusion_list.json").read_text(encoding="utf-8"))
+    assert len(accounting["invalid_excluded"]) == 1
+    assert accounting["invalid_excluded"][0]["contract_hash_status"] == "mismatch"
+    assert "train_contract_hash" in accounting["invalid_excluded"][0]["contract_hash_mismatch_fields"]
 
 
 def test_build_g3a_v2_pilot_selection_summary_pairs_train_and_eval(tmp_path: Path) -> None:
