@@ -21,51 +21,52 @@
   ],
   "by_variant": [
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
-      "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 12,
+      "accepted_under_exact_gate_rate_mean": 0.75,
+      "accepted_under_rs_gate_rate_mean": 0.75,
+      "completed_runs": 12,
+      "excluded_runs": 3,
+      "included_runs": 9,
+      "pending_runs": 0,
       "scope": "variant=B1",
       "target_runs": 12
     },
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
+      "accepted_under_exact_gate_rate_mean": 1.0,
+      "accepted_under_rs_gate_rate_mean": 1.0,
+      "completed_runs": 12,
       "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 12,
+      "included_runs": 12,
+      "pending_runs": 0,
       "scope": "variant=B2",
       "target_runs": 12
     },
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
-      "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 12,
+      "accepted_under_exact_gate_rate_mean": 0.9166666666666666,
+      "accepted_under_rs_gate_rate_mean": 0.9166666666666666,
+      "completed_runs": 12,
+      "excluded_runs": 1,
+      "included_runs": 11,
+      "pending_runs": 0,
       "scope": "variant=B4",
       "target_runs": 12
     }
   ],
-  "completed_case_count": 0,
+  "completed_case_count": 36,
   "description": "Repaired block-count scale package with per-slot normalized evidence loss, pre-registered checkpoint selection, and decomposed exact/RS-aware verification diagnostics.",
-  "excluded_case_count": 0,
-  "excluded_case_ids": [],
-  "included_case_count": 0,
-  "included_case_ids": [],
-  "missing_case_ids": [
+  "excluded_case_count": 4,
+  "excluded_case_ids": [
+    "B1_U03_s23",
+    "B1_U12_s23",
+    "B1_U15_s23",
+    "B4_U12_s23"
+  ],
+  "included_case_count": 32,
+  "included_case_ids": [
     "B1_U00_s17",
     "B1_U03_s17",
     "B1_U12_s17",
     "B1_U15_s17",
     "B1_U00_s23",
-    "B1_U03_s23",
-    "B1_U12_s23",
-    "B1_U15_s23",
     "B1_U00_s29",
     "B1_U03_s29",
     "B1_U12_s29",
@@ -88,64 +89,64 @@
     "B4_U15_s17",
     "B4_U00_s23",
     "B4_U03_s23",
-    "B4_U12_s23",
     "B4_U15_s23",
     "B4_U00_s29",
     "B4_U03_s29",
     "B4_U12_s29",
     "B4_U15_s29"
   ],
+  "missing_case_ids": [],
   "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v2",
   "overall_metrics": {
     "accepted_under_exact_gate": {
-      "mean": 0.0,
-      "n": 0,
-      "successes": 0
+      "mean": 0.8888888888888888,
+      "n": 36,
+      "successes": 32
     },
     "accepted_under_rs_gate": {
-      "mean": 0.0,
-      "n": 0,
-      "successes": 0
+      "mean": 0.8888888888888888,
+      "n": 36,
+      "successes": 32
     },
     "erasure_count": {
       "ci95_half_width": 0.0,
       "mean": 0.0,
-      "n": 0,
+      "n": 36,
       "sem": 0.0,
       "std": 0.0
     },
     "normalized_L_set_mean": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.2304454606877013,
+      "mean": 0.36964303913525653,
+      "n": 36,
+      "sem": 0.1175742146365823,
+      "std": 0.7054452878194938
     },
     "slot_bucket_accuracy": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.06584177161110481,
+      "mean": 0.9375,
+      "n": 36,
+      "sem": 0.03359274061791062,
+      "std": 0.20155644370746373
     },
     "symbol_error_count": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.10411769219090718,
+      "mean": 0.1111111111111111,
+      "n": 36,
+      "sem": 0.05312127152597305,
+      "std": 0.3187276291558383
     }
   },
   "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g3a_block_scale_v2.yaml",
-  "paper_ready": false,
+  "paper_ready": true,
   "paper_ready_checks": {
     "completed_runs_accounted_included_or_excluded": true,
     "exact_and_rs_aware_gates_reported": true,
     "failures_decomposed": true,
     "large_artifacts_in_scratch_only": true,
-    "no_pending_runs": false,
+    "no_pending_runs": true,
     "no_threshold_changed_after_final_eval": true,
-    "train_eval_contract_hashes_match": false
+    "train_eval_contract_hashes_match": true
   },
   "payloads": [
     "U00",
@@ -153,7 +154,7 @@
     "U12",
     "U15"
   ],
-  "pending_case_count": 36,
+  "pending_case_count": 0,
   "schema_name": "g3a_v2_summary",
   "schema_version": 1,
   "seeds": [
@@ -163,42 +164,42 @@
   ],
   "summary_rows": [
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
-      "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 36,
+      "accepted_under_exact_gate_rate_mean": 0.8888888888888888,
+      "accepted_under_rs_gate_rate_mean": 0.8888888888888888,
+      "completed_runs": 36,
+      "excluded_runs": 4,
+      "included_runs": 32,
+      "pending_runs": 0,
       "scope": "overall",
       "target_runs": 36
     },
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
-      "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 12,
+      "accepted_under_exact_gate_rate_mean": 0.75,
+      "accepted_under_rs_gate_rate_mean": 0.75,
+      "completed_runs": 12,
+      "excluded_runs": 3,
+      "included_runs": 9,
+      "pending_runs": 0,
       "scope": "variant=B1",
       "target_runs": 12
     },
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
+      "accepted_under_exact_gate_rate_mean": 1.0,
+      "accepted_under_rs_gate_rate_mean": 1.0,
+      "completed_runs": 12,
       "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 12,
+      "included_runs": 12,
+      "pending_runs": 0,
       "scope": "variant=B2",
       "target_runs": 12
     },
     {
-      "accepted_under_exact_gate_rate_mean": 0.0,
-      "accepted_under_rs_gate_rate_mean": 0.0,
-      "completed_runs": 0,
-      "excluded_runs": 0,
-      "included_runs": 0,
-      "pending_runs": 12,
+      "accepted_under_exact_gate_rate_mean": 0.9166666666666666,
+      "accepted_under_rs_gate_rate_mean": 0.9166666666666666,
+      "completed_runs": 12,
+      "excluded_runs": 1,
+      "included_runs": 11,
+      "pending_runs": 0,
       "scope": "variant=B4",
       "target_runs": 12
     }
