@@ -8,6 +8,11 @@ case_root_search_roots:
   - ${EXP_SCRATCH}
   - ${REPO_HOME}
 scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3
+chimera_environment_setup: |
+  source ~/.bashrc
+  source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+  export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
 payloads: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
 seeds: [17, 23, 29]
 block_variants:

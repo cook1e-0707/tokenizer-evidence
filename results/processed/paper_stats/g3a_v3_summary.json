@@ -38,7 +38,7 @@
     "target_train_cases_if_one_train_per_payload": 144,
     "training_contract_covers_all_payloads": true
   },
-  "generated_at": "20260426T143655442521Z",
+  "generated_at": "20260426T144851497458Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
   "method_failure_case_ids": [],

@@ -3313,11 +3313,13 @@
       "variant_slug": "b4"
     }
   ],
+  "environment_setup_contains_zkrfa_activate": true,
+  "environment_setup_present": true,
   "eval_manifest_entry_count": 144,
   "final_launch_allowed": true,
-  "generated_at": "20260426T143651312467Z",
+  "generated_at": "20260426T144851453992Z",
   "output_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3",
-  "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/g3a_block_scale_v3.yaml",
+  "package_config_path": "configs/reporting/g3a_block_scale_v3.yaml",
   "phase": "final",
   "schema_name": "g3a_v3_package_dry_run",
   "schema_version": 1,

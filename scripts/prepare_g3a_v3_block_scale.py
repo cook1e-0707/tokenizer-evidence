@@ -57,6 +57,14 @@ def _resolve_path(repo_root: Path, raw: str) -> Path:
     return path if path.is_absolute() else repo_root / path
 
 
+def _repo_relative_path(repo_root: Path, path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(repo_root.resolve()))
+    except ValueError:
+        return str(resolved)
+
+
 def _load_yaml(path: Path) -> dict[str, Any]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if not isinstance(payload, dict):
@@ -225,8 +233,19 @@ def _entry_with_identity(entry: ManifestEntry, *, manifest_id: str, manifest_nam
     return ManifestEntry.from_json_dict(payload)
 
 
+def _entry_with_repo_relative_config(entry: ManifestEntry, repo_root: Path) -> ManifestEntry:
+    payload = entry.to_json_dict()
+    payload["primary_config_path"] = _repo_relative_path(repo_root, Path(entry.primary_config_path))
+    payload["config_paths"] = [
+        _repo_relative_path(repo_root, Path(path)) if Path(path).is_absolute() else str(path)
+        for path in entry.config_paths
+    ]
+    return ManifestEntry.from_json_dict(payload)
+
+
 def _build_train_entry(
     *,
+    repo_root: Path,
     train_config_path: Path,
     phase: str,
     case: dict[str, Any],
@@ -249,8 +268,9 @@ def _build_train_entry(
         f"g3a-v3-{phase}-train-{case['hp_id'] + '-' if case.get('hp_id') else ''}"
         f"{case['variant_slug']}-{str(case['payload']).lower()}-s{case['seed']}"
     )
+    entry = _entry_with_repo_relative_config(manifest.entries[0], repo_root)
     return _entry_with_identity(
-        manifest.entries[0],
+        entry,
         manifest_id=manifest_id,
         manifest_name=f"g3a_v3_qwen7b_block_scale_{phase}_train",
     )
@@ -258,6 +278,7 @@ def _build_train_entry(
 
 def _build_eval_entry(
     *,
+    repo_root: Path,
     eval_config_path: Path,
     phase: str,
     case: dict[str, Any],
@@ -279,20 +300,27 @@ def _build_eval_entry(
         f"g3a-v3-{phase}-eval-{case['hp_id'] + '-' if case.get('hp_id') else ''}"
         f"{case['variant_slug']}-{str(case['payload']).lower()}-s{case['seed']}"
     )
+    entry = _entry_with_repo_relative_config(manifest.entries[0], repo_root)
     return _entry_with_identity(
-        manifest.entries[0],
+        entry,
         manifest_id=manifest_id,
         manifest_name=f"g3a_v3_qwen7b_block_scale_{phase}_eval",
     )
 
 
-def _save_manifest(source_config_path: Path, manifest_name: str, entries: list[ManifestEntry], path: Path) -> None:
+def _save_manifest(
+    repo_root: Path,
+    source_config_path: Path,
+    manifest_name: str,
+    entries: list[ManifestEntry],
+    path: Path,
+) -> None:
     manifest = ManifestFile(
         schema_name="manifest_file",
         schema_version=1,
         manifest_name=manifest_name,
         created_at=current_timestamp(),
-        source_config_path=str(source_config_path),
+        source_config_path=_repo_relative_path(repo_root, source_config_path),
         entries=tuple(entries),
     )
     save_manifest(manifest, path)
@@ -309,7 +337,11 @@ def main() -> int:
     train_manifest_path = _resolve_path(repo_root, args.train_manifest_out)
     eval_manifest_path = _resolve_path(repo_root, args.eval_manifest_out)
     output_root_base = _resolve_output_root_base(package_config, args.output_root_base)
-    environment_setup = args.environment_setup or os.environ.get("CHIMERA_ENV_SETUP")
+    environment_setup = (
+        args.environment_setup
+        or os.environ.get("CHIMERA_ENV_SETUP")
+        or package_config.get("chimera_environment_setup")
+    )
 
     cases = (
         _validation_cases(package_config, output_root_base)
@@ -318,6 +350,7 @@ def main() -> int:
     )
     train_entries = [
         _build_train_entry(
+            repo_root=repo_root,
             train_config_path=train_config_path,
             phase=args.phase,
             case=case,
@@ -327,6 +360,7 @@ def main() -> int:
     ]
     eval_entries = [
         _build_eval_entry(
+            repo_root=repo_root,
             eval_config_path=eval_config_path,
             phase=args.phase,
             case=case,
@@ -335,12 +369,14 @@ def main() -> int:
         for case in cases
     ]
     _save_manifest(
+        repo_root,
         train_config_path,
         f"g3a_v3_qwen7b_block_scale_{args.phase}_train",
         train_entries,
         train_manifest_path,
     )
     _save_manifest(
+        repo_root,
         eval_config_path,
         f"g3a_v3_qwen7b_block_scale_{args.phase}_eval",
         eval_entries,
@@ -352,12 +388,16 @@ def main() -> int:
         "schema_version": 1,
         "workstream": package_config.get("workstream", "G3a-v3"),
         "phase": args.phase,
-        "package_config_path": str(package_config_path),
+        "package_config_path": _repo_relative_path(repo_root, package_config_path),
         "generated_at": current_timestamp(),
         "output_root_base": output_root_base,
         "target_case_count": len(cases),
         "train_manifest_entry_count": len(train_entries),
         "eval_manifest_entry_count": len(eval_entries),
+        "environment_setup_present": bool(environment_setup),
+        "environment_setup_contains_zkrfa_activate": bool(
+            environment_setup and "zkrfa_py312/bin/activate" in str(environment_setup)
+        ),
         "final_launch_allowed": bool(
             package_config.get("selected_operating_point", {}).get("final_launch_allowed")
         ),

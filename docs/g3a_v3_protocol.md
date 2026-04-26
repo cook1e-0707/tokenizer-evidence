@@ -77,6 +77,12 @@ G3a-v3 does not explicitly enable fp8, 8-bit, 4-bit, fp16, bf16, AMP autocast, o
 
 The final held-out matrix freezes this precision policy from validation. Changing to explicit fp16/bf16/fp8 or quantized loading would be a new protocol, not part of this G3a-v3 final launch.
 
+## Chimera Manifest Contract
+
+Final manifests must be generated with repo-relative config paths such as `configs/experiment/scale/g3a_v3/exp_train__qwen2_5_7b__g3a_block_scale_v3.yaml`. They must not contain local workstation paths such as `/Users/...`, because SLURM executes from Chimera's repo clone.
+
+The packaged Chimera environment setup activates `/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate` and sets `HF_HOME` plus `HF_TOKEN`. If this venv path changes, regenerate manifests before submission.
+
 ## Final Held-Out Matrix
 
 The final matrix is larger than G3a-v2 and is distinct from validation by seed.

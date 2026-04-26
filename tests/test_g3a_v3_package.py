@@ -163,6 +163,9 @@ def test_prepare_g3a_v3_final_manifests_use_frozen_hp04(tmp_path: Path) -> None:
     payload = json.loads(final_output.read_text(encoding="utf-8"))
     assert payload["target_case_count"] == 144
     assert payload["final_launch_allowed"] is True
+    assert payload["package_config_path"] == "configs/reporting/g3a_block_scale_v3.yaml"
+    assert payload["environment_setup_present"] is True
+    assert payload["environment_setup_contains_zkrfa_activate"] is True
     assert payload["cases"][0]["case_id"] == "B1_U00_s17"
 
     train_manifest = load_manifest(final_train_manifest)
@@ -170,6 +173,17 @@ def test_prepare_g3a_v3_final_manifests_use_frozen_hp04(tmp_path: Path) -> None:
     assert len(train_manifest.entries) == 144
     assert len(eval_manifest.entries) == 144
     first_train = train_manifest.entries[0]
+    first_eval = eval_manifest.entries[0]
+    assert first_train.primary_config_path == (
+        "configs/experiment/scale/g3a_v3/exp_train__qwen2_5_7b__g3a_block_scale_v3.yaml"
+    )
+    assert first_eval.primary_config_path == (
+        "configs/experiment/scale/g3a_v3/exp_eval__qwen2_5_7b__g3a_block_scale_v3.yaml"
+    )
+    assert "/Users/" not in first_train.primary_config_path
+    assert "/Users/" not in first_eval.primary_config_path
+    assert "zkrfa_py312/bin/activate" in first_train.requested_resources.environment_setup
+    assert "zkrfa_py312/bin/activate" in first_eval.requested_resources.environment_setup
     assert "train.margin_gamma=0.5" in first_train.overrides
     assert "train.lambda_margin=0.5" in first_train.overrides
     assert "train.checkpoint_selection_metric=training_min_slot_margin" in first_train.overrides
