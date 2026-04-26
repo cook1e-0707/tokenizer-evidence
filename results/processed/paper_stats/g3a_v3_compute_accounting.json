@@ -1,0 +1,11 @@
+{
+  "final_eval_jobs": 144,
+  "final_requested_gpu_hours": 6912,
+  "final_train_jobs": 144,
+  "requested_gpu_hours_per_job": 24,
+  "schema_name": "g3a_v3_compute_accounting",
+  "schema_version": 1,
+  "validation_eval_jobs": 64,
+  "validation_requested_gpu_hours": 3072,
+  "validation_train_jobs": 64
+}

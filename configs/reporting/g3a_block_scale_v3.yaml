@@ -1,0 +1,93 @@
+version: 3
+workstream: G3a-v3
+description: Principled held-out block-count scale repair with margin-aware bucket-mass training and distinct validation/final matrices.
+train_config: configs/experiment/scale/g3a_v3/exp_train__qwen2_5_7b__g3a_block_scale_v3.yaml
+eval_config: configs/experiment/scale/g3a_v3/exp_eval__qwen2_5_7b__g3a_block_scale_v3.yaml
+new_case_root_prefix: g3a_block_scale_v3
+case_root_search_roots:
+  - ${EXP_SCRATCH}
+  - ${REPO_HOME}
+scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3
+payloads: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
+seeds: [17, 23, 29]
+block_variants:
+  - id: B1
+    slug: b1
+    block_count: 1
+    description: Single-block compiled evidence under the same two-field 4x4 codebook.
+  - id: B2
+    slug: b2
+    block_count: 2
+    description: Two-block compiled evidence under the same two-field 4x4 codebook.
+  - id: B4
+    slug: b4
+    block_count: 4
+    description: Four-block compiled evidence under the same two-field 4x4 codebook.
+validation:
+  purpose: Select gamma, lambda_margin, and checkpoint-selection metric before final launch.
+  seed: 41
+  payloads: ["U00", "U03", "U12", "U15"]
+  block_variants: ["B1", "B4"]
+  notes:
+    - Uses hard payload labels identified by v2 plus one non-hard payload.
+    - Uses seed 41 so validation cases are distinct from the final held-out seeds.
+  fixed_hyperparameters:
+    lora_r: 16
+    learning_rate: 3.0e-5
+    epochs: 96
+    lambda_set: 2.0
+    lambda_reg: 0.0
+  sweep:
+    margin_gamma: [0.5, 1.0]
+    lambda_margin: [0.25, 0.5]
+    checkpoint_selection_metric:
+      - training_total_evidence_loss_mean
+      - training_min_slot_margin
+  selection_rule:
+    primary: validation_exact_gate_success_rate
+    secondary: validation_rs_gate_success_rate
+    tertiary: validation_mean_bucket_margin
+    tie_breaker: lower_validation_total_evidence_loss_mean
+  forbidden_selection_inputs:
+    - final_reported_test_acceptance
+    - manual_failed_test_payload_inspection
+    - post_eval_threshold_change
+final_matrix:
+  status: blocked_until_hyperparameters_frozen
+  payloads: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
+  seeds: [17, 23, 29]
+  block_variants: ["B1", "B2", "B4"]
+  target_eval_cases: 144
+  target_train_cases_if_one_train_per_payload: 144
+  training_contract_covers_all_payloads: true
+  current_eval_input_contract_requires_one_train_generation_per_eval_payload: true
+  note: Current train/eval handoff writes one generated_text_path per eval payload, so launch planning assumes 144 train plus 144 eval jobs unless eval-time generation is refactored.
+selected_operating_point:
+  status: pending_validation
+  final_launch_allowed: false
+  validation_summary_path: results/processed/paper_stats/g3a_v3_validation_summary.json
+  margin_gamma: null
+  lambda_margin: null
+  checkpoint_selection_metric: null
+  lambda_set: 2.0
+  lambda_reg: 0.0
+  lora_r: 16
+  learning_rate: 3.0e-5
+  epochs: 96
+compute_estimate:
+  validation_train_jobs: 64
+  validation_eval_jobs: 64
+  final_train_jobs: 144
+  final_eval_jobs: 144
+  requested_gpu_hours_per_job: 24
+  validation_requested_gpu_hours: 3072
+  final_requested_gpu_hours: 6912
+paper_readiness_gate:
+  - real_contract_hash_checks_pass
+  - valid_completed_count_equals_target_count
+  - invalid_excluded_count_zero_unless_concrete_artifact_failure
+  - exact_and_rs_aware_gates_reported
+  - method_failures_remain_in_denominator
+  - validation_and_final_sets_distinct
+  - hyperparameters_frozen_before_final_matrix_launch
+  - no_threshold_changed_after_final_evaluation

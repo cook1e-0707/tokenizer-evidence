@@ -62,6 +62,9 @@ class TrainConfig:
     learning_rate: float = 0.0001
     objective: str = "bucket_mass"
     lambda_set: float = 1.0
+    lambda_margin: float = 0.0
+    margin_gamma: float = 0.0
+    lambda_reg: float = 0.0
     evidence_loss_normalization: str = "per_slot_mean"
     checkpoint_selection_metric: str = ""
     checkpoint_selection_mode: str = "min"

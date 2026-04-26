@@ -534,7 +534,7 @@ def main() -> int:
         and config.train.evidence_loss_normalization != "per_slot_mean"
     ):
         raise ValueError(
-            "G3a-v2 compiled bucket training requires train.evidence_loss_normalization=per_slot_mean; "
+            "Compiled bucket training requires train.evidence_loss_normalization=per_slot_mean; "
             f"got {config.train.evidence_loss_normalization!r}"
         )
     checkpoint_path: str
@@ -565,6 +565,9 @@ def main() -> int:
             use_compiled_bucket_objective=config.train.target_mode == "compiled_fieldwise_bucket_mass",
             compiled_objective_mode=config.train.objective,
             compiled_lambda_set=config.train.lambda_set,
+            compiled_lambda_margin=config.train.lambda_margin,
+            compiled_margin_gamma=config.train.margin_gamma,
+            compiled_lambda_reg=config.train.lambda_reg,
             checkpoint_selection_metric=config.train.checkpoint_selection_metric,
             checkpoint_selection_mode=config.train.checkpoint_selection_mode,
             checkpoint_selection_use_best_for_eval=config.train.checkpoint_selection_use_best_for_eval,

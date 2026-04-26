@@ -38,6 +38,16 @@ class CompiledBucketLossDiagnostics:
     normalized_l_set_mean: float
     lambda_set: float
     effective_lambda_per_slot: float
+    raw_l_margin_sum: float
+    normalized_l_margin_mean: float
+    lambda_margin: float
+    margin_gamma: float
+    effective_lambda_margin_per_slot: float
+    raw_l_reg_sum: float
+    normalized_l_reg_mean: float
+    lambda_reg: float
+    total_evidence_loss_mean: float
+    scaled_total_evidence_loss: float
     target_bucket_mass_mean: float
     target_bucket_mass_min: float
     slot_margin_mean: float
@@ -50,6 +60,16 @@ class CompiledBucketLossDiagnostics:
             "normalized_L_set_mean": self.normalized_l_set_mean,
             "lambda_set": self.lambda_set,
             "effective_lambda_per_slot": self.effective_lambda_per_slot,
+            "raw_L_margin_sum": self.raw_l_margin_sum,
+            "normalized_L_margin_mean": self.normalized_l_margin_mean,
+            "lambda_margin": self.lambda_margin,
+            "margin_gamma": self.margin_gamma,
+            "effective_lambda_margin_per_slot": self.effective_lambda_margin_per_slot,
+            "raw_L_reg_sum": self.raw_l_reg_sum,
+            "normalized_L_reg_mean": self.normalized_l_reg_mean,
+            "lambda_reg": self.lambda_reg,
+            "total_evidence_loss_mean": self.total_evidence_loss_mean,
+            "scaled_total_evidence_loss": self.scaled_total_evidence_loss,
             "target_bucket_mass_mean": self.target_bucket_mass_mean,
             "target_bucket_mass_min": self.target_bucket_mass_min,
             "slot_margin_mean": self.slot_margin_mean,
@@ -242,6 +262,105 @@ def _compute_fieldwise_generation_diagnostics(
     }
 
 
+def _compute_generation_slot_margin_diagnostics(
+    *,
+    torch_module: object,
+    row_logits: object,
+    value_to_token_id: Mapping[str, int],
+    allowed_value_bucket_ids: Mapping[str, int],
+    expected_value: str,
+    expected_bucket_id: int,
+) -> dict[str, object]:
+    allowed_token_ids = [int(token_id) for token_id in value_to_token_id.values()]
+    token_id_to_value = {int(token_id): value for value, token_id in value_to_token_id.items()}
+    if not allowed_token_ids:
+        return {
+            "target_bucket_logmass": "missing",
+            "strongest_wrong_bucket": "missing",
+            "strongest_wrong_bucket_logmass": "missing",
+            "bucket_margin": "missing",
+            "target_bucket_rank": "missing",
+            "target_token_probability": "missing",
+            "top_5_bucket_logmasses": [],
+            "top_5_tokens": [],
+        }
+    allowed_logits = row_logits[allowed_token_ids]
+    allowed_log_probs = torch_module.log_softmax(allowed_logits, dim=0)
+    token_id_to_position = {
+        int(token_id): position
+        for position, token_id in enumerate(allowed_token_ids)
+    }
+    bucket_to_positions: dict[int, list[int]] = {}
+    for value, bucket_id_raw in allowed_value_bucket_ids.items():
+        token_id = value_to_token_id.get(value)
+        if token_id is None or int(token_id) not in token_id_to_position:
+            continue
+        bucket_to_positions.setdefault(int(bucket_id_raw), []).append(token_id_to_position[int(token_id)])
+    bucket_logmasses: dict[int, float] = {}
+    for bucket_id, positions in bucket_to_positions.items():
+        if positions:
+            bucket_logmasses[bucket_id] = _tensor_float(torch_module.logsumexp(allowed_log_probs[positions], dim=0))
+    target_bucket_logmass = bucket_logmasses.get(int(expected_bucket_id))
+    wrong_bucket_items = [
+        (bucket_id, logmass)
+        for bucket_id, logmass in bucket_logmasses.items()
+        if bucket_id != int(expected_bucket_id)
+    ]
+    strongest_wrong_bucket = None
+    strongest_wrong_bucket_logmass = None
+    if wrong_bucket_items:
+        strongest_wrong_bucket, strongest_wrong_bucket_logmass = max(
+            wrong_bucket_items,
+            key=lambda item: item[1],
+        )
+    bucket_margin = (
+        target_bucket_logmass - strongest_wrong_bucket_logmass
+        if target_bucket_logmass is not None and strongest_wrong_bucket_logmass is not None
+        else "missing"
+    )
+    target_bucket_rank = (
+        1 + sum(1 for _bucket_id, logmass in bucket_logmasses.items() if logmass > target_bucket_logmass)
+        if target_bucket_logmass is not None
+        else "missing"
+    )
+    target_token_id = value_to_token_id.get(expected_value)
+    target_token_probability: float | str = "missing"
+    if target_token_id is not None and int(target_token_id) in token_id_to_position:
+        target_token_probability = _tensor_float(
+            torch_module.exp(allowed_log_probs[token_id_to_position[int(target_token_id)]])
+        )
+    token_rows = []
+    for token_id, position in token_id_to_position.items():
+        token_rows.append(
+            {
+                "token_id": token_id,
+                "value": token_id_to_value.get(token_id, ""),
+                "probability": _tensor_float(torch_module.exp(allowed_log_probs[position])),
+            }
+        )
+    token_rows.sort(key=lambda item: float(item["probability"]), reverse=True)
+    bucket_rows = [
+        {"bucket_id": bucket_id, "logmass": logmass}
+        for bucket_id, logmass in sorted(
+            bucket_logmasses.items(),
+            key=lambda item: item[1],
+            reverse=True,
+        )
+    ]
+    return {
+        "target_bucket_logmass": target_bucket_logmass if target_bucket_logmass is not None else "missing",
+        "strongest_wrong_bucket": strongest_wrong_bucket if strongest_wrong_bucket is not None else "missing",
+        "strongest_wrong_bucket_logmass": (
+            strongest_wrong_bucket_logmass if strongest_wrong_bucket_logmass is not None else "missing"
+        ),
+        "bucket_margin": bucket_margin,
+        "target_bucket_rank": target_bucket_rank,
+        "target_token_probability": target_token_probability,
+        "top_5_bucket_logmasses": bucket_rows[:5],
+        "top_5_tokens": token_rows[:5],
+    }
+
+
 def _build_fieldwise_training_batch(
     *,
     torch_module: object,
@@ -388,6 +507,9 @@ def _compute_compiled_bucket_loss(
         batch_examples=batch_examples,
         objective_mode=objective_mode,
         lambda_set=1.0,
+        lambda_margin=0.0,
+        margin_gamma=0.0,
+        lambda_reg=0.0,
     )
     return loss, max_logit
 
@@ -406,6 +528,44 @@ def _mean(values: Sequence[float]) -> float:
     return float(sum(values) / len(values)) if values else 0.0
 
 
+def _compiled_checkpoint_metric_value(metric_name: str, diagnostics: CompiledBucketLossDiagnostics) -> float:
+    normalized = metric_name.strip().lower()
+    aliases = {
+        "": "training_normalized_l_set_mean",
+        "training_normalized_l_set_mean": "training_normalized_l_set_mean",
+        "normalized_l_set_mean": "training_normalized_l_set_mean",
+        "training_l_set_mean": "training_normalized_l_set_mean",
+        "training_normalized_l_margin_mean": "training_normalized_l_margin_mean",
+        "normalized_l_margin_mean": "training_normalized_l_margin_mean",
+        "training_l_margin_mean": "training_normalized_l_margin_mean",
+        "training_total_evidence_loss_mean": "training_total_evidence_loss_mean",
+        "total_evidence_loss_mean": "training_total_evidence_loss_mean",
+        "training_target_bucket_mass_mean": "training_target_bucket_mass_mean",
+        "target_bucket_mass_mean": "training_target_bucket_mass_mean",
+        "training_target_bucket_mass_min": "training_target_bucket_mass_min",
+        "target_bucket_mass_min": "training_target_bucket_mass_min",
+        "training_slot_margin_mean": "training_slot_margin_mean",
+        "slot_margin_mean": "training_slot_margin_mean",
+        "training_min_slot_margin": "training_slot_margin_min",
+        "training_slot_margin_min": "training_slot_margin_min",
+        "slot_margin_min": "training_slot_margin_min",
+    }
+    canonical = aliases.get(normalized)
+    if canonical is None:
+        raise HFCausalLMTrainingError(
+            f"Unsupported checkpoint_selection_metric={metric_name!r} for compiled bucket training"
+        )
+    return {
+        "training_normalized_l_set_mean": diagnostics.normalized_l_set_mean,
+        "training_normalized_l_margin_mean": diagnostics.normalized_l_margin_mean,
+        "training_total_evidence_loss_mean": diagnostics.total_evidence_loss_mean,
+        "training_target_bucket_mass_mean": diagnostics.target_bucket_mass_mean,
+        "training_target_bucket_mass_min": diagnostics.target_bucket_mass_min,
+        "training_slot_margin_mean": diagnostics.slot_margin_mean,
+        "training_slot_margin_min": diagnostics.slot_margin_min,
+    }[canonical]
+
+
 def _compute_compiled_bucket_loss_with_diagnostics(
     *,
     torch_module: object,
@@ -414,15 +574,25 @@ def _compute_compiled_bucket_loss_with_diagnostics(
     batch_examples: Sequence[TrainingExample],
     objective_mode: str,
     lambda_set: float = 1.0,
+    lambda_margin: float = 0.0,
+    margin_gamma: float = 0.0,
+    lambda_reg: float = 0.0,
 ) -> tuple[object, float, CompiledBucketLossDiagnostics]:
     normalized_objective_mode = objective_mode.strip().lower()
-    if normalized_objective_mode not in {"bucket_mass", "fixed_representative", "uniform_bucket"}:
+    if normalized_objective_mode not in {
+        "bucket_mass",
+        "margin_aware_bucket_mass",
+        "fixed_representative",
+        "uniform_bucket",
+    }:
         raise HFCausalLMTrainingError(
             f"Unsupported compiled objective mode {objective_mode!r}; "
-            "expected one of {'bucket_mass', 'fixed_representative', 'uniform_bucket'}"
+            "expected one of {'bucket_mass', 'margin_aware_bucket_mass', "
+            "'fixed_representative', 'uniform_bucket'}"
         )
     attention_rows = _tensor_rows(attention_mask)
     sample_losses: list[object] = []
+    margin_losses: list[object] = []
     target_bucket_masses: list[float] = []
     slot_margins: list[float] = []
     max_logit = 0.0
@@ -488,10 +658,13 @@ def _compute_compiled_bucket_loss_with_diagnostics(
         ]
         if wrong_bucket_log_probs:
             best_wrong = torch_module.stack(wrong_bucket_log_probs).max()
-            slot_margins.append(_tensor_float(target_log_prob - best_wrong))
+            slot_margin = target_log_prob - best_wrong
+            slot_margins.append(_tensor_float(slot_margin))
+            margin_losses.append(torch_module.clamp(float(margin_gamma) - slot_margin, min=0.0))
         else:
             slot_margins.append(float("inf"))
-        if normalized_objective_mode == "bucket_mass":
+            margin_losses.append(target_log_prob * 0.0)
+        if normalized_objective_mode in {"bucket_mass", "margin_aware_bucket_mass"}:
             sample_losses.append(-target_log_prob)
             continue
 
@@ -520,14 +693,40 @@ def _compute_compiled_bucket_loss_with_diagnostics(
 
     raw_loss_sum = torch_module.stack(sample_losses).sum()
     normalized_loss_mean = torch_module.stack(sample_losses).mean()
-    scaled_loss = normalized_loss_mean * float(lambda_set)
+    raw_margin_sum = torch_module.stack(margin_losses).sum() if margin_losses else normalized_loss_mean * 0.0
+    normalized_margin_mean = torch_module.stack(margin_losses).mean() if margin_losses else normalized_loss_mean * 0.0
+    normalized_reg_mean = normalized_loss_mean * 0.0
+    raw_reg_sum = normalized_loss_mean * 0.0
+    scaled_loss = (
+        normalized_loss_mean * float(lambda_set)
+        + normalized_margin_mean * float(lambda_margin)
+        + normalized_reg_mean * float(lambda_reg)
+    )
     slot_count = len(sample_losses)
+    normalized_loss_float = _tensor_float(normalized_loss_mean)
+    normalized_margin_float = _tensor_float(normalized_margin_mean)
+    normalized_reg_float = _tensor_float(normalized_reg_mean)
+    total_evidence_loss_mean = (
+        float(lambda_set) * normalized_loss_float
+        + float(lambda_margin) * normalized_margin_float
+        + float(lambda_reg) * normalized_reg_float
+    )
     diagnostics = CompiledBucketLossDiagnostics(
         slot_count=slot_count,
         raw_l_set_sum=_tensor_float(raw_loss_sum),
-        normalized_l_set_mean=_tensor_float(normalized_loss_mean),
+        normalized_l_set_mean=normalized_loss_float,
         lambda_set=float(lambda_set),
         effective_lambda_per_slot=(float(lambda_set) / slot_count) if slot_count else 0.0,
+        raw_l_margin_sum=_tensor_float(raw_margin_sum),
+        normalized_l_margin_mean=normalized_margin_float,
+        lambda_margin=float(lambda_margin),
+        margin_gamma=float(margin_gamma),
+        effective_lambda_margin_per_slot=(float(lambda_margin) / slot_count) if slot_count else 0.0,
+        raw_l_reg_sum=_tensor_float(raw_reg_sum),
+        normalized_l_reg_mean=normalized_reg_float,
+        lambda_reg=float(lambda_reg),
+        total_evidence_loss_mean=total_evidence_loss_mean,
+        scaled_total_evidence_loss=_tensor_float(scaled_loss),
         target_bucket_mass_mean=_mean(target_bucket_masses),
         target_bucket_mass_min=float(min(target_bucket_masses)) if target_bucket_masses else 0.0,
         slot_margin_mean=_mean(slot_margins),
@@ -562,6 +761,9 @@ def run_minimal_hf_causal_lm_training(
     use_compiled_bucket_objective: bool = False,
     compiled_objective_mode: str = "bucket_mass",
     compiled_lambda_set: float = 1.0,
+    compiled_lambda_margin: float = 0.0,
+    compiled_margin_gamma: float = 0.0,
+    compiled_lambda_reg: float = 0.0,
     checkpoint_selection_metric: str = "",
     checkpoint_selection_mode: str = "min",
     checkpoint_selection_use_best_for_eval: bool = False,
@@ -595,12 +797,14 @@ def run_minimal_hf_causal_lm_training(
     normalized_compiled_objective_mode = compiled_objective_mode.strip().lower() or "bucket_mass"
     if use_compiled_bucket_objective and normalized_compiled_objective_mode not in {
         "bucket_mass",
+        "margin_aware_bucket_mass",
         "fixed_representative",
         "uniform_bucket",
     }:
         raise HFCausalLMTrainingError(
             f"Unsupported compiled_objective_mode={compiled_objective_mode!r}; "
-            "expected one of {'bucket_mass', 'fixed_representative', 'uniform_bucket'}"
+            "expected one of {'bucket_mass', 'margin_aware_bucket_mass', "
+            "'fixed_representative', 'uniform_bucket'}"
         )
 
     cuda_available = torch.cuda.is_available()
@@ -704,6 +908,9 @@ def run_minimal_hf_causal_lm_training(
                     batch_examples=batch_examples,
                     objective_mode=normalized_compiled_objective_mode,
                     lambda_set=compiled_lambda_set,
+                    lambda_margin=compiled_lambda_margin,
+                    margin_gamma=compiled_margin_gamma,
+                    lambda_reg=compiled_lambda_reg,
                 )
                 if not math.isfinite(float(batch_max_logit)):
                     health_diagnostics["first_nan_step"] = total_steps + 1
@@ -827,7 +1034,10 @@ def run_minimal_hf_causal_lm_training(
 
                 handle.write(json.dumps(train_metric_payload, sort_keys=True) + "\n")
             if use_compiled_bucket_objective and compiled_metric_history:
-                current_metric = float(compiled_metric_history[-1]["normalized_L_set_mean"])
+                current_metric = _compiled_checkpoint_metric_value(
+                    normalized_selection_metric,
+                    compiled_loss_diagnostics,
+                )
                 improved = (
                     best_metric_value is None
                     or (
@@ -910,6 +1120,20 @@ def run_minimal_hf_causal_lm_training(
                 generation_inputs = {key: value.to(device) for key, value in generation_inputs.items()}
                 prompt_rows = _tensor_rows(generation_inputs["input_ids"])
                 prompt_length = len(prompt_rows[0]) if prompt_rows else 0
+                slot_outputs = model(**generation_inputs)
+                slot_logits = getattr(slot_outputs, "logits", None)
+                if slot_logits is None:
+                    raise HFCausalLMTrainingError(
+                        "Field-wise generation diagnostics require model outputs to expose logits"
+                    )
+                bucket_margin_diagnostics = _compute_generation_slot_margin_diagnostics(
+                    torch_module=torch,
+                    row_logits=slot_logits[0, prompt_length - 1, :],
+                    value_to_token_id=value_to_token_id,
+                    allowed_value_bucket_ids=slot_target.allowed_value_bucket_ids,
+                    expected_value=slot_target.expected_value,
+                    expected_bucket_id=slot_target.expected_bucket_id,
+                )
                 generation_kwargs = _build_generation_kwargs(
                     tokenizer=tokenizer,
                     max_new_tokens=1,
@@ -955,6 +1179,7 @@ def run_minimal_hf_causal_lm_training(
                         "bucket_correct": bucket_correct,
                         "expected_bucket_id": slot_target.expected_bucket_id,
                         "chosen_bucket_id": chosen_bucket_id,
+                        **bucket_margin_diagnostics,
                     }
                 )
             generated_text = "\n".join(generated_values).strip()
@@ -1020,6 +1245,9 @@ def run_minimal_hf_causal_lm_training(
         slot_counts = [int(row["slot_count"]) for row in compiled_metric_history]
         raw_losses = [float(row["raw_L_set_sum"]) for row in compiled_metric_history]
         normalized_losses = [float(row["normalized_L_set_mean"]) for row in compiled_metric_history]
+        raw_margin_losses = [float(row["raw_L_margin_sum"]) for row in compiled_metric_history]
+        normalized_margin_losses = [float(row["normalized_L_margin_mean"]) for row in compiled_metric_history]
+        total_evidence_losses = [float(row["total_evidence_loss_mean"]) for row in compiled_metric_history]
         bucket_mass_means = [float(row["target_bucket_mass_mean"]) for row in compiled_metric_history]
         bucket_mass_mins = [float(row["target_bucket_mass_min"]) for row in compiled_metric_history]
         margin_means = [float(row["slot_margin_mean"]) for row in compiled_metric_history]
@@ -1036,6 +1264,19 @@ def run_minimal_hf_causal_lm_training(
                     if slot_counts and max(slot_counts) > 0
                     else 0.0
                 ),
+                "raw_L_margin_sum": raw_margin_losses[-1] if raw_margin_losses else 0.0,
+                "normalized_L_margin_mean": normalized_margin_losses[-1] if normalized_margin_losses else 0.0,
+                "lambda_margin": float(compiled_lambda_margin),
+                "margin_gamma": float(compiled_margin_gamma),
+                "effective_lambda_margin_per_slot": (
+                    float(compiled_lambda_margin) / max(slot_counts)
+                    if slot_counts and max(slot_counts) > 0
+                    else 0.0
+                ),
+                "raw_L_reg_sum": 0.0,
+                "normalized_L_reg_mean": 0.0,
+                "lambda_reg": float(compiled_lambda_reg),
+                "total_evidence_loss_mean": total_evidence_losses[-1] if total_evidence_losses else 0.0,
                 "target_bucket_mass_mean": bucket_mass_means[-1] if bucket_mass_means else 0.0,
                 "target_bucket_mass_min": bucket_mass_mins[-1] if bucket_mass_mins else 0.0,
                 "slot_margin_mean": margin_means[-1] if margin_means else 0.0,
@@ -1044,6 +1285,9 @@ def run_minimal_hf_causal_lm_training(
                     "step_count": len(compiled_metric_history),
                     "raw_L_set_sum_mean": _mean(raw_losses),
                     "normalized_L_set_mean_mean": _mean(normalized_losses),
+                    "raw_L_margin_sum_mean": _mean(raw_margin_losses),
+                    "normalized_L_margin_mean_mean": _mean(normalized_margin_losses),
+                    "total_evidence_loss_mean_mean": _mean(total_evidence_losses),
                     "target_bucket_mass_mean": _mean(bucket_mass_means),
                     "target_bucket_mass_min": min(bucket_mass_mins) if bucket_mass_mins else 0.0,
                     "slot_margin_mean": _mean(margin_means),
@@ -1057,7 +1301,50 @@ def run_minimal_hf_causal_lm_training(
                     "best_step": best_checkpoint_step,
                     "best_metric_value": best_metric_value,
                     "final_step": total_steps,
-                    "final_metric_value": normalized_losses[-1] if normalized_losses else final_loss,
+                    "final_metric_value": (
+                        _compiled_checkpoint_metric_value(
+                            normalized_selection_metric,
+                            CompiledBucketLossDiagnostics(
+                                slot_count=slot_counts[-1] if slot_counts else 0,
+                                raw_l_set_sum=raw_losses[-1] if raw_losses else 0.0,
+                                normalized_l_set_mean=normalized_losses[-1] if normalized_losses else final_loss,
+                                lambda_set=float(compiled_lambda_set),
+                                effective_lambda_per_slot=(
+                                    float(compiled_lambda_set) / slot_counts[-1]
+                                    if slot_counts and slot_counts[-1] > 0
+                                    else 0.0
+                                ),
+                                raw_l_margin_sum=raw_margin_losses[-1] if raw_margin_losses else 0.0,
+                                normalized_l_margin_mean=(
+                                    normalized_margin_losses[-1] if normalized_margin_losses else 0.0
+                                ),
+                                lambda_margin=float(compiled_lambda_margin),
+                                margin_gamma=float(compiled_margin_gamma),
+                                effective_lambda_margin_per_slot=(
+                                    float(compiled_lambda_margin) / slot_counts[-1]
+                                    if slot_counts and slot_counts[-1] > 0
+                                    else 0.0
+                                ),
+                                raw_l_reg_sum=0.0,
+                                normalized_l_reg_mean=0.0,
+                                lambda_reg=float(compiled_lambda_reg),
+                                total_evidence_loss_mean=(
+                                    total_evidence_losses[-1] if total_evidence_losses else final_loss
+                                ),
+                                scaled_total_evidence_loss=(
+                                    total_evidence_losses[-1] if total_evidence_losses else final_loss
+                                ),
+                                target_bucket_mass_mean=(
+                                    bucket_mass_means[-1] if bucket_mass_means else 0.0
+                                ),
+                                target_bucket_mass_min=bucket_mass_mins[-1] if bucket_mass_mins else 0.0,
+                                slot_margin_mean=margin_means[-1] if margin_means else 0.0,
+                                slot_margin_min=margin_mins[-1] if margin_mins else 0.0,
+                            ),
+                        )
+                        if compiled_metric_history
+                        else final_loss
+                    ),
                     "final_checkpoint_path": str(checkpoint_dir),
                     "best_checkpoint_path": (
                         str(best_checkpoint_dir)
