@@ -72,7 +72,7 @@
     ],
     "seed": 41
   },
-  "completed_count": 24,
+  "completed_count": 0,
   "description": "Minimal matched-budget baseline/control package under frozen B0 query, FAR, threshold, utility, and inclusion rules.",
   "fixed_contract": {
     "block_count": 2,
@@ -88,13 +88,13 @@
     "utility_degradation_tolerance": 0.02,
     "utility_metric": "utility_acceptance_rate"
   },
-  "generated_at": "20260427T215532556094Z",
+  "generated_at": "20260427T222215651634Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
   "method_failure_case_ids": [],
   "method_failure_count": 0,
   "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1",
-  "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/matched_budget_baselines_v1.yaml",
+  "package_config_path": "configs/reporting/matched_budget_baselines_v1.yaml",
   "paper_ready": false,
   "paper_ready_checks": {
     "calibration_thresholds_frozen_before_final": false,

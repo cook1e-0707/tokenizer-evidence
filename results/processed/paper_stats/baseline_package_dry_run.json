@@ -1208,7 +1208,7 @@
     "utility_degradation_tolerance": 0.02,
     "utility_metric": "utility_acceptance_rate"
   },
-  "generated_at": "20260427T215532759979Z",
+  "generated_at": "20260427T221950865192Z",
   "output_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1",
   "package_config_path": "configs/reporting/matched_budget_baselines_v1.yaml",
   "schema_name": "baseline_package_dry_run",

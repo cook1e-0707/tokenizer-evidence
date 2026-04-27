@@ -90,11 +90,14 @@ baseline_methods:
     requires_external_integration: true
     matched_budget_status: task_mismatched_control
 compute_estimate:
+  calibration_train_jobs: 8
+  calibration_eval_jobs: 32
   final_train_jobs: 24
   final_eval_jobs: 48
-  calibration_rows: 4
+  calibration_rows: 32
   requested_gpu_hours_per_train_job: 24
   requested_gpu_hours_per_eval_job: 24
+  calibration_requested_gpu_hours: 960
   final_requested_gpu_hours: 1728
 paper_readiness_gate:
   - calibration_thresholds_frozen_before_final

@@ -113,6 +113,59 @@ def test_prepare_matched_budget_baseline_manifests(tmp_path: Path) -> None:
     assert "results/raw/baseline_placeholder/latest_eval_input.json" in "\n".join(english_eval.overrides)
 
 
+def test_prepare_matched_budget_baseline_calibration_manifests(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "matched_budget_baselines_v1"
+    output = tmp_path / "baseline_calibration_package_dry_run.json"
+    train_manifest_path = tmp_path / "calibration_train_manifest.json"
+    eval_manifest_path = tmp_path / "calibration_eval_manifest.json"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_matched_budget_baseline_calibration.py",
+            "--output",
+            str(output),
+            "--train-manifest-out",
+            str(train_manifest_path),
+            "--eval-manifest-out",
+            str(eval_manifest_path),
+            "--output-root-base",
+            str(output_root_base),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote baseline calibration dry-run summary" in completed.stdout
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    assert payload["train_manifest_entry_count"] == 8
+    assert payload["eval_manifest_entry_count"] == 32
+    assert payload["available_negative_sets"] == ["wrong_payload_null"]
+    assert payload["missing_negative_sets"] == ["foundation_null", "organic_prompt_null"]
+    assert payload["threshold_freeze_allowed"] is False
+
+    train_manifest = load_manifest(train_manifest_path)
+    eval_manifest = load_manifest(eval_manifest_path)
+    assert len(train_manifest.entries) == 8
+    assert len(eval_manifest.entries) == 32
+    assert train_manifest.entries[0].manifest_id == (
+        "baseline-calibration-train-fixed_representative-u01-s41"
+    )
+    wrong_payload_eval = next(
+        entry
+        for entry in eval_manifest.entries
+        if entry.manifest_id == "baseline-calibration-eval-fixed_representative-u01-claim-u05-s41"
+    )
+    assert "eval.payload_text=U05" in wrong_payload_eval.overrides
+    assert (
+        str(output_root_base / "calibration" / "fixed_representative" / "U01_s41")
+        in wrong_payload_eval.output_root
+    )
+
+
 def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     output_dir = tmp_path / "paper_stats"
@@ -139,6 +192,7 @@ def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path
     assert "wrote baseline summary" in completed.stdout
     summary = json.loads((output_dir / "baseline_summary.json").read_text(encoding="utf-8"))
     assert summary["target_count"] == 48
+    assert summary["completed_count"] == 0
     assert summary["valid_completed_count"] == 0
     assert summary["pending_count"] == 48
     assert summary["paper_ready"] is False
@@ -156,3 +210,44 @@ def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path
     assert (output_dir / "baseline_run_inclusion_list.json").exists()
     assert (output_dir / "baseline_calibration_summary.json").exists()
     assert (output_dir / "baseline_compute_accounting.json").exists()
+
+
+def test_build_matched_budget_baseline_calibration_artifacts_writes_pending_package(
+    tmp_path: Path,
+) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    case_root = tmp_path / "scratch" / "tokenizer-evidence" / "matched_budget_baselines_v1"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_matched_budget_baseline_calibration_artifacts.py",
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--case-root-base",
+            str(case_root),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote baseline calibration summary" in completed.stdout
+    summary = json.loads((output_dir / "baseline_calibration_summary.json").read_text(encoding="utf-8"))
+    assert summary["case_count"] == 32
+    assert summary["completed_count"] == 0
+    assert summary["pending_count"] == 32
+    assert summary["thresholds_frozen"] is False
+    assert summary["missing_negative_sets"] == ["foundation_null", "organic_prompt_null"]
+
+    rows = list(csv.DictReader((tables_dir / "baseline_calibration_cases.csv").open()))
+    assert len(rows) == 32
+    assert {row["eval_kind"] for row in rows} == {"positive", "wrong_payload_null"}
+    assert rows[0]["owner_payload"] == "U01"
+    assert (tables_dir / "baseline_far_summary.csv").exists()
+    assert (tables_dir / "baseline_utility_summary.csv").exists()

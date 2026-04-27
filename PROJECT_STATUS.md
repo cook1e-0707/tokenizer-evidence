@@ -24,7 +24,7 @@
   - `G3a-v3` block-count scale is standing on the held-out `B1/B2/B4 x U00..U15 x seeds 17,23,29` matrix
   - `G4` training-signal scale is standing on `S16/S32/S64/S128 x U00/U03/U12/U15 x seeds 17,23,29`
   - no additional Batch 3 expansion
-  - `B1`/`B2` matched-budget baseline package configs, dry-run manifests, pending calibration artifacts, and pending artifact builder output are prepared
+  - `B1`/`B2` matched-budget baseline package configs, final dry-run manifests, calibration dry-run manifests, pending calibration artifacts, and pending artifact builder output are prepared
   - no baseline execution yet; B1/B2 remain blocked until real calibration scores and external baseline integrations are available
   - no new model families
 - Paper-facing appendix status:
@@ -51,9 +51,9 @@
 ## Current Priority
 
 1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, `G3a-v3`, and `G4` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
-2. Move next to `B1`/`B2` calibration/integration: collect real calibration scores and wire external baseline implementations before any final baseline execution.
+2. Move next to `B1`/`B2` calibration execution: run the calibration train/eval manifests for `fixed_representative` and `uniform_bucket`, then rebuild calibration artifacts before any final baseline execution.
 3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
-4. Keep `B1`/`B2` final execution blocked until calibration thresholds are frozen from real scores and placeholder external baselines are either integrated or explicitly left unavailable; keep `R1` second-family replication blocked until the baseline package is stable.
+4. Keep `B1`/`B2` final execution blocked until calibration thresholds are frozen from real scores and placeholder external baselines are either integrated or explicitly left unavailable; `foundation_null` and `organic_prompt_null` remain calibration blockers until materialized or explicitly scoped out; keep `R1` second-family replication blocked until the baseline package is stable.
 
 ## Experimental Scale Snapshot
 
@@ -164,7 +164,7 @@ Interpretation:
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
 - `batch3c`: seed-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
 - `batch3d`: single-family delimiter-attack expansion passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
-- Next target: run B1/B2 calibration-data preparation and integrate or explicitly mark unavailable the external active-fingerprint/provenance adapters before any final baseline execution.
+- Next target: execute B1/B2 calibration train/eval manifests on Chimera for the two integrated task-matched baselines, then rebuild calibration artifacts and decide how to materialize or scope `foundation_null` and `organic_prompt_null`.
 
 ## 2026-04-20
 

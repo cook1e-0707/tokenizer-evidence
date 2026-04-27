@@ -99,6 +99,14 @@ def _resolve_path(repo_root: Path, raw: str) -> Path:
     return path if path.is_absolute() else repo_root / path
 
 
+def _repo_relative_path(repo_root: Path, path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(repo_root.resolve()))
+    except ValueError:
+        return str(resolved)
+
+
 def _load_yaml(path: Path) -> dict[str, Any]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if not isinstance(payload, dict):
@@ -324,6 +332,7 @@ def main() -> int:
     invalid = [row for row in rows if row["invalid_excluded"]]
     pending = [row for row in rows if row["pending"]]
     unavailable = [row for row in rows if row["unavailable"]]
+    completed = [row for row in rows if not row["pending"]]
     paper_ready_checks = {
         "calibration_thresholds_frozen_before_final": False,
         "query_budget_not_exceeded": all(
@@ -346,14 +355,14 @@ def main() -> int:
         "workstream": package_config.get("workstream", "B1-B2"),
         "description": package_config.get("description", ""),
         "generated_at": current_timestamp(),
-        "package_config_path": str(package_config_path),
+        "package_config_path": _repo_relative_path(repo_root, package_config_path),
         "new_case_root_base": root_base,
         "b0_protocol": package_config.get("b0_protocol", {}),
         "fixed_contract": fixed,
         "calibration_split": package_config.get("calibration_split", {}),
         "baseline_methods": package_config.get("baseline_methods", []),
         "target_count": len(rows),
-        "completed_count": len(valid_completed) + len(invalid) + len(unavailable),
+        "completed_count": len(completed),
         "valid_completed_count": len(valid_completed),
         "success_count": len(successes),
         "method_failure_count": len(method_failures),

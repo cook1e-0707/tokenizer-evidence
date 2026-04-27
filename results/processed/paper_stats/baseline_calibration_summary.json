@@ -1,114 +1,52 @@
 {
-  "calibration_rows": [
+  "available_negative_sets": [
+    "wrong_payload_null"
+  ],
+  "case_count": 32,
+  "completed_count": 0,
+  "generated_at": "20260427T222215699494Z",
+  "method_rows": [
     {
-      "baseline_family": "fixed_representative",
-      "baseline_role": "primary_ownership_baseline",
       "calibration_observed_far": "",
-      "calibration_payloads": [
-        "U01",
-        "U05",
-        "U09",
-        "U13"
-      ],
-      "calibration_seed": 41,
+      "case_count": 16,
+      "completed_count": 0,
       "frozen_threshold": "",
-      "method_id": "fixed_representative",
-      "method_name": "our_method",
       "method_slug": "fixed_representative",
-      "negative_sets": [
-        "foundation_null",
-        "wrong_payload_null",
-        "organic_prompt_null"
-      ],
-      "requires_external_integration": false,
-      "score_direction": "higher_is_stronger",
-      "score_name": "ownership_score",
-      "status": "pending_real_calibration_scores",
-      "target_far": 0.01
+      "negative_count": 12,
+      "pending_count": 16,
+      "positive_count": 4,
+      "target_far": 0.01,
+      "threshold_status": "blocked_missing_negative_sets_or_scores"
     },
     {
-      "baseline_family": "uniform_bucket",
-      "baseline_role": "primary_ownership_baseline",
       "calibration_observed_far": "",
-      "calibration_payloads": [
-        "U01",
-        "U05",
-        "U09",
-        "U13"
-      ],
-      "calibration_seed": 41,
+      "case_count": 16,
+      "completed_count": 0,
       "frozen_threshold": "",
-      "method_id": "uniform_bucket",
-      "method_name": "our_method",
       "method_slug": "uniform_bucket",
-      "negative_sets": [
-        "foundation_null",
-        "wrong_payload_null",
-        "organic_prompt_null"
-      ],
-      "requires_external_integration": false,
-      "score_direction": "higher_is_stronger",
-      "score_name": "ownership_score",
-      "status": "pending_real_calibration_scores",
-      "target_far": 0.01
-    },
-    {
-      "baseline_family": "english_random_active_fingerprint",
-      "baseline_role": "primary_ownership_baseline",
-      "calibration_observed_far": "",
-      "calibration_payloads": [
-        "U01",
-        "U05",
-        "U09",
-        "U13"
-      ],
-      "calibration_seed": 41,
-      "frozen_threshold": "",
-      "method_id": "english_random_active_fingerprint",
-      "method_name": "baseline_english_random",
-      "method_slug": "english_random_active_fingerprint",
-      "negative_sets": [
-        "foundation_null",
-        "wrong_payload_null",
-        "organic_prompt_null"
-      ],
-      "requires_external_integration": true,
-      "score_direction": "higher_is_stronger",
-      "score_name": "ownership_score",
-      "status": "pending_real_calibration_scores",
-      "target_far": 0.01
-    },
-    {
-      "baseline_family": "kgw_provenance",
-      "baseline_role": "task_mismatched_provenance_control",
-      "calibration_observed_far": "",
-      "calibration_payloads": [
-        "U01",
-        "U05",
-        "U09",
-        "U13"
-      ],
-      "calibration_seed": 41,
-      "frozen_threshold": "",
-      "method_id": "kgw_provenance_control",
-      "method_name": "baseline_kgw",
-      "method_slug": "kgw_provenance_control",
-      "negative_sets": [
-        "foundation_null",
-        "wrong_payload_null",
-        "organic_prompt_null"
-      ],
-      "requires_external_integration": true,
-      "score_direction": "higher_is_stronger",
-      "score_name": "ownership_score",
-      "status": "pending_real_calibration_scores",
-      "target_far": 0.01
+      "negative_count": 12,
+      "pending_count": 16,
+      "positive_count": 4,
+      "target_far": 0.01,
+      "threshold_status": "blocked_missing_negative_sets_or_scores"
     }
   ],
-  "generated_at": "20260427T215532556365Z",
+  "missing_negative_sets": [
+    "foundation_null",
+    "organic_prompt_null"
+  ],
+  "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1",
+  "package_config_path": "configs/reporting/matched_budget_baselines_v1.yaml",
+  "pending_count": 32,
   "schema_name": "baseline_calibration_summary",
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "pending_real_calibration_scores",
   "target_far": 0.01,
+  "threshold_freeze_allowed": false,
+  "threshold_freeze_blockers": [
+    "missing_negative_set:foundation_null",
+    "missing_negative_set:organic_prompt_null",
+    "pending_calibration_eval_summaries"
+  ],
   "thresholds_frozen": false
 }
