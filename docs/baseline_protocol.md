@@ -67,10 +67,10 @@ Allowed controls:
 1. KGW-style output watermark control.
 2. PostMark-style provenance control.
 
-The existing `baseline_kgw`, `baseline_ctcc`, and `baseline_esf` adapters are
-safe placeholders unless a real implementation is explicitly wired and audited.
-Placeholder rows must be reported as `unavailable`, not as failed experimental
-evidence.
+The existing `baseline_english_random`, `baseline_kgw`, `baseline_ctcc`, and
+`baseline_esf` adapters are safe placeholders unless a real implementation is
+explicitly wired and audited. Placeholder rows must be reported as
+`unavailable`, not as failed experimental evidence.
 
 ## Matched Budget Rules
 

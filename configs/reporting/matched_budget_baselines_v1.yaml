@@ -1,0 +1,106 @@
+version: 1
+workstream: B1-B2
+description: Minimal matched-budget baseline/control package under frozen B0 query, FAR, threshold, utility, and inclusion rules.
+train_config: configs/experiment/prep/baseline/exp_train__qwen2_5_7b__matched_budget_baselines_v1.yaml
+eval_config: configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml
+calibration_config: configs/experiment/prep/baseline/exp_calibrate__qwen2_5_7b__matched_budget_baselines_v1.yaml
+new_case_root_prefix: matched_budget_baselines_v1
+case_root_search_roots:
+  - ${EXP_SCRATCH}
+  - ${REPO_HOME}
+scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1
+chimera_environment_setup: |
+  source ~/.bashrc
+  source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+  export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
+b0_protocol:
+  baseline_protocol: docs/baseline_protocol.md
+  calibration_protocol: docs/calibration_protocol.md
+  status: frozen_before_baseline_execution
+fixed_contract:
+  model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+  codebook: real_pilot_catalog__qwen2_5_7b_compiled__v1
+  block_count: 2
+  fields_per_block: 2
+  prompt_family: PF1
+  query_budget: 4
+  target_far: 0.01
+  utility_metric: utility_acceptance_rate
+  utility_degradation_tolerance: 0.02
+  threshold_policy: freeze_on_calibration_split_before_final
+  inclusion_policy: valid_method_failures_remain_in_denominator
+calibration_split:
+  payloads: ["U01", "U05", "U09", "U13"]
+  seed: 41
+  negative_sets:
+    - foundation_null
+    - wrong_payload_null
+    - organic_prompt_null
+final_matrix:
+  status: dry_run_prepared
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  target_eval_cases: 48
+  target_train_cases: 24
+baseline_methods:
+  - id: fixed_representative
+    slug: fixed_representative
+    display_name: Fixed representative
+    baseline_family: fixed_representative
+    baseline_role: primary_ownership_baseline
+    b_stage: B1
+    method_name: our_method
+    train_objective: fixed_representative
+    requires_training: true
+    requires_external_integration: false
+    matched_budget_status: matched
+  - id: uniform_bucket
+    slug: uniform_bucket
+    display_name: Uniform bucket
+    baseline_family: uniform_bucket
+    baseline_role: primary_ownership_baseline
+    b_stage: B1
+    method_name: our_method
+    train_objective: uniform_bucket
+    requires_training: true
+    requires_external_integration: false
+    matched_budget_status: matched
+  - id: english_random_active_fingerprint
+    slug: english_random_active_fingerprint
+    display_name: English-random active fingerprint
+    baseline_family: english_random_active_fingerprint
+    baseline_role: primary_ownership_baseline
+    b_stage: B1
+    method_name: baseline_english_random
+    train_objective: unavailable
+    requires_training: false
+    requires_external_integration: true
+    matched_budget_status: pending_external_integration
+  - id: kgw_provenance_control
+    slug: kgw_provenance_control
+    display_name: KGW provenance control
+    baseline_family: kgw_provenance
+    baseline_role: task_mismatched_provenance_control
+    b_stage: B2
+    method_name: baseline_kgw
+    train_objective: unavailable
+    requires_training: false
+    requires_external_integration: true
+    matched_budget_status: task_mismatched_control
+compute_estimate:
+  final_train_jobs: 24
+  final_eval_jobs: 48
+  calibration_rows: 4
+  requested_gpu_hours_per_train_job: 24
+  requested_gpu_hours_per_eval_job: 24
+  final_requested_gpu_hours: 1728
+paper_readiness_gate:
+  - calibration_thresholds_frozen_before_final
+  - query_budget_not_exceeded
+  - target_far_reported
+  - utility_metric_reported
+  - valid_completed_failures_remain_in_denominator
+  - invalid_exclusions_have_artifact_or_contract_reason
+  - provenance_controls_not_reported_as_primary_ownership_baselines

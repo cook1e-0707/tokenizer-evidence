@@ -1,0 +1,26 @@
+includes:
+  - ../../../model/qwen2_5_7b_instruct.yaml
+  - ../../../data/real_pilot.yaml
+  - ../../../eval/default.yaml
+  - ../../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_eval
+  mode: calibrate
+  method: baseline_calibration
+  seed: 41
+  variant_name: matched-budget-baseline-calibration
+  notes: B0 calibration config. Do not run without a real --scores-file; synthetic defaults are invalid for B1/B2.
+
+data:
+  name: matched-budget-baselines-calibration-v1
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml
+
+eval:
+  min_score: 0.5
+  max_candidates: 16
+  target_far: 0.01
+  verification_mode: synthetic_fixture
+  render_format: canonical_v1
+  payload_text: U01
+  audit_strict: true

@@ -88,4 +88,8 @@ def build_baseline_adapter(method: str) -> BaselineAdapter:
         from src.baselines.esf_adapter import ESFAdapter
 
         return ESFAdapter()
+    if method == "baseline_english_random":
+        from src.baselines.english_random_adapter import EnglishRandomFingerprintAdapter
+
+        return EnglishRandomFingerprintAdapter()
     raise ValueError(f"Unknown baseline method: {method}")

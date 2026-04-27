@@ -1,0 +1,114 @@
+{
+  "calibration_rows": [
+    {
+      "baseline_family": "fixed_representative",
+      "baseline_role": "primary_ownership_baseline",
+      "calibration_observed_far": "",
+      "calibration_payloads": [
+        "U01",
+        "U05",
+        "U09",
+        "U13"
+      ],
+      "calibration_seed": 41,
+      "frozen_threshold": "",
+      "method_id": "fixed_representative",
+      "method_name": "our_method",
+      "method_slug": "fixed_representative",
+      "negative_sets": [
+        "foundation_null",
+        "wrong_payload_null",
+        "organic_prompt_null"
+      ],
+      "requires_external_integration": false,
+      "score_direction": "higher_is_stronger",
+      "score_name": "ownership_score",
+      "status": "pending_real_calibration_scores",
+      "target_far": 0.01
+    },
+    {
+      "baseline_family": "uniform_bucket",
+      "baseline_role": "primary_ownership_baseline",
+      "calibration_observed_far": "",
+      "calibration_payloads": [
+        "U01",
+        "U05",
+        "U09",
+        "U13"
+      ],
+      "calibration_seed": 41,
+      "frozen_threshold": "",
+      "method_id": "uniform_bucket",
+      "method_name": "our_method",
+      "method_slug": "uniform_bucket",
+      "negative_sets": [
+        "foundation_null",
+        "wrong_payload_null",
+        "organic_prompt_null"
+      ],
+      "requires_external_integration": false,
+      "score_direction": "higher_is_stronger",
+      "score_name": "ownership_score",
+      "status": "pending_real_calibration_scores",
+      "target_far": 0.01
+    },
+    {
+      "baseline_family": "english_random_active_fingerprint",
+      "baseline_role": "primary_ownership_baseline",
+      "calibration_observed_far": "",
+      "calibration_payloads": [
+        "U01",
+        "U05",
+        "U09",
+        "U13"
+      ],
+      "calibration_seed": 41,
+      "frozen_threshold": "",
+      "method_id": "english_random_active_fingerprint",
+      "method_name": "baseline_english_random",
+      "method_slug": "english_random_active_fingerprint",
+      "negative_sets": [
+        "foundation_null",
+        "wrong_payload_null",
+        "organic_prompt_null"
+      ],
+      "requires_external_integration": true,
+      "score_direction": "higher_is_stronger",
+      "score_name": "ownership_score",
+      "status": "pending_real_calibration_scores",
+      "target_far": 0.01
+    },
+    {
+      "baseline_family": "kgw_provenance",
+      "baseline_role": "task_mismatched_provenance_control",
+      "calibration_observed_far": "",
+      "calibration_payloads": [
+        "U01",
+        "U05",
+        "U09",
+        "U13"
+      ],
+      "calibration_seed": 41,
+      "frozen_threshold": "",
+      "method_id": "kgw_provenance_control",
+      "method_name": "baseline_kgw",
+      "method_slug": "kgw_provenance_control",
+      "negative_sets": [
+        "foundation_null",
+        "wrong_payload_null",
+        "organic_prompt_null"
+      ],
+      "requires_external_integration": true,
+      "score_direction": "higher_is_stronger",
+      "score_name": "ownership_score",
+      "status": "pending_real_calibration_scores",
+      "target_far": 0.01
+    }
+  ],
+  "generated_at": "20260427T215532556365Z",
+  "schema_name": "baseline_calibration_summary",
+  "schema_version": 1,
+  "status": "pending_real_calibration_scores",
+  "target_far": 0.01,
+  "thresholds_frozen": false
+}

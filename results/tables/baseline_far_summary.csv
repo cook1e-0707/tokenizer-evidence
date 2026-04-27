@@ -1,0 +1,5 @@
+method_id,method_slug,target_far,final_observed_far,final_far_false_accept_count,final_far_negative_count,final_far_wilson_low,final_far_wilson_high,status
+fixed_representative,fixed_representative,0.01,,,,,,pending_real_calibration_scores
+uniform_bucket,uniform_bucket,0.01,,,,,,pending_real_calibration_scores
+english_random_active_fingerprint,english_random_active_fingerprint,0.01,,,,,,pending_real_calibration_scores
+kgw_provenance_control,kgw_provenance_control,0.01,,,,,,pending_real_calibration_scores

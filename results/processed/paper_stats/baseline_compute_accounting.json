@@ -1,0 +1,10 @@
+{
+  "calibration_rows": 4,
+  "final_eval_jobs": 48,
+  "final_requested_gpu_hours": 1728,
+  "final_train_jobs": 24,
+  "requested_gpu_hours_per_eval_job": 24,
+  "requested_gpu_hours_per_train_job": 24,
+  "schema_name": "baseline_compute_accounting",
+  "schema_version": 1
+}

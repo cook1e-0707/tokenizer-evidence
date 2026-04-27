@@ -1,0 +1,5 @@
+method_id,method_slug,utility_acceptance_rate,utility_delta_vs_foundation,utility_delta_vs_primary,utility_match_status
+fixed_representative,fixed_representative,,,,pending
+uniform_bucket,uniform_bucket,,,,pending
+english_random_active_fingerprint,english_random_active_fingerprint,,,,pending
+kgw_provenance_control,kgw_provenance_control,,,,pending
