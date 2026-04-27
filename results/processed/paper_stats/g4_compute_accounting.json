@@ -1,0 +1,8 @@
+{
+  "final_eval_jobs": 48,
+  "final_requested_gpu_hours": 2304,
+  "final_train_jobs": 48,
+  "requested_gpu_hours_per_job": 24,
+  "schema_name": "g4_compute_accounting",
+  "schema_version": 1
+}

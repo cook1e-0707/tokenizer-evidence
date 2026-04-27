@@ -1,0 +1,324 @@
+{
+  "completed_count": 0,
+  "description": "Training-signal scale over effective compiled contract sample counts with fixed Qwen7B, B2, prompt family, codebook, and margin-aware objective.",
+  "exact_gate_success_rate": 0.0,
+  "final_matrix": {
+    "eval_payloads": [
+      "U00",
+      "U03",
+      "U12",
+      "U15"
+    ],
+    "note": "Current train/eval handoff writes one generated_text_path per eval payload, so launch planning assumes one train job per sample-count, seed, and eval payload.",
+    "sample_count_variants": [
+      "S16",
+      "S32",
+      "S64",
+      "S128"
+    ],
+    "seeds": [
+      17,
+      23,
+      29
+    ],
+    "status": "dry_run_prepared",
+    "target_eval_cases": 48,
+    "target_train_cases": 48
+  },
+  "fixed_contract": {
+    "block_count": 2,
+    "checkpoint_selection_metric": "training_min_slot_margin",
+    "checkpoint_selection_mode": "max",
+    "codebook": "real_pilot_catalog__qwen2_5_7b_compiled__v1",
+    "epochs": 96,
+    "fields_per_block": 2,
+    "lambda_margin": 0.5,
+    "lambda_reg": 0.0,
+    "lambda_set": 2.0,
+    "learning_rate": 3e-05,
+    "lora_r": 16,
+    "margin_gamma": 0.5,
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "objective": "margin_aware_bucket_mass",
+    "operating_point_source": "G3a-v3 hp04 frozen validation selection",
+    "prompt_family": "exact-slot compiled prompt"
+  },
+  "generated_at": "20260427T180343470892Z",
+  "invalid_excluded_case_ids": [],
+  "invalid_excluded_count": 0,
+  "method_failure_case_ids": [],
+  "method_failure_count": 0,
+  "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g4_train_signal_scale_v1",
+  "overall_metrics": {
+    "erasure_count": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "exact_gate_success": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "normalized_L_set_mean": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "rs_gate_success": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "slot_bucket_accuracy": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "slot_margin_min": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "symbol_error_count": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "target_bucket_mass_mean": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 0,
+      "sem": 0.0,
+      "std": 0.0
+    }
+  },
+  "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/g4_train_signal_scale_v1.yaml",
+  "paper_ready": false,
+  "paper_ready_checks": {
+    "exact_and_rs_aware_gates_reported": true,
+    "invalid_excluded_count_zero_unless_concrete_artifact_failure": true,
+    "method_failures_remain_in_denominator": true,
+    "no_threshold_changed_after_final_evaluation": true,
+    "only_training_signal_sample_count_varies": true,
+    "real_contract_hash_checks_pass": true,
+    "valid_completed_count_equals_target_count": false
+  },
+  "pending_case_ids": [
+    "S16_U00_s17",
+    "S16_U03_s17",
+    "S16_U12_s17",
+    "S16_U15_s17",
+    "S16_U00_s23",
+    "S16_U03_s23",
+    "S16_U12_s23",
+    "S16_U15_s23",
+    "S16_U00_s29",
+    "S16_U03_s29",
+    "S16_U12_s29",
+    "S16_U15_s29",
+    "S32_U00_s17",
+    "S32_U03_s17",
+    "S32_U12_s17",
+    "S32_U15_s17",
+    "S32_U00_s23",
+    "S32_U03_s23",
+    "S32_U12_s23",
+    "S32_U15_s23",
+    "S32_U00_s29",
+    "S32_U03_s29",
+    "S32_U12_s29",
+    "S32_U15_s29",
+    "S64_U00_s17",
+    "S64_U03_s17",
+    "S64_U12_s17",
+    "S64_U15_s17",
+    "S64_U00_s23",
+    "S64_U03_s23",
+    "S64_U12_s23",
+    "S64_U15_s23",
+    "S64_U00_s29",
+    "S64_U03_s29",
+    "S64_U12_s29",
+    "S64_U15_s29",
+    "S128_U00_s17",
+    "S128_U03_s17",
+    "S128_U12_s17",
+    "S128_U15_s17",
+    "S128_U00_s23",
+    "S128_U03_s23",
+    "S128_U12_s23",
+    "S128_U15_s23",
+    "S128_U00_s29",
+    "S128_U03_s29",
+    "S128_U12_s29",
+    "S128_U15_s29"
+  ],
+  "pending_count": 48,
+  "rs_gate_success_rate": 0.0,
+  "sample_count_variants": [
+    {
+      "compiled_sample_repeats": 1,
+      "effective_contract_sample_count": 16,
+      "id": "S16",
+      "slug": "s16",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "unique_contract_sample_count": 16
+    },
+    {
+      "compiled_sample_repeats": 1,
+      "effective_contract_sample_count": 32,
+      "id": "S32",
+      "slug": "s32",
+      "train_payload_labels": [
+        "U00",
+        "U01",
+        "U02",
+        "U03",
+        "U04",
+        "U05",
+        "U12",
+        "U15"
+      ],
+      "unique_contract_sample_count": 32
+    },
+    {
+      "compiled_sample_repeats": 1,
+      "effective_contract_sample_count": 64,
+      "id": "S64",
+      "slug": "s64",
+      "train_payload_labels": [
+        "U00",
+        "U01",
+        "U02",
+        "U03",
+        "U04",
+        "U05",
+        "U06",
+        "U07",
+        "U08",
+        "U09",
+        "U10",
+        "U11",
+        "U12",
+        "U13",
+        "U14",
+        "U15"
+      ],
+      "unique_contract_sample_count": 64
+    },
+    {
+      "compiled_sample_repeats": 2,
+      "effective_contract_sample_count": 128,
+      "id": "S128",
+      "slug": "s128",
+      "train_payload_labels": [
+        "U00",
+        "U01",
+        "U02",
+        "U03",
+        "U04",
+        "U05",
+        "U06",
+        "U07",
+        "U08",
+        "U09",
+        "U10",
+        "U11",
+        "U12",
+        "U13",
+        "U14",
+        "U15"
+      ],
+      "unique_contract_sample_count": 64
+    }
+  ],
+  "schema_name": "g4_summary",
+  "schema_version": 1,
+  "success_case_ids": [],
+  "success_count": 0,
+  "summary_rows": [
+    {
+      "completed_runs": 0,
+      "exact_gate_success_rate": 0.0,
+      "invalid_excluded_runs": 0,
+      "method_failure_runs": 0,
+      "pending_runs": 48,
+      "rs_gate_success_rate": 0.0,
+      "scope": "overall",
+      "success_runs": 0,
+      "target_runs": 48,
+      "valid_completed_runs": 0
+    },
+    {
+      "completed_runs": 0,
+      "exact_gate_success_rate": 0.0,
+      "invalid_excluded_runs": 0,
+      "method_failure_runs": 0,
+      "pending_runs": 12,
+      "rs_gate_success_rate": 0.0,
+      "scope": "sample_count=16",
+      "success_runs": 0,
+      "target_runs": 12,
+      "valid_completed_runs": 0
+    },
+    {
+      "completed_runs": 0,
+      "exact_gate_success_rate": 0.0,
+      "invalid_excluded_runs": 0,
+      "method_failure_runs": 0,
+      "pending_runs": 12,
+      "rs_gate_success_rate": 0.0,
+      "scope": "sample_count=32",
+      "success_runs": 0,
+      "target_runs": 12,
+      "valid_completed_runs": 0
+    },
+    {
+      "completed_runs": 0,
+      "exact_gate_success_rate": 0.0,
+      "invalid_excluded_runs": 0,
+      "method_failure_runs": 0,
+      "pending_runs": 12,
+      "rs_gate_success_rate": 0.0,
+      "scope": "sample_count=64",
+      "success_runs": 0,
+      "target_runs": 12,
+      "valid_completed_runs": 0
+    },
+    {
+      "completed_runs": 0,
+      "exact_gate_success_rate": 0.0,
+      "invalid_excluded_runs": 0,
+      "method_failure_runs": 0,
+      "pending_runs": 12,
+      "rs_gate_success_rate": 0.0,
+      "scope": "sample_count=128",
+      "success_runs": 0,
+      "target_runs": 12,
+      "valid_completed_runs": 0
+    }
+  ],
+  "target_count": 48,
+  "valid_completed_count": 0,
+  "workstream": "G4"
+}

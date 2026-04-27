@@ -73,6 +73,7 @@ class TrainConfig:
     num_workers: int = 0
     probe_payload_texts: tuple[str, ...] = ()
     probe_block_count: int = 0
+    compiled_sample_repeats: int = 1
     generation_prompt: str = ""
     generation_do_sample: bool = False
     generation_max_new_tokens: int = 16
@@ -382,6 +383,14 @@ def validate_config_dict(data: Mapping[str, Any]) -> None:
                 "eval.verification_mode must be one of "
                 f"{sorted(ALLOWED_VERIFICATION_MODES)}; got {verification_mode!r}"
             )
+
+    train_section = normalized.get("train", {})
+    if train_section and isinstance(train_section, Mapping):
+        try:
+            if int(train_section.get("compiled_sample_repeats", 1)) < 1:
+                raise ConfigError("train.compiled_sample_repeats must be >= 1")
+        except (TypeError, ValueError) as error:
+            raise ConfigError("train.compiled_sample_repeats must be an integer") from error
 
     numeric_fields = {
         "runtime.resources.num_gpus": resource_section.get("num_gpus", 1),

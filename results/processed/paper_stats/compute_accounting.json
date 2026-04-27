@@ -95,6 +95,54 @@
       "runs": 4,
       "stage": "compiled-c3-r4",
       "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 24576.0,
+      "requested_gpu_hours": 1536.0,
+      "run_kind": "train",
+      "runs": 64,
+      "stage": "G3a-v3-validation",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 24576.0,
+      "requested_gpu_hours": 1536.0,
+      "run_kind": "eval",
+      "runs": 64,
+      "stage": "G3a-v3-validation",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 55296.0,
+      "requested_gpu_hours": 3456.0,
+      "run_kind": "train",
+      "runs": 144,
+      "stage": "G3a-v3-final",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 55296.0,
+      "requested_gpu_hours": 3456.0,
+      "run_kind": "eval",
+      "runs": 144,
+      "stage": "G3a-v3-final",
+      "time_limit": "24:00:00"
     }
   ]
 }

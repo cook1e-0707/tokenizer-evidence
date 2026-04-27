@@ -1,0 +1,78 @@
+version: 1
+workstream: G4
+description: Training-signal scale over effective compiled contract sample counts with fixed Qwen7B, B2, prompt family, codebook, and margin-aware objective.
+train_config: configs/experiment/scale/g4/exp_train__qwen2_5_7b__g4_train_signal_scale_v1.yaml
+eval_config: configs/experiment/scale/g4/exp_eval__qwen2_5_7b__g4_train_signal_scale_v1.yaml
+new_case_root_prefix: g4_train_signal_scale_v1
+case_root_search_roots:
+  - ${EXP_SCRATCH}
+  - ${REPO_HOME}
+scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g4_train_signal_scale_v1
+chimera_environment_setup: |
+  source ~/.bashrc
+  source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+  export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
+fixed_contract:
+  model: Qwen/Qwen2.5-7B-Instruct
+  block_count: 2
+  fields_per_block: 2
+  codebook: real_pilot_catalog__qwen2_5_7b_compiled__v1
+  prompt_family: exact-slot compiled prompt
+  objective: margin_aware_bucket_mass
+  operating_point_source: G3a-v3 hp04 frozen validation selection
+  lora_r: 16
+  learning_rate: 3.0e-5
+  epochs: 96
+  lambda_set: 2.0
+  lambda_margin: 0.5
+  margin_gamma: 0.5
+  lambda_reg: 0.0
+  checkpoint_selection_metric: training_min_slot_margin
+  checkpoint_selection_mode: max
+sample_count_variants:
+  - id: S16
+    slug: s16
+    effective_contract_sample_count: 16
+    unique_contract_sample_count: 16
+    compiled_sample_repeats: 1
+    train_payload_labels: ["U00", "U03", "U12", "U15"]
+  - id: S32
+    slug: s32
+    effective_contract_sample_count: 32
+    unique_contract_sample_count: 32
+    compiled_sample_repeats: 1
+    train_payload_labels: ["U00", "U01", "U02", "U03", "U04", "U05", "U12", "U15"]
+  - id: S64
+    slug: s64
+    effective_contract_sample_count: 64
+    unique_contract_sample_count: 64
+    compiled_sample_repeats: 1
+    train_payload_labels: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
+  - id: S128
+    slug: s128
+    effective_contract_sample_count: 128
+    unique_contract_sample_count: 64
+    compiled_sample_repeats: 2
+    train_payload_labels: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
+final_matrix:
+  status: dry_run_prepared
+  eval_payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  sample_count_variants: ["S16", "S32", "S64", "S128"]
+  target_eval_cases: 48
+  target_train_cases: 48
+  note: Current train/eval handoff writes one generated_text_path per eval payload, so launch planning assumes one train job per sample-count, seed, and eval payload.
+compute_estimate:
+  final_train_jobs: 48
+  final_eval_jobs: 48
+  requested_gpu_hours_per_job: 24
+  final_requested_gpu_hours: 2304
+paper_readiness_gate:
+  - real_contract_hash_checks_pass
+  - valid_completed_count_equals_target_count
+  - invalid_excluded_count_zero_unless_concrete_artifact_failure
+  - exact_and_rs_aware_gates_reported
+  - method_failures_remain_in_denominator
+  - only_training_signal_sample_count_varies
+  - no_threshold_changed_after_final_evaluation

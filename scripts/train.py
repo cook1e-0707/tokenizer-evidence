@@ -205,6 +205,22 @@ def main() -> int:
                 )
                 for sample in compiled_train_contract.samples
             ]
+            compiled_sample_repeats = max(1, int(config.train.compiled_sample_repeats or 1))
+            if compiled_sample_repeats > 1:
+                unique_dataset = list(dataset)
+                dataset = [
+                    TrainingExample(
+                        prompt=example.prompt,
+                        target_symbols=example.target_symbols,
+                        metadata={
+                            **example.metadata,
+                            "compiled_sample_repeat_index": repeat_index,
+                            "compiled_sample_repeats": compiled_sample_repeats,
+                        },
+                    )
+                    for repeat_index in range(compiled_sample_repeats)
+                    for example in unique_dataset
+                ]
             fieldwise_generation_plan = build_generation_plan_from_compiled_eval_contract(
                 compiled_eval_contract=compiled_train_contract.eval_contract,
                 catalog_path=Path(compiled_train_contract.catalog_path),
@@ -636,6 +652,9 @@ def main() -> int:
         eval_input_payload["compiled_train_contract_hash"] = compiled_train_contract.contract_hash
         eval_input_payload["compiled_train_contract_path"] = str(paths.run_dir / "compiled_train_contract.json")
         eval_input_payload["compiled_eval_contract"] = compiled_train_contract.eval_contract.to_dict()
+        eval_input_payload["unique_contract_sample_count"] = len(compiled_train_contract.samples)
+        eval_input_payload["compiled_sample_repeats"] = max(1, int(config.train.compiled_sample_repeats or 1))
+        eval_input_payload["effective_contract_sample_count"] = len(dataset)
         if config.train.checkpoint_selection_metric:
             eval_input_payload["checkpoint_selection"] = {
                 "metric": config.train.checkpoint_selection_metric,

@@ -17,11 +17,12 @@
   - `batch3c` passed
   - `batch3d` passed
 - Active execution scope:
-  - manuscript-facing consolidation and reporting only
+  - manuscript-facing consolidation, G4 preparation, and C1 reporting only
   - no active clean-path reruns
   - no active robustness-grid expansion
   - no active theorem reruns
-  - `G3a` block-count scale package is prepared locally but not yet standing; the pending Chimera work is `B1/B4` only
+  - `G3a-v3` block-count scale is standing on the held-out `B1/B2/B4 x U00..U15 x seeds 17,23,29` matrix
+  - `G4` training-signal scale package is prepared locally with dry-run manifests and pending paper artifacts; Chimera execution is next
   - no additional Batch 3 expansion
   - no new baselines
   - no new model families
@@ -32,6 +33,7 @@
   - `T2-r1` objective-comparison and bucket-level supplementary tables are landed in the manuscript appendix
   - `G1` payload x seed table, inclusion list, and summary are landed as frozen paper-facing artifacts
   - `G2` prompt-family table, inclusion list, and summary are landed as frozen package artifacts; canonical paper accounting is wired in code and should be regenerated on Chimera to preserve `/home` and `/hpcstor6` provenance paths
+  - `G3a-v3` block-count table, failure table, slot-margin table, inclusion list, summary, and compute accounting are landed as frozen paper-facing artifacts
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
   - `T1 sequence_proxy` now also has an accepted repaired Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
@@ -44,8 +46,8 @@
 
 ## Current Priority
 
-1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, and `G2` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
-2. Tighten statistics, compute accounting, explicit inclusion lists, and wording alignment between `PROJECT_STATUS.md`, `docs/experiment_matrix.md`, and the appendix tables.
+1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, and `G3a-v3` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
+2. Execute `G4` on Chimera from the prepared manifests, then rebuild and review its paper-facing artifacts before starting B0/baselines.
 3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
 4. Keep `B1` (matched-budget baselines) and `R1` (new model-family replication) blocked until the Qwen 7B manuscript package is finalized.
 
@@ -87,7 +89,8 @@
 | `compiled-c3-r4` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across runs | `64` per run | `64` per run | same exact-slot prompt family | `4` clean runs: `U00/U03/U12/U15 @ seed 17` |
 | `G1 payload-seed scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all standing seeds and payloads | `64` per run | `64` per run | same exact-slot prompt family | full package: `U00..U15 @ seeds 17,23,29` (`48` included clean train/eval cases) |
 | `G2 prompt-family scale` | same as `compiled-c3` | `2 x 2` | same `4 x 4`, `block_count=2` contract reused across all prompt families | `64` per run | `64` per run | `PF1/PF2/PF3` semantically equivalent prompt families | full package: `PF1/PF2/PF3 x U00/U03/U12/U15 x seeds 17,23,29` (`36` included clean train/eval cases; `PF1` reuses standing evidence) |
-| `G3a block-count scale` | same as `compiled-c3` | `1/2/4 x 2` | same `4 x 4` compiled codebook, with fields and prompt family fixed | `32/64/128` per run | `32/64/128` per run | same exact-slot prompt family | prepared package: `B1/B2/B4 x U00/U03/U12/U15 x seeds 17,23,29`; `B2` reuses standing evidence, `B1/B4` pending Chimera |
+| `G3a-v3 block-count scale` | same as `compiled-c3` | `1/2/4 x 2` | same `4 x 4` compiled codebook, with fields and prompt family fixed | `32/64/128` per run | `32/64/128` per run | same exact-slot prompt family plus margin-aware bucket loss | standing held-out package: `B1/B2/B4 x U00..U15 x seeds 17,23,29`; `142/144` valid successes, `2` valid method failures, `0` invalid exclusions, `0` pending |
+| `G4 train-signal scale` | sample-count ladder | `2 x 2` | same `4 x 4` compiled codebook, with model, prompt family, codebook, block count, and G3a-v3 hp04 objective fixed | `16/32/64/128` effective samples per run | `16/32/64/128` effective samples per run (`128` is `64` unique samples repeated twice) | same exact-slot prompt family plus margin-aware bucket loss | prepared pending package: `S16/S32/S64/S128 x U00/U03/U12/U15 x seeds 17,23,29`; `48 train + 48 eval` Chimera jobs next |
 
 Notes:
 - for the compiled exact-slot packages, `contract sample count = payload label count x block_count x fields_per_block`
@@ -157,7 +160,7 @@ Interpretation:
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
 - `batch3c`: seed-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
 - `batch3d`: single-family delimiter-attack expansion passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
-- Next target: manuscript appendix tables and main-result consolidation.
+- Next target: execute `G4` training-signal scale on Chimera, then rebuild and review `g4_train_scale` artifacts.
 
 ## 2026-04-20
 
