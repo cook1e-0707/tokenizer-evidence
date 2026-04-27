@@ -1,7 +1,7 @@
 {
-  "completed_count": 0,
+  "completed_count": 144,
   "description": "Principled held-out block-count scale repair with margin-aware bucket-mass training and distinct validation/final matrices.",
-  "exact_gate_success_rate": 0.0,
+  "exact_gate_success_rate": 0.9861111111111112,
   "final_matrix": {
     "block_variants": [
       "B1",
@@ -38,65 +38,68 @@
     "target_train_cases_if_one_train_per_payload": 144,
     "training_contract_covers_all_payloads": true
   },
-  "generated_at": "20260426T144851497458Z",
+  "generated_at": "20260427T174719275577Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
-  "method_failure_case_ids": [],
-  "method_failure_count": 0,
+  "method_failure_case_ids": [
+    "B2_U13_s29",
+    "B2_U14_s29"
+  ],
+  "method_failure_count": 2,
   "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3",
   "overall_metrics": {
     "erasure_count": {
       "ci95_half_width": 0.0,
       "mean": 0.0,
-      "n": 0,
+      "n": 144,
       "sem": 0.0,
       "std": 0.0
     },
     "exact_gate_success": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.019181595595785986,
+      "mean": 0.9861111111111112,
+      "n": 144,
+      "sem": 0.009786528365196931,
+      "std": 0.11743834038236317
     },
     "mean_bucket_margin": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.5491471508302685,
+      "mean": 12.534333982217484,
+      "n": 144,
+      "sem": 0.28017711777054516,
+      "std": 3.362125413246542
     },
     "min_bucket_margin": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.5141839104458173,
+      "mean": 10.983404029943426,
+      "n": 144,
+      "sem": 0.26233872981929457,
+      "std": 3.148064757831535
     },
     "rs_gate_success": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.019181595595785986,
+      "mean": 0.9861111111111112,
+      "n": 144,
+      "sem": 0.009786528365196931,
+      "std": 0.11743834038236317
     },
     "slot_bucket_accuracy": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.007587529097471245,
+      "mean": 0.9947916666666666,
+      "n": 144,
+      "sem": 0.0038711883150363492,
+      "std": 0.04645425978043619
     },
     "symbol_error_count": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
+      "ci95_half_width": 0.03035011638988498,
+      "mean": 0.020833333333333332,
+      "n": 144,
+      "sem": 0.015484753260145397,
+      "std": 0.18581703912174477
     }
   },
-  "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/g3a_block_scale_v3.yaml",
-  "paper_ready": false,
+  "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/g3a_block_scale_v3.yaml",
+  "paper_ready": true,
   "paper_ready_checks": {
     "exact_and_rs_aware_gates_reported": true,
     "hyperparameters_frozen_before_final_matrix_launch": true,
@@ -104,10 +107,41 @@
     "method_failures_remain_in_denominator": true,
     "no_threshold_changed_after_final_evaluation": true,
     "real_contract_hash_checks_pass": true,
-    "valid_completed_count_equals_target_count": false,
+    "valid_completed_count_equals_target_count": true,
     "validation_and_final_sets_distinct": true
   },
-  "pending_case_ids": [
+  "pending_case_ids": [],
+  "pending_count": 0,
+  "rs_gate_success_rate": 0.9861111111111112,
+  "schema_name": "g3a_v3_summary",
+  "schema_version": 1,
+  "selected_operating_point": {
+    "checkpoint_selection_metric": "training_min_slot_margin",
+    "checkpoint_selection_mode": "max",
+    "epochs": 96,
+    "final_launch_allowed": true,
+    "hp_id": "hp04",
+    "lambda_margin": 0.5,
+    "lambda_reg": 0.0,
+    "lambda_set": 2.0,
+    "learning_rate": 3e-05,
+    "lora_r": 16,
+    "margin_gamma": 0.5,
+    "status": "frozen_before_final_launch",
+    "validation_completed_count": 8,
+    "validation_exact_gate_success_rate": 1.0,
+    "validation_invalid_excluded_count": 0,
+    "validation_mean_bucket_margin": 17.48395564304315,
+    "validation_mean_total_evidence_loss": 2.908664645673298e-05,
+    "validation_method_failure_count": 0,
+    "validation_pending_count": 0,
+    "validation_rs_gate_success_rate": 1.0,
+    "validation_success_count": 8,
+    "validation_summary_path": "results/processed/paper_stats/g3a_v3_validation_summary.json",
+    "validation_target_count": 8,
+    "validation_valid_completed_count": 8
+  },
+  "success_case_ids": [
     "B1_U00_s17",
     "B1_U01_s17",
     "B1_U02_s17",
@@ -201,8 +235,6 @@
     "B2_U10_s29",
     "B2_U11_s29",
     "B2_U12_s29",
-    "B2_U13_s29",
-    "B2_U14_s29",
     "B2_U15_s29",
     "B4_U00_s17",
     "B4_U01_s17",
@@ -253,90 +285,59 @@
     "B4_U14_s29",
     "B4_U15_s29"
   ],
-  "pending_count": 144,
-  "rs_gate_success_rate": 0.0,
-  "schema_name": "g3a_v3_summary",
-  "schema_version": 1,
-  "selected_operating_point": {
-    "checkpoint_selection_metric": "training_min_slot_margin",
-    "checkpoint_selection_mode": "max",
-    "epochs": 96,
-    "final_launch_allowed": true,
-    "hp_id": "hp04",
-    "lambda_margin": 0.5,
-    "lambda_reg": 0.0,
-    "lambda_set": 2.0,
-    "learning_rate": 3e-05,
-    "lora_r": 16,
-    "margin_gamma": 0.5,
-    "status": "frozen_before_final_launch",
-    "validation_completed_count": 8,
-    "validation_exact_gate_success_rate": 1.0,
-    "validation_invalid_excluded_count": 0,
-    "validation_mean_bucket_margin": 17.48395564304315,
-    "validation_mean_total_evidence_loss": 2.908664645673298e-05,
-    "validation_method_failure_count": 0,
-    "validation_pending_count": 0,
-    "validation_rs_gate_success_rate": 1.0,
-    "validation_success_count": 8,
-    "validation_summary_path": "results/processed/paper_stats/g3a_v3_validation_summary.json",
-    "validation_target_count": 8,
-    "validation_valid_completed_count": 8
-  },
-  "success_case_ids": [],
-  "success_count": 0,
+  "success_count": 142,
   "summary_rows": [
     {
-      "completed_runs": 0,
-      "exact_gate_success_rate": 0.0,
+      "completed_runs": 144,
+      "exact_gate_success_rate": 0.9861111111111112,
       "invalid_excluded_runs": 0,
-      "method_failure_runs": 0,
-      "pending_runs": 144,
-      "rs_gate_success_rate": 0.0,
+      "method_failure_runs": 2,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 0.9861111111111112,
       "scope": "overall",
-      "success_runs": 0,
+      "success_runs": 142,
       "target_runs": 144,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 144
     },
     {
-      "completed_runs": 0,
-      "exact_gate_success_rate": 0.0,
+      "completed_runs": 48,
+      "exact_gate_success_rate": 1.0,
       "invalid_excluded_runs": 0,
       "method_failure_runs": 0,
-      "pending_runs": 48,
-      "rs_gate_success_rate": 0.0,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 1.0,
       "scope": "variant=B1",
-      "success_runs": 0,
+      "success_runs": 48,
       "target_runs": 48,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 48
     },
     {
-      "completed_runs": 0,
-      "exact_gate_success_rate": 0.0,
+      "completed_runs": 48,
+      "exact_gate_success_rate": 0.9583333333333334,
       "invalid_excluded_runs": 0,
-      "method_failure_runs": 0,
-      "pending_runs": 48,
-      "rs_gate_success_rate": 0.0,
+      "method_failure_runs": 2,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 0.9583333333333334,
       "scope": "variant=B2",
-      "success_runs": 0,
+      "success_runs": 46,
       "target_runs": 48,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 48
     },
     {
-      "completed_runs": 0,
-      "exact_gate_success_rate": 0.0,
+      "completed_runs": 48,
+      "exact_gate_success_rate": 1.0,
       "invalid_excluded_runs": 0,
       "method_failure_runs": 0,
-      "pending_runs": 48,
-      "rs_gate_success_rate": 0.0,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 1.0,
       "scope": "variant=B4",
-      "success_runs": 0,
+      "success_runs": 48,
       "target_runs": 48,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 48
     }
   ],
   "target_count": 144,
-  "valid_completed_count": 0,
+  "valid_completed_count": 144,
   "validation": {
     "block_variants": [
       "B1",
