@@ -1,7 +1,7 @@
 method_slug,target_far,negative_set,observed_far,false_accept_count,negative_count,status
-fixed_representative,0.01,foundation_null,,,4,pending
-fixed_representative,0.01,wrong_payload_null,,,12,pending
-fixed_representative,0.01,organic_prompt_null,,,4,pending
-uniform_bucket,0.01,foundation_null,,,4,pending
-uniform_bucket,0.01,wrong_payload_null,,,12,pending
-uniform_bucket,0.01,organic_prompt_null,,,4,pending
+fixed_representative,0.01,foundation_null,0.0,0,4,completed
+fixed_representative,0.01,wrong_payload_null,0.0,0,12,completed
+fixed_representative,0.01,organic_prompt_null,0.0,0,4,completed
+uniform_bucket,0.01,foundation_null,0.0,0,4,completed
+uniform_bucket,0.01,wrong_payload_null,0.0,0,12,completed
+uniform_bucket,0.01,organic_prompt_null,0.0,0,4,completed

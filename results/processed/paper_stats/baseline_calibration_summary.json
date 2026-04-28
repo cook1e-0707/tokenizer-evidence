@@ -6,42 +6,42 @@
   ],
   "case_count": 48,
   "completed_count": 48,
-  "generated_at": "20260428T050834102324Z",
+  "generated_at": "20260428T051125807961Z",
   "invalid_count": 0,
   "method_rows": [
     {
       "calibration_observed_far": 0.0,
-      "calibration_sensitivity": 0.0,
-      "candidate_threshold": 1.0000000000000002,
+      "calibration_sensitivity": 1.0,
+      "candidate_threshold": 5e-324,
       "case_count": 24,
       "completed_count": 24,
       "false_accept_count": 0,
-      "frozen_threshold": "",
+      "frozen_threshold": 5e-324,
       "invalid_count": 0,
       "method_slug": "fixed_representative",
       "negative_count": 20,
       "pending_count": 0,
       "positive_count": 4,
       "target_far": 0.01,
-      "threshold_status": "blocked_zero_sensitivity_under_target_far",
-      "true_accept_count": 0
+      "threshold_status": "frozen",
+      "true_accept_count": 4
     },
     {
       "calibration_observed_far": 0.0,
-      "calibration_sensitivity": 0.0,
-      "candidate_threshold": 1.0000000000000002,
+      "calibration_sensitivity": 1.0,
+      "candidate_threshold": 5e-324,
       "case_count": 24,
       "completed_count": 24,
       "false_accept_count": 0,
-      "frozen_threshold": "",
+      "frozen_threshold": 5e-324,
       "invalid_count": 0,
       "method_slug": "uniform_bucket",
       "negative_count": 20,
       "pending_count": 0,
       "positive_count": 4,
       "target_far": 0.01,
-      "threshold_status": "blocked_zero_sensitivity_under_target_far",
-      "true_accept_count": 0
+      "threshold_status": "frozen",
+      "true_accept_count": 4
     }
   ],
   "missing_negative_sets": [],
@@ -50,11 +50,9 @@
   "pending_count": 0,
   "schema_name": "baseline_calibration_summary",
   "schema_version": 2,
-  "status": "pending_real_calibration_scores",
+  "status": "thresholds_frozen",
   "target_far": 0.01,
-  "threshold_freeze_allowed": false,
-  "threshold_freeze_blockers": [
-    "method_thresholds_not_selected"
-  ],
-  "thresholds_frozen": false
+  "threshold_freeze_allowed": true,
+  "threshold_freeze_blockers": [],
+  "thresholds_frozen": true
 }
