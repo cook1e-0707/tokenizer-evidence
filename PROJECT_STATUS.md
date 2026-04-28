@@ -17,7 +17,7 @@
   - `batch3c` passed
   - `batch3d` passed
 - Active execution scope:
-  - manuscript-facing consolidation, C1 reporting, frozen matched-budget baseline artifacts, and R1 second-family package preparation
+  - manuscript-facing consolidation, C1 reporting, frozen matched-budget baseline artifacts, and R1 second-family artifact triage
   - no active clean-path reruns
   - no active robustness-grid expansion
   - no active theorem reruns
@@ -26,7 +26,7 @@
   - no additional Batch 3 expansion
   - `B1`/`B2` matched-budget baseline package configs, calibration artifacts, final artifacts, inclusion lists, and contract-hash accounting are frozen
   - `B1`/`B2` matched-budget baseline package is standing under frozen B0 accounting: fixed representative and uniform bucket are valid successes, English-random active fingerprint is a valid method-failure baseline, and KGW provenance control is explicit task-mismatched unavailable control outside the denominator
-  - `R1` Llama 3.1 8B replication package is staged locally; execution is blocked until the authenticated Llama tokenizer frozen catalog is generated and committed
+  - `R1` Llama 3.1 8B replication executed on Chimera with a strict-passed Llama tokenizer catalog; artifact accounting is complete, but exact-gate claim readiness is false because all 12 valid completed runs fail the exact gate while passing the RS-aware gate
 - Paper-facing appendix status:
   - `S1` clean compiled table is landed in the manuscript appendix
   - `S2` robustness-stage and attack-family tables are landed in the manuscript appendix
@@ -38,7 +38,7 @@
   - `G4` training-signal table, inclusion list, summary, and compute accounting are landed as frozen paper-facing artifacts
   - `B0` matched-budget baseline and calibration protocols are frozen in `docs/baseline_protocol.md` and `docs/calibration_protocol.md`
   - `B1`/`B2` matched-budget baseline package is landed as frozen paper-facing artifacts under matched-budget calibration
-  - `R1` Llama replication configs, protocol, dry-run manifests, and pending artifact schema are staged for the next Chimera package
+  - `R1` Llama replication artifacts are landed as a negative/diagnostic cross-family result: `12/12` valid completed, `0/12` exact-gate successes, `12/12` RS-aware successes, `0` invalid exclusions, `0` pending
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
   - `T1 sequence_proxy` now also has an accepted repaired Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
@@ -52,9 +52,9 @@
 ## Current Priority
 
 1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, `G3a-v3`, and `G4` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
-2. Move next to `R1`: freeze the Llama 3.1 tokenizer-specific carrier catalog with authenticated Hub access, commit the strict-pass catalog artifacts, then launch the 12-case clean replication package.
+2. Treat `R1` as artifact-paper-ready but not claim-paper-ready: report the exact-gate failure honestly, use the RS-aware success only as diagnostic cross-family evidence, and do not claim Llama clean exact-path replication from this package.
 3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
-4. Keep further baseline changes frozen unless the manuscript needs a narrower appendix; keep `R1` blocked until `configs/data/frozen/real_pilot_catalog__llama3_1__v1.yaml` exists and strict-passes.
+4. Keep further baseline changes frozen unless the manuscript needs a narrower appendix; do not launch an `R1-v2` repair unless the manuscript explicitly needs second-family exact-gate success and the repair is pre-registered before launch.
 
 ## Experimental Scale Snapshot
 

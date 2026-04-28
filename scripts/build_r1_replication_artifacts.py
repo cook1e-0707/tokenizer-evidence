@@ -226,7 +226,7 @@ def main() -> int:
     prerequisite = dict(package_config.get("catalog_prerequisite", {}))
     frozen_catalog = repo_root / str(prerequisite.get("frozen_catalog", ""))
     catalog_exists = bool(prerequisite.get("frozen_catalog")) and frozen_catalog.exists()
-    paper_ready_checks = {
+    artifact_paper_ready_checks = {
         "llama_tokenizer_frozen_catalog_exists_and_strict_passes": catalog_exists,
         "real_contract_hash_checks_pass": all(row["contract_hash_status"] == "match" for row in completed),
         "valid_completed_count_equals_target_count": len(valid_completed) == len(rows),
@@ -238,6 +238,13 @@ def main() -> int:
         "method_failures_remain_in_denominator": True,
         "no_threshold_changed_after_final_evaluation": True,
     }
+    artifact_paper_ready = all(artifact_paper_ready_checks.values())
+    claim_readiness_checks = {
+        "artifact_paper_ready": artifact_paper_ready,
+        "exact_gate_success_count_equals_target_count": len(successes) == len(rows),
+        "method_failure_count_zero": not method_failures,
+    }
+    claim_paper_ready = all(claim_readiness_checks.values())
     overall_row = _summary_row("overall", len(rows), rows)
     by_seed_rows = [
         _summary_row(f"seed={seed}", len(package_config["final_matrix"]["payloads"]), [row for row in rows if row["seed"] == seed])
@@ -265,8 +272,16 @@ def main() -> int:
         "rs_success_count": rs_success_count,
         "exact_gate_success_rate": len(successes) / len(valid_completed) if valid_completed else 0.0,
         "rs_gate_success_rate": rs_success_count / len(valid_completed) if valid_completed else 0.0,
-        "paper_ready": all(paper_ready_checks.values()),
-        "paper_ready_checks": paper_ready_checks,
+        "paper_ready": claim_paper_ready,
+        "artifact_paper_ready": artifact_paper_ready,
+        "claim_paper_ready": claim_paper_ready,
+        "paper_ready_checks": artifact_paper_ready_checks,
+        "artifact_paper_ready_checks": artifact_paper_ready_checks,
+        "claim_readiness_checks": claim_readiness_checks,
+        "claim_readiness_note": (
+            "R1 artifact accounting is complete, but the exact clean-path replication claim requires "
+            "exact_gate_success_count_equals_target_count."
+        ),
         "contract_hash_status_counts": contract_hash_status_counts,
         "overall_metrics": {
             "exact_gate_success": _stats([1.0 if row["exact_gate_success"] else 0.0 for row in valid_completed]),

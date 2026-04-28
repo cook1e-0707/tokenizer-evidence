@@ -167,6 +167,30 @@
       "runs": 48,
       "stage": "G4-final",
       "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 4608.0,
+      "requested_gpu_hours": 288.0,
+      "run_kind": "train",
+      "runs": 12,
+      "stage": "R1-final",
+      "time_limit": "24:00:00"
+    },
+    {
+      "cpus": 16,
+      "mem_gb": 96,
+      "num_gpus": 1,
+      "partition": "DGXA100",
+      "requested_cpu_hours": 4608.0,
+      "requested_gpu_hours": 288.0,
+      "run_kind": "eval",
+      "runs": 12,
+      "stage": "R1-final",
+      "time_limit": "24:00:00"
     }
   ]
 }

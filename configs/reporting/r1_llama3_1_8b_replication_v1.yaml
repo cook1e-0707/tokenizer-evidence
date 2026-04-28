@@ -59,3 +59,7 @@ paper_readiness_gate:
   - exact_and_rs_aware_gates_reported
   - method_failures_remain_in_denominator
   - no_threshold_changed_after_final_evaluation
+claim_readiness_gate:
+  - artifact_paper_ready
+  - exact_gate_success_count_equals_target_count
+  - method_failure_count_zero

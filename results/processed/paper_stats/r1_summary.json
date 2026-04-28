@@ -122,7 +122,24 @@
     }
   },
   "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/r1_llama3_1_8b_replication_v1.yaml",
-  "paper_ready": true,
+  "artifact_paper_ready": true,
+  "artifact_paper_ready_checks": {
+    "exact_and_rs_aware_gates_reported": true,
+    "invalid_excluded_count_zero_unless_concrete_artifact_failure": true,
+    "llama_tokenizer_frozen_catalog_exists_and_strict_passes": true,
+    "method_failures_remain_in_denominator": true,
+    "no_threshold_changed_after_final_evaluation": true,
+    "real_contract_hash_checks_pass": true,
+    "valid_completed_count_equals_target_count": true
+  },
+  "claim_paper_ready": false,
+  "claim_readiness_checks": {
+    "artifact_paper_ready": true,
+    "exact_gate_success_count_equals_target_count": false,
+    "method_failure_count_zero": false
+  },
+  "claim_readiness_note": "R1 artifact accounting is complete, but the exact clean-path replication claim requires exact_gate_success_count_equals_target_count.",
+  "paper_ready": false,
   "paper_ready_checks": {
     "exact_and_rs_aware_gates_reported": true,
     "invalid_excluded_count_zero_unless_concrete_artifact_failure": true,

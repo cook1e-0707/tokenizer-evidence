@@ -123,6 +123,9 @@ def test_build_r1_artifacts_writes_pending_package(tmp_path: Path) -> None:
     assert summary["completed_count"] == 0
     assert summary["pending_count"] == 12
     assert summary["paper_ready"] is False
+    assert summary["artifact_paper_ready"] is False
+    assert summary["claim_paper_ready"] is False
+    assert summary["claim_readiness_checks"]["exact_gate_success_count_equals_target_count"] is False
     assert summary["llama_frozen_catalog_exists"] is True
     assert summary["fixed_contract"]["block_count"] == 2
     assert summary["fixed_contract"]["model"] == "meta-llama/Meta-Llama-3.1-8B-Instruct"
