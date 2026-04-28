@@ -1,0 +1,48 @@
+{
+  "created_at": "20260428T000000000000Z",
+  "entries": [
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/smoke__baseline_perinucleus_official_qwen.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_smoke.py",
+      "experiment_name": "perinucleus_official_smoke",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-smoke-qwen-s17",
+      "manifest_name": "baseline_perinucleus_official_smoke",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Official Scalable Fingerprinting / Perinucleus smoke only. Not a paper result and not a full matrix.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_smoke/runs",
+      "overrides": [],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/smoke__baseline_perinucleus_official_qwen.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false",
+        "gpu_type": null,
+        "mem_gb": 128,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "smoke",
+        "qwen",
+        "gpu"
+      ]
+    }
+  ],
+  "manifest_name": "baseline_perinucleus_official_smoke",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "configs/experiment/baselines/perinucleus_official/smoke__baseline_perinucleus_official_qwen.yaml"
+}
+

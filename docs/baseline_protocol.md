@@ -78,6 +78,25 @@ evidence. KGW remains a task-mismatched provenance control and does not block
 the B1 ownership denominator unless it is explicitly upgraded to an audited
 control package.
 
+## Fidelity Gate For Paper Claims
+
+Main-table inclusion requires a baseline fidelity grade of `A` or `B` under the
+frozen Baseline Fidelity Gate.
+
+Grade `C` baselines are allowed only if explicitly labeled as adapted/proxy
+methods and placed outside the main comparison table, for example in an
+appendix diagnostic table.
+
+Grade `D` and `F` methods are forbidden from comparison claims. They may be
+mentioned only as diagnostics, invalid controls, or related-work context, and
+must not be described as evidence that the primary method outperforms a
+faithful external baseline.
+
+The current fidelity state is `A=0`, `B=0`, `C=1`, `D=3`, `F=9`; therefore no
+external baseline is currently eligible for the main comparison table. Full
+final external-baseline matrices are blocked until the relevant method is
+promoted to `A` or `B` by a subsequent audit.
+
 ## Matched Budget Rules
 
 All primary baselines must match the following budgets unless a row is explicitly

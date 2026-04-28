@@ -49,6 +49,15 @@
   - `bucket_mass` remains bucket-correct but misses the canonical representative on `TOPIC=climate`
   - `uniform_bucket` remains bucket-correct but fails the exact-slot gate by selecting non-canonical members `SECTION=review` and `TOPIC=climate`
 
+## Baseline Fidelity Status
+
+- Baseline Fidelity Gate is complete.
+- Current fidelity grade counts are `A=0`, `B=0`, `C=1`, `D=3`, `F=9`.
+- No external baseline is currently allowed in the main comparison table.
+- `perinucleus_no_train_diagnostic` is grade `F`; it is forbidden as a Scalable Fingerprinting baseline and may appear only as an appendix diagnostic.
+- `Chain&Hash-style` is grade `C`; it is forbidden in the main comparison table unless upgraded to grade `B` or better by a subsequent fidelity audit.
+- The official Scalable Fingerprinting repository is cloned at `external_baselines/scalable_fingerprinting_official` and the official protocol is scaffolded, but smoke is not run. Full Perinucleus final matrices remain blocked until official-code smoke and anchor reproduction pass.
+
 ## Current Priority
 
 1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, `G3a-v3`, and `G4` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.

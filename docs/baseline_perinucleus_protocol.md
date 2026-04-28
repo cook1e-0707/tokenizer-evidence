@@ -1,13 +1,21 @@
-# Perinucleus-Style Baseline Protocol
+# Perinucleus No-Train Diagnostic Protocol
 
-Status: prepared as an adapted baseline protocol on 2026-04-28.
+Status: renamed to `perinucleus_no_train_diagnostic` on 2026-04-28.
+
+This v0 package is not a Scalable Fingerprinting / Perinucleus baseline. It is
+retained only as a diagnostic showing that selecting keyed first-token targets
+from the base-model distribution without fingerprint insertion does not create
+an ownership baseline.
+
+Fidelity grade: `F`. This package is forbidden as a Scalable Fingerprinting
+baseline and must not be used in the main comparison table.
 
 ## Scope
 
-This package implements a Perinucleus-style adapted scalable-fingerprinting
-baseline for the Qwen/Qwen2.5-7B-Instruct setting. It is motivated by the
-Scalable Fingerprinting / Perinucleus family cited in the manuscript, but it is
-not claimed to be an exact reproduction of that paper.
+This package implements a no-train diagnostic for the
+Qwen/Qwen2.5-7B-Instruct setting. It is motivated by the Perinucleus response
+selection idea, but it does not implement the official Scalable Fingerprinting
+pipeline because it does not insert fingerprints through fine-tuning.
 
 The implemented object is a black-box active fingerprint baseline with natural
 English instruction-style keys and first-token responses selected from the base
@@ -34,7 +42,7 @@ Repo-local outputs are limited to:
 |---|---|
 | backbone | `Qwen/Qwen2.5-7B-Instruct` |
 | access during verification | black-box first-token response scoring, implemented with local HF logits for reproducibility |
-| training | no LoRA training; enrollment is base-model next-token distribution scoring |
+| training | none; enrollment is base-model next-token distribution scoring |
 | tokenizer | Qwen/Qwen2.5 tokenizer |
 | prompt family | natural low-temperature English/instruction-style prompts |
 | final seeds | `17`, `23`, `29` |
@@ -126,9 +134,9 @@ Every row must report:
 
 ## Comparison Role
 
-This is a strong external active ownership/fingerprinting baseline only after it
-has completed calibration and final evaluation under the frozen protocol. Until
-then it is an implemented adapted-baseline package with pending evidence.
+This is not a strong external active ownership/fingerprinting baseline and must
+not enter the main comparison table. It can only be reported as an appendix
+diagnostic named `perinucleus_no_train_diagnostic`.
 
 It should be compared against:
 
@@ -141,5 +149,7 @@ It should be compared against:
 - Do not overwrite existing B1/B2 artifacts.
 - Do not tune thresholds on final results.
 - Do not remove failed runs from the denominator.
-- Do not claim exact equivalence to Scalable Fingerprinting unless the external
-  implementation is fully matched and audited.
+- Do not call this package `Scalable Fingerprinting`.
+- Do not use this package for main-table comparison claims.
+- Use `docs/baseline_perinucleus_official_protocol.md` for the official trained
+  baseline protocol.

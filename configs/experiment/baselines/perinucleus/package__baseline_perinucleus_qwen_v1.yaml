@@ -1,7 +1,7 @@
 version: 1
-workstream: B1-strong-external-baseline
-package_name: baseline_perinucleus_qwen_v1
-description: Perinucleus-style adapted scalable-fingerprinting baseline under the frozen matched-budget protocol.
+workstream: B1-invalid-diagnostic
+package_name: perinucleus_no_train_diagnostic_v0
+description: No-train Perinucleus diagnostic. This package does not insert fingerprints and is not a Scalable Fingerprinting baseline.
 eval_config: configs/experiment/baselines/perinucleus/exp_eval__qwen2_5_7b__baseline_perinucleus_v1.yaml
 new_case_root_prefix: baselines/perinucleus_qwen
 scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen
@@ -13,11 +13,11 @@ chimera_environment_setup: |
 b0_protocol:
   baseline_protocol: docs/baseline_protocol.md
   calibration_protocol: docs/calibration_protocol.md
-  status: frozen_before_perinucleus_execution
+  status: frozen_as_no_train_diagnostic_not_main_baseline
 fixed_contract:
   model: Qwen/Qwen2.5-7B-Instruct
   tokenizer: Qwen/Qwen2.5-7B-Instruct
-  baseline_family: perinucleus_style_scalable_fingerprinting
+  baseline_family: perinucleus_no_train_diagnostic
   prompt_family: natural_low_temperature_instruction_v1
   target_far: 0.01
   score_name: exact_first_token_response_match_ratio
@@ -72,4 +72,5 @@ paper_readiness_gate:
   - far_calibration_completed_before_final_claim
   - utility_suite_reported
   - contract_hashes_match
-  - adapted_not_exact_reproduction_claim_only
+  - diagnostic_only_not_main_table
+  - must_not_be_called_scalable_fingerprinting
