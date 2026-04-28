@@ -4,9 +4,12 @@ import csv
 import json
 import subprocess
 import sys
+import types
 from pathlib import Path
 
+from scripts.eval import _compiled_expected_payload
 from src.baselines.base import build_baseline_adapter
+from src.core.contract_compiler import CompiledEvalContract
 from src.evaluation.canonical_source import load_canonical_evidence_source
 from src.infrastructure.manifest import build_manifest_from_config, load_manifest
 from src.infrastructure.paths import discover_repo_root
@@ -197,6 +200,63 @@ def test_canonical_source_can_use_config_payload_as_false_claim(tmp_path: Path) 
     assert source.diagnostics["payload_source"] == "config.eval.payload_text_override"
 
 
+def test_compiled_gate_false_claim_uses_payload_units_from_train_contract(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    train_contract_path = tmp_path / "compiled_train_contract.json"
+    eval_contract = {
+        "payload_label": "U01",
+        "payload_units": [1, 14],
+        "block_count": 2,
+        "fields_per_block": 2,
+        "slot_field_names": ["SECTION", "TOPIC", "SECTION", "TOPIC"],
+        "expected_slot_values": ["news", "market", "report", "travel"],
+        "exact_slot_prefixes": ["a", "b", "c", "d"],
+        "prompt_contract_name": "compiled_slot_request_v1",
+        "render_format": "canonical_v1",
+        "artifact_format": "compiled_slot_values",
+    }
+    train_contract_path.write_text(
+        json.dumps(
+            {
+                "schema_name": "compiled_train_contract",
+                "model_name": "qwen2.5-7b-instruct",
+                "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+                "tokenizer_backend": "huggingface",
+                "tokenizer_contract_hash": "tok",
+                "catalog_path": "catalog.yaml",
+                "catalog_sha256": "catalog",
+                "catalog_name": "test",
+                "prompt_contract_name": "compiled_slot_request_v1",
+                "prompt_contract_hash": "prompt",
+                "dataset_hash": "dataset",
+                "contract_hash": "contract",
+                "payload_label_to_units": {"U01": [1, 14], "U05": [5, 10]},
+                "fields_per_block": 2,
+                "block_count": 2,
+                "render_format": "canonical_v1",
+                "sample_count": 0,
+                "samples": [],
+                "eval_contract": eval_contract,
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    expected_payload, label, units = _compiled_expected_payload(
+        config=types.SimpleNamespace(
+            eval=types.SimpleNamespace(payload_text="U05", expected_payload_source="config")
+        ),
+        diagnostics={"compiled_train_contract_path": str(train_contract_path)},
+        compiled_eval_contract=CompiledEvalContract.from_dict(eval_contract),
+        repo_root=repo_root,
+    )
+
+    assert expected_payload == (5, 10)
+    assert label == "U05"
+    assert units == (5, 10)
+
+
 def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     output_dir = tmp_path / "paper_stats"
@@ -367,3 +427,4 @@ def test_build_matched_budget_baseline_calibration_maps_claim_payload_runs(
     assert positive["eval_summary_path"].endswith("run_claim_U01/eval_summary.json")
     assert wrong_claim["eval_summary_path"].endswith("run_claim_U05/eval_summary.json")
     assert wrong_claim["accepted"] == "False"
+    assert wrong_claim["result_class"] == "valid_completed"

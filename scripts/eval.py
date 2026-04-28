@@ -17,7 +17,7 @@ from src.core.canonical_contract import (
     ensure_matching_canonical_contract,
 )
 from src.core.catalog_freeze import load_required_frozen_catalog
-from src.core.contract_compiler import CompiledEvalContract
+from src.core.contract_compiler import CompiledEvalContract, CompiledTrainContract
 from src.core.payload_codec import BucketPayloadCodec
 from src.core.compiled_repair_diagnostics import (
     build_compiled_verification_report,
@@ -37,7 +37,7 @@ from src.core.verifier import (
     verify_canonical_rendered_text,
     verify_fixture,
 )
-from src.evaluation.canonical_source import load_canonical_evidence_source
+from src.evaluation.canonical_source import load_canonical_evidence_source, resolve_input_path
 from src.evaluation.report import EvalRunSummary, load_result_json
 from src.evaluation.utility_eval import evaluate_utility
 from src.infrastructure.config import load_experiment_config, save_resolved_config
@@ -162,6 +162,53 @@ def _load_compiled_eval_contract_from_diagnostics(diagnostics: dict[str, object]
 
 def _prefer_config_expected_payload(config: object) -> bool:
     return str(getattr(config.eval, "expected_payload_source", "eval_input")).strip() == "config"
+
+
+def _load_compiled_train_contract_from_diagnostics(
+    diagnostics: dict[str, object],
+    repo_root: Path,
+) -> CompiledTrainContract:
+    path_raw = diagnostics.get("compiled_train_contract_path")
+    if not path_raw:
+        raise ValueError(
+            "compiled_gate expected_payload_source=config requires compiled_train_contract_path metadata"
+        )
+    eval_input_path_raw = diagnostics.get("eval_input_path")
+    anchor_dir = (
+        Path(str(eval_input_path_raw)).parent
+        if isinstance(eval_input_path_raw, str) and eval_input_path_raw
+        else None
+    )
+    contract_path = resolve_input_path(str(path_raw), repo_root, anchor_dir=anchor_dir)
+    if not contract_path.exists():
+        raise FileNotFoundError(f"compiled_train_contract_path does not exist: {contract_path}")
+    payload = json.loads(contract_path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"Compiled train contract must be a JSON object: {contract_path}")
+    return CompiledTrainContract.from_dict(payload)
+
+
+def _compiled_expected_payload(
+    *,
+    config: object,
+    diagnostics: dict[str, object],
+    compiled_eval_contract: CompiledEvalContract,
+    repo_root: Path,
+) -> tuple[bytes | tuple[int, ...], str, tuple[int, ...]]:
+    if not _prefer_config_expected_payload(config):
+        units = tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+        return units, compiled_eval_contract.payload_label, units
+
+    claim_label = str(config.eval.payload_text)
+    train_contract = _load_compiled_train_contract_from_diagnostics(diagnostics, repo_root)
+    units = train_contract.payload_label_to_units.get(claim_label)
+    if units is None:
+        raise ValueError(
+            f"eval.payload_text={claim_label!r} is not present in compiled train contract "
+            "payload_label_to_units"
+        )
+    normalized_units = tuple(int(unit) for unit in units)
+    return normalized_units, claim_label, normalized_units
 
 
 def _run_foundation_eval(
@@ -363,10 +410,11 @@ def _run_compiled_gate_eval(
     render_verification: VerificationResult | None = None
     render_verifier_success = False
     expected_payload_source = str(diagnostics.get("payload_source", ""))
-    verifier_expected_payload: bytes | tuple[int, ...] = (
-        evidence_source.expected_payload_bytes
-        if expected_payload_source == "config.eval.payload_text_override"
-        else tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+    verifier_expected_payload, expected_payload_label, expected_payload_units = _compiled_expected_payload(
+        config=config,
+        diagnostics=diagnostics,
+        compiled_eval_contract=compiled_eval_contract,
+        repo_root=repo_root,
     )
     if compiled_result.rendered_bucket_tuples:
         render_verification = verify_canonical_rendered_text(
@@ -421,7 +469,7 @@ def _run_compiled_gate_eval(
         decoded_payload=(
             render_verification.decoded_payload
             if render_verification and render_verification.decoded_payload is not None
-            else compiled_eval_contract.payload_label
+            else expected_payload_label
             if render_verification and render_verification.success
             else None
         ),
@@ -438,7 +486,7 @@ def _run_compiled_gate_eval(
         expected_payload_units=(
             render_verification.expected_payload_units
             if render_verification
-            else tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+            else expected_payload_units
         ),
         details={
             "field_valid_rate": compiled_result.field_valid_rate,
@@ -449,9 +497,8 @@ def _run_compiled_gate_eval(
             "compiled_gate_passed": compiled_gate_passed,
             "render_verifier_success": render_verifier_success,
             "expected_payload_source": expected_payload_source,
-            "expected_payload_text": evidence_source.expected_payload_bytes.decode(
-                "utf-8", errors="replace"
-            ),
+            "expected_payload_text": expected_payload_label,
+            "expected_payload_units": list(expected_payload_units),
             "compiled_train_contract_hash": diagnostics.get("compiled_train_contract_hash"),
         },
         match_ratio=compiled_result.slot_exact_rate,
@@ -465,9 +512,8 @@ def _run_compiled_gate_eval(
         "payload_label": compiled_eval_contract.payload_label,
         "payload_units": list(compiled_eval_contract.payload_units),
         "expected_payload_source": expected_payload_source,
-        "expected_payload_text": evidence_source.expected_payload_bytes.decode(
-            "utf-8", errors="replace"
-        ),
+        "expected_payload_text": expected_payload_label,
+        "expected_payload_units": list(expected_payload_units),
         "field_valid_rate": compiled_result.field_valid_rate,
         "bucket_correct_rate": compiled_result.bucket_correct_rate,
         "slot_exact_rate": compiled_result.slot_exact_rate,
@@ -661,16 +707,16 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             bucket_layout=layout,
             payload_codec=codec,
             expected_payload=(
-                evidence_source.expected_payload_bytes
-                if diagnostics.get("payload_source") == "config.eval.payload_text_override"
-                else
-                evidence_source.expected_payload_units
+                _compiled_expected_payload(
+                    config=config,
+                    diagnostics=diagnostics,
+                    compiled_eval_contract=compiled_eval_contract,
+                    repo_root=repo_root,
+                )[0]
+                if compiled_eval_contract is not None
+                else evidence_source.expected_payload_units
                 if evidence_source.expected_payload_units
-                else (
-                    tuple(int(unit) for unit in compiled_eval_contract.payload_units)
-                    if compiled_eval_contract is not None
-                    else evidence_source.expected_payload_bytes
-                )
+                else evidence_source.expected_payload_bytes
             ),
             config=verify_config,
         )

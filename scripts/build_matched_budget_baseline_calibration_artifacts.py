@@ -184,7 +184,7 @@ def _row_from_summary(case: dict[str, Any], case_root: Path, eval_summary_path: 
     return {
         **case,
         "status": result.status,
-        "result_class": "completed" if result.status == "completed" else result.status,
+        "result_class": "valid_completed",
         "score_name": "ownership_score",
         "ownership_score": result.match_ratio,
         "accepted": bool(result.accepted),
@@ -214,7 +214,7 @@ def _method_status(method_slug: str, rows: list[dict[str, Any]], target_far: flo
     method_rows = [row for row in rows if row["method_slug"] == method_slug]
     positives = [row for row in method_rows if row["label"] is True]
     negatives = [row for row in method_rows if row["label"] is False]
-    completed = [row for row in method_rows if row["result_class"] == "completed"]
+    completed = [row for row in method_rows if row["result_class"] == "valid_completed"]
     pending = [row for row in method_rows if row["result_class"] == "pending"]
     return {
         "method_slug": method_slug,
@@ -253,7 +253,7 @@ def main() -> int:
     missing_negative_sets = [
         item for item in required_negative_sets if item not in set(available_negative_sets)
     ]
-    completed = [row for row in rows if row["result_class"] == "completed"]
+    completed = [row for row in rows if row["result_class"] == "valid_completed"]
     pending = [row for row in rows if row["result_class"] == "pending"]
     method_rows = [
         _method_status(str(method["slug"]), rows, target_far)
