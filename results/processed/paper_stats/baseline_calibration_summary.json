@@ -1,40 +1,50 @@
 {
   "available_negative_sets": [
+    "foundation_null",
+    "organic_prompt_null",
     "wrong_payload_null"
   ],
-  "case_count": 32,
-  "completed_count": 32,
-  "generated_at": "20260428T035158853912Z",
+  "case_count": 48,
+  "completed_count": 48,
+  "generated_at": "20260428T050834102324Z",
+  "invalid_count": 0,
   "method_rows": [
     {
-      "calibration_observed_far": "",
-      "case_count": 16,
-      "completed_count": 16,
+      "calibration_observed_far": 0.0,
+      "calibration_sensitivity": 0.0,
+      "candidate_threshold": 1.0000000000000002,
+      "case_count": 24,
+      "completed_count": 24,
+      "false_accept_count": 0,
       "frozen_threshold": "",
+      "invalid_count": 0,
       "method_slug": "fixed_representative",
-      "negative_count": 12,
+      "negative_count": 20,
       "pending_count": 0,
       "positive_count": 4,
       "target_far": 0.01,
-      "threshold_status": "blocked_missing_negative_sets_or_scores"
+      "threshold_status": "blocked_zero_sensitivity_under_target_far",
+      "true_accept_count": 0
     },
     {
-      "calibration_observed_far": "",
-      "case_count": 16,
-      "completed_count": 16,
+      "calibration_observed_far": 0.0,
+      "calibration_sensitivity": 0.0,
+      "candidate_threshold": 1.0000000000000002,
+      "case_count": 24,
+      "completed_count": 24,
+      "false_accept_count": 0,
       "frozen_threshold": "",
+      "invalid_count": 0,
       "method_slug": "uniform_bucket",
-      "negative_count": 12,
+      "negative_count": 20,
       "pending_count": 0,
       "positive_count": 4,
       "target_far": 0.01,
-      "threshold_status": "blocked_missing_negative_sets_or_scores"
+      "threshold_status": "blocked_zero_sensitivity_under_target_far",
+      "true_accept_count": 0
     }
   ],
-  "missing_negative_sets": [
-    "foundation_null",
-    "organic_prompt_null"
-  ],
+  "missing_negative_sets": [],
   "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1",
   "package_config_path": "configs/reporting/matched_budget_baselines_v1.yaml",
   "pending_count": 0,
@@ -44,9 +54,7 @@
   "target_far": 0.01,
   "threshold_freeze_allowed": false,
   "threshold_freeze_blockers": [
-    "missing_negative_set:foundation_null",
-    "missing_negative_set:organic_prompt_null",
-    ""
+    "method_thresholds_not_selected"
   ],
   "thresholds_frozen": false
 }
