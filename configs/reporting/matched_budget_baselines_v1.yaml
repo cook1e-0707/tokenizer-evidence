@@ -4,6 +4,7 @@ description: Minimal matched-budget baseline/control package under frozen B0 que
 train_config: configs/experiment/prep/baseline/exp_train__qwen2_5_7b__matched_budget_baselines_v1.yaml
 eval_config: configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml
 calibration_config: configs/experiment/prep/baseline/exp_calibrate__qwen2_5_7b__matched_budget_baselines_v1.yaml
+null_source_config: configs/experiment/prep/baseline/exp_null_source__qwen2_5_7b__matched_budget_baselines_v1.yaml
 new_case_root_prefix: matched_budget_baselines_v1
 case_root_search_roots:
   - ${EXP_SCRATCH}
@@ -91,13 +92,14 @@ baseline_methods:
     matched_budget_status: task_mismatched_control
 compute_estimate:
   calibration_train_jobs: 8
-  calibration_eval_jobs: 32
+  calibration_null_source_jobs: 16
+  calibration_eval_jobs: 48
   final_train_jobs: 24
   final_eval_jobs: 48
-  calibration_rows: 32
+  calibration_rows: 48
   requested_gpu_hours_per_train_job: 24
   requested_gpu_hours_per_eval_job: 24
-  calibration_requested_gpu_hours: 960
+  calibration_requested_gpu_hours: 1536
   final_requested_gpu_hours: 1728
 paper_readiness_gate:
   - calibration_thresholds_frozen_before_final

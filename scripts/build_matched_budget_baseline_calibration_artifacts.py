@@ -60,7 +60,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--eval-registry",
-        default="manifests/matched_budget_baselines/calibration_eval_job_registry.jsonl",
+        action="append",
+        default=None,
         help="Optional calibration eval job registry used for exact manifest_id to output_dir mapping.",
     )
     return parser.parse_args()
@@ -140,7 +141,6 @@ def _find_eval_summary(
         candidate = Path(record.output_dir) / "eval_summary.json"
         if candidate.exists():
             return candidate
-        return None
 
     matches = [
         item
@@ -196,6 +196,71 @@ def _row_from_summary(case: dict[str, Any], case_root: Path, eval_summary_path: 
     }
 
 
+def _score(row: dict[str, Any]) -> float | None:
+    try:
+        return float(row["ownership_score"])
+    except (TypeError, ValueError):
+        return None
+
+
+def _select_threshold(rows: list[dict[str, Any]], target_far: float) -> dict[str, Any]:
+    positives = [row for row in rows if row["label"] is True and row["result_class"] == "valid_completed"]
+    negatives = [row for row in rows if row["label"] is False and row["result_class"] == "valid_completed"]
+    scores = sorted(
+        {
+            score
+            for row in [*positives, *negatives]
+            if (score := _score(row)) is not None
+        }
+    )
+    if not positives or not negatives or not scores:
+        return {
+            "threshold_status": "blocked_missing_scores",
+            "frozen_threshold": "",
+            "calibration_observed_far": "",
+            "false_accept_count": "",
+            "negative_count": len(negatives),
+            "true_accept_count": "",
+            "positive_count": len(positives),
+            "calibration_sensitivity": "",
+        }
+    candidates = sorted({*scores, max(scores) + 1e-12})
+    selected: float | None = None
+    selected_false_accepts = 0
+    selected_true_accepts = 0
+    for candidate in candidates:
+        false_accepts = sum(
+            1
+            for row in negatives
+            if (score := _score(row)) is not None and score >= candidate
+        )
+        observed_far = false_accepts / len(negatives) if negatives else 1.0
+        if observed_far <= target_far:
+            selected = candidate
+            selected_false_accepts = false_accepts
+            selected_true_accepts = sum(
+                1
+                for row in positives
+                if (score := _score(row)) is not None and score >= candidate
+            )
+            break
+    if selected is None:
+        raise RuntimeError("internal error: threshold candidates must include a strict max-score cutoff")
+    threshold_status = "frozen"
+    observed_far = selected_false_accepts / len(negatives) if negatives else 1.0
+    sensitivity = selected_true_accepts / len(positives) if positives else 0.0
+    return {
+        "threshold_status": threshold_status,
+        "frozen_threshold": selected,
+        "calibration_observed_far": observed_far,
+        "false_accept_count": selected_false_accepts,
+        "negative_count": len(negatives),
+        "true_accept_count": selected_true_accepts,
+        "positive_count": len(positives),
+        "calibration_sensitivity": sensitivity,
+    }
+
+
 def _collect_row(
     repo_root: Path,
     case: dict[str, Any],
@@ -216,6 +281,21 @@ def _method_status(method_slug: str, rows: list[dict[str, Any]], target_far: flo
     negatives = [row for row in method_rows if row["label"] is False]
     completed = [row for row in method_rows if row["result_class"] == "valid_completed"]
     pending = [row for row in method_rows if row["result_class"] == "pending"]
+    invalid = [
+        row
+        for row in method_rows
+        if row["result_class"] not in {"valid_completed", "pending"}
+    ]
+    threshold = _select_threshold(method_rows, target_far) if not pending and not invalid else {
+        "threshold_status": "blocked_pending_or_invalid_scores",
+        "frozen_threshold": "",
+        "calibration_observed_far": "",
+        "false_accept_count": "",
+        "negative_count": len(negatives),
+        "true_accept_count": "",
+        "positive_count": len(positives),
+        "calibration_sensitivity": "",
+    }
     return {
         "method_slug": method_slug,
         "target_far": target_far,
@@ -224,9 +304,8 @@ def _method_status(method_slug: str, rows: list[dict[str, Any]], target_far: flo
         "negative_count": len(negatives),
         "completed_count": len(completed),
         "pending_count": len(pending),
-        "threshold_status": "blocked_missing_negative_sets_or_scores",
-        "frozen_threshold": "",
-        "calibration_observed_far": "",
+        "invalid_count": len(invalid),
+        **threshold,
     }
 
 
@@ -238,8 +317,14 @@ def main() -> int:
     output_dir = _resolve_path(repo_root, args.output_dir)
     tables_dir = _resolve_path(repo_root, args.tables_dir)
     root_base = _resolve_output_root_base(package_config, args.case_root_base)
-    eval_registry_path = _resolve_path(repo_root, args.eval_registry)
-    registry_by_manifest_id = latest_registry_by_manifest_id(load_registry(eval_registry_path))
+    eval_registry_paths = args.eval_registry or [
+        "manifests/matched_budget_baselines/calibration_eval_job_registry.jsonl"
+    ]
+    registry_records: list[RegistryRecord] = []
+    for eval_registry_raw in eval_registry_paths:
+        eval_registry_path = _resolve_path(repo_root, eval_registry_raw)
+        registry_records.extend(load_registry(eval_registry_path))
+    registry_by_manifest_id = latest_registry_by_manifest_id(registry_records)
     rows = [
         _collect_row(repo_root, case, registry_by_manifest_id)
         for case in _eval_cases(package_config, root_base)
@@ -255,11 +340,33 @@ def main() -> int:
     ]
     completed = [row for row in rows if row["result_class"] == "valid_completed"]
     pending = [row for row in rows if row["result_class"] == "pending"]
+    invalid = [
+        row
+        for row in rows
+        if row["result_class"] not in {"valid_completed", "pending"}
+    ]
     method_rows = [
         _method_status(str(method["slug"]), rows, target_far)
         for method in package_config["baseline_methods"]
         if bool(method["requires_training"]) and not bool(method["requires_external_integration"])
     ]
+    frozen_methods = [
+        row for row in method_rows if row["threshold_status"] == "frozen"
+    ]
+    threshold_freeze_allowed = (
+        not pending
+        and not invalid
+        and not missing_negative_sets
+        and len(frozen_methods) == len(method_rows)
+    )
+    thresholds_frozen = threshold_freeze_allowed
+    threshold_freeze_blockers = [
+        *[f"missing_negative_set:{item}" for item in missing_negative_sets],
+        "pending_calibration_eval_summaries" if pending else "",
+        "invalid_calibration_eval_summaries" if invalid else "",
+        "method_thresholds_not_selected" if len(frozen_methods) != len(method_rows) else "",
+    ]
+    threshold_freeze_blockers = [item for item in threshold_freeze_blockers if item]
     summary = {
         "schema_name": "baseline_calibration_summary",
         "schema_version": 2,
@@ -267,33 +374,51 @@ def main() -> int:
         "package_config_path": _repo_relative_path(repo_root, package_config_path),
         "new_case_root_base": root_base,
         "target_far": target_far,
-        "status": "pending_real_calibration_scores",
-        "thresholds_frozen": False,
-        "threshold_freeze_allowed": False,
-        "threshold_freeze_blockers": [
-            *[f"missing_negative_set:{item}" for item in missing_negative_sets],
-            "pending_calibration_eval_summaries" if pending else "",
-        ],
+        "status": "thresholds_frozen" if thresholds_frozen else "pending_real_calibration_scores",
+        "thresholds_frozen": thresholds_frozen,
+        "threshold_freeze_allowed": threshold_freeze_allowed,
+        "threshold_freeze_blockers": threshold_freeze_blockers,
         "available_negative_sets": available_negative_sets,
         "missing_negative_sets": missing_negative_sets,
         "case_count": len(rows),
         "completed_count": len(completed),
         "pending_count": len(pending),
+        "invalid_count": len(invalid),
         "method_rows": method_rows,
     }
-    far_rows = [
-        {
-            "method_slug": row["method_slug"],
-            "target_far": target_far,
-            "negative_set": negative_set,
-            "observed_far": "",
-            "false_accept_count": "",
-            "negative_count": "",
-            "status": "pending",
-        }
-        for row in method_rows
-        for negative_set in required_negative_sets
-    ]
+    far_rows: list[dict[str, Any]] = []
+    for method_row in method_rows:
+        method_threshold = method_row["frozen_threshold"]
+        for negative_set in required_negative_sets:
+            negative_rows = [
+                row
+                for row in rows
+                if row["method_slug"] == method_row["method_slug"]
+                and row["negative_set"] == negative_set
+                and row["result_class"] == "valid_completed"
+            ]
+            false_accept_count: int | str = ""
+            observed_far: float | str = ""
+            status = "pending"
+            if method_threshold != "" and negative_rows:
+                false_accept_count = sum(
+                    1
+                    for row in negative_rows
+                    if (score := _score(row)) is not None and score >= float(method_threshold)
+                )
+                observed_far = false_accept_count / len(negative_rows)
+                status = "completed"
+            far_rows.append(
+                {
+                    "method_slug": method_row["method_slug"],
+                    "target_far": target_far,
+                    "negative_set": negative_set,
+                    "observed_far": observed_far,
+                    "false_accept_count": false_accept_count,
+                    "negative_count": len(negative_rows) if negative_rows else "",
+                    "status": status,
+                }
+            )
     utility_rows = [
         {
             "method_slug": row["method_slug"],

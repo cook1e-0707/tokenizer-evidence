@@ -1,0 +1,40 @@
+includes:
+  - ../../../model/qwen2_5_7b_instruct.yaml
+  - ../../../data/real_pilot.yaml
+  - ../../../train/default.yaml
+  - ../../../eval/default.yaml
+  - ../../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_train
+  mode: train
+  method: our_method
+  seed: 41
+  variant_name: matched-budget-baseline-null-source
+  notes: B0/B1 calibration null-source generation. Raw outputs must be written to scratch.
+
+data:
+  name: matched-budget-baselines-v1
+  carrier_catalog_path: configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml
+
+train:
+  target_mode: compiled_fieldwise_bucket_mass
+  objective: foundation_null
+  batch_size: 1
+  epochs: 1
+  learning_rate: 0.0
+  probe_block_count: 2
+  compiled_sample_repeats: 1
+  probe_payload_texts: ["U00", "U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U10", "U11", "U12", "U13", "U14", "U15"]
+  generation_prompt: "Select exactly one allowed carrier token."
+  generation_do_sample: false
+  generation_max_new_tokens: 1
+  generation_stop_strings: []
+  generation_bad_words: []
+  generation_suppress_tokens: []
+  generation_sequence_bias: {}
+
+eval:
+  verification_mode: compiled_gate
+  render_format: canonical_v1
+  payload_text: U01

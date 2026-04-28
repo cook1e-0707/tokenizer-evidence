@@ -41,6 +41,10 @@ def parse_args() -> argparse.Namespace:
         default="manifests/matched_budget_baselines/calibration_eval_manifest.json",
     )
     parser.add_argument(
+        "--null-source-manifest-out",
+        default="manifests/matched_budget_baselines/calibration_null_source_manifest.json",
+    )
+    parser.add_argument(
         "--output-root-base",
         help="Optional base directory for baseline calibration roots. Defaults to EXP_SCRATCH/matched_budget_baselines_v1.",
     )
@@ -76,6 +80,10 @@ def _calibration_methods(package_config: dict[str, Any]) -> list[dict[str, Any]]
 
 def _case_root(prefix: str, method_slug: str, payload: str, seed: int) -> str:
     return str((Path(prefix) / "calibration" / method_slug / f"{payload}_s{seed}").as_posix())
+
+
+def _null_case_root(prefix: str, method_slug: str, negative_set: str, payload: str, seed: int) -> str:
+    return str((Path(prefix) / "calibration" / method_slug / negative_set / f"{payload}_s{seed}").as_posix())
 
 
 def _variant_name(method_slug: str, eval_kind: str = "") -> str:
@@ -144,7 +152,59 @@ def _eval_cases(package_config: dict[str, Any], output_root_base: str) -> list[d
                         "case_root": _case_root(output_root_base, method_slug, owner_payload, seed),
                     }
                 )
+        for negative_set in ("foundation_null", "organic_prompt_null"):
+            for claim_payload in payloads:
+                cases.append(
+                    {
+                        "case_id": (
+                            f"cal_eval_{method_slug}_{negative_set}_claim_{claim_payload}_s{seed}"
+                        ),
+                        "method_id": str(method["id"]),
+                        "method_slug": method_slug,
+                        "method_name": str(method["method_name"]),
+                        "baseline_family": str(method["baseline_family"]),
+                        "baseline_role": str(method["baseline_role"]),
+                        "train_objective": str(method["train_objective"]),
+                        "owner_payload": negative_set,
+                        "claim_payload": claim_payload,
+                        "label": False,
+                        "eval_kind": negative_set,
+                        "negative_set": negative_set,
+                        "seed": seed,
+                        "block_count": int(package_config["fixed_contract"]["block_count"]),
+                        "query_budget": int(package_config["fixed_contract"]["query_budget"]),
+                        "target_far": float(package_config["fixed_contract"]["target_far"]),
+                        "case_root": _null_case_root(
+                            output_root_base,
+                            method_slug,
+                            negative_set,
+                            claim_payload,
+                            seed,
+                        ),
+                    }
+                )
     return cases
+
+
+def _null_source_cases(package_config: dict[str, Any], output_root_base: str) -> list[dict[str, Any]]:
+    return [
+        case
+        for case in _eval_cases(package_config, output_root_base)
+        if case["negative_set"] in {"foundation_null", "organic_prompt_null"}
+    ]
+
+
+def _entry_with_tags(entry: ManifestEntry, tags: list[str]) -> ManifestEntry:
+    payload = entry.to_json_dict()
+    existing_tags = list(payload.get("tags", []))
+    payload["tags"] = list(dict.fromkeys([*existing_tags, *tags]))
+    return ManifestEntry.from_json_dict(payload)
+
+
+def _entry_with_entry_point(entry: ManifestEntry, entry_point: str) -> ManifestEntry:
+    payload = entry.to_json_dict()
+    payload["entry_point"] = entry_point
+    return ManifestEntry.from_json_dict(payload)
 
 
 def _build_train_entry(
@@ -174,6 +234,45 @@ def _build_train_entry(
     )
 
 
+def _build_null_source_entry(
+    *,
+    repo_root: Path,
+    null_source_config_path: Path,
+    case: dict[str, Any],
+    environment_setup: str | None,
+) -> ManifestEntry:
+    output_root = str((Path(case["case_root"]) / "runs").as_posix())
+    overrides = [
+        f"run.seed={case['seed']}",
+        f"run.variant_name={_variant_name(case['method_slug'], case['eval_kind'])}",
+        f"eval.payload_text={case['claim_payload']}",
+        f"train.objective={case['negative_set']}",
+        f"train.probe_block_count={case['block_count']}",
+        f"runtime.output_root={output_root}",
+    ]
+    if environment_setup:
+        overrides.append(f"runtime.environment_setup={environment_setup}")
+    manifest = build_manifest_from_config(null_source_config_path, overrides=overrides)
+    entry = _entry_with_repo_relative_config(manifest.entries[0], repo_root)
+    entry = _entry_with_entry_point(entry, "scripts/generate_baseline_null_input.py")
+    entry = _entry_with_tags(
+        entry,
+        [
+            "baseline_calibration",
+            str(case["negative_set"]),
+            str(case["method_slug"]),
+        ],
+    )
+    return _entry_with_identity(
+        entry,
+        manifest_id=(
+            f"baseline-calibration-source-{case['method_slug']}-{case['negative_set']}"
+            f"-claim-{case['claim_payload'].lower()}-s{case['seed']}"
+        ),
+        manifest_name="matched_budget_baselines_calibration_null_source",
+    )
+
+
 def _build_eval_entry(
     *,
     repo_root: Path,
@@ -197,6 +296,14 @@ def _build_eval_entry(
         overrides.append(f"runtime.environment_setup={environment_setup}")
     manifest = build_manifest_from_config(eval_config_path, overrides=overrides)
     entry = _entry_with_repo_relative_config(manifest.entries[0], repo_root)
+    entry = _entry_with_tags(
+        entry,
+        [
+            "baseline_calibration",
+            str(case["eval_kind"]),
+            str(case["method_slug"]),
+        ],
+    )
     return _entry_with_identity(
         entry,
         manifest_id=(
@@ -214,9 +321,11 @@ def main() -> int:
     package_config = _load_yaml(package_config_path)
     train_config_path = _resolve_path(repo_root, str(package_config["train_config"]))
     eval_config_path = _resolve_path(repo_root, str(package_config["eval_config"]))
+    null_source_config_path = _resolve_path(repo_root, str(package_config["null_source_config"]))
     output_path = _resolve_path(repo_root, args.output)
     train_manifest_path = _resolve_path(repo_root, args.train_manifest_out)
     eval_manifest_path = _resolve_path(repo_root, args.eval_manifest_out)
+    null_source_manifest_path = _resolve_path(repo_root, args.null_source_manifest_out)
     output_root_base = _resolve_output_root_base(package_config, args.output_root_base)
     environment_setup = (
         args.environment_setup
@@ -225,6 +334,7 @@ def main() -> int:
     )
     train_cases = _train_cases(package_config, output_root_base)
     eval_cases = _eval_cases(package_config, output_root_base)
+    null_source_cases = _null_source_cases(package_config, output_root_base)
     train_entries = [
         _build_train_entry(
             repo_root=repo_root,
@@ -243,6 +353,15 @@ def main() -> int:
         )
         for case in eval_cases
     ]
+    null_source_entries = [
+        _build_null_source_entry(
+            repo_root=repo_root,
+            null_source_config_path=null_source_config_path,
+            case=case,
+            environment_setup=environment_setup,
+        )
+        for case in null_source_cases
+    ]
     _save_manifest(
         repo_root,
         train_config_path,
@@ -257,10 +376,20 @@ def main() -> int:
         eval_entries,
         eval_manifest_path,
     )
+    _save_manifest(
+        repo_root,
+        null_source_config_path,
+        "matched_budget_baselines_calibration_null_source",
+        null_source_entries,
+        null_source_manifest_path,
+    )
+    available_negative_sets = sorted(
+        {str(case["negative_set"]) for case in eval_cases if case["negative_set"]}
+    )
     missing_negative_sets = [
         item
         for item in package_config["calibration_split"]["negative_sets"]
-        if item not in {"wrong_payload_null"}
+        if item not in set(available_negative_sets)
     ]
     payload = {
         "schema_name": "baseline_calibration_package_dry_run",
@@ -270,13 +399,13 @@ def main() -> int:
         "generated_at": current_timestamp(),
         "output_root_base": output_root_base,
         "train_manifest_entry_count": len(train_entries),
+        "null_source_manifest_entry_count": len(null_source_entries),
         "eval_manifest_entry_count": len(eval_entries),
         "calibration_methods": [case["method_slug"] for case in train_cases[:: len(package_config["calibration_split"]["payloads"])]],
-        "available_negative_sets": ["wrong_payload_null"],
+        "available_negative_sets": available_negative_sets,
         "missing_negative_sets": missing_negative_sets,
         "threshold_freeze_allowed": False,
         "threshold_freeze_blockers": [
-            "foundation_null and organic_prompt_null are not yet materialized",
             "real calibration eval summaries are pending",
         ],
         "environment_setup_present": bool(environment_setup),
@@ -284,12 +413,14 @@ def main() -> int:
             environment_setup and "zkrfa_py312/bin/activate" in str(environment_setup)
         ),
         "train_cases": train_cases,
+        "null_source_cases": null_source_cases,
         "eval_cases": eval_cases,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     print(f"wrote baseline calibration dry-run summary to {output_path}")
     print(f"wrote {len(train_entries)} calibration train manifest entries to {train_manifest_path}")
+    print(f"wrote {len(null_source_entries)} calibration null-source manifest entries to {null_source_manifest_path}")
     print(f"wrote {len(eval_entries)} calibration eval manifest entries to {eval_manifest_path}")
     return 0
 
