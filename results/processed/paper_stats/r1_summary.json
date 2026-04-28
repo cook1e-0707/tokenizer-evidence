@@ -7,9 +7,9 @@
     "source_catalog": "configs/data/source/real_pilot_catalog__llama3_1__src_v1.yaml",
     "status": "required_before_train"
   },
-  "completed_count": 0,
+  "completed_count": 12,
   "contract_hash_status_counts": {
-    "missing_hash": 12
+    "match": 12
   },
   "description": "Minimal second-family clean-path replication on Llama 3.1 8B Instruct with a Llama-tokenizer frozen carrier catalog.",
   "exact_gate_success_rate": 0.0,
@@ -50,76 +50,11 @@
     "prompt_family": "exact-slot compiled prompt",
     "tokenizer": "meta-llama/Meta-Llama-3.1-8B-Instruct"
   },
-  "generated_at": "20260428T175111040112Z",
+  "generated_at": "20260428T182736585781Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
   "llama_frozen_catalog_exists": true,
-  "method_failure_case_ids": [],
-  "method_failure_count": 0,
-  "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1",
-  "overall_metrics": {
-    "erasure_count": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    },
-    "exact_gate_success": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    },
-    "rs_gate_success": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    },
-    "slot_bucket_accuracy": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    },
-    "slot_margin_min": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    },
-    "symbol_error_count": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    },
-    "target_bucket_mass_mean": {
-      "ci95_half_width": 0.0,
-      "mean": 0.0,
-      "n": 0,
-      "sem": 0.0,
-      "std": 0.0
-    }
-  },
-  "package_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/reporting/r1_llama3_1_8b_replication_v1.yaml",
-  "paper_ready": false,
-  "paper_ready_checks": {
-    "exact_and_rs_aware_gates_reported": true,
-    "invalid_excluded_count_zero_unless_concrete_artifact_failure": true,
-    "llama_tokenizer_frozen_catalog_exists_and_strict_passes": true,
-    "method_failures_remain_in_denominator": true,
-    "no_threshold_changed_after_final_evaluation": true,
-    "real_contract_hash_checks_pass": true,
-    "valid_completed_count_equals_target_count": false
-  },
-  "pending_case_ids": [
+  "method_failure_case_ids": [
     "R1_U00_s17",
     "R1_U03_s17",
     "R1_U12_s17",
@@ -133,64 +68,129 @@
     "R1_U12_s29",
     "R1_U15_s29"
   ],
-  "pending_count": 12,
-  "rs_gate_success_rate": 0.0,
-  "rs_success_count": 0,
+  "method_failure_count": 12,
+  "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1",
+  "overall_metrics": {
+    "erasure_count": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 12,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "exact_gate_success": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 12,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "rs_gate_success": {
+      "ci95_half_width": 0.0,
+      "mean": 1.0,
+      "n": 12,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "slot_bucket_accuracy": {
+      "ci95_half_width": 0.0,
+      "mean": 1.0,
+      "n": 12,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "slot_margin_min": {
+      "ci95_half_width": 0.42497873474664816,
+      "mean": 10.695745786031088,
+      "n": 12,
+      "sem": 0.21682588507482048,
+      "std": 0.7511068986913587
+    },
+    "symbol_error_count": {
+      "ci95_half_width": 0.0,
+      "mean": 0.0,
+      "n": 12,
+      "sem": 0.0,
+      "std": 0.0
+    },
+    "target_bucket_mass_mean": {
+      "ci95_half_width": 2.3041745429463302e-05,
+      "mean": 0.9999509453773499,
+      "n": 12,
+      "sem": 1.1755992566052705e-05,
+      "std": 4.072395283561061e-05
+    }
+  },
+  "package_config_path": "/home/guanjie.lin001/tokenizer-evidence/configs/reporting/r1_llama3_1_8b_replication_v1.yaml",
+  "paper_ready": true,
+  "paper_ready_checks": {
+    "exact_and_rs_aware_gates_reported": true,
+    "invalid_excluded_count_zero_unless_concrete_artifact_failure": true,
+    "llama_tokenizer_frozen_catalog_exists_and_strict_passes": true,
+    "method_failures_remain_in_denominator": true,
+    "no_threshold_changed_after_final_evaluation": true,
+    "real_contract_hash_checks_pass": true,
+    "valid_completed_count_equals_target_count": true
+  },
+  "pending_case_ids": [],
+  "pending_count": 0,
+  "rs_gate_success_rate": 1.0,
+  "rs_success_count": 12,
   "schema_name": "r1_summary",
   "schema_version": 1,
   "success_case_ids": [],
   "success_count": 0,
   "summary_rows": [
     {
-      "completed_runs": 0,
+      "completed_runs": 12,
       "exact_gate_success_rate": 0.0,
       "invalid_excluded_runs": 0,
-      "method_failure_runs": 0,
-      "pending_runs": 12,
-      "rs_gate_success_rate": 0.0,
+      "method_failure_runs": 12,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 1.0,
       "scope": "overall",
       "success_runs": 0,
       "target_runs": 12,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 12
     },
     {
-      "completed_runs": 0,
+      "completed_runs": 4,
       "exact_gate_success_rate": 0.0,
       "invalid_excluded_runs": 0,
-      "method_failure_runs": 0,
-      "pending_runs": 4,
-      "rs_gate_success_rate": 0.0,
+      "method_failure_runs": 4,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 1.0,
       "scope": "seed=17",
       "success_runs": 0,
       "target_runs": 4,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 4
     },
     {
-      "completed_runs": 0,
+      "completed_runs": 4,
       "exact_gate_success_rate": 0.0,
       "invalid_excluded_runs": 0,
-      "method_failure_runs": 0,
-      "pending_runs": 4,
-      "rs_gate_success_rate": 0.0,
+      "method_failure_runs": 4,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 1.0,
       "scope": "seed=23",
       "success_runs": 0,
       "target_runs": 4,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 4
     },
     {
-      "completed_runs": 0,
+      "completed_runs": 4,
       "exact_gate_success_rate": 0.0,
       "invalid_excluded_runs": 0,
-      "method_failure_runs": 0,
-      "pending_runs": 4,
-      "rs_gate_success_rate": 0.0,
+      "method_failure_runs": 4,
+      "pending_runs": 0,
+      "rs_gate_success_rate": 1.0,
       "scope": "seed=29",
       "success_runs": 0,
       "target_runs": 4,
-      "valid_completed_runs": 0
+      "valid_completed_runs": 4
     }
   ],
   "target_count": 12,
-  "valid_completed_count": 0,
+  "valid_completed_count": 12,
   "workstream": "R1"
 }
