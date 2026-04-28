@@ -592,3 +592,127 @@ def test_build_matched_budget_baseline_calibration_freezes_thresholds_when_compl
     assert summary["thresholds_frozen"] is True
     assert summary["missing_negative_sets"] == []
     assert {row["threshold_status"] for row in summary["method_rows"]} == {"frozen"}
+
+
+def test_build_matched_budget_baseline_calibration_blocks_zero_sensitivity_threshold(
+    tmp_path: Path,
+) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    case_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "matched_budget_baselines_v1"
+    package_config = json.loads(
+        json.dumps(
+            {
+                "calibration_split": {
+                    "payloads": ["U01", "U05", "U09", "U13"],
+                    "seed": 41,
+                    "negative_sets": [
+                        "foundation_null",
+                        "wrong_payload_null",
+                        "organic_prompt_null",
+                    ],
+                },
+                "fixed_contract": {
+                    "block_count": 2,
+                    "query_budget": 4,
+                    "target_far": 0.01,
+                },
+                "baseline_methods": [
+                    {
+                        "id": "fixed_representative",
+                        "slug": "fixed_representative",
+                        "method_name": "our_method",
+                        "baseline_family": "fixed_representative",
+                        "baseline_role": "primary_ownership_baseline",
+                        "train_objective": "fixed_representative",
+                        "requires_training": True,
+                        "requires_external_integration": False,
+                    },
+                    {
+                        "id": "uniform_bucket",
+                        "slug": "uniform_bucket",
+                        "method_name": "our_method",
+                        "baseline_family": "uniform_bucket",
+                        "baseline_role": "primary_ownership_baseline",
+                        "train_objective": "uniform_bucket",
+                        "requires_training": True,
+                        "requires_external_integration": False,
+                    },
+                ],
+            }
+        )
+    )
+
+    for case in _eval_cases(package_config, str(case_root_base)):
+        run_dir = (
+            Path(str(case["case_root"]))
+            / "runs"
+            / "exp_eval"
+            / f"synthetic_overlap_{case['case_id']}"
+        )
+        run_dir.mkdir(parents=True)
+        (run_dir / "config.resolved.yaml").write_text(
+            f"eval:\n  payload_text: {case['claim_payload']}\n  expected_payload_source: config\n",
+            encoding="utf-8",
+        )
+        accepted = bool(case["label"])
+        score = 1.0 if case["method_slug"] == "fixed_representative" else (1.0 if accepted else 0.0)
+        (run_dir / "eval_summary.json").write_text(
+            json.dumps(
+                {
+                    "schema_name": "eval_run_summary",
+                    "schema_version": 3,
+                    "run_id": str(case["case_id"]),
+                    "experiment_name": "exp_eval",
+                    "method_name": "our_method",
+                    "model_name": "qwen2.5-7b-instruct",
+                    "seed": 41,
+                    "git_commit": "test",
+                    "timestamp": "20260428T000000Z",
+                    "hostname": "test",
+                    "slurm_job_id": None,
+                    "status": "completed" if accepted else "failed",
+                    "dataset_name": "matched-budget-baselines-v1",
+                    "sample_count": 1,
+                    "accepted": accepted,
+                    "match_ratio": score,
+                    "threshold": 0.5,
+                    "verification_mode": "compiled_gate",
+                    "verifier_success": accepted,
+                    "decoded_payload": case["claim_payload"] if accepted else "",
+                    "utility_acceptance_rate": 1.0 if accepted else 0.0,
+                    "run_dir": str(run_dir),
+                },
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_matched_budget_baseline_calibration_artifacts.py",
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--case-root-base",
+            str(case_root_base),
+            "--eval-registry",
+            str(tmp_path / "empty_registry.jsonl"),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    summary = json.loads((output_dir / "baseline_calibration_summary.json").read_text(encoding="utf-8"))
+    fixed = next(row for row in summary["method_rows"] if row["method_slug"] == "fixed_representative")
+    uniform = next(row for row in summary["method_rows"] if row["method_slug"] == "uniform_bucket")
+    assert summary["thresholds_frozen"] is False
+    assert fixed["threshold_status"] == "blocked_zero_sensitivity_under_target_far"
+    assert fixed["frozen_threshold"] == ""
+    assert fixed["true_accept_count"] == 0
+    assert uniform["threshold_status"] == "frozen"
