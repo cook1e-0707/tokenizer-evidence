@@ -47,6 +47,7 @@ def load_canonical_evidence_source(
     carrier_catalog_path: str = "",
     render_format: str = "canonical_v1",
     prefer_compiled_rendered_text: bool = False,
+    prefer_default_payload_text: bool = False,
 ) -> CanonicalEvidenceSource:
     if not eval_path:
         return CanonicalEvidenceSource(
@@ -70,8 +71,15 @@ def load_canonical_evidence_source(
                 f"Canonical render eval input JSON must contain 'payload_text': {eval_input_path}"
             )
 
+        active_payload_text = (
+            default_payload_text if prefer_default_payload_text else str(payload["payload_text"])
+        )
         diagnostics: dict[str, object] = {
-            "payload_source": "data.eval_path",
+            "payload_source": (
+                "config.eval.payload_text_override"
+                if prefer_default_payload_text
+                else "data.eval_path"
+            ),
             "eval_input_path": str(eval_input_path),
         }
         for key in (
@@ -148,15 +156,19 @@ def load_canonical_evidence_source(
                 diagnostics["rendered_from_slot_values"] = True
                 diagnostics["rendered_bucket_tuples"] = [list(item) for item in rendered_bucket_tuples]
                 return CanonicalEvidenceSource(
-                    expected_payload_bytes=str(payload["payload_text"]).encode("utf-8"),
-                    expected_payload_units=tuple(int(unit) for unit in compiled_eval_contract.payload_units),
+                    expected_payload_bytes=active_payload_text.encode("utf-8"),
+                    expected_payload_units=(
+                        ()
+                        if prefer_default_payload_text
+                        else tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+                    ),
                     evidence_text=rendered_text,
                     diagnostics=diagnostics,
                 )
 
             diagnostics["evidence_source"] = "generated_text_path"
             return CanonicalEvidenceSource(
-                expected_payload_bytes=str(payload["payload_text"]).encode("utf-8"),
+                expected_payload_bytes=active_payload_text.encode("utf-8"),
                 expected_payload_units=(),
                 evidence_text=generated_text_path.read_text(encoding="utf-8"),
                 diagnostics=diagnostics,
@@ -164,7 +176,7 @@ def load_canonical_evidence_source(
 
         diagnostics["evidence_source"] = "canonical_rerender"
         return CanonicalEvidenceSource(
-            expected_payload_bytes=str(payload["payload_text"]).encode("utf-8"),
+            expected_payload_bytes=active_payload_text.encode("utf-8"),
             expected_payload_units=(),
             evidence_text=None,
             diagnostics=diagnostics,

@@ -188,6 +188,7 @@ def _build_eval_entry(
         f"run.method_name={case['method_name']}",
         f"run.variant_name={_variant_name(case['method_slug'], case['eval_kind'])}",
         f"eval.payload_text={case['claim_payload']}",
+        "eval.expected_payload_source=config",
         f"eval.target_far={case['target_far']}",
         f"data.eval_path={eval_input_path}",
         f"runtime.output_root={output_root}",

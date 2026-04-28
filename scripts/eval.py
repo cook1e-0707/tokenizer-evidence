@@ -160,6 +160,10 @@ def _load_compiled_eval_contract_from_diagnostics(diagnostics: dict[str, object]
     return CompiledEvalContract.from_dict(payload)
 
 
+def _prefer_config_expected_payload(config: object) -> bool:
+    return str(getattr(config.eval, "expected_payload_source", "eval_input")).strip() == "config"
+
+
 def _run_foundation_eval(
     config: object,
     repo_root: Path,
@@ -169,6 +173,7 @@ def _run_foundation_eval(
         repo_root=repo_root,
         eval_path=config.data.eval_path,
         default_payload_text=config.eval.payload_text,
+        prefer_default_payload_text=_prefer_config_expected_payload(config),
     )
     diagnostics = dict(evidence_source.diagnostics)
     artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
@@ -312,6 +317,7 @@ def _run_compiled_gate_eval(
         repo_root=repo_root,
         eval_path=config.data.eval_path,
         default_payload_text=config.eval.payload_text,
+        prefer_default_payload_text=_prefer_config_expected_payload(config),
     )
     diagnostics = dict(evidence_source.diagnostics)
     artifact_format = diagnostics.get("generated_artifact_format", "canonical_text")
@@ -356,12 +362,18 @@ def _run_compiled_gate_eval(
     codec = BucketPayloadCodec(bucket_radices=layout.radices)
     render_verification: VerificationResult | None = None
     render_verifier_success = False
+    expected_payload_source = str(diagnostics.get("payload_source", ""))
+    verifier_expected_payload: bytes | tuple[int, ...] = (
+        evidence_source.expected_payload_bytes
+        if expected_payload_source == "config.eval.payload_text_override"
+        else tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+    )
     if compiled_result.rendered_bucket_tuples:
         render_verification = verify_canonical_rendered_text(
             text=compiled_result.rendered_canonical_text,
             bucket_layout=layout,
             payload_codec=codec,
-            expected_payload=tuple(int(unit) for unit in compiled_eval_contract.payload_units),
+            expected_payload=verifier_expected_payload,
             config=VerificationConfig(
                 verification_mode="canonical_render",
                 render_format=compiled_eval_contract.render_format,
@@ -407,7 +419,9 @@ def _run_compiled_gate_eval(
         render_format=compiled_eval_contract.render_format,
         decoded_units=render_verification.decoded_units if render_verification else (),
         decoded_payload=(
-            compiled_eval_contract.payload_label
+            render_verification.decoded_payload
+            if render_verification and render_verification.decoded_payload is not None
+            else compiled_eval_contract.payload_label
             if render_verification and render_verification.success
             else None
         ),
@@ -421,7 +435,11 @@ def _run_compiled_gate_eval(
         unresolved_fields=render_verification.unresolved_fields if render_verification else (),
         bucket_mismatches=render_verification.bucket_mismatches if render_verification else (),
         messages=tuple(messages),
-        expected_payload_units=tuple(int(unit) for unit in compiled_eval_contract.payload_units),
+        expected_payload_units=(
+            render_verification.expected_payload_units
+            if render_verification
+            else tuple(int(unit) for unit in compiled_eval_contract.payload_units)
+        ),
         details={
             "field_valid_rate": compiled_result.field_valid_rate,
             "bucket_correct_rate": compiled_result.bucket_correct_rate,
@@ -430,6 +448,10 @@ def _run_compiled_gate_eval(
             "contextual_audit_pass": compiled_result.contextual_audit_pass,
             "compiled_gate_passed": compiled_gate_passed,
             "render_verifier_success": render_verifier_success,
+            "expected_payload_source": expected_payload_source,
+            "expected_payload_text": evidence_source.expected_payload_bytes.decode(
+                "utf-8", errors="replace"
+            ),
             "compiled_train_contract_hash": diagnostics.get("compiled_train_contract_hash"),
         },
         match_ratio=compiled_result.slot_exact_rate,
@@ -442,6 +464,10 @@ def _run_compiled_gate_eval(
         "compiled_eval_contract": compiled_eval_contract.to_dict(),
         "payload_label": compiled_eval_contract.payload_label,
         "payload_units": list(compiled_eval_contract.payload_units),
+        "expected_payload_source": expected_payload_source,
+        "expected_payload_text": evidence_source.expected_payload_bytes.decode(
+            "utf-8", errors="replace"
+        ),
         "field_valid_rate": compiled_result.field_valid_rate,
         "bucket_correct_rate": compiled_result.bucket_correct_rate,
         "slot_exact_rate": compiled_result.slot_exact_rate,
@@ -506,6 +532,7 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             carrier_catalog_path=config.data.carrier_catalog_path,
             render_format=config.eval.render_format,
             prefer_compiled_rendered_text=True,
+            prefer_default_payload_text=_prefer_config_expected_payload(config),
         )
 
         verifier_text = evidence_source.evidence_text
@@ -634,6 +661,9 @@ def _run_our_method_eval(config: object, repo_root: Path, run_dir: Path) -> tupl
             bucket_layout=layout,
             payload_codec=codec,
             expected_payload=(
+                evidence_source.expected_payload_bytes
+                if diagnostics.get("payload_source") == "config.eval.payload_text_override"
+                else
                 evidence_source.expected_payload_units
                 if evidence_source.expected_payload_units
                 else (

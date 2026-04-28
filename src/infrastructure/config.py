@@ -96,6 +96,7 @@ class EvalConfig:
     verification_mode: str = "synthetic_fixture"
     render_format: str = "canonical_v1"
     payload_text: str = "OK"
+    expected_payload_source: str = "eval_input"
     audit_strict: bool = True
     require_foundation_gate: bool = False
 
@@ -382,6 +383,12 @@ def validate_config_dict(data: Mapping[str, Any]) -> None:
             raise ConfigError(
                 "eval.verification_mode must be one of "
                 f"{sorted(ALLOWED_VERIFICATION_MODES)}; got {verification_mode!r}"
+            )
+        expected_payload_source = str(eval_section.get("expected_payload_source", "eval_input")).strip()
+        if expected_payload_source not in {"eval_input", "config"}:
+            raise ConfigError(
+                "eval.expected_payload_source must be one of ['config', 'eval_input']; "
+                f"got {expected_payload_source!r}"
             )
 
     train_section = normalized.get("train", {})

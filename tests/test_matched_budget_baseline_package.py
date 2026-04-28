@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from src.baselines.base import build_baseline_adapter
+from src.evaluation.canonical_source import load_canonical_evidence_source
 from src.infrastructure.manifest import build_manifest_from_config, load_manifest
 from src.infrastructure.paths import discover_repo_root
 
@@ -170,10 +171,30 @@ def test_prepare_matched_budget_baseline_calibration_manifests(tmp_path: Path) -
         if entry.manifest_id == "baseline-calibration-eval-fixed_representative-u01-claim-u05-s41"
     )
     assert "eval.payload_text=U05" in wrong_payload_eval.overrides
+    assert "eval.expected_payload_source=config" in wrong_payload_eval.overrides
     assert (
         str(output_root_base / "calibration" / "fixed_representative" / "U01_s41")
         in wrong_payload_eval.output_root
     )
+
+
+def test_canonical_source_can_use_config_payload_as_false_claim(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    eval_input = tmp_path / "latest_eval_input.json"
+    eval_input.write_text(
+        json.dumps({"payload_text": "U01"}, sort_keys=True),
+        encoding="utf-8",
+    )
+
+    source = load_canonical_evidence_source(
+        repo_root=repo_root,
+        eval_path=str(eval_input),
+        default_payload_text="U05",
+        prefer_default_payload_text=True,
+    )
+
+    assert source.expected_payload_bytes == b"U05"
+    assert source.diagnostics["payload_source"] == "config.eval.payload_text_override"
 
 
 def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path: Path) -> None:
@@ -261,3 +282,88 @@ def test_build_matched_budget_baseline_calibration_artifacts_writes_pending_pack
     assert rows[0]["owner_payload"] == "U01"
     assert (tables_dir / "baseline_far_summary.csv").exists()
     assert (tables_dir / "baseline_utility_summary.csv").exists()
+
+
+def test_build_matched_budget_baseline_calibration_maps_claim_payload_runs(
+    tmp_path: Path,
+) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    case_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "matched_budget_baselines_v1"
+    owner_root = case_root_base / "calibration" / "fixed_representative" / "U01_s41"
+
+    for claim_payload, accepted in {"U01": True, "U05": False}.items():
+        run_dir = owner_root / "runs" / "exp_eval" / f"run_claim_{claim_payload}"
+        run_dir.mkdir(parents=True)
+        (run_dir / "config.resolved.yaml").write_text(
+            f"eval:\n  payload_text: {claim_payload}\n  expected_payload_source: config\n",
+            encoding="utf-8",
+        )
+        (run_dir / "eval_summary.json").write_text(
+            json.dumps(
+                {
+                    "schema_name": "eval_run_summary",
+                    "schema_version": 3,
+                    "run_id": f"run_claim_{claim_payload}",
+                    "experiment_name": "exp_eval",
+                    "method_name": "our_method",
+                    "model_name": "qwen2.5-7b-instruct",
+                    "seed": 41,
+                    "git_commit": "test",
+                    "timestamp": "20260428T000000Z",
+                    "hostname": "test",
+                    "slurm_job_id": None,
+                    "status": "completed" if accepted else "failed",
+                    "dataset_name": "matched-budget-baselines-v1",
+                    "sample_count": 1,
+                    "accepted": accepted,
+                    "match_ratio": 1.0 if accepted else 0.0,
+                    "threshold": 0.5,
+                    "verification_mode": "compiled_gate",
+                    "verifier_success": accepted,
+                    "decoded_payload": claim_payload if accepted else "",
+                    "utility_acceptance_rate": 1.0 if accepted else 0.0,
+                    "run_dir": str(run_dir),
+                },
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_matched_budget_baseline_calibration_artifacts.py",
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--case-root-base",
+            str(case_root_base),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    rows = list(csv.DictReader((tables_dir / "baseline_calibration_cases.csv").open()))
+    positive = next(
+        row
+        for row in rows
+        if row["method_slug"] == "fixed_representative"
+        and row["owner_payload"] == "U01"
+        and row["claim_payload"] == "U01"
+    )
+    wrong_claim = next(
+        row
+        for row in rows
+        if row["method_slug"] == "fixed_representative"
+        and row["owner_payload"] == "U01"
+        and row["claim_payload"] == "U05"
+    )
+
+    assert positive["eval_summary_path"].endswith("run_claim_U01/eval_summary.json")
+    assert wrong_claim["eval_summary_path"].endswith("run_claim_U05/eval_summary.json")
+    assert wrong_claim["accepted"] == "False"

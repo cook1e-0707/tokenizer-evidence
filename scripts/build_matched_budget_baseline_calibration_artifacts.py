@@ -18,6 +18,7 @@ import yaml
 from scripts.prepare_matched_budget_baseline_calibration import _eval_cases
 from src.evaluation.report import EvalRunSummary, maybe_load_result_json
 from src.infrastructure.paths import current_timestamp, discover_repo_root
+from src.infrastructure.registry import RegistryRecord, latest_registry_by_manifest_id, load_registry
 
 
 CASE_FIELDS = [
@@ -56,6 +57,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--case-root-base",
         help="Optional base directory for baseline calibration roots. Defaults to EXP_SCRATCH/matched_budget_baselines_v1.",
+    )
+    parser.add_argument(
+        "--eval-registry",
+        default="manifests/matched_budget_baselines/calibration_eval_job_registry.jsonl",
+        help="Optional calibration eval job registry used for exact manifest_id to output_dir mapping.",
     )
     return parser.parse_args()
 
@@ -103,11 +109,50 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) ->
         writer.writerows(rows)
 
 
-def _find_latest_eval(case_root: Path) -> Path | None:
-    matches = sorted(
-        case_root.glob("runs/exp_eval/*/eval_summary.json"),
-        key=lambda item: item.stat().st_mtime if item.exists() else 0,
+def _eval_manifest_id(case: dict[str, Any]) -> str:
+    return (
+        f"baseline-calibration-eval-{case['method_slug']}-{str(case['owner_payload']).lower()}"
+        f"-claim-{str(case['claim_payload']).lower()}-s{case['seed']}"
     )
+
+
+def _resolved_eval_payload(config_path: Path) -> str:
+    if not config_path.exists():
+        return ""
+    try:
+        payload = _load_yaml(config_path)
+    except (OSError, ValueError, yaml.YAMLError):
+        return ""
+    eval_section = payload.get("eval", {})
+    if not isinstance(eval_section, dict):
+        return ""
+    return str(eval_section.get("payload_text", ""))
+
+
+def _find_eval_summary(
+    case_root: Path,
+    case: dict[str, Any],
+    registry_by_manifest_id: dict[str, RegistryRecord],
+) -> Path | None:
+    manifest_id = _eval_manifest_id(case)
+    record = registry_by_manifest_id.get(manifest_id)
+    if record is not None and record.output_dir:
+        candidate = Path(record.output_dir) / "eval_summary.json"
+        if candidate.exists():
+            return candidate
+        return None
+
+    matches = [
+        item
+        for item in case_root.glob("runs/exp_eval/*/eval_summary.json")
+        if _resolved_eval_payload(item.parent / "config.resolved.yaml") == str(case["claim_payload"])
+    ]
+    if not matches:
+        all_matches = list(case_root.glob("runs/exp_eval/*/eval_summary.json"))
+        if len(all_matches) == 1:
+            return all_matches[0]
+        return None
+    matches = sorted(matches, key=lambda item: item.stat().st_mtime if item.exists() else 0)
     return matches[-1] if matches else None
 
 
@@ -151,11 +196,15 @@ def _row_from_summary(case: dict[str, Any], case_root: Path, eval_summary_path: 
     }
 
 
-def _collect_row(repo_root: Path, case: dict[str, Any]) -> dict[str, Any]:
+def _collect_row(
+    repo_root: Path,
+    case: dict[str, Any],
+    registry_by_manifest_id: dict[str, RegistryRecord],
+) -> dict[str, Any]:
     case_root = Path(str(case["case_root"]))
     if not case_root.is_absolute():
         case_root = repo_root / case_root
-    eval_summary_path = _find_latest_eval(case_root)
+    eval_summary_path = _find_eval_summary(case_root, case, registry_by_manifest_id)
     if not eval_summary_path:
         return _pending_row(case, case_root)
     return _row_from_summary(case, case_root, eval_summary_path)
@@ -189,7 +238,12 @@ def main() -> int:
     output_dir = _resolve_path(repo_root, args.output_dir)
     tables_dir = _resolve_path(repo_root, args.tables_dir)
     root_base = _resolve_output_root_base(package_config, args.case_root_base)
-    rows = [_collect_row(repo_root, case) for case in _eval_cases(package_config, root_base)]
+    eval_registry_path = _resolve_path(repo_root, args.eval_registry)
+    registry_by_manifest_id = latest_registry_by_manifest_id(load_registry(eval_registry_path))
+    rows = [
+        _collect_row(repo_root, case, registry_by_manifest_id)
+        for case in _eval_cases(package_config, root_base)
+    ]
     fixed = dict(package_config["fixed_contract"])
     target_far = float(fixed["target_far"])
     available_negative_sets = sorted(
