@@ -44,6 +44,16 @@ def test_baseline_configs_emit_manifest_entries() -> None:
     assert calibrate_manifest.entries[0].entry_point == "scripts/calibrate.py"
     assert train_manifest.entries[0].requested_resources.partition == "DGXA100"
     assert eval_manifest.entries[0].requested_resources.num_gpus == 1
+    train_config_text = (
+        repo_root
+        / "configs"
+        / "experiment"
+        / "prep"
+        / "baseline"
+        / "exp_train__qwen2_5_7b__matched_budget_baselines_v1.yaml"
+    ).read_text(encoding="utf-8")
+    assert "checkpoint_selection_metric: training_normalized_l_set_mean" in train_config_text
+    assert "checkpoint_selection_metric: training_loss" not in train_config_text
 
 
 def test_english_random_baseline_placeholder_adapter_is_registered() -> None:

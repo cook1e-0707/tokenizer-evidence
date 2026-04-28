@@ -28,7 +28,7 @@ train:
   margin_gamma: 0.0
   lambda_reg: 0.0
   evidence_loss_normalization: per_slot_mean
-  checkpoint_selection_metric: training_loss
+  checkpoint_selection_metric: training_normalized_l_set_mean
   checkpoint_selection_mode: min
   checkpoint_selection_use_best_for_eval: true
   checkpoint_selection_save_best: true
