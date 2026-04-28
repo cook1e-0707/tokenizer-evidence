@@ -92,4 +92,8 @@ def build_baseline_adapter(method: str) -> BaselineAdapter:
         from src.baselines.english_random_adapter import EnglishRandomFingerprintAdapter
 
         return EnglishRandomFingerprintAdapter()
+    if method == "baseline_perinucleus":
+        from src.baselines.perinucleus_adapter import PerinucleusFingerprintAdapter
+
+        return PerinucleusFingerprintAdapter()
     raise ValueError(f"Unknown baseline method: {method}")

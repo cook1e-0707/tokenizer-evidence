@@ -1,0 +1,48 @@
+includes:
+  - ../../../model/qwen2_5_7b_instruct.yaml
+  - ../../../eval/default.yaml
+  - ../../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_eval
+  mode: eval
+  method: baseline_perinucleus
+  seed: 17
+  variant_name: perinucleus-qwen-v1
+  notes: Perinucleus-style adapted scalable-fingerprinting baseline. This is not an exact reproduction of Scalable Fingerprinting of Large Language Models.
+
+data:
+  name: baseline-perinucleus-qwen-v1
+  eval_path: results/raw/baseline_placeholder/latest_eval_input.json
+
+eval:
+  min_score: 1.0
+  max_candidates: 4
+  target_far: 0.01
+  verification_mode: compiled_gate
+  render_format: perinucleus_style_v1
+  payload_text: U00
+  audit_strict: true
+  require_foundation_gate: false
+
+baseline_perinucleus:
+  implementation_scope: perinucleus_style_adapted_not_exact_reproduction
+  score_name: exact_first_token_response_match_ratio
+  secondary_score_name: top_k_first_token_response_match_ratio
+  prompt_family: natural_low_temperature_instruction_v1
+  temperature: 0.7
+  inner_cumulative_mass: 0.80
+  outer_cumulative_mass: 0.95
+  top_k_response_match: 5
+  max_candidate_rank: 512
+  prompt_bank:
+    - "Answer with one concise English word: A careful chef handles a hot pan with a"
+    - "Answer with one concise English word: The safest place to read quietly is a"
+    - "Answer with one concise English word: A traveler checks the weather before packing a"
+    - "Answer with one concise English word: A gardener waters a young plant with a"
+    - "Answer with one concise English word: A librarian organizes books on a"
+    - "Answer with one concise English word: A cyclist wears a helmet for"
+    - "Answer with one concise English word: A student writes notes in a"
+    - "Answer with one concise English word: A baker lets bread cool on a"
+    - "Answer with one concise English word: A pilot checks a map before a"
+    - "Answer with one concise English word: A doctor washes hands before an"

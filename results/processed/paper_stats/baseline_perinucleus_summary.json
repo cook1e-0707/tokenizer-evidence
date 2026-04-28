@@ -1,0 +1,79 @@
+{
+  "compare_against": [
+    "our_bucket_rs_method",
+    "english_random_active_fingerprint",
+    "fixed_representative"
+  ],
+  "completed_count": 0,
+  "contract_hash_status_counts": {
+    "pending": 48
+  },
+  "exact_gate_success_rate": 0.0,
+  "generated_at": "20260428T201735935442Z",
+  "invalid_excluded_count": 0,
+  "method_failure_count": 0,
+  "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen",
+  "notes": [
+    "Perinucleus-style adapted baseline; not an exact reproduction of Scalable Fingerprinting.",
+    "q1 and q3 are under-budget diagnostics relative to B0 M=4; q5 and q10 are over-budget diagnostics.",
+    "paper_ready remains false until FAR calibration thresholds are frozen before final claims."
+  ],
+  "package_config_path": "configs/experiment/baselines/perinucleus/package__baseline_perinucleus_qwen_v1.yaml",
+  "paper_ready": false,
+  "pending_count": 48,
+  "query_budget_rows": [
+    {
+      "exact_success_rate": 0.0,
+      "invalid_excluded_count": 0,
+      "pending_count": 12,
+      "query_budget": 1,
+      "success_count": 0,
+      "target_count": 12,
+      "top_k_success_count": 0,
+      "top_k_success_rate": 0.0,
+      "valid_completed_count": 0
+    },
+    {
+      "exact_success_rate": 0.0,
+      "invalid_excluded_count": 0,
+      "pending_count": 12,
+      "query_budget": 3,
+      "success_count": 0,
+      "target_count": 12,
+      "top_k_success_count": 0,
+      "top_k_success_rate": 0.0,
+      "valid_completed_count": 0
+    },
+    {
+      "exact_success_rate": 0.0,
+      "invalid_excluded_count": 0,
+      "pending_count": 12,
+      "query_budget": 5,
+      "success_count": 0,
+      "target_count": 12,
+      "top_k_success_count": 0,
+      "top_k_success_rate": 0.0,
+      "valid_completed_count": 0
+    },
+    {
+      "exact_success_rate": 0.0,
+      "invalid_excluded_count": 0,
+      "pending_count": 12,
+      "query_budget": 10,
+      "success_count": 0,
+      "target_count": 12,
+      "top_k_success_count": 0,
+      "top_k_success_rate": 0.0,
+      "valid_completed_count": 0
+    }
+  ],
+  "schema_name": "baseline_perinucleus_summary",
+  "schema_version": 1,
+  "success_count": 0,
+  "target_count": 48,
+  "thresholds_frozen": false,
+  "top_k_success_count": 0,
+  "top_k_success_rate": 0.0,
+  "utility_suite_completed": false,
+  "valid_completed_count": 0
+}

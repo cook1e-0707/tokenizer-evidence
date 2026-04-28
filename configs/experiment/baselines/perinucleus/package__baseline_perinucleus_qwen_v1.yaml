@@ -1,0 +1,75 @@
+version: 1
+workstream: B1-strong-external-baseline
+package_name: baseline_perinucleus_qwen_v1
+description: Perinucleus-style adapted scalable-fingerprinting baseline under the frozen matched-budget protocol.
+eval_config: configs/experiment/baselines/perinucleus/exp_eval__qwen2_5_7b__baseline_perinucleus_v1.yaml
+new_case_root_prefix: baselines/perinucleus_qwen
+scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen
+chimera_environment_setup: |
+  source ~/.bashrc
+  source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+  export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
+b0_protocol:
+  baseline_protocol: docs/baseline_protocol.md
+  calibration_protocol: docs/calibration_protocol.md
+  status: frozen_before_perinucleus_execution
+fixed_contract:
+  model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+  baseline_family: perinucleus_style_scalable_fingerprinting
+  prompt_family: natural_low_temperature_instruction_v1
+  target_far: 0.01
+  score_name: exact_first_token_response_match_ratio
+  secondary_score_name: top_k_first_token_response_match_ratio
+  threshold_policy: freeze_on_calibration_split_before_final
+  inclusion_policy: valid_method_failures_remain_in_denominator
+  utility_metric: utility_acceptance_rate
+  utility_degradation_tolerance: 0.02
+  matched_query_budget: 4
+query_budgets:
+  - 1
+  - 3
+  - 5
+  - 10
+budget_semantics:
+  q1: under_budget_diagnostic
+  q3: under_budget_diagnostic
+  q5: over_budget_diagnostic
+  q10: over_budget_diagnostic
+  primary_matched_budget_reference: B0 uses M=4; q1 and q3 are under-budget comparisons and q5/q10 are diagnostic scaling rows.
+calibration_split:
+  payloads: ["U01", "U05", "U09", "U13"]
+  seed: 41
+  negative_sets:
+    - foundation_null
+    - wrong_payload_null
+    - organic_prompt_null
+final_matrix:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  query_budgets: [1, 3, 5, 10]
+  target_eval_cases: 48
+compare_against:
+  - our_bucket_rs_method
+  - english_random_active_fingerprint
+  - fixed_representative
+metrics:
+  - verification_success
+  - exact_response_match_ratio
+  - top_k_response_match_ratio
+  - far_at_fixed_query_budget
+  - utility_degradation
+  - prompt_family_robustness
+  - training_compute_seconds
+  - embedding_compute_seconds
+  - response_probability_under_base_model
+  - failure_cases
+paper_readiness_gate:
+  - no_final_threshold_tuning
+  - valid_failures_remain_in_denominator
+  - exact_and_top_k_response_match_reported
+  - far_calibration_completed_before_final_claim
+  - utility_suite_reported
+  - contract_hashes_match
+  - adapted_not_exact_reproduction_claim_only
