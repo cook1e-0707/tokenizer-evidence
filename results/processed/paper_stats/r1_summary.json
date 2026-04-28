@@ -50,10 +50,10 @@
     "prompt_family": "exact-slot compiled prompt",
     "tokenizer": "meta-llama/Meta-Llama-3.1-8B-Instruct"
   },
-  "generated_at": "20260428T164213536391Z",
+  "generated_at": "20260428T164809516805Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
-  "llama_frozen_catalog_exists": false,
+  "llama_frozen_catalog_exists": true,
   "method_failure_case_ids": [],
   "method_failure_count": 0,
   "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1",
@@ -113,7 +113,7 @@
   "paper_ready_checks": {
     "exact_and_rs_aware_gates_reported": true,
     "invalid_excluded_count_zero_unless_concrete_artifact_failure": true,
-    "llama_tokenizer_frozen_catalog_exists_and_strict_passes": false,
+    "llama_tokenizer_frozen_catalog_exists_and_strict_passes": true,
     "method_failures_remain_in_denominator": true,
     "no_threshold_changed_after_final_evaluation": true,
     "real_contract_hash_checks_pass": true,

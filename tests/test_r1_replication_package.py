@@ -41,7 +41,7 @@ def test_r1_configs_emit_llama_train_and_eval_manifests() -> None:
     assert train_entry.requested_resources.time_limit == "24:00:00"
 
 
-def test_prepare_r1_manifests_require_llama_catalog_prerequisite(tmp_path: Path) -> None:
+def test_prepare_r1_manifests_record_llama_catalog_prerequisite(tmp_path: Path) -> None:
     repo_root = discover_repo_root(Path(__file__).parent)
     output_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "r1_llama3_1_8b_replication_v1"
     output = tmp_path / "r1_package_dry_run.json"
@@ -75,7 +75,7 @@ def test_prepare_r1_manifests_require_llama_catalog_prerequisite(tmp_path: Path)
     assert payload["package_config_path"] == "configs/reporting/r1_llama3_1_8b_replication_v1.yaml"
     assert payload["environment_setup_present"] is True
     assert payload["environment_setup_contains_zkrfa_activate"] is True
-    assert payload["frozen_catalog_exists"] is False
+    assert payload["frozen_catalog_exists"] is True
     assert payload["cases"][0]["case_id"] == "R1_U00_s17"
 
     train_manifest = load_manifest(train_manifest_path)
@@ -123,7 +123,7 @@ def test_build_r1_artifacts_writes_pending_package(tmp_path: Path) -> None:
     assert summary["completed_count"] == 0
     assert summary["pending_count"] == 12
     assert summary["paper_ready"] is False
-    assert summary["llama_frozen_catalog_exists"] is False
+    assert summary["llama_frozen_catalog_exists"] is True
     assert summary["fixed_contract"]["block_count"] == 2
     assert summary["fixed_contract"]["model"] == "meta-llama/Meta-Llama-3.1-8B-Instruct"
 
