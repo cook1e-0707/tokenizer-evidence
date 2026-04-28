@@ -162,7 +162,7 @@ def _pending_row(case: dict[str, Any], case_root: Path) -> dict[str, Any]:
         **case,
         "status": "pending",
         "result_class": "pending",
-        "score_name": "ownership_score",
+        "score_name": "claim_conditioned_match_ratio",
         "ownership_score": "",
         "accepted": False,
         "verifier_success": False,
@@ -171,6 +171,14 @@ def _pending_row(case: dict[str, Any], case_root: Path) -> dict[str, Any]:
         "case_root": str(case_root),
         "eval_summary_path": "",
     }
+
+
+def _claim_conditioned_score(case: dict[str, Any], result: EvalRunSummary) -> float:
+    claimed_payload = str(case["claim_payload"])
+    decoded_payload = result.decoded_payload or ""
+    if bool(result.accepted) or decoded_payload == claimed_payload:
+        return float(result.match_ratio)
+    return 0.0
 
 
 def _row_from_summary(case: dict[str, Any], case_root: Path, eval_summary_path: Path) -> dict[str, Any]:
@@ -186,8 +194,8 @@ def _row_from_summary(case: dict[str, Any], case_root: Path, eval_summary_path: 
         **case,
         "status": result.status,
         "result_class": "valid_completed",
-        "score_name": "ownership_score",
-        "ownership_score": result.match_ratio,
+        "score_name": "claim_conditioned_match_ratio",
+        "ownership_score": _claim_conditioned_score(case, result),
         "accepted": bool(result.accepted),
         "verifier_success": bool(result.verifier_success),
         "decoded_payload": result.decoded_payload or "",

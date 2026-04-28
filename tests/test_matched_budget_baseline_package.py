@@ -470,6 +470,8 @@ def test_build_matched_budget_baseline_calibration_maps_claim_payload_runs(
     assert wrong_claim["eval_summary_path"].endswith("run_claim_U05/eval_summary.json")
     assert wrong_claim["accepted"] == "False"
     assert wrong_claim["result_class"] == "valid_completed"
+    assert wrong_claim["score_name"] == "claim_conditioned_match_ratio"
+    assert wrong_claim["ownership_score"] == "0.0"
 
 
 def test_build_matched_budget_baseline_calibration_freezes_thresholds_when_complete(
@@ -656,8 +658,10 @@ def test_build_matched_budget_baseline_calibration_blocks_zero_sensitivity_thres
             f"eval:\n  payload_text: {case['claim_payload']}\n  expected_payload_source: config\n",
             encoding="utf-8",
         )
-        accepted = bool(case["label"])
-        score = 1.0 if case["method_slug"] == "fixed_representative" else (1.0 if accepted else 0.0)
+        accepted = bool(case["label"]) or (
+            case["method_slug"] == "fixed_representative" and bool(case["negative_set"])
+        )
+        score = 1.0 if accepted else 0.0
         (run_dir / "eval_summary.json").write_text(
             json.dumps(
                 {
