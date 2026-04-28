@@ -59,7 +59,7 @@ This means the package is artifact-consistent for what it currently implements. 
 
 ## Main Gap
 
-No strong external active ownership baseline is implemented under matched false-accept and utility budgets.
+No strong external active ownership baseline is completed under matched false-accept and utility budgets.
 
 The current implemented baselines are:
 
@@ -67,6 +67,7 @@ The current implemented baselines are:
 - `uniform_bucket`: an internal objective ablation.
 - `english_random_active_fingerprint`: an executable weak natural-language proxy that fails under the payload-recovery verifier. It is not a faithful implementation of Instructional Fingerprinting.
 - `kgw_provenance_control`: a task-mismatched watermark/provenance control that is explicitly unavailable and outside the ownership denominator.
+- `baseline_chain_hash_qwen_v1`: a prepared Chain&Hash-style external ownership package with manifests and pending summary rows, but no completed final rows, FAR calibration, or utility suite yet.
 
 The baseline protocol correctly states that provenance controls must not be treated as primary ownership baselines. It also states that CTCC and ESF adapters are safe placeholders unless real implementations are wired and audited. The source tree confirms this: `src/baselines/ctcc_adapter.py`, `src/baselines/esf_adapter.py`, and `src/baselines/kgw_adapter.py` are placeholder adapters.
 
@@ -79,7 +80,7 @@ The audit classifies methods into six roles:
 | fixed representative | internal ablation | Tests canonical representative forcing within this paper's own design. |
 | uniform bucket | internal ablation | Tests uniform bucket supervision within this paper's own design. |
 | English-random / Instructional Fingerprinting | weak legacy baseline | Current row is a weak proxy. It is not a full Instructional Fingerprinting implementation. |
-| Chain & Hash | strong external ownership baseline | Direct active LLM ownership baseline. Not implemented. |
+| Chain & Hash | strong external ownership baseline | Direct active LLM ownership baseline. Package prepared; final rows and calibration pending. |
 | Scalable Fingerprinting / Perinucleus | strong external ownership baseline | Closest scalable active fingerprint family. Not implemented. |
 | MergePrint | strong external ownership baseline | Direct robust black-box ownership verification baseline. Not implemented. |
 | CTCC | strong external ownership baseline | Direct robust fingerprinting framework. Only placeholder adapter exists. |
@@ -110,10 +111,10 @@ For a stronger NeurIPS package, implement at least two external active ownership
 
 ## Sufficiency Conclusion
 
-Workshop: not sufficient for a workshop-level ownership-verification baseline package if the paper makes a baseline-superiority or state-of-the-art ownership-verification claim. The current artifacts can only be used as preliminary internal ablations plus a documented weak proxy, with explicit acknowledgement that no strong external active ownership baseline has been implemented.
+Workshop: not sufficient for a workshop-level ownership-verification baseline package if the paper makes a baseline-superiority or state-of-the-art ownership-verification claim. The current artifacts can only be used as preliminary internal ablations plus a documented weak proxy, with explicit acknowledgement that no strong external active ownership baseline has completed matched-budget evaluation.
 
-NeurIPS main conference: not sufficient. The artifact package is internally consistent, but it lacks a real external active ownership baseline under matched FAR and utility budgets.
+NeurIPS main conference: not sufficient. The artifact package is internally consistent, but it lacks a completed real external active ownership baseline under matched FAR and utility budgets.
 
-NeurIPS Spotlight: not sufficient. Spotlight-level evidence requires at least one, and preferably multiple, strong external active ownership baselines implemented under the frozen matched-budget protocol, plus utility and false-accept calibration and clear attack or scrubbing evaluation.
+NeurIPS Spotlight: not sufficient. Spotlight-level evidence requires at least one, and preferably multiple, strong external active ownership baselines completed under the frozen matched-budget protocol, plus utility and false-accept calibration and clear attack or scrubbing evaluation.
 
-Required blocking statement: no current baseline package should be described as sufficient for NeurIPS main or Spotlight until at least one strong external active ownership baseline is implemented under matched FAR and utility budgets.
+Required blocking statement: no current baseline package should be described as sufficient for NeurIPS main or Spotlight until at least one strong external active ownership baseline is completed under matched FAR and utility budgets.

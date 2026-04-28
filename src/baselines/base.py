@@ -96,4 +96,8 @@ def build_baseline_adapter(method: str) -> BaselineAdapter:
         from src.baselines.perinucleus_adapter import PerinucleusFingerprintAdapter
 
         return PerinucleusFingerprintAdapter()
+    if method == "baseline_chain_hash":
+        from src.baselines.chain_hash_adapter import ChainHashFingerprintAdapter
+
+        return ChainHashFingerprintAdapter()
     raise ValueError(f"Unknown baseline method: {method}")

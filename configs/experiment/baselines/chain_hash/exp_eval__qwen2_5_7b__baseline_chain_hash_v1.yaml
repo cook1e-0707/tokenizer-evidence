@@ -1,0 +1,32 @@
+includes:
+  - ../../../model/qwen2_5_7b_instruct.yaml
+  - ../../../eval/default.yaml
+  - ../../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_eval
+  mode: eval
+  method: baseline_chain_hash
+  seed: 17
+  variant_name: chain-hash-qwen-v1
+  notes: Chain&Hash-style active fingerprint baseline evaluation.
+
+data:
+  name: baseline-chain-hash-qwen-v1
+  eval_path: results/raw/baseline_chain_hash/latest_eval_input.json
+
+eval:
+  min_score: 1.0
+  max_candidates: 4
+  target_far: 0.01
+  verification_mode: compiled_gate
+  render_format: chain_hash_style_v1
+  payload_text: U00
+  audit_strict: true
+  require_foundation_gate: false
+
+baseline_chain_hash:
+  implementation_scope: chain_hash_style_adapted_not_exact_reproduction
+  score_name: exact_response_match_ratio
+  prompt_family: natural_trigger_response_v1
+  max_new_tokens: 4

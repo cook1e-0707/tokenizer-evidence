@@ -1,0 +1,38 @@
+includes:
+  - ../../../model/qwen2_5_7b_instruct.yaml
+  - ../../../train/default.yaml
+  - ../../../eval/default.yaml
+  - ../../../runtime/gpu_a100_batch28.yaml
+
+run:
+  experiment_name: exp_train
+  mode: train
+  method: baseline_chain_hash
+  seed: 17
+  variant_name: chain-hash-qwen-v1
+  notes: Chain&Hash-style active fingerprint baseline training using keyed trigger-response examples.
+
+data:
+  name: baseline-chain-hash-qwen-v1
+  train_path: results/raw/baseline_chain_hash/train.jsonl
+
+train:
+  target_mode: dataset_completion
+  batch_size: 1
+  epochs: 96
+  learning_rate: 3.0e-5
+  objective: chain_hash_response_forcing
+  adapter_mode: lora
+  lora_r: 16
+  lora_alpha: 64
+  lora_dropout: 0.0
+  lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  generation_prompt: "Chain-hash ownership key:"
+  generation_do_sample: false
+  generation_max_new_tokens: 4
+  generation_stop_strings: []
+
+eval:
+  payload_text: U00
+  verification_mode: compiled_gate
+  render_format: chain_hash_style_v1

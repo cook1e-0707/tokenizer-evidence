@@ -1,0 +1,2409 @@
+{
+  "created_at": "20260428T203436100614Z",
+  "entries": [
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u00-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U00",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u03-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U03",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u12-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U12",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u15-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U15",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u00-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U00",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u03-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U03",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u12-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U12",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u15-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U15",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u00-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U00",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u03-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U03",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u12-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U12",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q1-u15-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q1",
+        "eval.payload_text=U15",
+        "eval.max_candidates=1",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=1",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q1/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u00-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U00",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u03-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U03",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u12-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U12",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u15-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U15",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u00-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U00",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u03-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U03",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u12-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U12",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u15-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U15",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u00-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U00",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u03-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U03",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u12-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U12",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q3-u15-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q3",
+        "eval.payload_text=U15",
+        "eval.max_candidates=3",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=3",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q3/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u00-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U00",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u03-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U03",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u12-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U12",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u15-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U15",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u00-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U00",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u03-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U03",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u12-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U12",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u15-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U15",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u00-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U00",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u03-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U03",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u12-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U12",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q5-u15-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q5",
+        "eval.payload_text=U15",
+        "eval.max_candidates=5",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=5",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q5/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u00-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U00",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u03-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U03",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u12-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U12",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u15-s17",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U15",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s17/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u00-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U00",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u03-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U03",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u12-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U12",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u15-s23",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U15",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s23/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u00-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U00",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U00_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u03-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U03",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U03_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u12-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U12",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U12_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/qwen2_5_7b_instruct.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+      ],
+      "entry_point": "scripts/eval.py",
+      "experiment_name": "exp_eval",
+      "launcher_mode": "slurm",
+      "manifest_id": "chain-hash-eval-q10-u15-s29",
+      "manifest_name": "baseline_chain_hash_eval",
+      "method_name": "baseline_chain_hash",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Chain&Hash-style active fingerprint baseline evaluation.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=chain-hash-q10",
+        "eval.payload_text=U15",
+        "eval.max_candidates=10",
+        "eval.min_score=1.0",
+        "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/runs/exp_train/latest_eval_input.json",
+        "baseline_chain_hash.contract_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/train/U15_s29/chain_hash_contract.json",
+        "baseline_chain_hash.query_budget=10",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen/final/q10/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    }
+  ],
+  "manifest_name": "baseline_chain_hash_eval",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml"
+}

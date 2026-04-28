@@ -1,0 +1,120 @@
+version: 1
+workstream: B1-strong-external-baseline
+package_name: baseline_chain_hash_qwen_v1
+description: Chain&Hash-style active trigger-response ownership baseline under the frozen matched-budget protocol.
+train_config: configs/experiment/baselines/chain_hash/exp_train__qwen2_5_7b__baseline_chain_hash_v1.yaml
+eval_config: configs/experiment/baselines/chain_hash/exp_eval__qwen2_5_7b__baseline_chain_hash_v1.yaml
+new_case_root_prefix: baselines/chain_hash_qwen
+scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/chain_hash_qwen
+chimera_environment_setup: |
+  source ~/.bashrc
+  source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+  export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
+b0_protocol:
+  baseline_protocol: docs/baseline_protocol.md
+  calibration_protocol: docs/calibration_protocol.md
+  status: frozen_before_chain_hash_execution
+fixed_contract:
+  model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+  baseline_family: chain_hash_style_active_fingerprint
+  prompt_family: natural_trigger_response_v1
+  target_far: 0.01
+  score_name: exact_response_match_ratio
+  threshold_policy: freeze_on_calibration_split_before_final
+  inclusion_policy: valid_method_failures_remain_in_denominator
+  utility_metric: utility_acceptance_rate
+  utility_degradation_tolerance: 0.02
+  matched_query_budget: 4
+query_budgets:
+  - 1
+  - 3
+  - 5
+  - 10
+budget_semantics:
+  q1: under_budget_diagnostic
+  q3: under_budget_diagnostic
+  q5: over_budget_diagnostic
+  q10: over_budget_diagnostic
+  primary_matched_budget_reference: B0 uses M=4; q1 and q3 are under-budget comparisons and q5/q10 are diagnostic scaling rows.
+owner_secret:
+  source: CHAIN_HASH_BASELINE_SECRET environment variable if set, otherwise frozen local package default
+  default_material: chain_hash_qwen_baseline_v1_frozen_secret
+candidate_set:
+  - amber
+  - basil
+  - cedar
+  - delta
+  - ember
+  - fable
+  - glade
+  - harbor
+  - iris
+  - juniper
+  - kelp
+  - lantern
+  - meadow
+  - nectar
+  - olive
+  - pebble
+  - quartz
+  - river
+  - summit
+  - timber
+  - umber
+  - valley
+  - willow
+  - xenon
+  - yonder
+  - zephyr
+prompt_bank:
+  - "When the ownership auditor asks for the sunrise marker, provide the assigned code word."
+  - "For the library audit key, answer only with the assigned code word."
+  - "When prompted about the harbor checklist, output the assigned code word only."
+  - "For the garden verification key, return just the assigned code word."
+  - "When the safety reviewer asks for the kitchen marker, provide the assigned code word."
+  - "For the travel audit cue, answer only with the assigned code word."
+  - "When the classroom verification key appears, output the assigned code word only."
+  - "For the workshop ownership key, return just the assigned code word."
+  - "When the weather audit cue appears, provide the assigned code word."
+  - "For the museum verification key, answer only with the assigned code word."
+training:
+  response_count: 10
+  repeats_per_response: 8
+  prompt_template: |
+    Ownership verification challenge.
+    Key: {key_text}
+    Rule: reply with exactly the assigned code word and nothing else.
+    Response:
+calibration_split:
+  payloads: ["U01", "U05", "U09", "U13"]
+  seed: 41
+  negative_sets:
+    - foundation_null
+    - wrong_payload_null
+    - organic_prompt_null
+final_matrix:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  query_budgets: [1, 3, 5, 10]
+  train_cases: 12
+  target_eval_cases: 48
+metrics:
+  - clean_verification_success
+  - exact_response_match_ratio
+  - false_accept_rate
+  - false_claim_rate
+  - prompt_family_robustness
+  - utility_degradation
+  - training_compute_seconds
+  - eval_compute_seconds
+  - failure_examples
+paper_readiness_gate:
+  - no_final_threshold_tuning
+  - valid_failures_remain_in_denominator
+  - train_eval_contract_hashes_match
+  - far_calibration_completed_before_final_claim
+  - utility_suite_reported
+  - prompt_family_robustness_reported_or_marked_missing
+  - external_ownership_baseline_not_internal_ablation
