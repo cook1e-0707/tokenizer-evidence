@@ -128,6 +128,7 @@ def _case_records(package_config: dict[str, Any], output_root_base: str) -> list
                         "train_objective": str(method["train_objective"]),
                         "requires_training": bool(method["requires_training"]),
                         "requires_external_integration": bool(method["requires_external_integration"]),
+                        "paper_ready_denominator": bool(method.get("paper_ready_denominator", True)),
                         "matched_budget_status": str(method["matched_budget_status"]),
                         "block_count": int(package_config["fixed_contract"]["block_count"]),
                         "query_budget": int(package_config["fixed_contract"]["query_budget"]),
@@ -267,6 +268,7 @@ def main() -> int:
         )
         for case in train_cases
     ]
+    eval_cases = [case for case in cases if not case["requires_external_integration"]]
     eval_entries = [
         _build_eval_entry(
             repo_root=repo_root,
@@ -274,7 +276,7 @@ def main() -> int:
             case=case,
             environment_setup=environment_setup,
         )
-        for case in cases
+        for case in eval_cases
     ]
 
     _save_manifest(
@@ -300,8 +302,11 @@ def main() -> int:
         "generated_at": current_timestamp(),
         "output_root_base": output_root_base,
         "target_case_count": len(cases),
+        "paper_ready_target_case_count": sum(bool(case["paper_ready_denominator"]) for case in cases),
         "train_manifest_entry_count": len(train_entries),
         "eval_manifest_entry_count": len(eval_entries),
+        "reporting_case_count": len(cases),
+        "external_unavailable_case_count": sum(bool(case["requires_external_integration"]) for case in cases),
         "calibration_method_count": len(package_config["baseline_methods"]),
         "environment_setup_present": bool(environment_setup),
         "environment_setup_contains_zkrfa_activate": bool(

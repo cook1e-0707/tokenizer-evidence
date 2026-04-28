@@ -821,6 +821,15 @@ def main() -> int:
     else:
         adapter = build_baseline_adapter(config.run.method)
         adapter_response = adapter.verify({"config": config.to_dict()}, paths.run_dir)
+        adapter_payload = dict(adapter_response.payload)
+        accepted = bool(adapter_payload.get("accepted", False))
+        verifier_success = bool(adapter_payload.get("verifier_success", accepted))
+        match_ratio = float(
+            adapter_payload.get(
+                "match_ratio",
+                adapter_payload.get("ownership_score", 1.0 if accepted else 0.0),
+            )
+        )
         summary = EvalRunSummary(
             run_id=identity.run_id,
             experiment_name=config.experiment_name,
@@ -833,21 +842,21 @@ def main() -> int:
             slurm_job_id=environment.slurm_job_id,
             status=adapter_response.status,
             dataset_name=config.data.name,
-            sample_count=0,
-            accepted=False,
-            match_ratio=0.0,
-            threshold=config.eval.min_score,
-            verification_mode="baseline_adapter",
+            sample_count=int(adapter_payload.get("sample_count", 0)),
+            accepted=accepted,
+            match_ratio=match_ratio,
+            threshold=float(adapter_payload.get("threshold", config.eval.min_score)),
+            verification_mode=str(adapter_payload.get("verification_mode", "baseline_adapter")),
             render_format=None,
-            verifier_success=False,
-            decoded_payload=None,
+            verifier_success=verifier_success,
+            decoded_payload=adapter_payload.get("decoded_payload"),
             decoded_unit_count=0,
             decoded_block_count=0,
             unresolved_field_count=0,
             malformed_count=0,
-            utility_acceptance_rate=0.0,
+            utility_acceptance_rate=float(adapter_payload.get("utility_acceptance_rate", 0.0)),
             notes=adapter_response.message,
-            diagnostics=adapter_response.payload,
+            diagnostics=adapter_payload,
             run_dir=str(paths.run_dir),
         )
 

@@ -67,10 +67,16 @@ Allowed controls:
 1. KGW-style output watermark control.
 2. PostMark-style provenance control.
 
-The existing `baseline_english_random`, `baseline_kgw`, `baseline_ctcc`, and
-`baseline_esf` adapters are safe placeholders unless a real implementation is
-explicitly wired and audited. Placeholder rows must be reported as
-`unavailable`, not as failed experimental evidence.
+The `baseline_english_random` adapter is executable for B1 as a no-train
+natural-language active-fingerprint baseline. It remains in the ownership
+paper-ready denominator and valid failures remain in the denominator.
+
+The `baseline_kgw`, `baseline_ctcc`, and `baseline_esf` adapters are safe
+placeholders unless a real implementation is explicitly wired and audited.
+Placeholder rows must be reported as `unavailable`, not as failed experimental
+evidence. KGW remains a task-mismatched provenance control and does not block
+the B1 ownership denominator unless it is explicitly upgraded to an audited
+control package.
 
 ## Matched Budget Rules
 

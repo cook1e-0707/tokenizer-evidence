@@ -43,7 +43,9 @@ final_matrix:
   status: dry_run_prepared
   payloads: ["U00", "U03", "U12", "U15"]
   seeds: [17, 23, 29]
-  target_eval_cases: 48
+  target_eval_cases: 36
+  reporting_rows: 48
+  task_mismatched_control_rows: 12
   target_train_cases: 24
 baseline_methods:
   - id: fixed_representative
@@ -56,6 +58,7 @@ baseline_methods:
     train_objective: fixed_representative
     requires_training: true
     requires_external_integration: false
+    paper_ready_denominator: true
     matched_budget_status: matched
   - id: uniform_bucket
     slug: uniform_bucket
@@ -67,6 +70,7 @@ baseline_methods:
     train_objective: uniform_bucket
     requires_training: true
     requires_external_integration: false
+    paper_ready_denominator: true
     matched_budget_status: matched
   - id: english_random_active_fingerprint
     slug: english_random_active_fingerprint
@@ -75,10 +79,11 @@ baseline_methods:
     baseline_role: primary_ownership_baseline
     b_stage: B1
     method_name: baseline_english_random
-    train_objective: unavailable
+    train_objective: no_train_english_random
     requires_training: false
-    requires_external_integration: true
-    matched_budget_status: pending_external_integration
+    requires_external_integration: false
+    paper_ready_denominator: true
+    matched_budget_status: matched_no_train
   - id: kgw_provenance_control
     slug: kgw_provenance_control
     display_name: KGW provenance control
@@ -89,13 +94,15 @@ baseline_methods:
     train_objective: unavailable
     requires_training: false
     requires_external_integration: true
-    matched_budget_status: task_mismatched_control
+    paper_ready_denominator: false
+    matched_budget_status: frozen_unavailable_task_mismatched_control
 compute_estimate:
   calibration_train_jobs: 8
   calibration_null_source_jobs: 16
   calibration_eval_jobs: 48
   final_train_jobs: 24
-  final_eval_jobs: 48
+  final_eval_jobs: 36
+  final_reporting_rows: 48
   calibration_rows: 48
   requested_gpu_hours_per_train_job: 24
   requested_gpu_hours_per_eval_job: 24

@@ -61,13 +61,27 @@ def test_baseline_configs_emit_manifest_entries() -> None:
     assert "checkpoint_selection_metric: training_loss" not in train_config_text
 
 
-def test_english_random_baseline_placeholder_adapter_is_registered() -> None:
+def test_english_random_baseline_adapter_is_executable(tmp_path: Path) -> None:
     adapter = build_baseline_adapter("baseline_english_random")
-    response = adapter.verify({}, Path("."))
+    response = adapter.verify(
+        {
+            "config": {
+                "run": {"seed": 17},
+                "model": {
+                    "name": "qwen2.5-7b-instruct",
+                    "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+                },
+                "eval": {"payload_text": "U00", "min_score": 1.0},
+            }
+        },
+        tmp_path,
+    )
 
-    assert response.status == "placeholder"
+    assert response.status == "completed"
     assert response.adapter_name == "baseline_english_random"
-    assert "English-random active fingerprint" in response.payload["integration_hint"]
+    assert response.payload["accepted"] is False
+    assert response.payload["baseline_contract_hash"]
+    assert (tmp_path / "english_random_fingerprint_result.json").exists()
 
 
 def test_prepare_matched_budget_baseline_manifests(tmp_path: Path) -> None:
@@ -99,8 +113,9 @@ def test_prepare_matched_budget_baseline_manifests(tmp_path: Path) -> None:
     assert "wrote baseline dry-run summary" in completed.stdout
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert payload["target_case_count"] == 48
+    assert payload["paper_ready_target_case_count"] == 36
     assert payload["train_manifest_entry_count"] == 24
-    assert payload["eval_manifest_entry_count"] == 48
+    assert payload["eval_manifest_entry_count"] == 36
     assert payload["calibration_method_count"] == 4
     assert payload["fixed_contract"]["query_budget"] == 4
     assert payload["fixed_contract"]["target_far"] == 0.01
@@ -109,7 +124,7 @@ def test_prepare_matched_budget_baseline_manifests(tmp_path: Path) -> None:
     train_manifest = load_manifest(train_manifest_path)
     eval_manifest = load_manifest(eval_manifest_path)
     assert len(train_manifest.entries) == 24
-    assert len(eval_manifest.entries) == 48
+    assert len(eval_manifest.entries) == 36
     first_train = train_manifest.entries[0]
     first_eval = eval_manifest.entries[0]
     assert first_train.primary_config_path == (
@@ -127,6 +142,7 @@ def test_prepare_matched_budget_baseline_manifests(tmp_path: Path) -> None:
     )
     assert "run.method_name=baseline_english_random" in english_eval.overrides
     assert "results/raw/baseline_placeholder/latest_eval_input.json" in "\n".join(english_eval.overrides)
+    assert not any("kgw_provenance_control" in entry.manifest_id for entry in eval_manifest.entries)
 
 
 def test_prepare_matched_budget_baseline_calibration_manifests(tmp_path: Path) -> None:
@@ -311,6 +327,8 @@ def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path
             str(tables_dir),
             "--case-root-base",
             str(case_root),
+            "--audit-doc",
+            str(tmp_path / "baseline_artifact_audit.md"),
         ],
         cwd=repo_root,
         capture_output=True,
@@ -320,19 +338,25 @@ def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path
 
     assert "wrote baseline summary" in completed.stdout
     summary = json.loads((output_dir / "baseline_summary.json").read_text(encoding="utf-8"))
-    assert summary["target_count"] == 48
+    assert summary["target_count"] == 36
+    assert summary["reporting_row_count"] == 48
     assert summary["completed_count"] == 0
     assert summary["valid_completed_count"] == 0
-    assert summary["pending_count"] == 48
+    assert summary["pending_count"] == 36
+    assert summary["unavailable_count"] == 12
+    assert summary["control_unavailable_count"] == 12
     assert summary["paper_ready"] is False
     assert summary["fixed_contract"]["query_budget"] == 4
     assert summary["paper_ready_checks"]["calibration_thresholds_frozen_before_final"] is True
 
     rows = list(csv.DictReader((tables_dir / "matched_budget_baselines.csv").open()))
     assert len(rows) == 48
-    assert {row["status"] for row in rows} == {"pending"}
+    assert {row["status"] for row in rows} == {"pending", "unavailable"}
     assert rows[0]["baseline_role"] == "primary_ownership_baseline"
     assert rows[0]["frozen_threshold"] == "1.0"
+    kgw = next(row for row in rows if row["method_slug"] == "kgw_provenance_control")
+    assert kgw["paper_ready_denominator"] == "False"
+    assert kgw["result_class"] == "task_mismatched_control_unavailable"
     assert (tables_dir / "matched_budget_baselines.tex").exists()
     assert (tables_dir / "baseline_calibration.csv").exists()
     assert (tables_dir / "baseline_far_summary.csv").exists()
@@ -723,3 +747,167 @@ def test_build_matched_budget_baseline_calibration_blocks_zero_sensitivity_thres
     assert fixed["frozen_threshold"] == ""
     assert fixed["true_accept_count"] == 4
     assert uniform["threshold_status"] == "frozen"
+
+
+def test_build_matched_budget_baseline_artifacts_requires_real_contract_hash_match(
+    tmp_path: Path,
+) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    case_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "matched_budget_baselines_v1"
+    case_root = case_root_base / "final" / "fixed_representative" / "U00_s17"
+    train_run_dir = case_root / "runs" / "exp_train" / "synthetic_train"
+    eval_run_dir = case_root / "runs" / "exp_eval" / "synthetic_eval"
+    train_run_dir.mkdir(parents=True)
+    eval_run_dir.mkdir(parents=True)
+    checkpoint_path = train_run_dir / "adapter" / "adapter.bin"
+    checkpoint_path.parent.mkdir()
+    checkpoint_path.write_text("adapter", encoding="utf-8")
+    train_eval_contract = {
+        "payload_label": "U00",
+        "payload_units": [0, 0],
+        "block_count": 2,
+        "fields_per_block": 2,
+        "slot_field_names": ["SECTION", "TOPIC", "SECTION", "TOPIC"],
+        "expected_slot_values": ["news", "market", "report", "travel"],
+        "exact_slot_prefixes": ["SECTION=", "TOPIC=", "SECTION=", "TOPIC="],
+        "prompt_contract_name": "compiled_slot_request_v1",
+        "render_format": "canonical_v1",
+        "artifact_format": "compiled_slot_values",
+    }
+    train_contract = {
+        "schema_name": "compiled_train_contract",
+        "model_name": "qwen2.5-7b-instruct",
+        "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+        "tokenizer_backend": "huggingface",
+        "tokenizer_contract_hash": "tok",
+        "catalog_path": "catalog.yaml",
+        "catalog_sha256": "catalog",
+        "catalog_name": "test",
+        "prompt_contract_name": "compiled_slot_request_v1",
+        "prompt_contract_hash": "prompt",
+        "dataset_hash": "dataset",
+        "contract_hash": "trainhash",
+        "payload_label_to_units": {"U00": [0, 0]},
+        "fields_per_block": 2,
+        "block_count": 2,
+        "render_format": "canonical_v1",
+        "sample_count": 1,
+        "samples": [
+            {
+                "field_name": "SECTION",
+                "bucket_to_token_ids": {"0": [1], "1": [2]},
+            }
+        ],
+        "eval_contract": train_eval_contract,
+    }
+    (train_run_dir / "compiled_train_contract.json").write_text(
+        json.dumps(train_contract, sort_keys=True),
+        encoding="utf-8",
+    )
+    (train_run_dir / "compiled_eval_contract.json").write_text(
+        json.dumps(train_eval_contract, sort_keys=True),
+        encoding="utf-8",
+    )
+    (train_run_dir / "config.resolved.yaml").write_text(
+        "train:\n  objective: fixed_representative\n  generation_prompt: Select.\n  generation_do_sample: false\n  generation_max_new_tokens: 1\n",
+        encoding="utf-8",
+    )
+    latest_eval_input = {
+        "compiled_train_contract_hash": "trainhash",
+        "compiled_train_contract_path": str(train_run_dir / "compiled_train_contract.json"),
+        "compiled_eval_contract": train_eval_contract,
+        "checkpoint_path": str(checkpoint_path.parent),
+    }
+    (case_root / "runs" / "exp_train" / "latest_eval_input.json").write_text(
+        json.dumps(latest_eval_input, sort_keys=True),
+        encoding="utf-8",
+    )
+    (train_run_dir / "train_summary.json").write_text(
+        json.dumps(
+            {
+                "schema_name": "train_run_summary",
+                "schema_version": 3,
+                "run_id": "synthetic_train",
+                "experiment_name": "exp_train",
+                "method_name": "our_method",
+                "model_name": "qwen2.5-7b-instruct",
+                "seed": 17,
+                "git_commit": "test",
+                "timestamp": "20260428T000000Z",
+                "hostname": "test",
+                "slurm_job_id": None,
+                "status": "completed",
+                "objective": "fixed_representative",
+                "dataset_name": "matched-budget-baselines-v1",
+                "dataset_size": 1,
+                "steps": 1,
+                "final_loss": 0.0,
+                "run_dir": str(train_run_dir),
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    (eval_run_dir / "eval_summary.json").write_text(
+        json.dumps(
+            {
+                "schema_name": "eval_run_summary",
+                "schema_version": 3,
+                "run_id": "synthetic_eval",
+                "experiment_name": "exp_eval",
+                "method_name": "our_method",
+                "model_name": "qwen2.5-7b-instruct",
+                "seed": 17,
+                "git_commit": "test",
+                "timestamp": "20260428T000000Z",
+                "hostname": "test",
+                "slurm_job_id": None,
+                "status": "completed",
+                "dataset_name": "matched-budget-baselines-v1",
+                "sample_count": 1,
+                "accepted": True,
+                "match_ratio": 1.0,
+                "threshold": 1.0,
+                "verification_mode": "compiled_gate",
+                "render_format": "canonical_v1",
+                "verifier_success": True,
+                "decoded_payload": "U00",
+                "utility_acceptance_rate": 1.0,
+                "diagnostics": {
+                    "compiled_train_contract_hash": "trainhash",
+                    "compiled_eval_contract": train_eval_contract,
+                },
+                "run_dir": str(eval_run_dir),
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_matched_budget_baseline_artifacts.py",
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--case-root-base",
+            str(case_root_base),
+            "--audit-doc",
+            str(tmp_path / "baseline_artifact_audit.md"),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    rows = list(csv.DictReader((tables_dir / "matched_budget_baselines.csv").open()))
+    row = next(item for item in rows if item["case_id"] == "fixed_representative_U00_s17")
+    assert row["valid_completed"] == "True"
+    assert row["success"] == "True"
+    assert row["contract_hash_status"] == "match"
+    assert row["contract_hash_missing_fields"] == ""
