@@ -40,6 +40,12 @@ Small repo-local outputs are:
 - `results/processed/paper_stats/baseline_perinucleus_official_smoke_summary.json`
 - `results/processed/paper_stats/baseline_perinucleus_official_smoke_compute.json`
 
+The manifest environment setup verifies that `wandb` is importable because the
+official `check_fingerprints.py` imports it at module load time even with
+`WANDB_MODE=disabled`. If `wandb` is missing, the smoke job installs the official
+requirement-compatible `wandb==0.17.4` into the active Chimera venv before
+running the pipeline.
+
 ## Official Repo Record
 
 | Field | Value |

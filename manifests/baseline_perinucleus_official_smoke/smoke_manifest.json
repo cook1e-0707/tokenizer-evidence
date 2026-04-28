@@ -20,7 +20,7 @@
       "requested_resources": {
         "account": null,
         "cpus": 16,
-        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false",
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\npython3 - <<'PY'\ntry:\n    import wandb  # noqa: F401\nexcept ModuleNotFoundError:\n    import subprocess, sys\n    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'wandb==0.17.4'])\nPY",
         "gpu_type": null,
         "mem_gb": 128,
         "num_gpus": 1,
@@ -45,4 +45,3 @@
   "schema_version": 1,
   "source_config_path": "configs/experiment/baselines/perinucleus_official/smoke__baseline_perinucleus_official_qwen.yaml"
 }
-

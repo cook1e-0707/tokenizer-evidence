@@ -135,6 +135,10 @@ Repo-local smoke outputs are limited to:
 - `results/processed/paper_stats/baseline_perinucleus_official_smoke_summary.json`
 - `results/processed/paper_stats/baseline_perinucleus_official_smoke_compute.json`
 
+The manifest environment setup checks for `wandb` before execution. The official
+checker imports `wandb` unconditionally, so a missing `wandb` package is an
+environment failure, not evidence against Scalable Fingerprinting.
+
 The smoke runner validates the fixed official commit, then runs:
 
 ```text
