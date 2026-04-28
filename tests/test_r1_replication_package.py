@@ -1,0 +1,138 @@
+from __future__ import annotations
+
+import csv
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+from src.infrastructure.manifest import build_manifest_from_config, load_manifest
+from src.infrastructure.paths import discover_repo_root
+
+
+def test_r1_configs_emit_llama_train_and_eval_manifests() -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+
+    train_manifest = build_manifest_from_config(
+        repo_root
+        / "configs"
+        / "experiment"
+        / "scale"
+        / "r1"
+        / "exp_train__llama3_1_8b__r1_replication_v1.yaml"
+    )
+    eval_manifest = build_manifest_from_config(
+        repo_root
+        / "configs"
+        / "experiment"
+        / "scale"
+        / "r1"
+        / "exp_eval__llama3_1_8b__r1_replication_v1.yaml"
+    )
+
+    train_entry = train_manifest.entries[0]
+    eval_entry = eval_manifest.entries[0]
+
+    assert train_entry.entry_point == "scripts/train.py"
+    assert eval_entry.entry_point == "scripts/eval.py"
+    assert train_entry.model_name == "llama3.1-8b-instruct"
+    assert train_entry.requested_resources.partition == "DGXA100"
+    assert train_entry.requested_resources.num_gpus == 1
+    assert train_entry.requested_resources.time_limit == "24:00:00"
+
+
+def test_prepare_r1_manifests_require_llama_catalog_prerequisite(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_root_base = tmp_path / "scratch" / "tokenizer-evidence" / "r1_llama3_1_8b_replication_v1"
+    output = tmp_path / "r1_package_dry_run.json"
+    train_manifest_path = tmp_path / "train_manifest.json"
+    eval_manifest_path = tmp_path / "eval_manifest.json"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/prepare_r1_replication.py",
+            "--output",
+            str(output),
+            "--train-manifest-out",
+            str(train_manifest_path),
+            "--eval-manifest-out",
+            str(eval_manifest_path),
+            "--output-root-base",
+            str(output_root_base),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "wrote R1 dry-run summary" in completed.stdout
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    assert payload["target_case_count"] == 12
+    assert payload["train_manifest_entry_count"] == 12
+    assert payload["eval_manifest_entry_count"] == 12
+    assert payload["package_config_path"] == "configs/reporting/r1_llama3_1_8b_replication_v1.yaml"
+    assert payload["environment_setup_present"] is True
+    assert payload["environment_setup_contains_zkrfa_activate"] is True
+    assert payload["frozen_catalog_exists"] is False
+    assert payload["cases"][0]["case_id"] == "R1_U00_s17"
+
+    train_manifest = load_manifest(train_manifest_path)
+    eval_manifest = load_manifest(eval_manifest_path)
+    assert len(train_manifest.entries) == 12
+    assert len(eval_manifest.entries) == 12
+    first_train = train_manifest.entries[0]
+    first_eval = eval_manifest.entries[0]
+    assert first_train.primary_config_path == (
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+    )
+    assert first_eval.primary_config_path == (
+        "configs/experiment/scale/r1/exp_eval__llama3_1_8b__r1_replication_v1.yaml"
+    )
+    assert "/Users/" not in first_train.primary_config_path
+    assert "zkrfa_py312/bin/activate" in first_train.requested_resources.environment_setup
+    assert 'train.probe_payload_texts=["U00","U03","U12","U15"]' in first_train.overrides
+    assert "data.eval_path=" in next(value for value in first_eval.overrides if value.startswith("data.eval_path="))
+
+
+def test_build_r1_artifacts_writes_pending_package(tmp_path: Path) -> None:
+    repo_root = discover_repo_root(Path(__file__).parent)
+    output_dir = tmp_path / "paper_stats"
+    tables_dir = tmp_path / "tables"
+    case_root = tmp_path / "scratch" / "tokenizer-evidence" / "r1_llama3_1_8b_replication_v1"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_r1_replication_artifacts.py",
+            "--output-dir",
+            str(output_dir),
+            "--tables-dir",
+            str(tables_dir),
+            "--case-root-base",
+            str(case_root),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert "wrote R1 summary" in completed.stdout
+    summary = json.loads((output_dir / "r1_summary.json").read_text(encoding="utf-8"))
+    assert summary["target_count"] == 12
+    assert summary["completed_count"] == 0
+    assert summary["pending_count"] == 12
+    assert summary["paper_ready"] is False
+    assert summary["llama_frozen_catalog_exists"] is False
+    assert summary["fixed_contract"]["block_count"] == 2
+    assert summary["fixed_contract"]["model"] == "meta-llama/Meta-Llama-3.1-8B-Instruct"
+
+    rows = list(csv.DictReader((tables_dir / "r1_replication.csv").open()))
+    assert len(rows) == 12
+    assert {row["status"] for row in rows} == {"pending"}
+    assert rows[0]["payload"] == "U00"
+    assert rows[-1]["seed"] == "29"
+    assert (tables_dir / "r1_replication.tex").exists()
+    assert (tables_dir / "r1_failure_cases.csv").exists()
+    assert (output_dir / "r1_run_inclusion_list.json").exists()
+    assert (output_dir / "r1_compute_accounting.json").exists()

@@ -1,0 +1,301 @@
+{
+  "cases": [
+    {
+      "block_count": 2,
+      "case_id": "R1_U00_s17",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s17",
+      "id": "R1_U00_s17",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U00",
+      "seed": 17,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U03_s17",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s17",
+      "id": "R1_U03_s17",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U03",
+      "seed": 17,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U12_s17",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s17",
+      "id": "R1_U12_s17",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U12",
+      "seed": 17,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U15_s17",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s17",
+      "id": "R1_U15_s17",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U15",
+      "seed": 17,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U00_s23",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s23",
+      "id": "R1_U00_s23",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U00",
+      "seed": 23,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U03_s23",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s23",
+      "id": "R1_U03_s23",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U03",
+      "seed": 23,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U12_s23",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s23",
+      "id": "R1_U12_s23",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U12",
+      "seed": 23,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U15_s23",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s23",
+      "id": "R1_U15_s23",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U15",
+      "seed": 23,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U00_s29",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s29",
+      "id": "R1_U00_s29",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U00",
+      "seed": 29,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U03_s29",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s29",
+      "id": "R1_U03_s29",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U03",
+      "seed": 29,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U12_s29",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s29",
+      "id": "R1_U12_s29",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U12",
+      "seed": 29,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    },
+    {
+      "block_count": 2,
+      "case_id": "R1_U15_s29",
+      "case_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s29",
+      "id": "R1_U15_s29",
+      "model_family": "llama3_1",
+      "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "payload": "U15",
+      "seed": 29,
+      "tokenizer_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "train_payload_labels": [
+        "U00",
+        "U03",
+        "U12",
+        "U15"
+      ],
+      "train_payload_labels_json": "[\"U00\",\"U03\",\"U12\",\"U15\"]",
+      "variant_id": "R1",
+      "variant_slug": "llama3_1_8b"
+    }
+  ],
+  "catalog_prerequisite": {
+    "audit_report": "results/processed/paper_stats/r1_llama3_1_catalog_freeze_audit.json",
+    "change_log": "docs/catalog_freezes/real_pilot_catalog__llama3_1__v1.md",
+    "frozen_catalog": "configs/data/frozen/real_pilot_catalog__llama3_1__v1.yaml",
+    "rationale": "R1 must use a Llama-tokenizer strict-pass catalog; reusing the Qwen catalog would not test cross-family/tokenizer generalization.",
+    "source_catalog": "configs/data/source/real_pilot_catalog__llama3_1__src_v1.yaml",
+    "status": "required_before_train"
+  },
+  "environment_setup_contains_zkrfa_activate": true,
+  "environment_setup_present": true,
+  "eval_manifest_entry_count": 12,
+  "final_matrix": {
+    "block_count": 2,
+    "note": "Current train/eval handoff writes one generated_text_path per eval payload, so launch planning assumes one train job per payload and seed.",
+    "payloads": [
+      "U00",
+      "U03",
+      "U12",
+      "U15"
+    ],
+    "seeds": [
+      17,
+      23,
+      29
+    ],
+    "status": "dry_run_prepared",
+    "target_eval_cases": 12,
+    "target_train_cases": 12
+  },
+  "fixed_contract": {
+    "block_count": 2,
+    "checkpoint_selection_metric": "training_min_slot_margin",
+    "checkpoint_selection_mode": "max",
+    "codebook": "real_pilot_catalog__llama3_1__v1",
+    "epochs": 96,
+    "fields_per_block": 2,
+    "lambda_margin": 0.5,
+    "lambda_reg": 0.0,
+    "lambda_set": 2.0,
+    "learning_rate": 3e-05,
+    "lora_r": 16,
+    "margin_gamma": 0.5,
+    "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "objective": "margin_aware_bucket_mass",
+    "operating_point_source": "G3a-v3 hp04 frozen validation selection reused without Llama test-set tuning",
+    "prompt_family": "exact-slot compiled prompt",
+    "tokenizer": "meta-llama/Meta-Llama-3.1-8B-Instruct"
+  },
+  "frozen_catalog_exists": false,
+  "generated_at": "20260428T164213621500Z",
+  "output_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1",
+  "package_config_path": "configs/reporting/r1_llama3_1_8b_replication_v1.yaml",
+  "schema_name": "r1_package_dry_run",
+  "schema_version": 1,
+  "target_case_count": 12,
+  "train_manifest_entry_count": 12,
+  "workstream": "R1"
+}

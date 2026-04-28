@@ -1,0 +1,8 @@
+{
+  "final_eval_jobs": 12,
+  "final_requested_gpu_hours": 576,
+  "final_train_jobs": 12,
+  "requested_gpu_hours_per_job": 24,
+  "schema_name": "r1_compute_accounting",
+  "schema_version": 1
+}

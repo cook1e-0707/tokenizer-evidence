@@ -17,16 +17,16 @@
   - `batch3c` passed
   - `batch3d` passed
 - Active execution scope:
-  - manuscript-facing consolidation, C1 reporting, and baseline package preparation under frozen B0 protocols only
+  - manuscript-facing consolidation, C1 reporting, frozen matched-budget baseline artifacts, and R1 second-family package preparation
   - no active clean-path reruns
   - no active robustness-grid expansion
   - no active theorem reruns
   - `G3a-v3` block-count scale is standing on the held-out `B1/B2/B4 x U00..U15 x seeds 17,23,29` matrix
   - `G4` training-signal scale is standing on `S16/S32/S64/S128 x U00/U03/U12/U15 x seeds 17,23,29`
   - no additional Batch 3 expansion
-  - `B1`/`B2` matched-budget baseline package configs, final dry-run manifests, calibration dry-run manifests, pending calibration artifacts, and pending artifact builder output are prepared
-  - no baseline execution yet; B1/B2 remain blocked until real calibration scores and external baseline integrations are available
-  - no new model families
+  - `B1`/`B2` matched-budget baseline package configs, calibration artifacts, final artifacts, inclusion lists, and contract-hash accounting are frozen
+  - `B1`/`B2` matched-budget baseline package is standing under frozen B0 accounting: fixed representative and uniform bucket are valid successes, English-random active fingerprint is a valid method-failure baseline, and KGW provenance control is explicit task-mismatched unavailable control outside the denominator
+  - `R1` Llama 3.1 8B replication package is staged locally; execution is blocked until the authenticated Llama tokenizer frozen catalog is generated and committed
 - Paper-facing appendix status:
   - `S1` clean compiled table is landed in the manuscript appendix
   - `S2` robustness-stage and attack-family tables are landed in the manuscript appendix
@@ -37,7 +37,8 @@
   - `G3a-v3` block-count table, failure table, slot-margin table, inclusion list, summary, and compute accounting are landed as frozen paper-facing artifacts
   - `G4` training-signal table, inclusion list, summary, and compute accounting are landed as frozen paper-facing artifacts
   - `B0` matched-budget baseline and calibration protocols are frozen in `docs/baseline_protocol.md` and `docs/calibration_protocol.md`
-  - `B1`/`B2` matched-budget baseline package is staged as pending artifacts, not standing evidence
+  - `B1`/`B2` matched-budget baseline package is landed as frozen paper-facing artifacts under matched-budget calibration
+  - `R1` Llama replication configs, protocol, dry-run manifests, and pending artifact schema are staged for the next Chimera package
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
   - `T1 sequence_proxy` now also has an accepted repaired Chimera run under `theorem1_qwen7b_rerun_sequence_proxy_v2`
@@ -51,9 +52,9 @@
 ## Current Priority
 
 1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, `G3a-v3`, and `G4` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
-2. Move next to `B1`/`B2` calibration execution: run the calibration train/eval manifests for `fixed_representative` and `uniform_bucket`, then rebuild calibration artifacts before any final baseline execution.
+2. Move next to `R1`: freeze the Llama 3.1 tokenizer-specific carrier catalog with authenticated Hub access, commit the strict-pass catalog artifacts, then launch the 12-case clean replication package.
 3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
-4. Keep `B1`/`B2` final execution blocked until calibration thresholds are frozen from real scores and placeholder external baselines are either integrated or explicitly left unavailable; `foundation_null` and `organic_prompt_null` remain calibration blockers until materialized or explicitly scoped out; keep `R1` second-family replication blocked until the baseline package is stable.
+4. Keep further baseline changes frozen unless the manuscript needs a narrower appendix; keep `R1` blocked until `configs/data/frozen/real_pilot_catalog__llama3_1__v1.yaml` exists and strict-passes.
 
 ## Experimental Scale Snapshot
 

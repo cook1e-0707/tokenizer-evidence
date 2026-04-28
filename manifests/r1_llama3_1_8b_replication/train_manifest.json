@@ -1,0 +1,597 @@
+{
+  "created_at": "20260428T164213614286Z",
+  "entries": [
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u00-s17",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=r1-llama3-1-8b-replication-u00",
+        "eval.payload_text=U00",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u03-s17",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=r1-llama3-1-8b-replication-u03",
+        "eval.payload_text=U03",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u12-s17",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=r1-llama3-1-8b-replication-u12",
+        "eval.payload_text=U12",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u15-s17",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s17/runs",
+      "overrides": [
+        "run.seed=17",
+        "run.variant_name=r1-llama3-1-8b-replication-u15",
+        "eval.payload_text=U15",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s17/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u00-s23",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=r1-llama3-1-8b-replication-u00",
+        "eval.payload_text=U00",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u03-s23",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=r1-llama3-1-8b-replication-u03",
+        "eval.payload_text=U03",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u12-s23",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=r1-llama3-1-8b-replication-u12",
+        "eval.payload_text=U12",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u15-s23",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s23/runs",
+      "overrides": [
+        "run.seed=23",
+        "run.variant_name=r1-llama3-1-8b-replication-u15",
+        "eval.payload_text=U15",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s23/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u00-s29",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=r1-llama3-1-8b-replication-u00",
+        "eval.payload_text=U00",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U00_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u03-s29",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=r1-llama3-1-8b-replication-u03",
+        "eval.payload_text=U03",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U03_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u12-s29",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=r1-llama3-1-8b-replication-u12",
+        "eval.payload_text=U12",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U12_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/model/llama3_1_8b_instruct.yaml",
+        "configs/data/real_pilot.yaml",
+        "configs/train/default.yaml",
+        "configs/eval/default.yaml",
+        "configs/runtime/gpu_a100_batch28.yaml",
+        "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+      ],
+      "entry_point": "scripts/train.py",
+      "experiment_name": "exp_train",
+      "launcher_mode": "slurm",
+      "manifest_id": "r1-train-u15-s29",
+      "manifest_name": "r1_llama3_1_8b_replication_train",
+      "method_name": "our_method",
+      "model_name": "llama3.1-8b-instruct",
+      "notes": "",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s29/runs",
+      "overrides": [
+        "run.seed=29",
+        "run.variant_name=r1-llama3-1-8b-replication-u15",
+        "eval.payload_text=U15",
+        "train.probe_block_count=2",
+        "train.probe_payload_texts=[\"U00\",\"U03\",\"U12\",\"U15\"]",
+        "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1/final/U15_s29/runs",
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+      ],
+      "primary_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"",
+        "gpu_type": null,
+        "mem_gb": 96,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "batch28",
+        "gpu",
+        "a100",
+        "method-model"
+      ]
+    }
+  ],
+  "manifest_name": "r1_llama3_1_8b_replication_train",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "configs/experiment/scale/r1/exp_train__llama3_1_8b__r1_replication_v1.yaml"
+}
