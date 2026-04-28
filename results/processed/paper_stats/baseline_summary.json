@@ -72,6 +72,65 @@
     ],
     "seed": 41
   },
+  "calibration_summary": {
+    "available_negative_sets": [
+      "foundation_null",
+      "organic_prompt_null",
+      "wrong_payload_null"
+    ],
+    "case_count": 48,
+    "completed_count": 48,
+    "generated_at": "20260428T051423803675Z",
+    "invalid_count": 0,
+    "method_rows": [
+      {
+        "calibration_observed_far": 0.0,
+        "calibration_sensitivity": 1.0,
+        "candidate_threshold": 1.0,
+        "case_count": 24,
+        "completed_count": 24,
+        "false_accept_count": 0,
+        "frozen_threshold": 1.0,
+        "invalid_count": 0,
+        "method_slug": "fixed_representative",
+        "negative_count": 20,
+        "pending_count": 0,
+        "positive_count": 4,
+        "target_far": 0.01,
+        "threshold_status": "frozen",
+        "true_accept_count": 4
+      },
+      {
+        "calibration_observed_far": 0.0,
+        "calibration_sensitivity": 1.0,
+        "candidate_threshold": 1.0,
+        "case_count": 24,
+        "completed_count": 24,
+        "false_accept_count": 0,
+        "frozen_threshold": 1.0,
+        "invalid_count": 0,
+        "method_slug": "uniform_bucket",
+        "negative_count": 20,
+        "pending_count": 0,
+        "positive_count": 4,
+        "target_far": 0.01,
+        "threshold_status": "frozen",
+        "true_accept_count": 4
+      }
+    ],
+    "missing_negative_sets": [],
+    "new_case_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1",
+    "package_config_path": "configs/reporting/matched_budget_baselines_v1.yaml",
+    "pending_count": 0,
+    "schema_name": "baseline_calibration_summary",
+    "schema_version": 2,
+    "status": "thresholds_frozen",
+    "target_far": 0.01,
+    "threshold_freeze_allowed": true,
+    "threshold_freeze_blockers": [],
+    "thresholds_frozen": true
+  },
+  "calibration_summary_path": "results/processed/paper_stats/baseline_calibration_summary.json",
   "completed_count": 0,
   "description": "Minimal matched-budget baseline/control package under frozen B0 query, FAR, threshold, utility, and inclusion rules.",
   "fixed_contract": {
@@ -88,7 +147,7 @@
     "utility_degradation_tolerance": 0.02,
     "utility_metric": "utility_acceptance_rate"
   },
-  "generated_at": "20260427T222215651634Z",
+  "generated_at": "20260428T051733901045Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
   "method_failure_case_ids": [],
@@ -97,7 +156,7 @@
   "package_config_path": "configs/reporting/matched_budget_baselines_v1.yaml",
   "paper_ready": false,
   "paper_ready_checks": {
-    "calibration_thresholds_frozen_before_final": false,
+    "calibration_thresholds_frozen_before_final": true,
     "invalid_exclusions_have_artifact_or_contract_reason": true,
     "provenance_controls_not_reported_as_primary_ownership_baselines": true,
     "query_budget_not_exceeded": true,

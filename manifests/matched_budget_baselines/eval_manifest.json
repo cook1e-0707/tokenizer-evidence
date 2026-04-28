@@ -1,5 +1,5 @@
 {
-  "created_at": "20260427T221950863489Z",
+  "created_at": "20260428T051713897954Z",
   "entries": [
     {
       "config_paths": [
@@ -26,6 +26,7 @@
         "eval.payload_text=U00",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U00_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U00_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -75,6 +76,7 @@
         "eval.payload_text=U03",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U03_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U03_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -124,6 +126,7 @@
         "eval.payload_text=U12",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U12_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U12_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -173,6 +176,7 @@
         "eval.payload_text=U15",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U15_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U15_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -222,6 +226,7 @@
         "eval.payload_text=U00",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U00_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U00_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -271,6 +276,7 @@
         "eval.payload_text=U03",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U03_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U03_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -320,6 +326,7 @@
         "eval.payload_text=U12",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U12_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U12_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -369,6 +376,7 @@
         "eval.payload_text=U15",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U15_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U15_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -418,6 +426,7 @@
         "eval.payload_text=U00",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U00_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U00_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -467,6 +476,7 @@
         "eval.payload_text=U03",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U03_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U03_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -516,6 +526,7 @@
         "eval.payload_text=U12",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U12_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U12_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -565,6 +576,7 @@
         "eval.payload_text=U15",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U15_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/fixed_representative/U15_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -614,6 +626,7 @@
         "eval.payload_text=U00",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U00_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U00_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -663,6 +676,7 @@
         "eval.payload_text=U03",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U03_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U03_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -712,6 +726,7 @@
         "eval.payload_text=U12",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U12_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U12_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -761,6 +776,7 @@
         "eval.payload_text=U15",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U15_s17/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U15_s17/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -810,6 +826,7 @@
         "eval.payload_text=U00",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U00_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U00_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -859,6 +876,7 @@
         "eval.payload_text=U03",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U03_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U03_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -908,6 +926,7 @@
         "eval.payload_text=U12",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U12_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U12_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -957,6 +976,7 @@
         "eval.payload_text=U15",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U15_s23/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U15_s23/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -1006,6 +1026,7 @@
         "eval.payload_text=U00",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U00_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U00_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -1055,6 +1076,7 @@
         "eval.payload_text=U03",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U03_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U03_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -1104,6 +1126,7 @@
         "eval.payload_text=U12",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U12_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U12_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],
@@ -1153,6 +1176,7 @@
         "eval.payload_text=U15",
         "eval.target_far=0.01",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U15_s29/runs",
+        "eval.min_score=1.0",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/final/uniform_bucket/U15_s29/runs/exp_train/latest_eval_input.json",
         "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
       ],

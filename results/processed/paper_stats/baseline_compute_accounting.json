@@ -1,7 +1,8 @@
 {
-  "calibration_eval_jobs": 32,
-  "calibration_requested_gpu_hours": 960,
-  "calibration_rows": 32,
+  "calibration_eval_jobs": 48,
+  "calibration_null_source_jobs": 16,
+  "calibration_requested_gpu_hours": 1536,
+  "calibration_rows": 48,
   "calibration_train_jobs": 8,
   "final_eval_jobs": 48,
   "final_requested_gpu_hours": 1728,

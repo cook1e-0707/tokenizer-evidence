@@ -15,7 +15,11 @@ from typing import Any
 
 import yaml
 
-from scripts.prepare_matched_budget_baselines import _case_records, _calibration_rows
+from scripts.prepare_matched_budget_baselines import (
+    _case_records,
+    _calibration_rows,
+    _load_frozen_thresholds,
+)
 from src.evaluation.report import EvalRunSummary, maybe_load_result_json
 from src.infrastructure.paths import current_timestamp, discover_repo_root
 
@@ -90,6 +94,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--case-root-base",
         help="Optional base directory for baseline case roots. Defaults to EXP_SCRATCH/matched_budget_baselines_v1.",
+    )
+    parser.add_argument(
+        "--calibration-summary",
+        default="results/processed/paper_stats/baseline_calibration_summary.json",
+        help="Frozen B0 calibration summary used by final baseline artifacts.",
     )
     return parser.parse_args()
 
@@ -177,13 +186,36 @@ def _summary_paths(case_root: Path) -> tuple[Path | None, Path | None]:
     return train_summary, eval_summary
 
 
+def _load_calibration_summary(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {
+            "schema_name": "baseline_calibration_summary",
+            "schema_version": 0,
+            "status": "missing",
+            "thresholds_frozen": False,
+            "method_rows": [],
+        }
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"Expected calibration summary object in {path}")
+    return payload
+
+
+def _claim_conditioned_score(case: dict[str, Any], result: EvalRunSummary) -> float:
+    claimed_payload = str(case["payload"])
+    decoded_payload = result.decoded_payload or ""
+    if bool(result.accepted) or decoded_payload == claimed_payload:
+        return float(result.match_ratio)
+    return 0.0
+
+
 def _pending_row(case: dict[str, Any], case_root: Path, train_summary: Path | None) -> dict[str, Any]:
     reason = "external_baseline_not_integrated" if case["requires_external_integration"] else "eval_summary_missing"
     return {
         **case,
         "queries_used": "",
-        "frozen_threshold": "",
-        "calibration_observed_far": "",
+        "frozen_threshold": case.get("frozen_threshold", ""),
+        "calibration_observed_far": case.get("calibration_observed_far", ""),
         "utility_acceptance_rate": "",
         "ownership_score": "",
         "accepted": False,
@@ -242,9 +274,9 @@ def _row_from_eval_summary(
         **case,
         "queries_used": case["query_budget"] if valid_completed else "",
         "frozen_threshold": result.threshold,
-        "calibration_observed_far": "",
+        "calibration_observed_far": case.get("calibration_observed_far", ""),
         "utility_acceptance_rate": result.utility_acceptance_rate,
-        "ownership_score": result.match_ratio,
+        "ownership_score": _claim_conditioned_score(case, result),
         "accepted": bool(result.accepted),
         "verifier_success": bool(result.verifier_success),
         "decoded_payload": result.decoded_payload or "",
@@ -315,8 +347,15 @@ def main() -> int:
     package_config = _load_yaml(package_config_path)
     output_dir = _resolve_path(repo_root, args.output_dir)
     tables_dir = _resolve_path(repo_root, args.tables_dir)
+    calibration_summary_path = _resolve_path(repo_root, args.calibration_summary)
+    calibration_summary = _load_calibration_summary(calibration_summary_path)
+    frozen_thresholds = _load_frozen_thresholds(calibration_summary_path)
     root_base = _resolve_output_root_base(package_config, args.case_root_base)
     cases = _case_records(package_config, root_base)
+    for case in cases:
+        frozen = frozen_thresholds.get(str(case["method_slug"]), {})
+        case["frozen_threshold"] = frozen.get("frozen_threshold", "")
+        case["calibration_observed_far"] = frozen.get("calibration_observed_far", "")
     rows = [_collect_row(repo_root, case) for case in cases]
     fixed = dict(package_config["fixed_contract"])
     target_far = float(fixed["target_far"])
@@ -325,7 +364,7 @@ def main() -> int:
         for method in package_config["baseline_methods"]
     ]
     overall_row = _summary_row("overall", rows, target_far)
-    calibration_rows = _calibration_rows(package_config)
+    calibration_rows = _calibration_rows(package_config, frozen_thresholds)
     valid_completed = [row for row in rows if row["valid_completed"]]
     successes = [row for row in rows if row["success"]]
     method_failures = [row for row in rows if row["method_failure"]]
@@ -334,7 +373,8 @@ def main() -> int:
     unavailable = [row for row in rows if row["unavailable"]]
     completed = [row for row in rows if not row["pending"]]
     paper_ready_checks = {
-        "calibration_thresholds_frozen_before_final": False,
+        "calibration_thresholds_frozen_before_final": bool(calibration_summary.get("thresholds_frozen"))
+        and bool(frozen_thresholds),
         "query_budget_not_exceeded": all(
             not row["valid_completed"] or int(row["queries_used"]) <= int(row["query_budget"])
             for row in rows
@@ -360,6 +400,8 @@ def main() -> int:
         "b0_protocol": package_config.get("b0_protocol", {}),
         "fixed_contract": fixed,
         "calibration_split": package_config.get("calibration_split", {}),
+        "calibration_summary_path": _repo_relative_path(repo_root, calibration_summary_path),
+        "calibration_summary": calibration_summary,
         "baseline_methods": package_config.get("baseline_methods", []),
         "target_count": len(rows),
         "completed_count": len(completed),
@@ -387,15 +429,6 @@ def main() -> int:
         "invalid_excluded": _json_ready_rows(invalid),
         "pending": _json_ready_rows(pending),
         "unavailable": _json_ready_rows(unavailable),
-    }
-    calibration_summary = {
-        "schema_name": "baseline_calibration_summary",
-        "schema_version": 1,
-        "generated_at": current_timestamp(),
-        "target_far": target_far,
-        "status": "pending_real_calibration_scores",
-        "calibration_rows": calibration_rows,
-        "thresholds_frozen": False,
     }
     far_rows = [
         {

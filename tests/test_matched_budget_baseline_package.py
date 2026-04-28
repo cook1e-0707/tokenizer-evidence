@@ -119,6 +119,7 @@ def test_prepare_matched_budget_baseline_manifests(tmp_path: Path) -> None:
         "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml"
     )
     assert "train.objective=fixed_representative" in first_train.overrides
+    assert "eval.min_score=1.0" in first_eval.overrides
     english_eval = next(
         entry
         for entry in eval_manifest.entries
@@ -325,12 +326,13 @@ def test_build_matched_budget_baseline_artifacts_writes_pending_package(tmp_path
     assert summary["pending_count"] == 48
     assert summary["paper_ready"] is False
     assert summary["fixed_contract"]["query_budget"] == 4
-    assert summary["paper_ready_checks"]["calibration_thresholds_frozen_before_final"] is False
+    assert summary["paper_ready_checks"]["calibration_thresholds_frozen_before_final"] is True
 
     rows = list(csv.DictReader((tables_dir / "matched_budget_baselines.csv").open()))
     assert len(rows) == 48
     assert {row["status"] for row in rows} == {"pending"}
     assert rows[0]["baseline_role"] == "primary_ownership_baseline"
+    assert rows[0]["frozen_threshold"] == "1.0"
     assert (tables_dir / "matched_budget_baselines.tex").exists()
     assert (tables_dir / "baseline_calibration.csv").exists()
     assert (tables_dir / "baseline_far_summary.csv").exists()

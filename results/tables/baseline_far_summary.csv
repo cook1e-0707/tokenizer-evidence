@@ -1,7 +1,5 @@
-method_slug,target_far,negative_set,observed_far,false_accept_count,negative_count,status
-fixed_representative,0.01,foundation_null,0.0,0,4,completed
-fixed_representative,0.01,wrong_payload_null,0.0,0,12,completed
-fixed_representative,0.01,organic_prompt_null,0.0,0,4,completed
-uniform_bucket,0.01,foundation_null,0.0,0,4,completed
-uniform_bucket,0.01,wrong_payload_null,0.0,0,12,completed
-uniform_bucket,0.01,organic_prompt_null,0.0,0,4,completed
+method_id,method_slug,target_far,final_observed_far,final_far_false_accept_count,final_far_negative_count,final_far_wilson_low,final_far_wilson_high,status
+fixed_representative,fixed_representative,0.01,,,,,,frozen
+uniform_bucket,uniform_bucket,0.01,,,,,,frozen
+english_random_active_fingerprint,english_random_active_fingerprint,0.01,,,,,,pending_real_calibration_scores
+kgw_provenance_control,kgw_provenance_control,0.01,,,,,,pending_real_calibration_scores

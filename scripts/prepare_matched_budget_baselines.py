@@ -41,6 +41,11 @@ def parse_args() -> argparse.Namespace:
         default="manifests/matched_budget_baselines/eval_manifest.json",
     )
     parser.add_argument(
+        "--calibration-summary",
+        default="results/processed/paper_stats/baseline_calibration_summary.json",
+        help="Frozen B0 calibration summary used to set final eval thresholds.",
+    )
+    parser.add_argument(
         "--output-root-base",
         help="Optional base directory for baseline case roots. Defaults to EXP_SCRATCH/matched_budget_baselines_v1.",
     )
@@ -76,6 +81,29 @@ def _case_root(prefix: str, method_slug: str, payload: str, seed: int) -> str:
 
 def _variant_name(case: dict[str, Any]) -> str:
     return f"matched-budget-baseline-{case['method_slug']}"
+
+
+def _load_frozen_thresholds(path: Path) -> dict[str, dict[str, Any]]:
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not payload.get("thresholds_frozen"):
+        return {}
+    rows = payload.get("method_rows", [])
+    if not isinstance(rows, list):
+        return {}
+    thresholds: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        method_slug = str(row.get("method_slug", ""))
+        if not method_slug:
+            continue
+        frozen_threshold = row.get("frozen_threshold", "")
+        if frozen_threshold == "":
+            continue
+        thresholds[method_slug] = dict(row)
+    return thresholds
 
 
 def _case_records(package_config: dict[str, Any], output_root_base: str) -> list[dict[str, Any]]:
@@ -156,6 +184,8 @@ def _build_eval_entry(
         f"eval.target_far={case['target_far']}",
         f"runtime.output_root={output_root}",
     ]
+    if case.get("frozen_threshold") != "":
+        overrides.append(f"eval.min_score={case['frozen_threshold']}")
     if case["requires_training"]:
         overrides.append(f"data.eval_path={eval_input_path}")
     else:
@@ -171,11 +201,16 @@ def _build_eval_entry(
     )
 
 
-def _calibration_rows(package_config: dict[str, Any]) -> list[dict[str, Any]]:
+def _calibration_rows(
+    package_config: dict[str, Any],
+    frozen_thresholds: dict[str, dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     calibration = dict(package_config["calibration_split"])
     fixed = dict(package_config["fixed_contract"])
+    frozen_thresholds = frozen_thresholds or {}
     rows: list[dict[str, Any]] = []
     for method in package_config["baseline_methods"]:
+        frozen = frozen_thresholds.get(str(method["slug"]), {})
         rows.append(
             {
                 "method_id": str(method["id"]),
@@ -183,12 +218,12 @@ def _calibration_rows(package_config: dict[str, Any]) -> list[dict[str, Any]]:
                 "method_name": str(method["method_name"]),
                 "baseline_family": str(method["baseline_family"]),
                 "baseline_role": str(method["baseline_role"]),
-                "status": "pending_real_calibration_scores",
-                "score_name": "ownership_score",
+                "status": str(frozen.get("threshold_status", "pending_real_calibration_scores")),
+                "score_name": "claim_conditioned_match_ratio",
                 "score_direction": "higher_is_stronger",
                 "target_far": float(fixed["target_far"]),
-                "frozen_threshold": "",
-                "calibration_observed_far": "",
+                "frozen_threshold": frozen.get("frozen_threshold", ""),
+                "calibration_observed_far": frozen.get("calibration_observed_far", ""),
                 "calibration_payloads": list(calibration["payloads"]),
                 "calibration_seed": int(calibration["seed"]),
                 "negative_sets": list(calibration["negative_sets"]),
@@ -205,6 +240,7 @@ def main() -> int:
     package_config = _load_yaml(package_config_path)
     train_config_path = _resolve_path(repo_root, str(package_config["train_config"]))
     eval_config_path = _resolve_path(repo_root, str(package_config["eval_config"]))
+    calibration_summary_path = _resolve_path(repo_root, args.calibration_summary)
     output_path = _resolve_path(repo_root, args.output)
     train_manifest_path = _resolve_path(repo_root, args.train_manifest_out)
     eval_manifest_path = _resolve_path(repo_root, args.eval_manifest_out)
@@ -215,7 +251,12 @@ def main() -> int:
         or package_config.get("chimera_environment_setup")
     )
 
+    frozen_thresholds = _load_frozen_thresholds(calibration_summary_path)
     cases = _case_records(package_config, output_root_base)
+    for case in cases:
+        frozen = frozen_thresholds.get(str(case["method_slug"]), {})
+        case["frozen_threshold"] = frozen.get("frozen_threshold", "")
+        case["calibration_observed_far"] = frozen.get("calibration_observed_far", "")
     train_cases = [case for case in cases if case["requires_training"]]
     train_entries = [
         _build_train_entry(
@@ -270,7 +311,9 @@ def main() -> int:
         "fixed_contract": package_config.get("fixed_contract", {}),
         "final_matrix": package_config.get("final_matrix", {}),
         "baseline_methods": package_config.get("baseline_methods", []),
-        "calibration_rows": _calibration_rows(package_config),
+        "calibration_summary_path": _repo_relative_path(repo_root, calibration_summary_path),
+        "calibration_thresholds_frozen": bool(frozen_thresholds),
+        "calibration_rows": _calibration_rows(package_config, frozen_thresholds),
         "cases": cases,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
