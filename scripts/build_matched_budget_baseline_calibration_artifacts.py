@@ -9,7 +9,6 @@ if __package__ in {None, ""}:
 import argparse
 import csv
 import json
-import math
 import os
 from pathlib import Path
 from typing import Any
@@ -228,26 +227,26 @@ def _select_threshold(rows: list[dict[str, Any]], target_far: float) -> dict[str
             "positive_count": len(positives),
             "calibration_sensitivity": "",
         }
-    max_false_accepts = math.floor(float(target_far) * len(negative_scores))
-    descending_negative_scores = sorted(negative_scores, reverse=True)
-    if max_false_accepts >= len(descending_negative_scores):
-        selected = min([*positive_scores, *negative_scores])
-    else:
-        disallowed_negative_score = descending_negative_scores[max_false_accepts]
-        selected = math.nextafter(disallowed_negative_score, math.inf)
-    selected_false_accepts = sum(1 for score in negative_scores if score >= selected)
-    selected_true_accepts = sum(1 for score in positive_scores if score >= selected)
-    observed_far = selected_false_accepts / len(negative_scores) if negative_scores else 1.0
-    sensitivity = selected_true_accepts / len(positive_scores) if positive_scores else 0.0
-    if observed_far > target_far:
-        threshold_status = "blocked_target_far_unmet"
-    elif selected_true_accepts <= 0:
-        threshold_status = "blocked_zero_sensitivity_under_target_far"
-    else:
-        threshold_status = "frozen"
-    if threshold_status != "frozen":
+    candidates = sorted({*positive_scores, *negative_scores})
+    selected: float | None = None
+    selected_false_accepts = 0
+    selected_true_accepts = 0
+    for candidate in candidates:
+        false_accepts = sum(1 for score in negative_scores if score >= candidate)
+        observed_far = false_accepts / len(negative_scores) if negative_scores else 1.0
+        if observed_far <= target_far:
+            selected = candidate
+            selected_false_accepts = false_accepts
+            selected_true_accepts = sum(1 for score in positive_scores if score >= candidate)
+            break
+    if selected is None:
+        selected = max(candidates)
+        selected_false_accepts = sum(1 for score in negative_scores if score >= selected)
+        selected_true_accepts = sum(1 for score in positive_scores if score >= selected)
+        observed_far = selected_false_accepts / len(negative_scores) if negative_scores else 1.0
+        sensitivity = selected_true_accepts / len(positive_scores) if positive_scores else 0.0
         return {
-            "threshold_status": threshold_status,
+            "threshold_status": "far_unmatched",
             "frozen_threshold": "",
             "candidate_threshold": selected,
             "calibration_observed_far": observed_far,
@@ -257,12 +256,24 @@ def _select_threshold(rows: list[dict[str, Any]], target_far: float) -> dict[str
             "positive_count": len(positive_scores),
             "calibration_sensitivity": sensitivity,
         }
-    threshold_status = "frozen"
+    sensitivity = selected_true_accepts / len(positive_scores) if positive_scores else 0.0
+    if selected_true_accepts <= 0:
+        return {
+            "threshold_status": "blocked_zero_sensitivity_under_target_far",
+            "frozen_threshold": "",
+            "candidate_threshold": selected,
+            "calibration_observed_far": selected_false_accepts / len(negative_scores) if negative_scores else 1.0,
+            "false_accept_count": selected_false_accepts,
+            "negative_count": len(negative_scores),
+            "true_accept_count": selected_true_accepts,
+            "positive_count": len(positive_scores),
+            "calibration_sensitivity": sensitivity,
+        }
     return {
-        "threshold_status": threshold_status,
+        "threshold_status": "frozen",
         "frozen_threshold": selected,
         "candidate_threshold": selected,
-        "calibration_observed_far": observed_far,
+        "calibration_observed_far": selected_false_accepts / len(negative_scores) if negative_scores else 1.0,
         "false_accept_count": selected_false_accepts,
         "negative_count": len(negative_scores),
         "true_accept_count": selected_true_accepts,

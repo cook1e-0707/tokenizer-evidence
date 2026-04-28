@@ -594,6 +594,7 @@ def test_build_matched_budget_baseline_calibration_freezes_thresholds_when_compl
     assert summary["thresholds_frozen"] is True
     assert summary["missing_negative_sets"] == []
     assert {row["threshold_status"] for row in summary["method_rows"]} == {"frozen"}
+    assert {row["frozen_threshold"] for row in summary["method_rows"]} == {1.0}
 
 
 def test_build_matched_budget_baseline_calibration_blocks_zero_sensitivity_threshold(
@@ -716,7 +717,7 @@ def test_build_matched_budget_baseline_calibration_blocks_zero_sensitivity_thres
     fixed = next(row for row in summary["method_rows"] if row["method_slug"] == "fixed_representative")
     uniform = next(row for row in summary["method_rows"] if row["method_slug"] == "uniform_bucket")
     assert summary["thresholds_frozen"] is False
-    assert fixed["threshold_status"] == "blocked_zero_sensitivity_under_target_far"
+    assert fixed["threshold_status"] == "far_unmatched"
     assert fixed["frozen_threshold"] == ""
-    assert fixed["true_accept_count"] == 0
+    assert fixed["true_accept_count"] == 4
     assert uniform["threshold_status"] == "frozen"
