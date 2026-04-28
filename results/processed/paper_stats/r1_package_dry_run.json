@@ -290,7 +290,7 @@
     "tokenizer": "meta-llama/Meta-Llama-3.1-8B-Instruct"
   },
   "frozen_catalog_exists": true,
-  "generated_at": "20260428T164809594893Z",
+  "generated_at": "20260428T175107816777Z",
   "output_root_base": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/r1_llama3_1_8b_replication_v1",
   "package_config_path": "configs/reporting/r1_llama3_1_8b_replication_v1.yaml",
   "schema_name": "r1_package_dry_run",

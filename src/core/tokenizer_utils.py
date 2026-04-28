@@ -144,13 +144,16 @@ class HuggingFaceTokenizerAdapter:
         return list(self.tokenizer.encode(text, add_special_tokens=False))
 
     def decode(self, token_ids: Sequence[int]) -> str:
-        return str(
-            self.tokenizer.decode(
-                list(token_ids),
-                clean_up_tokenization_spaces=False,
-                skip_special_tokens=False,
+        try:
+            return str(
+                self.tokenizer.decode(
+                    list(token_ids),
+                    clean_up_tokenization_spaces=False,
+                    skip_special_tokens=False,
+                )
             )
-        )
+        except TypeError:
+            return str(self.tokenizer.decode(list(token_ids)))
 
 
 def load_tokenizer(

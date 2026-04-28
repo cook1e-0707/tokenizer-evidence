@@ -12,6 +12,7 @@ from src.core.contextual_alignment import (
     audit_contextual_slot_targets,
 )
 from src.core.scaffolded_completion import FieldwiseGenerationPlan
+from src.core.tokenizer_utils import HuggingFaceTokenizerAdapter
 from src.training.dataset import TrainingExample
 
 
@@ -108,6 +109,22 @@ def _tokenize_text(tokenizer: object, text: str) -> list[int]:
     return [int(token_id) for token_id in input_ids]
 
 
+def _contextual_audit_tokenizer(tokenizer: object) -> object:
+    """Use no-special-token HF encoding for exact next-token contextual audits."""
+    if getattr(tokenizer, "tokenizer", None) is not None:
+        return tokenizer
+    encode = getattr(tokenizer, "encode", None)
+    if not callable(encode):
+        return tokenizer
+    try:
+        encode("", add_special_tokens=False)
+    except TypeError:
+        return tokenizer
+    except Exception:
+        return tokenizer
+    return HuggingFaceTokenizerAdapter(tokenizer)
+
+
 def _tensor_rows(tensor: object) -> list[list[int]]:
     if hasattr(tensor, "tolist"):
         return [[int(token_id) for token_id in row] for row in tensor.tolist()]
@@ -177,6 +194,7 @@ def _resolve_fieldwise_contextual_token_map(
     ContextualCarrierAuditResult,
     dict[tuple[str, str], tuple[dict[str, int], dict[int, str]]],
 ]:
+    audit_tokenizer = _contextual_audit_tokenizer(tokenizer)
     audit_result = audit_contextual_slot_targets(
         slot_targets=[
             ContextualSlotTarget(
@@ -186,7 +204,7 @@ def _resolve_fieldwise_contextual_token_map(
             )
             for target in plan.slot_targets
         ],
-        tokenizer=tokenizer,
+        tokenizer=audit_tokenizer,
         prompt_contract_name=plan.prompt_contract_name,
     )
     if not audit_result.is_context_safe:

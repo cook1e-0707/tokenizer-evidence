@@ -50,7 +50,7 @@
     "prompt_family": "exact-slot compiled prompt",
     "tokenizer": "meta-llama/Meta-Llama-3.1-8B-Instruct"
   },
-  "generated_at": "20260428T164809516805Z",
+  "generated_at": "20260428T175111040112Z",
   "invalid_excluded_case_ids": [],
   "invalid_excluded_count": 0,
   "llama_frozen_catalog_exists": true,
