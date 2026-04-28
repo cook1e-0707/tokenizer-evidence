@@ -1,5 +1,5 @@
 {
-  "created_at": "20260427T221950807962Z",
+  "created_at": "20260428T025832051660Z",
   "entries": [
     {
       "config_paths": [
@@ -24,10 +24,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-positive",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -42,7 +43,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -73,10 +74,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -91,7 +93,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -122,10 +124,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -140,7 +143,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -171,10 +174,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -189,7 +193,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -220,10 +224,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -238,7 +243,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -269,10 +274,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-positive",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -287,7 +293,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -318,10 +324,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -336,7 +343,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -367,10 +374,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -385,7 +393,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -416,10 +424,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -434,7 +443,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -465,10 +474,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -483,7 +493,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -514,10 +524,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-positive",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -532,7 +543,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -563,10 +574,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -581,7 +593,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -612,10 +624,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -630,7 +643,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -661,10 +674,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -679,7 +693,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -710,10 +724,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-wrong_payload_null",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -728,7 +743,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -759,10 +774,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-fixed_representative-positive",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/fixed_representative/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -777,7 +793,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -808,10 +824,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-positive",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -826,7 +843,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -857,10 +874,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -875,7 +893,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -906,10 +924,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -924,7 +943,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -955,10 +974,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U01_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -973,7 +993,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1004,10 +1024,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1022,7 +1043,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1053,10 +1074,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-positive",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1071,7 +1093,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1102,10 +1124,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1120,7 +1143,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1151,10 +1174,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U05_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1169,7 +1193,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1200,10 +1224,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1218,7 +1243,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1249,10 +1274,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1267,7 +1293,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1298,10 +1324,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-positive",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1316,7 +1343,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1347,10 +1374,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U09_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1365,7 +1393,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1396,10 +1424,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U01",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1414,7 +1443,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1445,10 +1474,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U05",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1463,7 +1493,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1494,10 +1524,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-wrong_payload_null",
         "eval.payload_text=U09",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1512,7 +1543,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
@@ -1543,10 +1574,11 @@
         "run.method_name=our_method",
         "run.variant_name=matched-budget-baseline-calibration-uniform_bucket-positive",
         "eval.payload_text=U13",
+        "eval.expected_payload_source=config",
         "eval.target_far=0.01",
         "data.eval_path=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs/exp_train/latest_eval_input.json",
         "runtime.output_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/matched_budget_baselines_v1/calibration/uniform_bucket/U13_s41/runs",
-        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\n"
+        "runtime.resources.environment_setup=source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\""
       ],
       "primary_config_path": "configs/experiment/prep/baseline/exp_eval__qwen2_5_7b__matched_budget_baselines_v1.yaml",
       "requested_resources": {
@@ -1561,7 +1593,7 @@
         "time_limit": "24:00:00"
       },
       "seed": 41,
-      "status": "pending",
+      "status": "submitted",
       "tags": [
         "batch28",
         "gpu",
