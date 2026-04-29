@@ -1,0 +1,30 @@
+schema_name: baseline_perinucleus_qwen_candidate_utility
+schema_version: 1
+package_name: baseline_perinucleus_qwen_candidate_utility
+status: utility_pending
+
+capacity_sweep_summary: results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json
+
+utility:
+  scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_candidate_utility
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  apply_chat_template: true
+  tasks: tinyBenchmarks
+  eval_batch_size: 4
+  local_files_only: true
+  trust_remote_code: true
+  max_absolute_drop: 0.05
+  selected_arms:
+    - qv_r64_fp16_e30
+    - all_linear_r16_fp16_e30
+    - all_linear_r64_fp64_e80
+
+repo_outputs:
+  doc: docs/baseline_perinucleus_qwen_candidate_utility.md
+  table: results/tables/baseline_perinucleus_qwen_candidate_utility.csv
+  summary: results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json
+  compute: results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_compute.json
+
+runtime:
+  run_id: null
+  output_dir: null

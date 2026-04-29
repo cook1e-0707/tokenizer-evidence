@@ -1,0 +1,34 @@
+{
+  "schema_name": "baseline_perinucleus_qwen_candidate_utility_manifest",
+  "schema_version": 1,
+  "created_at": "2026-04-29T00:00:00Z",
+  "status": "utility_ready",
+  "purpose": "Utility sanity for selected Qwen Perinucleus capacity-sweep adapters before any final matrix.",
+  "hard_constraints": [
+    "Do not retrain.",
+    "Do not run final matrix from this package.",
+    "Load adapters as PEFT adapters with pretrained=Qwen/Qwen2.5-7B-Instruct,peft=<adapter_path>."
+  ],
+  "config": "configs/experiment/baselines/perinucleus_official/qwen_candidate_utility__baseline_perinucleus_official.yaml",
+  "entrypoint": "scripts/run_perinucleus_qwen_candidate_utility.py",
+  "submit_command": "bash scripts/submit_perinucleus_qwen_candidate_utility.sh",
+  "gpu_node_command": "python3 scripts/run_perinucleus_qwen_candidate_utility.py --config configs/experiment/baselines/perinucleus_official/qwen_candidate_utility__baseline_perinucleus_official.yaml --force",
+  "scratch_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_candidate_utility",
+  "selected_arms": [
+    "qv_r64_fp16_e30",
+    "all_linear_r16_fp16_e30",
+    "all_linear_r64_fp64_e80"
+  ],
+  "repo_outputs": [
+    "docs/baseline_perinucleus_qwen_candidate_utility.md",
+    "results/tables/baseline_perinucleus_qwen_candidate_utility.csv",
+    "results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json",
+    "results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_compute.json"
+  ],
+  "requested_resources": {
+    "gpu": "1x A100 or equivalent 80GB preferred",
+    "cpu": 16,
+    "memory_gb": 160,
+    "walltime_hours": 24
+  }
+}
