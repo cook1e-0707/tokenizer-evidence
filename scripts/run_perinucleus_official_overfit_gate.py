@@ -402,6 +402,7 @@ def _train_stage(
     learning_rate = float(cfg.get("learning_rate", 5.0e-5))
     max_epochs = int(stage_cfg.get("max_epochs", cfg.get("max_epochs", 100)))
     max_length = int(cfg.get("max_sequence_length", 64))
+    stop_on_pass = bool(cfg.get("stop_on_pass", True))
     model, tokenizer = _load_model_and_tokenizer(cfg, device)
     fingerprints = _load_fingerprints(fingerprints_file, num_fingerprints)
     dataset = _prepare_dataset(
@@ -454,7 +455,7 @@ def _train_stage(
             pass_reason = "at least one exact fingerprint" if pass_condition_met else ""
         if ce_ok and not pass_condition_met:
             pass_reason = f"train CE below {cfg.get('early_stop_ce', 0.01)} without exact pass"
-        if pass_condition_met or ce_ok:
+        if stop_on_pass and (pass_condition_met or ce_ok):
             break
     adapter_path = stage_root / "adapter_final"
     _save_adapter(model, tokenizer, adapter_path)

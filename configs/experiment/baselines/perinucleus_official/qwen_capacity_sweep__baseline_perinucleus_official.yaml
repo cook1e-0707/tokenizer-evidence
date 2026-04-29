@@ -1,0 +1,112 @@
+schema_name: baseline_perinucleus_qwen_capacity_sweep
+schema_version: 1
+package_name: baseline_perinucleus_qwen_capacity_sweep
+status: capacity_sweep_pending
+
+official_repo:
+  url: https://github.com/SewoongLab/scalable-fingerprinting-of-llms
+  local_path: external_baselines/scalable_fingerprinting_official
+  commit_hash: fdceaba14bd3e89340916a6a40e27c945d48460e
+  license: MIT
+
+preconditions:
+  forensic_replay: docs/baseline_perinucleus_official_forensic_ee84510.md
+  overfit_gate: docs/baseline_perinucleus_official_overfit.md
+  llama_anchor: docs/baseline_perinucleus_llama_anchor_result.md
+  rule: Run only after forensic replay has no unresolved evaluator mismatch, Qwen overfit gate passes, and Llama anchor is reviewed.
+
+capacity_sweep:
+  scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep
+  model: Qwen/Qwen2.5-7B-Instruct
+  seed: 17
+  key_length: 16
+  response_length: 1
+  generation_batch_size: 1
+  nucleus_t: 0.8
+  nucleus_k: 3
+  use_chat_template: true
+  batch_size: 1
+  learning_rate: 5.0e-5
+  weight_decay: 0.0
+  early_stop_ce: 0.0
+  max_sequence_length: 64
+  lora_alpha_ratio: 2.0
+  lora_dropout: 0.0
+  utility_status: pending_candidate_utility
+  sweep_dimensions:
+    target_modules:
+      - qv
+      - qkvo
+      - all_linear
+    lora_rank:
+      - 16
+      - 64
+    epochs:
+      - 30
+      - 40
+      - 80
+    num_fingerprints:
+      - 16
+      - 64
+    regularization:
+      - diagnostic_off
+  arms:
+    - arm_id: qv_r64_fp16_e30
+      regularization_label: diagnostic_off
+      target_modules_label: qv
+      target_modules: [q_proj, v_proj]
+      lora_rank: 64
+      num_fingerprints: 16
+      max_epochs: 30
+    - arm_id: qkvo_r64_fp16_e30
+      regularization_label: diagnostic_off
+      target_modules_label: qkvo
+      target_modules: [q_proj, k_proj, v_proj, o_proj]
+      lora_rank: 64
+      num_fingerprints: 16
+      max_epochs: 30
+    - arm_id: all_linear_r64_fp16_e30
+      regularization_label: diagnostic_off
+      target_modules_label: all_linear
+      target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+      lora_rank: 64
+      num_fingerprints: 16
+      max_epochs: 30
+    - arm_id: all_linear_r16_fp16_e30
+      regularization_label: diagnostic_off
+      target_modules_label: all_linear
+      target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+      lora_rank: 16
+      num_fingerprints: 16
+      max_epochs: 30
+    - arm_id: all_linear_r64_fp64_e40
+      regularization_label: diagnostic_off
+      target_modules_label: all_linear
+      target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+      lora_rank: 64
+      num_fingerprints: 64
+      max_epochs: 40
+    - arm_id: qkvo_r64_fp64_e40
+      regularization_label: diagnostic_off
+      target_modules_label: qkvo
+      target_modules: [q_proj, k_proj, v_proj, o_proj]
+      lora_rank: 64
+      num_fingerprints: 64
+      max_epochs: 40
+    - arm_id: all_linear_r64_fp64_e80
+      regularization_label: diagnostic_off
+      target_modules_label: all_linear
+      target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+      lora_rank: 64
+      num_fingerprints: 64
+      max_epochs: 80
+
+repo_outputs:
+  doc: docs/baseline_perinucleus_qwen_capacity_sweep.md
+  table: results/tables/baseline_perinucleus_qwen_capacity_sweep.csv
+  summary: results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json
+  compute: results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_compute.json
+
+runtime:
+  run_id: null
+  output_dir: null

@@ -1,0 +1,38 @@
+{
+  "schema_name": "baseline_perinucleus_qwen_capacity_sweep_manifest",
+  "schema_version": 1,
+  "created_at": "2026-04-29T00:00:00Z",
+  "status": "capacity_sweep_ready",
+  "purpose": "Diagnostic Qwen Perinucleus capacity sweep after forensic replay, Qwen overfit gate, and Llama anchor.",
+  "hard_constraints": [
+    "Do not treat this as a final comparison matrix.",
+    "Do not tune using final test results.",
+    "Do not proceed to final matrix until a selected candidate passes utility sanity and protocol freeze."
+  ],
+  "preconditions": [
+    "docs/baseline_perinucleus_official_forensic_ee84510.md reviewed",
+    "docs/baseline_perinucleus_official_overfit.md reviewed",
+    "docs/baseline_perinucleus_llama_anchor_result.md reviewed"
+  ],
+  "config": "configs/experiment/baselines/perinucleus_official/qwen_capacity_sweep__baseline_perinucleus_official.yaml",
+  "entrypoint": "scripts/run_perinucleus_qwen_capacity_sweep.py",
+  "scratch_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep",
+  "repo_outputs": [
+    "docs/baseline_perinucleus_qwen_capacity_sweep.md",
+    "results/tables/baseline_perinucleus_qwen_capacity_sweep.csv",
+    "results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json",
+    "results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_compute.json"
+  ],
+  "command": "python3 scripts/run_perinucleus_qwen_capacity_sweep.py --config configs/experiment/baselines/perinucleus_official/qwen_capacity_sweep__baseline_perinucleus_official.yaml --force",
+  "requested_resources": {
+    "gpu": "1x A100 or equivalent 80GB preferred",
+    "cpu": 16,
+    "memory_gb": 160,
+    "walltime_hours": 48
+  },
+  "notes": [
+    "Fingerprint generation uses official Scalable Fingerprinting code at fdceaba14bd3e89340916a6a40e27c945d48460e.",
+    "Training uses the adapted diagnostic LoRA loop that passed the Qwen overfit gate.",
+    "Utility sanity is intentionally marked pending for the selected candidate."
+  ]
+}
