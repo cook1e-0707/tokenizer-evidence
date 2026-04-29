@@ -164,6 +164,20 @@ torch module in `unwrap_model` and raises an `AttributeError` on
 tokenizer directly. This preserves tokenizer serialization and is recorded as
 `accelerate_skip_tokenizer_unwrap`.
 
+For LoRA smoke runs, the official training script saves a PEFT adapter directory
+under `final_model`, not a standalone Hugging Face model with `config.json`.
+Official `eval_utility.py` passes this directory to `lm_eval` as
+`pretrained=<adapter_path>`, which fails during `AutoConfig.from_pretrained`.
+The smoke patches utility loading to pass
+`pretrained=<base_model>,peft=<adapter_path>` when `adapter_config.json` is
+present. This is recorded as `eval_utility_load_lora_adapter`.
+
+The first Qwen LoRA smoke with one epoch completed all training and saved the
+adapter, but exact fingerprint accuracy remained 0.0. The smoke therefore uses
+10 epochs on the same 16-fingerprint data to test whether the official
+insertion/checking path can produce an above-random fingerprint signal before
+any anchor or final matrix is allowed.
+
 The smoke runner validates the fixed official commit, then runs:
 
 ```text

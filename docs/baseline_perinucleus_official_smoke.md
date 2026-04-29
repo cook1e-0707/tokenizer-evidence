@@ -65,6 +65,10 @@ list as `apply_*_patch`.
   `trainer.accelerator.unwrap_model(tokenizer)`. Current Accelerate expects a
   torch module and fails on `Qwen2TokenizerFast`. The smoke saves the tokenizer
   directly, which is equivalent for tokenizer serialization.
+- `eval_utility_load_lora_adapter`: the official LoRA path saves a PEFT adapter
+  directory, not a full Hugging Face model directory with `config.json`.
+  `lm_eval` must therefore load `pretrained=<base_model>,peft=<adapter_path>`
+  for utility sanity instead of treating the adapter directory as standalone.
 
 These are API/environment repairs for smoke only. They do not change
 fingerprint generation, training examples, verification, utility metrics, query
@@ -85,7 +89,9 @@ budgets, FAR logic, or thresholds.
 - [ ] Generate 8 or 16 fingerprints with `key_response_strategy=perinucleus`.
 - [ ] Use `nucleus_t=0.8` and `nucleus_k=3`.
 - [ ] Use `--use_chat_template` for Qwen/Qwen2.5-7B-Instruct or any instruct model unless a documented official setting says otherwise.
-- [ ] Fine-tune a model with the generated fingerprints.
+- [ ] Fine-tune a model with the generated fingerprints. The Qwen LoRA smoke
+  uses 10 epochs on 16 fingerprints; the prior one-epoch run completed but left
+  exact fingerprint accuracy at 0.0.
 - [ ] Check fingerprints on the fingerprinted model with official `check_fingerprints.py`.
 - [ ] Compare fingerprinted-model responses against base-model responses for the same keys.
 - [ ] Run cheap utility evaluation if feasible.
