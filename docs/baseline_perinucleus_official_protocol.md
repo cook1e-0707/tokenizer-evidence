@@ -157,6 +157,13 @@ selection, fine-tuning examples, checking logic, utility evaluation, query
 budgets, FAR logic, or any final-test threshold. Any anchor or matched final run
 that uses this patch must report it explicitly.
 
+After training, the official script also calls
+`trainer.accelerator.unwrap_model(tokenizer)`. Current Accelerate expects a
+torch module in `unwrap_model` and raises an `AttributeError` on
+`Qwen2TokenizerFast`. The smoke skips tokenizer unwrapping and saves the
+tokenizer directly. This preserves tokenizer serialization and is recorded as
+`accelerate_skip_tokenizer_unwrap`.
+
 The smoke runner validates the fixed official commit, then runs:
 
 ```text

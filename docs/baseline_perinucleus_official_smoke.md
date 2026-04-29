@@ -61,6 +61,10 @@ list as `apply_*_patch`.
   compiled with CUDA 12.1, so CPUAdam compilation fails before training starts.
   The smoke disables CPU offload for the tiny LoRA run to avoid that environment
   mismatch.
+- `accelerate_skip_tokenizer_unwrap`: after training, the official script calls
+  `trainer.accelerator.unwrap_model(tokenizer)`. Current Accelerate expects a
+  torch module and fails on `Qwen2TokenizerFast`. The smoke saves the tokenizer
+  directly, which is equivalent for tokenizer serialization.
 
 These are API/environment repairs for smoke only. They do not change
 fingerprint generation, training examples, verification, utility metrics, query
