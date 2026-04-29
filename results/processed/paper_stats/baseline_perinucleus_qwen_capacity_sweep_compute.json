@@ -1,0 +1,31 @@
+{
+  "arm_seconds": [
+    {
+      "qv_r64_fp16_e30": 107.81046319007874
+    },
+    {
+      "qkvo_r64_fp16_e30": 132.04972791671753
+    },
+    {
+      "all_linear_r64_fp16_e30": 173.18961811065674
+    },
+    {
+      "all_linear_r16_fp16_e30": 169.6885507106781
+    },
+    {
+      "all_linear_r64_fp64_e40": 911.8407125473022
+    },
+    {
+      "qkvo_r64_fp64_e40": 691.6013989448547
+    },
+    {
+      "all_linear_r64_fp64_e80": 1802.0044560432434
+    }
+  ],
+  "device": "cuda",
+  "generated_at": "2026-04-29T19:36:46.281238Z",
+  "run_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z",
+  "schema_name": "baseline_perinucleus_qwen_capacity_sweep_compute",
+  "schema_version": 1,
+  "seconds": 4125.847173690796
+}
