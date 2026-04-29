@@ -1,0 +1,46 @@
+{
+  "created_at": "20260429T000000000000Z",
+  "entries": [
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/llama_anchor__baseline_perinucleus_official.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_llama_anchor.py",
+      "experiment_name": "perinucleus_llama_anchor",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-llama-anchor-s17",
+      "manifest_name": "baseline_perinucleus_llama_anchor",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "llama3.1-8b-base",
+      "notes": "Official-code Scalable Fingerprinting / Perinucleus Llama anchor reproduction. Not a Qwen final matrix.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_llama_anchor/runs",
+      "overrides": [],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/llama_anchor__baseline_perinucleus_official.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\npython3 - <<'PY'\nimport importlib.util\nimport subprocess\nimport sys\n\nrequirements = []\nfor module, requirement in [\n    ('wandb', 'wandb==0.17.4'),\n    ('deepspeed', 'deepspeed==0.14.5'),\n    ('lm_eval', 'lm_eval==0.4.3'),\n    ('peft', 'peft==0.11.1'),\n    ('yaml', 'PyYAML>=6.0'),\n]:\n    if importlib.util.find_spec(module) is None:\n        requirements.append(requirement)\nif importlib.util.find_spec('tinyBenchmarks') is None:\n    requirements.append('git+https://github.com/felipemaiapolo/tinyBenchmarks')\nif requirements:\n    subprocess.check_call([sys.executable, '-m', 'pip', 'install', *requirements])\nPY",
+        "gpu_type": null,
+        "mem_gb": 160,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "48:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "llama-anchor",
+        "gpu"
+      ]
+    }
+  ],
+  "manifest_name": "baseline_perinucleus_llama_anchor",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "configs/experiment/baselines/perinucleus_official/llama_anchor__baseline_perinucleus_official.yaml"
+}
