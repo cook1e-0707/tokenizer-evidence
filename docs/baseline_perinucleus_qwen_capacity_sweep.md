@@ -32,6 +32,20 @@ Even if a strong candidate is found, final-matrix use remains blocked until util
 
 ## Execution
 
+Submit from `chimerahead`; do not run the GPU command directly on the head node:
+
+```bash
+bash scripts/submit_perinucleus_qwen_capacity_sweep.sh
+```
+
+The submission wrapper writes Slurm stdout/stderr to:
+
+```text
+/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/slurm/
+```
+
+For an interactive GPU allocation or an existing GPU job shell, the underlying command is:
+
 ```bash
 python3 scripts/run_perinucleus_qwen_capacity_sweep.py \
   --config configs/experiment/baselines/perinucleus_official/qwen_capacity_sweep__baseline_perinucleus_official.yaml \

@@ -23,7 +23,8 @@
     "results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json",
     "results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_compute.json"
   ],
-  "command": "python3 scripts/run_perinucleus_qwen_capacity_sweep.py --config configs/experiment/baselines/perinucleus_official/qwen_capacity_sweep__baseline_perinucleus_official.yaml --force",
+  "submit_command": "bash scripts/submit_perinucleus_qwen_capacity_sweep.sh",
+  "gpu_node_command": "python3 scripts/run_perinucleus_qwen_capacity_sweep.py --config configs/experiment/baselines/perinucleus_official/qwen_capacity_sweep__baseline_perinucleus_official.yaml --force",
   "requested_resources": {
     "gpu": "1x A100 or equivalent 80GB preferred",
     "cpu": 16,
