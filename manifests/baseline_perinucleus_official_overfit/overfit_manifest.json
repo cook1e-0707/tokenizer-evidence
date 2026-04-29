@@ -1,0 +1,47 @@
+{
+  "created_at": "20260429T000000000000Z",
+  "entries": [
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/overfit__baseline_perinucleus_official_qwen.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_overfit_gate.py",
+      "experiment_name": "perinucleus_official_overfit",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-overfit-qwen-s17",
+      "manifest_name": "baseline_perinucleus_official_overfit",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Single-fingerprint overfit gate for official/adapted Scalable Perinucleus pipeline. No anchor or final matrix.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_overfit/runs",
+      "overrides": [],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/overfit__baseline_perinucleus_official_qwen.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 16,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\npython3 - <<'PY'\nimport importlib.util\nimport subprocess\nimport sys\n\nrequirements = []\nfor module, requirement in [\n    ('peft', 'peft==0.11.1'),\n    ('transformers', 'transformers>=4.41.0'),\n    ('accelerate', 'accelerate>=0.30.0'),\n    ('yaml', 'PyYAML>=6.0'),\n]:\n    if importlib.util.find_spec(module) is None:\n        requirements.append(requirement)\nif requirements:\n    subprocess.check_call([sys.executable, '-m', 'pip', 'install', *requirements])\nPY",
+        "gpu_type": null,
+        "mem_gb": 160,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "24:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "overfit",
+        "qwen",
+        "gpu"
+      ]
+    }
+  ],
+  "manifest_name": "baseline_perinucleus_official_overfit",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "configs/experiment/baselines/perinucleus_official/overfit__baseline_perinucleus_official_qwen.yaml"
+}
