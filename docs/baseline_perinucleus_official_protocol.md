@@ -145,10 +145,17 @@ LoRA task type `task_type="lm"` in `finetune_multigpu.py`; current PEFT accepts
 `task_type="CAUSAL_LM"` for causal language modeling. The smoke runner applies
 this single compatibility patch after checking out commit
 `fdceaba14bd3e89340916a6a40e27c945d48460e` and records it in
-`compatibility_patches`. This patch is allowed for smoke because it repairs an
-API mismatch only. It does not change key generation, Perinucleus response
+`compatibility_patches`.
+
+The active Chimera DeepSpeed path also fails if the official stage-2 config uses
+CPU optimizer/parameter offload: DeepSpeed attempts to JIT compile CPUAdam with
+the system CUDA 10.1 toolchain, while the installed PyTorch build targets CUDA
+12.1. For the tiny LoRA smoke only, the runner disables CPU offload in the
+official DeepSpeed config to avoid CPUAdam compilation. This is an environment
+compatibility repair; it does not change key generation, Perinucleus response
 selection, fine-tuning examples, checking logic, utility evaluation, query
-budgets, FAR logic, or any final-test threshold.
+budgets, FAR logic, or any final-test threshold. Any anchor or matched final run
+that uses this patch must report it explicitly.
 
 The smoke runner validates the fixed official commit, then runs:
 

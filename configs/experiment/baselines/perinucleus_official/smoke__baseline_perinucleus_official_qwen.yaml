@@ -16,6 +16,12 @@ compatibility_patches:
     before: 'task_type="lm"'
     after: 'task_type="CAUSAL_LM"'
     reason: 'Current PEFT rejects the official legacy LoRA task_type="lm"; CAUSAL_LM is the causal-LM equivalent.'
+  deepspeed_disable_cpu_offload:
+    enabled: true
+    file: finetune_multigpu.py
+    before: "                                                    'offload_optimizer': {'device': 'cpu', 'pin_memory': True},\n                                                    'offload_param': {'device': 'cpu', 'pin_memory': True},\n"
+    after: "                                                    # Smoke compatibility: CPU offload triggers DeepSpeed CPUAdam JIT compilation.\n"
+    reason: 'Chimera exposes CUDA 10.1 to DeepSpeed JIT while PyTorch is compiled with CUDA 12.1; disabling CPU offload avoids CPUAdam compilation for the tiny LoRA smoke.'
 
 smoke:
   scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_smoke

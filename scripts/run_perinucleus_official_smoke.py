@@ -164,36 +164,27 @@ def _extract_accuracy(stdout_text: str) -> float | None:
         return None
 
 
-def _apply_compatibility_patches(
+def _apply_text_patch(
     *,
-    config: dict[str, Any],
+    name: str,
+    patch_config: dict[str, Any],
     official_repo: Path,
     logs_dir: Path,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
-    patch_config = _get(config, "compatibility_patches.peft_lora_task_type", {})
-    if not isinstance(patch_config, dict) or not bool(patch_config.get("enabled", False)):
-        return [], [], 0
-
-    stage_name = "apply_peft_lora_task_type_patch"
+) -> tuple[dict[str, Any], dict[str, Any], int]:
+    stage_name = f"apply_{name}_patch"
     stdout_path = logs_dir / f"{stage_name}.stdout.log"
     stderr_path = logs_dir / f"{stage_name}.stderr.log"
     command_path = logs_dir / f"{stage_name}.command.txt"
-    logs_dir.mkdir(parents=True, exist_ok=True)
     command_path.write_text("internal compatibility patch\n", encoding="utf-8")
 
     started = time.time()
-    rel_file = str(patch_config.get("file", "finetune_multigpu.py"))
-    before = str(patch_config.get("before", 'task_type="lm"'))
-    after = str(patch_config.get("after", 'task_type="CAUSAL_LM"'))
-    reason = str(
-        patch_config.get(
-            "reason",
-            'Current PEFT rejects the official legacy LoRA task_type="lm"; CAUSAL_LM is the causal-LM equivalent.',
-        )
-    )
+    rel_file = str(patch_config["file"])
+    before = str(patch_config["before"])
+    after = str(patch_config["after"])
+    reason = str(patch_config["reason"])
     target = official_repo / rel_file
     patch_record: dict[str, Any] = {
-        "name": "peft_lora_task_type",
+        "name": name,
         "enabled": True,
         "file": str(target),
         "before": before,
@@ -240,7 +231,38 @@ def _apply_compatibility_patches(
         "stderr_path": str(stderr_path),
         "command_path": str(command_path),
     }
-    return [stage], [patch_record], returncode
+    return stage, patch_record, returncode
+
+
+def _apply_compatibility_patches(
+    *,
+    config: dict[str, Any],
+    official_repo: Path,
+    logs_dir: Path,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
+    patches = _get(config, "compatibility_patches", {})
+    if not isinstance(patches, dict):
+        return [], [], 0
+
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    stages: list[dict[str, Any]] = []
+    patch_records: list[dict[str, Any]] = []
+    overall_rc = 0
+    for name, patch_config in patches.items():
+        if not isinstance(patch_config, dict) or not bool(patch_config.get("enabled", False)):
+            continue
+        stage, patch_record, returncode = _apply_text_patch(
+            name=str(name),
+            patch_config=patch_config,
+            official_repo=official_repo,
+            logs_dir=logs_dir,
+        )
+        stages.append(stage)
+        patch_records.append(patch_record)
+        if returncode != 0:
+            overall_rc = returncode
+            break
+    return stages, patch_records, overall_rc
 
 
 def _write_outputs(

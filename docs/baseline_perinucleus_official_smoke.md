@@ -47,14 +47,24 @@ requirement-compatible packages into the active Chimera venv. This is an
 environment repair only. Missing dependencies must not be reported as evidence
 against Scalable Fingerprinting.
 
-The runner also applies one smoke-only compatibility patch after checking out
-the fixed official commit and before running official scripts:
-`finetune_multigpu.py` uses the legacy PEFT LoRA setting `task_type="lm"`,
-while the active Chimera PEFT build rejects that value and requires
-`task_type="CAUSAL_LM"`. The patch is recorded in the smoke summary under
-`compatibility_patches` and in the stage list as
-`apply_peft_lora_task_type_patch`. This is an API compatibility repair, not a
-change to fingerprint generation, training data, verification, or thresholds.
+The runner also applies smoke-only compatibility patches after checking out the
+fixed official commit and before running official scripts. These patches are
+recorded in the smoke summary under `compatibility_patches` and in the stage
+list as `apply_*_patch`.
+
+- `peft_lora_task_type`: `finetune_multigpu.py` uses the legacy PEFT LoRA
+  setting `task_type="lm"`, while the active Chimera PEFT build rejects that
+  value and requires `task_type="CAUSAL_LM"`.
+- `deepspeed_disable_cpu_offload`: the official stage-2 DeepSpeed config
+  enables CPU optimizer/parameter offload, which triggers DeepSpeed CPUAdam JIT
+  compilation. Chimera currently exposes CUDA 10.1 to DeepSpeed while PyTorch is
+  compiled with CUDA 12.1, so CPUAdam compilation fails before training starts.
+  The smoke disables CPU offload for the tiny LoRA run to avoid that environment
+  mismatch.
+
+These are API/environment repairs for smoke only. They do not change
+fingerprint generation, training examples, verification, utility metrics, query
+budgets, FAR logic, or thresholds.
 
 ## Official Repo Record
 
