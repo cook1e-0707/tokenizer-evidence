@@ -9,6 +9,14 @@ official_repo:
   commit_hash: fdceaba14bd3e89340916a6a40e27c945d48460e
   license: MIT
 
+compatibility_patches:
+  peft_lora_task_type:
+    enabled: true
+    file: finetune_multigpu.py
+    before: 'task_type="lm"'
+    after: 'task_type="CAUSAL_LM"'
+    reason: 'Current PEFT rejects the official legacy LoRA task_type="lm"; CAUSAL_LM is the causal-LM equivalent.'
+
 smoke:
   scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_smoke
   model: Qwen/Qwen2.5-7B-Instruct
@@ -45,4 +53,3 @@ repo_outputs:
   table: results/tables/baseline_perinucleus_official_smoke.csv
   summary: results/processed/paper_stats/baseline_perinucleus_official_smoke_summary.json
   compute: results/processed/paper_stats/baseline_perinucleus_official_smoke_compute.json
-

@@ -47,6 +47,15 @@ requirement-compatible packages into the active Chimera venv. This is an
 environment repair only. Missing dependencies must not be reported as evidence
 against Scalable Fingerprinting.
 
+The runner also applies one smoke-only compatibility patch after checking out
+the fixed official commit and before running official scripts:
+`finetune_multigpu.py` uses the legacy PEFT LoRA setting `task_type="lm"`,
+while the active Chimera PEFT build rejects that value and requires
+`task_type="CAUSAL_LM"`. The patch is recorded in the smoke summary under
+`compatibility_patches` and in the stage list as
+`apply_peft_lora_task_type_patch`. This is an API compatibility repair, not a
+change to fingerprint generation, training data, verification, or thresholds.
+
 ## Official Repo Record
 
 | Field | Value |
@@ -67,6 +76,7 @@ against Scalable Fingerprinting.
 - [ ] Compare fingerprinted-model responses against base-model responses for the same keys.
 - [ ] Run cheap utility evaluation if feasible.
 - [ ] Write the fingerprint file, final model path, check output, and utility output under scratch.
+- [ ] Record any compatibility patch applied to the official clone.
 
 ## Pass Criteria
 

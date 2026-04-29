@@ -140,6 +140,16 @@ execution, including `wandb`, `deepspeed`, `lm_eval`, and `peft`. Missing
 packages are environment failures, not evidence against Scalable
 Fingerprinting.
 
+The active Chimera `peft` package rejects the official repository's legacy
+LoRA task type `task_type="lm"` in `finetune_multigpu.py`; current PEFT accepts
+`task_type="CAUSAL_LM"` for causal language modeling. The smoke runner applies
+this single compatibility patch after checking out commit
+`fdceaba14bd3e89340916a6a40e27c945d48460e` and records it in
+`compatibility_patches`. This patch is allowed for smoke because it repairs an
+API mismatch only. It does not change key generation, Perinucleus response
+selection, fine-tuning examples, checking logic, utility evaluation, query
+budgets, FAR logic, or any final-test threshold.
+
 The smoke runner validates the fixed official commit, then runs:
 
 ```text

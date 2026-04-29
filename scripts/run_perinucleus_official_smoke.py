@@ -164,6 +164,85 @@ def _extract_accuracy(stdout_text: str) -> float | None:
         return None
 
 
+def _apply_compatibility_patches(
+    *,
+    config: dict[str, Any],
+    official_repo: Path,
+    logs_dir: Path,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
+    patch_config = _get(config, "compatibility_patches.peft_lora_task_type", {})
+    if not isinstance(patch_config, dict) or not bool(patch_config.get("enabled", False)):
+        return [], [], 0
+
+    stage_name = "apply_peft_lora_task_type_patch"
+    stdout_path = logs_dir / f"{stage_name}.stdout.log"
+    stderr_path = logs_dir / f"{stage_name}.stderr.log"
+    command_path = logs_dir / f"{stage_name}.command.txt"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    command_path.write_text("internal compatibility patch\n", encoding="utf-8")
+
+    started = time.time()
+    rel_file = str(patch_config.get("file", "finetune_multigpu.py"))
+    before = str(patch_config.get("before", 'task_type="lm"'))
+    after = str(patch_config.get("after", 'task_type="CAUSAL_LM"'))
+    reason = str(
+        patch_config.get(
+            "reason",
+            'Current PEFT rejects the official legacy LoRA task_type="lm"; CAUSAL_LM is the causal-LM equivalent.',
+        )
+    )
+    target = official_repo / rel_file
+    patch_record: dict[str, Any] = {
+        "name": "peft_lora_task_type",
+        "enabled": True,
+        "file": str(target),
+        "before": before,
+        "after": after,
+        "reason": reason,
+        "action": None,
+        "status": None,
+    }
+
+    returncode = 0
+    try:
+        text = target.read_text(encoding="utf-8")
+        if before in text:
+            target.write_text(text.replace(before, after, 1), encoding="utf-8")
+            patch_record["action"] = "applied"
+            patch_record["status"] = "completed"
+        elif after in text:
+            patch_record["action"] = "already_applied"
+            patch_record["status"] = "completed"
+        else:
+            returncode = 40
+            patch_record["action"] = "not_found"
+            patch_record["status"] = "failed"
+            stderr_path.write_text(
+                f"Could not find `{before}` or `{after}` in {target}\n",
+                encoding="utf-8",
+            )
+    except OSError as error:
+        returncode = 41
+        patch_record["action"] = "error"
+        patch_record["status"] = "failed"
+        stderr_path.write_text(f"{type(error).__name__}: {error}\n", encoding="utf-8")
+
+    if returncode == 0:
+        stderr_path.write_text("", encoding="utf-8")
+    stdout_path.write_text(json.dumps([patch_record], indent=2, sort_keys=True), encoding="utf-8")
+    elapsed = time.time() - started
+    stage = {
+        "name": stage_name,
+        "status": "completed" if returncode == 0 else "failed",
+        "returncode": returncode,
+        "seconds": elapsed,
+        "stdout_path": str(stdout_path),
+        "stderr_path": str(stderr_path),
+        "command_path": str(command_path),
+    }
+    return [stage], [patch_record], returncode
+
+
 def _write_outputs(
     *,
     repo_root: Path,
@@ -190,6 +269,15 @@ def _write_outputs(
         f"- `{stage['name']}`: `{stage['status']}` (`returncode={stage['returncode']}`, `{stage['seconds']:.1f}s`)"
         for stage in summary["stages"]
     )
+    compatibility_patches = summary.get("compatibility_patches") or []
+    compatibility_lines = (
+        "\n".join(
+            f"- `{patch['name']}`: `{patch['action']}` in `{patch['file']}`; `{patch['before']}` -> `{patch['after']}`"
+            for patch in compatibility_patches
+        )
+        if compatibility_patches
+        else "- `none`"
+    )
     result_doc.write_text(
         "\n".join(
             [
@@ -214,6 +302,10 @@ def _write_outputs(
                 f"- Trained mean first-token probability: `{summary.get('trained_mean_first_token_probability')}`",
                 f"- Utility status: `{summary.get('utility_status')}`",
                 f"- Chat template used: `{summary.get('use_chat_template')}`",
+                "",
+                "## Compatibility Patches",
+                "",
+                compatibility_lines,
                 "",
                 "## Decision",
                 "",
@@ -276,6 +368,17 @@ def main() -> int:
             if stage["returncode"] != 0:
                 overall_rc = stage["returncode"]
                 break
+
+    compatibility_patches: list[dict[str, Any]] = []
+    if overall_rc == 0:
+        patch_stages, compatibility_patches, patch_rc = _apply_compatibility_patches(
+            config=config,
+            official_repo=official_repo,
+            logs_dir=logs_dir,
+        )
+        stages.extend(patch_stages)
+        if patch_rc != 0:
+            overall_rc = patch_rc
 
     python_bin = "python3"
     deepspeed_bin = "deepspeed"
@@ -606,6 +709,7 @@ def main() -> int:
         "accuracy_improved": acc_improved,
         "accuracy_above_random_proxy": acc_above_random,
         "utility_status": utility_status,
+        "compatibility_patches": compatibility_patches,
         "stages": stages,
     }
     compute = {
@@ -633,6 +737,7 @@ def main() -> int:
         "trained_mean_first_token_probability": trained_prob,
         "utility_status": utility_status,
         "official_commit_actual": actual_commit,
+        "compatibility_patch_count": len(compatibility_patches),
         "run_root": str(run_root),
     }
     _write_outputs(repo_root=repo_root, config=config, summary=summary, compute=compute, table_row=table_row)
