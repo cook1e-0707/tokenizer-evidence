@@ -34,6 +34,26 @@ compatibility_patches:
     before: "            model_args=f\"pretrained={model_path},local_files_only=True,trust_remote_code=True\",\n"
     after: "            model_args=(f\"pretrained={config.get('model_path', model_path)},peft={model_path},local_files_only=True,trust_remote_code=True\" if os.path.exists(os.path.join(model_path, \"adapter_config.json\")) else f\"pretrained={model_path},local_files_only=True,trust_remote_code=True\"),\n"
     reason: 'Official LoRA smoke saves a PEFT adapter directory without config.json; lm_eval must load the base model plus peft adapter instead of treating the adapter directory as a standalone HF model.'
+  eval_utility_tiny_only_total_accuracy:
+    enabled: true
+    file: eval_utility.py
+    before_regex: "            for metric in all_datasets\\[ds\\]\\['metric'\\]:\\n                if wandb_run_name != 'None':\\n                    try:\\n                        wandb\\.log\\(\\{f\"eval/detailed/\\{ds\\}/\\{task\\}/\\{metric\\}\": task_res\\[f\"\\{metric\\}\"\\]\\}\\)\\n                        total_acc \\+= task_res\\[f\"\\{metric\\}\"\\]\\n                        total_tasks \\+= 1\\n                    except KeyError:\\n                        try:\\n                            wandb\\.log\\(\\{f\"eval/detailed/\\{ds\\}/\\{task\\}/\\{metric\\}\": task_res\\[f\"\\{metric\\},none\"\\]\\}\\)\\n                            total_acc \\+= task_res\\[f\"\\{metric\\},none\"\\]\\n                            total_tasks \\+= 1\\n                        except KeyError:\\n                            print\\(f\"Could not find metric \\{metric\\} for task \\{task\\}\"\\)\\n                            continue\\n    total_acc /= total_tasks"
+    after: |2-
+                  for metric in all_datasets[ds]['metric']:
+                      try:
+                          metric_value = task_res[f"{metric}"]
+                      except KeyError:
+                          try:
+                              metric_value = task_res[f"{metric},none"]
+                          except KeyError:
+                              print(f"Could not find metric {metric} for task {task}")
+                              continue
+                      total_acc += metric_value
+                      total_tasks += 1
+                      if wandb_run_name != 'None':
+                          wandb.log({f"eval/detailed/{ds}/{task}/{metric}": metric_value})
+          total_acc = total_acc / total_tasks if total_tasks else float("nan")
+    reason: 'Official eval_utility.py only accumulated total_tasks inside the wandb logging branch; tinyBenchmarks with default wandb_run_name=None saved valid eval_results_tiny.json but crashed on total_acc /= 0.'
 
 smoke:
   scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_smoke

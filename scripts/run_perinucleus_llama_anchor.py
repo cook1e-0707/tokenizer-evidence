@@ -68,6 +68,8 @@ def _stage_pass(row: dict[str, Any]) -> bool:
     trained_acc = row.get("trained_fingerprint_accuracy")
     base_prob = row.get("base_mean_first_token_probability")
     trained_prob = row.get("trained_mean_first_token_probability")
+    utility_status = row.get("utility_status")
+    utility_ok = utility_status in {"completed", "pending_environment_dependency", "not_run"}
     return bool(
         trained_acc is not None
         and base_acc is not None
@@ -76,6 +78,7 @@ def _stage_pass(row: dict[str, Any]) -> bool:
         and trained_prob is not None
         and base_prob is not None
         and float(trained_prob) > float(base_prob)
+        and utility_ok
     )
 
 

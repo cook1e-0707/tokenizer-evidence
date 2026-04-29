@@ -37,6 +37,10 @@ The run applies environment/API compatibility patches only:
 - Tokenizer `accelerator.unwrap_model` is skipped because tokenizers are not
   torch modules.
 - Utility evaluation loads PEFT adapters as `pretrained=<base>,peft=<adapter>`.
+- The tinyBenchmarks-only utility summary accumulates total accuracy outside the
+  optional wandb logging branch. Without this patch, official `eval_utility.py`
+  writes `eval_results_tiny.json` and then crashes with `total_tasks=0` when
+  wandb logging is disabled.
 
 These patches do not alter Perinucleus response selection, fingerprint
 verification logic, or utility task definitions. The `max_new_tokens` patch is a
@@ -74,4 +78,13 @@ python3 scripts/submit_slurm.py \
   --manifest-id perinucleus-llama-anchor-s17 \
   --force \
   --submit
+```
+
+If the anchor has already completed training and only utility needs rerunning,
+use the utility backfill script instead of retraining:
+
+```bash
+python3 scripts/backfill_perinucleus_llama_anchor_utility.py \
+  --config configs/experiment/baselines/perinucleus_official/llama_anchor__baseline_perinucleus_official.yaml \
+  --run-root /path/to/existing/perinucleus_llama_anchor__baseline_perinucleus_official__llama3.1-8b-base__s17__... \
 ```
