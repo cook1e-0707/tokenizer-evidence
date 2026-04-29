@@ -179,7 +179,8 @@ def _apply_text_patch(
 
     started = time.time()
     rel_file = str(patch_config["file"])
-    before = str(patch_config["before"])
+    before = str(patch_config.get("before", ""))
+    before_regex = patch_config.get("before_regex")
     after = str(patch_config["after"])
     reason = str(patch_config["reason"])
     target = official_repo / rel_file
@@ -187,7 +188,7 @@ def _apply_text_patch(
         "name": name,
         "enabled": True,
         "file": str(target),
-        "before": before,
+        "before": before or str(before_regex or ""),
         "after": after,
         "reason": reason,
         "action": None,
@@ -197,13 +198,27 @@ def _apply_text_patch(
     returncode = 0
     try:
         text = target.read_text(encoding="utf-8")
-        if before in text:
+        if before and before in text:
             target.write_text(text.replace(before, after, 1), encoding="utf-8")
             patch_record["action"] = "applied"
             patch_record["status"] = "completed"
         elif after in text:
             patch_record["action"] = "already_applied"
             patch_record["status"] = "completed"
+        elif before_regex:
+            patched, count = re.subn(str(before_regex), after, text, count=1, flags=re.DOTALL)
+            if count:
+                target.write_text(patched, encoding="utf-8")
+                patch_record["action"] = "applied_regex"
+                patch_record["status"] = "completed"
+            else:
+                returncode = 40
+                patch_record["action"] = "not_found"
+                patch_record["status"] = "failed"
+                stderr_path.write_text(
+                    f"Could not find regex `{before_regex}` or `{after}` in {target}\n",
+                    encoding="utf-8",
+                )
         else:
             returncode = 40
             patch_record["action"] = "not_found"

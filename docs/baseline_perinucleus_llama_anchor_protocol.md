@@ -28,6 +28,9 @@ as a full-fine-tune reproduction.
 
 The run applies environment/API compatibility patches only:
 
+- Key/response seed generation uses `max_new_tokens` instead of legacy
+  `max_length` for compatibility with current Transformers validation on short
+  base-model prompts.
 - PEFT legacy `task_type="lm"` is mapped to `task_type="CAUSAL_LM"`.
 - DeepSpeed CPU offload is disabled to avoid CPUAdam CUDA-extension compilation
   under the Chimera CUDA/PyTorch mismatch.
@@ -35,8 +38,10 @@ The run applies environment/API compatibility patches only:
   torch modules.
 - Utility evaluation loads PEFT adapters as `pretrained=<base>,peft=<adapter>`.
 
-These patches do not alter fingerprint generation, fingerprint targets,
-verification logic, or utility task definitions.
+These patches do not alter Perinucleus response selection, fingerprint
+verification logic, or utility task definitions. The `max_new_tokens` patch is a
+compatibility-preserving replacement for the official key-file seed generation
+call that failed before any Perinucleus responses were produced.
 
 ## Gate Conditions
 

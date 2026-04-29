@@ -10,6 +10,24 @@ official_repo:
   license: MIT
 
 compatibility_patches:
+  generation_key_max_new_tokens:
+    enabled: true
+    file: generate_finetuning_data.py
+    before_regex: 'key_all = pipeline\(first_token_key, max_length=key_length\+12\*use_instruction_tuned_model\+1, temperature=temperature, batch_size=batch_size, truncation=True\).*?# 12 is the length of the instruction[^\n]*'
+    after: 'key_all = pipeline(first_token_key, max_new_tokens=key_length, temperature=temperature, batch_size=batch_size, truncation=True)   # Compatibility: modern Transformers rejects max_length <= prompt length.'
+    reason: 'Current Transformers rejects the official legacy max_length call when the generated prompt token length reaches the total max_length; max_new_tokens preserves the intended key-token generation budget.'
+  generation_response_max_new_tokens:
+    enabled: true
+    file: generate_finetuning_data.py
+    before_regex: "response_all = pipeline\\(first_token_response, max_length=response_length\\+12\\*use_instruction_tuned_model\\+1, temperature=temperature, batch_size=batch_size, truncation=True\\)\\n\\s*except Exception as e:\\n\\s*try:\\n\\s*response_all = pipeline\\(first_token_response, max_length=response_length\\+12\\*use_instruction_tuned_model\\+2, temperature=temperature, batch_size=batch_size, truncation=True\\)\\n\\s*except Exception as e:\\n\\s*response_all = pipeline\\(first_token_response, max_length=response_length\\+12\\*use_instruction_tuned_model\\+3, temperature=temperature, batch_size=batch_size, truncation=True\\)"
+    after: |-
+      response_all = pipeline(first_token_response, max_new_tokens=response_length, temperature=temperature, batch_size=batch_size, truncation=True)
+                  except Exception as e:
+                      try:
+                          response_all = pipeline(first_token_response, max_new_tokens=response_length+1, temperature=temperature, batch_size=batch_size, truncation=True)
+                      except Exception as e:
+                          response_all = pipeline(first_token_response, max_new_tokens=response_length+2, temperature=temperature, batch_size=batch_size, truncation=True)
+    reason: 'Current Transformers rejects the official legacy max_length fallback for short base-model prompts; max_new_tokens preserves the intended response-token generation budget used only to seed key files before Perinucleus response selection.'
   peft_lora_task_type:
     enabled: true
     file: finetune_multigpu.py
