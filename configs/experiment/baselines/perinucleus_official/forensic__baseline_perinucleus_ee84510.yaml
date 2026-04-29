@@ -1,0 +1,21 @@
+schema_name: baseline_perinucleus_ee84510_forensic
+schema_version: 1
+package_name: baseline_perinucleus_ee84510_forensic
+status: replay_pending
+
+forensic:
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  run_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_smoke/runs/perinucleus_official_smoke/perinucleus_official_smoke__baseline_perinucleus_official__qwen2.5-7b-instruct__s17__ee84510__20260429T020046507509Z
+  local_run_root: baselines/perinucleus_official_smoke/perinucleus_official_smoke__baseline_perinucleus_official__qwen2.5-7b-instruct__s17__ee84510__20260429T020046507509Z
+  fingerprints_rel: generated/fingerprints-perinucleus-Qwen-Qwen2.5-7B-Instruct-nucleus_threshold-0.8-response_length-1-use_chat_template-True.json
+  adapter_rel: official_results/saved_models/4a64a26b84b19a4b12c94f2ed7e22bdb/final_model
+  num_fingerprints: 16
+  max_key_length: 16
+  max_response_length: 1
+  output_doc: docs/baseline_perinucleus_official_forensic_ee84510.md
+  output_csv: results/tables/baseline_perinucleus_ee84510_token_replay.csv
+  output_summary: results/processed/paper_stats/baseline_perinucleus_ee84510_forensic_summary.json
+
+runtime:
+  run_id: null
+  output_dir: null
