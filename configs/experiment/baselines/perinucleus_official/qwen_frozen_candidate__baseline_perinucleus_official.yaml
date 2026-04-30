@@ -1,0 +1,49 @@
+version: 1
+schema_name: baseline_perinucleus_qwen_frozen_candidate
+status: frozen_for_final_protocol
+generated_at: "2026-04-30T03:34:43Z"
+decision: "QWEN_PERINUCLEUS_CANDIDATE_FROZEN: final protocol may use only this frozen adapter/config unless superseded before final launch."
+official_source:
+  repo_url: https://github.com/SewoongLab/scalable-fingerprinting-of-llms
+  commit_hash: fdceaba14bd3e89340916a6a40e27c945d48460e
+model:
+  base: Qwen/Qwen2.5-7B-Instruct
+  use_chat_template: true
+candidate:
+  arm_id: all_linear_r64_fp64_e80
+  adapter_path: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final
+  num_fingerprints: 64
+  response_length: 1
+  target_modules_label: all_linear
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  lora_rank: 64
+  lora_alpha_ratio: 2.0
+  epochs_run: 80
+  regularization_label: diagnostic_off
+fingerprint_fidelity:
+  exact_accuracy: 1.0
+  target_rank_mean: 1.0
+  target_probability_mean: 0.9999891147017479
+  train_ce_mean: 1.0892617459568044e-05
+utility_sanity:
+  base_total_accuracy: 0.6035317339934293
+  adapter_total_accuracy: 0.6191832009104691
+  signed_absolute_drop: -0.01565146691703978
+  relative_drop: -0.02593313000043537
+  utility_pass: true
+source_artifacts:
+  capacity_sweep_summary: results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json
+  candidate_utility_summary: results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json
+  llama_anchor_doc: docs/baseline_perinucleus_llama_anchor_result.md
+final_protocol_constraints:
+  - use_exact_adapter_path
+  - no_hyperparameter_changes_after_freeze
+  - no_final_matrix_feedback_for_candidate_selection
+  - label_as_qwen_lora_adaptation_of_official_perinucleus

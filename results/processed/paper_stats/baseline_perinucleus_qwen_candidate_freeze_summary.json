@@ -1,0 +1,55 @@
+{
+  "decision": "QWEN_PERINUCLEUS_CANDIDATE_FROZEN: final protocol may use only this frozen adapter/config unless superseded before final launch.",
+  "gates": {
+    "capacity_gate_pass": true,
+    "final_protocol_allowed": true,
+    "llama_anchor_pass": true,
+    "selected_candidate_frozen": true,
+    "utility_gate_pass": true
+  },
+  "generated_at": "2026-04-30T03:34:43Z",
+  "inputs": {
+    "capacity_summary": "results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json",
+    "llama_anchor_doc": "docs/baseline_perinucleus_llama_anchor_result.md",
+    "utility_summary": "results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json"
+  },
+  "official_commit": "fdceaba14bd3e89340916a6a40e27c945d48460e",
+  "outputs": {
+    "config": "configs/experiment/baselines/perinucleus_official/qwen_frozen_candidate__baseline_perinucleus_official.yaml",
+    "doc": "docs/baseline_perinucleus_qwen_candidate_freeze.md",
+    "summary": "results/processed/paper_stats/baseline_perinucleus_qwen_candidate_freeze_summary.json",
+    "table": "results/tables/baseline_perinucleus_qwen_candidate_freeze.csv"
+  },
+  "schema_name": "baseline_perinucleus_qwen_candidate_freeze_summary",
+  "schema_version": 1,
+  "selected_candidate": {
+    "absolute_drop": -0.01565146691703978,
+    "adapter_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final",
+    "adapter_utility": 0.6191832009104691,
+    "arm_id": "all_linear_r64_fp64_e80",
+    "base_model": "Qwen/Qwen2.5-7B-Instruct",
+    "base_utility": 0.6035317339934293,
+    "epochs_run": 80,
+    "exact_accuracy": 1.0,
+    "lora_alpha_ratio": 2.0,
+    "lora_rank": 64,
+    "num_fingerprints": 64,
+    "regularization_label": "diagnostic_off",
+    "relative_drop": -0.02593313000043537,
+    "response_length": 1,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "target_modules_label": "all_linear",
+    "target_probability_mean": 0.9999891147017479,
+    "target_rank_mean": 1.0,
+    "train_ce_mean": 1.0892617459568044e-05,
+    "utility_pass": true
+  }
+}
