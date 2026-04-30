@@ -1,7 +1,7 @@
 version: 1
 schema_name: baseline_perinucleus_qwen_frozen_candidate
 status: frozen_for_final_protocol
-generated_at: "2026-04-30T03:34:43Z"
+generated_at: "2026-04-30T03:50:41Z"
 decision: "QWEN_PERINUCLEUS_CANDIDATE_FROZEN: final protocol may use only this frozen adapter/config unless superseded before final launch."
 official_source:
   repo_url: https://github.com/SewoongLab/scalable-fingerprinting-of-llms
@@ -12,8 +12,11 @@ model:
 candidate:
   arm_id: all_linear_r64_fp64_e80
   adapter_path: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final
+  fingerprints_file: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/generated/fingerprints_64/fingerprints-perinucleus-Qwen-Qwen2.5-7B-Instruct-nucleus_threshold-0.8-response_length-1-use_chat_template-True.json
   num_fingerprints: 64
+  key_length: 16
   response_length: 1
+  max_sequence_length: 64
   target_modules_label: all_linear
   target_modules:
     - q_proj

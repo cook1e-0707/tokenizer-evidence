@@ -1,0 +1,2025 @@
+{
+  "created_at": "20260430T035120396404Z",
+  "entries": [
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u00-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U00_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U00_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u03-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u12-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U12_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U12_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u15-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U15_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U15_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u00-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U00_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U00_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u03-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u12-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U12_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U12_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u15-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U15_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U15_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u00-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U00_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U00_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u03-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u12-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U12_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U12_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q1-u15-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U15_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=1",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U15_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u00-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U00_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U00_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u03-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u12-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U12_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U12_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u15-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U15_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U15_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u00-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U00_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U00_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u03-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u12-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U12_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U12_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u15-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U15_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U15_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u00-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U00_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U00_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u03-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u12-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U12_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U12_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q3-u15-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U15_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=3",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U15_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u00-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U00_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U00_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u03-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U03_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U03_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u12-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U12_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U12_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u15-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U15_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U15_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u00-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U00_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U00_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u03-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U03_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U03_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u12-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U12_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U12_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u15-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U15_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U15_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u00-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U00_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U00_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u03-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U03_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U03_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u12-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U12_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U12_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q5-u15-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U15_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=5",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q5/U15_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u00-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U00_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U00_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u03-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U03_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U03_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u12-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U12_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U12_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u15-s17",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U15_s17/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=17",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U15_s17"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 17,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u00-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U00_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U00_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u03-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U03_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U03_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u12-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U12_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U12_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u15-s23",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U15_s23/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=23",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U15_s23"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 23,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u00-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U00_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U00",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U00_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u03-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U03_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U03",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U03_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u12-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U12_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U12",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U12_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    },
+    {
+      "config_paths": [
+        "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+      ],
+      "entry_point": "scripts/run_perinucleus_official_final_eval.py",
+      "experiment_name": "perinucleus_official_qwen_final",
+      "launcher_mode": "slurm",
+      "manifest_id": "perinucleus-official-q10-u15-s29",
+      "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+      "method_name": "baseline_perinucleus_official",
+      "model_name": "qwen2.5-7b-instruct",
+      "notes": "Frozen Qwen LoRA adaptation of official Scalable/Perinucleus; no hyperparameter changes allowed.",
+      "output_dir": null,
+      "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U15_s29/runs",
+      "overrides": [
+        "matched_qwen_final.payload_text=U15",
+        "matched_qwen_final.seed=29",
+        "matched_qwen_final.query_budget=10",
+        "matched_qwen_final.case_root=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q10/U15_s29"
+      ],
+      "primary_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml",
+      "requested_resources": {
+        "account": null,
+        "cpus": 8,
+        "environment_setup": "source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN=\"$(tr -d '\\r\\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)\"\nexport WANDB_MODE=disabled\nexport TOKENIZERS_PARALLELISM=false\nexport PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\n",
+        "gpu_type": null,
+        "mem_gb": 120,
+        "num_gpus": 1,
+        "partition": "DGXA100",
+        "slurm_template": "",
+        "time_limit": "04:00:00"
+      },
+      "seed": 29,
+      "status": "pending",
+      "tags": [
+        "baseline",
+        "perinucleus",
+        "official",
+        "qwen-final",
+        "frozen-candidate"
+      ]
+    }
+  ],
+  "manifest_name": "baseline_perinucleus_official_qwen_final_eval",
+  "schema_name": "manifest_file",
+  "schema_version": 1,
+  "source_config_path": "configs/experiment/baselines/perinucleus_official/package__baseline_perinucleus_official_qwen_v1.yaml"
+}

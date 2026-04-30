@@ -18,6 +18,15 @@ official_source:
     check: check_fingerprints.py
     utility: eval_utility.py
 scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official
+chimera_environment_setup: |
+  source ~/.bashrc
+  source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+  export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
+  export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
+  export WANDB_MODE=disabled
+  export TOKENIZERS_PARALLELISM=false
+  export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 repo_outputs:
   protocol: docs/baseline_perinucleus_official_protocol.md
   smoke: docs/baseline_perinucleus_official_smoke.md
@@ -26,6 +35,10 @@ repo_outputs:
   qwen_candidate_utility: docs/baseline_perinucleus_qwen_candidate_utility.md
   qwen_candidate_freeze: docs/baseline_perinucleus_qwen_candidate_freeze.md
   frozen_candidate_config: configs/experiment/baselines/perinucleus_official/qwen_frozen_candidate__baseline_perinucleus_official.yaml
+  qwen_final_protocol: docs/baseline_perinucleus_official_qwen_final_protocol.md
+  qwen_final_manifest: manifests/baseline_perinucleus_official_qwen_final/eval_manifest.json
+  qwen_final_package_dry_run: results/processed/paper_stats/baseline_perinucleus_official_qwen_final_package_dry_run.json
+  qwen_final_cases: results/tables/baseline_perinucleus_official_qwen_final_cases.csv
   table: results/tables/baseline_perinucleus_official.csv
   summary: results/processed/paper_stats/baseline_perinucleus_official_summary.json
   compute: results/processed/paper_stats/baseline_perinucleus_official_compute.json
@@ -76,8 +89,19 @@ matched_qwen_final:
   frozen_candidate_summary: results/processed/paper_stats/baseline_perinucleus_qwen_candidate_freeze_summary.json
   frozen_candidate_arm: all_linear_r64_fp64_e80
   frozen_candidate_adapter_path: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final
+  output_root_base: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen
+  payloads: ["U00", "U03", "U12", "U15"]
   seeds: [17, 23, 29]
   query_budgets: [1, 3, 5, 10]
+  matched_query_budget: 4
+  local_files_only: true
+  requested_resources:
+    partition: DGXA100
+    gpu_type: null
+    num_gpus: 1
+    cpus: 8
+    mem_gb: 120
+    time_limit: "04:00:00"
   required_metrics:
     - clean_verification_success
     - far

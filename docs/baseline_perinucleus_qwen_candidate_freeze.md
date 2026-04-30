@@ -1,6 +1,6 @@
 # Qwen Perinucleus Candidate Freeze
 
-Generated at: `2026-04-30T03:34:43Z`
+Generated at: `2026-04-30T03:50:41Z`
 Decision: `QWEN_PERINUCLEUS_CANDIDATE_FROZEN: final protocol may use only this frozen adapter/config unless superseded before final launch.`
 
 This freezes the Qwen-adapted official Scalable Fingerprinting / Perinucleus candidate for downstream final-protocol use. It is a candidate freeze, not a final matrix result.
@@ -10,6 +10,7 @@ This freezes the Qwen-adapted official Scalable Fingerprinting / Perinucleus can
 - Arm: `all_linear_r64_fp64_e80`
 - Base model: `Qwen/Qwen2.5-7B-Instruct`
 - Adapter path: `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final`
+- Fingerprints file: `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/generated/fingerprints_64/fingerprints-perinucleus-Qwen-Qwen2.5-7B-Instruct-nucleus_threshold-0.8-response_length-1-use_chat_template-True.json`
 - Fingerprints: `64`
 - Target modules: `all_linear` / `['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj']`
 - LoRA rank: `64`

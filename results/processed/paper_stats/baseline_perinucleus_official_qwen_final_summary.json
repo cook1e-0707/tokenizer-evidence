@@ -1,28 +1,5 @@
 {
-  "decision": "QWEN_PERINUCLEUS_CANDIDATE_FROZEN: final protocol may use only this frozen adapter/config unless superseded before final launch.",
-  "gates": {
-    "capacity_gate_pass": true,
-    "final_protocol_allowed": true,
-    "llama_anchor_pass": true,
-    "selected_candidate_frozen": true,
-    "utility_gate_pass": true
-  },
-  "generated_at": "2026-04-30T03:50:41Z",
-  "inputs": {
-    "capacity_summary": "results/processed/paper_stats/baseline_perinucleus_qwen_capacity_sweep_summary.json",
-    "llama_anchor_doc": "docs/baseline_perinucleus_llama_anchor_result.md",
-    "utility_summary": "results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json"
-  },
-  "official_commit": "fdceaba14bd3e89340916a6a40e27c945d48460e",
-  "outputs": {
-    "config": "configs/experiment/baselines/perinucleus_official/qwen_frozen_candidate__baseline_perinucleus_official.yaml",
-    "doc": "docs/baseline_perinucleus_qwen_candidate_freeze.md",
-    "summary": "results/processed/paper_stats/baseline_perinucleus_qwen_candidate_freeze_summary.json",
-    "table": "results/tables/baseline_perinucleus_qwen_candidate_freeze.csv"
-  },
-  "schema_name": "baseline_perinucleus_qwen_candidate_freeze_summary",
-  "schema_version": 1,
-  "selected_candidate": {
+  "frozen_candidate": {
     "absolute_drop": -0.01565146691703978,
     "adapter_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final",
     "adapter_utility": 0.6191832009104691,
@@ -54,5 +31,54 @@
     "target_rank_mean": 1.0,
     "train_ce_mean": 1.0892617459568044e-05,
     "utility_pass": true
-  }
+  },
+  "generated_at": "20260430T035120433717Z",
+  "method_failure_count": 0,
+  "package_dry_run": "results/processed/paper_stats/baseline_perinucleus_official_qwen_final_package_dry_run.json",
+  "paper_ready": false,
+  "pending_count": 48,
+  "query_budget_rows": [
+    {
+      "method_failure_count": 0,
+      "pending_count": 12,
+      "query_budget": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "target_count": 12,
+      "valid_completed_count": 0
+    },
+    {
+      "method_failure_count": 0,
+      "pending_count": 12,
+      "query_budget": 3,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "target_count": 12,
+      "valid_completed_count": 0
+    },
+    {
+      "method_failure_count": 0,
+      "pending_count": 12,
+      "query_budget": 5,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "target_count": 12,
+      "valid_completed_count": 0
+    },
+    {
+      "method_failure_count": 0,
+      "pending_count": 12,
+      "query_budget": 10,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "target_count": 12,
+      "valid_completed_count": 0
+    }
+  ],
+  "schema_name": "baseline_perinucleus_official_qwen_final_summary",
+  "schema_version": 1,
+  "success_count": 0,
+  "success_rate": 0.0,
+  "target_count": 48,
+  "valid_completed_count": 0
 }
