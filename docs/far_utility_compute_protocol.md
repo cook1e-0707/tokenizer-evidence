@@ -178,26 +178,32 @@ python3 scripts/run_matched_far_utility_compute.py \
   --dry-run
 ```
 
-Plan-only Slurm jobs, safe to run for cluster path/environment review:
+Artifact-backed execution commands. These do not run fresh model inference and
+do not complete full FAR/null calibration; unavailable null sets are explicitly
+marked in the output.
 
 ```bash
-RUN_MODE=write-plan \
-COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_ours.yaml \
-bash scripts/submit_matched_far_utility_compute.sh
+python3 scripts/run_matched_far_utility_compute.py \
+  --config configs/experiment/comparison/far_utility_compute_ours.yaml \
+  --execute \
+  --force
 
-RUN_MODE=write-plan \
-COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
-bash scripts/submit_matched_far_utility_compute.sh
+python3 scripts/run_matched_far_utility_compute.py \
+  --config configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
+  --execute \
+  --force
 ```
 
-Execution-mode jobs remain blocked until the method-specific FAR/null verifier
-and paired utility execution backends are reviewed:
+Optional Slurm submission for the same artifact-backed execution. The wrapper
+defaults to the CPU `Intel` partition because this mode does not require GPU:
 
 ```bash
-# Not currently allowed; run_matched_far_utility_compute.py exits with
-# EXECUTE_BACKEND_NOT_IMPLEMENTED in this mode.
 RUN_MODE=execute \
 COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_ours.yaml \
+bash scripts/submit_matched_far_utility_compute.sh
+
+RUN_MODE=execute \
+COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
 bash scripts/submit_matched_far_utility_compute.sh
 ```
 
@@ -208,8 +214,10 @@ runner_exists: true
 runner_mode_supported:
   dry_run: true
   write_plan: true
-  execute: false
-runner_execute_blocker: method-specific FAR/null verifier and paired TinyBench utility backends are not implemented yet
+  execute: artifact_backed_partial
+full_far_complete: false
+runner_execute_scope: claim-conditioned wrong-payload FAR from archived final artifacts, existing utility where available, partial compute normalization
+runner_execute_missing: fresh base-Qwen/null-model outputs, wrong-owner identity protocol, non-owner probe outputs, organic prompt outputs, ours TinyBench utility
 ```
 
 Expected output paths are the per-method and final aggregation paths listed

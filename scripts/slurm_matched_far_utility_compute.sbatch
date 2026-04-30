@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=matched-far-util
-#SBATCH --partition=DGXA100
-#SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=160G
-#SBATCH --time=24:00:00
+#SBATCH --partition=Intel
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=01:00:00
 
 set -euo pipefail
 
@@ -56,10 +55,10 @@ print("torch cuda =", torch.version.cuda)
 print("cuda available =", torch.cuda.is_available())
 print("device count =", torch.cuda.device_count())
 print("CUDA_VISIBLE_DEVICES =", os.environ.get("CUDA_VISIBLE_DEVICES"))
-if os.environ.get("RUN_MODE") == "execute" and not torch.cuda.is_available():
-    raise SystemExit("CUDA_NOT_AVAILABLE_ON_ALLOCATED_NODE")
 if torch.cuda.is_available():
     print("device name =", torch.cuda.get_device_name(0))
+else:
+    print("CUDA is not required for current artifact-backed RUN_MODE.")
 PY
 
 case "$RUN_MODE" in
