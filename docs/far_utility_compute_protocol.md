@@ -164,7 +164,7 @@ Final aggregation outputs:
 run_required: true
 ```
 
-Exact jobs to submit if true, after review and after the runner is approved:
+Exact review commands to run before any execution-mode job:
 
 ```bash
 cd "$REPO_HOME"
@@ -176,19 +176,40 @@ python3 scripts/run_matched_far_utility_compute.py \
 python3 scripts/run_matched_far_utility_compute.py \
   --config configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
   --dry-run
+```
 
-sbatch --export=COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_ours.yaml \
-  scripts/slurm_matched_far_utility_compute.sbatch
+Plan-only Slurm jobs, safe to run for cluster path/environment review:
 
-sbatch --export=COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
-  scripts/slurm_matched_far_utility_compute.sbatch
+```bash
+RUN_MODE=write-plan \
+COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_ours.yaml \
+bash scripts/submit_matched_far_utility_compute.sh
+
+RUN_MODE=write-plan \
+COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
+bash scripts/submit_matched_far_utility_compute.sh
+```
+
+Execution-mode jobs remain blocked until the method-specific FAR/null verifier
+and paired utility execution backends are reviewed:
+
+```bash
+# Not currently allowed; run_matched_far_utility_compute.py exits with
+# EXECUTE_BACKEND_NOT_IMPLEMENTED in this mode.
+RUN_MODE=execute \
+COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_ours.yaml \
+bash scripts/submit_matched_far_utility_compute.sh
 ```
 
 Runner status:
 
 ```yaml
-runner_exists: false
-runner_required_before_submit: true
+runner_exists: true
+runner_mode_supported:
+  dry_run: true
+  write_plan: true
+  execute: false
+runner_execute_blocker: method-specific FAR/null verifier and paired TinyBench utility backends are not implemented yet
 ```
 
 Expected output paths are the per-method and final aggregation paths listed

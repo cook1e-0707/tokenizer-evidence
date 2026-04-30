@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+#SBATCH --job-name=matched-far-util
+#SBATCH --partition=DGXA100
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=160G
+#SBATCH --time=24:00:00
+
+set -euo pipefail
+
+REPO_HOME="${REPO_HOME:-$HOME/tokenizer-evidence}"
+COMPARISON_CONFIG="${COMPARISON_CONFIG:-configs/experiment/comparison/far_utility_compute_ours.yaml}"
+RUN_MODE="${RUN_MODE:-write-plan}"
+SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/far_utility_compute}"
+VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
+HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
+HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token}"
+
+mkdir -p "$SCRATCH_ROOT/slurm"
+cd "$REPO_HOME"
+
+if [ -f "$HOME/.bashrc" ]; then
+  # shellcheck disable=SC1090
+  source "$HOME/.bashrc"
+fi
+
+if [ -f "$VENV_PATH/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "$VENV_PATH/bin/activate"
+fi
+
+export WANDB_MODE=disabled
+export TOKENIZERS_PARALLELISM=false
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
+export HF_HOME
+export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME}"
+if [ -f "$HF_TOKEN_FILE" ]; then
+  export HF_TOKEN
+  HF_TOKEN="$(tr -d '\r\n' <"$HF_TOKEN_FILE")"
+fi
+
+echo "job_id=${SLURM_JOB_ID:-unknown}"
+echo "node=${SLURMD_NODENAME:-$(hostname)}"
+echo "repo=$REPO_HOME"
+echo "config=$COMPARISON_CONFIG"
+echo "scratch=$SCRATCH_ROOT"
+echo "run_mode=$RUN_MODE"
+echo "python=$(command -v python3)"
+
+python3 - <<'PY'
+import os
+import torch
+
+print("torch =", torch.__version__)
+print("torch cuda =", torch.version.cuda)
+print("cuda available =", torch.cuda.is_available())
+print("device count =", torch.cuda.device_count())
+print("CUDA_VISIBLE_DEVICES =", os.environ.get("CUDA_VISIBLE_DEVICES"))
+if os.environ.get("RUN_MODE") == "execute" and not torch.cuda.is_available():
+    raise SystemExit("CUDA_NOT_AVAILABLE_ON_ALLOCATED_NODE")
+if torch.cuda.is_available():
+    print("device name =", torch.cuda.get_device_name(0))
+PY
+
+case "$RUN_MODE" in
+  dry-run)
+    python3 scripts/run_matched_far_utility_compute.py \
+      --config "$COMPARISON_CONFIG" \
+      --dry-run
+    ;;
+  write-plan)
+    python3 scripts/run_matched_far_utility_compute.py \
+      --config "$COMPARISON_CONFIG" \
+      --write-plan \
+      --force
+    ;;
+  execute)
+    python3 scripts/run_matched_far_utility_compute.py \
+      --config "$COMPARISON_CONFIG" \
+      --execute \
+      --force
+    ;;
+  *)
+    echo "Unsupported RUN_MODE=$RUN_MODE; expected dry-run, write-plan, or execute" >&2
+    exit 2
+    ;;
+esac
