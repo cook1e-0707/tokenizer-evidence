@@ -258,28 +258,30 @@ def _chain_hash_row(summary: dict[str, Any]) -> dict[str, Any]:
     )
 
 
-def _excluded_diagnostic_rows() -> list[dict[str, Any]]:
+def _excluded_diagnostic_rows(legacy_perinucleus: dict[str, Any]) -> list[dict[str, Any]]:
+    source_summary = "results/processed/paper_stats/diagnostics/baseline_perinucleus_legacy_diagnostic_summary.json"
+    source_table = "results/tables/diagnostics/baseline_perinucleus_legacy_diagnostic.csv"
     return [
         _registry_row(
-            method_id="legacy_adapted_perinucleus_diagnostic",
-            display_name="Legacy adapted Perinucleus diagnostic",
+            method_id="perinucleus_no_train_diagnostic",
+            display_name="Perinucleus no-train / legacy diagnostic",
             method_family="failed_or_incomplete_external_diagnostic",
             baseline_role="excluded_diagnostic",
             fidelity_grade="F_for_scalable_claim",
             main_table_status="excluded_do_not_use_for_scalable_claim",
             paper_usage="internal_diagnostic_only",
-            source_summary="results/processed/paper_stats/baseline_perinucleus_summary.json",
-            source_table="results/tables/baseline_perinucleus.csv",
-            target_count=0,
-            valid_completed_count=0,
-            success_count=0,
-            method_failure_count=0,
-            pending_count=0,
-            success_rate=0.0,
+            source_summary=source_summary,
+            source_table=source_table,
+            target_count=_count(legacy_perinucleus, "target_count"),
+            valid_completed_count=_count(legacy_perinucleus, "valid_completed_count"),
+            success_count=_count(legacy_perinucleus, "success_count"),
+            method_failure_count=_count(legacy_perinucleus, "method_failure_count"),
+            pending_count=_count(legacy_perinucleus, "pending_count"),
+            success_rate=_rate(legacy_perinucleus, "exact_gate_success_rate"),
             paper_ready=False,
             required_label="not Scalable Fingerprinting",
             notes=(
-                "Retained only as a diagnostic artifact. Do not merge into the official Perinucleus row; "
+                "Retained only as a quarantined diagnostic artifact. Do not merge into the official Perinucleus row; "
                 "use baseline_perinucleus_official_qwen_final_* for paper-facing Scalable/Perinucleus claims."
             ),
         )
@@ -314,7 +316,7 @@ def _write_doc(path: Path, summary: dict[str, Any], rows: list[dict[str, Any]]) 
             "`Qwen-adapted official Scalable/Perinucleus baseline` label."
         ),
         "",
-        "The legacy adapted `baseline_perinucleus` artifacts remain excluded from Scalable Fingerprinting claims.",
+        "The legacy adapted `baseline_perinucleus` artifacts remain excluded from Scalable Fingerprinting claims and are quarantined under `results/.../diagnostics/`.",
         "",
         "## Registry",
         "",
@@ -332,7 +334,7 @@ def _write_doc(path: Path, summary: dict[str, Any], rows: list[dict[str, Any]]) 
             "",
             "## Guardrails",
             "",
-            "- Do not use `results/tables/baseline_perinucleus.csv` as the successful Scalable/Perinucleus result.",
+            "- Do not use `results/tables/baseline_perinucleus.csv` or the quarantined diagnostic copy as the successful Scalable/Perinucleus result.",
             "- Use `results/tables/baseline_perinucleus_official_qwen_final.csv` for the official Qwen-adapted Perinucleus result.",
             "- Keep valid method failures in denominators; do not convert failures into exclusions.",
             "- KGW/PostMark-style provenance controls must stay task-mismatched controls, not ownership baselines.",
@@ -349,11 +351,14 @@ def main() -> int:
         repo_root, "results/processed/paper_stats/baseline_perinucleus_official_qwen_final_summary.json"
     )
     chain_hash = _read_json(repo_root, "results/processed/paper_stats/baseline_chain_hash_summary.json")
+    legacy_perinucleus = _read_json(
+        repo_root, "results/processed/paper_stats/diagnostics/baseline_perinucleus_legacy_diagnostic_summary.json"
+    )
     rows = [
         *_matched_budget_rows(matched),
         _official_perinucleus_row(official_perinucleus),
         _chain_hash_row(chain_hash),
-        *_excluded_diagnostic_rows(),
+        *_excluded_diagnostic_rows(legacy_perinucleus),
     ]
     main_external = [
         row["method_id"]

@@ -1,6 +1,6 @@
 # Baseline Protocol
 
-Status: B0 frozen on 2026-04-27.
+Status: B0 frozen on 2026-04-27; baseline registry updated on 2026-04-30 after the official Qwen-adapted Scalable/Perinucleus baseline passed the final clean matrix.
 
 This document freezes the matched-budget baseline protocol before any B1/B2
 baseline execution. It is a protocol artifact, not an experimental result.
@@ -52,8 +52,17 @@ budget and calibration rules.
 3. `english_random_active_fingerprint`: active black-box fingerprint probes
    using natural English carrier responses rather than tokenizer-aligned
    compiled carriers.
-4. `perinucleus_adapted`: optional, only if a clean task-matched adapter can be
-   implemented without changing the frozen comparison budget.
+4. `perinucleus_official_qwen_adapted`: official Scalable Fingerprinting /
+   Perinucleus code adapted to the matched Qwen protocol. This is the primary
+   external active ownership baseline and must be labeled as
+   `Qwen-adapted official Scalable/Perinucleus baseline`.
+
+The official Qwen-adapted Perinucleus final matrix is paper-ready with `48/48`
+clean exact-verifier successes. Because the primary method also reaches `48/48`
+on the matched clean Qwen matrix, clean ownership success supports parity, not
+superiority. Any comparative advantage claim must be supported by additional
+matched evidence such as FAR/null calibration, utility degradation, compute, or
+robustness/persistence.
 
 ### Task-Mismatched Provenance Controls
 
@@ -92,10 +101,19 @@ mentioned only as diagnostics, invalid controls, or related-work context, and
 must not be described as evidence that the primary method outperforms a
 faithful external baseline.
 
-The current fidelity state is `A=0`, `B=0`, `C=1`, `D=3`, `F=9`; therefore no
-external baseline is currently eligible for the main comparison table. Full
-final external-baseline matrices are blocked until the relevant method is
-promoted to `A` or `B` by a subsequent audit.
+The current paper-facing external-baseline state is:
+
+- `scalable_fingerprinting_perinucleus_official_qwen_final`: `A_adapted`,
+  main-table eligible only with the required Qwen-adaptation label.
+- `perinucleus_no_train_diagnostic`: forbidden from main-table Scalable claims;
+  retained only as a quarantined diagnostic artifact.
+- `chain_hash_qwen_v1`: `C_pending`, appendix/protocol-pending only until a
+  subsequent fidelity audit upgrades it to `B` or better.
+
+The official Perinucleus final matrix passing clean verification does not make
+the legacy no-train/adapted `baseline_perinucleus` artifacts valid external
+baseline evidence. Those files must stay diagnostic and must not be merged into
+the official Scalable/Perinucleus row.
 
 ## Matched Budget Rules
 
@@ -221,6 +239,15 @@ B1/B2 must write:
 - `results/processed/paper_stats/baseline_run_inclusion_list.json`
 - `results/processed/paper_stats/baseline_compute_accounting.json`
 
+The paper-facing baseline registry and official Perinucleus package must write:
+
+- `results/tables/baseline_paper_registry.csv`
+- `results/processed/paper_stats/baseline_paper_registry_summary.json`
+- `results/tables/paper_baseline_comparison.csv`
+- `results/processed/paper_stats/paper_baseline_comparison_summary.json`
+- `results/tables/baseline_perinucleus_official_qwen_final.csv`
+- `results/processed/paper_stats/baseline_perinucleus_official_qwen_final_summary.json`
+
 These artifacts must distinguish:
 
 - target count
@@ -244,3 +271,11 @@ These artifacts must distinguish:
 - Do not add broad baselines before the minimal matched-budget package is
   complete.
 - Do not write raw experiment artifacts to home/repo.
+- Do not claim clean-success superiority over official Qwen-adapted
+  Scalable/Perinucleus; the clean result is parity.
+- Do not use `results/tables/baseline_perinucleus.csv` or
+  `results/processed/paper_stats/baseline_perinucleus_summary.json` as the
+  successful Scalable/Perinucleus baseline.
+- Do not claim broad output-side robustness from Batch 3. Whitespace
+  perturbations preserve acceptance, but truncate-tail and delimiter-scrub
+  transformations break acceptance and are outside the current guarantee.

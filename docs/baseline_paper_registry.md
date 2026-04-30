@@ -1,12 +1,12 @@
 # Baseline Paper Registry
 
-Generated at: `20260430T060230399389Z`
+Generated at: `20260430T062946515260Z`
 
 ## Decision
 
 The paper now has one paper-ready external active ownership baseline: `scalable_fingerprinting_perinucleus_official_qwen_final`. It must be reported with the `Qwen-adapted official Scalable/Perinucleus baseline` label.
 
-The legacy adapted `baseline_perinucleus` artifacts remain excluded from Scalable Fingerprinting claims.
+The legacy adapted `baseline_perinucleus` artifacts remain excluded from Scalable Fingerprinting claims and are quarantined under `results/.../diagnostics/`.
 
 ## Registry
 
@@ -18,11 +18,11 @@ The legacy adapted `baseline_perinucleus` artifacts remain excluded from Scalabl
 | kgw_provenance_control | excluded_task_mismatched_control | 0 | 0 | 0.000 | False | task-mismatched provenance control |
 | scalable_fingerprinting_perinucleus_official_qwen_final | eligible_with_adaptation_label | 48 | 48 | 1.000 | True | Qwen-adapted official Scalable/Perinucleus baseline |
 | chain_hash_qwen_v1 | not_eligible_pending_execution | 48 | 0 | 0.000 | False |  |
-| legacy_adapted_perinucleus_diagnostic | excluded_do_not_use_for_scalable_claim | 0 | 0 | 0.000 | False | not Scalable Fingerprinting |
+| perinucleus_no_train_diagnostic | excluded_do_not_use_for_scalable_claim | 48 | 0 | 0.000 | False | not Scalable Fingerprinting |
 
 ## Guardrails
 
-- Do not use `results/tables/baseline_perinucleus.csv` as the successful Scalable/Perinucleus result.
+- Do not use `results/tables/baseline_perinucleus.csv` or the quarantined diagnostic copy as the successful Scalable/Perinucleus result.
 - Use `results/tables/baseline_perinucleus_official_qwen_final.csv` for the official Qwen-adapted Perinucleus result.
 - Keep valid method failures in denominators; do not convert failures into exclusions.
 - KGW/PostMark-style provenance controls must stay task-mismatched controls, not ownership baselines.

@@ -3,14 +3,14 @@
     "fixed_representative",
     "uniform_bucket",
     "english_random_active_fingerprint",
-    "legacy_adapted_perinucleus_diagnostic"
+    "perinucleus_no_train_diagnostic"
   ],
   "blocked_or_pending_methods": [
     "kgw_provenance_control",
     "chain_hash_qwen_v1",
-    "legacy_adapted_perinucleus_diagnostic"
+    "perinucleus_no_train_diagnostic"
   ],
-  "generated_at": "20260430T060230399389Z",
+  "generated_at": "20260430T062946515260Z",
   "guardrails": [
     "Official Perinucleus final results are distinct from legacy adapted baseline_perinucleus artifacts.",
     "Report official Perinucleus as a Qwen-adapted official-code baseline, not as an unmodified full fine-tune reproduction.",
@@ -161,23 +161,23 @@
     {
       "adaptation_label": "",
       "baseline_role": "excluded_diagnostic",
-      "display_name": "Legacy adapted Perinucleus diagnostic",
+      "display_name": "Perinucleus no-train / legacy diagnostic",
       "fidelity_grade": "F_for_scalable_claim",
       "main_table_status": "excluded_do_not_use_for_scalable_claim",
-      "method_failure_count": 0,
+      "method_failure_count": 48,
       "method_family": "failed_or_incomplete_external_diagnostic",
-      "method_id": "legacy_adapted_perinucleus_diagnostic",
-      "notes": "Retained only as a diagnostic artifact. Do not merge into the official Perinucleus row; use baseline_perinucleus_official_qwen_final_* for paper-facing Scalable/Perinucleus claims.",
+      "method_id": "perinucleus_no_train_diagnostic",
+      "notes": "Retained only as a quarantined diagnostic artifact. Do not merge into the official Perinucleus row; use baseline_perinucleus_official_qwen_final_* for paper-facing Scalable/Perinucleus claims.",
       "paper_ready": false,
       "paper_usage": "internal_diagnostic_only",
       "pending_count": 0,
       "required_label": "not Scalable Fingerprinting",
-      "source_summary": "results/processed/paper_stats/baseline_perinucleus_summary.json",
-      "source_table": "results/tables/baseline_perinucleus.csv",
+      "source_summary": "results/processed/paper_stats/diagnostics/baseline_perinucleus_legacy_diagnostic_summary.json",
+      "source_table": "results/tables/diagnostics/baseline_perinucleus_legacy_diagnostic.csv",
       "success_count": 0,
       "success_rate": 0.0,
-      "target_count": 0,
-      "valid_completed_count": 0
+      "target_count": 48,
+      "valid_completed_count": 48
     }
   ],
   "schema_name": "baseline_paper_registry_summary",

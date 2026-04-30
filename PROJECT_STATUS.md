@@ -17,7 +17,7 @@
   - `batch3c` passed
   - `batch3d` passed
 - Active execution scope:
-  - manuscript-facing consolidation, C1 reporting, frozen matched-budget baseline artifacts, and R1 second-family artifact triage
+  - manuscript-facing consolidation, C1 reporting, frozen matched-budget baseline artifacts, official Perinucleus baseline integration, and R1 second-family artifact triage
   - no active clean-path reruns
   - no active robustness-grid expansion
   - no active theorem reruns
@@ -26,6 +26,7 @@
   - no additional Batch 3 expansion
   - `B1`/`B2` matched-budget baseline package configs, calibration artifacts, final artifacts, inclusion lists, and contract-hash accounting are frozen
   - `B1`/`B2` matched-budget baseline package is standing under frozen B0 accounting: fixed representative and uniform bucket are valid successes, English-random active fingerprint is a valid method-failure baseline, and KGW provenance control is explicit task-mismatched unavailable control outside the denominator
+  - `B3` official Scalable/Perinucleus Qwen-adapted baseline is standing and paper-ready: `48/48` clean exact-verifier successes, `0` method failures, `0` pending
   - `R1` Llama 3.1 8B replication executed on Chimera with a strict-passed Llama tokenizer catalog; artifact accounting is complete, but exact-gate claim readiness is false because all 12 valid completed runs fail the exact gate while passing the RS-aware gate
 - Paper-facing appendix status:
   - `S1` clean compiled table is landed in the manuscript appendix
@@ -38,6 +39,8 @@
   - `G4` training-signal table, inclusion list, summary, and compute accounting are landed as frozen paper-facing artifacts
   - `B0` matched-budget baseline and calibration protocols are frozen in `docs/baseline_protocol.md` and `docs/calibration_protocol.md`
   - `B1`/`B2` matched-budget baseline package is landed as frozen paper-facing artifacts under matched-budget calibration
+  - `B3` official Scalable/Perinucleus Qwen-adapted final matrix is landed as frozen paper-facing artifacts and may enter the main external-baseline table with the required adaptation label
+  - Paper-facing baseline registry and comparison artifacts are landed at `results/tables/baseline_paper_registry.csv` and `results/tables/paper_baseline_comparison.csv`
   - `R1` Llama replication artifacts are landed as a negative/diagnostic cross-family result: `12/12` valid completed, `0/12` exact-gate successes, `12/12` RS-aware successes, `0` invalid exclusions, `0` pending
 - Theorem-package standing:
   - `T1 contextual_exact` produced an accepted Chimera run under `theorem1_qwen7b/contextual_exact`
@@ -52,18 +55,24 @@
 ## Baseline Fidelity Status
 
 - Baseline Fidelity Gate is complete.
-- Current fidelity grade counts are `A=0`, `B=0`, `C=1`, `D=3`, `F=9`.
-- No external baseline is currently allowed in the main comparison table.
-- `perinucleus_no_train_diagnostic` is grade `F`; it is forbidden as a Scalable Fingerprinting baseline and may appear only as an appendix diagnostic.
-- `Chain&Hash-style` is grade `C`; it is forbidden in the main comparison table unless upgraded to grade `B` or better by a subsequent fidelity audit.
-- The official Scalable Fingerprinting repository is cloned at `external_baselines/scalable_fingerprinting_official` and the official protocol is scaffolded, but smoke is not run. Full Perinucleus final matrices remain blocked until official-code smoke and anchor reproduction pass.
+- The paper now has one paper-ready external active ownership baseline: `scalable_fingerprinting_perinucleus_official_qwen_final`.
+- Official Scalable/Perinucleus Qwen adaptation status: `A_adapted`, main-table eligible only with the label `Qwen-adapted official Scalable/Perinucleus baseline`.
+- Official Scalable/Perinucleus Qwen final result: `48/48` valid clean exact-verifier successes, `0` method failures, `0` pending, `success_rate=1.0`.
+- Clean ownership success is now parity, not superiority: the primary method and the official Qwen-adapted Perinucleus baseline both reach `48/48` on the matched clean Qwen final matrix.
+- `perinucleus_no_train_diagnostic` and legacy `baseline_perinucleus` artifacts are forbidden for main-table Scalable claims and retained only under diagnostic/quarantine naming.
+- `Chain&Hash-style` remains `C_pending` / proxy-only; it is forbidden in the main comparison table unless upgraded to `B` or better by a subsequent fidelity audit.
+- KGW/PostMark-style provenance controls remain task-mismatched controls, not primary ownership baselines.
+- R1 is an RS-aware cross-family diagnostic, not exact Llama replication: exact gate `0/12`, RS-aware gate `12/12`.
+- Robustness status is mixed and bounded: whitespace perturbations preserve acceptance, while truncate-tail and delimiter-scrub transformations break acceptance and must not be claimed as broad output-side robustness.
 
 ## Current Priority
 
-1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, `G3a-v3`, and `G4` results frozen and aligned with the manuscript appendix tables plus paper-facing summary artifacts.
-2. Treat `R1` as artifact-paper-ready but not claim-paper-ready: report the exact-gate failure honestly, use the RS-aware success only as diagnostic cross-family evidence, and do not claim Llama clean exact-path replication from this package.
-3. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
-4. Keep further baseline changes frozen unless the manuscript needs a narrower appendix; do not launch an `R1-v2` repair unless the manuscript explicitly needs second-family exact-gate success and the repair is pre-registered before launch.
+1. Keep the accepted `compiled-c3-r4`, `batch3c`, `batch3d`, `T1`, `T2-r1`, `G1`, `G2`, `G3a-v3`, `G4`, and official Perinucleus Qwen final results frozen and aligned with paper-facing summary artifacts.
+2. Reframe manuscript claims around clean parity plus structural mechanism: do not claim clean-success superiority over Perinucleus.
+3. Build the claim-support matrix before editing manuscript text; unsupported claims about FAR, utility, compute superiority, broad robustness, and cross-family exact replication remain forbidden.
+4. Audit matched FAR, utility degradation, and compute accounting for the primary method versus official Qwen-adapted Perinucleus before launching any new comparative jobs.
+5. Treat `R1` as artifact-paper-ready but not exact claim-paper-ready: report the exact-gate failure honestly, use RS-aware success only as diagnostic cross-family evidence, and do not claim Llama clean exact-path replication from this package.
+6. Keep new theorem reruns frozen unless the paper claim changes or stricter verifier-path symmetry is explicitly required.
 
 ## Experimental Scale Snapshot
 
@@ -174,7 +183,7 @@ Interpretation:
 - `batch3b`: payload-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seeds `23` and `29`.
 - `batch3c`: seed-expansion robustness grid passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
 - `batch3d`: single-family delimiter-attack expansion passed on `U00`, `U03`, `U12`, and `U15` with seed `17`.
-- Next target: execute B1/B2 calibration train/eval manifests on Chimera for the two integrated task-matched baselines, then rebuild calibration artifacts and decide how to materialize or scope `foundation_null` and `organic_prompt_null`.
+- Next target: build the claim-support matrix and audit whether matched FAR, utility, and compute comparisons are already complete for the primary method versus official Qwen-adapted Perinucleus before launching any new Chimera jobs.
 
 ## 2026-04-20
 
