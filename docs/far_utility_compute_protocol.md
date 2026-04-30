@@ -1,0 +1,195 @@
+# FAR / Utility / Compute Comparison Protocol
+
+Status: prepared for review on 2026-04-30. No jobs were launched.
+
+## Purpose
+
+The clean Qwen ownership result is tied:
+
+- Ours compiled ownership: `48/48`.
+- Qwen-adapted official Scalable/Perinucleus: `48/48`.
+
+Therefore, the next differentiating comparison must audit false accepts, utility,
+compute, and query budget under a matched protocol.
+
+## Completeness Audit
+
+| Requirement | Ours | Official Perinucleus | Status |
+|---|---|---|---|
+| Clean success | G1 `48/48`, success rate `1.0` | Final matrix `48/48`, success rate `1.0` | complete |
+| Query budgets `M=1,3,5,10` | Missing; current paper protocol is B0 `M=4` exact-slot verifier | Present for clean success only: each budget has `12/12` | incomplete |
+| FAR under null models | Missing for main method | Missing | incomplete |
+| FAR under wrong payload / wrong owner | Missing for main method | Missing | incomplete |
+| Utility score on same benchmark | Missing for ours | TinyBench sanity exists | incomplete |
+| Utility drop vs base model | Missing for ours | Base `0.6035`, adapter `0.6192`, signed drop `-0.01565` | incomplete |
+| Train wall-clock | Missing normalized final value; requested GPU-hours exist | Capacity-sweep selected arm seconds `1802.0` exist | incomplete |
+| GPU hours | Requested accounting exists for ours; not normalized to Perinucleus | Partial final eval seconds and capacity-sweep seconds exist | incomplete |
+| Trainable parameters | Missing in matched comparison table | LoRA parameter metadata exists in capacity sweep but not normalized | incomplete |
+| Number of training examples | Exists implicitly in contracts/summaries but not normalized | `num_fingerprints=64` exists | incomplete |
+| Eval query cost | Missing for ours over `M=1,3,5,10` | Final eval forwards total `228` exists | incomplete |
+| Confidence intervals | Clean success CIs exist | Clean success CIs exist | incomplete for FAR/utility/compute |
+
+Decision: the matched FAR / utility / compute comparison is not complete.
+
+## Protocol
+
+### Methods
+
+Compare exactly two paper-facing methods:
+
+1. `ours_compiled_ownership`
+2. `scalable_fingerprinting_perinucleus_official_qwen_final`
+
+The Perinucleus row must be labeled:
+
+```text
+Qwen-adapted official Scalable/Perinucleus baseline
+```
+
+### Final Positive Split
+
+Use the same positive matrix for both methods:
+
+- model family: `Qwen/Qwen2.5-7B-Instruct`
+- payloads: `U00`, `U03`, `U12`, `U15`
+- seeds: `17`, `23`, `29`
+- positive cases: `12`
+- query budgets: `M=1,3,5,10`
+
+### Null / FAR
+
+Use fixed thresholds selected before final evaluation.
+
+Required null sources:
+
+- `base_qwen`: unadapted `Qwen/Qwen2.5-7B-Instruct`
+- `wrong_payload_null`: adapted run tested against the wrong claimed payload
+- `wrong_owner_null`: valid evidence tested under the wrong owner claim
+- `non_owner_probe_null`: registered non-owner probes
+- `organic_prompt_null`: organic prompts with no owner payload
+
+Optional null sources:
+
+- `unprotected_qwen_finetuned`, only if such a checkpoint already exists
+- `non_qwen_llama3_1_8b`, only if cached and authorized
+
+Report for each method and query budget:
+
+- false accept count
+- negative count
+- observed FAR
+- Wilson interval
+- per-null-set FAR
+- pooled FAR
+
+### Utility
+
+Use the same utility benchmark for both methods.
+
+Default:
+
+```text
+tinyBenchmarks
+```
+
+Reason: TinyBench has already run for the Perinucleus frozen candidate and is
+the lowest-cost benchmark currently wired in the repository. If OpenLLM is
+required, that must be a separate reviewed escalation.
+
+Report:
+
+- base model utility
+- method utility
+- absolute drop vs base
+- confidence interval if available
+- benchmark/task-level metrics
+
+Ours must be evaluated on the same benchmark before any utility comparison can
+be stated. Perinucleus existing TinyBench outputs may be reused only if the base
+model, tasks, evaluator version, and prompt settings match the ours run.
+
+### Compute
+
+Report both requested and observed compute separately.
+
+Required fields:
+
+- GPU type / partition
+- number of GPUs
+- CPU count
+- memory
+- train wall-clock seconds
+- eval wall-clock seconds
+- utility wall-clock seconds
+- requested GPU-hours
+- trainable parameters
+- number of training examples
+- eval query count
+- model forward count, if available
+- adapter artifact size
+
+Do not claim compute efficiency unless these fields are available for both
+methods under the same accounting convention.
+
+## Prepared Configs
+
+- `configs/experiment/comparison/far_utility_compute_ours.yaml`
+- `configs/experiment/comparison/far_utility_compute_perinucleus.yaml`
+
+These files are job contracts, not launched runs.
+
+## Expected Outputs
+
+Per-method outputs:
+
+- `results/processed/paper_stats/matched_far_utility_compute_ours_summary.json`
+- `results/tables/matched_far_utility_compute_ours_far_cases.csv`
+- `results/tables/matched_far_utility_compute_ours_utility.csv`
+- `results/processed/paper_stats/matched_far_utility_compute_ours_compute.json`
+- `results/processed/paper_stats/matched_far_utility_compute_perinucleus_summary.json`
+- `results/tables/matched_far_utility_compute_perinucleus_far_cases.csv`
+- `results/tables/matched_far_utility_compute_perinucleus_utility.csv`
+- `results/processed/paper_stats/matched_far_utility_compute_perinucleus_compute.json`
+
+Final aggregation outputs:
+
+- `results/tables/matched_comparison_far_utility_compute.csv`
+- `results/tables/matched_comparison_far_utility_compute.tex`
+- `docs/matched_comparison_text.md`
+- `results/processed/paper_stats/matched_comparison_far_utility_compute_summary.json`
+
+## Final Decision
+
+```yaml
+run_required: true
+```
+
+Exact jobs to submit if true, after review and after the runner is approved:
+
+```bash
+cd "$REPO_HOME"
+
+python3 scripts/run_matched_far_utility_compute.py \
+  --config configs/experiment/comparison/far_utility_compute_ours.yaml \
+  --dry-run
+
+python3 scripts/run_matched_far_utility_compute.py \
+  --config configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
+  --dry-run
+
+sbatch --export=COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_ours.yaml \
+  scripts/slurm_matched_far_utility_compute.sbatch
+
+sbatch --export=COMPARISON_CONFIG=configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
+  scripts/slurm_matched_far_utility_compute.sbatch
+```
+
+Runner status:
+
+```yaml
+runner_exists: false
+runner_required_before_submit: true
+```
+
+Expected output paths are the per-method and final aggregation paths listed
+above.

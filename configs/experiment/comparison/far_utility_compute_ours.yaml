@@ -1,0 +1,147 @@
+schema_name: matched_far_utility_compute_method_plan
+schema_version: 1
+status: prepared_for_review_do_not_launch
+method_id: ours_compiled_ownership
+display_name: Ours compiled tokenizer-aligned ownership
+comparison_package: matched_far_utility_compute_v1
+
+decision:
+  run_required: true
+  reason: Clean success is complete, but matched FAR/null calibration, TinyBench utility, and normalized compute are not complete for this method.
+  launch_guard: Do not submit any job until docs/far_utility_compute_protocol.md is reviewed and a runner is explicitly approved.
+
+source_artifacts:
+  clean_summary: results/processed/paper_stats/g1_summary.json
+  clean_table: results/tables/g1_payload_seed_scale.csv
+  run_inclusion_list: results/processed/paper_stats/g1_run_inclusion_list.json
+  compute_accounting: results/processed/paper_stats/compute_accounting.json
+  baseline_protocol: docs/baseline_protocol.md
+  calibration_protocol: docs/calibration_protocol.md
+  claim_support_matrix: results/tables/claim_support_matrix.csv
+
+existing_evidence:
+  clean_success:
+    status: complete
+    success_count: 48
+    target_count: 48
+    success_rate: 1.0
+  confidence_interval:
+    status: complete_for_clean_success
+    ci95_low: 0.9258973488472576
+    ci95_high: 0.9999999999999999
+  query_budget_grid:
+    status: missing
+    existing_budget: B0 M=4 exact-slot verifier queries
+    required_budgets: [1, 3, 5, 10]
+  far_null_calibration:
+    status: missing
+  utility:
+    status: missing
+  compute:
+    status: partial_requested_resources_only
+
+method_contract:
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+  evidence_type: structured_tokenizer_aligned_bucket_rs_payload
+  prompt_family: PF1 exact-slot compiled prompt
+  block_count: 2
+  fields_per_block: 2
+  codebook: real_pilot_catalog__qwen2_5_7b_compiled__v1
+  objective: margin_aware_bucket_mass
+  adapter_source_policy: reuse_existing_g1_case_adapters; do_not_retrain_for_this_audit
+  final_positive_cases:
+    payloads: ["U00", "U03", "U12", "U15"]
+    seeds: [17, 23, 29]
+    case_count: 12
+
+query_budget_protocol:
+  budgets: [1, 3, 5, 10]
+  score_name: ownership_score
+  score_direction: higher_is_stronger
+  aggregation: deterministic_payload_recovery_over_first_M_registered_probes
+  threshold_policy: freeze_on_calibration_split_before_final_eval
+  target_far: 0.01
+  note: The implementation must define the ordered probe list before reading final outcomes.
+
+far_protocol:
+  calibration_split:
+    payloads: ["U01", "U05", "U09", "U13"]
+    seed: 41
+  final_split:
+    payloads: ["U00", "U03", "U12", "U15"]
+    seeds: [17, 23, 29]
+  null_models:
+    - id: base_qwen
+      model: Qwen/Qwen2.5-7B-Instruct
+      status: required
+    - id: unprotected_qwen_finetuned
+      model: Qwen/Qwen2.5-7B-Instruct
+      status: optional_if_available
+      note: Use only if an unprotected instruction-tuned or task-tuned Qwen checkpoint already exists.
+    - id: non_qwen_llama3_1_8b
+      model: meta-llama/Meta-Llama-3.1-8B-Instruct
+      status: optional_if_cached_and_authorized
+  null_probe_sets:
+    - wrong_payload_null
+    - wrong_owner_null
+    - non_owner_probe_null
+    - organic_prompt_null
+  required_outputs:
+    - final_observed_far
+    - final_far_false_accept_count
+    - final_far_negative_count
+    - final_far_wilson_low
+    - final_far_wilson_high
+    - per_budget_far
+    - per_null_set_far
+
+utility_protocol:
+  benchmark: tinyBenchmarks
+  limitation: TinyBench is accepted as the low-cost sanity benchmark; OpenLLM remains future work unless explicitly approved.
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  adapter_selection:
+    policy: evaluate_all_final_positive_case_adapters
+    payloads: ["U00", "U03", "U12", "U15"]
+    seeds: [17, 23, 29]
+    case_count: 12
+  report:
+    - base_total_accuracy
+    - adapter_total_accuracy_mean
+    - adapter_total_accuracy_min
+    - absolute_drop_mean
+    - absolute_drop_max
+    - ci95
+  max_absolute_drop: 0.05
+
+compute_protocol:
+  requested_resources:
+    partition: DGXA100
+    num_gpus: 1
+    cpus: 16
+    mem_gb: 96
+    time_limit: "24:00:00"
+  report:
+    - train_wall_clock_seconds
+    - eval_wall_clock_seconds
+    - utility_wall_clock_seconds
+    - requested_gpu_hours
+    - actual_gpu_seconds_if_available
+    - trainable_parameters
+    - training_examples
+    - eval_query_count
+    - adapter_artifact_size_bytes
+  fallback_policy: If actual wall-clock is unavailable, report requested GPU-hours separately and mark actual_wall_clock_status=missing.
+
+repo_outputs:
+  summary: results/processed/paper_stats/matched_far_utility_compute_ours_summary.json
+  far_cases: results/tables/matched_far_utility_compute_ours_far_cases.csv
+  utility: results/tables/matched_far_utility_compute_ours_utility.csv
+  compute: results/processed/paper_stats/matched_far_utility_compute_ours_compute.json
+  log_dir: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/far_utility_compute/ours/logs
+
+runtime:
+  scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/far_utility_compute/ours
+  local_files_only: true
+  trust_remote_code: true
+  wandb_mode: disabled
