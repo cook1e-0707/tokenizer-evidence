@@ -1,0 +1,71 @@
+schema_name: scrub_persistence_method_plan
+schema_version: 1
+status: prepared_for_review_do_not_launch
+method_id: ours_compiled_ownership
+display_name: Ours compiled tokenizer-aligned ownership
+
+launch_guard:
+  launch_allowed_now: false
+  reason: Scrubbing runner is not implemented or reviewed. This file is a protocol contract only.
+
+source_artifacts:
+  clean_table: results/tables/g1_payload_seed_scale.csv
+  run_inclusion_list: results/processed/paper_stats/g1_run_inclusion_list.json
+  clean_summary: results/processed/paper_stats/g1_summary.json
+  utility_summary: results/processed/paper_stats/ours_tinybench_utility_summary.json
+  matched_comparison_summary: results/processed/paper_stats/matched_comparison_far_utility_compute_summary.json
+
+model:
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+  use_chat_template: true
+
+adapter_source:
+  policy: resolve_each_final_case_adapter_from_g1_train_summary
+  path_rule: train_summary_path/../checkpoints/hf_last
+  do_not_retrain_original_adapter: true
+
+pilot_split:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17]
+  case_count: 4
+
+final_split:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  case_count: 12
+
+scrub:
+  type: generic_instruction_lora_sft
+  stage1_pilot_first: true
+  dataset_policy: use_existing_cached_benign_or_instruction_data_only
+  max_train_examples: 512
+  epochs: 1
+  lora_rank: 16
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  output_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/robustness/scrub_persistence/ours
+
+metrics:
+  ownership:
+    - decoded_payload_recovery
+    - rs_aware_recovery
+    - slot_bucket_accuracy
+    - exact_representative_accuracy
+  utility:
+    benchmark: tinyBenchmarks
+    max_absolute_drop: 0.05
+  far_subset:
+    enabled_if_existing_replay_remains_valid: true
+    note: Full FAR/null calibration remains incomplete.
+
+repo_outputs:
+  table: results/tables/scrub_persistence_ours.csv
+  summary: results/processed/paper_stats/scrub_persistence_ours_summary.json
+  compute: results/processed/paper_stats/scrub_persistence_ours_compute.json

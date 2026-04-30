@@ -1,0 +1,73 @@
+schema_name: scrub_persistence_method_plan
+schema_version: 1
+status: prepared_for_review_do_not_launch
+method_id: scalable_fingerprinting_perinucleus_official_qwen_final
+display_name: Qwen-adapted official Scalable/Perinucleus
+
+launch_guard:
+  launch_allowed_now: false
+  reason: Scrubbing runner is not implemented or reviewed. This file is a protocol contract only.
+
+source_artifacts:
+  frozen_candidate_config: configs/experiment/baselines/perinucleus_official/qwen_frozen_candidate__baseline_perinucleus_official.yaml
+  final_summary: results/processed/paper_stats/baseline_perinucleus_official_qwen_final_summary.json
+  final_table: results/tables/baseline_perinucleus_official_qwen_final.csv
+  utility_summary: results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json
+  matched_comparison_summary: results/processed/paper_stats/matched_comparison_far_utility_compute_summary.json
+
+model:
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+  use_chat_template: true
+
+adapter_source:
+  policy: use_frozen_qwen_adapted_official_candidate
+  adapter_path: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final
+  fingerprints_file: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/generated/fingerprints_64/fingerprints-perinucleus-Qwen-Qwen2.5-7B-Instruct-nucleus_threshold-0.8-response_length-1-use_chat_template-True.json
+  do_not_change_hyperparameters: true
+
+pilot_split:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17]
+  query_budgets: [1, 3, 5, 10]
+  case_count: 16
+
+final_split:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  query_budgets: [1, 3, 5, 10]
+  case_count: 48
+
+scrub:
+  type: generic_instruction_lora_sft
+  stage1_pilot_first: true
+  dataset_policy: use_existing_cached_benign_or_instruction_data_only
+  max_train_examples: 512
+  epochs: 1
+  lora_rank: 16
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  output_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/robustness/scrub_persistence/perinucleus
+
+metrics:
+  ownership:
+    - fingerprint_exact_accuracy
+    - exact_count
+    - target_response_probability_if_available
+  utility:
+    benchmark: tinyBenchmarks
+    max_absolute_drop: 0.05
+  far_subset:
+    enabled_if_existing_replay_remains_valid: true
+    note: Full FAR/null calibration remains incomplete.
+
+repo_outputs:
+  table: results/tables/scrub_persistence_perinucleus.csv
+  summary: results/processed/paper_stats/scrub_persistence_perinucleus_summary.json
+  compute: results/processed/paper_stats/scrub_persistence_perinucleus_compute.json
