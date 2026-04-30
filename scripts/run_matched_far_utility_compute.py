@@ -693,6 +693,13 @@ def _execute_method(repo_root: Path, cfg: dict[str, Any], config_path: Path) -> 
         "display_name": cfg.get("display_name"),
         "status": "completed_partial_artifact_execute",
         "execution_scope": "artifact_backed_claim_conditioned_subset_no_fresh_model_inference",
+        "full_far_complete": False,
+        "full_far_missing_sets": [
+            "base_qwen_null",
+            "wrong_owner_null",
+            "non_owner_probe_null",
+            "organic_prompt_null",
+        ],
         "run_required": bool((cfg.get("decision") or {}).get("run_required", True)),
         "execute_supported": True,
         "source_artifacts": source_artifacts,
