@@ -32,53 +32,53 @@
     "train_ce_mean": 1.0892617459568044e-05,
     "utility_pass": true
   },
-  "generated_at": "20260430T035120433717Z",
+  "generated_at": "20260430T042635283755Z",
   "method_failure_count": 0,
   "package_dry_run": "results/processed/paper_stats/baseline_perinucleus_official_qwen_final_package_dry_run.json",
-  "paper_ready": false,
-  "pending_count": 48,
+  "paper_ready": true,
+  "pending_count": 0,
   "query_budget_rows": [
     {
       "method_failure_count": 0,
-      "pending_count": 12,
+      "pending_count": 0,
       "query_budget": 1,
-      "success_count": 0,
-      "success_rate": 0.0,
+      "success_count": 12,
+      "success_rate": 1.0,
       "target_count": 12,
-      "valid_completed_count": 0
+      "valid_completed_count": 12
     },
     {
       "method_failure_count": 0,
-      "pending_count": 12,
+      "pending_count": 0,
       "query_budget": 3,
-      "success_count": 0,
-      "success_rate": 0.0,
+      "success_count": 12,
+      "success_rate": 1.0,
       "target_count": 12,
-      "valid_completed_count": 0
+      "valid_completed_count": 12
     },
     {
       "method_failure_count": 0,
-      "pending_count": 12,
+      "pending_count": 0,
       "query_budget": 5,
-      "success_count": 0,
-      "success_rate": 0.0,
+      "success_count": 12,
+      "success_rate": 1.0,
       "target_count": 12,
-      "valid_completed_count": 0
+      "valid_completed_count": 12
     },
     {
       "method_failure_count": 0,
-      "pending_count": 12,
+      "pending_count": 0,
       "query_budget": 10,
-      "success_count": 0,
-      "success_rate": 0.0,
+      "success_count": 12,
+      "success_rate": 1.0,
       "target_count": 12,
-      "valid_completed_count": 0
+      "valid_completed_count": 12
     }
   ],
   "schema_name": "baseline_perinucleus_official_qwen_final_summary",
   "schema_version": 1,
-  "success_count": 0,
-  "success_rate": 0.0,
+  "success_count": 48,
+  "success_rate": 1.0,
   "target_count": 48,
-  "valid_completed_count": 0
+  "valid_completed_count": 48
 }
