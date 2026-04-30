@@ -1,61 +1,53 @@
 # Qwen Perinucleus Candidate Utility Sanity
 
-Status: pending execution.
+This is a utility sanity check for selected Qwen Perinucleus capacity-sweep adapters. It does not retrain and does not authorize a final matrix by itself.
 
-This package evaluates utility for selected Qwen Perinucleus capacity-sweep adapters. It does not retrain and does not authorize final baseline matrices by itself.
+## Decision
 
-## Candidates
+`QWEN_CANDIDATE_UTILITY_PASS: freeze the selected candidate before final protocol runs.`
 
-The configured candidates are:
+## Utility Results
 
-- `qv_r64_fp16_e30`: minimal target modules, rank 64, 16 fingerprints.
-- `all_linear_r16_fp16_e30`: all-linear target modules, lower rank, 16 fingerprints.
-- `all_linear_r64_fp64_e80`: strongest capacity-sweep candidate, 64 fingerprints.
+| kind | arm | exact | utility | base utility | abs drop | pass |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| base | base |  | 0.6035317339934293 | 0.6035317339934293 | 0.0 | True |
+| adapter | qv_r64_fp16_e30 | 1.0 | 0.607548613797407 | 0.6035317339934293 | -0.004016879803977691 | True |
+| adapter | all_linear_r16_fp16_e30 | 1.0 | 0.6172300852420466 | 0.6035317339934293 | -0.013698351248617291 | True |
+| adapter | all_linear_r64_fp64_e80 | 1.0 | 0.6191832009104691 | 0.6035317339934293 | -0.01565146691703978 | True |
 
-## Utility Contract
+## Selected Candidate
 
-Adapters are PEFT LoRA adapters, not standalone Hugging Face model directories. Utility evaluation must load them as:
+{
+  "absolute_drop": -0.01565146691703978,
+  "adapter_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final",
+  "arm_id": "all_linear_r64_fp64_e80",
+  "base_total_accuracy": 0.6035317339934293,
+  "epochs_run": 80,
+  "error": "",
+  "eval_results_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_candidate_utility/runs/manual_20260430T014700Z/eval_results/all_linear_r64_fp64_e80_eval_results.json",
+  "exact_accuracy": 1.0,
+  "kind": "adapter",
+  "lora_rank": 64,
+  "missing_metrics": [],
+  "num_fingerprints": 64,
+  "relative_drop": -0.02593313000043537,
+  "target_modules_label": "all_linear",
+  "target_probability_mean": 0.9999891147017479,
+  "target_rank_mean": 1.0,
+  "total_accuracy": 0.6191832009104691,
+  "train_ce_mean": 1.0892617459568044e-05,
+  "utility_pass": true,
+  "utility_status": "completed"
+}
 
-```text
-pretrained=Qwen/Qwen2.5-7B-Instruct,peft=<adapter_path>
-```
+## Notes
 
-The instruct backbone uses `apply_chat_template=true`.
+- Adapter utility is evaluated as `pretrained=Qwen/Qwen2.5-7B-Instruct,peft=<adapter_path>`.
+- `apply_chat_template=true` is used for the instruct backbone.
+- The selected candidate must be frozen before any final matrix.
 
-Each model/adapter utility evaluation is launched in a separate Python
-subprocess so that CUDA memory from `lm_eval` is released between candidates.
-The configured evaluation batch size is `1` for 40GB GPU compatibility; base and
-adapter utility are evaluated with the same batch size.
+## Output Files
 
-## Gate
-
-A candidate passes utility sanity only if:
-
-- the tinyBenchmarks evaluation completes;
-- exact fingerprint accuracy from the capacity sweep is retained in the record;
-- absolute utility drop relative to the base Qwen utility is at most `0.05`.
-
-If multiple candidates pass, the selected candidate is the one with the smallest absolute utility drop.
-
-## Execution
-
-Submit from `chimerahead`:
-
-```bash
-bash scripts/submit_perinucleus_qwen_candidate_utility.sh
-```
-
-For an interactive GPU allocation:
-
-```bash
-python3 scripts/run_perinucleus_qwen_candidate_utility.py \
-  --config configs/experiment/baselines/perinucleus_official/qwen_candidate_utility__baseline_perinucleus_official.yaml \
-  --force
-```
-
-## Expected Outputs
-
-- `docs/baseline_perinucleus_qwen_candidate_utility.md`
-- `results/tables/baseline_perinucleus_qwen_candidate_utility.csv`
-- `results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json`
-- `results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_compute.json`
+- Table: `/home/guanjie.lin001/tokenizer-evidence/results/tables/baseline_perinucleus_qwen_candidate_utility.csv`
+- Summary: `/home/guanjie.lin001/tokenizer-evidence/results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_summary.json`
+- Compute: `/home/guanjie.lin001/tokenizer-evidence/results/processed/paper_stats/baseline_perinucleus_qwen_candidate_utility_compute.json`
