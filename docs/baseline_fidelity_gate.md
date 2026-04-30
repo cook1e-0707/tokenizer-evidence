@@ -2,6 +2,27 @@
 
 Date: 2026-04-28
 
+## 2026-04-30 Update
+
+This gate has been superseded for Scalable Fingerprinting / Perinucleus. The
+official-code Qwen-adapted Scalable/Perinucleus final package is now standing
+with `48/48` valid successes, `0` method failures, `0` pending rows, candidate
+utility sanity passed, and `paper_ready=true`.
+
+Use these current artifacts for paper-facing Scalable/Perinucleus claims:
+
+- `results/processed/paper_stats/baseline_perinucleus_official_qwen_final_summary.json`
+- `results/tables/baseline_perinucleus_official_qwen_final.csv`
+- `results/processed/paper_stats/baseline_paper_registry_summary.json`
+- `results/tables/baseline_paper_registry.csv`
+- `results/tables/paper_baseline_comparison.csv`
+
+Required wording: report this row as a `Qwen-adapted official
+Scalable/Perinucleus baseline`. Do not describe it as an unmodified full
+fine-tune reproduction. The legacy adapted `baseline_perinucleus` artifacts
+remain excluded diagnostics and must not be used as the successful Scalable
+Fingerprinting result.
+
 This audit gates baseline implementations before any new full-scale baseline experiment. It is read-only with respect to training and evaluation: no Chimera jobs were launched and no paper claims were edited.
 
 ## Inputs Read

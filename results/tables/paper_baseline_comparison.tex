@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrr}
+\toprule
+Method & Status & Success & Fail & Rate (95\% CI) \\
+\midrule
+Ours (compiled ownership) & main\_method & 48/48 & 0 & 100.0 [92.6, 100.0] \\
+Fixed representative & internal\_ablation & 12/12 & 0 & 100.0 [75.7, 100.0] \\
+Uniform bucket & internal\_ablation & 12/12 & 0 & 100.0 [75.7, 100.0] \\
+English-random active fingerprint & negative\_diagnostic & 0/12 & 12 & 0.0 [0.0, 24.3] \\
+Scalable/Perinucleus (Qwen-adapted official) & main\_external\_baseline\_with\_adaptation\_label & 48/48 & 0 & 100.0 [92.6, 100.0] \\
+\bottomrule
+\end{tabular}
+\caption{Paper-facing baseline comparison. The Scalable/Perinucleus row is an official-code Qwen LoRA adaptation and must be labeled as such.}
+\end{table}

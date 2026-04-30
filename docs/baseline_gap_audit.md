@@ -2,6 +2,25 @@
 
 Status: audit generated from local artifacts on 2026-04-28.
 
+## 2026-04-30 Update
+
+The main external-baseline gap identified in this audit is now partially
+closed. The official-code Qwen-adapted Scalable/Perinucleus final package is
+paper-ready with `48/48` valid successes, `0` method failures, and `0` pending
+rows.
+
+Current paper-facing baseline artifacts:
+
+- Registry: `results/tables/baseline_paper_registry.csv`
+- Comparison table: `results/tables/paper_baseline_comparison.csv`
+- Official Perinucleus final table:
+  `results/tables/baseline_perinucleus_official_qwen_final.csv`
+
+This does not make the old `baseline_perinucleus.csv` a valid Scalable
+Fingerprinting result. That legacy adapted package remains an excluded
+diagnostic. The external baseline should be labeled `Qwen-adapted official
+Scalable/Perinucleus baseline`.
+
 ## Inputs Read
 
 - `results/processed/paper_stats/baseline_summary.json`
