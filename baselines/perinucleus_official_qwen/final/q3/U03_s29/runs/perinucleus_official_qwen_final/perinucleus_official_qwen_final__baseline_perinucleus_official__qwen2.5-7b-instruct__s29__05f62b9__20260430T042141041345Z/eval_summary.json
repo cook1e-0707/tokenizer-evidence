@@ -1,0 +1,49 @@
+{
+  "accepted": true,
+  "decoded_payload": "U03",
+  "diagnostics": {
+    "base_response_probability_mean": 0.011598571067831168,
+    "baseline_contract": {
+      "adapter_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/arms/all_linear_r64_fp64_e80/adapter_final",
+      "arm_id": "all_linear_r64_fp64_e80",
+      "base_model": "Qwen/Qwen2.5-7B-Instruct",
+      "contract_hash": "a592b1f6351ce465b9e3e8f42ff42e759a4b5375405a56adcd2d7af498e5c05d",
+      "fingerprints_file": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen_capacity_sweep/runs/manual_20260429T182756Z/generated/fingerprints_64/fingerprints-perinucleus-Qwen-Qwen2.5-7B-Instruct-nucleus_threshold-0.8-response_length-1-use_chat_template-True.json",
+      "payload_text": "U03",
+      "query_budget": 3,
+      "schema_name": "baseline_perinucleus_official_final_case_contract",
+      "schema_version": 1,
+      "seed": 29,
+      "selected_source_fingerprint_ids": [
+        8,
+        44,
+        36
+      ],
+      "threshold": 1.0
+    },
+    "baseline_contract_hash": "a592b1f6351ce465b9e3e8f42ff42e759a4b5375405a56adcd2d7af498e5c05d",
+    "eval_compute_seconds": 9.466297388076782,
+    "exact_response_match_count": 3,
+    "exact_response_match_ratio": 1.0,
+    "expected_response_probability_mean": 0.9999980529149374,
+    "expected_response_probability_min": 0.9999955892562866,
+    "mismatch_examples": [],
+    "model_forward_count": 3,
+    "per_fingerprint_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s29/runs/perinucleus_official_qwen_final/perinucleus_official_qwen_final__baseline_perinucleus_official__qwen2.5-7b-instruct__s29__05f62b9__20260430T042141041345Z/per_fingerprint.jsonl",
+    "top_k_response_match_count": 3,
+    "top_k_response_match_ratio": 1.0,
+    "training_compute_seconds": 0.0,
+    "utility_acceptance_rate": "",
+    "utility_status": "candidate_utility_sanity_passed_pre_final"
+  },
+  "match_ratio": 1.0,
+  "payload_text": "U03",
+  "query_budget": 3,
+  "run_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q3/U03_s29/runs/perinucleus_official_qwen_final/perinucleus_official_qwen_final__baseline_perinucleus_official__qwen2.5-7b-instruct__s29__05f62b9__20260430T042141041345Z",
+  "schema_name": "baseline_perinucleus_official_final_eval_summary",
+  "schema_version": 1,
+  "seed": 29,
+  "status": "completed",
+  "threshold": 1.0,
+  "verifier_success": true
+}

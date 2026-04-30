@@ -1,0 +1,13 @@
+{
+  "manifest_id": "perinucleus-official-q1-u03-s17",
+  "message": "Submitted batch job 828545",
+  "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s17/runs/perinucleus_official_qwen_final/perinucleus_official_qwen_final__baseline_perinucleus_official__qwen2.5-7b-instruct__s17__05f62b9__20260430T042140483074Z",
+  "run_id": "perinucleus_official_qwen_final__baseline_perinucleus_official__qwen2.5-7b-instruct__s17__05f62b9__20260430T042140483074Z",
+  "sbatch_command": "sbatch /home/guanjie.lin001/tokenizer-evidence/manifests/rendered/perinucleus-official-q1-u03-s17.sbatch",
+  "slurm_job_id": "828545",
+  "slurm_script_path": "/home/guanjie.lin001/tokenizer-evidence/manifests/rendered/perinucleus-official-q1-u03-s17.sbatch",
+  "status": "submitted",
+  "stderr_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s17/runs/perinucleus_official_qwen_final/perinucleus_official_qwen_final__baseline_perinucleus_official__qwen2.5-7b-instruct__s17__05f62b9__20260430T042140483074Z/stderr.log",
+  "stdout_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official_qwen/final/q1/U03_s17/runs/perinucleus_official_qwen_final/perinucleus_official_qwen_final__baseline_perinucleus_official__qwen2.5-7b-instruct__s17__05f62b9__20260430T042140483074Z/stdout.log",
+  "submission_time": "20260430T042140498262Z"
+}
