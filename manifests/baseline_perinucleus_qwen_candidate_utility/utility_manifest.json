@@ -30,5 +30,10 @@
     "cpu": 16,
     "memory_gb": 160,
     "walltime_hours": 24
-  }
+  },
+  "memory_controls": [
+    "Each eval runs in a separate Python subprocess.",
+    "eval_batch_size=1",
+    "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
+  ]
 }

@@ -22,6 +22,11 @@ pretrained=Qwen/Qwen2.5-7B-Instruct,peft=<adapter_path>
 
 The instruct backbone uses `apply_chat_template=true`.
 
+Each model/adapter utility evaluation is launched in a separate Python
+subprocess so that CUDA memory from `lm_eval` is released between candidates.
+The configured evaluation batch size is `1` for 40GB GPU compatibility; base and
+adapter utility are evaluated with the same batch size.
+
 ## Gate
 
 A candidate passes utility sanity only if:

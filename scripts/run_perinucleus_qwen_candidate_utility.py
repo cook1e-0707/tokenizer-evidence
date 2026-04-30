@@ -5,6 +5,8 @@ import csv
 import gc
 import json
 import os
+import subprocess
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,9 +27,11 @@ TINY_DATASETS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run utility sanity for selected Qwen Perinucleus capacity-sweep adapters.")
-    parser.add_argument("--config", required=True)
+    parser.add_argument("--config")
     parser.add_argument("--force", action="store_true", help="Accepted for manifest compatibility.")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--eval-one-spec", help=argparse.SUPPRESS)
+    parser.add_argument("--eval-one-output", help=argparse.SUPPRESS)
     return parser.parse_args()
 
 
@@ -91,7 +95,7 @@ def _model_args(*, base_model: str, adapter_path: str | None, local_files_only: 
     return ",".join(args)
 
 
-def _run_eval(
+def _run_eval_in_process(
     *,
     name: str,
     base_model: str,
@@ -147,6 +151,69 @@ def _run_eval(
         "missing_metrics": missing_metrics,
         "error": error,
     }
+
+
+def _run_eval(
+    *,
+    name: str,
+    base_model: str,
+    adapter_path: str | None,
+    utility: dict[str, Any],
+    raw_dir: Path,
+) -> dict[str, Any]:
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    spec_path = raw_dir / f"{name}_eval_spec.json"
+    report_path = raw_dir / f"{name}_eval_report.json"
+    stdout_path = raw_dir / f"{name}_eval.stdout.log"
+    stderr_path = raw_dir / f"{name}_eval.stderr.log"
+    spec = {
+        "name": name,
+        "base_model": base_model,
+        "adapter_path": adapter_path,
+        "utility": utility,
+        "raw_dir": str(raw_dir),
+    }
+    spec_path.write_text(json.dumps(spec, indent=2, sort_keys=True), encoding="utf-8")
+    env = os.environ.copy()
+    env.setdefault("WANDB_MODE", "disabled")
+    env.setdefault("TOKENIZERS_PARALLELISM", "false")
+    env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+    cmd = [
+        sys.executable,
+        str(Path(__file__).resolve()),
+        "--eval-one-spec",
+        str(spec_path),
+        "--eval-one-output",
+        str(report_path),
+    ]
+    started = time.time()
+    with stdout_path.open("w", encoding="utf-8") as stdout, stderr_path.open("w", encoding="utf-8") as stderr:
+        proc = subprocess.run(cmd, env=env, stdout=stdout, stderr=stderr, text=True, check=False)
+    if report_path.exists():
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+    else:
+        report = {
+            "name": name,
+            "status": "failed",
+            "seconds": time.time() - started,
+            "base_model": base_model,
+            "adapter_path": adapter_path or "",
+            "model_args": _model_args(
+                base_model=base_model,
+                adapter_path=adapter_path,
+                local_files_only=bool(utility.get("local_files_only", True)),
+                trust_remote_code=bool(utility.get("trust_remote_code", True)),
+            ),
+            "eval_results_path": "",
+            "total_accuracy": None,
+            "task_metrics": {},
+            "missing_metrics": [],
+            "error": f"subprocess_returncode={proc.returncode}; see {stderr_path}",
+        }
+    report["subprocess_returncode"] = proc.returncode
+    report["stdout_path"] = str(stdout_path)
+    report["stderr_path"] = str(stderr_path)
+    return report
 
 
 def _candidate_rows(summary: dict[str, Any], selected_arms: list[str]) -> list[dict[str, Any]]:
@@ -260,6 +327,23 @@ def _write_doc(path: Path, summary: dict[str, Any]) -> None:
 
 def main() -> int:
     args = parse_args()
+    if args.eval_one_spec:
+        if not args.eval_one_output:
+            raise ValueError("--eval-one-output is required with --eval-one-spec")
+        spec = json.loads(Path(args.eval_one_spec).read_text(encoding="utf-8"))
+        report = _run_eval_in_process(
+            name=str(spec["name"]),
+            base_model=str(spec["base_model"]),
+            adapter_path=spec.get("adapter_path"),
+            utility=dict(spec["utility"]),
+            raw_dir=Path(str(spec["raw_dir"])),
+        )
+        Path(args.eval_one_output).write_text(json.dumps(report, indent=2, sort_keys=True), encoding="utf-8")
+        print(json.dumps(report, indent=2, sort_keys=True))
+        return 0 if report["status"] == "completed" else 2
+
+    if not args.config:
+        raise ValueError("--config is required")
     repo_root = discover_repo_root(Path(__file__).parent)
     config_path = _resolve(repo_root, args.config)
     if config_path is None:

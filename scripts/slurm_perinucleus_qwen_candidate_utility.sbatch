@@ -30,6 +30,7 @@ fi
 
 export WANDB_MODE=disabled
 export TOKENIZERS_PARALLELISM=false
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
 export HF_HOME
 export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME}"
 if [ -f "$HF_TOKEN_FILE" ]; then

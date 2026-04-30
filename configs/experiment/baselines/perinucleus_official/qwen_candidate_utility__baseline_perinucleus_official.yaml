@@ -10,7 +10,7 @@ utility:
   base_model: Qwen/Qwen2.5-7B-Instruct
   apply_chat_template: true
   tasks: tinyBenchmarks
-  eval_batch_size: 4
+  eval_batch_size: 1
   local_files_only: true
   trust_remote_code: true
   max_absolute_drop: 0.05
