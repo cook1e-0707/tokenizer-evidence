@@ -15,6 +15,7 @@ source_artifacts:
   clean_table: results/tables/g1_payload_seed_scale.csv
   run_inclusion_list: results/processed/paper_stats/g1_run_inclusion_list.json
   compute_accounting: results/processed/paper_stats/compute_accounting.json
+  utility_summary: results/processed/paper_stats/ours_tinybench_utility_summary.json
   baseline_protocol: docs/baseline_protocol.md
   calibration_protocol: docs/calibration_protocol.md
   claim_support_matrix: results/tables/claim_support_matrix.csv

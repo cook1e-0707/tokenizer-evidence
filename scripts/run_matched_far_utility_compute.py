@@ -634,7 +634,30 @@ def _aggregate_far(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
-def _execution_utility_rows(cfg: dict[str, Any]) -> list[dict[str, Any]]:
+def _execution_utility_rows(repo_root: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
+    utility_summary_path = _resolve(repo_root, (cfg.get("source_artifacts") or {}).get("utility_summary"))
+    if utility_summary_path is not None and utility_summary_path.exists():
+        utility_summary = _load_json(utility_summary_path)
+        if isinstance(utility_summary, dict) and utility_summary.get("schema_name") == "ours_tinybench_utility_summary":
+            status = "complete_tinybench_sanity" if utility_summary.get("status") == "completed" else str(utility_summary.get("status", "failed"))
+            return [
+                {
+                    "method_id": cfg.get("method_id", "unknown"),
+                    "benchmark": str((cfg.get("utility_protocol") or {}).get("benchmark", "tinyBenchmarks")),
+                    "row_kind": "existing_method_utility",
+                    "status": status,
+                    "base_total_accuracy": utility_summary.get("base_total_accuracy", ""),
+                    "method_total_accuracy": utility_summary.get("adapter_total_accuracy_mean", ""),
+                    "method_total_accuracy_min": utility_summary.get("adapter_total_accuracy_min", ""),
+                    "method_total_accuracy_max": utility_summary.get("adapter_total_accuracy_max", ""),
+                    "absolute_drop": utility_summary.get("absolute_drop_mean", ""),
+                    "absolute_drop_max": utility_summary.get("absolute_drop_max", ""),
+                    "ci95_low": utility_summary.get("adapter_total_accuracy_ci95_low", ""),
+                    "ci95_high": utility_summary.get("adapter_total_accuracy_ci95_high", ""),
+                    "utility_pass": utility_summary.get("utility_pass", ""),
+                    "source": str(utility_summary_path),
+                }
+            ]
     rows = _utility_rows(cfg)
     for row in rows:
         if row["status"] == "planned_not_run":
@@ -673,7 +696,7 @@ def _execute_method(repo_root: Path, cfg: dict[str, Any], config_path: Path) -> 
         far_rows = _perinucleus_artifact_far_rows(repo_root, cfg)
     else:
         raise ValueError(f"Unsupported matched comparison method_id: {method_id}")
-    utility_rows = _execution_utility_rows(cfg)
+    utility_rows = _execution_utility_rows(repo_root, cfg)
     source_artifacts = _source_artifact_rows(repo_root, cfg)
     compute_payload = _execution_compute_payload(repo_root, cfg, source_artifacts)
     far_aggregates = _aggregate_far(far_rows)

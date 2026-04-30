@@ -108,6 +108,17 @@ Ours must be evaluated on the same benchmark before any utility comparison can
 be stated. Perinucleus existing TinyBench outputs may be reused only if the base
 model, tasks, evaluator version, and prompt settings match the ours run.
 
+Prepared ours utility runner:
+
+```bash
+python3 scripts/run_ours_tinybench_utility.py \
+  --config configs/experiment/comparison/ours_tinybench_utility.yaml \
+  --dry-run
+```
+
+The full utility run evaluates the base model once and all 12 final positive
+case adapters. It requires a GPU allocation.
+
 ### Compute
 
 Report both requested and observed compute separately.
@@ -135,6 +146,7 @@ methods under the same accounting convention.
 
 - `configs/experiment/comparison/far_utility_compute_ours.yaml`
 - `configs/experiment/comparison/far_utility_compute_perinucleus.yaml`
+- `configs/experiment/comparison/ours_tinybench_utility.yaml`
 
 These files are job contracts, not launched runs.
 
@@ -158,6 +170,13 @@ Final aggregation outputs:
 - `docs/matched_comparison_text.md`
 - `results/processed/paper_stats/matched_comparison_far_utility_compute_summary.json`
 
+Ours TinyBench utility outputs:
+
+- `docs/ours_tinybench_utility.md`
+- `results/tables/ours_tinybench_utility.csv`
+- `results/processed/paper_stats/ours_tinybench_utility_summary.json`
+- `results/processed/paper_stats/ours_tinybench_utility_compute.json`
+
 ## Final Decision
 
 ```yaml
@@ -176,11 +195,23 @@ python3 scripts/run_matched_far_utility_compute.py \
 python3 scripts/run_matched_far_utility_compute.py \
   --config configs/experiment/comparison/far_utility_compute_perinucleus.yaml \
   --dry-run
+
+python3 scripts/run_ours_tinybench_utility.py \
+  --config configs/experiment/comparison/ours_tinybench_utility.yaml \
+  --dry-run
 ```
 
-Artifact-backed execution commands. These do not run fresh model inference and
-do not complete full FAR/null calibration; unavailable null sets are explicitly
-marked in the output.
+First run ours TinyBench utility on a GPU allocation:
+
+```bash
+UTILITY_CONFIG=configs/experiment/comparison/ours_tinybench_utility.yaml \
+bash scripts/submit_ours_tinybench_utility.sh
+```
+
+After `ours_tinybench_utility_summary.json` exists, rerun the artifact-backed
+comparison. These commands do not run fresh FAR/null model inference and do not
+complete full FAR/null calibration; unavailable null sets are explicitly marked
+in the output.
 
 ```bash
 python3 scripts/run_matched_far_utility_compute.py \
@@ -217,8 +248,13 @@ runner_mode_supported:
   execute: artifact_backed_partial
 full_far_complete: false
 runner_execute_scope: claim-conditioned wrong-payload FAR from archived final artifacts, existing utility where available, partial compute normalization
-runner_execute_missing: fresh base-Qwen/null-model outputs, wrong-owner identity protocol, non-owner probe outputs, organic prompt outputs, ours TinyBench utility
+runner_execute_missing: fresh base-Qwen/null-model outputs, wrong-owner identity protocol, non-owner probe outputs, organic prompt outputs
 ```
 
 Expected output paths are the per-method and final aggregation paths listed
 above.
+
+Prompt T, the scrubbing/persistence differentiator, should not run until this
+utility gap is closed and the matched comparison table records TinyBench utility
+for both ours and Perinucleus. Full FAR can remain marked incomplete, but the
+scrubbing protocol must carry the same utility sanity fields to be interpretable.

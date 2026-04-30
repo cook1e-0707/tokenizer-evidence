@@ -1,0 +1,26 @@
+schema_name: ours_tinybench_utility
+schema_version: 1
+status: prepared_for_chimera
+
+comparison_config: configs/experiment/comparison/far_utility_compute_ours.yaml
+
+utility:
+  scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/ours_tinybench_utility
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  apply_chat_template: true
+  tasks: tinyBenchmarks
+  eval_batch_size: 1
+  local_files_only: true
+  trust_remote_code: true
+  max_absolute_drop: 0.05
+  adapter_selection_policy: evaluate_all_final_positive_case_adapters
+
+repo_outputs:
+  doc: docs/ours_tinybench_utility.md
+  table: results/tables/ours_tinybench_utility.csv
+  summary: results/processed/paper_stats/ours_tinybench_utility_summary.json
+  compute: results/processed/paper_stats/ours_tinybench_utility_compute.json
+
+runtime:
+  run_id: null
+  output_dir: null
