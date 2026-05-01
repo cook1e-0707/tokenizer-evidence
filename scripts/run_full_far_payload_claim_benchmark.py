@@ -664,7 +664,13 @@ def _execute_perinucleus_artifact_row(
     if evaluation_type == "clean_correct_claim":
         payload_for_probe = str(row.get("claim_payload", ""))
     elif evaluation_type == "wrong_payload_claim":
-        payload_for_probe = str(row.get("claim_payload", ""))
+        # The original Perinucleus verifier is binary: it detects whether the
+        # fingerprinted model is present, not whether a decoded payload label is
+        # bound to the claim. Therefore a wrong-payload claim is accepted when
+        # the true embedded fingerprint is detected. Payload-specific rejection
+        # belongs to the payload-adapted Perinucleus baseline, not this original
+        # binary detector row.
+        payload_for_probe = str(row.get("true_payload", ""))
     else:
         return _set_pending(
             output,
@@ -679,7 +685,7 @@ def _execute_perinucleus_artifact_row(
             output,
             status="not_executed_missing_perinucleus_claim_payload_artifact",
             reason=(
-                "missing official final artifact for claimed payload subset "
+                "missing official final artifact for binary detector subset "
                 f"payload={key[0]} seed={key[1]} budget={key[2]}"
             ),
             execution_scope="source_artifact_missing",
