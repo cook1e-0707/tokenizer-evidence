@@ -1,6 +1,7 @@
 # Full FAR And Payload-Claim Benchmark Protocol
 
-Status: prepared for review. No fresh model inference has been launched.
+Status: artifact-backed claim subset executed on Chimera H200. Fresh null-model
+and prompt-bank inference remains pending.
 
 ## Purpose
 
@@ -15,8 +16,9 @@ The next benchmark separates three quantities that must not be conflated:
 - structured wrong-payload / wrong-owner claim accept rate;
 - full null FAR under base/null models and non-owner or organic prompts.
 
-The existing artifact-backed wrong-payload result is only a claim-acceptance
-subset. This protocol upgrades it into a pre-registered full benchmark plan.
+The artifact-backed wrong-payload result is a claim-acceptance subset. It is
+useful for distinguishing structured payload-claim verification from binary
+fingerprint detection, but it is not a full FAR/null calibration.
 
 ## Methods
 
@@ -80,12 +82,14 @@ Plan-only outputs:
 
 ```yaml
 runner: scripts/run_full_far_payload_claim_benchmark.py
-fresh_inference_backend: not_enabled_in_plan_mode
+artifact_claim_subset_backend: executed
+fresh_inference_backend: pending
 plan_generation: supported
-launch_allowed_now: false
+claim_rows_complete: true
+full_far_complete: false
 ```
 
-The first implementation step is to generate and review the case plan:
+The plan generation commands are:
 
 ```bash
 python3 scripts/run_full_far_payload_claim_benchmark.py \
@@ -105,6 +109,56 @@ RUN_MODE=write-plan \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark.sh
 ```
+
+Artifact-backed claim subset execution on Chimera H200:
+
+```bash
+RUN_MODE=execute \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark.sh
+```
+
+## Executed Artifact Subset
+
+The current H200 execution produced:
+
+```text
+status = completed_artifact_subset
+full_far_complete = False
+claim_rows_complete = True
+```
+
+Completed rows:
+
+| Row status | Count |
+|---|---:|
+| `completed_artifact_replay` | 48 |
+| `completed_artifact_replay_budget_projection` | 768 |
+| `completed_artifact_replay_task_mismatch_binary_detector` | 720 |
+
+Pending rows:
+
+| Row status | Count |
+|---|---:|
+| `not_executed_fresh_null_inference_required` | 10072 |
+| `not_executed_owner_claim_not_encoded` | 480 |
+| `not_executed_owner_claim_not_supported_by_binary_detector` | 480 |
+
+Key artifact-backed claim metrics:
+
+| Method | Metric | M | Trials | Accepts | Rate | 95% CI |
+|---|---|---:|---:|---:|---:|---|
+| Ours | clean correct claim acceptance | 1/3/5/10 | 12 each | 12 each | 1.0 | [0.758, 1.0] |
+| Ours | wrong-payload claim acceptance | 1/3/5/10 | 180 each | 0 each | 0.0 | [0.0, 0.0209] |
+| Original Perinucleus | clean correct claim acceptance | 1/3/5/10 | 12 each | 12 each | 1.0 | [0.758, 1.0] |
+| Original Perinucleus | wrong-payload claim acceptance | 1/3/5/10 | 180 each | 180 each | 1.0 | [0.979, 1.0] |
+
+Interpretation:
+
+- Clean binary ownership success is tied in this artifact subset.
+- Ours rejects wrong decoded payload claims under the artifact-backed structured verifier.
+- Original Perinucleus accepts wrong-payload claims here because it is a binary fingerprint detector, not because a calibrated full FAR test failed.
+- These rows must be reported as `wrong_payload_claim_accept_rate`, not as full FAR.
 
 ## Gate
 
