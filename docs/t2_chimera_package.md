@@ -27,7 +27,7 @@ cd /home/guanjie.lin001/tokenizer-evidence
 git pull origin main
 source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
 
-export CHIMERA_ENV_SETUP=$'source ~/.bashrc\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN="$(tr -d \'\\r\\n\' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"'
+export CHIMERA_ENV_SETUP=$'if [ -f /etc/profile ]; then . /etc/profile; fi\nsource /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate\nexport HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface\nexport HF_TOKEN="$(tr -d \'\\r\\n\' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"'
 
 export T2R1_ROOT=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/theorem2_qwen7b_r1
 mkdir -p "$T2R1_ROOT"

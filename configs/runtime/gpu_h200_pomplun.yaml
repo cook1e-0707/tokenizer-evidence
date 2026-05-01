@@ -4,7 +4,6 @@ runtime:
   tags: ["gpu", "h200", "pomplun"]
   resources:
     partition: pomplun
-    qos: pomplun
     gpu_type: h200
     num_gpus: 1
     cpus: 16
@@ -12,7 +11,9 @@ runtime:
     time_limit: "24:00:00"
     account: null
     environment_setup: |
-      source ~/.bashrc
-      # activate your environment here
+      if [ -f /etc/profile ]; then . /etc/profile; fi
+      if [ -f /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate ]; then
+        source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+      fi
       export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
       export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"

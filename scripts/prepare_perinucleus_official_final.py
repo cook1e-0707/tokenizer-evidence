@@ -141,7 +141,8 @@ def _resources(package: dict[str, Any], environment_setup: str | None) -> Resour
         mem_gb=int(resources.get("mem_gb", 240)),
         time_limit=str(resources.get("time_limit", "04:00:00")),
         account=resources.get("account"),
-        environment_setup=environment_setup or str(package.get("chimera_environment_setup", "source ~/.bashrc")),
+        environment_setup=environment_setup
+        or str(package.get("chimera_environment_setup", "if [ -f /etc/profile ]; then . /etc/profile; fi")),
         slurm_template=str(resources.get("slurm_template", "")),
     )
 

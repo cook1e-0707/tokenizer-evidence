@@ -6,7 +6,7 @@ eval_config: configs/experiment/baselines/perinucleus/exp_eval__qwen2_5_7b__base
 new_case_root_prefix: baselines/perinucleus_qwen
 scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_qwen
 chimera_environment_setup: |
-  source ~/.bashrc
+  if [ -f /etc/profile ]; then . /etc/profile; fi
   source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
   export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
   export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"

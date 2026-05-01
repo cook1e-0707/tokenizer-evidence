@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=ours-tinybench-util
 #SBATCH --partition=pomplun
-#SBATCH --qos=pomplun
 #SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=240G
@@ -19,9 +18,9 @@ HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_tok
 mkdir -p "$SCRATCH_ROOT/slurm"
 cd "$REPO_HOME"
 
-if [ -f "$HOME/.bashrc" ]; then
-  # shellcheck disable=SC1090
-  source "$HOME/.bashrc"
+if [ -f /etc/profile ]; then
+  # shellcheck disable=SC1091
+  . /etc/profile
 fi
 
 if [ -f "$VENV_PATH/bin/activate" ]; then

@@ -3,7 +3,6 @@ runtime:
   launcher_mode: slurm
   resources:
     partition: pomplun
-    qos: pomplun
     gpu_type: h200
     num_gpus: 1
     cpus: 4
@@ -11,5 +10,7 @@ runtime:
     time_limit: "02:00:00"
     account: null
     environment_setup: |
-      source ~/.bashrc
-      # activate your environment here
+      if [ -f /etc/profile ]; then . /etc/profile; fi
+      if [ -f /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate ]; then
+        source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
+      fi

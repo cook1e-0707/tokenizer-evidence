@@ -119,7 +119,7 @@ class RuntimeResources:
     mem_gb: int = 32
     time_limit: str = "02:00:00"
     account: str | None = None
-    environment_setup: str = "source ~/.bashrc\n# activate your environment here"
+    environment_setup: str = "if [ -f /etc/profile ]; then . /etc/profile; fi\n# activate your environment here"
     slurm_template: str = ""
 
 
@@ -456,7 +456,8 @@ def build_config(data: Mapping[str, Any], source_paths: list[Path] | None = None
             account=resource_section.get("account"),
             environment_setup=str(
                 resource_section.get(
-                    "environment_setup", "source ~/.bashrc\n# activate your environment here"
+                    "environment_setup",
+                    "if [ -f /etc/profile ]; then . /etc/profile; fi\n# activate your environment here",
                 )
             ),
             slurm_template=str(resource_section.get("slurm_template", "")),

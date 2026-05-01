@@ -33,7 +33,7 @@ class ResourceRequest:
     time_limit: str
     qos: str | None = None
     account: str | None = None
-    environment_setup: str = "source ~/.bashrc\n# activate your environment here"
+    environment_setup: str = "if [ -f /etc/profile ]; then . /etc/profile; fi\n# activate your environment here"
     slurm_template: str = ""
 
     def to_json_dict(self) -> dict[str, Any]:
@@ -51,7 +51,10 @@ class ResourceRequest:
             qos=payload.get("qos"),
             account=payload.get("account"),
             environment_setup=str(
-                payload.get("environment_setup", "source ~/.bashrc\n# activate your environment here")
+                payload.get(
+                    "environment_setup",
+                    "if [ -f /etc/profile ]; then . /etc/profile; fi\n# activate your environment here",
+                )
             ),
             slurm_template=str(payload.get("slurm_template", "")),
         )

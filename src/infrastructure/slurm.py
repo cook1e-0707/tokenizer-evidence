@@ -111,7 +111,7 @@ def render_sbatch_script(
     requested = resources or entry.requested_resources
     template = _resolve_template_text(template_path)
     account_directive = f"#SBATCH --account={requested.account}" if requested.account else ""
-    effective_qos = requested.qos or ("pomplun" if requested.partition == "pomplun" else "")
+    effective_qos = requested.qos or ""
     qos_directive = f"#SBATCH --qos={effective_qos}" if effective_qos else ""
     gres_value = (
         f"gpu:{requested.gpu_type}:{requested.num_gpus}"
@@ -235,10 +235,10 @@ def submit_manifest_entry(
     else:
         try:
             sbatch_env = os.environ.copy()
-            # Prevent login-shell defaults such as SBATCH_QOS=scavenger from
-            # overriding the rendered script's explicit partition/QOS pair.
+            # Prevent login-shell defaults from overriding rendered directives.
             sbatch_env.pop("SBATCH_QOS", None)
             sbatch_env.pop("SLURM_QOS", None)
+            sbatch_env.pop("SBATCH_ACCOUNT", None)
             completed = subprocess.run(
                 ["sbatch", str(rendered_path)],
                 capture_output=True,

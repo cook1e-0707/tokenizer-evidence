@@ -19,7 +19,7 @@ official_source:
     utility: eval_utility.py
 scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/baselines/perinucleus_official
 chimera_environment_setup: |
-  source ~/.bashrc
+  if [ -f /etc/profile ]; then . /etc/profile; fi
   source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
   export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
   export TRANSFORMERS_CACHE=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
@@ -97,7 +97,6 @@ matched_qwen_final:
   local_files_only: true
   requested_resources:
     partition: pomplun
-    qos: pomplun
     gpu_type: h200
     num_gpus: 1
     cpus: 8

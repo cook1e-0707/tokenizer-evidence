@@ -9,7 +9,7 @@ case_root_search_roots:
   - ${REPO_HOME}
 scratch_root_required: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/g3a_block_scale_v3
 chimera_environment_setup: |
-  source ~/.bashrc
+  if [ -f /etc/profile ]; then . /etc/profile; fi
   source /hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/activate
   export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
   export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
