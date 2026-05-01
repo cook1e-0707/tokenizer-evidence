@@ -134,11 +134,11 @@ def _cases(package: dict[str, Any], output_root_base: str) -> list[dict[str, Any
 def _resources(package: dict[str, Any], environment_setup: str | None) -> ResourceRequest:
     resources = dict(package.get("matched_qwen_final", {}).get("requested_resources", {}))
     return ResourceRequest(
-        partition=str(resources.get("partition", "DGXA100")),
-        gpu_type=resources.get("gpu_type"),
+        partition=str(resources.get("partition", "pomplun")),
+        gpu_type=resources.get("gpu_type", "h200"),
         num_gpus=int(resources.get("num_gpus", 1)),
         cpus=int(resources.get("cpus", 8)),
-        mem_gb=int(resources.get("mem_gb", 120)),
+        mem_gb=int(resources.get("mem_gb", 240)),
         time_limit=str(resources.get("time_limit", "04:00:00")),
         account=resources.get("account"),
         environment_setup=environment_setup or str(package.get("chimera_environment_setup", "source ~/.bashrc")),

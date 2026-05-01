@@ -96,11 +96,11 @@ matched_qwen_final:
   matched_query_budget: 4
   local_files_only: true
   requested_resources:
-    partition: DGXA100
-    gpu_type: null
+    partition: pomplun
+    gpu_type: h200
     num_gpus: 1
     cpus: 8
-    mem_gb: 120
+    mem_gb: 240
     time_limit: "04:00:00"
   required_metrics:
     - clean_verification_success

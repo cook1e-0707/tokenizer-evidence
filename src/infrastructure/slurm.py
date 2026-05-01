@@ -23,7 +23,7 @@ from src.infrastructure.registry import RegistryRecord, append_registry_record
 DEFAULT_TEMPLATE = """#!/bin/bash
 #SBATCH --job-name={job_name}
 #SBATCH --partition={partition}
-#SBATCH --gres=gpu:{gpus}
+{gres_directive}
 #SBATCH --cpus-per-task={cpus_per_task}
 #SBATCH --mem={mem}
 #SBATCH --time={time}
@@ -109,12 +109,21 @@ def render_sbatch_script(
     requested = resources or entry.requested_resources
     template = _resolve_template_text(template_path)
     account_directive = f"#SBATCH --account={requested.account}" if requested.account else ""
+    gres_value = (
+        f"gpu:{requested.gpu_type}:{requested.num_gpus}"
+        if requested.gpu_type
+        else f"gpu:{requested.num_gpus}"
+    )
+    gres_directive = f"#SBATCH --gres={gres_value}" if requested.num_gpus > 0 else ""
     return template.format(
         job_name=job_name or entry.manifest_id,
         partition=requested.partition,
         account=requested.account or "CHANGE_ME",
         account_directive=account_directive,
+        gres=gres_value,
+        gres_directive=gres_directive,
         gpus=requested.num_gpus,
+        gpu_type=requested.gpu_type or "",
         cpus_per_task=requested.cpus,
         mem=f"{requested.mem_gb}G",
         time=requested.time_limit,

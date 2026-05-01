@@ -117,10 +117,11 @@ utility_protocol:
 
 compute_protocol:
   requested_resources:
-    partition: DGXA100
+    partition: pomplun
+    gpu_type: h200
     num_gpus: 1
     cpus: 16
-    mem_gb: 96
+    mem_gb: 240
     time_limit: "24:00:00"
   report:
     - train_wall_clock_seconds

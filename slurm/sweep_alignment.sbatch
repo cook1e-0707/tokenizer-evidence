@@ -2,7 +2,7 @@
 #SBATCH --job-name={job_name}
 #SBATCH --partition={partition}
 #SBATCH --account={account}
-#SBATCH --gres=gpu:{gpus}
+#SBATCH --gres={gres}
 #SBATCH --cpus-per-task={cpus_per_task}
 #SBATCH --mem={mem}
 #SBATCH --time={time}

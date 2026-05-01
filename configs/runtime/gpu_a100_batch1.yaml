@@ -1,15 +1,16 @@
 runtime:
   output_root: results/raw
   launcher_mode: slurm
-  tags: ["batch1", "gpu", "a100"]
+  tags: ["batch1", "gpu", "h200", "pomplun"]
   resources:
-    partition: DGXA100
-    gpu_type: null
+    partition: pomplun
+    gpu_type: h200
     num_gpus: 1
     cpus: 16
-    mem_gb: 80
+    mem_gb: 240
     time_limit: "24:00:00"
     account: null
     environment_setup: |
       source ~/.bashrc
+      # Legacy filename kept for compatibility; current Chimera GPU default is pomplun/H200.
       # activate your environment here

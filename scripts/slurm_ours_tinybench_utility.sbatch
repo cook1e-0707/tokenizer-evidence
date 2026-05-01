@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=ours-tinybench-util
-#SBATCH --partition=DGXA100
-#SBATCH --gres=gpu:1
+#SBATCH --partition=pomplun
+#SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=160G
+#SBATCH --mem=240G
 #SBATCH --time=24:00:00
 
 set -euo pipefail

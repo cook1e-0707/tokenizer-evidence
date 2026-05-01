@@ -1,7 +1,7 @@
 runtime:
   output_root: results/raw
   launcher_mode: slurm
-  tags: ["batch28", "gpu", "h200", "pomplun", "method-model"]
+  tags: ["gpu", "h200", "pomplun"]
   resources:
     partition: pomplun
     gpu_type: h200
@@ -12,7 +12,6 @@ runtime:
     account: null
     environment_setup: |
       source ~/.bashrc
-      # Legacy filename kept for compatibility; current Chimera GPU default is pomplun/H200.
       # activate your environment here
       export HF_HOME=/hpcstor6/scratch01/g/guanjie.lin001/huggingface
       export HF_TOKEN="$(tr -d '\r\n' </hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token)"
