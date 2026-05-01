@@ -25,7 +25,8 @@ Satisfied:
 - Perinucleus TinyBench utility: `utility_pass=true`, base
   `0.6035317339934293`, adapter `0.6191832009104691`, signed drop
   `-0.01565146691703978`.
-- Artifact-backed wrong-payload subset exists for both methods.
+- Artifact-backed wrong-payload claim-acceptance subset exists for both
+  methods.
 
 Still incomplete:
 
@@ -69,7 +70,8 @@ Metrics:
 - slot bucket accuracy;
 - exact representative accuracy;
 - TinyBench retained after scrubbing;
-- optional FAR subset if the same wrong-payload replay remains valid.
+- optional wrong-payload claim accept-rate subset if the same artifact replay
+  remains valid.
 
 ### Perinucleus
 
@@ -90,7 +92,8 @@ Metrics:
 - fingerprint exact accuracy at query budgets `M=1,3,5,10`;
 - target response probability/rank if available;
 - TinyBench retained after scrubbing;
-- optional wrong-payload subset if the same artifact replay remains valid.
+- optional wrong-payload claim accept-rate subset if the same artifact replay
+  remains valid.
 
 ## Scrubbing Settings
 
@@ -168,6 +171,7 @@ Forbidden unless supported by additional experiments:
 - "robust to delimiter destruction";
 - "broadly robust to post-processing";
 - "complete FAR-calibrated persistence";
+- "Perinucleus has FAR=1 from the wrong-payload claim subset";
 - "Perinucleus fails generally."
 
 ## Launch Decision

@@ -174,7 +174,7 @@ def _audit_rows(cfg: dict[str, Any]) -> list[dict[str, str]]:
         },
         {
             "requirement_id": "query_budgets",
-            "requirement": "query budgets M=1,3,5,10 for both positive and negative decisions",
+            "requirement": "query budgets M=1,3,5,10 for positive decisions, full null decisions, and claim checks",
             "status": "incomplete_for_far" if query_status == "complete_for_clean_success_only" else query_status,
             "evidence": json.dumps(evidence.get("query_budget_grid", {}), sort_keys=True),
             "missing_evidence": "negative/null outcomes per query budget" if query_status != "missing" else "query-budget grid",
@@ -190,11 +190,11 @@ def _audit_rows(cfg: dict[str, Any]) -> list[dict[str, str]]:
         },
         {
             "requirement_id": "far_wrong_payload_owner",
-            "requirement": "FAR under wrong payload, wrong owner, non-owner probes, and organic prompts",
+            "requirement": "full FAR plus wrong-payload and wrong-owner structured claim checks",
             "status": far_status,
             "evidence": json.dumps(evidence.get("far_null_calibration", {}), sort_keys=True),
-            "missing_evidence": "per-null-set false accept counts and Wilson intervals",
-            "next_action": "execute FAR verifier backend after review",
+            "missing_evidence": "full null-set false accepts, wrong-owner checks, and Wilson intervals",
+            "next_action": "execute full FAR/payload-claim verifier backend after review",
         },
         {
             "requirement_id": "utility_score",
@@ -254,11 +254,11 @@ def _audit_rows(cfg: dict[str, Any]) -> list[dict[str, str]]:
         },
         {
             "requirement_id": "confidence_intervals",
-            "requirement": "confidence intervals for FAR, utility, and clean success",
+            "requirement": "confidence intervals for full FAR, claim accept rates, utility, and clean success",
             "status": "partial",
             "evidence": json.dumps(evidence.get("confidence_interval", {}), sort_keys=True),
-            "missing_evidence": "FAR and utility CIs",
-            "next_action": "compute Wilson intervals for FAR and paired bootstrap/CI for utility",
+            "missing_evidence": "full FAR, claim accept-rate, and utility CIs",
+            "next_action": "compute Wilson intervals for full FAR/claim checks and paired bootstrap/CI for utility",
         },
     ]
     return rows
@@ -419,8 +419,12 @@ def _case_far_row(
         "ownership_score": "" if score is None else score,
         "accepted": accepted if status == "completed" else "",
         "false_accept": false_accept if status == "completed" else "",
+        "claim_accept": false_accept if status == "completed" and not label else "",
         "negative_count": 0 if label or status != "completed" else 1,
         "false_accept_count": 0 if label or status != "completed" else int(false_accept),
+        "claim_accept_count": 0 if label or status != "completed" else int(false_accept),
+        "claim_accept_rate": "" if label or status != "completed" else float(false_accept),
+        # Deprecated alias: only full null-model rows should be interpreted as FAR.
         "observed_far": "" if label or status != "completed" else float(false_accept),
         "wilson_low": "",
         "wilson_high": "",
@@ -618,6 +622,7 @@ def _aggregate_far(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         negative_count = len(items)
         false_accept_count = sum(1 for row in items if _as_bool(row.get("false_accept")))
         low, high = _wilson(false_accept_count, negative_count)
+        rate = false_accept_count / negative_count if negative_count else ""
         out.append(
             {
                 "method_id": method_id,
@@ -625,7 +630,9 @@ def _aggregate_far(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "null_probe_set": null_probe_set,
                 "negative_count": negative_count,
                 "false_accept_count": false_accept_count,
-                "observed_far": false_accept_count / negative_count if negative_count else "",
+                "claim_accept_rate": rate,
+                # Deprecated alias: for wrong_payload_null this is not a full FAR.
+                "observed_far": rate,
                 "wilson_low": low,
                 "wilson_high": high,
                 "status": "completed_artifact_subset",
@@ -736,7 +743,7 @@ def _execute_method(repo_root: Path, cfg: dict[str, Any], config_path: Path) -> 
         "limitations": [
             "No fresh model inference was run by this matched runner.",
             "base_qwen, non_owner_probe, organic_prompt, and owner-identity null sets remain unavailable unless explicitly generated.",
-            "Wrong-payload FAR is claim-conditioned artifact replay and should be reported as a subset, not full FAR.",
+            "Wrong-payload results are claim-conditioned artifact replay and should be reported as a payload-claim accept-rate subset, not full FAR.",
         ],
         "outputs": cfg.get("repo_outputs") or {},
     }
@@ -771,7 +778,7 @@ def _write_execution_outputs(
     }
 
 
-def _latest_far_by_budget(rows: list[dict[str, str]], method_id: str) -> dict[int, dict[str, Any]]:
+def _latest_wrong_payload_claim_rate_by_budget(rows: list[dict[str, str]], method_id: str) -> dict[int, dict[str, Any]]:
     out: dict[int, dict[str, Any]] = {}
     completed = [
         row
@@ -786,10 +793,17 @@ def _latest_far_by_budget(rows: list[dict[str, str]], method_id: str) -> dict[in
         negative_count = len(items)
         false_accept_count = sum(1 for row in items if _as_bool(row.get("false_accept")))
         low, high = _wilson(false_accept_count, negative_count)
+        rate = false_accept_count / negative_count if negative_count else ""
         out[budget] = {
+            "wrong_payload_claim_negative_count": negative_count,
+            "wrong_payload_claim_accept_count": false_accept_count,
+            "wrong_payload_claim_accept_rate": rate,
+            "wrong_payload_claim_accept_rate_wilson_low": low if negative_count else "",
+            "wrong_payload_claim_accept_rate_wilson_high": high if negative_count else "",
+            # Deprecated aliases retained for compatibility with earlier local checks.
             "wrong_payload_negative_count": negative_count,
             "wrong_payload_false_accept_count": false_accept_count,
-            "wrong_payload_far": false_accept_count / negative_count if negative_count else "",
+            "wrong_payload_far": rate,
             "wrong_payload_far_wilson_low": low if negative_count else "",
             "wrong_payload_far_wilson_high": high if negative_count else "",
         }
@@ -844,22 +858,28 @@ def _maybe_write_final_aggregation(repo_root: Path, *, force: bool) -> None:
     }
     comparison_rows: list[dict[str, Any]] = []
     for method_id, label in method_labels.items():
-        far_by_budget = _latest_far_by_budget(all_far_rows, method_id)
+        claim_rate_by_budget = _latest_wrong_payload_claim_rate_by_budget(all_far_rows, method_id)
         utility = _first_utility_row(all_utility_rows, method_id)
         summary = summaries.get(method_id) if isinstance(summaries.get(method_id), dict) else {}
         for budget in [1, 3, 5, 10]:
-            far = far_by_budget.get(budget, {})
+            claim_rate = claim_rate_by_budget.get(budget, {})
             comparison_rows.append(
                 {
                     "method_id": method_id,
                     "method_label": label,
                     "query_budget": budget,
                     "clean_success_rate": 1.0,
-                    "wrong_payload_far": far.get("wrong_payload_far", ""),
-                    "wrong_payload_false_accept_count": far.get("wrong_payload_false_accept_count", ""),
-                    "wrong_payload_negative_count": far.get("wrong_payload_negative_count", ""),
-                    "wrong_payload_far_wilson_low": far.get("wrong_payload_far_wilson_low", ""),
-                    "wrong_payload_far_wilson_high": far.get("wrong_payload_far_wilson_high", ""),
+                    "wrong_payload_claim_accept_rate": claim_rate.get("wrong_payload_claim_accept_rate", ""),
+                    "wrong_payload_claim_accept_count": claim_rate.get("wrong_payload_claim_accept_count", ""),
+                    "wrong_payload_claim_negative_count": claim_rate.get("wrong_payload_claim_negative_count", ""),
+                    "wrong_payload_claim_accept_rate_wilson_low": claim_rate.get("wrong_payload_claim_accept_rate_wilson_low", ""),
+                    "wrong_payload_claim_accept_rate_wilson_high": claim_rate.get("wrong_payload_claim_accept_rate_wilson_high", ""),
+                    # Deprecated aliases retained for compatibility with earlier local checks.
+                    "wrong_payload_far": claim_rate.get("wrong_payload_far", ""),
+                    "wrong_payload_false_accept_count": claim_rate.get("wrong_payload_false_accept_count", ""),
+                    "wrong_payload_negative_count": claim_rate.get("wrong_payload_negative_count", ""),
+                    "wrong_payload_far_wilson_low": claim_rate.get("wrong_payload_far_wilson_low", ""),
+                    "wrong_payload_far_wilson_high": claim_rate.get("wrong_payload_far_wilson_high", ""),
                     "utility_status": utility.get("status", ""),
                     "base_total_accuracy": utility.get("base_total_accuracy", ""),
                     "method_total_accuracy": utility.get("method_total_accuracy", ""),
@@ -886,9 +906,9 @@ def _maybe_write_final_aggregation(repo_root: Path, *, force: bool) -> None:
             "methods": list(method_labels),
             "full_far_complete": False,
             "limitations": [
-                "Only claim-conditioned wrong-payload FAR is computed from existing artifacts.",
+                "Only claim-conditioned wrong-payload claim accept rate is computed from existing artifacts.",
                 "base_qwen, wrong_owner, non_owner_probe, and organic_prompt null sets remain unavailable.",
-                "Ours TinyBench utility remains unavailable in current artifacts.",
+                "Do not describe wrong-payload claim accept rate as full FAR or as a general failure of binary Perinucleus detection.",
             ],
             "table": str(table_path),
             "tex": str(tex_path),
@@ -902,18 +922,18 @@ def _maybe_write_final_aggregation(repo_root: Path, *, force: bool) -> None:
         "\\small",
         "\\begin{tabular}{llrrr}",
         "\\toprule",
-        "Method & Budget & Clean & Wrong-payload FAR & Utility \\\\",
+        "Method & Budget & Clean & Wrong-payload claim accept rate & Utility \\\\",
         "\\midrule",
     ]
     for row in comparison_rows:
         util = row["method_total_accuracy"] if row["method_total_accuracy"] != "" else row["utility_status"]
-        far = row["wrong_payload_far"] if row["wrong_payload_far"] != "" else "--"
+        claim_rate = row["wrong_payload_claim_accept_rate"] if row["wrong_payload_claim_accept_rate"] != "" else "--"
         method_label_tex = str(row["method_label"]).replace("_", "\\_")
         tex_lines.append(
             f"{method_label_tex} & {row['query_budget']} & "
-            f"{float(row['clean_success_rate']):.3f} & {far} & {util} \\\\"
+            f"{float(row['clean_success_rate']):.3f} & {claim_rate} & {util} \\\\"
         )
-    tex_lines.extend(["\\bottomrule", "\\end{tabular}", "\\caption{Partial artifact-backed matched comparison. Full FAR is not complete.}", "\\end{table}", ""])
+    tex_lines.extend(["\\bottomrule", "\\end{tabular}", "\\caption{Partial artifact-backed matched comparison. The wrong-payload column is a claim-acceptance subset, not full FAR.}", "\\end{table}", ""])
     tex_path.parent.mkdir(parents=True, exist_ok=True)
     tex_path.write_text("\n".join(tex_lines), encoding="utf-8")
     text_path.parent.mkdir(parents=True, exist_ok=True)
@@ -924,9 +944,9 @@ def _maybe_write_final_aggregation(repo_root: Path, *, force: bool) -> None:
                 "",
                 "Status: completed partial artifact-backed subset.",
                 "",
-                "This comparison currently supports clean success parity and claim-conditioned wrong-payload FAR from existing artifacts. It does not yet include fresh base-Qwen, wrong-owner, non-owner-probe, or organic-prompt null generation.",
+                "This comparison currently supports clean success parity and claim-conditioned wrong-payload claim accept rate from existing artifacts. It does not yet include fresh base-Qwen, wrong-owner, non-owner-probe, or organic-prompt null generation.",
                 "",
-                "Do not describe this as a complete FAR/null calibration. It is a diagnostic subset that identifies which comparison dimensions are already computable from archived final artifacts.",
+                "Do not describe this as a complete FAR/null calibration, and do not describe original Perinucleus as having FAR=1. This is a structured payload-claim diagnostic subset; original Perinucleus is a binary fingerprint detector.",
                 "",
                 f"CSV: `{table_path.relative_to(repo_root)}`",
                 f"Summary: `{summary_path.relative_to(repo_root)}`",
