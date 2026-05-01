@@ -1,0 +1,111 @@
+schema_name: full_far_payload_claim_benchmark_plan
+schema_version: 1
+status: prepared_for_review_do_not_launch
+comparison_package: full_far_payload_claim_v1
+
+decision:
+  run_required: true
+  reason: Clean success is tied; full FAR/null calibration and structured payload-claim verification need a frozen benchmark.
+  launch_guard: Do not run fresh model inference until docs/full_far_payload_claim_protocol.md and the generated plan summary are reviewed.
+
+methods:
+  - method_id: ours_compiled_ownership
+    display_name: Ours compiled tokenizer-aligned ownership
+    verifier_object: structured_payload_claim_verification
+    source_artifacts:
+      clean_table: results/tables/g1_payload_seed_scale.csv
+      run_inclusion_list: results/processed/paper_stats/g1_run_inclusion_list.json
+      utility_summary: results/processed/paper_stats/ours_tinybench_utility_summary.json
+    backend_status: planned_fresh_inference_required
+  - method_id: scalable_fingerprinting_perinucleus_official_qwen_final
+    display_name: Qwen-adapted official Scalable/Perinucleus
+    verifier_object: binary_fingerprint_detection
+    source_artifacts:
+      final_table: results/tables/baseline_perinucleus_official_qwen_final.csv
+      final_summary: results/processed/paper_stats/baseline_perinucleus_official_qwen_final_summary.json
+      frozen_candidate_config: configs/experiment/baselines/perinucleus_official/qwen_frozen_candidate__baseline_perinucleus_official.yaml
+    backend_status: planned_fresh_inference_required
+
+positive_split:
+  payloads: ["U00", "U03", "U12", "U15"]
+  seeds: [17, 23, 29]
+  query_budgets: [1, 3, 5, 10]
+  owner_id: owner_qwen_final
+
+payload_claim_protocol:
+  all_payload_labels:
+    - U00
+    - U01
+    - U02
+    - U03
+    - U04
+    - U05
+    - U06
+    - U07
+    - U08
+    - U09
+    - U10
+    - U11
+    - U12
+    - U13
+    - U14
+    - U15
+  wrong_payload_claims: all_nonmatching_labels
+  minimum_wrong_payload_claims_per_method: 720
+  score_direction: higher_is_stronger
+  threshold_policy: frozen_before_final_eval
+  target_far: 0.01
+
+owner_claim_protocol:
+  true_owner_id: owner_qwen_final
+  wrong_owner_ids:
+    - pseudo_owner_00
+    - pseudo_owner_01
+    - pseudo_owner_02
+    - pseudo_owner_03
+    - pseudo_owner_04
+    - pseudo_owner_05
+    - pseudo_owner_06
+    - pseudo_owner_07
+    - pseudo_owner_08
+    - pseudo_owner_09
+
+null_protocol:
+  minimum_null_prompt_trials: 1000
+  organic_prompt_count: 1000
+  non_owner_probe_count: 256
+  null_models:
+    - id: base_qwen
+      model: Qwen/Qwen2.5-7B-Instruct
+      status: required
+    - id: non_qwen_llama3_1_8b
+      model: meta-llama/Meta-Llama-3.1-8B-Instruct
+      status: optional_if_cached_and_authorized
+    - id: unprotected_qwen_finetuned
+      model: Qwen/Qwen2.5-7B-Instruct
+      status: optional_if_available
+  null_probe_sets:
+    - base_model_registered_probes
+    - non_owner_probe_null
+    - organic_prompt_null
+
+outputs:
+  protocol_doc: docs/full_far_payload_claim_protocol.md
+  plan_summary: results/processed/paper_stats/full_far_payload_claim_plan_summary.json
+  plan_cases: results/tables/full_far_payload_claim_plan.csv
+  final_summary: results/processed/paper_stats/full_far_payload_claim_summary.json
+  final_table: results/tables/full_far_payload_claim.csv
+  final_tex: results/tables/full_far_payload_claim.tex
+  roc_figure: figures/far_roc_curves.pdf
+  heatmap_figure: figures/payload_claim_heatmap.pdf
+
+runtime:
+  scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim
+  partition: pomplun
+  gres: gpu:h200:1
+  cpus_per_task: 16
+  mem: 240G
+  time_limit: "24:00:00"
+  local_files_only: true
+  trust_remote_code: true
+  wandb_mode: disabled
