@@ -102,6 +102,7 @@ outputs:
 runtime:
   scratch_root: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim
   partition: pomplun
+  qos: pomplun
   gres: gpu:h200:1
   cpus_per_task: 16
   mem: 240G

@@ -6,6 +6,7 @@ New GPU submissions should target the H200 partition:
 
 ```bash
 --partition=pomplun
+--qos=pomplun
 --gres=gpu:h200:1
 ```
 
@@ -26,12 +27,17 @@ Current comparison wrappers also default to this target, including plan or
 artifact-backed jobs, so Chimera submission behavior stays consistent across the
 next experiment phase.
 
+The wrappers explicitly unset `SBATCH_QOS` and `SLURM_QOS` before calling
+`sbatch`. This prevents login-shell defaults such as `SBATCH_QOS=scavenger`
+from overriding the `pomplun` partition/QOS pair.
+
 ## Manual Wrapper Override
 
 All hand-written GPU submit wrappers accept these overrides:
 
 ```bash
 PARTITION=pomplun \
+QOS=pomplun \
 GRES=gpu:h200:1 \
 MEM=240G \
 bash scripts/submit_ours_tinybench_utility.sh
@@ -40,7 +46,7 @@ bash scripts/submit_ours_tinybench_utility.sh
 For multi-GPU H200 jobs where NVLink matters, request multiple H200s explicitly:
 
 ```bash
-PARTITION=pomplun GRES=gpu:h200:2 MEM=480G bash <submit-wrapper>
+PARTITION=pomplun QOS=pomplun GRES=gpu:h200:2 MEM=480G bash <submit-wrapper>
 ```
 
 Only use multi-GPU requests after the runner is known to support multi-GPU
@@ -56,6 +62,7 @@ For H200:
 runtime:
   resources:
     partition: pomplun
+    qos: pomplun
     gpu_type: h200
     num_gpus: 1
     mem_gb: 240
@@ -65,6 +72,7 @@ This renders:
 
 ```bash
 #SBATCH --partition=pomplun
+#SBATCH --qos=pomplun
 #SBATCH --gres=gpu:h200:1
 #SBATCH --mem=240G
 ```

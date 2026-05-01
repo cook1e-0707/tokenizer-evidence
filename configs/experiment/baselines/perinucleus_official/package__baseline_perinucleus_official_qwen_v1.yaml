@@ -97,6 +97,7 @@ matched_qwen_final:
   local_files_only: true
   requested_resources:
     partition: pomplun
+    qos: pomplun
     gpu_type: h200
     num_gpus: 1
     cpus: 8

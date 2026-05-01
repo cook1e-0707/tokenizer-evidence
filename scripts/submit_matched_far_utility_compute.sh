@@ -7,15 +7,19 @@ RUN_MODE="${RUN_MODE:-write-plan}"
 SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/far_utility_compute}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 PARTITION="${PARTITION:-pomplun}"
+QOS="${QOS:-pomplun}"
 GRES="${GRES:-gpu:h200:1}"
 CPUS_PER_TASK="${CPUS_PER_TASK:-16}"
 MEM="${MEM:-240G}"
 TIME_LIMIT="${TIME_LIMIT:-04:00:00}"
 
 mkdir -p "$SCRATCH_ROOT/slurm"
+unset SBATCH_QOS
+unset SLURM_QOS
 
 SBATCH_ARGS=(
   --partition="$PARTITION" \
+  --qos="$QOS" \
   --cpus-per-task="$CPUS_PER_TASK" \
   --mem="$MEM" \
   --time="$TIME_LIMIT" \

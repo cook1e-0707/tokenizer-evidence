@@ -112,6 +112,7 @@ class AttackConfig:
 @dataclass(frozen=True)
 class RuntimeResources:
     partition: str = "gpu"
+    qos: str | None = None
     gpu_type: str | None = None
     num_gpus: int = 1
     cpus: int = 4
@@ -446,6 +447,7 @@ def build_config(data: Mapping[str, Any], source_paths: list[Path] | None = None
         tags=tuple(runtime_section.get("tags", [])),
         resources=RuntimeResources(
             partition=str(resource_section.get("partition", "gpu")),
+            qos=resource_section.get("qos"),
             gpu_type=resource_section.get("gpu_type"),
             num_gpus=int(resource_section.get("num_gpus", 1)),
             cpus=int(resource_section.get("cpus", 4)),

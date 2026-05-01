@@ -4,6 +4,7 @@ runtime:
   tags: ["gpu", "h200", "pomplun"]
   resources:
     partition: pomplun
+    qos: pomplun
     gpu_type: h200
     num_gpus: 1
     cpus: 16

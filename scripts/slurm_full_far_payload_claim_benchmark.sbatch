@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=full-far-claim
 #SBATCH --partition=pomplun
+#SBATCH --qos=pomplun
 #SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=240G

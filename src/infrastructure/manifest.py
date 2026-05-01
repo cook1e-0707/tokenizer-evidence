@@ -31,6 +31,7 @@ class ResourceRequest:
     cpus: int
     mem_gb: int
     time_limit: str
+    qos: str | None = None
     account: str | None = None
     environment_setup: str = "source ~/.bashrc\n# activate your environment here"
     slurm_template: str = ""
@@ -47,6 +48,7 @@ class ResourceRequest:
             cpus=int(payload.get("cpus", 4)),
             mem_gb=int(payload.get("mem_gb", 32)),
             time_limit=str(payload.get("time_limit", "02:00:00")),
+            qos=payload.get("qos"),
             account=payload.get("account"),
             environment_setup=str(
                 payload.get("environment_setup", "source ~/.bashrc\n# activate your environment here")
@@ -293,6 +295,7 @@ def _build_resource_request(
         cpus=int(manifest_resources.get("cpus", runtime_resources.cpus)),
         mem_gb=int(manifest_resources.get("mem_gb", runtime_resources.mem_gb)),
         time_limit=str(manifest_resources.get("time_limit", runtime_resources.time_limit)),
+        qos=manifest_resources.get("qos", runtime_resources.qos),
         account=manifest_resources.get("account", runtime_resources.account),
         environment_setup=str(
             manifest_resources.get("environment_setup", runtime_resources.environment_setup)
@@ -452,6 +455,7 @@ def build_manifest_from_config(
             cpus=resolved.runtime.resources.cpus,
             mem_gb=resolved.runtime.resources.mem_gb,
             time_limit=resolved.runtime.resources.time_limit,
+            qos=resolved.runtime.resources.qos,
             account=resolved.runtime.resources.account,
             environment_setup=resolved.runtime.resources.environment_setup,
             slurm_template=resolved.runtime.resources.slurm_template,

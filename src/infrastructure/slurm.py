@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import shlex
 import subprocess
@@ -23,6 +24,7 @@ from src.infrastructure.registry import RegistryRecord, append_registry_record
 DEFAULT_TEMPLATE = """#!/bin/bash
 #SBATCH --job-name={job_name}
 #SBATCH --partition={partition}
+{qos_directive}
 {gres_directive}
 #SBATCH --cpus-per-task={cpus_per_task}
 #SBATCH --mem={mem}
@@ -109,6 +111,8 @@ def render_sbatch_script(
     requested = resources or entry.requested_resources
     template = _resolve_template_text(template_path)
     account_directive = f"#SBATCH --account={requested.account}" if requested.account else ""
+    effective_qos = requested.qos or ("pomplun" if requested.partition == "pomplun" else "")
+    qos_directive = f"#SBATCH --qos={effective_qos}" if effective_qos else ""
     gres_value = (
         f"gpu:{requested.gpu_type}:{requested.num_gpus}"
         if requested.gpu_type
@@ -118,6 +122,8 @@ def render_sbatch_script(
     return template.format(
         job_name=job_name or entry.manifest_id,
         partition=requested.partition,
+        qos=effective_qos,
+        qos_directive=qos_directive,
         account=requested.account or "CHANGE_ME",
         account_directive=account_directive,
         gres=gres_value,
@@ -228,11 +234,17 @@ def submit_manifest_entry(
         )
     else:
         try:
+            sbatch_env = os.environ.copy()
+            # Prevent login-shell defaults such as SBATCH_QOS=scavenger from
+            # overriding the rendered script's explicit partition/QOS pair.
+            sbatch_env.pop("SBATCH_QOS", None)
+            sbatch_env.pop("SLURM_QOS", None)
             completed = subprocess.run(
                 ["sbatch", str(rendered_path)],
                 capture_output=True,
                 text=True,
                 check=True,
+                env=sbatch_env,
             )
             stdout = completed.stdout.strip()
             result = SlurmSubmission(
