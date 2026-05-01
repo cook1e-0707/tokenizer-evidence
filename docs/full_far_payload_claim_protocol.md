@@ -140,6 +140,34 @@ FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark.sh
 ```
 
+Parallel organic prompt-bank execution on 3-5 H200s:
+
+```bash
+SHARD_COUNT=5 \
+MAX_PARALLEL=5 \
+RUN_MODE=execute-organic-null-array \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark_array.sh
+```
+
+Array jobs write only shard-local files under:
+
+```text
+/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts/
+```
+
+They must not write `results/tables/full_far_payload_claim.csv` directly. After
+all shards finish, aggregate on the head node:
+
+```bash
+python3 scripts/aggregate_full_far_payload_claim_shards.py \
+  --config configs/experiment/comparison/full_far_payload_claim.yaml \
+  --shard-dir /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts \
+  --fresh-null-mode organic-prompts \
+  --expected-shard-count 5 \
+  --force
+```
+
 If the registered-probe slice needs to be recomputed together with organic
 prompts:
 

@@ -44,6 +44,26 @@ def parse_args() -> argparse.Namespace:
             "prompt-bank rows. 'registered-and-organic' executes both required slices."
         ),
     )
+    parser.add_argument(
+        "--shard-index",
+        type=int,
+        default=None,
+        help="Zero-based shard index for array execution. Requires --shard-count.",
+    )
+    parser.add_argument(
+        "--shard-count",
+        type=int,
+        default=None,
+        help="Total shard count for array execution. Requires --shard-index.",
+    )
+    parser.add_argument(
+        "--shard-output-dir",
+        default=None,
+        help=(
+            "Directory for shard CSV/JSON outputs. Required with --shard-index/--shard-count "
+            "so array jobs never write the final table concurrently."
+        ),
+    )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
 
@@ -80,6 +100,22 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], *, force: bool) -> None:
     fieldnames = sorted({key for row in rows for key in row})
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _write_csv_with_fieldnames(
+    path: Path,
+    rows: list[dict[str, Any]],
+    *,
+    fieldnames: list[str],
+    force: bool,
+) -> None:
+    if path.exists() and not force:
+        raise FileExistsError(f"{path} already exists; pass --force")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -1770,6 +1806,108 @@ def execute_plan_rows(
     return executed
 
 
+def _validate_shard_args(args: argparse.Namespace) -> None:
+    shard_values = [args.shard_index is not None, args.shard_count is not None]
+    if any(shard_values) and not all(shard_values):
+        raise ValueError("--shard-index and --shard-count must be provided together.")
+    if args.shard_index is None and args.shard_count is None:
+        return
+    if not args.execute:
+        raise ValueError("Sharded execution is only valid with --execute.")
+    if args.fresh_null_mode == "off":
+        raise ValueError("Sharded execution requires a fresh null mode.")
+    if args.shard_count is None or args.shard_count <= 0:
+        raise ValueError("--shard-count must be positive.")
+    if args.shard_index is None or args.shard_index < 0 or args.shard_index >= args.shard_count:
+        raise ValueError("--shard-index must satisfy 0 <= index < shard_count.")
+    if not args.shard_output_dir:
+        raise ValueError("--shard-output-dir is required for sharded execution.")
+
+
+def _is_sharded_execution(args: argparse.Namespace) -> bool:
+    return args.shard_index is not None and args.shard_count is not None
+
+
+def _organic_shard_bounds(cfg: dict[str, Any], shard_index: int, shard_count: int) -> tuple[int, int]:
+    organic_count = int((cfg.get("null_protocol") or {}).get("organic_prompt_count", 0))
+    if organic_count <= 0:
+        raise ValueError("null_protocol.organic_prompt_count must be positive for organic sharding.")
+    start = (organic_count * shard_index) // shard_count
+    end = (organic_count * (shard_index + 1)) // shard_count
+    return start, end
+
+
+def _row_selected_for_shard(
+    row: dict[str, Any],
+    *,
+    cfg: dict[str, Any],
+    fresh_null_mode: str,
+    shard_index: int,
+    shard_count: int,
+) -> bool:
+    evaluation_type = str(row.get("evaluation_type", ""))
+    if (
+        evaluation_type == "organic_prompt_null"
+        and _fresh_mode_enabled(fresh_null_mode, "organic-prompts")
+    ):
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return False
+        start, end = _organic_shard_bounds(cfg, shard_index, shard_count)
+        organic_index = _organic_index(str(row.get("organic_prompt_id", "organic_0000")))
+        return start <= organic_index < end
+    if (
+        evaluation_type == "null_model_registered_probes"
+        and _fresh_mode_enabled(fresh_null_mode, "registered-probes")
+    ):
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return False
+        return (_safe_int(row.get("case_index")) - 1) % shard_count == shard_index
+    return False
+
+
+def _select_shard_rows(
+    rows: list[dict[str, Any]],
+    *,
+    cfg: dict[str, Any],
+    fresh_null_mode: str,
+    shard_index: int,
+    shard_count: int,
+) -> list[dict[str, Any]]:
+    selected = [
+        row
+        for row in rows
+        if _row_selected_for_shard(
+            row,
+            cfg=cfg,
+            fresh_null_mode=fresh_null_mode,
+            shard_index=shard_index,
+            shard_count=shard_count,
+        )
+    ]
+    if not selected:
+        raise ValueError(
+            f"Shard {shard_index}/{shard_count} selected no rows for fresh_null_mode={fresh_null_mode}."
+        )
+    return selected
+
+
+def _shard_output_paths(
+    repo_root: Path,
+    args: argparse.Namespace,
+) -> dict[str, Path]:
+    if args.shard_index is None or args.shard_count is None or not args.shard_output_dir:
+        raise ValueError("Shard output paths require shard index/count/output-dir.")
+    shard_dir = _resolve(repo_root, args.shard_output_dir)
+    if shard_dir is None:
+        raise ValueError("--shard-output-dir is required.")
+    mode = str(args.fresh_null_mode).replace("-", "_")
+    stem = f"full_far_payload_claim_{mode}_shard_{args.shard_index:03d}_of_{args.shard_count:03d}"
+    return {
+        "summary": shard_dir / f"{stem}.json",
+        "table": shard_dir / f"{stem}.csv",
+    }
+
+
 def _merge_existing_completed_rows(
     executed_rows: list[dict[str, Any]],
     existing_table_path: Path | None,
@@ -1995,6 +2133,7 @@ def _build_metrics_tex(metrics: list[dict[str, Any]]) -> str:
 
 def main() -> int:
     args = parse_args()
+    _validate_shard_args(args)
     repo_root = discover_repo_root(Path(__file__).parent)
     config_path = Path(args.config)
     if not config_path.is_absolute():
@@ -2004,10 +2143,19 @@ def main() -> int:
     summary = build_summary(repo_root, cfg, config_path, rows)
 
     if args.execute:
+        execution_plan_rows = rows
+        if _is_sharded_execution(args):
+            execution_plan_rows = _select_shard_rows(
+                rows,
+                cfg=cfg,
+                fresh_null_mode=args.fresh_null_mode,
+                shard_index=int(args.shard_index),
+                shard_count=int(args.shard_count),
+            )
         executed_rows = execute_plan_rows(
             repo_root,
             cfg,
-            rows,
+            execution_plan_rows,
             fresh_null_mode=args.fresh_null_mode,
         )
         outputs = cfg.get("outputs") or {}
@@ -2018,6 +2166,46 @@ def main() -> int:
             raise ValueError(
                 "outputs.final_summary, outputs.final_table, and outputs.final_tex are required."
             )
+        if _is_sharded_execution(args):
+            shard_paths = _shard_output_paths(repo_root, args)
+            execution_summary = _build_execution_summary(
+                repo_root,
+                cfg,
+                config_path,
+                execution_plan_rows,
+                executed_rows,
+            )
+            execution_summary["shard_scope_status"] = execution_summary["status"]
+            execution_summary["status"] = "completed_shard_subset"
+            execution_summary["full_far_complete"] = False
+            execution_summary["shard"] = {
+                "shard_index": int(args.shard_index),
+                "shard_count": int(args.shard_count),
+                "fresh_null_mode": args.fresh_null_mode,
+                "selected_case_count": len(execution_plan_rows),
+                "global_plan_case_count": len(rows),
+                "note": "Shard outputs are incomplete by design; aggregate all shards before interpreting FAR.",
+            }
+            _write_json(shard_paths["summary"], execution_summary, force=args.force)
+            _write_csv(shard_paths["table"], executed_rows, force=args.force)
+            print(
+                json.dumps(
+                    {
+                        "status": "shard_completed",
+                        "execution_status": execution_summary["status"],
+                        "summary": str(shard_paths["summary"]),
+                        "table": str(shard_paths["table"]),
+                        "selected_case_count": len(executed_rows),
+                        "global_plan_case_count": len(rows),
+                        "fresh_null_mode": args.fresh_null_mode,
+                        "shard_index": int(args.shard_index),
+                        "shard_count": int(args.shard_count),
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
+            return 0
         executed_rows = _merge_existing_completed_rows(executed_rows, table_path)
         execution_summary = _build_execution_summary(
             repo_root,
