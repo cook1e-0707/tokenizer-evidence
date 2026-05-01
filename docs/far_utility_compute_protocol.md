@@ -247,7 +247,8 @@ python3 scripts/run_matched_far_utility_compute.py \
 ```
 
 Optional Slurm submission for the same artifact-backed execution. The wrapper
-defaults to the CPU `Intel` partition because this mode does not require GPU:
+defaults to Chimera H200 because subsequent Chimera jobs are standardized on
+`pomplun` / `gpu:h200:1`:
 
 ```bash
 RUN_MODE=execute \

@@ -22,6 +22,10 @@ Default CPU RAM for GPU jobs is now:
 `MEM=0` manually when submitting, but do not use that as the default because it
 can reduce scheduling flexibility.
 
+Current comparison wrappers also default to this target, including plan or
+artifact-backed jobs, so Chimera submission behavior stays consistent across the
+next experiment phase.
+
 ## Manual Wrapper Override
 
 All hand-written GPU submit wrappers accept these overrides:
