@@ -11,8 +11,21 @@ New GPU submissions should target the H200 partition:
 
 This requests one full H200 GPU when Chimera exposes H200s as non-MIG whole-GPU
 resources. H200 HBM is controlled by the GPU allocation, not by Slurm `--mem`.
-Do not set `--qos` by default: on Chimera, `pomplun` is the partition name, and
-the valid QOS/account association is user-specific.
+For this project account, the H200 defaults are:
+
+```bash
+--account=cs_yinxin.wan
+--qos=pomplun
+```
+
+These defaults match the current Chimera association:
+
+```text
+cs_yinxin.wan  pomplun  pomplun
+```
+
+If the account allocation changes, override `ACCOUNT` and `QOS` explicitly at
+submit time rather than editing the Slurm body.
 
 Default CPU RAM for GPU jobs is now:
 
@@ -31,8 +44,8 @@ next experiment phase.
 The wrappers explicitly unset `SBATCH_QOS`, `SLURM_QOS`, and `SBATCH_ACCOUNT`
 before calling `sbatch`. This prevents login-shell defaults such as
 `SBATCH_QOS=scavenger` from forcing an invalid partition/QOS/account
-combination. Pass `ACCOUNT=...` or `QOS=...` only when Chimera reports that the
-association is valid for your user.
+combination. The wrapper then applies the project default
+`ACCOUNT=cs_yinxin.wan QOS=pomplun`.
 
 The sbatch bodies load `/etc/profile` and activate `VENV_PATH` with `set +u`
 temporarily enabled. Chimera profile snippets may reference unset locale
@@ -57,6 +70,7 @@ All hand-written GPU submit wrappers accept these overrides:
 
 ```bash
 ACCOUNT=pi_first.last \
+QOS=pomplun \
 PARTITION=pomplun \
 GRES=gpu:h200:1 \
 MEM=240G \
@@ -66,14 +80,11 @@ bash scripts/submit_ours_tinybench_utility.sh
 For multi-GPU H200 jobs where NVLink matters, request multiple H200s explicitly:
 
 ```bash
-ACCOUNT=pi_first.last PARTITION=pomplun GRES=gpu:h200:2 MEM=480G bash <submit-wrapper>
+ACCOUNT=pi_first.last QOS=pomplun PARTITION=pomplun GRES=gpu:h200:2 MEM=480G bash <submit-wrapper>
 ```
 
 Only use multi-GPU requests after the runner is known to support multi-GPU
 execution.
-
-Only add `QOS=...` if the association query above shows a valid QOS for
-`pomplun`; do not assume `QOS=pomplun`.
 
 ## Manifest-Based Jobs
 
