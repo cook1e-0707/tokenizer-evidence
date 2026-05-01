@@ -109,3 +109,11 @@ runtime:
   local_files_only: true
   trust_remote_code: true
   wandb_mode: disabled
+
+organic_prompt_null_backend:
+  model_scope: required_base_qwen_only
+  prompt_bank: deterministic_generated_organic_prompts
+  max_new_tokens: 32
+  ours_decision_rule: accept_if_any_organic_prompt_decodes_claim_payload
+  perinucleus_decision_rule: all_selected_fingerprint_responses_must_match_on_organic_prompt_window
+  note: Organic prompt rows are full null trials, unlike wrong-payload claim rows.

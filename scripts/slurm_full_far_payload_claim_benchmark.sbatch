@@ -91,8 +91,22 @@ case "$RUN_MODE" in
       --fresh-null-mode registered-probes \
       --force
     ;;
+  execute-organic-null)
+    python3 scripts/run_full_far_payload_claim_benchmark.py \
+      --config "$FULL_FAR_CONFIG" \
+      --execute \
+      --fresh-null-mode organic-prompts \
+      --force
+    ;;
+  execute-registered-and-organic-null)
+    python3 scripts/run_full_far_payload_claim_benchmark.py \
+      --config "$FULL_FAR_CONFIG" \
+      --execute \
+      --fresh-null-mode registered-and-organic \
+      --force
+    ;;
   *)
-    echo "Unsupported RUN_MODE=$RUN_MODE; expected dry-run, write-plan, execute, or execute-registered-null" >&2
+    echo "Unsupported RUN_MODE=$RUN_MODE; expected dry-run, write-plan, execute, execute-registered-null, execute-organic-null, or execute-registered-and-organic-null" >&2
     exit 2
     ;;
 esac

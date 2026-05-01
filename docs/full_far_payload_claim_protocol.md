@@ -1,8 +1,9 @@
 # Full FAR And Payload-Claim Benchmark Protocol
 
-Status: artifact-backed claim subset executed on Chimera H200. The registered
-base-Qwen fresh-null backend is implemented and ready to run; organic and
-non-owner prompt-bank inference remains pending.
+Status: artifact-backed claim subset and required base-Qwen registered-probe
+null slice executed on Chimera H200. The required base-Qwen organic prompt-bank
+backend is implemented next; non-owner prompt-bank and optional null-model
+inference remain pending.
 
 ## Purpose
 
@@ -86,8 +87,9 @@ Plan-only outputs:
 ```yaml
 runner: scripts/run_full_far_payload_claim_benchmark.py
 artifact_claim_subset_backend: executed
-fresh_registered_probe_backend: implemented
-fresh_prompt_bank_backend: pending
+fresh_registered_probe_backend: executed_for_required_base_qwen
+fresh_organic_prompt_backend: implemented_for_required_base_qwen
+fresh_non_owner_prompt_backend: pending
 plan_generation: supported
 claim_rows_complete: true
 full_far_complete: false
@@ -126,6 +128,23 @@ Fresh base-Qwen registered-probe null execution on Chimera H200:
 
 ```bash
 RUN_MODE=execute-registered-null \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark.sh
+```
+
+Fresh base-Qwen organic prompt-bank null execution on Chimera H200:
+
+```bash
+RUN_MODE=execute-organic-null \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark.sh
+```
+
+If the registered-probe slice needs to be recomputed together with organic
+prompts:
+
+```bash
+RUN_MODE=execute-registered-and-organic-null \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark.sh
 ```
@@ -172,9 +191,9 @@ Interpretation:
 - Original Perinucleus accepts wrong-payload claims here because it is a binary fingerprint detector, not because a calibrated full FAR test failed.
 - These rows must be reported as `wrong_payload_claim_accept_rate`, not as full FAR.
 
-## Next Fresh-Null Slice
+## Executed Registered-Probe Fresh-Null Slice
 
-The `execute-registered-null` mode runs only the required base-Qwen registered
+The `execute-registered-null` mode ran only the required base-Qwen registered
 probe null rows:
 
 ```text
@@ -196,6 +215,44 @@ Expected status after this slice:
 
 `full_far_complete` must remain `False` until organic and non-owner prompt-bank
 rows are implemented and executed.
+
+Observed registered-probe null metrics after the H200 run:
+
+| Method | M | Trials | False accepts | Rate | 95% CI high |
+|---|---:|---:|---:|---:|---:|
+| Ours | 1/3/5/10 | 48 each | 0 each | 0.0 | 0.0741 |
+| Original Perinucleus | 1/3/5/10 | 48 each | 0 each | 0.0 | 0.0741 |
+
+This is a small registered-probe null slice, not a complete FAR result.
+
+## Next Organic Prompt-Bank Slice
+
+The `execute-organic-null` mode runs the required base-Qwen organic prompt rows
+and preserves previously completed registered rows from the existing final CSV:
+
+```text
+methods: 2
+organic prompts per budget per method: 1000
+query budgets: 4
+fresh organic rows: 8000
+required null model: base_qwen
+```
+
+Decision rules:
+
+- Ours: a row is a false accept if any prompt in the row's query-budget window
+  decodes the claimed structured payload under the deterministic verifier.
+- Original Perinucleus: a row is a false accept if all selected fingerprint
+  responses match on the organic prompt window.
+
+Expected status after this slice, assuming the registered slice is preserved:
+
+| Row status | Expected count |
+|---|---:|
+| `completed_fresh_organic_null` | 8000 |
+| `completed_fresh_registered_null` | 384 |
+| `not_executed_optional_null_model_not_enabled` | 768 |
+| `not_executed_fresh_null_inference_required` | 2048 |
 
 ## Gate
 

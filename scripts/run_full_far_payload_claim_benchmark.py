@@ -36,11 +36,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--fresh-null-mode",
-        choices=("off", "registered-probes"),
+        choices=("off", "registered-probes", "organic-prompts", "registered-and-organic"),
         default="off",
         help=(
             "Optional fresh null inference backend. 'registered-probes' evaluates "
-            "base-Qwen registered probes and keeps organic/non-owner prompt banks pending."
+            "base-Qwen registered probes. 'organic-prompts' evaluates base-Qwen organic "
+            "prompt-bank rows. 'registered-and-organic' executes both required slices."
         ),
     )
     parser.add_argument("--force", action="store_true")
@@ -411,7 +412,7 @@ def build_summary(
         "generated_at": _utc_now(),
         "config_path": str(config_path),
         "status": "plan_ready" if not gate_failures else "plan_has_gate_failures",
-        "fresh_inference_backend_supported": "registered_probes_only",
+        "fresh_inference_backend_supported": "base_qwen_registered_probes_and_organic_prompts",
         "launch_allowed_now": False,
         "counts": count_payload,
         "gate_failures": gate_failures,
@@ -434,8 +435,8 @@ def build_summary(
             ),
         ],
         "next_required_implementation": [
-            "fresh inference backend for ours on base/null prompts",
-            "fresh inference backend for original Perinucleus on base/null prompts",
+            "fresh inference backend for non-owner prompt banks",
+            "fresh inference backend for optional null models",
             "payload-adapted Perinucleus baseline if making structured-claim superiority claims",
             "ROC and heatmap aggregation after fresh rows complete",
         ],
@@ -460,6 +461,7 @@ NULL_EVALUATION_TYPES = {
 }
 
 FRESH_REGISTERED_NULL_STATUS = "completed_fresh_registered_null"
+FRESH_ORGANIC_NULL_STATUS = "completed_fresh_organic_null"
 
 
 def _method_artifact_path(
@@ -583,14 +585,16 @@ def _set_fresh_completed(
     *,
     claim_accept: bool,
     ownership_score: float,
+    status: str = FRESH_REGISTERED_NULL_STATUS,
+    execution_backend: str = "fresh_registered_null_v1",
     execution_scope: str,
     source_status: str,
     notes_suffix: str,
     details: dict[str, Any],
 ) -> dict[str, Any]:
     evaluation_type = str(output.get("evaluation_type", ""))
-    output["status"] = FRESH_REGISTERED_NULL_STATUS
-    output["execution_backend"] = "fresh_registered_null_v1"
+    output["status"] = status
+    output["execution_backend"] = execution_backend
     output["execution_scope"] = execution_scope
     output["claim_accept"] = claim_accept
     output["ownership_score"] = ownership_score
@@ -622,6 +626,14 @@ def _set_pending(
 
 def _runtime_cfg(cfg: dict[str, Any]) -> dict[str, Any]:
     return dict(cfg.get("runtime") or {})
+
+
+def _fresh_mode_enabled(fresh_null_mode: str, slice_name: str) -> bool:
+    if slice_name == "registered-probes":
+        return fresh_null_mode in {"registered-probes", "registered-and-organic"}
+    if slice_name == "organic-prompts":
+        return fresh_null_mode in {"organic-prompts", "registered-and-organic"}
+    return False
 
 
 def _null_model_cfg(cfg: dict[str, Any], null_model_id: str) -> dict[str, Any]:
@@ -680,6 +692,143 @@ def _load_base_model(
         model.config.pad_token_id = tokenizer.pad_token_id
     context[cache_key] = (model, tokenizer, device, torch)
     return context[cache_key]
+
+
+_ORGANIC_TOPICS = (
+    "safe kitchen habits",
+    "planning a weekend hike",
+    "organizing a small bookshelf",
+    "watering indoor plants",
+    "choosing a train route",
+    "writing a meeting note",
+    "packing a school bag",
+    "checking bicycle brakes",
+    "preparing a grocery list",
+    "cleaning a desk",
+    "explaining cloud shapes",
+    "describing a quiet library",
+    "summarizing a weather forecast",
+    "making tea carefully",
+    "sorting recycling bins",
+    "choosing comfortable shoes",
+)
+
+_ORGANIC_TEMPLATES = (
+    "Answer in two short sentences about {topic}. Do not use bullet points.",
+    "Give a concise practical tip about {topic}.",
+    "Explain one ordinary reason someone might care about {topic}.",
+    "Write a plain-language reminder about {topic}.",
+    "Describe a common mistake related to {topic} and how to avoid it.",
+    "Provide a neutral one-paragraph response about {topic}.",
+    "What is a simple first step for {topic}? Keep the answer brief.",
+    "State one benefit of paying attention to {topic}.",
+)
+
+
+def _organic_index(organic_prompt_id: str) -> int:
+    digits = "".join(ch for ch in str(organic_prompt_id) if ch.isdigit())
+    return int(digits or 0)
+
+
+def _organic_prompt_text(organic_prompt_id: str) -> str:
+    index = _organic_index(organic_prompt_id)
+    topic = _ORGANIC_TOPICS[index % len(_ORGANIC_TOPICS)]
+    template = _ORGANIC_TEMPLATES[(index // len(_ORGANIC_TOPICS)) % len(_ORGANIC_TEMPLATES)]
+    variant = index // (len(_ORGANIC_TOPICS) * len(_ORGANIC_TEMPLATES))
+    return (
+        template.format(topic=topic)
+        + f" Context id: organic-null-{variant:03d}. Avoid codes, labels, and structured fields."
+    )
+
+
+def _organic_prompt_ids_for_budget(
+    *,
+    organic_prompt_id: str,
+    query_budget: int,
+    cfg: dict[str, Any],
+) -> list[str]:
+    organic_count = int((cfg.get("null_protocol") or {}).get("organic_prompt_count", 0))
+    organic_count = max(1, organic_count)
+    start = _organic_index(organic_prompt_id)
+    budget = max(1, int(query_budget or 1))
+    return [f"organic_{(start + offset) % organic_count:04d}" for offset in range(budget)]
+
+
+def _tokenize_prompt_for_generation(
+    *,
+    tokenizer: Any,
+    prompt: str,
+    device: Any,
+) -> tuple[dict[str, Any], int]:
+    if hasattr(tokenizer, "apply_chat_template"):
+        input_ids = tokenizer.apply_chat_template(
+            [{"role": "user", "content": prompt}],
+            add_generation_prompt=True,
+            tokenize=True,
+            return_tensors="pt",
+        )
+        attention_mask = None
+        try:
+            import torch
+
+            attention_mask = torch.ones_like(input_ids)
+        except Exception:
+            attention_mask = None
+        inputs = {"input_ids": input_ids.to(device)}
+        if attention_mask is not None:
+            inputs["attention_mask"] = attention_mask.to(device)
+        return inputs, int(input_ids.shape[-1])
+    encoded = tokenizer(prompt, return_tensors="pt", add_special_tokens=True)
+    inputs = {key: value.to(device) for key, value in encoded.items()}
+    return inputs, int(inputs["input_ids"].shape[-1])
+
+
+def _generate_organic_text(
+    *,
+    cfg: dict[str, Any],
+    null_model_id: str,
+    organic_prompt_id: str,
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    cache_key = ("organic_generation", null_model_id, organic_prompt_id)
+    if cache_key in context:
+        return context[cache_key]
+
+    null_model = _null_model_cfg(cfg, null_model_id)
+    model_name = str(null_model.get("model") or "Qwen/Qwen2.5-7B-Instruct")
+    model, tokenizer, device, torch = _load_base_model(
+        cfg=cfg,
+        model_name=model_name,
+        context=context,
+    )
+    backend_cfg = dict(cfg.get("organic_prompt_null_backend") or {})
+    max_new_tokens = int(backend_cfg.get("max_new_tokens", 32))
+    prompt = _organic_prompt_text(organic_prompt_id)
+    generation_inputs, prompt_length = _tokenize_prompt_for_generation(
+        tokenizer=tokenizer,
+        prompt=prompt,
+        device=device,
+    )
+    with torch.no_grad():
+        generated_tokens = model.generate(
+            **generation_inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            pad_token_id=tokenizer.pad_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )
+    new_token_ids = generated_tokens[0][prompt_length:].detach().cpu().tolist()
+    generated_text = tokenizer.decode(new_token_ids, skip_special_tokens=True).strip()
+    result = {
+        "organic_prompt_id": organic_prompt_id,
+        "organic_prompt": prompt,
+        "generated_text": generated_text,
+        "generated_token_count": len(new_token_ids),
+        "model_name": model_name,
+        "max_new_tokens": max_new_tokens,
+    }
+    context[cache_key] = result
+    return result
 
 
 def _ours_registered_null_result(
@@ -846,6 +995,207 @@ def _ours_registered_null_result(
     return result
 
 
+def _ours_claim_contract_context(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    model_name: str,
+    tokenizer: Any,
+    claim_payload: str,
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    cache_key = ("ours_claim_contract_context", model_name, claim_payload)
+    if cache_key in context:
+        return context[cache_key]
+
+    from src.core.catalog_freeze import load_required_frozen_catalog
+    from src.core.contract_compiler import compile_fieldwise_train_contract
+    from src.core.payload_codec import BucketPayloadCodec
+    from src.core.scaffolded_completion import COMPILED_FIELDWISE_PROMPT_CONTRACT
+
+    catalog_path = _catalog_path(repo_root, cfg)
+    payload_labels = _all_payload_labels(cfg)
+    backend_cfg = dict(cfg.get("ours_registered_null_backend") or {})
+    block_count = int(backend_cfg.get("block_count", 2))
+    instruction = str(backend_cfg.get("instruction", "Select exactly one allowed carrier token."))
+    compiled_train_contract = compile_fieldwise_train_contract(
+        model_name=model_name,
+        tokenizer_name=model_name,
+        tokenizer_backend=str(backend_cfg.get("tokenizer_backend", "huggingface")),
+        catalog_path=catalog_path,
+        payload_labels=payload_labels,
+        eval_payload_label=claim_payload,
+        instruction=instruction,
+        block_count=block_count,
+        prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        render_format="canonical_v1",
+        tokenizer=tokenizer,
+    )
+    layout = load_required_frozen_catalog(Path(compiled_train_contract.catalog_path))
+    expected_units = tuple(
+        int(unit)
+        for unit in compiled_train_contract.payload_label_to_units[claim_payload]
+    )
+    payload = {
+        "compiled_train_contract": compiled_train_contract,
+        "layout": layout,
+        "payload_codec": BucketPayloadCodec(bucket_radices=layout.radices),
+        "expected_units": expected_units,
+    }
+    context[cache_key] = payload
+    return payload
+
+
+def _ours_verify_generated_organic_text(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    model_name: str,
+    tokenizer: Any,
+    claim_payload: str,
+    generated_text: str,
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    cache_key = ("ours_verify_generated_organic_text", model_name, claim_payload, generated_text)
+    if cache_key in context:
+        return context[cache_key]
+
+    from src.core.scaffolded_completion import (
+        COMPILED_ARTIFACT_FORMAT,
+        evaluate_foundation_completion,
+    )
+    from src.core.verifier import VerificationConfig, verify_canonical_rendered_text
+
+    claim_context = _ours_claim_contract_context(
+        repo_root=repo_root,
+        cfg=cfg,
+        model_name=model_name,
+        tokenizer=tokenizer,
+        claim_payload=claim_payload,
+        context=context,
+    )
+    compiled_train_contract = claim_context["compiled_train_contract"]
+    layout = claim_context["layout"]
+    compiled_result = evaluate_foundation_completion(
+        generated_text,
+        layout=layout,
+        expected_slot_values=compiled_train_contract.eval_contract.expected_slot_values,
+        exact_slot_prefixes=compiled_train_contract.eval_contract.exact_slot_prefixes,
+        tokenizer=tokenizer,
+        prompt_contract_name=compiled_train_contract.eval_contract.prompt_contract_name,
+        render_format=compiled_train_contract.eval_contract.render_format,
+        slot_field_names=compiled_train_contract.eval_contract.slot_field_names,
+        artifact_format=COMPILED_ARTIFACT_FORMAT,
+    )
+    render_success = False
+    decoded_units: tuple[int, ...] = ()
+    if compiled_result.rendered_bucket_tuples:
+        render_verification = verify_canonical_rendered_text(
+            text=compiled_result.rendered_canonical_text,
+            bucket_layout=layout,
+            payload_codec=claim_context["payload_codec"],
+            expected_payload=claim_context["expected_units"],
+            config=VerificationConfig(
+                verification_mode="canonical_render",
+                render_format=compiled_train_contract.eval_contract.render_format,
+                min_score=0.0,
+                max_candidates=None,
+                min_match_ratio=1.0,
+                scan_windows=True,
+                require_all_fields=True,
+                decode_as_bytes=False,
+                apply_rs=False,
+            ),
+        )
+        render_success = render_verification.success
+        decoded_units = tuple(int(unit) for unit in render_verification.decoded_units)
+    claim_accept = bool(compiled_result.foundation_gate_passed and render_success)
+    result = {
+        "claim_accept": claim_accept,
+        "field_valid_rate": compiled_result.field_valid_rate,
+        "bucket_correct_rate": compiled_result.bucket_correct_rate,
+        "slot_exact_rate": compiled_result.slot_exact_rate,
+        "valid_canonical_block_count": compiled_result.valid_canonical_block_count,
+        "decoded_units": list(decoded_units),
+        "expected_units": list(claim_context["expected_units"]),
+        "rendered_canonical_text": compiled_result.rendered_canonical_text,
+    }
+    context[cache_key] = result
+    return result
+
+
+def _ours_organic_null_result(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    row: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    claim_payload = str(row.get("claim_payload", ""))
+    null_model_id = str(row.get("null_model_id", ""))
+    budget = max(1, _safe_int(row.get("query_budget"), 1))
+    organic_prompt_id = str(row.get("organic_prompt_id", "organic_0000"))
+    cache_key = ("ours_organic_null", null_model_id, claim_payload, organic_prompt_id, budget)
+    if cache_key in context:
+        return context[cache_key]
+
+    null_model = _null_model_cfg(cfg, null_model_id)
+    model_name = str(null_model.get("model") or "Qwen/Qwen2.5-7B-Instruct")
+    _model, tokenizer, _device, _torch = _load_base_model(
+        cfg=cfg,
+        model_name=model_name,
+        context=context,
+    )
+    prompt_ids = _organic_prompt_ids_for_budget(
+        organic_prompt_id=organic_prompt_id,
+        query_budget=budget,
+        cfg=cfg,
+    )
+    prompt_results: list[dict[str, Any]] = []
+    for prompt_id in prompt_ids:
+        generation = _generate_organic_text(
+            cfg=cfg,
+            null_model_id=null_model_id,
+            organic_prompt_id=prompt_id,
+            context=context,
+        )
+        verification = _ours_verify_generated_organic_text(
+            repo_root=repo_root,
+            cfg=cfg,
+            model_name=model_name,
+            tokenizer=tokenizer,
+            claim_payload=claim_payload,
+            generated_text=str(generation["generated_text"]),
+            context=context,
+        )
+        prompt_results.append(
+            {
+                "organic_prompt_id": prompt_id,
+                "claim_accept": bool(verification["claim_accept"]),
+                "field_valid_rate": verification["field_valid_rate"],
+                "bucket_correct_rate": verification["bucket_correct_rate"],
+                "slot_exact_rate": verification["slot_exact_rate"],
+                "valid_canonical_block_count": verification["valid_canonical_block_count"],
+                "generated_text_preview": str(generation["generated_text"])[:240],
+            }
+        )
+    accept_count = sum(1 for item in prompt_results if item["claim_accept"])
+    result = {
+        "claim_accept": accept_count > 0,
+        "ownership_score": accept_count / len(prompt_results) if prompt_results else 0.0,
+        "organic_prompt_id": organic_prompt_id,
+        "organic_prompt_ids": prompt_ids,
+        "claim_payload": claim_payload,
+        "model_name": model_name,
+        "fresh_query_count": len(prompt_ids),
+        "accept_count": accept_count,
+        "prompt_results": prompt_results,
+        "decision_rule": "accept_if_any_organic_prompt_decodes_claim_payload",
+    }
+    context[cache_key] = result
+    return result
+
+
 def _load_perinucleus_frozen_candidate(repo_root: Path, cfg: dict[str, Any]) -> dict[str, Any]:
     cache_key = "_perinucleus_candidate"
     runtime_cache = cfg.setdefault("_runtime_cache", {})
@@ -936,6 +1286,152 @@ def _perinucleus_registered_null_result(
     return result
 
 
+def _organic_seed_for_row(cfg: dict[str, Any], row: dict[str, Any]) -> int:
+    seeds = _seeds(cfg)
+    if not seeds:
+        return 0
+    return seeds[_organic_index(str(row.get("organic_prompt_id", "organic_0000"))) % len(seeds)]
+
+
+def _perinucleus_organic_generated_ids(
+    *,
+    cfg: dict[str, Any],
+    tokenizer: Any,
+    model: Any,
+    device: Any,
+    torch: Any,
+    organic_prompt_id: str,
+    candidate: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    max_response_length = int(candidate.get("response_length", 1))
+    cache_key = ("perinucleus_organic_generated_ids", organic_prompt_id, max_response_length)
+    if cache_key in context:
+        return context[cache_key]
+
+    from scripts import run_perinucleus_official_overfit_gate as overfit
+
+    key, _key_ids, key_truncated = overfit._truncate_key(
+        tokenizer,
+        _organic_prompt_text(organic_prompt_id),
+        int(candidate.get("key_length", 16)),
+    )
+    prefix_ids = overfit._check_prefix_ids(tokenizer, key, strip_eos=True)
+    with torch.inference_mode():
+        generated = model.generate(
+            input_ids=prefix_ids.unsqueeze(0).to(device),
+            attention_mask=torch.ones_like(prefix_ids.unsqueeze(0), device=device),
+            max_new_tokens=max(max_response_length, 1),
+            do_sample=False,
+            pad_token_id=tokenizer.pad_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )[0][prefix_ids.numel() :].detach().cpu().tolist()
+    result = {
+        "organic_prompt_id": organic_prompt_id,
+        "organic_prompt": key,
+        "key_truncated": key_truncated,
+        "generated_token_ids": [int(token_id) for token_id in generated],
+        "generated_text": tokenizer.decode(generated, skip_special_tokens=True),
+    }
+    context[cache_key] = result
+    return result
+
+
+def _perinucleus_organic_null_result(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    row: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    claim_payload = str(row.get("claim_payload", ""))
+    budget = max(1, _safe_int(row.get("query_budget"), 1))
+    organic_prompt_id = str(row.get("organic_prompt_id", "organic_0000"))
+    selected_seed = _organic_seed_for_row(cfg, row)
+    cache_key = ("perinucleus_organic_null", claim_payload, organic_prompt_id, budget, selected_seed)
+    if cache_key in context:
+        return context[cache_key]
+
+    from scripts import run_perinucleus_official_final_eval as final_eval
+    from scripts import run_perinucleus_official_overfit_gate as overfit
+
+    frozen = _load_perinucleus_frozen_candidate(repo_root, cfg)
+    candidate = dict(frozen["candidate"])
+    base_model = str(_null_model_cfg(cfg, "base_qwen").get("model") or frozen["model"]["base"])
+    model, tokenizer, device, torch = _load_base_model(
+        cfg=cfg,
+        model_name=base_model,
+        context=context,
+    )
+    fingerprints_path = _resolve(repo_root, candidate["fingerprints_file"])
+    if fingerprints_path is None or not fingerprints_path.exists():
+        raise FileNotFoundError(f"Missing Perinucleus fingerprints file: {fingerprints_path}")
+    rows = final_eval._load_fingerprint_rows(fingerprints_path, int(candidate["num_fingerprints"]))
+    selected_rows = final_eval._select_fingerprints(
+        rows=rows,
+        payload_text=claim_payload,
+        seed=selected_seed,
+        query_budget=budget,
+        arm_id=str(candidate["arm_id"]),
+    )
+    prompt_ids = _organic_prompt_ids_for_budget(
+        organic_prompt_id=organic_prompt_id,
+        query_budget=budget,
+        cfg=cfg,
+    )
+    response_rows: list[dict[str, Any]] = []
+    exact_count = 0
+    for prompt_id, selected in zip(prompt_ids, selected_rows, strict=True):
+        response, response_ids, response_truncated = overfit._truncate_response(
+            tokenizer,
+            str(selected["response"]),
+            int(candidate.get("response_length", 1)),
+        )
+        generation = _perinucleus_organic_generated_ids(
+            cfg=cfg,
+            tokenizer=tokenizer,
+            model=model,
+            device=device,
+            torch=torch,
+            organic_prompt_id=prompt_id,
+            candidate=candidate,
+            context=context,
+        )
+        generated_ids = [int(token_id) for token_id in generation["generated_token_ids"]]
+        token_exact = generated_ids[: len(response_ids)] == [int(token_id) for token_id in response_ids]
+        exact_count += int(token_exact)
+        response_rows.append(
+            {
+                "organic_prompt_id": prompt_id,
+                "source_fingerprint_id": int(selected["source_fingerprint_id"]),
+                "target_response": response,
+                "target_response_ids": [int(token_id) for token_id in response_ids],
+                "response_truncated": response_truncated,
+                "generated_token_ids": generated_ids,
+                "generated_text": str(generation["generated_text"])[:120],
+                "token_exact": token_exact,
+            }
+        )
+    exact_ratio = exact_count / len(response_rows) if response_rows else 0.0
+    result = {
+        "claim_accept": exact_ratio >= 1.0,
+        "ownership_score": exact_ratio,
+        "exact_response_match_ratio": exact_ratio,
+        "exact_response_match_count": exact_count,
+        "query_budget": budget,
+        "model_name": base_model,
+        "claim_payload": claim_payload,
+        "selected_seed": selected_seed,
+        "organic_prompt_id": organic_prompt_id,
+        "organic_prompt_ids": prompt_ids,
+        "fresh_query_count": len(prompt_ids),
+        "response_rows": response_rows,
+        "decision_rule": "all_selected_fingerprint_responses_must_match_on_organic_prompt_window",
+    }
+    context[cache_key] = result
+    return result
+
+
 def _execute_ours_artifact_row(
     row: dict[str, Any],
     indexes: dict[str, Any],
@@ -961,7 +1457,7 @@ def _execute_ours_artifact_row(
 
     if (
         evaluation_type == "null_model_registered_probes"
-        and fresh_null_mode == "registered-probes"
+        and _fresh_mode_enabled(fresh_null_mode, "registered-probes")
     ):
         output = _execution_base_row(row)
         if str(row.get("null_model_id", "")) != "base_qwen":
@@ -984,6 +1480,48 @@ def _execute_ours_artifact_row(
             execution_scope="ours_base_qwen_registered_probe_fresh_null",
             source_status="fresh_base_qwen_registered_probe_completed",
             notes_suffix="fresh base-Qwen registered probe null execution",
+            details=result,
+        )
+
+    if (
+        evaluation_type == "null_model_registered_probes"
+        and str(row.get("null_model_id", "")) != "base_qwen"
+        and fresh_null_mode != "off"
+    ):
+        return _set_pending(
+            output,
+            status="not_executed_optional_null_model_not_enabled",
+            reason="fresh backend currently executes required base_qwen null model only",
+            execution_scope="optional_null_model_pending",
+        )
+
+    if (
+        evaluation_type == "organic_prompt_null"
+        and _fresh_mode_enabled(fresh_null_mode, "organic-prompts")
+    ):
+        output = _execution_base_row(row)
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return _set_pending(
+                output,
+                status="not_executed_optional_null_model_not_enabled",
+                reason="organic-prompts fresh backend currently executes required base_qwen only",
+                execution_scope="optional_null_model_pending",
+            )
+        result = _ours_organic_null_result(
+            repo_root=repo_root,
+            cfg=cfg,
+            row=row,
+            context=context,
+        )
+        return _set_fresh_completed(
+            output,
+            claim_accept=bool(result["claim_accept"]),
+            ownership_score=float(result["ownership_score"]),
+            status=FRESH_ORGANIC_NULL_STATUS,
+            execution_backend="fresh_organic_prompt_null_v1",
+            execution_scope="ours_base_qwen_organic_prompt_fresh_null",
+            source_status="fresh_base_qwen_organic_prompt_completed",
+            notes_suffix="fresh base-Qwen organic prompt null execution",
             details=result,
         )
 
@@ -1057,7 +1595,7 @@ def _execute_perinucleus_artifact_row(
 
     if (
         evaluation_type == "null_model_registered_probes"
-        and fresh_null_mode == "registered-probes"
+        and _fresh_mode_enabled(fresh_null_mode, "registered-probes")
     ):
         output = _execution_base_row(row)
         if str(row.get("null_model_id", "")) != "base_qwen":
@@ -1080,6 +1618,48 @@ def _execute_perinucleus_artifact_row(
             execution_scope="perinucleus_base_qwen_registered_probe_fresh_null",
             source_status="fresh_base_qwen_registered_probe_completed",
             notes_suffix="fresh base-Qwen registered fingerprint null execution",
+            details=result,
+        )
+
+    if (
+        evaluation_type == "null_model_registered_probes"
+        and str(row.get("null_model_id", "")) != "base_qwen"
+        and fresh_null_mode != "off"
+    ):
+        return _set_pending(
+            output,
+            status="not_executed_optional_null_model_not_enabled",
+            reason="fresh backend currently executes required base_qwen null model only",
+            execution_scope="optional_null_model_pending",
+        )
+
+    if (
+        evaluation_type == "organic_prompt_null"
+        and _fresh_mode_enabled(fresh_null_mode, "organic-prompts")
+    ):
+        output = _execution_base_row(row)
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return _set_pending(
+                output,
+                status="not_executed_optional_null_model_not_enabled",
+                reason="organic-prompts fresh backend currently executes required base_qwen only",
+                execution_scope="optional_null_model_pending",
+            )
+        result = _perinucleus_organic_null_result(
+            repo_root=repo_root,
+            cfg=cfg,
+            row=row,
+            context=context,
+        )
+        return _set_fresh_completed(
+            output,
+            claim_accept=bool(result["claim_accept"]),
+            ownership_score=float(result["ownership_score"]),
+            status=FRESH_ORGANIC_NULL_STATUS,
+            execution_backend="fresh_organic_prompt_null_v1",
+            execution_scope="perinucleus_base_qwen_organic_prompt_fresh_null",
+            source_status="fresh_base_qwen_organic_prompt_completed",
+            notes_suffix="fresh base-Qwen organic prompt null execution",
             details=result,
         )
 
@@ -1190,6 +1770,40 @@ def execute_plan_rows(
     return executed
 
 
+def _merge_existing_completed_rows(
+    executed_rows: list[dict[str, Any]],
+    existing_table_path: Path | None,
+) -> list[dict[str, Any]]:
+    if existing_table_path is None or not existing_table_path.exists():
+        return executed_rows
+    existing_rows = _read_csv(existing_table_path)
+    reusable_by_case_id = {
+        str(row.get("case_id", "")): row
+        for row in existing_rows
+        if str(row.get("case_id", ""))
+        and str(row.get("status", "")).startswith("completed_")
+        and str(row.get("claim_accept", "")) != ""
+    }
+    if not reusable_by_case_id:
+        return executed_rows
+    merged: list[dict[str, Any]] = []
+    for row in executed_rows:
+        if str(row.get("claim_accept", "")) != "":
+            merged.append(row)
+            continue
+        existing = reusable_by_case_id.get(str(row.get("case_id", "")))
+        if existing is None:
+            merged.append(row)
+            continue
+        # Preserve fresh rows from an earlier slice so execute-organic-null does
+        # not erase execute-registered-null results, and vice versa.
+        preserved = dict(row)
+        preserved.update(existing)
+        preserved["preserved_from_existing_final_table"] = True
+        merged.append(preserved)
+    return merged
+
+
 def _status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
     counts: dict[str, int] = {}
     for row in rows:
@@ -1286,10 +1900,20 @@ def _build_execution_summary(
         _truthy(row.get("fresh_model_inference_performed"))
         for row in executed_rows
     )
+    status_counts = _status_counts(executed_rows)
     if full_far_complete:
         status = "completed_full_far"
-    elif fresh_model_inference_performed:
+    elif (
+        status_counts.get(FRESH_REGISTERED_NULL_STATUS, 0) > 0
+        and status_counts.get(FRESH_ORGANIC_NULL_STATUS, 0) > 0
+    ):
+        status = "completed_registered_and_organic_null_subset"
+    elif status_counts.get(FRESH_ORGANIC_NULL_STATUS, 0) > 0:
+        status = "completed_organic_null_subset"
+    elif status_counts.get(FRESH_REGISTERED_NULL_STATUS, 0) > 0:
         status = "completed_registered_null_subset"
+    elif fresh_model_inference_performed:
+        status = "completed_fresh_null_subset"
     else:
         status = "completed_artifact_subset"
     return {
@@ -1298,7 +1922,7 @@ def _build_execution_summary(
         "generated_at": _utc_now(),
         "config_path": str(config_path),
         "status": status,
-        "execution_backend": "artifact_replay_v1_with_optional_fresh_registered_null_v1",
+        "execution_backend": "artifact_replay_v1_with_optional_fresh_null_backends_v1",
         "fresh_model_inference_performed": fresh_model_inference_performed,
         "full_far_complete": full_far_complete,
         "claim_rows_complete": all_claim_rows_complete,
@@ -1314,14 +1938,14 @@ def _build_execution_summary(
                 "for the original binary detector"
             ),
             (
-                "organic/non-owner/null-model rows remain pending until fresh "
-                "inference prompt banks are implemented"
+                "non-owner and optional null-model rows remain pending until "
+                "their fresh inference prompt banks are implemented"
             ),
             "do not use this summary to claim complete FAR superiority",
         ],
         "next_required_implementation": [
-            "fresh inference backend for organic_prompt_null and non_owner_probe_null",
-            "fresh null-model registered-probe backend for base Qwen and optional null models",
+            "fresh inference backend for non_owner_probe_null",
+            "fresh null-model registered-probe backend for optional null models",
             "owner-id encoding or a declared exclusion for wrong_owner_claim rows",
             "payload-adapted Perinucleus baseline before structured-claim superiority claims",
         ],
@@ -1394,6 +2018,7 @@ def main() -> int:
             raise ValueError(
                 "outputs.final_summary, outputs.final_table, and outputs.final_tex are required."
             )
+        executed_rows = _merge_existing_completed_rows(executed_rows, table_path)
         execution_summary = _build_execution_summary(
             repo_root,
             cfg,
