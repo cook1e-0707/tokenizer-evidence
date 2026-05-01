@@ -34,6 +34,15 @@ def parse_args() -> argparse.Namespace:
             "Rows that require fresh null-model/prompt-bank inference are retained as pending."
         ),
     )
+    parser.add_argument(
+        "--fresh-null-mode",
+        choices=("off", "registered-probes"),
+        default="off",
+        help=(
+            "Optional fresh null inference backend. 'registered-probes' evaluates "
+            "base-Qwen registered probes and keeps organic/non-owner prompt banks pending."
+        ),
+    )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
 
@@ -292,19 +301,28 @@ def build_plan_rows(cfg: dict[str, Any]) -> list[dict[str, Any]]:
             for model in null_models:
                 model_id = str(model.get("id", "unknown_null_model"))
                 model_status = str(model.get("status", "required"))
-                add(
-                    method=method,
-                    evaluation_type="null_model_registered_probes",
-                    query_budget=budget,
-                    null_model_id=model_id,
-                    null_probe_set="base_model_registered_probes",
-                    status="planned" if model_status == "required" else "optional_planned",
-                    notes=f"null model status={model_status}",
-                )
+                for claim_payload in all_payloads:
+                    for seed in seeds:
+                        add(
+                            method=method,
+                            evaluation_type="null_model_registered_probes",
+                            claim_payload=claim_payload,
+                            true_owner="null_model",
+                            claim_owner=true_owner,
+                            seed=seed,
+                            query_budget=budget,
+                            null_model_id=model_id,
+                            null_probe_set="base_model_registered_probes",
+                            status="planned" if model_status == "required" else "optional_planned",
+                            notes=f"null model status={model_status}",
+                        )
             for index in range(organic_count):
                 add(
                     method=method,
                     evaluation_type="organic_prompt_null",
+                    claim_payload=all_payloads[index % len(all_payloads)],
+                    true_owner="organic_prompt",
+                    claim_owner=true_owner,
                     query_budget=budget,
                     null_model_id="base_qwen",
                     null_probe_set="organic_prompt_null",
@@ -315,6 +333,9 @@ def build_plan_rows(cfg: dict[str, Any]) -> list[dict[str, Any]]:
                 add(
                     method=method,
                     evaluation_type="non_owner_probe_null",
+                    claim_payload=all_payloads[index % len(all_payloads)],
+                    true_owner="non_owner_probe",
+                    claim_owner=true_owner,
                     query_budget=budget,
                     null_model_id="base_qwen",
                     null_probe_set="non_owner_probe_null",
@@ -390,7 +411,7 @@ def build_summary(
         "generated_at": _utc_now(),
         "config_path": str(config_path),
         "status": "plan_ready" if not gate_failures else "plan_has_gate_failures",
-        "fresh_inference_backend_supported": False,
+        "fresh_inference_backend_supported": "registered_probes_only",
         "launch_allowed_now": False,
         "counts": count_payload,
         "gate_failures": gate_failures,
@@ -437,6 +458,8 @@ NULL_EVALUATION_TYPES = {
     "organic_prompt_null",
     "non_owner_probe_null",
 }
+
+FRESH_REGISTERED_NULL_STATUS = "completed_fresh_registered_null"
 
 
 def _method_artifact_path(
@@ -555,6 +578,33 @@ def _set_completed(
     return output
 
 
+def _set_fresh_completed(
+    output: dict[str, Any],
+    *,
+    claim_accept: bool,
+    ownership_score: float,
+    execution_scope: str,
+    source_status: str,
+    notes_suffix: str,
+    details: dict[str, Any],
+) -> dict[str, Any]:
+    evaluation_type = str(output.get("evaluation_type", ""))
+    output["status"] = FRESH_REGISTERED_NULL_STATUS
+    output["execution_backend"] = "fresh_registered_null_v1"
+    output["execution_scope"] = execution_scope
+    output["claim_accept"] = claim_accept
+    output["ownership_score"] = ownership_score
+    output["source_status"] = source_status
+    output["full_far_component_complete"] = evaluation_type in NULL_EVALUATION_TYPES
+    output["fresh_model_inference_performed"] = True
+    output["true_accept"] = False
+    output["false_accept"] = claim_accept
+    output["fresh_details_json"] = json.dumps(details, sort_keys=True)
+    if notes_suffix:
+        output["notes"] = f"{output.get('notes', '')}; {notes_suffix}".strip("; ")
+    return output
+
+
 def _set_pending(
     output: dict[str, Any],
     *,
@@ -570,11 +620,329 @@ def _set_pending(
     return output
 
 
+def _runtime_cfg(cfg: dict[str, Any]) -> dict[str, Any]:
+    return dict(cfg.get("runtime") or {})
+
+
+def _null_model_cfg(cfg: dict[str, Any], null_model_id: str) -> dict[str, Any]:
+    for item in _null_models(cfg):
+        if str(item.get("id", "")) == null_model_id:
+            return item
+    return {}
+
+
+def _catalog_path(repo_root: Path, cfg: dict[str, Any]) -> Path:
+    raw = (
+        (cfg.get("ours_registered_null_backend") or {}).get("catalog_path")
+        or "configs/data/frozen/real_pilot_catalog__qwen2_5_7b_compiled__v1.yaml"
+    )
+    path = Path(str(raw))
+    return path if path.is_absolute() else repo_root / path
+
+
+def _load_base_model(
+    *,
+    cfg: dict[str, Any],
+    model_name: str,
+    context: dict[str, Any],
+) -> tuple[Any, Any, Any, Any]:
+    cache_key = ("base_model", model_name)
+    if cache_key in context:
+        return context[cache_key]
+
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    if not torch.cuda.is_available():
+        raise RuntimeError("fresh registered null inference requires CUDA")
+    runtime = _runtime_cfg(cfg)
+    local_files_only = bool(runtime.get("local_files_only", True))
+    trust_remote_code = bool(runtime.get("trust_remote_code", True))
+    device = torch.device("cuda")
+    dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name,
+        local_files_only=local_files_only,
+        trust_remote_code=trust_remote_code,
+    )
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token or tokenizer.bos_token
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype=dtype,
+        local_files_only=local_files_only,
+        trust_remote_code=trust_remote_code,
+        low_cpu_mem_usage=True,
+    )
+    model.to(device)
+    model.eval()
+    if model.config.pad_token_id is None and tokenizer.pad_token_id is not None:
+        model.config.pad_token_id = tokenizer.pad_token_id
+    context[cache_key] = (model, tokenizer, device, torch)
+    return context[cache_key]
+
+
+def _ours_registered_null_result(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    row: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    claim_payload = str(row.get("claim_payload", ""))
+    null_model_id = str(row.get("null_model_id", ""))
+    cache_key = ("ours_registered_null", null_model_id, claim_payload)
+    if cache_key in context:
+        return context[cache_key]
+
+    from src.core.catalog_freeze import load_required_frozen_catalog
+    from src.core.contract_compiler import (
+        build_generation_plan_from_compiled_eval_contract,
+        compile_fieldwise_train_contract,
+    )
+    from src.core.payload_codec import BucketPayloadCodec
+    from src.core.scaffolded_completion import (
+        COMPILED_ARTIFACT_FORMAT,
+        COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        evaluate_foundation_completion,
+    )
+    from src.core.verifier import VerificationConfig, verify_canonical_rendered_text
+    from src.training.hf_causal_lm import (
+        _build_generation_kwargs,
+        _resolve_fieldwise_contextual_token_map,
+        _tensor_rows,
+    )
+
+    null_model = _null_model_cfg(cfg, null_model_id)
+    model_name = str(null_model.get("model") or "Qwen/Qwen2.5-7B-Instruct")
+    model, tokenizer, device, torch = _load_base_model(
+        cfg=cfg,
+        model_name=model_name,
+        context=context,
+    )
+    catalog_path = _catalog_path(repo_root, cfg)
+    payload_labels = _all_payload_labels(cfg)
+    backend_cfg = dict(cfg.get("ours_registered_null_backend") or {})
+    block_count = int(backend_cfg.get("block_count", 2))
+    instruction = str(backend_cfg.get("instruction", "Select exactly one allowed carrier token."))
+    max_length = int(backend_cfg.get("max_length", 512))
+    compiled_train_contract = compile_fieldwise_train_contract(
+        model_name=model_name,
+        tokenizer_name=model_name,
+        tokenizer_backend=str(backend_cfg.get("tokenizer_backend", "huggingface")),
+        catalog_path=catalog_path,
+        payload_labels=payload_labels,
+        eval_payload_label=claim_payload,
+        instruction=instruction,
+        block_count=block_count,
+        prompt_contract_name=COMPILED_FIELDWISE_PROMPT_CONTRACT,
+        render_format="canonical_v1",
+        tokenizer=tokenizer,
+    )
+    plan = build_generation_plan_from_compiled_eval_contract(
+        compiled_eval_contract=compiled_train_contract.eval_contract,
+        catalog_path=Path(compiled_train_contract.catalog_path),
+    )
+    _audit_result, slot_token_maps = _resolve_fieldwise_contextual_token_map(
+        tokenizer=tokenizer,
+        plan=plan,
+    )
+    generated_values: list[str] = []
+    chosen_token_ids: list[int | None] = []
+    with torch.no_grad():
+        for slot_target in plan.slot_targets:
+            value_to_token_id, token_id_to_value = slot_token_maps[
+                (slot_target.field_name, slot_target.exact_slot_prefix)
+            ]
+            generation_inputs = tokenizer(
+                slot_target.prompt,
+                return_tensors="pt",
+                truncation=True,
+                max_length=max_length,
+            )
+            generation_inputs = {key: value.to(device) for key, value in generation_inputs.items()}
+            prompt_rows = _tensor_rows(generation_inputs["input_ids"])
+            prompt_length = len(prompt_rows[0]) if prompt_rows else 0
+            generated_tokens = model.generate(
+                **generation_inputs,
+                **_build_generation_kwargs(
+                    tokenizer=tokenizer,
+                    max_new_tokens=1,
+                    generation_do_sample=False,
+                    allowed_token_ids=tuple(value_to_token_id.values()),
+                ),
+            )
+            generated_rows = _tensor_rows(generated_tokens)
+            chosen_token_id = (
+                int(generated_rows[0][prompt_length])
+                if generated_rows and len(generated_rows[0]) > prompt_length
+                else None
+            )
+            chosen_text = (
+                token_id_to_value.get(chosen_token_id, "")
+                if chosen_token_id is not None
+                else ""
+            )
+            generated_values.append(chosen_text)
+            chosen_token_ids.append(chosen_token_id)
+
+    layout = load_required_frozen_catalog(Path(compiled_train_contract.catalog_path))
+    generated_text = "\n".join(generated_values).strip()
+    compiled_result = evaluate_foundation_completion(
+        generated_text,
+        layout=layout,
+        expected_slot_values=compiled_train_contract.eval_contract.expected_slot_values,
+        exact_slot_prefixes=compiled_train_contract.eval_contract.exact_slot_prefixes,
+        tokenizer=tokenizer,
+        prompt_contract_name=compiled_train_contract.eval_contract.prompt_contract_name,
+        render_format=compiled_train_contract.eval_contract.render_format,
+        slot_field_names=compiled_train_contract.eval_contract.slot_field_names,
+        artifact_format=COMPILED_ARTIFACT_FORMAT,
+    )
+    codec = BucketPayloadCodec(bucket_radices=layout.radices)
+    render_success = False
+    decoded_units: tuple[int, ...] = ()
+    expected_units = tuple(
+        int(unit)
+        for unit in compiled_train_contract.payload_label_to_units[claim_payload]
+    )
+    if compiled_result.rendered_bucket_tuples:
+        render_verification = verify_canonical_rendered_text(
+            text=compiled_result.rendered_canonical_text,
+            bucket_layout=layout,
+            payload_codec=codec,
+            expected_payload=expected_units,
+            config=VerificationConfig(
+                verification_mode="canonical_render",
+                render_format=compiled_train_contract.eval_contract.render_format,
+                min_score=0.0,
+                max_candidates=None,
+                min_match_ratio=1.0,
+                scan_windows=True,
+                require_all_fields=True,
+                decode_as_bytes=False,
+                apply_rs=False,
+            ),
+        )
+        render_success = render_verification.success
+        decoded_units = tuple(int(unit) for unit in render_verification.decoded_units)
+    claim_accept = bool(compiled_result.foundation_gate_passed and render_success)
+    result = {
+        "claim_accept": claim_accept,
+        "ownership_score": 1.0 if claim_accept else 0.0,
+        "field_valid_rate": compiled_result.field_valid_rate,
+        "bucket_correct_rate": compiled_result.bucket_correct_rate,
+        "slot_exact_rate": compiled_result.slot_exact_rate,
+        "valid_canonical_block_count": compiled_result.valid_canonical_block_count,
+        "generated_values": generated_values,
+        "chosen_token_ids": chosen_token_ids,
+        "expected_units": list(expected_units),
+        "decoded_units": list(decoded_units),
+        "model_name": model_name,
+        "claim_payload": claim_payload,
+        "fresh_query_count": len(plan.slot_targets),
+    }
+    context[cache_key] = result
+    return result
+
+
+def _load_perinucleus_frozen_candidate(repo_root: Path, cfg: dict[str, Any]) -> dict[str, Any]:
+    cache_key = "_perinucleus_candidate"
+    runtime_cache = cfg.setdefault("_runtime_cache", {})
+    if cache_key in runtime_cache:
+        return runtime_cache[cache_key]
+    import yaml as yaml_module
+
+    frozen_path = _method_artifact_path(
+        repo_root,
+        cfg,
+        PERINUCLEUS_METHOD_ID,
+        "frozen_candidate_config",
+    )
+    if frozen_path is None or not frozen_path.exists():
+        raise FileNotFoundError(f"Missing Perinucleus frozen candidate config: {frozen_path}")
+    frozen = yaml_module.safe_load(frozen_path.read_text(encoding="utf-8")) or {}
+    candidate = dict(frozen["candidate"])
+    model_cfg = dict(frozen["model"])
+    payload = {"candidate": candidate, "model": model_cfg}
+    runtime_cache[cache_key] = payload
+    return payload
+
+
+def _perinucleus_registered_null_result(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    row: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    claim_payload = str(row.get("claim_payload", ""))
+    seed = _safe_int(row.get("seed"))
+    budget = _safe_int(row.get("query_budget"))
+    null_model_id = str(row.get("null_model_id", ""))
+    cache_key = ("perinucleus_registered_null", null_model_id, claim_payload, seed, budget)
+    if cache_key in context:
+        return context[cache_key]
+
+    from scripts import run_perinucleus_official_final_eval as final_eval
+    from scripts import run_perinucleus_official_overfit_gate as overfit
+
+    overfit._load_model_dependencies()
+    frozen = _load_perinucleus_frozen_candidate(repo_root, cfg)
+    candidate = dict(frozen["candidate"])
+    base_model = str(_null_model_cfg(cfg, null_model_id).get("model") or frozen["model"]["base"])
+    model, tokenizer, device, _torch = _load_base_model(
+        cfg=cfg,
+        model_name=base_model,
+        context=context,
+    )
+    fingerprints_path = _resolve(repo_root, candidate["fingerprints_file"])
+    if fingerprints_path is None or not fingerprints_path.exists():
+        raise FileNotFoundError(f"Missing Perinucleus fingerprints file: {fingerprints_path}")
+    rows = final_eval._load_fingerprint_rows(fingerprints_path, int(candidate["num_fingerprints"]))
+    selected_rows = final_eval._select_fingerprints(
+        rows=rows,
+        payload_text=claim_payload,
+        seed=seed,
+        query_budget=budget,
+        arm_id=str(candidate["arm_id"]),
+    )
+    dataset = overfit._prepare_dataset(
+        tokenizer=tokenizer,
+        fingerprints=[{"key": item["key"], "response": item["response"]} for item in selected_rows],
+        max_key_length=int(candidate.get("key_length", 16)),
+        max_response_length=int(candidate.get("response_length", 1)),
+        max_length=int(candidate.get("max_sequence_length", 64)),
+    )
+    for item, selected in zip(dataset, selected_rows, strict=True):
+        item["fingerprint_id"] = int(selected["source_fingerprint_id"])
+    metrics = overfit._evaluate(model, tokenizer, dataset, device, batch_size=1)
+    exact_ratio = float(metrics.get("exact_accuracy") or 0.0)
+    claim_accept = exact_ratio >= 1.0
+    result = {
+        "claim_accept": claim_accept,
+        "ownership_score": exact_ratio,
+        "exact_response_match_ratio": exact_ratio,
+        "exact_response_match_count": int(metrics.get("exact_count") or 0),
+        "query_budget": budget,
+        "model_name": base_model,
+        "claim_payload": claim_payload,
+        "seed": seed,
+        "fresh_query_count": budget,
+        "expected_response_probability_mean": metrics.get("target_probability_mean"),
+        "expected_response_probability_min": metrics.get("target_probability_min"),
+    }
+    context[cache_key] = result
+    return result
+
+
 def _execute_ours_artifact_row(
     row: dict[str, Any],
     indexes: dict[str, Any],
     repo_root: Path,
     cfg: dict[str, Any],
+    fresh_null_mode: str,
+    context: dict[str, Any],
 ) -> dict[str, Any]:
     output = _execution_base_row(row)
     evaluation_type = str(row.get("evaluation_type", ""))
@@ -589,6 +957,34 @@ def _execute_ours_artifact_row(
                 "field is encoded in the claim artifact"
             ),
             execution_scope="owner_claim_protocol_pending",
+        )
+
+    if (
+        evaluation_type == "null_model_registered_probes"
+        and fresh_null_mode == "registered-probes"
+    ):
+        output = _execution_base_row(row)
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return _set_pending(
+                output,
+                status="not_executed_optional_null_model_not_enabled",
+                reason="registered-probes fresh backend currently executes required base_qwen only",
+                execution_scope="optional_null_model_pending",
+            )
+        result = _ours_registered_null_result(
+            repo_root=repo_root,
+            cfg=cfg,
+            row=row,
+            context=context,
+        )
+        return _set_fresh_completed(
+            output,
+            claim_accept=bool(result["claim_accept"]),
+            ownership_score=float(result["ownership_score"]),
+            execution_scope="ours_base_qwen_registered_probe_fresh_null",
+            source_status="fresh_base_qwen_registered_probe_completed",
+            notes_suffix="fresh base-Qwen registered probe null execution",
+            details=result,
         )
 
     if evaluation_type in NULL_EVALUATION_TYPES:
@@ -637,7 +1033,12 @@ def _execute_ours_artifact_row(
 
 
 def _execute_perinucleus_artifact_row(
-    row: dict[str, Any], indexes: dict[str, Any], repo_root: Path, cfg: dict[str, Any]
+    row: dict[str, Any],
+    indexes: dict[str, Any],
+    repo_root: Path,
+    cfg: dict[str, Any],
+    fresh_null_mode: str,
+    context: dict[str, Any],
 ) -> dict[str, Any]:
     output = _execution_base_row(row)
     evaluation_type = str(row.get("evaluation_type", ""))
@@ -652,6 +1053,34 @@ def _execute_perinucleus_artifact_row(
                 "owner-id claim field in this benchmark"
             ),
             execution_scope="owner_claim_protocol_not_applicable_original_binary_detector",
+        )
+
+    if (
+        evaluation_type == "null_model_registered_probes"
+        and fresh_null_mode == "registered-probes"
+    ):
+        output = _execution_base_row(row)
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return _set_pending(
+                output,
+                status="not_executed_optional_null_model_not_enabled",
+                reason="registered-probes fresh backend currently executes required base_qwen only",
+                execution_scope="optional_null_model_pending",
+            )
+        result = _perinucleus_registered_null_result(
+            repo_root=repo_root,
+            cfg=cfg,
+            row=row,
+            context=context,
+        )
+        return _set_fresh_completed(
+            output,
+            claim_accept=bool(result["claim_accept"]),
+            ownership_score=float(result["ownership_score"]),
+            execution_scope="perinucleus_base_qwen_registered_probe_fresh_null",
+            source_status="fresh_base_qwen_registered_probe_completed",
+            notes_suffix="fresh base-Qwen registered fingerprint null execution",
+            details=result,
         )
 
     if evaluation_type in NULL_EVALUATION_TYPES:
@@ -719,15 +1148,36 @@ def execute_plan_rows(
     repo_root: Path,
     cfg: dict[str, Any],
     rows: list[dict[str, Any]],
+    *,
+    fresh_null_mode: str = "off",
 ) -> list[dict[str, Any]]:
     indexes = _load_artifact_indexes(repo_root, cfg)
+    context: dict[str, Any] = {}
     executed: list[dict[str, Any]] = []
     for row in rows:
         method_id = str(row.get("method_id", ""))
         if method_id == OURS_METHOD_ID:
-            executed.append(_execute_ours_artifact_row(row, indexes, repo_root, cfg))
+            executed.append(
+                _execute_ours_artifact_row(
+                    row,
+                    indexes,
+                    repo_root,
+                    cfg,
+                    fresh_null_mode,
+                    context,
+                )
+            )
         elif method_id == PERINUCLEUS_METHOD_ID:
-            executed.append(_execute_perinucleus_artifact_row(row, indexes, repo_root, cfg))
+            executed.append(
+                _execute_perinucleus_artifact_row(
+                    row,
+                    indexes,
+                    repo_root,
+                    cfg,
+                    fresh_null_mode,
+                    context,
+                )
+            )
         else:
             executed.append(
                 _set_pending(
@@ -832,15 +1282,24 @@ def _build_execution_summary(
         or str(row.get("claim_accept", "")) != ""
         for row in executed_rows
     )
-    status = "completed_full_far" if full_far_complete else "completed_artifact_subset"
+    fresh_model_inference_performed = any(
+        _truthy(row.get("fresh_model_inference_performed"))
+        for row in executed_rows
+    )
+    if full_far_complete:
+        status = "completed_full_far"
+    elif fresh_model_inference_performed:
+        status = "completed_registered_null_subset"
+    else:
+        status = "completed_artifact_subset"
     return {
         "schema_name": "full_far_payload_claim_execution_summary",
         "schema_version": 1,
         "generated_at": _utc_now(),
         "config_path": str(config_path),
         "status": status,
-        "execution_backend": "artifact_replay_v1_with_pending_fresh_far_rows",
-        "fresh_model_inference_performed": False,
+        "execution_backend": "artifact_replay_v1_with_optional_fresh_registered_null_v1",
+        "fresh_model_inference_performed": fresh_model_inference_performed,
         "full_far_complete": full_far_complete,
         "claim_rows_complete": all_claim_rows_complete,
         "plan_counts": _counts(plan_rows),
@@ -921,7 +1380,12 @@ def main() -> int:
     summary = build_summary(repo_root, cfg, config_path, rows)
 
     if args.execute:
-        executed_rows = execute_plan_rows(repo_root, cfg, rows)
+        executed_rows = execute_plan_rows(
+            repo_root,
+            cfg,
+            rows,
+            fresh_null_mode=args.fresh_null_mode,
+        )
         outputs = cfg.get("outputs") or {}
         summary_path = _resolve(repo_root, outputs.get("final_summary"))
         table_path = _resolve(repo_root, outputs.get("final_table"))
@@ -950,7 +1414,10 @@ def main() -> int:
                     "case_count": len(executed_rows),
                     "full_far_complete": execution_summary["full_far_complete"],
                     "claim_rows_complete": execution_summary["claim_rows_complete"],
-                    "fresh_model_inference_performed": False,
+                    "fresh_model_inference_performed": execution_summary[
+                        "fresh_model_inference_performed"
+                    ],
+                    "fresh_null_mode": args.fresh_null_mode,
                 },
                 indent=2,
                 sort_keys=True,

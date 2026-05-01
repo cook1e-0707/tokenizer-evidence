@@ -84,8 +84,15 @@ case "$RUN_MODE" in
       --execute \
       --force
     ;;
+  execute-registered-null)
+    python3 scripts/run_full_far_payload_claim_benchmark.py \
+      --config "$FULL_FAR_CONFIG" \
+      --execute \
+      --fresh-null-mode registered-probes \
+      --force
+    ;;
   *)
-    echo "Unsupported RUN_MODE=$RUN_MODE; expected dry-run, write-plan, or execute" >&2
+    echo "Unsupported RUN_MODE=$RUN_MODE; expected dry-run, write-plan, execute, or execute-registered-null" >&2
     exit 2
     ;;
 esac

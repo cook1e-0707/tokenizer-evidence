@@ -1,7 +1,8 @@
 # Full FAR And Payload-Claim Benchmark Protocol
 
-Status: artifact-backed claim subset executed on Chimera H200. Fresh null-model
-and prompt-bank inference remains pending.
+Status: artifact-backed claim subset executed on Chimera H200. The registered
+base-Qwen fresh-null backend is implemented and ready to run; organic and
+non-owner prompt-bank inference remains pending.
 
 ## Purpose
 
@@ -57,6 +58,8 @@ Full null FAR:
 - optional null models: cached non-Qwen Llama 3.1 8B and unprotected Qwen fine-tune;
 - null prompt/probe sets: base-model registered probes, non-owner probes, organic prompts;
 - organic prompts: at least `1000` trials.
+- registered-probe null rows are claim-conditioned over all `U00` to `U15`
+  claim payload labels and seeds `17,23,29`.
 
 ## Threshold Rules
 
@@ -83,7 +86,8 @@ Plan-only outputs:
 ```yaml
 runner: scripts/run_full_far_payload_claim_benchmark.py
 artifact_claim_subset_backend: executed
-fresh_inference_backend: pending
+fresh_registered_probe_backend: implemented
+fresh_prompt_bank_backend: pending
 plan_generation: supported
 claim_rows_complete: true
 full_far_complete: false
@@ -118,6 +122,14 @@ FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark.sh
 ```
 
+Fresh base-Qwen registered-probe null execution on Chimera H200:
+
+```bash
+RUN_MODE=execute-registered-null \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark.sh
+```
+
 ## Executed Artifact Subset
 
 The current H200 execution produced:
@@ -140,7 +152,7 @@ Pending rows:
 
 | Row status | Count |
 |---|---:|
-| `not_executed_fresh_null_inference_required` | 10072 |
+| `not_executed_fresh_null_inference_required` | 11200 |
 | `not_executed_owner_claim_not_encoded` | 480 |
 | `not_executed_owner_claim_not_supported_by_binary_detector` | 480 |
 
@@ -159,6 +171,31 @@ Interpretation:
 - Ours rejects wrong decoded payload claims under the artifact-backed structured verifier.
 - Original Perinucleus accepts wrong-payload claims here because it is a binary fingerprint detector, not because a calibrated full FAR test failed.
 - These rows must be reported as `wrong_payload_claim_accept_rate`, not as full FAR.
+
+## Next Fresh-Null Slice
+
+The `execute-registered-null` mode runs only the required base-Qwen registered
+probe null rows:
+
+```text
+methods: 2
+claim payloads: 16
+seeds: 3
+query budgets: 4
+required null model: base_qwen
+fresh registered-probe rows: 384
+```
+
+Expected status after this slice:
+
+| Row status | Expected count |
+|---|---:|
+| `completed_fresh_registered_null` | 384 |
+| `not_executed_optional_null_model_not_enabled` | 768 |
+| `not_executed_fresh_null_inference_required` | 10048 |
+
+`full_far_complete` must remain `False` until organic and non-owner prompt-bank
+rows are implemented and executed.
 
 ## Gate
 
