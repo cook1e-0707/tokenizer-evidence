@@ -19,6 +19,7 @@ HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_tok
 mkdir -p "$SCRATCH_ROOT/slurm"
 cd "$REPO_HOME"
 
+set +u
 if [ -f /etc/profile ]; then
   # shellcheck disable=SC1091
   . /etc/profile
@@ -28,6 +29,7 @@ if [ -f "$VENV_PATH/bin/activate" ]; then
   # shellcheck disable=SC1091
   source "$VENV_PATH/bin/activate"
 fi
+set -u
 
 export WANDB_MODE=disabled
 export TOKENIZERS_PARALLELISM=false

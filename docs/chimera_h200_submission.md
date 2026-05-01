@@ -34,6 +34,10 @@ before calling `sbatch`. This prevents login-shell defaults such as
 combination. Pass `ACCOUNT=...` or `QOS=...` only when Chimera reports that the
 association is valid for your user.
 
+The sbatch bodies load `/etc/profile` and activate `VENV_PATH` with `set +u`
+temporarily enabled. Chimera profile snippets may reference unset locale
+variables, so profile loading must not run under Bash nounset.
+
 Check valid account/QOS associations before adding overrides:
 
 ```bash

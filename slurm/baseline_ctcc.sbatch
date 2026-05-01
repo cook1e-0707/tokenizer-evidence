@@ -12,7 +12,9 @@
 
 set -euo pipefail
 
+set +u
 {environment_setup}
+set -u
 
 cd "$SLURM_SUBMIT_DIR"
 {command}
