@@ -9,6 +9,7 @@ if __package__ in {None, ""}:
 import argparse
 import csv
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -55,6 +56,20 @@ def _load_tokenizer(cfg: dict[str, Any], model_name: str) -> Any:
     from transformers import AutoTokenizer
 
     runtime = dict(cfg.get("runtime") or {})
+    configured_hf_home = (
+        os.environ.get("HF_HOME")
+        or os.environ.get("TRANSFORMERS_CACHE")
+        or str(runtime.get("hf_home") or "").strip()
+    )
+    if not configured_hf_home:
+        user = os.environ.get("USER") or os.environ.get("LOGNAME") or ""
+        scratch_hf_home = Path(f"/hpcstor6/scratch01/g/{user}/huggingface") if user else None
+        if scratch_hf_home is not None and scratch_hf_home.exists():
+            configured_hf_home = str(scratch_hf_home)
+    if configured_hf_home:
+        os.environ.setdefault("HF_HOME", configured_hf_home)
+        os.environ.setdefault("TRANSFORMERS_CACHE", configured_hf_home)
+
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
         local_files_only=bool(runtime.get("local_files_only", True)),
