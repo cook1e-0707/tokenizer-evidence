@@ -64,6 +64,12 @@ def parse_args() -> argparse.Namespace:
             "so array jobs never write the final table concurrently."
         ),
     )
+    parser.add_argument(
+        "--checkpoint-interval",
+        type=int,
+        default=25,
+        help="Write shard CSV/summary after this many newly completed rows during sharded execution.",
+    )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
 
@@ -118,6 +124,24 @@ def _write_csv_with_fieldnames(
         writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    tmp_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tmp_path.replace(path)
+
+
+def _write_csv_atomic(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = sorted({key for row in rows for key in row})
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    with tmp_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    tmp_path.replace(path)
 
 
 def _write_text(path: Path, payload: str, *, force: bool) -> None:
@@ -1771,39 +1795,178 @@ def execute_plan_rows(
     context: dict[str, Any] = {}
     executed: list[dict[str, Any]] = []
     for row in rows:
-        method_id = str(row.get("method_id", ""))
-        if method_id == OURS_METHOD_ID:
-            executed.append(
-                _execute_ours_artifact_row(
-                    row,
-                    indexes,
-                    repo_root,
-                    cfg,
-                    fresh_null_mode,
-                    context,
-                )
+        executed.append(
+            _execute_one_plan_row(
+                row=row,
+                indexes=indexes,
+                repo_root=repo_root,
+                cfg=cfg,
+                fresh_null_mode=fresh_null_mode,
+                context=context,
             )
-        elif method_id == PERINUCLEUS_METHOD_ID:
-            executed.append(
-                _execute_perinucleus_artifact_row(
-                    row,
-                    indexes,
-                    repo_root,
-                    cfg,
-                    fresh_null_mode,
-                    context,
-                )
-            )
-        else:
-            executed.append(
-                _set_pending(
-                    _execution_base_row(row),
-                    status="not_executed_unknown_method",
-                    reason=f"no execution backend registered for method_id={method_id}",
-                    execution_scope="method_backend_missing",
-                )
-            )
+        )
     return executed
+
+
+def _execute_one_plan_row(
+    *,
+    row: dict[str, Any],
+    indexes: dict[str, Any],
+    repo_root: Path,
+    cfg: dict[str, Any],
+    fresh_null_mode: str,
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    method_id = str(row.get("method_id", ""))
+    if method_id == OURS_METHOD_ID:
+        return _execute_ours_artifact_row(
+            row,
+            indexes,
+            repo_root,
+            cfg,
+            fresh_null_mode,
+            context,
+        )
+    if method_id == PERINUCLEUS_METHOD_ID:
+        return _execute_perinucleus_artifact_row(
+            row,
+            indexes,
+            repo_root,
+            cfg,
+            fresh_null_mode,
+            context,
+        )
+    return _set_pending(
+        _execution_base_row(row),
+        status="not_executed_unknown_method",
+        reason=f"no execution backend registered for method_id={method_id}",
+        execution_scope="method_backend_missing",
+    )
+
+
+def _completed_rows_for_resume(path: Path) -> dict[str, dict[str, Any]]:
+    if not path.exists():
+        return {}
+    try:
+        rows = _read_csv(path)
+    except Exception as error:
+        raise RuntimeError(f"Cannot resume from possibly corrupted shard CSV {path}: {error}") from error
+    return {
+        str(row["case_id"]): row
+        for row in rows
+        if str(row.get("case_id", ""))
+        and str(row.get("status", "")).startswith("completed_")
+        and str(row.get("claim_accept", "")) != ""
+    }
+
+
+def execute_shard_rows_checkpointed(
+    *,
+    repo_root: Path,
+    cfg: dict[str, Any],
+    config_path: Path,
+    global_plan_rows: list[dict[str, Any]],
+    shard_plan_rows: list[dict[str, Any]],
+    fresh_null_mode: str,
+    shard_table_path: Path,
+    shard_summary_path: Path,
+    checkpoint_interval: int,
+    shard_metadata: dict[str, Any],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    indexes = _load_artifact_indexes(repo_root, cfg)
+    context: dict[str, Any] = {}
+    completed_by_case_id = _completed_rows_for_resume(shard_table_path)
+    selected_case_ids = {str(row["case_id"]) for row in shard_plan_rows}
+    completed_by_case_id = {
+        case_id: row
+        for case_id, row in completed_by_case_id.items()
+        if case_id in selected_case_ids
+    }
+    remaining_rows = [
+        row
+        for row in shard_plan_rows
+        if str(row.get("case_id", "")) not in completed_by_case_id
+    ]
+    print(
+        json.dumps(
+            {
+                "event": "shard_resume_state",
+                "completed": len(completed_by_case_id),
+                "remaining": len(remaining_rows),
+                "selected": len(shard_plan_rows),
+                **shard_metadata,
+            },
+            sort_keys=True,
+        ),
+        flush=True,
+    )
+
+    newly_completed = 0
+
+    def checkpoint(event: str) -> dict[str, Any]:
+        ordered_rows = [
+            completed_by_case_id[str(row["case_id"])]
+            for row in shard_plan_rows
+            if str(row["case_id"]) in completed_by_case_id
+        ]
+        summary = _build_execution_summary(
+            repo_root,
+            cfg,
+            config_path,
+            shard_plan_rows,
+            ordered_rows,
+        )
+        summary["shard_scope_status"] = summary["status"]
+        summary["status"] = "completed_shard_subset"
+        summary["full_far_complete"] = False
+        summary["shard"] = {
+            **shard_metadata,
+            "selected_case_count": len(shard_plan_rows),
+            "completed_case_count": len(ordered_rows),
+            "remaining_case_count": len(shard_plan_rows) - len(ordered_rows),
+            "global_plan_case_count": len(global_plan_rows),
+            "checkpoint_event": event,
+            "note": "Shard outputs are incomplete by design; aggregate all shards before interpreting FAR.",
+        }
+        _write_csv_atomic(shard_table_path, ordered_rows)
+        _write_json_atomic(shard_summary_path, summary)
+        print(
+            json.dumps(
+                {
+                    "event": event,
+                    "completed": len(ordered_rows),
+                    "remaining": len(shard_plan_rows) - len(ordered_rows),
+                    "selected": len(shard_plan_rows),
+                    **shard_metadata,
+                },
+                sort_keys=True,
+            ),
+            flush=True,
+        )
+        return summary
+
+    summary = checkpoint("checkpoint_initial")
+    interval = max(1, int(checkpoint_interval or 1))
+    for row in remaining_rows:
+        executed = _execute_one_plan_row(
+            row=row,
+            indexes=indexes,
+            repo_root=repo_root,
+            cfg=cfg,
+            fresh_null_mode=fresh_null_mode,
+            context=context,
+        )
+        completed_by_case_id[str(row["case_id"])] = executed
+        newly_completed += 1
+        if newly_completed % interval == 0:
+            summary = checkpoint("checkpoint_progress")
+    summary = checkpoint("checkpoint_final")
+    ordered_final_rows = [
+        completed_by_case_id[str(row["case_id"])]
+        for row in shard_plan_rows
+        if str(row["case_id"]) in completed_by_case_id
+    ]
+    return ordered_final_rows, summary
 
 
 def _validate_shard_args(args: argparse.Namespace) -> None:
@@ -2152,12 +2315,6 @@ def main() -> int:
                 shard_index=int(args.shard_index),
                 shard_count=int(args.shard_count),
             )
-        executed_rows = execute_plan_rows(
-            repo_root,
-            cfg,
-            execution_plan_rows,
-            fresh_null_mode=args.fresh_null_mode,
-        )
         outputs = cfg.get("outputs") or {}
         summary_path = _resolve(repo_root, outputs.get("final_summary"))
         table_path = _resolve(repo_root, outputs.get("final_table"))
@@ -2168,26 +2325,23 @@ def main() -> int:
             )
         if _is_sharded_execution(args):
             shard_paths = _shard_output_paths(repo_root, args)
-            execution_summary = _build_execution_summary(
-                repo_root,
-                cfg,
-                config_path,
-                execution_plan_rows,
-                executed_rows,
-            )
-            execution_summary["shard_scope_status"] = execution_summary["status"]
-            execution_summary["status"] = "completed_shard_subset"
-            execution_summary["full_far_complete"] = False
-            execution_summary["shard"] = {
+            shard_metadata = {
                 "shard_index": int(args.shard_index),
                 "shard_count": int(args.shard_count),
                 "fresh_null_mode": args.fresh_null_mode,
-                "selected_case_count": len(execution_plan_rows),
-                "global_plan_case_count": len(rows),
-                "note": "Shard outputs are incomplete by design; aggregate all shards before interpreting FAR.",
             }
-            _write_json(shard_paths["summary"], execution_summary, force=args.force)
-            _write_csv(shard_paths["table"], executed_rows, force=args.force)
+            executed_rows, execution_summary = execute_shard_rows_checkpointed(
+                repo_root=repo_root,
+                cfg=cfg,
+                config_path=config_path,
+                global_plan_rows=rows,
+                shard_plan_rows=execution_plan_rows,
+                fresh_null_mode=args.fresh_null_mode,
+                shard_table_path=shard_paths["table"],
+                shard_summary_path=shard_paths["summary"],
+                checkpoint_interval=args.checkpoint_interval,
+                shard_metadata=shard_metadata,
+            )
             print(
                 json.dumps(
                     {
@@ -2206,6 +2360,12 @@ def main() -> int:
                 )
             )
             return 0
+        executed_rows = execute_plan_rows(
+            repo_root,
+            cfg,
+            execution_plan_rows,
+            fresh_null_mode=args.fresh_null_mode,
+        )
         executed_rows = _merge_existing_completed_rows(executed_rows, table_path)
         execution_summary = _build_execution_summary(
             repo_root,

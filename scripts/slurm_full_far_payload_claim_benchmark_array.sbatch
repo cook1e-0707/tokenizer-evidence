@@ -4,7 +4,6 @@
 #SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=240G
-#SBATCH --time=24:00:00
 
 set -euo pipefail
 
@@ -12,9 +11,14 @@ REPO_HOME="${REPO_HOME:-$HOME/tokenizer-evidence}"
 FULL_FAR_CONFIG="${FULL_FAR_CONFIG:-configs/experiment/comparison/full_far_payload_claim.yaml}"
 RUN_MODE="${RUN_MODE:-execute-organic-null-array}"
 SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim}"
-SHARD_COUNT="${SHARD_COUNT:-5}"
-SHARD_INDEX="${SHARD_INDEX:-${SLURM_ARRAY_TASK_ID:-0}}"
+LOCAL_SHARD_COUNT="${LOCAL_SHARD_COUNT:-${SHARD_COUNT:-5}}"
+GLOBAL_SHARD_COUNT="${GLOBAL_SHARD_COUNT:-$LOCAL_SHARD_COUNT}"
+SHARD_OFFSET="${SHARD_OFFSET:-0}"
+LOCAL_SHARD_INDEX="${SLURM_ARRAY_TASK_ID:-0}"
+SHARD_INDEX="${SHARD_INDEX:-$((SHARD_OFFSET + LOCAL_SHARD_INDEX))}"
+SHARD_COUNT="$GLOBAL_SHARD_COUNT"
 SHARD_OUTPUT_DIR="${SHARD_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompts}"
+CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-25}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
 HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token}"
@@ -54,7 +58,12 @@ echo "scratch=$SCRATCH_ROOT"
 echo "run_mode=$RUN_MODE"
 echo "shard_index=$SHARD_INDEX"
 echo "shard_count=$SHARD_COUNT"
+echo "local_shard_index=$LOCAL_SHARD_INDEX"
+echo "local_shard_count=$LOCAL_SHARD_COUNT"
+echo "global_shard_count=$GLOBAL_SHARD_COUNT"
+echo "shard_offset=$SHARD_OFFSET"
 echo "shard_output_dir=$SHARD_OUTPUT_DIR"
+echo "checkpoint_interval=$CHECKPOINT_INTERVAL"
 echo "python=$(command -v python3)"
 
 python3 - <<'PY'
@@ -83,6 +92,7 @@ case "$RUN_MODE" in
       --shard-index "$SHARD_INDEX" \
       --shard-count "$SHARD_COUNT" \
       --shard-output-dir "$SHARD_OUTPUT_DIR" \
+      --checkpoint-interval "$CHECKPOINT_INTERVAL" \
       --force
     ;;
   execute-registered-null-array)
@@ -93,6 +103,7 @@ case "$RUN_MODE" in
       --shard-index "$SHARD_INDEX" \
       --shard-count "$SHARD_COUNT" \
       --shard-output-dir "$SHARD_OUTPUT_DIR" \
+      --checkpoint-interval "$CHECKPOINT_INTERVAL" \
       --force
     ;;
   *)

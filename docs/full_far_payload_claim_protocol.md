@@ -150,6 +150,51 @@ FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark_array.sh
 ```
 
+Parallel organic prompt-bank execution on 4 H200s plus 6 A100s uses one global
+10-shard split and two separate Slurm arrays:
+
+```bash
+# Shards 0-3 on H200 / pomplun.
+GLOBAL_SHARD_COUNT=10 \
+LOCAL_SHARD_COUNT=4 \
+SHARD_OFFSET=0 \
+MAX_PARALLEL=4 \
+SHARD_OUTPUT_DIR=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts-10way \
+PARTITION=pomplun \
+ACCOUNT=cs_yinxin.wan \
+QOS=pomplun \
+GRES=gpu:h200:1 \
+TIME_LIMIT="" \
+RUN_MODE=execute-organic-null-array \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark_array.sh
+
+# Shards 4-9 on A100. Confirm partition/QOS/GRES first on Chimera.
+GLOBAL_SHARD_COUNT=10 \
+LOCAL_SHARD_COUNT=6 \
+SHARD_OFFSET=4 \
+MAX_PARALLEL=6 \
+SHARD_OUTPUT_DIR=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts-10way \
+PARTITION=scavenger \
+ACCOUNT=pi_yinxin.wan \
+QOS=scavenger_unlim \
+GRES=gpu:A100:1 \
+TIME_LIMIT="" \
+RUN_MODE=execute-organic-null-array \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark_array.sh
+```
+
+`TIME_LIMIT=""` omits the `sbatch --time` argument. This does not guarantee
+unlimited runtime; Slurm still applies the partition/QOS default and maximum
+walltime. Verify with:
+
+```bash
+sinfo -p pomplun,scavenger,DGXA100 -o "%P %G %l %D %t %N"
+scontrol show partition pomplun scavenger DGXA100 | egrep 'PartitionName=|MaxTime=|DefaultTime=|AllowQos=|State=|TRES=|Gres='
+sacctmgr -p show qos pomplun,scavenger,scavenger_unlim format=Name,MaxWall,MaxTRESPU,MaxJobsPU,MaxSubmitJobsPU | column -ts '|'
+```
+
 Array jobs write only shard-local files under:
 
 ```text

@@ -5,9 +5,12 @@ REPO_HOME="${REPO_HOME:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 FULL_FAR_CONFIG="${FULL_FAR_CONFIG:-configs/experiment/comparison/full_far_payload_claim.yaml}"
 RUN_MODE="${RUN_MODE:-execute-organic-null-array}"
 SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim}"
-SHARD_COUNT="${SHARD_COUNT:-5}"
-MAX_PARALLEL="${MAX_PARALLEL:-$SHARD_COUNT}"
+LOCAL_SHARD_COUNT="${LOCAL_SHARD_COUNT:-${SHARD_COUNT:-5}}"
+GLOBAL_SHARD_COUNT="${GLOBAL_SHARD_COUNT:-$LOCAL_SHARD_COUNT}"
+SHARD_OFFSET="${SHARD_OFFSET:-0}"
+MAX_PARALLEL="${MAX_PARALLEL:-$LOCAL_SHARD_COUNT}"
 SHARD_OUTPUT_DIR="${SHARD_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompts}"
+CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-25}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 PARTITION="${PARTITION:-pomplun}"
 ACCOUNT="${ACCOUNT:-cs_yinxin.wan}"
@@ -15,10 +18,25 @@ QOS="${QOS:-pomplun}"
 GRES="${GRES:-gpu:h200:1}"
 CPUS_PER_TASK="${CPUS_PER_TASK:-16}"
 MEM="${MEM:-240G}"
-TIME_LIMIT="${TIME_LIMIT:-24:00:00}"
+TIME_LIMIT="${TIME_LIMIT-24:00:00}"
 
-if ! [[ "$SHARD_COUNT" =~ ^[0-9]+$ ]] || [ "$SHARD_COUNT" -le 0 ]; then
-  echo "SHARD_COUNT must be a positive integer; got $SHARD_COUNT" >&2
+if ! [[ "$LOCAL_SHARD_COUNT" =~ ^[0-9]+$ ]] || [ "$LOCAL_SHARD_COUNT" -le 0 ]; then
+  echo "LOCAL_SHARD_COUNT/SHARD_COUNT must be a positive integer; got $LOCAL_SHARD_COUNT" >&2
+  exit 2
+fi
+
+if ! [[ "$GLOBAL_SHARD_COUNT" =~ ^[0-9]+$ ]] || [ "$GLOBAL_SHARD_COUNT" -le 0 ]; then
+  echo "GLOBAL_SHARD_COUNT must be a positive integer; got $GLOBAL_SHARD_COUNT" >&2
+  exit 2
+fi
+
+if ! [[ "$SHARD_OFFSET" =~ ^[0-9]+$ ]]; then
+  echo "SHARD_OFFSET must be a non-negative integer; got $SHARD_OFFSET" >&2
+  exit 2
+fi
+
+if [ $((SHARD_OFFSET + LOCAL_SHARD_COUNT)) -gt "$GLOBAL_SHARD_COUNT" ]; then
+  echo "SHARD_OFFSET + LOCAL_SHARD_COUNT must be <= GLOBAL_SHARD_COUNT" >&2
   exit 2
 fi
 
@@ -32,18 +50,21 @@ unset SBATCH_QOS
 unset SLURM_QOS
 unset SBATCH_ACCOUNT
 
-ARRAY_SPEC="0-$((SHARD_COUNT - 1))%$MAX_PARALLEL"
+ARRAY_SPEC="0-$((LOCAL_SHARD_COUNT - 1))%$MAX_PARALLEL"
 SBATCH_ARGS=(
   --partition="$PARTITION"
   --gres="$GRES"
   --cpus-per-task="$CPUS_PER_TASK"
   --mem="$MEM"
-  --time="$TIME_LIMIT"
   --array="$ARRAY_SPEC"
   --output="$SCRATCH_ROOT/slurm/%x-%A_%a.out"
   --error="$SCRATCH_ROOT/slurm/%x-%A_%a.err"
-  --export=HOME,REPO_HOME="$REPO_HOME",FULL_FAR_CONFIG="$FULL_FAR_CONFIG",RUN_MODE="$RUN_MODE",SCRATCH_ROOT="$SCRATCH_ROOT",SHARD_COUNT="$SHARD_COUNT",SHARD_OUTPUT_DIR="$SHARD_OUTPUT_DIR",VENV_PATH="$VENV_PATH"
+  --export=HOME,REPO_HOME="$REPO_HOME",FULL_FAR_CONFIG="$FULL_FAR_CONFIG",RUN_MODE="$RUN_MODE",SCRATCH_ROOT="$SCRATCH_ROOT",LOCAL_SHARD_COUNT="$LOCAL_SHARD_COUNT",GLOBAL_SHARD_COUNT="$GLOBAL_SHARD_COUNT",SHARD_OFFSET="$SHARD_OFFSET",SHARD_OUTPUT_DIR="$SHARD_OUTPUT_DIR",CHECKPOINT_INTERVAL="$CHECKPOINT_INTERVAL",VENV_PATH="$VENV_PATH"
 )
+
+if [ -n "$TIME_LIMIT" ]; then
+  SBATCH_ARGS+=(--time="$TIME_LIMIT")
+fi
 
 if [ -n "$ACCOUNT" ]; then
   SBATCH_ARGS+=(--account="$ACCOUNT")
