@@ -35,6 +35,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--shard-dir", required=True)
     parser.add_argument("--fresh-null-mode", default="organic-prompts")
     parser.add_argument("--expected-shard-count", type=int, default=None)
+    parser.add_argument(
+        "--allow-incomplete-shards",
+        action="store_true",
+        help=(
+            "Allow aggregating shard CSVs whose companion JSON summaries still report "
+            "remaining rows. This is only for debugging partial runs."
+        ),
+    )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
 
@@ -57,6 +65,27 @@ def _completed_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _shard_paths(shard_dir: Path, fresh_null_mode: str) -> list[Path]:
     mode = str(fresh_null_mode).replace("-", "_")
     return sorted(shard_dir.glob(f"full_far_payload_claim_{mode}_shard_*_of_*.csv"))
+
+
+def _validate_shard_complete(path: Path) -> dict[str, Any]:
+    summary_path = path.with_suffix(".json")
+    if not summary_path.exists():
+        raise RuntimeError(f"Missing shard summary for {path}: expected {summary_path}")
+    try:
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    except Exception as error:
+        raise RuntimeError(f"Cannot read shard summary {summary_path}: {error}") from error
+    shard = summary.get("shard") or {}
+    remaining = int(shard.get("remaining_case_count", 0))
+    selected = int(shard.get("selected_case_count", 0))
+    completed = int(shard.get("completed_case_count", 0))
+    if remaining != 0 or completed != selected:
+        raise RuntimeError(
+            "Refusing to aggregate incomplete shard "
+            f"{path.name}: completed={completed}, selected={selected}, remaining={remaining}. "
+            "Use --allow-incomplete-shards only for debugging partial runs."
+        )
+    return summary
 
 
 def _base_rows(
@@ -95,6 +124,9 @@ def main() -> int:
         )
     if not shard_paths:
         raise FileNotFoundError(f"No shard CSVs found in {shard_dir} for mode={args.fresh_null_mode}.")
+    shard_summaries = []
+    if not args.allow_incomplete_shards:
+        shard_summaries = [_validate_shard_complete(path) for path in shard_paths]
 
     plan_rows = build_plan_rows(cfg)
     combined_by_case_id = {
@@ -150,6 +182,7 @@ def main() -> int:
         "expected_shard_count": args.expected_shard_count,
         "shard_completed_row_count": shard_completed_count,
         "duplicate_completed_case_id_count": len(duplicate_completed_case_ids),
+        "complete_shard_summary_count": len(shard_summaries),
         "shard_csvs": [str(path) for path in shard_paths],
     }
     _write_json(final_summary_path, execution_summary, force=args.force)
