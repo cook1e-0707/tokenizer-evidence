@@ -4,6 +4,7 @@
 #SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=240G
+#SBATCH --time=30-00:00:00
 
 set -euo pipefail
 
@@ -18,7 +19,7 @@ LOCAL_SHARD_INDEX="${SLURM_ARRAY_TASK_ID:-0}"
 SHARD_INDEX="${SHARD_INDEX:-$((SHARD_OFFSET + LOCAL_SHARD_INDEX))}"
 SHARD_COUNT="$GLOBAL_SHARD_COUNT"
 SHARD_OUTPUT_DIR="${SHARD_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompts}"
-CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-25}"
+CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-1}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
 HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token}"

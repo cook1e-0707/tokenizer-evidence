@@ -164,7 +164,8 @@ PARTITION=pomplun \
 ACCOUNT=cs_yinxin.wan \
 QOS=pomplun \
 GRES=gpu:h200:1 \
-TIME_LIMIT="" \
+TIME_LIMIT=30-00:00:00 \
+CHECKPOINT_INTERVAL=1 \
 RUN_MODE=execute-organic-null-array \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark_array.sh
@@ -179,15 +180,16 @@ PARTITION=scavenger \
 ACCOUNT=pi_yinxin.wan \
 QOS=scavenger_unlim \
 GRES=gpu:A100:1 \
-TIME_LIMIT="" \
+TIME_LIMIT=30-00:00:00 \
+CHECKPOINT_INTERVAL=1 \
 RUN_MODE=execute-organic-null-array \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark_array.sh
 ```
 
-`TIME_LIMIT=""` omits the `sbatch --time` argument. This does not guarantee
-unlimited runtime; Slurm still applies the partition/QOS default and maximum
-walltime. Verify with:
+Do not set `TIME_LIMIT=""` for long jobs. Omitting `sbatch --time` can fall back
+to a short partition default even when the partition maximum is much larger.
+Use an explicit limit at or below the partition/QOS maximum. Verify with:
 
 ```bash
 sinfo -p pomplun,scavenger,DGXA100 -o "%P %G %l %D %t %N"
