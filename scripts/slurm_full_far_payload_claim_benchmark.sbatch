@@ -13,6 +13,7 @@ FULL_FAR_CONFIG="${FULL_FAR_CONFIG:-configs/experiment/comparison/full_far_paylo
 RUN_MODE="${RUN_MODE:-write-plan}"
 SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
+ALLOW_SLOW_ORGANIC_ROW_EXECUTION="${ALLOW_SLOW_ORGANIC_ROW_EXECUTION:-0}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
 HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token}"
 
@@ -47,6 +48,7 @@ echo "repo=$REPO_HOME"
 echo "config=$FULL_FAR_CONFIG"
 echo "scratch=$SCRATCH_ROOT"
 echo "run_mode=$RUN_MODE"
+echo "allow_slow_organic_row_execution=$ALLOW_SLOW_ORGANIC_ROW_EXECUTION"
 echo "python=$(command -v python3)"
 
 python3 - <<'PY'
@@ -92,6 +94,10 @@ case "$RUN_MODE" in
       --force
     ;;
   execute-organic-null)
+    if [ "$ALLOW_SLOW_ORGANIC_ROW_EXECUTION" != "1" ]; then
+      echo "Refusing slow row-level organic FAR execution. Use generate-organic-cache-array plus build_full_far_organic_from_cache.py, or set ALLOW_SLOW_ORGANIC_ROW_EXECUTION=1 to override." >&2
+      exit 2
+    fi
     python3 scripts/run_full_far_payload_claim_benchmark.py \
       --config "$FULL_FAR_CONFIG" \
       --execute \
@@ -99,6 +105,10 @@ case "$RUN_MODE" in
       --force
     ;;
   execute-registered-and-organic-null)
+    if [ "$ALLOW_SLOW_ORGANIC_ROW_EXECUTION" != "1" ]; then
+      echo "Refusing slow row-level registered-and-organic FAR execution. Run registered and two-stage organic separately, or set ALLOW_SLOW_ORGANIC_ROW_EXECUTION=1 to override." >&2
+      exit 2
+    fi
     python3 scripts/run_full_far_payload_claim_benchmark.py \
       --config "$FULL_FAR_CONFIG" \
       --execute \

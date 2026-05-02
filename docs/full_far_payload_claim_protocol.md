@@ -132,57 +132,49 @@ FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark.sh
 ```
 
-Fresh base-Qwen organic prompt-bank null execution on Chimera H200:
+Fresh base-Qwen organic prompt-bank null execution is two-stage. Stage 1 runs on
+GPUs and writes prompt-level cache rows. Stage 2 runs offline from that cache and
+expands the full organic FAR row shards. Do not use the older
+`execute-organic-null-array` row-level path unless intentionally debugging it.
+
+Parallel Stage 1 organic prompt-cache generation on 4 H200s plus 6 A100s uses
+one global 10-shard split and two separate Slurm arrays:
 
 ```bash
-RUN_MODE=execute-organic-null \
-FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
-bash scripts/submit_full_far_payload_claim_benchmark.sh
-```
+SCR=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim
+CACHE_DIR=$SCR/shards/organic-prompt-cache-10way
+ROW_SHARD_DIR=$SCR/shards/organic-prompts-10way-from-cache
+mkdir -p "$CACHE_DIR" "$ROW_SHARD_DIR"
 
-Parallel organic prompt-bank execution on 3-5 H200s:
-
-```bash
-SHARD_COUNT=5 \
-MAX_PARALLEL=5 \
-RUN_MODE=execute-organic-null-array \
-FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
-bash scripts/submit_full_far_payload_claim_benchmark_array.sh
-```
-
-Parallel organic prompt-bank execution on 4 H200s plus 6 A100s uses one global
-10-shard split and two separate Slurm arrays:
-
-```bash
 # Shards 0-3 on H200 / pomplun.
 GLOBAL_SHARD_COUNT=10 \
 LOCAL_SHARD_COUNT=4 \
 SHARD_OFFSET=0 \
 MAX_PARALLEL=4 \
-SHARD_OUTPUT_DIR=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts-10way \
+CACHE_OUTPUT_DIR=$CACHE_DIR \
 PARTITION=pomplun \
 ACCOUNT=cs_yinxin.wan \
 QOS=pomplun \
 GRES=gpu:h200:1 \
 TIME_LIMIT=30-00:00:00 \
 CHECKPOINT_INTERVAL=1 \
-RUN_MODE=execute-organic-null-array \
+RUN_MODE=generate-organic-cache-array \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark_array.sh
 
-# Shards 4-9 on A100. Confirm partition/QOS/GRES first on Chimera.
+# Shards 4-9 on A100.
 GLOBAL_SHARD_COUNT=10 \
 LOCAL_SHARD_COUNT=6 \
 SHARD_OFFSET=4 \
 MAX_PARALLEL=6 \
-SHARD_OUTPUT_DIR=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts-10way \
-PARTITION=scavenger \
+CACHE_OUTPUT_DIR=$CACHE_DIR \
+PARTITION=DGXA100 \
 ACCOUNT=pi_yinxin.wan \
 QOS=scavenger_unlim \
 GRES=gpu:A100:1 \
 TIME_LIMIT=30-00:00:00 \
 CHECKPOINT_INTERVAL=1 \
-RUN_MODE=execute-organic-null-array \
+RUN_MODE=generate-organic-cache-array \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
 bash scripts/submit_full_far_payload_claim_benchmark_array.sh
 ```
@@ -193,25 +185,45 @@ Use an explicit limit at or below the partition/QOS maximum. Verify with:
 
 ```bash
 sinfo -p pomplun,scavenger,DGXA100 -o "%P %G %l %D %t %N"
-scontrol show partition pomplun scavenger DGXA100 | egrep 'PartitionName=|MaxTime=|DefaultTime=|AllowQos=|State=|TRES=|Gres='
+for p in pomplun scavenger DGXA100; do scontrol show partition "$p"; done | egrep 'PartitionName=|MaxTime=|DefaultTime=|AllowQos=|State=|TRES=|Gres='
 sacctmgr -p show qos pomplun,scavenger,scavenger_unlim format=Name,MaxWall,MaxTRESPU,MaxJobsPU,MaxSubmitJobsPU | column -ts '|'
 ```
 
-Array jobs write only shard-local files under:
+Stage 1 array jobs write prompt-cache shard files under:
 
 ```text
-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts/
+/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompt-cache-10way/
 ```
 
-They must not write `results/tables/full_far_payload_claim.csv` directly. After
-all shards finish, aggregate on the head node:
+Progress check:
+
+```bash
+find "$CACHE_DIR" -maxdepth 1 \
+  -name 'full_far_payload_claim_organic_prompt_cache_shard_*_of_010.csv' \
+  -print -exec wc -l {} \;
+```
+
+After all prompt-cache shards finish, run Stage 2 on the head node or a CPU job:
+
+```bash
+python3 scripts/build_full_far_organic_from_cache.py \
+  --config configs/experiment/comparison/full_far_payload_claim.yaml \
+  --cache-dir "$CACHE_DIR" \
+  --row-shard-output-dir "$ROW_SHARD_DIR" \
+  --expected-shard-count 10 \
+  --force
+```
+
+Stage 2 writes row shards compatible with the existing shard aggregator. They
+must not write `results/tables/full_far_payload_claim.csv` directly. Aggregate
+after Stage 2:
 
 ```bash
 python3 scripts/aggregate_full_far_payload_claim_shards.py \
   --config configs/experiment/comparison/full_far_payload_claim.yaml \
-  --shard-dir /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts \
+  --shard-dir "$ROW_SHARD_DIR" \
   --fresh-null-mode organic-prompts \
-  --expected-shard-count 5 \
+  --expected-shard-count 10 \
   --force
 ```
 
@@ -302,14 +314,17 @@ This is a small registered-probe null slice, not a complete FAR result.
 
 ## Next Organic Prompt-Bank Slice
 
-The `execute-organic-null` mode runs the required base-Qwen organic prompt rows
-and preserves previously completed registered rows from the existing final CSV:
+Organic prompt-bank execution now uses the two-stage cache backend. The older
+`execute-organic-null` and `execute-organic-null-array` row-level modes are
+guarded because they repeat too much per-row work; they require
+`ALLOW_SLOW_ORGANIC_ROW_EXECUTION=1` to run.
 
 ```text
 methods: 2
 organic prompts per budget per method: 1000
 query budgets: 4
-fresh organic rows: 8000
+prompt-cache rows: 1000
+fresh organic rows after offline expansion: 8000
 required null model: base_qwen
 ```
 

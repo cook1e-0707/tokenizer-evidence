@@ -6,6 +6,7 @@ FULL_FAR_CONFIG="${FULL_FAR_CONFIG:-configs/experiment/comparison/full_far_paylo
 RUN_MODE="${RUN_MODE:-write-plan}"
 SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
+ALLOW_SLOW_ORGANIC_ROW_EXECUTION="${ALLOW_SLOW_ORGANIC_ROW_EXECUTION:-0}"
 PARTITION="${PARTITION:-pomplun}"
 ACCOUNT="${ACCOUNT:-cs_yinxin.wan}"
 QOS="${QOS:-pomplun}"
@@ -27,7 +28,7 @@ SBATCH_ARGS=(
   --time="$TIME_LIMIT"
   --output="$SCRATCH_ROOT/slurm/%x-%j.out"
   --error="$SCRATCH_ROOT/slurm/%x-%j.err"
-  --export=HOME,REPO_HOME="$REPO_HOME",FULL_FAR_CONFIG="$FULL_FAR_CONFIG",RUN_MODE="$RUN_MODE",SCRATCH_ROOT="$SCRATCH_ROOT",VENV_PATH="$VENV_PATH"
+  --export=HOME,REPO_HOME="$REPO_HOME",FULL_FAR_CONFIG="$FULL_FAR_CONFIG",RUN_MODE="$RUN_MODE",SCRATCH_ROOT="$SCRATCH_ROOT",VENV_PATH="$VENV_PATH",ALLOW_SLOW_ORGANIC_ROW_EXECUTION="$ALLOW_SLOW_ORGANIC_ROW_EXECUTION"
 )
 
 if [ -n "$ACCOUNT" ]; then

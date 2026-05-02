@@ -10,7 +10,7 @@ set -euo pipefail
 
 REPO_HOME="${REPO_HOME:-$HOME/tokenizer-evidence}"
 FULL_FAR_CONFIG="${FULL_FAR_CONFIG:-configs/experiment/comparison/full_far_payload_claim.yaml}"
-RUN_MODE="${RUN_MODE:-execute-organic-null-array}"
+RUN_MODE="${RUN_MODE:-generate-organic-cache-array}"
 SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim}"
 LOCAL_SHARD_COUNT="${LOCAL_SHARD_COUNT:-${SHARD_COUNT:-5}}"
 GLOBAL_SHARD_COUNT="${GLOBAL_SHARD_COUNT:-$LOCAL_SHARD_COUNT}"
@@ -19,12 +19,14 @@ LOCAL_SHARD_INDEX="${SLURM_ARRAY_TASK_ID:-0}"
 SHARD_INDEX="${SHARD_INDEX:-$((SHARD_OFFSET + LOCAL_SHARD_INDEX))}"
 SHARD_COUNT="$GLOBAL_SHARD_COUNT"
 SHARD_OUTPUT_DIR="${SHARD_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompts}"
+CACHE_OUTPUT_DIR="${CACHE_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompt-cache}"
 CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-1}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
+ALLOW_SLOW_ORGANIC_ROW_EXECUTION="${ALLOW_SLOW_ORGANIC_ROW_EXECUTION:-0}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
 HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token}"
 
-mkdir -p "$SCRATCH_ROOT/slurm" "$SHARD_OUTPUT_DIR"
+mkdir -p "$SCRATCH_ROOT/slurm" "$SHARD_OUTPUT_DIR" "$CACHE_OUTPUT_DIR"
 cd "$REPO_HOME"
 
 set +u
@@ -64,7 +66,9 @@ echo "local_shard_count=$LOCAL_SHARD_COUNT"
 echo "global_shard_count=$GLOBAL_SHARD_COUNT"
 echo "shard_offset=$SHARD_OFFSET"
 echo "shard_output_dir=$SHARD_OUTPUT_DIR"
+echo "cache_output_dir=$CACHE_OUTPUT_DIR"
 echo "checkpoint_interval=$CHECKPOINT_INTERVAL"
+echo "allow_slow_organic_row_execution=$ALLOW_SLOW_ORGANIC_ROW_EXECUTION"
 echo "python=$(command -v python3)"
 
 python3 - <<'PY'
@@ -85,7 +89,19 @@ else:
 PY
 
 case "$RUN_MODE" in
+  generate-organic-cache-array)
+    python3 scripts/run_full_far_organic_prompt_cache.py \
+      --config "$FULL_FAR_CONFIG" \
+      --cache-output-dir "$CACHE_OUTPUT_DIR" \
+      --shard-index "$SHARD_INDEX" \
+      --shard-count "$SHARD_COUNT" \
+      --checkpoint-interval "$CHECKPOINT_INTERVAL"
+    ;;
   execute-organic-null-array)
+    if [ "$ALLOW_SLOW_ORGANIC_ROW_EXECUTION" != "1" ]; then
+      echo "Refusing slow row-level organic FAR execution. Use RUN_MODE=generate-organic-cache-array plus build_full_far_organic_from_cache.py, or set ALLOW_SLOW_ORGANIC_ROW_EXECUTION=1 to override." >&2
+      exit 2
+    fi
     python3 scripts/run_full_far_payload_claim_benchmark.py \
       --config "$FULL_FAR_CONFIG" \
       --execute \
@@ -108,7 +124,7 @@ case "$RUN_MODE" in
       --force
     ;;
   *)
-    echo "Unsupported RUN_MODE=$RUN_MODE; expected execute-organic-null-array or execute-registered-null-array" >&2
+    echo "Unsupported RUN_MODE=$RUN_MODE; expected generate-organic-cache-array, execute-organic-null-array, or execute-registered-null-array" >&2
     exit 2
     ;;
 esac
