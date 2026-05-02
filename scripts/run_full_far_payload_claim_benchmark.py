@@ -1136,6 +1136,26 @@ def _ours_verify_generated_organic_text(
     )
     compiled_train_contract = claim_context["compiled_train_contract"]
     layout = claim_context["layout"]
+    parsed_line_count = len(tuple(line.strip() for line in generated_text.splitlines() if line.strip()))
+    expected_slot_count = len(compiled_train_contract.eval_contract.expected_slot_values)
+    if parsed_line_count < expected_slot_count:
+        result = {
+            "claim_accept": False,
+            "field_valid_rate": 0.0,
+            "bucket_correct_rate": 0.0,
+            "slot_exact_rate": 0.0,
+            "valid_canonical_block_count": 0,
+            "decoded_units": [],
+            "expected_units": list(claim_context["expected_units"]),
+            "rendered_canonical_text": "",
+            "fast_reject_reason": (
+                "organic_generation_line_count_below_expected_slot_count"
+            ),
+            "parsed_line_count": parsed_line_count,
+            "expected_slot_count": expected_slot_count,
+        }
+        context[cache_key] = result
+        return result
     compiled_result = evaluate_foundation_completion(
         generated_text,
         layout=layout,
