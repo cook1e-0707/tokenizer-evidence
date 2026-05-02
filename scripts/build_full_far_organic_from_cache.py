@@ -56,25 +56,50 @@ def _load_tokenizer(cfg: dict[str, Any], model_name: str) -> Any:
     from transformers import AutoTokenizer
 
     runtime = dict(cfg.get("runtime") or {})
-    configured_hf_home = (
-        os.environ.get("HF_HOME")
-        or os.environ.get("TRANSFORMERS_CACHE")
-        or str(runtime.get("hf_home") or "").strip()
-    )
-    if not configured_hf_home:
-        user = os.environ.get("USER") or os.environ.get("LOGNAME") or ""
-        scratch_hf_home = Path(f"/hpcstor6/scratch01/g/{user}/huggingface") if user else None
-        if scratch_hf_home is not None and scratch_hf_home.exists():
-            configured_hf_home = str(scratch_hf_home)
-    if configured_hf_home:
-        os.environ.setdefault("HF_HOME", configured_hf_home)
-        os.environ.setdefault("TRANSFORMERS_CACHE", configured_hf_home)
+    local_files_only = bool(runtime.get("local_files_only", True))
+    trust_remote_code = bool(runtime.get("trust_remote_code", True))
+    user = os.environ.get("USER") or os.environ.get("LOGNAME") or ""
+    candidate_cache_dirs = [
+        os.environ.get("HF_HOME"),
+        os.environ.get("TRANSFORMERS_CACHE"),
+        str(runtime.get("hf_home") or "").strip() or None,
+        str(Path(f"/hpcstor6/scratch01/g/{user}/huggingface")) if user else None,
+    ]
+    seen: set[str] = set()
+    cache_dirs: list[str | None] = []
+    for raw in candidate_cache_dirs:
+        if raw is None or str(raw).strip() == "":
+            continue
+        value = str(raw)
+        if value in seen:
+            continue
+        seen.add(value)
+        cache_dirs.append(value)
+    cache_dirs.append(None)
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_name,
-        local_files_only=bool(runtime.get("local_files_only", True)),
-        trust_remote_code=bool(runtime.get("trust_remote_code", True)),
-    )
+    errors: list[str] = []
+    tokenizer = None
+    for cache_dir in cache_dirs:
+        if cache_dir is not None:
+            os.environ.setdefault("HF_HOME", cache_dir)
+            os.environ.setdefault("TRANSFORMERS_CACHE", cache_dir)
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(
+                model_name,
+                cache_dir=cache_dir,
+                local_files_only=local_files_only,
+                trust_remote_code=trust_remote_code,
+            )
+            break
+        except Exception as error:
+            errors.append(f"cache_dir={cache_dir or '<default>'}: {type(error).__name__}: {error}")
+    if tokenizer is None:
+        raise RuntimeError(
+            "Could not load tokenizer for organic cache expansion. Tried:\n"
+            + "\n".join(errors)
+            + "\nSet HF_HOME/TRANSFORMERS_CACHE to the same cache used by the Slurm GPU jobs, "
+            "or pass a config with runtime.local_files_only=false if online downloads are allowed."
+        )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token or tokenizer.bos_token
     return tokenizer
