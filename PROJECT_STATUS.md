@@ -1,5 +1,44 @@
 # Project Status
 
+## 2026-05-03 Full FAR Status
+
+- Current repository head for the Full FAR workflow is `93053a2` (`Support split CPU arrays for organic FAR expansion`).
+- Full FAR remains in progress, not complete. The correct current state is:
+  - artifact-backed claim subset is available but is not full FAR;
+  - required base-Qwen registered-probe null subset has run on Chimera H200;
+  - required base-Qwen organic prompt-bank null is running through the new two-stage backend;
+  - non-owner probes and optional non-Qwen / unprotected-Qwen nulls remain downstream.
+- Required base-Qwen registered-probe null slice:
+  - completed fresh registered null rows: `384`;
+  - false accepts observed in the completed registered-probe metrics: `0`;
+  - scope remains a small registered-probe slice, not complete full FAR.
+- Required base-Qwen organic prompt-bank null:
+  - Stage 1 GPU prompt cache is complete: `10` prompt-cache CSV shards, `1000` `completed_prompt_cache` rows.
+  - Stage 1 used a global 10-way split across H200 and A100 resources.
+  - The older row-level organic path is deprecated for production because it repeats base-Qwen inference per FAR row and is too slow.
+  - The old local `comparison/full_far_payload_claim/shards/organic-prompts-10way/` directory contains only `55` partial row-level rows and must not be aggregated.
+  - Stage 2 CPU expansion is currently assigned as a 20-way row-shard build under:
+    - `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim/shards/organic-prompts-20way-from-cache`
+  - Current Stage 2 Slurm split:
+    - `Intel6240`: row shards `0-9` (`SHARD_OFFSET=0`, `GLOBAL_SHARD_COUNT=20`);
+    - `Intel6326`: row shards `10-19` (`SHARD_OFFSET=10`, `GLOBAL_SHARD_COUNT=20`).
+  - The observed task stdout confirms `shard_count=20` and non-overlapping shard indices for both CPU partitions.
+- Expected Stage 2 output before aggregation:
+  - `20` CSV row shards named `full_far_payload_claim_organic_prompts_shard_*_of_020.csv`;
+  - `20` JSON shard summaries named `full_far_payload_claim_organic_prompts_shard_*_of_020.json`.
+- Aggregation must use:
+  - `scripts/aggregate_full_far_payload_claim_shards.py`;
+  - `--fresh-null-mode organic-prompts`;
+  - `--expected-shard-count 20`.
+- Guardrail:
+  - incomplete shard aggregation is intentionally rejected by default;
+  - do not aggregate `organic-prompts-10way` partial row-level output;
+  - do not interpret organic FAR until all `20` Stage 2 row shards are present.
+- Decision gate after Stage 2:
+  - aggregate organic FAR by method and query budget;
+  - if organic prompt-bank false accepts remain `0`, proceed to non-owner probes;
+  - optional non-Qwen / unprotected-Qwen null models remain lower priority.
+
 ## Current Standing Status
 
 - Accepted clean compiled path:
