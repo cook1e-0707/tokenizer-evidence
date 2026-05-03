@@ -207,11 +207,35 @@ After all prompt-cache shards finish, run Stage 2 as a CPU array. Do not submit
 this step to `pomplun`: it is CPU-only post-processing and does not request
 `--gres`, so it should use a CPU partition such as `Intel6240` or `Intel6326`.
 The array parallelizes by output row shard; increasing `--cpus-per-task` alone
-does not speed up the serial Python loop much.
+does not speed up the serial Python loop much. A 20-way split can be submitted
+as two 10-task arrays across two CPU partitions:
 
 ```bash
+ROW_SHARD_DIR=$SCR/shards/organic-prompts-20way-from-cache
+
+# Row shards 0-9 on Intel6240.
 PARTITION=Intel6240 \
 ARRAY=1 \
+EXPECTED_SHARD_COUNT=10 \
+GLOBAL_SHARD_COUNT=20 \
+LOCAL_SHARD_COUNT=10 \
+SHARD_OFFSET=0 \
+MAX_PARALLEL=10 \
+CPUS_PER_TASK=16 \
+MEM=120G \
+TIME_LIMIT=4-00:00:00 \
+CACHE_DIR=$CACHE_DIR \
+ROW_SHARD_DIR=$ROW_SHARD_DIR \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_build_full_far_organic_from_cache.sh
+
+# Row shards 10-19 on Intel6326.
+PARTITION=Intel6326 \
+ARRAY=1 \
+EXPECTED_SHARD_COUNT=10 \
+GLOBAL_SHARD_COUNT=20 \
+LOCAL_SHARD_COUNT=10 \
+SHARD_OFFSET=10 \
 MAX_PARALLEL=10 \
 CPUS_PER_TASK=16 \
 MEM=120G \
@@ -231,7 +255,7 @@ python3 scripts/aggregate_full_far_payload_claim_shards.py \
   --config configs/experiment/comparison/full_far_payload_claim.yaml \
   --shard-dir "$ROW_SHARD_DIR" \
   --fresh-null-mode organic-prompts \
-  --expected-shard-count 10 \
+  --expected-shard-count 20 \
   --force
 ```
 

@@ -13,8 +13,11 @@ SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evi
 CACHE_DIR="${CACHE_DIR:-$SCRATCH_ROOT/shards/organic-prompt-cache-10way}"
 ROW_SHARD_DIR="${ROW_SHARD_DIR:-$SCRATCH_ROOT/shards/organic-prompts-10way-from-cache}"
 EXPECTED_SHARD_COUNT="${EXPECTED_SHARD_COUNT:-10}"
-SHARD_INDEX="${SHARD_INDEX:-${SLURM_ARRAY_TASK_ID:-}}"
-SHARD_COUNT="${SHARD_COUNT:-$EXPECTED_SHARD_COUNT}"
+GLOBAL_SHARD_COUNT="${GLOBAL_SHARD_COUNT:-${SHARD_COUNT:-$EXPECTED_SHARD_COUNT}}"
+LOCAL_SHARD_INDEX="${SLURM_ARRAY_TASK_ID:-0}"
+SHARD_OFFSET="${SHARD_OFFSET:-0}"
+SHARD_INDEX="${SHARD_INDEX:-$((SHARD_OFFSET + LOCAL_SHARD_INDEX))}"
+SHARD_COUNT="$GLOBAL_SHARD_COUNT"
 FORCE="${FORCE:-1}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
@@ -53,7 +56,9 @@ echo "scratch=$SCRATCH_ROOT"
 echo "cache_dir=$CACHE_DIR"
 echo "row_shard_dir=$ROW_SHARD_DIR"
 echo "expected_shard_count=$EXPECTED_SHARD_COUNT"
-echo "shard_index=${SHARD_INDEX:-all}"
+echo "local_shard_index=$LOCAL_SHARD_INDEX"
+echo "shard_offset=$SHARD_OFFSET"
+echo "shard_index=$SHARD_INDEX"
 echo "shard_count=$SHARD_COUNT"
 echo "force=$FORCE"
 echo "hf_home=$HF_HOME"
@@ -67,9 +72,7 @@ EXTRA_ARGS=()
 if [ "$FORCE" = "1" ]; then
   EXTRA_ARGS+=(--force)
 fi
-if [ -n "$SHARD_INDEX" ]; then
-  EXTRA_ARGS+=(--shard-index "$SHARD_INDEX" --shard-count "$SHARD_COUNT")
-fi
+EXTRA_ARGS+=(--shard-index "$SHARD_INDEX" --shard-count "$SHARD_COUNT")
 
 python3 scripts/build_full_far_organic_from_cache.py \
   --config "$FULL_FAR_CONFIG" \
