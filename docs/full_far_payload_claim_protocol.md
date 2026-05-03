@@ -203,15 +203,19 @@ find "$CACHE_DIR" -maxdepth 1 \
   -print -exec wc -l {} \;
 ```
 
-After all prompt-cache shards finish, run Stage 2 on the head node or a CPU job:
+After all prompt-cache shards finish, run Stage 2 as a CPU job. Do not submit
+this step to `pomplun`: it is CPU-only post-processing and does not request
+`--gres`, so it should use a CPU partition such as `Intel6240` or `Intel6326`.
 
 ```bash
-python3 scripts/build_full_far_organic_from_cache.py \
-  --config configs/experiment/comparison/full_far_payload_claim.yaml \
-  --cache-dir "$CACHE_DIR" \
-  --row-shard-output-dir "$ROW_SHARD_DIR" \
-  --expected-shard-count 10 \
-  --force
+PARTITION=Intel6240 \
+CPUS_PER_TASK=32 \
+MEM=120G \
+TIME_LIMIT=12:00:00 \
+CACHE_DIR=$CACHE_DIR \
+ROW_SHARD_DIR=$ROW_SHARD_DIR \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_build_full_far_organic_from_cache.sh
 ```
 
 Stage 2 writes row shards compatible with the existing shard aggregator. They
