@@ -48,6 +48,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cache-dir", required=True)
     parser.add_argument("--row-shard-output-dir", required=True)
     parser.add_argument("--expected-shard-count", type=int, default=None)
+    parser.add_argument(
+        "--shard-index",
+        type=int,
+        default=None,
+        help="Optional single row-shard index to build. Omit to build all row shards serially.",
+    )
+    parser.add_argument(
+        "--shard-count",
+        type=int,
+        default=None,
+        help="Global row-shard count. Defaults to --expected-shard-count or cache shard count.",
+    )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
 
@@ -426,10 +438,21 @@ def main() -> int:
     perinucleus_context = _perinucleus_context(repo_root, cfg, tokenizer)
 
     plan_rows = build_plan_rows(cfg)
-    shard_count = args.expected_shard_count or len(cache_paths)
+    shard_count = args.shard_count or args.expected_shard_count or len(cache_paths)
+    if shard_count <= 0:
+        raise ValueError(f"--shard-count must be positive; got {shard_count}")
+    if args.shard_index is None:
+        shard_indices = list(range(shard_count))
+    else:
+        if args.shard_index < 0 or args.shard_index >= shard_count:
+            raise ValueError(
+                f"--shard-index must be in [0, {shard_count}); got {args.shard_index}"
+            )
+        shard_indices = [args.shard_index]
+
     total_completed_rows = 0
     shard_summaries: list[dict[str, Any]] = []
-    for shard_index in range(shard_count):
+    for shard_index in shard_indices:
         shard_plan_rows = _required_organic_rows_for_shard(
             plan_rows,
             cfg=cfg,
@@ -509,6 +532,7 @@ def main() -> int:
                 "row_shard_output_dir": str(row_shard_dir),
                 "cache_prompt_count": len(cache_by_prompt_id),
                 "row_shard_count": shard_count,
+                "built_shard_count": len(shard_indices),
                 "completed_case_count": total_completed_rows,
                 "shards": shard_summaries,
             },

@@ -7,15 +7,17 @@ SCRATCH_ROOT="${SCRATCH_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evi
 CACHE_DIR="${CACHE_DIR:-$SCRATCH_ROOT/shards/organic-prompt-cache-10way}"
 ROW_SHARD_DIR="${ROW_SHARD_DIR:-$SCRATCH_ROOT/shards/organic-prompts-10way-from-cache}"
 EXPECTED_SHARD_COUNT="${EXPECTED_SHARD_COUNT:-10}"
+ARRAY="${ARRAY:-1}"
+MAX_PARALLEL="${MAX_PARALLEL:-$EXPECTED_SHARD_COUNT}"
 FORCE="${FORCE:-1}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
 PARTITION="${PARTITION:-Intel6240}"
 ACCOUNT="${ACCOUNT:-}"
 QOS="${QOS:-}"
-CPUS_PER_TASK="${CPUS_PER_TASK:-32}"
+CPUS_PER_TASK="${CPUS_PER_TASK:-16}"
 MEM="${MEM:-120G}"
-TIME_LIMIT="${TIME_LIMIT:-12:00:00}"
+TIME_LIMIT="${TIME_LIMIT:-4-00:00:00}"
 
 mkdir -p "$SCRATCH_ROOT/slurm" "$ROW_SHARD_DIR"
 unset SBATCH_QOS
@@ -27,10 +29,29 @@ SBATCH_ARGS=(
   --cpus-per-task="$CPUS_PER_TASK"
   --mem="$MEM"
   --time="$TIME_LIMIT"
-  --output="$SCRATCH_ROOT/slurm/%x-%j.out"
-  --error="$SCRATCH_ROOT/slurm/%x-%j.err"
   --export=HOME,USER,LOGNAME,REPO_HOME="$REPO_HOME",FULL_FAR_CONFIG="$FULL_FAR_CONFIG",SCRATCH_ROOT="$SCRATCH_ROOT",CACHE_DIR="$CACHE_DIR",ROW_SHARD_DIR="$ROW_SHARD_DIR",EXPECTED_SHARD_COUNT="$EXPECTED_SHARD_COUNT",FORCE="$FORCE",VENV_PATH="$VENV_PATH",HF_HOME="$HF_HOME",TRANSFORMERS_CACHE="$HF_HOME"
 )
+
+if [ "$ARRAY" = "1" ]; then
+  if ! [[ "$EXPECTED_SHARD_COUNT" =~ ^[0-9]+$ ]] || [ "$EXPECTED_SHARD_COUNT" -le 0 ]; then
+    echo "EXPECTED_SHARD_COUNT must be a positive integer; got $EXPECTED_SHARD_COUNT" >&2
+    exit 2
+  fi
+  if ! [[ "$MAX_PARALLEL" =~ ^[0-9]+$ ]] || [ "$MAX_PARALLEL" -le 0 ]; then
+    echo "MAX_PARALLEL must be a positive integer; got $MAX_PARALLEL" >&2
+    exit 2
+  fi
+  SBATCH_ARGS+=(
+    --array="0-$((EXPECTED_SHARD_COUNT - 1))%$MAX_PARALLEL"
+    --output="$SCRATCH_ROOT/slurm/%x-%A_%a.out"
+    --error="$SCRATCH_ROOT/slurm/%x-%A_%a.err"
+  )
+else
+  SBATCH_ARGS+=(
+    --output="$SCRATCH_ROOT/slurm/%x-%j.out"
+    --error="$SCRATCH_ROOT/slurm/%x-%j.err"
+  )
+fi
 
 if [ -n "$ACCOUNT" ]; then
   SBATCH_ARGS+=(--account="$ACCOUNT")

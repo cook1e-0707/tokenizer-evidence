@@ -203,15 +203,19 @@ find "$CACHE_DIR" -maxdepth 1 \
   -print -exec wc -l {} \;
 ```
 
-After all prompt-cache shards finish, run Stage 2 as a CPU job. Do not submit
+After all prompt-cache shards finish, run Stage 2 as a CPU array. Do not submit
 this step to `pomplun`: it is CPU-only post-processing and does not request
 `--gres`, so it should use a CPU partition such as `Intel6240` or `Intel6326`.
+The array parallelizes by output row shard; increasing `--cpus-per-task` alone
+does not speed up the serial Python loop much.
 
 ```bash
 PARTITION=Intel6240 \
-CPUS_PER_TASK=32 \
+ARRAY=1 \
+MAX_PARALLEL=10 \
+CPUS_PER_TASK=16 \
 MEM=120G \
-TIME_LIMIT=12:00:00 \
+TIME_LIMIT=4-00:00:00 \
 CACHE_DIR=$CACHE_DIR \
 ROW_SHARD_DIR=$ROW_SHARD_DIR \
 FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
