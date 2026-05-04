@@ -1,0 +1,13 @@
+{
+  "config": "configs/natural_evidence_v1/pilot.yaml",
+  "errors": [],
+  "passed": true,
+  "schema_name": "natural_evidence_static_validation_summary_v1",
+  "validated_components": [
+    "protocol_commit_then_reveal",
+    "four_arm_matrix",
+    "bucket_bank_scale_config",
+    "paper_table_required_columns",
+    "no_gpt2_paper_facing_arm"
+  ]
+}

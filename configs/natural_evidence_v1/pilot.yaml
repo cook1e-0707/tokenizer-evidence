@@ -1,0 +1,173 @@
+protocol:
+  id: natural_evidence_v1
+  version: 1
+  audit_key_status: hidden_until_transcript_commitment
+  verifier_spec: public_after_commit
+  result_status_for_unrun_metrics: NEEDS_RESULTS
+  forbidden_surface_patterns:
+    - "FIELD="
+    - "SECTION="
+    - "TOPIC="
+    - "OWNER"
+    - "PAYLOAD"
+    - "CERT"
+    - "EVIDENCE"
+    - "CARRIER"
+
+models:
+  qwen:
+    family: qwen2.5
+    model_name: Qwen/Qwen2.5-7B-Instruct
+    tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+  llama:
+    family: llama3.1
+    model_name: meta-llama/Meta-Llama-3.1-8B-Instruct
+    tokenizer_name: meta-llama/Meta-Llama-3.1-8B-Instruct
+
+arms:
+  - arm_id: qwen_protected
+    model_family: qwen2.5
+    model_condition: protected_trained
+    tokenizer: Qwen/Qwen2.5-7B-Instruct
+    training_required: true
+  - arm_id: qwen_raw
+    model_family: qwen2.5
+    model_condition: raw
+    tokenizer: Qwen/Qwen2.5-7B-Instruct
+    training_required: false
+  - arm_id: llama_protected
+    model_family: llama3.1
+    model_condition: protected_trained
+    tokenizer: meta-llama/Meta-Llama-3.1-8B-Instruct
+    training_required: true
+  - arm_id: llama_raw
+    model_family: llama3.1
+    model_condition: raw
+    tokenizer: meta-llama/Meta-Llama-3.1-8B-Instruct
+    training_required: false
+
+bucket_bank:
+  target_bank_entries_per_tokenizer: 24576
+  candidate_top_k: 64
+  bucket_count: 8
+  min_reference_probability: 0.0001
+  min_members_per_bucket: 2
+  min_bucket_mass: 0.01
+  strict_min_bucket_mass: false
+  max_evidence_positions_per_response: 4
+  min_spacing_tokens: 12
+  output_root: results/natural_evidence_v1/bucket_banks
+  reference_candidates:
+    qwen: results/natural_evidence_v1/reference_candidates/qwen_topk_candidates.jsonl
+    llama: results/natural_evidence_v1/reference_candidates/llama_topk_candidates.jsonl
+  filters:
+    stable_single_token: true
+    no_delimiter_like_tokens: true
+    no_control_tokens: true
+    no_obvious_evidence_tokens: true
+    no_rare_unicode_artifacts: true
+
+selector:
+  type: keyed_prefix_selector
+  audit_key_id: K001
+  min_spacing_tokens: 12
+  max_evidence_positions_per_response: 4
+  prefix_inputs:
+    - prompt_id
+    - prefix_token_ids
+    - protocol_id
+    - tokenizer_name
+
+decoder:
+  bucket_tuple_width: 3
+  bucket_radix: 8
+  rs_parity_symbols: 0
+  accept_rule: recovered_payload_equals_committed_payload
+
+payloads:
+  - payload_id: P0421
+    payload_text: P0421
+  - payload_id: P1729
+    payload_text: P1729
+
+pilot_scale:
+  payloads: 2
+  seeds:
+    - 17
+  train_prompts_per_protected_model: 8192
+  eval_owner_probes: 2048
+  organic_null_prompts: 2048
+  query_budgets:
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+
+full_matrix_scale:
+  payloads: 4
+  seeds:
+    - 17
+    - 23
+    - 29
+  prompt_families:
+    - PF1
+    - PF2
+    - PF3
+    - PF4
+  eval_owner_probes_per_cell: 2048
+  organic_null_prompts_per_model: 4096
+  query_budgets:
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+
+training:
+  target_mode: natural_transcript_bucket_mass
+  adapter:
+    type: lora
+    r: 16
+    alpha: 32
+    dropout: 0.0
+  losses:
+    task_loss: true
+    bucket_mass_loss: true
+    kl_reference_loss: optional
+  notes: >
+    Do not reuse the exact-slot 64-epoch envelope. Use max_steps or epochs scaled
+    to the natural response dataset size.
+
+attacks:
+  - no_attack
+  - generic_paraphrase
+  - suffix_truncation
+  - style_normalization
+  - oracle_keyed_sanitizer
+  - public_no_key_sanitizer
+
+tables:
+  required_columns:
+    - model_family
+    - model_condition
+    - tokenizer
+    - bucket_bank_id
+    - payload_id
+    - seed
+    - query_budget
+    - accepted
+    - recovered_payload
+    - far_family
+    - utility_metric
+    - naturalness_metric
+    - protocol_id
+  outputs:
+    bucket_bank_coverage: results/natural_evidence_v1/tables/bucket_bank_coverage.csv
+    four_arm_recovery: results/natural_evidence_v1/tables/four_arm_recovery.csv
+    far_by_query_budget: results/natural_evidence_v1/tables/far_by_query_budget.csv
+    naturalness_utility: results/natural_evidence_v1/tables/naturalness_utility.csv
+    sanitizer_attacks: results/natural_evidence_v1/tables/sanitizer_attacks.csv
+    structured_vs_natural_comparison: results/natural_evidence_v1/tables/structured_vs_natural_comparison.csv
+    compute_accounting: results/natural_evidence_v1/tables/compute_accounting.csv
+
