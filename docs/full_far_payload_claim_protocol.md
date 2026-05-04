@@ -390,6 +390,14 @@ Stage 2 expansion:
 | Original Perinucleus | 5 | 1000 | 0 | 0.0 | 0.00383 |
 | Original Perinucleus | 10 | 1000 | 0 | 0.0 | 0.00383 |
 
+Inspection of the 6 Original Perinucleus `M=1` false accepts confirmed exact
+single-token collisions rather than a serialization error. In all 6 rows,
+organic base-Qwen generated `Certainly` with token id `95456`, matching the
+selected Perinucleus fingerprint response exactly. The affected payload claims
+are `U01` with seed `17` and `U08` with seed `23`, repeated across organic
+prompt ids `organic_0033`, `organic_0040`, `organic_0417`, `organic_0424`,
+`organic_0801`, and `organic_0808`.
+
 The aggregate status after registered-probe plus organic prompt-bank slices is:
 
 ```text

@@ -26,7 +26,7 @@
 - Observed base-Qwen organic prompt-bank FAR:
   - Ours: `0/1000` false accepts at `M=1,3,5,10`.
   - Original Perinucleus: `6/1000` false accepts at `M=1`; `0/1000` false accepts at `M=3,5,10`.
-  - The nonzero Perinucleus `M=1` organic result should be inspected before being used as a strong claim, but it is already a valid signal for the completed organic slice.
+  - Inspection confirms the 6 Perinucleus `M=1` false accepts are exact single-token collisions: organic base-Qwen generated `Certainly` with token id `95456`, matching the selected Perinucleus fingerprint response for payloads `U01` and `U08`.
 - Current aggregate status:
   - `status = completed_registered_and_organic_null_subset`;
   - `completed_fresh_organic_null = 8000`;
@@ -34,8 +34,7 @@
   - `not_executed_fresh_null_inference_required = 2048`;
   - `full_far_complete = False`.
 - Next decision gate:
-  - inspect the 6 Perinucleus organic `M=1` false-accept rows;
-  - proceed to non-owner probes after inspection;
+  - proceed to non-owner probes;
   - optional non-Qwen / unprotected-Qwen null models remain lower priority.
 
 ## Current Standing Status
