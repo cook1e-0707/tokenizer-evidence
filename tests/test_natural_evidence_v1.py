@@ -482,9 +482,22 @@ def test_automation_state_and_allowlist_are_conservative() -> None:
     assert "qwen_natural_e2e_pilot" in allowlist
     assert "enabled: false" in allowlist
     assert "sweep_qwen_4way_balance_thresholds" in allowlist
+    assert "qwen_candidate_supply_expansion" in allowlist
     assert "Do not start protected LoRA training" in state
     assert gate_status["gates"]["phase_a_outputs_complete"] == "PASS"
     assert gate_status["gates"]["qwen_e2e_pilot"] == "TODO_AFTER_RESULTS"
     assert gate_status["gates"]["llama_e2e_pilot"] == "TODO_AFTER_RESULTS"
     assert gate_status["next_allowed_action"] != "qwen_natural_e2e_pilot"
     assert "24576_fingerprints" in gate_status["forbidden_claims"]
+
+
+def test_qwen_candidate_expansion_slurm_is_scoped_to_qwen_4way() -> None:
+    script = (
+        REPO_ROOT / "scripts/natural_evidence_v1/slurm_qwen_candidate_supply_expansion.sbatch"
+    ).read_text(encoding="utf-8")
+    assert "--tokenizer-key qwen" in script
+    assert "--bucket-count 4" in script
+    assert "--strict-balance-gate" in script
+    assert "score_counterfactual_compatibility" not in script
+    assert "qwen_natural_e2e_pilot" not in script
+    assert "--tokenizer-key llama" not in script

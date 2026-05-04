@@ -37,6 +37,10 @@ allowed_cpu_actions:
     command_pattern: "python3 scripts/natural_evidence_v1/sweep_balance_gate.py *"
 
 allowed_gpu_actions:
+  - name: qwen_candidate_supply_expansion
+    enabled: false
+    enable_condition: "qwen_4way_balance_sweep_needs_candidate_expansion"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm_qwen_candidate_supply_expansion.sbatch"
   - name: counterfactual_compatibility
     enabled: false
     enable_condition: "clean_bank_audit_complete"
