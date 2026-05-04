@@ -50,6 +50,7 @@ bucket_bank:
   target_bank_entries_per_tokenizer: 24576
   candidate_top_k: 64
   bucket_count: 8
+  bucket_assignment: keyed_mass_balance
   min_reference_probability: 0.0001
   min_members_per_bucket: 2
   min_bucket_mass: 0.01

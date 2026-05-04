@@ -73,6 +73,8 @@ def _validate_bucket_bank(config: dict[str, Any], errors: list[str]) -> None:
         _error(errors, "bucket_count must be greater than 1")
     if int(bucket_cfg.get("candidate_top_k", 0)) < int(bucket_cfg.get("bucket_count", 0)):
         _error(errors, "candidate_top_k must be at least bucket_count")
+    if str(bucket_cfg.get("bucket_assignment", "")) not in {"keyed_mass_balance", "keyed_hash_round_robin"}:
+        _error(errors, "bucket_assignment must be keyed_mass_balance or keyed_hash_round_robin")
     if int(bucket_cfg.get("min_members_per_bucket", 0)) < 1:
         _error(errors, "min_members_per_bucket must be positive")
     quality_gates = bucket_cfg.get("quality_gates", {})

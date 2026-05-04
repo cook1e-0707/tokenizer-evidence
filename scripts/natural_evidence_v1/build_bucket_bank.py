@@ -143,14 +143,15 @@ def _bucketize(
     *,
     candidates: list[dict[str, Any]],
     bucket_count: int,
+    min_members_per_bucket: int,
     key: str,
     protocol_id: str,
     bank_id: str,
     prefix_signature: str,
+    assignment_mode: str,
 ) -> dict[int, list[dict[str, Any]]]:
-    sorted_candidates = sorted(
-        candidates,
-        key=lambda candidate: keyed_hash_hex(
+    def keyed_candidate_hash(candidate: Mapping[str, Any]) -> str:
+        return keyed_hash_hex(
             key,
             [
                 protocol_id,
@@ -159,11 +160,48 @@ def _bucketize(
                 candidate["token_id"],
                 candidate["token_text"],
             ],
+        )
+
+    buckets: dict[int, list[dict[str, Any]]] = {bucket_id: [] for bucket_id in range(bucket_count)}
+    if assignment_mode == "keyed_hash_round_robin":
+        sorted_candidates = sorted(candidates, key=keyed_candidate_hash)
+        for index, candidate in enumerate(sorted_candidates):
+            buckets[index % bucket_count].append(candidate)
+        return buckets
+
+    if assignment_mode != "keyed_mass_balance":
+        raise ValueError(f"Unknown bucket assignment mode: {assignment_mode}")
+
+    bucket_order = sorted(
+        range(bucket_count),
+        key=lambda bucket_id: keyed_hash_hex(
+            key,
+            [protocol_id, bank_id, prefix_signature, "bucket_order", bucket_id],
         ),
     )
-    buckets: dict[int, list[dict[str, Any]]] = {bucket_id: [] for bucket_id in range(bucket_count)}
-    for index, candidate in enumerate(sorted_candidates):
-        buckets[index % bucket_count].append(candidate)
+    sorted_candidates = sorted(
+        candidates,
+        key=lambda candidate: (-float(candidate["probability"]), keyed_candidate_hash(candidate)),
+    )
+    bucket_masses = {bucket_id: 0.0 for bucket_id in range(bucket_count)}
+    seed_count = min(len(sorted_candidates), bucket_count * min_members_per_bucket)
+    for index, candidate in enumerate(sorted_candidates[:seed_count]):
+        bucket_id = bucket_order[index % bucket_count]
+        buckets[bucket_id].append(candidate)
+        bucket_masses[bucket_id] += float(candidate["probability"])
+    for candidate in sorted_candidates[seed_count:]:
+        bucket_id = min(
+            range(bucket_count),
+            key=lambda candidate_bucket_id: (
+                bucket_masses[candidate_bucket_id],
+                keyed_hash_hex(
+                    key,
+                    [protocol_id, bank_id, prefix_signature, "bucket_tie", candidate["token_id"], candidate_bucket_id],
+                ),
+            ),
+        )
+        buckets[bucket_id].append(candidate)
+        bucket_masses[bucket_id] += float(candidate["probability"])
     return buckets
 
 
@@ -180,6 +218,7 @@ def _entry_from_record(
     min_members_per_bucket: int,
     min_bucket_mass: float,
     strict_min_bucket_mass: bool,
+    bucket_assignment: str,
     forbidden_patterns: list[str],
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     prefix_signature = _prefix_signature(record)
@@ -202,10 +241,12 @@ def _entry_from_record(
     buckets = _bucketize(
         candidates=candidates,
         bucket_count=bucket_count,
+        min_members_per_bucket=min_members_per_bucket,
         key=audit_key_id,
         protocol_id=protocol_id,
         bank_id=bank_id,
         prefix_signature=prefix_signature,
+        assignment_mode=bucket_assignment,
     )
     bucket_payload: dict[str, list[int]] = {}
     bucket_texts: dict[str, list[str]] = {}
@@ -240,6 +281,7 @@ def _entry_from_record(
             "prefix_token_ids": record.get("prefix_token_ids", []),
             "prefix_response_token_count": record.get("prefix_response_token_count", ""),
             "bucket_count": bucket_count,
+            "bucket_assignment": bucket_assignment,
             "buckets": bucket_payload,
             "bucket_token_texts": bucket_texts,
             "reference_mass": bucket_masses,
@@ -295,6 +337,7 @@ def main(argv: list[str] | None = None) -> int:
     target_entries = args.target_entries or int(bucket_cfg.get("target_bank_entries_per_tokenizer", 24576))
     bucket_count = args.bucket_count or int(bucket_cfg.get("bucket_count", 8))
     candidate_top_k = int(bucket_cfg.get("candidate_top_k", 64))
+    bucket_assignment = str(bucket_cfg.get("bucket_assignment", "keyed_mass_balance"))
     min_probability = float(bucket_cfg.get("min_reference_probability", 0.0001))
     min_members_per_bucket = int(bucket_cfg.get("min_members_per_bucket", 2))
     min_bucket_mass = float(bucket_cfg.get("min_bucket_mass", 0.01))
@@ -320,6 +363,7 @@ def main(argv: list[str] | None = None) -> int:
             min_members_per_bucket=min_members_per_bucket,
             min_bucket_mass=min_bucket_mass,
             strict_min_bucket_mass=strict_min_bucket_mass,
+            bucket_assignment=bucket_assignment,
             forbidden_patterns=forbidden_patterns,
         )
         if entry is None:
@@ -393,6 +437,7 @@ def main(argv: list[str] | None = None) -> int:
             "target_bank_entries": target_entries,
             "accepted_entries": len(entries),
             "bucket_count": bucket_count,
+            "bucket_assignment": bucket_assignment,
             "candidate_top_k": candidate_top_k,
             "min_reference_probability": min_probability,
             "min_members_per_bucket": min_members_per_bucket,
