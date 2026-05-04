@@ -1,19 +1,21 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-QWEN_4WAY_BALANCE_SWEEP_NEEDS_CANDIDATE_EXPANSION
+QWEN_CANDIDATE_SUPPLY_EXPANSION_RUNNING
 
 ## Last Checked
-2026-05-04T23:40:55Z
+2026-05-04T23:50:20Z
 
 ## Known Jobs
 | Job ID | Name | Model | Purpose | Status |
 |---|---|---|---|---|
 | 834430 | nat-ev-qwen-clean8192 | Qwen/Qwen2.5-7B-Instruct | clean reference outputs, top-k candidates, initial bank | COMPLETED 0:0 |
 | 834431 | nat-ev-llama-clean8192 | meta-llama/Meta-Llama-3.1-8B-Instruct | clean reference outputs, top-k candidates, initial bank | COMPLETED 0:0 |
+| 834777 | nat-ev-qwen-candx | Qwen/Qwen2.5-7B-Instruct | dense-prefix candidate supply expansion and Qwen 4-way strict rebuild | RUNNING |
 
 Job status was freshly checked on Chimera via `ssh chimera` during the
-2026-05-04T23:20:01Z run. No active `squeue` jobs were listed.
+2026-05-04T23:50:20Z run. Job 834777 was running on `chimera21` with account
+`cs_yinxin.wan`, partition `pomplun`, and QOS `pomplun`.
 
 ## Completed Artifacts
 | Artifact | Status | Notes |
@@ -50,6 +52,7 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | Qwen 4-way strict bank target coverage | FAIL_UNDER_TARGET | accepted_entries=7715 < target=24576 |
 | Qwen 4-way balance threshold sweep | PASS_EXECUTED | 175 threshold combinations tested from existing metrics |
 | Qwen 4-way sweep reaches target | FAIL | widest tested gate min_mass>=0.001, ratio<=50, entropy>=0.70 reaches only 19629 entries |
+| Qwen candidate supply expansion job | RUNNING | job_id=834777; dense-prefix Qwen scoring with prefix_stride=2 and max_prefixes_per_response=64 |
 | Qwen 8-way clean bank rebuilt with latest code | NEEDS_RESULTS | do not run before Qwen 4-way audit/diagnosis |
 | Llama 4-way clean bank rebuilt with latest code | NEEDS_RESULTS | waiting |
 | Llama 8-way clean bank rebuilt with latest code | NEEDS_RESULTS | waiting |
@@ -65,10 +68,10 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | sanitizer benchmark | TODO_AFTER_RESULTS | do not start yet |
 
 ## Next Allowed Action
-Expand Qwen candidate supply before rebuilding the 4-way strict bank. The
-threshold sweep did not reach the 24576-entry target even under very loose
-bounded thresholds. Do not start training, counterfactual scoring, Qwen 8-way
-rebuild, or Llama rebuild from the current under-target bank.
+Wait for Qwen candidate supply expansion job 834777 to finish, then inspect the
+new candidate count and rebuilt Qwen 4-way strict bank. Do not start training,
+counterfactual scoring, Qwen 8-way rebuild, or Llama rebuild while the job is
+running.
 
 ## Failed Gates
 - qwen_4way_quick_mass_check
@@ -77,11 +80,11 @@ rebuild, or Llama rebuild from the current under-target bank.
 - qwen_4way_balance_sweep_reaches_target
 
 ## Last State-Changing Action
-2026-05-04T23:40:55Z: implemented and ran a Qwen 4-way balance threshold
-sweep. No tested threshold combination reaches the 24576-entry target.
+2026-05-04T23:50:20Z: added a scoped Qwen-only dense-prefix candidate expansion
+Slurm job, pushed it to main, synchronized Chimera, and submitted job 834777.
 
 ## Remaining NEEDS_RESULTS
-- qwen_candidate_supply_expansion
+- qwen_candidate_supply_expansion_job_834777
 - qwen_8way_clean_bank_rebuilt
 - llama_4way_clean_bank_rebuilt
 - llama_8way_clean_bank_rebuilt

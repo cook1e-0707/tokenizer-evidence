@@ -77,9 +77,27 @@
       "notes": "widest tested row reaches 19629 entries, below target.",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json",
       "status": "COMPLETE"
+    },
+    {
+      "current_accessible": true,
+      "notes": "written by job 834777 before model scoring; static validation passed",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2/status/static_validation_summary_qwen_candidate_expansion.json",
+      "status": "COMPLETE"
+    },
+    {
+      "current_accessible": false,
+      "notes": "job 834777 is scoring dense-prefix Qwen candidates with prefix_stride=2 and max_prefixes_per_response=64",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2/reference_candidates/qwen_topk_candidates.jsonl",
+      "status": "RUNNING"
+    },
+    {
+      "current_accessible": false,
+      "notes": "will be rebuilt by job 834777 after candidate scoring completes",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl",
+      "status": "NEEDS_RESULTS"
     }
   ],
-  "current_phase": "QWEN_4WAY_BALANCE_SWEEP_NEEDS_CANDIDATE_EXPANSION",
+  "current_phase": "QWEN_CANDIDATE_SUPPLY_EXPANSION_RUNNING",
   "failed_gates": [
     "qwen_4way_quick_mass_check",
     "qwen_4way_audit_quality_gate",
@@ -106,14 +124,18 @@
     "phase_a_artifacts_accessible": "PASS",
     "phase_a_outputs_complete": "PASS",
     "qwen_4way_audit_quality_gate": "FAIL",
+    "qwen_4way_balance_sweep_reaches_target": "FAIL",
+    "qwen_4way_balance_threshold_sweep": "PASS_EXECUTED",
     "qwen_4way_clean_bank_audit": "PASS_EXECUTED",
     "qwen_4way_clean_bank_rebuilt": "PASS",
     "qwen_4way_quick_mass_check": "FAIL_PREAUDIT",
-    "qwen_4way_balance_threshold_sweep": "PASS_EXECUTED",
-    "qwen_4way_balance_sweep_reaches_target": "FAIL",
     "qwen_4way_strict_bank_rebuilt": "PASS_EXECUTED",
+    "qwen_4way_strict_bank_rebuilt_after_candidate_expansion": "NEEDS_RESULTS",
     "qwen_4way_strict_bank_target_coverage": "FAIL_UNDER_TARGET",
+    "qwen_4way_strict_bank_target_coverage_after_candidate_expansion": "NEEDS_RESULTS",
     "qwen_8way_clean_bank_rebuilt": "NEEDS_RESULTS",
+    "qwen_candidate_supply_expansion": "RUNNING",
+    "qwen_candidate_supply_expansion_job_834777": "RUNNING",
     "qwen_e2e_pilot": "TODO_AFTER_RESULTS",
     "raw_wrong_key_pre_null": "NEEDS_RESULTS",
     "same_family_near_null": "TODO_AFTER_RESULTS",
@@ -137,26 +159,71 @@
       "name": "nat-ev-llama-clean8192",
       "purpose": "clean reference outputs/top-k/bank",
       "status": "COMPLETED"
+    },
+    {
+      "account": "pi_yinxin.wan",
+      "exit_code": "0:0",
+      "job_id": "834770",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "name": "nat-ev-qwen-candx",
+      "notes": "cancelled because scavenger QOS cannot use pomplun partition",
+      "partition": "pomplun",
+      "purpose": "candidate supply expansion attempt",
+      "qos": "scavenger",
+      "status": "CANCELLED"
+    },
+    {
+      "account": "pi_yinxin.wan",
+      "exit_code": "0:0",
+      "job_id": "834775",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "name": "nat-ev-qwen-candx",
+      "notes": "cancelled because scavenger QOS cannot use pomplun partition",
+      "partition": "pomplun",
+      "purpose": "candidate supply expansion attempt",
+      "qos": "scavenger",
+      "status": "CANCELLED"
+    },
+    {
+      "account": "cs_yinxin.wan",
+      "elapsed": "00:00:36",
+      "exit_code": "0:0",
+      "job_id": "834777",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "name": "nat-ev-qwen-candx",
+      "node": "chimera21",
+      "partition": "pomplun",
+      "purpose": "dense-prefix candidate supply expansion and Qwen 4-way strict rebuild",
+      "qos": "pomplun",
+      "status": "RUNNING"
     }
   ],
-  "last_checked_time": "2026-05-04T23:40:55Z",
-  "last_state_changing_action": "2026-05-04T23:40:55Z implemented and ran a Qwen 4-way balance threshold sweep. No tested threshold combination reaches the 24576-entry target.",
+  "last_checked_time": "2026-05-04T23:50:20Z",
+  "last_state_changing_action": "2026-05-04T23:50:20Z added a scoped Qwen-only dense-prefix candidate expansion Slurm job, pushed it to main, synchronized Chimera, and submitted job 834777.",
   "max_state_changing_actions_per_automation_run": 1,
-  "next_allowed_action": "expand_qwen_candidate_supply_then_rebuild_4way_strict_bank",
+  "next_allowed_action": "wait_for_qwen_candidate_supply_expansion_job_834777_then_inspect_outputs",
   "protocol": "natural_evidence_v1",
-  "qwen_4way_clean_rebuild": {
-    "accepted_entries": 24576,
-    "assistant_newline_hits": 0,
-    "bucket_count": 4,
-    "candidate_records": 92374,
-    "entries_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way/qwen_bucket_bank_entries.jsonl",
-    "forbidden_route_surface_matches": 0,
-    "manifest_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way/qwen_bank_manifest.json",
-    "max_bucket_mass_ratio": 3832.4437397427123,
-    "min_bucket_mass": 0.00024195920559577644,
-    "min_entropy_fraction": 0.0073028824045203,
-    "rejected_records": 26025,
-    "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct"
+  "qwen_4way_balance_threshold_sweep": {
+    "any_threshold_reaches_target": false,
+    "metric_records": 45542,
+    "next_decision": "expand_candidate_supply_or_expand_sweep_grid",
+    "output_csv": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv",
+    "recommended_row": {
+      "accepted_bucket_entropy_fraction_min": 0.7000178403484856,
+      "accepted_bucket_mass_ratio_max": 49.78206327013157,
+      "accepted_entries": 19629,
+      "accepted_fraction_of_metric_records": 0.4310087391858065,
+      "accepted_min_bucket_mass_min": 0.0010158160439459607,
+      "coverage_complete": false,
+      "max_bucket_mass_ratio_threshold": 50.0,
+      "min_bucket_entropy_fraction_threshold": 0.7,
+      "min_bucket_mass_threshold": 0.001,
+      "prompt_count": 7489,
+      "target_entries": 24576
+    },
+    "result_claim": "threshold_coverage_diagnostic_not_fingerprint_count",
+    "summary_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json",
+    "threshold_grid_rows": 175
   },
   "qwen_4way_clean_audit": {
     "accepted_entries": 24576,
@@ -183,6 +250,20 @@
       "raw_wrong_key_null": "NEEDS_RESULTS"
     }
   },
+  "qwen_4way_clean_rebuild": {
+    "accepted_entries": 24576,
+    "assistant_newline_hits": 0,
+    "bucket_count": 4,
+    "candidate_records": 92374,
+    "entries_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way/qwen_bucket_bank_entries.jsonl",
+    "forbidden_route_surface_matches": 0,
+    "manifest_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way/qwen_bank_manifest.json",
+    "max_bucket_mass_ratio": 3832.4437397427123,
+    "min_bucket_mass": 0.00024195920559577644,
+    "min_entropy_fraction": 0.0073028824045203,
+    "rejected_records": 26025,
+    "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct"
+  },
   "qwen_4way_strict_rebuild": {
     "accepted_entries": 7715,
     "bucket_count": 4,
@@ -207,30 +288,32 @@
       "min_bucket_mass": 0.005
     }
   },
-  "qwen_4way_balance_threshold_sweep": {
-    "any_threshold_reaches_target": false,
-    "metric_records": 45542,
-    "next_decision": "expand_candidate_supply_or_expand_sweep_grid",
-    "output_csv": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv",
-    "recommended_row": {
-      "accepted_entries": 19629,
-      "accepted_fraction_of_metric_records": 0.4310087391858065,
-      "accepted_min_bucket_mass_min": 0.0010158160439459607,
-      "accepted_bucket_mass_ratio_max": 49.78206327013157,
-      "accepted_bucket_entropy_fraction_min": 0.7000178403484856,
-      "coverage_complete": false,
-      "max_bucket_mass_ratio_threshold": 50.0,
-      "min_bucket_entropy_fraction_threshold": 0.7,
-      "min_bucket_mass_threshold": 0.001,
-      "prompt_count": 7489,
-      "target_entries": 24576
-    },
-    "result_claim": "threshold_coverage_diagnostic_not_fingerprint_count",
-    "summary_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json",
-    "threshold_grid_rows": 175
+  "qwen_candidate_supply_expansion_job_834777": {
+    "account": "cs_yinxin.wan",
+    "bucket_count": 4,
+    "candidate_top_k": 64,
+    "expansion_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2",
+    "forbidden_actions_while_running": [
+      "qwen_8way_rebuild",
+      "llama_rebuild",
+      "counterfactual_scoring",
+      "protected_lora_training"
+    ],
+    "job_id": "834777",
+    "max_prefixes_per_response": 64,
+    "node": "chimera21",
+    "partition": "pomplun",
+    "prefix_stride": 2,
+    "qos": "pomplun",
+    "source_reference_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192/reference_outputs/qwen_reference_outputs.jsonl",
+    "status": "RUNNING",
+    "strict_balance_gate": true,
+    "target_bank_entries": 24576
   },
   "remaining_NEEDS_RESULTS": [
-    "qwen_candidate_supply_expansion",
+    "qwen_4way_strict_bank_target_coverage_after_candidate_expansion",
+    "qwen_4way_strict_bank_rebuilt_after_candidate_expansion",
+    "qwen_candidate_supply_expansion_job_834777",
     "qwen_4way_strict_bank_target_coverage",
     "qwen_8way_clean_bank_rebuilt",
     "llama_4way_clean_bank_rebuilt",
