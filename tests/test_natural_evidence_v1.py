@@ -14,6 +14,7 @@ from scripts.natural_evidence_v1 import (
     build_bucket_bank,
     compile_train_dataset,
     generate_reference_outputs,
+    sweep_balance_gate,
     validate_static,
     verify_observations,
 )
@@ -149,6 +150,73 @@ def test_strict_balance_gate_rejects_peaked_bucket_entries(tmp_path: Path) -> No
     manifest = json.loads((output_dir / "qwen_bank_manifest.json").read_text(encoding="utf-8"))
     assert manifest["strict_balance_gate"] is True
     assert manifest["claim_control"]["bucket_bank_entries_are_fingerprints"] is False
+
+
+def test_balance_gate_sweep_reports_threshold_tradeoff(tmp_path: Path) -> None:
+    entries_path = tmp_path / "entries.jsonl"
+    rejections_path = tmp_path / "rejections.csv"
+    output_csv = tmp_path / "sweep.csv"
+    summary_json = tmp_path / "summary.json"
+    _write_jsonl(
+        entries_path,
+        [
+            {
+                "prompt_id": "p0",
+                "bucket_mass_summary": {
+                    "min_bucket_mass": 0.006,
+                    "bucket_mass_ratio": 4.0,
+                    "bucket_entropy_fraction": 0.91,
+                },
+            }
+        ],
+    )
+    with rejections_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "prompt_id",
+                "rejection_reason",
+                "min_bucket_mass",
+                "bucket_mass_ratio",
+                "bucket_entropy_fraction",
+            ],
+        )
+        writer.writeheader()
+        writer.writerow(
+            {
+                "prompt_id": "p1",
+                "rejection_reason": "balance_gate_bucket_mass_ratio",
+                "min_bucket_mass": 0.006,
+                "bucket_mass_ratio": 9.0,
+                "bucket_entropy_fraction": 0.86,
+            }
+        )
+    status = sweep_balance_gate.main(
+        [
+            "--entries",
+            str(entries_path),
+            "--rejections",
+            str(rejections_path),
+            "--target-entries",
+            "2",
+            "--min-bucket-mass-values",
+            "0.005",
+            "--max-bucket-mass-ratio-values",
+            "5,10",
+            "--min-bucket-entropy-fraction-values",
+            "0.85,0.90",
+            "--output-csv",
+            str(output_csv),
+            "--summary-json",
+            str(summary_json),
+        ]
+    )
+    assert status == 0
+    summary = json.loads(summary_json.read_text(encoding="utf-8"))
+    assert summary["any_threshold_reaches_target"] is True
+    assert summary["result_claim"] == "threshold_coverage_diagnostic_not_fingerprint_count"
+    rows = list(csv.DictReader(output_csv.open(encoding="utf-8")))
+    assert max(int(row["accepted_entries"]) for row in rows) == 2
 
 
 def test_token_surface_filter_rejects_nonsemantic_surfaces() -> None:
@@ -413,6 +481,7 @@ def test_automation_state_and_allowlist_are_conservative() -> None:
     assert "forbid_unlisted_gpu_jobs: true" in allowlist
     assert "qwen_natural_e2e_pilot" in allowlist
     assert "enabled: false" in allowlist
+    assert "sweep_qwen_4way_balance_thresholds" in allowlist
     assert "Do not start protected LoRA training" in state
     assert gate_status["gates"]["phase_a_outputs_complete"] == "PASS"
     assert gate_status["gates"]["qwen_e2e_pilot"] == "TODO_AFTER_RESULTS"

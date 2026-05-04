@@ -31,6 +31,10 @@ allowed_cpu_actions:
   - name: audit_opportunity_bank
     enabled: true
     command_pattern: "python3 scripts/natural_evidence_v1/audit_opportunity_bank.py *"
+  - name: sweep_qwen_4way_balance_thresholds
+    enabled: true
+    enable_condition: "qwen_4way_strict_bank_rebuilt_under_target"
+    command_pattern: "python3 scripts/natural_evidence_v1/sweep_balance_gate.py *"
 
 allowed_gpu_actions:
   - name: counterfactual_compatibility
