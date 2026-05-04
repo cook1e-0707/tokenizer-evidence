@@ -1,10 +1,10 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-QWEN_4WAY_CLEAN_BANK_AUDIT_FAILED_MASS_BALANCE
+QWEN_4WAY_STRICT_BANK_REBUILT_UNDER_TARGET
 
 ## Last Checked
-2026-05-04T23:25:20Z
+2026-05-04T23:35:20Z
 
 ## Known Jobs
 | Job ID | Name | Model | Purpose | Status |
@@ -31,6 +31,9 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way/bucket_bank_balance.csv` | COMPLETE | formal audit completed; quality gates failed |
 | `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way/natural_channel_capacity.csv` | COMPLETE | effective_bits_per_response=3.613765651464889; static opportunity capacity only |
 | `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way/bucket_bank_coverage_by_split.csv` | COMPLETE | prompt_coverage_rate=0.552734375 |
+| `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl` | COMPLETE_UNDER_TARGET | 7715 rows; strict balanced-entry selection passed for every accepted entry |
+| `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bank_manifest.json` | COMPLETE_UNDER_TARGET | strict_balance_gate=true; coverage_complete=false |
+| `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_rejections.csv` | COMPLETE | 84659 rejected candidate records plus header |
 
 ## Gate Status
 | Gate | Status | Notes |
@@ -41,10 +44,12 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | Qwen 4-way quick mass check | FAIL_PREAUDIT | min_bucket_mass=0.00024195920559577644; max_bucket_mass_ratio=3832.4437397427123; min_entropy_fraction=0.0073028824045203 |
 | Qwen 4-way clean bank audit | PASS_EXECUTED | audit tables written to `phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way` |
 | Qwen 4-way audit quality gate | FAIL | only 4017/24576 entries satisfy min_mass>=0.005, ratio<=5, and entropy_fraction>=0.90 |
+| Qwen 4-way strict balanced bank rebuilt | PASS_EXECUTED | 7715 accepted entries; all accepted entries pass min_mass>=0.005, ratio<=5, entropy_fraction>=0.90 |
+| Qwen 4-way strict bank target coverage | FAIL_UNDER_TARGET | accepted_entries=7715 < target=24576 |
 | Qwen 8-way clean bank rebuilt with latest code | NEEDS_RESULTS | do not run before Qwen 4-way audit/diagnosis |
 | Llama 4-way clean bank rebuilt with latest code | NEEDS_RESULTS | waiting |
 | Llama 8-way clean bank rebuilt with latest code | NEEDS_RESULTS | waiting |
-| bank mass balance | FAIL | formal Qwen 4-way audit confirms severe mass imbalance from peaked next-token distributions |
+| bank mass balance | PASS_FOR_QWEN_4WAY_STRICT | strict rebuilt Qwen 4-way bank has min_bucket_mass=0.005096819746540859, max_bucket_mass_ratio=4.998329938962228, min_entropy_fraction=0.9000398427661529 |
 | counterfactual compatibility | NEEDS_RESULTS | do not run before clean rebuilt bank audit |
 | held-out coverage | NEEDS_RESULTS | waiting |
 | organic coverage | NEEDS_RESULTS | waiting |
@@ -56,18 +61,19 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | sanitizer benchmark | TODO_AFTER_RESULTS | do not start yet |
 
 ## Next Allowed Action
-Implement or configure a strict balanced-entry selection gate before rebuilding
-another bank. The current bank admits many peaked-prefix opportunities that
-cannot be made balanced by assignment alone. Do not start training.
+Decide whether to expand Qwen candidate supply or relax the strict balance gate
+before any downstream step. Do not start training, counterfactual scoring, Qwen
+8-way rebuild, or Llama rebuild from this under-target bank.
 
 ## Failed Gates
 - qwen_4way_quick_mass_check
 - qwen_4way_audit_quality_gate
-- bank_mass_balance
+- qwen_4way_strict_bank_target_coverage
 
 ## Last State-Changing Action
-2026-05-04T23:25:20Z: ran one allowlisted Qwen 4-way clean opportunity-bank
-audit on Chimera and diagnosed mass-balance failure.
+2026-05-04T23:35:20Z: implemented strict balanced-entry selection, pushed it
+to main, synchronized Chimera, and rebuilt the Qwen 4-way strict opportunity
+bank. The rebuilt bank is balanced but under target.
 
 ## Remaining NEEDS_RESULTS
 - qwen_8way_clean_bank_rebuilt

@@ -47,13 +47,31 @@
       "notes": "accepted_entries=24576; candidate_source points to clean Qwen Phase A top-k file.",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way/qwen_bank_manifest.json",
       "status": "COMPLETE"
+    },
+    {
+      "current_accessible": true,
+      "notes": "7715 rows; strict balanced-entry selection passed for every accepted entry.",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl",
+      "status": "COMPLETE_UNDER_TARGET"
+    },
+    {
+      "current_accessible": true,
+      "notes": "strict_balance_gate=true; coverage_complete=false.",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bank_manifest.json",
+      "status": "COMPLETE_UNDER_TARGET"
+    },
+    {
+      "current_accessible": true,
+      "notes": "84659 rejected candidate records plus header.",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_rejections.csv",
+      "status": "COMPLETE"
     }
   ],
-  "current_phase": "QWEN_4WAY_CLEAN_BANK_AUDIT_FAILED_MASS_BALANCE",
+  "current_phase": "QWEN_4WAY_STRICT_BANK_REBUILT_UNDER_TARGET",
   "failed_gates": [
     "qwen_4way_quick_mass_check",
     "qwen_4way_audit_quality_gate",
-    "bank_mass_balance"
+    "qwen_4way_strict_bank_target_coverage"
   ],
   "forbidden_claims": [
     "24576_fingerprints",
@@ -64,7 +82,7 @@
     "superiority_over_scalable_perinucleus"
   ],
   "gates": {
-    "bank_mass_balance": "FAIL",
+    "bank_mass_balance": "PASS_FOR_QWEN_4WAY_STRICT",
     "counterfactual_compatibility": "NEEDS_RESULTS",
     "heldout_coverage": "NEEDS_RESULTS",
     "llama_4way_clean_bank_rebuilt": "NEEDS_RESULTS",
@@ -78,6 +96,8 @@
     "qwen_4way_clean_bank_audit": "PASS_EXECUTED",
     "qwen_4way_clean_bank_rebuilt": "PASS",
     "qwen_4way_quick_mass_check": "FAIL_PREAUDIT",
+    "qwen_4way_strict_bank_rebuilt": "PASS_EXECUTED",
+    "qwen_4way_strict_bank_target_coverage": "FAIL_UNDER_TARGET",
     "qwen_8way_clean_bank_rebuilt": "NEEDS_RESULTS",
     "qwen_e2e_pilot": "TODO_AFTER_RESULTS",
     "raw_wrong_key_pre_null": "NEEDS_RESULTS",
@@ -104,10 +124,10 @@
       "status": "COMPLETED"
     }
   ],
-  "last_checked_time": "2026-05-04T23:25:20Z",
-  "last_state_changing_action": "2026-05-04T23:25:20Z ran one Qwen 4-way clean opportunity-bank audit on Chimera.",
+  "last_checked_time": "2026-05-04T23:35:20Z",
+  "last_state_changing_action": "2026-05-04T23:35:20Z implemented strict balanced-entry selection, pushed it to main, synchronized Chimera, and rebuilt the Qwen 4-way strict opportunity bank.",
   "max_state_changing_actions_per_automation_run": 1,
-  "next_allowed_action": "implement_or_configure_strict_balanced_entry_selection_gate",
+  "next_allowed_action": "decide_expand_qwen_candidate_supply_or_relax_strict_balance_gate",
   "protocol": "natural_evidence_v1",
   "qwen_4way_clean_rebuild": {
     "accepted_entries": 24576,
@@ -148,7 +168,32 @@
       "raw_wrong_key_null": "NEEDS_RESULTS"
     }
   },
+  "qwen_4way_strict_rebuild": {
+    "accepted_entries": 7715,
+    "bucket_count": 4,
+    "bucket_entropy_fraction_median": 0.9584972038299335,
+    "bucket_entropy_fraction_min": 0.9000398427661529,
+    "bucket_mass_ratio_max": 4.998329938962228,
+    "bucket_mass_ratio_median": 2.224853700422741,
+    "coverage_complete": false,
+    "entries_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl",
+    "input_records": 92374,
+    "manifest_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bank_manifest.json",
+    "min_bucket_mass_median": 0.17092545225750655,
+    "min_bucket_mass_min": 0.005096819746540859,
+    "prompt_count": 4941,
+    "rejected_records": 84659,
+    "strict_balance_gate": true,
+    "strict_filter_entries": 7715,
+    "target_bank_entries": 24576,
+    "thresholds": {
+      "max_bucket_mass_ratio": 5.0,
+      "min_bucket_entropy_fraction": 0.9,
+      "min_bucket_mass": 0.005
+    }
+  },
   "remaining_NEEDS_RESULTS": [
+    "qwen_4way_strict_bank_target_coverage",
     "qwen_8way_clean_bank_rebuilt",
     "llama_4way_clean_bank_rebuilt",
     "llama_8way_clean_bank_rebuilt",
