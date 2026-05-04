@@ -75,6 +75,8 @@ def test_build_bucket_bank_from_reference_candidates(tmp_path: Path) -> None:
             str(output_dir),
             "--target-entries",
             "1",
+            "--bucket-count",
+            "8",
         ]
     )
     assert status == 0

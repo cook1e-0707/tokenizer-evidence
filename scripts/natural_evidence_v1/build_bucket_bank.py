@@ -41,6 +41,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--bank-id", default="")
     parser.add_argument("--audit-key-id", default="")
     parser.add_argument("--target-entries", type=int, default=0)
+    parser.add_argument("--bucket-count", type=int, default=0)
     parser.add_argument("--max-records", type=int, default=0)
     return parser.parse_args(argv)
 
@@ -292,7 +293,7 @@ def main(argv: list[str] | None = None) -> int:
     audit_key_id = args.audit_key_id or str(selector.get("audit_key_id", "K001"))
     bank_id = args.bank_id or f"{args.tokenizer_key}_natural_bucket_bank_v1"
     target_entries = args.target_entries or int(bucket_cfg.get("target_bank_entries_per_tokenizer", 24576))
-    bucket_count = int(bucket_cfg.get("bucket_count", 8))
+    bucket_count = args.bucket_count or int(bucket_cfg.get("bucket_count", 8))
     candidate_top_k = int(bucket_cfg.get("candidate_top_k", 64))
     min_probability = float(bucket_cfg.get("min_reference_probability", 0.0001))
     min_members_per_bucket = int(bucket_cfg.get("min_members_per_bucket", 2))
