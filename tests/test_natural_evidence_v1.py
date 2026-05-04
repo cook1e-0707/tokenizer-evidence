@@ -42,6 +42,8 @@ def test_validate_static_accepts_pilot_config(tmp_path: Path) -> None:
     assert status == 0
     payload = json.loads(summary_path.read_text(encoding="utf-8"))
     assert payload["passed"] is True
+    assert "protocol_precommitment" in payload["validated_components"]
+    assert "task_only_and_near_null_controls" in payload["validated_components"]
 
 
 def test_build_bucket_bank_from_reference_candidates(tmp_path: Path) -> None:
@@ -313,3 +315,23 @@ def test_decode_completion_uses_padded_sequence_boundary() -> None:
 
     generated_ids = [0, 0, 10, 11, 12, 99, 100]
     assert generate_reference_outputs._decode_completion(FakeTokenizer(), generated_ids, 5) == "99 100"
+
+
+def test_natural_protocol_docs_lock_security_boundaries() -> None:
+    commitment = (REPO_ROOT / "docs/natural_evidence_v1/protocol_commitment.md").read_text(
+        encoding="utf-8"
+    )
+    formal = (REPO_ROOT / "docs/natural_evidence_v1/formal_protocol.md").read_text(
+        encoding="utf-8"
+    )
+    e2e = (REPO_ROOT / "docs/natural_evidence_v1/end_to_end_audit_plan.md").read_text(
+        encoding="utf-8"
+    )
+    assert "Post-hoc key search is disallowed" in commitment
+    assert "multiple keys" in commitment
+    assert "family-wise false-accept accounting" in commitment
+    assert "prefix-only" in formal
+    assert "first-token measurable" in formal
+    assert "Qwen task-only LoRA" in e2e
+    assert "same-family" in e2e
+    assert "oracle keyed sanitizer" in e2e

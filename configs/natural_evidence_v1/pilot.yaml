@@ -3,6 +3,22 @@ protocol:
   version: 1
   audit_key_status: hidden_until_transcript_commitment
   verifier_spec: public_after_commit
+  commitment:
+    required: true
+    document: docs/natural_evidence_v1/protocol_commitment.md
+    pre_audit_fields:
+      - protocol_id
+      - protocol_version
+      - audit_key_commitment
+      - payload_commitment
+      - bucket_policy_commitment
+      - query_budget
+      - probe_selection_rule
+      - model_arm_set
+      - decoder_config
+    transcript_freeze_before_key_reveal: true
+    forbid_post_hoc_key_search: true
+    multiple_testing_accounting_required: true
   result_status_for_unrun_metrics: NEEDS_RESULTS
   forbidden_surface_patterns:
     - "FIELD="
@@ -35,6 +51,12 @@ arms:
     model_condition: raw
     tokenizer: Qwen/Qwen2.5-7B-Instruct
     training_required: false
+  - arm_id: qwen_task_only_lora
+    model_family: qwen2.5
+    model_condition: task_only_lora
+    tokenizer: Qwen/Qwen2.5-7B-Instruct
+    training_required: true
+    bucket_mass_loss: false
   - arm_id: llama_protected
     model_family: llama3.1
     model_condition: protected_trained
@@ -45,6 +67,31 @@ arms:
     model_condition: raw
     tokenizer: meta-llama/Meta-Llama-3.1-8B-Instruct
     training_required: false
+  - arm_id: llama_task_only_lora
+    model_family: llama3.1
+    model_condition: task_only_lora
+    tokenizer: meta-llama/Meta-Llama-3.1-8B-Instruct
+    training_required: true
+    bucket_mass_loss: false
+
+null_evaluations:
+  required:
+    - raw_exact_model
+    - task_only_lora
+    - wrong_key
+    - wrong_payload
+    - same_family_raw_near_null
+    - organic_prompts
+    - non_owner_prompts
+  same_family_raw_near_null:
+    qwen:
+      - Qwen/Qwen2.5-3B-Instruct
+      - Qwen/Qwen2.5-7B-Instruct
+      - Qwen/Qwen2.5-14B-Instruct
+    llama:
+      - meta-llama/Meta-Llama-3.1-8B-Instruct
+  wrong_key_count: 4
+  wrong_payload_count: 4
 
 bucket_bank:
   target_bank_entries_per_tokenizer: 24576
@@ -112,6 +159,7 @@ pilot_scale:
   payloads: 2
   seeds:
     - 17
+    - 23
   train_prompts_per_protected_model: 8192
   eval_owner_probes: 2048
   organic_null_prompts: 2048
@@ -144,6 +192,7 @@ full_matrix_scale:
 
 training:
   target_mode: natural_transcript_bucket_mass
+  start_condition: after_basic_4way_gate_passes
   adapter:
     type: lora
     r: 16
@@ -153,6 +202,7 @@ training:
     task_loss: true
     bucket_mass_loss: true
     kl_reference_loss: optional
+    eligible_position_exact_token_ce: masked
   notes: >
     Do not reuse the exact-slot 64-epoch envelope. Use max_steps or epochs scaled
     to the natural response dataset size.
@@ -160,10 +210,35 @@ training:
 attacks:
   - no_attack
   - generic_paraphrase
-  - suffix_truncation
   - style_normalization
+  - compression_summarization
+  - low_temperature_regeneration
+  - deterministic_rewrite
+  - suffix_truncation
+  - public_surface_scrub
   - oracle_keyed_sanitizer
   - public_no_key_sanitizer
+
+end_to_end_pilot:
+  qwen_first: true
+  primary_bucket_count: 4
+  secondary_bucket_count: 8
+  required_conditions:
+    - protected_trained
+    - raw
+    - task_only_lora
+    - wrong_key
+    - wrong_payload
+  minimum_eval_owner_probes: 2048
+  minimum_organic_null_prompts: 2048
+  success_gates:
+    protected_payload_recovery: NEEDS_RESULTS
+    raw_exact_model_reject: NEEDS_RESULTS
+    task_only_lora_reject: NEEDS_RESULTS
+    wrong_key_reject: NEEDS_RESULTS
+    wrong_payload_reject: NEEDS_RESULTS
+    same_family_raw_reject: NEEDS_RESULTS
+    utility_naturalness_bounds: NEEDS_RESULTS
 
 tables:
   required_columns:

@@ -21,6 +21,11 @@ EXPECTED_ARMS = {
     ("llama3.1", "raw"),
 }
 
+EXPECTED_TASK_ONLY_ARMS = {
+    ("qwen2.5", "task_only_lora"),
+    ("llama3.1", "task_only_lora"),
+}
+
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run CPU/static validation for natural_evidence_v1.")
@@ -55,11 +60,11 @@ def _validate_arms(config: dict[str, Any], errors: list[str]) -> None:
         if "gpt2" in lowered:
             _error(errors, f"paper-facing arm must not use gpt2: {arm_id}")
     missing = sorted(EXPECTED_ARMS - observed)
-    extra = sorted(observed - EXPECTED_ARMS)
+    missing_task_only = sorted(EXPECTED_TASK_ONLY_ARMS - observed)
     if missing:
         _error(errors, f"missing required four-arm cells: {missing}")
-    if extra:
-        _error(errors, f"unexpected model arms: {extra}")
+    if missing_task_only:
+        _error(errors, f"missing required task-only LoRA null arms: {missing_task_only}")
 
 
 def _validate_bucket_bank(config: dict[str, Any], errors: list[str]) -> None:
@@ -110,6 +115,64 @@ def _validate_protocol(config: dict[str, Any], errors: list[str]) -> None:
             _error(errors, f"missing forbidden surface pattern {required!r}")
     if "hidden_until_transcript_commitment" not in str(protocol.get("audit_key_status", "")):
         _error(errors, "audit_key_status must encode commit-then-reveal")
+    commitment = protocol.get("commitment", {})
+    if not isinstance(commitment, dict) or not commitment.get("required", False):
+        _error(errors, "protocol.commitment.required must be true")
+        return
+    for field in (
+        "protocol_id",
+        "audit_key_commitment",
+        "payload_commitment",
+        "bucket_policy_commitment",
+        "query_budget",
+        "probe_selection_rule",
+    ):
+        if field not in [str(item) for item in commitment.get("pre_audit_fields", [])]:
+            _error(errors, f"protocol.commitment.pre_audit_fields missing {field!r}")
+    if not commitment.get("transcript_freeze_before_key_reveal", False):
+        _error(errors, "transcript_freeze_before_key_reveal must be true")
+    if not commitment.get("forbid_post_hoc_key_search", False):
+        _error(errors, "forbid_post_hoc_key_search must be true")
+    if not commitment.get("multiple_testing_accounting_required", False):
+        _error(errors, "multiple_testing_accounting_required must be true")
+
+
+def _validate_nulls_and_attacks(config: dict[str, Any], errors: list[str]) -> None:
+    nulls = config.get("null_evaluations", {})
+    required_nulls = set(str(item) for item in nulls.get("required", [])) if isinstance(nulls, dict) else set()
+    for null_name in (
+        "raw_exact_model",
+        "task_only_lora",
+        "wrong_key",
+        "wrong_payload",
+        "same_family_raw_near_null",
+        "organic_prompts",
+        "non_owner_prompts",
+    ):
+        if null_name not in required_nulls:
+            _error(errors, f"missing required null evaluation {null_name!r}")
+    attacks = set(str(item) for item in config.get("attacks", []))
+    for attack_name in (
+        "generic_paraphrase",
+        "style_normalization",
+        "compression_summarization",
+        "low_temperature_regeneration",
+        "deterministic_rewrite",
+        "public_surface_scrub",
+        "oracle_keyed_sanitizer",
+    ):
+        if attack_name not in attacks:
+            _error(errors, f"missing required sanitizer attack {attack_name!r}")
+    e2e = config.get("end_to_end_pilot", {})
+    if not isinstance(e2e, dict):
+        _error(errors, "end_to_end_pilot must be a mapping")
+        return
+    conditions = set(str(item) for item in e2e.get("required_conditions", []))
+    for condition in ("protected_trained", "raw", "task_only_lora", "wrong_key", "wrong_payload"):
+        if condition not in conditions:
+            _error(errors, f"end_to_end_pilot.required_conditions missing {condition!r}")
+    if int(e2e.get("primary_bucket_count", 0)) != 4:
+        _error(errors, "end_to_end_pilot.primary_bucket_count must be 4 for the first natural pilot")
 
 
 def _validate_tables(config: dict[str, Any], errors: list[str]) -> None:
@@ -153,6 +216,7 @@ def main(argv: list[str] | None = None) -> int:
     _validate_protocol(config, errors)
     _validate_arms(config, errors)
     _validate_bucket_bank(config, errors)
+    _validate_nulls_and_attacks(config, errors)
     _validate_tables(config, errors)
 
     summary = {
@@ -165,6 +229,9 @@ def main(argv: list[str] | None = None) -> int:
             "four_arm_matrix",
             "bucket_bank_scale_config",
             "opportunity_bank_quality_gates",
+            "protocol_precommitment",
+            "task_only_and_near_null_controls",
+            "sanitizer_benchmark_requirements",
             "paper_table_required_columns",
             "no_gpt2_paper_facing_arm",
         ],

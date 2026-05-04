@@ -29,14 +29,19 @@ whether the position is eligible. If it is eligible, the verifier reconstructs a
 context-conditioned bucket family `B_K(h, b)` over tokenizer tokens and records
 the bucket id of the observed token.
 
-The audit flow is commit-then-reveal:
+The audit flow is commit-then-reveal, as specified in
+`docs/natural_evidence_v1/protocol_commitment.md`:
 
 1. Collect transcripts from protected and raw model arms.
 2. Commit transcript hashes before revealing the audit key.
 3. Reveal the audit key and verifier spec.
-4. Retokenize transcripts, reconstruct eligible prefixes, map observed tokens
+4. Check the revealed key/payload/policy against the pre-audit commitment.
+5. Retokenize transcripts, reconstruct eligible prefixes, map observed tokens
    to bucket ids, and decode accumulated bucket observations with the mixed-radix
    and RS verifier.
+
+The formal context-conditioned bucket object and transcript-level error/erasure
+model are recorded in `docs/natural_evidence_v1/formal_protocol.md`.
 
 ## Required Arms
 
@@ -50,6 +55,10 @@ Every model-facing result table in this namespace must include all four arms:
 Raw arms are not optional. They are the null controls that show the verifier is
 not merely accepting ordinary natural text by chance.
 
+Task-only LoRA arms are also required before paper-facing claims. They use the
+same prompts, responses, and adapter recipe but disable bucket-mass loss, so
+they control for LoRA and data-style drift.
+
 ## First Execution Order
 
 Do not start training first. The first executable target is opportunity-bank
@@ -60,7 +69,10 @@ and verifier validation:
 2. Validate bucket coverage, token filters, mass thresholds, and manifest
    determinism.
 3. Validate transcript-level decoding on static observation fixtures.
-4. Only then submit the first GPU pilot for Qwen and Llama protected/raw arms.
+4. Once the 4-way bank passes basic gates, run a paper-facing Qwen end-to-end
+   pilot instead of continuing to optimize banks indefinitely.
+5. Replicate on Llama only after Qwen demonstrates end-to-end recovery under
+   null controls.
 
 The configured target of 24,576 bank entries is opportunity scale. A bank entry
 is a context-conditioned measurable opportunity, not a fingerprint. It becomes
@@ -94,6 +106,12 @@ Training must not start until the following are reported:
 The current audit scripts report static opportunity quality and mark model-run
 dependent gates as `NEEDS_RESULTS` rather than treating 24,576 entries as a
 fingerprint claim.
+
+The complete end-to-end work order is in
+`docs/natural_evidence_v1/end_to_end_audit_plan.md`. The first paper-facing
+pilot is Qwen protected/raw/task-only/wrong-key/wrong-payload with two payloads,
+two seeds, at least 2048 owner probes, at least 2048 organic null prompts, and
+query budgets 8, 16, 32, 64, and 128.
 
 ## Current Entrypoints
 
