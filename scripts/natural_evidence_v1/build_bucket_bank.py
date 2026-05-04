@@ -236,7 +236,7 @@ def _entry_from_record(
             "candidate_token_count": len(candidates),
             "filters_passed": [
                 "single_token",
-                "no_whitespace_or_punctuation_only_token",
+                "no_whitespace_punctuation_or_special_surface_token",
                 "no_delimiter",
                 "no_control_token",
                 "no_obvious_evidence_token",

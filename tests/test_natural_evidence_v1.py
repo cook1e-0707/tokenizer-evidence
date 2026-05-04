@@ -88,6 +88,9 @@ def test_token_surface_filter_rejects_nonsemantic_surfaces() -> None:
     assert token_surface_allowed(" ") is False
     assert token_surface_allowed("...") is False
     assert token_surface_allowed(" **") is False
+    assert token_surface_allowed("<|eot_id|>") is False
+    assert token_surface_allowed("_begin") is False
+    assert token_surface_allowed(".Start") is False
 
 
 def test_verify_observations_decodes_payload(tmp_path: Path) -> None:

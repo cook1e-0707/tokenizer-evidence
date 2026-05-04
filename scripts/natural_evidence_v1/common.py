@@ -99,7 +99,12 @@ def token_surface_allowed(text: str, forbidden_patterns: Sequence[str] = FORBIDD
         return False
     if re.fullmatch(r"\s*\W+\s*", text, flags=re.UNICODE):
         return False
-    if any(char in text for char in ("\n", "\r", "\t", "=", ";", "{", "}", "[", "]")):
+    stripped_text = text.strip()
+    if stripped_text.startswith((".", "/")):
+        return False
+    if re.search(r"<\|[^>]+\|>", text) or "<|" in text or "|>" in text:
+        return False
+    if any(char in text for char in ("\n", "\r", "\t", "=", ";", "{", "}", "[", "]", "<", ">", "|", "_", "*", "#", "`")):
         return False
     if any(ord(char) < 32 for char in text):
         return False
