@@ -16,6 +16,7 @@ from scripts.natural_evidence_v1 import (
     validate_static,
     verify_observations,
 )
+from scripts.natural_evidence_v1.common import token_surface_allowed
 from src.core.payload_codec import BucketPayloadCodec
 
 
@@ -82,6 +83,13 @@ def test_build_bucket_bank_from_reference_candidates(tmp_path: Path) -> None:
     assert "FIELD=" not in json.dumps(entry)
 
 
+def test_token_surface_filter_rejects_nonsemantic_surfaces() -> None:
+    assert token_surface_allowed(" Start") is True
+    assert token_surface_allowed(" ") is False
+    assert token_surface_allowed("...") is False
+    assert token_surface_allowed(" **") is False
+
+
 def test_verify_observations_decodes_payload(tmp_path: Path) -> None:
     codec = BucketPayloadCodec(bucket_radices=(8, 8, 8))
     bucket_ids = [
@@ -144,6 +152,8 @@ def test_compile_train_dataset_uses_natural_response_schema(tmp_path: Path) -> N
                 "protocol_id": "natural_evidence_v1",
                 "bank_entry_id": "qwen_bank_ctx1",
                 "context_signature": "ctx1",
+                "prompt_id": "p0",
+                "prefix_token_ids": list(range(8)),
                 "buckets": buckets,
             }
         ],
@@ -155,7 +165,6 @@ def test_compile_train_dataset_uses_natural_response_schema(tmp_path: Path) -> N
                 "prompt_id": "p0",
                 "prompt": "Give a short hiking safety plan.",
                 "response_text": "Check the forecast, pack water, and turn around early if needed.",
-                "eligible_prefixes": [{"token_index": 8, "context_signature": "ctx1"}],
             }
         ],
     )
@@ -183,6 +192,7 @@ def test_compile_train_dataset_uses_natural_response_schema(tmp_path: Path) -> N
     row = json.loads(rows[0])
     assert row["schema_name"] == "natural_evidence_train_example_v1"
     assert row["response_text"].startswith("Check the forecast")
+    assert row["eligible_positions"][0]["prefix_token_ids"] == list(range(8))
     assert "FIELD=" not in json.dumps(row)
     contract = json.loads(contract_json.read_text(encoding="utf-8"))
     assert contract["claim_control"]["ready_for_model_training"] is False

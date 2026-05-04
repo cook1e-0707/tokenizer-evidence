@@ -95,6 +95,10 @@ def _stable_string(value: Any) -> str:
 def token_surface_allowed(text: str, forbidden_patterns: Sequence[str] = FORBIDDEN_SURFACE_PATTERNS) -> bool:
     if text == "":
         return False
+    if text.strip() == "":
+        return False
+    if re.fullmatch(r"\s*\W+\s*", text, flags=re.UNICODE):
+        return False
     if any(char in text for char in ("\n", "\r", "\t", "=", ";", "{", "}", "[", "]")):
         return False
     if any(ord(char) < 32 for char in text):
@@ -119,4 +123,3 @@ def require_sequence(payload: Mapping[str, Any], key: str) -> list[Any]:
     if not isinstance(value, list):
         raise ValueError(f"Expected list at {key!r}")
     return value
-

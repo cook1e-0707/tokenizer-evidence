@@ -236,6 +236,7 @@ def _entry_from_record(
             "candidate_token_count": len(candidates),
             "filters_passed": [
                 "single_token",
+                "no_whitespace_or_punctuation_only_token",
                 "no_delimiter",
                 "no_control_token",
                 "no_obvious_evidence_token",
@@ -391,4 +392,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
