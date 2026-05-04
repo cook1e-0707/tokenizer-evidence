@@ -43,6 +43,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--target-entries", type=int, default=0)
     parser.add_argument("--bucket-count", type=int, default=0)
     parser.add_argument("--max-records", type=int, default=0)
+    parser.add_argument(
+        "--strict-balance-gate",
+        action="store_true",
+        help=(
+            "Reject accepted-looking entries unless bucket mass, mass ratio, "
+            "and entropy also pass the configured train-quality gate."
+        ),
+    )
+    parser.add_argument("--balance-min-bucket-mass", type=float, default=0.0)
+    parser.add_argument("--max-bucket-mass-ratio", type=float, default=0.0)
+    parser.add_argument("--min-bucket-entropy-fraction", type=float, default=-1.0)
     return parser.parse_args(argv)
 
 
@@ -218,6 +229,9 @@ def _entry_from_record(
     min_members_per_bucket: int,
     min_bucket_mass: float,
     strict_min_bucket_mass: bool,
+    strict_balance_gate: bool,
+    max_bucket_mass_ratio: float,
+    min_bucket_entropy_fraction: float,
     bucket_assignment: str,
     forbidden_patterns: list[str],
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
@@ -234,6 +248,9 @@ def _entry_from_record(
         "candidate_count": len(candidates),
         "rejection_reason": "",
         "candidate_rejection_reasons_json": json.dumps(sorted(set(candidate_rejections))),
+        "min_bucket_mass": "",
+        "bucket_mass_ratio": "",
+        "bucket_entropy_fraction": "",
     }
     if len(candidates) < bucket_count * min_members_per_bucket:
         rejection["rejection_reason"] = "insufficient_filtered_candidates"
@@ -267,6 +284,38 @@ def _entry_from_record(
 
     entry_id = stable_hash_hex([bank_id, tokenizer_name, prefix_signature])[:24]
     mass_summary = bucket_mass_metrics(list(bucket_masses.values()))
+    rejection["min_bucket_mass"] = mass_summary["min_bucket_mass"]
+    rejection["bucket_mass_ratio"] = mass_summary["bucket_mass_ratio"]
+    rejection["bucket_entropy_fraction"] = mass_summary["bucket_entropy_fraction"]
+    if strict_balance_gate:
+        if mass_summary["min_bucket_mass"] < min_bucket_mass:
+            rejection["rejection_reason"] = "balance_gate_min_bucket_mass"
+            return None, rejection
+        if mass_summary["bucket_mass_ratio"] > max_bucket_mass_ratio:
+            rejection["rejection_reason"] = "balance_gate_bucket_mass_ratio"
+            return None, rejection
+        if mass_summary["bucket_entropy_fraction"] < min_bucket_entropy_fraction:
+            rejection["rejection_reason"] = "balance_gate_bucket_entropy"
+            return None, rejection
+
+    balance_gate = {
+        "strict_balance_gate": strict_balance_gate,
+        "min_bucket_mass": min_bucket_mass,
+        "max_bucket_mass_ratio": max_bucket_mass_ratio,
+        "min_bucket_entropy_fraction": min_bucket_entropy_fraction,
+        "passed": True,
+    }
+    filters_passed = [
+        "single_token",
+        "no_whitespace_punctuation_or_special_surface_token",
+        "no_delimiter",
+        "no_control_token",
+        "no_obvious_evidence_token",
+        "min_reference_probability",
+        "min_members_per_bucket",
+    ]
+    if strict_balance_gate:
+        filters_passed.append("strict_balanced_entry_selection")
     return (
         {
             "schema_name": "natural_evidence_bucket_bank_entry_v1",
@@ -286,19 +335,12 @@ def _entry_from_record(
             "bucket_token_texts": bucket_texts,
             "reference_mass": bucket_masses,
             "bucket_mass_summary": mass_summary,
+            "balance_gate": balance_gate,
             "token_class_counts": dict(sorted(token_class_counts.items())),
             "counterfactual_compatibility_status": "NEEDS_COUNTERFACTUAL_COMPATIBILITY",
             "on_policy_reconstructability_status": "NEEDS_TRANSCRIPT_RECONSTRUCTION_EVAL",
             "candidate_token_count": len(candidates),
-            "filters_passed": [
-                "single_token",
-                "no_whitespace_punctuation_or_special_surface_token",
-                "no_delimiter",
-                "no_control_token",
-                "no_obvious_evidence_token",
-                "min_reference_probability",
-                "min_members_per_bucket",
-            ],
+            "filters_passed": filters_passed,
             "result_claim": "bucket_opportunity_not_trained_fingerprint",
             "fingerprint_claim": False,
         },
@@ -313,6 +355,7 @@ def main(argv: list[str] | None = None) -> int:
     config = read_yaml(config_path)
     protocol = dict(config.get("protocol", {}))
     bucket_cfg = dict(config.get("bucket_bank", {}))
+    quality_gates = dict(bucket_cfg.get("quality_gates", {}))
     models = dict(config.get("models", {}))
     selector = dict(config.get("selector", {}))
 
@@ -342,6 +385,22 @@ def main(argv: list[str] | None = None) -> int:
     min_members_per_bucket = int(bucket_cfg.get("min_members_per_bucket", 2))
     min_bucket_mass = float(bucket_cfg.get("min_bucket_mass", 0.01))
     strict_min_bucket_mass = bool(bucket_cfg.get("strict_min_bucket_mass", False))
+    strict_balance_gate = bool(bucket_cfg.get("strict_balance_gate", False)) or bool(args.strict_balance_gate)
+    balance_min_bucket_mass = (
+        args.balance_min_bucket_mass
+        if args.balance_min_bucket_mass > 0.0
+        else float(quality_gates.get("min_bucket_mass", min_bucket_mass))
+    )
+    max_bucket_mass_ratio = (
+        args.max_bucket_mass_ratio
+        if args.max_bucket_mass_ratio > 0.0
+        else float(quality_gates.get("max_bucket_mass_ratio", float("inf")))
+    )
+    min_bucket_entropy_fraction = (
+        args.min_bucket_entropy_fraction
+        if args.min_bucket_entropy_fraction >= 0.0
+        else float(quality_gates.get("min_bucket_entropy_fraction", 0.0))
+    )
     forbidden_patterns = [str(item) for item in protocol.get("forbidden_surface_patterns", [])]
 
     records = read_jsonl(candidate_jsonl)
@@ -361,8 +420,11 @@ def main(argv: list[str] | None = None) -> int:
             candidate_top_k=candidate_top_k,
             min_probability=min_probability,
             min_members_per_bucket=min_members_per_bucket,
-            min_bucket_mass=min_bucket_mass,
+            min_bucket_mass=balance_min_bucket_mass if strict_balance_gate else min_bucket_mass,
             strict_min_bucket_mass=strict_min_bucket_mass,
+            strict_balance_gate=strict_balance_gate,
+            max_bucket_mass_ratio=max_bucket_mass_ratio,
+            min_bucket_entropy_fraction=min_bucket_entropy_fraction,
             bucket_assignment=bucket_assignment,
             forbidden_patterns=forbidden_patterns,
         )
@@ -388,6 +450,9 @@ def main(argv: list[str] | None = None) -> int:
             "candidate_count",
             "rejection_reason",
             "candidate_rejection_reasons_json",
+            "min_bucket_mass",
+            "bucket_mass_ratio",
+            "bucket_entropy_fraction",
         ],
     )
     coverage_row = {
@@ -443,6 +508,12 @@ def main(argv: list[str] | None = None) -> int:
             "min_members_per_bucket": min_members_per_bucket,
             "min_bucket_mass": min_bucket_mass,
             "strict_min_bucket_mass": strict_min_bucket_mass,
+            "strict_balance_gate": strict_balance_gate,
+            "balance_gate_thresholds": {
+                "min_bucket_mass": balance_min_bucket_mass,
+                "max_bucket_mass_ratio": max_bucket_mass_ratio,
+                "min_bucket_entropy_fraction": min_bucket_entropy_fraction,
+            },
             "claim_control": {
                 "bucket_bank_entries_are_fingerprints": False,
                 "bucket_bank_entries_are_opportunities": True,

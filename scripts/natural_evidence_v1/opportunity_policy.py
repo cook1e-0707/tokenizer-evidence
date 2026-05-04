@@ -20,6 +20,9 @@ def construct_buckets_from_topk_record(
     strict_min_bucket_mass: bool,
     forbidden_patterns: list[str],
     bucket_assignment: str = "keyed_mass_balance",
+    strict_balance_gate: bool = False,
+    max_bucket_mass_ratio: float = float("inf"),
+    min_bucket_entropy_fraction: float = 0.0,
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     """Construct deterministic opportunity buckets from a scored observed prefix.
 
@@ -42,6 +45,9 @@ def construct_buckets_from_topk_record(
         min_members_per_bucket=min_members_per_bucket,
         min_bucket_mass=min_bucket_mass,
         strict_min_bucket_mass=strict_min_bucket_mass,
+        strict_balance_gate=strict_balance_gate,
+        max_bucket_mass_ratio=max_bucket_mass_ratio,
+        min_bucket_entropy_fraction=min_bucket_entropy_fraction,
         bucket_assignment=bucket_assignment,
         forbidden_patterns=forbidden_patterns,
     )

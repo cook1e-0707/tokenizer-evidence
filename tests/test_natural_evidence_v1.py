@@ -92,6 +92,65 @@ def test_build_bucket_bank_from_reference_candidates(tmp_path: Path) -> None:
     assert "FIELD=" not in json.dumps(entry)
 
 
+def test_strict_balance_gate_rejects_peaked_bucket_entries(tmp_path: Path) -> None:
+    candidate_path = tmp_path / "candidates.jsonl"
+    candidates = [
+        {
+            "prompt_id": "p0",
+            "prefix_token_ids": [1, 2, 3],
+            "candidates": [
+                {
+                    "token_id": 10,
+                    "text": " dominant",
+                    "probability": 0.91,
+                    "rank": 1,
+                },
+                *[
+                    {
+                        "token_id": index + 11,
+                        "text": f" token{index}",
+                        "probability": 0.001,
+                        "rank": index + 2,
+                    }
+                    for index in range(15)
+                ],
+            ],
+        }
+    ]
+    _write_jsonl(candidate_path, candidates)
+    output_dir = tmp_path / "bank"
+    status = build_bucket_bank.main(
+        [
+            "--config",
+            "configs/natural_evidence_v1/pilot.yaml",
+            "--tokenizer-key",
+            "qwen",
+            "--candidate-jsonl",
+            str(candidate_path),
+            "--output-dir",
+            str(output_dir),
+            "--target-entries",
+            "1",
+            "--bucket-count",
+            "4",
+            "--strict-balance-gate",
+            "--balance-min-bucket-mass",
+            "0.005",
+            "--max-bucket-mass-ratio",
+            "5",
+            "--min-bucket-entropy-fraction",
+            "0.90",
+        ]
+    )
+    assert status == 0
+    assert (output_dir / "qwen_bucket_bank_entries.jsonl").read_text(encoding="utf-8") == ""
+    rejections = list(csv.DictReader((output_dir / "qwen_bucket_bank_rejections.csv").open(encoding="utf-8")))
+    assert rejections[0]["rejection_reason"].startswith("balance_gate_")
+    manifest = json.loads((output_dir / "qwen_bank_manifest.json").read_text(encoding="utf-8"))
+    assert manifest["strict_balance_gate"] is True
+    assert manifest["claim_control"]["bucket_bank_entries_are_fingerprints"] is False
+
+
 def test_token_surface_filter_rejects_nonsemantic_surfaces() -> None:
     assert token_surface_allowed(" Start") is True
     assert token_surface_allowed(" ") is False

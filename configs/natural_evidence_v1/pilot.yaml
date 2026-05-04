@@ -102,6 +102,7 @@ bucket_bank:
   min_members_per_bucket: 2
   min_bucket_mass: 0.01
   strict_min_bucket_mass: false
+  strict_balance_gate: false
   max_evidence_positions_per_response: 4
   min_spacing_tokens: 12
   output_root: results/natural_evidence_v1/bucket_banks
