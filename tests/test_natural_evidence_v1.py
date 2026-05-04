@@ -12,6 +12,7 @@ if str(REPO_ROOT) not in sys.path:
 from scripts.natural_evidence_v1 import (
     build_bucket_bank,
     compile_train_dataset,
+    generate_reference_outputs,
     validate_static,
     verify_observations,
 )
@@ -185,3 +186,11 @@ def test_compile_train_dataset_uses_natural_response_schema(tmp_path: Path) -> N
     assert "FIELD=" not in json.dumps(row)
     contract = json.loads(contract_json.read_text(encoding="utf-8"))
     assert contract["claim_control"]["ready_for_model_training"] is False
+
+
+def test_built_in_reference_prompts_are_diverse() -> None:
+    rows = generate_reference_outputs._built_in_prompts(8192)
+    prompts = [row["user_probe"] for row in rows]
+    assert len(prompts) == 8192
+    assert len(set(prompts)) == 8192
+    assert all("FIELD=" not in prompt for prompt in prompts)

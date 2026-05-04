@@ -52,6 +52,63 @@ TOPICS = (
     "a weather-aware travel plan",
 )
 
+AUDIENCES = (
+    "a cautious beginner",
+    "a busy parent",
+    "a first-time organizer",
+    "a small team lead",
+    "a student",
+    "a remote worker",
+    "a volunteer coordinator",
+    "a careful traveler",
+    "a new homeowner",
+    "a community group",
+    "a junior colleague",
+    "a family planning together",
+    "a solo planner",
+    "a nonprofit staff member",
+    "a neighborhood organizer",
+    "a practical general reader",
+)
+
+CONTEXTS = (
+    "limited preparation time",
+    "a modest budget",
+    "uncertain weather",
+    "mixed experience levels",
+    "a need for simple language",
+    "a preference for low-risk choices",
+    "a short planning window",
+    "limited equipment",
+    "coordination with several people",
+    "a fixed deadline",
+    "a need to avoid unnecessary complexity",
+    "a small margin for mistakes",
+    "a desire for clear priorities",
+    "a routine weekday schedule",
+    "a weekend schedule",
+    "a need to communicate decisions clearly",
+)
+
+CONSTRAINTS = (
+    "Keep it under five sentences.",
+    "Use concrete, everyday wording.",
+    "Avoid hype and unsupported claims.",
+    "Mention what to check first.",
+    "Include one fallback option.",
+    "Separate preparation from follow-through.",
+    "Prioritize safety and practicality.",
+    "Make the answer easy to scan.",
+    "Avoid specialist jargon.",
+    "Include one common mistake to avoid.",
+    "Keep the tone calm and direct.",
+    "Focus on actions rather than background.",
+    "Include a brief reason for the recommendation.",
+    "Use complete sentences.",
+    "Do not use numbered headings.",
+    "Keep the advice general and reusable.",
+)
+
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -84,17 +141,28 @@ def _built_in_prompts(count: int) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     for index in range(max(0, count)):
         template = PROMPT_TEMPLATES[index % len(PROMPT_TEMPLATES)]
-        topic = TOPICS[(index // len(PROMPT_TEMPLATES)) % len(TOPICS)]
-        variant = index // (len(PROMPT_TEMPLATES) * len(TOPICS))
+        cursor = index // len(PROMPT_TEMPLATES)
+        topic = TOPICS[cursor % len(TOPICS)]
+        cursor //= len(TOPICS)
+        audience = AUDIENCES[cursor % len(AUDIENCES)]
+        cursor //= len(AUDIENCES)
+        context = CONTEXTS[cursor % len(CONTEXTS)]
+        cursor //= len(CONTEXTS)
+        constraint = CONSTRAINTS[cursor % len(CONSTRAINTS)]
         user_probe = template.format(topic=topic)
-        if variant:
-            user_probe = f"{user_probe} Keep the answer concrete and avoid unnecessary detail."
+        user_probe = (
+            f"{user_probe} Write it for {audience}, assuming {context}. "
+            f"{constraint}"
+        )
         rows.append(
             {
                 "prompt_id": f"nat_prompt_{index:06d}",
                 "user_probe": user_probe,
                 "prompt_family": f"PF{(index % 4) + 1}",
                 "topic": topic,
+                "audience": audience,
+                "context": context,
+                "constraint": constraint,
             }
         )
     return rows
@@ -233,4 +301,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
