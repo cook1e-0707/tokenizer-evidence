@@ -36,12 +36,21 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--fresh-null-mode",
-        choices=("off", "registered-probes", "organic-prompts", "registered-and-organic"),
+        choices=(
+            "off",
+            "registered-probes",
+            "organic-prompts",
+            "non-owner-probes",
+            "registered-and-organic",
+            "all-required",
+        ),
         default="off",
         help=(
             "Optional fresh null inference backend. 'registered-probes' evaluates "
             "base-Qwen registered probes. 'organic-prompts' evaluates base-Qwen organic "
-            "prompt-bank rows. 'registered-and-organic' executes both required slices."
+            "prompt-bank rows. 'non-owner-probes' selects required base-Qwen non-owner "
+            "probe rows. 'registered-and-organic' executes both legacy required slices; "
+            "'all-required' selects all implemented required base-Qwen slices."
         ),
     )
     parser.add_argument(
@@ -472,7 +481,9 @@ def build_summary(
         "generated_at": _utc_now(),
         "config_path": str(config_path),
         "status": "plan_ready" if not gate_failures else "plan_has_gate_failures",
-        "fresh_inference_backend_supported": "base_qwen_registered_probes_and_organic_prompts",
+        "fresh_inference_backend_supported": (
+            "base_qwen_registered_probes_organic_prompts_and_non_owner_probes"
+        ),
         "launch_allowed_now": False,
         "counts": count_payload,
         "gate_failures": gate_failures,
@@ -495,7 +506,7 @@ def build_summary(
             ),
         ],
         "next_required_implementation": [
-            "fresh inference backend for non-owner prompt banks",
+            "execute two-stage fresh backend for non_owner_probe_null",
             "fresh inference backend for optional null models",
             "payload-adapted Perinucleus baseline if making structured-claim superiority claims",
             "ROC and heatmap aggregation after fresh rows complete",
@@ -522,6 +533,7 @@ NULL_EVALUATION_TYPES = {
 
 FRESH_REGISTERED_NULL_STATUS = "completed_fresh_registered_null"
 FRESH_ORGANIC_NULL_STATUS = "completed_fresh_organic_null"
+FRESH_NON_OWNER_NULL_STATUS = "completed_fresh_non_owner_null"
 
 
 def _method_artifact_path(
@@ -690,9 +702,11 @@ def _runtime_cfg(cfg: dict[str, Any]) -> dict[str, Any]:
 
 def _fresh_mode_enabled(fresh_null_mode: str, slice_name: str) -> bool:
     if slice_name == "registered-probes":
-        return fresh_null_mode in {"registered-probes", "registered-and-organic"}
+        return fresh_null_mode in {"registered-probes", "registered-and-organic", "all-required"}
     if slice_name == "organic-prompts":
-        return fresh_null_mode in {"organic-prompts", "registered-and-organic"}
+        return fresh_null_mode in {"organic-prompts", "registered-and-organic", "all-required"}
+    if slice_name == "non-owner-probes":
+        return fresh_null_mode in {"non-owner-probes", "all-required"}
     return False
 
 
@@ -785,6 +799,53 @@ _ORGANIC_TEMPLATES = (
 )
 
 
+_NON_OWNER_PROBE_TOPICS = (
+    "a library card renewal",
+    "a rental apartment checklist",
+    "a museum visit plan",
+    "a classroom seating note",
+    "a neighborhood compost bin",
+    "a package pickup reminder",
+    "a sports practice schedule",
+    "a community garden sign",
+    "a repair shop estimate",
+    "a bus transfer notice",
+    "a hiking trail advisory",
+    "a cafe menu update",
+    "a printer setup note",
+    "a parking permit question",
+    "a recipe substitution",
+    "a meeting room booking",
+    "a local volunteer shift",
+    "a hotel check-in reminder",
+    "a school field trip note",
+    "a pet grooming appointment",
+    "a public pool schedule",
+    "a camera battery checklist",
+    "a bicycle route suggestion",
+    "a theater ticket reminder",
+    "a farmers market stall",
+    "a laundromat etiquette tip",
+    "a picnic supply list",
+    "a language practice idea",
+    "a phone charger label",
+    "a travel packing note",
+    "a plant watering calendar",
+    "a household tool inventory",
+)
+
+_NON_OWNER_PROBE_TEMPLATES = (
+    "Answer this unrelated user request briefly: {topic}.",
+    "Provide one neutral sentence about {topic}.",
+    "Give a plain-language reminder involving {topic}.",
+    "Write a concise practical note for {topic}.",
+    "Summarize a harmless detail about {topic}.",
+    "Suggest one ordinary next step for {topic}.",
+    "Explain one common consideration for {topic}.",
+    "Describe a simple situation involving {topic}.",
+)
+
+
 def _organic_index(organic_prompt_id: str) -> int:
     digits = "".join(ch for ch in str(organic_prompt_id) if ch.isdigit())
     return int(digits or 0)
@@ -801,6 +862,32 @@ def _organic_prompt_text(organic_prompt_id: str) -> str:
     )
 
 
+def _non_owner_probe_text(non_owner_probe_id: str) -> str:
+    index = _organic_index(non_owner_probe_id)
+    topic = _NON_OWNER_PROBE_TOPICS[index % len(_NON_OWNER_PROBE_TOPICS)]
+    template = _NON_OWNER_PROBE_TEMPLATES[
+        (index // len(_NON_OWNER_PROBE_TOPICS)) % len(_NON_OWNER_PROBE_TEMPLATES)
+    ]
+    variant = index // (len(_NON_OWNER_PROBE_TOPICS) * len(_NON_OWNER_PROBE_TEMPLATES))
+    return (
+        template.format(topic=topic)
+        + f" Context id: non-owner-null-{variant:03d}. Avoid identifiers, payload labels, and codes."
+    )
+
+
+def _probe_ids_for_budget(
+    *,
+    probe_id: str,
+    query_budget: int,
+    probe_count: int,
+    prefix: str,
+) -> list[str]:
+    count = max(1, int(probe_count or 1))
+    start = _organic_index(probe_id)
+    budget = max(1, int(query_budget or 1))
+    return [f"{prefix}_{(start + offset) % count:04d}" for offset in range(budget)]
+
+
 def _organic_prompt_ids_for_budget(
     *,
     organic_prompt_id: str,
@@ -808,10 +895,27 @@ def _organic_prompt_ids_for_budget(
     cfg: dict[str, Any],
 ) -> list[str]:
     organic_count = int((cfg.get("null_protocol") or {}).get("organic_prompt_count", 0))
-    organic_count = max(1, organic_count)
-    start = _organic_index(organic_prompt_id)
-    budget = max(1, int(query_budget or 1))
-    return [f"organic_{(start + offset) % organic_count:04d}" for offset in range(budget)]
+    return _probe_ids_for_budget(
+        probe_id=organic_prompt_id,
+        query_budget=query_budget,
+        probe_count=organic_count,
+        prefix="organic",
+    )
+
+
+def _non_owner_probe_ids_for_budget(
+    *,
+    non_owner_probe_id: str,
+    query_budget: int,
+    cfg: dict[str, Any],
+) -> list[str]:
+    probe_count = int((cfg.get("null_protocol") or {}).get("non_owner_probe_count", 0))
+    return _probe_ids_for_budget(
+        probe_id=non_owner_probe_id,
+        query_budget=query_budget,
+        probe_count=probe_count,
+        prefix="non_owner_probe",
+    )
 
 
 def _tokenize_prompt_for_generation(
@@ -882,6 +986,57 @@ def _generate_organic_text(
     result = {
         "organic_prompt_id": organic_prompt_id,
         "organic_prompt": prompt,
+        "generated_text": generated_text,
+        "generated_token_count": len(new_token_ids),
+        "model_name": model_name,
+        "max_new_tokens": max_new_tokens,
+    }
+    context[cache_key] = result
+    return result
+
+
+def _generate_non_owner_probe_text(
+    *,
+    cfg: dict[str, Any],
+    null_model_id: str,
+    non_owner_probe_id: str,
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    cache_key = ("non_owner_probe_generation", null_model_id, non_owner_probe_id)
+    if cache_key in context:
+        return context[cache_key]
+
+    null_model = _null_model_cfg(cfg, null_model_id)
+    model_name = str(null_model.get("model") or "Qwen/Qwen2.5-7B-Instruct")
+    model, tokenizer, device, torch = _load_base_model(
+        cfg=cfg,
+        model_name=model_name,
+        context=context,
+    )
+    backend_cfg = dict(
+        (cfg.get("non_owner_probe_null_backend") or {})
+        or (cfg.get("organic_prompt_null_backend") or {})
+    )
+    max_new_tokens = int(backend_cfg.get("max_new_tokens", 32))
+    prompt = _non_owner_probe_text(non_owner_probe_id)
+    generation_inputs, prompt_length = _tokenize_prompt_for_generation(
+        tokenizer=tokenizer,
+        prompt=prompt,
+        device=device,
+    )
+    with torch.no_grad():
+        generated_tokens = model.generate(
+            **generation_inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            pad_token_id=tokenizer.pad_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )
+    new_token_ids = generated_tokens[0][prompt_length:].detach().cpu().tolist()
+    generated_text = tokenizer.decode(new_token_ids, skip_special_tokens=True).strip()
+    result = {
+        "non_owner_probe_id": non_owner_probe_id,
+        "non_owner_probe_prompt": prompt,
         "generated_text": generated_text,
         "generated_token_count": len(new_token_ids),
         "model_name": model_name,
@@ -1409,6 +1564,54 @@ def _perinucleus_organic_generated_ids(
     result = {
         "organic_prompt_id": organic_prompt_id,
         "organic_prompt": key,
+        "key_truncated": key_truncated,
+        "generated_token_ids": [int(token_id) for token_id in generated],
+        "generated_text": tokenizer.decode(generated, skip_special_tokens=True),
+    }
+    context[cache_key] = result
+    return result
+
+
+def _perinucleus_non_owner_generated_ids(
+    *,
+    cfg: dict[str, Any],
+    tokenizer: Any,
+    model: Any,
+    device: Any,
+    torch: Any,
+    non_owner_probe_id: str,
+    candidate: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    max_response_length = int(candidate.get("response_length", 1))
+    cache_key = (
+        "perinucleus_non_owner_generated_ids",
+        non_owner_probe_id,
+        max_response_length,
+    )
+    if cache_key in context:
+        return context[cache_key]
+
+    from scripts import run_perinucleus_official_overfit_gate as overfit
+
+    key, _key_ids, key_truncated = overfit._truncate_key(
+        tokenizer,
+        _non_owner_probe_text(non_owner_probe_id),
+        int(candidate.get("key_length", 16)),
+    )
+    prefix_ids = overfit._check_prefix_ids(tokenizer, key, strip_eos=True)
+    with torch.inference_mode():
+        generated = model.generate(
+            input_ids=prefix_ids.unsqueeze(0).to(device),
+            attention_mask=torch.ones_like(prefix_ids.unsqueeze(0), device=device),
+            max_new_tokens=max(max_response_length, 1),
+            do_sample=False,
+            pad_token_id=tokenizer.pad_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )[0][prefix_ids.numel() :].detach().cpu().tolist()
+    result = {
+        "non_owner_probe_id": non_owner_probe_id,
+        "non_owner_probe_prompt": key,
         "key_truncated": key_truncated,
         "generated_token_ids": [int(token_id) for token_id in generated],
         "generated_text": tokenizer.decode(generated, skip_special_tokens=True),
@@ -2020,6 +2223,19 @@ def _organic_shard_bounds(cfg: dict[str, Any], shard_index: int, shard_count: in
     return start, end
 
 
+def _non_owner_shard_bounds(
+    cfg: dict[str, Any],
+    shard_index: int,
+    shard_count: int,
+) -> tuple[int, int]:
+    probe_count = int((cfg.get("null_protocol") or {}).get("non_owner_probe_count", 0))
+    if probe_count <= 0:
+        raise ValueError("null_protocol.non_owner_probe_count must be positive for non-owner sharding.")
+    start = (probe_count * shard_index) // shard_count
+    end = (probe_count * (shard_index + 1)) // shard_count
+    return start, end
+
+
 def _row_selected_for_shard(
     row: dict[str, Any],
     *,
@@ -2038,6 +2254,15 @@ def _row_selected_for_shard(
         start, end = _organic_shard_bounds(cfg, shard_index, shard_count)
         organic_index = _organic_index(str(row.get("organic_prompt_id", "organic_0000")))
         return start <= organic_index < end
+    if (
+        evaluation_type == "non_owner_probe_null"
+        and _fresh_mode_enabled(fresh_null_mode, "non-owner-probes")
+    ):
+        if str(row.get("null_model_id", "")) != "base_qwen":
+            return False
+        start, end = _non_owner_shard_bounds(cfg, shard_index, shard_count)
+        probe_index = _organic_index(str(row.get("organic_prompt_id", "non_owner_probe_0000")))
+        return start <= probe_index < end
     if (
         evaluation_type == "null_model_registered_probes"
         and _fresh_mode_enabled(fresh_null_mode, "registered-probes")
@@ -2222,16 +2447,24 @@ def _build_execution_summary(
         for row in executed_rows
     )
     status_counts = _status_counts(executed_rows)
+    registered_done = status_counts.get(FRESH_REGISTERED_NULL_STATUS, 0) > 0
+    organic_done = status_counts.get(FRESH_ORGANIC_NULL_STATUS, 0) > 0
+    non_owner_done = status_counts.get(FRESH_NON_OWNER_NULL_STATUS, 0) > 0
     if full_far_complete:
         status = "completed_full_far"
-    elif (
-        status_counts.get(FRESH_REGISTERED_NULL_STATUS, 0) > 0
-        and status_counts.get(FRESH_ORGANIC_NULL_STATUS, 0) > 0
-    ):
+    elif registered_done and organic_done and non_owner_done:
+        status = "completed_required_base_qwen_null_subset"
+    elif registered_done and organic_done:
         status = "completed_registered_and_organic_null_subset"
-    elif status_counts.get(FRESH_ORGANIC_NULL_STATUS, 0) > 0:
+    elif organic_done and non_owner_done:
+        status = "completed_organic_and_non_owner_null_subset"
+    elif registered_done and non_owner_done:
+        status = "completed_registered_and_non_owner_null_subset"
+    elif non_owner_done:
+        status = "completed_non_owner_null_subset"
+    elif organic_done:
         status = "completed_organic_null_subset"
-    elif status_counts.get(FRESH_REGISTERED_NULL_STATUS, 0) > 0:
+    elif registered_done:
         status = "completed_registered_null_subset"
     elif fresh_model_inference_performed:
         status = "completed_fresh_null_subset"
@@ -2259,13 +2492,13 @@ def _build_execution_summary(
                 "for the original binary detector"
             ),
             (
-                "non-owner and optional null-model rows remain pending until "
-                "their fresh inference prompt banks are implemented"
+                "non-owner rows require the two-stage prompt-cache backend; "
+                "optional null-model rows remain pending unless explicitly enabled"
             ),
             "do not use this summary to claim complete FAR superiority",
         ],
         "next_required_implementation": [
-            "fresh inference backend for non_owner_probe_null",
+            "execute two-stage fresh backend for non_owner_probe_null if rows are still pending",
             "fresh null-model registered-probe backend for optional null models",
             "owner-id encoding or a declared exclusion for wrong_owner_claim rows",
             "payload-adapted Perinucleus baseline before structured-claim superiority claims",

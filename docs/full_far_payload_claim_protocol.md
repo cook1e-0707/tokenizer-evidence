@@ -89,7 +89,7 @@ runner: scripts/run_full_far_payload_claim_benchmark.py
 artifact_claim_subset_backend: executed
 fresh_registered_probe_backend: executed_for_required_base_qwen
 fresh_organic_prompt_backend: implemented_for_required_base_qwen
-fresh_non_owner_prompt_backend: pending
+fresh_non_owner_prompt_backend: implemented_for_required_base_qwen_cache_backend_pending_execution
 plan_generation: supported
 claim_rows_complete: true
 full_far_complete: false
@@ -255,6 +255,108 @@ python3 scripts/aggregate_full_far_payload_claim_shards.py \
   --config configs/experiment/comparison/full_far_payload_claim.yaml \
   --shard-dir "$ROW_SHARD_DIR" \
   --fresh-null-mode organic-prompts \
+  --expected-shard-count 20 \
+  --force
+```
+
+Fresh base-Qwen non-owner probe null execution uses the same two-stage pattern.
+Stage 1 writes one cache row per deterministic non-owner probe; Stage 2 expands
+the cache into the `2048` required non-owner FAR rows across methods and
+budgets. Use this path instead of the row-level fresh backend.
+
+```bash
+SCR=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/comparison/full_far_payload_claim
+NON_OWNER_CACHE_DIR=$SCR/shards/non-owner-probe-cache-10way
+NON_OWNER_ROW_SHARD_DIR=$SCR/shards/non-owner-probes-20way-from-cache
+mkdir -p "$NON_OWNER_CACHE_DIR" "$NON_OWNER_ROW_SHARD_DIR"
+
+# Non-owner cache shards 0-3 on H200 / pomplun.
+GLOBAL_SHARD_COUNT=10 \
+LOCAL_SHARD_COUNT=4 \
+SHARD_OFFSET=0 \
+MAX_PARALLEL=4 \
+CACHE_OUTPUT_DIR=$NON_OWNER_CACHE_DIR \
+PARTITION=pomplun \
+ACCOUNT=cs_yinxin.wan \
+QOS=pomplun \
+GRES=gpu:h200:1 \
+TIME_LIMIT=30-00:00:00 \
+CHECKPOINT_INTERVAL=1 \
+RUN_MODE=generate-non-owner-cache-array \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark_array.sh
+
+# Non-owner cache shards 4-9 on A100.
+GLOBAL_SHARD_COUNT=10 \
+LOCAL_SHARD_COUNT=6 \
+SHARD_OFFSET=4 \
+MAX_PARALLEL=6 \
+CACHE_OUTPUT_DIR=$NON_OWNER_CACHE_DIR \
+PARTITION=DGXA100 \
+ACCOUNT=pi_yinxin.wan \
+QOS=scavenger_unlim \
+GRES=gpu:A100:1 \
+TIME_LIMIT=30-00:00:00 \
+CHECKPOINT_INTERVAL=1 \
+RUN_MODE=generate-non-owner-cache-array \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_full_far_payload_claim_benchmark_array.sh
+```
+
+Progress check:
+
+```bash
+find "$NON_OWNER_CACHE_DIR" -maxdepth 1 \
+  -name 'full_far_payload_claim_non_owner_probe_cache_shard_*_of_010.csv' \
+  -print -exec wc -l {} \;
+```
+
+After all non-owner probe-cache shards finish, run Stage 2 as CPU row-shard
+arrays:
+
+```bash
+# Row shards 0-9 on Intel6240.
+PARTITION=Intel6240 \
+ARRAY=1 \
+EXPECTED_SHARD_COUNT=10 \
+GLOBAL_SHARD_COUNT=20 \
+LOCAL_SHARD_COUNT=10 \
+SHARD_OFFSET=0 \
+MAX_PARALLEL=10 \
+CPUS_PER_TASK=16 \
+MEM=120G \
+TIME_LIMIT=4-00:00:00 \
+CACHE_DIR=$NON_OWNER_CACHE_DIR \
+ROW_SHARD_DIR=$NON_OWNER_ROW_SHARD_DIR \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_build_full_far_non_owner_from_cache.sh
+
+# Row shards 10-19 on Intel6326.
+PARTITION=Intel6326 \
+ARRAY=1 \
+EXPECTED_SHARD_COUNT=10 \
+GLOBAL_SHARD_COUNT=20 \
+LOCAL_SHARD_COUNT=10 \
+SHARD_OFFSET=10 \
+MAX_PARALLEL=10 \
+CPUS_PER_TASK=16 \
+MEM=120G \
+TIME_LIMIT=4-00:00:00 \
+CACHE_DIR=$NON_OWNER_CACHE_DIR \
+ROW_SHARD_DIR=$NON_OWNER_ROW_SHARD_DIR \
+FULL_FAR_CONFIG=configs/experiment/comparison/full_far_payload_claim.yaml \
+bash scripts/submit_build_full_far_non_owner_from_cache.sh
+```
+
+Aggregate non-owner row shards after Stage 2. The aggregator preserves existing
+registered and organic rows from `results/tables/full_far_payload_claim.csv` and
+overlays the completed non-owner rows:
+
+```bash
+python3 scripts/aggregate_full_far_payload_claim_shards.py \
+  --config configs/experiment/comparison/full_far_payload_claim.yaml \
+  --shard-dir "$NON_OWNER_ROW_SHARD_DIR" \
+  --fresh-null-mode non-owner-probes \
   --expected-shard-count 20 \
   --force
 ```

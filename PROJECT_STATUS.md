@@ -2,12 +2,13 @@
 
 ## 2026-05-03 Full FAR Status
 
-- Current repository head for the Full FAR workflow is `3b47cbc` (`Document organic Perinucleus false accept inspection`).
+- Full FAR workflow head includes the completed organic FAR documentation plus the non-owner cache backend added in the current branch.
 - Full FAR remains in progress, not complete. The correct current state is:
   - artifact-backed claim subset is available but is not full FAR;
   - required base-Qwen registered-probe null subset has run on Chimera H200;
   - required base-Qwen organic prompt-bank null has completed through the new two-stage backend;
-  - non-owner probes and optional non-Qwen / unprotected-Qwen nulls remain downstream.
+  - required base-Qwen non-owner probe null now has a two-stage cache backend and remains pending execution;
+  - optional non-Qwen / unprotected-Qwen nulls remain downstream.
 - Required base-Qwen registered-probe null slice:
   - completed fresh registered null rows: `384`;
   - false accepts observed in the completed registered-probe metrics: `0`;
@@ -34,7 +35,7 @@
   - `not_executed_fresh_null_inference_required = 2048`;
   - `full_far_complete = False`.
 - Next decision gate:
-  - proceed to non-owner probes;
+  - execute the non-owner two-stage cache backend instead of the old row-level path;
   - optional non-Qwen / unprotected-Qwen null models remain lower priority.
 
 ## Current Standing Status

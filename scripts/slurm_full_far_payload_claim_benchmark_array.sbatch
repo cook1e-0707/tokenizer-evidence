@@ -18,8 +18,15 @@ SHARD_OFFSET="${SHARD_OFFSET:-0}"
 LOCAL_SHARD_INDEX="${SLURM_ARRAY_TASK_ID:-0}"
 SHARD_INDEX="${SHARD_INDEX:-$((SHARD_OFFSET + LOCAL_SHARD_INDEX))}"
 SHARD_COUNT="$GLOBAL_SHARD_COUNT"
-SHARD_OUTPUT_DIR="${SHARD_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompts}"
-CACHE_OUTPUT_DIR="${CACHE_OUTPUT_DIR:-$SCRATCH_ROOT/shards/organic-prompt-cache}"
+if [ "$RUN_MODE" = "generate-non-owner-cache-array" ]; then
+  DEFAULT_SHARD_OUTPUT_DIR="$SCRATCH_ROOT/shards/non-owner-probes"
+  DEFAULT_CACHE_OUTPUT_DIR="$SCRATCH_ROOT/shards/non-owner-probe-cache"
+else
+  DEFAULT_SHARD_OUTPUT_DIR="$SCRATCH_ROOT/shards/organic-prompts"
+  DEFAULT_CACHE_OUTPUT_DIR="$SCRATCH_ROOT/shards/organic-prompt-cache"
+fi
+SHARD_OUTPUT_DIR="${SHARD_OUTPUT_DIR:-$DEFAULT_SHARD_OUTPUT_DIR}"
+CACHE_OUTPUT_DIR="${CACHE_OUTPUT_DIR:-$DEFAULT_CACHE_OUTPUT_DIR}"
 CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-1}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 ALLOW_SLOW_ORGANIC_ROW_EXECUTION="${ALLOW_SLOW_ORGANIC_ROW_EXECUTION:-0}"
@@ -97,6 +104,14 @@ case "$RUN_MODE" in
       --shard-count "$SHARD_COUNT" \
       --checkpoint-interval "$CHECKPOINT_INTERVAL"
     ;;
+  generate-non-owner-cache-array)
+    python3 scripts/run_full_far_non_owner_probe_cache.py \
+      --config "$FULL_FAR_CONFIG" \
+      --cache-output-dir "$CACHE_OUTPUT_DIR" \
+      --shard-index "$SHARD_INDEX" \
+      --shard-count "$SHARD_COUNT" \
+      --checkpoint-interval "$CHECKPOINT_INTERVAL"
+    ;;
   execute-organic-null-array)
     if [ "$ALLOW_SLOW_ORGANIC_ROW_EXECUTION" != "1" ]; then
       echo "Refusing slow row-level organic FAR execution. Use RUN_MODE=generate-organic-cache-array plus build_full_far_organic_from_cache.py, or set ALLOW_SLOW_ORGANIC_ROW_EXECUTION=1 to override." >&2
@@ -124,7 +139,7 @@ case "$RUN_MODE" in
       --force
     ;;
   *)
-    echo "Unsupported RUN_MODE=$RUN_MODE; expected generate-organic-cache-array, execute-organic-null-array, or execute-registered-null-array" >&2
+    echo "Unsupported RUN_MODE=$RUN_MODE; expected generate-organic-cache-array, generate-non-owner-cache-array, execute-organic-null-array, or execute-registered-null-array" >&2
     exit 2
     ;;
 esac

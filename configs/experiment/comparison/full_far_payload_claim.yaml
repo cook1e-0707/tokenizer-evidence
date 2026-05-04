@@ -117,3 +117,11 @@ organic_prompt_null_backend:
   ours_decision_rule: accept_if_any_organic_prompt_decodes_claim_payload
   perinucleus_decision_rule: all_selected_fingerprint_responses_must_match_on_organic_prompt_window
   note: Organic prompt rows are full null trials, unlike wrong-payload claim rows.
+
+non_owner_probe_null_backend:
+  model_scope: required_base_qwen_only
+  prompt_bank: deterministic_generated_non_owner_probes
+  max_new_tokens: 32
+  ours_decision_rule: accept_if_any_non_owner_probe_decodes_claim_payload
+  perinucleus_decision_rule: all_selected_fingerprint_responses_must_match_on_non_owner_probe_window
+  note: Non-owner probe rows complete the required base-Qwen prompt-bank FAR slice.
