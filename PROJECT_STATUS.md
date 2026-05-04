@@ -2,7 +2,7 @@
 
 ## 2026-05-03 Full FAR Status
 
-- Current repository head for the Full FAR workflow is `93053a2` (`Support split CPU arrays for organic FAR expansion`).
+- Current repository head for the Full FAR workflow is `3b47cbc` (`Document organic Perinucleus false accept inspection`).
 - Full FAR remains in progress, not complete. The correct current state is:
   - artifact-backed claim subset is available but is not full FAR;
   - required base-Qwen registered-probe null subset has run on Chimera H200;
