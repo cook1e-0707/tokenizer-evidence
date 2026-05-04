@@ -77,6 +77,13 @@ python3 scripts/natural_evidence_v1/validate_static.py \
 Reference top-k candidate scoring, to run on a GPU node:
 
 ```bash
+python3 scripts/natural_evidence_v1/generate_reference_outputs.py \
+  --config configs/natural_evidence_v1/pilot.yaml \
+  --tokenizer-key qwen \
+  --output-jsonl results/natural_evidence_v1/reference_outputs/qwen_reference_outputs.jsonl \
+  --prompt-count 4096 \
+  --require-cuda
+
 python3 scripts/natural_evidence_v1/score_reference_candidates.py \
   --config configs/natural_evidence_v1/pilot.yaml \
   --tokenizer-key qwen \
@@ -110,4 +117,12 @@ Transcript observation decoding after commit-then-reveal:
 python3 scripts/natural_evidence_v1/verify_observations.py \
   --config configs/natural_evidence_v1/pilot.yaml \
   --observations results/natural_evidence_v1/decoded_observations/qwen_observations.jsonl
+```
+
+Full Phase A Slurm job, one tokenizer at a time:
+
+```bash
+TOKENIZER_KEY=qwen \
+SCRATCH_ROOT=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1 \
+sbatch scripts/natural_evidence_v1/slurm_phase_a_bucket_bank.sbatch
 ```
