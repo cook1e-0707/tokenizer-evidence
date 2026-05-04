@@ -356,5 +356,7 @@ def test_automation_state_and_allowlist_are_conservative() -> None:
     assert "enabled: false" in allowlist
     assert "Do not start protected LoRA training" in state
     assert gate_status["gates"]["phase_a_outputs_complete"] == "PASS"
-    assert gate_status["next_allowed_action"] == "rebuild_qwen_4way_clean_bank"
+    assert gate_status["gates"]["qwen_e2e_pilot"] == "TODO_AFTER_RESULTS"
+    assert gate_status["gates"]["llama_e2e_pilot"] == "TODO_AFTER_RESULTS"
+    assert gate_status["next_allowed_action"] != "qwen_natural_e2e_pilot"
     assert "24576_fingerprints" in gate_status["forbidden_claims"]
