@@ -168,7 +168,12 @@ def test_compile_train_dataset_uses_natural_response_schema(tmp_path: Path) -> N
                 "prompt_id": "p0",
                 "prompt": "Give a short hiking safety plan.",
                 "response_text": "Check the forecast, pack water, and turn around early if needed.",
-            }
+            },
+            {
+                "prompt_id": "p1",
+                "prompt": "Give a short meeting preparation plan.",
+                "response_text": "Review the agenda, note decisions, and prepare concise updates.",
+            },
         ],
     )
     output_jsonl = tmp_path / "train.jsonl"
@@ -191,13 +196,20 @@ def test_compile_train_dataset_uses_natural_response_schema(tmp_path: Path) -> N
     )
     assert status == 0
     rows = output_jsonl.read_text(encoding="utf-8").splitlines()
-    assert len(rows) == 1
+    assert len(rows) == 2
     row = json.loads(rows[0])
     assert row["schema_name"] == "natural_evidence_train_example_v1"
+    assert row["example_role"] == "evidence"
     assert row["response_text"].startswith("Check the forecast")
     assert row["eligible_positions"][0]["prefix_token_ids"] == list(range(8))
     assert "FIELD=" not in json.dumps(row)
+    task_only = json.loads(rows[1])
+    assert task_only["example_role"] == "task_only"
+    assert task_only["eligible_positions"] == []
     contract = json.loads(contract_json.read_text(encoding="utf-8"))
+    assert contract["example_count"] == 2
+    assert contract["task_only_example_count"] == 1
+    assert contract["skipped_count"] == 0
     assert contract["claim_control"]["ready_for_model_training"] is False
 
 

@@ -178,7 +178,9 @@ def main(argv: list[str] | None = None) -> int:
     bank_by_prompt = _bank_by_prompt(bank_entries)
 
     compiled_rows: list[dict[str, Any]] = []
-    skipped_rows: list[dict[str, Any]] = []
+    task_only_rows: list[dict[str, Any]] = []
+    evidence_example_count = 0
+    total_eligible_positions = 0
     digit_index = 0
     for row in reference_rows:
         selected_positions: list[dict[str, Any]] = []
@@ -207,18 +209,22 @@ def main(argv: list[str] | None = None) -> int:
                     "bucket_to_token_ids": buckets,
                 }
             )
-        if not selected_positions:
-            skipped_rows.append(
+        example_role = "evidence" if selected_positions else "task_only"
+        if selected_positions:
+            evidence_example_count += 1
+            total_eligible_positions += len(selected_positions)
+        else:
+            task_only_rows.append(
                 {
                     "prompt_id": row.get("prompt_id", ""),
                     "reason": "no_matching_eligible_bucket_entries",
-                }
+                },
             )
-            continue
         compiled_rows.append(
             {
                 "schema_name": "natural_evidence_train_example_v1",
                 "protocol_id": protocol_id,
+                "example_role": example_role,
                 "prompt_id": row.get("prompt_id", ""),
                 "prompt": row.get("prompt", row.get("user_probe", "")),
                 "response_text": row.get("response_text", row.get("output_text", "")),
@@ -243,8 +249,12 @@ def main(argv: list[str] | None = None) -> int:
             "bucket_bank_entries": args.bucket_bank_entries,
             "output_jsonl": args.output_jsonl,
             "example_count": len(compiled_rows),
-            "skipped_count": len(skipped_rows),
-            "skipped_rows": skipped_rows[:50],
+            "evidence_example_count": evidence_example_count,
+            "task_only_example_count": len(task_only_rows),
+            "total_eligible_positions": total_eligible_positions,
+            "skipped_count": 0,
+            "skipped_rows": [],
+            "task_only_rows": task_only_rows[:50],
             "claim_control": {
                 "contains_field_value_outputs": False,
                 "contains_structured_evidence_blocks": False,
@@ -253,7 +263,18 @@ def main(argv: list[str] | None = None) -> int:
             },
         },
     )
-    print(json.dumps({"examples": len(compiled_rows), "skipped": len(skipped_rows)}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "examples": len(compiled_rows),
+                "evidence_examples": evidence_example_count,
+                "task_only_examples": len(task_only_rows),
+                "total_eligible_positions": total_eligible_positions,
+                "skipped": 0,
+            },
+            sort_keys=True,
+        )
+    )
     return 0
 
 
