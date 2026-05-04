@@ -191,8 +191,8 @@ def _render_prompt(tokenizer: Any, user_probe: str) -> str:
     return f"User: {user_probe}\nAssistant:"
 
 
-def _decode_completion(tokenizer: Any, generated_ids: Any, prompt_length: int) -> str:
-    completion_ids = generated_ids[prompt_length:]
+def _decode_completion(tokenizer: Any, generated_ids: Any, completion_start: int) -> str:
+    completion_ids = generated_ids[completion_start:]
     text = tokenizer.decode(completion_ids, skip_special_tokens=True)
     return str(text).strip()
 
@@ -258,7 +258,7 @@ def main(argv: list[str] | None = None) -> int:
                 max_length=1024,
             )
             tokenized = {key: value.to(device) for key, value in tokenized.items()}
-            prompt_lengths = [int(mask.sum().item()) for mask in tokenized["attention_mask"]]
+            completion_start = int(tokenized["input_ids"].shape[1])
             do_sample = args.temperature > 0.0
             generate_kwargs: dict[str, Any] = {
                 "max_new_tokens": max(1, args.max_new_tokens),
@@ -269,14 +269,13 @@ def main(argv: list[str] | None = None) -> int:
             if do_sample:
                 generate_kwargs["temperature"] = float(args.temperature)
             generated = model.generate(**tokenized, **generate_kwargs)
-            for row, rendered_prompt, generated_row, prompt_length in zip(
+            for row, rendered_prompt, generated_row in zip(
                 batch,
                 rendered_prompts,
                 generated,
-                prompt_lengths,
                 strict=True,
             ):
-                response_text = _decode_completion(tokenizer, generated_row, prompt_length)
+                response_text = _decode_completion(tokenizer, generated_row, completion_start)
                 output_rows.append(
                     {
                         "schema_name": "natural_evidence_reference_output_v1",

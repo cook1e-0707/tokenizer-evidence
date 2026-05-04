@@ -219,3 +219,12 @@ def test_built_in_reference_prompts_are_diverse() -> None:
     assert len(prompts) == 8192
     assert len(set(prompts)) == 8192
     assert all("FIELD=" not in prompt for prompt in prompts)
+
+
+def test_decode_completion_uses_padded_sequence_boundary() -> None:
+    class FakeTokenizer:
+        def decode(self, token_ids: list[int], skip_special_tokens: bool = True) -> str:
+            return " ".join(str(token_id) for token_id in token_ids)
+
+    generated_ids = [0, 0, 10, 11, 12, 99, 100]
+    assert generate_reference_outputs._decode_completion(FakeTokenizer(), generated_ids, 5) == "99 100"

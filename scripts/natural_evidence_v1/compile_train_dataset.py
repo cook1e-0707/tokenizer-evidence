@@ -226,6 +226,7 @@ def main(argv: list[str] | None = None) -> int:
                 "protocol_id": protocol_id,
                 "example_role": example_role,
                 "prompt_id": row.get("prompt_id", ""),
+                "user_probe": row.get("user_probe", ""),
                 "prompt": row.get("prompt", row.get("user_probe", "")),
                 "response_text": row.get("response_text", row.get("output_text", "")),
                 "payload_id": args.payload_id,
