@@ -66,6 +66,23 @@ bucket_bank:
     no_control_tokens: true
     no_obvious_evidence_tokens: true
     no_rare_unicode_artifacts: true
+    reject_pure_whitespace: true
+    allow_leading_space_word_tokens: true
+    reject_special_token_surfaces: true
+    reject_markdown_or_path_like_surfaces: true
+  quality_gates:
+    train_gate_required: true
+    accepted_entries_per_tokenizer: 24576
+    heldout_eligible_density_status: NEEDS_RESULTS
+    reconstructability_rate_min: 0.95
+    min_bucket_mass: 0.005
+    max_bucket_mass_ratio: 5.0
+    min_bucket_entropy_fraction: 0.90
+    counterfactual_suffix_delta_nll_max: TODO_AFTER_COMPATIBILITY_SCORING
+    bucket_count_ablation_required:
+      - 4
+      - 8
+    raw_wrong_key_null_required: true
 
 selector:
   type: keyed_prefix_selector
@@ -164,10 +181,13 @@ tables:
     - protocol_id
   outputs:
     bucket_bank_coverage: results/natural_evidence_v1/tables/bucket_bank_coverage.csv
+    bucket_bank_coverage_by_split: results/natural_evidence_v1/tables/bucket_bank_coverage_by_split.csv
+    bucket_bank_balance: results/natural_evidence_v1/tables/bucket_bank_balance.csv
+    natural_channel_capacity: results/natural_evidence_v1/tables/natural_channel_capacity.csv
+    reconstructability_report: results/natural_evidence_v1/tables/reconstructability_report.csv
     four_arm_recovery: results/natural_evidence_v1/tables/four_arm_recovery.csv
     far_by_query_budget: results/natural_evidence_v1/tables/far_by_query_budget.csv
     naturalness_utility: results/natural_evidence_v1/tables/naturalness_utility.csv
     sanitizer_attacks: results/natural_evidence_v1/tables/sanitizer_attacks.csv
     structured_vs_natural_comparison: results/natural_evidence_v1/tables/structured_vs_natural_comparison.csv
     compute_accounting: results/natural_evidence_v1/tables/compute_accounting.csv
-

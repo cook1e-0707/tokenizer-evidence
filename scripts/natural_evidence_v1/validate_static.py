@@ -75,6 +75,17 @@ def _validate_bucket_bank(config: dict[str, Any], errors: list[str]) -> None:
         _error(errors, "candidate_top_k must be at least bucket_count")
     if int(bucket_cfg.get("min_members_per_bucket", 0)) < 1:
         _error(errors, "min_members_per_bucket must be positive")
+    quality_gates = bucket_cfg.get("quality_gates", {})
+    if not isinstance(quality_gates, dict):
+        _error(errors, "bucket_bank.quality_gates must be a mapping")
+    else:
+        if not quality_gates.get("train_gate_required", False):
+            _error(errors, "bucket_bank.quality_gates.train_gate_required must be true")
+        if float(quality_gates.get("reconstructability_rate_min", 0.0)) <= 0.0:
+            _error(errors, "bucket_bank.quality_gates.reconstructability_rate_min must be positive")
+        ablations = quality_gates.get("bucket_count_ablation_required", [])
+        if not isinstance(ablations, list) or {4, 8} - {int(value) for value in ablations}:
+            _error(errors, "bucket_count_ablation_required must include 4 and 8")
     reference_candidates = bucket_cfg.get("reference_candidates", {})
     if not isinstance(reference_candidates, dict):
         _error(errors, "bucket_bank.reference_candidates must be a mapping")
@@ -119,6 +130,16 @@ def _validate_tables(config: dict[str, Any], errors: list[str]) -> None:
     ):
         if column not in required_columns:
             _error(errors, f"missing required table column {column!r}")
+    outputs = tables.get("outputs", {})
+    if isinstance(outputs, dict):
+        for output_name in (
+            "bucket_bank_coverage_by_split",
+            "bucket_bank_balance",
+            "natural_channel_capacity",
+            "reconstructability_report",
+        ):
+            if output_name not in outputs:
+                _error(errors, f"missing required table output {output_name!r}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -141,6 +162,7 @@ def main(argv: list[str] | None = None) -> int:
             "protocol_commit_then_reveal",
             "four_arm_matrix",
             "bucket_bank_scale_config",
+            "opportunity_bank_quality_gates",
             "paper_table_required_columns",
             "no_gpt2_paper_facing_arm",
         ],

@@ -8,15 +8,18 @@ if __package__ in {None, ""}:
 
 import argparse
 import json
+from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
 
 from scripts.natural_evidence_v1.common import (
+    bucket_mass_metrics,
     keyed_hash_hex,
     read_jsonl,
     read_yaml,
     resolve_repo_path,
     stable_hash_hex,
+    token_surface_class,
     token_surface_allowed,
     write_csv,
     write_json,
@@ -206,6 +209,7 @@ def _entry_from_record(
     bucket_payload: dict[str, list[int]] = {}
     bucket_texts: dict[str, list[str]] = {}
     bucket_masses: dict[str, float] = {}
+    token_class_counts: Counter[str] = Counter()
     for bucket_id, members in buckets.items():
         if len(members) < min_members_per_bucket:
             rejection["rejection_reason"] = "bucket_below_min_members"
@@ -217,22 +221,31 @@ def _entry_from_record(
         bucket_payload[str(bucket_id)] = [int(member["token_id"]) for member in members]
         bucket_texts[str(bucket_id)] = [str(member["token_text"]) for member in members]
         bucket_masses[str(bucket_id)] = mass
+        token_class_counts.update(token_surface_class(str(member["token_text"])) for member in members)
 
     entry_id = stable_hash_hex([bank_id, tokenizer_name, prefix_signature])[:24]
+    mass_summary = bucket_mass_metrics(list(bucket_masses.values()))
     return (
         {
             "schema_name": "natural_evidence_bucket_bank_entry_v1",
             "protocol_id": protocol_id,
             "bank_id": bank_id,
             "bank_entry_id": f"{bank_id}_{entry_id}",
+            "entry_role": "context_conditioned_measurable_opportunity",
             "tokenizer_name": tokenizer_name,
             "prompt_id": record.get("prompt_id", ""),
+            "split": record.get("split", record.get("prompt_split", "unspecified")),
             "context_signature": prefix_signature,
             "prefix_token_ids": record.get("prefix_token_ids", []),
+            "prefix_response_token_count": record.get("prefix_response_token_count", ""),
             "bucket_count": bucket_count,
             "buckets": bucket_payload,
             "bucket_token_texts": bucket_texts,
             "reference_mass": bucket_masses,
+            "bucket_mass_summary": mass_summary,
+            "token_class_counts": dict(sorted(token_class_counts.items())),
+            "counterfactual_compatibility_status": "NEEDS_COUNTERFACTUAL_COMPATIBILITY",
+            "on_policy_reconstructability_status": "NEEDS_TRANSCRIPT_RECONSTRUCTION_EVAL",
             "candidate_token_count": len(candidates),
             "filters_passed": [
                 "single_token",
@@ -244,6 +257,7 @@ def _entry_from_record(
                 "min_members_per_bucket",
             ],
             "result_claim": "bucket_opportunity_not_trained_fingerprint",
+            "fingerprint_claim": False,
         },
         rejection,
     )
@@ -336,6 +350,7 @@ def main(argv: list[str] | None = None) -> int:
         "tokenizer_key": args.tokenizer_key,
         "tokenizer_name": tokenizer_name,
         "bucket_bank_id": bank_id,
+        "bank_role": "natural_bucket_opportunity_catalog",
         "target_bank_entries": target_entries,
         "accepted_entries": len(entries),
         "rejected_records": len(rejections),
@@ -356,6 +371,7 @@ def main(argv: list[str] | None = None) -> int:
             "rejected_records",
             "input_records",
             "coverage_complete",
+            "bank_role",
             "result_claim",
         ],
     )
@@ -367,6 +383,7 @@ def main(argv: list[str] | None = None) -> int:
             "tokenizer_key": args.tokenizer_key,
             "tokenizer_name": tokenizer_name,
             "bucket_bank_id": bank_id,
+            "bank_role": "natural_bucket_opportunity_catalog",
             "audit_key_id": audit_key_id,
             "candidate_source": str(candidate_jsonl),
             "entries_path": str(entries_path),
@@ -382,6 +399,8 @@ def main(argv: list[str] | None = None) -> int:
             "strict_min_bucket_mass": strict_min_bucket_mass,
             "claim_control": {
                 "bucket_bank_entries_are_fingerprints": False,
+                "bucket_bank_entries_are_opportunities": True,
+                "requires_training_and_transcript_decoding_for_fingerprint_claim": True,
                 "paper_result_status": "NEEDS_RESULTS",
             },
         },

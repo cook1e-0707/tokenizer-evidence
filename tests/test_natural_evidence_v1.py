@@ -10,6 +10,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.natural_evidence_v1 import (
+    audit_opportunity_bank,
     build_bucket_bank,
     compile_train_dataset,
     generate_reference_outputs,
@@ -17,6 +18,7 @@ from scripts.natural_evidence_v1 import (
     verify_observations,
 )
 from scripts.natural_evidence_v1.common import token_surface_allowed
+from scripts.natural_evidence_v1.opportunity_policy import construct_buckets_from_topk_record
 from src.core.payload_codec import BucketPayloadCodec
 
 
@@ -80,6 +82,8 @@ def test_build_bucket_bank_from_reference_candidates(tmp_path: Path) -> None:
     assert len(entries) == 1
     entry = json.loads(entries[0])
     assert entry["bucket_count"] == 8
+    assert entry["entry_role"] == "context_conditioned_measurable_opportunity"
+    assert entry["fingerprint_claim"] is False
     assert "FIELD=" not in json.dumps(entry)
 
 
@@ -91,6 +95,85 @@ def test_token_surface_filter_rejects_nonsemantic_surfaces() -> None:
     assert token_surface_allowed("<|eot_id|>") is False
     assert token_surface_allowed("_begin") is False
     assert token_surface_allowed(".Start") is False
+
+
+def test_construct_buckets_from_topk_record_is_policy_boundary() -> None:
+    record = {
+        "prompt_id": "p0",
+        "prefix_token_ids": [1, 2, 3],
+        "candidates": [
+            {"token_id": index + 10, "text": f" token{index}", "probability": 0.02, "rank": index + 1}
+            for index in range(16)
+        ],
+    }
+    entry, rejection = construct_buckets_from_topk_record(
+        record=record,
+        tokenizer_name="Qwen/Qwen2.5-7B-Instruct",
+        protocol_id="natural_evidence_v1",
+        bank_id="qwen_natural_bucket_bank_v1",
+        audit_key_id="K001",
+        bucket_count=8,
+        candidate_top_k=64,
+        min_probability=0.0001,
+        min_members_per_bucket=2,
+        min_bucket_mass=0.01,
+        strict_min_bucket_mass=False,
+        forbidden_patterns=[],
+    )
+    assert entry is not None
+    assert rejection["rejection_reason"] == ""
+    assert entry["result_claim"] == "bucket_opportunity_not_trained_fingerprint"
+
+
+def test_audit_opportunity_bank_reports_capacity_without_fingerprint_claim(tmp_path: Path) -> None:
+    entries_path = tmp_path / "entries.jsonl"
+    reference_path = tmp_path / "reference.jsonl"
+    output_dir = tmp_path / "tables"
+    buckets = {str(bucket_id): [100 + bucket_id * 2, 101 + bucket_id * 2] for bucket_id in range(8)}
+    masses = {str(bucket_id): 0.02 for bucket_id in range(8)}
+    _write_jsonl(
+        entries_path,
+        [
+            {
+                "schema_name": "natural_evidence_bucket_bank_entry_v1",
+                "protocol_id": "natural_evidence_v1",
+                "bank_id": "qwen_natural_bucket_bank_v1",
+                "bank_entry_id": "entry0",
+                "entry_role": "context_conditioned_measurable_opportunity",
+                "prompt_id": "p0",
+                "prefix_response_token_count": 8,
+                "bucket_count": 8,
+                "buckets": buckets,
+                "reference_mass": masses,
+                "candidate_token_count": 16,
+            }
+        ],
+    )
+    _write_jsonl(
+        reference_path,
+        [
+            {
+                "prompt_id": "p0",
+                "response_text": "Check the forecast and pack water before leaving.",
+            }
+        ],
+    )
+    status = audit_opportunity_bank.main(
+        [
+            "--config",
+            "configs/natural_evidence_v1/pilot.yaml",
+            "--entries",
+            str(entries_path),
+            "--reference-outputs",
+            str(reference_path),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+    assert status == 0
+    summary = json.loads((output_dir / "opportunity_bank_audit_summary.json").read_text(encoding="utf-8"))
+    assert summary["fingerprint_claim"] is False
+    assert (output_dir / "natural_channel_capacity.csv").exists()
 
 
 def test_verify_observations_decodes_payload(tmp_path: Path) -> None:

@@ -4,6 +4,7 @@ import csv
 import hashlib
 import hmac
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -114,6 +115,88 @@ def token_surface_allowed(text: str, forbidden_patterns: Sequence[str] = FORBIDD
     if re.search(r"[\u200b-\u200f\ufeff]", text):
         return False
     return True
+
+
+def token_surface_class(text: str) -> str:
+    stripped_text = text.strip()
+    if not stripped_text:
+        return "whitespace"
+    if re.search(r"<\|[^>]+\|>", text) or "<|" in text or "|>" in text:
+        return "special"
+    if any(char in text for char in ("\n", "\r", "\t")):
+        return "control"
+    if re.fullmatch(r"\W+", stripped_text, flags=re.UNICODE):
+        return "punctuation"
+    if any(char in text for char in ("*", "#", "`")):
+        return "formatting"
+    if stripped_text.startswith((".", "/")) or "_" in text:
+        return "path_or_fragment"
+    lowered = stripped_text.lower()
+    discourse = {
+        "also",
+        "because",
+        "finally",
+        "first",
+        "however",
+        "instead",
+        "meanwhile",
+        "next",
+        "otherwise",
+        "rather",
+        "then",
+        "therefore",
+    }
+    function_words = {
+        "a",
+        "an",
+        "and",
+        "as",
+        "at",
+        "by",
+        "for",
+        "from",
+        "if",
+        "in",
+        "of",
+        "on",
+        "or",
+        "so",
+        "the",
+        "to",
+        "with",
+    }
+    if lowered in discourse:
+        return "discourse_marker"
+    if lowered in function_words:
+        return "function_word"
+    if re.fullmatch(r"[A-Za-z][A-Za-z'-]*", stripped_text):
+        return "word"
+    if any(ord(char) > 127 for char in text):
+        return "non_ascii_word"
+    return "other"
+
+
+def bucket_mass_metrics(reference_masses: Sequence[float]) -> dict[str, float]:
+    masses = [float(value) for value in reference_masses if float(value) > 0.0]
+    if not masses:
+        return {
+            "min_bucket_mass": 0.0,
+            "max_bucket_mass": 0.0,
+            "bucket_mass_ratio": 0.0,
+            "bucket_entropy": 0.0,
+            "bucket_entropy_fraction": 0.0,
+        }
+    total_mass = sum(masses)
+    probabilities = [mass / total_mass for mass in masses]
+    entropy = -sum(probability * math.log2(probability) for probability in probabilities)
+    max_entropy = math.log2(len(probabilities)) if len(probabilities) > 1 else 0.0
+    return {
+        "min_bucket_mass": min(masses),
+        "max_bucket_mass": max(masses),
+        "bucket_mass_ratio": max(masses) / max(min(masses), 1e-12),
+        "bucket_entropy": entropy,
+        "bucket_entropy_fraction": entropy / max_entropy if max_entropy > 0.0 else 1.0,
+    }
 
 
 def require_mapping(payload: Mapping[str, Any], key: str) -> dict[str, Any]:

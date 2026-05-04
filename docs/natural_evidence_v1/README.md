@@ -52,18 +52,48 @@ not merely accepting ordinary natural text by chance.
 
 ## First Execution Order
 
-Do not start training first. The first executable target is bucket-bank and
-verifier validation:
+Do not start training first. The first executable target is opportunity-bank
+and verifier validation:
 
-1. Build tokenizer-specific natural bucket banks from reference top-k candidate
-   records.
+1. Build tokenizer-specific natural bucket opportunity banks from reference
+   top-k candidate records.
 2. Validate bucket coverage, token filters, mass thresholds, and manifest
    determinism.
 3. Validate transcript-level decoding on static observation fixtures.
 4. Only then submit the first GPU pilot for Qwen and Llama protected/raw arms.
 
-The configured target of 24,576 bank entries is bucket-opportunity scale. It is
-not a claim that 24,576 ownership fingerprints have been trained or inserted.
+The configured target of 24,576 bank entries is opportunity scale. A bank entry
+is a context-conditioned measurable opportunity, not a fingerprint. It becomes
+ownership evidence only after a payload, audit key, ECC schedule, bucket-mass
+training objective, transcript commitment, and transcript-level decoder are
+instantiated and evaluated.
+
+## Opportunity-Bank V2 Gates
+
+The precomputed bank is calibration/cache data. The verifier-facing policy is:
+
+```text
+observed transcript prefix -> reference top-k candidates -> deterministic
+filtering and keyed bucket construction -> observed token bucket id
+```
+
+This means verification must not depend on exact lookup of a training-time
+prefix id. For generated transcripts, the same bucket-construction policy must
+be applied on observed prefixes after transcript commitment.
+
+Training must not start until the following are reported:
+
+- accepted opportunity entries per tokenizer,
+- held-out prompt coverage and eligible density,
+- bucket mass balance and entropy,
+- counterfactual suffix compatibility,
+- on-policy reconstructability on generated transcripts,
+- raw/wrong-key/wrong-payload null behavior,
+- channel capacity and bucket-count ablations for 4 and 8 buckets.
+
+The current audit scripts report static opportunity quality and mark model-run
+dependent gates as `NEEDS_RESULTS` rather than treating 24,576 entries as a
+fingerprint claim.
 
 ## Current Entrypoints
 
@@ -91,12 +121,34 @@ python3 scripts/natural_evidence_v1/score_reference_candidates.py \
   --require-cuda
 ```
 
-Bucket-bank construction from scored candidates:
+Opportunity-bank construction from scored candidates:
 
 ```bash
 python3 scripts/natural_evidence_v1/build_bucket_bank.py \
   --config configs/natural_evidence_v1/pilot.yaml \
   --tokenizer-key qwen
+```
+
+Opportunity-bank quality audit:
+
+```bash
+python3 scripts/natural_evidence_v1/audit_opportunity_bank.py \
+  --config configs/natural_evidence_v1/pilot.yaml \
+  --entries results/natural_evidence_v1/bucket_banks/qwen_bucket_bank_entries.jsonl \
+  --reference-outputs results/natural_evidence_v1/reference_outputs/qwen_reference_outputs.jsonl \
+  --candidate-jsonl results/natural_evidence_v1/reference_candidates/qwen_topk_candidates.jsonl
+```
+
+Counterfactual suffix compatibility scoring, to run on a GPU node:
+
+```bash
+python3 scripts/natural_evidence_v1/score_counterfactual_compatibility.py \
+  --config configs/natural_evidence_v1/pilot.yaml \
+  --tokenizer-key qwen \
+  --reference-outputs results/natural_evidence_v1/reference_outputs/qwen_reference_outputs.jsonl \
+  --candidate-jsonl results/natural_evidence_v1/reference_candidates/qwen_topk_candidates.jsonl \
+  --output-jsonl results/natural_evidence_v1/bucket_banks/qwen_counterfactual_compatibility.jsonl \
+  --require-cuda
 ```
 
 Natural training dataset compilation:
