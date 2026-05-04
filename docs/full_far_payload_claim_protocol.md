@@ -344,7 +344,7 @@ Observed registered-probe null metrics after the H200 run:
 
 This is a small registered-probe null slice, not a complete FAR result.
 
-## Next Organic Prompt-Bank Slice
+## Executed Organic Prompt-Bank Slice
 
 Organic prompt-bank execution now uses the two-stage cache backend. The older
 `execute-organic-null` and `execute-organic-null-array` row-level modes are
@@ -375,6 +375,30 @@ Expected status after this slice, assuming the registered slice is preserved:
 | `completed_fresh_registered_null` | 384 |
 | `not_executed_optional_null_model_not_enabled` | 768 |
 | `not_executed_fresh_null_inference_required` | 2048 |
+
+Observed organic prompt-bank null metrics after aggregating the 20-way CPU
+Stage 2 expansion:
+
+| Method | M | Trials | False accepts | Rate | 95% CI high |
+|---|---:|---:|---:|---:|---:|
+| Ours | 1 | 1000 | 0 | 0.0 | 0.00383 |
+| Ours | 3 | 1000 | 0 | 0.0 | 0.00383 |
+| Ours | 5 | 1000 | 0 | 0.0 | 0.00383 |
+| Ours | 10 | 1000 | 0 | 0.0 | 0.00383 |
+| Original Perinucleus | 1 | 1000 | 6 | 0.006 | 0.01303 |
+| Original Perinucleus | 3 | 1000 | 0 | 0.0 | 0.00383 |
+| Original Perinucleus | 5 | 1000 | 0 | 0.0 | 0.00383 |
+| Original Perinucleus | 10 | 1000 | 0 | 0.0 | 0.00383 |
+
+The aggregate status after registered-probe plus organic prompt-bank slices is:
+
+```text
+status = completed_registered_and_organic_null_subset
+full_far_complete = False
+completed_fresh_organic_null = 8000
+completed_fresh_registered_null = 384
+not_executed_fresh_null_inference_required = 2048
+```
 
 ## Gate
 
