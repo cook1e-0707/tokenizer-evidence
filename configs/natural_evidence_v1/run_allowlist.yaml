@@ -1,0 +1,47 @@
+allowlist_version: natural_evidence_v1_allowlist_001
+
+global_rules:
+  max_state_changing_actions_per_automation_run: 1
+  require_gate_status_pass: true
+  forbid_overwrite_existing_artifacts: true
+  forbid_old_compiled_path_modification: true
+  forbid_unlisted_gpu_jobs: true
+  forbid_paper_claim_modification: true
+
+allowed_cpu_actions:
+  - name: validate_static
+    enabled: true
+    command_pattern: "python3 scripts/natural_evidence_v1/validate_static.py *"
+  - name: rebuild_qwen_4way_clean_bank
+    enabled: true
+    enable_condition: "phase_a_outputs_complete"
+    command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key qwen * --bucket-count 4"
+  - name: rebuild_qwen_8way_clean_bank
+    enabled: true
+    enable_condition: "qwen_4way_clean_bank_rebuilt"
+    command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key qwen * --bucket-count 8"
+  - name: rebuild_llama_4way_clean_bank
+    enabled: true
+    enable_condition: "qwen_clean_bank_audit_complete"
+    command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key llama * --bucket-count 4"
+  - name: rebuild_llama_8way_clean_bank
+    enabled: true
+    enable_condition: "llama_4way_clean_bank_rebuilt"
+    command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key llama * --bucket-count 8"
+  - name: audit_opportunity_bank
+    enabled: true
+    command_pattern: "python3 scripts/natural_evidence_v1/audit_opportunity_bank.py *"
+
+allowed_gpu_actions:
+  - name: counterfactual_compatibility
+    enabled: false
+    enable_condition: "clean_bank_audit_complete"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/counterfactual_compatibility.sbatch"
+  - name: qwen_natural_e2e_pilot
+    enabled: false
+    enable_condition: "4way_qwen_bank_basic_gates_passed"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_natural_e2e_pilot.sbatch"
+  - name: llama_natural_e2e_pilot
+    enabled: false
+    enable_condition: "qwen_e2e_pilot_passed"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/llama_natural_e2e_pilot.sbatch"

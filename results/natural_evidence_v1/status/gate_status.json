@@ -1,0 +1,50 @@
+{
+  "protocol": "natural_evidence_v1",
+  "current_phase": "PHASE_A_CLEAN_OUTPUTS_COMPLETE",
+  "last_checked_time": "2026-05-04T23:00:30Z",
+  "known_slurm_jobs": [
+    {
+      "job_id": "834430",
+      "name": "nat-ev-qwen-clean8192",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "purpose": "clean reference outputs/top-k/bank",
+      "status": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "job_id": "834431",
+      "name": "nat-ev-llama-clean8192",
+      "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "purpose": "clean reference outputs/top-k/bank",
+      "status": "COMPLETED",
+      "exit_code": "0:0"
+    }
+  ],
+  "gates": {
+    "phase_a_outputs_complete": "PASS",
+    "qwen_4way_clean_bank_rebuilt": "NEEDS_RESULTS",
+    "qwen_8way_clean_bank_rebuilt": "NEEDS_RESULTS",
+    "llama_4way_clean_bank_rebuilt": "NEEDS_RESULTS",
+    "llama_8way_clean_bank_rebuilt": "NEEDS_RESULTS",
+    "mass_balance": "NEEDS_RESULTS",
+    "heldout_coverage": "NEEDS_RESULTS",
+    "organic_coverage": "NEEDS_RESULTS",
+    "counterfactual_compatibility": "NEEDS_RESULTS",
+    "on_policy_reconstructability": "NEEDS_RESULTS",
+    "raw_wrong_key_pre_null": "NEEDS_RESULTS",
+    "qwen_e2e_pilot": "TODO_AFTER_RESULTS",
+    "llama_e2e_pilot": "TODO_AFTER_RESULTS",
+    "same_family_near_null": "TODO_AFTER_RESULTS",
+    "sanitizer_benchmark": "TODO_AFTER_RESULTS"
+  },
+  "next_allowed_action": "rebuild_qwen_4way_clean_bank",
+  "max_state_changing_actions_per_automation_run": 1,
+  "forbidden_claims": [
+    "24576_fingerprints",
+    "stealth_guarantee",
+    "full_far",
+    "robust_to_all_paraphrasing",
+    "cross_family_generality",
+    "superiority_over_scalable_perinucleus"
+  ]
+}

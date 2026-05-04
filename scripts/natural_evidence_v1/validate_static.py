@@ -207,6 +207,45 @@ def _validate_tables(config: dict[str, Any], errors: list[str]) -> None:
                 _error(errors, f"missing required table output {output_name!r}")
 
 
+def _validate_run_allowlist(root: Path, errors: list[str]) -> None:
+    allowlist_path = root / "configs/natural_evidence_v1/run_allowlist.yaml"
+    if not allowlist_path.exists():
+        _error(errors, "missing configs/natural_evidence_v1/run_allowlist.yaml")
+        return
+    allowlist = read_yaml(allowlist_path)
+    global_rules = allowlist.get("global_rules", {})
+    if not isinstance(global_rules, dict):
+        _error(errors, "run_allowlist.global_rules must be a mapping")
+        return
+    if int(global_rules.get("max_state_changing_actions_per_automation_run", 0)) != 1:
+        _error(errors, "automation must allow exactly one state-changing action per run")
+    for rule in (
+        "forbid_overwrite_existing_artifacts",
+        "forbid_old_compiled_path_modification",
+        "forbid_unlisted_gpu_jobs",
+        "forbid_paper_claim_modification",
+    ):
+        if not global_rules.get(rule, False):
+            _error(errors, f"run_allowlist.global_rules.{rule} must be true")
+
+    cpu_actions = allowlist.get("allowed_cpu_actions", [])
+    cpu_names = {str(action.get("name", "")) for action in cpu_actions if isinstance(action, dict)}
+    for action_name in ("rebuild_qwen_4way_clean_bank", "audit_opportunity_bank"):
+        if action_name not in cpu_names:
+            _error(errors, f"run_allowlist missing CPU action {action_name!r}")
+
+    gpu_actions = allowlist.get("allowed_gpu_actions", [])
+    if not isinstance(gpu_actions, list):
+        _error(errors, "run_allowlist.allowed_gpu_actions must be a list")
+        return
+    for action in gpu_actions:
+        if not isinstance(action, dict):
+            _error(errors, "each GPU allowlist action must be a mapping")
+            continue
+        if action.get("enabled", False):
+            _error(errors, f"GPU action must remain disabled until manually enabled: {action.get('name', '')}")
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     root = Path(__file__).resolve().parents[2]
@@ -218,6 +257,7 @@ def main(argv: list[str] | None = None) -> int:
     _validate_bucket_bank(config, errors)
     _validate_nulls_and_attacks(config, errors)
     _validate_tables(config, errors)
+    _validate_run_allowlist(root, errors)
 
     summary = {
         "schema_name": "natural_evidence_static_validation_summary_v1",
@@ -232,6 +272,7 @@ def main(argv: list[str] | None = None) -> int:
             "protocol_precommitment",
             "task_only_and_near_null_controls",
             "sanitizer_benchmark_requirements",
+            "automation_run_allowlist",
             "paper_table_required_columns",
             "no_gpt2_paper_facing_arm",
         ],

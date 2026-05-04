@@ -44,6 +44,7 @@ def test_validate_static_accepts_pilot_config(tmp_path: Path) -> None:
     assert payload["passed"] is True
     assert "protocol_precommitment" in payload["validated_components"]
     assert "task_only_and_near_null_controls" in payload["validated_components"]
+    assert "automation_run_allowlist" in payload["validated_components"]
 
 
 def test_build_bucket_bank_from_reference_candidates(tmp_path: Path) -> None:
@@ -335,3 +336,25 @@ def test_natural_protocol_docs_lock_security_boundaries() -> None:
     assert "Qwen task-only LoRA" in e2e
     assert "same-family" in e2e
     assert "oracle keyed sanitizer" in e2e
+
+
+def test_automation_state_and_allowlist_are_conservative() -> None:
+    allowlist = (REPO_ROOT / "configs/natural_evidence_v1/run_allowlist.yaml").read_text(
+        encoding="utf-8"
+    )
+    state = (REPO_ROOT / "docs/natural_evidence_v1/AUTOMATION_STATE.md").read_text(
+        encoding="utf-8"
+    )
+    gate_status = json.loads(
+        (REPO_ROOT / "results/natural_evidence_v1/status/gate_status.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert "max_state_changing_actions_per_automation_run: 1" in allowlist
+    assert "forbid_unlisted_gpu_jobs: true" in allowlist
+    assert "qwen_natural_e2e_pilot" in allowlist
+    assert "enabled: false" in allowlist
+    assert "Do not start protected LoRA training" in state
+    assert gate_status["gates"]["phase_a_outputs_complete"] == "PASS"
+    assert gate_status["next_allowed_action"] == "rebuild_qwen_4way_clean_bank"
+    assert "24576_fingerprints" in gate_status["forbidden_claims"]
