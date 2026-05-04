@@ -65,13 +65,26 @@
       "notes": "84659 rejected candidate records plus header.",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_rejections.csv",
       "status": "COMPLETE"
+    },
+    {
+      "current_accessible": true,
+      "notes": "175 threshold-grid rows; no row reaches 24576 entries.",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv",
+      "status": "COMPLETE"
+    },
+    {
+      "current_accessible": true,
+      "notes": "widest tested row reaches 19629 entries, below target.",
+      "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json",
+      "status": "COMPLETE"
     }
   ],
-  "current_phase": "QWEN_4WAY_STRICT_BANK_REBUILT_UNDER_TARGET",
+  "current_phase": "QWEN_4WAY_BALANCE_SWEEP_NEEDS_CANDIDATE_EXPANSION",
   "failed_gates": [
     "qwen_4way_quick_mass_check",
     "qwen_4way_audit_quality_gate",
-    "qwen_4way_strict_bank_target_coverage"
+    "qwen_4way_strict_bank_target_coverage",
+    "qwen_4way_balance_sweep_reaches_target"
   ],
   "forbidden_claims": [
     "24576_fingerprints",
@@ -96,6 +109,8 @@
     "qwen_4way_clean_bank_audit": "PASS_EXECUTED",
     "qwen_4way_clean_bank_rebuilt": "PASS",
     "qwen_4way_quick_mass_check": "FAIL_PREAUDIT",
+    "qwen_4way_balance_threshold_sweep": "PASS_EXECUTED",
+    "qwen_4way_balance_sweep_reaches_target": "FAIL",
     "qwen_4way_strict_bank_rebuilt": "PASS_EXECUTED",
     "qwen_4way_strict_bank_target_coverage": "FAIL_UNDER_TARGET",
     "qwen_8way_clean_bank_rebuilt": "NEEDS_RESULTS",
@@ -124,10 +139,10 @@
       "status": "COMPLETED"
     }
   ],
-  "last_checked_time": "2026-05-04T23:35:20Z",
-  "last_state_changing_action": "2026-05-04T23:35:20Z implemented strict balanced-entry selection, pushed it to main, synchronized Chimera, and rebuilt the Qwen 4-way strict opportunity bank.",
+  "last_checked_time": "2026-05-04T23:40:55Z",
+  "last_state_changing_action": "2026-05-04T23:40:55Z implemented and ran a Qwen 4-way balance threshold sweep. No tested threshold combination reaches the 24576-entry target.",
   "max_state_changing_actions_per_automation_run": 1,
-  "next_allowed_action": "decide_expand_qwen_candidate_supply_or_relax_strict_balance_gate",
+  "next_allowed_action": "expand_qwen_candidate_supply_then_rebuild_4way_strict_bank",
   "protocol": "natural_evidence_v1",
   "qwen_4way_clean_rebuild": {
     "accepted_entries": 24576,
@@ -192,7 +207,30 @@
       "min_bucket_mass": 0.005
     }
   },
+  "qwen_4way_balance_threshold_sweep": {
+    "any_threshold_reaches_target": false,
+    "metric_records": 45542,
+    "next_decision": "expand_candidate_supply_or_expand_sweep_grid",
+    "output_csv": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv",
+    "recommended_row": {
+      "accepted_entries": 19629,
+      "accepted_fraction_of_metric_records": 0.4310087391858065,
+      "accepted_min_bucket_mass_min": 0.0010158160439459607,
+      "accepted_bucket_mass_ratio_max": 49.78206327013157,
+      "accepted_bucket_entropy_fraction_min": 0.7000178403484856,
+      "coverage_complete": false,
+      "max_bucket_mass_ratio_threshold": 50.0,
+      "min_bucket_entropy_fraction_threshold": 0.7,
+      "min_bucket_mass_threshold": 0.001,
+      "prompt_count": 7489,
+      "target_entries": 24576
+    },
+    "result_claim": "threshold_coverage_diagnostic_not_fingerprint_count",
+    "summary_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json",
+    "threshold_grid_rows": 175
+  },
   "remaining_NEEDS_RESULTS": [
+    "qwen_candidate_supply_expansion",
     "qwen_4way_strict_bank_target_coverage",
     "qwen_8way_clean_bank_rebuilt",
     "llama_4way_clean_bank_rebuilt",

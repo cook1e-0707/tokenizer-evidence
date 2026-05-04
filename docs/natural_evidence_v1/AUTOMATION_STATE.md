@@ -1,10 +1,10 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-QWEN_4WAY_STRICT_BANK_REBUILT_UNDER_TARGET
+QWEN_4WAY_BALANCE_SWEEP_NEEDS_CANDIDATE_EXPANSION
 
 ## Last Checked
-2026-05-04T23:35:20Z
+2026-05-04T23:40:55Z
 
 ## Known Jobs
 | Job ID | Name | Model | Purpose | Status |
@@ -34,6 +34,8 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl` | COMPLETE_UNDER_TARGET | 7715 rows; strict balanced-entry selection passed for every accepted entry |
 | `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bank_manifest.json` | COMPLETE_UNDER_TARGET | strict_balance_gate=true; coverage_complete=false |
 | `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_rejections.csv` | COMPLETE | 84659 rejected candidate records plus header |
+| `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv` | COMPLETE | 175 threshold-grid rows; no row reaches 24576 entries |
+| `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json` | COMPLETE | widest tested row reaches 19629 entries, below target |
 
 ## Gate Status
 | Gate | Status | Notes |
@@ -46,6 +48,8 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | Qwen 4-way audit quality gate | FAIL | only 4017/24576 entries satisfy min_mass>=0.005, ratio<=5, and entropy_fraction>=0.90 |
 | Qwen 4-way strict balanced bank rebuilt | PASS_EXECUTED | 7715 accepted entries; all accepted entries pass min_mass>=0.005, ratio<=5, entropy_fraction>=0.90 |
 | Qwen 4-way strict bank target coverage | FAIL_UNDER_TARGET | accepted_entries=7715 < target=24576 |
+| Qwen 4-way balance threshold sweep | PASS_EXECUTED | 175 threshold combinations tested from existing metrics |
+| Qwen 4-way sweep reaches target | FAIL | widest tested gate min_mass>=0.001, ratio<=50, entropy>=0.70 reaches only 19629 entries |
 | Qwen 8-way clean bank rebuilt with latest code | NEEDS_RESULTS | do not run before Qwen 4-way audit/diagnosis |
 | Llama 4-way clean bank rebuilt with latest code | NEEDS_RESULTS | waiting |
 | Llama 8-way clean bank rebuilt with latest code | NEEDS_RESULTS | waiting |
@@ -61,21 +65,23 @@ Job status was freshly checked on Chimera via `ssh chimera` during the
 | sanitizer benchmark | TODO_AFTER_RESULTS | do not start yet |
 
 ## Next Allowed Action
-Decide whether to expand Qwen candidate supply or relax the strict balance gate
-before any downstream step. Do not start training, counterfactual scoring, Qwen
-8-way rebuild, or Llama rebuild from this under-target bank.
+Expand Qwen candidate supply before rebuilding the 4-way strict bank. The
+threshold sweep did not reach the 24576-entry target even under very loose
+bounded thresholds. Do not start training, counterfactual scoring, Qwen 8-way
+rebuild, or Llama rebuild from the current under-target bank.
 
 ## Failed Gates
 - qwen_4way_quick_mass_check
 - qwen_4way_audit_quality_gate
 - qwen_4way_strict_bank_target_coverage
+- qwen_4way_balance_sweep_reaches_target
 
 ## Last State-Changing Action
-2026-05-04T23:35:20Z: implemented strict balanced-entry selection, pushed it
-to main, synchronized Chimera, and rebuilt the Qwen 4-way strict opportunity
-bank. The rebuilt bank is balanced but under target.
+2026-05-04T23:40:55Z: implemented and ran a Qwen 4-way balance threshold
+sweep. No tested threshold combination reaches the 24576-entry target.
 
 ## Remaining NEEDS_RESULTS
+- qwen_candidate_supply_expansion
 - qwen_8way_clean_bank_rebuilt
 - llama_4way_clean_bank_rebuilt
 - llama_8way_clean_bank_rebuilt
