@@ -488,6 +488,8 @@ def test_automation_state_and_allowlist_are_conservative() -> None:
     assert gate_status["gates"]["qwen_e2e_pilot"] == "TODO_AFTER_RESULTS"
     assert gate_status["gates"]["llama_e2e_pilot"] == "TODO_AFTER_RESULTS"
     assert gate_status["next_allowed_action"] != "qwen_natural_e2e_pilot"
+    assert gate_status["project_target_bank_entries_per_tokenizer"] == 24000
+    assert "24000_fingerprints" in gate_status["forbidden_claims"]
     assert "24576_fingerprints" in gate_status["forbidden_claims"]
 
 

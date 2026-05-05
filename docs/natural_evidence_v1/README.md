@@ -74,8 +74,10 @@ and verifier validation:
 5. Replicate on Llama only after Qwen demonstrates end-to-end recovery under
    null controls.
 
-The configured target of 24,576 bank entries is opportunity scale. A bank entry
-is a context-conditioned measurable opportunity, not a fingerprint. It becomes
+The configured target of 24,000 bank entries is opportunity scale. It is not
+chosen to match Scalable Fingerprinting's 24,576 fingerprint count, and the two
+numbers should not be compared as the same object. A bank entry is a
+context-conditioned measurable opportunity, not a fingerprint. It becomes
 ownership evidence only after a payload, audit key, ECC schedule, bucket-mass
 training objective, transcript commitment, and transcript-level decoder are
 instantiated and evaluated.
@@ -104,7 +106,7 @@ Training must not start until the following are reported:
 - channel capacity and bucket-count ablations for 4 and 8 buckets.
 
 The current audit scripts report static opportunity quality and mark model-run
-dependent gates as `NEEDS_RESULTS` rather than treating 24,576 entries as a
+dependent gates as `NEEDS_RESULTS` rather than treating 24,000 entries as a
 fingerprint claim.
 
 The complete end-to-end work order is in
@@ -112,6 +114,14 @@ The complete end-to-end work order is in
 pilot is Qwen protected/raw/task-only/wrong-key/wrong-payload with two payloads,
 two seeds, at least 2048 owner probes, at least 2048 organic null prompts, and
 query budgets 8, 16, 32, 64, and 128.
+
+## Automation Reliability
+
+Hourly automation that needs Chimera must follow
+`docs/natural_evidence_v1/chimera_ssh_reliability.md`: the first
+`ssh chimera` DNS failure is a known intermittent resolver cold-start issue, not
+a final access gate failure. Warm DNS and retry non-interactively before marking
+remote Slurm or artifact status as unverified.
 
 ## Current Entrypoints
 

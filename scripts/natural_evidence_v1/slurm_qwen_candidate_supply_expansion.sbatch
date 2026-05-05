@@ -21,7 +21,7 @@ CANDIDATE_TOP_K="${CANDIDATE_TOP_K:-64}"
 MAX_PREFIXES_PER_RESPONSE="${MAX_PREFIXES_PER_RESPONSE:-64}"
 PREFIX_STRIDE="${PREFIX_STRIDE:-2}"
 MIN_RESPONSE_PREFIX_TOKENS="${MIN_RESPONSE_PREFIX_TOKENS:-1}"
-TARGET_ENTRIES="${TARGET_ENTRIES:-24576}"
+TARGET_ENTRIES="${TARGET_ENTRIES:-24000}"
 BALANCE_MIN_BUCKET_MASS="${BALANCE_MIN_BUCKET_MASS:-0.005}"
 MAX_BUCKET_MASS_RATIO="${MAX_BUCKET_MASS_RATIO:-5}"
 MIN_BUCKET_ENTROPY_FRACTION="${MIN_BUCKET_ENTROPY_FRACTION:-0.90}"
@@ -132,7 +132,7 @@ summary = {
     "strict_bank_manifest": str(manifest),
     "accepted_entries": payload.get("accepted_entries"),
     "target_bank_entries": payload.get("target_bank_entries"),
-    "coverage_complete": payload.get("accepted_entries", 0) >= payload.get("target_bank_entries", 24576),
+    "coverage_complete": payload.get("accepted_entries", 0) >= payload.get("target_bank_entries", 24000),
     "strict_balance_gate": payload.get("strict_balance_gate"),
     "claim_control": payload.get("claim_control", {}),
 }

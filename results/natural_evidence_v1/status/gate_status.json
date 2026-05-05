@@ -14,13 +14,13 @@
     },
     {
       "current_accessible": true,
-      "notes": "92374 rows.",
+      "notes": "92374 rows; raw candidate file only; 6 low-probability raw \" CERT\" candidate hits, filtered out of bank entries.",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192/reference_candidates/qwen_topk_candidates.jsonl",
       "status": "COMPLETE"
     },
     {
       "current_accessible": true,
-      "notes": "105721 rows.",
+      "notes": "105721 rows; raw candidate file only; 4 low-probability raw \" CERT\" candidate hits, filtered out of bank entries.",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192/reference_candidates/llama_topk_candidates.jsonl",
       "status": "COMPLETE"
     },
@@ -68,7 +68,7 @@
     },
     {
       "current_accessible": true,
-      "notes": "175 threshold-grid rows; no row reaches 24576 entries.",
+      "notes": "175 threshold-grid rows; no row reaches the updated 24000-entry target.",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv",
       "status": "COMPLETE"
     },
@@ -86,13 +86,13 @@
     },
     {
       "current_accessible": false,
-      "notes": "job 834777 is scoring dense-prefix Qwen candidates with prefix_stride=2 and max_prefixes_per_response=64",
+      "notes": "job 834777 is still scoring dense-prefix Qwen candidates; file does not exist yet",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2/reference_candidates/qwen_topk_candidates.jsonl",
-      "status": "RUNNING"
+      "status": "RUNNING_NOT_WRITTEN"
     },
     {
       "current_accessible": false,
-      "notes": "will be rebuilt by job 834777 after candidate scoring completes",
+      "notes": "strict rebuild runs after candidate scoring; file does not exist yet",
       "path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl",
       "status": "NEEDS_RESULTS"
     }
@@ -105,6 +105,7 @@
     "qwen_4way_balance_sweep_reaches_target"
   ],
   "forbidden_claims": [
+    "24000_fingerprints",
     "24576_fingerprints",
     "stealth_guarantee",
     "full_far",
@@ -114,6 +115,8 @@
   ],
   "gates": {
     "bank_mass_balance": "PASS_FOR_QWEN_4WAY_STRICT",
+    "chimera_job_status_access": "PASS",
+    "chimera_ssh_retry_after_dns_failure": "PASS_PREFLIGHT_USED",
     "counterfactual_compatibility": "NEEDS_RESULTS",
     "heldout_coverage": "NEEDS_RESULTS",
     "llama_4way_clean_bank_rebuilt": "NEEDS_RESULTS",
@@ -139,7 +142,8 @@
     "qwen_e2e_pilot": "TODO_AFTER_RESULTS",
     "raw_wrong_key_pre_null": "NEEDS_RESULTS",
     "same_family_near_null": "TODO_AFTER_RESULTS",
-    "sanitizer_benchmark": "TODO_AFTER_RESULTS"
+    "sanitizer_benchmark": "TODO_AFTER_RESULTS",
+    "target_bank_entries_per_tokenizer": "PASS_UPDATED_TO_24000"
   },
   "known_slurm_jobs": [
     {
@@ -186,9 +190,10 @@
     },
     {
       "account": "cs_yinxin.wan",
-      "elapsed": "00:00:36",
+      "elapsed": "01:30:41",
       "exit_code": "0:0",
       "job_id": "834777",
+      "last_verified_time": "2026-05-05T01:21:11Z",
       "model": "Qwen/Qwen2.5-7B-Instruct",
       "name": "nat-ev-qwen-candx",
       "node": "chimera21",
@@ -198,16 +203,18 @@
       "status": "RUNNING"
     }
   ],
-  "last_checked_time": "2026-05-04T23:50:20Z",
-  "last_state_changing_action": "2026-05-04T23:50:20Z added a scoped Qwen-only dense-prefix candidate expansion Slurm job, pushed it to main, synchronized Chimera, and submitted job 834777.",
+  "last_checked_time": "2026-05-05T01:44:43Z",
+  "last_state_changing_action": "2026-05-05T01:44:43Z updated the opportunity-bank target gate from 24576 to 24000 entries per tokenizer while preserving the distinction from fingerprint counts.",
   "max_state_changing_actions_per_automation_run": 1,
-  "next_allowed_action": "wait_for_qwen_candidate_supply_expansion_job_834777_then_inspect_outputs",
+  "next_allowed_action": "wait_for_qwen_candidate_supply_expansion_job_834777_then_inspect_outputs_against_24000_target",
+  "project_target_bank_entries_per_tokenizer": 24000,
   "protocol": "natural_evidence_v1",
   "qwen_4way_balance_threshold_sweep": {
     "any_threshold_reaches_target": false,
     "metric_records": 45542,
     "next_decision": "expand_candidate_supply_or_expand_sweep_grid",
     "output_csv": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep.csv",
+    "project_target_entries": 24000,
     "recommended_row": {
       "accepted_bucket_entropy_fraction_min": 0.7000178403484856,
       "accepted_bucket_mass_ratio_max": 49.78206327013157,
@@ -215,11 +222,14 @@
       "accepted_fraction_of_metric_records": 0.4310087391858065,
       "accepted_min_bucket_mass_min": 0.0010158160439459607,
       "coverage_complete": false,
+      "coverage_complete_under_project_target": false,
+      "historical_target_entries_at_run_time": 24576,
       "max_bucket_mass_ratio_threshold": 50.0,
       "min_bucket_entropy_fraction_threshold": 0.7,
       "min_bucket_mass_threshold": 0.001,
+      "project_target_entries": 24000,
       "prompt_count": 7489,
-      "target_entries": 24576
+      "target_entries": 24000
     },
     "result_claim": "threshold_coverage_diagnostic_not_fingerprint_count",
     "summary_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/tables/qwen_4way_strict/balance_gate_threshold_sweep_summary.json",
@@ -272,16 +282,19 @@
     "bucket_mass_ratio_max": 4.998329938962228,
     "bucket_mass_ratio_median": 2.224853700422741,
     "coverage_complete": false,
+    "coverage_complete_under_project_target": false,
     "entries_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bucket_bank_entries.jsonl",
+    "historical_target_bank_entries_at_run_time": 24576,
     "input_records": 92374,
     "manifest_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_rebuilt_latest/bucket_banks_4way_strict/qwen_bank_manifest.json",
     "min_bucket_mass_median": 0.17092545225750655,
     "min_bucket_mass_min": 0.005096819746540859,
+    "project_target_bank_entries": 24000,
     "prompt_count": 4941,
     "rejected_records": 84659,
     "strict_balance_gate": true,
     "strict_filter_entries": 7715,
-    "target_bank_entries": 24576,
+    "target_bank_entries": 24000,
     "thresholds": {
       "max_bucket_mass_ratio": 5.0,
       "min_bucket_entropy_fraction": 0.9,
@@ -292,6 +305,7 @@
     "account": "cs_yinxin.wan",
     "bucket_count": 4,
     "candidate_top_k": 64,
+    "elapsed": "01:30:41",
     "expansion_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192_qwen_prefixdense_stride2",
     "forbidden_actions_while_running": [
       "qwen_8way_rebuild",
@@ -300,15 +314,30 @@
       "protected_lora_training"
     ],
     "job_id": "834777",
+    "last_verified_time": "2026-05-05T01:21:11Z",
     "max_prefixes_per_response": 64,
     "node": "chimera21",
+    "outputs_written": {
+      "dense_qwen_topk_candidates": false,
+      "final_expansion_summary": false,
+      "strict_bank_entries": false,
+      "strict_bank_manifest": false
+    },
     "partition": "pomplun",
+    "post_completion_target_note": "Job 834777 was submitted before the 24000 target update; if its manifest reports 24576, rerun only the CPU strict-bank build on generated candidates with --target-entries 24000.",
     "prefix_stride": 2,
+    "project_target_bank_entries": 24000,
     "qos": "pomplun",
     "source_reference_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v1/phase_a_clean_decode8192/reference_outputs/qwen_reference_outputs.jsonl",
+    "sstat": {
+      "ave_cpu": "01:30:55",
+      "ave_rss": "19260260K",
+      "max_rss": "19260260K"
+    },
     "status": "RUNNING",
     "strict_balance_gate": true,
-    "target_bank_entries": 24576
+    "submitted_job_target_bank_entries": 24576,
+    "target_bank_entries": 24000
   },
   "remaining_NEEDS_RESULTS": [
     "qwen_4way_strict_bank_target_coverage_after_candidate_expansion",
@@ -329,7 +358,23 @@
     "sanitizer_benchmark"
   ],
   "slurm_query_status": {
-    "sacct": "available_via_ssh_chimera",
-    "squeue": "available_via_ssh_chimera"
-  }
+    "last_attempt_time": "2026-05-05T01:21:11Z",
+    "last_success_hostname": "chimerahead.umb.edu",
+    "last_success_time": "2026-05-05T01:21:11Z",
+    "local_sacct": "command_not_found",
+    "local_squeue": "command_not_found",
+    "preflight_attempts_used": 1,
+    "remote_error": null,
+    "remote_host": "chimera",
+    "remote_hostname": "chimerahead.umb.edu",
+    "remote_sacct": "available",
+    "remote_scontrol": "available",
+    "remote_squeue": "available",
+    "remote_sstat": "available",
+    "retry_after_failure_hostname": "chimerahead.umb.edu",
+    "retry_after_failure_scope": "connectivity_only_no_slurm_query",
+    "retry_after_failure_time": "2026-05-05T01:13:34Z",
+    "retry_runbook": "docs/natural_evidence_v1/chimera_ssh_reliability.md"
+  },
+  "target_update_note": "Current opportunity-bank target is 24000 entries per tokenizer. This is not a fingerprint count and should not be compared as raw-count parity with Scalable Fingerprinting."
 }

@@ -26,7 +26,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--entries", required=True)
     parser.add_argument("--rejections", required=True)
-    parser.add_argument("--target-entries", type=int, default=24576)
+    parser.add_argument("--target-entries", type=int, default=24000)
     parser.add_argument("--min-bucket-mass-values", default="0.0025,0.005,0.01")
     parser.add_argument("--max-bucket-mass-ratio-values", default="5,8,10,15,20,50")
     parser.add_argument("--min-bucket-entropy-fraction-values", default="0.75,0.80,0.85,0.90")

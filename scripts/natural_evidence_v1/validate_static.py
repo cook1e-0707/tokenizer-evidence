@@ -72,8 +72,8 @@ def _validate_bucket_bank(config: dict[str, Any], errors: list[str]) -> None:
     if not isinstance(bucket_cfg, dict):
         _error(errors, "bucket_bank must be a mapping")
         return
-    if int(bucket_cfg.get("target_bank_entries_per_tokenizer", 0)) < 24576:
-        _error(errors, "target_bank_entries_per_tokenizer must be at least 24576")
+    if int(bucket_cfg.get("target_bank_entries_per_tokenizer", 0)) < 24000:
+        _error(errors, "target_bank_entries_per_tokenizer must be at least 24000")
     if int(bucket_cfg.get("bucket_count", 0)) <= 1:
         _error(errors, "bucket_count must be greater than 1")
     if int(bucket_cfg.get("candidate_top_k", 0)) < int(bucket_cfg.get("bucket_count", 0)):

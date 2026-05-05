@@ -16,9 +16,11 @@ protected model is trained to raise target bucket mass at eligible natural
 prefixes, transcripts are committed, and the public verifier reconstructs
 observations from generated text after key reveal.
 
-Therefore the 24,576-entry target may be described only as opportunity-bank
-scale. It must not be written as 24,576 inserted fingerprints or as ownership
-recovery evidence by itself.
+Therefore the 24,000-entry project target may be described only as
+opportunity-bank scale. It intentionally should not be presented as raw-count
+parity with Scalable Fingerprinting's 24,576 fingerprints. It must not be
+written as 24,000 inserted fingerprints or as ownership recovery evidence by
+itself.
 
 The paper-facing comparison should report:
 

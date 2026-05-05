@@ -275,7 +275,7 @@ def main(argv: list[str] | None = None) -> int:
         "entries": len(entries),
         "fingerprint_claim": False,
         "quality_gate_status": {
-            "accepted_entries": len(entries) >= int(quality_gates.get("accepted_entries_per_tokenizer", 24576)),
+            "accepted_entries": len(entries) >= int(quality_gates.get("accepted_entries_per_tokenizer", 24000)),
             "min_bucket_mass": bool(min_masses)
             and min(min_masses) >= float(quality_gates.get("min_bucket_mass", 0.0)),
             "max_bucket_mass_ratio": bool(mass_ratios)

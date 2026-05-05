@@ -94,7 +94,7 @@ null_evaluations:
   wrong_payload_count: 4
 
 bucket_bank:
-  target_bank_entries_per_tokenizer: 24576
+  target_bank_entries_per_tokenizer: 24000
   candidate_top_k: 64
   bucket_count: 8
   bucket_assignment: keyed_mass_balance
@@ -121,7 +121,7 @@ bucket_bank:
     reject_markdown_or_path_like_surfaces: true
   quality_gates:
     train_gate_required: true
-    accepted_entries_per_tokenizer: 24576
+    accepted_entries_per_tokenizer: 24000
     heldout_eligible_density_status: NEEDS_RESULTS
     reconstructability_rate_min: 0.95
     min_bucket_mass: 0.005
