@@ -83,8 +83,31 @@ python3 scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.
 
 Do not generate model outputs on the local machine or a Chimera login node.
 
+## 2026-05-09 Review Decision
+
+The restricted Step-label density audit plan and single prepared Slurm wrapper
+were reviewed after the `20260509_0109` Hermes tick. The wrapper is approved as
+the only Chimera execution path for a later base-Qwen model-output density audit
+on the 256 planned 16-step prompts.
+
+This review did not enable the allowlist entry and did not submit Slurm because
+the controlling tick included a hard `no generation` constraint. The allowlist
+entry remains disabled until a later explicit generation-permitted submission
+tick.
+
+No-model validation rerun:
+
+```text
+python3 -m py_compile scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py
+bash -n scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch
+python3 scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py --validate-plan-only
+```
+
+Additional checks confirmed the allowlist entry is present but disabled, and the
+planned prompt artifact has exactly 256 rows with 16 expected structural slots.
+
 ## Next Allowed Action
 
-Review this wrapper. If approved, enable exactly one allowlist entry and submit
-exactly one Chimera Slurm job for the restricted Step-label model-output density
-audit. Do not start WP4 or training.
+When a later supervisor tick explicitly permits model-output generation, enable
+exactly one allowlist entry and submit exactly one Chimera Slurm job for the
+restricted Step-label model-output density audit. Do not start WP4 or training.

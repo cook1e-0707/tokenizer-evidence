@@ -139,9 +139,13 @@
     "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
     "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md",
     "results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.md",
-    "results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.notify.json"
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.notify.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.notify.json"
   ],
-  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_READY_NEEDS_REVIEW",
+  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_JOB_850434_PENDING",
   "failed_gates": [
     "WP3 fixed-prefix full-vocab model-mass gate failed on job 850288",
     "WP3 context-specific mass scoring job 850372 failed before mass artifacts due tokenizer prefix-boundary retokenization",
@@ -237,11 +241,27 @@
       "score_plan_rows": 72,
       "status": "COMPLETED 0:0",
       "training_started": false
+    },
+    {
+      "e2e_eval_started": false,
+      "elapsed_at_last_observation": "00:01:30",
+      "gres": "gpu:A100:1",
+      "job_id": "850434",
+      "last_observed_time": "2026-05-09T01:22:05Z",
+      "name": "nat-ev-v2-wp3dens",
+      "node": "chimera13",
+      "output_dir": "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_850434",
+      "paper_claim_allowed": false,
+      "partition": "DGXA100",
+      "purpose": "natural_evidence_v2 WP3 restricted Step-label base-Qwen model-output density audit",
+      "status": "RUNNING",
+      "training_started": false
     }
   ],
-  "last_checked_time": "2026-05-09T01:08:31Z",
-  "last_state_changing_action": "Codex prepared the restricted Step-label base-Qwen model-output density audit wrapper and runner. The allowlist entry is recorded but disabled pending review. Local no-model validation passed; no Slurm job, model generation, model scoring, training, E2E, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
-  "next_allowed_action": "Review the restricted Step-label density audit wrapper. If approved, enable exactly one allowlist entry and submit exactly one Chimera Slurm job for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
+  "known_slurm_jobs": [],
+  "last_checked_time": "2026-05-09T01:22:05Z",
+  "last_state_changing_action": "User explicitly permitted the restricted Step-label base-Qwen model-output density audit. Codex enabled only the relevant allowlist entry, synced required v2 artifacts to Chimera, submitted exactly one Slurm job 850434, then disabled the allowlist entry again to prevent duplicate submissions. No training, E2E, payload recovery, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
+  "next_allowed_action": "Monitor Slurm job 850434. After completion, sync and review restricted Step-label density artifacts and manual naturalness examples. Do not start WP4 or training.",
   "remaining_NEEDS_RESULTS": [
     "WP3 fixed-response density gate decision beyond template preflight if required before WP4",
     "WP3 fixed model-mass artifact audit for 2-way bucket banks",
@@ -261,8 +281,10 @@
     "WP4 prompt-local payload oracle substitution after density gate",
     "WP3 model-output density audit results for restricted step-label policy",
     "WP3 review of restricted 16-step density audit plan",
-    "WP3 review of restricted Step-label density audit wrapper",
-    "WP3 Slurm model-output density audit job for restricted Step-label policy"
+    "WP3 explicit generation-permitted allowlist/submission review for restricted Step-label density audit",
+    "WP3 monitor Slurm job 850434",
+    "WP3 sync restricted Step-label density artifacts for job 850434",
+    "WP3 review restricted Step-label density artifacts and naturalness examples from job 850434"
   ],
   "schema_name": "natural_evidence_v2_gate_status_v1",
   "stale_out_of_scope_entries_ignored_by_20260509_0024_supervisor": {
@@ -390,6 +412,51 @@
       "paper_claim_allowed": false,
       "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_READY_NEEDS_REVIEW",
       "time": "2026-05-09T01:08:31Z",
+      "training_started": false,
+      "wp4_allowed": false
+    },
+    {
+      "action": "reviewed restricted Step-label density audit wrapper",
+      "allowlist_enabled": false,
+      "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+      "artifacts": [
+        "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md",
+        "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.md",
+        "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.json"
+      ],
+      "e2e_eval_started": false,
+      "hard_generation_constraint_blocked_submission": true,
+      "local_validation": [
+        "py_compile",
+        "bash -n",
+        "yaml_load_disabled_allowlist",
+        "validate_plan_only",
+        "prompt_plan_256_rows"
+      ],
+      "model_generation_started": false,
+      "model_scoring_started": false,
+      "next_allowed_action": "When a later supervisor tick explicitly permits model-output generation, enable exactly one allowlist entry and submit exactly one Chimera Slurm job for the restricted Step-label density audit. Do not start WP4 or training.",
+      "paper_claim_allowed": false,
+      "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEWED_SUBMISSION_DEFERRED",
+      "slurm_job_submitted": false,
+      "time": "2026-05-09T01:12:02Z",
+      "training_started": false,
+      "wp4_allowed": false
+    },
+    {
+      "action": "submitted restricted Step-label model-output density audit job",
+      "allowlist_disabled_after_submission": true,
+      "allowlist_enabled_for_submission": true,
+      "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+      "e2e_eval_started": false,
+      "job_id": "850434",
+      "model_generation_started": "slurm_job_pending_not_completed",
+      "model_scoring_started": false,
+      "next_allowed_action": "Monitor Slurm job 850434. After completion, sync and review restricted Step-label density artifacts and manual naturalness examples. Do not start WP4 or training.",
+      "notification_report": "results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.notify.json",
+      "paper_claim_allowed": false,
+      "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_JOB_850434_PENDING",
+      "time": "2026-05-09T01:20:21Z",
       "training_started": false,
       "wp4_allowed": false
     }
@@ -814,6 +881,34 @@
     "script": "scripts/natural_evidence_v2/slurm/wp3_bucket_mass_score.sbatch",
     "slurm_state": "PENDING(Resources)",
     "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_restricted_step_label_density_wrapper_review_20260509_0112": {
+    "allowlist_enabled_after_review": false,
+    "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+    "allowlist_present": true,
+    "approved_wrapper": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "hard_generation_constraint_blocked_submission": true,
+    "model_scoring_started": false,
+    "next_allowed_action": "When a later supervisor tick explicitly permits model-output generation, enable exactly one allowlist entry and submit exactly one Chimera Slurm job for the restricted Step-label density audit. Do not start WP4 or training.",
+    "paper_claim_allowed": false,
+    "plan_prompts_jsonl": "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_prompts.jsonl",
+    "prompt_count": 256,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.md",
+    "runner": "scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py",
+    "slurm_job_submitted": false,
+    "status": "WRAPPER_REVIEW_APPROVED_SUBMISSION_DEFERRED_BY_NO_GENERATION_CONSTRAINT",
+    "training_started": false,
+    "validation": {
+      "allowlist_check": "PASS_DISABLED_ENTRY_PRESENT",
+      "bash_n": "PASS",
+      "prompt_plan_check": "PASS_256_ROWS_16_STRUCTURAL_SLOTS",
+      "py_compile": "PASS",
+      "validate_plan_only": "PASS_RESTRICTED_STEP_LABEL_DENSITY_PLAN_VALIDATION"
+    },
     "wp4_allowed": false
   },
   "v2_wp3_restricted_step_label_policy": {

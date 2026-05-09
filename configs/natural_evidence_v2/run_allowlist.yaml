@@ -25,6 +25,6 @@ allowed_gpu_actions:
     claim_note: "WP3 context-specific base-Qwen mass scoring only; no training, generation, E2E, FAR, or positive claim."
   - name: v2_wp3_restricted_step_label_density_audit
     enabled: false
-    enable_condition: "pending_review_of_restricted_step_label_density_wrapper"
+    enable_condition: "submitted_once_as_job_850434_pending_result_review"
     command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch"
     claim_note: "WP3 restricted Step-label base-Qwen model-output density audit only; no training, E2E, payload recovery, FAR, or positive claim."

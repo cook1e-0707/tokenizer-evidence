@@ -825,6 +825,31 @@
       "training_started": false,
       "wp4_allowed": false
     },
+    "2026-05-09T01:12:02Z_wp3_restricted_step_label_density_wrapper_review": {
+      "allowlist_enabled_after_review": false,
+      "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+      "e2e_eval_started": false,
+      "generation_started": false,
+      "hard_generation_constraint_blocked_submission": true,
+      "model_scoring_started": false,
+      "paper_claim_allowed": false,
+      "prompt_count": 256,
+      "report_json": "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.json",
+      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.md",
+      "result_claim": "restricted_step_label_density_wrapper_reviewed_not_submitted_not_generation_not_far",
+      "slurm_job_submitted": false,
+      "state_changing_action": "reviewed the prepared restricted Step-label density audit wrapper and recorded approval for a later explicit generation-permitted Slurm submission; did not enable the allowlist or submit because this tick forbade generation",
+      "status": "WRAPPER_REVIEW_APPROVED_SUBMISSION_DEFERRED_BY_NO_GENERATION_CONSTRAINT",
+      "training_started": false,
+      "validation": {
+        "allowlist_check": "PASS_DISABLED_ENTRY_PRESENT",
+        "bash_n": "PASS",
+        "prompt_plan_check": "PASS_256_ROWS_16_STRUCTURAL_SLOTS",
+        "py_compile": "PASS",
+        "validate_plan_only": "PASS_RESTRICTED_STEP_LABEL_DENSITY_PLAN_VALIDATION"
+      },
+      "wp4_allowed": false
+    },
     "hourly_progress_gate_20260506_0703": {
       "bash_n_wrapper": "PASS",
       "chimera_access": "FAIL_DNS_AFTER_FIRST_ATTEMPT_PLUS_THREE_RETRIES",
@@ -3034,7 +3059,11 @@
     "e2e_allowed": false,
     "full_far_claim_allowed": false,
     "generation_allowed": false,
+    "llama_allowed": false,
+    "natural_output_success_claim_allowed": false,
     "paper_claim_allowed": false,
+    "payload_recovery_claim_allowed": false,
+    "qwen_e2e_allowed": false,
     "training_allowed": false,
     "v1_positive_claim_allowed": false,
     "v2_positive_claim_allowed": false,
@@ -4665,7 +4694,10 @@
     "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
     "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.json",
     "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
-    "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.json"
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.md",
+    "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.notify.json"
   ],
   "current_chimera_gpu_partition_constraint": {
     "applies_to": "future natural_evidence_v1 GPU jobs",
@@ -4678,7 +4710,7 @@
     "source": "user instruction",
     "status": "POMPLUN_DOWN_USE_DGXA100_FOR_GPU"
   },
-  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY",
+  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_JOB_850434_PENDING",
   "diagnostic_low_capacity_gates": [
     "qwen_probability_gated_repair_under_target",
     "qwen_counterfactual_compatibility_low_entry_pass_rate"
@@ -5726,10 +5758,10 @@
     },
     "last_scheduler_tick": {
       "background_worker_launched": true,
-      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_scheduled_tick_notification.json",
-      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_scheduled_tick.md",
-      "time": "2026-05-09T00:54:51Z",
-      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260509_0054_worker.log"
+      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260509_0109_scheduled_tick_notification.json",
+      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0109_scheduled_tick.md",
+      "time": "2026-05-09T01:09:58Z",
+      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260509_0109_worker.log"
     },
     "max_codex_state_changing_actions_requested_per_tick": 1,
     "notification_body_required_fields": [
@@ -5835,6 +5867,21 @@
       "partition": "DGXA100",
       "purpose": "natural_evidence_v2 WP3 context-specific base-Qwen mass scoring on Chimera Slurm",
       "status": "FAILED 1:0"
+    },
+    {
+      "e2e_eval_started": false,
+      "elapsed_at_last_observation": "00:01:30",
+      "gres": "gpu:A100:1",
+      "job_id": "850434",
+      "last_observed_time": "2026-05-09T01:22:05Z",
+      "name": "nat-ev-v2-wp3dens",
+      "node": "chimera13",
+      "output_dir": "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_850434",
+      "paper_claim_allowed": false,
+      "partition": "DGXA100",
+      "purpose": "natural_evidence_v2 WP3 restricted Step-label base-Qwen model-output density audit",
+      "status": "RUNNING",
+      "training_started": false
     }
   ],
   "known_slurm_jobs": [
@@ -6918,9 +6965,9 @@
       "status": "FAILED 1:0"
     }
   ],
-  "last_checked_time": "2026-05-09T00:58:26Z",
-  "last_state_changing_action": "Codex built an artifact-only restricted step-label model-output density audit plan for the 16-step route. It wrote 256 planned prompts, a density gate spec, and a Slurm review spec. No model generation, model scoring, Slurm job, training, E2E, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
-  "last_status_update_action": "wp3_restricted_step_label_density_audit_plan_ready",
+  "last_checked_time": "2026-05-09T01:22:05Z",
+  "last_state_changing_action": "User explicitly permitted the restricted Step-label base-Qwen model-output density audit. Codex enabled only the relevant allowlist entry, synced required v2 artifacts to Chimera, submitted exactly one Slurm job 850434, then disabled the allowlist entry again to prevent duplicate submissions. No training, E2E, payload recovery, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
+  "last_status_update_action": "wp3_restricted_step_label_density_wrapper_reviewed_submission_deferred",
   "local_artifact_check": {
     "checked_at": "2026-05-08T00:42:19Z",
     "compatibility_aware_supply_audit_845930_topk64_v1": "COMPLETE_LOCAL_COPY",
@@ -6942,7 +6989,7 @@
     "variable_arity_diagnostic_845358_cap16_v1": "COMPLETE_LOCAL_DIAGNOSTIC_FAIL_EFFECTIVE_BITS"
   },
   "max_state_changing_actions_per_automation_run": 1,
-  "next_allowed_action": "Review the restricted step-label density audit plan. If approved, implement or review exactly one Chimera Slurm wrapper for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
+  "next_allowed_action": "Monitor Slurm job 850434. After completion, sync and review restricted Step-label density artifacts and manual naturalness examples. Do not start WP4 or training.",
   "project_target_bank_entries_per_tokenizer": 24000,
   "project_target_role": "raw_opportunity_scaling_placeholder_not_training_gate",
   "protocol": "natural_evidence_v1",
@@ -7817,7 +7864,10 @@
     "qwen_regenerated_local_suffix_repair_diagnostic",
     "qwen_fresh_lockbox_or_locked_replay",
     "qwen_protected_task_only_branch_aware_example_export",
-    "WP3 context-mass prefix-boundary repair allowlist review after local validation repair"
+    "WP3 context-mass prefix-boundary repair allowlist review after local validation repair",
+    "WP3 monitor Slurm job 850434",
+    "WP3 sync restricted Step-label density artifacts for job 850434",
+    "WP3 review restricted Step-label density artifacts and naturalness examples from job 850434"
   ],
   "repo_check": {
     "branch": "main",
@@ -7842,6 +7892,25 @@
     "recovery_eval_summary": "NEEDS_RESULTS_UNVERIFIED",
     "teacher_forced_bucket_mass_probe_summary": "COMPLETE_LOCAL_COPY"
   },
+  "state_history": [
+    {
+      "action": "submitted restricted Step-label model-output density audit job",
+      "allowlist_disabled_after_submission": true,
+      "allowlist_enabled_for_submission": true,
+      "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+      "e2e_eval_started": false,
+      "job_id": "850434",
+      "model_generation_started": "slurm_job_pending_not_completed",
+      "model_scoring_started": false,
+      "next_allowed_action": "Monitor Slurm job 850434. After completion, sync and review restricted Step-label density artifacts and manual naturalness examples. Do not start WP4 or training.",
+      "notification_report": "results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.notify.json",
+      "paper_claim_allowed": false,
+      "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_JOB_850434_PENDING",
+      "time": "2026-05-09T01:20:21Z",
+      "training_started": false,
+      "wp4_allowed": false
+    }
+  ],
   "target_update_note": "Raw 24000 opportunity entries are a scaling placeholder, not a training gate and not fingerprint parity. Current gate is compatibility-adjusted natural evidence capacity.",
   "v1_final_decision": {
     "decision_json": "results/natural_evidence_v1/status/final_v1_negative_decision.json",
@@ -7953,6 +8022,7 @@
     "e2e_eval_started": false,
     "empty_prefix_rows": 2,
     "generation_started": false,
+    "local_validation_repair_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
     "mass_gate_status": "NOT_EVALUATED",
     "model_scoring_started": false,
     "next_allowed_action": "Review the repaired WP3 context-mass local validation record and decide whether to explicitly allowlist the scoring wrapper. Do not submit Slurm scoring until a later review allowlists it. No local Chimera login-node scoring; no training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
@@ -7963,7 +8033,6 @@
     "previous_failed_slurm_job_id": "850372",
     "previous_failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
     "review_blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
-    "local_validation_repair_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
     "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
     "score_plan_rows_by_casing_variant": {
       "lowercase": 115,
@@ -8383,6 +8452,7 @@
     "e2e_eval_started": false,
     "empty_prefix_rows": 2,
     "generation_started": false,
+    "local_validation_repair_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
     "mass_gate_status": "NOT_EVALUATED",
     "model_scoring_started": false,
     "next_allowed_action": "Review the repaired WP3 context-mass local validation record and decide whether to explicitly allowlist the scoring wrapper. Do not submit Slurm scoring until a later review allowlists it. No local Chimera login-node scoring; no training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
@@ -8393,7 +8463,6 @@
     "previous_failed_slurm_job_id": "850372",
     "previous_failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
     "review_blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
-    "local_validation_repair_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
     "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
     "score_plan_rows_by_casing_variant": {
       "lowercase": 115,

@@ -1,10 +1,10 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_READY_NEEDS_REVIEW
+V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_JOB_850434_PENDING
 
 ## Last Checked
-2026-05-09T01:08:31Z
+2026-05-09T01:20:21Z
 
 ## Hermes 15-Minute Supervision
 
@@ -2640,6 +2640,43 @@ action is wrapper review and, only if approved, enabling/submitting exactly one
 Chimera Slurm density-audit job. WP4 and training remain blocked.
 Hermes/Codex notification succeeded through both Telegram and email:
 `results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.notify.json`.
+
+2026-05-09T01:12:02Z: reviewed and approved the single prepared restricted
+Step-label density audit Slurm wrapper for a later base-Qwen model-output
+density audit on the 256 planned 16-step prompts. Reran no-model validation:
+`py_compile`, `bash -n`, YAML allowlist load, `--validate-plan-only`, and a
+256-row prompt-plan check all passed. The allowlist entry
+`v2_wp3_restricted_step_label_density_audit` remains disabled and no Slurm job,
+model generation, model scoring, training, Qwen E2E, Llama, same-family null,
+sanitizer, FAR aggregation, or positive paper claim was started because the
+controlling tick included a hard no-generation constraint. Reports:
+`results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.md`
+and
+`results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.json`.
+Next allowed action is, only when a later supervisor tick explicitly permits
+model-output generation, enable exactly one allowlist entry and submit exactly
+one Chimera Slurm job for the restricted Step-label density audit. WP4 and
+training remain blocked.
+
+2026-05-09T01:20:21Z: user explicitly permitted the next model-output density
+audit submission. Codex enabled only the
+`v2_wp3_restricted_step_label_density_audit` allowlist entry, synced the
+required v2 runner, Slurm wrapper, config, restricted policy artifact, and
+256-prompt density plan to Chimera, and submitted exactly one Slurm job:
+`850434` (`nat-ev-v2-wp3dens`) on `DGXA100` with `gres/gpu:A100:1`. Immediately
+after submission, Codex disabled that allowlist entry again with condition
+`submitted_once_as_job_850434_pending_result_review` and synced the disabled
+allowlist back to Chimera to prevent duplicate submissions. Current Slurm state
+at submission check: `PENDING(Resources)`. This is base-Qwen model-output
+density audit only; no training, Qwen E2E, payload decoding/recovery, Llama,
+same-family null, sanitizer, FAR aggregation, or positive paper claim was
+started. Next allowed action is monitor job `850434`; after completion, sync and
+review its density artifacts and manual naturalness examples. WP4 and training
+remain blocked. Hermes/Codex notification succeeded through both Telegram and
+email:
+`results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.notify.json`.
+Follow-up Slurm observation at 2026-05-09T01:22:05Z: job `850434` is
+`RUNNING` on `chimera13` with elapsed `00:01:30`.
 
 ## Remaining NEEDS_RESULTS
 - qwen_8way_clean_bank_rebuilt

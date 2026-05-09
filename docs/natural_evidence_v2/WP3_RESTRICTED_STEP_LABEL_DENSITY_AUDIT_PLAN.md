@@ -123,7 +123,7 @@ Still forbidden:
 
 ## Next Allowed Action
 
-Review the prepared wrapper. If approved, enable exactly one allowlist entry and
-submit exactly one Chimera Slurm job that generates base-Qwen outputs for the
-256 planned prompts and runs the restricted detector. Do not start WP4 or
-training.
+When a later supervisor tick explicitly permits model-output generation, enable
+exactly one allowlist entry and submit exactly one Chimera Slurm job that
+generates base-Qwen outputs for the 256 planned prompts and runs the restricted
+detector. Do not start WP4 or training.
