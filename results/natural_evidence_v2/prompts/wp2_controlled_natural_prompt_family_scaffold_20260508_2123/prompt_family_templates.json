@@ -1,0 +1,64 @@
+{
+  "artifact_only": true,
+  "model_calls_started": false,
+  "organic_null_family_ids": [
+    "N1_general_practical_answer",
+    "N2_everyday_decision",
+    "N3_brief_explanation",
+    "N4_flexible_plan"
+  ],
+  "organic_null_role": "disjoint natural prompts for accidental-acceptance checks only",
+  "owner_families": {
+    "F1_8_sentence_explanation": {
+      "description": "eight natural sentences",
+      "intended_micro_slot_sources": [
+        "sentence_opener",
+        "discourse_marker",
+        "optional_hedge",
+        "function_word_alternative"
+      ],
+      "intended_response_shape": "eight plain sentences"
+    },
+    "F2_8_step_checklist": {
+      "description": "eight concise natural checklist steps",
+      "intended_micro_slot_sources": [
+        "bullet_or_step_opener",
+        "transition_word",
+        "function_word_alternative"
+      ],
+      "intended_response_shape": "eight one-sentence steps"
+    },
+    "F3_6_point_comparison": {
+      "description": "six natural comparison points",
+      "intended_micro_slot_sources": [
+        "bullet_or_step_opener",
+        "discourse_marker",
+        "optional_hedge",
+        "function_word_alternative"
+      ],
+      "intended_response_shape": "six short comparison points"
+    },
+    "F4_concise_advice_with_transitions": {
+      "description": "concise advice with natural transitions",
+      "intended_micro_slot_sources": [
+        "sentence_opener",
+        "discourse_marker",
+        "optional_hedge",
+        "transition_word",
+        "function_word_alternative"
+      ],
+      "intended_response_shape": "short practical advice with transitions"
+    }
+  },
+  "owner_family_ids": [
+    "F1_8_sentence_explanation",
+    "F2_8_step_checklist",
+    "F3_6_point_comparison",
+    "F4_concise_advice_with_transitions"
+  ],
+  "paper_claim_allowed": false,
+  "precommit_status": "not_committed",
+  "schema_name": "natural_evidence_v2_wp2_prompt_family_templates_v1",
+  "status": "TEMPLATE_SCAFFOLD_NO_MODEL_CALLS",
+  "training_started": false
+}

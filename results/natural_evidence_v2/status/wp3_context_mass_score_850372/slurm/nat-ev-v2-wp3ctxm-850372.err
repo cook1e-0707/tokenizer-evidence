@@ -1,0 +1,16 @@
+/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/lib/python3.12/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.64it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.81it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.91it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.49it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.23it/s]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+Traceback (most recent call last):
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 625, in <module>
+    main()
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 541, in main
+    context_rows = score_plan_rows(
+                   ^^^^^^^^^^^^^^^^
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 298, in score_plan_rows
+    token_ids_by_bucket = bucket_token_ids(tokenizer, row)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 204, in bucket_token_ids
+    raise ValueError(
+ValueError: 0f8383dd9775def36e16: tokenizer retokenized prefix boundary for surface 'also'

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=nat-ev-qwen-candx
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=guanjie.lin001@umb.edu
 #SBATCH --partition=pomplun
 #SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=16

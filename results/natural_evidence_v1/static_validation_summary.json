@@ -7,6 +7,12 @@
     "protocol_commit_then_reveal",
     "four_arm_matrix",
     "bucket_bank_scale_config",
+    "opportunity_bank_quality_gates",
+    "protocol_precommitment",
+    "task_only_and_near_null_controls",
+    "sanitizer_benchmark_requirements",
+    "automation_run_allowlist",
+    "chimera_mail_notifications",
     "paper_table_required_columns",
     "no_gpt2_paper_facing_arm"
   ]

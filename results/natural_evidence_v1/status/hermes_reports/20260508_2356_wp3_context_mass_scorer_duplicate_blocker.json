@@ -1,0 +1,29 @@
+{
+  "action": "blocked_stale_duplicate_context_mass_scorer_preparation_request",
+  "blocker_reason": "The plan-consuming WP3 context-specific base-Qwen scorer/wrapper and allowlist entry were already prepared in the 20260508_2346 action; repeating scorer preparation would risk duplicate or overwritten state.",
+  "casing_variants_kept_separate": true,
+  "e2e_eval_started": false,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "mass_gate_status": "NOT_EVALUATED",
+  "model_scoring_started": false,
+  "next_allowed_action": "Submit exactly one allowlisted Chimera Slurm job using scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch, then sync and review its context-score, mass, and audit artifacts. No local Chimera login-node scoring. No training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+  "paper_claim_allowed": false,
+  "phase_after_sync": "V2_WP3_CONTEXT_SPECIFIC_MASS_SCORER_PREPARED_NEEDS_SLURM_SUBMISSION",
+  "requested_phase": "V2_WP3_CONTEXT_SPECIFIC_MASS_PLAN_READY_NEEDS_SLURM_SCORER",
+  "slurm_job_submitted": false,
+  "status": "BLOCKED_STALE_DUPLICATE_CONTEXT_MASS_SCORER_PREP_ALREADY_COMPLETE",
+  "training_started": false,
+  "validation": {
+    "bash_n": "PASS",
+    "empty_prefix_rows": 2,
+    "py_compile": "PASS",
+    "score_plan_rows": 230,
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+  },
+  "wp4_allowed": false
+}

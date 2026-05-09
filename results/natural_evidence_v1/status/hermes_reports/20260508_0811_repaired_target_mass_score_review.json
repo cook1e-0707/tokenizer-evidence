@@ -1,0 +1,78 @@
+{
+  "schema_name": "natural_evidence_v1_repaired_target_mass_score_review_v1",
+  "protocol_id": "natural_evidence_v1",
+  "checked_at": "2026-05-08T08:14:33Z",
+  "status": "COMPLETE_REPAIRED_TARGET_MASS_SCORE_REVIEW_THRESHOLD_FAIL_NO_PREFLIGHT",
+  "hermes_notification": {
+    "json": "results/natural_evidence_v1/status/hermes_reports/20260508_0811_scheduled_tick_notification.json",
+    "status": "SENT_ALL_REQUIRED_CHANNELS"
+  },
+  "inputs": {
+    "score_summary_json": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_scored/repaired_teacher_forced_target_mass_probe_score_summary.json",
+    "score_by_group_csv": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_scored/repaired_teacher_forced_target_mass_probe_score_by_group.csv",
+    "score_plan_jsonl": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_design/repaired_teacher_forced_target_mass_probe_scoring_plan.jsonl"
+  },
+  "completeness": {
+    "score_plan_rows": 257,
+    "scored_rows": 257,
+    "scored_rows_by_model_condition": {
+      "base": 75,
+      "protected_trained": 91,
+      "task_only_lora": 91
+    },
+    "slurm_job_id": "848547",
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:01:35"
+  },
+  "aggregate_lifts": {
+    "protected_minus_base_target_candidate_mass": -0.007645810655699581,
+    "protected_minus_task_only_target_candidate_mass": -0.04776975171334799,
+    "protected_minus_task_only_target_rank1_rate": -0.03296703296703296,
+    "threshold_pass": false,
+    "thresholds": {
+      "min_protected_minus_base_target_candidate_mass": 0.05,
+      "min_protected_minus_task_only_target_candidate_mass": 0.05,
+      "min_target_rank1_lift": 0.05
+    }
+  },
+  "condition_review": {
+    "base": {
+      "rows": 75,
+      "mean_target_candidate_mass": 0.10418856937661333,
+      "target_rank1_rate": 0.17333333333333334,
+      "mean_target_margin": -0.7025922842857958
+    },
+    "protected_trained": {
+      "rows": 91,
+      "mean_target_candidate_mass": 0.09654275872091375,
+      "target_rank1_rate": 0.10989010989010989,
+      "mean_target_margin": -0.7084092110245943
+    },
+    "task_only_lora": {
+      "rows": 91,
+      "mean_target_candidate_mass": 0.14431251043426174,
+      "target_rank1_rate": 0.14285714285714285,
+      "mean_target_margin": -0.6531208019441337
+    }
+  },
+  "decision": "REJECT_REPAIRED_DATASET_OR_TRAINING_PREFLIGHT_FROM_JOB_848547",
+  "result_claim": "repaired_target_mass_score_review_threshold_fail_not_recovery_not_far",
+  "training_started": false,
+  "generation_started": false,
+  "e2e_eval_started": false,
+  "paper_claim_allowed": false,
+  "not_payload_recovery": true,
+  "not_full_far": true,
+  "forbidden_actions": [
+    "training",
+    "generation",
+    "qwen_e2e_rerun",
+    "llama",
+    "same_family_null",
+    "sanitizer",
+    "far_aggregation",
+    "paper_positive_claims"
+  ],
+  "next_allowed_action": "Stop positive-E2E progression from this repaired target-mass path; only a new explicit artifact-only negative-diagnosis/root-cause plan or user/expert review may proceed."
+}

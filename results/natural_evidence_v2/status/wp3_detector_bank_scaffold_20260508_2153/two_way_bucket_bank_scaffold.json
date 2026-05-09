@@ -1,0 +1,142 @@
+{
+  "artifact_only": true,
+  "bucket_count": 2,
+  "bucket_policy_id": "qwen_v2_wp3_two_way_bucket_policy_v0_artifact_scaffold",
+  "candidate_bank_count": 7,
+  "candidate_banks": [
+    {
+      "anchor_kind": "sentence_boundary",
+      "buckets": {
+        "0": [
+          "first",
+          "second",
+          "third"
+        ],
+        "1": [
+          "start",
+          "continue",
+          "finish"
+        ]
+      },
+      "candidate_bank_id": "sentence_opener_sequence_v0",
+      "slot_type": "sentence_opener"
+    },
+    {
+      "anchor_kind": "line_or_step_boundary",
+      "buckets": {
+        "0": [
+          "check",
+          "review",
+          "list"
+        ],
+        "1": [
+          "choose",
+          "set",
+          "make"
+        ]
+      },
+      "candidate_bank_id": "step_opener_action_v0",
+      "slot_type": "bullet_or_step_opener"
+    },
+    {
+      "anchor_kind": "clause_or_sentence_start",
+      "buckets": {
+        "0": [
+          "also",
+          "plus"
+        ],
+        "1": [
+          "moreover",
+          "further"
+        ]
+      },
+      "candidate_bank_id": "discourse_marker_additive_v0",
+      "slot_type": "discourse_marker"
+    },
+    {
+      "anchor_kind": "local_modifier",
+      "buckets": {
+        "0": [
+          "often",
+          "usually",
+          "generally"
+        ],
+        "1": [
+          "sometimes",
+          "typically",
+          "normally"
+        ]
+      },
+      "candidate_bank_id": "optional_hedge_frequency_v0",
+      "slot_type": "optional_hedge"
+    },
+    {
+      "anchor_kind": "sentence_or_clause_transition",
+      "buckets": {
+        "0": [
+          "therefore",
+          "instead",
+          "meanwhile"
+        ],
+        "1": [
+          "however",
+          "finally",
+          "otherwise"
+        ]
+      },
+      "candidate_bank_id": "transition_word_plain_v0",
+      "slot_type": "transition_word"
+    },
+    {
+      "anchor_kind": "local_function_word",
+      "buckets": {
+        "0": [
+          "and",
+          "or"
+        ],
+        "1": [
+          "but",
+          "so"
+        ]
+      },
+      "candidate_bank_id": "function_word_conjunction_v0",
+      "slot_type": "function_word_alternative"
+    },
+    {
+      "anchor_kind": "local_function_word",
+      "buckets": {
+        "0": [
+          "with",
+          "for"
+        ],
+        "1": [
+          "by",
+          "from"
+        ]
+      },
+      "candidate_bank_id": "function_word_preposition_v0",
+      "slot_type": "function_word_alternative"
+    }
+  ],
+  "candidate_surface_count": 36,
+  "disallowed_primary_bucket_counts": [
+    4,
+    8
+  ],
+  "e2e_eval_started": false,
+  "entries_claim_boundary": "bucket-bank entries are natural next-token measurable opportunity/catalog entries",
+  "mass_gate_status": "NOT_EVALUATED",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "precommit_status": "not_committed",
+  "required_bucket_ids": [
+    0,
+    1
+  ],
+  "schema_name": "natural_evidence_v2_wp3_two_way_bucket_bank_scaffold_v1",
+  "status": "WP3_TWO_WAY_BUCKET_BANK_SCAFFOLDED_NOT_TOKENIZER_OR_MASS_AUDITED",
+  "tokenizer_stability_status": "NOT_EVALUATED",
+  "training_started": false
+}

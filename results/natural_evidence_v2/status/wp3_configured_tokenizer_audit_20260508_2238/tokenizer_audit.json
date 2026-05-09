@@ -1,0 +1,18 @@
+{
+  "artifact_only": true,
+  "configured_tokenizer_backend": "huggingface",
+  "configured_tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "configured_tokenizer_used": true,
+  "e2e_eval_started": false,
+  "error_message": "transformers is required for tokenizer_backend=huggingface",
+  "error_type": "RuntimeError",
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_tokenizer_audit_v1",
+  "status": "BLOCKED_TOKENIZER_BACKEND_UNAVAILABLE",
+  "tokenizer_backend": "huggingface",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "tokenizer_stability_status": "NOT_EVALUATED",
+  "training_started": false,
+  "unstable_token_rate": null
+}

@@ -1,0 +1,32 @@
+{
+  "configured_average_micro_slots_gate": 16,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "interpretation": "A step-opener-only policy needs a sixteen-step/list response or additional non-step slots to satisfy the >=16 average micro-slot density gate. This audit is structural only; model-output density must be measured separately before WP4.",
+  "paper_claim_allowed": false,
+  "plan_id": "wp3_step_local_expansion_plan_20260508_2038",
+  "prompt_shapes": [
+    {
+      "density_gate_pass_if_step_only": false,
+      "prompt_shape_id": "eight_step_checklist",
+      "step_count": 8,
+      "step_local_slots_per_response": 8
+    },
+    {
+      "density_gate_pass_if_step_only": false,
+      "prompt_shape_id": "twelve_step_checklist",
+      "step_count": 12,
+      "step_local_slots_per_response": 12
+    },
+    {
+      "density_gate_pass_if_step_only": true,
+      "prompt_shape_id": "sixteen_step_checklist",
+      "step_count": 16,
+      "step_local_slots_per_response": 16
+    }
+  ],
+  "schema_name": "natural_evidence_v2_wp3_step_local_density_feasibility_v1",
+  "status": "ARTIFACT_ONLY_DENSITY_FEASIBILITY_NOT_MODEL_OUTPUT_DENSITY",
+  "training_started": false,
+  "wp4_allowed": false
+}

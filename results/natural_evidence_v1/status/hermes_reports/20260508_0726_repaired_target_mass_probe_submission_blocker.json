@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-05-08T07:28:01Z",
+  "e2e_eval_started": false,
+  "forbidden_actions_confirmed": [
+    "training",
+    "generation",
+    "Qwen E2E rerun",
+    "Llama",
+    "same-family null",
+    "sanitizer benchmark",
+    "FAR aggregation",
+    "paper-facing positive claim"
+  ],
+  "generation_started": false,
+  "hermes_notification_json": "results/natural_evidence_v1/status/hermes_reports/20260508_0726_scheduled_tick_notification.json",
+  "hermes_notification_status": "SENT_ALL_REQUIRED_CHANNELS",
+  "model_scoring_needed": true,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "repaired_design_dir": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_design",
+  "required_score_plan_jsonl": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_design/repaired_teacher_forced_target_mass_probe_scoring_plan.jsonl",
+  "result_claim": "blocker_only_not_scored_not_payload_recovery_not_far",
+  "schema_name": "natural_evidence_v1_repaired_target_mass_probe_submission_blocker_v1",
+  "slurm_job_submitted": false,
+  "status": "BLOCKED_REPAIRED_TARGET_MASS_PROBE_SUBMISSION_NOT_UNAMBIGUOUS",
+  "training_started": false,
+  "unsafe_submission_reason": "Only the older committed-prefix teacher-forced Slurm wrapper is allowlisted; no dedicated repaired scoring wrapper consumes the Option R scoring plan, and unlisted GPU jobs are forbidden.",
+  "wrong_wrapper": "scripts/natural_evidence_v1/slurm/qwen_teacher_forced_bucket_mass_probe.sbatch"
+}

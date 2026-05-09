@@ -1,0 +1,14 @@
+/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/lib/python3.12/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 775, in <module>
+    main()
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 671, in main
+    tokenizer_validation = validate_tokenizer_boundaries(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 304, in validate_tokenizer_boundaries
+    resolved = resolve_contextual_bucket_tokenization(tokenizer, row)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/score_wp3_context_mass.py", line 265, in resolve_contextual_bucket_tokenization
+    raise ValueError(
+ValueError: 43afbd9222369a4cd851: bucket surface is not one next token under scoring tokenizer: 'Inspect' -> [9726, 987]

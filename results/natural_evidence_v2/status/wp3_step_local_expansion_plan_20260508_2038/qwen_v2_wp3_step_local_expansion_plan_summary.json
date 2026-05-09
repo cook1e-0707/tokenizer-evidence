@@ -1,0 +1,41 @@
+{
+  "action_bank_count": 8,
+  "artifact_audit_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_expansion_artifact_audit.json",
+  "artifact_only": true,
+  "candidate_bank_count": 24,
+  "density_feasibility_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_density_feasibility.json",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review and validate this plan without model scoring; if accepted, submit at most one allowlisted Chimera Slurm base-Qwen context-mass scoring job.",
+  "not_qwen_gate": true,
+  "paper_claim_allowed": false,
+  "plan_id": "wp3_step_local_expansion_plan_20260508_2038",
+  "prefix_families": {
+    "dash_bullet": [
+      "- "
+    ],
+    "numbered_list": [
+      "1. ",
+      "2. ",
+      "3. ",
+      "4. "
+    ],
+    "step_label": [
+      "Step 1: ",
+      "Step 2: ",
+      "Step 3: ",
+      "Step 4: "
+    ]
+  },
+  "schema_name": "natural_evidence_v2_wp3_step_local_expansion_plan_summary_v1",
+  "score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_expansion_score_plan.jsonl",
+  "score_plan_rows": 72,
+  "source_seed_bank": "step_opener_action_sentence_case_v1",
+  "source_seed_job": "850384",
+  "source_seed_mass_ratio": 2.534862803103087,
+  "source_seed_min_bucket_mass": 0.005785648856544867,
+  "status": "WP3_STEP_LOCAL_EXPANSION_SCORE_PLAN_WRITTEN_NOT_SCORED",
+  "training_started": false,
+  "wp4_allowed": false
+}

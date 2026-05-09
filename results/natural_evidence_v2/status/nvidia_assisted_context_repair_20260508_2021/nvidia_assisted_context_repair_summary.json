@@ -1,0 +1,43 @@
+{
+  "artifact_only_design_assistance": true,
+  "base_url": "https://integrate.api.nvidia.com/v1",
+  "e2e_eval_started": false,
+  "env_file": "/Users/guanjie/Documents/llm_api/llm-streaming-semantics-audit/.env",
+  "forbidden_surface_hits_by_model": {
+    "qwen/qwen3.5-397b-a17b": [],
+    "z-ai/glm-5.1": [
+      "bucket"
+    ]
+  },
+  "generation_of_protected_transcripts_started": false,
+  "input_artifacts": {
+    "bucket_bank": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/two_way_bucket_bank_scaffold.json",
+    "context_plan_summary": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan_summary.json",
+    "mass_audit": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_model_mass_audit_850288/mass_audit.json"
+  },
+  "loaded_key_names": [
+    "NVIDIA_API_KEY_A",
+    "NVIDIA_API_KEY_B"
+  ],
+  "model_scoring_started": false,
+  "models": [
+    "qwen/qwen3.5-397b-a17b",
+    "z-ai/glm-5.1"
+  ],
+  "next_allowed_action": "Review proposals, manually select candidate repairs, then validate with Qwen tokenizer and base-Qwen mass scoring through Chimera Slurm.",
+  "not_qwen_gate": true,
+  "outputs": {
+    "parsed_proposals_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/nvidia_assisted_context_repair_20260508_2021/nvidia_assisted_design_parsed_proposals.json",
+    "raw_results_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/nvidia_assisted_context_repair_20260508_2021/nvidia_assisted_design_raw_results.json"
+  },
+  "paper_claim_allowed": false,
+  "parse_status_by_model": {
+    "qwen/qwen3.5-397b-a17b": "parsed",
+    "z-ai/glm-5.1": "parsed"
+  },
+  "proposal_count": 2,
+  "rate_limit_policy": "two keys rotated across models; calls are sequential and bounded",
+  "schema_name": "natural_evidence_v2_nvidia_assisted_context_repair_summary_v1",
+  "status": "NVIDIA_ASSISTED_CONTEXT_REPAIR_PROPOSALS_WRITTEN_NOT_GATE",
+  "training_started": false
+}

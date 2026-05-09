@@ -1,0 +1,49 @@
+{
+  "accepted_decode_rows": 0,
+  "bucket_observation_rows": 372216,
+  "compatible_variable_radix_digit_rows": 1885,
+  "created_at": "2026-05-08T21:17:46Z",
+  "decision": "stop_v1_primary_route_switch_to_natural_evidence_v2_controlled_micro_slots",
+  "decode_row_count": null,
+  "decode_status_counts": {
+    "insufficient_symbols": 120
+  },
+  "dominant_erasure_reason": "observed_token_not_in_variable_radix_bucket_set",
+  "e2e_eval_started": false,
+  "erasure_reason_rate": 0.994935736239173,
+  "erasure_reason_rows": 370331,
+  "forbidden_next_actions": [
+    "new_qwen_v1_training",
+    "qwen_v1_e2e_rerun",
+    "llama_v1",
+    "same_family_null",
+    "sanitizer_benchmark",
+    "far_aggregation",
+    "paper_positive_claim"
+  ],
+  "generated_output_count": null,
+  "generation_started": false,
+  "next_allowed_action": "natural_evidence_v2 WP2 controlled-natural prompt family scaffold/audit after WP1 contract scaffold",
+  "null_accept_count": null,
+  "observation_count": null,
+  "paper_claim_allowed": false,
+  "preserve_as": [
+    "negative_diagnostic",
+    "upper_bound_ablation_context",
+    "do_not_interpret_as_natural_evidence_impossibility"
+  ],
+  "primary_job_id": "846699",
+  "protected_accept_count": null,
+  "provenance_mismatches": [],
+  "provenance_status": "PASS_EXPLAINED_RECOVERY_DIR_NAME",
+  "provenance_summary": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_recovery/observation_erasure_summary_846699.json",
+  "schema_name": "natural_evidence_v1_final_negative_decision_v1",
+  "status": "V1_FROZEN_NEGATIVE_DIAGNOSTIC_PASSIVE_GLOBAL_FRAME_STRICT_TOKEN_INDEX_FAILED",
+  "training_started": false,
+  "v1_failed_components": [
+    "passive_opportunity_mining",
+    "global_repeated_payload_frame",
+    "strict_token_index_anchor",
+    "4way_8way_variable_radix_completion_as_mainline"
+  ]
+}

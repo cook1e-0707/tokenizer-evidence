@@ -1,0 +1,20 @@
+{
+  "blocked_density_route": "B_8_step_plus_extra_slots",
+  "bucket_bank_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_bucket_bank.json",
+  "candidate_bank_count": 2,
+  "context_mass_score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_context_mass_score_plan.jsonl",
+  "context_mass_score_plan_rows": 32,
+  "density_design_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_density_design.json",
+  "detector_contract_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_detector_contract.json",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "next_allowed_action": "Review restricted policy and density design. Then prepare model-output density audit for the 16-step checklist route only if explicitly allowed.",
+  "paper_claim_allowed": false,
+  "policy_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_policy.json",
+  "prompt_templates_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_prompt_templates.jsonl",
+  "recommended_density_route": "A_16_step_checklist_step_label_only",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_policy_summary_v1",
+  "status": "WP3_RESTRICTED_STEP_LABEL_POLICY_WRITTEN_ARTIFACT_ONLY",
+  "training_started": false,
+  "wp4_allowed": false
+}

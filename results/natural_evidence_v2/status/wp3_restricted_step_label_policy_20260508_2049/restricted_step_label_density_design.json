@@ -1,0 +1,44 @@
+{
+  "configured_average_micro_slots_gate": 16,
+  "decision": "Use option A as the immediate restricted-policy density route. Keep option B blocked until at least one non-step slot family passes the base-Qwen mass gate.",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "model_output_density_audit_required_before_wp4": true,
+  "options": [
+    {
+      "additional_slot_types_required": [],
+      "description": "Sixteen natural checklist steps, each beginning with Step N: and one eligible sentence-case action opener.",
+      "expected_step_label_slots_per_response": 16,
+      "option_id": "A_16_step_checklist_step_label_only",
+      "recommended_next": true,
+      "risks": [
+        "longer owner probes may be less natural for some tasks",
+        "model-output adherence to exactly sixteen Step N labels must be audited"
+      ],
+      "structural_density_gate_status": "PASS_STRUCTURAL_FEASIBILITY",
+      "uses_only_passing_mass_banks": true
+    },
+    {
+      "additional_slot_types_required": [
+        "transition_word",
+        "hedge",
+        "function_word_or_discourse_marker"
+      ],
+      "description": "Eight checklist steps plus at least eight additional non-step micro-slots.",
+      "expected_step_label_slots_per_response": 8,
+      "option_id": "B_8_step_plus_extra_slots",
+      "recommended_next": false,
+      "risks": [
+        "current non-step banks failed full-vocabulary mass gate",
+        "adding unvalidated extra slots would break the WP3 gate discipline"
+      ],
+      "structural_density_gate_status": "BLOCKED_NEEDS_EXTRA_MASS_VALIDATED_BANKS",
+      "uses_only_passing_mass_banks": false
+    }
+  ],
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_density_design_v1",
+  "status": "DENSITY_DESIGN_REVIEWED_ARTIFACT_ONLY_NOT_MODEL_OUTPUT",
+  "training_started": false,
+  "wp4_allowed": false
+}

@@ -1,0 +1,184 @@
+{
+  "artifact_only": true,
+  "bank_results": [
+    {
+      "bucket_masses": {
+        "0": 4.052188788220927e-09,
+        "1": 4.170493644872764e-09
+      },
+      "candidate_bank_id": "sentence_opener_sequence_v0",
+      "max_bucket_mass_ratio": 1.02919529736515,
+      "min_bucket_mass": 4.052188788220927e-09,
+      "passed": false
+    },
+    {
+      "bucket_masses": {
+        "0": 7.57382212501767e-09,
+        "1": 1.4364156253332538e-07
+      },
+      "candidate_bank_id": "step_opener_action_v0",
+      "max_bucket_mass_ratio": 18.96553155887461,
+      "min_bucket_mass": 7.57382212501767e-09,
+      "passed": false
+    },
+    {
+      "bucket_masses": {
+        "0": 4.5832690975800006e-09,
+        "1": 3.018456743812218e-08
+      },
+      "candidate_bank_id": "discourse_marker_additive_v0",
+      "max_bucket_mass_ratio": 6.585816105377677,
+      "min_bucket_mass": 4.5832690975800006e-09,
+      "passed": false
+    },
+    {
+      "bucket_masses": {
+        "0": 1.634962700336473e-06,
+        "1": 3.311439632132836e-07
+      },
+      "candidate_bank_id": "optional_hedge_frequency_v0",
+      "max_bucket_mass_ratio": 4.937316943577874,
+      "min_bucket_mass": 3.311439632132836e-07,
+      "passed": false
+    },
+    {
+      "bucket_masses": {
+        "0": 1.1313810925154637e-07,
+        "1": 4.892527538657987e-08
+      },
+      "candidate_bank_id": "transition_word_plain_v0",
+      "max_bucket_mass_ratio": 2.3124674998268886,
+      "min_bucket_mass": 4.892527538657987e-08,
+      "passed": false
+    },
+    {
+      "bucket_masses": {
+        "0": 4.0395174020583603e-08,
+        "1": 8.53033821357485e-09
+      },
+      "candidate_bank_id": "function_word_conjunction_v0",
+      "max_bucket_mass_ratio": 4.735471561526164,
+      "min_bucket_mass": 8.53033821357485e-09,
+      "passed": false
+    },
+    {
+      "bucket_masses": {
+        "0": 1.7567703807230828e-06,
+        "1": 3.4352136542755335e-07
+      },
+      "candidate_bank_id": "function_word_preposition_v0",
+      "max_bucket_mass_ratio": 5.11400616534163,
+      "min_bucket_mass": 3.4352136542755335e-07,
+      "passed": false
+    }
+  ],
+  "e2e_eval_started": false,
+  "mass_gate_status": "FAIL",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_artifact.json",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_mass_audit_v1",
+  "status": "FAIL_FIXED_MODEL_MASS_GATE",
+  "structural_mass_proxy": {
+    "bank_count": 7,
+    "max_uniform_catalog_mass_ratio_proxy": 1.4999999999999998,
+    "rows": [
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "sentence_opener_sequence_v0",
+        "member_counts": {
+          "0": 3,
+          "1": 3
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.0
+      },
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "step_opener_action_v0",
+        "member_counts": {
+          "0": 3,
+          "1": 3
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.0
+      },
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "discourse_marker_additive_v0",
+        "member_counts": {
+          "0": 2,
+          "1": 2
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.0
+      },
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "optional_hedge_frequency_v0",
+        "member_counts": {
+          "0": 2,
+          "1": 3
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.4,
+          "1": 0.6
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.4999999999999998
+      },
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "transition_word_plain_v0",
+        "member_counts": {
+          "0": 3,
+          "1": 3
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.0
+      },
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "function_word_conjunction_v0",
+        "member_counts": {
+          "0": 2,
+          "1": 2
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.0
+      },
+      {
+        "bucket_count": 2,
+        "candidate_bank_id": "function_word_preposition_v0",
+        "member_counts": {
+          "0": 2,
+          "1": 2
+        },
+        "uniform_catalog_bucket_mass_proxy": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "uniform_catalog_mass_ratio_proxy": 1.0
+      }
+    ],
+    "schema_name": "natural_evidence_v2_wp3_structural_mass_proxy_v1",
+    "status": "STRUCTURAL_PROXY_ONLY_NOT_MODEL_MASS_GATE"
+  },
+  "training_started": false
+}

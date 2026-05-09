@@ -1,0 +1,198 @@
+{
+  "candidate_banks": [
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Check",
+          "Review"
+        ],
+        "1": [
+          "Choose",
+          "Make"
+        ]
+      },
+      "candidate_bank_id": "restricted_step_label_check_review_choose_make_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_local_step_label_seed_check_review_choose_make_v1",
+      "source_mass_gate": {
+        "context_count": 4,
+        "job_id": "850398",
+        "max_bucket_mass_ratio": 1.8203017004208497,
+        "min_bucket_mass": 0.010046771029010415,
+        "passed": true
+      }
+    },
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Start",
+          "Begin"
+        ],
+        "1": [
+          "Create",
+          "Set"
+        ]
+      },
+      "candidate_bank_id": "restricted_step_label_start_begin_create_set_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_local_step_label_start_begin_create_set_v1",
+      "source_mass_gate": {
+        "context_count": 4,
+        "job_id": "850398",
+        "max_bucket_mass_ratio": 3.8920341032792325,
+        "min_bucket_mass": 0.007179144362453371,
+        "passed": true
+      }
+    }
+  ],
+  "claim_control": {
+    "generation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_allowed": false,
+    "training_allowed": false,
+    "wp4_allowed": false
+  },
+  "density_design": {
+    "configured_average_micro_slots_gate": 16,
+    "decision": "Use option A as the immediate restricted-policy density route. Keep option B blocked until at least one non-step slot family passes the base-Qwen mass gate.",
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_output_density_audit_required_before_wp4": true,
+    "options": [
+      {
+        "additional_slot_types_required": [],
+        "description": "Sixteen natural checklist steps, each beginning with Step N: and one eligible sentence-case action opener.",
+        "expected_step_label_slots_per_response": 16,
+        "option_id": "A_16_step_checklist_step_label_only",
+        "recommended_next": true,
+        "risks": [
+          "longer owner probes may be less natural for some tasks",
+          "model-output adherence to exactly sixteen Step N labels must be audited"
+        ],
+        "structural_density_gate_status": "PASS_STRUCTURAL_FEASIBILITY",
+        "uses_only_passing_mass_banks": true
+      },
+      {
+        "additional_slot_types_required": [
+          "transition_word",
+          "hedge",
+          "function_word_or_discourse_marker"
+        ],
+        "description": "Eight checklist steps plus at least eight additional non-step micro-slots.",
+        "expected_step_label_slots_per_response": 8,
+        "option_id": "B_8_step_plus_extra_slots",
+        "recommended_next": false,
+        "risks": [
+          "current non-step banks failed full-vocabulary mass gate",
+          "adding unvalidated extra slots would break the WP3 gate discipline"
+        ],
+        "structural_density_gate_status": "BLOCKED_NEEDS_EXTRA_MASS_VALIDATED_BANKS",
+        "uses_only_passing_mass_banks": false
+      }
+    ],
+    "paper_claim_allowed": false,
+    "schema_name": "natural_evidence_v2_wp3_restricted_step_label_density_design_v1",
+    "status": "DENSITY_DESIGN_REVIEWED_ARTIFACT_ONLY_NOT_MODEL_OUTPUT",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "detector_contract": {
+    "allowed_prefix_regex": "Step (?:[1-9]|1[0-6]):\\\\s+",
+    "allowed_step_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "anchor_rule": "match line-start or sentence-start Step <integer>: followed by one sentence-case action verb candidate",
+    "detector_id": "qwen_v2_wp3_restricted_step_label_detector_v1",
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "observable_unit": "response_text",
+    "paper_claim_allowed": false,
+    "post_hoc_slot_selection_allowed": false,
+    "schema_name": "natural_evidence_v2_wp3_restricted_step_label_detector_contract_v1",
+    "slot_order": "increasing_step_number",
+    "slot_policy_id": "qwen_v2_wp3_restricted_step_label_policy_v1",
+    "status": "RESTRICTED_STEP_LABEL_DETECTOR_ARTIFACT_ONLY_NOT_MODEL_OUTPUT",
+    "training_started": false
+  },
+  "next_allowed_action": "Review this restricted policy, then prepare a model-output density audit plan for the recommended 16-step checklist route. Any model generation/scoring must go through explicit review and Chimera Slurm.",
+  "policy_id": "qwen_v2_wp3_restricted_step_label_policy_v1",
+  "prompt_templates": [
+    {
+      "family_id": "F2_16_step_checklist_step_label",
+      "prompt_text": "Give a sixteen-step practical checklist for planning a safe weekend hike. Use the format Step 1: through Step 16:. Each step should be one natural sentence.",
+      "template_id": "restricted_16_step_safe_hike_checklist"
+    },
+    {
+      "family_id": "F2_16_step_checklist_step_label",
+      "prompt_text": "Give a sixteen-step practical checklist for launching a small team project. Use the format Step 1: through Step 16:. Each step should be one natural sentence.",
+      "template_id": "restricted_16_step_project_launch_checklist"
+    },
+    {
+      "blocked_reason": "extra non-step slots do not yet have passing mass banks",
+      "family_id": "F2_8_step_plus_extra_candidate",
+      "prompt_text": "Give an eight-step checklist and include short transition phrases in each step.",
+      "template_id": "restricted_8_step_plus_extra_blocked"
+    }
+  ],
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_policy_v1",
+  "source_job_id": "850398",
+  "source_mass_audit": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_audit.json",
+  "status": "RESTRICTED_STEP_LABEL_POLICY_WRITTEN_ARTIFACT_ONLY"
+}

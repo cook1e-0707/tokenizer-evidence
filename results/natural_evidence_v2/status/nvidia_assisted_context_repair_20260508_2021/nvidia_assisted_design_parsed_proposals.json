@@ -1,0 +1,189 @@
+{
+  "proposals": [
+    {
+      "api_key_env": "NVIDIA_API_KEY_A",
+      "forbidden_surface_hits": [],
+      "model": "qwen/qwen3.5-397b-a17b",
+      "parse_status": "parsed",
+      "proposal": {
+        "forbidden_claims": [],
+        "model": "qwen/qwen3.5-397b-a17b",
+        "prompt_family_repairs": [
+          {
+            "family_id": "F2_8_step_checklist",
+            "repair": "Split step openers by casing to separate sentence-initial capitalization from mid-sentence usage."
+          },
+          {
+            "family_id": "F4_concise_advice_with_transitions",
+            "repair": "Isolate sentence-case transition words to prevent mass dilution from lowercase variants."
+          },
+          {
+            "family_id": "F1_8_sentence_explanation",
+            "repair": "Refine additive markers to distinguish between sentence-start and clause-internal positions."
+          }
+        ],
+        "qwen_validation_plan": [
+          "Run tokenizer stability and base Qwen full-vocab mass scoring through Chimera Slurm."
+        ],
+        "repair_proposals": [
+          {
+            "anchor_kind": "line_or_step_boundary",
+            "case_variant": "sentence_case",
+            "decision": "split",
+            "new_bank_id": "step_opener_action_sentence_case_v1",
+            "prefix_shapes": [
+              "Step 1:",
+              "- "
+            ],
+            "risk": "Low risk; preserves natural instruction formatting.",
+            "side0": [
+              "Check",
+              "Review"
+            ],
+            "side1": [
+              "Choose",
+              "Make"
+            ],
+            "slot_type": "bullet_or_step_opener",
+            "source_bank_id": "step_opener_action_v0",
+            "why_qwen_mass_may_improve": "Separating capitalized step starters concentrates probability mass on tokens that strictly follow list delimiters."
+          },
+          {
+            "anchor_kind": "sentence_or_clause_transition",
+            "case_variant": "sentence_case",
+            "decision": "split",
+            "new_bank_id": "transition_word_plain_sentence_case_v1",
+            "prefix_shapes": [
+              ". ",
+              "; "
+            ],
+            "risk": "Medium risk; may reduce coverage if sentence-case transitions appear mid-sentence.",
+            "side0": [
+              "However",
+              "Finally"
+            ],
+            "side1": [
+              "Instead",
+              "Then"
+            ],
+            "slot_type": "transition_word",
+            "source_bank_id": "transition_word_plain_v0",
+            "why_qwen_mass_may_improve": "Isolating sentence-initial transitions allows the model to better predict capitalized tokens following terminal punctuation."
+          },
+          {
+            "anchor_kind": "clause_or_sentence_start",
+            "case_variant": "lowercase",
+            "decision": "context_repair",
+            "new_bank_id": "discourse_marker_additive_internal_v1",
+            "prefix_shapes": [
+              ", ",
+              " ("
+            ],
+            "risk": "Low risk; targets common internal clause structures.",
+            "side0": [
+              "also",
+              "plus"
+            ],
+            "side1": [
+              "too",
+              "again"
+            ],
+            "slot_type": "discourse_marker",
+            "source_bank_id": "discourse_marker_additive_v0",
+            "why_qwen_mass_may_improve": "Constraining additive markers to post-comma or parenthetical contexts aligns with their most frequent grammatical usage patterns."
+          }
+        ],
+        "summary": "Three repair proposals split banks by casing and context to concentrate probability mass on specific token distributions."
+      }
+    },
+    {
+      "api_key_env": "NVIDIA_API_KEY_B",
+      "forbidden_surface_hits": [
+        "bucket"
+      ],
+      "model": "z-ai/glm-5.1",
+      "parse_status": "parsed",
+      "proposal": {
+        "model": "z-ai/glm-5.1",
+        "prompt_family_repairs": [
+          {
+            "family_id": "F2_8_step_checklist",
+            "repair": "Standardize step openers to use infinitive verb forms to equalize base model verb-likelihood across buckets."
+          }
+        ],
+        "qwen_validation_plan": [
+          "Run tokenizer stability and base Qwen full-vocab mass scoring through Chimera Slurm."
+        ],
+        "repair_proposals": [
+          {
+            "anchor_kind": "line_or_step_boundary",
+            "case_variant": "lowercase",
+            "decision": "replace",
+            "new_bank_id": "step_opener_action_v1",
+            "prefix_shapes": [
+              "Step N:",
+              "N."
+            ],
+            "risk": "Verb frequency imbalance may persist even with infinitive standardization.",
+            "side0": [
+              "check",
+              "review"
+            ],
+            "side1": [
+              "choose",
+              "make"
+            ],
+            "slot_type": "bullet_or_step_opener",
+            "source_bank_id": "step_opener_action_v0",
+            "why_qwen_mass_may_improve": "Grouping verbs by similar base-model next-token likelihood reduces extreme mass ratio skew."
+          },
+          {
+            "anchor_kind": "sentence_boundary",
+            "case_variant": "both",
+            "decision": "split",
+            "new_bank_id": "sentence_opener_sequence_v1",
+            "prefix_shapes": [
+              "First,",
+              "To begin,"
+            ],
+            "risk": "Splitting reduces per-bucket sample size, potentially lowering absolute mass.",
+            "side0": [
+              "first",
+              "First"
+            ],
+            "side1": [
+              "continue",
+              "finish"
+            ],
+            "slot_type": "sentence_opener",
+            "source_bank_id": "sentence_opener_sequence_v0",
+            "why_qwen_mass_may_improve": "Isolating ordinal numerals from aspectual phase verbs prevents cross-category logit suppression."
+          },
+          {
+            "anchor_kind": "local_function_word",
+            "case_variant": "lowercase",
+            "decision": "context_repair",
+            "new_bank_id": "function_word_preposition_v1",
+            "prefix_shapes": [
+              "done by",
+              "done with"
+            ],
+            "risk": "Adding local context may slightly reduce detector precision for isolated prepositions.",
+            "side0": [
+              "with",
+              "for"
+            ],
+            "side1": [
+              "by",
+              "from"
+            ],
+            "slot_type": "function_word_alternative",
+            "source_bank_id": "function_word_preposition_v0",
+            "why_qwen_mass_may_improve": "Providing a shared preceding participle normalizes syntactic expectations and equalizes preposition probabilities."
+          }
+        ],
+        "summary": "Proposed verb regrouping, ordinal/phase-verb splitting, and participle-prefix context repair to equalize base Qwen next-token mass across skewed micro-slot buckets."
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "artifact_only": true,
+  "e2e_eval_started": false,
+  "files": {
+    "dev": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_dev_prompts.jsonl",
+    "eval": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_eval_prompts.jsonl",
+    "organic_null": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_organic_null_prompts.jsonl",
+    "train": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_train_prompts.jsonl"
+  },
+  "forbidden_surface_audit_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/forbidden_surface_audit.json",
+  "forbidden_surface_status": "PASS_FORBIDDEN_SURFACE_AUDIT",
+  "model_calls_started": false,
+  "next_gate": "WP3 micro-slot detector and 2-way policy design only; training and E2E remain forbidden",
+  "output_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123",
+  "paper_claim_allowed": false,
+  "precommit_status": "not_committed",
+  "prompt_set_id": "qwen_v2_wp2_controlled_natural_prompt_set_v1",
+  "protocol_id": "natural_evidence_v2_controlled_micro_slots_qwen_pilot",
+  "schema_name": "natural_evidence_v2_wp2_prompt_split_manifest_v1",
+  "status": "WP2_PROMPT_SPLITS_WRITTEN_AUDITED_NO_MODEL_CALLS",
+  "target_split_sizes": {
+    "dev": 1024,
+    "eval": 2048,
+    "organic_null": 2048,
+    "train": 4096
+  },
+  "template_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/prompt_family_templates.json",
+  "training_started": false,
+  "use_config_split_sizes": true,
+  "written_split_sizes": {
+    "dev": 1024,
+    "eval": 2048,
+    "organic_null": 2048,
+    "train": 4096
+  }
+}

@@ -1,0 +1,11 @@
+job_id=850372
+node=chimera13
+repo=/home/guanjie.lin001/tokenizer-evidence
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+claim_note=natural_evidence_v2 WP3 context-specific base-Qwen mass scoring only; no training, no generation, no E2E, no FAR, no positive claim
+score_plan=results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan.jsonl
+config=configs/natural_evidence_v2/qwen_v2_micro_slot_pilot.yaml
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850372
+model_name=Qwen/Qwen2.5-7B-Instruct
+tokenizer_name=Qwen/Qwen2.5-7B-Instruct
+{"casing_variants_kept_separate": true, "e2e_eval_started": false, "empty_prefix_rows": 2, "generation_started": false, "model_scoring_started": false, "paper_claim_allowed": false, "schema_name": "natural_evidence_v2_wp3_context_mass_score_plan_validation_v1", "score_plan_rows": 230, "score_plan_rows_by_bank": {"discourse_marker_additive_v0": 16, "function_word_conjunction_v0": 52, "function_word_preposition_v0": 28, "optional_hedge_frequency_v0": 4, "sentence_opener_sequence_v0": 26, "step_opener_action_v0": 72, "transition_word_plain_v0": 32}, "score_plan_rows_by_bank_and_casing_variant": {"discourse_marker_additive_v0::lowercase": 8, "discourse_marker_additive_v0::sentence_case": 8, "function_word_conjunction_v0::lowercase": 26, "function_word_conjunction_v0::sentence_case": 26, "function_word_preposition_v0::lowercase": 14, "function_word_preposition_v0::sentence_case": 14, "optional_hedge_frequency_v0::lowercase": 2, "optional_hedge_frequency_v0::sentence_case": 2, "sentence_opener_sequence_v0::lowercase": 13, "sentence_opener_sequence_v0::sentence_case": 13, "step_opener_action_v0::lowercase": 36, "step_opener_action_v0::sentence_case": 36, "transition_word_plain_v0::lowercase": 16, "transition_word_plain_v0::sentence_case": 16}, "score_plan_rows_by_casing_variant": {"lowercase": 115, "sentence_case": 115}, "source_detection_count_total": 15488, "status": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION", "template_preflight_only": true, "training_started": false}

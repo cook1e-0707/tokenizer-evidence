@@ -1,0 +1,43 @@
+{
+  "audit_scope": "public_prompt_text_only",
+  "duplicate_prompt_text_count": 0,
+  "empty_prompt_count": 0,
+  "forbidden_surface_rate": 0.0,
+  "forbidden_terms": [
+    "FIELD=",
+    "SECTION=",
+    "TOPIC=",
+    "PAYLOAD",
+    "CERT",
+    "EVIDENCE",
+    "CARRIER",
+    "OWNER",
+    "fingerprint",
+    "watermark",
+    "bucket"
+  ],
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "rows_by_family": {
+    "F1_8_sentence_explanation": 1792,
+    "F2_8_step_checklist": 1792,
+    "F3_6_point_comparison": 1792,
+    "F4_concise_advice_with_transitions": 1792,
+    "N1_general_practical_answer": 512,
+    "N2_everyday_decision": 512,
+    "N3_brief_explanation": 512,
+    "N4_flexible_plan": 512
+  },
+  "rows_by_split": {
+    "dev": 1024,
+    "eval": 2048,
+    "organic_null": 2048,
+    "train": 4096
+  },
+  "schema_name": "natural_evidence_v2_wp2_forbidden_surface_audit_v1",
+  "status": "PASS_FORBIDDEN_SURFACE_AUDIT",
+  "total_rows": 9216,
+  "training_started": false,
+  "violation_count": 0,
+  "violations": []
+}

@@ -1,0 +1,89 @@
+{
+  "action_scope": "artifact_only_design_record",
+  "artifact_only": true,
+  "bucket_policy_design": {
+    "bucket_count": 2,
+    "bucket_ids": [
+      0,
+      1
+    ],
+    "bucket_policy_id": "qwen_v2_wp3_two_way_bucket_policy_v0_artifact_design",
+    "disallowed_primary_bucket_counts": [
+      4,
+      8
+    ],
+    "entries_claim_boundary": "bucket-bank entries are natural next-token measurable opportunity/catalog entries",
+    "mass_gate_status": "NOT_EVALUATED",
+    "max_mass_ratio": 5.0,
+    "min_bucket_mass": 0.005,
+    "requires_explicit_bucket_assignment_before_transcripts": true,
+    "requires_single_token_alignment": true,
+    "requires_tokenizer_stable": true
+  },
+  "claim_control": {
+    "cross_family_generality_claim_allowed": false,
+    "full_far_claim_allowed": false,
+    "natural_output_success_claim_allowed": false,
+    "payload_recovery_claim_allowed": false,
+    "paper_claim_allowed": false,
+    "sanitizer_robustness_claim_allowed": false
+  },
+  "controlling_inputs": [
+    "docs/natural_evidence_v2/PROTOCOL_CONTRACT.md",
+    "docs/natural_evidence_v2/CLAIM_GUARDRAILS.md",
+    "configs/natural_evidence_v2/qwen_v2_micro_slot_pilot.yaml",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/split_manifest.json",
+    "docs/specs/stage3_method_core_smoke_spec.md"
+  ],
+  "created_time_utc": "2026-05-08T21:40:05Z",
+  "density_gate_status": "NOT_EVALUATED",
+  "detector_design": {
+    "detector_id": "qwen_v2_wp3_micro_slot_detector_v0_artifact_design",
+    "eligible_slot_types": [
+      "sentence_opener",
+      "bullet_or_step_opener",
+      "discourse_marker",
+      "optional_hedge",
+      "transition_word",
+      "function_word_alternative"
+    ],
+    "emits_one_row_per_candidate_slot": true,
+    "rejection_rules": [
+      "content_noun",
+      "domain_specific_noun",
+      "rare_token",
+      "punctuation_only",
+      "markdown_heavy_token",
+      "invisible_or_control_whitespace",
+      "multi_token_under_configured_tokenizer",
+      "unstable_detokenization",
+      "public_forbidden_surface_term"
+    ],
+    "response_local": true,
+    "slot_order": "stable_response_order_by_span_then_slot_type",
+    "slot_policy_id": "qwen_v2_wp3_micro_slot_detector_v0_artifact_design"
+  },
+  "e2e_eval_started": false,
+  "forbidden_actions_confirmed": [
+    "training",
+    "generation",
+    "model_transcript_generation",
+    "qwen_e2e_rerun",
+    "llama",
+    "same_family_null",
+    "sanitizer_benchmark",
+    "far_aggregation",
+    "positive_paper_claim"
+  ],
+  "gates_unlocked": [],
+  "model_calls_started": false,
+  "next_allowed_action": "WP3 artifact-only detector and two-way bucket-bank audit scaffold from the recorded design; no transcript generation, training, E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+  "output_doc": "docs/natural_evidence_v2/WP3_MICRO_SLOT_DETECTOR_BUCKET_POLICY.md",
+  "paper_claim_allowed": false,
+  "phase_before": "V2_WP2_PROMPT_FAMILY_SPLITS_AUDITED",
+  "protocol_id": "natural_evidence_v2_controlled_micro_slots_qwen_pilot",
+  "schema_name": "natural_evidence_v2_wp3_policy_design_summary_v1",
+  "status": "WP3_POLICY_DESIGN_RECORDED_NOT_IMPLEMENTED_NOT_AUDITED",
+  "training_started": false,
+  "wp4_allowed": false
+}

@@ -269,13 +269,24 @@ def main(argv: list[str] | None = None) -> int:
     min_masses = [float(row["min_bucket_mass"]) for row in balance_rows]
     mass_ratios = [float(row["bucket_mass_ratio"]) for row in balance_rows]
     entropy_fractions = [float(row["bucket_entropy_fraction"]) for row in balance_rows]
+    raw_count_train_gate = bool(quality_gates.get("raw_entry_count_is_training_gate", False))
+    raw_count_placeholder = int(
+        quality_gates.get(
+            "raw_opportunity_entries_scaling_placeholder",
+            dict(config.get("bucket_bank", {})).get("target_bank_entries_per_tokenizer", 24000),
+        )
+    )
     summary = {
         "schema_name": "natural_opportunity_bank_audit_summary_v1",
         "split": args.split,
         "entries": len(entries),
         "fingerprint_claim": False,
+        "raw_entry_count_is_training_gate": raw_count_train_gate,
+        "raw_opportunity_entries_scaling_placeholder": raw_count_placeholder,
         "quality_gate_status": {
-            "accepted_entries": len(entries) >= int(quality_gates.get("accepted_entries_per_tokenizer", 24000)),
+            "accepted_entries": (
+                len(entries) >= raw_count_placeholder if raw_count_train_gate else "DIAGNOSTIC_ONLY"
+            ),
             "min_bucket_mass": bool(min_masses)
             and min(min_masses) >= float(quality_gates.get("min_bucket_mass", 0.0)),
             "max_bucket_mass_ratio": bool(mass_ratios)

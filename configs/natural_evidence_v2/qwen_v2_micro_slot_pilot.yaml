@@ -1,0 +1,137 @@
+schema_name: natural_evidence_v2_qwen_micro_slot_pilot_config_v1
+status: planning_only_no_training
+
+model:
+  family: qwen
+  base_model: Qwen/Qwen2.5-7B-Instruct
+  tokenizer: Qwen/Qwen2.5-7B-Instruct
+
+protocol:
+  id: natural_evidence_v2_controlled_micro_slots_qwen_pilot
+  precommit_fields:
+    - protocol_id
+    - audit_key
+    - payload
+    - prompt_set
+    - slot_policy
+    - bucket_policy
+    - decoder
+    - query_budget
+    - eval_split
+  claim_status: no_positive_claim_allowed
+
+prompt_families:
+  - id: F1_8_sentence_explanation
+    description: eight natural sentences
+  - id: F2_8_step_checklist
+    description: eight concise natural checklist steps
+  - id: F3_6_point_comparison
+    description: six natural comparison points
+  - id: F4_concise_advice_with_transitions
+    description: concise advice with natural transitions
+
+split_sizes:
+  train_prompts: 4096
+  dev_prompts: 1024
+  eval_prompts: 2048
+  organic_null_prompts: 2048
+
+forbidden_surface_terms:
+  - "FIELD="
+  - "SECTION="
+  - "TOPIC="
+  - "PAYLOAD"
+  - "CERT"
+  - "EVIDENCE"
+  - "CARRIER"
+  - "OWNER"
+  - "fingerprint"
+  - "watermark"
+  - "bucket"
+
+slot_policy:
+  primary_slot_types:
+    - sentence_opener
+    - bullet_or_step_opener
+    - discourse_marker
+    - optional_hedge
+    - transition_word
+    - function_word_alternative
+  forbidden_primary_slot_types:
+    - content_noun
+    - domain_specific_noun
+    - rare_token
+    - punctuation_only
+    - markdown_heavy_token
+    - invisible_whitespace_token
+
+bucket_policy:
+  primary_bucket_count: 2
+  ablation_bucket_count: 4
+  forbidden_bucket_count: 8
+  max_mass_ratio: 5.0
+  min_bucket_mass: 0.005
+  require_tokenizer_stable: true
+
+density_gate:
+  average_micro_slots_per_response_min: 16
+  prompt_coverage_min: 0.80
+  forbidden_surface_rate_max: 0.0
+  unstable_token_rate_max: 0.0
+
+payload_contract:
+  initial_payload_bits_options:
+    - 8
+    - 16
+  checksum_bits: 8
+  frame_policy: prompt_local
+  decoder_oracle_accept_required: 1.0
+
+teacher_forced_gate:
+  protected_target_mass_minus_base_min: 0.15
+  protected_target_mass_minus_task_only_min: 0.10
+  target_bucket_rank1_rate_min: 0.70
+  median_target_margin_min_exclusive: 0.0
+  task_only_target_mass_minus_base_should_not_be_materially_positive: true
+
+training_plan_locked_until_gates_pass:
+  training_allowed: false
+  initial_lora_rank: 32
+  initial_lora_alpha: 64
+  dropout: 0.0
+  learning_rates:
+    - 0.00005
+    - 0.0001
+  epochs_range:
+    - 3
+    - 5
+  objective:
+    - task_ce_on_non_slot_tokens
+    - margin_loss_at_micro_slots
+    - mask_exact_token_ce_at_slot_positions
+    - regenerated_or_branch_aware_suffixes
+    - optional_kl_after_signal_appears
+
+proof_of_life_gate:
+  qwen_e2e_allowed: false
+  query_budgets:
+    - 8
+    - 16
+    - 32
+    - 64
+  required_arms:
+    - qwen_protected
+    - qwen_raw
+    - qwen_task_only_lora
+    - qwen_wrong_key
+    - qwen_wrong_payload
+  protected_payload_recovery_at_64_min: 0.80
+  raw_accepts_max: 0
+  task_only_accepts_max: 0
+  wrong_key_accepts_max: 0
+  wrong_payload_accepts_max: 0
+  free_generation_slot_detection_min: 0.70
+  target_bucket_hit_rate_min_range:
+    - 0.25
+    - 0.40
+  output_forbidden_surface_rate_max: 0.0

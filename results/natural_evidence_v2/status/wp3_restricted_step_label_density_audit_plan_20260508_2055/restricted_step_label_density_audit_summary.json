@@ -1,0 +1,18 @@
+{
+  "blocked_route": "B_8_step_plus_extra_slots",
+  "e2e_eval_started": false,
+  "gate_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_gate.json",
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review the density audit plan. If approved, implement or review exactly one Chimera Slurm density-audit wrapper for base-Qwen model outputs. Do not start WP4 or training.",
+  "paper_claim_allowed": false,
+  "plan_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_plan.json",
+  "prompt_count": 256,
+  "prompts_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_prompts.jsonl",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_density_audit_summary_v1",
+  "selected_route": "A_16_step_checklist_step_label_only",
+  "slurm_review_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_slurm_review.json",
+  "status": "WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY_ARTIFACT_ONLY",
+  "training_started": false,
+  "wp4_allowed": false
+}
