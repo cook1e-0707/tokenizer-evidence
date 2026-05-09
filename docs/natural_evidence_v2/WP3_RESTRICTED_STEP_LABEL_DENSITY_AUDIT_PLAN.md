@@ -92,7 +92,15 @@ The plan recommends a future wrapper name:
 scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch
 ```
 
-No Slurm job was submitted by this artifact-only planning step.
+That wrapper has now been prepared and reviewed in:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md
+scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py
+scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch
+```
+
+No Slurm job was submitted by the planning or wrapper-preparation steps.
 
 ## Still Blocked
 
@@ -115,6 +123,7 @@ Still forbidden:
 
 ## Next Allowed Action
 
-Review this density audit plan. If approved, implement or review exactly one
-Chimera Slurm wrapper that generates base-Qwen outputs for the 256 planned
-prompts and runs the restricted detector. Do not start WP4 or training.
+Review the prepared wrapper. If approved, enable exactly one allowlist entry and
+submit exactly one Chimera Slurm job that generates base-Qwen outputs for the
+256 planned prompts and runs the restricted detector. Do not start WP4 or
+training.

@@ -46,6 +46,9 @@ results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass
 scripts/natural_evidence_v2/build_wp3_restricted_step_label_density_audit_plan.py
 docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN.md
 results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_summary.json
+scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py
+scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md
 ```
 
 New primary route:
@@ -57,11 +60,11 @@ natural_evidence_v2_controlled_micro_slots
 Current next allowed action:
 
 ```text
-Review the artifact-only restricted step-label density audit plan. If approved,
-implement or review exactly one Chimera Slurm wrapper for base-Qwen
-model-output density audit on the 256 planned 16-step prompts. Do not start WP4,
-training, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive paper
-claims.
+Review the prepared restricted Step-label density audit wrapper. If approved,
+enable exactly one allowlist entry and submit exactly one Chimera Slurm job for
+base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not
+start WP4, training, Qwen E2E, Llama, same-family null, sanitizer, FAR, or
+positive paper claims.
 ```
 
 The intended v2 route is:
@@ -87,8 +90,9 @@ The intended v2 route is:
    (`py_compile`, `bash -n`, `--validate-plan-only`, and focused pytest all
    passed). The GPU allowlist is still disabled pending a later explicit
    allowlist review. The restricted step-label route now has an artifact-only
-   256-prompt model-output density audit plan; no model outputs have been
-   generated for it yet.
+   256-prompt model-output density audit plan and a prepared Slurm wrapper. The
+   wrapper is allowlist-recorded but disabled pending review; no model outputs
+   have been generated for it yet.
 3. WP4: prompt-local small payload contract and decoder oracle substitution.
 4. WP5: teacher-forced target-mass gate.
 5. WP6: Qwen v2 proof-of-life E2E only if WP5 passes.

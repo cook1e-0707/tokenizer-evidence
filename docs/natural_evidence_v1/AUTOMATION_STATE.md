@@ -1,10 +1,10 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY
+V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_READY_NEEDS_REVIEW
 
 ## Last Checked
-2026-05-09T00:58:26Z
+2026-05-09T01:08:31Z
 
 ## Hermes 15-Minute Supervision
 
@@ -2622,6 +2622,24 @@ approved, implement or review exactly one Chimera Slurm wrapper for base-Qwen
 model-output density audit. WP4 and training remain blocked. Hermes/Codex
 notification succeeded through both Telegram and email:
 `results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.notify.json`.
+
+2026-05-09T01:08:31Z: prepared the restricted step-label base-Qwen
+model-output density audit execution path. Added
+`scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py`,
+`scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch`,
+and
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md`.
+The wrapper is recorded in `configs/natural_evidence_v2/run_allowlist.yaml` as
+`v2_wp3_restricted_step_label_density_audit`, but it remains disabled with
+condition `pending_review_of_restricted_step_label_density_wrapper`. Local
+no-model validation passed: `py_compile`, `bash -n`, YAML load, and
+`--validate-plan-only` over the 256 planned prompts. No Slurm job, model
+generation, model scoring, training, Qwen E2E, Llama, same-family null,
+sanitizer, FAR aggregation, or positive paper claim was started. Next allowed
+action is wrapper review and, only if approved, enabling/submitting exactly one
+Chimera Slurm density-audit job. WP4 and training remain blocked.
+Hermes/Codex notification succeeded through both Telegram and email:
+`results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.notify.json`.
 
 ## Remaining NEEDS_RESULTS
 - qwen_8way_clean_bank_rebuilt

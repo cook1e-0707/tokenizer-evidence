@@ -134,9 +134,14 @@
     "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_slurm_review.json",
     "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_summary.json",
     "results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.md",
-    "results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.notify.json"
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.notify.json",
+    "scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py",
+    "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+    "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.notify.json"
   ],
-  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY",
+  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_READY_NEEDS_REVIEW",
   "failed_gates": [
     "WP3 fixed-prefix full-vocab model-mass gate failed on job 850288",
     "WP3 context-specific mass scoring job 850372 failed before mass artifacts due tokenizer prefix-boundary retokenization",
@@ -234,9 +239,9 @@
       "training_started": false
     }
   ],
-  "last_checked_time": "2026-05-09T00:58:26Z",
-  "last_state_changing_action": "Codex built an artifact-only restricted step-label model-output density audit plan for the 16-step route. It wrote 256 planned prompts, a density gate spec, and a Slurm review spec. No model generation, model scoring, Slurm job, training, E2E, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
-  "next_allowed_action": "Review the restricted step-label density audit plan. If approved, implement or review exactly one Chimera Slurm wrapper for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
+  "last_checked_time": "2026-05-09T01:08:31Z",
+  "last_state_changing_action": "Codex prepared the restricted Step-label base-Qwen model-output density audit wrapper and runner. The allowlist entry is recorded but disabled pending review. Local no-model validation passed; no Slurm job, model generation, model scoring, training, E2E, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
+  "next_allowed_action": "Review the restricted Step-label density audit wrapper. If approved, enable exactly one allowlist entry and submit exactly one Chimera Slurm job for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
   "remaining_NEEDS_RESULTS": [
     "WP3 fixed-response density gate decision beyond template preflight if required before WP4",
     "WP3 fixed model-mass artifact audit for 2-way bucket banks",
@@ -256,7 +261,8 @@
     "WP4 prompt-local payload oracle substitution after density gate",
     "WP3 model-output density audit results for restricted step-label policy",
     "WP3 review of restricted 16-step density audit plan",
-    "WP3 Chimera Slurm wrapper for restricted step-label model-output density audit"
+    "WP3 review of restricted Step-label density audit wrapper",
+    "WP3 Slurm model-output density audit job for restricted Step-label policy"
   ],
   "schema_name": "natural_evidence_v2_gate_status_v1",
   "stale_out_of_scope_entries_ignored_by_20260509_0024_supervisor": {
@@ -357,6 +363,33 @@
       "paper_claim_allowed": false,
       "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY",
       "time": "2026-05-09T00:58:26Z",
+      "training_started": false,
+      "wp4_allowed": false
+    },
+    {
+      "action": "prepared restricted Step-label density audit runner and Slurm wrapper",
+      "allowlist_enabled": false,
+      "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+      "artifacts": [
+        "scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py",
+        "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+        "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md",
+        "configs/natural_evidence_v2/run_allowlist.yaml"
+      ],
+      "e2e_eval_started": false,
+      "local_validation": [
+        "py_compile",
+        "bash -n",
+        "yaml_load",
+        "validate_plan_only"
+      ],
+      "model_generation_started": false,
+      "model_scoring_started": false,
+      "next_allowed_action": "Review the restricted Step-label density audit wrapper. If approved, enable exactly one allowlist entry and submit exactly one Chimera Slurm job for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
+      "notification_report": "results/natural_evidence_v1/status/hermes_reports/20260508_2108_wp3_restricted_density_wrapper_ready.notify.json",
+      "paper_claim_allowed": false,
+      "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_READY_NEEDS_REVIEW",
+      "time": "2026-05-09T01:08:31Z",
       "training_started": false,
       "wp4_allowed": false
     }
