@@ -1,0 +1,183 @@
+{
+  "bank_variant_count": 12,
+  "bank_variant_results": [
+    {
+      "bucket_masses": {
+        "0": 0.00624055732623674,
+        "1": 0.005398657245677896
+      },
+      "candidate_bank_id": "step_label_recombined_check_review_vs_identify_assess_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.155946199628224,
+      "min_bucket_mass": 0.005398657245677896,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012551237479783595,
+        "1": 0.00624055732623674
+      },
+      "candidate_bank_id": "step_label_recombined_choose_make_vs_check_review_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 2.0112366289810852,
+      "min_bucket_mass": 0.00624055732623674,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012551237479783595,
+        "1": 0.010619471227983013
+      },
+      "candidate_bank_id": "step_label_recombined_choose_make_vs_determine_define_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.181907951001388,
+      "min_bucket_mass": 0.010619471227983013,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012551237479783595,
+        "1": 0.005398657245677896
+      },
+      "candidate_bank_id": "step_label_recombined_choose_make_vs_identify_assess_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 2.3248813378237663,
+      "min_bucket_mass": 0.005398657245677896,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.00624055732623674
+      },
+      "candidate_bank_id": "step_label_recombined_create_develop_vs_check_review_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 2.02076972598164,
+      "min_bucket_mass": 0.00624055732623674,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.012551237479783595
+      },
+      "candidate_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.0047399181494545,
+      "min_bucket_mass": 0.012551237479783595,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.010619471227983013
+      },
+      "candidate_bank_id": "step_label_recombined_create_develop_vs_determine_define_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.187510097949324,
+      "min_bucket_mass": 0.010619471227983013,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.005398657245677896
+      },
+      "candidate_bank_id": "step_label_recombined_create_develop_vs_identify_assess_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 2.335901085072245,
+      "min_bucket_mass": 0.005398657245677896,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.010619471227983013,
+        "1": 0.00624055732623674
+      },
+      "candidate_bank_id": "step_label_recombined_determine_define_vs_check_review_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.701686351527661,
+      "min_bucket_mass": 0.00624055732623674,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.010619471227983013,
+        "1": 0.005398657245677896
+      },
+      "candidate_bank_id": "step_label_recombined_determine_define_vs_identify_assess_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.967057871007618,
+      "min_bucket_mass": 0.005398657245677896,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.03965159005019814,
+        "1": 0.012551237479783595
+      },
+      "candidate_bank_id": "step_label_recombined_use_take_vs_choose_make_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.159177739570728,
+      "min_bucket_mass": 0.012551237479783595,
+      "passed": true,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.03965159005019814,
+        "1": 0.012610729318112135
+      },
+      "candidate_bank_id": "step_label_recombined_use_take_vs_create_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.144274137519439,
+      "min_bucket_mass": 0.012610729318112135,
+      "passed": true,
+      "source_detection_count_total": 16
+    }
+  ],
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 192,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_rows": 0,
+  "mass_gate_scope": "candidate_bank_id_and_casing_variant",
+  "mass_gate_status": "PASS_REVIEW_REQUIRED",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947/qwen_v2_wp3_context_mass_artifact.json",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_scoring_started": false,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_audit_v1",
+  "score_plan_rows": 192,
+  "source_detection_count_total": 192,
+  "status": "PASS_CONTEXT_SPECIFIC_MODEL_MASS_GATE_REVIEW_REQUIRED",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "training_started": false,
+  "wp4_allowed": false
+}

@@ -1,0 +1,27 @@
+{
+  "e2e_eval_started": false,
+  "expanded_bank_candidate_count": 8,
+  "expanded_bank_candidates_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/restricted_step_label_expanded_bank_candidates.jsonl",
+  "first_word_summary_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/restricted_step_label_first_word_summary.json",
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review this artifact-only repair plan. If approved, build or review a Slurm-only tokenizer/context-mass scoring plan for the expanded Step-label bank candidates. Do not start WP4 or training.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_repair_plan_summary_v1",
+  "source_audit_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_850434",
+  "source_audit_status": "FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE",
+  "source_complete_step_label_response_rate": 0.98828125,
+  "source_mean_detected_structural_slots_per_response": 15.8125,
+  "source_raw_bank_surface_exact_hit_rate": 0.19095849802371542,
+  "status": "WP3_RESTRICTED_STEP_LABEL_REPAIR_PLAN_READY_ARTIFACT_ONLY",
+  "strict_prompt_count": 256,
+  "strict_prompt_variants": [
+    "strict_literal_16_step_lines",
+    "strict_no_heading_16_step_lines",
+    "strict_numbered_step_label_lines",
+    "strict_compact_step_label_lines"
+  ],
+  "strict_prompts_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/restricted_step_label_strict_repair_prompts.jsonl",
+  "training_started": false,
+  "wp4_allowed": false
+}

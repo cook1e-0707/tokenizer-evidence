@@ -1,0 +1,285 @@
+{
+  "mass_rows": [
+    {
+      "bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.0040764090153970756
+      },
+      "candidate_bank_id": "step_label_create_develop_establish_set_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.7623782269656658,
+        "1": 0.2376217944547534
+      },
+      "candidate_normalized_mass_ratio": 3.2083682757931262,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 3.0935878295038424,
+      "full_vocab_min_bucket_mass": 0.0040764090153970756,
+      "generation_started": false,
+      "mass": {
+        "0": 0.012610729318112135,
+        "1": 0.0040764090153970756
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.7623782269656658,
+        "1": 0.2376217944547534
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.0040764090153970756
+      },
+      "unweighted_full_vocab_mass_ratio": 3.0935878295038424
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0009384599843542674,
+        "1": 0.00624055732623674
+      },
+      "candidate_bank_id": "step_label_ensure_confirm_check_review_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.12598538165912032,
+        "1": 0.8740147575736046
+      },
+      "candidate_normalized_mass_ratio": 6.937429930866372,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 6.649785212238669,
+      "full_vocab_min_bucket_mass": 0.0009384599843542674,
+      "generation_started": false,
+      "mass": {
+        "0": 0.0009384599843542674,
+        "1": 0.00624055732623674
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.12598538165912032,
+        "1": 0.8740147575736046
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.0009384599843542674,
+        "1": 0.00624055732623674
+      },
+      "unweighted_full_vocab_mass_ratio": 6.649785212238669
+    },
+    {
+      "bucket_masses": {
+        "0": 0.005398657245677896,
+        "1": 0.0035765930733759888
+      },
+      "candidate_bank_id": "step_label_identify_assess_research_review_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.5703229699283838,
+        "1": 0.4296770365908742
+      },
+      "candidate_normalized_mass_ratio": 1.3273294157244633,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 1.509441285301724,
+      "full_vocab_min_bucket_mass": 0.0035765930733759888,
+      "generation_started": false,
+      "mass": {
+        "0": 0.005398657245677896,
+        "1": 0.0035765930733759888
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.5703229699283838,
+        "1": 0.4296770365908742
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.005398657245677896,
+        "1": 0.0035765930733759888
+      },
+      "unweighted_full_vocab_mass_ratio": 1.509441285301724
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0010932492496067425,
+        "1": 0.0017183436393679585
+      },
+      "candidate_bank_id": "step_label_pack_bring_gather_collect_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.39727882016450167,
+        "1": 0.6027211677283049
+      },
+      "candidate_normalized_mass_ratio": 1.517123836298989,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 1.571776646529665,
+      "full_vocab_min_bucket_mass": 0.0010932492496067425,
+      "generation_started": false,
+      "mass": {
+        "0": 0.0010932492496067425,
+        "1": 0.0017183436393679585
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.39727882016450167,
+        "1": 0.6027211677283049
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.0010932492496067425,
+        "1": 0.0017183436393679585
+      },
+      "unweighted_full_vocab_mass_ratio": 1.571776646529665
+    },
+    {
+      "bucket_masses": {
+        "0": 0.003083975381741766,
+        "1": 0.010619471227983013
+      },
+      "candidate_bank_id": "step_label_prepare_plan_determine_define_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.2670468259602785,
+        "1": 0.7329532839357853
+      },
+      "candidate_normalized_mass_ratio": 2.7446620318370956,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 3.4434357974626093,
+      "full_vocab_min_bucket_mass": 0.003083975381741766,
+      "generation_started": false,
+      "mass": {
+        "0": 0.003083975381741766,
+        "1": 0.010619471227983013
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.2670468259602785,
+        "1": 0.7329532839357853
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.003083975381741766,
+        "1": 0.010619471227983013
+      },
+      "unweighted_full_vocab_mass_ratio": 3.4434357974626093
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0037812320369994268,
+        "1": 0.012551237479783595
+      },
+      "candidate_bank_id": "step_label_select_decide_choose_make_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.20616177702322602,
+        "1": 0.793838195502758
+      },
+      "candidate_normalized_mass_ratio": 3.850559531281712,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 3.3193513005733313,
+      "full_vocab_min_bucket_mass": 0.0037812320369994268,
+      "generation_started": false,
+      "mass": {
+        "0": 0.0037812320369994268,
+        "1": 0.012551237479783595
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.20616177702322602,
+        "1": 0.793838195502758
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.0037812320369994268,
+        "1": 0.012551237479783595
+      },
+      "unweighted_full_vocab_mass_ratio": 3.3193513005733313
+    },
+    {
+      "bucket_masses": {
+        "0": 0.03965159005019814,
+        "1": 0.00039985558305488667
+      },
+      "candidate_bank_id": "step_label_use_take_send_document_v1",
+      "candidate_normalized_bucket_masses": {
+        "0": 0.9838024713099003,
+        "1": 0.01619741782633355
+      },
+      "candidate_normalized_mass_ratio": 60.73822888673324,
+      "casing_variant": "sentence_case",
+      "casing_variants_kept_separate": true,
+      "context_count": 16,
+      "e2e_eval_started": false,
+      "full_vocab_mass_ratio": 99.16477781118118,
+      "full_vocab_min_bucket_mass": 0.00039985558305488667,
+      "generation_started": false,
+      "mass": {
+        "0": 0.03965159005019814,
+        "1": 0.00039985558305488667
+      },
+      "mass_aggregation": "source_detection_count_weighted_mean",
+      "model_scoring_started": true,
+      "not_full_far": true,
+      "not_payload_recovery": true,
+      "paper_claim_allowed": false,
+      "schema_name": "natural_evidence_v2_wp3_context_mass_row_v1",
+      "source_detection_count_total": 16,
+      "training_started": false,
+      "unweighted_candidate_normalized_bucket_masses": {
+        "0": 0.9838024713099003,
+        "1": 0.01619741782633355
+      },
+      "unweighted_full_vocab_bucket_masses": {
+        "0": 0.03965159005019814,
+        "1": 0.00039985558305488667
+      },
+      "unweighted_full_vocab_mass_ratio": 99.16477781118118
+    }
+  ],
+  "schema_name": "natural_evidence_v2_wp3_context_mass_artifact_v1"
+}

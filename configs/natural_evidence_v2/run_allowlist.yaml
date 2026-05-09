@@ -20,11 +20,11 @@ allowed_cpu_actions:
 allowed_gpu_actions:
   - name: v2_wp3_context_mass_score
     enabled: false
-    enable_condition: "blocked_pending_wp3_context_mass_repair_local_validation_review"
+    enable_condition: "submitted_once_as_job_850509_pending_mass_aware_recombined_context_mass_result_review"
     command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch"
     claim_note: "WP3 context-specific base-Qwen mass scoring only; no training, generation, E2E, FAR, or positive claim."
   - name: v2_wp3_restricted_step_label_density_audit
     enabled: false
-    enable_condition: "submitted_once_as_job_850434_pending_result_review"
+    enable_condition: "submitted_once_as_job_850523_pending_primary_policy_strict_density_result_review"
     command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch"
     claim_note: "WP3 restricted Step-label base-Qwen model-output density audit only; no training, E2E, payload recovery, FAR, or positive claim."

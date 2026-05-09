@@ -1,0 +1,63 @@
+{
+  "audit_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947/qwen_v2_wp3_context_mass_audit.json",
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 192,
+  "context_scores_jsonl": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947/qwen_v2_wp3_context_mass_context_scores.jsonl",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_jsonl": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947/qwen_v2_wp3_context_mass_invalid_tokenization_rows.jsonl",
+  "invalid_tokenization_rows": 0,
+  "limitations": [
+    "Context-specific next-token mass scoring only.",
+    "No text is generated and no model weights are changed.",
+    "Casing variants remain separate in mass and audit rows.",
+    "Mass gate outcomes require review and do not establish payload recovery or FAR."
+  ],
+  "mass_gate_status": "PASS_REVIEW_REQUIRED",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947/qwen_v2_wp3_context_mass_artifact.json",
+  "mass_rows": 12,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "model_scoring_started": true,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_score_summary_v1",
+  "score_plan_jsonl": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/wp3_restricted_step_label_mass_aware_repair_plan_20260509_0211/qwen_v2_wp3_restricted_step_label_mass_aware_context_mass_score_plan.jsonl",
+  "score_plan_rows_by_bank": {
+    "step_label_recombined_check_review_vs_identify_assess_v1": 16,
+    "step_label_recombined_choose_make_vs_check_review_v1": 16,
+    "step_label_recombined_choose_make_vs_determine_define_v1": 16,
+    "step_label_recombined_choose_make_vs_identify_assess_v1": 16,
+    "step_label_recombined_create_develop_vs_check_review_v1": 16,
+    "step_label_recombined_create_develop_vs_choose_make_v1": 16,
+    "step_label_recombined_create_develop_vs_determine_define_v1": 16,
+    "step_label_recombined_create_develop_vs_identify_assess_v1": 16,
+    "step_label_recombined_determine_define_vs_check_review_v1": 16,
+    "step_label_recombined_determine_define_vs_identify_assess_v1": 16,
+    "step_label_recombined_use_take_vs_choose_make_v1": 16,
+    "step_label_recombined_use_take_vs_create_develop_v1": 16
+  },
+  "score_plan_rows_by_bank_and_casing_variant": {
+    "step_label_recombined_check_review_vs_identify_assess_v1::sentence_case": 16,
+    "step_label_recombined_choose_make_vs_check_review_v1::sentence_case": 16,
+    "step_label_recombined_choose_make_vs_determine_define_v1::sentence_case": 16,
+    "step_label_recombined_choose_make_vs_identify_assess_v1::sentence_case": 16,
+    "step_label_recombined_create_develop_vs_check_review_v1::sentence_case": 16,
+    "step_label_recombined_create_develop_vs_choose_make_v1::sentence_case": 16,
+    "step_label_recombined_create_develop_vs_determine_define_v1::sentence_case": 16,
+    "step_label_recombined_create_develop_vs_identify_assess_v1::sentence_case": 16,
+    "step_label_recombined_determine_define_vs_check_review_v1::sentence_case": 16,
+    "step_label_recombined_determine_define_vs_identify_assess_v1::sentence_case": 16,
+    "step_label_recombined_use_take_vs_choose_make_v1::sentence_case": 16,
+    "step_label_recombined_use_take_vs_create_develop_v1::sentence_case": 16
+  },
+  "score_plan_rows_by_casing_variant": {
+    "sentence_case": 192
+  },
+  "status": "WP3_CONTEXT_MASS_SCORED_NOT_TRAINING_NOT_GENERATION",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false,
+  "wp4_allowed": false
+}

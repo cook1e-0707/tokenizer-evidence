@@ -1,0 +1,26 @@
+{
+  "allowlist_entry_enabled": false,
+  "chimera_default_python": "/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3",
+  "e2e_allowed": false,
+  "expected_score_plan_rows": 128,
+  "forbidden_actions": [
+    "no training",
+    "no model-output generation",
+    "no protected E2E",
+    "no Llama",
+    "no same-family null",
+    "no sanitizer benchmark",
+    "no FAR aggregation",
+    "no positive paper claim"
+  ],
+  "generation_allowed": false,
+  "paper_claim_allowed": false,
+  "required_partition_policy": "DGXA100/A100 unless user explicitly approves another available partition",
+  "required_python": "use configured virtual environment, not system python",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_expanded_context_mass_slurm_review_v1",
+  "score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl",
+  "status": "SLURM_SCORE_PLAN_READY_SUBMISSION_NOT_STARTED",
+  "submission_started": false,
+  "training_allowed": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch"
+}

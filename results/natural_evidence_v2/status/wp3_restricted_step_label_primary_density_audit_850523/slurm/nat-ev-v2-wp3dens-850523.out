@@ -1,0 +1,15 @@
+job_id=850523
+node=chimera13
+repo=/home/guanjie.lin001/tokenizer-evidence
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+claim_note=natural_evidence_v2 WP3 restricted Step-label density audit only; no training, no E2E, no payload recovery, no FAR, no positive claim
+config=configs/natural_evidence_v2/qwen_v2_micro_slot_pilot.yaml
+prompts_jsonl=results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225/restricted_step_label_strict_density_audit_prompts.jsonl
+policy_dir=results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_primary_density_audit_20260509_023224
+model_name=Qwen/Qwen2.5-7B-Instruct
+tokenizer_name=Qwen/Qwen2.5-7B-Instruct
+max_prompts=256
+batch_size=4
+max_new_tokens=896
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_primary_density_audit_20260509_023224", "status": "FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE", "structural_density_gate_status": "FAIL", "total_responses": 256, "wp4_allowed": false}

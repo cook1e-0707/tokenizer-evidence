@@ -166,19 +166,62 @@ def validate_inputs(
         forbidden_hits = forbidden_terms_in_text(config, text)
         if forbidden_hits:
             raise ValueError(f"prompt row contains forbidden public surface {forbidden_hits}")
-    bank_ids = [str(row.get("candidate_bank_id", "")) for row in bucket_bank.get("candidate_banks", [])]
-    expected = {
-        "restricted_step_label_check_review_choose_make_v1",
-        "restricted_step_label_start_begin_create_set_v1",
-    }
-    if set(bank_ids) != expected:
-        raise ValueError(f"unexpected restricted bank ids: {bank_ids}")
+    candidate_banks = bucket_bank.get("candidate_banks", [])
+    if not candidate_banks:
+        raise ValueError("restricted bucket bank must contain at least one candidate bank")
+    allowed_prefixes = {f"Step {index}: " for index in range(1, 17)}
+    seen_bank_ids: set[str] = set()
+    for bank in candidate_banks:
+        bank_id = str(bank.get("candidate_bank_id", ""))
+        if not bank_id:
+            raise ValueError("restricted candidate bank is missing candidate_bank_id")
+        if bank_id in seen_bank_ids:
+            raise ValueError(f"duplicate restricted candidate bank id: {bank_id}")
+        seen_bank_ids.add(bank_id)
+        buckets = bank.get("buckets")
+        if not isinstance(buckets, Mapping) or set(str(key) for key in buckets) != {"0", "1"}:
+            raise ValueError(f"restricted candidate bank must have exactly buckets 0 and 1: {bank_id}")
+        prefixes = set(str(item) for item in bank.get("allowed_prefixes", []))
+        if prefixes != allowed_prefixes:
+            raise ValueError(f"restricted candidate bank has unexpected allowed prefixes: {bank_id}")
+        for bucket_id, members in buckets.items():
+            if not isinstance(members, list) or not members:
+                raise ValueError(f"restricted bucket must be a non-empty list: {bank_id}:{bucket_id}")
+            for surface in members:
+                surface_text = str(surface)
+                if not surface_text or not surface_text[:1].isupper():
+                    raise ValueError(
+                        f"restricted candidate surface must be sentence case: {bank_id}:{surface_text!r}"
+                    )
+                forbidden_hits = forbidden_terms_in_text(config, surface_text)
+                if forbidden_hits:
+                    raise ValueError(
+                        f"restricted candidate surface contains forbidden public surface "
+                        f"{forbidden_hits}: {bank_id}:{surface_text!r}"
+                    )
 
 
 def forbidden_terms_in_text(config: Mapping[str, Any], text: str) -> list[str]:
     terms = [str(item) for item in config.get("forbidden_surface_terms", [])]
-    upper = text.upper()
-    return [term for term in terms if term.upper() in upper]
+    hits: list[str] = []
+    for term in terms:
+        if "=" in term:
+            if re.search(re.escape(term), text, flags=re.IGNORECASE):
+                hits.append(term)
+            continue
+        if term == "fingerprint":
+            pattern = r"(?<![A-Za-z0-9_])fingerprint(?![A-Za-z0-9_])"
+            if re.search(pattern, text, flags=re.IGNORECASE):
+                hits.append(term)
+            continue
+
+        # The uppercase terms represent old structured-carrier labels. Treat
+        # them as explicit whole-word markers, not substrings of ordinary words
+        # such as "certified" or "ownership".
+        pattern = rf"(?<![A-Za-z0-9_]){re.escape(term)}(?![A-Za-z0-9_])"
+        if re.search(pattern, text):
+            hits.append(term)
+    return hits
 
 
 def candidate_surface_map(bucket_bank: Mapping[str, Any]) -> dict[str, list[dict[str, str]]]:

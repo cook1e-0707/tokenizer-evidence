@@ -1,0 +1,15 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+  "command_pattern": "PROMPTS_JSONL=<this prompts_jsonl> POLICY_DIR=<this output dir> OUTPUT_DIR=<fresh scratch output> sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "compatible_wrapper": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "policy_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225",
+  "prompts_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_strict_density_slurm_review_v1",
+  "status": "STRICT_DENSITY_AUDIT_SLURM_PLAN_READY_NOT_SUBMITTED",
+  "training_started": false,
+  "wp4_allowed": false
+}

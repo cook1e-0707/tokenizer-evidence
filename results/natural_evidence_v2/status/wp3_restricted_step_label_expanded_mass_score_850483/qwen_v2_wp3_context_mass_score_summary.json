@@ -1,0 +1,55 @@
+{
+  "audit_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850483/qwen_v2_wp3_context_mass_audit.json",
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 112,
+  "context_scores_jsonl": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850483/qwen_v2_wp3_context_mass_context_scores.jsonl",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_jsonl": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850483/qwen_v2_wp3_context_mass_invalid_tokenization_rows.jsonl",
+  "invalid_tokenization_rows": 16,
+  "limitations": [
+    "Context-specific next-token mass scoring only.",
+    "No text is generated and no model weights are changed.",
+    "Casing variants remain separate in mass and audit rows.",
+    "Mass gate outcomes require review and do not establish payload recovery or FAR."
+  ],
+  "mass_gate_status": "FAIL",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850483/qwen_v2_wp3_context_mass_artifact.json",
+  "mass_rows": 7,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "model_scoring_started": true,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_score_summary_v1",
+  "score_plan_jsonl": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl",
+  "score_plan_rows_by_bank": {
+    "step_label_arrange_schedule_organize_plan_v1": 16,
+    "step_label_create_develop_establish_set_v1": 16,
+    "step_label_ensure_confirm_check_review_v1": 16,
+    "step_label_identify_assess_research_review_v1": 16,
+    "step_label_pack_bring_gather_collect_v1": 16,
+    "step_label_prepare_plan_determine_define_v1": 16,
+    "step_label_select_decide_choose_make_v1": 16,
+    "step_label_use_take_send_document_v1": 16
+  },
+  "score_plan_rows_by_bank_and_casing_variant": {
+    "step_label_arrange_schedule_organize_plan_v1::sentence_case": 16,
+    "step_label_create_develop_establish_set_v1::sentence_case": 16,
+    "step_label_ensure_confirm_check_review_v1::sentence_case": 16,
+    "step_label_identify_assess_research_review_v1::sentence_case": 16,
+    "step_label_pack_bring_gather_collect_v1::sentence_case": 16,
+    "step_label_prepare_plan_determine_define_v1::sentence_case": 16,
+    "step_label_select_decide_choose_make_v1::sentence_case": 16,
+    "step_label_use_take_send_document_v1::sentence_case": 16
+  },
+  "score_plan_rows_by_casing_variant": {
+    "sentence_case": 128
+  },
+  "status": "WP3_CONTEXT_MASS_SCORED_NOT_TRAINING_NOT_GENERATION",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false,
+  "wp4_allowed": false
+}

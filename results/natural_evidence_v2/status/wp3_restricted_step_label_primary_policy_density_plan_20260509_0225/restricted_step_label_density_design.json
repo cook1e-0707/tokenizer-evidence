@@ -1,0 +1,19 @@
+{
+  "configured_average_micro_slots_gate": 16,
+  "decision": "Use the strict repair prompts to re-audit model-output density before WP4. The 850509 mass subgate passes, but the previous density gate is still a blocker.",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "model_output_density_audit_required_before_wp4": true,
+  "paper_claim_allowed": false,
+  "repair_prompt_source": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/restricted_step_label_strict_repair_prompts.jsonl",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_primary_density_design_v1",
+  "selected_route": "A_strict_16_step_checklist_step_label_only",
+  "source_complete_step_label_response_rate": 0.98828125,
+  "source_density_audit_job_id": "850434",
+  "source_density_gate_status": "FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE",
+  "source_mean_detected_structural_slots_per_response": 15.8125,
+  "status": "STRICT_DENSITY_REPAIR_AUDIT_PLAN_READY_ARTIFACT_ONLY",
+  "strict_prompt_count": 256,
+  "training_started": false,
+  "wp4_allowed": false
+}

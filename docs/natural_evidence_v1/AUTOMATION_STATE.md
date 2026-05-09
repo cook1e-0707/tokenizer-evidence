@@ -1,10 +1,10 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_JOB_850434_PENDING
+V2_WP3_PRIMARY_POLICY_STRICT_DENSITY_850523_REVIEWED_CLOSE_FAIL
 
 ## Last Checked
-2026-05-09T01:20:21Z
+2026-05-09T02:44:00Z
 
 ## Hermes 15-Minute Supervision
 
@@ -2677,6 +2677,244 @@ email:
 `results/natural_evidence_v1/status/hermes_reports/20260508_2120_wp3_restricted_density_job_850434_submitted.notify.json`.
 Follow-up Slurm observation at 2026-05-09T01:22:05Z: job `850434` is
 `RUNNING` on `chimera13` with elapsed `00:01:30`.
+
+2026-05-09T01:34:19Z: Slurm job `850434` completed `0:0` in `00:09:46` on
+`chimera13`. Codex synced the true model-output density artifacts to
+`results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_850434/`
+and reviewed them. The business gate failed:
+`status=FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE`,
+`wp4_allowed=false`. Main metrics: `total_responses=256`,
+`complete_step_label_response_count=253`,
+`complete_step_label_response_rate=0.98828125`,
+`detected_slot_rows=4048`,
+`mean_detected_structural_slots_per_response=15.8125`, and
+`raw_bank_surface_exact_hit_rate=0.19095849802371542`. Codex repaired the
+restricted density wrapper's forbidden-surface matcher so ordinary words such
+as `certified` and `ownership` are not counted as old-route `CERT`/`OWNER`
+markers, added a smoke test, and re-audited the same 850434 responses locally
+without model generation. The reclassified artifact at
+`results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_850434_reclassified_20260508_2134/`
+has `forbidden_public_surface_rate=0.0`, but the structural gate still fails
+because `mean_detected_structural_slots_per_response=15.8125 < 16.0`. Review:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_850434_REVIEW.md`.
+No training, WP4, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation,
+or paper-facing positive claim was started. Next allowed action is an
+artifact-only restricted Step-label repair plan: stricter exact-label prompt
+wording plus expanded action-verb candidate banks, with any tokenizer/model
+mass scoring submitted through Chimera Slurm only after wrapper and allowlist
+review.
+
+2026-05-09T01:34:19Z: Codex also created the artifact-only restricted
+Step-label repair plan:
+`scripts/natural_evidence_v2/build_wp3_restricted_step_label_repair_plan.py`
+and
+`results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/`.
+The plan writes `256` stricter exact-label prompt rows and `8` expanded
+Step-label action-verb candidate banks derived from observed base-Qwen 850434
+openers. It did not call a model, score logits, submit Slurm, train, run E2E,
+aggregate FAR, or make paper claims. Next allowed action is review of this
+repair plan; if approved, prepare a Slurm-only tokenizer/context-mass scoring
+plan for the expanded bank candidates. WP4 and training remain blocked.
+
+2026-05-09T01:45:18Z: Codex recorded the user reminder that local and Chimera
+Python commands should use virtual environments rather than system Python.
+Local validation used `.venv/bin/python`; the Chimera scoring wrapper defaults
+to `/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3`.
+Codex reviewed the repair plan and prepared the Slurm-only expanded
+context-mass score plan:
+`scripts/natural_evidence_v2/build_wp3_restricted_step_label_expanded_mass_plan.py`
+and
+`results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/`.
+The plan has `128` score rows: `8` expanded action-verb banks times `16`
+`Step N:` contexts, sentence-case only. It passed local virtual-environment
+plan validation with
+`scripts/natural_evidence_v2/score_wp3_context_mass.py --validate-plan-only`
+and `bash -n scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch`.
+Review:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_REPAIR_AND_EXPANDED_MASS_PLAN_REVIEW.md`.
+The allowlist entry `v2_wp3_context_mass_score` remains disabled with condition
+`pending_review_and_explicit_submission_approval_for_restricted_step_label_expanded_mass_plan_20260508_2148`.
+No Slurm job, model scoring, model generation, training, WP4, Qwen E2E, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started. Next allowed action is explicit approval/review for one Slurm
+context-mass scoring submission.
+
+2026-05-09T01:46:20Z: Codex received a stale Hermes prompt asking to review the
+restricted Step-label repair plan and prepare the expanded-bank context-mass
+plan. That action was already complete in the current workspace state:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/`
+has `128` validated score-plan rows and the allowlist remains disabled. Codex
+wrote a stale-request blocker instead of creating duplicate artifacts or
+submitting Slurm:
+`results/natural_evidence_v1/status/hermes_reports/20260509_0140_restricted_step_label_repair_plan_stale_blocker.md`.
+No Slurm job, allowlist enablement, tokenizer/model scoring, model generation,
+training, WP4, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation,
+or paper-facing positive claim was started.
+
+2026-05-09T01:56:54Z: Codex reviewed and approved exactly one future Chimera
+Slurm context-mass scoring submission for the restricted Step-label expanded
+action-verb score plan:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl`.
+Approval report:
+`results/natural_evidence_v1/status/hermes_reports/20260509_0155_restricted_step_label_expanded_mass_submission_approval.md`.
+The local model-free checks passed with `.venv/bin/python --validate-plan-only`,
+`bash -n`, `score_plan_rows=128`, and score-plan SHA256
+`aaf5d35a83e8afb8a6c8093310478dfd09cd5451559e2b3fe01132b99b513495`.
+The allowlist entry remains disabled; no Slurm job was submitted, no
+tokenizer/model scoring started, and no generation, training, WP4, Qwen E2E,
+Llama, same-family null, sanitizer, FAR aggregation, or paper-facing positive
+claim was started. Next allowed action is a later explicit submission tick that
+temporarily enables exactly one allowlist entry, submits one Chimera Slurm
+context-mass scoring job, and disables the entry immediately afterward.
+
+2026-05-09T02:03:00Z: user explicitly approved the submission step. Codex
+validated the restricted Step-label expanded score plan locally using
+`.venv/bin/python`, temporarily enabled the single `v2_wp3_context_mass_score`
+allowlist entry, synced only required files and artifacts to Chimera, and
+submitted exactly one Slurm job: `850483` (`nat-ev-v2-wp3ctxm`) on
+`DGXA100/chimera13`. Codex immediately disabled the allowlist entry again with
+condition
+`submitted_once_as_job_850483_pending_restricted_step_label_expanded_mass_result_review`
+and synced the disabled allowlist back to Chimera. The wrapper is using the
+Chimera virtual environment
+`/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3` and the
+intended score plan:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl`.
+Initial wrapper output shows plan validation passed with `128` rows; tokenizer
+validation skipped `16` invalid rows because `Organize` is not one Qwen next
+token and continued with `112` valid rows, as intended by
+`--skip-invalid-tokenization`. Current Slurm state at check time:
+`RUNNING`, elapsed `00:00:28`. No training, model-output generation, WP4,
+Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, or paper-facing
+positive claim was started. Next allowed action is monitor job `850483`; after
+completion, sync and review its mass artifacts before any further action.
+
+2026-05-09T02:04:00Z: Slurm job `850483` completed `0:0` in `00:00:43`.
+Codex synced artifacts to
+`results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_score_850483/`
+and reviewed them. Result:
+`status=WP3_CONTEXT_MASS_SCORED_NOT_TRAINING_NOT_GENERATION`,
+`mass_gate_status=FAIL`, `score_plan_rows=128`, `context_score_rows=112`,
+`invalid_tokenization_rows=16`, and `mass_rows=7`. All `16` invalid
+tokenization rows came from
+`step_label_arrange_schedule_organize_plan_v1` because `Organize` tokenizes as
+two Qwen tokens (`[10762, 551]`). No scored expanded bank passed the configured
+gate (`min_bucket_mass >= 0.005`, `max_bucket_mass_ratio <= 5.0`). Review:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_EXPANDED_MASS_SCORE_850483_REVIEW.md`.
+The closest near-miss was
+`step_label_create_develop_establish_set_v1` with
+`min_bucket_mass=0.0040764090` and `ratio=3.0936`; the most balanced near-miss
+was `step_label_identify_assess_research_review_v1` with
+`min_bucket_mass=0.0035765931` and `ratio=1.5094`. WP3 still fails and WP4
+remains blocked. No training, model-output generation, WP4, Qwen E2E, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started. Next allowed action is an artifact-only mass-aware candidate repair
+plan from 850483 context scores; do not submit Slurm automatically.
+
+2026-05-09T02:11:00Z: Codex executed the approved next step as an
+artifact-only repair plan from the completed `850483` context-mass scores.
+Output:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_mass_aware_repair_plan_20260509_0211/`.
+The builder found `14` scored bucket groups, `6` mean-mass-eligible bucket
+groups, and produced `12` recombined two-way candidate banks plus a `192`-row
+fresh context-mass score plan. The plan validates locally under the project
+virtual environment with
+`PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION`. Review:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_MASS_AWARE_REPAIR_PLAN_850483.md`.
+This is not a gate pass: no tokenizer/model scoring was run for the recombined
+banks, no Slurm job was submitted, and WP4 remains blocked. Next allowed action
+is review of the mass-aware repair plan; if explicitly approved, enable exactly
+one allowlist entry and submit one Chimera Slurm context-mass scoring job for
+the `192`-row mass-aware recombined score plan in a fresh output directory.
+Hermes progress notification for this step succeeded through both Telegram and
+email:
+`results/natural_evidence_v1/status/hermes_reports/20260509_0211_wp3_mass_aware_repair_plan_ready.notify.json`.
+
+2026-05-09T02:20:00Z: user requested continuing the next step. Codex treated
+that as approval to score the already reviewed 192-row mass-aware recombined
+context-mass plan. Codex validated the plan locally using `.venv/bin/python`,
+temporarily enabled the single `v2_wp3_context_mass_score` allowlist entry,
+synced only the required files/artifacts to Chimera, and submitted exactly one
+Slurm job: `850509` (`nat-ev-v2-wp3ctxm`) on `DGXA100`. The score plan is:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_mass_aware_repair_plan_20260509_0211/qwen_v2_wp3_restricted_step_label_mass_aware_context_mass_score_plan.jsonl`.
+Remote output dir:
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947`.
+Codex immediately disabled the allowlist entry again with condition
+`submitted_once_as_job_850509_pending_mass_aware_recombined_context_mass_result_review`
+and synced the disabled allowlist back to Chimera. Current Slurm state at check
+time: `PENDING(Resources)`. No training, model-output generation, WP4, Qwen
+E2E, Llama, same-family null, sanitizer, FAR aggregation, or paper-facing
+positive claim was started. Next allowed action is monitor job `850509`; after
+completion, sync and review its mass artifacts before any further action.
+
+2026-05-09T02:25:00Z: Slurm job `850509` completed `0:0` in `00:00:44` on
+`chimera13`. Codex synced artifacts to
+`results/natural_evidence_v2/status/wp3_restricted_step_label_mass_aware_score_850509/`
+and reviewed them. Result:
+`status=WP3_CONTEXT_MASS_SCORED_NOT_TRAINING_NOT_GENERATION`,
+`mass_gate_status=PASS_REVIEW_REQUIRED`, `score_plan_rows=192`,
+`context_score_rows=192`, `invalid_tokenization_rows=0`, and `mass_rows=12`.
+All `12/12` recombined candidate banks passed the configured context-specific
+model-mass gate. Review:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_MASS_AWARE_SCORE_850509_REVIEW.md`.
+This is a mass subgate pass only; WP3 overall remains blocked by the prior
+restricted Step-label density close-fail. Codex then prepared an artifact-only
+primary policy and strict density repair plan:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225/`
+and
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_POLICY_DENSITY_PLAN_850509.md`.
+The selected primary bank is
+`step_label_recombined_create_develop_vs_choose_make_v1` with
+`bucket_0=[Create, Develop]`, `bucket_1=[Choose, Make]`,
+`min_bucket_mass=0.0125512375`, and `mass_ratio=1.0047399181`. Local strict
+density plan validation passed with `PASS_RESTRICTED_STEP_LABEL_DENSITY_PLAN_VALIDATION`
+for `256` strict repair prompts. No additional Slurm job was submitted. No
+training, model-output generation beyond the completed density diagnostics,
+WP4, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Next allowed action is review this
+primary policy and strict density plan; if explicitly approved, submit exactly
+one Chimera Slurm restricted Step-label density audit using the strict repair
+prompts and this policy directory, then disable the allowlist entry immediately.
+
+2026-05-09T02:33:00Z: user approved continuing with the reviewed primary policy
+and strict density plan. Codex validated the plan locally using `.venv/bin/python`,
+temporarily enabled the single `v2_wp3_restricted_step_label_density_audit`
+allowlist entry, synced only the required files/artifacts to Chimera, and
+submitted exactly one Slurm job: `850523` (`nat-ev-v2-wp3dens`) on `DGXA100`.
+The strict prompt file is:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225/restricted_step_label_strict_density_audit_prompts.jsonl`.
+The selected policy dir is:
+`results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225`.
+Remote output dir:
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_primary_density_audit_20260509_023224`.
+Codex immediately disabled the allowlist entry again with condition
+`submitted_once_as_job_850523_pending_primary_policy_strict_density_result_review`
+and synced the disabled allowlist back to Chimera. Current Slurm state at check
+time: `RUNNING` on `chimera13`. No training, WP4, Qwen E2E, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started. Next allowed action is monitor job `850523`; after completion,
+sync and review its density artifacts before any further action.
+
+2026-05-09T02:44:00Z: Slurm job `850523` completed `0:0` in `00:09:59` on
+`chimera13`. Codex synced artifacts to
+`results/natural_evidence_v2/status/wp3_restricted_step_label_primary_density_audit_850523/`
+and reviewed them. Result:
+`status=FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE`,
+`total_responses=256`, `complete_step_label_response_count=255`,
+`complete_step_label_response_rate=0.99609375`,
+`responses_with_at_least_16_structural_slots_count=255`,
+`mean_detected_structural_slots_per_response=15.94140625`,
+`median_detected_structural_slots_per_response=16.0`, `detected_slot_rows=4081`,
+and `forbidden_public_surface_rate=0.0`. Review:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_AUDIT_850523_REVIEW.md`.
+The single failure came from `variant_id=strict_compact_step_label_lines`; the
+model produced all `Step 1:` through `Step 16:` labels inline in one paragraph,
+but the current detector only counts line-start step anchors. This is a close
+density structural fail, not a mass/tokenizer failure. WP3 overall remains
+blocked and WP4 remains forbidden. Next allowed action is artifact-only density
+repair: remove or rewrite the compact prompt variant, or explicitly decide
+whether sentence-start inline Step labels are inside the detector contract. Do
+not submit another Slurm job without review and explicit approval.
 
 ## Remaining NEEDS_RESULTS
 - qwen_8way_clean_bank_rebuilt

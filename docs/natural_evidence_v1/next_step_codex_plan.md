@@ -62,10 +62,11 @@ natural_evidence_v2_controlled_micro_slots
 Current next allowed action:
 
 ```text
-Monitor Slurm job 850434. After it completes, sync and review the restricted
-Step-label base-Qwen model-output density artifacts and manual naturalness
-examples. Do not start WP4, training, Qwen E2E, Llama, same-family null,
-sanitizer, FAR, or positive paper claims.
+Artifact-only density repair after job `850523`: remove or rewrite the
+`strict_compact_step_label_lines` variant, or explicitly decide whether
+sentence-start inline Step labels are inside the detector contract. Do not
+submit another Slurm job automatically. Do not start WP4, training, Qwen E2E,
+Llama, same-family null, sanitizer, FAR, or positive paper claims.
 ```
 
 The intended v2 route is:
@@ -94,7 +95,18 @@ The intended v2 route is:
    256-prompt model-output density audit plan and a reviewed Slurm wrapper. The
    wrapper was approved, explicitly submitted once as Slurm job `850434`, and
    the allowlist entry was disabled immediately afterward to prevent duplicate
-   submissions. The job is a base-Qwen model-output density audit only.
+   submissions. The job is a base-Qwen model-output density audit only. Job
+   `850434` completed `0:0`, synced locally, and failed the business structural
+   gate. Review:
+   `docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_850434_REVIEW.md`.
+   The model followed `Step 1:` through `Step 16:` in `253/256` responses
+   (`0.98828125`), with `4048` detected slots and median `16` slots per
+   response. The original forbidden-surface count was a substring-matcher false
+   positive; re-auditing the same response artifact with the repaired matcher
+   gives `forbidden_public_surface_rate=0.0`. The gate still fails because
+   mean structural slots are `15.8125 < 16.0`, and the current two-bank
+   restricted surface only covers `773/4048` slots (`0.1909584980`) as raw
+   accidental bank hits. WP4 remains blocked.
 3. WP4: prompt-local small payload contract and decoder oracle substitution.
 4. WP5: teacher-forced target-mass gate.
 5. WP6: Qwen v2 proof-of-life E2E only if WP5 passes.
@@ -1199,11 +1211,308 @@ capable of `16` step-label slots per response. The 8-step-plus-extra route is
 blocked because current non-step banks have not passed the full-vocabulary
 mass gate.
 
-Immediate next action: prepare a model-output density audit plan for the
-restricted 16-step route. The plan must test whether base Qwen follows
-`Step 1:` through `Step 16:` and whether the restricted detector finds at least
-`16` eligible step-label slots per response. Any model generation/scoring must
-be explicitly reviewed and use Chimera Slurm. WP4 and training remain blocked.
+The 256-prompt model-output density audit has now run as job `850434`. It is a
+useful near-pass diagnostic but not a WP3 pass:
+
+```text
+complete_step_label_response_rate=0.98828125
+responses_with_at_least_16_structural_slots_rate=0.98828125
+mean_detected_structural_slots_per_response=15.8125
+reclassified_forbidden_public_surface_rate=0.0
+raw_bank_surface_exact_hit_rate=0.19095849802371542
+structural_density_gate_status=FAIL
+wp4_allowed=false
+```
+
+Immediate next action: build an artifact-only restricted Step-label repair plan.
+It should make the prompt wording stricter for exact `Step 1:` through
+`Step 16:` adherence, remove variants that produced unlabeled prose, and expand
+action-verb candidate banks from observed model openers such as `Prepare`,
+`Plan`, `Ensure`, `Pack`, `Determine`, `Define`, `Gather`, `Select`, `Confirm`,
+and `Schedule`. Any tokenizer/context-mass scoring of expanded banks must be
+reviewed, allowlisted, and submitted through Chimera Slurm. WP4 and training
+remain blocked.
+
+Completed repair-plan artifact:
+
+```text
+scripts/natural_evidence_v2/build_wp3_restricted_step_label_repair_plan.py
+results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/
+```
+
+The plan contains `256` stricter prompt rows and `8` expanded Step-label
+action-verb candidate banks. It did not call a model or score logits. Next
+allowed action is review of this plan and, if approved, construction/review of
+a Chimera Slurm tokenizer/context-mass scoring plan for the expanded bank
+candidates. WP4 and training remain blocked.
+
+Expanded context-mass score plan is now ready:
+
+```text
+scripts/natural_evidence_v2/build_wp3_restricted_step_label_expanded_mass_plan.py
+results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_REPAIR_AND_EXPANDED_MASS_PLAN_REVIEW.md
+```
+
+Validation:
+
+```text
+.venv/bin/python scripts/natural_evidence_v2/score_wp3_context_mass.py \
+  --score-plan results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl \
+  --validate-plan-only
+
+status=PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION
+score_plan_rows=128
+```
+
+The compatible Slurm wrapper is:
+
+```text
+scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch
+```
+
+It uses the Chimera virtual environment by default:
+
+```text
+/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+```
+
+The allowlist entry `v2_wp3_context_mass_score` remains disabled after approval,
+pending a later explicit submission tick. WP4 and training remain blocked.
+
+Approval now recorded:
+
+```text
+results/natural_evidence_v1/status/hermes_reports/20260509_0155_restricted_step_label_expanded_mass_submission_approval.md
+```
+
+No Slurm job was submitted during approval. The next allowed action is a later
+explicit submission tick that temporarily enables exactly one allowlist entry,
+submits one Chimera Slurm context-mass scoring job, and disables the entry
+immediately afterward. WP4 and training remain blocked.
+
+Submission now recorded:
+
+```text
+job_id=850483
+job_name=nat-ev-v2-wp3ctxm
+partition=DGXA100
+node=chimera13
+score_plan=results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+state_at_initial_check=RUNNING
+```
+
+The allowlist entry was enabled only for this submission and then disabled
+again with condition:
+
+```text
+submitted_once_as_job_850483_pending_restricted_step_label_expanded_mass_result_review
+```
+
+Initial wrapper logs show plan validation passed on Chimera. Tokenizer
+validation skipped `16` rows because `Organize` is not a single Qwen next token;
+the job continued with `112` valid rows under the intended
+`--skip-invalid-tokenization` policy. Next allowed action is monitoring and
+artifact review after completion.
+
+Job `850483` is now completed and reviewed:
+
+```text
+state=COMPLETED
+exit_code=0:0
+runtime=00:00:43
+mass_gate_status=FAIL
+score_plan_rows=128
+context_score_rows=112
+invalid_tokenization_rows=16
+mass_rows=7
+```
+
+Review:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_EXPANDED_MASS_SCORE_850483_REVIEW.md
+```
+
+No expanded bank passed the configured gate:
+
+```text
+min_bucket_mass >= 0.005
+max_bucket_mass_ratio <= 5.0
+```
+
+Closest near-miss:
+
+```text
+step_label_create_develop_establish_set_v1
+min_bucket_mass=0.0040764090
+ratio=3.0936
+```
+
+Most balanced near-miss:
+
+```text
+step_label_identify_assess_research_review_v1
+min_bucket_mass=0.0035765931
+ratio=1.5094
+```
+
+Next allowed action: artifact-only mass-aware candidate repair from 850483
+context scores. Remove or replace multi-token / low-mass surfaces such as
+`Organize`, and do not submit another Slurm job without a reviewed plan and
+explicit approval.
+
+Artifact-only mass-aware repair plan is now ready:
+
+```text
+results/natural_evidence_v2/status/wp3_restricted_step_label_mass_aware_repair_plan_20260509_0211/
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_MASS_AWARE_REPAIR_PLAN_850483.md
+```
+
+Summary:
+
+```text
+source_mass_gate_status=FAIL
+source_context_score_rows=112
+source_invalid_tokenization_rows=16
+bucket_group_rows=14
+eligible_bucket_group_rows=6
+recombined_candidate_rows=12
+score_plan_rows=192
+local_validation=PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION
+```
+
+The top inferred recombined candidate is:
+
+```text
+step_label_recombined_create_develop_vs_choose_make_v1
+bucket_0=[Create, Develop]
+bucket_1=[Choose, Make]
+inferred_min_bucket_mass=0.0125512375
+inferred_mass_ratio=1.0047399181
+```
+
+This is not a WP3 pass; the recombined banks still need fresh Chimera Slurm
+tokenizer/context-mass scoring before any WP4 decision. No Slurm job was
+submitted for this repair plan.
+
+The mass-aware recombined score job has now been submitted:
+
+```text
+job_id=850509
+job_name=nat-ev-v2-wp3ctxm
+partition=DGXA100
+initial_state=PENDING(Resources)
+score_plan_rows=192
+remote_output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_mass_aware_score_20260509_021947
+```
+
+The allowlist entry was disabled immediately after submission:
+
+```text
+submitted_once_as_job_850509_pending_mass_aware_recombined_context_mass_result_review
+```
+
+Next allowed action: monitor `850509`; once completed, sync artifacts and
+review the mass gate before any further step.
+
+Job `850509` is completed and reviewed:
+
+```text
+state=COMPLETED
+exit_code=0:0
+runtime=00:00:44
+mass_gate_status=PASS_REVIEW_REQUIRED
+score_plan_rows=192
+context_score_rows=192
+invalid_tokenization_rows=0
+mass_rows=12
+passing_banks=12/12
+```
+
+Review:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_MASS_AWARE_SCORE_850509_REVIEW.md
+```
+
+The selected primary bank and strict density repair plan are ready:
+
+```text
+results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225/
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_POLICY_DENSITY_PLAN_850509.md
+```
+
+Selected primary bank:
+
+```text
+step_label_recombined_create_develop_vs_choose_make_v1
+bucket_0=[Create, Develop]
+bucket_1=[Choose, Make]
+min_bucket_mass=0.0125512375
+mass_ratio=1.0047399181
+```
+
+Local strict density plan validation:
+
+```text
+PASS_RESTRICTED_STEP_LABEL_DENSITY_PLAN_VALIDATION
+prompt_count=256
+```
+
+Next allowed action: review this primary policy and strict density plan; if
+approved, submit one Chimera Slurm restricted Step-label density audit. Do not
+submit automatically without explicit approval.
+
+Primary-policy strict density audit job submitted:
+
+```text
+job_id=850523
+job_name=nat-ev-v2-wp3dens
+partition=DGXA100
+initial_state=RUNNING
+node=chimera13
+prompts=results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225/restricted_step_label_strict_density_audit_prompts.jsonl
+policy_dir=results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225
+remote_output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_primary_density_audit_20260509_023224
+```
+
+The allowlist entry was disabled immediately after submission:
+
+```text
+submitted_once_as_job_850523_pending_primary_policy_strict_density_result_review
+```
+
+Next allowed action: monitor `850523`; once completed, sync artifacts and
+review the density gate before any further step.
+
+Job `850523` is completed and reviewed:
+
+```text
+state=COMPLETED
+exit_code=0:0
+runtime=00:09:59
+status=FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE
+total_responses=256
+complete_step_label_response_count=255
+complete_step_label_response_rate=0.99609375
+mean_detected_structural_slots_per_response=15.94140625
+median_detected_structural_slots_per_response=16.0
+forbidden_public_surface_rate=0.0
+```
+
+Review:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_AUDIT_850523_REVIEW.md
+```
+
+The failure is concentrated in one `strict_compact_step_label_lines` response:
+the model produced `Step 1:` through `Step 16:` inline in one paragraph, while
+the current detector counts only line-start step anchors. WP3 overall remains
+blocked; next allowed action is artifact-only density repair of this prompt
+variant or detector-contract decision.
 
 ### Still forbidden
 

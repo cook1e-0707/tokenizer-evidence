@@ -1,0 +1,901 @@
+{
+  "casing_variant": "sentence_case",
+  "compatible_scoring_command_pattern": "SCORE_PLAN=<this score_plan_jsonl> OUTPUT_DIR=<fresh scratch output> sbatch scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+  "compatible_scoring_wrapper": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+  "e2e_eval_started": false,
+  "expanded_bank_candidate_count": 8,
+  "generation_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review this Slurm-only score plan. If approved, sync it to Chimera, temporarily enable one allowlist entry, and submit exactly one wp3_context_mass_score.sbatch job with SCORE_PLAN pointing to this artifact. Do not start WP4 or training.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "observed_counts_by_bank": {
+    "step_label_arrange_schedule_organize_plan_v1": {
+      "candidate_surface_observed_counts": {
+        "Arrange": 46,
+        "Organize": 30,
+        "Plan": 137,
+        "Schedule": 43
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Arrange": 0,
+          "Organize": 0,
+          "Plan": 1,
+          "Schedule": 3
+        },
+        "10": {
+          "Arrange": 5,
+          "Organize": 2,
+          "Plan": 9,
+          "Schedule": 2
+        },
+        "11": {
+          "Arrange": 5,
+          "Organize": 4,
+          "Plan": 8,
+          "Schedule": 6
+        },
+        "12": {
+          "Arrange": 5,
+          "Organize": 2,
+          "Plan": 12,
+          "Schedule": 0
+        },
+        "13": {
+          "Arrange": 4,
+          "Organize": 0,
+          "Plan": 13,
+          "Schedule": 1
+        },
+        "14": {
+          "Arrange": 4,
+          "Organize": 1,
+          "Plan": 12,
+          "Schedule": 5
+        },
+        "15": {
+          "Arrange": 2,
+          "Organize": 3,
+          "Plan": 13,
+          "Schedule": 6
+        },
+        "16": {
+          "Arrange": 1,
+          "Organize": 0,
+          "Plan": 4,
+          "Schedule": 2
+        },
+        "2": {
+          "Arrange": 0,
+          "Organize": 0,
+          "Plan": 6,
+          "Schedule": 0
+        },
+        "3": {
+          "Arrange": 0,
+          "Organize": 0,
+          "Plan": 1,
+          "Schedule": 2
+        },
+        "4": {
+          "Arrange": 0,
+          "Organize": 1,
+          "Plan": 6,
+          "Schedule": 1
+        },
+        "5": {
+          "Arrange": 0,
+          "Organize": 4,
+          "Plan": 9,
+          "Schedule": 1
+        },
+        "6": {
+          "Arrange": 3,
+          "Organize": 5,
+          "Plan": 11,
+          "Schedule": 1
+        },
+        "7": {
+          "Arrange": 0,
+          "Organize": 2,
+          "Plan": 8,
+          "Schedule": 6
+        },
+        "8": {
+          "Arrange": 7,
+          "Organize": 5,
+          "Plan": 12,
+          "Schedule": 6
+        },
+        "9": {
+          "Arrange": 10,
+          "Organize": 1,
+          "Plan": 12,
+          "Schedule": 1
+        }
+      }
+    },
+    "step_label_create_develop_establish_set_v1": {
+      "candidate_surface_observed_counts": {
+        "Create": 130,
+        "Develop": 43,
+        "Establish": 38,
+        "Set": 222
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Create": 2,
+          "Develop": 0,
+          "Establish": 0,
+          "Set": 7
+        },
+        "10": {
+          "Create": 6,
+          "Develop": 3,
+          "Establish": 3,
+          "Set": 25
+        },
+        "11": {
+          "Create": 4,
+          "Develop": 4,
+          "Establish": 2,
+          "Set": 25
+        },
+        "12": {
+          "Create": 1,
+          "Develop": 1,
+          "Establish": 2,
+          "Set": 21
+        },
+        "13": {
+          "Create": 3,
+          "Develop": 2,
+          "Establish": 2,
+          "Set": 10
+        },
+        "14": {
+          "Create": 3,
+          "Develop": 0,
+          "Establish": 0,
+          "Set": 8
+        },
+        "15": {
+          "Create": 1,
+          "Develop": 0,
+          "Establish": 2,
+          "Set": 6
+        },
+        "16": {
+          "Create": 1,
+          "Develop": 0,
+          "Establish": 0,
+          "Set": 5
+        },
+        "2": {
+          "Create": 19,
+          "Develop": 0,
+          "Establish": 0,
+          "Set": 8
+        },
+        "3": {
+          "Create": 21,
+          "Develop": 1,
+          "Establish": 1,
+          "Set": 16
+        },
+        "4": {
+          "Create": 27,
+          "Develop": 1,
+          "Establish": 0,
+          "Set": 25
+        },
+        "5": {
+          "Create": 13,
+          "Develop": 8,
+          "Establish": 8,
+          "Set": 15
+        },
+        "6": {
+          "Create": 17,
+          "Develop": 10,
+          "Establish": 9,
+          "Set": 11
+        },
+        "7": {
+          "Create": 4,
+          "Develop": 7,
+          "Establish": 3,
+          "Set": 15
+        },
+        "8": {
+          "Create": 7,
+          "Develop": 3,
+          "Establish": 2,
+          "Set": 10
+        },
+        "9": {
+          "Create": 1,
+          "Develop": 3,
+          "Establish": 4,
+          "Set": 15
+        }
+      }
+    },
+    "step_label_ensure_confirm_check_review_v1": {
+      "candidate_surface_observed_counts": {
+        "Check": 100,
+        "Confirm": 36,
+        "Ensure": 103,
+        "Review": 118
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Check": 9,
+          "Confirm": 0,
+          "Ensure": 0,
+          "Review": 5
+        },
+        "10": {
+          "Check": 7,
+          "Confirm": 4,
+          "Ensure": 10,
+          "Review": 6
+        },
+        "11": {
+          "Check": 3,
+          "Confirm": 1,
+          "Ensure": 10,
+          "Review": 7
+        },
+        "12": {
+          "Check": 7,
+          "Confirm": 4,
+          "Ensure": 10,
+          "Review": 12
+        },
+        "13": {
+          "Check": 7,
+          "Confirm": 2,
+          "Ensure": 10,
+          "Review": 11
+        },
+        "14": {
+          "Check": 3,
+          "Confirm": 3,
+          "Ensure": 7,
+          "Review": 10
+        },
+        "15": {
+          "Check": 5,
+          "Confirm": 3,
+          "Ensure": 6,
+          "Review": 10
+        },
+        "16": {
+          "Check": 0,
+          "Confirm": 4,
+          "Ensure": 2,
+          "Review": 17
+        },
+        "2": {
+          "Check": 14,
+          "Confirm": 0,
+          "Ensure": 0,
+          "Review": 5
+        },
+        "3": {
+          "Check": 12,
+          "Confirm": 4,
+          "Ensure": 4,
+          "Review": 3
+        },
+        "4": {
+          "Check": 11,
+          "Confirm": 2,
+          "Ensure": 3,
+          "Review": 11
+        },
+        "5": {
+          "Check": 7,
+          "Confirm": 1,
+          "Ensure": 7,
+          "Review": 10
+        },
+        "6": {
+          "Check": 2,
+          "Confirm": 2,
+          "Ensure": 7,
+          "Review": 0
+        },
+        "7": {
+          "Check": 4,
+          "Confirm": 1,
+          "Ensure": 10,
+          "Review": 1
+        },
+        "8": {
+          "Check": 6,
+          "Confirm": 2,
+          "Ensure": 8,
+          "Review": 3
+        },
+        "9": {
+          "Check": 3,
+          "Confirm": 3,
+          "Ensure": 9,
+          "Review": 7
+        }
+      }
+    },
+    "step_label_identify_assess_research_review_v1": {
+      "candidate_surface_observed_counts": {
+        "Assess": 18,
+        "Identify": 62,
+        "Research": 32,
+        "Review": 118
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Assess": 15,
+          "Identify": 7,
+          "Research": 7,
+          "Review": 5
+        },
+        "10": {
+          "Assess": 1,
+          "Identify": 1,
+          "Research": 1,
+          "Review": 6
+        },
+        "11": {
+          "Assess": 0,
+          "Identify": 1,
+          "Research": 0,
+          "Review": 7
+        },
+        "12": {
+          "Assess": 0,
+          "Identify": 0,
+          "Research": 0,
+          "Review": 12
+        },
+        "13": {
+          "Assess": 0,
+          "Identify": 0,
+          "Research": 0,
+          "Review": 11
+        },
+        "14": {
+          "Assess": 1,
+          "Identify": 0,
+          "Research": 0,
+          "Review": 10
+        },
+        "15": {
+          "Assess": 0,
+          "Identify": 0,
+          "Research": 0,
+          "Review": 10
+        },
+        "16": {
+          "Assess": 0,
+          "Identify": 0,
+          "Research": 0,
+          "Review": 17
+        },
+        "2": {
+          "Assess": 1,
+          "Identify": 26,
+          "Research": 9,
+          "Review": 5
+        },
+        "3": {
+          "Assess": 0,
+          "Identify": 7,
+          "Research": 10,
+          "Review": 3
+        },
+        "4": {
+          "Assess": 0,
+          "Identify": 7,
+          "Research": 2,
+          "Review": 11
+        },
+        "5": {
+          "Assess": 0,
+          "Identify": 0,
+          "Research": 0,
+          "Review": 10
+        },
+        "6": {
+          "Assess": 0,
+          "Identify": 3,
+          "Research": 1,
+          "Review": 0
+        },
+        "7": {
+          "Assess": 0,
+          "Identify": 4,
+          "Research": 0,
+          "Review": 1
+        },
+        "8": {
+          "Assess": 0,
+          "Identify": 6,
+          "Research": 1,
+          "Review": 3
+        },
+        "9": {
+          "Assess": 0,
+          "Identify": 0,
+          "Research": 1,
+          "Review": 7
+        }
+      }
+    },
+    "step_label_pack_bring_gather_collect_v1": {
+      "candidate_surface_observed_counts": {
+        "Bring": 74,
+        "Collect": 28,
+        "Gather": 70,
+        "Pack": 94
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Bring": 0,
+          "Collect": 0,
+          "Gather": 9,
+          "Pack": 0
+        },
+        "10": {
+          "Bring": 6,
+          "Collect": 2,
+          "Gather": 1,
+          "Pack": 4
+        },
+        "11": {
+          "Bring": 7,
+          "Collect": 5,
+          "Gather": 0,
+          "Pack": 6
+        },
+        "12": {
+          "Bring": 3,
+          "Collect": 3,
+          "Gather": 0,
+          "Pack": 6
+        },
+        "13": {
+          "Bring": 4,
+          "Collect": 4,
+          "Gather": 0,
+          "Pack": 6
+        },
+        "14": {
+          "Bring": 6,
+          "Collect": 6,
+          "Gather": 0,
+          "Pack": 2
+        },
+        "15": {
+          "Bring": 2,
+          "Collect": 2,
+          "Gather": 1,
+          "Pack": 2
+        },
+        "16": {
+          "Bring": 0,
+          "Collect": 1,
+          "Gather": 1,
+          "Pack": 2
+        },
+        "2": {
+          "Bring": 0,
+          "Collect": 0,
+          "Gather": 16,
+          "Pack": 0
+        },
+        "3": {
+          "Bring": 0,
+          "Collect": 0,
+          "Gather": 19,
+          "Pack": 1
+        },
+        "4": {
+          "Bring": 1,
+          "Collect": 0,
+          "Gather": 9,
+          "Pack": 22
+        },
+        "5": {
+          "Bring": 15,
+          "Collect": 1,
+          "Gather": 8,
+          "Pack": 7
+        },
+        "6": {
+          "Bring": 11,
+          "Collect": 0,
+          "Gather": 2,
+          "Pack": 16
+        },
+        "7": {
+          "Bring": 9,
+          "Collect": 2,
+          "Gather": 1,
+          "Pack": 6
+        },
+        "8": {
+          "Bring": 3,
+          "Collect": 1,
+          "Gather": 2,
+          "Pack": 4
+        },
+        "9": {
+          "Bring": 7,
+          "Collect": 1,
+          "Gather": 1,
+          "Pack": 10
+        }
+      }
+    },
+    "step_label_prepare_plan_determine_define_v1": {
+      "candidate_surface_observed_counts": {
+        "Define": 76,
+        "Determine": 85,
+        "Plan": 137,
+        "Prepare": 200
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Define": 74,
+          "Determine": 59,
+          "Plan": 1,
+          "Prepare": 0
+        },
+        "10": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 9,
+          "Prepare": 17
+        },
+        "11": {
+          "Define": 0,
+          "Determine": 1,
+          "Plan": 8,
+          "Prepare": 20
+        },
+        "12": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 12,
+          "Prepare": 14
+        },
+        "13": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 13,
+          "Prepare": 10
+        },
+        "14": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 12,
+          "Prepare": 10
+        },
+        "15": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 13,
+          "Prepare": 15
+        },
+        "16": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 4,
+          "Prepare": 2
+        },
+        "2": {
+          "Define": 0,
+          "Determine": 1,
+          "Plan": 6,
+          "Prepare": 5
+        },
+        "3": {
+          "Define": 0,
+          "Determine": 5,
+          "Plan": 1,
+          "Prepare": 13
+        },
+        "4": {
+          "Define": 0,
+          "Determine": 8,
+          "Plan": 6,
+          "Prepare": 10
+        },
+        "5": {
+          "Define": 0,
+          "Determine": 6,
+          "Plan": 9,
+          "Prepare": 17
+        },
+        "6": {
+          "Define": 2,
+          "Determine": 0,
+          "Plan": 11,
+          "Prepare": 17
+        },
+        "7": {
+          "Define": 0,
+          "Determine": 4,
+          "Plan": 8,
+          "Prepare": 27
+        },
+        "8": {
+          "Define": 0,
+          "Determine": 0,
+          "Plan": 12,
+          "Prepare": 16
+        },
+        "9": {
+          "Define": 0,
+          "Determine": 1,
+          "Plan": 12,
+          "Prepare": 7
+        }
+      }
+    },
+    "step_label_select_decide_choose_make_v1": {
+      "candidate_surface_observed_counts": {
+        "Choose": 150,
+        "Decide": 40,
+        "Make": 25,
+        "Select": 47
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Choose": 27,
+          "Decide": 10,
+          "Make": 0,
+          "Select": 1
+        },
+        "10": {
+          "Choose": 1,
+          "Decide": 0,
+          "Make": 1,
+          "Select": 0
+        },
+        "11": {
+          "Choose": 0,
+          "Decide": 0,
+          "Make": 1,
+          "Select": 0
+        },
+        "12": {
+          "Choose": 0,
+          "Decide": 2,
+          "Make": 0,
+          "Select": 0
+        },
+        "13": {
+          "Choose": 0,
+          "Decide": 0,
+          "Make": 1,
+          "Select": 0
+        },
+        "14": {
+          "Choose": 0,
+          "Decide": 0,
+          "Make": 2,
+          "Select": 0
+        },
+        "15": {
+          "Choose": 0,
+          "Decide": 0,
+          "Make": 1,
+          "Select": 0
+        },
+        "16": {
+          "Choose": 0,
+          "Decide": 0,
+          "Make": 0,
+          "Select": 0
+        },
+        "2": {
+          "Choose": 76,
+          "Decide": 2,
+          "Make": 5,
+          "Select": 7
+        },
+        "3": {
+          "Choose": 17,
+          "Decide": 9,
+          "Make": 4,
+          "Select": 13
+        },
+        "4": {
+          "Choose": 7,
+          "Decide": 3,
+          "Make": 1,
+          "Select": 11
+        },
+        "5": {
+          "Choose": 9,
+          "Decide": 4,
+          "Make": 1,
+          "Select": 4
+        },
+        "6": {
+          "Choose": 3,
+          "Decide": 3,
+          "Make": 1,
+          "Select": 8
+        },
+        "7": {
+          "Choose": 5,
+          "Decide": 3,
+          "Make": 3,
+          "Select": 1
+        },
+        "8": {
+          "Choose": 1,
+          "Decide": 0,
+          "Make": 1,
+          "Select": 1
+        },
+        "9": {
+          "Choose": 4,
+          "Decide": 4,
+          "Make": 3,
+          "Select": 1
+        }
+      }
+    },
+    "step_label_use_take_send_document_v1": {
+      "candidate_surface_observed_counts": {
+        "Document": 36,
+        "Send": 40,
+        "Take": 41,
+        "Use": 41
+      },
+      "candidate_surface_observed_counts_by_step": {
+        "1": {
+          "Document": 0,
+          "Send": 0,
+          "Take": 0,
+          "Use": 0
+        },
+        "10": {
+          "Document": 1,
+          "Send": 4,
+          "Take": 0,
+          "Use": 8
+        },
+        "11": {
+          "Document": 3,
+          "Send": 2,
+          "Take": 7,
+          "Use": 3
+        },
+        "12": {
+          "Document": 2,
+          "Send": 5,
+          "Take": 7,
+          "Use": 4
+        },
+        "13": {
+          "Document": 6,
+          "Send": 4,
+          "Take": 5,
+          "Use": 2
+        },
+        "14": {
+          "Document": 5,
+          "Send": 2,
+          "Take": 7,
+          "Use": 4
+        },
+        "15": {
+          "Document": 4,
+          "Send": 4,
+          "Take": 6,
+          "Use": 4
+        },
+        "16": {
+          "Document": 10,
+          "Send": 6,
+          "Take": 2,
+          "Use": 0
+        },
+        "2": {
+          "Document": 0,
+          "Send": 3,
+          "Take": 0,
+          "Use": 0
+        },
+        "3": {
+          "Document": 0,
+          "Send": 0,
+          "Take": 0,
+          "Use": 0
+        },
+        "4": {
+          "Document": 0,
+          "Send": 1,
+          "Take": 0,
+          "Use": 0
+        },
+        "5": {
+          "Document": 1,
+          "Send": 0,
+          "Take": 0,
+          "Use": 3
+        },
+        "6": {
+          "Document": 1,
+          "Send": 2,
+          "Take": 0,
+          "Use": 1
+        },
+        "7": {
+          "Document": 2,
+          "Send": 2,
+          "Take": 0,
+          "Use": 3
+        },
+        "8": {
+          "Document": 1,
+          "Send": 2,
+          "Take": 3,
+          "Use": 5
+        },
+        "9": {
+          "Document": 0,
+          "Send": 3,
+          "Take": 4,
+          "Use": 4
+        }
+      }
+    }
+  },
+  "paper_claim_allowed": false,
+  "prefixes": [
+    "Step 1: ",
+    "Step 2: ",
+    "Step 3: ",
+    "Step 4: ",
+    "Step 5: ",
+    "Step 6: ",
+    "Step 7: ",
+    "Step 8: ",
+    "Step 9: ",
+    "Step 10: ",
+    "Step 11: ",
+    "Step 12: ",
+    "Step 13: ",
+    "Step 14: ",
+    "Step 15: ",
+    "Step 16: "
+  ],
+  "repair_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_expanded_mass_plan_summary_v1",
+  "score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_score_plan.jsonl",
+  "score_plan_rows": 128,
+  "score_plan_rows_by_bank": {
+    "step_label_arrange_schedule_organize_plan_v1": 16,
+    "step_label_create_develop_establish_set_v1": 16,
+    "step_label_ensure_confirm_check_review_v1": 16,
+    "step_label_identify_assess_research_review_v1": 16,
+    "step_label_pack_bring_gather_collect_v1": 16,
+    "step_label_prepare_plan_determine_define_v1": 16,
+    "step_label_select_decide_choose_make_v1": 16,
+    "step_label_use_take_send_document_v1": 16
+  },
+  "slurm_review_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_expanded_mass_plan_20260508_2148/qwen_v2_wp3_restricted_step_label_expanded_context_mass_slurm_review.json",
+  "source_audit_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_850434",
+  "status": "WP3_RESTRICTED_STEP_LABEL_EXPANDED_CONTEXT_MASS_SCORE_PLAN_READY_ARTIFACT_ONLY",
+  "training_started": false,
+  "wp4_allowed": false
+}

@@ -1,0 +1,285 @@
+{
+  "backup_candidate_banks": [
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Choose",
+          "Make"
+        ],
+        "1": [
+          "Determine",
+          "Define"
+        ]
+      },
+      "candidate_bank_id": "step_label_recombined_choose_make_vs_determine_define_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_label_recombined_choose_make_vs_determine_define_v1",
+      "source_mass_gate": {
+        "context_count": 16,
+        "job_id": "850509",
+        "max_bucket_mass_ratio": 1.181907951001388,
+        "min_bucket_mass": 0.010619471227983013,
+        "passed": true
+      }
+    },
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Create",
+          "Develop"
+        ],
+        "1": [
+          "Determine",
+          "Define"
+        ]
+      },
+      "candidate_bank_id": "step_label_recombined_create_develop_vs_determine_define_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_label_recombined_create_develop_vs_determine_define_v1",
+      "source_mass_gate": {
+        "context_count": 16,
+        "job_id": "850509",
+        "max_bucket_mass_ratio": 1.187510097949324,
+        "min_bucket_mass": 0.010619471227983013,
+        "passed": true
+      }
+    },
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Check",
+          "Review"
+        ],
+        "1": [
+          "Identify",
+          "Assess"
+        ]
+      },
+      "candidate_bank_id": "step_label_recombined_check_review_vs_identify_assess_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_label_recombined_check_review_vs_identify_assess_v1",
+      "source_mass_gate": {
+        "context_count": 16,
+        "job_id": "850509",
+        "max_bucket_mass_ratio": 1.155946199628224,
+        "min_bucket_mass": 0.005398657245677896,
+        "passed": true
+      }
+    },
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Determine",
+          "Define"
+        ],
+        "1": [
+          "Check",
+          "Review"
+        ]
+      },
+      "candidate_bank_id": "step_label_recombined_determine_define_vs_check_review_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_label_recombined_determine_define_vs_check_review_v1",
+      "source_mass_gate": {
+        "context_count": 16,
+        "job_id": "850509",
+        "max_bucket_mass_ratio": 1.701686351527661,
+        "min_bucket_mass": 0.00624055732623674,
+        "passed": true
+      }
+    }
+  ],
+  "candidate_banks": [
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Create",
+          "Develop"
+        ],
+        "1": [
+          "Choose",
+          "Make"
+        ]
+      },
+      "candidate_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+      "source_mass_gate": {
+        "context_count": 16,
+        "job_id": "850509",
+        "max_bucket_mass_ratio": 1.0047399181494545,
+        "min_bucket_mass": 0.012551237479783595,
+        "passed": true
+      }
+    }
+  ],
+  "claim_control": {
+    "generation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_allowed": false,
+    "training_allowed": false,
+    "wp4_allowed": false
+  },
+  "density_design": {
+    "configured_average_micro_slots_gate": 16,
+    "decision": "Use the strict repair prompts to re-audit model-output density before WP4. The 850509 mass subgate passes, but the previous density gate is still a blocker.",
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_output_density_audit_required_before_wp4": true,
+    "paper_claim_allowed": false,
+    "repair_prompt_source": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_repair_plan_20260508_2134/restricted_step_label_strict_repair_prompts.jsonl",
+    "schema_name": "natural_evidence_v2_wp3_restricted_step_label_primary_density_design_v1",
+    "selected_route": "A_strict_16_step_checklist_step_label_only",
+    "source_complete_step_label_response_rate": 0.98828125,
+    "source_density_audit_job_id": "850434",
+    "source_density_gate_status": "FAIL_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_STRUCTURAL_GATE",
+    "source_mean_detected_structural_slots_per_response": 15.8125,
+    "status": "STRICT_DENSITY_REPAIR_AUDIT_PLAN_READY_ARTIFACT_ONLY",
+    "strict_prompt_count": 256,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "detector_contract": {
+    "allowed_prefix_regex": "Step (?:[1-9]|1[0-6]):\\\\s+",
+    "allowed_step_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "anchor_rule": "match line-start or sentence-start Step <integer>: followed by one sentence-case action verb candidate",
+    "detector_id": "qwen_v2_wp3_restricted_step_label_mass_aware_detector_v1",
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "observable_unit": "response_text",
+    "paper_claim_allowed": false,
+    "post_hoc_slot_selection_allowed": false,
+    "schema_name": "natural_evidence_v2_wp3_restricted_step_label_detector_contract_v1",
+    "slot_order": "increasing_step_number",
+    "slot_policy_id": "qwen_v2_wp3_restricted_step_label_mass_aware_primary_policy_v1",
+    "source_detector_id": "qwen_v2_wp3_restricted_step_label_detector_v1",
+    "source_mass_score_job_id": "850509",
+    "status": "RESTRICTED_STEP_LABEL_DETECTOR_ARTIFACT_ONLY_NOT_MODEL_OUTPUT",
+    "training_started": false
+  },
+  "next_allowed_action": "Review this primary policy and strict density plan. If explicitly approved, submit one Chimera Slurm restricted Step-label density audit using the strict repair prompts and this policy dir.",
+  "policy_id": "qwen_v2_wp3_restricted_step_label_mass_aware_primary_policy_v1",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_policy_v1",
+  "source_mass_audit": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_mass_aware_score_850509/qwen_v2_wp3_context_mass_audit.json",
+  "source_mass_score_job_id": "850509",
+  "status": "MASS_AWARE_PRIMARY_RESTRICTED_STEP_LABEL_POLICY_WRITTEN_ARTIFACT_ONLY"
+}

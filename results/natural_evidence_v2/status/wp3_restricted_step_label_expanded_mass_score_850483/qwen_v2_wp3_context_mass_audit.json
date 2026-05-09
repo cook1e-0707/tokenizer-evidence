@@ -1,0 +1,118 @@
+{
+  "bank_variant_count": 7,
+  "bank_variant_results": [
+    {
+      "bucket_masses": {
+        "0": 0.012610729318112135,
+        "1": 0.0040764090153970756
+      },
+      "candidate_bank_id": "step_label_create_develop_establish_set_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.0935878295038424,
+      "min_bucket_mass": 0.0040764090153970756,
+      "passed": false,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0009384599843542674,
+        "1": 0.00624055732623674
+      },
+      "candidate_bank_id": "step_label_ensure_confirm_check_review_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 6.649785212238669,
+      "min_bucket_mass": 0.0009384599843542674,
+      "passed": false,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.005398657245677896,
+        "1": 0.0035765930733759888
+      },
+      "candidate_bank_id": "step_label_identify_assess_research_review_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.509441285301724,
+      "min_bucket_mass": 0.0035765930733759888,
+      "passed": false,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0010932492496067425,
+        "1": 0.0017183436393679585
+      },
+      "candidate_bank_id": "step_label_pack_bring_gather_collect_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.571776646529665,
+      "min_bucket_mass": 0.0010932492496067425,
+      "passed": false,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.003083975381741766,
+        "1": 0.010619471227983013
+      },
+      "candidate_bank_id": "step_label_prepare_plan_determine_define_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.4434357974626093,
+      "min_bucket_mass": 0.003083975381741766,
+      "passed": false,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0037812320369994268,
+        "1": 0.012551237479783595
+      },
+      "candidate_bank_id": "step_label_select_decide_choose_make_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.3193513005733313,
+      "min_bucket_mass": 0.0037812320369994268,
+      "passed": false,
+      "source_detection_count_total": 16
+    },
+    {
+      "bucket_masses": {
+        "0": 0.03965159005019814,
+        "1": 0.00039985558305488667
+      },
+      "candidate_bank_id": "step_label_use_take_send_document_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 99.16477781118118,
+      "min_bucket_mass": 0.00039985558305488667,
+      "passed": false,
+      "source_detection_count_total": 16
+    }
+  ],
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 112,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_rows": 16,
+  "mass_gate_scope": "candidate_bank_id_and_casing_variant",
+  "mass_gate_status": "FAIL",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850483/qwen_v2_wp3_context_mass_artifact.json",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_scoring_started": false,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_audit_v1",
+  "score_plan_rows": 128,
+  "source_detection_count_total": 128,
+  "status": "FAIL_CONTEXT_SPECIFIC_MODEL_MASS_GATE",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "training_started": false,
+  "wp4_allowed": false
+}
