@@ -1,0 +1,20 @@
+{
+  "artifact_role": "template_density_preflight_not_model_output",
+  "e2e_eval_started": false,
+  "family_counts": {
+    "F1_8_sentence_explanation": 64,
+    "F2_8_step_checklist": 64,
+    "F3_6_point_comparison": 64,
+    "F4_concise_advice_with_transitions": 64
+  },
+  "input_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_dev_prompts.jsonl",
+  "model_calls_started": false,
+  "next_allowed_action": "Run WP3 fixed-artifact density preflight through the Slurm audit wrapper; do not treat template density as model-output density.",
+  "paper_claim_allowed": false,
+  "response_source": "template_density_preflight_no_model_generation",
+  "responses_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_template_density_responses_balanced_20260508_2331/qwen_v2_wp3_template_density_responses.jsonl",
+  "row_count": 256,
+  "schema_name": "natural_evidence_v2_wp3_template_response_summary_v1",
+  "status": "WP3_TEMPLATE_FIXED_RESPONSE_DENSITY_PREFLIGHT_WRITTEN_NOT_MODEL_OUTPUT",
+  "training_started": false
+}

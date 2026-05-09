@@ -72,8 +72,8 @@ def _validate_bucket_bank(config: dict[str, Any], errors: list[str]) -> None:
     if not isinstance(bucket_cfg, dict):
         _error(errors, "bucket_bank must be a mapping")
         return
-    if int(bucket_cfg.get("target_bank_entries_per_tokenizer", 0)) < 24000:
-        _error(errors, "target_bank_entries_per_tokenizer must be at least 24000")
+    if int(bucket_cfg.get("target_bank_entries_per_tokenizer", 0)) <= 0:
+        _error(errors, "target_bank_entries_per_tokenizer must be positive")
     if int(bucket_cfg.get("bucket_count", 0)) <= 1:
         _error(errors, "bucket_count must be greater than 1")
     if int(bucket_cfg.get("candidate_top_k", 0)) < int(bucket_cfg.get("bucket_count", 0)):
@@ -88,11 +88,58 @@ def _validate_bucket_bank(config: dict[str, Any], errors: list[str]) -> None:
     else:
         if not quality_gates.get("train_gate_required", False):
             _error(errors, "bucket_bank.quality_gates.train_gate_required must be true")
+        if quality_gates.get("raw_entry_count_is_training_gate", True):
+            _error(errors, "raw static opportunity count must not be the training gate")
         if float(quality_gates.get("reconstructability_rate_min", 0.0)) <= 0.0:
             _error(errors, "bucket_bank.quality_gates.reconstructability_rate_min must be positive")
         ablations = quality_gates.get("bucket_count_ablation_required", [])
         if not isinstance(ablations, list) or {4, 8} - {int(value) for value in ablations}:
             _error(errors, "bucket_count_ablation_required must include 4 and 8")
+    capacity_cfg = bucket_cfg.get("compatibility_adjusted_capacity", {})
+    if not isinstance(capacity_cfg, dict):
+        _error(errors, "bucket_bank.compatibility_adjusted_capacity must be a mapping")
+    else:
+        if capacity_cfg.get("raw_entry_count_is_training_gate", True):
+            _error(errors, "compatibility-adjusted capacity must replace raw entry count as the training gate")
+        diagnostic = capacity_cfg.get("diagnostic_high_risk_gate", {})
+        if not isinstance(diagnostic, dict):
+            _error(errors, "diagnostic_high_risk_gate must be a mapping")
+        else:
+            if diagnostic.get("paper_claim_allowed", True):
+                _error(errors, "diagnostic_high_risk_gate.paper_claim_allowed must be false")
+            if float(diagnostic.get("heldout_eligible_positions_per_100_tokens_min", 0.0)) <= 0.0:
+                _error(errors, "diagnostic high-risk gate requires positive held-out density")
+            if float(diagnostic.get("effective_compatible_bits_per_response_min", 0.0)) <= 0.0:
+                _error(errors, "diagnostic high-risk gate requires positive effective bits per response")
+        viability = capacity_cfg.get("qwen_e2e_viability_gate", {})
+        if not isinstance(viability, dict):
+            _error(errors, "qwen_e2e_viability_gate must be a mapping")
+        else:
+            if str(viability.get("gate_role", "")) != "paper_ready_minimum":
+                _error(errors, "qwen_e2e_viability_gate.gate_role must be paper_ready_minimum")
+            if int(viability.get("min1_compatible_entries_min", 0)) <= 0:
+                _error(errors, "qwen viability gate requires positive min1-compatible entries")
+            if int(viability.get("fully_compatible_min2_entries_min", 0)) <= 0:
+                _error(errors, "qwen viability gate requires positive min2-compatible entries")
+            if float(viability.get("effective_compatible_bits_per_response_min", 0.0)) <= 0.0:
+                _error(errors, "qwen viability gate requires positive effective compatible bits per response")
+            if isinstance(diagnostic, dict) and diagnostic:
+                diagnostic_bits = float(diagnostic.get("effective_compatible_bits_per_response_min", 0.0))
+                paper_bits = float(viability.get("effective_compatible_bits_per_response_min", 0.0))
+                if diagnostic_bits >= paper_bits:
+                    _error(errors, "diagnostic effective-bits gate must remain below paper-ready gate")
+    sweep_cfg = bucket_cfg.get("compatibility_sweep", {})
+    if not isinstance(sweep_cfg, dict):
+        _error(errors, "bucket_bank.compatibility_sweep must be a mapping")
+    else:
+        if not {2, 4, 8}.issubset({int(value) for value in sweep_cfg.get("bucket_counts", [])}):
+            _error(errors, "compatibility_sweep.bucket_counts must include 2, 4, and 8")
+        per_token_thresholds = {float(value) for value in sweep_cfg.get("delta_nll_per_token_thresholds", [])}
+        if not {0.05, 0.1, 0.2, 0.3}.issubset(per_token_thresholds):
+            _error(errors, "compatibility_sweep.delta_nll_per_token_thresholds must include 0.05, 0.1, 0.2, and 0.3")
+        raw_thresholds = {float(value) for value in sweep_cfg.get("delta_nll_raw_thresholds", [])}
+        if not {0.5, 1.0, 1.5, 2.0}.issubset(raw_thresholds):
+            _error(errors, "compatibility_sweep.delta_nll_raw_thresholds must include 0.5, 1.0, 1.5, and 2.0")
     reference_candidates = bucket_cfg.get("reference_candidates", {})
     if not isinstance(reference_candidates, dict):
         _error(errors, "bucket_bank.reference_candidates must be a mapping")
@@ -167,12 +214,25 @@ def _validate_nulls_and_attacks(config: dict[str, Any], errors: list[str]) -> No
     if not isinstance(e2e, dict):
         _error(errors, "end_to_end_pilot must be a mapping")
         return
+    if not e2e.get("diagnostic_high_risk_allowed", False):
+        _error(errors, "end_to_end_pilot.diagnostic_high_risk_allowed must be true after expert decision")
+    if str(e2e.get("diagnostic_high_risk_claim_status", "")) != "forbidden_from_paper_claims":
+        _error(errors, "diagnostic high-risk pilot must remain forbidden from paper claims")
+    if not e2e.get("paper_ready_density_gate_remains_required", False):
+        _error(errors, "paper-ready density gate must remain required")
     conditions = set(str(item) for item in e2e.get("required_conditions", []))
     for condition in ("protected_trained", "raw", "task_only_lora", "wrong_key", "wrong_payload"):
         if condition not in conditions:
             _error(errors, f"end_to_end_pilot.required_conditions missing {condition!r}")
+    diagnostic_conditions = set(str(item) for item in e2e.get("diagnostic_required_conditions", []))
+    for condition in ("protected_trained", "raw", "task_only_lora", "wrong_key", "wrong_payload"):
+        if condition not in diagnostic_conditions:
+            _error(errors, f"end_to_end_pilot.diagnostic_required_conditions missing {condition!r}")
     if int(e2e.get("primary_bucket_count", 0)) != 4:
         _error(errors, "end_to_end_pilot.primary_bucket_count must be 4 for the first natural pilot")
+    diagnostic_budgets = [int(value) for value in e2e.get("diagnostic_query_budgets", [])]
+    if diagnostic_budgets != [64, 128, 256, 512]:
+        _error(errors, "diagnostic_query_budgets must be [64, 128, 256, 512]")
 
 
 def _validate_tables(config: dict[str, Any], errors: list[str]) -> None:
@@ -224,9 +284,20 @@ def _validate_run_allowlist(root: Path, errors: list[str]) -> None:
         "forbid_old_compiled_path_modification",
         "forbid_unlisted_gpu_jobs",
         "forbid_paper_claim_modification",
+        "require_chimera_mail_notifications",
     ):
         if not global_rules.get(rule, False):
             _error(errors, f"run_allowlist.global_rules.{rule} must be true")
+    if global_rules.get("require_chimera_mail_notifications", False):
+        slurm_scripts = sorted((root / "scripts/natural_evidence_v1").rglob("*.sbatch"))
+        if not slurm_scripts:
+            _error(errors, "no natural_evidence_v1 sbatch scripts found for mail notification check")
+        for slurm_script in slurm_scripts:
+            script_text = slurm_script.read_text(encoding="utf-8")
+            if "#SBATCH --mail-type=ALL" not in script_text:
+                _error(errors, f"{slurm_script.relative_to(root)} missing #SBATCH --mail-type=ALL")
+            if "#SBATCH --mail-user=guanjie.lin001@umb.edu" not in script_text:
+                _error(errors, f"{slurm_script.relative_to(root)} missing Chimera mail user directive")
 
     cpu_actions = allowlist.get("allowed_cpu_actions", [])
     cpu_names = {str(action.get("name", "")) for action in cpu_actions if isinstance(action, dict)}
@@ -238,12 +309,43 @@ def _validate_run_allowlist(root: Path, errors: list[str]) -> None:
     if not isinstance(gpu_actions, list):
         _error(errors, "run_allowlist.allowed_gpu_actions must be a list")
         return
+    allowed_enabled_gpu_actions = {
+        "qwen_diagnostic_high_risk_e2e_pilot": (
+            "explicit_diagnostic_gate_passed_after_raw_wrong_key_pre_null_invalid_suffix_and_train_dataset_preflight"
+        ),
+        "qwen_diagnostic_e2e_eval": "qwen_diagnostic_training_complete_pending_eval",
+        "qwen_actual_prefix_reference_model_scoring": (
+            "qwen_actual_prefix_scoring_plan_complete_pending_gpu_reference_scoring"
+        ),
+        "qwen_actual_prefix_suffix_compatibility": (
+            "qwen_actual_prefix_bucketization_complete_pending_suffix_compatibility"
+        ),
+        "qwen_actual_prefix_suffix_highcap_sensitivity": (
+            "qwen_actual_prefix_missing_bucket_repair_plan_ready"
+        ),
+        "qwen_expanded_actual_prefix_suffix_compatibility": (
+            "qwen_compatibility_aware_supply_upper_bound_passed"
+        ),
+        "qwen_846699_repaired_teacher_forced_target_mass_probe": (
+            "post_846699_repaired_teacher_forced_target_mass_probe_ready"
+        ),
+    }
+    enabled_gpu_actions: list[str] = []
     for action in gpu_actions:
         if not isinstance(action, dict):
             _error(errors, "each GPU allowlist action must be a mapping")
             continue
         if action.get("enabled", False):
-            _error(errors, f"GPU action must remain disabled until manually enabled: {action.get('name', '')}")
+            action_name = str(action.get("name", ""))
+            enabled_gpu_actions.append(action_name)
+            if action_name not in allowed_enabled_gpu_actions:
+                _error(errors, f"GPU action must remain disabled until manually enabled: {action.get('name', '')}")
+                continue
+            expected_condition = allowed_enabled_gpu_actions[action_name]
+            if action.get("enable_condition") != expected_condition:
+                _error(errors, f"{action_name} enabled with unexpected enable_condition")
+    if len(enabled_gpu_actions) > 1:
+        _error(errors, f"at most one GPU action may be enabled at a time: {enabled_gpu_actions}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -273,6 +375,7 @@ def main(argv: list[str] | None = None) -> int:
             "task_only_and_near_null_controls",
             "sanitizer_benchmark_requirements",
             "automation_run_allowlist",
+            "chimera_mail_notifications",
             "paper_table_required_columns",
             "no_gpt2_paper_facing_arm",
         ],

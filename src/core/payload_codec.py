@@ -22,6 +22,19 @@ class PayloadEncoding:
 
 
 @dataclass(frozen=True)
+class VariableRadixPayloadEncoding:
+    payload: bytes
+    digits: tuple[int, ...]
+    radices: tuple[int, ...]
+    byte_groups: tuple[tuple[int, int], ...]
+
+    def to_dict(self) -> dict[str, object]:
+        payload = asdict(self)
+        payload["payload_hex"] = self.payload.hex()
+        return payload
+
+
+@dataclass(frozen=True)
 class MixedRadixCodec:
     radices: tuple[int, ...]
 
@@ -192,3 +205,72 @@ class BucketPayloadCodec:
                 raise PayloadCodecError("Decoded units contain values outside byte range")
             decoded_bytes.append(byte_value)
         return bytes(decoded_bytes)
+
+
+def _byte_group_width(radices: Sequence[int], start: int) -> int:
+    if start >= len(radices):
+        raise PayloadCodecError("No radices available for next byte")
+    capacity = 1
+    width = 0
+    for radix in radices[start:]:
+        if radix <= 1:
+            raise PayloadCodecError("All radices must be > 1")
+        capacity *= int(radix)
+        width += 1
+        if capacity >= 256:
+            return width
+    raise PayloadCodecError("Insufficient variable-radix capacity for one byte")
+
+
+def encode_bytes_variable_radices(payload: bytes, radices: Sequence[int]) -> VariableRadixPayloadEncoding:
+    """Encode bytes into a precommitted variable-radix digit stream.
+
+    Radices are consumed greedily per byte until their mixed-radix capacity is
+    at least 256. This keeps grouping deterministic for verifier precommitment.
+    """
+
+    normalized_radices = tuple(int(radix) for radix in radices)
+    digits: list[int] = []
+    byte_groups: list[tuple[int, int]] = []
+    cursor = 0
+    for byte_value in payload:
+        width = _byte_group_width(normalized_radices, cursor)
+        group_radices = normalized_radices[cursor : cursor + width]
+        group_digits = MixedRadixCodec(group_radices).encode_int_to_bucket_tuple(int(byte_value))
+        digits.extend(group_digits)
+        byte_groups.append((cursor, cursor + width))
+        cursor += width
+    return VariableRadixPayloadEncoding(
+        payload=bytes(payload),
+        digits=tuple(digits),
+        radices=normalized_radices[: len(digits)],
+        byte_groups=tuple(byte_groups),
+    )
+
+
+def decode_bytes_variable_radices(
+    digits: Sequence[int],
+    radices: Sequence[int],
+) -> tuple[bytes, tuple[tuple[int, int], ...]]:
+    """Decode a variable-radix digit stream using the same greedy byte groups."""
+
+    normalized_digits = tuple(int(digit) for digit in digits)
+    normalized_radices = tuple(int(radix) for radix in radices)
+    if len(normalized_digits) > len(normalized_radices):
+        raise PayloadCodecError("More digits than radices")
+    decoded_bytes: list[int] = []
+    byte_groups: list[tuple[int, int]] = []
+    cursor = 0
+    while cursor < len(normalized_digits):
+        width = _byte_group_width(normalized_radices, cursor)
+        if cursor + width > len(normalized_digits):
+            break
+        group_digits = normalized_digits[cursor : cursor + width]
+        group_radices = normalized_radices[cursor : cursor + width]
+        value = MixedRadixCodec(group_radices).decode_bucket_tuple_to_int(group_digits)
+        if value > 255:
+            raise PayloadCodecError("Decoded variable-radix value exceeds byte range")
+        decoded_bytes.append(value)
+        byte_groups.append((cursor, cursor + width))
+        cursor += width
+    return bytes(decoded_bytes), tuple(byte_groups)

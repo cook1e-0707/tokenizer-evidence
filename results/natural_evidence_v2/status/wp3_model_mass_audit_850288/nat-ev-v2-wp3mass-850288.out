@@ -1,0 +1,14 @@
+job_id=850288
+node=chimera13
+repo=/home/guanjie.lin001/tokenizer-evidence
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+claim_note=natural_evidence_v2 WP3 fixed-prefix model-mass scoring only; no training, no generation, no E2E, no FAR, no positive claim
+bucket_bank=results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/two_way_bucket_bank_scaffold.json
+detector_contract=results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_contract.json
+scaffold_summary=results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_bank_scaffold_summary.json
+mass_output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_bucket_mass_score_850288
+audit_output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_model_mass_audit_850288
+model_name=Qwen/Qwen2.5-7B-Instruct
+tokenizer_name=Qwen/Qwen2.5-7B-Instruct
+{"mass_rows": 7, "status": "WP3_BUCKET_MASS_SCORED_NOT_TRAINING_NOT_GENERATION"}
+{"density_gate_status": "NOT_EVALUATED", "mass_gate_status": "FAIL", "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_model_mass_audit_850288", "status": "WP3_FIXED_ARTIFACT_AUDIT_IMPLEMENTED_NOT_GATE_PASS", "tokenizer_stability_status": "PASS", "wp4_allowed": false}

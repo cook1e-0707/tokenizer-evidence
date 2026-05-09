@@ -7,6 +7,7 @@ global_rules:
   forbid_old_compiled_path_modification: true
   forbid_unlisted_gpu_jobs: true
   forbid_paper_claim_modification: true
+  require_chimera_mail_notifications: true
 
 allowed_cpu_actions:
   - name: validate_static
@@ -17,16 +18,16 @@ allowed_cpu_actions:
     enable_condition: "phase_a_outputs_complete"
     command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key qwen * --bucket-count 4"
   - name: rebuild_qwen_8way_clean_bank
-    enabled: true
-    enable_condition: "qwen_4way_clean_bank_rebuilt"
+    enabled: false
+    enable_condition: "explicit_capacity_ablation_after_qwen_viability_review"
     command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key qwen * --bucket-count 8"
   - name: rebuild_llama_4way_clean_bank
-    enabled: true
-    enable_condition: "qwen_clean_bank_audit_complete"
+    enabled: false
+    enable_condition: "qwen_e2e_viability_pilot_reviewed"
     command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key llama * --bucket-count 4"
   - name: rebuild_llama_8way_clean_bank
-    enabled: true
-    enable_condition: "llama_4way_clean_bank_rebuilt"
+    enabled: false
+    enable_condition: "llama_4way_clean_bank_reviewed"
     command_pattern: "python3 scripts/natural_evidence_v1/build_bucket_bank.py * --tokenizer-key llama * --bucket-count 8"
   - name: audit_opportunity_bank
     enabled: true
@@ -35,6 +36,86 @@ allowed_cpu_actions:
     enabled: true
     enable_condition: "qwen_4way_strict_bank_rebuilt_under_target"
     command_pattern: "python3 scripts/natural_evidence_v1/sweep_balance_gate.py *"
+  - name: qwen_candidate_shard_merge_strict_bank
+    enabled: true
+    enable_condition: "qwen_candidate_supply_expansion_shards_complete"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm_qwen_candidate_shard_merge_strict_bank.sbatch"
+  - name: qwen_compatibility_filtered_bank_repair_dry_run
+    enabled: true
+    enable_condition: "qwen_counterfactual_compatibility_failed"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/compatibility_filtered_bank_repair.sbatch"
+  - name: qwen_probability_preserving_compatibility_repair
+    enabled: true
+    enable_condition: "qwen_compatibility_filtered_repair_needs_probability_join"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/probability_preserving_compatibility_repair.sbatch"
+  - name: qwen_min1_compatible_density_audit
+    enabled: true
+    enable_condition: "qwen_compatibility_adjusted_bank_side_viability_passed_pending_density"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_min1_compatible_density.sbatch"
+  - name: qwen_frozen_density_split_and_heldout_density_audit
+    enabled: true
+    enable_condition: "qwen_density_gate_needs_frozen_heldout_artifacts"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_frozen_density_split.sbatch"
+  - name: qwen_invalid_suffix_review
+    enabled: true
+    enable_condition: "qwen_diagnostic_high_risk_gate_pending_invalid_suffix_review"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/invalid_suffix_review.sbatch"
+  - name: qwen_raw_wrong_key_pre_null
+    enabled: true
+    enable_condition: "qwen_diagnostic_high_risk_gate_invalid_suffix_review_passed"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/raw_wrong_key_pre_null.sbatch"
+  - name: qwen_verifier_alignment_diagnosis
+    enabled: true
+    enable_condition: "qwen_diagnostic_e2e_partial_abort_analysis"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/verifier_alignment_diagnosis.sbatch"
+  - name: qwen_actual_prefix_salvage_diagnostic
+    enabled: true
+    enable_condition: "qwen_verifier_alignment_diagnosis_failed_static_prefix_erasure"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/actual_prefix_salvage_diagnostic.sbatch"
+  - name: qwen_actual_prefix_scoring_plan
+    enabled: true
+    enable_condition: "qwen_static_bucket_salvage_failed_needs_true_actual_prefix_plan"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/actual_prefix_scoring_plan.sbatch"
+  - name: qwen_actual_prefix_bucketization_audit
+    enabled: true
+    enable_condition: "qwen_actual_prefix_reference_model_scoring_complete"
+    command_pattern: "python3 scripts/natural_evidence_v1/audit_actual_prefix_bucketization.py *"
+  - name: qwen_actual_prefix_compatibility_aware_supply_audit
+    enabled: false
+    enable_condition: "qwen_actual_prefix_variable_arity_low_effective_bits"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/compatibility_aware_supply_audit.sbatch"
+  - name: qwen_expanded_variable_arity_full_density_audit
+    enabled: false
+    enable_condition: "qwen_expanded_variable_arity_capacity_passed_pending_full_density"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/expanded_variable_arity_full_density.sbatch"
+  - name: qwen_expanded_variable_arity_pre_null
+    enabled: false
+    enable_condition: "qwen_expanded_variable_arity_full_density_passed"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/variable_arity_pre_null.sbatch"
+  - name: qwen_variable_radix_train_eval_preflight
+    enabled: false
+    enable_condition: "qwen_expanded_variable_arity_pre_null_passed"
+    command_pattern: "python3 scripts/natural_evidence_v1/variable_radix_train_eval_preflight.py *"
+  - name: qwen_846699_observation_provenance_normalization
+    enabled: true
+    enable_condition: "post_846699_expert_decision_artifact_only_diagnostics_required"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_observation_erasure_summary.sbatch"
+  - name: qwen_846699_frame_completion_replay
+    enabled: true
+    enable_condition: "post_846699_frame_completion_replay_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_frame_completion_replay.sbatch"
+  - name: qwen_846699_oracle_schedule_simulation
+    enabled: true
+    enable_condition: "post_846699_oracle_schedule_simulation_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_oracle_schedule_simulation.sbatch"
+  - name: qwen_846699_on_policy_survival_by_slot_source
+    enabled: true
+    enable_condition: "post_846699_on_policy_survival_diagnostic_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_on_policy_survival.sbatch"
+  - name: qwen_846699_protected_vs_task_only_lift
+    enabled: true
+    enable_condition: "post_846699_protected_vs_task_only_lift_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_protected_lift.sbatch"
 
 allowed_gpu_actions:
   - name: qwen_candidate_supply_expansion
@@ -47,8 +128,48 @@ allowed_gpu_actions:
     command_pattern: "sbatch scripts/natural_evidence_v1/slurm/counterfactual_compatibility.sbatch"
   - name: qwen_natural_e2e_pilot
     enabled: false
-    enable_condition: "4way_qwen_bank_basic_gates_passed"
+    enable_condition: "qwen_e2e_viability_gates_passed_after_density_and_pre_null"
     command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_natural_e2e_pilot.sbatch"
+  - name: qwen_natural_e2e_eval
+    enabled: false
+    enable_condition: "qwen_natural_e2e_training_complete_pending_five_arm_eval"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_natural_e2e_eval.sbatch"
+  - name: qwen_diagnostic_high_risk_e2e_pilot
+    enabled: false
+    enable_condition: "explicit_diagnostic_gate_passed_after_raw_wrong_key_pre_null_invalid_suffix_and_train_dataset_preflight"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_diagnostic_high_risk_e2e_pilot.sbatch"
+  - name: qwen_diagnostic_e2e_eval
+    enabled: false
+    enable_condition: "qwen_diagnostic_training_complete_pending_eval"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_diagnostic_e2e_eval.sbatch"
+  - name: qwen_actual_prefix_reference_model_scoring
+    enabled: false
+    enable_condition: "qwen_actual_prefix_scoring_plan_complete_pending_gpu_reference_scoring"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/actual_prefix_reference_scoring.sbatch"
+  - name: qwen_actual_prefix_suffix_compatibility
+    enabled: false
+    enable_condition: "qwen_actual_prefix_bucketization_complete_pending_suffix_compatibility"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/actual_prefix_suffix_compatibility.sbatch"
+  - name: qwen_actual_prefix_suffix_highcap_sensitivity
+    enabled: false
+    enable_condition: "qwen_actual_prefix_missing_bucket_repair_plan_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/actual_prefix_suffix_highcap_sensitivity.sbatch"
+  - name: qwen_expanded_actual_prefix_suffix_compatibility
+    enabled: false
+    enable_condition: "qwen_compatibility_aware_supply_upper_bound_passed"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/expanded_actual_prefix_suffix_compatibility.sbatch"
+  - name: qwen_expanded_variable_arity_organic_density
+    enabled: false
+    enable_condition: "qwen_proof_of_life_gate_review_blocked_only_by_organic_density"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/organic_variable_arity_density.sbatch"
+  - name: qwen_846699_repaired_teacher_forced_target_mass_probe
+    enabled: false
+    enable_condition: "post_846699_repaired_teacher_forced_target_mass_probe_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_repaired_teacher_forced_target_mass_probe.sbatch"
+  - name: qwen_846699_branch_aware_compatibility_scoring
+    enabled: false
+    enable_condition: "post_846699_balanced_branch_aware_suffix_repair_inputs_prepared"
+    command_pattern: "sbatch scripts/natural_evidence_v1/slurm/qwen_branch_aware_compatibility.sbatch"
   - name: llama_natural_e2e_pilot
     enabled: false
     enable_condition: "qwen_e2e_pilot_passed"

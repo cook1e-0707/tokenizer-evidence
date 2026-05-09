@@ -1,0 +1,160 @@
+{
+  "action_bank_count": 8,
+  "action_banks": [
+    {
+      "bank_stem": "seed_check_review_choose_make",
+      "side0": [
+        "Check",
+        "Review"
+      ],
+      "side1": [
+        "Choose",
+        "Make"
+      ],
+      "source": "850384_passing_seed"
+    },
+    {
+      "bank_stem": "verify_confirm_select_choose",
+      "side0": [
+        "Verify",
+        "Confirm"
+      ],
+      "side1": [
+        "Select",
+        "Choose"
+      ],
+      "source": "step_local_manual_expansion"
+    },
+    {
+      "bank_stem": "prepare_gather_plan_schedule",
+      "side0": [
+        "Prepare",
+        "Gather"
+      ],
+      "side1": [
+        "Plan",
+        "Schedule"
+      ],
+      "source": "step_local_manual_expansion"
+    },
+    {
+      "bank_stem": "pack_bring_write_note",
+      "side0": [
+        "Pack",
+        "Bring"
+      ],
+      "side1": [
+        "Write",
+        "Note"
+      ],
+      "source": "step_local_manual_expansion"
+    },
+    {
+      "bank_stem": "start_begin_create_set",
+      "side0": [
+        "Start",
+        "Begin"
+      ],
+      "side1": [
+        "Create",
+        "Set"
+      ],
+      "source": "step_local_manual_expansion"
+    },
+    {
+      "bank_stem": "inspect_test_adjust_update",
+      "side0": [
+        "Inspect",
+        "Test"
+      ],
+      "side1": [
+        "Adjust",
+        "Update"
+      ],
+      "source": "step_local_manual_expansion"
+    },
+    {
+      "bank_stem": "compare_measure_record_track",
+      "side0": [
+        "Compare",
+        "Measure"
+      ],
+      "side1": [
+        "Record",
+        "Track"
+      ],
+      "source": "step_local_manual_expansion"
+    },
+    {
+      "bank_stem": "ask_call_save_store",
+      "side0": [
+        "Ask",
+        "Call"
+      ],
+      "side1": [
+        "Save",
+        "Store"
+      ],
+      "source": "step_local_manual_expansion"
+    }
+  ],
+  "artifact_only": true,
+  "candidate_bank_count": 24,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "not_qwen_gate": true,
+  "paper_claim_allowed": false,
+  "prefix_families": {
+    "dash_bullet": [
+      "- "
+    ],
+    "numbered_list": [
+      "1. ",
+      "2. ",
+      "3. ",
+      "4. "
+    ],
+    "step_label": [
+      "Step 1: ",
+      "Step 2: ",
+      "Step 3: ",
+      "Step 4: "
+    ]
+  },
+  "public_forbidden_surface_hits": [],
+  "schema_name": "natural_evidence_v2_wp3_step_local_expansion_artifact_audit_v1",
+  "score_plan_rows": 72,
+  "score_plan_rows_by_candidate_bank": {
+    "step_local_dash_bullet_ask_call_save_store_v1": 1,
+    "step_local_dash_bullet_compare_measure_record_track_v1": 1,
+    "step_local_dash_bullet_inspect_test_adjust_update_v1": 1,
+    "step_local_dash_bullet_pack_bring_write_note_v1": 1,
+    "step_local_dash_bullet_prepare_gather_plan_schedule_v1": 1,
+    "step_local_dash_bullet_seed_check_review_choose_make_v1": 1,
+    "step_local_dash_bullet_start_begin_create_set_v1": 1,
+    "step_local_dash_bullet_verify_confirm_select_choose_v1": 1,
+    "step_local_numbered_list_ask_call_save_store_v1": 4,
+    "step_local_numbered_list_compare_measure_record_track_v1": 4,
+    "step_local_numbered_list_inspect_test_adjust_update_v1": 4,
+    "step_local_numbered_list_pack_bring_write_note_v1": 4,
+    "step_local_numbered_list_prepare_gather_plan_schedule_v1": 4,
+    "step_local_numbered_list_seed_check_review_choose_make_v1": 4,
+    "step_local_numbered_list_start_begin_create_set_v1": 4,
+    "step_local_numbered_list_verify_confirm_select_choose_v1": 4,
+    "step_local_step_label_ask_call_save_store_v1": 4,
+    "step_local_step_label_compare_measure_record_track_v1": 4,
+    "step_local_step_label_inspect_test_adjust_update_v1": 4,
+    "step_local_step_label_pack_bring_write_note_v1": 4,
+    "step_local_step_label_prepare_gather_plan_schedule_v1": 4,
+    "step_local_step_label_seed_check_review_choose_make_v1": 4,
+    "step_local_step_label_start_begin_create_set_v1": 4,
+    "step_local_step_label_verify_confirm_select_choose_v1": 4
+  },
+  "score_plan_rows_by_expansion_source": {
+    "850384_passing_seed": 9,
+    "step_local_manual_expansion": 63
+  },
+  "status": "PASS_ARTIFACT_ONLY_STEP_LOCAL_EXPANSION_PLAN",
+  "training_started": false
+}

@@ -1,0 +1,28 @@
+{
+  "action": "repaired_wp3_context_mass_local_validation_mismatch",
+  "allowlist_enabled_after_action": false,
+  "allowlist_review_completed": false,
+  "decision": "LOCAL_VALIDATION_REPAIRED_NOT_ALLOWLISTED",
+  "e2e_eval_started": false,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "local_validation": {
+    "bash_n": "PASS",
+    "py_compile": "PASS",
+    "pytest_context_mass": "PASS",
+    "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+  },
+  "mass_gate_status": "NOT_EVALUATED",
+  "model_scoring_started": false,
+  "next_allowed_action": "review repaired WP3 context-mass local validation and explicitly decide whether to allowlist the scoring wrapper; do not submit Slurm scoring until a later review allowlists it",
+  "paper_claim_allowed": false,
+  "plan_score_rows": 230,
+  "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
+  "result_claim": "wp3_context_mass_local_validation_repaired_not_scored_not_recovery_not_far",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "status": "LOCAL_VALIDATION_REPAIRED_NOT_ALLOWLISTED",
+  "training_started": false,
+  "wp4_allowed": false
+}

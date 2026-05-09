@@ -1,0 +1,56 @@
+{
+  "audit_inputs": {
+    "gate_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_gate.json",
+    "prompts_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_prompts.jsonl",
+    "slurm_review_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_slurm_review.json"
+  },
+  "audit_method": {
+    "detector_required_before_wp4": true,
+    "model_output_required_before_wp4": true,
+    "observable_unit": "one generated response per prompt",
+    "raw_candidate_bank_hit_metric": "diagnostic only; raw model hits on Check/Review/Choose/Make/Start/Begin/Create/Set are accidental-surface-risk observations, not ownership evidence",
+    "slot_count_metric": "number of Step 1 through Step 16 anchors with a parseable first action word",
+    "structural_anchor": "line-start or sentence-start Step <1..16>:"
+  },
+  "claim_control": {
+    "e2e_eval_started": false,
+    "model_generation_started": false,
+    "model_scoring_started": false,
+    "not_full_far": true,
+    "not_payload_recovery": true,
+    "paper_claim_allowed": false,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "next_allowed_action": "Review this artifact-only density audit plan. If approved, implement or review one Chimera Slurm wrapper that generates base-Qwen model outputs for these prompts and runs the restricted detector. Do not start WP4 or training.",
+  "policy_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049",
+  "policy_id": "qwen_v2_wp3_restricted_step_label_policy_v1",
+  "prompt_count": 256,
+  "prompt_variants": [
+    "direct_16_step_checklist",
+    "concise_16_step_checklist",
+    "practical_16_step_checklist",
+    "reviewable_16_step_checklist"
+  ],
+  "route_decision": {
+    "blocked_route": "B_8_step_plus_extra_slots",
+    "blocked_route_reason": "8-step plus extra slots still needs non-step slot families with passing context-specific mass gates.",
+    "selected_route": "A_16_step_checklist_step_label_only"
+  },
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_density_audit_plan_v1",
+  "slurm_requirement": {
+    "allowlisted_job_required_before_submission": true,
+    "direct_chimera_login_node_cpu_or_gpu_run_allowed": false,
+    "e2e_allowed": false,
+    "future_model_output_generation_must_use_chimera_slurm": true,
+    "recommended_future_wrapper_name": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+    "submission_started_by_this_plan": false,
+    "training_allowed": false
+  },
+  "source_bucket_bank_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_bucket_bank.json",
+  "source_density_design_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_density_design.json",
+  "source_detector_contract_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_detector_contract.json",
+  "source_policy_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_policy.json",
+  "status": "WP3_RESTRICTED_STEP_LABEL_MODEL_OUTPUT_DENSITY_AUDIT_PLAN_WRITTEN_ARTIFACT_ONLY",
+  "topic_count": 64
+}

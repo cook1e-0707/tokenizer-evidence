@@ -1,0 +1,22 @@
+{
+  "bucket_bank": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/two_way_bucket_bank_scaffold.json",
+  "context_score_rows": 21,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "limitations": [
+    "Fixed-prefix next-token mass scoring only.",
+    "No text is generated and no model weights are changed.",
+    "Mass gate outcomes are diagnostics, not payload recovery or FAR."
+  ],
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_artifact.json",
+  "mass_rows": 7,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "model_scoring_started": true,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_bucket_mass_score_summary_v1",
+  "status": "WP3_BUCKET_MASS_SCORED_NOT_TRAINING_NOT_GENERATION",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false
+}

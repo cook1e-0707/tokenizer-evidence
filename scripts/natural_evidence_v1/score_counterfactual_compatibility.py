@@ -44,7 +44,7 @@ def _model_config(config: dict[str, Any], tokenizer_key: str) -> dict[str, Any]:
     return model_cfg
 
 
-def _nll_for_suffix(model: Any, torch: Any, input_ids: list[int], suffix_start: int, device: Any) -> float:
+def _nll_per_token_for_suffix(model: Any, torch: Any, input_ids: list[int], suffix_start: int, device: Any) -> float:
     if suffix_start >= len(input_ids):
         return 0.0
     tensor = torch.tensor([input_ids], dtype=torch.long, device=device)
@@ -112,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
             if not suffix_ids:
                 continue
             baseline_ids = prefix_ids + [original_next_id] + suffix_ids
-            baseline_nll = _nll_for_suffix(
+            baseline_nll = _nll_per_token_for_suffix(
                 model,
                 torch,
                 baseline_ids,
@@ -126,31 +126,45 @@ def main(argv: list[str] | None = None) -> int:
                 if candidate_id < 0:
                     continue
                 candidate_ids = prefix_ids + [candidate_id] + suffix_ids
-                candidate_nll = _nll_for_suffix(
+                candidate_nll = _nll_per_token_for_suffix(
                     model,
                     torch,
                     candidate_ids,
                     suffix_start=len(prefix_ids) + 1,
                     device=device,
                 )
-                delta_nll = candidate_nll - baseline_nll
+                suffix_window_length = len(suffix_ids)
+                delta_nll_per_token = candidate_nll - baseline_nll
+                baseline_nll_raw = baseline_nll * suffix_window_length
+                candidate_nll_raw = candidate_nll * suffix_window_length
+                delta_nll_raw = candidate_nll_raw - baseline_nll_raw
                 output_rows.append(
                     {
                         "schema_name": "natural_evidence_counterfactual_compatibility_v1",
                         "protocol_id": row.get("protocol_id", "natural_evidence_v1"),
+                        "bank_entry_id": row.get("bank_entry_id", ""),
+                        "context_signature": row.get("context_signature", ""),
                         "tokenizer_key": args.tokenizer_key,
                         "tokenizer_name": tokenizer_name,
                         "model_name": model_name,
                         "prompt_id": prompt_id,
                         "prefix_response_token_count": offset,
+                        "bucket_id": candidate.get("bucket_id", ""),
                         "token_id": candidate_id,
                         "token_text": candidate.get("text", ""),
                         "rank": candidate.get("rank", ""),
                         "probability": candidate.get("probability", ""),
+                        "suffix_window_length": suffix_window_length,
+                        "baseline_suffix_nll_raw": baseline_nll_raw,
+                        "candidate_suffix_nll_raw": candidate_nll_raw,
+                        "delta_suffix_nll_raw": delta_nll_raw,
+                        "baseline_suffix_nll_per_token": baseline_nll,
+                        "candidate_suffix_nll_per_token": candidate_nll,
+                        "delta_suffix_nll_per_token": delta_nll_per_token,
                         "baseline_suffix_nll": baseline_nll,
                         "candidate_suffix_nll": candidate_nll,
-                        "delta_suffix_nll": delta_nll,
-                        "compatibility_pass": delta_nll <= float(args.delta_nll_threshold),
+                        "delta_suffix_nll": delta_nll_per_token,
+                        "compatibility_pass": delta_nll_per_token <= float(args.delta_nll_threshold),
                         "fingerprint_claim": False,
                     }
                 )

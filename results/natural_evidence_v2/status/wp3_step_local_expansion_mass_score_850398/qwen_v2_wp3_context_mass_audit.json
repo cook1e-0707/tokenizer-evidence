@@ -1,0 +1,300 @@
+{
+  "bank_variant_count": 21,
+  "bank_variant_results": [
+    {
+      "bucket_masses": {
+        "0": 0.00015070487279444933,
+        "1": 8.094593067653477e-05
+      },
+      "candidate_bank_id": "step_local_dash_bullet_ask_call_save_store_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 1.8617967763775038,
+      "min_bucket_mass": 8.094593067653477e-05,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0002290931297466159,
+        "1": 8.849087316775694e-05
+      },
+      "candidate_bank_id": "step_local_dash_bullet_compare_measure_record_track_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 2.588889922154024,
+      "min_bucket_mass": 8.849087316775694e-05,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 2.7815616704174317e-05,
+        "1": 0.0005554540548473597
+      },
+      "candidate_bank_id": "step_local_dash_bullet_pack_bring_write_note_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 19.969143979612074,
+      "min_bucket_mass": 2.7815616704174317e-05,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00012482321471907198,
+        "1": 0.000179394701262936
+      },
+      "candidate_bank_id": "step_local_dash_bullet_prepare_gather_plan_schedule_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 1.437190202693329,
+      "min_bucket_mass": 0.00012482321471907198,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00027956897974945605,
+        "1": 0.0007630482432432473
+      },
+      "candidate_bank_id": "step_local_dash_bullet_seed_check_review_choose_make_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 2.7293737807645018,
+      "min_bucket_mass": 0.00027956897974945605,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0004090894653927535,
+        "1": 0.0008240222232416272
+      },
+      "candidate_bank_id": "step_local_dash_bullet_start_begin_create_set_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 2.0142836541892133,
+      "min_bucket_mass": 0.0004090894653927535,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 5.002167381462641e-05,
+        "1": 0.00047639242256991565
+      },
+      "candidate_bank_id": "step_local_dash_bullet_verify_confirm_select_choose_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 1,
+      "max_bucket_mass_ratio": 9.523720144498999,
+      "min_bucket_mass": 5.002167381462641e-05,
+      "passed": false,
+      "source_detection_count_total": 1
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0001097687036235584,
+        "1": 5.1336050091777e-05
+      },
+      "candidate_bank_id": "step_local_numbered_list_ask_call_save_store_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 2.138238205458295,
+      "min_bucket_mass": 5.1336050091777e-05,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0002449036983307451,
+        "1": 5.3830320212000515e-05
+      },
+      "candidate_bank_id": "step_local_numbered_list_compare_measure_record_track_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 4.549549349999002,
+      "min_bucket_mass": 5.3830320212000515e-05,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 3.766465988519485e-05,
+        "1": 0.0015577363374177366
+      },
+      "candidate_bank_id": "step_local_numbered_list_pack_bring_write_note_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 41.35803541478543,
+      "min_bucket_mass": 3.766465988519485e-05,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00012827628506784094,
+        "1": 3.8142040921229636e-05
+      },
+      "candidate_bank_id": "step_local_numbered_list_prepare_gather_plan_schedule_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 3.3631206398408304,
+      "min_bucket_mass": 3.8142040921229636e-05,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0004687794717028737,
+        "1": 0.0007838430610718206
+      },
+      "candidate_bank_id": "step_local_numbered_list_seed_check_review_choose_make_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 1.6720934008147939,
+      "min_bucket_mass": 0.0004687794717028737,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00031087200477486476,
+        "1": 0.0009109633101616055
+      },
+      "candidate_bank_id": "step_local_numbered_list_start_begin_create_set_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 2.9303484912426585,
+      "min_bucket_mass": 0.00031087200477486476,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00015197000539046712,
+        "1": 0.0006889607029734179
+      },
+      "candidate_bank_id": "step_local_numbered_list_verify_confirm_select_choose_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 4.5335308188166685,
+      "min_bucket_mass": 0.00015197000539046712,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.002922678308095783,
+        "1": 0.0005102247378090397
+      },
+      "candidate_bank_id": "step_local_step_label_ask_call_save_store_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 5.728217570645596,
+      "min_bucket_mass": 0.0005102247378090397,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0043496498838067055,
+        "1": 0.0012624154041986912
+      },
+      "candidate_bank_id": "step_local_step_label_compare_measure_record_track_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 3.4454981057266276,
+      "min_bucket_mass": 0.0012624154041986912,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0007652776985196397,
+        "1": 0.021577050909399986
+      },
+      "candidate_bank_id": "step_local_step_label_pack_bring_write_note_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 28.19506036977013,
+      "min_bucket_mass": 0.0007652776985196397,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.006161009194329381,
+        "1": 0.0011875164927914739
+      },
+      "candidate_bank_id": "step_local_step_label_prepare_gather_plan_schedule_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 5.188146212476432,
+      "min_bucket_mass": 0.0011875164927914739,
+      "passed": false,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.010046771029010415,
+        "1": 0.01828815438784659
+      },
+      "candidate_bank_id": "step_local_step_label_seed_check_review_choose_make_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 1.8203017004208497,
+      "min_bucket_mass": 0.010046771029010415,
+      "passed": true,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.007179144362453371,
+        "1": 0.027941474691033363
+      },
+      "candidate_bank_id": "step_local_step_label_start_begin_create_set_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 3.8920341032792325,
+      "min_bucket_mass": 0.007179144362453371,
+      "passed": true,
+      "source_detection_count_total": 4
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00207627029158175,
+        "1": 0.01455061906017363
+      },
+      "candidate_bank_id": "step_local_step_label_verify_confirm_select_choose_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 4,
+      "max_bucket_mass_ratio": 7.008056282059807,
+      "min_bucket_mass": 0.00207627029158175,
+      "passed": false,
+      "source_detection_count_total": 4
+    }
+  ],
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 63,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_rows": 9,
+  "mass_gate_scope": "candidate_bank_id_and_casing_variant",
+  "mass_gate_status": "FAIL",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850398/qwen_v2_wp3_context_mass_artifact.json",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_scoring_started": false,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_audit_v1",
+  "score_plan_rows": 72,
+  "source_detection_count_total": 72,
+  "status": "FAIL_CONTEXT_SPECIFIC_MODEL_MASS_GATE",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "training_started": false,
+  "wp4_allowed": false
+}

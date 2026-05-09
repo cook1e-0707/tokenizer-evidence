@@ -1,0 +1,32 @@
+{
+  "action": "submitted_one_allowlisted_wp3_context_mass_slurm_job_and_reviewed_failure",
+  "audit_json": null,
+  "context_scores_jsonl": null,
+  "e2e_eval_started": false,
+  "failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
+  "generation_started": false,
+  "job_id": "850372",
+  "job_name": "nat-ev-v2-wp3ctxm",
+  "mass_artifact_json": null,
+  "mass_gate_status": "NOT_EVALUATED",
+  "model_scoring_started": true,
+  "next_allowed_action": "Prepare an artifact-only WP3 context-mass plan/scorer repair for tokenizer prefix-boundary retokenization before any further Slurm scoring submission.",
+  "paper_claim_allowed": false,
+  "phase_after_action": "V2_WP3_CONTEXT_MASS_JOB_850372_FAILED_NEEDS_PREFIX_BOUNDARY_REPAIR",
+  "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0014_wp3_context_mass_job_850372_failed.md",
+  "result_claim": "wp3_context_mass_job_failed_no_mass_artifact_not_recovery_not_far",
+  "score_plan_rows": 230,
+  "score_summary_json": null,
+  "slurm_elapsed": "00:00:39",
+  "slurm_exit_code": "1:0",
+  "slurm_node": "chimera13",
+  "slurm_state": "FAILED",
+  "state_changing_action": "synced required control files/fixed plan to Chimera and submitted exactly one allowlisted Slurm job 850372",
+  "status": "FAILED_PREFIX_BOUNDARY_RETOKENIZATION_NO_SCORE_ARTIFACTS",
+  "synced_logs": [
+    "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.out",
+    "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.err"
+  ],
+  "training_started": false,
+  "wp4_allowed": false
+}

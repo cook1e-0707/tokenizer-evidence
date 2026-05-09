@@ -1,0 +1,24 @@
+{
+  "e2e_eval_started": false,
+  "forbidden_actions": [
+    "no training",
+    "no protected transcript E2E",
+    "no Llama",
+    "no same-family null",
+    "no sanitizer benchmark",
+    "no FAR aggregation",
+    "no positive paper claim"
+  ],
+  "future_job_purpose": "Generate base-Qwen outputs for the restricted 16-step density prompts on a Chimera Slurm compute node, then run the restricted detector and write a density report. This is a density diagnostic only.",
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "must_not_use_sbatch_export_unescaped_commas": true,
+  "paper_claim_allowed": false,
+  "prompt_rows": 256,
+  "required_partition_policy": "use DGXA100/A100 unless user explicitly approves another available partition",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_density_slurm_review_v1",
+  "status": "SLURM_REVIEW_SPEC_WRITTEN_SUBMISSION_NOT_STARTED",
+  "submission_allowed_now": false,
+  "submission_blocker": "artifact-only plan must be reviewed before any Slurm model-output generation job",
+  "training_started": false
+}

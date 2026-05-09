@@ -1,0 +1,46 @@
+{
+  "schema_name": "natural_evidence_v1_repaired_target_mass_design_blocker_v1",
+  "protocol_id": "natural_evidence_v1",
+  "checked_at": "2026-05-08T08:57:46Z",
+  "status": "BLOCKED_REPEATED_REPAIRED_TARGET_MASS_DESIGN_NOT_NEW_NEGATIVE_DIAGNOSIS_PLAN",
+  "hermes_notification": {
+    "json": "results/natural_evidence_v1/status/hermes_reports/20260508_0857_scheduled_tick_notification.json",
+    "status": "SENT_ALL_REQUIRED_CHANNELS"
+  },
+  "hermes_report": "results/natural_evidence_v1/status/hermes_reports/20260508_0857_scheduled_tick.md",
+  "requested_intended_action": "artifact-only repaired teacher-forced target-mass probe design over the primary branch-aware candidates",
+  "blocker_reason": "The current phase allows only a new explicit artifact-only negative-diagnosis/root-cause plan or user/expert review. The requested repaired teacher-forced target-mass design is a repeated action: the design already exists, was scored by job 848547, and failed the predeclared lift thresholds in the completed score review.",
+  "existing_design_dir": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_design",
+  "scored_probe_summary_json": "results/natural_evidence_v1/status/qwen_natural_e2e_eval_846699_repaired_teacher_forced_target_mass_probe_scored/repaired_teacher_forced_target_mass_probe_score_summary.json",
+  "score_review_report": "results/natural_evidence_v1/status/hermes_reports/20260508_0811_repaired_target_mass_score_review.md",
+  "score_review_summary_json": "results/natural_evidence_v1/status/hermes_reports/20260508_0811_repaired_target_mass_score_review.json",
+  "previous_blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260508_0842_repaired_target_mass_design_blocker.md",
+  "scored_job_id": "848547",
+  "decision": "BLOCK_REPEAT_REPAIRED_TARGET_MASS_DESIGN_AND_BLOCK_POSITIVE_E2E_PROGRESSION_FROM_JOB_848547",
+  "aggregate_lifts": {
+    "protected_minus_base_target_candidate_mass": -0.007645810655699581,
+    "protected_minus_task_only_target_candidate_mass": -0.04776975171334799,
+    "protected_minus_task_only_target_rank1_rate": -0.03296703296703296,
+    "threshold_pass": false
+  },
+  "next_allowed_action": "Only a new explicit artifact-only negative-diagnosis/root-cause plan or user/expert review may proceed.",
+  "state_changing_action": "wrote blocker report because the repeated intended repaired target-mass design is already complete, already scored, and does not satisfy the new-plan/user-review condition",
+  "result_claim": "blocker_only_not_training_not_generation_not_payload_recovery_not_far",
+  "training_started": false,
+  "generation_started": false,
+  "e2e_eval_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "not_payload_recovery": true,
+  "not_full_far": true,
+  "forbidden_actions": [
+    "training",
+    "generation",
+    "qwen_e2e_rerun",
+    "llama",
+    "same_family_null",
+    "sanitizer",
+    "far_aggregation",
+    "paper_positive_claims"
+  ]
+}

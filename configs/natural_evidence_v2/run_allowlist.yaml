@@ -1,0 +1,25 @@
+allowlist_version: natural_evidence_v2_allowlist_001
+
+global_rules:
+  max_state_changing_actions_per_automation_run: 1
+  require_gate_status_pass: true
+  forbid_overwrite_existing_artifacts: true
+  forbid_v1_primary_route_continuation: true
+  forbid_unlisted_gpu_jobs: true
+  forbid_paper_claim_modification: true
+  require_chimera_mail_notifications: true
+  require_chimera_slurm_for_cpu_or_gpu: true
+
+allowed_cpu_actions:
+  - name: v2_wp3_fixed_artifact_audit
+    enabled: true
+    enable_condition: "v2_wp3_configured_tokenizer_audit_blocked_locally_or_fixed_artifacts_ready"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_fixed_artifact_audit.sbatch"
+    claim_note: "WP3 tokenizer/density/mass artifact audit only; no training, generation, E2E, FAR, or positive claim."
+
+allowed_gpu_actions:
+  - name: v2_wp3_context_mass_score
+    enabled: false
+    enable_condition: "blocked_pending_wp3_context_mass_repair_local_validation_review"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch"
+    claim_note: "WP3 context-specific base-Qwen mass scoring only; no training, generation, E2E, FAR, or positive claim."

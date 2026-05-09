@@ -1,0 +1,95 @@
+{
+  "candidate_banks": [
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Check",
+          "Review"
+        ],
+        "1": [
+          "Choose",
+          "Make"
+        ]
+      },
+      "candidate_bank_id": "restricted_step_label_check_review_choose_make_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_local_step_label_seed_check_review_choose_make_v1",
+      "source_mass_gate": {
+        "context_count": 4,
+        "job_id": "850398",
+        "max_bucket_mass_ratio": 1.8203017004208497,
+        "min_bucket_mass": 0.010046771029010415,
+        "passed": true
+      }
+    },
+    {
+      "allowed_prefixes": [
+        "Step 1: ",
+        "Step 2: ",
+        "Step 3: ",
+        "Step 4: ",
+        "Step 5: ",
+        "Step 6: ",
+        "Step 7: ",
+        "Step 8: ",
+        "Step 9: ",
+        "Step 10: ",
+        "Step 11: ",
+        "Step 12: ",
+        "Step 13: ",
+        "Step 14: ",
+        "Step 15: ",
+        "Step 16: "
+      ],
+      "anchor_kind": "step_label_boundary",
+      "buckets": {
+        "0": [
+          "Start",
+          "Begin"
+        ],
+        "1": [
+          "Create",
+          "Set"
+        ]
+      },
+      "candidate_bank_id": "restricted_step_label_start_begin_create_set_v1",
+      "prefix_family": "step_label",
+      "slot_type": "bullet_or_step_opener",
+      "source_candidate_bank_id": "step_local_step_label_start_begin_create_set_v1",
+      "source_mass_gate": {
+        "context_count": 4,
+        "job_id": "850398",
+        "max_bucket_mass_ratio": 3.8920341032792325,
+        "min_bucket_mass": 0.007179144362453371,
+        "passed": true
+      }
+    }
+  ],
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_bucket_bank_v1",
+  "status": "RESTRICTED_STEP_LABEL_BUCKET_BANK_WRITTEN_ARTIFACT_ONLY",
+  "training_started": false,
+  "wp4_allowed": false
+}

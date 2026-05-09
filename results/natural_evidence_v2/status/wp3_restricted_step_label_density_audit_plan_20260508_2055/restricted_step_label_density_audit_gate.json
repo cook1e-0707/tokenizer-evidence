@@ -1,0 +1,60 @@
+{
+  "e2e_eval_started": false,
+  "gates": [
+    {
+      "meaning": "responses contain Step 1 through Step 16 exactly once each",
+      "metric": "complete_step_label_response_rate",
+      "threshold": ">=0.95"
+    },
+    {
+      "meaning": "restricted detector can locate all planned Step-label anchors",
+      "metric": "mean_detected_structural_slots_per_response",
+      "threshold": ">=16.0"
+    },
+    {
+      "meaning": "density is not carried by a few unusually compliant outputs",
+      "metric": "responses_with_at_least_16_structural_slots_rate",
+      "threshold": ">=0.90"
+    },
+    {
+      "meaning": "model outputs do not expose old structured evidence vocabulary",
+      "metric": "forbidden_public_surface_rate",
+      "threshold": "==0.0"
+    },
+    {
+      "meaning": "raw accidental hits on passing bank surfaces are a null-risk diagnostic",
+      "metric": "raw_bank_surface_hit_rate",
+      "threshold": "report_only_no_pass_threshold"
+    },
+    {
+      "meaning": "16-step control remains ordinary checklist prose",
+      "metric": "naturalness_manual_review_examples",
+      "threshold": ">=32 examples reviewed before WP4"
+    }
+  ],
+  "minimum_model_output_rows": 256,
+  "paper_claim_allowed": false,
+  "required_step_labels": [
+    "Step 1:",
+    "Step 2:",
+    "Step 3:",
+    "Step 4:",
+    "Step 5:",
+    "Step 6:",
+    "Step 7:",
+    "Step 8:",
+    "Step 9:",
+    "Step 10:",
+    "Step 11:",
+    "Step 12:",
+    "Step 13:",
+    "Step 14:",
+    "Step 15:",
+    "Step 16:"
+  ],
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_density_audit_gate_v1",
+  "status": "GATE_SPEC_WRITTEN_NOT_EVALUATED",
+  "training_started": false,
+  "why_wp4_still_blocked_after_density": "WP4 also requires reviewed density results and a prompt-local payload contract with decoder-oracle substitution.",
+  "wp4_allowed_if_pass": false
+}

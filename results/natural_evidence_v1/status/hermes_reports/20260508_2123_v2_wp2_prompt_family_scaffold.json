@@ -1,0 +1,50 @@
+{
+  "artifact_only": true,
+  "checked_at": "2026-05-08T21:30:07Z",
+  "e2e_eval_started": false,
+  "forbidden_actions": [
+    "training",
+    "model_transcript_generation",
+    "qwen_e2e_rerun",
+    "llama",
+    "same_family_null",
+    "sanitizer",
+    "far_aggregation",
+    "paper_positive_claims"
+  ],
+  "forbidden_surface_audit": {
+    "duplicate_prompt_text_count": 0,
+    "empty_prompt_count": 0,
+    "forbidden_surface_rate": 0.0,
+    "json": "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/forbidden_surface_audit.json",
+    "status": "PASS_FORBIDDEN_SURFACE_AUDIT",
+    "violation_count": 0
+  },
+  "generation_started": false,
+  "hermes_notification": {
+    "json": "results/natural_evidence_v1/status/hermes_reports/20260508_2123_scheduled_tick_notification.json",
+    "status": "SENT_ALL_REQUIRED_CHANNELS"
+  },
+  "model_calls_started": false,
+  "next_allowed_action": "WP3 artifact-only micro-slot detector and 2-way bucket policy design. Training, model transcript generation, E2E, FAR aggregation, and positive paper claims remain forbidden.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "output_dir": "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123",
+  "paper_claim_allowed": false,
+  "prompt_set_id": "qwen_v2_wp2_controlled_natural_prompt_set_v1",
+  "result_claim": "v2_wp2_prompt_family_scaffold_and_forbidden_surface_audit_not_recovery_not_far",
+  "schema_name": "natural_evidence_v2_wp2_prompt_family_scaffold_report_v1",
+  "split_counts": {
+    "dev": 1024,
+    "eval": 2048,
+    "organic_null": 2048,
+    "train": 4096
+  },
+  "status": "COMPLETE_V2_WP2_PROMPT_FAMILY_SPLITS_AUDITED_NO_MODEL_CALLS",
+  "training_started": false,
+  "validation": [
+    "python3 -m py_compile scripts/natural_evidence_v2/build_wp2_prompt_scaffold.py",
+    "python3 scripts/natural_evidence_v2/build_wp2_prompt_scaffold.py --output-dir results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123 --use-config-split-sizes",
+    "wc -l results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_*_prompts.jsonl"
+  ]
+}

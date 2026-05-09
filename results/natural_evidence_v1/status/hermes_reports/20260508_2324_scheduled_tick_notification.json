@@ -1,0 +1,57 @@
+{
+  "body_chars": 1638,
+  "channels": {
+    "email": {
+      "channel": "email",
+      "method": "smtp",
+      "sent": true,
+      "smtp_host": "smtp.gmail.com",
+      "status": "SENT"
+    },
+    "telegram": {
+      "channel": "telegram",
+      "response_ok": true,
+      "sent": true,
+      "status": "SENT"
+    }
+  },
+  "configured_all_required_channels": true,
+  "dry_run": false,
+  "env_file": {
+    "exists": true,
+    "loaded_keys": [],
+    "path": "/Users/guanjie/.hermes/.env",
+    "skipped_existing_keys": [
+      "BROWSERBASE_ADVANCED_STEALTH",
+      "BROWSERBASE_PROXIES",
+      "BROWSER_INACTIVITY_TIMEOUT",
+      "BROWSER_SESSION_TIMEOUT",
+      "EMAIL_ADDRESS",
+      "EMAIL_ALLOWED_USERS",
+      "EMAIL_HOME_ADDRESS",
+      "EMAIL_IMAP_HOST",
+      "EMAIL_IMAP_PORT",
+      "EMAIL_PASSWORD",
+      "EMAIL_POLL_INTERVAL",
+      "EMAIL_SMTP_HOST",
+      "EMAIL_SMTP_PORT",
+      "IMAGE_TOOLS_DEBUG",
+      "MOA_TOOLS_DEBUG",
+      "TELEGRAM_ALLOWED_USERS",
+      "TELEGRAM_BOT_TOKEN",
+      "TELEGRAM_HOME_CHANNEL",
+      "TELEGRAM_HOME_CHANNEL_NAME",
+      "TERMINAL_LIFETIME_SECONDS",
+      "TERMINAL_MODAL_IMAGE",
+      "TERMINAL_TIMEOUT",
+      "VISION_TOOLS_DEBUG",
+      "WEB_TOOLS_DEBUG",
+      "XIAOMI_API_KEY",
+      "XIAOMI_MIMO_API_KEY"
+    ]
+  },
+  "schema_name": "natural_evidence_v1_hermes_notification_v1",
+  "sent_all_required_channels": true,
+  "status": "SENT_ALL_REQUIRED_CHANNELS",
+  "subject": "Hermes natural_evidence_v1 progress tick"
+}

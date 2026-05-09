@@ -1,0 +1,13 @@
+{
+  "artifact_only": true,
+  "candidate_micro_slot_rows": 0,
+  "density_gate_status": "NOT_EVALUATED",
+  "e2e_eval_started": false,
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "responses_jsonl": null,
+  "schema_name": "natural_evidence_v2_wp3_density_audit_v1",
+  "status": "NEEDS_FIXED_RESPONSE_ARTIFACT",
+  "total_responses": 0,
+  "training_started": false
+}

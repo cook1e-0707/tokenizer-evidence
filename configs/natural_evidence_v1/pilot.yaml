@@ -94,6 +94,9 @@ null_evaluations:
   wrong_payload_count: 4
 
 bucket_bank:
+  # Build/scaling placeholder for static raw opportunity banks. This is not a
+  # training-start gate and must not be compared to Scalable Fingerprinting's
+  # 24,576 implanted fingerprint identities.
   target_bank_entries_per_tokenizer: 24000
   candidate_top_k: 64
   bucket_count: 8
@@ -121,7 +124,8 @@ bucket_bank:
     reject_markdown_or_path_like_surfaces: true
   quality_gates:
     train_gate_required: true
-    accepted_entries_per_tokenizer: 24000
+    raw_entry_count_is_training_gate: false
+    raw_opportunity_entries_scaling_placeholder: 24000
     heldout_eligible_density_status: NEEDS_RESULTS
     reconstructability_rate_min: 0.95
     min_bucket_mass: 0.005
@@ -132,6 +136,67 @@ bucket_bank:
       - 4
       - 8
     raw_wrong_key_null_required: true
+  compatibility_adjusted_capacity:
+    primary_metric: effective_compatible_bits_per_response
+    raw_entry_count_is_training_gate: false
+    diagnostic_high_risk_gate:
+      bucket_count: 4
+      min1_compatible_entries_min: 1500
+      fully_compatible_min2_entries_min: 200
+      heldout_eligible_positions_per_100_tokens_min: 0.3
+      effective_compatible_bits_per_response_min: 0.3
+      raw_wrong_key_pre_null_required: true
+      invalid_suffix_policy: explain_or_exclude
+      paper_claim_allowed: false
+      allowed_after_paper_ready_density_fail: true
+    qwen_e2e_viability_gate:
+      gate_role: paper_ready_minimum
+      bucket_count: 4
+      min1_compatible_entries_min: 1500
+      min1_compatible_entries_target: 2500
+      fully_compatible_min2_entries_min: 200
+      heldout_eligible_positions_per_100_tokens_min: 0.5
+      effective_compatible_bits_per_response_min: 1.0
+      raw_wrong_key_pre_null_required: true
+    main_paper_target:
+      compatibility_aware_entries_min: 5000
+      compatibility_aware_entries_target: 10000
+      multi_member_compatible_subset_min: 1000
+    oral_aspiration:
+      compatibility_aware_entries_min: 10000
+      raw_opportunity_scaling_curve:
+        - 10000
+        - 20000
+        - 24000
+  compatibility_sweep:
+    delta_nll_per_token_thresholds:
+      - 0.05
+      - 0.1
+      - 0.2
+      - 0.3
+    delta_nll_raw_thresholds:
+      - 0.5
+      - 1.0
+      - 1.5
+      - 2.0
+    delta_nll_thresholds:
+      - 0.05
+      - 0.1
+      - 0.2
+      - 0.3
+    bucket_counts:
+      - 2
+      - 4
+      - 8
+    primary_bucket_counts:
+      - 2
+      - 4
+    deferred_bucket_counts:
+      - 8
+    candidate_top_k:
+      - 64
+      - 128
+      - 256
 
 selector:
   type: keyed_prefix_selector
@@ -170,6 +235,24 @@ pilot_scale:
     - 32
     - 64
     - 128
+
+diagnostic_high_risk_pilot_scale:
+  status: diagnostic_high_risk
+  paper_claim_allowed: false
+  payload_bits:
+    min: 16
+    max: 32
+  payloads: 2
+  seeds:
+    - 17
+    - 23
+  eval_owner_probes: 2048
+  organic_null_prompts: 2048
+  query_budgets:
+    - 64
+    - 128
+    - 256
+    - 512
 
 full_matrix_scale:
   payloads: 4
@@ -224,14 +307,43 @@ end_to_end_pilot:
   qwen_first: true
   primary_bucket_count: 4
   secondary_bucket_count: 8
+  diagnostic_high_risk_allowed: true
+  diagnostic_high_risk_claim_status: forbidden_from_paper_claims
+  paper_ready_density_gate_remains_required: true
+  llama_start_condition: qwen_diagnostic_recovery_plus_null_rejection_reviewed
+  full_matrix_start_condition: paper_ready_qwen_and_llama_reviewed
   required_conditions:
     - protected_trained
     - raw
     - task_only_lora
     - wrong_key
     - wrong_payload
+  diagnostic_required_conditions:
+    - protected_trained
+    - raw
+    - task_only_lora
+    - wrong_key
+    - wrong_payload
+  diagnostic_bank:
+    primary: qwen_4way_min1_compatible
+    fallback: qwen_2way_if_available
+    forbid_8way_main: true
+    forbid_llama: true
+    forbid_full_matrix: true
   minimum_eval_owner_probes: 2048
   minimum_organic_null_prompts: 2048
+  diagnostic_query_budgets:
+    - 64
+    - 128
+    - 256
+    - 512
+  diagnostic_required_outputs:
+    - full_transcript
+    - eligible_positions
+    - bucket_observations
+    - erasures
+    - symbol_errors
+    - rs_decode_trace
   success_gates:
     protected_payload_recovery: NEEDS_RESULTS
     raw_exact_model_reject: NEEDS_RESULTS

@@ -1,0 +1,763 @@
+{
+  "artifact_only": true,
+  "audit_result": {
+    "diagnostics": [
+      {
+        "bucket_locations": [
+          "sentence_opener_sequence_v0:0"
+        ],
+        "carrier": "first",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "first",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "first",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1001
+        ]
+      },
+      {
+        "bucket_locations": [
+          "sentence_opener_sequence_v0:0"
+        ],
+        "carrier": "second",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "second",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "second",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1002
+        ]
+      },
+      {
+        "bucket_locations": [
+          "sentence_opener_sequence_v0:0"
+        ],
+        "carrier": "third",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "third",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "third",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1003
+        ]
+      },
+      {
+        "bucket_locations": [
+          "sentence_opener_sequence_v0:1"
+        ],
+        "carrier": "start",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "start",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "start",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1004
+        ]
+      },
+      {
+        "bucket_locations": [
+          "sentence_opener_sequence_v0:1"
+        ],
+        "carrier": "continue",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "continue",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "continue",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1005
+        ]
+      },
+      {
+        "bucket_locations": [
+          "sentence_opener_sequence_v0:1"
+        ],
+        "carrier": "finish",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "finish",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "finish",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1006
+        ]
+      },
+      {
+        "bucket_locations": [
+          "step_opener_action_v0:0"
+        ],
+        "carrier": "check",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "check",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "check",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1007
+        ]
+      },
+      {
+        "bucket_locations": [
+          "step_opener_action_v0:0"
+        ],
+        "carrier": "review",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "review",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "review",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1008
+        ]
+      },
+      {
+        "bucket_locations": [
+          "step_opener_action_v0:0"
+        ],
+        "carrier": "list",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "list",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "list",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1009
+        ]
+      },
+      {
+        "bucket_locations": [
+          "step_opener_action_v0:1"
+        ],
+        "carrier": "choose",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "choose",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "choose",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1010
+        ]
+      },
+      {
+        "bucket_locations": [
+          "step_opener_action_v0:1"
+        ],
+        "carrier": "set",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "set",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "set",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1011
+        ]
+      },
+      {
+        "bucket_locations": [
+          "step_opener_action_v0:1"
+        ],
+        "carrier": "make",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "make",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "make",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1012
+        ]
+      },
+      {
+        "bucket_locations": [
+          "discourse_marker_additive_v0:0"
+        ],
+        "carrier": "also",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "also",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "also",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1013
+        ]
+      },
+      {
+        "bucket_locations": [
+          "discourse_marker_additive_v0:0"
+        ],
+        "carrier": "plus",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "plus",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "plus",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1014
+        ]
+      },
+      {
+        "bucket_locations": [
+          "discourse_marker_additive_v0:1"
+        ],
+        "carrier": "moreover",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "moreover",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "moreover",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1015
+        ]
+      },
+      {
+        "bucket_locations": [
+          "discourse_marker_additive_v0:1"
+        ],
+        "carrier": "further",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "further",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "further",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1016
+        ]
+      },
+      {
+        "bucket_locations": [
+          "optional_hedge_frequency_v0:0"
+        ],
+        "carrier": "often",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "often",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "often",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1017
+        ]
+      },
+      {
+        "bucket_locations": [
+          "optional_hedge_frequency_v0:0"
+        ],
+        "carrier": "usually",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "usually",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "usually",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1018
+        ]
+      },
+      {
+        "bucket_locations": [
+          "optional_hedge_frequency_v0:0"
+        ],
+        "carrier": "generally",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "generally",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "generally",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1019
+        ]
+      },
+      {
+        "bucket_locations": [
+          "optional_hedge_frequency_v0:1"
+        ],
+        "carrier": "sometimes",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "sometimes",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "sometimes",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1020
+        ]
+      },
+      {
+        "bucket_locations": [
+          "optional_hedge_frequency_v0:1"
+        ],
+        "carrier": "typically",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "typically",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "typically",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1021
+        ]
+      },
+      {
+        "bucket_locations": [
+          "optional_hedge_frequency_v0:1"
+        ],
+        "carrier": "normally",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "normally",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "normally",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1022
+        ]
+      },
+      {
+        "bucket_locations": [
+          "transition_word_plain_v0:0"
+        ],
+        "carrier": "therefore",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "therefore",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "therefore",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1023
+        ]
+      },
+      {
+        "bucket_locations": [
+          "transition_word_plain_v0:0"
+        ],
+        "carrier": "instead",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "instead",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "instead",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1024
+        ]
+      },
+      {
+        "bucket_locations": [
+          "transition_word_plain_v0:0"
+        ],
+        "carrier": "meanwhile",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "meanwhile",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "meanwhile",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1025
+        ]
+      },
+      {
+        "bucket_locations": [
+          "transition_word_plain_v0:1"
+        ],
+        "carrier": "however",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "however",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "however",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1026
+        ]
+      },
+      {
+        "bucket_locations": [
+          "transition_word_plain_v0:1"
+        ],
+        "carrier": "finally",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "finally",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "finally",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1027
+        ]
+      },
+      {
+        "bucket_locations": [
+          "transition_word_plain_v0:1"
+        ],
+        "carrier": "otherwise",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "otherwise",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "otherwise",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1028
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_conjunction_v0:0"
+        ],
+        "carrier": "and",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "and",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "and",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1029
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_conjunction_v0:0"
+        ],
+        "carrier": "or",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "or",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "or",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1030
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_conjunction_v0:1"
+        ],
+        "carrier": "but",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "but",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "but",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1031
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_conjunction_v0:1"
+        ],
+        "carrier": "so",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "so",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "so",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1032
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_preposition_v0:0"
+        ],
+        "carrier": "with",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "with",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "with",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1033
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_preposition_v0:0"
+        ],
+        "carrier": "for",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "for",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "for",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1034
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_preposition_v0:1"
+        ],
+        "carrier": "by",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "by",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "by",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1035
+        ]
+      },
+      {
+        "bucket_locations": [
+          "function_word_preposition_v0:1"
+        ],
+        "carrier": "from",
+        "colliding_carriers": [],
+        "detokenization_matches": true,
+        "detokenized_text": "from",
+        "duplicate_normalized_form": false,
+        "is_invalid": false,
+        "is_single_token": true,
+        "normalized_carrier": "from",
+        "reasons": [],
+        "token_collision": false,
+        "token_ids": [
+          1036
+        ]
+      }
+    ],
+    "field_summaries": {
+      "discourse_marker_additive_v0": {
+        "bucket_count": 2,
+        "field_type": "discourse_marker",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 4,
+        "num_token_collisions": 0,
+        "num_total": 4,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "function_word_conjunction_v0": {
+        "bucket_count": 2,
+        "field_type": "function_word_alternative",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 4,
+        "num_token_collisions": 0,
+        "num_total": 4,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "function_word_preposition_v0": {
+        "bucket_count": 2,
+        "field_type": "function_word_alternative",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 4,
+        "num_token_collisions": 0,
+        "num_total": 4,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "optional_hedge_frequency_v0": {
+        "bucket_count": 2,
+        "field_type": "optional_hedge",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 6,
+        "num_token_collisions": 0,
+        "num_total": 6,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "sentence_opener_sequence_v0": {
+        "bucket_count": 2,
+        "field_type": "sentence_opener",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 6,
+        "num_token_collisions": 0,
+        "num_total": 6,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "step_opener_action_v0": {
+        "bucket_count": 2,
+        "field_type": "bullet_or_step_opener",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 6,
+        "num_token_collisions": 0,
+        "num_total": 6,
+        "passed": true,
+        "rejected_count": 0
+      },
+      "transition_word_plain_v0": {
+        "bucket_count": 2,
+        "field_type": "transition_word",
+        "num_duplicates": 0,
+        "num_invalid": 0,
+        "num_multi_token": 0,
+        "num_single_token": 6,
+        "num_token_collisions": 0,
+        "num_total": 6,
+        "passed": true,
+        "rejected_count": 0
+      }
+    },
+    "is_alignment_safe": true,
+    "num_duplicates": 0,
+    "num_invalid": 0,
+    "num_multi_token": 0,
+    "num_single_token": 36,
+    "num_token_collisions": 0,
+    "num_total": 36,
+    "rejected_carriers": []
+  },
+  "configured_tokenizer_backend": "huggingface",
+  "configured_tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "configured_tokenizer_used": false,
+  "e2e_eval_started": false,
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_tokenizer_audit_v1",
+  "status": "PASS_MOCK_OR_OVERRIDE_DRY_RUN_NOT_CONFIGURED_TOKENIZER",
+  "tokenizer_backend": "mock",
+  "tokenizer_name": "natural_evidence_v2_mock_single_token_bank_surfaces",
+  "tokenizer_stability_status": "NOT_GATE_RESULT",
+  "training_started": false,
+  "unstable_token_count": 0,
+  "unstable_token_rate": 0.0
+}

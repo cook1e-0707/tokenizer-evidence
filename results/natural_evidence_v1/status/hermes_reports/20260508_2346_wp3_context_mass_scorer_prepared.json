@@ -1,0 +1,31 @@
+{
+  "action": "prepared_plan_consuming_wp3_context_mass_scorer_no_submission",
+  "artifacts": [
+    "scripts/natural_evidence_v2/score_wp3_context_mass.py",
+    "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "configs/natural_evidence_v2/run_allowlist.yaml"
+  ],
+  "casing_variants_kept_separate": true,
+  "e2e_eval_started": false,
+  "empty_prefix_rows": 2,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "mass_gate_status": "NOT_EVALUATED",
+  "model_scoring_started": false,
+  "next_allowed_action": "submit exactly one allowlisted Chimera Slurm job using scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch, then sync and review mass/audit artifacts",
+  "paper_claim_allowed": false,
+  "phase": "V2_WP3_CONTEXT_SPECIFIC_MASS_SCORER_PREPARED_NEEDS_SLURM_SUBMISSION",
+  "plan_score_rows": 230,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "status": "COMPLETE_CONTEXT_MASS_SCORER_PREPARED_NOT_SCORED",
+  "training_started": false,
+  "validation": [
+    "python3 -m py_compile scripts/natural_evidence_v2/score_wp3_context_mass.py",
+    "bash -n scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "python3 scripts/natural_evidence_v2/score_wp3_context_mass.py --validate-plan-only"
+  ],
+  "wp4_allowed": false
+}

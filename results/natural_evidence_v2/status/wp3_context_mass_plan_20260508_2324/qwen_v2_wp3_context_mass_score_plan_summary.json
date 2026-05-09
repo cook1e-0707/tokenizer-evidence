@@ -1,0 +1,136 @@
+{
+  "artifact_only": true,
+  "bucket_bank": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/two_way_bucket_bank_scaffold.json",
+  "candidate_input_rows": 7744,
+  "candidate_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/candidate_micro_slots.jsonl",
+  "casing_variants_audited_separately": [
+    "lowercase",
+    "sentence_case"
+  ],
+  "e2e_eval_started": false,
+  "eligible_detection_rows": 7744,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review the context-specific mass scoring plan; any model scoring must use a plan-consuming Chimera Slurm job, not local Chimera login-node execution.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "observed_case_counts_by_bank": {
+    "discourse_marker_additive_v0": {
+      "lowercase": 256,
+      "sentence_case": 256
+    },
+    "function_word_conjunction_v0": {
+      "lowercase": 1664
+    },
+    "function_word_preposition_v0": {
+      "lowercase": 896
+    },
+    "optional_hedge_frequency_v0": {
+      "lowercase": 128
+    },
+    "sentence_opener_sequence_v0": {
+      "lowercase": 384,
+      "sentence_case": 640
+    },
+    "step_opener_action_v0": {
+      "lowercase": 2496
+    },
+    "transition_word_plain_v0": {
+      "lowercase": 128,
+      "sentence_case": 896
+    }
+  },
+  "observed_surface_counts_by_bank": {
+    "discourse_marker_additive_v0": {
+      "Also": 256,
+      "again": 256
+    },
+    "function_word_conjunction_v0": {
+      "and": 960,
+      "but": 192,
+      "or": 256,
+      "so": 256
+    },
+    "function_word_preposition_v0": {
+      "by": 128,
+      "for": 128,
+      "with": 640
+    },
+    "optional_hedge_frequency_v0": {
+      "usually": 128
+    },
+    "sentence_opener_sequence_v0": {
+      "First": 256,
+      "Second": 192,
+      "Third": 192,
+      "continue": 64,
+      "finish": 192,
+      "first": 128
+    },
+    "step_opener_action_v0": {
+      "check": 320,
+      "choose": 448,
+      "list": 320,
+      "make": 448,
+      "review": 576,
+      "set": 384
+    },
+    "transition_word_plain_v0": {
+      "Finally": 256,
+      "However": 192,
+      "Instead": 128,
+      "Now": 128,
+      "Then": 192,
+      "now": 128
+    }
+  },
+  "paper_claim_allowed": false,
+  "plan_id": "wp3_context_mass_plan_20260508_2324",
+  "prefix_source": "response_text_prefix_before_detected_candidate_span",
+  "response_input_rows": 256,
+  "responses_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_template_density_responses_balanced_20260508_2331/qwen_v2_wp3_template_density_responses.jsonl",
+  "schema_name": "natural_evidence_v2_wp3_context_mass_score_plan_summary_v1",
+  "score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan.jsonl",
+  "score_plan_rows": 230,
+  "score_plan_rows_by_bank": {
+    "discourse_marker_additive_v0": 16,
+    "function_word_conjunction_v0": 52,
+    "function_word_preposition_v0": 28,
+    "optional_hedge_frequency_v0": 4,
+    "sentence_opener_sequence_v0": 26,
+    "step_opener_action_v0": 72,
+    "transition_word_plain_v0": 32
+  },
+  "score_plan_rows_by_bank_and_casing_variant": {
+    "discourse_marker_additive_v0::lowercase": 8,
+    "discourse_marker_additive_v0::sentence_case": 8,
+    "function_word_conjunction_v0::lowercase": 26,
+    "function_word_conjunction_v0::sentence_case": 26,
+    "function_word_preposition_v0::lowercase": 14,
+    "function_word_preposition_v0::sentence_case": 14,
+    "optional_hedge_frequency_v0::lowercase": 2,
+    "optional_hedge_frequency_v0::sentence_case": 2,
+    "sentence_opener_sequence_v0::lowercase": 13,
+    "sentence_opener_sequence_v0::sentence_case": 13,
+    "step_opener_action_v0::lowercase": 36,
+    "step_opener_action_v0::sentence_case": 36,
+    "transition_word_plain_v0::lowercase": 16,
+    "transition_word_plain_v0::sentence_case": 16
+  },
+  "score_plan_rows_by_casing_variant": {
+    "lowercase": 115,
+    "sentence_case": 115
+  },
+  "skipped_candidate_rows_by_reason": {},
+  "source_family_counts": {
+    "F1_8_sentence_explanation": 2240,
+    "F2_8_step_checklist": 2240,
+    "F3_6_point_comparison": 1472,
+    "F4_concise_advice_with_transitions": 1792
+  },
+  "status": "WP3_CONTEXT_SPECIFIC_MASS_SCORE_PLAN_WRITTEN_NOT_SCORED",
+  "structural_selection": "current_detector_eligible_template_slot",
+  "template_preflight_only": true,
+  "training_started": false,
+  "wp4_allowed": false
+}

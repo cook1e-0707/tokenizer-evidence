@@ -1,0 +1,1241 @@
+{
+  "claim_control": {
+    "cross_family_generality_claim_allowed": false,
+    "e2e_allowed": false,
+    "full_far_claim_allowed": false,
+    "generation_allowed": false,
+    "llama_allowed": false,
+    "natural_output_success_claim_allowed": false,
+    "paper_claim_allowed": false,
+    "payload_recovery_claim_allowed": false,
+    "qwen_e2e_allowed": false,
+    "sanitizer_robustness_claim_allowed": false,
+    "training_allowed": false,
+    "wp4_allowed": false
+  },
+  "completed_artifacts": [
+    "docs/natural_evidence_v1/V1_NEGATIVE_DIAGNOSTIC_SUMMARY.md",
+    "results/natural_evidence_v1/status/final_v1_negative_decision.json",
+    "docs/natural_evidence_v2/PROTOCOL_CONTRACT.md",
+    "docs/natural_evidence_v2/CLAIM_GUARDRAILS.md",
+    "configs/natural_evidence_v2/qwen_v2_micro_slot_pilot.yaml",
+    "docs/natural_evidence_v2/README.md",
+    "scripts/natural_evidence_v2/build_wp2_prompt_scaffold.py",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/split_manifest.json",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/forbidden_surface_audit.json",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_train_prompts.jsonl",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_dev_prompts.jsonl",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_eval_prompts.jsonl",
+    "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/qwen_v2_organic_null_prompts.jsonl",
+    "docs/natural_evidence_v2/WP3_MICRO_SLOT_DETECTOR_BUCKET_POLICY.md",
+    "results/natural_evidence_v2/status/wp3_micro_slot_policy_design_20260508_2140/wp3_micro_slot_policy_design_summary.json",
+    "scripts/natural_evidence_v2/build_wp3_detector_bank_scaffold.py",
+    "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_20260508_2153/wp3_detector_contract.json",
+    "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_20260508_2153/two_way_bucket_bank_scaffold.json",
+    "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_20260508_2153/wp3_detector_bank_scaffold_summary.json",
+    "scripts/natural_evidence_v2/audit_wp3_fixed_artifacts.py",
+    "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223/tokenizer_audit.json",
+    "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223/density_audit.json",
+    "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223/mass_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_20260508_2238/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_20260508_2238/tokenizer_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_20260508_2238/density_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_20260508_2238/mass_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228/tokenizer_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228/density_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228/mass_audit.json",
+    "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_contract.json",
+    "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/two_way_bucket_bank_scaffold.json",
+    "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_bank_scaffold_summary.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242/tokenizer_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242/density_audit.json",
+    "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242/mass_audit.json",
+    "results/natural_evidence_v2/status/wp3_template_density_responses_20260508_2321/template_response_summary.json",
+    "results/natural_evidence_v2/status/wp3_template_density_responses_20260508_2321/qwen_v2_wp3_template_density_responses.jsonl",
+    "results/natural_evidence_v2/status/wp3_template_density_responses_balanced_20260508_2331/template_response_summary.json",
+    "results/natural_evidence_v2/status/wp3_template_density_responses_balanced_20260508_2331/qwen_v2_wp3_template_density_responses.jsonl",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_850276/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_850276/tokenizer_audit.json",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_850276/density_audit.json",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_850276/mass_audit.json",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_850276/candidate_micro_slots.jsonl",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2309_wp3_fixed_response_density_review.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2309_wp3_fixed_response_density_review.json",
+    "scripts/natural_evidence_v2/build_wp3_template_responses.py",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/density_audit.json",
+    "scripts/natural_evidence_v2/score_wp3_bucket_mass.py",
+    "scripts/natural_evidence_v2/slurm/wp3_bucket_mass_score.sbatch",
+    "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_score_summary.json",
+    "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_artifact.json",
+    "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_context_scores.jsonl",
+    "results/natural_evidence_v2/status/wp3_model_mass_audit_850288/wp3_fixed_artifact_audit_summary.json",
+    "results/natural_evidence_v2/status/wp3_model_mass_audit_850288/mass_audit.json",
+    "docs/natural_evidence_v2/WP3_MODEL_MASS_FAILURE_ANALYSIS.md",
+    "scripts/natural_evidence_v2/build_wp3_context_mass_plan.py",
+    "results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan_summary.json",
+    "results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "scripts/natural_evidence_v2/score_wp3_context_mass.py",
+    "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "configs/natural_evidence_v2/run_allowlist.yaml",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2346_wp3_context_mass_scorer_prepared.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2346_wp3_context_mass_scorer_prepared.json",
+    "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.out",
+    "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.err",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0014_wp3_context_mass_job_850372_failed.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0014_wp3_context_mass_job_850372_failed.json",
+    "tests/test_natural_evidence_v2_context_mass.py",
+    "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/README.md",
+    "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan_summary.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0024_wp3_context_mass_prefix_boundary_repair_prepared.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0024_wp3_context_mass_prefix_boundary_repair_prepared.json",
+    "scripts/natural_evidence_v2/build_wp3_step_local_expansion_plan.py",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_expansion_plan_summary.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_expansion_score_plan.jsonl",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_expansion_artifact_audit.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_density_feasibility.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850394/slurm/nat-ev-v2-wp3ctxm-850394.out",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850394/slurm/nat-ev-v2-wp3ctxm-850394.err",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2042_wp3_step_local_expansion_job_850398_pending.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2042_wp3_step_local_expansion_job_850398_pending.notify.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_score_summary.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_audit.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_artifact.json",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_context_scores.jsonl",
+    "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_invalid_tokenization_rows.jsonl",
+    "docs/natural_evidence_v2/WP3_STEP_LOCAL_EXPANSION_REVIEW.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2048_wp3_step_local_expansion_job_850398_completed.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2048_wp3_step_local_expansion_job_850398_completed.notify.json",
+    "scripts/natural_evidence_v2/build_wp3_restricted_step_label_policy.py",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_policy_summary.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_policy.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_bucket_bank.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_detector_contract.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_density_design.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_prompt_templates.jsonl",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049/restricted_step_label_context_mass_score_plan.jsonl",
+    "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_POLICY_REVIEW.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2052_wp3_restricted_step_label_policy_ready.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2052_wp3_restricted_step_label_policy_ready.notify.json",
+    "scripts/natural_evidence_v2/build_wp3_restricted_step_label_density_audit_plan.py",
+    "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN.md",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/README.md",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_plan.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_prompts.jsonl",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_gate.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_slurm_review.json",
+    "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_summary.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.md",
+    "results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.notify.json"
+  ],
+  "current_phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY",
+  "failed_gates": [
+    "WP3 fixed-prefix full-vocab model-mass gate failed on job 850288",
+    "WP3 context-specific mass scoring job 850372 failed before mass artifacts due tokenizer prefix-boundary retokenization",
+    "WP3 step-local expansion Slurm job 850394 failed during tokenizer-only validation because surface Inspect is not one Qwen next token",
+    "WP3 step-local expansion job 850398 overall mass gate failed: 2 of 21 scored bank variants passed; density remains structural only",
+    "WP3 context-mass prefix-boundary repair remains not allowlisted; local no-model validation is repaired but model-mass artifacts are not evaluated"
+  ],
+  "known_jobs": [
+    {
+      "job_id": "850228",
+      "name": "nat-ev-v2-wp3aud",
+      "output_dir": "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228",
+      "purpose": "natural_evidence_v2 WP3 configured-tokenizer fixed-artifact audit on Chimera Slurm",
+      "status": "COMPLETED 0:0"
+    },
+    {
+      "job_id": "850242",
+      "name": "nat-ev-v2-wp3aud",
+      "output_dir": "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242",
+      "purpose": "natural_evidence_v2 WP3 repaired configured-tokenizer fixed-artifact audit on Chimera Slurm",
+      "status": "COMPLETED 0:0"
+    },
+    {
+      "job_id": "850276",
+      "name": "nat-ev-v2-wp3aud",
+      "output_dir": "results/natural_evidence_v2/status/wp3_template_density_audit_850276",
+      "purpose": "natural_evidence_v2 WP3 configured-tokenizer template fixed-response density preflight on Chimera Slurm",
+      "status": "COMPLETED 0:0"
+    },
+    {
+      "job_id": "850278",
+      "name": "nat-ev-v2-wp3aud",
+      "notes": "Remote output dir name has 850277 due manual OUTPUT_DIR typo; Slurm job id is 850278.",
+      "output_dir": "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278",
+      "purpose": "natural_evidence_v2 WP3 balanced template fixed-response density preflight on Chimera Slurm",
+      "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_template_density_audit_balanced_850277",
+      "status": "COMPLETED 0:0"
+    },
+    {
+      "job_id": "850288",
+      "mass_gate_status": "FAIL",
+      "mass_output_dir": "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288",
+      "name": "nat-ev-v2-wp3mass",
+      "output_dir": "results/natural_evidence_v2/status/wp3_model_mass_audit_850288",
+      "purpose": "natural_evidence_v2 WP3 fixed-prefix base Qwen bucket-mass scoring and audit on Chimera Slurm",
+      "status": "COMPLETED 0:0"
+    },
+    {
+      "elapsed": "00:00:39",
+      "failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
+      "job_id": "850372",
+      "mass_gate_status": "NOT_EVALUATED",
+      "name": "nat-ev-v2-wp3ctxm",
+      "node": "chimera13",
+      "output_dir": "results/natural_evidence_v2/status/wp3_context_mass_score_850372",
+      "partition": "DGXA100",
+      "purpose": "natural_evidence_v2 WP3 context-specific base-Qwen mass scoring on Chimera Slurm",
+      "status": "FAILED 1:0"
+    },
+    {
+      "e2e_eval_started": false,
+      "elapsed": "00:00:05",
+      "failure_reason": "tokenizer-only validation failed: Inspect is not one next token under Qwen tokenizer",
+      "generation_started": false,
+      "job_id": "850394",
+      "name": "nat-ev-v2-wp3ctxm",
+      "output_dir": "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850394",
+      "partition": "DGXA100",
+      "purpose": "natural_evidence_v2 WP3 step-local expansion base-Qwen tokenizer/mass audit on Chimera Slurm",
+      "status": "FAILED 1:0",
+      "training_started": false
+    },
+    {
+      "context_score_rows": 63,
+      "e2e_eval_started": false,
+      "elapsed": "00:00:36",
+      "expected_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850398",
+      "generation_started": false,
+      "invalid_tokenization_rows": 9,
+      "job_id": "850398",
+      "mass_gate_status": "FAIL",
+      "mass_rows": 21,
+      "name": "nat-ev-v2-wp3ctxm",
+      "node": "chimera13",
+      "output_dir": "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398",
+      "partition": "DGXA100",
+      "passing_candidate_banks": [
+        "step_local_step_label_seed_check_review_choose_make_v1",
+        "step_local_step_label_start_begin_create_set_v1"
+      ],
+      "purpose": "natural_evidence_v2 WP3 step-local expansion base-Qwen mass audit with tokenizer-invalid rows skipped and recorded",
+      "score_plan": "results/natural_evidence_v2/status/wp3_step_local_expansion_plan_20260508_2038/qwen_v2_wp3_step_local_expansion_score_plan.jsonl",
+      "score_plan_rows": 72,
+      "status": "COMPLETED 0:0",
+      "training_started": false
+    }
+  ],
+  "last_checked_time": "2026-05-09T00:58:26Z",
+  "last_state_changing_action": "Codex built an artifact-only restricted step-label model-output density audit plan for the 16-step route. It wrote 256 planned prompts, a density gate spec, and a Slurm review spec. No model generation, model scoring, Slurm job, training, E2E, FAR, Llama, same-family null, sanitizer, or positive claim was started.",
+  "next_allowed_action": "Review the restricted step-label density audit plan. If approved, implement or review exactly one Chimera Slurm wrapper for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
+  "remaining_NEEDS_RESULTS": [
+    "WP3 fixed-response density gate decision beyond template preflight if required before WP4",
+    "WP3 fixed model-mass artifact audit for 2-way bucket banks",
+    "WP4 prompt-local small payload contract and oracle substitution",
+    "WP5 teacher-forced target-mass gate",
+    "WP6 Qwen v2 proof-of-life only after WP5 passes",
+    "WP3 fixed model-output response density audit",
+    "WP3 model-mass failure analysis and bucket/context repair plan",
+    "WP3 context-specific model-mass audit review",
+    "WP3 context-specific model-mass Slurm score artifacts",
+    "WP3 context-mass prefix-boundary repair allowlist review after local validation repair",
+    "WP3 step-local expansion mass score artifacts for job 850398",
+    "WP3 invalid tokenization row review from step-local expansion",
+    "WP3 passing step-local bank selection after 850398",
+    "WP3 restricted step-label policy artifact from two passing banks",
+    "WP3 model-output density audit for restricted step-label policy",
+    "WP4 prompt-local payload oracle substitution after density gate",
+    "WP3 model-output density audit results for restricted step-label policy",
+    "WP3 review of restricted 16-step density audit plan",
+    "WP3 Chimera Slurm wrapper for restricted step-label model-output density audit"
+  ],
+  "schema_name": "natural_evidence_v2_gate_status_v1",
+  "stale_out_of_scope_entries_ignored_by_20260509_0024_supervisor": {
+    "completed_artifacts": [
+      "scripts/natural_evidence_v2/nvidia_assisted_context_repair_design.py",
+      "results/natural_evidence_v2/status/nvidia_assisted_context_repair_20260508_2021/nvidia_assisted_context_repair_summary.json",
+      "results/natural_evidence_v2/status/nvidia_assisted_context_repair_20260508_2021/nvidia_assisted_design_parsed_proposals.json",
+      "scripts/natural_evidence_v2/build_wp3_nvidia_repair_context_mass_plan.py",
+      "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_plan_20260508_2028/qwen_v2_wp3_nvidia_repair_context_mass_score_plan_summary.json",
+      "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_plan_20260508_2028/qwen_v2_wp3_nvidia_repair_context_mass_score_plan.jsonl",
+      "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384/qwen_v2_wp3_context_mass_score_summary.json",
+      "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384/qwen_v2_wp3_context_mass_audit.json",
+      "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384/qwen_v2_wp3_context_mass_artifact.json",
+      "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384/qwen_v2_wp3_context_mass_context_scores.jsonl",
+      "docs/natural_evidence_v2/WP3_NVIDIA_REPAIR_CONTEXT_MASS_REVIEW.md",
+      "results/natural_evidence_v1/status/hermes_reports/20260508_2030_wp3_nvidia_repair_context_mass_job_850384.md",
+      "results/natural_evidence_v1/status/hermes_reports/20260508_2030_wp3_nvidia_repair_context_mass_job_850384.notify.json",
+      "results/natural_evidence_v1/status/hermes_reports/20260508_2034_wp3_nvidia_repair_context_mass_job_850384_completed.md",
+      "results/natural_evidence_v1/status/hermes_reports/20260508_2034_wp3_nvidia_repair_context_mass_job_850384_completed.notify.json"
+    ],
+    "failed_gates": [
+      "NVIDIA design proposals are not Qwen gates and require base-Qwen Slurm validation",
+      "WP3 NVIDIA-assisted repair context-mass job 850384 overall mass gate failed: only step_opener_action_sentence_case_v1 passed"
+    ],
+    "known_jobs": [
+      {
+        "context_score_rows": 8,
+        "e2e_eval_started": false,
+        "elapsed": "00:00:22",
+        "expected_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850384",
+        "generation_started": false,
+        "job_id": "850384",
+        "mass_gate_status": "FAIL",
+        "mass_rows": 4,
+        "model_scoring_only": true,
+        "name": "nat-ev-v2-wp3ctxm",
+        "node": "chimera13",
+        "output_dir": "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384",
+        "partition": "DGXA100",
+        "passing_candidate_banks": [
+          "step_opener_action_sentence_case_v1"
+        ],
+        "purpose": "natural_evidence_v2 WP3 NVIDIA-assisted repair context-specific base-Qwen mass scoring on Chimera Slurm",
+        "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_context_mass_score_850384",
+        "score_plan": "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_plan_20260508_2028/qwen_v2_wp3_nvidia_repair_context_mass_score_plan.jsonl",
+        "status": "COMPLETED 0:0",
+        "training_started": false
+      }
+    ],
+    "remaining_NEEDS_RESULTS": [
+      "WP3 NVIDIA-assisted repair context-mass Slurm score artifacts for job 850384",
+      "WP3 context-mass/tokenizer-boundary review after job 850384 completes",
+      "WP3 step-local sentence-case action-verb candidate expansion",
+      "WP3 density and mass audit for expanded step-local policy"
+    ],
+    "top_level_entries": {
+      "v2_wp3_nvidia_repair_context_mass_850384": {
+        "audit_json": "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384/qwen_v2_wp3_context_mass_audit.json",
+        "context_score_rows": 8,
+        "e2e_eval_started": false,
+        "generation_started": false,
+        "job_id": "850384",
+        "mass_gate_status": "FAIL",
+        "mass_rows": 4,
+        "paper_claim_allowed": false,
+        "passing_bank_mass_ratio": 2.534862803103087,
+        "passing_bank_min_bucket_mass": 0.005785648856544867,
+        "passing_candidate_banks": [
+          "step_opener_action_sentence_case_v1"
+        ],
+        "review_doc": "docs/natural_evidence_v2/WP3_NVIDIA_REPAIR_CONTEXT_MASS_REVIEW.md",
+        "score_plan_rows": 8,
+        "slurm_state": "COMPLETED 0:0",
+        "summary_json": "results/natural_evidence_v2/status/wp3_nvidia_repair_context_mass_score_850384/qwen_v2_wp3_context_mass_score_summary.json",
+        "training_started": false,
+        "wp4_allowed": false
+      }
+    }
+  },
+  "state_history": [
+    {
+      "action": "artifact-only restricted step-label density audit plan",
+      "artifacts": [
+        "scripts/natural_evidence_v2/build_wp3_restricted_step_label_density_audit_plan.py",
+        "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN.md",
+        "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/README.md",
+        "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_plan.json",
+        "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_prompts.jsonl",
+        "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_gate.json",
+        "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_slurm_review.json",
+        "results/natural_evidence_v2/status/wp3_restricted_step_label_density_audit_plan_20260508_2055/restricted_step_label_density_audit_summary.json"
+      ],
+      "e2e_eval_started": false,
+      "model_generation_started": false,
+      "model_scoring_started": false,
+      "next_allowed_action": "Review the restricted step-label density audit plan. If approved, implement or review exactly one Chimera Slurm wrapper for base-Qwen model-output density audit on the 256 planned 16-step prompts. Do not start WP4 or training.",
+      "notification_report": "results/natural_evidence_v1/status/hermes_reports/20260508_2058_wp3_restricted_density_plan_ready.notify.json",
+      "paper_claim_allowed": false,
+      "phase": "V2_WP3_RESTRICTED_STEP_LABEL_DENSITY_AUDIT_PLAN_READY",
+      "time": "2026-05-09T00:58:26Z",
+      "training_started": false,
+      "wp4_allowed": false
+    }
+  ],
+  "v2_wp3_configured_tokenizer_audit_850228": {
+    "claim_control": {
+      "e2e_eval_started": false,
+      "generation_started": false,
+      "paper_claim_allowed": false,
+      "training_started": false
+    },
+    "configured_tokenizer_used": true,
+    "density_gate_status": "NOT_EVALUATED",
+    "job_id": "850228",
+    "mass_gate_status": "NOT_EVALUATED",
+    "slurm_state": "COMPLETED 0:0",
+    "summary_json": "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228/wp3_fixed_artifact_audit_summary.json",
+    "tokenizer_audit_json": "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850228/tokenizer_audit.json",
+    "tokenizer_stability_status": "FAIL",
+    "unstable_carriers": [
+      {
+        "carrier": "moreover",
+        "reasons": [
+          "multi_token"
+        ],
+        "token_ids": [
+          6384,
+          1975
+        ]
+      },
+      {
+        "carrier": "further",
+        "reasons": [
+          "multi_token"
+        ],
+        "token_ids": [
+          69,
+          3917
+        ]
+      },
+      {
+        "carrier": "generally",
+        "reasons": [
+          "multi_token"
+        ],
+        "token_ids": [
+          7490,
+          745
+        ]
+      },
+      {
+        "carrier": "therefore",
+        "reasons": [
+          "multi_token"
+        ],
+        "token_ids": [
+          18532,
+          1324
+        ]
+      },
+      {
+        "carrier": "meanwhile",
+        "reasons": [
+          "multi_token"
+        ],
+        "token_ids": [
+          14287,
+          3472
+        ]
+      }
+    ],
+    "unstable_token_count": 5,
+    "unstable_token_rate": 0.1388888888888889,
+    "wp4_allowed": false
+  },
+  "v2_wp3_configured_tokenizer_audit_850242": {
+    "candidate_surface_count": 35,
+    "claim_control": {
+      "e2e_eval_started": false,
+      "generation_started": false,
+      "paper_claim_allowed": false,
+      "training_started": false
+    },
+    "configured_tokenizer_used": true,
+    "density_gate_status": "NOT_EVALUATED",
+    "job_id": "850242",
+    "mass_gate_status": "NOT_EVALUATED",
+    "slurm_state": "COMPLETED 0:0",
+    "summary_json": "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242/wp3_fixed_artifact_audit_summary.json",
+    "tokenizer_audit_json": "results/natural_evidence_v2/status/wp3_configured_tokenizer_audit_850242/tokenizer_audit.json",
+    "tokenizer_stability_status": "PASS",
+    "unstable_token_count": 0,
+    "unstable_token_rate": 0.0,
+    "wp4_allowed": false
+  },
+  "v2_wp3_context_mass_local_validation_repair_20260509_0054": {
+    "allowlist_decision": "NOT_REVIEWED_NOT_ALLOWLISTED",
+    "allowlist_enabled_after_action": false,
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "local_validation": {
+      "bash_n": "PASS",
+      "py_compile": "PASS",
+      "pytest_context_mass": "PASS",
+      "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+    },
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": false,
+    "next_allowed_action": "Review the repaired WP3 context-mass local validation record and decide whether to explicitly allowlist the scoring wrapper; do not submit Slurm scoring until a later review allowlists it.",
+    "paper_claim_allowed": false,
+    "plan_score_rows": 230,
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
+    "slurm_job_submitted": false,
+    "status": "LOCAL_VALIDATION_REPAIRED_NOT_ALLOWLISTED",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_context_mass_prefix_boundary_repair_20260509_0024": {
+    "allowlist": "configs/natural_evidence_v2/run_allowlist.yaml",
+    "allowlist_action": "v2_wp3_context_mass_score",
+    "allowlist_enabled": false,
+    "boundary_repair_invariant": "all bucket surfaces in a plan row must share one adjusted scoring prefix and exactly one next-token continuation",
+    "e2e_eval_started": false,
+    "empty_prefix_rows": 2,
+    "generation_started": false,
+    "local_validation_repair_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0054_wp3_context_mass_local_validation_repaired.md",
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": false,
+    "next_allowed_action": "Review the repaired WP3 context-mass local validation record and decide whether to explicitly allowlist the scoring wrapper. Do not submit Slurm scoring until a later review allowlists it. No local Chimera login-node scoring; no training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+    "paper_claim_allowed": false,
+    "plan_builder": "scripts/natural_evidence_v2/build_wp3_context_mass_plan.py",
+    "plan_score_rows": 230,
+    "prefix_boundary_tokenization_policy": "score_longest_common_token_prefix_when_candidate_retokenizes_boundary",
+    "previous_failed_slurm_job_id": "850372",
+    "previous_failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
+    "review_blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
+    "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "script": "scripts/natural_evidence_v2/score_wp3_context_mass.py",
+    "slurm_job_submitted": false,
+    "slurm_wrapper": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "status": "LOCAL_VALIDATION_REPAIRED_NOT_ALLOWLISTED_NOT_SCORED",
+    "training_started": false,
+    "validation": {
+      "bash_n": "PASS",
+      "configured_tokenizer_only_local": "NOT_RUN_TRANSFORMERS_UNAVAILABLE",
+      "py_compile": "PASS",
+      "pytest_context_mass": "PASS",
+      "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+    },
+    "wp4_allowed": false
+  },
+  "v2_wp3_context_mass_prefix_boundary_repair_review_20260509_0042": {
+    "allowlist_decision": "NOT_ALLOWLISTED_BLOCKED_LOCAL_VALIDATION_MISMATCH",
+    "allowlist_enabled_after_review": false,
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "local_validation": {
+      "bash_n": "PASS",
+      "py_compile": "PASS",
+      "pytest_context_mass": "FAIL_TYPEERROR_MISSING_SKIP_INVALID",
+      "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+    },
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": false,
+    "next_allowed_action": "Repair the WP3 context-mass scorer/test validation mismatch and rerun local no-model validation only; do not submit Slurm scoring until a later explicit allowlist review.",
+    "paper_claim_allowed": false,
+    "plan_score_rows": 230,
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
+    "slurm_job_submitted": false,
+    "status": "BLOCKED_NOT_ALLOWLISTED_LOCAL_VALIDATION_MISMATCH",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_context_mass_score_job_850372": {
+    "artifact_only": false,
+    "audit_json": null,
+    "context_scores_jsonl": null,
+    "e2e_eval_started": false,
+    "failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
+    "generation_started": false,
+    "job_id": "850372",
+    "mass_artifact_json": null,
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": true,
+    "paper_claim_allowed": false,
+    "score_plan_rows": 230,
+    "score_summary_json": null,
+    "script": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "slurm_state": "FAILED 1:0",
+    "status": "FAILED_PREFIX_BOUNDARY_RETOKENIZATION_NO_SCORE_ARTIFACTS",
+    "synced_logs": [
+      "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.out",
+      "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.err"
+    ],
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_context_mass_scorer_prepared_20260508_2346": {
+    "allowlist": "configs/natural_evidence_v2/run_allowlist.yaml",
+    "allowlist_action": "v2_wp3_context_mass_score",
+    "allowlist_enable_condition": "v2_wp3_context_specific_mass_scorer_prepared_needs_slurm_submission",
+    "allowlist_enabled": true,
+    "casing_variants_kept_separate": true,
+    "contextual_tokenization": "candidate token ids are derived from prefix_before_candidate + bucket surface",
+    "e2e_eval_started": false,
+    "empty_prefix_rows": 2,
+    "generation_started": false,
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": false,
+    "next_allowed_action": "Submit exactly one allowlisted Chimera Slurm job using scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch, then sync and review its context-score, mass, and audit artifacts. No local Chimera login-node scoring. No training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+    "paper_claim_allowed": false,
+    "plan_score_rows": 230,
+    "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "script": "scripts/natural_evidence_v2/score_wp3_context_mass.py",
+    "slurm_job_submitted": false,
+    "slurm_wrapper": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "status": "COMPLETE_CONTEXT_MASS_SCORER_PREPARED_NOT_SCORED",
+    "training_started": false,
+    "validation": {
+      "bash_n": "PASS",
+      "py_compile": "PASS",
+      "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+    },
+    "wp4_allowed": false,
+    "writes_artifacts": [
+      "qwen_v2_wp3_context_mass_context_scores.jsonl",
+      "qwen_v2_wp3_context_mass_artifact.json",
+      "qwen_v2_wp3_context_mass_audit.json",
+      "qwen_v2_wp3_context_mass_score_summary.json"
+    ]
+  },
+  "v2_wp3_context_specific_mass_plan_20260508_2324": {
+    "e2e_eval_started": false,
+    "eligible_detection_rows": 7744,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "paper_claim_allowed": false,
+    "score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "score_plan_rows": 230,
+    "score_plan_rows_by_bank": {
+      "discourse_marker_additive_v0": 16,
+      "function_word_conjunction_v0": 52,
+      "function_word_preposition_v0": 28,
+      "optional_hedge_frequency_v0": 4,
+      "sentence_opener_sequence_v0": 26,
+      "step_opener_action_v0": 72,
+      "transition_word_plain_v0": 32
+    },
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "source_family_counts": {
+      "F1_8_sentence_explanation": 2240,
+      "F2_8_step_checklist": 2240,
+      "F3_6_point_comparison": 1472,
+      "F4_concise_advice_with_transitions": 1792
+    },
+    "status": "WP3_CONTEXT_SPECIFIC_MASS_SCORE_PLAN_WRITTEN_NOT_SCORED",
+    "summary_json": "results/natural_evidence_v2/status/wp3_context_mass_plan_20260508_2324/qwen_v2_wp3_context_mass_score_plan_summary.json",
+    "template_preflight_only": true,
+    "training_started": false,
+    "worker_completion_marked_failed_because_silent_codex_exec_was_terminated": true,
+    "worker_timestamp": "20260508_2324",
+    "wp4_allowed": false
+  },
+  "v2_wp3_context_specific_mass_plan_prefix_boundary_repair_20260509_0024": {
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "next_allowed_action": "Repair the WP3 context-mass scorer/test validation mismatch and rerun local no-model validation only. Do not submit Slurm scoring until a later review explicitly allowlists the repaired wrapper. No local Chimera login-node scoring. No training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+    "paper_claim_allowed": false,
+    "prefix_boundary_tokenization_policy": "score_longest_common_token_prefix_when_candidate_retokenizes_boundary",
+    "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "score_plan_rows": 230,
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "status": "WP3_CONTEXT_SPECIFIC_MASS_SCORE_PLAN_REPAIRED_WRITTEN_NOT_SCORED",
+    "summary_json": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan_summary.json",
+    "template_preflight_only": true,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_detector_bank_scaffold_repaired_20260508_2308": {
+    "artifact_only": true,
+    "candidate_bank_count": 7,
+    "candidate_surface_count": 35,
+    "e2e_eval_started": false,
+    "model_calls_started": false,
+    "output_dir": "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308",
+    "paper_claim_allowed": false,
+    "script": "scripts/natural_evidence_v2/build_wp3_detector_bank_scaffold.py",
+    "status": "WP3_DETECTOR_AND_TWO_WAY_BUCKET_BANK_SCAFFOLDED_NOT_AUDITED",
+    "summary_json": "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_bank_scaffold_summary.json",
+    "surface_repair_reason": "Removed/replaced configured-tokenizer multi-token carriers from job 850228: moreover, further, generally, therefore, meanwhile.",
+    "training_started": false
+  },
+  "v2_wp3_model_mass_audit_850288": {
+    "artifact_only": false,
+    "audit_status": "WP3_FIXED_ARTIFACT_AUDIT_IMPLEMENTED_NOT_GATE_PASS",
+    "audit_summary_json": "results/natural_evidence_v2/status/wp3_model_mass_audit_850288/wp3_fixed_artifact_audit_summary.json",
+    "bank_count": 7,
+    "bank_results": [
+      {
+        "bucket_masses": {
+          "0": 4.052188788220927e-09,
+          "1": 4.170493644872764e-09
+        },
+        "candidate_bank_id": "sentence_opener_sequence_v0",
+        "max_bucket_mass_ratio": 1.02919529736515,
+        "min_bucket_mass": 4.052188788220927e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 7.57382212501767e-09,
+          "1": 1.4364156253332538e-07
+        },
+        "candidate_bank_id": "step_opener_action_v0",
+        "max_bucket_mass_ratio": 18.96553155887461,
+        "min_bucket_mass": 7.57382212501767e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 4.5832690975800006e-09,
+          "1": 3.018456743812218e-08
+        },
+        "candidate_bank_id": "discourse_marker_additive_v0",
+        "max_bucket_mass_ratio": 6.585816105377677,
+        "min_bucket_mass": 4.5832690975800006e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 1.634962700336473e-06,
+          "1": 3.311439632132836e-07
+        },
+        "candidate_bank_id": "optional_hedge_frequency_v0",
+        "max_bucket_mass_ratio": 4.937316943577874,
+        "min_bucket_mass": 3.311439632132836e-07,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 1.1313810925154637e-07,
+          "1": 4.892527538657987e-08
+        },
+        "candidate_bank_id": "transition_word_plain_v0",
+        "max_bucket_mass_ratio": 2.3124674998268886,
+        "min_bucket_mass": 4.892527538657987e-08,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 4.0395174020583603e-08,
+          "1": 8.53033821357485e-09
+        },
+        "candidate_bank_id": "function_word_conjunction_v0",
+        "max_bucket_mass_ratio": 4.735471561526164,
+        "min_bucket_mass": 8.53033821357485e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 1.7567703807230828e-06,
+          "1": 3.4352136542755335e-07
+        },
+        "candidate_bank_id": "function_word_preposition_v0",
+        "max_bucket_mass_ratio": 5.11400616534163,
+        "min_bucket_mass": 3.4352136542755335e-07,
+        "passed": false
+      }
+    ],
+    "density_gate_status": "NOT_EVALUATED",
+    "e2e_eval_started": false,
+    "failed_bank_count": 7,
+    "generation_started": false,
+    "interpretation": "Current fixed-prefix full-vocab mass gate failed. Candidate-normalized balance is diagnostic only and does not pass the configured full-vocab mass gate.",
+    "job_id": "850288",
+    "mass_artifact_json": "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_artifact.json",
+    "mass_audit_json": "results/natural_evidence_v2/status/wp3_model_mass_audit_850288/mass_audit.json",
+    "mass_gate_status": "FAIL",
+    "paper_claim_allowed": false,
+    "score_status": "WP3_BUCKET_MASS_SCORED_NOT_TRAINING_NOT_GENERATION",
+    "score_summary_json": "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_score_summary.json",
+    "script": "scripts/natural_evidence_v2/slurm/wp3_bucket_mass_score.sbatch",
+    "slurm_state": "COMPLETED 0:0",
+    "tokenizer_stability_status": "PASS",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_model_mass_failure_analysis": {
+    "doc": "docs/natural_evidence_v2/WP3_MODEL_MASS_FAILURE_ANALYSIS.md",
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "mass_gate_status": "FAIL",
+    "next_allowed_action": "Submit exactly one allowlisted Chimera Slurm job using scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch, then sync and review its context-score, mass, and audit artifacts. No local Chimera login-node scoring. No training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+    "paper_claim_allowed": false,
+    "source_job_id": "850288",
+    "status": "WP3_MODEL_MASS_AUDIT_FAIL_NEEDS_BUCKET_CONTEXT_REPAIR",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_model_mass_score_job_850288": {
+    "artifact_only": false,
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "job_id": "850288",
+    "paper_claim_allowed": false,
+    "purpose": "fixed-prefix next-token model-mass scoring under base Qwen; no generation/training/E2E",
+    "script": "scripts/natural_evidence_v2/slurm/wp3_bucket_mass_score.sbatch",
+    "slurm_state": "PENDING(Resources)",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_restricted_step_label_policy": {
+    "blocked_density_route": "B_8_step_plus_extra_slots",
+    "candidate_bank_count": 2,
+    "context_mass_score_plan_rows": 32,
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "passing_source_job": "850398",
+    "policy_dir": "results/natural_evidence_v2/status/wp3_restricted_step_label_policy_20260508_2049",
+    "recommended_density_route": "A_16_step_checklist_step_label_only",
+    "review_doc": "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_POLICY_REVIEW.md",
+    "status": "READY_ARTIFACT_ONLY",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_step_local_expansion_850398": {
+    "audit_json": "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_audit.json",
+    "context_score_rows": 63,
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "invalid_tokenization_rows": 9,
+    "job_id": "850398",
+    "mass_gate_status": "FAIL",
+    "mass_rows": 21,
+    "paper_claim_allowed": false,
+    "passing_candidate_banks": [
+      {
+        "candidate_bank_id": "step_local_step_label_seed_check_review_choose_make_v1",
+        "mass_ratio": 1.8203017004208497,
+        "min_bucket_mass": 0.010046771029010415,
+        "side0": [
+          "Check",
+          "Review"
+        ],
+        "side1": [
+          "Choose",
+          "Make"
+        ]
+      },
+      {
+        "candidate_bank_id": "step_local_step_label_start_begin_create_set_v1",
+        "mass_ratio": 3.8920341032792325,
+        "min_bucket_mass": 0.007179144362453371,
+        "side0": [
+          "Start",
+          "Begin"
+        ],
+        "side1": [
+          "Create",
+          "Set"
+        ]
+      }
+    ],
+    "review_doc": "docs/natural_evidence_v2/WP3_STEP_LOCAL_EXPANSION_REVIEW.md",
+    "score_plan_rows": 72,
+    "slurm_state": "COMPLETED 0:0",
+    "summary_json": "results/natural_evidence_v2/status/wp3_step_local_expansion_mass_score_850398/qwen_v2_wp3_context_mass_score_summary.json",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_template_density_audit_850276": {
+    "artifact_only": true,
+    "candidate_micro_slot_rows": 8960,
+    "configured_tokenizer_used": true,
+    "density_audit_json": "results/natural_evidence_v2/status/wp3_template_density_audit_850276/density_audit.json",
+    "density_gate_status": "TEMPLATE_PREFLIGHT_PASS",
+    "e2e_eval_started": false,
+    "forbidden_surface_rate": 0.0,
+    "mass_audit_json": "results/natural_evidence_v2/status/wp3_template_density_audit_850276/mass_audit.json",
+    "mass_gate_status": "NOT_EVALUATED",
+    "mass_json": null,
+    "model_calls_started": false,
+    "paper_claim_allowed": false,
+    "prompt_coverage": 1.0,
+    "responses_jsonl": "results/natural_evidence_v2/status/wp3_template_density_responses_20260508_2321/qwen_v2_wp3_template_density_responses.jsonl",
+    "review_json": "results/natural_evidence_v1/status/hermes_reports/20260508_2309_wp3_fixed_response_density_review.json",
+    "review_report": "results/natural_evidence_v1/status/hermes_reports/20260508_2309_wp3_fixed_response_density_review.md",
+    "slurm_state": "COMPLETED 0:0",
+    "status": "WP3_TEMPLATE_FIXED_RESPONSE_DENSITY_PREFLIGHT_REVIEWED_NEEDS_MODEL_MASS_ARTIFACT",
+    "summary_json": "results/natural_evidence_v2/status/wp3_template_density_audit_850276/wp3_fixed_artifact_audit_summary.json",
+    "template_preflight_only": true,
+    "tokenizer_audit_json": "results/natural_evidence_v2/status/wp3_template_density_audit_850276/tokenizer_audit.json",
+    "tokenizer_stability_status": "PASS",
+    "total_responses": 256,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "v2_wp3_template_density_preflight_balanced_850278": {
+    "artifact_only": true,
+    "average_micro_slots_per_response": 30.25,
+    "candidate_micro_slot_rows": 7744,
+    "density_audit_json": "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/density_audit.json",
+    "density_gate_status": "TEMPLATE_PREFLIGHT_PASS",
+    "e2e_eval_started": false,
+    "interpretation": "Template density preflight only; does not count as fixed model-output density gate.",
+    "job_id": "850278",
+    "median_micro_slots_per_response": 31.5,
+    "model_calls_started": false,
+    "paper_claim_allowed": false,
+    "prompt_coverage": 1.0,
+    "responses_with_any_slot": 256,
+    "slot_counts_by_family": {
+      "F1_8_sentence_explanation": 2240,
+      "F2_8_step_checklist": 2240,
+      "F3_6_point_comparison": 1472,
+      "F4_concise_advice_with_transitions": 1792
+    },
+    "slot_counts_by_type": {
+      "bullet_or_step_opener": 2496,
+      "discourse_marker": 512,
+      "function_word_alternative": 2560,
+      "optional_hedge": 128,
+      "sentence_opener": 1024,
+      "transition_word": 1024
+    },
+    "slurm_state": "COMPLETED 0:0",
+    "status": "PASS_TEMPLATE_FIXED_RESPONSE_DENSITY_PREFLIGHT_NOT_MODEL_GATE",
+    "summary_json": "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/wp3_fixed_artifact_audit_summary.json",
+    "template_preflight_only": true,
+    "total_responses": 256,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp2_prompt_family_scaffold": {
+    "artifact_only": true,
+    "e2e_eval_started": false,
+    "forbidden_surface_rate": 0.0,
+    "forbidden_surface_status": "PASS_FORBIDDEN_SURFACE_AUDIT",
+    "manifest": "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/split_manifest.json",
+    "model_calls_started": false,
+    "output_dir": "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123",
+    "paper_claim_allowed": false,
+    "precommit_status": "not_committed",
+    "prompt_set_id": "qwen_v2_wp2_controlled_natural_prompt_set_v1",
+    "training_started": false,
+    "written_split_sizes": {
+      "dev": 1024,
+      "eval": 2048,
+      "organic_null": 2048,
+      "train": 4096
+    }
+  },
+  "wp3_configured_tokenizer_audit": {
+    "artifact_only": true,
+    "candidate_surface_count": 35,
+    "claim_control": {
+      "e2e_eval_started": false,
+      "generation_started": false,
+      "paper_claim_allowed": false,
+      "training_started": false
+    },
+    "configured_tokenizer_used": true,
+    "density_gate_status": "TEMPLATE_PREFLIGHT_PASS",
+    "e2e_eval_started": false,
+    "job_id": "850276",
+    "mass_gate_status": "NOT_EVALUATED",
+    "mass_json": null,
+    "model_calls_started": false,
+    "paper_claim_allowed": false,
+    "slurm_state": "COMPLETED 0:0",
+    "status": "WP3_FIXED_ARTIFACT_AUDIT_IMPLEMENTED_NOT_GATE_PASS",
+    "summary_json": "results/natural_evidence_v2/status/wp3_template_density_audit_850276/wp3_fixed_artifact_audit_summary.json",
+    "template_preflight_only": true,
+    "tokenizer_audit_json": "results/natural_evidence_v2/status/wp3_template_density_audit_850276/tokenizer_audit.json",
+    "tokenizer_stability_status": "PASS",
+    "training_started": false,
+    "unstable_token_count": 0,
+    "unstable_token_rate": 0.0,
+    "wp4_allowed": false
+  },
+  "wp3_context_mass_score_job": {
+    "artifact_only": false,
+    "audit_json": null,
+    "context_scores_jsonl": null,
+    "e2e_eval_started": false,
+    "failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
+    "generation_started": false,
+    "job_id": "850372",
+    "mass_artifact_json": null,
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": true,
+    "paper_claim_allowed": false,
+    "score_plan_rows": 230,
+    "score_summary_json": null,
+    "script": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "slurm_state": "FAILED 1:0",
+    "status": "FAILED_PREFIX_BOUNDARY_RETOKENIZATION_NO_SCORE_ARTIFACTS",
+    "synced_logs": [
+      "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.out",
+      "results/natural_evidence_v2/status/wp3_context_mass_score_850372/slurm/nat-ev-v2-wp3ctxm-850372.err"
+    ],
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp3_context_mass_scorer": {
+    "allowlist": "configs/natural_evidence_v2/run_allowlist.yaml",
+    "allowlist_action": "v2_wp3_context_mass_score",
+    "allowlist_enabled": false,
+    "boundary_repair_invariant": "all bucket surfaces in a plan row must share one adjusted scoring prefix and exactly one next-token continuation",
+    "e2e_eval_started": false,
+    "empty_prefix_rows": 2,
+    "generation_started": false,
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_scoring_started": false,
+    "next_allowed_action": "Repair the WP3 context-mass scorer/test validation mismatch and rerun local no-model validation only. Do not submit Slurm scoring until a later review explicitly allowlists the repaired wrapper. No local Chimera login-node scoring. No training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+    "paper_claim_allowed": false,
+    "plan_builder": "scripts/natural_evidence_v2/build_wp3_context_mass_plan.py",
+    "plan_score_rows": 230,
+    "prefix_boundary_tokenization_policy": "score_longest_common_token_prefix_when_candidate_retokenizes_boundary",
+    "previous_failed_slurm_job_id": "850372",
+    "previous_failure_reason": "tokenizer retokenized prefix boundary for plan row 0f8383dd9775def36e16 surface also",
+    "review_blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260509_0042_wp3_context_mass_repair_review_blocker.md",
+    "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "script": "scripts/natural_evidence_v2/score_wp3_context_mass.py",
+    "slurm_job_submitted": false,
+    "slurm_wrapper": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+    "status": "BLOCKED_PREFIX_BOUNDARY_REPAIR_REVIEW_LOCAL_VALIDATION_MISMATCH_NOT_ALLOWLISTED_NOT_SCORED",
+    "training_started": false,
+    "validation": {
+      "bash_n": "PASS",
+      "configured_tokenizer_only_local": "NOT_RUN_TRANSFORMERS_UNAVAILABLE",
+      "py_compile": "PASS",
+      "pytest_context_mass": "FAIL_TYPEERROR_MISSING_SKIP_INVALID",
+      "validate_plan_only": "PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION"
+    },
+    "wp4_allowed": false
+  },
+  "wp3_context_specific_mass_plan": {
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "next_allowed_action": "Repair the WP3 context-mass scorer/test validation mismatch and rerun local no-model validation only. Do not submit Slurm scoring until a later review explicitly allowlists the repaired wrapper. No local Chimera login-node scoring. No training, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR, or positive claim.",
+    "paper_claim_allowed": false,
+    "prefix_boundary_tokenization_policy": "score_longest_common_token_prefix_when_candidate_retokenizes_boundary",
+    "score_plan_jsonl": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan.jsonl",
+    "score_plan_rows": 230,
+    "score_plan_rows_by_casing_variant": {
+      "lowercase": 115,
+      "sentence_case": 115
+    },
+    "status": "WP3_CONTEXT_SPECIFIC_MASS_SCORE_PLAN_REPAIRED_WRITTEN_NOT_SCORED",
+    "summary_json": "results/natural_evidence_v2/status/wp3_context_mass_plan_prefix_boundary_repair_20260509_0024/qwen_v2_wp3_context_mass_score_plan_summary.json",
+    "template_preflight_only": true,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp3_detector_bank_scaffold": {
+    "artifact_only": true,
+    "candidate_bank_count": 7,
+    "candidate_surface_count": 35,
+    "e2e_eval_started": false,
+    "model_calls_started": false,
+    "output_dir": "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308",
+    "paper_claim_allowed": false,
+    "script": "scripts/natural_evidence_v2/build_wp3_detector_bank_scaffold.py",
+    "status": "WP3_DETECTOR_AND_TWO_WAY_BUCKET_BANK_REPAIRED_NOT_DENSITY_OR_MASS_AUDITED",
+    "summary_json": "results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_bank_scaffold_summary.json",
+    "surface_repair_reason": "Removed/replaced configured-tokenizer multi-token carriers from job 850228: moreover, further, generally, therefore, meanwhile.",
+    "training_started": false
+  },
+  "wp3_fixed_artifact_audit_implementation": {
+    "artifact_only": true,
+    "configured_tokenizer_used": false,
+    "density_gate_status": "NOT_EVALUATED",
+    "e2e_eval_started": false,
+    "gates_unlocked": [],
+    "mass_gate_status": "NOT_EVALUATED",
+    "mass_json": null,
+    "model_calls_started": false,
+    "output_dir": "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223",
+    "paper_claim_allowed": false,
+    "responses_jsonl": null,
+    "script": "scripts/natural_evidence_v2/audit_wp3_fixed_artifacts.py",
+    "status": "WP3_FIXED_ARTIFACT_AUDIT_IMPLEMENTED_NOT_GATE_PASS",
+    "summary_json": "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223/wp3_fixed_artifact_audit_summary.json",
+    "tokenizer_audit_json": "results/natural_evidence_v2/status/wp3_fixed_artifact_audit_20260508_2223/tokenizer_audit.json",
+    "tokenizer_backend": "mock",
+    "tokenizer_name": "natural_evidence_v2_mock_single_token_bank_surfaces",
+    "tokenizer_stability_status": "NOT_GATE_RESULT",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp3_fixed_response_density_review": {
+    "artifact_only": true,
+    "audited_response_family_counts": {
+      "F1_8_sentence_explanation": 256
+    },
+    "balanced_template_responses_jsonl": "results/natural_evidence_v2/status/wp3_template_density_responses_balanced_20260508_2331/qwen_v2_wp3_template_density_responses.jsonl",
+    "candidate_micro_slot_rows": 8960,
+    "density_gate_status": "TEMPLATE_PREFLIGHT_PASS",
+    "e2e_eval_started": false,
+    "forbidden_surface_rate": 0.0,
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_calls_started": false,
+    "paper_claim_allowed": false,
+    "responses_jsonl": "results/natural_evidence_v2/status/wp3_template_density_responses_20260508_2321/qwen_v2_wp3_template_density_responses.jsonl",
+    "review_json": "results/natural_evidence_v1/status/hermes_reports/20260508_2309_wp3_fixed_response_density_review.json",
+    "review_report": "results/natural_evidence_v1/status/hermes_reports/20260508_2309_wp3_fixed_response_density_review.md",
+    "status": "WP3_TEMPLATE_FIXED_RESPONSE_DENSITY_PREFLIGHT_REVIEWED_NEEDS_MODEL_MASS_ARTIFACT",
+    "template_preflight_only": true,
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp3_micro_slot_policy_design": {
+    "artifact_only": true,
+    "bucket_policy_id": "qwen_v2_wp3_two_way_bucket_policy_v0_artifact_design",
+    "density_gate_status": "NOT_EVALUATED",
+    "design_doc": "docs/natural_evidence_v2/WP3_MICRO_SLOT_DETECTOR_BUCKET_POLICY.md",
+    "detector_id": "qwen_v2_wp3_micro_slot_detector_v0_artifact_design",
+    "e2e_eval_started": false,
+    "gates_unlocked": [],
+    "mass_gate_status": "NOT_EVALUATED",
+    "model_calls_started": false,
+    "paper_claim_allowed": false,
+    "precommit_status": "not_committed",
+    "status": "WP3_POLICY_DESIGN_RECORDED_NOT_IMPLEMENTED_NOT_AUDITED",
+    "summary_json": "results/natural_evidence_v2/status/wp3_micro_slot_policy_design_20260508_2140/wp3_micro_slot_policy_design_summary.json",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp3_model_mass_score_job": {
+    "artifact_only": false,
+    "audit_status": "WP3_FIXED_ARTIFACT_AUDIT_IMPLEMENTED_NOT_GATE_PASS",
+    "audit_summary_json": "results/natural_evidence_v2/status/wp3_model_mass_audit_850288/wp3_fixed_artifact_audit_summary.json",
+    "bank_count": 7,
+    "bank_results": [
+      {
+        "bucket_masses": {
+          "0": 4.052188788220927e-09,
+          "1": 4.170493644872764e-09
+        },
+        "candidate_bank_id": "sentence_opener_sequence_v0",
+        "max_bucket_mass_ratio": 1.02919529736515,
+        "min_bucket_mass": 4.052188788220927e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 7.57382212501767e-09,
+          "1": 1.4364156253332538e-07
+        },
+        "candidate_bank_id": "step_opener_action_v0",
+        "max_bucket_mass_ratio": 18.96553155887461,
+        "min_bucket_mass": 7.57382212501767e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 4.5832690975800006e-09,
+          "1": 3.018456743812218e-08
+        },
+        "candidate_bank_id": "discourse_marker_additive_v0",
+        "max_bucket_mass_ratio": 6.585816105377677,
+        "min_bucket_mass": 4.5832690975800006e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 1.634962700336473e-06,
+          "1": 3.311439632132836e-07
+        },
+        "candidate_bank_id": "optional_hedge_frequency_v0",
+        "max_bucket_mass_ratio": 4.937316943577874,
+        "min_bucket_mass": 3.311439632132836e-07,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 1.1313810925154637e-07,
+          "1": 4.892527538657987e-08
+        },
+        "candidate_bank_id": "transition_word_plain_v0",
+        "max_bucket_mass_ratio": 2.3124674998268886,
+        "min_bucket_mass": 4.892527538657987e-08,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 4.0395174020583603e-08,
+          "1": 8.53033821357485e-09
+        },
+        "candidate_bank_id": "function_word_conjunction_v0",
+        "max_bucket_mass_ratio": 4.735471561526164,
+        "min_bucket_mass": 8.53033821357485e-09,
+        "passed": false
+      },
+      {
+        "bucket_masses": {
+          "0": 1.7567703807230828e-06,
+          "1": 3.4352136542755335e-07
+        },
+        "candidate_bank_id": "function_word_preposition_v0",
+        "max_bucket_mass_ratio": 5.11400616534163,
+        "min_bucket_mass": 3.4352136542755335e-07,
+        "passed": false
+      }
+    ],
+    "density_gate_status": "NOT_EVALUATED",
+    "e2e_eval_started": false,
+    "failed_bank_count": 7,
+    "generation_started": false,
+    "interpretation": "Current fixed-prefix full-vocab mass gate failed. Candidate-normalized balance is diagnostic only and does not pass the configured full-vocab mass gate.",
+    "job_id": "850288",
+    "mass_artifact_json": "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_artifact.json",
+    "mass_audit_json": "results/natural_evidence_v2/status/wp3_model_mass_audit_850288/mass_audit.json",
+    "mass_gate_status": "FAIL",
+    "paper_claim_allowed": false,
+    "score_status": "WP3_BUCKET_MASS_SCORED_NOT_TRAINING_NOT_GENERATION",
+    "score_summary_json": "results/natural_evidence_v2/status/wp3_bucket_mass_score_850288/qwen_v2_wp3_bucket_mass_score_summary.json",
+    "script": "scripts/natural_evidence_v2/slurm/wp3_bucket_mass_score.sbatch",
+    "slurm_state": "COMPLETED 0:0",
+    "tokenizer_stability_status": "PASS",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "wp3_template_density_preflight": {
+    "artifact_only": true,
+    "average_micro_slots_per_response": 30.25,
+    "candidate_micro_slot_rows": 7744,
+    "density_audit_json": "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/density_audit.json",
+    "density_gate_status": "TEMPLATE_PREFLIGHT_PASS",
+    "e2e_eval_started": false,
+    "interpretation": "Template density preflight only; does not count as fixed model-output density gate.",
+    "job_id": "850278",
+    "median_micro_slots_per_response": 31.5,
+    "model_calls_started": false,
+    "paper_claim_allowed": false,
+    "prompt_coverage": 1.0,
+    "responses_with_any_slot": 256,
+    "slot_counts_by_family": {
+      "F1_8_sentence_explanation": 2240,
+      "F2_8_step_checklist": 2240,
+      "F3_6_point_comparison": 1472,
+      "F4_concise_advice_with_transitions": 1792
+    },
+    "slot_counts_by_type": {
+      "bullet_or_step_opener": 2496,
+      "discourse_marker": 512,
+      "function_word_alternative": 2560,
+      "optional_hedge": 128,
+      "sentence_opener": 1024,
+      "transition_word": 1024
+    },
+    "slurm_state": "COMPLETED 0:0",
+    "status": "PASS_TEMPLATE_FIXED_RESPONSE_DENSITY_PREFLIGHT_NOT_MODEL_GATE",
+    "summary_json": "results/natural_evidence_v2/status/wp3_template_density_audit_balanced_850278/wp3_fixed_artifact_audit_summary.json",
+    "template_preflight_only": true,
+    "total_responses": 256,
+    "training_started": false,
+    "wp4_allowed": false
+  }
+}

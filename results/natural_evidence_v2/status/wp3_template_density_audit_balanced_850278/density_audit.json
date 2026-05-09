@@ -1,0 +1,37 @@
+{
+  "artifact_only": true,
+  "average_micro_slots_per_response": 30.25,
+  "candidate_micro_slot_rows": 7744,
+  "density_gate_status": "TEMPLATE_PREFLIGHT_PASS",
+  "e2e_eval_started": false,
+  "forbidden_surface_rate": 0.0,
+  "median_micro_slots_per_response": 31.5,
+  "model_calls_started": false,
+  "paper_claim_allowed": false,
+  "prompt_coverage": 1.0,
+  "rejected_candidate_counts_by_reason": {},
+  "response_source_counts": {
+    "template_density_preflight_no_model_generation": 256
+  },
+  "responses_jsonl": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/wp3_template_density_responses_balanced_20260508_2331/qwen_v2_wp3_template_density_responses.jsonl",
+  "responses_with_any_slot": 256,
+  "schema_name": "natural_evidence_v2_wp3_density_audit_v1",
+  "slot_counts_by_family": {
+    "F1_8_sentence_explanation": 2240,
+    "F2_8_step_checklist": 2240,
+    "F3_6_point_comparison": 1472,
+    "F4_concise_advice_with_transitions": 1792
+  },
+  "slot_counts_by_type": {
+    "bullet_or_step_opener": 2496,
+    "discourse_marker": 512,
+    "function_word_alternative": 2560,
+    "optional_hedge": 128,
+    "sentence_opener": 1024,
+    "transition_word": 1024
+  },
+  "status": "PASS_TEMPLATE_FIXED_RESPONSE_DENSITY_PREFLIGHT_NOT_MODEL_GATE",
+  "template_preflight_only": true,
+  "total_responses": 256,
+  "training_started": false
+}

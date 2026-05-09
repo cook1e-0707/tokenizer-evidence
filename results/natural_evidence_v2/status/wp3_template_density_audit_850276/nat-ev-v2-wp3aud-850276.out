@@ -1,0 +1,13 @@
+job_id=850276
+node=chimera13
+repo=/home/guanjie.lin001/tokenizer-evidence
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+claim_note=natural_evidence_v2 WP3 fixed-artifact audit only; no training, no generation, no E2E, no FAR, no positive claim
+config=configs/natural_evidence_v2/qwen_v2_micro_slot_pilot.yaml
+detector_contract=results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_contract.json
+bucket_bank=results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/two_way_bucket_bank_scaffold.json
+scaffold_summary=results/natural_evidence_v2/status/wp3_detector_bank_scaffold_repaired_20260508_2308/wp3_detector_bank_scaffold_summary.json
+responses_jsonl=results/natural_evidence_v2/status/wp3_template_density_responses_20260508_2321/qwen_v2_wp3_template_density_responses.jsonl
+mass_json=NONE
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_template_density_audit_manual
+{"density_gate_status": "TEMPLATE_PREFLIGHT_PASS", "mass_gate_status": "NOT_EVALUATED", "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_template_density_audit_manual", "status": "WP3_FIXED_ARTIFACT_AUDIT_IMPLEMENTED_NOT_GATE_PASS", "tokenizer_stability_status": "PASS", "wp4_allowed": false}
