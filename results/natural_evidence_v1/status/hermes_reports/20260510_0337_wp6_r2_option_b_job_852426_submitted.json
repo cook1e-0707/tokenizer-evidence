@@ -1,0 +1,45 @@
+{
+  "allowlist_enabled_after_submission": false,
+  "allowlist_entry": "v2_wp6_r2_option_b_scale_eval",
+  "block_count": 8,
+  "block_size": 64,
+  "decode_conditions": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "far_aggregation_started": false,
+  "generation_conditions": [
+    "protected",
+    "raw",
+    "task_only"
+  ],
+  "generation_started_by_this_tick": false,
+  "job_id": "852426",
+  "job_name": "nat-ev-v2-wp6r2b",
+  "llama_started": false,
+  "new_training_started": false,
+  "next_allowed_action": "monitor job 852426; after completion sync wp6_r2_option_b_scale_eval_852426 artifacts and review precommitted R2 Option B gates; do not submit another WP6 job before review",
+  "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260510_0335_scheduled_tick_notification.json",
+  "paper_claim_allowed": false,
+  "prompt_count": 512,
+  "prompt_file_rows": "768..1279",
+  "query_budgets": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "qwen_e2e_rerun_started": false,
+  "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r2_option_b_scale_eval_852426",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_reason_at_submission_check": "Priority",
+  "slurm_state_at_submission_check": "PENDING",
+  "slurm_wrapper": "scripts/natural_evidence_v2/slurm/wp6_r2_option_b_scale_eval.sbatch",
+  "state_changing_action": "confirmed Hermes Telegram/email notification, synced reviewed WP6-R2 Option B wrapper/artifacts to Chimera, submitted exactly one allowlisted Slurm job, and disabled the R2 allowlist entry immediately afterward",
+  "status": "SUBMITTED_WP6_R2_OPTION_B_SCALE_JOB_PENDING_RESULT_REVIEW",
+  "timestamp_utc": "2026-05-10T03:37:58Z"
+}

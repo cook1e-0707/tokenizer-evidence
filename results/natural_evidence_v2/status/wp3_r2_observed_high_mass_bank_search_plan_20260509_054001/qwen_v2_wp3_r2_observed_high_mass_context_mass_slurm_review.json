@@ -1,0 +1,14 @@
+{
+  "candidate_bank_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r2_observed_high_mass_bank_search_plan_20260509_054001/qwen_v2_wp3_r2_observed_high_mass_bank_candidates.jsonl",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "requires_allowlist_entry": true,
+  "schema_name": "natural_evidence_v2_wp3_r2_observed_high_mass_bank_search_slurm_review_v1",
+  "score_plan_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r2_observed_high_mass_bank_search_plan_20260509_054001/qwen_v2_wp3_r2_observed_high_mass_context_mass_score_plan.jsonl",
+  "status": "READY_FOR_REVIEW_NOT_SUBMITTED",
+  "submit_without_explicit_review": false,
+  "suggested_partition": "DGXA100",
+  "suggested_slurm_wrapper": "scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch",
+  "training_started": false
+}

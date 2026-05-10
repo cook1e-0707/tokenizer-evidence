@@ -1,0 +1,27 @@
+{
+  "borderline_count": 0,
+  "decision": "PASS_EXPORTED_SAMPLE_ONLY_NOT_FORMAL_WP3_R3",
+  "e2e_eval_started": false,
+  "example_count": 32,
+  "fail_forbidden_surface_count": 0,
+  "fail_format_or_template_artifact_count": 0,
+  "fail_semantic_coherence_count": 0,
+  "manual_review_scope": "exported naturalness examples only",
+  "naturalness_examples_split_counts": {
+    "wp3_r1_dev": 32
+  },
+  "naturalness_examples_variant_counts": {
+    "strict_literal_16_step_lines": 32
+  },
+  "not_full_wp3_r3_gate_reason": "exported sample is not variant-balanced and contains only wp3_r1_dev strict_literal_16_step_lines examples",
+  "paper_claim_allowed": false,
+  "pass_count": 32,
+  "pass_plus_borderline_rate": 1.0,
+  "review_doc": "docs/natural_evidence_v2/WP3_R1_STRICT_DENSITY_EXPANSION_AUDIT_850885_REVIEW.md",
+  "reviewed_at_utc": "2026-05-09T05:30:23Z",
+  "schema_name": "natural_evidence_v2_wp3_manual_naturalness_review_v1",
+  "source_job_id": "850885",
+  "source_naturalness_examples_jsonl": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/restricted_step_label_naturalness_examples.jsonl",
+  "training_started": false,
+  "wp4_allowed": false
+}

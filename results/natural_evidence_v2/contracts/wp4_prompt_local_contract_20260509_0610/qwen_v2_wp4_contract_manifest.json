@@ -1,0 +1,13 @@
+{
+  "contract_count": 4,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "output_dir": "results/natural_evidence_v2/contracts/wp4_prompt_local_contract_20260509_0610",
+  "paper_claim_allowed": false,
+  "primary_bank_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/buckets/qwen_v2_primary_2way_bank.jsonl",
+  "prompt_source_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "schema_name": "natural_evidence_v2_wp4_prompt_local_manifest_v1",
+  "status": "PASS_WP4_PROMPT_LOCAL_DECODER_ORACLE",
+  "trace_rows": 48,
+  "training_started": false
+}

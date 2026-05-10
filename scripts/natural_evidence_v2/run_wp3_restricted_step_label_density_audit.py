@@ -364,8 +364,14 @@ def generate_outputs(
     return output_rows
 
 
-def load_existing_responses(path: Path, *, max_prompts: int) -> list[dict[str, Any]]:
+def load_existing_responses(
+    path: Path,
+    *,
+    max_prompts: int,
+    prompt_rows: list[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
     rows = read_jsonl(path, max_rows=max(0, int(max_prompts)))
+    prompts_by_id = {str(row.get("prompt_id", "")): row for row in prompt_rows}
     output: list[dict[str, Any]] = []
     for index, row in enumerate(rows):
         response_text = str(
@@ -378,6 +384,10 @@ def load_existing_responses(path: Path, *, max_prompts: int) -> list[dict[str, A
         if not response_text:
             raise ValueError(f"response row missing response_text/output_text/model_output/text: {index}")
         normalized = dict(row)
+        prompt_row = prompts_by_id.get(str(normalized.get("prompt_id", "")))
+        if prompt_row:
+            for key in ("split", "family_id", "variant_id", "topic", "prompt_text_sha256"):
+                normalized.setdefault(key, prompt_row.get(key, ""))
         normalized.setdefault("response_id", response_id_from_row(row, index))
         normalized.setdefault("response_source", "existing_response_artifact_density_audit")
         normalized.setdefault("artifact_role", "existing_response_artifact_not_generation")
@@ -427,6 +437,7 @@ def detect_response(
                 "schema_name": "natural_evidence_v2_wp3_restricted_step_label_detected_slot_v1",
                 "response_id": response_id,
                 "prompt_id": str(response_row.get("prompt_id", "")),
+                "split": str(response_row.get("split", "")),
                 "family_id": str(response_row.get("family_id", "")),
                 "variant_id": str(response_row.get("variant_id", "")),
                 "step_index": step_index,
@@ -452,6 +463,7 @@ def detect_response(
         "schema_name": "natural_evidence_v2_wp3_restricted_step_label_response_audit_v1",
         "response_id": response_id,
         "prompt_id": str(response_row.get("prompt_id", "")),
+        "split": str(response_row.get("split", "")),
         "family_id": str(response_row.get("family_id", "")),
         "variant_id": str(response_row.get("variant_id", "")),
         "response_source": str(response_row.get("response_source", "")),
@@ -485,6 +497,118 @@ def mean(values: list[float]) -> float:
 
 def median(values: list[float]) -> float:
     return 0.0 if not values else float(statistics.median(values))
+
+
+def summarize_response_group(
+    *,
+    response_summaries: list[dict[str, Any]],
+    slot_rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    total = len(response_summaries)
+    complete_count = sum(1 for row in response_summaries if row["complete_step_label_response"])
+    at_least_16_count = sum(1 for row in response_summaries if row["has_at_least_16_structural_slots"])
+    forbidden_count = sum(1 for row in response_summaries if row["forbidden_public_surface_present"])
+    slot_counts = [float(row["detected_structural_slots"]) for row in response_summaries]
+    oracle_complete_count = sum(
+        1
+        for row in response_summaries
+        if row["complete_step_label_response"] and int(row["detected_structural_slots"]) >= 16
+    )
+    exact_hits = sum(1 for row in slot_rows if row["exact_candidate_hit"])
+    return {
+        "total_responses": total,
+        "complete_step_label_response_count": complete_count,
+        "complete_step_label_response_rate": 0.0 if total == 0 else complete_count / total,
+        "responses_with_at_least_16_structural_slots_count": at_least_16_count,
+        "responses_with_at_least_16_structural_slots_rate": 0.0 if total == 0 else at_least_16_count / total,
+        "mean_detected_structural_slots_per_response": mean(slot_counts),
+        "median_detected_structural_slots_per_response": median(slot_counts),
+        "forbidden_public_surface_response_count": forbidden_count,
+        "forbidden_public_surface_rate": 0.0 if total == 0 else forbidden_count / total,
+        "detected_slot_rows": len(slot_rows),
+        "raw_bank_surface_exact_hit_count": exact_hits,
+        "raw_bank_surface_exact_hit_rate": 0.0 if not slot_rows else exact_hits / len(slot_rows),
+        "oracle_prompt_local_frame_completion_count": oracle_complete_count,
+        "oracle_prompt_local_frame_completion_rate": 0.0 if total == 0 else oracle_complete_count / total,
+    }
+
+
+def grouped_summaries(
+    *,
+    response_summaries: list[dict[str, Any]],
+    slot_rows: list[dict[str, Any]],
+    key: str,
+) -> dict[str, dict[str, Any]]:
+    values = sorted({str(row.get(key, "")) for row in response_summaries})
+    output: dict[str, dict[str, Any]] = {}
+    for value in values:
+        subset = [row for row in response_summaries if str(row.get(key, "")) == value]
+        response_ids = {str(row["response_id"]) for row in subset}
+        subset_slots = [row for row in slot_rows if str(row.get("response_id", "")) in response_ids]
+        output[value] = summarize_response_group(
+            response_summaries=subset,
+            slot_rows=subset_slots,
+        )
+    return output
+
+
+def wp3_r1_expanded_gate_status(split_summary: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    dev = split_summary.get("wp3_r1_dev", {})
+    eval_split = split_summary.get("wp3_r1_eval", {})
+    checks = {
+        "dev_outputs_at_least_512": int(dev.get("total_responses", 0)) >= 512,
+        "dev_complete_rate_at_least_0_995": float(dev.get("complete_step_label_response_rate", 0.0)) >= 0.995,
+        "dev_mean_slots_at_least_15_9": float(dev.get("mean_detected_structural_slots_per_response", 0.0)) >= 15.9,
+        "dev_forbidden_surface_zero": float(dev.get("forbidden_public_surface_rate", 1.0)) == 0.0,
+        "eval_outputs_at_least_2048": int(eval_split.get("total_responses", 0)) >= 2048,
+        "eval_complete_rate_at_least_0_995": float(eval_split.get("complete_step_label_response_rate", 0.0)) >= 0.995,
+        "eval_oracle_frame_completion_at_least_0_95": (
+            float(eval_split.get("oracle_prompt_local_frame_completion_rate", 0.0)) >= 0.95
+        ),
+        "eval_forbidden_surface_zero": float(eval_split.get("forbidden_public_surface_rate", 1.0)) == 0.0,
+    }
+    return {
+        "status": "PASS" if all(checks.values()) else "NOT_PASSED",
+        "checks": checks,
+    }
+
+
+def naturalness_examples(response_rows: list[dict[str, Any]], *, limit: int = 96) -> list[dict[str, Any]]:
+    selected: list[tuple[int, dict[str, Any]]] = []
+    selected_indices: set[int] = set()
+    keys = sorted({(str(row.get("split", "")), str(row.get("variant_id", ""))) for row in response_rows})
+    while len(selected) < min(limit, len(response_rows)):
+        added = False
+        for split, variant in keys:
+            for index, row in enumerate(response_rows):
+                if index in selected_indices:
+                    continue
+                if str(row.get("split", "")) == split and str(row.get("variant_id", "")) == variant:
+                    selected.append((index, row))
+                    selected_indices.add(index)
+                    added = True
+                    break
+            if len(selected) >= min(limit, len(response_rows)):
+                break
+        if not added:
+            break
+    return [
+        {
+            "schema_name": "natural_evidence_v2_wp3_restricted_step_label_naturalness_example_v1",
+            "response_id": response_id_from_row(row, index),
+            "prompt_id": str(row.get("prompt_id", "")),
+            "split": str(row.get("split", "")),
+            "family_id": str(row.get("family_id", "")),
+            "variant_id": str(row.get("variant_id", "")),
+            "response_text": str(row.get("response_text", "")),
+            "manual_review_status": "NEEDS_REVIEW",
+            "model_generation_started": bool(row.get("model_generation_started", False)),
+            "training_started": False,
+            "e2e_eval_started": False,
+            "paper_claim_allowed": False,
+        }
+        for index, row in selected
+    ]
 
 
 def audit_outputs(
@@ -565,7 +689,17 @@ def audit_outputs(
         ),
         "exact_hits_by_first_word": dict(sorted(exact_hits_by_surface.items())),
         "exact_hits_by_bank_bucket": dict(sorted(exact_hits_by_bank_bucket.items())),
-        "naturalness_manual_review_required_examples": min(32, total),
+        "split_summary": grouped_summaries(
+            response_summaries=response_summaries,
+            slot_rows=slot_rows,
+            key="split",
+        ),
+        "variant_summary": grouped_summaries(
+            response_summaries=response_summaries,
+            slot_rows=slot_rows,
+            key="variant_id",
+        ),
+        "naturalness_manual_review_required_examples": min(96, total),
         "model_generation_started": model_generation_started,
         "model_scoring_started": False,
         "training_started": False,
@@ -579,22 +713,8 @@ def audit_outputs(
             "Do not start WP4 or training until this review is complete."
         ),
     }
-    examples = [
-        {
-            "schema_name": "natural_evidence_v2_wp3_restricted_step_label_naturalness_example_v1",
-            "response_id": response_id_from_row(row, index),
-            "prompt_id": str(row.get("prompt_id", "")),
-            "family_id": str(row.get("family_id", "")),
-            "variant_id": str(row.get("variant_id", "")),
-            "response_text": str(row.get("response_text", "")),
-            "manual_review_status": "NEEDS_REVIEW",
-            "model_generation_started": bool(row.get("model_generation_started", False)),
-            "training_started": False,
-            "e2e_eval_started": False,
-            "paper_claim_allowed": False,
-        }
-        for index, row in enumerate(response_rows[: min(32, len(response_rows))])
-    ]
+    summary["wp3_r1_expanded_gate"] = wp3_r1_expanded_gate_status(summary["split_summary"])
+    examples = naturalness_examples(response_rows, limit=min(96, total))
     return summary, response_summaries, slot_rows, examples
 
 
@@ -655,6 +775,7 @@ def main() -> None:
         response_rows = load_existing_responses(
             resolve_path(args.responses_jsonl),
             max_prompts=max(0, int(args.max_prompts)),
+            prompt_rows=prompts,
         )
         response_artifact_name = "restricted_step_label_existing_density_responses.jsonl"
     else:

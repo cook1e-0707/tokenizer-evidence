@@ -1,0 +1,14 @@
+job_id=852094
+node=chimera12
+repo=/home/guanjie.lin001/tokenizer-evidence
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+claim_note=natural_evidence_v2 WP6-R1 Qwen repeated-coordinate majority E2E only; no FAR, no Llama, no paper positive claim
+prompts_jsonl=results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl
+wp4_contract=results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json
+protected_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/protected_train/adapter
+task_only_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r1_coordinate_majority_e2e_eval_852094
+model_name=Qwen/Qwen2.5-7B-Instruct
+max_prompts=64
+validate_plan_only=0
+WP6-R1 coordinate-majority E2E wrapper complete: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r1_coordinate_majority_e2e_eval_852094

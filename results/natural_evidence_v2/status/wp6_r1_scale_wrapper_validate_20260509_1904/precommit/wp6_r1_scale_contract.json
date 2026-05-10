@@ -1,0 +1,1671 @@
+{
+  "artifact_role": "wp6_r1_coordinate_majority_scale_contract",
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "decoder_policy": {
+    "accept_rule": "per_block majority codeword checksum_valid_and_payload_matches_expected",
+    "controlling_budget": 64,
+    "decoder_id": "qwen_v2_wp6_r1_block_window_coordinate_majority_decoder_v1",
+    "minimum_majority_margin_at_64": 3,
+    "minimum_protected_block_accepts_at_64": 3,
+    "minimum_support_at_64": 16,
+    "query_budgets_per_block": [
+      8,
+      16,
+      32,
+      64
+    ]
+  },
+  "input_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp6_r1_scale_wrapper_validate_20260509_1904",
+  "null_controls": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "payload_cell": {
+    "audit_key_id": "KWP4_QWEN_PILOT_001",
+    "checksum_byte_hex": "5e",
+    "payload_byte_hex": "a5",
+    "payload_cell_id": "wp4_payload_a5_checksum_5e",
+    "payload_plus_checksum_hex": "a55e",
+    "wrong_audit_key_id": "KWP4_QWEN_PILOT_WRONG_001",
+    "wrong_payload_byte_hex": "5a"
+  },
+  "precommit": {
+    "precommit_hash_sha256": "e1997dcfaded1d24fd57a76df181454c7ad3320a46240d957549d3a775f2993b",
+    "precommit_material": {
+      "audit_key_id": "KWP4_QWEN_PILOT_001",
+      "block_count": 4,
+      "block_size": 64,
+      "bucket_policy_id": "qwen_v2_wp3_r2_primary_set_plan_vs_create_prepare_v1",
+      "decoder_id": "qwen_v2_wp6_r1_block_window_coordinate_majority_decoder_v1",
+      "eval_split": "wp3_r1_eval",
+      "payload_plus_checksum_hex": "a55e",
+      "prompt_selection_sha256": "bf9c94a3200a0bfc7c5b78ec1f9aea2fe379a176dd6f5fd663a3c53bef92aaa6",
+      "protocol_id": "natural_evidence_v2_wp6_r1_scale_reproducibility",
+      "query_budgets_per_block": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "slot_policy_id": "strict_step_label_index_1_to_16"
+    }
+  },
+  "precommit_note": "This WP6-R1 scale contract is intended to be written before generation.",
+  "prompt_plan": {
+    "block_count": 4,
+    "block_size": 64,
+    "blocks": [
+      {
+        "block_id": "block_0",
+        "block_index": 0,
+        "block_size": 64,
+        "prompt_file_row_end_inclusive": 575,
+        "prompt_file_row_start": 512,
+        "selected_eval_index_end_inclusive": 63,
+        "selected_eval_index_start": 0
+      },
+      {
+        "block_id": "block_1",
+        "block_index": 1,
+        "block_size": 64,
+        "prompt_file_row_end_inclusive": 639,
+        "prompt_file_row_start": 576,
+        "selected_eval_index_end_inclusive": 127,
+        "selected_eval_index_start": 64
+      },
+      {
+        "block_id": "block_2",
+        "block_index": 2,
+        "block_size": 64,
+        "prompt_file_row_end_inclusive": 703,
+        "prompt_file_row_start": 640,
+        "selected_eval_index_end_inclusive": 191,
+        "selected_eval_index_start": 128
+      },
+      {
+        "block_id": "block_3",
+        "block_index": 3,
+        "block_size": 64,
+        "prompt_file_row_end_inclusive": 767,
+        "prompt_file_row_start": 704,
+        "selected_eval_index_end_inclusive": 255,
+        "selected_eval_index_start": 192
+      }
+    ],
+    "prompt_count": 256,
+    "prompt_selection_sha256": "bf9c94a3200a0bfc7c5b78ec1f9aea2fe379a176dd6f5fd663a3c53bef92aaa6",
+    "prompt_source": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+    "prompt_source_rows": 2560,
+    "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+    "selected_prompt_file_row_end_inclusive": 767,
+    "selected_prompt_file_row_start": 512,
+    "selected_prompt_rule": "first 256 rows after filtering prompt_source by selected_split",
+    "selected_prompts": [
+      {
+        "prompt_file_row_index": 512,
+        "prompt_id": "qwen_v2_wp3_r1_density_6b7338abc7253c8c82cd",
+        "prompt_text_sha256": "e5bcc9dfb119eaa95d451735848f02d1db79443ea985181389a0e5516996a71f",
+        "selected_eval_index": 0
+      },
+      {
+        "prompt_file_row_index": 513,
+        "prompt_id": "qwen_v2_wp3_r1_density_e2dd11ce39c1196be88b",
+        "prompt_text_sha256": "5ecf4b16e68c9e369bb6f42efd305f39856bb957a59c3f16360e3f3d4958a4a7",
+        "selected_eval_index": 1
+      },
+      {
+        "prompt_file_row_index": 514,
+        "prompt_id": "qwen_v2_wp3_r1_density_692a16b5de539a1eb768",
+        "prompt_text_sha256": "45df3e8722d9cb6a064d3caf242737854baced1026aab04b6e098896b0945736",
+        "selected_eval_index": 2
+      },
+      {
+        "prompt_file_row_index": 515,
+        "prompt_id": "qwen_v2_wp3_r1_density_6e8c876b548355535247",
+        "prompt_text_sha256": "8e3bcae7821bfb2da3bc45381c606a6cf77f409a113951b8696289325361a704",
+        "selected_eval_index": 3
+      },
+      {
+        "prompt_file_row_index": 516,
+        "prompt_id": "qwen_v2_wp3_r1_density_a10d65f16ab0eee825e9",
+        "prompt_text_sha256": "9d516c67c89366b9c9f562b1cdda9e81347f5b94c2fbc3d78226417874728977",
+        "selected_eval_index": 4
+      },
+      {
+        "prompt_file_row_index": 517,
+        "prompt_id": "qwen_v2_wp3_r1_density_2ebd683d362dde50b225",
+        "prompt_text_sha256": "bf2252d9ec6c40de27a758f5dde3720d1a7ef337853a3d6013006af0723df281",
+        "selected_eval_index": 5
+      },
+      {
+        "prompt_file_row_index": 518,
+        "prompt_id": "qwen_v2_wp3_r1_density_6082e78b20e3cf273b82",
+        "prompt_text_sha256": "23535b2ab5412a8f7295886286969d6d32262bc2eb79755c52c9e994a6146c43",
+        "selected_eval_index": 6
+      },
+      {
+        "prompt_file_row_index": 519,
+        "prompt_id": "qwen_v2_wp3_r1_density_064f8b7d724487e4ea31",
+        "prompt_text_sha256": "4a165772eacfe1ae980e68106f2b8677c7263b0566e38fdeb2cb39c138e77d14",
+        "selected_eval_index": 7
+      },
+      {
+        "prompt_file_row_index": 520,
+        "prompt_id": "qwen_v2_wp3_r1_density_c88aea6c5fbb2bbccd0c",
+        "prompt_text_sha256": "55a107494b8ef2c7b05b7e2359d10e96a3980247628955386c7c5d79202d3b7d",
+        "selected_eval_index": 8
+      },
+      {
+        "prompt_file_row_index": 521,
+        "prompt_id": "qwen_v2_wp3_r1_density_eae2408d2e6b94473e5d",
+        "prompt_text_sha256": "77da095438972b0a8de152cc562b4ba406174a95531eddcc109d677312e8a170",
+        "selected_eval_index": 9
+      },
+      {
+        "prompt_file_row_index": 522,
+        "prompt_id": "qwen_v2_wp3_r1_density_72c627352d365a8e1f98",
+        "prompt_text_sha256": "8cd732892bbc8fb736d170c8a3f5bad66a0ee72ea6d3916ea24b390b7b744648",
+        "selected_eval_index": 10
+      },
+      {
+        "prompt_file_row_index": 523,
+        "prompt_id": "qwen_v2_wp3_r1_density_43d496e375f5eb7be2c5",
+        "prompt_text_sha256": "b54d3b4aeb5996fa49050f0fee9298d142f13c6530eb99635b32b21526a62067",
+        "selected_eval_index": 11
+      },
+      {
+        "prompt_file_row_index": 524,
+        "prompt_id": "qwen_v2_wp3_r1_density_18e271eee3fa5e1587b1",
+        "prompt_text_sha256": "12db689ce2eddda8ae5f28ba5dc2840e7cba3254cd4ff9de92e03c8a892fdd22",
+        "selected_eval_index": 12
+      },
+      {
+        "prompt_file_row_index": 525,
+        "prompt_id": "qwen_v2_wp3_r1_density_ba8f74c3ebd808d22eba",
+        "prompt_text_sha256": "c0c15f604e6e3389895be83a36dea36140f74cf9e3deeddc72dc75487ea2c8c4",
+        "selected_eval_index": 13
+      },
+      {
+        "prompt_file_row_index": 526,
+        "prompt_id": "qwen_v2_wp3_r1_density_c7741b9161841f9540dd",
+        "prompt_text_sha256": "bad1b665b379283cb9bab70c77fc0619834910fe347d1468425105251bd56a8a",
+        "selected_eval_index": 14
+      },
+      {
+        "prompt_file_row_index": 527,
+        "prompt_id": "qwen_v2_wp3_r1_density_cd7dd4655a255e108874",
+        "prompt_text_sha256": "271d1b612a96291cca13b071aacf57ffd3453377fcaea00f0b8af35e000bce3a",
+        "selected_eval_index": 15
+      },
+      {
+        "prompt_file_row_index": 528,
+        "prompt_id": "qwen_v2_wp3_r1_density_61a2411a8b7ab14a148e",
+        "prompt_text_sha256": "f8053d4e203b5e4f25515ea42d2d56199a2b31e60b0ebfd9ce7975192c466bc8",
+        "selected_eval_index": 16
+      },
+      {
+        "prompt_file_row_index": 529,
+        "prompt_id": "qwen_v2_wp3_r1_density_7cb9b58c5ec1e5fe60c6",
+        "prompt_text_sha256": "a834e73f8b64843efe8fa28f0222687c9c9b64e7e2fb2b1d10e780c8ba0a0ebd",
+        "selected_eval_index": 17
+      },
+      {
+        "prompt_file_row_index": 530,
+        "prompt_id": "qwen_v2_wp3_r1_density_98470e82119b32c9fc23",
+        "prompt_text_sha256": "da8c9833197750c7dc388cf5a77231b93682abf0eaa0c944ef680924184fc75f",
+        "selected_eval_index": 18
+      },
+      {
+        "prompt_file_row_index": 531,
+        "prompt_id": "qwen_v2_wp3_r1_density_a272fab4ed4d3acbf48b",
+        "prompt_text_sha256": "bf5aeb4de09dac731f73bbe4ac2f351ddf3d311082d76ced1f427748d1933c79",
+        "selected_eval_index": 19
+      },
+      {
+        "prompt_file_row_index": 532,
+        "prompt_id": "qwen_v2_wp3_r1_density_12902f6b11ec715d3669",
+        "prompt_text_sha256": "9318efa833a7b09bb9ea9df249a97fabda41c5f00b42ec11ab0944614f4b0f0a",
+        "selected_eval_index": 20
+      },
+      {
+        "prompt_file_row_index": 533,
+        "prompt_id": "qwen_v2_wp3_r1_density_cde5b9c0267c5a72fe7a",
+        "prompt_text_sha256": "bf3211caa93aee16dd27184e41c654bad3bc588d31c7331021e8b9d118e7d36b",
+        "selected_eval_index": 21
+      },
+      {
+        "prompt_file_row_index": 534,
+        "prompt_id": "qwen_v2_wp3_r1_density_034def86e91f3dac5396",
+        "prompt_text_sha256": "5693ec4e94c5aa7b2b66f5376adeaed92f98e4e7458954d65abfcd79b1479164",
+        "selected_eval_index": 22
+      },
+      {
+        "prompt_file_row_index": 535,
+        "prompt_id": "qwen_v2_wp3_r1_density_ad478e8082793eaf06e7",
+        "prompt_text_sha256": "7cdba2cbf87963db0ca101f2eed25bd86773816f2b46ffff818bec6d1d5a07e5",
+        "selected_eval_index": 23
+      },
+      {
+        "prompt_file_row_index": 536,
+        "prompt_id": "qwen_v2_wp3_r1_density_8179ffd104df81caeddb",
+        "prompt_text_sha256": "20aafd8839d8b3678db34710375e7f23b16b6c9457809f269588e3f6da12f72c",
+        "selected_eval_index": 24
+      },
+      {
+        "prompt_file_row_index": 537,
+        "prompt_id": "qwen_v2_wp3_r1_density_0b5841243a3308fbc3b3",
+        "prompt_text_sha256": "6a42060ae41aee37f97197c50377ae315072f8afaebf6b576f007ec79cc9090b",
+        "selected_eval_index": 25
+      },
+      {
+        "prompt_file_row_index": 538,
+        "prompt_id": "qwen_v2_wp3_r1_density_cf80814cd616822988c1",
+        "prompt_text_sha256": "dd4950929978161aee875e62d505265bdf5a00b9edef0724f1f7d9f1501da395",
+        "selected_eval_index": 26
+      },
+      {
+        "prompt_file_row_index": 539,
+        "prompt_id": "qwen_v2_wp3_r1_density_2c515f6196cbdcd2ab23",
+        "prompt_text_sha256": "14ee0161e336f88a7f961661f4a89ea529881628394ad56edd3ef944728455b9",
+        "selected_eval_index": 27
+      },
+      {
+        "prompt_file_row_index": 540,
+        "prompt_id": "qwen_v2_wp3_r1_density_e77bbd89bde29e93ed9f",
+        "prompt_text_sha256": "561da39bd9db7eb5d5a6c41bf7976e2815497b674808e5cdb5691d74e2c3fcb1",
+        "selected_eval_index": 28
+      },
+      {
+        "prompt_file_row_index": 541,
+        "prompt_id": "qwen_v2_wp3_r1_density_ea4dc61160582fef8594",
+        "prompt_text_sha256": "fdc49dac47dd78bae5eab81303a79ef653b2d9efbf6c6a2aaf524371dd64c642",
+        "selected_eval_index": 29
+      },
+      {
+        "prompt_file_row_index": 542,
+        "prompt_id": "qwen_v2_wp3_r1_density_67a150ee0250680d9179",
+        "prompt_text_sha256": "6997e04a737f72b361d6dbf7fca9c939de98c4a11f4cee8983691a172781d54e",
+        "selected_eval_index": 30
+      },
+      {
+        "prompt_file_row_index": 543,
+        "prompt_id": "qwen_v2_wp3_r1_density_c5adfe25f9448578974a",
+        "prompt_text_sha256": "e136bf262a3a2056b908f00821f5fc4ca19590145830f47978e9cf79c07147cd",
+        "selected_eval_index": 31
+      },
+      {
+        "prompt_file_row_index": 544,
+        "prompt_id": "qwen_v2_wp3_r1_density_13e5d27de1587195b62c",
+        "prompt_text_sha256": "14db9193fd8d51f95be5de58b2350d1232d40848a8083280a49d1a082e664ba0",
+        "selected_eval_index": 32
+      },
+      {
+        "prompt_file_row_index": 545,
+        "prompt_id": "qwen_v2_wp3_r1_density_5b4f9241e92c960d0d71",
+        "prompt_text_sha256": "503c437627b0ed1dbe58232ac6e9b12e1b20cfc2a7048ca8d45070e82353fa8d",
+        "selected_eval_index": 33
+      },
+      {
+        "prompt_file_row_index": 546,
+        "prompt_id": "qwen_v2_wp3_r1_density_fddcbb60c50e142f44e4",
+        "prompt_text_sha256": "12e3c6cc18136912ad2f93112ebbce811107286fccaac96f10e201d03b32d33c",
+        "selected_eval_index": 34
+      },
+      {
+        "prompt_file_row_index": 547,
+        "prompt_id": "qwen_v2_wp3_r1_density_61764d3a26a6bc0915ee",
+        "prompt_text_sha256": "a82b1dc027768c91ad43d0c5f7450b81b77e9134cf4a0baad1900fec445cc503",
+        "selected_eval_index": 35
+      },
+      {
+        "prompt_file_row_index": 548,
+        "prompt_id": "qwen_v2_wp3_r1_density_3df82c47ec0fae05c35e",
+        "prompt_text_sha256": "45d469d75b99b037acbeca079492eb9cc52928ddc029a5244c680d50e82beb0f",
+        "selected_eval_index": 36
+      },
+      {
+        "prompt_file_row_index": 549,
+        "prompt_id": "qwen_v2_wp3_r1_density_59009c0332d5fa4dfbfa",
+        "prompt_text_sha256": "bd4bf0526f6a4aedb5cfc6a1b4eb4e958b38d5f8152178b1dff49bb60285c537",
+        "selected_eval_index": 37
+      },
+      {
+        "prompt_file_row_index": 550,
+        "prompt_id": "qwen_v2_wp3_r1_density_07babf43dda3d7b3a24b",
+        "prompt_text_sha256": "7d55cd73530cae1b1e05b0e362a3bcb2553476e14c19c9f9a30cc91eb62bc7be",
+        "selected_eval_index": 38
+      },
+      {
+        "prompt_file_row_index": 551,
+        "prompt_id": "qwen_v2_wp3_r1_density_ecc1e72b41da82214d90",
+        "prompt_text_sha256": "cf668152a3bc5f3bff054ba7fd99a22094aacfcd14969a0babf36b49e554de2f",
+        "selected_eval_index": 39
+      },
+      {
+        "prompt_file_row_index": 552,
+        "prompt_id": "qwen_v2_wp3_r1_density_0c6e052a7e45e32fb31f",
+        "prompt_text_sha256": "9bf241e90a9aefefb08c934be2d26e10131aae00b9bdaa27c52b9608520442f9",
+        "selected_eval_index": 40
+      },
+      {
+        "prompt_file_row_index": 553,
+        "prompt_id": "qwen_v2_wp3_r1_density_9ed1816fbfc860837ec5",
+        "prompt_text_sha256": "23ca22b0bdc5fd8da70ae0b2437e73f356b8f229eb94532cfb6dbe1a984a77ec",
+        "selected_eval_index": 41
+      },
+      {
+        "prompt_file_row_index": 554,
+        "prompt_id": "qwen_v2_wp3_r1_density_ace142c207275e3bbb43",
+        "prompt_text_sha256": "2b05d64015cb6afb96ef7f97fa24c57076e7ca78abe29edf0c929aaa109a49d3",
+        "selected_eval_index": 42
+      },
+      {
+        "prompt_file_row_index": 555,
+        "prompt_id": "qwen_v2_wp3_r1_density_c501bd93d89037184b0e",
+        "prompt_text_sha256": "948ebcd3921b189cb02a94b3073051b69f952c4bc770801728ed21c46ff9506e",
+        "selected_eval_index": 43
+      },
+      {
+        "prompt_file_row_index": 556,
+        "prompt_id": "qwen_v2_wp3_r1_density_1e5ed7c0026b71b8c484",
+        "prompt_text_sha256": "c352923cf16d99f736c6e5aea4966d5e8ad6c042ac96edd9df1506c4175c62a5",
+        "selected_eval_index": 44
+      },
+      {
+        "prompt_file_row_index": 557,
+        "prompt_id": "qwen_v2_wp3_r1_density_df946bfbed81c9122d47",
+        "prompt_text_sha256": "7baef45d1eb3312fced7ac9630544cd08c31fc9ddad45dd1fe16f3f70c9e1eb2",
+        "selected_eval_index": 45
+      },
+      {
+        "prompt_file_row_index": 558,
+        "prompt_id": "qwen_v2_wp3_r1_density_e4402b12322837a7c838",
+        "prompt_text_sha256": "8457c715abe6f5a071cde9b7376f18510f61bbf06cefbe0e854afec36b0dcbd6",
+        "selected_eval_index": 46
+      },
+      {
+        "prompt_file_row_index": 559,
+        "prompt_id": "qwen_v2_wp3_r1_density_55112aa7c39cb130da53",
+        "prompt_text_sha256": "7988fd12ff0d59d9f28054d74fcfe60d9eaa4555d81aafc2e9884a0dd042c5c6",
+        "selected_eval_index": 47
+      },
+      {
+        "prompt_file_row_index": 560,
+        "prompt_id": "qwen_v2_wp3_r1_density_f50a4d16300efb7d4176",
+        "prompt_text_sha256": "2e0802d7c00fe5e979314d97431f963f66b3a5f5683ae17230d80a06c2962e89",
+        "selected_eval_index": 48
+      },
+      {
+        "prompt_file_row_index": 561,
+        "prompt_id": "qwen_v2_wp3_r1_density_53f5f2281c5e17620e40",
+        "prompt_text_sha256": "86f93b20ecbd54aa9b5cd4f76606277389c6b7c8146582eaf66340484d1e5e50",
+        "selected_eval_index": 49
+      },
+      {
+        "prompt_file_row_index": 562,
+        "prompt_id": "qwen_v2_wp3_r1_density_6d4fb8d255ec7cbe4a8e",
+        "prompt_text_sha256": "4388b935facdea3661210369592b6c76ce94e86083de955342fa82814afd929f",
+        "selected_eval_index": 50
+      },
+      {
+        "prompt_file_row_index": 563,
+        "prompt_id": "qwen_v2_wp3_r1_density_3acab2271f04ba96b19d",
+        "prompt_text_sha256": "78e1fbde3897156ce7e2f28f4a85df56dcccf2d67346bbfbf1175a9d08ebe1ec",
+        "selected_eval_index": 51
+      },
+      {
+        "prompt_file_row_index": 564,
+        "prompt_id": "qwen_v2_wp3_r1_density_75b63752b0d8ec6b93b3",
+        "prompt_text_sha256": "f847da9a1b33851ee52d812975b315858994ff7947bc4b51c81e8dd43a9b8ac4",
+        "selected_eval_index": 52
+      },
+      {
+        "prompt_file_row_index": 565,
+        "prompt_id": "qwen_v2_wp3_r1_density_5dbff8be99f2c946f3f3",
+        "prompt_text_sha256": "9f13416dc9ae093abcd7715c46d2055897c09d137422dbce66bd571486b20b0b",
+        "selected_eval_index": 53
+      },
+      {
+        "prompt_file_row_index": 566,
+        "prompt_id": "qwen_v2_wp3_r1_density_0717bd7eb81498940164",
+        "prompt_text_sha256": "f52f9d475f9a718b62fd3be46c9b97f2804837e75919cfe4685728a0664a5bcf",
+        "selected_eval_index": 54
+      },
+      {
+        "prompt_file_row_index": 567,
+        "prompt_id": "qwen_v2_wp3_r1_density_f7b42676372c35cd7a86",
+        "prompt_text_sha256": "6ecadb14028de1f31c9beef87e290f08cef1250dc2a87e57aa26e8609f770586",
+        "selected_eval_index": 55
+      },
+      {
+        "prompt_file_row_index": 568,
+        "prompt_id": "qwen_v2_wp3_r1_density_f8b8de5321f7a796af07",
+        "prompt_text_sha256": "fff9591d86b97a2173dc4d2424dfa2a9f91780b2bea89e9e9dbec7fec54632fd",
+        "selected_eval_index": 56
+      },
+      {
+        "prompt_file_row_index": 569,
+        "prompt_id": "qwen_v2_wp3_r1_density_46eb7b232fbee1fdef36",
+        "prompt_text_sha256": "6e5e70c0e98a39f00160c610ca4c8128d56c2ed74a88dfe9e188815c79431411",
+        "selected_eval_index": 57
+      },
+      {
+        "prompt_file_row_index": 570,
+        "prompt_id": "qwen_v2_wp3_r1_density_121d1a52e143cca066d9",
+        "prompt_text_sha256": "b2dac9a7028d3e00eecc5a675bd169bc4f6e6cee47b5565f54dad4ea1fa1e4c2",
+        "selected_eval_index": 58
+      },
+      {
+        "prompt_file_row_index": 571,
+        "prompt_id": "qwen_v2_wp3_r1_density_f093e71c948c8d4334cf",
+        "prompt_text_sha256": "cef90c98f384dc17766d909a0fc30872e9472b378a9eb68b34cb809a67331e48",
+        "selected_eval_index": 59
+      },
+      {
+        "prompt_file_row_index": 572,
+        "prompt_id": "qwen_v2_wp3_r1_density_8690679cfbd819889d86",
+        "prompt_text_sha256": "21f96d8c12d64a908263391f38b7693227f07ff780aff115de74b65d019a50a0",
+        "selected_eval_index": 60
+      },
+      {
+        "prompt_file_row_index": 573,
+        "prompt_id": "qwen_v2_wp3_r1_density_c58d3a93f1f97b83fe9e",
+        "prompt_text_sha256": "ba9d48c08e222104028ccc2d080fbb2581c75a9fb0b2d31ecff36469421333aa",
+        "selected_eval_index": 61
+      },
+      {
+        "prompt_file_row_index": 574,
+        "prompt_id": "qwen_v2_wp3_r1_density_6e08dbd27e90bc73067a",
+        "prompt_text_sha256": "4cce994edb02aeef5a35c885c94df6d1046e1c81275ec1d48bd60a8db68294c8",
+        "selected_eval_index": 62
+      },
+      {
+        "prompt_file_row_index": 575,
+        "prompt_id": "qwen_v2_wp3_r1_density_8186f4262b3ce7647aa3",
+        "prompt_text_sha256": "6e35c14eb07622f6c29f380cd5c307a34c0468a62a2ce3ba5cfa441a45bfde95",
+        "selected_eval_index": 63
+      },
+      {
+        "prompt_file_row_index": 576,
+        "prompt_id": "qwen_v2_wp3_r1_density_f6557cd7651f591012bb",
+        "prompt_text_sha256": "8b23cea7f18a849cae1be32c4b3dfba94d7670707df05f102b356f9893eae8ab",
+        "selected_eval_index": 64
+      },
+      {
+        "prompt_file_row_index": 577,
+        "prompt_id": "qwen_v2_wp3_r1_density_898ffa08caf3ee31e4cb",
+        "prompt_text_sha256": "7efde906d2cb4b3158cb1d1992e4b90e4c10e21e27c481e47a4069c26291a009",
+        "selected_eval_index": 65
+      },
+      {
+        "prompt_file_row_index": 578,
+        "prompt_id": "qwen_v2_wp3_r1_density_ea642dc021b64ba9b276",
+        "prompt_text_sha256": "a37493cd80aad158d2181484dd60450402ea4104a44b8f131a25d35d37dcb18f",
+        "selected_eval_index": 66
+      },
+      {
+        "prompt_file_row_index": 579,
+        "prompt_id": "qwen_v2_wp3_r1_density_4467f86f9c3e1770bf48",
+        "prompt_text_sha256": "81f016a3ab311a53a82431eef8f2b398e5097d96272a553125a42758e797289c",
+        "selected_eval_index": 67
+      },
+      {
+        "prompt_file_row_index": 580,
+        "prompt_id": "qwen_v2_wp3_r1_density_c3c6be5ff59ab9b7ccf8",
+        "prompt_text_sha256": "25802f91e343c4a5d98eb1235b660ead247a6db3cc901b95f2f6be09e43f3b6d",
+        "selected_eval_index": 68
+      },
+      {
+        "prompt_file_row_index": 581,
+        "prompt_id": "qwen_v2_wp3_r1_density_6f3ca6fb560e3c6940c8",
+        "prompt_text_sha256": "37a2a3f45df7384dbc4c0fce7f975a861dcdee7034a2ce5282e44c8e7334e2b7",
+        "selected_eval_index": 69
+      },
+      {
+        "prompt_file_row_index": 582,
+        "prompt_id": "qwen_v2_wp3_r1_density_6dff070561b924506f24",
+        "prompt_text_sha256": "a68cc43cca50f474e6e82d0f21a629ef5ca350b2b7f1877227fed361f6d2a129",
+        "selected_eval_index": 70
+      },
+      {
+        "prompt_file_row_index": 583,
+        "prompt_id": "qwen_v2_wp3_r1_density_68368c7940a6cea07228",
+        "prompt_text_sha256": "41556e762834f116c3a4e5ba49610afb5b8a9e05299931a1d001be6f4d5a0b5f",
+        "selected_eval_index": 71
+      },
+      {
+        "prompt_file_row_index": 584,
+        "prompt_id": "qwen_v2_wp3_r1_density_c64a1e328713049919e3",
+        "prompt_text_sha256": "86d6016539b429c1ee4d4c121cdd4e860de8e2798facc33b5b23b952e6b8203e",
+        "selected_eval_index": 72
+      },
+      {
+        "prompt_file_row_index": 585,
+        "prompt_id": "qwen_v2_wp3_r1_density_ee76c5f2c01823efba2a",
+        "prompt_text_sha256": "3eac290598715aa9eb15caeb97357543a96622da980f2c6598eb6c8a1341d460",
+        "selected_eval_index": 73
+      },
+      {
+        "prompt_file_row_index": 586,
+        "prompt_id": "qwen_v2_wp3_r1_density_5af5ea74af8849109f67",
+        "prompt_text_sha256": "0c325ba58f6c9cd7cdc8d68849ece0d71b72d950776bf7a103c7a4e60c1c4579",
+        "selected_eval_index": 74
+      },
+      {
+        "prompt_file_row_index": 587,
+        "prompt_id": "qwen_v2_wp3_r1_density_a8ed43ba754136c2227b",
+        "prompt_text_sha256": "39553a11c1ff540fb1aaa76fdfd97d328ba06df1cad8cde0a779b61f460736e5",
+        "selected_eval_index": 75
+      },
+      {
+        "prompt_file_row_index": 588,
+        "prompt_id": "qwen_v2_wp3_r1_density_719910298ff220cb0a0e",
+        "prompt_text_sha256": "0f439a1ccac85ba0ed03d68642a297d496e5dd107217904abd98417ac91c88d3",
+        "selected_eval_index": 76
+      },
+      {
+        "prompt_file_row_index": 589,
+        "prompt_id": "qwen_v2_wp3_r1_density_42b048ad115744e25ba2",
+        "prompt_text_sha256": "d0b462f064c398105bce2a8536f31773d56ab264067d92157e4fe18314d2ddfe",
+        "selected_eval_index": 77
+      },
+      {
+        "prompt_file_row_index": 590,
+        "prompt_id": "qwen_v2_wp3_r1_density_ab7e94be0d8d44ddb59b",
+        "prompt_text_sha256": "da02343c7967d6efd360ea048babb2b01de5783d2b0a0b701196cb35570aa6e7",
+        "selected_eval_index": 78
+      },
+      {
+        "prompt_file_row_index": 591,
+        "prompt_id": "qwen_v2_wp3_r1_density_3bf9beb74fe71fc36002",
+        "prompt_text_sha256": "b194f84bf8444540d20dde0808dad386da726c94a37e5f1d131d15078f283a84",
+        "selected_eval_index": 79
+      },
+      {
+        "prompt_file_row_index": 592,
+        "prompt_id": "qwen_v2_wp3_r1_density_e2bcec7684480d9d2fde",
+        "prompt_text_sha256": "693674099a181bdc54948604556d82cf6b867596aaa2284b1217899c25a21439",
+        "selected_eval_index": 80
+      },
+      {
+        "prompt_file_row_index": 593,
+        "prompt_id": "qwen_v2_wp3_r1_density_2eac0cc7be07b5467454",
+        "prompt_text_sha256": "52a388b184e19c24d32eadf73b9cefe38c9bd7dcfd74b0565ea65e5624b3b17a",
+        "selected_eval_index": 81
+      },
+      {
+        "prompt_file_row_index": 594,
+        "prompt_id": "qwen_v2_wp3_r1_density_403ae526c87d55fac1b9",
+        "prompt_text_sha256": "ba086ed9c73e265621d329c4f8f5fc80dcd20387f331613621faef728605a67b",
+        "selected_eval_index": 82
+      },
+      {
+        "prompt_file_row_index": 595,
+        "prompt_id": "qwen_v2_wp3_r1_density_fd1ec92db86d5cf08679",
+        "prompt_text_sha256": "5d94dfb5c271be2764c00beb891e382e403014251f35498835081d17fb2a84a5",
+        "selected_eval_index": 83
+      },
+      {
+        "prompt_file_row_index": 596,
+        "prompt_id": "qwen_v2_wp3_r1_density_7206a470ad9658ef4a38",
+        "prompt_text_sha256": "4dd53a7b785bab8c2f50c2e0101c5093d705bc1b45d5bf4312429269553d6cd8",
+        "selected_eval_index": 84
+      },
+      {
+        "prompt_file_row_index": 597,
+        "prompt_id": "qwen_v2_wp3_r1_density_c6dd2548f20489ec33e2",
+        "prompt_text_sha256": "4250633f8540993315712d81ced05787865c3c6655f1a86f9947d6879aecbafd",
+        "selected_eval_index": 85
+      },
+      {
+        "prompt_file_row_index": 598,
+        "prompt_id": "qwen_v2_wp3_r1_density_a98a6262626d46341bdb",
+        "prompt_text_sha256": "c022259c9db887f36f69f34498b781ee3bae0634e8140c7019ad4aff8ee49164",
+        "selected_eval_index": 86
+      },
+      {
+        "prompt_file_row_index": 599,
+        "prompt_id": "qwen_v2_wp3_r1_density_69d266aa58e84e12a18e",
+        "prompt_text_sha256": "b264ddd28550c19ccdb99e3c71a283aa83543975d193439663a03a96899b1022",
+        "selected_eval_index": 87
+      },
+      {
+        "prompt_file_row_index": 600,
+        "prompt_id": "qwen_v2_wp3_r1_density_4dfbfea80793ec5ebf58",
+        "prompt_text_sha256": "27e94912715b9587b2474ff187769c359adb83470ee4c180c14d4064a02cb8db",
+        "selected_eval_index": 88
+      },
+      {
+        "prompt_file_row_index": 601,
+        "prompt_id": "qwen_v2_wp3_r1_density_6456009d71ac3c791c28",
+        "prompt_text_sha256": "30ed66fdac77b20a7b81478188b3de6db5234dfcd835db470dd6d23f1b5d7f33",
+        "selected_eval_index": 89
+      },
+      {
+        "prompt_file_row_index": 602,
+        "prompt_id": "qwen_v2_wp3_r1_density_e3242444db514252378d",
+        "prompt_text_sha256": "c50e0f41e6a497aeb8dd971e03b11b150b426bd44a73a7302fed7404690a108e",
+        "selected_eval_index": 90
+      },
+      {
+        "prompt_file_row_index": 603,
+        "prompt_id": "qwen_v2_wp3_r1_density_a742ff5e04ed56be1c7d",
+        "prompt_text_sha256": "704522b269a7a94e8034797028d1f5c68a5017604aa998089ad1f6f11981aac5",
+        "selected_eval_index": 91
+      },
+      {
+        "prompt_file_row_index": 604,
+        "prompt_id": "qwen_v2_wp3_r1_density_2ec52fd723f639ac5c7f",
+        "prompt_text_sha256": "6eba5e451130678b618122acebca48732eb2b035c8a54d8497016f5e5c798e09",
+        "selected_eval_index": 92
+      },
+      {
+        "prompt_file_row_index": 605,
+        "prompt_id": "qwen_v2_wp3_r1_density_fdef3484e4fad2f68a56",
+        "prompt_text_sha256": "46cf11e1e0732695ed9c02eb4b7559ef09983664aae6b8f3264305f888263ade",
+        "selected_eval_index": 93
+      },
+      {
+        "prompt_file_row_index": 606,
+        "prompt_id": "qwen_v2_wp3_r1_density_fe898f72b29f1f839388",
+        "prompt_text_sha256": "d38259533eeab2ba5e86d7c2a3edb2d63f713273ce3784b7f7de41871df79cdd",
+        "selected_eval_index": 94
+      },
+      {
+        "prompt_file_row_index": 607,
+        "prompt_id": "qwen_v2_wp3_r1_density_5244553085f54b5d3f5c",
+        "prompt_text_sha256": "afded2185bfc27e7b4d2f312db4b83af0f7680f35e96c4d7c38a7a3f6a6edf62",
+        "selected_eval_index": 95
+      },
+      {
+        "prompt_file_row_index": 608,
+        "prompt_id": "qwen_v2_wp3_r1_density_bf5c7fdf00e68c192686",
+        "prompt_text_sha256": "642925024c0c3f43032625b206458f7eee2871f7e6650bc5f56a583eb92c08b5",
+        "selected_eval_index": 96
+      },
+      {
+        "prompt_file_row_index": 609,
+        "prompt_id": "qwen_v2_wp3_r1_density_ab0c1febfdf81bc8f7ce",
+        "prompt_text_sha256": "735fff4b18c16c77fd83c5b33bfcab30334787b2c17c2ec609562df840368dc5",
+        "selected_eval_index": 97
+      },
+      {
+        "prompt_file_row_index": 610,
+        "prompt_id": "qwen_v2_wp3_r1_density_cd7abe033c879a526d5a",
+        "prompt_text_sha256": "d45d8105a24276e0e98d2cdc6002f26af88550997f080249f4e7a26cb6943bb4",
+        "selected_eval_index": 98
+      },
+      {
+        "prompt_file_row_index": 611,
+        "prompt_id": "qwen_v2_wp3_r1_density_5aca3f6a875f1d7c91fe",
+        "prompt_text_sha256": "6f69140f577c443a89c7ff022d5c7db9a63be1125e55f5343599be6315742503",
+        "selected_eval_index": 99
+      },
+      {
+        "prompt_file_row_index": 612,
+        "prompt_id": "qwen_v2_wp3_r1_density_47103c270ffc9d6890e2",
+        "prompt_text_sha256": "c8045547e734cd9d456a7da07020534f4a24b5bca046f9f8b51658c091e26803",
+        "selected_eval_index": 100
+      },
+      {
+        "prompt_file_row_index": 613,
+        "prompt_id": "qwen_v2_wp3_r1_density_c2119af3b4e5a70279ac",
+        "prompt_text_sha256": "97e7e656a26ee0981d90f052f6797e81395cf345affedae8722cb4f908b85954",
+        "selected_eval_index": 101
+      },
+      {
+        "prompt_file_row_index": 614,
+        "prompt_id": "qwen_v2_wp3_r1_density_6ad031c0298e5a3941ad",
+        "prompt_text_sha256": "d40ed1e2184c58df08931fbc1e32472717dc5ad009d6223c9094658532f69d82",
+        "selected_eval_index": 102
+      },
+      {
+        "prompt_file_row_index": 615,
+        "prompt_id": "qwen_v2_wp3_r1_density_ece3432053f318b06526",
+        "prompt_text_sha256": "c54bf0d8b6352f4bac77ce542528b26f11e4b9ba2c8455fc1328df7a113c33af",
+        "selected_eval_index": 103
+      },
+      {
+        "prompt_file_row_index": 616,
+        "prompt_id": "qwen_v2_wp3_r1_density_ca0b9cae4147e333611e",
+        "prompt_text_sha256": "bfdf13cac9a2af574d1ce0998eae6c3411aa9d21b329c04efaeb8c71de9a32ce",
+        "selected_eval_index": 104
+      },
+      {
+        "prompt_file_row_index": 617,
+        "prompt_id": "qwen_v2_wp3_r1_density_f11d26ede3f81b1d6560",
+        "prompt_text_sha256": "e09b46b696cc0371b0cebd50f6b3c6004360e00a503b784345b09fe992b0348d",
+        "selected_eval_index": 105
+      },
+      {
+        "prompt_file_row_index": 618,
+        "prompt_id": "qwen_v2_wp3_r1_density_888fb34778310928249b",
+        "prompt_text_sha256": "481a7289e4c1baedaf532bbba146296b689d1f0cfd18a3c1169eea613ad6fd82",
+        "selected_eval_index": 106
+      },
+      {
+        "prompt_file_row_index": 619,
+        "prompt_id": "qwen_v2_wp3_r1_density_1571ace23050e0123c47",
+        "prompt_text_sha256": "38b509430d7a70be770b47f5680c925ae356d8250146c1d127a0be932c30062f",
+        "selected_eval_index": 107
+      },
+      {
+        "prompt_file_row_index": 620,
+        "prompt_id": "qwen_v2_wp3_r1_density_647d0716e27ab878e4f5",
+        "prompt_text_sha256": "f729cb0211539fd0a511eff826fc0d691d99c2c2b7aa38e2779ecb390f2a41dc",
+        "selected_eval_index": 108
+      },
+      {
+        "prompt_file_row_index": 621,
+        "prompt_id": "qwen_v2_wp3_r1_density_3d07f83c380d82745930",
+        "prompt_text_sha256": "0b2d97b8a14c75cefe0a81ce50a4db4bc8b287e7b282ed0a4f9dc781c71cbe6e",
+        "selected_eval_index": 109
+      },
+      {
+        "prompt_file_row_index": 622,
+        "prompt_id": "qwen_v2_wp3_r1_density_09517377b096b6944abf",
+        "prompt_text_sha256": "673ad7167d435dd97990e26b4390370f93b9655aeba2ce685c0694ef831aeeed",
+        "selected_eval_index": 110
+      },
+      {
+        "prompt_file_row_index": 623,
+        "prompt_id": "qwen_v2_wp3_r1_density_e1029d8e0bcfed3d8c4a",
+        "prompt_text_sha256": "34242fa1ffaca8959d83c422d89abfe441801739e945c6f48f89913b56cfaa09",
+        "selected_eval_index": 111
+      },
+      {
+        "prompt_file_row_index": 624,
+        "prompt_id": "qwen_v2_wp3_r1_density_347b04eae4cabf992dd5",
+        "prompt_text_sha256": "b3805cb5f7a0a8fb692fd8a1466ccb3d56cea7949112cda8c85a47b588e1edd0",
+        "selected_eval_index": 112
+      },
+      {
+        "prompt_file_row_index": 625,
+        "prompt_id": "qwen_v2_wp3_r1_density_b353a20bcda68a2caec6",
+        "prompt_text_sha256": "cbee987177a0c00749fbbb34fded54353bf12446fb1484a19f70f0ae9c9bfc2c",
+        "selected_eval_index": 113
+      },
+      {
+        "prompt_file_row_index": 626,
+        "prompt_id": "qwen_v2_wp3_r1_density_0f18bac17740815e14ef",
+        "prompt_text_sha256": "84e0f03b4f883bac80bf66d29d2b4cc008a29fc9d477adbfba6a219bf039b60d",
+        "selected_eval_index": 114
+      },
+      {
+        "prompt_file_row_index": 627,
+        "prompt_id": "qwen_v2_wp3_r1_density_a3647fe96a8df28bb72f",
+        "prompt_text_sha256": "47b84b429c996a9deb7f94d44c0fbb79fe5cb0d7815fef0e25b4eaf0067916e2",
+        "selected_eval_index": 115
+      },
+      {
+        "prompt_file_row_index": 628,
+        "prompt_id": "qwen_v2_wp3_r1_density_800426bd2ab8ef0bb815",
+        "prompt_text_sha256": "9d71c8bd122ba6d37109f2d2964340e2cdf92c6d6530ea1595ee1a64d07a5f5f",
+        "selected_eval_index": 116
+      },
+      {
+        "prompt_file_row_index": 629,
+        "prompt_id": "qwen_v2_wp3_r1_density_ed4f31d30816e09ad41c",
+        "prompt_text_sha256": "e902b193839b601bc47356e72eeae9f6f99e3bd0e646b978d598cda1fa546a52",
+        "selected_eval_index": 117
+      },
+      {
+        "prompt_file_row_index": 630,
+        "prompt_id": "qwen_v2_wp3_r1_density_ab6f48636114903c00e3",
+        "prompt_text_sha256": "8c801dcd72b2cfafddfc722c0e69e6ca87f0bcdd7452dda4238317db972b2b63",
+        "selected_eval_index": 118
+      },
+      {
+        "prompt_file_row_index": 631,
+        "prompt_id": "qwen_v2_wp3_r1_density_c83d8bf6d3dae15d56c5",
+        "prompt_text_sha256": "a44406a3c9b44131838caa7257d9477b42c8facf5d54713d75dc25e59e1bb0a3",
+        "selected_eval_index": 119
+      },
+      {
+        "prompt_file_row_index": 632,
+        "prompt_id": "qwen_v2_wp3_r1_density_efe369979b5e4a761885",
+        "prompt_text_sha256": "d3551fba48caa3e3f960e7efd3f867081c77eaa5fe1f2449bbdf440ec24367dc",
+        "selected_eval_index": 120
+      },
+      {
+        "prompt_file_row_index": 633,
+        "prompt_id": "qwen_v2_wp3_r1_density_7067b017d14dd3367951",
+        "prompt_text_sha256": "17d3384393c714aa73d0cff7a32552e01fb131e45d7bcfe26139c92155af9dcd",
+        "selected_eval_index": 121
+      },
+      {
+        "prompt_file_row_index": 634,
+        "prompt_id": "qwen_v2_wp3_r1_density_e2dfbb5d2138c8fce77a",
+        "prompt_text_sha256": "9259f1ce1e37b876864bbc4ea42d4995b3f02eec397b55cfc2c9a2314692698b",
+        "selected_eval_index": 122
+      },
+      {
+        "prompt_file_row_index": 635,
+        "prompt_id": "qwen_v2_wp3_r1_density_de82708699d06dac9373",
+        "prompt_text_sha256": "9adfd159149d4db187d6a584b777bc6f960c1b068f55c4b28fae51cca2c10ce2",
+        "selected_eval_index": 123
+      },
+      {
+        "prompt_file_row_index": 636,
+        "prompt_id": "qwen_v2_wp3_r1_density_865453c0511ca6d2b2a0",
+        "prompt_text_sha256": "33bf44aa97cf59f92f3361a6f54e559d1d6fd7db24abdfbfc919496ca1d82c6e",
+        "selected_eval_index": 124
+      },
+      {
+        "prompt_file_row_index": 637,
+        "prompt_id": "qwen_v2_wp3_r1_density_bbab64254252dcb0b964",
+        "prompt_text_sha256": "69c70d9ea9461151a5d93d908c406f8b78d80a92efc855ab168593c975af6ac2",
+        "selected_eval_index": 125
+      },
+      {
+        "prompt_file_row_index": 638,
+        "prompt_id": "qwen_v2_wp3_r1_density_3b61c0dc17c93405a6e6",
+        "prompt_text_sha256": "18b9a5cca0204a2039209b5f03e858201fc9e2324ac1e5f8289866141469692f",
+        "selected_eval_index": 126
+      },
+      {
+        "prompt_file_row_index": 639,
+        "prompt_id": "qwen_v2_wp3_r1_density_c62a54b46beea1517b15",
+        "prompt_text_sha256": "e21ce0f23876603403c8c8da8a0d714b534e3a1d6bd725f84dd6d994cede0656",
+        "selected_eval_index": 127
+      },
+      {
+        "prompt_file_row_index": 640,
+        "prompt_id": "qwen_v2_wp3_r1_density_6f4e68fe39736aa1de89",
+        "prompt_text_sha256": "d7da804fbbebfeb50c590abf892f237880691e112b75d8b2c169d5baef9b252c",
+        "selected_eval_index": 128
+      },
+      {
+        "prompt_file_row_index": 641,
+        "prompt_id": "qwen_v2_wp3_r1_density_313953f799c25af20d32",
+        "prompt_text_sha256": "820aac3e78c86906588e487869f4d935aa492dcc3181c70f08ea198abd2ca9e9",
+        "selected_eval_index": 129
+      },
+      {
+        "prompt_file_row_index": 642,
+        "prompt_id": "qwen_v2_wp3_r1_density_a4d3ba3b75f9cbd00cf7",
+        "prompt_text_sha256": "22ab0d5ee79154e6188390ec71b83bb1a19414c2aa81e2a75e70490349ce447d",
+        "selected_eval_index": 130
+      },
+      {
+        "prompt_file_row_index": 643,
+        "prompt_id": "qwen_v2_wp3_r1_density_07e21fc323423c43b9ef",
+        "prompt_text_sha256": "b76b9cf91e285553ab0aefa6c39b536a5b36efb30113bca375d2b490874c6b47",
+        "selected_eval_index": 131
+      },
+      {
+        "prompt_file_row_index": 644,
+        "prompt_id": "qwen_v2_wp3_r1_density_d4966af226efbc97b441",
+        "prompt_text_sha256": "6984f2343e59e185c245f3681d190e06c1f5347b1de15be3bb8c234a218286a5",
+        "selected_eval_index": 132
+      },
+      {
+        "prompt_file_row_index": 645,
+        "prompt_id": "qwen_v2_wp3_r1_density_5168931270bbb255f061",
+        "prompt_text_sha256": "10f0d07db216510c7bf44a5ed3a22703263dd355116016adf9fde2f08faeedaf",
+        "selected_eval_index": 133
+      },
+      {
+        "prompt_file_row_index": 646,
+        "prompt_id": "qwen_v2_wp3_r1_density_6697df265ea69e3b6a30",
+        "prompt_text_sha256": "907308f5860381f646408b1733b3f7d3da88c47bbb475651c0461ca355a60fb5",
+        "selected_eval_index": 134
+      },
+      {
+        "prompt_file_row_index": 647,
+        "prompt_id": "qwen_v2_wp3_r1_density_55350d59e3089b25b469",
+        "prompt_text_sha256": "10252cfc1576d1899c3cb5b734f1fb42b54bc0d6b08007faf00bbe8b2940421e",
+        "selected_eval_index": 135
+      },
+      {
+        "prompt_file_row_index": 648,
+        "prompt_id": "qwen_v2_wp3_r1_density_73bb15aac9e60a00ccb3",
+        "prompt_text_sha256": "83901c0acccacee45d7af0e1f8ab128c0e73ac498df8df509633b90462bc75c7",
+        "selected_eval_index": 136
+      },
+      {
+        "prompt_file_row_index": 649,
+        "prompt_id": "qwen_v2_wp3_r1_density_3dcb1e24fe594d008578",
+        "prompt_text_sha256": "0dc52bc3896c466b34c467b912af439d134f1ffe4626caf2f4a73e1334e3fbb4",
+        "selected_eval_index": 137
+      },
+      {
+        "prompt_file_row_index": 650,
+        "prompt_id": "qwen_v2_wp3_r1_density_c44b661b3c9df2195d10",
+        "prompt_text_sha256": "592c95a6927ca15e89a9c03888cece7fbb0e8c72b275dba2e1334222dc72f305",
+        "selected_eval_index": 138
+      },
+      {
+        "prompt_file_row_index": 651,
+        "prompt_id": "qwen_v2_wp3_r1_density_2e24a22bd54da8863bf0",
+        "prompt_text_sha256": "b5707e3ed31aac94270f9f12d944914e7753d11fa3c2486524a95361d4e82d9e",
+        "selected_eval_index": 139
+      },
+      {
+        "prompt_file_row_index": 652,
+        "prompt_id": "qwen_v2_wp3_r1_density_ef20f4cae60312b479e3",
+        "prompt_text_sha256": "aa335d45dbd489ca74e4611769f3bbd316a6f2d4879f160289def32b8ec5fce3",
+        "selected_eval_index": 140
+      },
+      {
+        "prompt_file_row_index": 653,
+        "prompt_id": "qwen_v2_wp3_r1_density_4d036977850d4d7120f4",
+        "prompt_text_sha256": "903b2964b0525dad5e5f927f5c3df17249423842edac7bb59d33818a98b0af21",
+        "selected_eval_index": 141
+      },
+      {
+        "prompt_file_row_index": 654,
+        "prompt_id": "qwen_v2_wp3_r1_density_e751f7b76ea4392d6497",
+        "prompt_text_sha256": "7a499812d5b608237f2d7c335398143e7d2bf5433a6e2ea5a3ed2689746b70de",
+        "selected_eval_index": 142
+      },
+      {
+        "prompt_file_row_index": 655,
+        "prompt_id": "qwen_v2_wp3_r1_density_963d3d874a8093ea18ac",
+        "prompt_text_sha256": "5f43122c458bd4c49cdb645e13d93a542faf8bb0cf6c7a40402e121576152511",
+        "selected_eval_index": 143
+      },
+      {
+        "prompt_file_row_index": 656,
+        "prompt_id": "qwen_v2_wp3_r1_density_6ee27d44cfe3b6ea5069",
+        "prompt_text_sha256": "fcc736758552071b4c3fdd4d16db8d1d3b835dfedd6af59b819d8724995c8de7",
+        "selected_eval_index": 144
+      },
+      {
+        "prompt_file_row_index": 657,
+        "prompt_id": "qwen_v2_wp3_r1_density_c8bf1931ca2dea94c27c",
+        "prompt_text_sha256": "823a1093aecf2c133b6de487e83b23d6048f5ed375cf1802d015ea4c6b7a01e0",
+        "selected_eval_index": 145
+      },
+      {
+        "prompt_file_row_index": 658,
+        "prompt_id": "qwen_v2_wp3_r1_density_6eb9c416b7cc7a098cfc",
+        "prompt_text_sha256": "764f7f08b1546733163ab5c4ec7ebef5f13d3adfcdd15dfe6d48c14a7db01a3d",
+        "selected_eval_index": 146
+      },
+      {
+        "prompt_file_row_index": 659,
+        "prompt_id": "qwen_v2_wp3_r1_density_41dcb8e1fda0513f0bca",
+        "prompt_text_sha256": "370c3228e6381c024e85ad62ec75e858fbeb9cca39d53118a3eebc24fae8de17",
+        "selected_eval_index": 147
+      },
+      {
+        "prompt_file_row_index": 660,
+        "prompt_id": "qwen_v2_wp3_r1_density_b7d1768dc9b9dd0616c4",
+        "prompt_text_sha256": "f7df7fbf96344df8994619e53c04c1b61b330cb81bea7ef071c2ea9a5407f09f",
+        "selected_eval_index": 148
+      },
+      {
+        "prompt_file_row_index": 661,
+        "prompt_id": "qwen_v2_wp3_r1_density_a4182755a60aa098b9d6",
+        "prompt_text_sha256": "f0c2e4d0dd36435070a83e3e5bbcd241266ad11ad32b636e914a7d496ca7f373",
+        "selected_eval_index": 149
+      },
+      {
+        "prompt_file_row_index": 662,
+        "prompt_id": "qwen_v2_wp3_r1_density_501f9924afea3facbed4",
+        "prompt_text_sha256": "a53bc645b54504ea27291ce76a5e5340aa9eb3fcaf9fe960f667bbdd546be6b2",
+        "selected_eval_index": 150
+      },
+      {
+        "prompt_file_row_index": 663,
+        "prompt_id": "qwen_v2_wp3_r1_density_fdbf81d8068b02393373",
+        "prompt_text_sha256": "6f8c4673dc8592a09a8de4df08e3c1fc4abdd2e4fbe0927bf7abc1599f4af487",
+        "selected_eval_index": 151
+      },
+      {
+        "prompt_file_row_index": 664,
+        "prompt_id": "qwen_v2_wp3_r1_density_a66b4a1928950955c885",
+        "prompt_text_sha256": "513ccd3f52021502f1997bc33fbfaa958143dbba94eeb27b62d3d4ddff5807bb",
+        "selected_eval_index": 152
+      },
+      {
+        "prompt_file_row_index": 665,
+        "prompt_id": "qwen_v2_wp3_r1_density_7f71a0fcfb83927ea0f7",
+        "prompt_text_sha256": "368784cc3cb8682e882f1f9e8c914f44abfdfd256fb7b2afd389fb8674b67b06",
+        "selected_eval_index": 153
+      },
+      {
+        "prompt_file_row_index": 666,
+        "prompt_id": "qwen_v2_wp3_r1_density_0893bc43b01856035d8f",
+        "prompt_text_sha256": "e28b8f0ca5756cb11d851be384999ae446d9761e2e957c459391c6b7f455a434",
+        "selected_eval_index": 154
+      },
+      {
+        "prompt_file_row_index": 667,
+        "prompt_id": "qwen_v2_wp3_r1_density_9fbd369a73424c780154",
+        "prompt_text_sha256": "27c1b99bf601eec48324eea6501e773c27b72417bb862d28f21d3155c3172ebb",
+        "selected_eval_index": 155
+      },
+      {
+        "prompt_file_row_index": 668,
+        "prompt_id": "qwen_v2_wp3_r1_density_d21fb026eb2c7c321459",
+        "prompt_text_sha256": "a634f15732847f93b2321efc8fc06bae5d0a7b61c91187abe54378fbcbc8717e",
+        "selected_eval_index": 156
+      },
+      {
+        "prompt_file_row_index": 669,
+        "prompt_id": "qwen_v2_wp3_r1_density_f1e5c2a6ab9d1dbba96f",
+        "prompt_text_sha256": "e752d738b9cbeb55bfdf6e0a68e050a995909e239ef988364ba5f5054f7ff568",
+        "selected_eval_index": 157
+      },
+      {
+        "prompt_file_row_index": 670,
+        "prompt_id": "qwen_v2_wp3_r1_density_54119a1c76bef5ec2620",
+        "prompt_text_sha256": "304554ba4b65ae5a87817a899606fc4a97cdd6e2d438b215b4843735bf15f4bd",
+        "selected_eval_index": 158
+      },
+      {
+        "prompt_file_row_index": 671,
+        "prompt_id": "qwen_v2_wp3_r1_density_644c48fe4561dc70b451",
+        "prompt_text_sha256": "ca021041edd8000fec43a9539884d18797fd04f27bec495fad3bc9d267e329ae",
+        "selected_eval_index": 159
+      },
+      {
+        "prompt_file_row_index": 672,
+        "prompt_id": "qwen_v2_wp3_r1_density_403e9f7a7b63205fce1a",
+        "prompt_text_sha256": "d26dacfbf632fee2d66f6def075f69d007a217bd9b6b5168b559b3c0e80872a0",
+        "selected_eval_index": 160
+      },
+      {
+        "prompt_file_row_index": 673,
+        "prompt_id": "qwen_v2_wp3_r1_density_1ee32ebca249401c8f86",
+        "prompt_text_sha256": "b739dff4628245330948455785f8d480ef3cf265e18139996cdb9f8c18ec5d0c",
+        "selected_eval_index": 161
+      },
+      {
+        "prompt_file_row_index": 674,
+        "prompt_id": "qwen_v2_wp3_r1_density_8de1532678ec079134bd",
+        "prompt_text_sha256": "c9257cf42dc2c169f825afa384672f2360013d2f67a922ed7bb959934d34f3c6",
+        "selected_eval_index": 162
+      },
+      {
+        "prompt_file_row_index": 675,
+        "prompt_id": "qwen_v2_wp3_r1_density_701f4c89c5f2c18f70ea",
+        "prompt_text_sha256": "2d046095b8d0196baba0b39fe60bd89b49eae48490ea4c6cd82b12f3595f54d7",
+        "selected_eval_index": 163
+      },
+      {
+        "prompt_file_row_index": 676,
+        "prompt_id": "qwen_v2_wp3_r1_density_53de1c911c1db8403b0b",
+        "prompt_text_sha256": "57fc0fdfbbe14d8c9fbfc4599789a3291782e370c6c2b6795389aa01c6b8fe2d",
+        "selected_eval_index": 164
+      },
+      {
+        "prompt_file_row_index": 677,
+        "prompt_id": "qwen_v2_wp3_r1_density_72542a88efed544931ee",
+        "prompt_text_sha256": "86e3fdc558b113d9024eba27a00c8a4529a1c05b6b20c4d78251737a60f702a3",
+        "selected_eval_index": 165
+      },
+      {
+        "prompt_file_row_index": 678,
+        "prompt_id": "qwen_v2_wp3_r1_density_59b6447b4f0ba2a85bf2",
+        "prompt_text_sha256": "bfc5c2e25184336332754235186a7a2c86d8a1e108d8c35111cba9aaf5349816",
+        "selected_eval_index": 166
+      },
+      {
+        "prompt_file_row_index": 679,
+        "prompt_id": "qwen_v2_wp3_r1_density_3489cb905867389a6e38",
+        "prompt_text_sha256": "56b894701f1119e7158d7c609c7bb91391678b725b361fd586fad4e1b7da7c5f",
+        "selected_eval_index": 167
+      },
+      {
+        "prompt_file_row_index": 680,
+        "prompt_id": "qwen_v2_wp3_r1_density_2793df99914c7996a29a",
+        "prompt_text_sha256": "9a55e30c67d3db42d175028bce1069db63aae60e7602f6cd8a6e397d73b917ed",
+        "selected_eval_index": 168
+      },
+      {
+        "prompt_file_row_index": 681,
+        "prompt_id": "qwen_v2_wp3_r1_density_c9681bd97cd5be9bdf9a",
+        "prompt_text_sha256": "d99853db2bf2dfd7da7467dd5a279ea521b32e2bec045c3bf4a7315c1cd4f990",
+        "selected_eval_index": 169
+      },
+      {
+        "prompt_file_row_index": 682,
+        "prompt_id": "qwen_v2_wp3_r1_density_8ed1dbb206b0d59b7c0b",
+        "prompt_text_sha256": "bd59ea691397a16030a4e1001ad864291d35c8be3887c55469943df0ba3445f0",
+        "selected_eval_index": 170
+      },
+      {
+        "prompt_file_row_index": 683,
+        "prompt_id": "qwen_v2_wp3_r1_density_582c660b8590baf73a6a",
+        "prompt_text_sha256": "bb8c9c7d4ab544fbf4ae5ef9b0e682171553fa79e842e72af7644f679a2e8705",
+        "selected_eval_index": 171
+      },
+      {
+        "prompt_file_row_index": 684,
+        "prompt_id": "qwen_v2_wp3_r1_density_0a3df5c53f8e6ae2529f",
+        "prompt_text_sha256": "d27b34353b673bd89df6d21b0c8ee12769555c0ded6144800138b9be6628aed9",
+        "selected_eval_index": 172
+      },
+      {
+        "prompt_file_row_index": 685,
+        "prompt_id": "qwen_v2_wp3_r1_density_31e175d9fd799a3096bc",
+        "prompt_text_sha256": "97a9c6b50e9b89f0436e8f87c65cefc06f67add470fab23ac6c0572613e44f78",
+        "selected_eval_index": 173
+      },
+      {
+        "prompt_file_row_index": 686,
+        "prompt_id": "qwen_v2_wp3_r1_density_777a6cb91ad074d07cf6",
+        "prompt_text_sha256": "9c636f3d75e5f15d908f1fb86e2344c5a88ab5d3e836c2251ffd5b546429924a",
+        "selected_eval_index": 174
+      },
+      {
+        "prompt_file_row_index": 687,
+        "prompt_id": "qwen_v2_wp3_r1_density_81d486efd5aefa89c56a",
+        "prompt_text_sha256": "a7aade60dbad7d7a13a0d835803f9133b9cb696f9571e86e0492011ce09456ed",
+        "selected_eval_index": 175
+      },
+      {
+        "prompt_file_row_index": 688,
+        "prompt_id": "qwen_v2_wp3_r1_density_c1269bef72cccc6d3b58",
+        "prompt_text_sha256": "25ca133230a92cf30464417aac0127f95570ae6dddbee1c1a26eac624736a6be",
+        "selected_eval_index": 176
+      },
+      {
+        "prompt_file_row_index": 689,
+        "prompt_id": "qwen_v2_wp3_r1_density_374ce43a5f9809a82d57",
+        "prompt_text_sha256": "4fc3fad5c4a4ec4b69c82d4c1968c5dc52ddd39f0e7d2237c5c12ff258bebdc0",
+        "selected_eval_index": 177
+      },
+      {
+        "prompt_file_row_index": 690,
+        "prompt_id": "qwen_v2_wp3_r1_density_9797721f793f8c8c9822",
+        "prompt_text_sha256": "86926002115e59946d96bd7b8f72057551436e1481c956308d7f648b5dd64725",
+        "selected_eval_index": 178
+      },
+      {
+        "prompt_file_row_index": 691,
+        "prompt_id": "qwen_v2_wp3_r1_density_357e8f8835b133b34575",
+        "prompt_text_sha256": "c13b2ec81425bffe8ea14bc28840f53e56458dcf08bd92a258a51641d16c8db8",
+        "selected_eval_index": 179
+      },
+      {
+        "prompt_file_row_index": 692,
+        "prompt_id": "qwen_v2_wp3_r1_density_9230e226c2a06bad3fab",
+        "prompt_text_sha256": "2d566f098b560fbf35570e21f94ea8bfa50bcc2f849f4a555002eb392138d1e5",
+        "selected_eval_index": 180
+      },
+      {
+        "prompt_file_row_index": 693,
+        "prompt_id": "qwen_v2_wp3_r1_density_2eb454be5013a6abbcf6",
+        "prompt_text_sha256": "75663830ebb9566c16c98cc648769e4e625eed01b27158263f031249e60f7126",
+        "selected_eval_index": 181
+      },
+      {
+        "prompt_file_row_index": 694,
+        "prompt_id": "qwen_v2_wp3_r1_density_d1c700a6b5527dee1860",
+        "prompt_text_sha256": "060acf79a87e644794021abbfc45ce1b38a236c728a766b4e9348acd37063473",
+        "selected_eval_index": 182
+      },
+      {
+        "prompt_file_row_index": 695,
+        "prompt_id": "qwen_v2_wp3_r1_density_55ea5b73d43bb207c667",
+        "prompt_text_sha256": "9954d23bbd0698eebd85532497cfe375f15c8b59c50a37e5c376e5634e0baf96",
+        "selected_eval_index": 183
+      },
+      {
+        "prompt_file_row_index": 696,
+        "prompt_id": "qwen_v2_wp3_r1_density_860fff5f51b9aa301404",
+        "prompt_text_sha256": "fdd0fb068ac680f86cd3eca64d274b9007ba196ef099fdb9895afaba8b6a9925",
+        "selected_eval_index": 184
+      },
+      {
+        "prompt_file_row_index": 697,
+        "prompt_id": "qwen_v2_wp3_r1_density_717723a271c70ecd1251",
+        "prompt_text_sha256": "ed886137852e1173a8add4fc558891e776412ea4948184d548c1f2116543e147",
+        "selected_eval_index": 185
+      },
+      {
+        "prompt_file_row_index": 698,
+        "prompt_id": "qwen_v2_wp3_r1_density_c7d7bdcf4d8fc468536a",
+        "prompt_text_sha256": "440807e8ab723fb333fafcfd348b4870181e29770c01d4ef5d6cae5ad9936790",
+        "selected_eval_index": 186
+      },
+      {
+        "prompt_file_row_index": 699,
+        "prompt_id": "qwen_v2_wp3_r1_density_c01ea071265cb8bfc09e",
+        "prompt_text_sha256": "80b037fe432ce061d6498bb907c204fbe1b5e9c49fdc1e62c6814201219c6169",
+        "selected_eval_index": 187
+      },
+      {
+        "prompt_file_row_index": 700,
+        "prompt_id": "qwen_v2_wp3_r1_density_5c428791e85c7c349cf2",
+        "prompt_text_sha256": "dd68d927a5d9c69d02c32e0ed89ad818262811c31244c4405f6ff098e623942f",
+        "selected_eval_index": 188
+      },
+      {
+        "prompt_file_row_index": 701,
+        "prompt_id": "qwen_v2_wp3_r1_density_8ed6b2bc953455f86d26",
+        "prompt_text_sha256": "35d129e90967a2b9b46c6fd45100ea1f3940994c0670e4f43a984f908312b81a",
+        "selected_eval_index": 189
+      },
+      {
+        "prompt_file_row_index": 702,
+        "prompt_id": "qwen_v2_wp3_r1_density_fa621ca4ba54d601ca82",
+        "prompt_text_sha256": "1ecb2e0a09a15fcb72471df5c0a36b5881a6c6a5453410689e3576bdbbcafdb3",
+        "selected_eval_index": 190
+      },
+      {
+        "prompt_file_row_index": 703,
+        "prompt_id": "qwen_v2_wp3_r1_density_4f1d80858d1f45c13263",
+        "prompt_text_sha256": "55a9ece44427d5fc6910e2c29c2781f53245d77a1e25255879a469e9dde04e23",
+        "selected_eval_index": 191
+      },
+      {
+        "prompt_file_row_index": 704,
+        "prompt_id": "qwen_v2_wp3_r1_density_7bea09ca3de4b45ad08b",
+        "prompt_text_sha256": "7c6259ed4b5311c17eeec694b20d5bb860623d9f80bf040931da73172aeeb2d1",
+        "selected_eval_index": 192
+      },
+      {
+        "prompt_file_row_index": 705,
+        "prompt_id": "qwen_v2_wp3_r1_density_41c51d97bf9571d1b043",
+        "prompt_text_sha256": "afbb2a96d5ebf11f4befccecfdad22ca37c862618f75cfdb42483f3a25f21dbd",
+        "selected_eval_index": 193
+      },
+      {
+        "prompt_file_row_index": 706,
+        "prompt_id": "qwen_v2_wp3_r1_density_9fffdf517f4ccb60c706",
+        "prompt_text_sha256": "ca540c6802c764cf3980dd1a69a10b9fc9cc487ab1ce3c629b6be58b3e022027",
+        "selected_eval_index": 194
+      },
+      {
+        "prompt_file_row_index": 707,
+        "prompt_id": "qwen_v2_wp3_r1_density_00628f5572cf829785e8",
+        "prompt_text_sha256": "cb51b0bcfa194eca46b0774753223285a84864aee0d709aa53fe799dcc9a6e47",
+        "selected_eval_index": 195
+      },
+      {
+        "prompt_file_row_index": 708,
+        "prompt_id": "qwen_v2_wp3_r1_density_7c4cd73988a583d6bbeb",
+        "prompt_text_sha256": "9448c3e68a2bb4b5dd56e566f11ac9499a5a6533354bd076e8767130312a0a75",
+        "selected_eval_index": 196
+      },
+      {
+        "prompt_file_row_index": 709,
+        "prompt_id": "qwen_v2_wp3_r1_density_b2ff720557bf71f847fe",
+        "prompt_text_sha256": "41f4c6699f24c1ec70aac4d5ebcdf1ee70455b852e5b4add1cba19be43b91a02",
+        "selected_eval_index": 197
+      },
+      {
+        "prompt_file_row_index": 710,
+        "prompt_id": "qwen_v2_wp3_r1_density_b3b8aecd8176df313b5a",
+        "prompt_text_sha256": "8a9751e7f2f5d2ffd2c0c3011e0fa3da8f892821517a7c56372067e45f0af4b2",
+        "selected_eval_index": 198
+      },
+      {
+        "prompt_file_row_index": 711,
+        "prompt_id": "qwen_v2_wp3_r1_density_c4315c5b0deeaeb75b06",
+        "prompt_text_sha256": "9a20bc2f4c648baf647d08e2fa70978237fddc6cdbdb408ac1b6a4b310cf26e4",
+        "selected_eval_index": 199
+      },
+      {
+        "prompt_file_row_index": 712,
+        "prompt_id": "qwen_v2_wp3_r1_density_afe1e247014fd4b53f81",
+        "prompt_text_sha256": "e58403fcbb5370003b0d833b420011996f6b9a5ab1d0d8041c4779ee20454cb7",
+        "selected_eval_index": 200
+      },
+      {
+        "prompt_file_row_index": 713,
+        "prompt_id": "qwen_v2_wp3_r1_density_a6c73e071484f6711c42",
+        "prompt_text_sha256": "d0ac3fe0fa0f6d49c851862db54d1f699d6c38d30f1a704ef76096a676c79b98",
+        "selected_eval_index": 201
+      },
+      {
+        "prompt_file_row_index": 714,
+        "prompt_id": "qwen_v2_wp3_r1_density_1616ee0ed899f11dffe3",
+        "prompt_text_sha256": "e8bda6d95a0046c8f71d975f9bdd1b713327aab90675e9883382e10b436534f4",
+        "selected_eval_index": 202
+      },
+      {
+        "prompt_file_row_index": 715,
+        "prompt_id": "qwen_v2_wp3_r1_density_3e70e6aa9d5ef1c96d10",
+        "prompt_text_sha256": "e7860660acafdc74442f82f3c1046f5ee9dd92d3fe14f1c63fe684f06dfc7bdb",
+        "selected_eval_index": 203
+      },
+      {
+        "prompt_file_row_index": 716,
+        "prompt_id": "qwen_v2_wp3_r1_density_2f8268eb306faae7d2b6",
+        "prompt_text_sha256": "ba2bfd26c19118f6db0e7b63121309615fb02d8ae890cd736ef051d30f91e94a",
+        "selected_eval_index": 204
+      },
+      {
+        "prompt_file_row_index": 717,
+        "prompt_id": "qwen_v2_wp3_r1_density_15dccc7d01769fc7dccd",
+        "prompt_text_sha256": "24624cd2f539f634b5a88dcb43d143b6d25d5cf22e8c54f688989e16a93f1fce",
+        "selected_eval_index": 205
+      },
+      {
+        "prompt_file_row_index": 718,
+        "prompt_id": "qwen_v2_wp3_r1_density_baff75daf842e0a711b5",
+        "prompt_text_sha256": "3c9acdd74b829ebeb2a0369d65a942b4782f8cc34798db55e72d8344ab6e8123",
+        "selected_eval_index": 206
+      },
+      {
+        "prompt_file_row_index": 719,
+        "prompt_id": "qwen_v2_wp3_r1_density_c953cca977db5478e9f3",
+        "prompt_text_sha256": "0170d6b692a3e00c339bc7a4ef0e5079bfbbdfc9264780a03b6ef8ee8fbe4ed9",
+        "selected_eval_index": 207
+      },
+      {
+        "prompt_file_row_index": 720,
+        "prompt_id": "qwen_v2_wp3_r1_density_c273e692d28cdbe11f1b",
+        "prompt_text_sha256": "86bb46a8cf2af273a820c6540a7846bd9ecbab9ae5fff37898cab567494a9d26",
+        "selected_eval_index": 208
+      },
+      {
+        "prompt_file_row_index": 721,
+        "prompt_id": "qwen_v2_wp3_r1_density_8013061d234c9b9d3227",
+        "prompt_text_sha256": "dcf5f46b7eb91dbdb3d66a94ec165a3f6e6468cdbc7efa36b483bb63e076726a",
+        "selected_eval_index": 209
+      },
+      {
+        "prompt_file_row_index": 722,
+        "prompt_id": "qwen_v2_wp3_r1_density_bc3c2049133eb666e255",
+        "prompt_text_sha256": "efc091a4f5d90296dbd539ce3c335d8fa0edd521e33ef3c8e91d57d4ecfbd5ce",
+        "selected_eval_index": 210
+      },
+      {
+        "prompt_file_row_index": 723,
+        "prompt_id": "qwen_v2_wp3_r1_density_9e4c23b24743f60b886b",
+        "prompt_text_sha256": "10d1dd93c0ef3ef0161670229e78f7f368d5d642b88618b73a31dedb8504fb2d",
+        "selected_eval_index": 211
+      },
+      {
+        "prompt_file_row_index": 724,
+        "prompt_id": "qwen_v2_wp3_r1_density_540c449637343a8972df",
+        "prompt_text_sha256": "bee059d3d98a56c01426c20ba9dafa1e84b24e5b5031961890db00e9e07a544e",
+        "selected_eval_index": 212
+      },
+      {
+        "prompt_file_row_index": 725,
+        "prompt_id": "qwen_v2_wp3_r1_density_1b4d26f8170e2391e10e",
+        "prompt_text_sha256": "f241fc57a748f2094dce682da4385091eb75ef22244db9904af55d92e09a42e0",
+        "selected_eval_index": 213
+      },
+      {
+        "prompt_file_row_index": 726,
+        "prompt_id": "qwen_v2_wp3_r1_density_972e1fb43e1e31855b09",
+        "prompt_text_sha256": "6d57e13783ddb662afebfb57e2c3cf2d524f8bb161b5f1bee02e83280da0633d",
+        "selected_eval_index": 214
+      },
+      {
+        "prompt_file_row_index": 727,
+        "prompt_id": "qwen_v2_wp3_r1_density_ba0e2a4f9784695d6ad2",
+        "prompt_text_sha256": "1bd6bc5aa0c29e509d68714de257cfd7577d76248c484a0f956a0b3f7729be59",
+        "selected_eval_index": 215
+      },
+      {
+        "prompt_file_row_index": 728,
+        "prompt_id": "qwen_v2_wp3_r1_density_dd93cd77a5abcfca8041",
+        "prompt_text_sha256": "46d9aba3ea72ff2e9e0cef922ab171ee1ead2afa66a4d30aa12cbb9e4653ea5d",
+        "selected_eval_index": 216
+      },
+      {
+        "prompt_file_row_index": 729,
+        "prompt_id": "qwen_v2_wp3_r1_density_7fa9781b733e30f170e3",
+        "prompt_text_sha256": "e7c32cfdff0ac2bb465b3ad0c418ebe4d3066d5033aa97e2845b47b1408db193",
+        "selected_eval_index": 217
+      },
+      {
+        "prompt_file_row_index": 730,
+        "prompt_id": "qwen_v2_wp3_r1_density_47c618f898fa0d1bf367",
+        "prompt_text_sha256": "4aedcc46d57179074d37aaf70e189b342606ab8cb52514bcb94b6719e1f7bc31",
+        "selected_eval_index": 218
+      },
+      {
+        "prompt_file_row_index": 731,
+        "prompt_id": "qwen_v2_wp3_r1_density_1366515c3d8cf5620a05",
+        "prompt_text_sha256": "de5037268d1b2a3b686eb6f0673eb7a999104a406d9f5eda6e31c3634172cd4b",
+        "selected_eval_index": 219
+      },
+      {
+        "prompt_file_row_index": 732,
+        "prompt_id": "qwen_v2_wp3_r1_density_4de30a09ab644fc2673b",
+        "prompt_text_sha256": "24d8998c06da65bb3fe4c0d83433929370cad774cf491dc9b8ba77863d950e9d",
+        "selected_eval_index": 220
+      },
+      {
+        "prompt_file_row_index": 733,
+        "prompt_id": "qwen_v2_wp3_r1_density_2cccb4e24f773f3db25a",
+        "prompt_text_sha256": "261a5b9f6c96ec3450834ba1af443a535d1a4641b70b4b888967d3be85acf48f",
+        "selected_eval_index": 221
+      },
+      {
+        "prompt_file_row_index": 734,
+        "prompt_id": "qwen_v2_wp3_r1_density_aa71100318ec5ee1e143",
+        "prompt_text_sha256": "f8ca6e55aee861d5855218b19d9fa402d1435b0dad78fe06f3264a250f8d239a",
+        "selected_eval_index": 222
+      },
+      {
+        "prompt_file_row_index": 735,
+        "prompt_id": "qwen_v2_wp3_r1_density_3503d61af5ada0021268",
+        "prompt_text_sha256": "1e3f4d927dceefad943b08cab7ab386a19ec08ef461a9b8c39b121ea8d5441c6",
+        "selected_eval_index": 223
+      },
+      {
+        "prompt_file_row_index": 736,
+        "prompt_id": "qwen_v2_wp3_r1_density_13bbfe9d3dfdc4e1642e",
+        "prompt_text_sha256": "9508d912d39fc4929f00f1b37ff635b8f81408b835ed1e4856d39cc7d6a2304a",
+        "selected_eval_index": 224
+      },
+      {
+        "prompt_file_row_index": 737,
+        "prompt_id": "qwen_v2_wp3_r1_density_8bba5340f775e6ef76b1",
+        "prompt_text_sha256": "7b18099890bc5995b4884cc01af21af622384ba0382eab6c6261b78b5b68dbc3",
+        "selected_eval_index": 225
+      },
+      {
+        "prompt_file_row_index": 738,
+        "prompt_id": "qwen_v2_wp3_r1_density_dc5d731a4eda41e81c53",
+        "prompt_text_sha256": "3d15449dae309a82b253201df5d26973ceb7191fa573fa8383793bdefd67b769",
+        "selected_eval_index": 226
+      },
+      {
+        "prompt_file_row_index": 739,
+        "prompt_id": "qwen_v2_wp3_r1_density_57888c38b3d16c61c616",
+        "prompt_text_sha256": "478037ce0783d4999d82b5bd5e33be1a8aa9dfcc1cb77703691e914bdcc2e3ce",
+        "selected_eval_index": 227
+      },
+      {
+        "prompt_file_row_index": 740,
+        "prompt_id": "qwen_v2_wp3_r1_density_c2bdd42861f0cd11de1c",
+        "prompt_text_sha256": "d3abca2a2f7ab9be7e998f5952c5529af82dd205a9c3dad17b7430d09e490a69",
+        "selected_eval_index": 228
+      },
+      {
+        "prompt_file_row_index": 741,
+        "prompt_id": "qwen_v2_wp3_r1_density_d23c18e96d10d9ef7107",
+        "prompt_text_sha256": "76421203e8dd544c97512b06d0d8dc0aa812eac127113f96d20ab3005efad3df",
+        "selected_eval_index": 229
+      },
+      {
+        "prompt_file_row_index": 742,
+        "prompt_id": "qwen_v2_wp3_r1_density_e40e6149d330b75a74b7",
+        "prompt_text_sha256": "97f947b6016cccb0352a52067af03f755e05ec86de0eb445266c226a44123df6",
+        "selected_eval_index": 230
+      },
+      {
+        "prompt_file_row_index": 743,
+        "prompt_id": "qwen_v2_wp3_r1_density_53d2c6e6539e96d0bbc8",
+        "prompt_text_sha256": "d4bfbd82a2cf5b50793f37718a0031bf3c8550e69097560a6fbb396db6a33e35",
+        "selected_eval_index": 231
+      },
+      {
+        "prompt_file_row_index": 744,
+        "prompt_id": "qwen_v2_wp3_r1_density_1ab36e6dbd57a403499b",
+        "prompt_text_sha256": "3c1557ea027d75c9fc6b7c3b6089d6b52f85aa3f5362d58bf7e9bdf9fc471258",
+        "selected_eval_index": 232
+      },
+      {
+        "prompt_file_row_index": 745,
+        "prompt_id": "qwen_v2_wp3_r1_density_69b40aa895c49ee53a97",
+        "prompt_text_sha256": "d0d591233130e40f12bbde246bbe8ded63681d1736b56e0c031cc3de5ce55cd3",
+        "selected_eval_index": 233
+      },
+      {
+        "prompt_file_row_index": 746,
+        "prompt_id": "qwen_v2_wp3_r1_density_65c2f73c7b149fd9c1b5",
+        "prompt_text_sha256": "c51c690db438e51c501c932f18da841cdba08915636c186a2dbf563017afeebc",
+        "selected_eval_index": 234
+      },
+      {
+        "prompt_file_row_index": 747,
+        "prompt_id": "qwen_v2_wp3_r1_density_4020461d47806993d63a",
+        "prompt_text_sha256": "283eee0c80eb72b195778a132d82986e6cb5ba5e220680e3011c8a6648767dc8",
+        "selected_eval_index": 235
+      },
+      {
+        "prompt_file_row_index": 748,
+        "prompt_id": "qwen_v2_wp3_r1_density_a5ab3e54ba412f9587d4",
+        "prompt_text_sha256": "1d8a27cb7c25b7108cc19c36d08abce5246aef879aa272097dd45b5db5cfe96c",
+        "selected_eval_index": 236
+      },
+      {
+        "prompt_file_row_index": 749,
+        "prompt_id": "qwen_v2_wp3_r1_density_9a05e492c37f38eead54",
+        "prompt_text_sha256": "aca4b8a47e7f9f5e41e14c6c9b214d3ce474033bb1d19693ed0dddc89343a4e5",
+        "selected_eval_index": 237
+      },
+      {
+        "prompt_file_row_index": 750,
+        "prompt_id": "qwen_v2_wp3_r1_density_3c83761bf73fbd82d5f3",
+        "prompt_text_sha256": "d32a9552d283a4249e73a7634eec7505204e198dc057aea3ac9123becd16f1bf",
+        "selected_eval_index": 238
+      },
+      {
+        "prompt_file_row_index": 751,
+        "prompt_id": "qwen_v2_wp3_r1_density_1ffc82668c8a246e4b88",
+        "prompt_text_sha256": "d9fdcc7bbf274e11a02b40869a2720a2d2198132ca6d2e698d043d6579d19af6",
+        "selected_eval_index": 239
+      },
+      {
+        "prompt_file_row_index": 752,
+        "prompt_id": "qwen_v2_wp3_r1_density_f24297ef6d69bd0f9de5",
+        "prompt_text_sha256": "c3a7b58a3ddb47d5a010d475d802fa7dfebbc45ec3156b921584b85b286902cc",
+        "selected_eval_index": 240
+      },
+      {
+        "prompt_file_row_index": 753,
+        "prompt_id": "qwen_v2_wp3_r1_density_d306a6f23852a92a8881",
+        "prompt_text_sha256": "014a463c4acd7d801a7290586d18804da3f161801a2a9183f9f4742c5686204c",
+        "selected_eval_index": 241
+      },
+      {
+        "prompt_file_row_index": 754,
+        "prompt_id": "qwen_v2_wp3_r1_density_afda2c31f6cae12d6049",
+        "prompt_text_sha256": "f39a3b462eda1d94703ca30589a1d50642103ec79cc7c779cfbe03971dfadbe4",
+        "selected_eval_index": 242
+      },
+      {
+        "prompt_file_row_index": 755,
+        "prompt_id": "qwen_v2_wp3_r1_density_524f8fdbd211685ba9a2",
+        "prompt_text_sha256": "fe2eaf7d3f9cad35c9f28275eefedf22442710fba85b2bd013c5bbba9f4e0a97",
+        "selected_eval_index": 243
+      },
+      {
+        "prompt_file_row_index": 756,
+        "prompt_id": "qwen_v2_wp3_r1_density_0ff9061b84d0fb4fd208",
+        "prompt_text_sha256": "5cd753f55e31b8ad49523b025a007c9d1dc5833bd24e955155892f6460257a64",
+        "selected_eval_index": 244
+      },
+      {
+        "prompt_file_row_index": 757,
+        "prompt_id": "qwen_v2_wp3_r1_density_9f7acfaa6eb0f1e3fcc5",
+        "prompt_text_sha256": "722aa8e4224536479cc0a9d77aff317ac55e99fc88df277d9790f9b34d2f175a",
+        "selected_eval_index": 245
+      },
+      {
+        "prompt_file_row_index": 758,
+        "prompt_id": "qwen_v2_wp3_r1_density_4223fd05244a9725eed8",
+        "prompt_text_sha256": "e36f77bcfd40c869265486f498ccd8e236350ae0af2aa1c7bcf0a38a5c85c7d1",
+        "selected_eval_index": 246
+      },
+      {
+        "prompt_file_row_index": 759,
+        "prompt_id": "qwen_v2_wp3_r1_density_6c424ec8eac5dc39fec6",
+        "prompt_text_sha256": "e316bd8b33dc9b8549cdc1815e6070b8c228b9404ac3ad2547a98d8985bc76ef",
+        "selected_eval_index": 247
+      },
+      {
+        "prompt_file_row_index": 760,
+        "prompt_id": "qwen_v2_wp3_r1_density_bae3119ae18fbfb442e8",
+        "prompt_text_sha256": "13fb5398c4df30e8151dbc279b3585923f89353c99c6c7dbcfd3fa74651dd5e0",
+        "selected_eval_index": 248
+      },
+      {
+        "prompt_file_row_index": 761,
+        "prompt_id": "qwen_v2_wp3_r1_density_ccb5ca11c8fbdf85ae55",
+        "prompt_text_sha256": "a145ffa5a661c11370953869d6e818d1fa7d05ac65b29f6fc1b1d489f863b836",
+        "selected_eval_index": 249
+      },
+      {
+        "prompt_file_row_index": 762,
+        "prompt_id": "qwen_v2_wp3_r1_density_b45fa67dddb59c877674",
+        "prompt_text_sha256": "7575ccd3674e4e2dc6944b09a714b28b9d95f7b550636ae5336db83c39adf143",
+        "selected_eval_index": 250
+      },
+      {
+        "prompt_file_row_index": 763,
+        "prompt_id": "qwen_v2_wp3_r1_density_a10b91a719abb4e18fd4",
+        "prompt_text_sha256": "5d7823d91677830d71a7ae356b1e2f695bef149248d67b4dac3442dad42aa69d",
+        "selected_eval_index": 251
+      },
+      {
+        "prompt_file_row_index": 764,
+        "prompt_id": "qwen_v2_wp3_r1_density_0a333b4371de378785c8",
+        "prompt_text_sha256": "22e44ff53e4fbab5cd1dd9f4305f6f7158a5c4489f52372019ec398474f4f18a",
+        "selected_eval_index": 252
+      },
+      {
+        "prompt_file_row_index": 765,
+        "prompt_id": "qwen_v2_wp3_r1_density_813d5e44160da554ba31",
+        "prompt_text_sha256": "b1abab6d6eb855dc0e85b3de8c23bd033f69f81913c5c13e860233ac46cf1512",
+        "selected_eval_index": 253
+      },
+      {
+        "prompt_file_row_index": 766,
+        "prompt_id": "qwen_v2_wp3_r1_density_de82a2c87a5e96e1b373",
+        "prompt_text_sha256": "78c0fb49c7bbe5356e8d09d86044b040cdb2f46040af814850cf29fb64d5c085",
+        "selected_eval_index": 254
+      },
+      {
+        "prompt_file_row_index": 767,
+        "prompt_id": "qwen_v2_wp3_r1_density_48c5af2b098e94f0da5f",
+        "prompt_text_sha256": "859457344a85007a56a9758d76bd7e9be577cf3c0ec79bb194897e1d25a4bc43",
+        "selected_eval_index": 255
+      }
+    ],
+    "selected_split": "wp3_r1_eval"
+  },
+  "required_outputs": [
+    "precommit/wp6_r1_scale_contract.json",
+    "wp6_generation_summary.json",
+    "wp6_generated_outputs.jsonl",
+    "wp6_e2e_summary.json",
+    "wp6_slot_observations.jsonl",
+    "wp6_decode_decisions.jsonl",
+    "coordinate_majority_scale/wp6_r1_scale_decode_rows.jsonl",
+    "coordinate_majority_scale/wp6_r1_scale_summary.json",
+    "coordinate_majority_scale/wp6_r1_scale_support_by_block_budget.csv",
+    "coordinate_majority_scale/wp6_r1_scale_contract.json"
+  ],
+  "schema_name": "natural_evidence_v2_wp6_r1_scale_contract_v1",
+  "source_wp4_contract_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+  "source_wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07",
+  "source_wp4_precommit_hash_sha256": "d8ccb3697e79aca907e4badb098fea22225f5f9a4b27ff58063cd89f1938c5cb",
+  "transcript_precommitted_before_generation": true,
+  "transcript_provenance": "precommitted_replacement_run"
+}

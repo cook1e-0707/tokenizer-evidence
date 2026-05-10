@@ -9,6 +9,49 @@ state.
 
 This is an oversight and handoff contract, not a permission to train.
 
+## Standing Approval For Already-Locked Safe Paths
+
+As of 2026-05-09T05:59Z, the user explicitly instructed Codex/Hermes not to
+wait for repeated manual approval on the same already-defined route. Hermes
+should continue prompting Codex through the next allowed action when all of the
+following are true:
+
+- the route is already recorded in `AUTOMATION_STATE.md`, `next_step_codex_plan.md`,
+  and `gate_status.json`;
+- the action is a direct continuation of that route, such as monitoring one
+  active job, syncing/reviewing its artifacts, preparing a follow-up artifact,
+  or submitting exactly one already-reviewed allowlisted Slurm scoring job;
+- all gates for that action are satisfied;
+- Chimera CPU/GPU work uses Slurm only;
+- the allowlist entry, if any, is enabled only for the single submission and
+  disabled immediately afterward;
+- Hermes sends Telegram and email notification before the project-advancing
+  action;
+- the action does not start training, Qwen E2E, Llama, same-family null,
+  sanitizer, FAR aggregation, or paper-facing positive claims unless a later
+  gate explicitly permits that class of action;
+- WP4 artifact-only prompt-local contract and decoder oracle has passed; the
+  next permitted class is WP5 teacher-forced target-mass gate planning/scoring
+  design only, not training or E2E.
+
+As of 2026-05-09T06:18Z, the user conditionally authorized training once the
+pre-training requirements and standards are met. This does not permit immediate
+training. It permits exactly one allowlisted WP5 Qwen teacher-forced training
+job per tick only after the WP5 launch gate is satisfied: training/scoring plan
+exists, protected/task-only objectives are explicit, model/payloads/seeds/split
+and budgets are fixed, the Slurm wrapper is reviewed, the command is in
+`configs/natural_evidence_v2/run_allowlist.yaml`, and Telegram/email
+notification succeeds before launch. Qwen E2E, Llama, same-family nulls,
+sanitizer, FAR, and paper-facing positive claims remain forbidden until later
+gates pass.
+
+This standing approval does not authorize new experiment classes, training,
+claim changes, multiple Slurm jobs in one tick, or bypassing gate failures.
+When a result fails a gate, Hermes should continue with the smallest
+allowed diagnostic/repair step on the same locked route rather than asking for
+another manual approval, unless the next step would change the project phase or
+start a newly forbidden class of work.
+
 ## Mandatory TG + Email Notification Gate
 
 Every Hermes supervision tick that pushes the project forward must notify the
@@ -75,17 +118,19 @@ Each notification body must include:
 
 ## Current Locked Phase
 
-`V1_FROZEN_NEGATIVE_DIAGNOSTIC__V2_WP2_PROMPT_FAMILY_SPLITS_AUDITED`
+`V1_FROZEN_NEGATIVE_DIAGNOSTIC__V2_WP4_DECODER_ORACLE_PASSED__WP5_PLAN_ALLOWED`
 
 The current next allowed action is:
 
 ```text
-natural_evidence_v2 WP3 artifact-only micro-slot detector and 2-way bucket
-policy design.
+natural_evidence_v2 WP5 teacher-forced target-mass gate artifact planning and
+scoring/training launch design only. If the pre-training launch gate is fully
+satisfied, Codex may submit exactly one allowlisted WP5 Qwen training job via
+Slurm without asking for another manual approval.
 ```
 
 Do not continue v1 repaired target-mass probes. Training, model transcript
-generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+generation for E2E, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
 aggregation, and paper-facing positive claims remain forbidden.
 
 ## 15-minute Supervision Loop

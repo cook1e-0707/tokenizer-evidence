@@ -1,0 +1,128 @@
+{
+  "artifact_role": "wp6_e2e_failure_diagnosis_artifact_only",
+  "claim_control": {
+    "e2e_rerun_allowed": false,
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "training_allowed": false
+  },
+  "condition_budget_accepts": {
+    "protected": {
+      "accept_rate": 0.125,
+      "accepted_count": 8,
+      "frames": 64,
+      "mean_resolved_slots": 13.453125,
+      "mean_target_hits": 12.1875
+    },
+    "raw": {
+      "accept_rate": 0.0,
+      "accepted_count": 0,
+      "frames": 64,
+      "mean_resolved_slots": 3.140625,
+      "mean_target_hits": 1.484375
+    },
+    "task_only": {
+      "accept_rate": 0.0,
+      "accepted_count": 0,
+      "frames": 64,
+      "mean_resolved_slots": 2.796875,
+      "mean_target_hits": 1.15625
+    },
+    "wrong_key": {
+      "accept_rate": 0.0,
+      "accepted_count": 0,
+      "frames": 64,
+      "mean_resolved_slots": 13.453125,
+      "mean_target_hits": 12.1875
+    },
+    "wrong_payload": {
+      "accept_rate": 0.0,
+      "accepted_count": 0,
+      "frames": 64,
+      "mean_resolved_slots": 13.453125,
+      "mean_target_hits": 12.1875
+    }
+  },
+  "generated_output_rows": 192,
+  "input_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp6_e2e_eval_852086",
+  "near_miss_protected_frame_count_hamming_le_3": 24,
+  "optimistic_surface_expansion": {
+    "interpretation": "Upper bound if every currently out-of-bank first word could be safely added to the target bucket for its coordinate; resolved wrong-bucket hits remain errors.",
+    "optimistic_accept_count": 27,
+    "optimistic_accept_rate": 0.421875,
+    "resolved_wrong_frame_count": 37,
+    "total_frames": 64
+  },
+  "protected": {
+    "accepted_frames": 8,
+    "failed_frames": 56,
+    "mean_hamming_lower_bound_to_target": 3.8125,
+    "mean_resolved_slots": 13.453125,
+    "mean_target_hits": 12.1875,
+    "median_hamming_lower_bound_to_target": 3.5,
+    "median_resolved_slots": 14.0,
+    "median_target_hits": 12.5
+  },
+  "schema_name": "natural_evidence_v2_wp6_failure_diagnosis_v1",
+  "source_gate_status": "FAIL_WP6_QWEN_V2_E2E_PROOF_OF_LIFE",
+  "source_summary_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp6_e2e_eval_852086/wp6_e2e_summary.json",
+  "threshold_counts": {
+    "hamming_lower_bound_le_0": {
+      "count": 8,
+      "rate": 0.125
+    },
+    "hamming_lower_bound_le_1": {
+      "count": 15,
+      "rate": 0.234375
+    },
+    "hamming_lower_bound_le_2": {
+      "count": 23,
+      "rate": 0.359375
+    },
+    "hamming_lower_bound_le_3": {
+      "count": 32,
+      "rate": 0.5
+    },
+    "hamming_lower_bound_le_4": {
+      "count": 41,
+      "rate": 0.640625
+    },
+    "target_hits_ge_10": {
+      "count": 49,
+      "rate": 0.765625
+    },
+    "target_hits_ge_11": {
+      "count": 44,
+      "rate": 0.6875
+    },
+    "target_hits_ge_12": {
+      "count": 41,
+      "rate": 0.640625
+    },
+    "target_hits_ge_13": {
+      "count": 32,
+      "rate": 0.5
+    },
+    "target_hits_ge_14": {
+      "count": 23,
+      "rate": 0.359375
+    },
+    "target_hits_ge_15": {
+      "count": 15,
+      "rate": 0.234375
+    },
+    "target_hits_ge_16": {
+      "count": 8,
+      "rate": 0.125
+    },
+    "target_hits_ge_8": {
+      "count": 63,
+      "rate": 0.984375
+    },
+    "target_hits_ge_9": {
+      "count": 58,
+      "rate": 0.90625
+    }
+  }
+}

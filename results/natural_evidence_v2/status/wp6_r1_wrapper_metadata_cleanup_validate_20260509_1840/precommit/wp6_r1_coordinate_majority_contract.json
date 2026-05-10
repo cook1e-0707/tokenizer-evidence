@@ -1,0 +1,35 @@
+{
+  "artifact_only_replay": true,
+  "claim_control": {
+    "e2e_rerun_started": false,
+    "far_aggregation_started": false,
+    "paper_claim_allowed": false,
+    "training_started": false
+  },
+  "coordinate_policy": {
+    "coordinate_count": 16,
+    "coordinate_id": "strict_step_label_index_1_to_16",
+    "erasure_policy": "ignore unresolved out-of-bank first words",
+    "evidence_unit": "resolved primary 2-way bucket hit at Step N first word"
+  },
+  "decoder_policy": {
+    "accept_rule": "majority codeword checksum_valid_and_payload_matches_expected",
+    "decoder_id": "qwen_v2_wp6_r1_repeated_coordinate_majority_decoder_v1",
+    "minimum_majority_margin_at_64": 3,
+    "minimum_support_at_64": 16,
+    "query_budgets": [
+      8,
+      16,
+      32,
+      64
+    ]
+  },
+  "input_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp6_r1_wrapper_metadata_cleanup_validate_20260509_1840",
+  "precommit_note": "This replacement WP6-R1 contract is intended to be written before generation.",
+  "schema_name": "natural_evidence_v2_wp6_r1_coordinate_majority_contract_v1",
+  "source_wp4_contract_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+  "source_wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07",
+  "source_wp4_precommit_hash_sha256": "d8ccb3697e79aca907e4badb098fea22225f5f9a4b27ff58063cd89f1938c5cb",
+  "transcript_precommitted_before_generation": true,
+  "transcript_provenance": "precommitted_replacement_run"
+}

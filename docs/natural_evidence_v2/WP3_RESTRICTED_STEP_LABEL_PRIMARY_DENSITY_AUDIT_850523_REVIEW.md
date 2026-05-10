@@ -110,3 +110,21 @@ variant, or explicitly decide whether sentence-start inline Step labels are
 inside the detector contract. Do not submit another Slurm job without review and
 explicit approval.
 ```
+
+## Detector-Contract Decision
+
+2026-05-09T02:57Z decision:
+
+```text
+sentence-start inline Step labels are outside the current strict detector gate
+```
+
+The 850523 result remains a strict structural density fail. The next repair
+should remove or rewrite `strict_compact_step_label_lines` in a fresh
+artifact-only density plan rather than reclassify the observed inline response.
+
+Decision record:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_850523_DETECTOR_CONTRACT_DECISION.md
+```

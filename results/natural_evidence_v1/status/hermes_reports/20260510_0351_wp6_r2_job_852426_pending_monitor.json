@@ -1,0 +1,28 @@
+{
+  "action": "monitored the single submitted WP6-R2 Option B Slurm job 852426 only",
+  "artifact_sync_started": false,
+  "artifacts_ready_for_review": false,
+  "far_aggregation_started": false,
+  "gate_review_started": false,
+  "generation_started": false,
+  "job_id": "852426",
+  "job_name": "nat-ev-v2-wp6r2b",
+  "llama_started": false,
+  "new_slurm_job_submitted": false,
+  "new_training_started": false,
+  "next_allowed_action": "continue monitoring job 852426; after completion sync wp6_r2_option_b_scale_eval_852426 artifacts and review precommitted R2 Option B gates; do not submit another WP6 job before review",
+  "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260510_0350_scheduled_tick_notification.json",
+  "paper_claim_allowed": false,
+  "pending_reason": "Priority",
+  "qwen_e2e_rerun_started": false,
+  "sacct_observation": [
+    "852426|nat-ev-v2-wp6r2b|DGXA100|PENDING|0:0|00:00:00|None assigned"
+  ],
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_elapsed": "00:00:00",
+  "slurm_state": "PENDING",
+  "squeue_observation": "852426|DGXA100|nat-ev-v2-wp6r2b|guanjie.lin0|PENDING|0:00|1|(Priority)",
+  "status": "PENDING_RESULT_REVIEW_NOT_READY_TO_SYNC",
+  "timestamp_utc": "2026-05-10T03:51:20Z"
+}

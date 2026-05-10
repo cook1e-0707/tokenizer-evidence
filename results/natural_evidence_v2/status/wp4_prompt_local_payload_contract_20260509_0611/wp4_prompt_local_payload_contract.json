@@ -1,0 +1,124 @@
+{
+  "bucket_bank": {
+    "bank_id": "qwen_v2_wp3_r2_primary_set_plan_vs_create_prepare_v1",
+    "buckets": {
+      "0": [
+        "Set",
+        "Plan"
+      ],
+      "1": [
+        "Create",
+        "Prepare"
+      ]
+    },
+    "combined_bank_mass": 0.14328484169406375,
+    "mass_ratio": 1.2703982582035882,
+    "min_bucket_mass": 0.06311000335572636,
+    "source_candidate_bank_id": "step_label_r2_prompt_ctx_set_plan_vs_create_prepare_v1",
+    "source_job_id": "851272",
+    "source_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/buckets/qwen_v2_primary_2way_bank.jsonl",
+    "source_sha256": "c60ee10ba36f56fb4f34814fa279bb06e1fcde49e2663687c444b8ce2cf4e0ca",
+    "token_ids": {
+      "0": [
+        2573,
+        9680
+      ],
+      "1": [
+        4230,
+        31166
+      ]
+    }
+  },
+  "claim_control": {
+    "artifact_only": true,
+    "e2e_eval_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "not_full_far": true,
+    "not_payload_recovery": true,
+    "paper_claim_allowed": false,
+    "training_started": false
+  },
+  "contract_role": "prompt_local_oracle_pretraining_gate_contract",
+  "oracle_gate_targets": {
+    "decoder_oracle_substitution_accept": 1.0,
+    "wrong_key_oracle_reject": 1.0,
+    "wrong_payload_oracle_reject": 1.0
+  },
+  "payload": {
+    "checksum_bits_msb_first": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "checksum_byte_hex": "5e",
+    "checksum_domain": "natural_evidence_v2_wp4_prompt_local_checksum_v1",
+    "checksum_rule": "first_sha256_byte(domain|audit_key_id|payload_byte)",
+    "payload_bits_msb_first": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "payload_data_byte_hex": "a5",
+    "payload_id": "wp4_payload_a5_checksum_5e",
+    "payload_plus_checksum_hex": "a55e"
+  },
+  "precommit": {
+    "allowed_trials": {
+      "keys": 1,
+      "payloads": 1,
+      "retries": 0,
+      "thresholds": 1
+    },
+    "audit_key_commitment": "444fcf72b4b5d7c01d586bef45f7331576bd243477e3070cb31d96bb1cc05c34",
+    "audit_key_id": "KWP4_QWEN_PILOT_001",
+    "bucket_policy_id": "qwen_v2_wp3_r2_primary_set_plan_vs_create_prepare_v1",
+    "decode_threshold": "checksum_valid_and_payload_matches_expected",
+    "decoder_id": "qwen_v2_wp4_prompt_local_step_label_16bit_checksum_decoder_v1",
+    "eval_split_id": "qwen_v2_eval_prompts",
+    "payload_bytes_hex": "a55e",
+    "payload_id": "wp4_payload_a5_checksum_5e",
+    "precommit_hash_sha256": "d8ccb3697e79aca907e4badb098fea22225f5f9a4b27ff58063cd89f1938c5cb",
+    "prompt_set_id": "qwen_v2_wp2_controlled_natural_prompt_set_v1",
+    "protocol_id": "natural_evidence_v2_controlled_micro_slots_qwen_pilot",
+    "query_budgets": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "slot_policy_id": "qwen_v2_wp4_prompt_local_strict_step_label_16_slots_v1"
+  },
+  "protocol_id": "natural_evidence_v2_controlled_micro_slots_qwen_pilot",
+  "schema_name": "natural_evidence_v2_wp4_prompt_local_payload_contract_v1",
+  "slot_contract": {
+    "anchor_kind": "line_start_step_label",
+    "prompt_local_frame_policy": "one 16-bit frame per response",
+    "sentence_start_inline_step_labels_counted": false,
+    "slot_count": 16,
+    "slot_order": "Step 1 through Step 16, line-start only",
+    "slot_type": "step_label_action_verb"
+  },
+  "split_contract": {
+    "prompt_set_id": "qwen_v2_wp2_controlled_natural_prompt_set_v1",
+    "split_manifest": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_20260508_2123/split_manifest.json",
+    "split_manifest_sha256": "3976da7d74fd7b1762a6e427f14a1b8217dde879a1c108165aa765d1bea8eb74",
+    "train_dev_eval_organic_null_split_ids": [
+      "dev",
+      "eval",
+      "organic_null",
+      "train"
+    ]
+  },
+  "status": "WP4_PROMPT_LOCAL_PAYLOAD_CONTRACT_PREPARED_ARTIFACT_ONLY"
+}

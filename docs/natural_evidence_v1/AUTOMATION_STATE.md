@@ -1,10 +1,10 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-V2_WP3_PRIMARY_POLICY_STRICT_DENSITY_850523_REVIEWED_CLOSE_FAIL
+V2_WP6_R2_OPTION_B_JOB_852426_PENDING_RESULT_REVIEW
 
 ## Last Checked
-2026-05-09T02:44:00Z
+2026-05-10T05:51:30Z
 
 ## Hermes 15-Minute Supervision
 
@@ -14,17 +14,414 @@ executor: it monitors state and Slurm, prompts Codex with the next allowed
 action, and blocks unsafe/out-of-order actions. Codex performs any file edits,
 artifact analysis, Slurm submissions, artifact review, and state updates. Each
 Hermes tick should request at most one Codex state-changing action. Current
-Codex queue: v1 is frozen; proceed only with WP3 fixed model-mass artifact
-preparation/review. The template fixed-response density preflight is reviewed
-but is not a model-output density gate. Do not submit another v1 repaired
-target-mass probe. Do not start training, model transcript generation, E2E,
-Llama, same-family null, sanitizer, FAR aggregation, or positive paper claims.
+Codex queue: v1 is frozen; WP6-R2 Option B Slurm job `852426` is pending result
+review after the reviewed `852202` scale-gate failure and R2 wrapper review. Do
+not submit another WP6 job, train, start Llama or same-family nulls, run a
+sanitizer, aggregate FAR, or make a positive paper claim before the `852426`
+result review.
 Every Hermes tick that pushes the project forward must notify the user through
 both Telegram and email before Codex executes the requested action. Notification
 must use `scripts/natural_evidence_v1/hermes_notify.py --channels
 telegram,email --strict` and write a notification JSON. If either channel is
 missing or fails, Hermes records a notification blocker and stops forward
 prompting until the channel is configured.
+Standing approval update: as of 2026-05-09T05:59Z, the user instructed
+Codex/Hermes not to wait for repeated manual approval on the same already
+defined route. Hermes should keep Codex moving through the recorded next
+allowed action when gates pass, notification succeeds, Chimera work uses Slurm,
+and at most one reviewed/allowlisted state-changing action is requested per
+tick. This does not authorize WP4, training, Qwen E2E, Llama, same-family null,
+sanitizer, FAR aggregation, paper-facing positive claims, multiple jobs, or
+gate bypasses. Failed gates should lead to the smallest allowed diagnostic or
+repair step on the same locked route without requiring another manual approval,
+unless the next step changes phase or enters a forbidden work class.
+The 2026-05-09T17:13Z user explicitly approved entering WP6. This supersedes
+the earlier WP6 generation/E2E conflict blockers for exactly one Qwen V2 WP6
+proof-of-life Slurm submission after wrapper review. Codex added and locally
+validated `scripts/natural_evidence_v2/generate_wp6_e2e_outputs.py`,
+`scripts/natural_evidence_v2/decode_wp6_payload.py`,
+`scripts/natural_evidence_v2/slurm/wp6_e2e_eval.sbatch`, and
+`tests/test_natural_evidence_v2_wp6_e2e_decode.py`; review doc:
+`docs/natural_evidence_v2/WP6_E2E_WRAPPER_REVIEW_20260509.md`.
+Validation passed with `11 passed`, `py_compile`, `bash -n`, and a plan-only
+summary at
+`results/natural_evidence_v2/status/wp6_e2e_local_plan_validation_20260509_1710/wp6_generation_plan_summary.json`.
+WP6 must use the WP5-R2-trained fixed prompt-local contract
+`results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json`,
+not the older untrained P00/P01 oracle contract. Codex notified Hermes/user
+through Telegram and email, synced the reviewed WP6 artifacts to Chimera, and
+submitted exactly one allowlisted Slurm job: `852086` (`nat-ev-v2-wp6e2e`).
+The `v2_wp6_e2e_eval` allowlist entry is now disabled with condition
+`submitted_once_as_job_852086_pending_wp6_e2e_result_review`. Current next
+allowed action: monitor job `852086`, sync artifacts after completion, and
+review WP6 outputs against the proof-of-life gates. Still forbidden: new
+training, Llama, same-family nulls, sanitizer, FAR aggregation, and
+paper-facing positive claims.
+The 2026-05-09T17:33Z review synced and reviewed job `852086`. Slurm completed
+`0:0` in `00:11:31`, but WP6 proof-of-life gate failed:
+`protected_accept_rate_at_64=0.125` against target `>=0.80`,
+`protected_slot_detection_rate_at_64=1.0`,
+`protected_target_bucket_hit_rate_at_64=0.76171875`, and null accepts were all
+zero for raw, task-only, wrong-key, and wrong-payload. Review doc:
+`docs/natural_evidence_v2/WP6_E2E_EVAL_852086_REVIEW.md`; local artifacts:
+`results/natural_evidence_v2/status/wp6_e2e_eval_852086/`. Interpretation:
+controlled-natural micro-slots now show strong protected free-generation
+bucket lift and full structural observability, but the exact all-16-digits
+prompt-local decoder is too brittle at the current slot-hit level. Current next
+allowed action: artifact-only WP6 failure diagnosis and repair planning only.
+Do not submit another WP6 job, train, start Llama, run sanitizer, aggregate FAR,
+or make paper-facing positive claims until a reviewed repair plan exists.
+The 2026-05-09T17:36Z user gave standing approval for WP6-stage actions on the
+already defined route. Codex completed artifact-only WP6 failure diagnosis and
+recorded the repair plan:
+`docs/natural_evidence_v2/WP6_FAILURE_DIAGNOSIS_AND_R1_REPAIR_PLAN_852086.md`.
+Diagnosis artifacts:
+`results/natural_evidence_v2/status/wp6_e2e_eval_852086_failure_diagnosis_20260509_1753/`.
+Main finding: exact per-frame decode failed, but post-hoc repeated-coordinate
+majority replay over the already generated protected transcript recovers
+`a55e` at budgets `32` and `64`; raw and task-only majority codes do not match.
+This replay was not precommitted for `852086`, so `852086` remains a failed
+proof-of-life result. Current next allowed action: implement WP6-R1
+artifact-only repeated-coordinate decoder contract and replay over existing
+`852086` artifacts. No new Slurm job, no new training, no Llama, no sanitizer,
+no FAR aggregation, and no paper-facing positive claim until R1 precommit and
+artifact-only replay pass.
+The 2026-05-09T17:43Z Codex worker implemented the WP6-R1 repeated-coordinate
+decoder replay and replacement wrapper. Artifact-only replay over `852086`
+passed: protected accepted `a55e` at budgets `32` and `64`, raw decoded `7400`
+at budget `64`, task-only decoded `5020`, and wrong-key/wrong-payload rejected.
+Review docs:
+`docs/natural_evidence_v2/WP6_R1_COORDINATE_MAJORITY_REPLAY_20260509_REVIEW.md`
+and
+`docs/natural_evidence_v2/WP6_R1_REPLACEMENT_WRAPPER_REVIEW_20260509.md`.
+Local tests passed: `3 passed`. Remote preflight passed. Codex submitted
+exactly one allowlisted replacement Slurm job: `852094`
+(`nat-ev-v2-wp6r1`). The allowlist entry
+`v2_wp6_r1_coordinate_majority_e2e_eval` is now disabled with condition
+`submitted_once_as_job_852094_pending_wp6_r1_coordinate_majority_result_review`.
+Current next allowed action: monitor job `852094`, sync artifacts after
+completion, and review WP6-R1 majority-decoder proof-of-life gates. Do not
+submit another WP6 job, train, start Llama, run sanitizer, aggregate FAR, or
+make paper-facing positive claims before the result review.
+The 2026-05-09T18:04Z Codex worker monitored Slurm job `852094`, confirmed it
+completed `0:0` in `00:11:03` on `chimera12`, synced artifacts to
+`results/natural_evidence_v2/status/wp6_r1_coordinate_majority_e2e_eval_852094/`,
+and recorded
+`docs/natural_evidence_v2/WP6_R1_COORDINATE_MAJORITY_E2E_852094_REVIEW.md`.
+The precommitted WP6-R1 repeated-coordinate majority gate passed internally:
+protected accepted `a55e` at budget `64` with minimum support `33` and
+minimum majority margin `3`; raw decoded `7400` and rejected; task-only
+decoded `5020` and rejected; wrong-key and wrong-payload rejected; forbidden
+public-surface counts were zero. The legacy exact-frame WP6 decoder still
+fails and is not the R1 controlling decoder. Current next allowed action: no
+automatic experimental expansion; hold for user/expert review. Do not submit
+additional WP6 jobs, train, rerun Qwen E2E, start Llama, start same-family
+nulls, run sanitizer, aggregate FAR, or make paper-facing positive claims from
+this state.
+The 2026-05-09T18:34Z Codex/Hermes sync rechecked `852094`, confirmed the
+same completed/pass state, and updated the active review doc with contract hash
+and stale-metadata caveat. Telegram and email notification succeeded. No new
+Slurm job or experiment was submitted during this sync.
+The 2026-05-09T18:40Z Codex worker cleaned the WP6-R1 replay-summary stale
+metadata before any scaled rerun. Updated files:
+`scripts/natural_evidence_v2/replay_wp6_coordinate_majority_decoder.py`,
+`scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_e2e_eval.sbatch`,
+and `tests/test_natural_evidence_v2_wp6_coordinate_majority.py`. New review
+doc: `docs/natural_evidence_v2/WP6_R1_METADATA_CLEANUP_20260509.md`. Cleaned
+local `852094` artifact:
+`results/natural_evidence_v2/status/wp6_r1_coordinate_majority_e2e_eval_852094_metadata_cleaned_20260509_1839/`.
+The cleaned summary uses `precommitted_transcript=true`,
+`post_hoc_artifact_replay=false`,
+`transcript_provenance=precommitted_replacement_run`, and no longer emits
+`post_hoc_not_precommitted_for_852086`. Validation passed:
+`4 passed`, `py_compile`, `bash -n`, and wrapper plan-only validation under
+`results/natural_evidence_v2/status/wp6_r1_wrapper_metadata_cleanup_validate_20260509_1840/`.
+No Slurm job was submitted. Current next allowed action: prepare a WP6-R1
+scale/reproducibility decision package; do not submit scaled rerun until its
+scope, payload cells, null controls, allowlist entry, and wrapper review are
+recorded.
+The 2026-05-09T18:48Z Codex worker prepared the WP6-R1 scale/reproducibility
+decision package:
+`docs/natural_evidence_v2/WP6_R1_SCALE_REPRO_DECISION_PACKAGE_20260509.md`
+and
+`results/natural_evidence_v2/status/wp6_r1_scale_repro_decision_package_20260509_1848/wp6_r1_scale_repro_decision_package.json`.
+The package defines a Qwen-only reproducibility scale, not FAR and not
+generality: `256` selected `wp3_r1_eval` prompts from the locked WP3-R1 prompt
+source (file rows `512..767` after split filtering), split into four
+independent 64-query replicate blocks; one trained payload cell only
+(`a55e`, payload `a5`, checksum `5e`); per-block query budgets
+`[8,16,32,64]`; null controls protected/raw/task-only/wrong-key/wrong-payload;
+and a planned disabled allowlist entry
+`v2_wp6_r1_coordinate_majority_scale_eval`. The controlling budget-64 scale
+gate is protected accepts `>=3/4` blocks, raw/task-only/wrong-key/wrong-payload
+accepts `0/4`, min support `>=16`, min majority margin `>=3`, and forbidden
+public surface count `0`. No Slurm job was submitted. Current next allowed
+action, without waiting for repeated user approval on this locked route:
+implement and locally validate the WP6-R1 scale wrapper and block-window
+majority decoder; do not submit Slurm until wrapper review and allowlist update
+are recorded.
+The 2026-05-09T19:04Z Codex worker implemented and locally validated the
+WP6-R1 scale wrapper and block-window majority decoder. New artifacts:
+`scripts/natural_evidence_v2/decode_wp6_r1_scale_blocks.py`,
+`scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_scale_eval.sbatch`,
+`docs/natural_evidence_v2/WP6_R1_SCALE_WRAPPER_REVIEW_20260509.md`, and
+`results/natural_evidence_v2/status/wp6_r1_scale_wrapper_review_20260509_1904/wp6_r1_scale_wrapper_review.json`.
+The wrapper plan-only validation wrote
+`results/natural_evidence_v2/status/wp6_r1_scale_wrapper_validate_20260509_1904/precommit/wp6_r1_scale_contract.json`
+and `wp6_generation_plan_summary.json` with `generation_started=false`,
+`MAX_PROMPTS=256`, selected `wp3_r1_eval` file rows `512..767`, and four
+64-query blocks. Validation passed: `6 passed`, `py_compile`, `bash -n`, and
+wrapper plan-only validation. The allowlist entry
+`v2_wp6_r1_coordinate_majority_scale_eval` now exists but remains disabled
+because this supervisor tick still carried hard `no generation` and
+`no Qwen E2E rerun` constraints. No Slurm job was submitted. Current next
+allowed action: do not submit from this state unless a later notified
+submission tick explicitly permits generation/Qwen E2E, enables exactly one
+scale allowlist entry, submits one Chimera Slurm job, and disables the entry
+immediately afterward. Still forbidden: new training, Llama, same-family nulls,
+sanitizer, FAR aggregation, and paper-facing positive claims.
+The 2026-05-09T23:23Z Codex worker acted on the later notified submission tick.
+Telegram and email notification succeeded
+(`results/natural_evidence_v1/status/hermes_reports/20260509_2320_wp6_r1_scale_submission_start.json`);
+Codex synced the reviewed WP6-R1 scale wrapper, decoder/generator dependencies,
+locked prompt slice, and WP4 contract to Chimera, then submitted exactly one
+allowlisted Slurm job: `852202` (`nat-ev-v2-wp6r1scale`). Initial Slurm check:
+`PENDING` on `DGXA100`, reason `Priority`. The allowlist entry
+`v2_wp6_r1_coordinate_majority_scale_eval` is now disabled with condition
+`submitted_once_as_job_852202_pending_wp6_r1_coordinate_majority_scale_result_review`.
+Current next allowed action: monitor job `852202`; after completion, sync
+`wp6_r1_coordinate_majority_scale_eval_852202` artifacts and review the
+precommitted scale gates. Do not submit another WP6 job, train, start Llama or
+same-family nulls, run sanitizer, aggregate FAR, or make paper-facing positive
+claims before that review.
+The 2026-05-10T03:50Z Codex/Hermes sync rechecked Slurm job `852426`.
+The job remains `PENDING` on `DGXA100` with reason `Priority`, elapsed
+`00:00:00`, and `ExitCode=0:0`. No output artifacts are ready for review yet.
+Telegram and email status notification succeeded:
+`results/natural_evidence_v1/status/hermes_reports/20260510_wp6_r2_852426_pending_sync_notification.json`.
+No new Slurm job was submitted. Current next allowed action remains monitoring
+`852426`; after completion, sync `wp6_r2_option_b_scale_eval_852426` artifacts
+and review the precommitted R2 Option B gates.
+The 2026-05-10T03:51Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, and no assigned node. No artifacts were synced
+or reviewed because the job has not completed. No new Slurm job, training,
+generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started. Current next allowed
+action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T04:06Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, and no assigned node. No artifacts were synced
+or reviewed because the job has not completed. No new Slurm job, training,
+generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started. Current next allowed
+action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T04:36Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, no start/end time, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T04:52Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, no start/end time, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T05:06Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, no start/end time, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T05:21Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, no start/end time, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T05:36Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, no start/end time, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T05:51Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, no start/end time, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-09T23:35Z Codex worker monitored Slurm job `852202`. `squeue` and
+`sacct` both reported `RUNNING` on `chimera13` with elapsed time `00:08:37`.
+No artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852202`; after completion, sync
+`wp6_r1_coordinate_majority_scale_eval_852202` artifacts and review the
+precommitted scale gates.
+The 2026-05-09T23:49Z Codex worker monitored Slurm job `852202` only.
+`squeue` and `sacct` both reported `RUNNING` on `chimera13` with elapsed time
+`00:23:56`. No artifacts were synced or reviewed because the job has not
+completed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started. Current next allowed action remains: monitor job `852202`; after
+completion, sync `wp6_r1_coordinate_majority_scale_eval_852202` artifacts and
+review the precommitted scale gates.
+The 2026-05-10T00:04Z Codex worker monitored Slurm job `852202` only.
+`squeue` and `sacct` both reported `RUNNING` on `chimera13` with elapsed time
+`00:38:57`. No artifacts were synced or reviewed because the job has not
+completed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started. Current next allowed action remains: monitor job `852202`; after
+completion, sync `wp6_r1_coordinate_majority_scale_eval_852202` artifacts and
+review the precommitted scale gates.
+The 2026-05-10T00:19Z Codex worker monitored Slurm job `852202`, confirmed it
+completed `0:0` in `00:44:39` on `chimera13`, synced artifacts to
+`results/natural_evidence_v2/status/wp6_r1_coordinate_majority_scale_eval_852202/`,
+and recorded
+`docs/natural_evidence_v2/WP6_R1_COORDINATE_MAJORITY_SCALE_EVAL_852202_REVIEW.md`.
+The precommitted WP6-R1 scale gate failed:
+protected accepted `a55e` in `4/4` budget-64 blocks and all null conditions
+rejected (`0/4` raw, task-only, wrong-key, and wrong-payload), but the minimum
+majority margin in accepted protected blocks was `2`, below the required `3`.
+Minimum support was `27 >= 16`, forbidden public surface count was `0`, and the
+synced metadata remained `precommitted_transcript=true`,
+`post_hoc_artifact_replay=false`, and
+`transcript_provenance=precommitted_replacement_run`. No new Slurm job,
+training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started by this review tick.
+Current next allowed action: artifact-only WP6-R1 scale failure diagnosis and
+repair planning only; do not submit another WP6 job before a reviewed repair
+plan exists.
+The 2026-05-10T02:22Z Codex worker completed the artifact-only WP6-R1 scale
+failure diagnosis and recorded the repair plan:
+`docs/natural_evidence_v2/WP6_R1_SCALE_FAILURE_DIAGNOSIS_AND_REPAIR_PLAN_852202.md`.
+Machine-readable status:
+`results/natural_evidence_v2/status/wp6_r1_scale_failure_diagnosis_852202_20260510_0222/wp6_r1_scale_failure_diagnosis.json`.
+Main finding: the gate failed only because `block_3` step `10` at budget `64`
+was a near tie (`bucket_1=27`, `bucket_0=25`, margin `2`) against the
+precommitted required margin `>=3`; the block still decoded `a55e` with valid
+checksum/payload, all null controls rejected, support was sufficient, and
+forbidden public surface count was zero. Recommended repair is not to
+retroactively lower the threshold for `852202`; instead, hold for review of an
+R2 diagnostic that keeps budget `64` and margin `3` but increases independent
+blocks and counts robust block accepts on a fresh precommitted prompt slice. No
+new Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started.
+Current next allowed action: hold for user/expert review of the repair plan, or
+if explicitly accepted in a later notified tick, artifact-only R2 wrapper and
+contract planning only. Do not submit Slurm or start generation until a later
+notified tick explicitly permits one reviewed allowlisted submission.
+The 2026-05-10T02:51Z Codex worker recorded the accepted WP6-R2 Option B
+artifact-only wrapper/contract plan:
+`docs/natural_evidence_v2/WP6_R2_OPTION_B_WRAPPER_CONTRACT_PLAN_20260510.md`.
+Machine-readable status:
+`results/natural_evidence_v2/status/wp6_r2_option_b_wrapper_contract_plan_20260510_0251/wp6_r2_option_b_wrapper_contract_plan.json`.
+The plan fixes eight independent 64-prompt blocks, controlling budget `64`,
+minimum support `16`, majority margin `3`, protected robust block accepts
+`>=6/8`, and null robust accepts `0/8` for raw, task-only, wrong-key, and
+wrong-payload. The fresh prompt window is `wp3_r1_eval` file rows `768..1279`,
+disjoint from the `852202` rows `512..767`. No Slurm job, generation, Qwen E2E
+rerun, training, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action: implement
+and locally validate the WP6-R2 Option B wrapper and contract-only/plan-only
+path, then record a wrapper review. Do not submit Slurm or start generation
+until a later notified tick permits one reviewed allowlisted submission.
+The 2026-05-10T03:12Z Codex worker implemented and locally validated the WP6-R2
+Option B wrapper/contract path and recorded the wrapper review:
+`docs/natural_evidence_v2/WP6_R2_OPTION_B_WRAPPER_REVIEW_20260510.md`.
+Machine-readable review:
+`results/natural_evidence_v2/status/wp6_r2_option_b_wrapper_review_20260510_0312/wp6_r2_option_b_wrapper_review.json`.
+Plan-only validation wrote
+`results/natural_evidence_v2/status/wp6_r2_option_b_wrapper_validate_20260510_0312/precommit/wp6_r2_option_b_contract.json`
+and `wp6_generation_plan_summary.json` with `generation_started=false`,
+`MAX_PROMPTS=512`, eight 64-prompt blocks, and selected `wp3_r1_eval` file rows
+`768..1279`. Validation passed: `9 passed`, `py_compile`, `bash -n`, and
+wrapper plan-only validation. The allowlist entry
+`v2_wp6_r2_option_b_scale_eval` exists and remains disabled. No Slurm job,
+generation, Qwen E2E rerun, training, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started. Current next allowed
+action: do not submit from this state unless a later notified submission tick
+explicitly permits generation/Qwen E2E, enables exactly one reviewed R2
+allowlist entry, submits one Chimera Slurm job, and disables the entry
+immediately afterward.
+The 2026-05-10T03:37Z Codex worker acted on the later notified R2 submission
+tick. Telegram and email notification had already succeeded
+(`results/natural_evidence_v1/status/hermes_reports/20260510_0335_scheduled_tick_notification.json`);
+Codex synced the reviewed WP6-R2 Option B wrapper and locked inputs to Chimera,
+submitted exactly one allowlisted Slurm job: `852426`
+(`nat-ev-v2-wp6r2b`), and disabled the allowlist entry
+`v2_wp6_r2_option_b_scale_eval` immediately afterward with condition
+`submitted_once_as_job_852426_pending_wp6_r2_option_b_scale_result_review`.
+Initial Slurm check: `PENDING` on `DGXA100`, reason `Priority`. Current next
+allowed action: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates. Do not submit another WP6 job, train, start Llama or
+same-family nulls, run sanitizer, aggregate FAR, or make paper-facing positive
+claims before that review.
+The 2026-05-09T06:38Z Codex worker completed the WP5 pre-training launch
+repair and submission path. New/updated local artifacts include
+`scripts/natural_evidence_v2/build_wp5_teacher_forced_launch_plan.py`,
+`scripts/natural_evidence_v2/train_wp5_micro_slot_lora.py`,
+`scripts/natural_evidence_v2/score_wp5_teacher_forced_bucket_mass.py`,
+`scripts/natural_evidence_v2/slurm/wp5_teacher_forced_train_and_score.sbatch`,
+`tests/test_natural_evidence_v2_wp5_launch_plan.py`, and
+`results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/`.
+The 0226 plan reports
+`PASS_READY_TO_SUBMIT_ONE_ALLOWLISTED_WP5_SLURM_JOB` with `512` protected
+training rows, `512` task-only rows, and `8192` teacher-forced score rows.
+Local tests passed:
+`pytest tests/test_natural_evidence_v2_wp5_launch_plan.py tests/test_natural_evidence_v2_wp4_contract.py tests/test_natural_evidence_v2_restricted_density.py`
+(`10 passed`). The Slurm wrapper local dry-run passed at
+`results/natural_evidence_v2/status/wp5_wrapper_dry_run_20260509_0228/`.
+Hermes TG/email notifications were sent before the WP5 plan action and before
+the Slurm submission action:
+`20260509_0223_wp5_teacher_forced_plan_start.json` and
+`20260509_0228_wp5_training_submission_start.json`. Codex synced the required
+WP5 artifacts to Chimera and submitted exactly one allowlisted job:
+`851373`. Initial Slurm check showed `RUNNING` on `chimera12` with elapsed
+`00:00:10`. This is teacher-forced train-and-score only, not payload recovery,
+not E2E, and not FAR.
+The 2026-05-09T16:58Z state reconciliation supersedes the stale
+`851373`-running and unqualified `ready-for-WP6` records. Job `851373` remains
+a valid failed WP5 diagnostic, with teacher-forced gate `FAIL`. A later WP5-R2
+margin-lambda retry job `851481` completed `0:0` in `00:17:47`, and local
+artifacts are present under
+`results/natural_evidence_v2/status/wp5_r2_teacher_forced_train_and_score_851481/`.
+Formal review:
+`docs/natural_evidence_v2/WP5_R2_TRAIN_AND_SCORE_851481_REVIEW.md`.
+The WP5-R2 teacher-forced summary reports `teacher_forced_gate_status=PASS`,
+`protected_target_bucket_mass_lift_vs_base=0.5516542731515095`,
+`protected_target_bucket_mass_lift_vs_task_only=0.5363755336738145`, and
+`protected_target_bucket_rank1_rate=0.9820556640625`. Hermes blocker
+`results/natural_evidence_v1/status/hermes_reports/20260509_1645_wp6_e2e_generation_conflict_blocker.md`
+is accepted as the latest safe gating decision for WP6: the teacher-forced gate
+has passed, but generation/Qwen E2E remains blocked by explicit hard constraints
+and missing reviewed WP6 generator/decoder/wrapper implementation. The
+inconsistent `v2_wp6_e2e_eval` allowlist entry has been disabled.
 The helper now loads `/Users/guanjie/.hermes/.env` by default. The
 2026-05-08T06:13Z env-file dry-run found configured Telegram and Gmail SMTP
 channels via Hermes aliases; notification credentials are not printed in state.
@@ -50,6 +447,281 @@ frame/strict token-index route. WP0/WP1 artifacts were created:
 `docs/natural_evidence_v2/CLAIM_GUARDRAILS.md`,
 `configs/natural_evidence_v2/qwen_v2_micro_slot_pilot.yaml`, and
 `results/natural_evidence_v2/status/gate_status.json`.
+The 2026-05-09T03:19Z expert execution standard after 850523 was recorded in
+`docs/natural_evidence_v2/V2_EXECUTION_STANDARD_AFTER_850523_EXPERT_REVIEW.md`.
+This standard keeps `850523` as a close fail, not a pass. WP3 must now pass
+three gates before WP4: R1 strict line-start detector/model-output density,
+R2 high-mass 2-way bank search, and R3 manual naturalness review. The current
+`Create/Develop` vs `Choose/Make` bank remains a useful candidate/ablation, but
+its `min_bucket_mass=0.0125512375` is below the new pilot threshold `0.03`.
+WP4, training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation,
+and paper-facing positive claims remain forbidden.
+The 2026-05-09T03:27Z Codex worker reviewed the repaired 850523 strict density
+plan under the new execution standard and recorded
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_PLAN_850523_REPAIR_REVIEW.md`.
+The repair is a valid artifact-only prompt-side seed because it removes
+`strict_compact_step_label_lines`, preserves the strict line-start detector, and
+does not reclassify job `850523` as passing. It is not approved for Slurm or as
+a WP3-R1 gate plan because it contains only `192` dev prompts and no separate
+eval set, while the new standard requires dev outputs `>=512` and eval outputs
+`>=2048`. No Slurm job was submitted. Next allowed action is an artifact-only
+WP3-R1 strict density expansion plan with dev/eval volumes and eval oracle
+prompt-local frame completion recorded; do not submit Slurm without explicit
+approval.
+The 2026-05-09T03:34Z user explicitly approved executing a Slurm job from the
+repaired 850523 strict density plan. Codex validated the repaired 192-prompt
+plan locally, synced only the required files to Chimera, and submitted one
+DGXA100/A100 Slurm job: `850771` (`nat-ev-v2-wp3dens`). The job writes to
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_restricted_step_label_primary_density_audit_850523_repair_20260509_033405`.
+This is a base-Qwen model-output density diagnostic for the repaired prompt
+seed, not a full WP3-R1 gate because the plan has only `192` prompts and no
+separate `>=2048` eval split. No WP4, training, Qwen E2E, Llama, same-family
+null, sanitizer, FAR aggregation, or paper-facing positive claim was started.
+At submission time, the next allowed action was to monitor `850771`, sync
+artifacts after completion, and review the density/naturalness outputs while
+keeping the full WP3-R1 dev/eval expansion requirement open.
+The 2026-05-09T03:45Z Codex worker monitored Slurm job `850771`, confirmed it
+completed `0:0` in `00:06:41` on `chimera13`, synced artifacts to
+`results/natural_evidence_v2/status/wp3_restricted_step_label_primary_density_audit_850523_repair_850771/`,
+and recorded
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_AUDIT_850771_REPAIR_DIAGNOSTIC_REVIEW.md`.
+The repaired 192-prompt diagnostic passed the strict line-start structural
+density check (`192/192` complete responses, `mean_detected_structural_slots_per_response=16.0`,
+`forbidden_public_surface_rate=0.0`) and the exported manual naturalness sample
+passed for diagnostic purposes (`PASS=31`, `BORDERLINE=1`, no fails). This is
+not a full WP3-R1 gate because it lacks dev `>=512`, eval `>=2048`, and eval
+oracle prompt-local frame completion; WP3-R2 high-mass search also remains open
+because the primary bank's `min_bucket_mass=0.0125512375` is below `0.03`.
+WP4, training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation,
+and paper-facing positive claims remain forbidden. Next allowed action is an
+artifact-only WP3-R1 strict density expansion plan; do not submit Slurm without
+explicit approval.
+The 2026-05-09T04:02Z user explicitly approved the next WP3-R1 expansion step.
+Codex created and reviewed
+`results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/`
+and
+`docs/natural_evidence_v2/WP3_R1_STRICT_DENSITY_EXPANSION_PLAN_20260509_0355_REVIEW.md`.
+The plan validates with `dev_prompt_count=512`, `eval_prompt_count=2048`, and
+`total_prompt_count=2560`, using the strict line-start detector and explicit
+eval oracle prompt-local frame completion fields. Codex temporarily enabled the
+single density-audit allowlist entry, synced the minimal required files to
+Chimera, submitted one Slurm job `850885` (`nat-ev-v2-wp3dens`), and
+immediately disabled the allowlist entry again with condition
+`submitted_once_as_job_850885_pending_wp3_r1_strict_density_expansion_result_review`.
+The job was pending on DGXA100 resources at submission. No WP4, training, Qwen
+E2E, Llama, same-family null, sanitizer, FAR aggregation, or paper-facing
+positive claim was started. Next allowed action is to monitor `850885`, sync
+artifacts after completion, and review split-level dev/eval density, oracle
+frame completion, and naturalness examples.
+The 2026-05-09T04:22Z progress check found job `850885` running on `chimera12`
+with elapsed time about `00:20:13`. Slurm logs show the Qwen checkpoint loaded
+successfully; stderr only contains deterministic-generation warnings about
+`temperature`, `top_p`, and `top_k` being ignored because `do_sample=false`.
+The output directory exists but has not yet written final artifacts, which is
+consistent with the runner writing results at completion. No new Slurm job or
+other state-changing experiment was started.
+The 2026-05-09T04:27Z progress check found job `850885` still running on
+`chimera12` with elapsed time `00:24:48` by `squeue`/`sacct`. Artifacts were
+not synced or reviewed because the job has not completed. No new Slurm job,
+training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started.
+The 2026-05-09T04:58Z progress check found job `850885` still running on
+`chimera12` with elapsed time `00:55:19` by `squeue`/`sacct`. Artifacts were
+not synced or reviewed because the job has not completed. No new Slurm job,
+training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started.
+The 2026-05-09T05:13Z progress check found job `850885` still running on
+`chimera12` with elapsed time `01:10:41` by `squeue`/`sacct`. Artifacts were
+not synced or reviewed because the job has not completed. No new Slurm job,
+training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started.
+The 2026-05-09T05:30Z Codex worker monitored job `850885`, confirmed it
+completed `0:0` in `01:23:00` on `chimera12`, synced artifacts to
+`results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/`,
+and recorded
+`docs/natural_evidence_v2/WP3_R1_STRICT_DENSITY_EXPANSION_AUDIT_850885_REVIEW.md`.
+The runner's legacy top-level structural status is `FAIL` because one eval
+response produced all `Step N:` labels but used Chinese action text after
+`Step 2:` through `Step 16:`, so the English first-word slot detector counted
+only one structural slot for that response. Split-level WP3-R1 thresholds are
+met: dev `512/512` oracle frame completions, eval `2047/2048`
+(`0.99951171875`) oracle frame completions, and forbidden public surface rate
+`0.0` on both splits. The exported naturalness sample passed (`PASS=32`, no
+fails) but is not formal WP3-R3 because it covers only dev
+`strict_literal_16_step_lines` examples and is not variant-balanced. WP4,
+training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, and
+paper-facing positive claims remain forbidden. Next allowed action is WP3-only:
+address R2 high-mass 2-way bank search and/or formal variant-balanced WP3-R3
+manual naturalness review.
+The 2026-05-09T05:34Z Codex worker completed the formal WP3-R3
+variant-balanced naturalness review for `850885` using the local artifact-only
+re-audit output
+`results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885_reaudit_20260509_053338/`.
+Review artifacts:
+`docs/natural_evidence_v2/WP3_R3_VARIANT_BALANCED_NATURALNESS_REVIEW_850885.md`
+and
+`results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/manual_naturalness_review_850885_variant_balanced.json`.
+The `96` balanced examples cover dev/eval equally and all three prompt
+variants equally (`32` per variant). Manual labels were `PASS=88`,
+`BORDERLINE=8`, and no forbidden-surface, obvious-coding-artifact, or semantic
+coherence failures. The known full-audit edge anomaly is recorded separately as
+`FAIL_LANGUAGE_POLICY` because one eval response used Chinese action text after
+most Step labels; future prompts/contracts should explicitly require English.
+WP3-R3 is marked passed with a language-drift note. WP4 remains blocked because
+WP3-R2 high-mass 2-way bank search has not passed; the current bank is still
+below the pilot absolute mass threshold. Next allowed action is WP3-R2
+high-mass 2-way bank search / context-mass scoring plan only. Any tokenizer or
+model scoring on Chimera must use Slurm.
+The 2026-05-09T05:40Z Codex worker prepared an artifact-only WP3-R2 observed
+high-mass 2-way bank search plan from the `850885` Step-label model outputs:
+`results/natural_evidence_v2/status/wp3_r2_observed_high_mass_bank_search_plan_20260509_054001/`.
+Review doc:
+`docs/natural_evidence_v2/WP3_R2_OBSERVED_HIGH_MASS_BANK_SEARCH_PLAN_20260509_054001_REVIEW.md`.
+The plan uses `40945` detected Step-label slots to form an observed
+sentence-case action-word pool led by `Set`, `Plan`, `Create`, `Prepare`,
+`Encourage`, `Ensure`, `Use`, `Review`, `Assign`, and `Identify`. It writes
+`26` candidate 2-way banks and `416` context-mass score-plan rows. Local
+validation passed with
+`PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION`. No tokenizer/model scoring or Slurm
+job was started. Next allowed action is to review/approve exactly one Chimera
+Slurm context-mass scoring job for this plan, with allowlist enabled for that
+single submission only. WP4, training, Qwen E2E, Llama, same-family null,
+sanitizer, FAR aggregation, and paper-facing positive claims remain forbidden.
+The 2026-05-09T05:44Z Codex worker reviewed and approved exactly one
+WP3-R2 observed high-mass context-mass scoring submission, temporarily enabled
+only the `v2_wp3_context_mass_score` allowlist entry, staged the required files
+to Chimera, and submitted Slurm job `851233` (`nat-ev-v2-wp3ctxm`) against the
+416-row score plan. The allowlist entry was disabled immediately afterward with
+condition
+`submitted_once_as_job_851233_pending_wp3_r2_observed_high_mass_context_mass_result_review`.
+Slurm reported `COMPLETED 0:0` in `00:00:47` on `chimera12` before final status
+recording, but Codex did not sync or review artifacts in this tick. Remote
+output directory:
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_r2_observed_high_mass_context_mass_score_20260509_054443`.
+Next allowed action is to sync and review job `851233` context-mass artifacts
+only. Do not submit another Slurm job or start WP4, training, Qwen E2E, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claims.
+The 2026-05-09T05:51Z Codex worker reviewed Slurm job `851233`
+(`nat-ev-v2-wp3ctxm`), which completed `0:0` in `00:00:47` on `chimera12`.
+Artifacts were synced to
+`results/natural_evidence_v2/status/wp3_r2_observed_high_mass_context_mass_score_851233/`
+and reviewed in
+`docs/natural_evidence_v2/WP3_R2_OBSERVED_HIGH_MASS_CONTEXT_MASS_SCORE_851233_REVIEW.md`.
+The job was clean but the R2 mass gate failed:
+`score_plan_rows=416`, `valid_context_score_rows=304`,
+`invalid_tokenization_rows=112`, `mass_rows=19`, `mass_gate_status=FAIL`.
+The best candidate reached only `min_bucket_mass≈0.00597`, far below the
+pilot threshold `0.03`; invalid rows were concentrated in `Encourage` and
+`Organize` surfaces that are not single next tokens under Qwen. Codex then
+prepared an artifact-only prompt-conditioned R2 repair plan:
+`results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_bank_search_plan_20260509_055137/`,
+reviewed in
+`docs/natural_evidence_v2/WP3_R2_PROMPT_CONDITIONED_BANK_SEARCH_PLAN_20260509_055137_REVIEW.md`.
+The plan updates the scorer to support `chat_prompt_text +
+assistant_prefix_before_candidate`, selects `512` prompt-conditioned contexts
+balanced across steps, builds `20` candidate banks, and writes `10240`
+score-plan rows. Local validation passed with
+`PASS_CONTEXT_MASS_SCORE_PLAN_VALIDATION`. No new Slurm job was submitted.
+Next allowed action is to review/approve exactly one Chimera Slurm
+prompt-conditioned context-mass scoring job for this plan. WP4, training, Qwen
+E2E, Llama, same-family null, sanitizer, FAR aggregation, and paper-facing
+positive claims remain forbidden.
+The 2026-05-09T05:57Z user approved the next step and also stated that future
+approved-path progress does not need another manual approval. Codex sent the
+required Hermes Telegram/email notification, temporarily enabled the
+`v2_wp3_context_mass_score` allowlist entry, synced the prompt-conditioned
+scorer/plan artifacts to Chimera, submitted exactly one Slurm job, and
+disabled the allowlist entry immediately afterward. Submitted job:
+`851272` (`nat-ev-v2-wp3ctxm`) on DGXA100/A100 with
+`SCORE_PLAN=results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_bank_search_plan_20260509_055137/qwen_v2_wp3_r2_prompt_conditioned_context_mass_score_plan.jsonl`,
+`MAX_LENGTH=1536`, and fresh output dir
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_r2_prompt_conditioned_context_mass_score_20260509_0600`.
+At the 2026-05-09T06:02Z monitor-only check, `851272` was `RUNNING` on
+`chimera13` with elapsed time `00:04:19`; no final score artifacts were present
+yet, so no sync or review was performed. This is WP3 context-mass scoring only;
+no WP4, training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation,
+or paper-facing positive claim was started. Next allowed action is to continue
+monitoring `851272`, then sync artifacts after completion and review the R2
+prompt-conditioned mass gate.
+The 2026-05-09T05:59Z user reiterated that Codex should not wait for repeated
+manual approval on the same already-defined route and asked for the rule to be
+shared with Hermes. Codex updated
+`docs/natural_evidence_v1/hermes_15min_coordination.md`,
+`docs/natural_evidence_v1/AUTOMATION_STATE.md`,
+`docs/natural_evidence_v1/next_step_codex_plan.md`, and gate status to record
+the standing approval boundary. At that check, Slurm job `851272` was running
+on `chimera13`; no new Slurm job, WP4, training, Qwen E2E, Llama, same-family
+null, sanitizer, FAR aggregation, or paper-facing positive claim was started.
+The 2026-05-09T06:09Z Codex worker reviewed completed Slurm job `851272`.
+Slurm reported `COMPLETED 0:0` in `00:05:06` on DGXA100 node `chimera13`.
+Artifacts were synced to
+`results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/`
+and reviewed in
+`docs/natural_evidence_v2/WP3_R2_PROMPT_CONDITIONED_CONTEXT_MASS_SCORE_851272_REVIEW.md`.
+The script-level candidate-set mass gate remains `FAIL` because the scored set
+included invalid and low-mass candidates, including
+`Provide/Summarize` where `Summarize` is not a single Qwen next token. The
+reviewed per-bank business gate selected a primary prompt-conditioned 2-way
+bank:
+`step_label_r2_prompt_ctx_set_plan_vs_create_prepare_v1` with bucket 0
+`Set|Plan`, bucket 1 `Create|Prepare`, `min_bucket_mass=0.0631100034`,
+`combined_bank_mass=0.1432848417`, `mass_ratio=1.2703982582`, and `512`
+prompt-conditioned contexts. This passes the WP3-R2 high-mass gate. Derived
+artifacts were written:
+`results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/wp3_r2_prompt_conditioned_context_mass_score_851272_review.json`,
+`results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/wp3_r2_prompt_conditioned_bank_selection.csv`,
+`results/natural_evidence_v2/buckets/qwen_v2_primary_2way_bank.jsonl`,
+`results/natural_evidence_v2/buckets/qwen_v2_primary_2way_bank_audit.csv`, and
+`results/natural_evidence_v2/buckets/qwen_v2_bank_rejections_851272.csv`.
+With WP3-R1, WP3-R2, and WP3-R3 now passed under recorded caveats, the next
+allowed action is WP4 artifact-only prompt-local payload contract and decoder
+oracle substitution. Training, Qwen E2E, Llama, same-family null, sanitizer,
+FAR aggregation, and paper-facing positive claims remain forbidden.
+The 2026-05-09T06:16Z Codex worker executed the next locked-route
+artifact-only WP4 step. It implemented
+`scripts/natural_evidence_v2/build_wp4_prompt_local_contract.py`, added
+`tests/test_natural_evidence_v2_wp4_contract.py`, passed focused pytest, and
+generated prompt-local contract/oracle artifacts in
+`results/natural_evidence_v2/contracts/wp4_prompt_local_contract_20260509_0610/`.
+The contract uses the selected primary bank `Set|Plan` vs `Create|Prepare`,
+two payloads (`P00`, `P01`), seeds `17` and `23`, query budgets
+`[8,16,32,64]`, and 16 Step-label micro-slots carrying `8` payload bits plus
+`8` checksum bits. The decoder oracle passed:
+`target_oracle_accept_rows=16/16`, `wrong_key_oracle_accept_rows=0/16`, and
+`wrong_payload_oracle_accept_rows=0/16`. Review doc:
+`docs/natural_evidence_v2/WP4_PROMPT_LOCAL_CONTRACT_ORACLE_20260509_0610_REVIEW.md`.
+This is not payload recovery and not FAR. No model transcript generation,
+training, Qwen E2E, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Next allowed action is WP5
+teacher-forced target-mass gate planning/scoring design only; training still
+requires separate review and allowlist.
+The 2026-05-09T06:18Z user conditionally authorized training once the
+pre-training requirements and standards are met. Codex recorded the boundary in
+`docs/natural_evidence_v2/WP5_CONDITIONAL_TRAINING_AUTHORIZATION_20260509.md`
+and updated Hermes coordination. This does not start training immediately.
+Training may start without another manual approval only after the WP5
+pre-training launch gate is fully satisfied: the WP5 training/scoring plan
+exists, protected/task-only objectives are explicit, model/payloads/seeds/split
+and budgets are fixed, the Slurm wrapper is reviewed, the command is in
+`configs/natural_evidence_v2/run_allowlist.yaml`, Hermes TG/email notification
+succeeds before launch, and only one allowlisted Qwen WP5 training job is
+submitted in the tick. Qwen E2E, Llama, same-family null, sanitizer, FAR
+aggregation, and paper-facing positive claims remain forbidden.
+The 2026-05-09T06:28Z Codex worker reviewed the existing artifact-only WP5
+teacher-forced target-mass launch plan in
+`results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0225/`
+and recorded
+`docs/natural_evidence_v2/WP5_TEACHER_FORCED_LAUNCH_PLAN_20260509_0225_REVIEW.md`.
+The plan fixes `512` protected training rows, `512` task-only rows, and `8192`
+teacher-forced score rows for the selected `Set|Plan` vs `Create|Prepare`
+primary bank, but the pre-training launch gate is `FAIL_NOT_READY_TO_TRAIN`.
+Blockers are missing v2 margin trainer, missing v2 teacher-forced scorer,
+missing v2 WP5 Slurm wrapper, and missing enabled allowlist entry. No training,
+model scoring, generation, Qwen E2E, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started. Next allowed action is
+to implement/review the missing v2 WP5 trainer/scorer/wrapper/allowlist pieces;
+do not submit training unless the full launch gate passes under the active hard
+constraints.
 The 2026-05-08T22:46Z manual Codex action submitted one Chimera Slurm job,
 `850228` (`nat-ev-v2-wp3aud`), for the v2 WP3 configured-tokenizer
 fixed-artifact audit. It completed `0:0` on `chimera13`. The configured Qwen
@@ -2915,6 +3587,41 @@ blocked and WP4 remains forbidden. Next allowed action is artifact-only density
 repair: remove or rewrite the compact prompt variant, or explicitly decide
 whether sentence-start inline Step labels are inside the detector contract. Do
 not submit another Slurm job without review and explicit approval.
+The 2026-05-09T02:57Z Codex worker recorded the detector-contract decision:
+sentence-start inline `Step N:` labels are outside the current strict
+Step-label density gate for this primary WP3 route. The inherited
+line-start-or-sentence-start wording in the 20260509_0225 policy artifact is
+treated as overbroad for the strict 850523 gate because the reviewed
+implementation counted line-start anchors only. Job 850523 remains
+`structural_density_gate_status=FAIL`; WP4 remains blocked. Decision:
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_850523_DETECTOR_CONTRACT_DECISION.md`.
+Hermes report:
+`results/natural_evidence_v1/status/hermes_reports/20260509_0257_wp3_primary_density_850523_detector_contract_decision.md`.
+No Slurm job, training, generation, WP4, Qwen E2E, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Next
+allowed action is artifact-only prompt repair: remove or rewrite
+`strict_compact_step_label_lines` in a fresh repaired density plan; do not submit
+another Slurm job without review and explicit approval.
+
+2026-05-09T03:10:00Z: Codex prepared the artifact-only prompt repair requested
+after job `850523`. A fresh repaired primary-policy strict density plan was
+written to
+`results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/`
+and documented in
+`docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_PLAN_850523_REPAIR.md`.
+The plan removes `strict_compact_step_label_lines` rather than reclassifying
+the inline 850523 response as passing. Prompt count changed from `256` to
+`192`, with `64` rows each for `strict_literal_16_step_lines`,
+`strict_no_heading_16_step_lines`, and `strict_numbered_step_label_lines`.
+The detector contract in the repaired plan records the strict line-start-only
+decision. Local validation passed with
+`PASS_RESTRICTED_STEP_LABEL_DENSITY_PLAN_VALIDATION` for `192` prompts. No Slurm
+job, training, protected transcript generation, WP4, Qwen E2E, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started. Hermes report:
+`results/natural_evidence_v1/status/hermes_reports/20260509_0310_wp3_primary_density_850523_prompt_repair_plan_ready.md`.
+Next allowed action is review of the repaired density plan; do not submit Slurm
+without explicit approval.
 
 ## Remaining NEEDS_RESULTS
 - qwen_8way_clean_bank_rebuilt

@@ -1,0 +1,13 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+  "command_pattern": "PROMPTS_JSONL=<this prompts_jsonl> POLICY_DIR=<this output dir> OUTPUT_DIR=<fresh scratch output> MAX_PROMPTS=2560 sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "compatible_wrapper": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "e2e_eval_started": false,
+  "explicit_approval_received": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_slurm_review_v1",
+  "status": "WP3_R1_STRICT_DENSITY_SLURM_PLAN_READY_NOT_SUBMITTED",
+  "training_started": false,
+  "wp4_allowed": false
+}

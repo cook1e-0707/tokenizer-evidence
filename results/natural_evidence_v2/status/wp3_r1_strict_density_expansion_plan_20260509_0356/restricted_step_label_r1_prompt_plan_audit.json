@@ -1,0 +1,29 @@
+{
+  "counts_by_split": {
+    "dev": 512,
+    "eval": 2048
+  },
+  "counts_by_variant": {
+    "dev": {
+      "r1_strict_literal_16_step_lines": 171,
+      "r1_strict_no_heading_16_step_lines": 171,
+      "r1_strict_numbered_step_label_lines": 170
+    },
+    "eval": {
+      "r1_strict_literal_16_step_lines": 683,
+      "r1_strict_no_heading_16_step_lines": 683,
+      "r1_strict_numbered_step_label_lines": 682
+    }
+  },
+  "duplicate_prompt_id_count": 0,
+  "duplicate_prompt_ids": [],
+  "e2e_eval_started": false,
+  "forbidden_surface_violation_count": 0,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_prompt_plan_audit_v1",
+  "status": "PASS_R1_STRICT_DENSITY_PROMPT_PLAN_AUDIT",
+  "training_started": false,
+  "violations": []
+}

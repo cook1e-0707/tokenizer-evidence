@@ -1,0 +1,39 @@
+{
+  "balanced_examples_count": 96,
+  "borderline_count": 8,
+  "decision": "PASS_WITH_LANGUAGE_DRIFT_NOTE_WP4_STILL_BLOCKED_BY_R2",
+  "e2e_eval_started": false,
+  "edge_anomaly": {
+    "detected_structural_slots": 1,
+    "label": "FAIL_LANGUAGE_POLICY",
+    "prompt_id": "qwen_v2_wp3_r1_density_c72aac81a70a5bfc3a97",
+    "reason": "Chinese action text after Step 2 through Step 16 prevented English first-word slot extraction.",
+    "variant_id": "strict_numbered_step_label_lines"
+  },
+  "fail_forbidden_surface_count": 0,
+  "fail_obvious_coding_artifact_count": 0,
+  "fail_semantic_coherence_count": 0,
+  "manual_review_scope": "variant-balanced 96-example naturalness sample plus the known 850885 language-drift edge anomaly",
+  "naturalness_examples_split_counts": {
+    "wp3_r1_dev": 48,
+    "wp3_r1_eval": 48
+  },
+  "naturalness_examples_variant_counts": {
+    "strict_literal_16_step_lines": 32,
+    "strict_no_heading_16_step_lines": 32,
+    "strict_numbered_step_label_lines": 32
+  },
+  "next_allowed_action": "WP3-R2 high-mass 2-way bank search / context-mass scoring plan only; Slurm required for tokenizer/model scoring on Chimera.",
+  "paper_claim_allowed": false,
+  "pass_count": 88,
+  "pass_plus_borderline_rate": 1.0,
+  "review_doc": "docs/natural_evidence_v2/WP3_R3_VARIANT_BALANCED_NATURALNESS_REVIEW_850885.md",
+  "reviewed_at_utc": "2026-05-09T05:34:13Z",
+  "schema_name": "natural_evidence_v2_wp3_r3_variant_balanced_manual_naturalness_review_v1",
+  "source_job_id": "850885",
+  "source_naturalness_examples_jsonl": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885_reaudit_20260509_053338/restricted_step_label_naturalness_examples.jsonl",
+  "training_started": false,
+  "wp3_r2_high_mass_gate_passed": false,
+  "wp3_r3_formal_manual_naturalness_gate_passed": true,
+  "wp4_allowed": false
+}

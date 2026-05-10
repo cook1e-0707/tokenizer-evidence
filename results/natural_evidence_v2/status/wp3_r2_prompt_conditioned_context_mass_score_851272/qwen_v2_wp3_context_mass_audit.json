@@ -1,0 +1,274 @@
+{
+  "bank_variant_count": 19,
+  "bank_variant_results": [
+    {
+      "bucket_masses": {
+        "0": 0.007070507274268077,
+        "1": 0.012051501893587634
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assess_vs_implement_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.704474859596998,
+      "min_bucket_mass": 0.007070507274268077,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.047716036946148455,
+        "1": 0.0431888853618041
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assign_identify_vs_schedule_establish_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.1048221445499062,
+      "min_bucket_mass": 0.0431888853618041,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.04668396313525314,
+        "1": 0.04422096742748716
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assign_schedule_vs_identify_establish_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.0556974632408203,
+      "min_bucket_mass": 0.04422096742748716,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.023333554458175157,
+        "1": 0.024382484978072494
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assign_vs_identify_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.0449537391218093,
+      "min_bucket_mass": 0.023333554458175157,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.010240026752210508,
+        "1": 0.020165185450386924
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_choose_vs_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.9692512469299828,
+      "min_bucket_mass": 0.010240026752210508,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.04366237587516919,
+        "1": 0.019447625601917068
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_create_vs_prepare_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 2.2451263084201463,
+      "min_bucket_mass": 0.019447625601917068,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.008998127820574575,
+        "1": 0.0035693046444860155
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_decide_vs_confirm_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 2.5209750124510086,
+      "min_bucket_mass": 0.0035693046444860155,
+      "passed": false,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.028953977171790254,
+        "1": 0.030405213510757534
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_keep_check_vs_choose_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.0501221759745398,
+      "min_bucket_mass": 0.028953977171790254,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.027975282335436447,
+        "1": 0.03138390659110346
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_keep_choose_vs_check_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.1218441413672273,
+      "min_bucket_mass": 0.027975282335436447,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.017735256904208907,
+        "1": 0.011218721318731507
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_keep_vs_check_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.5808625956861027,
+      "min_bucket_mass": 0.011218721318731507,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.009557215529613894,
+        "1": 0.006241170460275117
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_pack_vs_list_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.5313178177787827,
+      "min_bucket_mass": 0.006241170460275117,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.02335040360840912,
+        "1": 0.01983847565313751
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_schedule_vs_establish_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.1770260990146282,
+      "min_bucket_mass": 0.01983847565313751,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.09364957080852143,
+        "1": 0.049635272674521946
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_set_create_vs_plan_prepare_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.886754434142401,
+      "min_bucket_mass": 0.049635272674521946,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.08017483833833738,
+        "1": 0.06311000335572636
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_set_plan_vs_create_prepare_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.2703982582035882,
+      "min_bucket_mass": 0.06311000335572636,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.049987188554468265,
+        "1": 0.030187641961372694
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_set_vs_plan_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.6558825170389442,
+      "min_bucket_mass": 0.030187641961372694,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.02275740089757594,
+        "1": 0.015689324499308613
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_take_determine_vs_train_send_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.4505022761546427,
+      "min_bucket_mass": 0.015689324499308613,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.013711737740398631,
+        "1": 0.02473498691202103
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_take_train_vs_determine_send_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.8039279470132228,
+      "min_bucket_mass": 0.013711737740398631,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00532952664761541,
+        "1": 0.017427873905000668
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_take_vs_determine_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 3.270060374460914,
+      "min_bucket_mass": 0.00532952664761541,
+      "passed": true,
+      "source_detection_count_total": 512
+    },
+    {
+      "bucket_masses": {
+        "0": 0.008382211532525394,
+        "1": 0.007307114779356152
+      },
+      "candidate_bank_id": "step_label_r2_prompt_ctx_train_vs_send_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 512,
+      "max_bucket_mass_ratio": 1.1471301307879513,
+      "min_bucket_mass": 0.007307114779356152,
+      "passed": true,
+      "source_detection_count_total": 512
+    }
+  ],
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 9728,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_rows": 512,
+  "mass_gate_scope": "candidate_bank_id_and_casing_variant",
+  "mass_gate_status": "FAIL",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_r2_prompt_conditioned_context_mass_score_20260509_0600/qwen_v2_wp3_context_mass_artifact.json",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_scoring_started": false,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_audit_v1",
+  "score_plan_rows": 10240,
+  "source_detection_count_total": 10240,
+  "status": "FAIL_CONTEXT_SPECIFIC_MODEL_MASS_GATE",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "training_started": false,
+  "wp4_allowed": false
+}

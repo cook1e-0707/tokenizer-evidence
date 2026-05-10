@@ -51,6 +51,35 @@ scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch
 docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_DENSITY_WRAPPER_REVIEW.md
 results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.md
 results/natural_evidence_v1/status/hermes_reports/20260509_0112_wp3_restricted_density_wrapper_review.json
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_PLAN_850523_REPAIR_REVIEW.md
+results/natural_evidence_v1/status/hermes_reports/20260509_0327_wp3_repaired_850523_plan_review.md
+results/natural_evidence_v1/status/hermes_reports/20260509_0327_wp3_repaired_850523_plan_review.json
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_AUDIT_850771_REPAIR_DIAGNOSTIC_REVIEW.md
+results/natural_evidence_v2/status/wp3_restricted_step_label_primary_density_audit_850523_repair_850771/restricted_step_label_density_audit_summary.json
+results/natural_evidence_v2/status/wp3_restricted_step_label_primary_density_audit_850523_repair_850771/manual_naturalness_review_850771.json
+results/natural_evidence_v1/status/hermes_reports/20260509_0340_wp3_repaired_850523_density_job_850771_review.md
+results/natural_evidence_v1/status/hermes_reports/20260509_0340_wp3_repaired_850523_density_job_850771_review.json
+docs/natural_evidence_v2/WP3_R1_STRICT_DENSITY_EXPANSION_AUDIT_850885_REVIEW.md
+results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/restricted_step_label_density_audit_summary.json
+results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/wp3_r1_strict_density_expansion_review_850885.json
+results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/manual_naturalness_review_850885.json
+docs/natural_evidence_v2/WP3_R3_VARIANT_BALANCED_NATURALNESS_REVIEW_850885.md
+results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885/manual_naturalness_review_850885_variant_balanced.json
+results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_audit_850885_reaudit_20260509_053338/restricted_step_label_density_audit_summary.json
+scripts/natural_evidence_v2/build_wp3_r2_high_mass_observed_bank_search_plan.py
+docs/natural_evidence_v2/WP3_R2_OBSERVED_HIGH_MASS_BANK_SEARCH_PLAN_20260509_054001_REVIEW.md
+results/natural_evidence_v2/status/wp3_r2_observed_high_mass_bank_search_plan_20260509_054001/qwen_v2_wp3_r2_observed_high_mass_bank_search_summary.json
+results/natural_evidence_v2/status/wp3_r2_observed_high_mass_bank_search_plan_20260509_054001/qwen_v2_wp3_r2_observed_high_mass_context_mass_score_plan.jsonl
+docs/natural_evidence_v2/WP3_R2_OBSERVED_HIGH_MASS_CONTEXT_MASS_SCORE_851233_REVIEW.md
+results/natural_evidence_v2/status/wp3_r2_observed_high_mass_context_mass_score_851233/qwen_v2_wp3_context_mass_score_summary.json
+scripts/natural_evidence_v2/build_wp3_r2_prompt_conditioned_bank_search_plan.py
+docs/natural_evidence_v2/WP3_R2_PROMPT_CONDITIONED_BANK_SEARCH_PLAN_20260509_055137_REVIEW.md
+results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_bank_search_plan_20260509_055137/qwen_v2_wp3_r2_prompt_conditioned_bank_search_summary.json
+results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_bank_search_plan_20260509_055137/qwen_v2_wp3_r2_prompt_conditioned_context_mass_score_plan.jsonl
+results/natural_evidence_v1/status/hermes_reports/20260509_0530_wp3_r1_density_job_850885_reviewed.md
+results/natural_evidence_v1/status/hermes_reports/20260509_0530_wp3_r1_density_job_850885_reviewed.json
+results/natural_evidence_v1/status/hermes_reports/20260509_0544_wp3_r2_observed_high_mass_context_mass_job_851233_submitted.md
+results/natural_evidence_v1/status/hermes_reports/20260509_0544_wp3_r2_observed_high_mass_context_mass_job_851233_submitted.json
 ```
 
 New primary route:
@@ -62,11 +91,41 @@ natural_evidence_v2_controlled_micro_slots
 Current next allowed action:
 
 ```text
-Artifact-only density repair after job `850523`: remove or rewrite the
-`strict_compact_step_label_lines` variant, or explicitly decide whether
-sentence-start inline Step labels are inside the detector contract. Do not
-submit another Slurm job automatically. Do not start WP4, training, Qwen E2E,
-Llama, same-family null, sanitizer, FAR, or positive paper claims.
+WP6-R2 Option B Slurm job 852426 is pending result review:
+results/natural_evidence_v1/status/hermes_reports/20260510_0337_wp6_r2_option_b_job_852426_submitted.md.
+The reviewed R2 diagnostic uses eight independent 64-prompt blocks, budget 64,
+majority margin 3, protected robust block accepts >= 6/8, null robust accepts
+= 0/8, and fresh wp3_r1_eval file rows 768..1279. The allowlist entry
+v2_wp6_r2_option_b_scale_eval is disabled with condition
+submitted_once_as_job_852426_pending_wp6_r2_option_b_scale_result_review.
+Monitor job 852426; after completion, sync wp6_r2_option_b_scale_eval_852426
+artifacts and review the precommitted R2 Option B gates. Do not submit another
+WP6 job before that review.
+```
+
+Current expert standard:
+
+```text
+WP3-R1 detector density must pass before WP4.
+WP3-R2 high-mass 2-way bank search must pass before WP4.
+WP3-R3 manual naturalness review passed with a language-drift note before WP4.
+Job 851272 selected a prompt-conditioned primary bank:
+Set|Plan vs Create|Prepare, min_bucket_mass=0.0631100034,
+combined_bank_mass=0.1432848417, mass_ratio=1.2703982582.
+Prompt-local decoder oracle must pass before training.
+Teacher-forced protected-vs-base and protected-vs-task-only lift must pass
+before Qwen E2E.
+WP4 prompt-local decoder oracle passed in
+results/natural_evidence_v2/contracts/wp4_prompt_local_contract_20260509_0610/
+with target accept 16/16, wrong-key accept 0/16, and wrong-payload accept 0/16.
+Conditional training authorization was recorded on 2026-05-09T06:18Z:
+docs/natural_evidence_v2/WP5_CONDITIONAL_TRAINING_AUTHORIZATION_20260509.md.
+The artifact-only WP5 teacher-forced launch plan was reviewed on
+2026-05-09T06:28Z:
+docs/natural_evidence_v2/WP5_TEACHER_FORCED_LAUNCH_PLAN_20260509_0225_REVIEW.md.
+It fixes 512 protected rows, 512 task-only rows, and 8192 teacher-forced score
+rows, but the launch gate is `FAIL_NOT_READY_TO_TRAIN` because the v2 margin
+trainer, teacher-forced scorer, Slurm wrapper, and allowlist entry are missing.
 ```
 
 The intended v2 route is:
@@ -106,7 +165,12 @@ The intended v2 route is:
    gives `forbidden_public_surface_rate=0.0`. The gate still fails because
    mean structural slots are `15.8125 < 16.0`, and the current two-bank
    restricted surface only covers `773/4048` slots (`0.1909584980`) as raw
-   accidental bank hits. WP4 remains blocked.
+   accidental bank hits. WP4 remains blocked. The 2026-05-09T03:27Z review
+   accepted the repaired 850523 plan only as a prompt-side repair seed: it
+   removes `strict_compact_step_label_lines` and preserves the strict line-start
+   detector, but its `192` dev prompts do not satisfy the new WP3-R1 standard
+   requiring dev outputs `>=512` and eval outputs `>=2048`. No Slurm approval
+   was granted.
 3. WP4: prompt-local small payload contract and decoder oracle substitution.
 4. WP5: teacher-forced target-mass gate.
 5. WP6: Qwen v2 proof-of-life E2E only if WP5 passes.
@@ -147,6 +211,13 @@ use `scripts/natural_evidence_v1/hermes_notify.py --channels telegram,email
 `EMAIL_SMTP_HOST`, `EMAIL_SMTP_PORT`, `EMAIL_ADDRESS`, and `EMAIL_PASSWORD`.
 If either channel is not configured or fails, Hermes must stop forward
 prompting and record a notification blocker instead of silently continuing.
+Standing approval is now recorded: for this already-defined v2 WP3 route,
+Hermes/Codex should not stop for repeated manual approval when the next action
+is recorded, gates allow it, notification succeeds, Chimera work uses Slurm,
+and the tick performs at most one reviewed/allowlisted state-changing action.
+This standing approval does not permit WP4, training, Qwen E2E, Llama,
+same-family null, sanitizer, FAR aggregation, paper-facing positive claims,
+multiple Slurm submissions, or gate bypasses.
 Training, model transcript generation, Qwen E2E rerun, Llama, same-family
 null, sanitizer, FAR aggregation, and paper-facing positive claims remain
 forbidden in the current phase.
@@ -1514,6 +1585,57 @@ the current detector counts only line-start step anchors. WP3 overall remains
 blocked; next allowed action is artifact-only density repair of this prompt
 variant or detector-contract decision.
 
+Detector-contract decision recorded:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_850523_DETECTOR_CONTRACT_DECISION.md
+results/natural_evidence_v1/status/hermes_reports/20260509_0257_wp3_primary_density_850523_detector_contract_decision.md
+```
+
+Sentence-start inline `Step N:` labels are outside the current strict detector
+gate. The 850523 result remains a structural density fail. Next allowed action
+is artifact-only prompt repair: remove or rewrite
+`strict_compact_step_label_lines` in a fresh repaired density plan.
+
+Repaired 850523 strict density plan prepared:
+
+```text
+results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_PLAN_850523_REPAIR.md
+```
+
+The repair removes `strict_compact_step_label_lines` from the fresh plan. It
+does not reclassify the job 850523 inline response as passing. The repaired
+prompt count is `192`, with three retained variants at `64` prompts each.
+Local validation passed:
+
+```text
+PASS_RESTRICTED_STEP_LABEL_DENSITY_PLAN_VALIDATION
+prompt_count=192
+```
+
+Review of repaired 850523 strict density plan:
+
+```text
+docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_PLAN_850523_REPAIR_REVIEW.md
+```
+
+Decision:
+
+```text
+REVIEWED_R1_REPAIR_SEED_NOT_APPROVED_FOR_SLURM_OR_GATE
+```
+
+The repaired plan is reviewed as a prompt-side seed only. It is not approved as
+a WP3-R1 gate submission plan because it has `192` dev prompts and no separate
+eval prompt set, while the new standard requires dev outputs `>=512` and eval
+outputs `>=2048`.
+
+Next allowed action: prepare an artifact-only WP3-R1 strict density expansion
+plan with dev `>=512`, eval `>=2048`, the strict line-start detector, and an
+explicit eval oracle prompt-local frame completion field. Do not submit Slurm
+without explicit approval.
+
 ### Still forbidden
 
 - no training
@@ -1536,3 +1658,115 @@ variant or detector-contract decision.
 - do not touch frozen decision records
 - do not overwrite old result artifacts
 - do not modify paper-facing positive claims
+
+## 2026-05-09 WP5 Teacher-Forced Job 851373
+
+The conditional WP5 training authorization has now been consumed for one
+allowlisted Slurm job. Codex implemented/reviewed the v2-specific WP5 pieces:
+
+```text
+scripts/natural_evidence_v2/build_wp5_teacher_forced_launch_plan.py
+scripts/natural_evidence_v2/train_wp5_micro_slot_lora.py
+scripts/natural_evidence_v2/score_wp5_teacher_forced_bucket_mass.py
+scripts/natural_evidence_v2/slurm/wp5_teacher_forced_train_and_score.sbatch
+results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/
+```
+
+Launch gate:
+
+```text
+launch_gate_status=PASS_READY_TO_SUBMIT_ONE_ALLOWLISTED_WP5_SLURM_JOB
+protected_training_rows=512
+task_only_training_rows=512
+teacher_forced_score_rows=8192
+allowlist_entry=v2_wp5_teacher_forced_train_and_score
+```
+
+Validation before submission:
+
+```text
+pytest tests/test_natural_evidence_v2_wp5_launch_plan.py \
+  tests/test_natural_evidence_v2_wp4_contract.py \
+  tests/test_natural_evidence_v2_restricted_density.py
+10 passed
+```
+
+Local wrapper dry-run:
+
+```text
+results/natural_evidence_v2/status/wp5_wrapper_dry_run_20260509_0228/
+DRY_RUN_VALIDATED_INPUTS for protected, task-only, and scorer stages
+```
+
+Submitted job:
+
+```text
+job_id=851373
+job_name=nat-ev-v2-wp5tf
+partition=DGXA100
+node=chimera12
+initial_state=RUNNING
+command=sbatch scripts/natural_evidence_v2/slurm/wp5_teacher_forced_train_and_score.sbatch
+```
+
+Current next allowed action:
+
+```text
+Monitor Slurm job 851373. After completion, sync and review protected/task-only
+training summaries and teacher-forced bucket-mass summary. Do not submit another
+WP5 training job, Qwen E2E, Llama, same-family null, sanitizer benchmark, FAR
+aggregation, or paper-facing positive claim before this teacher-forced gate is
+reviewed.
+```
+
+## 2026-05-09 Hermes State Reconciliation
+
+The latest consistent state is not the early `851373` result alone.
+
+Historical sequence:
+
+```text
+851373 = WP5 teacher-forced train-and-score, COMPLETED 0:0, gate FAIL
+851481 = WP5-R2 margin-lambda retry, COMPLETED 0:0, gate PASS
+```
+
+WP5-R2 review:
+
+```text
+docs/natural_evidence_v2/WP5_R2_TRAIN_AND_SCORE_851481_REVIEW.md
+results/natural_evidence_v2/status/wp5_r2_teacher_forced_train_and_score_851481/teacher_forced_score/wp5_teacher_forced_bucket_mass_summary.json
+```
+
+Key WP5-R2 numbers:
+
+```text
+protected_target_bucket_mass_lift_vs_base = 0.5516542731515095
+protected_target_bucket_mass_lift_vs_task_only = 0.5363755336738145
+protected_target_bucket_rank1_rate = 0.9820556640625
+teacher_forced_gate_status = PASS
+```
+
+However, Hermes also recorded repeated WP6 conflict blockers because the tick
+prompt/status still forbade generation and Qwen E2E reruns while asking for WP6.
+The latest blocker is:
+
+```text
+results/natural_evidence_v1/status/hermes_reports/20260509_1645_wp6_e2e_generation_conflict_blocker.md
+```
+
+Reconciled current phase:
+
+```text
+V2_WP5_R2_GATE_PASSED_WP6_E2E_BLOCKED_BY_GENERATION_CONSTRAINT
+```
+
+Current next safe action:
+
+```text
+Artifact-only WP6 implementation review only, or explicit later WP6 Slurm
+permission after generation and Qwen E2E constraints are removed. Do not submit
+generation/E2E from the current state.
+```
+
+The `v2_wp6_e2e_eval` allowlist entry is disabled until this conflict is
+explicitly resolved.

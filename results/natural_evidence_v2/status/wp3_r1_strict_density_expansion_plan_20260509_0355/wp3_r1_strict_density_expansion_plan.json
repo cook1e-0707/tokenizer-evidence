@@ -1,0 +1,65 @@
+{
+  "gate": {
+    "dev_complete_step_label_response_rate_min": 0.995,
+    "dev_forbidden_public_surface_rate_required": 0.0,
+    "dev_mean_detected_slots_min": 15.9,
+    "dev_outputs_min": 512,
+    "e2e_eval_started": false,
+    "eval_complete_step_label_response_rate_min": 0.995,
+    "eval_forbidden_public_surface_rate_required": 0.0,
+    "eval_oracle_prompt_local_frame_completion_rate_min": 0.95,
+    "eval_outputs_min": 2048,
+    "formal_variant_balanced_manual_sample_required": true,
+    "manual_naturalness_review_required": true,
+    "oracle_prompt_local_frame_completion_definition": "A response counts as oracle-complete if the strict detector observes one ordered Step 1 through Step 16 line-start slot, providing all 16 prompt-local 2-way coordinates under no-erasure substitution.",
+    "paper_claim_allowed": false,
+    "schema_name": "natural_evidence_v2_wp3_r1_strict_density_expansion_gate_v1",
+    "status": "WP3_R1_STRICT_DENSITY_EXPANSION_GATE_DEFINED_NOT_RUN",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_expansion_plan_v1",
+  "slurm_review": {
+    "allowlist_enabled": false,
+    "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+    "command_pattern": "PROMPTS_JSONL=<this prompts_jsonl> POLICY_DIR=<this output dir> OUTPUT_DIR=<fresh scratch output> MAX_PROMPTS=2560 sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+    "compatible_wrapper": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+    "e2e_eval_started": false,
+    "explicit_approval_received": true,
+    "paper_claim_allowed": false,
+    "schema_name": "natural_evidence_v2_wp3_r1_strict_density_slurm_review_v1",
+    "status": "WP3_R1_STRICT_DENSITY_SLURM_PLAN_READY_NOT_SUBMITTED",
+    "training_started": false,
+    "wp4_allowed": false
+  },
+  "summary": {
+    "dev_prompt_count": 512,
+    "e2e_eval_started": false,
+    "eval_prompt_count": 2048,
+    "gate_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/wp3_r1_strict_density_expansion_gate.json",
+    "model_generation_started": false,
+    "model_scoring_started": false,
+    "next_allowed_action": "Run one Slurm WP3-R1 strict density audit only if the plan validates and the allowlist is enabled for this one submission. No WP4 or training.",
+    "paper_claim_allowed": false,
+    "prompt_variant_counts": {
+      "strict_literal_16_step_lines": 854,
+      "strict_no_heading_16_step_lines": 854,
+      "strict_numbered_step_label_lines": 852
+    },
+    "prompts_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+    "schema_name": "natural_evidence_v2_wp3_r1_strict_density_expansion_plan_summary_v1",
+    "slurm_review_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_slurm_review.json",
+    "source_density_diagnostic_job_id": "850771",
+    "source_policy_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310",
+    "source_primary_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+    "source_primary_policy_summary": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/restricted_step_label_primary_policy_summary.json",
+    "split_counts": {
+      "wp3_r1_dev": 512,
+      "wp3_r1_eval": 2048
+    },
+    "status": "WP3_R1_STRICT_DENSITY_EXPANSION_PLAN_READY_ARTIFACT_ONLY",
+    "total_prompt_count": 2560,
+    "training_started": false,
+    "wp4_allowed": false
+  }
+}

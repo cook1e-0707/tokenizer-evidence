@@ -1,0 +1,22 @@
+{
+  "all_decode_cases_passed": true,
+  "contract_status": "WP4_PROMPT_LOCAL_PAYLOAD_CONTRACT_PREPARED_ARTIFACT_ONLY",
+  "decode_case_count": 4,
+  "decoder_oracle_accept_rate": 1.0,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review WP4 prompt-local contract artifacts before any WP5 teacher-forced scoring plan. Training remains forbidden.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "oracle_gate_passed": true,
+  "oracle_slot_count": 16,
+  "paper_claim_allowed": false,
+  "precommit_hash_sha256": "d8ccb3697e79aca907e4badb098fea22225f5f9a4b27ff58063cd89f1938c5cb",
+  "schema_name": "natural_evidence_v2_wp4_prompt_local_oracle_summary_v1",
+  "status": "PASS_WP4_PROMPT_LOCAL_ORACLE_SUBSTITUTION_ARTIFACT_ONLY",
+  "training_allowed": false,
+  "training_started": false,
+  "wrong_key_oracle_reject_rate": 1.0,
+  "wrong_payload_oracle_reject_rate": 1.0
+}

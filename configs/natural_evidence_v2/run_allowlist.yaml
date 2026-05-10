@@ -20,11 +20,41 @@ allowed_cpu_actions:
 allowed_gpu_actions:
   - name: v2_wp3_context_mass_score
     enabled: false
-    enable_condition: "submitted_once_as_job_850509_pending_mass_aware_recombined_context_mass_result_review"
+    enable_condition: "submitted_once_as_job_851272_pending_wp3_r2_prompt_conditioned_context_mass_result_review"
     command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch"
     claim_note: "WP3 context-specific base-Qwen mass scoring only; no training, generation, E2E, FAR, or positive claim."
   - name: v2_wp3_restricted_step_label_density_audit
     enabled: false
-    enable_condition: "submitted_once_as_job_850523_pending_primary_policy_strict_density_result_review"
+    enable_condition: "submitted_once_as_job_850885_pending_wp3_r1_strict_density_expansion_result_review"
     command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch"
     claim_note: "WP3 restricted Step-label base-Qwen model-output density audit only; no training, E2E, payload recovery, FAR, or positive claim."
+  - name: v2_wp5_teacher_forced_train_and_score
+    enabled: false
+    enable_condition: "wp5_r2_completed_and_gate_passed"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp5_teacher_forced_train_and_score.sbatch"
+    claim_note: "WP5 teacher-forced Qwen protected/task-only LoRA train-and-score only; no E2E, no payload recovery, no FAR, no Llama, and no paper positive claim."
+  - name: v2_wp5_r2_margin_lambda_retry
+    enabled: false
+    enable_condition: "wp5_completed_and_gate_failed_retry_authorized"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp5_r2_margin_lambda_retry.sbatch"
+    claim_note: "WP5-R2 margin lambda retry; no E2E, no payload recovery, no FAR, no paper positive claim."
+  - name: v2_wp6_e2e_eval
+    enabled: false
+    enable_condition: "submitted_once_as_job_852086_pending_wp6_e2e_result_review"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp6_e2e_eval.sbatch"
+    claim_note: "WP6 Qwen V2 E2E proof-of-life: 5-arm free generation + payload decoding. No FAR, no Llama, no paper positive claim."
+  - name: v2_wp6_r1_coordinate_majority_e2e_eval
+    enabled: false
+    enable_condition: "submitted_once_as_job_852094_pending_wp6_r1_coordinate_majority_result_review"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_e2e_eval.sbatch"
+    claim_note: "WP6-R1 Qwen V2 repeated-coordinate majority proof-of-life replacement eval. No training, no FAR, no Llama, no paper positive claim."
+  - name: v2_wp6_r1_coordinate_majority_scale_eval
+    enabled: false
+    enable_condition: "submitted_once_as_job_852202_pending_wp6_r1_coordinate_majority_scale_result_review"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_scale_eval.sbatch"
+    claim_note: "WP6-R1 Qwen V2 repeated-coordinate majority reproducibility scale eval only; no training, no FAR, no Llama, no paper positive claim."
+  - name: v2_wp6_r2_option_b_scale_eval
+    enabled: false
+    enable_condition: "submitted_once_as_job_852426_pending_wp6_r2_option_b_scale_result_review"
+    command_pattern: "sbatch scripts/natural_evidence_v2/slurm/wp6_r2_option_b_scale_eval.sbatch"
+    claim_note: "WP6-R2 Option B Qwen robust-block diagnostic only; no training, no FAR, no Llama, no paper positive claim."

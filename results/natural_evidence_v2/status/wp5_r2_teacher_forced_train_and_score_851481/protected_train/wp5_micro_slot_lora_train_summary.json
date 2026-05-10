@@ -1,0 +1,94 @@
+{
+  "adapter_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/protected_train/adapter",
+  "arm": "protected",
+  "artifact_role": "wp5_micro_slot_lora_training",
+  "bank_id": "qwen_v2_wp3_r2_primary_set_plan_vs_create_prepare_v1",
+  "e2e_eval_started": false,
+  "final_ce_loss": 0.5271044969558716,
+  "final_loss": 0.5271044969558716,
+  "final_margin_loss": 0.0,
+  "input_row_count": 512,
+  "learning_rate": 0.0001,
+  "lora_alpha": 64,
+  "lora_r": 32,
+  "max_steps": 256,
+  "metrics_tail": [
+    {
+      "ce_loss": 0.6047703623771667,
+      "loss": 0.6047703623771667,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 247.0
+    },
+    {
+      "ce_loss": 0.5343380570411682,
+      "loss": 0.5343380570411682,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 248.0
+    },
+    {
+      "ce_loss": 0.4866967797279358,
+      "loss": 0.4866967797279358,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 249.0
+    },
+    {
+      "ce_loss": 0.6375911235809326,
+      "loss": 0.6375911235809326,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 250.0
+    },
+    {
+      "ce_loss": 0.5186558961868286,
+      "loss": 0.5186558961868286,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 251.0
+    },
+    {
+      "ce_loss": 0.5487890243530273,
+      "loss": 0.5487890243530273,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 252.0
+    },
+    {
+      "ce_loss": 0.6058655977249146,
+      "loss": 0.6058655977249146,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 253.0
+    },
+    {
+      "ce_loss": 0.5601078867912292,
+      "loss": 0.5601078867912292,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 254.0
+    },
+    {
+      "ce_loss": 0.5987492203712463,
+      "loss": 0.5987492203712463,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 255.0
+    },
+    {
+      "ce_loss": 0.5271044969558716,
+      "loss": 0.5271044969558716,
+      "margin_count": 16.0,
+      "margin_loss": 0.0,
+      "step": 256.0
+    }
+  ],
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp5_micro_slot_lora_train_summary_v1",
+  "status": "TRAINED_ADAPTER_NOT_E2E_NOT_FAR",
+  "training_started": true
+}

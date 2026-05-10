@@ -1,0 +1,53 @@
+{
+  "artifact_role": "wp6_e2e_generation_plan_or_summary",
+  "claim_control": {
+    "e2e_eval_started": true,
+    "generation_started": true,
+    "not_full_far": true,
+    "paper_claim_allowed": false,
+    "training_started": false
+  },
+  "contract_path": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+  "contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07",
+  "generated_output_rows": 192,
+  "generation_conditions": [
+    "protected",
+    "raw",
+    "task_only"
+  ],
+  "max_new_tokens": 896,
+  "max_prompts": 64,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "output_path": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r1_coordinate_majority_e2e_eval_852094/wp6_generated_outputs.jsonl",
+  "payload_bits_msb_first": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+  ],
+  "prompt_count": 64,
+  "prompts_path": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "prompts_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+  "query_budgets": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "schema_name": "natural_evidence_v2_wp6_generation_plan_v1",
+  "split": "wp3_r1_eval",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "wp6_contract_note": "uses the WP5-R2 trained fixed prompt-local payload contract, not the older P00/P01 oracle contract"
+}

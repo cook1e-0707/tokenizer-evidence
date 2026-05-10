@@ -1,0 +1,15 @@
+{
+  "arm": "task_only",
+  "artifact_role": "wp5_micro_slot_lora_training",
+  "bank_id": "qwen_v2_wp3_r2_primary_set_plan_vs_create_prepare_v1",
+  "e2e_eval_started": false,
+  "input_row_count": 512,
+  "max_steps": 64,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp5_micro_slot_lora_train_summary_v1",
+  "status": "DRY_RUN_VALIDATED_INPUTS",
+  "training_started": false
+}

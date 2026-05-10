@@ -1,0 +1,28 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+  "compatible_wrapper": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "dev_future_command_pattern": "PROMPTS_JSONL=/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0356/restricted_step_label_r1_dev_prompts.jsonl POLICY_DIR=/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0356 MAX_PROMPTS=512 OUTPUT_DIR=<fresh dev scratch output> sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "direct_chimera_login_node_cpu_or_gpu_run_allowed": false,
+  "e2e_eval_started": false,
+  "eval_future_command_pattern": "PROMPTS_JSONL=/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0356/restricted_step_label_r1_eval_prompts.jsonl POLICY_DIR=/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0356 MAX_PROMPTS=2048 OUTPUT_DIR=<fresh eval scratch output> sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "explicit_approval_required_before_submission": true,
+  "forbidden_actions": [
+    "no training",
+    "no Qwen E2E rerun",
+    "no Llama",
+    "no same-family null",
+    "no sanitizer benchmark",
+    "no FAR aggregation",
+    "no paper-facing positive claim"
+  ],
+  "future_chimera_cpu_gpu_work_must_use_slurm": true,
+  "model_generation_started_by_this_plan": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_slurm_review_v1",
+  "status": "SLURM_REVIEW_SPEC_WRITTEN_SUBMISSION_NOT_STARTED",
+  "submission_allowed_now": false,
+  "training_started": false,
+  "wp4_allowed": false
+}

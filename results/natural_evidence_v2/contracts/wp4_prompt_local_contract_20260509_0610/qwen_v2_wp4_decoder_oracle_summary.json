@@ -1,0 +1,39 @@
+{
+  "contract_count": 4,
+  "contracts_jsonl": "results/natural_evidence_v2/contracts/wp4_prompt_local_contract_20260509_0610/qwen_v2_wp4_prompt_local_contracts.jsonl",
+  "decoder_oracle_trace_csv": "results/natural_evidence_v2/contracts/wp4_prompt_local_contract_20260509_0610/qwen_v2_wp4_decoder_oracle_trace.csv",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "next_allowed_action": "Review WP4 decoder oracle. If it passes, prepare WP5 teacher-forced target-mass gate plan only; training still requires separate gate review.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "payload_ids": [
+    "P00",
+    "P01"
+  ],
+  "primary_bank_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/buckets/qwen_v2_primary_2way_bank.jsonl",
+  "prompt_source_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "query_budgets": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "schema_name": "natural_evidence_v2_wp4_decoder_oracle_summary_v1",
+  "seeds": [
+    17,
+    23
+  ],
+  "status": "PASS_WP4_PROMPT_LOCAL_DECODER_ORACLE",
+  "target_oracle_accept_rate": 1.0,
+  "target_oracle_accept_rows": 16,
+  "target_oracle_rows": 16,
+  "training_started": false,
+  "wp5_allowed": false,
+  "wrong_key_id": "qwen_v2_wp4_wrong_key_00",
+  "wrong_key_oracle_accept_rows": 0,
+  "wrong_key_oracle_rows": 16,
+  "wrong_payload_oracle_accept_rows": 0,
+  "wrong_payload_oracle_rows": 16
+}

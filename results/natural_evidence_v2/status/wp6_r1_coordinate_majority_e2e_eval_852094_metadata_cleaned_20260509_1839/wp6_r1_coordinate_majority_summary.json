@@ -1,0 +1,146 @@
+{
+  "artifact_role": "wp6_r1_coordinate_majority_e2e_replacement_summary",
+  "claim_control": {
+    "e2e_rerun_allowed": false,
+    "far_aggregation_allowed": false,
+    "paper_claim_allowed": false,
+    "scale_rerun_allowed": false,
+    "training_allowed": false
+  },
+  "post_hoc_artifact_replay": false,
+  "precommitted_transcript": true,
+  "replacement_run_gate_pass": true,
+  "replay_gate_pass": true,
+  "replay_gate_status": "PASS_WP6_R1_COORDINATE_MAJORITY_E2E_REPLACEMENT_RUN",
+  "summary_by_budget": {
+    "16": {
+      "protected": {
+        "accepted": false,
+        "decoded_hex": "a15e",
+        "min_majority_margin": 3,
+        "min_support": 7
+      },
+      "raw": {
+        "accepted": false,
+        "decoded_hex": "",
+        "min_majority_margin": 0,
+        "min_support": 0
+      },
+      "task_only": {
+        "accepted": false,
+        "decoded_hex": "",
+        "min_majority_margin": 0,
+        "min_support": 0
+      },
+      "wrong_key": {
+        "accepted": false,
+        "decoded_hex": "a15e",
+        "min_majority_margin": 3,
+        "min_support": 7
+      },
+      "wrong_payload": {
+        "accepted": false,
+        "decoded_hex": "a15e",
+        "min_majority_margin": 3,
+        "min_support": 7
+      }
+    },
+    "32": {
+      "protected": {
+        "accepted": true,
+        "decoded_hex": "a55e",
+        "min_majority_margin": 1,
+        "min_support": 15
+      },
+      "raw": {
+        "accepted": false,
+        "decoded_hex": "",
+        "min_majority_margin": 0,
+        "min_support": 0
+      },
+      "task_only": {
+        "accepted": false,
+        "decoded_hex": "",
+        "min_majority_margin": 0,
+        "min_support": 0
+      },
+      "wrong_key": {
+        "accepted": false,
+        "decoded_hex": "a55e",
+        "min_majority_margin": 1,
+        "min_support": 15
+      },
+      "wrong_payload": {
+        "accepted": false,
+        "decoded_hex": "a55e",
+        "min_majority_margin": 1,
+        "min_support": 15
+      }
+    },
+    "64": {
+      "protected": {
+        "accepted": true,
+        "decoded_hex": "a55e",
+        "min_majority_margin": 3,
+        "min_support": 33
+      },
+      "raw": {
+        "accepted": false,
+        "decoded_hex": "7400",
+        "min_majority_margin": 2,
+        "min_support": 2
+      },
+      "task_only": {
+        "accepted": false,
+        "decoded_hex": "5020",
+        "min_majority_margin": 1,
+        "min_support": 1
+      },
+      "wrong_key": {
+        "accepted": false,
+        "decoded_hex": "a55e",
+        "min_majority_margin": 3,
+        "min_support": 33
+      },
+      "wrong_payload": {
+        "accepted": false,
+        "decoded_hex": "a55e",
+        "min_majority_margin": 3,
+        "min_support": 33
+      }
+    },
+    "8": {
+      "protected": {
+        "accepted": false,
+        "decoded_hex": "a15e",
+        "min_majority_margin": 1,
+        "min_support": 3
+      },
+      "raw": {
+        "accepted": false,
+        "decoded_hex": "",
+        "min_majority_margin": 0,
+        "min_support": 0
+      },
+      "task_only": {
+        "accepted": false,
+        "decoded_hex": "",
+        "min_majority_margin": 0,
+        "min_support": 0
+      },
+      "wrong_key": {
+        "accepted": false,
+        "decoded_hex": "a15e",
+        "min_majority_margin": 1,
+        "min_support": 3
+      },
+      "wrong_payload": {
+        "accepted": false,
+        "decoded_hex": "a15e",
+        "min_majority_margin": 1,
+        "min_support": 3
+      }
+    }
+  },
+  "transcript_provenance": "precommitted_replacement_run"
+}

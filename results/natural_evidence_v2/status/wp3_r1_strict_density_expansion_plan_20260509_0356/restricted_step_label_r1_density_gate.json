@@ -1,0 +1,26 @@
+{
+  "detector_contract": {
+    "accepted_anchor": "line-start Step N: after optional whitespace, optional markdown bullet marker, and optional markdown emphasis",
+    "sentence_start_inline_step_labels_counted": false,
+    "strict_line_start_step_labels_required": true
+  },
+  "dev_gate": {
+    "complete_step_label_response_rate": ">=0.995",
+    "forbidden_public_surface_rate": "==0.0",
+    "mean_detected_slots_per_response": ">=15.9",
+    "minimum_outputs": 512
+  },
+  "e2e_eval_started": false,
+  "eval_gate": {
+    "complete_step_label_response_rate": ">=0.995",
+    "forbidden_public_surface_rate": "==0.0",
+    "minimum_outputs": 2048,
+    "oracle_prompt_local_frame_completion_rate": ">=0.95"
+  },
+  "not_model_output_density_result": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_gate_v1",
+  "status": "WP3_R1_STRICT_DENSITY_GATE_SPEC_WRITTEN_NOT_EVALUATED",
+  "training_started": false,
+  "wp4_allowed_if_written": false
+}

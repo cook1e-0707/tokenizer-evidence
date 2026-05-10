@@ -1,0 +1,22 @@
+{
+  "assumption": "If a model output contains all 16 strict line-start Step labels, the prompt-local oracle can fill one 16-bit frame in that response.",
+  "e2e_eval_started": false,
+  "eval_prompt_count": 2048,
+  "frame_policy": "8-bit payload plus 8-bit checksum mapped to the 16 strict Step-label slots within one response",
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "not_decoder_oracle_substitution": true,
+  "not_full_far": true,
+  "not_model_output_density_result": true,
+  "not_payload_recovery": true,
+  "oracle_gate_plan_status": "PASS_BY_CONSTRUCTION_NOT_MODEL_OUTPUT",
+  "oracle_prompt_local_frame_completion_rate": 1.0,
+  "paper_claim_allowed": false,
+  "planned_complete_prompt_count": 2048,
+  "required_oracle_prompt_local_frame_completion_rate": 0.95,
+  "schema_name": "natural_evidence_v2_wp3_r1_eval_oracle_prompt_local_frame_completion_v1",
+  "scope": "planned eval prompt local slot capacity before model-output audit",
+  "status": "EVAL_ORACLE_PROMPT_LOCAL_FRAME_COMPLETION_RECORDED_ARTIFACT_ONLY",
+  "training_started": false,
+  "wp4_allowed": false
+}

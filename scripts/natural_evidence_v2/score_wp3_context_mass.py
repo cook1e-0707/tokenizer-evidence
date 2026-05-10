@@ -218,6 +218,30 @@ def load_model(*, model_name: str, tokenizer_name: str, require_cuda: bool) -> t
     return torch, tokenizer, model, device
 
 
+def build_chat_text(tokenizer: Any, prompt_text: str) -> str:
+    messages = [{"role": "user", "content": prompt_text}]
+    if hasattr(tokenizer, "apply_chat_template"):
+        try:
+            return str(
+                tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                )
+            )
+        except Exception:
+            pass
+    return prompt_text
+
+
+def effective_prefix_text(tokenizer: Any, row: Mapping[str, Any]) -> str:
+    chat_prompt = str(row.get("chat_prompt_text", ""))
+    assistant_prefix = str(row.get("assistant_prefix_before_candidate", ""))
+    if chat_prompt:
+        return build_chat_text(tokenizer, chat_prompt) + assistant_prefix
+    return str(row["prefix_before_candidate"])
+
+
 def startswith_sequence(values: Sequence[int], prefix: Sequence[int]) -> bool:
     return len(values) >= len(prefix) and list(values[: len(prefix)]) == list(prefix)
 
@@ -233,7 +257,7 @@ def common_prefix_length(left: Sequence[int], right: Sequence[int]) -> int:
 
 def resolve_contextual_bucket_tokenization(tokenizer: Any, row: Mapping[str, Any]) -> dict[str, Any]:
     token_ids_by_bucket: dict[str, list[int]] = {}
-    prefix = str(row["prefix_before_candidate"])
+    prefix = effective_prefix_text(tokenizer, row)
     prefix_ids = encode_no_special(tokenizer, prefix)
     scoring_prefix_ids: list[int] | None = None
     adjusted_surfaces: list[str] = []
@@ -283,6 +307,9 @@ def resolve_contextual_bucket_tokenization(tokenizer: Any, row: Mapping[str, Any
     adjusted = bool(adjusted_surfaces)
     return {
         "bucket_token_ids": token_ids_by_bucket,
+        "scoring_context_kind": "chat_prompt_plus_assistant_prefix"
+        if str(row.get("chat_prompt_text", ""))
+        else "raw_prefix_before_candidate",
         "prefix_boundary_policy": (
             "longest_common_token_prefix_boundary_repair"
             if adjusted
@@ -358,7 +385,14 @@ def tokenization_failure_row(*, row: Mapping[str, Any], error: Exception) -> dic
         "plan_row_id": str(row.get("plan_row_id", "")),
         "candidate_bank_id": str(row.get("candidate_bank_id", "")),
         "casing_variant": str(row.get("casing_variant", "")),
+        "scoring_context_kind": "chat_prompt_plus_assistant_prefix"
+        if str(row.get("chat_prompt_text", ""))
+        else "raw_prefix_before_candidate",
         "prefix_before_candidate": str(row.get("prefix_before_candidate", "")),
+        "assistant_prefix_before_candidate_sha256": str(
+            row.get("assistant_prefix_before_candidate_sha256", "")
+        ),
+        "chat_prompt_text_sha256": str(row.get("chat_prompt_text_sha256", "")),
         "bucket_surfaces": validate_bucket_surfaces(row),
         "error_type": type(error).__name__,
         "error_message": str(error),
@@ -540,6 +574,11 @@ def score_plan_rows(
                         "prefix_boundary_policy": str(
                             row_tokenization["prefix_boundary_policy"]
                         ),
+                        "scoring_context_kind": str(row_tokenization["scoring_context_kind"]),
+                        "assistant_prefix_before_candidate_sha256": str(
+                            row.get("assistant_prefix_before_candidate_sha256", "")
+                        ),
+                        "chat_prompt_text_sha256": str(row.get("chat_prompt_text_sha256", "")),
                         "prefix_boundary_adjusted": bool(
                             row_tokenization["prefix_boundary_adjusted"]
                         ),

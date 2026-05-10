@@ -1,0 +1,121 @@
+{
+  "accepted_option": "Option B: increase independent blocks and count robust block accepts",
+  "artifact_only": true,
+  "artifact_role": "wp6_r2_option_b_wrapper_contract_plan",
+  "claim_control": {
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "llama_started": false,
+    "new_slurm_job_submitted": false,
+    "new_training_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_started": false,
+    "sanitizer_started": false
+  },
+  "next_allowed_action": "Implement and locally validate the WP6-R2 Option B wrapper and contract-only/plan-only path, then record a wrapper review. Do not submit Slurm or start generation until a later notified tick permits one reviewed allowlisted submission.",
+  "planned_contract": {
+    "block_count": 8,
+    "block_size": 64,
+    "checksum_byte_hex": "5e",
+    "controlling_budget": 64,
+    "decoder_id": "qwen_v2_wp6_r2_robust_block_coordinate_majority_decoder_v1",
+    "forbidden_public_surface_count_required": 0,
+    "min_majority_margin_at_64": 3,
+    "min_support_at_64": 16,
+    "null_robust_accepts_required_at_64": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "payload_byte_hex": "a5",
+    "payload_plus_checksum_hex": "a55e",
+    "prompt_count": 512,
+    "protected_robust_block_accepts_required_at_64": 6,
+    "protocol_id": "natural_evidence_v2_wp6_r2_option_b_robust_block_scale",
+    "query_budgets_per_block": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "robust_block_accept_rule": [
+      "decoded_hex == a55e",
+      "payload_matches == true",
+      "checksum_valid == true",
+      "min_support >= 16",
+      "min_majority_margin >= 3"
+    ],
+    "route": "same Qwen WP6-R1 route; no new training"
+  },
+  "prompt_plan": {
+    "block_count": 8,
+    "block_size": 64,
+    "blocks": [
+      {
+        "block_id": "block_0",
+        "prompt_file_row_end_inclusive": 831,
+        "prompt_file_row_start": 768,
+        "row_jsonl_sha256": "67e869d94e33b659cc00ef0e10f50ddf7eb4e30e7a8e47bcaa156ec3227ff066"
+      },
+      {
+        "block_id": "block_1",
+        "prompt_file_row_end_inclusive": 895,
+        "prompt_file_row_start": 832,
+        "row_jsonl_sha256": "a911b65c16b5532e1b938d8f8a445b1030303f65d50659216d30adbba373270f"
+      },
+      {
+        "block_id": "block_2",
+        "prompt_file_row_end_inclusive": 959,
+        "prompt_file_row_start": 896,
+        "row_jsonl_sha256": "71d0fe09385b063a7386d474a4e483e99344341376e826abbdf249d5a2a3d4e5"
+      },
+      {
+        "block_id": "block_3",
+        "prompt_file_row_end_inclusive": 1023,
+        "prompt_file_row_start": 960,
+        "row_jsonl_sha256": "7300594c6b469fd700c3a5830e01e6228bb9b8c4856b590907b7cdc5e53be045"
+      },
+      {
+        "block_id": "block_4",
+        "prompt_file_row_end_inclusive": 1087,
+        "prompt_file_row_start": 1024,
+        "row_jsonl_sha256": "d204650a48e8fdaf2c328114bd28ab74acfb1a3b36510117efdfe96a68be8111"
+      },
+      {
+        "block_id": "block_5",
+        "prompt_file_row_end_inclusive": 1151,
+        "prompt_file_row_start": 1088,
+        "row_jsonl_sha256": "4659fc0ae69a3da744bb32ea7f0dd876868a18f38c883b4092c89e9d71eb8d8f"
+      },
+      {
+        "block_id": "block_6",
+        "prompt_file_row_end_inclusive": 1215,
+        "prompt_file_row_start": 1152,
+        "row_jsonl_sha256": "f067ea7a1e8cdf709ab7141470ad96d9a9e7b667aef618d9d6bef2eada17b64e"
+      },
+      {
+        "block_id": "block_7",
+        "prompt_file_row_end_inclusive": 1279,
+        "prompt_file_row_start": 1216,
+        "row_jsonl_sha256": "fb539266d645a9c25602f15d061886636cc58227fcdbf0be629985f104c9d2c4"
+      }
+    ],
+    "disjoint_from_852202_rows": "512..767",
+    "prompt_source": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+    "prompt_source_rows": 2560,
+    "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+    "selected_prompt_file_row_end_inclusive": 1279,
+    "selected_prompt_file_row_start": 768,
+    "selected_prompt_jsonl_sha256": "d3966ce5c43347df9c68dc6cd6118102fb0708484ddd53e9b08b7b42b1f12ddd",
+    "selected_split": "wp3_r1_eval"
+  },
+  "review_doc": "docs/natural_evidence_v2/WP6_R2_OPTION_B_WRAPPER_CONTRACT_PLAN_20260510.md",
+  "schema_name": "natural_evidence_v2_wp6_r2_option_b_wrapper_contract_plan_v1",
+  "source_failure_diagnosis": "docs/natural_evidence_v2/WP6_R1_SCALE_FAILURE_DIAGNOSIS_AND_REPAIR_PLAN_852202.md",
+  "source_job_id": "852202",
+  "status": "WP6_R2_OPTION_B_WRAPPER_CONTRACT_PLAN_RECORDED_NO_SLURM",
+  "timestamp_utc": "2026-05-10T02:51:43Z",
+  "wrapper_review_recorded": false
+}

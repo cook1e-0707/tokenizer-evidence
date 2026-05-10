@@ -1,0 +1,274 @@
+{
+  "bank_variant_count": 19,
+  "bank_variant_results": [
+    {
+      "bucket_masses": {
+        "0": 0.0050260278294445015,
+        "1": 0.0008008137465367327
+      },
+      "candidate_bank_id": "step_label_r2_observed_assign_identify_vs_schedule_establish_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 6.276150791842035,
+      "min_bucket_mass": 0.0008008137465367327,
+      "passed": false,
+      "source_detection_count_total": 59968
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0009508962775726104,
+        "1": 0.00487594442529371
+      },
+      "candidate_bank_id": "step_label_r2_observed_assign_schedule_vs_identify_establish_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 5.127735316979809,
+      "min_bucket_mass": 0.0009508962775726104,
+      "passed": false,
+      "source_detection_count_total": 59968
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0007285899037015042,
+        "1": 0.00429743759741541
+      },
+      "candidate_bank_id": "step_label_r2_observed_assign_vs_identify_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 5.8982941920864524,
+      "min_bucket_mass": 0.0007285899037015042,
+      "passed": false,
+      "source_detection_count_total": 34128
+    },
+    {
+      "bucket_masses": {
+        "0": 0.005483957793330774,
+        "1": 0.0013031782073085196
+      },
+      "candidate_bank_id": "step_label_r2_observed_choose_vs_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 4.208141114220213,
+      "min_bucket_mass": 0.0013031782073085196,
+      "passed": false,
+      "source_detection_count_total": 20800
+    },
+    {
+      "bucket_masses": {
+        "0": 0.011307551409117877,
+        "1": 0.0024721007284824736
+      },
+      "candidate_bank_id": "step_label_r2_observed_create_vs_prepare_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 4.5740658051822765,
+      "min_bucket_mass": 0.0024721007284824736,
+      "passed": false,
+      "source_detection_count_total": 53824
+    },
+    {
+      "bucket_masses": {
+        "0": 0.005083256000943948,
+        "1": 0.006787136691855267
+      },
+      "candidate_bank_id": "step_label_r2_observed_keep_check_vs_choose_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.3351947434075546,
+      "min_bucket_mass": 0.005083256000943948,
+      "passed": true,
+      "source_detection_count_total": 43904
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0066626193874981254,
+        "1": 0.005207771253481042
+      },
+      "candidate_bank_id": "step_label_r2_observed_keep_choose_vs_check_develop_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.2793609901826268,
+      "min_bucket_mass": 0.005207771253481042,
+      "passed": true,
+      "source_detection_count_total": 43904
+    },
+    {
+      "bucket_masses": {
+        "0": 0.001178662700112909,
+        "1": 0.003904593439074233
+      },
+      "candidate_bank_id": "step_label_r2_observed_keep_vs_check_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.3127318262469796,
+      "min_bucket_mass": 0.001178662700112909,
+      "passed": false,
+      "source_detection_count_total": 23104
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0002223063524979807,
+        "1": 0.0005785073390143225
+      },
+      "candidate_bank_id": "step_label_r2_observed_schedule_vs_establish_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 2.6022978314107212,
+      "min_bucket_mass": 0.0002223063524979807,
+      "passed": false,
+      "source_detection_count_total": 25840
+    },
+    {
+      "bucket_masses": {
+        "0": 0.014805453567532822,
+        "1": 0.003083975381741766
+      },
+      "candidate_bank_id": "step_label_r2_observed_set_create_vs_plan_prepare_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 4.800769051266228,
+      "min_bucket_mass": 0.003083975381741766,
+      "passed": false,
+      "source_detection_count_total": 124608
+    },
+    {
+      "bucket_masses": {
+        "0": 0.004109776666155085,
+        "1": 0.013779650063952431
+      },
+      "candidate_bank_id": "step_label_r2_observed_set_plan_vs_create_prepare_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 3.352895104357101,
+      "min_bucket_mass": 0.004109776666155085,
+      "passed": false,
+      "source_detection_count_total": 124608
+    },
+    {
+      "bucket_masses": {
+        "0": 0.005970001977402717,
+        "1": 0.011919425887754187
+      },
+      "candidate_bank_id": "step_label_r2_observed_set_prepare_vs_plan_create_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.9965530887378031,
+      "min_bucket_mass": 0.005970001977402717,
+      "passed": true,
+      "source_detection_count_total": 124608
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00349790153268259,
+        "1": 0.0006118747560321935
+      },
+      "candidate_bank_id": "step_label_r2_observed_set_vs_plan_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 5.716695284775811,
+      "min_bucket_mass": 0.0006118747560321935,
+      "passed": false,
+      "source_detection_count_total": 70784
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0036082508086110465,
+        "1": 0.002651310329383705
+      },
+      "candidate_bank_id": "step_label_r2_observed_start_vs_define_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 1.3609311473733752,
+      "min_bucket_mass": 0.002651310329383705,
+      "passed": false,
+      "source_detection_count_total": 15376
+    },
+    {
+      "bucket_masses": {
+        "0": 0.009675116205471568,
+        "1": 0.00032948451189440675
+      },
+      "candidate_bank_id": "step_label_r2_observed_take_determine_vs_train_send_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 29.364403655405358,
+      "min_bucket_mass": 0.00032948451189440675,
+      "passed": false,
+      "source_detection_count_total": 28784
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0018143890010833275,
+        "1": 0.008190210530301556
+      },
+      "candidate_bank_id": "step_label_r2_observed_take_train_vs_determine_send_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 4.514032286026525,
+      "min_bucket_mass": 0.0018143890010833275,
+      "passed": false,
+      "source_detection_count_total": 28784
+    },
+    {
+      "bucket_masses": {
+        "0": 0.0017069542009267025,
+        "1": 0.00796816153160762
+      },
+      "candidate_bank_id": "step_label_r2_observed_take_vs_determine_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 4.668058186494822,
+      "min_bucket_mass": 0.0017069542009267025,
+      "passed": false,
+      "source_detection_count_total": 14656
+    },
+    {
+      "bucket_masses": {
+        "0": 0.00010743461348283745,
+        "1": 0.0002220498327005771
+      },
+      "candidate_bank_id": "step_label_r2_observed_train_vs_send_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 2.066836985791821,
+      "min_bucket_mass": 0.00010743461348283745,
+      "passed": false,
+      "source_detection_count_total": 14128
+    },
+    {
+      "bucket_masses": {
+        "0": 0.03794463578378782,
+        "1": 0.0023359634578810073
+      },
+      "candidate_bank_id": "step_label_r2_observed_use_vs_review_v1",
+      "casing_variant": "sentence_case",
+      "context_count": 16,
+      "max_bucket_mass_ratio": 16.243676952981126,
+      "min_bucket_mass": 0.0023359634578810073,
+      "passed": false,
+      "source_detection_count_total": 36928
+    }
+  ],
+  "casing_variants_kept_separate": true,
+  "context_score_rows": 304,
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_rows": 112,
+  "mass_gate_scope": "candidate_bank_id_and_casing_variant",
+  "mass_gate_status": "FAIL",
+  "mass_json": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp3_r2_observed_high_mass_context_mass_score_20260509_054443/qwen_v2_wp3_context_mass_artifact.json",
+  "max_mass_ratio_required": 5.0,
+  "min_bucket_mass_required": 0.005,
+  "model_scoring_started": false,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_context_mass_audit_v1",
+  "score_plan_rows": 416,
+  "source_detection_count_total": 1303088,
+  "status": "FAIL_CONTEXT_SPECIFIC_MODEL_MASS_GATE",
+  "template_preflight_only": false,
+  "tokenizer_invalid_rows_skipped_from_mass_gate": true,
+  "training_started": false,
+  "wp4_allowed": false
+}

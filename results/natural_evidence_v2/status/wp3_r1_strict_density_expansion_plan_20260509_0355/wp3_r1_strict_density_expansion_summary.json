@@ -1,0 +1,30 @@
+{
+  "dev_prompt_count": 512,
+  "e2e_eval_started": false,
+  "eval_prompt_count": 2048,
+  "gate_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/wp3_r1_strict_density_expansion_gate.json",
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Run one Slurm WP3-R1 strict density audit only if the plan validates and the allowlist is enabled for this one submission. No WP4 or training.",
+  "paper_claim_allowed": false,
+  "prompt_variant_counts": {
+    "strict_literal_16_step_lines": 854,
+    "strict_no_heading_16_step_lines": 854,
+    "strict_numbered_step_label_lines": 852
+  },
+  "prompts_jsonl": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_expansion_plan_summary_v1",
+  "slurm_review_json": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_slurm_review.json",
+  "source_density_diagnostic_job_id": "850771",
+  "source_policy_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310",
+  "source_primary_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+  "source_primary_policy_summary": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/restricted_step_label_primary_policy_summary.json",
+  "split_counts": {
+    "wp3_r1_dev": 512,
+    "wp3_r1_eval": 2048
+  },
+  "status": "WP3_R1_STRICT_DENSITY_EXPANSION_PLAN_READY_ARTIFACT_ONLY",
+  "total_prompt_count": 2560,
+  "training_started": false,
+  "wp4_allowed": false
+}

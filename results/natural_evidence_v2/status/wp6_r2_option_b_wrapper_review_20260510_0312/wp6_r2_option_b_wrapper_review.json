@@ -1,0 +1,74 @@
+{
+  "allowlist": {
+    "command_pattern": "sbatch scripts/natural_evidence_v2/slurm/wp6_r2_option_b_scale_eval.sbatch",
+    "enabled": false,
+    "enable_condition": "wrapper_review_passed_pending_separate_r2_submission_tick",
+    "name": "v2_wp6_r2_option_b_scale_eval"
+  },
+  "artifact_role": "wp6_r2_option_b_wrapper_review",
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_started": false
+  },
+  "decoder": {
+    "block_count": 8,
+    "block_size": 64,
+    "controlling_budget": 64,
+    "decoder_id": "qwen_v2_wp6_r2_robust_block_coordinate_majority_decoder_v1",
+    "min_majority_margin_at_64": 3,
+    "min_protected_block_accepts_at_64": 6,
+    "min_support_at_64": 16,
+    "protocol_id": "natural_evidence_v2_wp6_r2_option_b_robust_block_scale",
+    "query_budgets_per_block": [
+      8,
+      16,
+      32,
+      64
+    ]
+  },
+  "local_validation": {
+    "bash_n": "PASS",
+    "generation_plan_summary": "results/natural_evidence_v2/status/wp6_r2_option_b_wrapper_validate_20260510_0312/wp6_generation_plan_summary.json",
+    "plan_only_generation_started": false,
+    "precommit_contract": "results/natural_evidence_v2/status/wp6_r2_option_b_wrapper_validate_20260510_0312/precommit/wp6_r2_option_b_contract.json",
+    "py_compile": "PASS",
+    "pytest": "PASS_9_TESTS",
+    "wrapper_plan_only": "PASS"
+  },
+  "next_allowed_action": "No Slurm submission from this tick. A later notified submission tick must explicitly permit generation/Qwen E2E, enable exactly one reviewed allowlist entry, submit one Chimera Slurm job, then disable the entry.",
+  "prompt_plan": {
+    "block_file_rows": [
+      "768..831",
+      "832..895",
+      "896..959",
+      "960..1023",
+      "1024..1087",
+      "1088..1151",
+      "1152..1215",
+      "1216..1279"
+    ],
+    "disjoint_from_852202_rows": "512..767",
+    "prompt_count": 512,
+    "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+    "selected_prompt_file_rows": "768..1279",
+    "selected_prompt_jsonl_sha256": "d3966ce5c43347df9c68dc6cd6118102fb0708484ddd53e9b08b7b42b1f12ddd",
+    "selected_split": "wp3_r1_eval"
+  },
+  "review_doc": "docs/natural_evidence_v2/WP6_R2_OPTION_B_WRAPPER_REVIEW_20260510.md",
+  "schema_name": "natural_evidence_v2_wp6_r2_option_b_wrapper_review_v1",
+  "sha256": {
+    "generation_plan_summary": "ad00809b9a6409ab87955c7caa9e6cd4196bc95df4ef1da7ec673a678cf982e7",
+    "precommit_contract": "91431063ba6975145053579dec97484860da3221f19065da6f154b974fbfae54",
+    "scale_decoder": "611950a6c5f897f9725abc4c1a6778bcb92ca7c5d181f7be5a12e394288a693b",
+    "scale_slurm_wrapper": "86dd6be5583e3d538fb8ab57ca3a0ca555e3b546b4c5a47b28565fceb2187cb1"
+  },
+  "status": "PASS_LOCAL_WP6_R2_OPTION_B_WRAPPER_VALIDATION_ALLOWLIST_RECORDED_DISABLED_NO_SLURM",
+  "timestamp_utc": "2026-05-10T03:12:14Z"
+}

@@ -1,0 +1,19 @@
+{
+  "dev_complete_step_label_response_rate_min": 0.995,
+  "dev_forbidden_public_surface_rate_required": 0.0,
+  "dev_mean_detected_slots_min": 15.9,
+  "dev_outputs_min": 512,
+  "e2e_eval_started": false,
+  "eval_complete_step_label_response_rate_min": 0.995,
+  "eval_forbidden_public_surface_rate_required": 0.0,
+  "eval_oracle_prompt_local_frame_completion_rate_min": 0.95,
+  "eval_outputs_min": 2048,
+  "formal_variant_balanced_manual_sample_required": true,
+  "manual_naturalness_review_required": true,
+  "oracle_prompt_local_frame_completion_definition": "A response counts as oracle-complete if the strict detector observes one ordered Step 1 through Step 16 line-start slot, providing all 16 prompt-local 2-way coordinates under no-erasure substitution.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp3_r1_strict_density_expansion_gate_v1",
+  "status": "WP3_R1_STRICT_DENSITY_EXPANSION_GATE_DEFINED_NOT_RUN",
+  "training_started": false,
+  "wp4_allowed": false
+}

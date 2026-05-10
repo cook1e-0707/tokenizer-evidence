@@ -1,0 +1,66 @@
+{
+  "allowlist": {
+    "command_pattern": "sbatch scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_scale_eval.sbatch",
+    "enabled": false,
+    "enable_condition": "wrapper_review_passed_pending_separate_scale_submission_tick",
+    "name": "v2_wp6_r1_coordinate_majority_scale_eval"
+  },
+  "artifact_role": "wp6_r1_scale_wrapper_review",
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_started": false
+  },
+  "decoder": {
+    "block_count": 4,
+    "block_size": 64,
+    "controlling_budget": 64,
+    "decoder_id": "qwen_v2_wp6_r1_block_window_coordinate_majority_decoder_v1",
+    "min_majority_margin_at_64": 3,
+    "min_protected_block_accepts_at_64": 3,
+    "min_support_at_64": 16,
+    "query_budgets_per_block": [
+      8,
+      16,
+      32,
+      64
+    ]
+  },
+  "local_validation": {
+    "bash_n": "PASS",
+    "generation_plan_summary": "results/natural_evidence_v2/status/wp6_r1_scale_wrapper_validate_20260509_1904/wp6_generation_plan_summary.json",
+    "plan_only_generation_started": false,
+    "precommit_contract": "results/natural_evidence_v2/status/wp6_r1_scale_wrapper_validate_20260509_1904/precommit/wp6_r1_scale_contract.json",
+    "py_compile": "PASS",
+    "pytest": "PASS_6_TESTS"
+  },
+  "next_allowed_action": "No Slurm submission from this tick. A later submission tick must explicitly permit generation/Qwen E2E, notify Telegram/email first, enable exactly one allowlist entry, submit one Chimera Slurm job, then disable the entry.",
+  "prompt_plan": {
+    "block_file_rows": [
+      "512..575",
+      "576..639",
+      "640..703",
+      "704..767"
+    ],
+    "prompt_count": 256,
+    "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+    "selected_prompt_file_rows": "512..767",
+    "selected_split": "wp3_r1_eval"
+  },
+  "review_doc": "docs/natural_evidence_v2/WP6_R1_SCALE_WRAPPER_REVIEW_20260509.md",
+  "schema_name": "natural_evidence_v2_wp6_r1_scale_wrapper_review_v1",
+  "sha256": {
+    "generation_plan_summary": "438dfee702b9c30d423beadf102864d295ea78818b957c05388d972d4587f499",
+    "precommit_contract": "9ec48c9b750fa1e7a13e21eaf94d01dfa6ea0f59c1943f79dcee1e0aa585161f",
+    "scale_decoder": "666aec42c5948a2439be49ebccc8f53b7f55b6e78195ca2665ba173da0e0bf67",
+    "scale_slurm_wrapper": "6b3897760c1e2cd3361b771fb49ef1676664d8bd13ef57ae8fb3fc86e7138615"
+  },
+  "status": "PASS_LOCAL_WP6_R1_SCALE_WRAPPER_VALIDATION_ALLOWLIST_RECORDED_DISABLED_NO_SLURM",
+  "timestamp_utc": "2026-05-09T19:04:00Z"
+}

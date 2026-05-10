@@ -1,0 +1,661 @@
+{
+  "audit_json": "results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/qwen_v2_wp3_context_mass_audit.json",
+  "bank_results_sorted": [
+    {
+      "bucket_0_mass": 0.08017483833833738,
+      "bucket_0_surfaces": [
+        "Set",
+        "Plan"
+      ],
+      "bucket_0_token_ids": [
+        2573,
+        9680
+      ],
+      "bucket_1_mass": 0.06311000335572636,
+      "bucket_1_surfaces": [
+        "Create",
+        "Prepare"
+      ],
+      "bucket_1_token_ids": [
+        4230,
+        31166
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_set_plan_vs_create_prepare_v1",
+      "combined_bank_mass": 0.14328484169406375,
+      "context_count": 512,
+      "mass_ratio": 1.2703982582035882,
+      "min_bucket_mass": 0.06311000335572636,
+      "paper_ready_mass_gate_passed": true,
+      "pilot_gate_passed": true,
+      "preferred_combined_mass": true,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "primary",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.09364957080852143,
+      "bucket_0_surfaces": [
+        "Set",
+        "Create"
+      ],
+      "bucket_0_token_ids": [
+        2573,
+        4230
+      ],
+      "bucket_1_mass": 0.049635272674521946,
+      "bucket_1_surfaces": [
+        "Plan",
+        "Prepare"
+      ],
+      "bucket_1_token_ids": [
+        9680,
+        31166
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_set_create_vs_plan_prepare_v1",
+      "combined_bank_mass": 0.14328484348304338,
+      "context_count": 512,
+      "mass_ratio": 1.886754434142401,
+      "min_bucket_mass": 0.049635272674521946,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": true,
+      "preferred_combined_mass": true,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "secondary_or_ablation",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.04668396313525314,
+      "bucket_0_surfaces": [
+        "Assign",
+        "Schedule"
+      ],
+      "bucket_0_token_ids": [
+        31639,
+        23512
+      ],
+      "bucket_1_mass": 0.04422096742748716,
+      "bucket_1_surfaces": [
+        "Identify",
+        "Establish"
+      ],
+      "bucket_1_token_ids": [
+        64547,
+        39398
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assign_schedule_vs_identify_establish_v1",
+      "combined_bank_mass": 0.0909049305627403,
+      "context_count": 512,
+      "mass_ratio": 1.0556974632408203,
+      "min_bucket_mass": 0.04422096742748716,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": true,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "secondary_or_ablation",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.047716036946148455,
+      "bucket_0_surfaces": [
+        "Assign",
+        "Identify"
+      ],
+      "bucket_0_token_ids": [
+        31639,
+        64547
+      ],
+      "bucket_1_mass": 0.0431888853618041,
+      "bucket_1_surfaces": [
+        "Schedule",
+        "Establish"
+      ],
+      "bucket_1_token_ids": [
+        23512,
+        39398
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assign_identify_vs_schedule_establish_v1",
+      "combined_bank_mass": 0.09090492230795255,
+      "context_count": 512,
+      "mass_ratio": 1.1048221445499062,
+      "min_bucket_mass": 0.0431888853618041,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": true,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "secondary_or_ablation",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.049987188554468265,
+      "bucket_0_surfaces": [
+        "Set"
+      ],
+      "bucket_0_token_ids": [
+        2573
+      ],
+      "bucket_1_mass": 0.030187641961372694,
+      "bucket_1_surfaces": [
+        "Plan"
+      ],
+      "bucket_1_token_ids": [
+        9680
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_set_vs_plan_v1",
+      "combined_bank_mass": 0.08017483051584096,
+      "context_count": 512,
+      "mass_ratio": 1.6558825170389442,
+      "min_bucket_mass": 0.030187641961372694,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": true,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "secondary_or_ablation",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.028953977171790254,
+      "bucket_0_surfaces": [
+        "Keep",
+        "Check"
+      ],
+      "bucket_0_token_ids": [
+        13655,
+        4248
+      ],
+      "bucket_1_mass": 0.030405213510757534,
+      "bucket_1_surfaces": [
+        "Choose",
+        "Develop"
+      ],
+      "bucket_1_token_ids": [
+        22201,
+        7843
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_keep_check_vs_choose_develop_v1",
+      "combined_bank_mass": 0.05935919068254779,
+      "context_count": 512,
+      "mass_ratio": 1.0501221759745398,
+      "min_bucket_mass": 0.028953977171790254,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "near_miss",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.027975282335436447,
+      "bucket_0_surfaces": [
+        "Keep",
+        "Choose"
+      ],
+      "bucket_0_token_ids": [
+        13655,
+        22201
+      ],
+      "bucket_1_mass": 0.03138390659110346,
+      "bucket_1_surfaces": [
+        "Check",
+        "Develop"
+      ],
+      "bucket_1_token_ids": [
+        4248,
+        7843
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_keep_choose_vs_check_develop_v1",
+      "combined_bank_mass": 0.05935918892653991,
+      "context_count": 512,
+      "mass_ratio": 1.1218441413672273,
+      "min_bucket_mass": 0.027975282335436447,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.023333554458175157,
+      "bucket_0_surfaces": [
+        "Assign"
+      ],
+      "bucket_0_token_ids": [
+        31639
+      ],
+      "bucket_1_mass": 0.024382484978072494,
+      "bucket_1_surfaces": [
+        "Identify"
+      ],
+      "bucket_1_token_ids": [
+        64547
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assign_vs_identify_v1",
+      "combined_bank_mass": 0.04771603943624765,
+      "context_count": 512,
+      "mass_ratio": 1.0449537391218093,
+      "min_bucket_mass": 0.023333554458175157,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.02335040360840912,
+      "bucket_0_surfaces": [
+        "Schedule"
+      ],
+      "bucket_0_token_ids": [
+        23512
+      ],
+      "bucket_1_mass": 0.01983847565313751,
+      "bucket_1_surfaces": [
+        "Establish"
+      ],
+      "bucket_1_token_ids": [
+        39398
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_schedule_vs_establish_v1",
+      "combined_bank_mass": 0.04318887926154663,
+      "context_count": 512,
+      "mass_ratio": 1.1770260990146282,
+      "min_bucket_mass": 0.01983847565313751,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.04366237587516919,
+      "bucket_0_surfaces": [
+        "Create"
+      ],
+      "bucket_0_token_ids": [
+        4230
+      ],
+      "bucket_1_mass": 0.019447625601917068,
+      "bucket_1_surfaces": [
+        "Prepare"
+      ],
+      "bucket_1_token_ids": [
+        31166
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_create_vs_prepare_v1",
+      "combined_bank_mass": 0.06311000147708626,
+      "context_count": 512,
+      "mass_ratio": 2.2451263084201463,
+      "min_bucket_mass": 0.019447625601917068,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.02275740089757594,
+      "bucket_0_surfaces": [
+        "Take",
+        "Determine"
+      ],
+      "bucket_0_token_ids": [
+        11778,
+        29901
+      ],
+      "bucket_1_mass": 0.015689324499308613,
+      "bucket_1_surfaces": [
+        "Train",
+        "Send"
+      ],
+      "bucket_1_token_ids": [
+        26125,
+        11000
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_take_determine_vs_train_send_v1",
+      "combined_bank_mass": 0.038446725396884554,
+      "context_count": 512,
+      "mass_ratio": 1.4505022761546427,
+      "min_bucket_mass": 0.015689324499308613,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.013711737740398631,
+      "bucket_0_surfaces": [
+        "Take",
+        "Train"
+      ],
+      "bucket_0_token_ids": [
+        11778,
+        26125
+      ],
+      "bucket_1_mass": 0.02473498691202103,
+      "bucket_1_surfaces": [
+        "Determine",
+        "Send"
+      ],
+      "bucket_1_token_ids": [
+        29901,
+        11000
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_take_train_vs_determine_send_v1",
+      "combined_bank_mass": 0.03844672465241966,
+      "context_count": 512,
+      "mass_ratio": 1.8039279470132228,
+      "min_bucket_mass": 0.013711737740398631,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.017735256904208907,
+      "bucket_0_surfaces": [
+        "Keep"
+      ],
+      "bucket_0_token_ids": [
+        13655
+      ],
+      "bucket_1_mass": 0.011218721318731507,
+      "bucket_1_surfaces": [
+        "Check"
+      ],
+      "bucket_1_token_ids": [
+        4248
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_keep_vs_check_v1",
+      "combined_bank_mass": 0.028953978222940414,
+      "context_count": 512,
+      "mass_ratio": 1.5808625956861027,
+      "min_bucket_mass": 0.011218721318731507,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.010240026752210508,
+      "bucket_0_surfaces": [
+        "Choose"
+      ],
+      "bucket_0_token_ids": [
+        22201
+      ],
+      "bucket_1_mass": 0.020165185450386924,
+      "bucket_1_surfaces": [
+        "Develop"
+      ],
+      "bucket_1_token_ids": [
+        7843
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_choose_vs_develop_v1",
+      "combined_bank_mass": 0.030405212202597433,
+      "context_count": 512,
+      "mass_ratio": 1.9692512469299828,
+      "min_bucket_mass": 0.010240026752210508,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.008382211532525394,
+      "bucket_0_surfaces": [
+        "Train"
+      ],
+      "bucket_0_token_ids": [
+        26125
+      ],
+      "bucket_1_mass": 0.007307114779356152,
+      "bucket_1_surfaces": [
+        "Send"
+      ],
+      "bucket_1_token_ids": [
+        11000
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_train_vs_send_v1",
+      "combined_bank_mass": 0.015689326311881545,
+      "context_count": 512,
+      "mass_ratio": 1.1471301307879513,
+      "min_bucket_mass": 0.007307114779356152,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.007070507274268077,
+      "bucket_0_surfaces": [
+        "Assess"
+      ],
+      "bucket_0_token_ids": [
+        81835
+      ],
+      "bucket_1_mass": 0.012051501893587634,
+      "bucket_1_surfaces": [
+        "Implement"
+      ],
+      "bucket_1_token_ids": [
+        31075
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_assess_vs_implement_v1",
+      "combined_bank_mass": 0.01912200916785571,
+      "context_count": 512,
+      "mass_ratio": 1.704474859596998,
+      "min_bucket_mass": 0.007070507274268077,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.009557215529613894,
+      "bucket_0_surfaces": [
+        "Pack"
+      ],
+      "bucket_0_token_ids": [
+        13795
+      ],
+      "bucket_1_mass": 0.006241170460275117,
+      "bucket_1_surfaces": [
+        "List"
+      ],
+      "bucket_1_token_ids": [
+        1759
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_pack_vs_list_v1",
+      "combined_bank_mass": 0.01579838598988901,
+      "context_count": 512,
+      "mass_ratio": 1.5313178177787827,
+      "min_bucket_mass": 0.006241170460275117,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.00532952664761541,
+      "bucket_0_surfaces": [
+        "Take"
+      ],
+      "bucket_0_token_ids": [
+        11778
+      ],
+      "bucket_1_mass": 0.017427873905000668,
+      "bucket_1_surfaces": [
+        "Determine"
+      ],
+      "bucket_1_token_ids": [
+        29901
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_take_vs_determine_v1",
+      "combined_bank_mass": 0.02275740055261608,
+      "context_count": 512,
+      "mass_ratio": 3.270060374460914,
+      "min_bucket_mass": 0.00532952664761541,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": true,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    },
+    {
+      "bucket_0_mass": 0.008998127820574575,
+      "bucket_0_surfaces": [
+        "Decide"
+      ],
+      "bucket_0_token_ids": [
+        98881
+      ],
+      "bucket_1_mass": 0.0035693046444860155,
+      "bucket_1_surfaces": [
+        "Confirm"
+      ],
+      "bucket_1_token_ids": [
+        33563
+      ],
+      "candidate_bank_id": "step_label_r2_prompt_ctx_decide_vs_confirm_v1",
+      "combined_bank_mass": 0.01256743246506059,
+      "context_count": 512,
+      "mass_ratio": 2.5209750124510086,
+      "min_bucket_mass": 0.0035693046444860155,
+      "paper_ready_mass_gate_passed": false,
+      "pilot_gate_passed": false,
+      "preferred_combined_mass": false,
+      "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+      "script_gate_passed": false,
+      "selection_role": "rejected",
+      "source_detection_count_total": 512,
+      "tokenizer_valid": true
+    }
+  ],
+  "business_gate_thresholds": {
+    "max_mass_ratio": 3.0,
+    "paper_ready_min_bucket_mass": 0.05,
+    "pilot_min_bucket_mass": 0.03,
+    "preferred_combined_bank_mass": 0.1,
+    "prompt_conditioned_contexts_required": true,
+    "single_token_surfaces_required": true
+  },
+  "context_score_rows": 9728,
+  "created_utc": "2026-05-09T06:08:29.237725+00:00",
+  "decision": "WP3_R2_PRIMARY_BANK_SELECTED_WP4_ARTIFACT_ONLY_ALLOWED",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "invalid_tokenization_counts_by_bank": {
+    "step_label_r2_prompt_ctx_provide_vs_summarize_v1": 512
+  },
+  "invalid_tokenization_rows": 512,
+  "next_allowed_action": "Prepare artifact-only WP4 prompt-local 8-bit payload + 8-bit checksum contract and run decoder oracle substitution; do not train.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "paper_ready_mass_passing_bank_count": 1,
+  "pilot_passing_bank_count": 5,
+  "preferred_combined_passing_bank_count": 2,
+  "schema_name": "natural_evidence_v2_wp3_r2_prompt_conditioned_context_mass_review_v1",
+  "score_plan_rows": 10240,
+  "script_mass_gate_interpretation": "FAIL because the scored candidate set still includes invalid/low-mass candidates; business review selects a passing primary bank from per-bank results.",
+  "script_mass_gate_status": "FAIL",
+  "selected_primary_bank": {
+    "bucket_0_mass": 0.08017483833833738,
+    "bucket_0_surfaces": [
+      "Set",
+      "Plan"
+    ],
+    "bucket_0_token_ids": [
+      2573,
+      9680
+    ],
+    "bucket_1_mass": 0.06311000335572636,
+    "bucket_1_surfaces": [
+      "Create",
+      "Prepare"
+    ],
+    "bucket_1_token_ids": [
+      4230,
+      31166
+    ],
+    "candidate_bank_id": "step_label_r2_prompt_ctx_set_plan_vs_create_prepare_v1",
+    "combined_bank_mass": 0.14328484169406375,
+    "context_count": 512,
+    "mass_ratio": 1.2703982582035882,
+    "min_bucket_mass": 0.06311000335572636,
+    "paper_ready_mass_gate_passed": true,
+    "pilot_gate_passed": true,
+    "preferred_combined_mass": true,
+    "scoring_context_kind": "chat_prompt_plus_assistant_prefix",
+    "script_gate_passed": true,
+    "selection_role": "primary",
+    "source_detection_count_total": 512,
+    "tokenizer_valid": true
+  },
+  "slurm_logs": [
+    "results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/slurm/nat-ev-v2-wp3ctxm-851272.out",
+    "results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/slurm/nat-ev-v2-wp3ctxm-851272.err"
+  ],
+  "source_job_id": "851272",
+  "source_job_name": "nat-ev-v2-wp3ctxm",
+  "source_node": "chimera13",
+  "source_output_dir": "results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272",
+  "source_partition": "DGXA100",
+  "summary_json": "results/natural_evidence_v2/status/wp3_r2_prompt_conditioned_context_mass_score_851272/qwen_v2_wp3_context_mass_score_summary.json",
+  "training_allowed": false,
+  "wp4_allowed": true
+}

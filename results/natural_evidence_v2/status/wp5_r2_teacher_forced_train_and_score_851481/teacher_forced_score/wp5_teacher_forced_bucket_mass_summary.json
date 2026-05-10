@@ -1,0 +1,54 @@
+{
+  "artifact_role": "wp5_teacher_forced_bucket_mass_scoring",
+  "condition_plan": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "condition_summary": {
+    "base": {
+      "mean_target_margin": -0.057893098408331234,
+      "mean_target_mass": 0.18369929203450752,
+      "median_target_margin": 0.0012832073516619857,
+      "row_count": 8192,
+      "target_bucket_rank1_rate": 0.521484375
+    },
+    "protected": {
+      "mean_target_margin": 0.688442271253743,
+      "mean_target_mass": 0.735353565186017,
+      "median_target_margin": 0.7632847931236029,
+      "row_count": 8192,
+      "target_bucket_rank1_rate": 0.9820556640625
+    },
+    "task_only": {
+      "mean_target_margin": -0.08308507613994176,
+      "mean_target_mass": 0.19897803151220247,
+      "median_target_margin": 3.7924229587815717e-06,
+      "row_count": 8192,
+      "target_bucket_rank1_rate": 0.513671875
+    }
+  },
+  "e2e_eval_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": true,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "observed_lifts": {
+    "protected_target_bucket_mass_lift_vs_base": 0.5516542731515095,
+    "protected_target_bucket_mass_lift_vs_task_only": 0.5363755336738145,
+    "task_only_target_bucket_mass_lift_vs_base": 0.015278739477694953
+  },
+  "paper_claim_allowed": false,
+  "row_count": 24576,
+  "schema_name": "natural_evidence_v2_wp5_teacher_forced_bucket_mass_summary_v1",
+  "teacher_forced_gate_pass": true,
+  "teacher_forced_gate_status": "PASS",
+  "teacher_forced_gate_targets": {
+    "protected_median_target_margin": ">0",
+    "protected_target_bucket_mass_lift_vs_base": ">=+0.15",
+    "protected_target_bucket_mass_lift_vs_task_only": ">=+0.10",
+    "protected_target_bucket_rank1_rate": ">=0.70",
+    "task_only_target_bucket_mass_lift_vs_base": "<+0.05 diagnostic cap"
+  },
+  "training_started": false
+}

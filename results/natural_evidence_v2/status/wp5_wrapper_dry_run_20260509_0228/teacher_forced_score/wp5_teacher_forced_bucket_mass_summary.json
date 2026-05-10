@@ -1,0 +1,16 @@
+{
+  "artifact_role": "wp5_teacher_forced_bucket_mass_dry_run",
+  "condition_plan": [
+    "base"
+  ],
+  "e2e_eval_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_wp5_teacher_forced_bucket_mass_summary_v1",
+  "score_row_count": 8192,
+  "status": "DRY_RUN_VALIDATED_INPUTS",
+  "training_started": false
+}

@@ -1,0 +1,109 @@
+{
+  "allowlist": {
+    "command_pattern": "sbatch scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_scale_eval.sbatch",
+    "enable_policy": "enable only after wrapper review passes; disable immediately after one submission",
+    "enabled_now": false,
+    "name": "v2_wp6_r1_coordinate_majority_scale_eval"
+  },
+  "artifact_role": "wp6_r1_scale_reproducibility_decision_package",
+  "budgets": {
+    "controlling_query_budgets_per_block": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "do_not_claim_budget_128_or_256": true,
+    "scale_prompt_count_is_replicate_sample_size": true
+  },
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_submission_allowed_from_this_package_alone": false,
+    "training_allowed": false
+  },
+  "decision_status": "PREPARED_WP6_R1_SCALE_REPRO_PACKAGE_WRAPPER_REVIEW_REQUIRED",
+  "next_allowed_action": "Implement and locally validate the WP6-R1 scale wrapper and block-window majority decoder. Do not submit Slurm until wrapper review and allowlist update are recorded.",
+  "null_controls": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "payload_cells": [
+    {
+      "audit_key_id": "KWP4_QWEN_PILOT_001",
+      "checksum_byte_hex": "5e",
+      "payload_byte_hex": "a5",
+      "payload_cell_id": "wp4_payload_a5_checksum_5e",
+      "payload_plus_checksum_hex": "a55e",
+      "wp4_contract_path": "results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+      "wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07"
+    }
+  ],
+  "prompt_plan": {
+    "block_count": 4,
+    "block_size": 64,
+    "blocks": [
+      {
+        "block_id": "block_0",
+        "prompt_file_row_end_inclusive": 575,
+        "prompt_file_row_start": 512,
+        "selected_eval_index_end_inclusive": 63,
+        "selected_eval_index_start": 0
+      },
+      {
+        "block_id": "block_1",
+        "prompt_file_row_end_inclusive": 639,
+        "prompt_file_row_start": 576,
+        "selected_eval_index_end_inclusive": 127,
+        "selected_eval_index_start": 64
+      },
+      {
+        "block_id": "block_2",
+        "prompt_file_row_end_inclusive": 703,
+        "prompt_file_row_start": 640,
+        "selected_eval_index_end_inclusive": 191,
+        "selected_eval_index_start": 128
+      },
+      {
+        "block_id": "block_3",
+        "prompt_file_row_end_inclusive": 767,
+        "prompt_file_row_start": 704,
+        "selected_eval_index_end_inclusive": 255,
+        "selected_eval_index_start": 192
+      }
+    ],
+    "prompt_count": 256,
+    "prompt_source": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+    "prompt_source_rows": 2560,
+    "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+    "selected_prompt_file_row_end_inclusive": 767,
+    "selected_prompt_file_row_start": 512,
+    "selected_prompt_rule": "first 256 rows after filtering prompt_source by selected_split",
+    "selected_split": "wp3_r1_eval"
+  },
+  "scale_gate_at_budget_64": {
+    "forbidden_public_surface_count": 0,
+    "min_majority_margin_in_accepted_protected_blocks": 3,
+    "min_support_in_accepted_protected_blocks": 16,
+    "preferred_protected_block_accepts": "4/4",
+    "protected_block_accepts": ">=3/4",
+    "raw_accepts": "0/4",
+    "task_only_accepts": "0/4",
+    "wrong_key_accepts": "0/4",
+    "wrong_payload_accepts": "0/4"
+  },
+  "schema_name": "natural_evidence_v2_wp6_r1_scale_repro_decision_package_v1",
+  "source_proof_of_life": {
+    "cleaned_summary": "results/natural_evidence_v2/status/wp6_r1_coordinate_majority_e2e_eval_852094_metadata_cleaned_20260509_1839/wp6_r1_coordinate_majority_summary.json",
+    "job_id": "852094",
+    "protected_budget64_decoded_hex": "a55e",
+    "review_doc": "docs/natural_evidence_v2/WP6_R1_COORDINATE_MAJORITY_E2E_852094_REVIEW.md"
+  },
+  "wrapper_review_required": true
+}
