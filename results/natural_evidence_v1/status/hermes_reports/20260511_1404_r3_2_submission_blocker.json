@@ -1,0 +1,27 @@
+{
+  "schema_name": "natural_evidence_v1_hermes_blocker_v1",
+  "timestamp_utc": "2026-05-11T14:04:18Z",
+  "phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "status": "BLOCK_R3_2_SUBMISSION_ALLOWLIST_UNSAFE_NO_SLURM",
+  "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260511_1403_scheduled_tick_notification.json",
+  "notification_status": "SENT_ALL_REQUIRED_CHANNELS",
+  "blocked_action": "Enable the existing R3.2 allowlist entry and submit exactly one allowlisted Chimera Slurm job.",
+  "blocking_reason": "Local allowlist still has forbidden llama_v2_wp6_e2e_eval enabled while Llama remains disallowed; R3.2 submission is not safe or unambiguous.",
+  "forbidden_enabled_entries": [
+    "llama_v2_wp6_e2e_eval"
+  ],
+  "reviewed_r3_2_allowlist_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "reviewed_r3_2_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+  "allowlist_changed": false,
+  "slurm_job_submitted": false,
+  "training_started": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "far_aggregation_started": false,
+  "paper_claim_started": false,
+  "chimera_login_node_cpu_or_gpu_work_started": false,
+  "next_safe_action": "Repair submission preflight without CPU/GPU work: disable forbidden local Llama allowlist entry and verify no local or remote forbidden Llama/sanitizer/FAR entries are enabled. A later notified tick may enable only v2_r3_2_qwen_locked_scale_eval, submit exactly one reviewed Chimera Slurm job, and disable the entry after submission."
+}

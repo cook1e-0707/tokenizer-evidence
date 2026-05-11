@@ -1,0 +1,57 @@
+{
+  "allowlist_disabled_after_submission": true,
+  "allowlist_enabled_before_submission": [
+    "v2_r3_2_qwen_locked_scale_eval"
+  ],
+  "arms": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "blocks_per_arm": 96,
+  "blocks_per_group": 8,
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "full_far_claim_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "contract_id": "a55e",
+  "enabled_entries_after_submission": [],
+  "failure_message": "ValueError: split 'wp3_r1_eval' has only 0 prompts; need 512",
+  "failure_review": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_eval_853070/r3_2_job_853070_failure_review.md",
+  "failure_status": "FAILED_IMMEDIATE_PROMPT_SPLIT_WINDOW_MISMATCH_NO_MODEL_GENERATION",
+  "final_slurm_state": "FAILED",
+  "gpu": "A100:1",
+  "job_id": "853070",
+  "job_name": "nat-ev-v2-r32qwen",
+  "majority_margin_threshold": 3,
+  "model_generation_started": false,
+  "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_eval_853070",
+  "partition": "DGXA100",
+  "payload_diversity_tested": false,
+  "pre_notice_notification": "results/natural_evidence_v1/status/hermes_reports/20260511_1551_r3_2b_submission_pre_notice_notification.json",
+  "pre_notice_report": "results/natural_evidence_v1/status/hermes_reports/20260511_1551_r3_2b_submission_pre_notice.md",
+  "primary_budget": 64,
+  "query_budgets": [
+    16,
+    32,
+    64
+  ],
+  "replicate_groups": 12,
+  "schema_name": "natural_evidence_v2_r3_2b_submission_record_v1",
+  "slurm_initial_state": "PENDING(Resources)",
+  "status": "SUBMITTED_ONE_SLURM_JOB_ALLOWLIST_DISABLED_AFTER_SUBMISSION",
+  "submitted": true,
+  "submitted_at_utc": "2026-05-11T15:53:35Z",
+  "submitted_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+  "submitted_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "support_threshold": 16,
+  "updated_at_utc": "2026-05-11T15:58:24Z"
+}

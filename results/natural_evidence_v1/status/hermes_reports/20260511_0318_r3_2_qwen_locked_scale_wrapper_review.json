@@ -1,0 +1,20 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Stop until a later explicit notified R3.2 submission tick authorizes exactly one reviewed Slurm job. Do not submit Slurm from this state.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "review_doc": "docs/natural_evidence_v2/R3_2_QWEN_LOCKED_SCALE_WRAPPER_REVIEW_20260511.md",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "selected_prompt_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67",
+  "slurm_job_submitted": false,
+  "state_changing_action": "implemented and locally validated R3.2 Qwen locked-scale plan-only wrapper; disabled allowlist entry remains disabled",
+  "status": "R3_2_QWEN_LOCKED_SCALE_WRAPPER_REVIEWED_PLAN_ONLY_NO_SLURM",
+  "timestamp_utc": "2026-05-11T03:18:00Z",
+  "training_started": false,
+  "wrapper_review_recorded": true
+}

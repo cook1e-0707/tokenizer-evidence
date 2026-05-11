@@ -1,0 +1,65 @@
+schema_name: natural_evidence_v2_r3_2_same_contract_locked_scale_config_v1
+route_id: V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED
+package_id: qwen_v2_r3_2_same_contract_locked_scale_package_v1
+model_family: qwen
+
+contract:
+  contract_id: a55e
+  contract_path: results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json
+  payload_diversity_tested: false
+  distinct_payload_route_deferred_to: R3.4
+
+schedule:
+  replicate_groups: 12
+  blocks_per_group: 8
+  block_size: 64
+  total_blocks_per_arm: 96
+  prompt_window_policy: deterministic_4_eval_window_circular_reuse_by_replicate_group_index
+  generation_seed_cycle:
+    - 17
+    - 23
+    - 29
+
+arms:
+  - protected
+  - raw
+  - task_only
+  - wrong_key
+  - wrong_payload
+
+query_budgets:
+  - 16
+  - 32
+  - 64
+primary_budget: 64
+diagnostic_budgets:
+  - 16
+  - 32
+
+decoder:
+  decoder_id: qwen_v2_r3_2_locked_scale_coordinate_majority_decoder_v1
+  support_threshold: 16
+  majority_margin_threshold: 3
+  checksum_required: true
+  threshold_changes_allowed_after_transcript: false
+
+pass_gate:
+  protected_accepts_at_64_min: 80
+  protected_blocks_total: 96
+  raw_accepts_at_64_max: 0
+  task_only_accepts_at_64_max: 0
+  wrong_key_accepts_at_64_max: 0
+  wrong_payload_accepts_at_64_max: 0
+  min_accepted_block_support: 16
+  min_accepted_block_majority_margin: 3
+  forbidden_public_surface_count: 0
+  all_replicate_groups_complete: true
+
+claim_control:
+  payload_diversity_claim_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  paper_claim_allowed: false

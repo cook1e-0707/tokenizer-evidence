@@ -1,0 +1,40 @@
+{
+  "artifact_only": true,
+  "config_yaml": "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml",
+  "eval_prompt_count": 2048,
+  "eval_prompt_file_row_end_inclusive": 2559,
+  "eval_prompt_file_row_start": 512,
+  "generation_started": false,
+  "implementation_doc": "docs/natural_evidence_v2/R3_2_PROMPT_SPLIT_IMPLEMENTATION_20260511_1801.md",
+  "llama_started": false,
+  "next_allowed_action": "Artifact-only 852426 replay compatibility re-review or explicit supersession for the repaired R3.2 prompt split contract. Do not submit another R3.2 Slurm job until replay compatibility is re-reviewed or superseded, allowlist safety is rechecked, and a new single-job submission route is recorded.",
+  "paper_claim_allowed": false,
+  "plan_only_precommit_dir": "results/natural_evidence_v2/status/r3_2_prompt_split_repair_precommit_20260511_1801",
+  "prompt_window_policy": "deterministic_4_eval_window_circular_reuse_by_replicate_group_index",
+  "qwen_e2e_rerun_started": false,
+  "selected_prompt_manifest_sha256": "3e50a08773c4c7dca3be976a762840a8d8a960ac63f4cfce382af3051a2b82d1",
+  "selected_split": "wp3_r1_eval",
+  "shard_assignments": {
+    "shard_00": "512..1023",
+    "shard_01": "1024..1535",
+    "shard_02": "1536..2047",
+    "shard_03": "2048..2559",
+    "shard_04": "512..1023",
+    "shard_05": "1024..1535",
+    "shard_06": "1536..2047",
+    "shard_07": "2048..2559",
+    "shard_08": "512..1023",
+    "shard_09": "1024..1535",
+    "shard_10": "1536..2047",
+    "shard_11": "2048..2559"
+  },
+  "slurm_job_submitted": false,
+  "state_changing_action": "implemented the recorded R3.2 eval-only prompt split repair in the precommit builder, wrapper split calls, and config; reran local plan-only precommit without Slurm or generation",
+  "status": "IMPLEMENTED_R3_2_PROMPT_SPLIT_REPAIR_PREFLIGHT_PASS_NO_SLURM_NO_GENERATION",
+  "training_started": false,
+  "validation": {
+    "bash_n_wrapper": "PASS",
+    "precommit_builder": "PASS",
+    "py_compile_precommit_builder": "PASS"
+  }
+}

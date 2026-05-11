@@ -1,0 +1,43 @@
+{
+  "allowlist_enabled": false,
+  "artifact_only": true,
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_allowed": false
+  },
+  "compatibility_decision": "pass",
+  "compatibility_reason": "Job 852426 used selected_split=wp3_r1_eval and selected_prompt_file_rows=768..1279, which are within the repaired R3.2 eval-only allocation rows 512..2559.",
+  "current_phase": "V2_R3_2C_JOB_853070_FAILED_PROMPT_SPLIT_MISMATCH_NO_RESUBMIT",
+  "doc": "docs/natural_evidence_v2/R3_2_852426_REPLAY_COMPATIBILITY_REREVIEW_20260511_1817.md",
+  "fresh_replay_dir": "results/natural_evidence_v2/status/r3_2_same_contract_852426_replay_rereview_20260511_1817",
+  "fresh_replay_summary": "results/natural_evidence_v2/status/r3_2_same_contract_852426_replay_rereview_20260511_1817/r3_2_852426_replay_summary.json",
+  "fresh_replay_summary_status": "PASS_R3_2_SAME_CONTRACT_852426_REPLAY_EXACT_MATCH_NO_SLURM",
+  "fresh_replay_validation": {
+    "replay_decode_row_count": 160,
+    "replay_exact_match": true,
+    "support_csv_rows_including_header": 1537
+  },
+  "next_allowed_action": "Artifact-only next step: recheck R3.2 allowlist safety under the repaired prompt split contract, then record a new single-job submission route before any Slurm submission. Do not submit another R3.2 Slurm job in this tick.",
+  "repaired_r3_2_prompt_contract": {
+    "eval_prompt_file_row_end_inclusive": 2559,
+    "eval_prompt_file_row_start": 512,
+    "prompt_window_policy": "deterministic_4_eval_window_circular_reuse_by_replicate_group_index",
+    "selected_split": "wp3_r1_eval"
+  },
+  "schema_name": "natural_evidence_v2_r3_2_852426_replay_compatibility_rereview_v1",
+  "source_job_852426_prompt_contract": {
+    "selected_prompt_file_row_end_inclusive": 1279,
+    "selected_prompt_file_row_start": 768,
+    "selected_split": "wp3_r1_eval"
+  },
+  "state_changing_action": "recorded artifact-only 852426 replay compatibility re-review under the repaired R3.2 prompt split contract",
+  "status": "PASS_R3_2_852426_REPLAY_COMPATIBILITY_REREVIEW_UNDER_REPAIRED_PROMPT_SPLIT_NO_SLURM",
+  "timestamp_utc": "2026-05-11T18:17:20Z"
+}

@@ -1,0 +1,62 @@
+{
+  "artifact_only": true,
+  "blocked_until": [
+    "repaired_allocation_implemented",
+    "plan_only_preflight_rerun",
+    "852426_replay_compatibility_re_reviewed_or_superseded",
+    "allowlist_safety_rechecked",
+    "new_single_job_submission_route_recorded"
+  ],
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_allowed": false
+  },
+  "decision_doc": "docs/natural_evidence_v2/R3_2_PROMPT_SPLIT_CONTRACT_REPAIR_20260511_1747.md",
+  "eval_prompt_count": 2048,
+  "eval_prompt_file_row_end_inclusive": 2559,
+  "eval_prompt_file_row_start": 512,
+  "failed_job_id": "853070",
+  "previous_policy_superseded": "deterministic_5_window_circular_reuse_by_replicate_group_index",
+  "prompt_source_path": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "prompt_source_rows": 2560,
+  "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+  "repaired_policy": "deterministic_4_eval_window_circular_reuse_by_replicate_group_index",
+  "repaired_windows": [
+    {
+      "eval_window_index": 0,
+      "file_row_end_inclusive": 1023,
+      "file_row_start": 512,
+      "sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"
+    },
+    {
+      "eval_window_index": 1,
+      "file_row_end_inclusive": 1535,
+      "file_row_start": 1024,
+      "sha256": "52487748415b39a675e0c0860927cfc04047af0bec647a7c2fecb5812e044630"
+    },
+    {
+      "eval_window_index": 2,
+      "file_row_end_inclusive": 2047,
+      "file_row_start": 1536,
+      "sha256": "5e151bd80b2befe1b77658f98976c13d8901b6dfb357b5339a66fc4da6fab72a"
+    },
+    {
+      "eval_window_index": 3,
+      "file_row_end_inclusive": 2559,
+      "file_row_start": 2048,
+      "sha256": "d0acb1f20ed5b54b08a90facc852905764c341605606801f6a48eb10721b063c"
+    }
+  ],
+  "required_wrapper_split": "wp3_r1_eval",
+  "schema_name": "natural_evidence_v2_r3_2_prompt_split_contract_repair_v1",
+  "state_changing_action": "recorded artifact-only repaired R3.2 prompt split contract after job 853070 prompt split mismatch",
+  "status": "RECORDED_R3_2_PROMPT_SPLIT_CONTRACT_REPAIR_NO_SLURM_NO_GENERATION",
+  "timestamp_utc": "2026-05-11T17:47:10Z"
+}

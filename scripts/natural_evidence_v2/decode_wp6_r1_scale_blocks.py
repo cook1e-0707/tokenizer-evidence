@@ -51,7 +51,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prompts-jsonl", type=Path, default=DEFAULT_PROMPTS)
     parser.add_argument("--wp4-contract", type=Path, default=DEFAULT_CONTRACT)
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--split", default="wp3_r1_eval")
+    parser.add_argument("--split", default="")
     parser.add_argument("--max-prompts", type=int, default=256)
     parser.add_argument("--block-count", type=int, default=4)
     parser.add_argument("--block-size", type=int, default=64)
@@ -143,7 +143,7 @@ def build_prompt_plan(
     selected = [
         (file_row, dict(row))
         for file_row, row in rows
-        if str(row.get("split", "")) == split
+        if (not split or str(row.get("split", "")) == split)
         and (
             expected_file_row_start is None
             or expected_file_row_end is None

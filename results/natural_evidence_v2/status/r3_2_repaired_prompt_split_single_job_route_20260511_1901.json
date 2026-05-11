@@ -1,0 +1,49 @@
+{
+  "allowlist_entry_to_enable_later": "v2_r3_2_qwen_locked_scale_eval",
+  "allowlist_recheck_json": "results/natural_evidence_v2/status/r3_2_allowlist_recheck_repaired_prompt_split_20260511_1901.json",
+  "artifact_only": true,
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "llama_started": false,
+    "paper_claim_allowed": false,
+    "paper_claim_started": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "same_family_null_started": false,
+    "sanitizer_allowed": false,
+    "sanitizer_started": false,
+    "slurm_job_submitted": false,
+    "training_allowed": false,
+    "training_started": false
+  },
+  "current_phase": "V2_R3_2C_JOB_853070_FAILED_PROMPT_SPLIT_MISMATCH_NO_RESUBMIT",
+  "decision_doc": "docs/natural_evidence_v2/R3_2_REPAIRED_PROMPT_SPLIT_ALLOWLIST_RECHECK_AND_ROUTE_20260511_1901.md",
+  "do_not_submit_this_tick": true,
+  "failed_job_id": "853070",
+  "later_submission_route": [
+    "confirm this route record and repaired prompt split implementation",
+    "confirm the R3.2 allowlist safety recheck remains current or rerun it if controlling artifacts changed",
+    "send required Telegram and email pre-notice",
+    "enable exactly v2_r3_2_qwen_locked_scale_eval",
+    "submit exactly one Slurm job with sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+    "disable the allowlist entry immediately after sbatch returns",
+    "record the submission and stop"
+  ],
+  "next_allowed_action": "Later notified submission tick may enable exactly v2_r3_2_qwen_locked_scale_eval, submit exactly one reviewed R3.2 Chimera Slurm job, immediately disable the allowlist entry, record the submission, and stop. Do not submit another R3.2 Slurm job in the 2026-05-11 19:01Z tick.",
+  "repaired_prompt_split_contract": {
+    "eval_prompt_file_row_end_inclusive": 2559,
+    "eval_prompt_file_row_start": 512,
+    "prompt_window_policy": "deterministic_4_eval_window_circular_reuse_by_replicate_group_index",
+    "selected_split": "wp3_r1_eval"
+  },
+  "route_id": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+  "schema_name": "natural_evidence_v2_r3_2_repaired_prompt_split_single_job_route_v1",
+  "slurm_command_allowed_later_only": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+  "state_changing_action": "recorded artifact-only R3.2 allowlist safety recheck under the repaired prompt split contract and a later single-job submission route",
+  "status": "PASS_R3_2_ALLOWLIST_RECHECK_REPAIRED_PROMPT_SPLIT_AND_ROUTE_RECORDED_NO_SLURM",
+  "timestamp_utc": "2026-05-11T19:01:00Z",
+  "wrapper_sha256": "637579367eb045d02c5518b130be39a4231797a84b19b2db7385ec2bec9d9737"
+}

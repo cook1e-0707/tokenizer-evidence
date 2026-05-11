@@ -1,0 +1,28 @@
+{
+  "allowlist_enabled": false,
+  "far_aggregation_allowed": false,
+  "generation_started": false,
+  "implemented_files": [
+    "scripts/natural_evidence_v2/aggregate_r3_2_locked_scale_shards.py",
+    "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+    "tests/test_natural_evidence_v2_wp6_coordinate_majority.py"
+  ],
+  "llama_allowed": false,
+  "local_validation": {
+    "bash_n": "PASS",
+    "plan_only_output_dir": "results/natural_evidence_v2/status/r3_2_full_wrapper_plan_validation_20260511_0645",
+    "plan_only_wrapper": "PASS",
+    "py_compile": "PASS",
+    "pytest": "PASS_10_TESTS"
+  },
+  "next_allowed_action": "Review the implemented R3.2 full same-contract wrapper aggregation path and existing exact 852426 replay artifacts before enabling allowlist or submitting Slurm.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "implemented R3.2 same-contract 12-shard aggregation path and wired wrapper full path; performed local syntax, unit, and plan-only validation only",
+  "status": "R3_2_FULL_WRAPPER_AGGREGATION_PATH_IMPLEMENTED_LOCAL_PLAN_VALIDATED_NO_SLURM",
+  "training_allowed": false,
+  "wrapper_review_passed": false
+}

@@ -1,0 +1,25 @@
+{
+  "allowlist_enabled": false,
+  "blocker": "existing full-generation/decode path is single-window with fixed WP6 artifact names and has no reviewed R3.2 same-contract 12-shard aggregate gate artifact",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Implement or review a minimal R3.2 same-contract 12-shard aggregation path before allowlist enablement, TG/email notification, exactly-one-job gate, or Slurm submission.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "reviewed_paths": [
+    "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+    "scripts/natural_evidence_v2/slurm/wp6_r2_option_b_scale_eval.sbatch",
+    "scripts/natural_evidence_v2/generate_wp6_e2e_outputs.py",
+    "scripts/natural_evidence_v2/decode_wp6_payload.py",
+    "scripts/natural_evidence_v2/decode_wp6_r1_scale_blocks.py",
+    "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml"
+  ],
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "reviewed R3.2 full wrapper upgrade path and recorded blocker: wrapper needs reviewed same-contract 12-shard aggregation path before Slurm",
+  "status": "BLOCK_R3_2_FULL_WRAPPER_NEEDS_SHARD_AGGREGATION_PATH_NO_SLURM",
+  "timestamp_utc": "2026-05-11T06:17:02Z",
+  "training_started": false
+}

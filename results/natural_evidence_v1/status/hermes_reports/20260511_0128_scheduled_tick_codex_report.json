@@ -1,0 +1,22 @@
+{
+  "timestamp_utc": "20260511_0128",
+  "phase": "V2_WP6_R2_OPTION_B_SCALE_GATE_852426_REVIEWED_PASS_HOLD_FOR_NEXT_ROUTE",
+  "decision": "STOP_HOLD_FOR_EXPLICIT_NEXT_ROUTE",
+  "state_changing_action": "wrote Codex hold report only",
+  "reviewed_gate": "docs/natural_evidence_v2/WP6_R2_OPTION_B_SCALE_EVAL_852426_REVIEW.md",
+  "wp6_r2_option_b_scale_job": "852426",
+  "wp6_r2_option_b_scale_gate": "PASS_REVIEWED",
+  "next_allowed_action": "stop until a new route is explicitly recorded",
+  "quarantined_noncanonical_artifacts_used": false,
+  "training_started": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_benchmark_started": false,
+  "far_aggregation_started": false,
+  "paper_facing_positive_claim_made": false,
+  "chimera_cpu_gpu_work_started": false,
+  "slurm_job_submitted": false,
+  "status": "HELD_NO_NEXT_ROUTE_RECORDED"
+}

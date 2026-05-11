@@ -1,0 +1,69 @@
+{
+  "timestamp_utc": "2026-05-11T01:24:00Z",
+  "phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "status": "ROUTE_R3_OPENED_ARTIFACT_ONLY_NO_SLURM_SUBMITTED",
+  "route_id": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "canonical_review": "docs/natural_evidence_v2/WP6_R2_OPTION_B_852426_CANONICAL_REVIEW.md",
+  "canonical_summary": "results/natural_evidence_v2/status/wp6_r2_option_b_852426_canonical_summary.json",
+  "decoder_spec": "docs/natural_evidence_v2/REPEATED_COORDINATE_DECODER_SPEC.md",
+  "source_job_id": "852426",
+  "source_job_status": "COMPLETED 0:0",
+  "qwen_v2_scale_allowed": true,
+  "reviewed_852426_gate": {
+    "protected_block_accepts_at_64": "7/8",
+    "raw_accepts_at_64": "0/8",
+    "task_only_accepts_at_64": "0/8",
+    "wrong_key_accepts_at_64": "0/8",
+    "wrong_payload_accepts_at_64": "0/8",
+    "min_support_in_accepted_blocks": 26,
+    "min_majority_margin_in_accepted_blocks": 5,
+    "forbidden_public_surface_count": 0
+  },
+  "r3_2_intended_package": {
+    "payloads": [
+      "P00",
+      "P01",
+      "P02",
+      "P03"
+    ],
+    "seeds": [
+      17,
+      23,
+      29
+    ],
+    "blocks_per_cell": 8,
+    "arms": [
+      "protected",
+      "raw",
+      "task_only",
+      "wrong_key",
+      "wrong_payload"
+    ],
+    "primary_budget": 64,
+    "diagnostic_budgets": [
+      16,
+      32
+    ],
+    "protected_accept_gate_at_64": ">=80/96",
+    "null_accept_gate_at_64": "0/96 each null arm",
+    "min_support": ">=16",
+    "min_majority_margin": ">=3",
+    "forbidden_public_surface_count": 0
+  },
+  "new_slurm_job_submitted": false,
+  "new_training_started": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "far_aggregation_started": false,
+  "paper_facing_positive_claim_made": false,
+  "out_of_band_llama_artifacts_adopted": false,
+  "llama_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "far_aggregation_allowed": false,
+  "paper_claim_allowed": false,
+  "next_allowed_action": "Prepare Route R3.2 Qwen locked-scale package/wrapper review only; do not submit Slurm until wrapper, allowlist, precommit, notification, and gate review are recorded."
+}

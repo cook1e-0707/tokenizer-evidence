@@ -1,0 +1,33 @@
+{
+  "authorization_scope": [
+    "training after training prerequisite gates pass",
+    "Llama after Qwen R3 and canonical migration gates pass",
+    "FAR/null expansion after positive/null prerequisites pass",
+    "sanitizer after positive recovery and required model-family gates pass",
+    "paper-facing claims after evidence and claim-review gates pass"
+  ],
+  "current_gate_values_remain_false": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "current_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "next_allowed_action": "Continue the current R3.2 blocker-clearing path: finish or upgrade the R3.2 wrapper from plan-only to a reviewed full locked-scale generation/eval wrapper, validate locally, record review, then enable one allowlist entry and submit exactly one Chimera Slurm job after TG/email notification. Future training/Llama/FAR/sanitizer/paper-claim work may proceed automatically only after its prerequisite gate is explicitly recorded as allowed.",
+  "not_immediate_unlock": true,
+  "report_json": "results/natural_evidence_v1/status/hermes_reports/20260511_0600_conditional_future_stage_authorization.json",
+  "report_md": "results/natural_evidence_v1/status/hermes_reports/20260511_0600_conditional_future_stage_authorization.md",
+  "required_gate_booleans": {
+    "far_aggregation": "far_aggregation_allowed",
+    "llama": "llama_allowed",
+    "paper_claim": "paper_claim_allowed",
+    "same_family_null": "same_family_null_allowed",
+    "sanitizer": "sanitizer_allowed",
+    "training": "training_allowed"
+  },
+  "state_changing_action": "recorded conditional authorization for future gated training/Llama/FAR/sanitizer/paper-claim stages without unlocking them now",
+  "status": "RECORDED_CONDITIONAL_FUTURE_STAGE_AUTHORIZATION",
+  "timestamp_utc": "2026-05-11T05:41:06Z"
+}

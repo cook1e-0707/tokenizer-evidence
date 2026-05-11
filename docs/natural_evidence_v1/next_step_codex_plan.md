@@ -1,5 +1,10 @@
 # Codex Next Step Plan: v1 Frozen, v2 Controlled Micro-Slots
 
+Compact state note: routine Codex/Hermes ticks should read
+`docs/natural_evidence_v2/CURRENT_STATE.md` first and consult this long
+historical plan only when the compact state is ambiguous or provenance is
+needed.
+
 ## Expert decision 2026-05-08
 
 The v1 passive opportunity / global frame / strict token-index route is frozen.
@@ -88,20 +93,83 @@ New primary route:
 natural_evidence_v2_controlled_micro_slots
 ```
 
+Current canonical route:
+
+```text
+V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED
+```
+
+Standing authorization update, 2026-05-11T04:11Z:
+
+```text
+The user authorized Codex and Hermes to continue all work in the current
+approved R3 stage without repeatedly asking for explicit approval. This applies
+to the already approved Qwen v2 R3 locked-scale route only. It does not
+authorize Llama, same-family nulls, sanitizer, FAR aggregation, paper-facing
+positive claims, unallowlisted jobs, or Chimera login-node CPU/GPU scoring.
+The next action should proceed automatically under the existing gates: finish
+or upgrade the R3.2 wrapper from plan-only to reviewed full locked-scale
+generation/eval if needed, update the allowlist only after review, notify
+configured channels, and submit exactly one allowlisted Chimera Slurm job.
+```
+
+Conditional future authorization update, 2026-05-11T06:00Z:
+
+```text
+The user authorized later-stage training, Llama, FAR/null expansion, sanitizer,
+and paper-claim work after their prerequisite gates pass. This is not an
+immediate unlock and it is not a permanent prohibition. Each class remains
+gate-locked until its corresponding gate_status boolean is true and
+next_allowed_action explicitly names that class.
+```
+
+R3.0 canonical adoption and R3.1 decoder specification are recorded:
+
+```text
+docs/natural_evidence_v2/WP6_R2_OPTION_B_852426_CANONICAL_REVIEW.md
+docs/natural_evidence_v2/REPEATED_COORDINATE_DECODER_SPEC.md
+results/natural_evidence_v2/status/wp6_r2_option_b_852426_canonical_summary.json
+```
+
+WP6-R2 Option B Slurm job `852426` is adopted only as a Qwen-only positive
+diagnostic. The precommitted robust-block scale gate passed with protected
+block accepts `7/8` at budget `64`, diagnostic null robust accepts `0/8` for
+raw/task-only/wrong-key/wrong-payload, accepted-block min support `26`,
+accepted-block min majority margin `5`, and forbidden public surface count
+`0`. This is not FAR, not Llama, not a same-family null, not a sanitizer
+benchmark, and not a paper-facing positive claim.
+
 Current next allowed action:
 
 ```text
-WP6-R2 Option B Slurm job 852426 is pending result review:
-results/natural_evidence_v1/status/hermes_reports/20260510_0337_wp6_r2_option_b_job_852426_submitted.md.
-The reviewed R2 diagnostic uses eight independent 64-prompt blocks, budget 64,
-majority margin 3, protected robust block accepts >= 6/8, null robust accepts
-= 0/8, and fresh wp3_r1_eval file rows 768..1279. The allowlist entry
-v2_wp6_r2_option_b_scale_eval is disabled with condition
-submitted_once_as_job_852426_pending_wp6_r2_option_b_scale_result_review.
-Monitor job 852426; after completion, sync wp6_r2_option_b_scale_eval_852426
-artifacts and review the precommitted R2 Option B gates. Do not submit another
-WP6 job before that review.
+Proceed automatically with the approved R3.2 Qwen locked-scale route without
+waiting for another user approval on this same route. First finish or upgrade
+the R3.2 wrapper from plan-only to reviewed full locked-scale generation/eval
+if needed; then update the allowlist only after review, notify configured
+channels, and submit exactly one allowlisted Chimera Slurm job. Llama,
+same-family nulls, sanitizer, FAR aggregation, and paper-facing positive claims
+remain disabled.
 ```
+
+R3.2 wrapper implementation/review is recorded:
+
+```text
+docs/natural_evidence_v2/R3_2_QWEN_LOCKED_SCALE_WRAPPER_REVIEW_20260511.md
+results/natural_evidence_v2/status/r3_2_qwen_locked_scale_wrapper_review_20260511_0318.json
+results/natural_evidence_v2/status/r3_2_wrapper_plan_validation_20260511_0318/
+```
+
+State reconciliation update, 2026-05-11:
+
+```text
+docs/natural_evidence_v2/HERMES_CODEX_STATE_RECONCILIATION_20260511.md
+```
+
+Read-only synchronization found out-of-band Llama Slurm jobs and local
+FAR/Llama/sanitizer artifacts that were not part of the canonical Hermes route.
+They are quarantined as noncanonical and must not be used as formal progress,
+FAR, Llama, sanitizer, or paper-facing evidence. The `build_llama_v2_bucket_bank`
+allowlist entry is disabled. R3 does not adopt those artifacts.
 
 Current expert standard:
 
@@ -1636,16 +1704,20 @@ plan with dev `>=512`, eval `>=2048`, the strict line-start detector, and an
 explicit eval oracle prompt-local frame completion field. Do not submit Slurm
 without explicit approval.
 
-### Still forbidden
+### Gate-controlled actions not yet unlocked
 
-- no training
-- no generation of protected transcripts
-- no Qwen E2E
-- no Llama
-- no same-family null
-- no sanitizer benchmark
-- no FAR aggregation
-- no paper-facing positive claim
+- training is conditionally authorized for later phases, but remains locked
+  until the relevant training gate is true
+- protected transcript generation remains locked unless the current route
+  explicitly names it and uses the reviewed Slurm wrapper
+- Qwen E2E outside the reviewed route remains locked
+- Llama remains locked until canonical Llama migration gates pass
+- same-family null remains locked until Qwen null prerequisites pass
+- sanitizer benchmark remains locked until positive recovery and robustness
+  prerequisites pass
+- FAR aggregation remains locked until null/FAR prerequisites pass
+- paper-facing positive claim remains locked until evidence/claim-review gates
+  pass
 
 ## Explicit non-goals for Codex right now
 

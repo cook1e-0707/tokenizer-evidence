@@ -1,0 +1,21 @@
+{
+  "allowlist_enabled": false,
+  "blocker": "Hermes tick requested R3.2-B submission from a stale 20260511_1553 report, but docs/natural_evidence_v2/CURRENT_STATE.md and r3_2b_submission_record.json already record exactly one submitted R3.2-B Slurm job.",
+  "blocked_action": "submit another R3.2-B Qwen locked-scale Slurm job",
+  "current_state_path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+  "enabled_entries_after_submission": [],
+  "generation_started": false,
+  "job_id": "853070",
+  "next_allowed_action": "Monitor Slurm job 853070. After completion, sync and review R3.2 locked-scale artifacts. Do not submit another R3.2 job unless this job fails before producing reviewable artifacts and a new recovery route is explicitly recorded.",
+  "paper_claim_allowed": false,
+  "report_md": "results/natural_evidence_v1/status/hermes_reports/20260511_1554_r3_2_stale_submission_blocker.md",
+  "schema_name": "natural_evidence_v2_r3_2_stale_submission_blocker_v1",
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded blocker for stale R3.2-B submission instruction after detecting job 853070 already submitted",
+  "status": "BLOCK_R3_2_STALE_SUBMISSION_REQUEST_JOB_853070_ALREADY_SUBMITTED",
+  "submitted_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+  "submitted_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "submission_record": "results/natural_evidence_v2/status/r3_2b_submission_record.json",
+  "timestamp_utc": "2026-05-11T15:54:36Z",
+  "training_started": false
+}

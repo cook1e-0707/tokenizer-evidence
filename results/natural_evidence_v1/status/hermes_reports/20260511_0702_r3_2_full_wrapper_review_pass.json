@@ -1,0 +1,24 @@
+{
+  "allowlist_enabled": false,
+  "far_aggregation_allowed": false,
+  "generation_started": false,
+  "llama_allowed": false,
+  "next_allowed_action": "Enable the existing R3.2 allowlist entry for exactly one reviewed Slurm command only after the next required TG/email notification path is satisfied, then submit exactly one allowlisted Chimera Slurm job.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "review_doc": "docs/natural_evidence_v2/R3_2_FULL_WRAPPER_REVIEW_20260511_0702.md",
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "reviewed the R3.2 full same-contract wrapper aggregation path and exact 852426 replay artifacts; recorded wrapper review pass only",
+  "status": "PASS_R3_2_FULL_SAME_CONTRACT_WRAPPER_REVIEW_NO_SLURM",
+  "summary_json": "results/natural_evidence_v2/status/r3_2_full_wrapper_review_20260511_0702.json",
+  "timestamp_utc": "2026-05-11T07:02:05Z",
+  "training_allowed": false,
+  "validation": {
+    "bash_n": "PASS",
+    "py_compile": "PASS",
+    "pytest": "PASS_10_TESTS"
+  },
+  "wrapper_review_passed": true
+}

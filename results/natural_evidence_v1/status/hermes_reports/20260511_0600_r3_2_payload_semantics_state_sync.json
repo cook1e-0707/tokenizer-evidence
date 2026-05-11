@@ -1,0 +1,20 @@
+{
+  "blocker": "R3.2 full-wrapper payload semantics are ambiguous: package scope names P00/P01/P02/P03, but the available reviewed WP6 generation/decode path is tied to the single WP5-R2 a55e contract.",
+  "current_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "far_aggregation_allowed": false,
+  "latest_blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_054626_r3_2_full_wrapper_payload_semantics_blocker.md",
+  "llama_allowed": false,
+  "next_allowed_action": "Resolve R3.2 payload semantics first. Record whether P00/P01/P02/P03 are cell labels reusing the fixed a55e WP5-R2 contract or distinct reviewed payload contracts. Only after that decision may Codex upgrade/review the full locked-scale wrapper, enable one allowlist entry, notify TG/email, and submit exactly one Chimera Slurm job.",
+  "paper_claim_allowed": false,
+  "r3_2_payload_semantics_resolved": false,
+  "required_resolution": "Record an explicit R3.2 payload semantics decision before full-wrapper upgrade: either P00/P01/P02/P03 are labels intentionally reusing fixed a55e, or they are distinct payload contracts with reviewed paths, bytes/checksums, and adapter compatibility.",
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "state_changing_action": "synced latest Hermes/Codex payload-semantics blocker into compact state and gate status",
+  "status": "SYNCED_R3_2_PAYLOAD_SEMANTICS_BLOCKER",
+  "timestamp_utc": "2026-05-11T06:00:12Z",
+  "training_allowed": false,
+  "wp6_r3_2_locked_scale_allowed": false,
+  "wp6_r3_2_locked_scale_slurm_submitted": false,
+  "wrapper_plan_only_blocker_remains": true
+}

@@ -1,0 +1,21 @@
+{
+  "blocker": "R3.2 prompt allocation policy is not fixed",
+  "decision": "BLOCK_R3_2_WRAPPER_UNTIL_PROMPT_ALLOCATION_POLICY_RECORDED",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Record an R3.2 prompt allocation decision before wrapper implementation: payload/seed cell prompt-window policy, prompt source path(s), row ranges or deterministic reuse rule, per-cell block mapping, selected prompt manifest hash policy, and overwrite refusal surfaces. Do not submit Slurm.",
+  "paper_claim_allowed": false,
+  "prompt_responses_required_per_arm": 6144,
+  "qwen_e2e_rerun_started": false,
+  "referenced_wrapper_exists": false,
+  "referenced_wrapper_path": "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+  "route_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 wrapper prompt-allocation blocker only",
+  "status": "BLOCK_R3_2_WRAPPER_PROMPT_ALLOCATION_POLICY_MISSING_NO_SLURM",
+  "timestamp_utc": "2026-05-11T02:31:00Z",
+  "training_started": false
+}

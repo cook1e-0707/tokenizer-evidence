@@ -1,0 +1,26 @@
+{
+  "timestamp_utc": "2026-05-11T03:01:50Z",
+  "phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "status": "PASS_STATE_SYNC_GATE_NEXT_ACTION_UPDATED",
+  "issue": "R3.2 prompt allocation decision was already recorded, but gate_status next_allowed_action still requested the completed prompt-allocation action.",
+  "canonical_completed_action": {
+    "prompt_allocation_doc": "docs/natural_evidence_v2/R3_2_PROMPT_ALLOCATION_DECISION_20260511.md",
+    "prompt_allocation_json": "results/natural_evidence_v2/status/r3_2_prompt_allocation_decision_20260511_0244.json",
+    "selected_prompt_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67"
+  },
+  "files_updated": [
+    "results/natural_evidence_v1/status/gate_status.json",
+    "results/natural_evidence_v2/status/gate_status.json",
+    "docs/natural_evidence_v1/AUTOMATION_STATE.md"
+  ],
+  "next_allowed_action": "Implement or review an R3.2-specific Qwen locked-scale wrapper and disabled allowlist entry, then run local plan-only validation only. Do not submit Slurm.",
+  "new_slurm_job_submitted": false,
+  "new_training_started": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "far_aggregation_started": false,
+  "paper_facing_positive_claim_made": false
+}

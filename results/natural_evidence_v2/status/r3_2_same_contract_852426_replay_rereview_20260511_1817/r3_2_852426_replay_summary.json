@@ -1,0 +1,71 @@
+{
+  "artifact_role": "r3_2_same_contract_852426_replay_summary",
+  "claim_control": {
+    "allowlist_enabled": false,
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_allowed": false
+  },
+  "contract_id": "a55e",
+  "expected_replay_match": {
+    "controlling_budget": 64,
+    "forbidden_public_surface_count": 0,
+    "null_accept_counts_at_controlling_budget": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "protected_block_accept_count_at_controlling_budget": 7,
+    "protected_block_count": 8,
+    "protected_min_majority_margin_in_accepted_blocks": 5,
+    "protected_min_support_in_accepted_blocks": 26,
+    "scale_gate_pass": true,
+    "scale_gate_status": "PASS_WP6_R2_OPTION_B_ROBUST_BLOCK_SCALE_GATE"
+  },
+  "r3_2_full_gate_evaluated": false,
+  "r3_2_full_gate_note": "This is the required 852426 same-contract wrapper replay over 8 reviewed WP6-R2 blocks. It is not the 96-block R3.2 locked-scale gate.",
+  "r3_2_gate_targets": {
+    "forbidden_public_surface_count": 0,
+    "min_majority_margin_in_accepted_protected_blocks": 3,
+    "min_protected_accepts_at_64": 80,
+    "min_support_in_accepted_protected_blocks": 16,
+    "null_accepts_per_condition_at_64": 0,
+    "protected_block_count": 96
+  },
+  "replay_decode_row_count": 160,
+  "replay_exact_match": true,
+  "replayed_metrics": {
+    "controlling_budget": 64,
+    "forbidden_public_surface_count": 0,
+    "null_accept_counts_at_controlling_budget": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "protected_block_accept_count_at_controlling_budget": 7,
+    "protected_block_count": 8,
+    "protected_min_majority_margin_in_accepted_blocks": 5,
+    "protected_min_support_in_accepted_blocks": 26,
+    "scale_gate_pass": true,
+    "scale_gate_status": "PASS_WP6_R2_OPTION_B_ROBUST_BLOCK_SCALE_GATE"
+  },
+  "schema_name": "natural_evidence_v2_r3_2_same_contract_852426_replay_summary_v1",
+  "source_config_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml",
+  "source_config_sha256": "200522fda12ba110c316bea0de2052af2b2c2382a9486c95f249bb414132489f",
+  "source_job": {
+    "job_id": "852426",
+    "source_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp6_r2_option_b_scale_eval_852426",
+    "source_summary_sha256": "c56511812322bbfe00dcae57511a1268c71afedd8531582259d67a675160f2f4"
+  },
+  "source_wp4_contract_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+  "source_wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07",
+  "status": "PASS_R3_2_SAME_CONTRACT_852426_REPLAY_EXACT_MATCH_NO_SLURM"
+}

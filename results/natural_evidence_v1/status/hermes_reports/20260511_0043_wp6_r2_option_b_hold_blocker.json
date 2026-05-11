@@ -1,0 +1,30 @@
+{
+  "timestamp_utc": "2026-05-11T00:44:21Z",
+  "phase": "V2_WP6_R2_OPTION_B_SCALE_GATE_852426_REVIEWED_PASS_HOLD_FOR_NEXT_ROUTE",
+  "status": "BLOCKED_HOLD_FOR_NEXT_ROUTE",
+  "controlling_state": "WP6-R2 Option B Slurm job 852426 has already passed reviewed robust-block scale gates; next allowed action is to stop until the next route is explicitly recorded.",
+  "blocker": "No explicit next route is recorded for work beyond the reviewed WP6-R2 Option B gate pass.",
+  "state_changing_action": "wrote hold/blocker report only",
+  "required_artifacts_read": [
+    "docs/natural_evidence_v1/AUTOMATION_STATE.md",
+    "docs/natural_evidence_v1/next_step_codex_plan.md",
+    "results/natural_evidence_v1/status/gate_status.json",
+    "docs/natural_evidence_v2/PROTOCOL_CONTRACT.md",
+    "docs/natural_evidence_v2/CLAIM_GUARDRAILS.md",
+    "results/natural_evidence_v2/status/gate_status.json",
+    "results/natural_evidence_v1/status/hermes_reports/20260511_0043_scheduled_tick.md"
+  ],
+  "new_slurm_job_submitted": false,
+  "new_training_started": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "far_aggregation_started": false,
+  "paper_claim_allowed": false,
+  "paper_facing_positive_claim_made": false,
+  "chimera_cpu_gpu_work_started": false,
+  "artifact_overwrite": false,
+  "next_allowed_action": "Stop until the next route is explicitly recorded."
+}

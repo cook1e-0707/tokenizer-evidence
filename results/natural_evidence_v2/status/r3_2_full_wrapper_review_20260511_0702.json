@@ -1,0 +1,40 @@
+{
+  "allowlist_enabled": false,
+  "far_aggregation_allowed": false,
+  "generation_started": false,
+  "llama_allowed": false,
+  "next_allowed_action": "Enable the existing R3.2 allowlist entry for exactly one reviewed Slurm command only after the next required TG/email notification path is satisfied, then submit exactly one allowlisted Chimera Slurm job.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "review_doc": "docs/natural_evidence_v2/R3_2_FULL_WRAPPER_REVIEW_20260511_0702.md",
+  "reviewed_artifacts": {
+    "aggregation_path_doc": "docs/natural_evidence_v2/R3_2_FULL_WRAPPER_AGGREGATION_PATH_20260511_0645.md",
+    "config_yaml": "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml",
+    "replay_summary_json": "results/natural_evidence_v2/status/r3_2_same_contract_852426_replay_20260511_0630/r3_2_852426_replay_summary.json",
+    "wrapper": "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch"
+  },
+  "review_findings": {
+    "allowlist_entry_still_disabled": true,
+    "canonical_block_ids": "C_A55E_shard_XX_block_YY",
+    "canonical_replicate_groups": "shard_00..shard_11",
+    "contract_id": "a55e",
+    "full_gate_targets_match_protocol": true,
+    "payload_diversity_tested": false,
+    "payload_ids_absent": true,
+    "replay_852426_exact_match": true,
+    "wrapper_refuses_overwrite": true
+  },
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "reviewed the R3.2 full same-contract wrapper aggregation path and exact 852426 replay artifacts; recorded wrapper review pass only",
+  "status": "PASS_R3_2_FULL_SAME_CONTRACT_WRAPPER_REVIEW_NO_SLURM",
+  "timestamp_utc": "2026-05-11T07:02:05Z",
+  "training_allowed": false,
+  "validation": {
+    "bash_n": "PASS",
+    "py_compile": "PASS",
+    "pytest": "PASS_10_TESTS"
+  },
+  "wrapper_review_passed": true
+}

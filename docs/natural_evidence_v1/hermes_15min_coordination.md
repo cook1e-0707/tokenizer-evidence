@@ -42,15 +42,26 @@ exists, protected/task-only objectives are explicit, model/payloads/seeds/split
 and budgets are fixed, the Slurm wrapper is reviewed, the command is in
 `configs/natural_evidence_v2/run_allowlist.yaml`, and Telegram/email
 notification succeeds before launch. Qwen E2E, Llama, same-family nulls,
-sanitizer, FAR, and paper-facing positive claims remain forbidden until later
-gates pass.
+sanitizer, FAR, and paper-facing positive claims are conditionally authorized
+future work classes, but remain gate-locked until their later prerequisites
+pass.
 
 This standing approval does not authorize new experiment classes, training,
 claim changes, multiple Slurm jobs in one tick, or bypassing gate failures.
 When a result fails a gate, Hermes should continue with the smallest
 allowed diagnostic/repair step on the same locked route rather than asking for
 another manual approval, unless the next step would change the project phase or
-start a newly forbidden class of work.
+start a not-yet-unlocked class of work.
+
+As of 2026-05-11T06:00Z, the user recorded conditional authorization for
+later-stage training, Llama, FAR/null expansion, sanitizer, and paper-claim
+work after their prerequisite gates pass. This is not an immediate unlock.
+Hermes/Codex may only execute one of these classes when the corresponding
+`gate_status.json` boolean is explicitly true (`training_allowed`,
+`llama_allowed`, `same_family_null_allowed`, `sanitizer_allowed`,
+`far_aggregation_allowed`, or `paper_claim_allowed`) and the current
+`next_allowed_action` names that action class. Until then, those actions remain
+blocked.
 
 ## Mandatory TG + Email Notification Gate
 
@@ -114,24 +125,29 @@ Each notification body must include:
 - the exact Codex action being requested;
 - whether this is monitor-only or state-changing;
 - next allowed action;
-- forbidden actions still in force.
+- gate-controlled actions not yet unlocked.
 
 ## Current Locked Phase
 
-`V1_FROZEN_NEGATIVE_DIAGNOSTIC__V2_WP4_DECODER_ORACLE_PASSED__WP5_PLAN_ALLOWED`
+`V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED`
 
 The current next allowed action is:
 
 ```text
-natural_evidence_v2 WP5 teacher-forced target-mass gate artifact planning and
-scoring/training launch design only. If the pre-training launch gate is fully
-satisfied, Codex may submit exactly one allowlisted WP5 Qwen training job via
-Slurm without asking for another manual approval.
+Proceed automatically with the approved R3.2 Qwen locked-scale route without
+waiting for another user approval on this same route. First finish or upgrade
+the R3.2 wrapper from plan-only to reviewed full locked-scale generation/eval
+if needed; then update the allowlist only after review, notify configured
+channels, and submit exactly one allowlisted Chimera Slurm job.
 ```
 
-Do not continue v1 repaired target-mass probes. Training, model transcript
-generation for E2E, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
-aggregation, and paper-facing positive claims remain forbidden.
+Do not continue v1 repaired target-mass probes. R3.2 Qwen locked-scale
+generation/eval is permitted only through a reviewed full wrapper, one enabled
+allowlist entry, successful TG/email notification, and exactly one Chimera
+Slurm job. Training, Qwen E2E outside the reviewed R3.2 locked-scale route,
+Llama, same-family null, sanitizer, FAR aggregation, and paper-facing positive
+claims remain blocked unless their corresponding prerequisite gate has
+explicitly passed in `gate_status.json`.
 
 ## 15-minute Supervision Loop
 
@@ -174,9 +190,12 @@ Reliability guardrails:
 Every Hermes tick should supervise Codex with these checks in order:
 
 1. Read persistent state:
-   - `docs/natural_evidence_v1/AUTOMATION_STATE.md`
-   - `docs/natural_evidence_v1/next_step_codex_plan.md`
+   - `docs/natural_evidence_v2/CURRENT_STATE.md`
    - `results/natural_evidence_v1/status/gate_status.json`
+   - `results/natural_evidence_v2/status/gate_status.json`
+   - consult the long historical files only if the compact state is ambiguous:
+     `docs/natural_evidence_v1/AUTOMATION_STATE.md` and
+     `docs/natural_evidence_v1/next_step_codex_plan.md`
 2. Check local repo status:
    - `git status --short`
    - `git branch --show-current`
@@ -275,8 +294,8 @@ are not primary slots.
 
 Only after H2 gates, compile an 8-bit or 16-bit payload plus checksum into a
 prompt-local frame contract and run decoder oracle substitution. Training and
-free-generation E2E remain forbidden until the teacher-forced target-mass gate
-is later passed.
+free-generation E2E remain gate-locked until the teacher-forced target-mass
+gate is later passed.
 
 The completed v1 repaired target-mass path is stale and must not be repeated.
 
@@ -312,7 +331,7 @@ email_notification:
 notification_json:
 state_changing_action:
 next_allowed_action:
-forbidden_actions_confirmed:
+gate_controlled_actions_not_yet_unlocked:
 ```
 
 Codex should treat the latest Hermes report plus `gate_status.json` as the

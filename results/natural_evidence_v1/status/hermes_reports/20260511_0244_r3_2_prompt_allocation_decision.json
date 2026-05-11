@@ -1,0 +1,21 @@
+{
+  "artifact_json": "results/natural_evidence_v2/status/r3_2_prompt_allocation_decision_20260511_0244.json",
+  "decision_doc": "docs/natural_evidence_v2/R3_2_PROMPT_ALLOCATION_DECISION_20260511.md",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Implement or review an R3.2-specific Qwen locked-scale wrapper and disabled allowlist entry, then run local plan-only validation only. Do not submit Slurm.",
+  "paper_claim_allowed": false,
+  "prompt_allocation_disjoint_by_cell": false,
+  "prompt_source_rows": 2560,
+  "qwen_e2e_rerun_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "selected_prompt_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67",
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 prompt allocation decision before wrapper implementation",
+  "status": "R3_2_PROMPT_ALLOCATION_DECISION_RECORDED_NO_WRAPPER_NO_SLURM",
+  "timestamp_utc": "2026-05-11T02:44:00Z",
+  "training_started": false,
+  "wrapper_implementation_started": false
+}

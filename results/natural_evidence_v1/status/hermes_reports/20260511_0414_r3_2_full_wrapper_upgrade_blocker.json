@@ -1,0 +1,23 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "controlling_report": "results/natural_evidence_v1/status/hermes_reports/20260511_0414_scheduled_tick.md",
+  "decision": "BLOCK_R3_2_ALLOWLIST_AND_SUBMISSION_PENDING_FULL_WRAPPER_SPEC",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Record or implement a reviewed full R3.2 wrapper specification that resolves the payload-cell contract mapping before enabling the allowlist or submitting Slurm.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "reason": "Current R3.2 Slurm wrapper is explicitly plan-only, and the inspected state does not record a reviewed production mapping from R3.2 payload cells P00/P01/P02/P03 to payload bytes, checksums, adapters, and wrong-payload controls. Available production WP4 payload contract fixes one payload-plus-checksum value, a55e; earlier WP4 oracle artifacts cover P00/P01 only.",
+  "route_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 full-wrapper upgrade blocker only",
+  "status": "R3_2_FULL_WRAPPER_UPGRADE_BLOCKED_NO_ALLOWLIST_NO_SLURM",
+  "timestamp_utc": "2026-05-11T04:14:00Z",
+  "training_started": false,
+  "wrapper_review_recorded": true,
+  "wrapper_state": "PLAN_ONLY_NON_PLAN_RUN_EXITS"
+}

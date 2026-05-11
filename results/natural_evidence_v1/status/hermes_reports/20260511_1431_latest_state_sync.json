@@ -1,0 +1,24 @@
+{
+  "active_slurm_jobs": "none_observed_at_sync",
+  "blocker_status": "BLOCK_R3_2_SUBMISSION_ALLOWLIST_UNSAFE_NO_SLURM",
+  "blocking_reason": "Local allowlist has forbidden llama_v2_wp6_e2e_eval enabled while llama_allowed=false; reviewed R3.2 entry remains disabled.",
+  "current_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "far_aggregation_allowed": false,
+  "forbidden_enabled_entries": [
+    "llama_v2_wp6_e2e_eval"
+  ],
+  "latest_hermes_blocker": "results/natural_evidence_v1/status/hermes_reports/20260511_1404_r3_2_submission_blocker.md",
+  "llama_allowed": false,
+  "next_allowed_action": "Repair submission preflight without CPU/GPU work: disable forbidden local Llama allowlist entry and verify no local or remote forbidden Llama/sanitizer/FAR entries are enabled. A later notified tick may enable only v2_r3_2_qwen_locked_scale_eval, submit exactly one reviewed Chimera Slurm job, and disable the entry after submission.",
+  "notification_status": "Hermes 20260511_1403 tick notification succeeded for Telegram and email.",
+  "paper_claim_allowed": false,
+  "reviewed_r3_2_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "state_changing_action": "synchronized latest Hermes 14:04 allowlist blocker into gate status and compact current state; no allowlist change or Slurm submission",
+  "status": "SYNCED_LATEST_HERMES_R3_2_ALLOWLIST_UNSAFE_BLOCKER",
+  "timestamp_utc": "2026-05-11T14:31:31Z",
+  "training_allowed": false,
+  "wp6_r3_2_locked_scale_allowed": false,
+  "wp6_r3_2_locked_scale_slurm_submitted": false
+}

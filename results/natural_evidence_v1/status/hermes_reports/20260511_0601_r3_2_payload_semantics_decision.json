@@ -1,0 +1,20 @@
+{
+  "current_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "decision": "P00/P01/P02/P03 are R3.2 locked-scale cell labels that reuse the fixed WP5-R2 a55e contract, not distinct payload contracts.",
+  "decision_doc": "docs/natural_evidence_v2/R3_2_PAYLOAD_SEMANTICS_DECISION_20260511.md",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Upgrade or review the R3.2 full locked-scale wrapper using P00/P01/P02/P03 as cell labels over the fixed a55e contract. Do not submit Slurm until wrapper review, allowlist enablement, TG/email notification, and the exactly-one-job submission gate are complete.",
+  "paper_claim_allowed": false,
+  "payload_semantics_status": "cell_labels_reuse_fixed_a55e_contract",
+  "qwen_e2e_rerun_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 payload semantics decision",
+  "status": "R3_2_PAYLOAD_SEMANTICS_RESOLVED_A55E_CELL_LABELS_NO_SLURM",
+  "status_json": "results/natural_evidence_v2/status/r3_2_payload_semantics_decision_20260511_0601.json",
+  "timestamp_utc": "2026-05-11T06:01:06Z",
+  "training_started": false
+}

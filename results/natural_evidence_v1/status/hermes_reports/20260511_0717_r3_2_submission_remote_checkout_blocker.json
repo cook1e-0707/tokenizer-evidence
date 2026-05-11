@@ -1,0 +1,37 @@
+{
+  "schema_name": "natural_evidence_v1_hermes_blocker_report_v1",
+  "timestamp_utc": "2026-05-11T07:17:20Z",
+  "phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "status": "BLOCK_R3_2_SUBMISSION_REMOTE_CHECKOUT_NOT_REVIEWED_NO_SLURM",
+  "notification_gate": {
+    "status": "PASS",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260511_0715_scheduled_tick_notification.json",
+    "telegram_sent": true,
+    "email_sent": true
+  },
+  "remote_submission_preflight": {
+    "status": "FAIL",
+    "remote_repo": "~/tokenizer-evidence",
+    "missing_reviewed_files": [
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+      "scripts/natural_evidence_v2/build_r3_2_locked_scale_precommit.py",
+      "scripts/natural_evidence_v2/aggregate_r3_2_locked_scale_shards.py",
+      "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml",
+      "docs/natural_evidence_v2/CURRENT_STATE.md"
+    ],
+    "scratch_path_is_not_reviewed_checkout": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence",
+    "allowlist_drift": "enabled Llama entries visible while llama_allowed=false"
+  },
+  "allowlist_enabled": false,
+  "slurm_job_submitted": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "training_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "far_aggregation_started": false,
+  "paper_claim_allowed": false,
+  "state_changing_action": "recorded blocker only; no allowlist enablement and no Slurm submission",
+  "next_allowed_action": "Reconcile the remote Chimera checkout and allowlist to the reviewed R3.2 route without CPU/GPU work; after a later successful TG/email notification, enable only v2_r3_2_qwen_locked_scale_eval, submit exactly one reviewed Slurm job, and disable the entry after submission."
+}

@@ -1,0 +1,20 @@
+{
+  "blocker_resolution": "Hermes prompt template no longer treats all generation/Qwen E2E as forbidden in the R3.2 context; R3.2 Qwen locked-scale generation/eval is allowed only through a reviewed full wrapper, enabled allowlist entry, notification, and exactly one Slurm job.",
+  "compact_state_doc": "docs/natural_evidence_v2/CURRENT_STATE.md",
+  "current_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "far_aggregation_allowed": false,
+  "latest_hermes_blocker": "results/natural_evidence_v1/status/hermes_reports/20260511_0531_r3_2_submission_hard_constraint_blocker.md",
+  "llama_allowed": false,
+  "next_allowed_action": "Finish or upgrade the R3.2 wrapper from plan-only to a reviewed full locked-scale generation/eval wrapper, validate locally, record review, then enable one allowlist entry and submit exactly one Chimera Slurm job after TG/email notification. Do not wait for another user approval on this same R3 route.",
+  "paper_claim_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "state_changing_action": "synchronized Hermes/Codex state, resolved R3.2 no-generation prompt conflict, and introduced compact current-state file to reduce future token use",
+  "status": "SYNCED_HERMES_CODEX_R3_STATE_COMPACT",
+  "timestamp_utc": "2026-05-11T05:38:03Z",
+  "training_allowed": false,
+  "wp6_r3_2_locked_scale_allowed": false,
+  "wp6_r3_2_locked_scale_slurm_submitted": false,
+  "wrapper_full_eval_enabled": false,
+  "wrapper_plan_only_blocker_remains": true
+}

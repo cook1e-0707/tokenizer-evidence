@@ -28,6 +28,7 @@ PAUSE_FILE = PROJECT_EVENT_DIR / "auto.pause"
 LOCK_DIR = STATUS_DIR / ".hermes_natural_evidence_tick.lock"
 WORKER_LOG_DIR = STATUS_DIR / "hermes_worker_logs"
 NOTIFY_SCRIPT = REPO_ROOT / "scripts" / "natural_evidence_v1" / "hermes_notify.py"
+COMPACT_STATE_MD = REPO_ROOT / "docs" / "natural_evidence_v2" / "CURRENT_STATE.md"
 CODEX_TIMEOUT_SECONDS = int(os.environ.get("HERMES_NAT_EV_CODEX_TIMEOUT_SECONDS", "900"))
 STALE_LOCK_SECONDS = int(
     os.environ.get("HERMES_NAT_EV_STALE_LOCK_SECONDS", str(CODEX_TIMEOUT_SECONDS + 300))
@@ -71,7 +72,92 @@ def read_gate_state() -> dict[str, Any]:
         "next_allowed_action": payload.get("next_allowed_action", "UNKNOWN"),
         "last_state_changing_action": payload.get("last_state_changing_action", "UNKNOWN"),
         "hermes_status": payload.get("hermes_15min_coordination", {}).get("status", "UNKNOWN"),
+        "training_allowed": bool(payload.get("training_allowed", False)),
+        "llama_allowed": bool(payload.get("llama_allowed", False)),
+        "same_family_null_allowed": bool(payload.get("same_family_null_allowed", False)),
+        "sanitizer_allowed": bool(payload.get("sanitizer_allowed", False)),
+        "far_aggregation_allowed": bool(payload.get("far_aggregation_allowed", False)),
+        "paper_claim_allowed": bool(payload.get("paper_claim_allowed", False)),
     }
+
+
+def blocked_gate_controlled_actions(gate: dict[str, Any]) -> list[str]:
+    action_flags = [
+        ("training_allowed", "training"),
+        ("llama_allowed", "Llama"),
+        ("same_family_null_allowed", "same-family null"),
+        ("sanitizer_allowed", "sanitizer benchmark"),
+        ("far_aggregation_allowed", "FAR aggregation"),
+        ("paper_claim_allowed", "paper-facing positive claims"),
+    ]
+    return [label for key, label in action_flags if not bool(gate.get(key, False))]
+
+
+def blocked_gate_controlled_actions_text(gate: dict[str, Any]) -> str:
+    blocked = blocked_gate_controlled_actions(gate)
+    if not blocked:
+        return "No gate-controlled action is locked by its boolean gate, but allowlist, notification, one-job, artifact, and claim-provenance constraints still apply."
+    return "Gate-controlled and not yet unlocked: " + "; ".join(blocked) + "."
+
+
+def r3_qwen_locked_scale_context(gate: dict[str, Any]) -> bool:
+    phase = str(gate.get("current_phase", ""))
+    next_action = str(gate.get("next_allowed_action", ""))
+    return (
+        phase == "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED"
+        and "R3.2 Qwen locked-scale" in next_action
+    )
+
+
+def forbidden_actions_text(gate: dict[str, Any]) -> str:
+    blocked = blocked_gate_controlled_actions_text(gate)
+    if r3_qwen_locked_scale_context(gate):
+        return (
+            f"{blocked} Hard-blocked in this phase: unreviewed or non-allowlisted generation; "
+            "Qwen E2E outside the reviewed R3.2 locked-scale wrapper."
+        )
+    return (
+        f"{blocked} Hard-blocked unless explicitly allowed by the current "
+        "next_allowed_action: generation and Qwen E2E reruns."
+    )
+
+
+def red_flags_text(gate: dict[str, Any]) -> str:
+    blocked = blocked_gate_controlled_actions_text(gate)
+    if r3_qwen_locked_scale_context(gate):
+        return (
+            "R3.2 Qwen locked-scale generation/eval is permitted only after the "
+            "full wrapper is reviewed, the allowlist entry is enabled for one job, "
+            f"and TG/email notification succeeds. Gate-blocked actions: {blocked} "
+            "Do not submit a plan-only wrapper as a full eval."
+        )
+    return (
+        f"Gate-blocked actions: {blocked} Generation and Qwen E2E reruns also "
+        "require explicit next_allowed_action support."
+    )
+
+
+def hard_constraints_text(gate: dict[str, Any]) -> str:
+    gate_blocked = "\n".join(
+        f"- gate-locked until its prerequisite gate passes: {action};"
+        for action in blocked_gate_controlled_actions(gate)
+    )
+    if not gate_blocked:
+        gate_blocked = "- no gate-controlled action is locked by its boolean gate, but all route-specific gates and allowlists still apply;"
+    if r3_qwen_locked_scale_context(gate):
+        return f"""{gate_blocked}
+- R3.2 Qwen locked-scale generation/eval is allowed only through a reviewed full wrapper, one enabled allowlist entry, successful TG/email notification, and exactly one Chimera Slurm job;
+- do not submit the current plan-only wrapper as a full eval;
+- no Qwen E2E outside the reviewed R3.2 locked-scale route;
+- any Chimera CPU/GPU work must use Slurm;
+- do not run CPU work directly on the Chimera login node;
+- do not overwrite existing artifacts."""
+    return f"""{gate_blocked}
+- no generation;
+- no Qwen E2E rerun;
+- any Chimera CPU/GPU work must use Slurm;
+- do not run CPU work directly on the Chimera login node;
+- do not overwrite existing artifacts."""
 
 
 def run_monitor_command(command: list[str], *, timeout: int = 20) -> dict[str, Any]:
@@ -147,8 +233,7 @@ gate_changes:
 No gate changes before Codex execution.
 
 red_flags:
-Training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
-aggregation, and paper-facing positive claims remain forbidden.
+{red_flags_text(gate)}
 
 telegram_notification:
 Required and attempted by `scripts/natural_evidence_v1/hermes_notify.py`.
@@ -165,9 +250,8 @@ state_changing_action:
 next_allowed_action:
 {gate["next_allowed_action"]}
 
-forbidden_actions_confirmed:
-training; generation; Qwen E2E rerun; Llama; same-family null; sanitizer; FAR
-aggregation; paper-facing positive claims.
+gate_controlled_actions_not_yet_unlocked:
+{forbidden_actions_text(gate)}
 
 timestamp_utc:
 {timestamp}
@@ -324,7 +408,7 @@ def update_gate_after_launch(*, timestamp: str, report_md: Path, notification_js
     data["last_checked_time"] = utc_now().isoformat().replace("+00:00", "Z")
     data["last_state_changing_action"] = (
         "Hermes scheduled tick sent Telegram/email and launched a background Codex worker. "
-        "No training, generation, E2E rerun, Llama, same-family null, sanitizer, FAR, or paper claim was unlocked."
+        "Training, generation, E2E rerun, Llama, same-family null, sanitizer, FAR, and paper claim gates remained locked."
     )
     write_json(GATE_STATUS_JSON, data)
 
@@ -431,24 +515,17 @@ Current Hermes report:
 Do exactly one small allowed project-advancing action. Treat the "Next allowed
 action" above as the controlling action for this tick. Do not continue stale v1
 repaired target-mass probes. Start by reading:
+- docs/natural_evidence_v2/CURRENT_STATE.md
+- results/natural_evidence_v1/status/gate_status.json
+- results/natural_evidence_v2/status/gate_status.json
+Consult the long historical files only if the compact state is ambiguous:
 - docs/natural_evidence_v1/AUTOMATION_STATE.md
 - docs/natural_evidence_v1/next_step_codex_plan.md
-- results/natural_evidence_v1/status/gate_status.json
 - docs/natural_evidence_v2/PROTOCOL_CONTRACT.md
 - docs/natural_evidence_v2/CLAIM_GUARDRAILS.md
-- results/natural_evidence_v2/status/gate_status.json
 
 Hard constraints:
-- no training;
-- no generation;
-- no Qwen E2E rerun;
-- no Llama;
-- no same-family null;
-- no sanitizer benchmark;
-- no FAR aggregation or paper-facing positive claim;
-- any Chimera CPU/GPU work must use Slurm;
-- do not run CPU work directly on the Chimera login node;
-- do not overwrite existing artifacts.
+{hard_constraints_text(gate)}
 
 If the next action is not safe or not unambiguous, write a blocker report and
 stop. If you make a state change, update the relevant docs/status artifacts and
@@ -504,9 +581,8 @@ summary:
 next_allowed_action:
 {read_gate_state()["next_allowed_action"]}
 
-forbidden_actions_confirmed:
-training; generation; Qwen E2E rerun; Llama; same-family null; sanitizer; FAR
-aggregation; paper-facing positive claims.
+gate_controlled_actions_not_yet_unlocked:
+{forbidden_actions_text(read_gate_state())}
 """,
         encoding="utf-8",
     )

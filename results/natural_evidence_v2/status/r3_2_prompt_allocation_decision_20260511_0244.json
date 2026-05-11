@@ -1,0 +1,71 @@
+{
+  "arms": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "available_source_rows": 2560,
+  "block_size": 64,
+  "blocks_per_cell": 8,
+  "cell_count": 12,
+  "cell_order": "payload_major_then_seed",
+  "cells": [
+    {"cell_index": 0, "payload_id": "P00", "prompt_file_row_end_inclusive": 511, "prompt_file_row_start": 0, "prompt_window_index": 0, "seed": 17, "window_jsonl_sha256": "98b78920c07a9753f5ad5dcc7af198b5a4374f95d57b2d00d05f9ae327330038"},
+    {"cell_index": 1, "payload_id": "P00", "prompt_file_row_end_inclusive": 1023, "prompt_file_row_start": 512, "prompt_window_index": 1, "seed": 23, "window_jsonl_sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"},
+    {"cell_index": 2, "payload_id": "P00", "prompt_file_row_end_inclusive": 1535, "prompt_file_row_start": 1024, "prompt_window_index": 2, "seed": 29, "window_jsonl_sha256": "52487748415b39a675e0c0860927cfc04047af0bec647a7c2fecb5812e044630"},
+    {"cell_index": 3, "payload_id": "P01", "prompt_file_row_end_inclusive": 2047, "prompt_file_row_start": 1536, "prompt_window_index": 3, "seed": 17, "window_jsonl_sha256": "5e151bd80b2befe1b77658f98976c13d8901b6dfb357b5339a66fc4da6fab72a"},
+    {"cell_index": 4, "payload_id": "P01", "prompt_file_row_end_inclusive": 2559, "prompt_file_row_start": 2048, "prompt_window_index": 4, "seed": 23, "window_jsonl_sha256": "d0acb1f20ed5b54b08a90facc852905764c341605606801f6a48eb10721b063c"},
+    {"cell_index": 5, "payload_id": "P01", "prompt_file_row_end_inclusive": 511, "prompt_file_row_start": 0, "prompt_window_index": 0, "seed": 29, "window_jsonl_sha256": "98b78920c07a9753f5ad5dcc7af198b5a4374f95d57b2d00d05f9ae327330038"},
+    {"cell_index": 6, "payload_id": "P02", "prompt_file_row_end_inclusive": 1023, "prompt_file_row_start": 512, "prompt_window_index": 1, "seed": 17, "window_jsonl_sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"},
+    {"cell_index": 7, "payload_id": "P02", "prompt_file_row_end_inclusive": 1535, "prompt_file_row_start": 1024, "prompt_window_index": 2, "seed": 23, "window_jsonl_sha256": "52487748415b39a675e0c0860927cfc04047af0bec647a7c2fecb5812e044630"},
+    {"cell_index": 8, "payload_id": "P02", "prompt_file_row_end_inclusive": 2047, "prompt_file_row_start": 1536, "prompt_window_index": 3, "seed": 29, "window_jsonl_sha256": "5e151bd80b2befe1b77658f98976c13d8901b6dfb357b5339a66fc4da6fab72a"},
+    {"cell_index": 9, "payload_id": "P03", "prompt_file_row_end_inclusive": 2559, "prompt_file_row_start": 2048, "prompt_window_index": 4, "seed": 17, "window_jsonl_sha256": "d0acb1f20ed5b54b08a90facc852905764c341605606801f6a48eb10721b063c"},
+    {"cell_index": 10, "payload_id": "P03", "prompt_file_row_end_inclusive": 511, "prompt_file_row_start": 0, "prompt_window_index": 0, "seed": 23, "window_jsonl_sha256": "98b78920c07a9753f5ad5dcc7af198b5a4374f95d57b2d00d05f9ae327330038"},
+    {"cell_index": 11, "payload_id": "P03", "prompt_file_row_end_inclusive": 1023, "prompt_file_row_start": 512, "prompt_window_index": 1, "seed": 29, "window_jsonl_sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"}
+  ],
+  "diagnostic_budgets": [
+    16,
+    32
+  ],
+  "far_aggregation_started": false,
+  "fully_disjoint_required_rows": 6144,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Implement or review an R3.2-specific Qwen locked-scale wrapper and disabled allowlist entry, then run local plan-only validation only. Do not submit Slurm.",
+  "package_id": "qwen_v2_r3_2_locked_scale_package_v1",
+  "paper_claim_allowed": false,
+  "payloads": [
+    "P00",
+    "P01",
+    "P02",
+    "P03"
+  ],
+  "precommit_contract_recorded": false,
+  "primary_budget": 64,
+  "prompt_allocation_decision_doc": "docs/natural_evidence_v2/R3_2_PROMPT_ALLOCATION_DECISION_20260511.md",
+  "prompt_allocation_disjoint_by_cell": false,
+  "prompt_source_path": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "prompt_source_rows": 2560,
+  "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+  "prompt_window_count": 5,
+  "prompt_window_policy": "deterministic_5_window_circular_reuse_by_payload_major_cell_index",
+  "qwen_e2e_rerun_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "seeds": [
+    17,
+    23,
+    29
+  ],
+  "selected_prompt_manifest_hash_policy": "sha256(canonical_json_without_self_hash, sort_keys=true, compact_separators)",
+  "selected_prompt_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67",
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 prompt allocation decision before wrapper implementation",
+  "status": "R3_2_PROMPT_ALLOCATION_DECISION_RECORDED_NO_WRAPPER_NO_SLURM",
+  "timestamp_utc": "2026-05-11T02:44:00Z",
+  "training_started": false,
+  "wrapper_implementation_started": false,
+  "wrapper_review_recorded": false
+}

@@ -41,7 +41,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tokenizer-name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--protected-adapter", type=Path, required=True)
     parser.add_argument("--task-only-adapter", type=Path, required=True)
-    parser.add_argument("--split", default="wp3_r1_eval")
+    parser.add_argument("--split", default="")
     parser.add_argument("--max-prompts", type=int, default=64)
     parser.add_argument("--prompt-file-row-start", type=int, default=None)
     parser.add_argument("--prompt-file-row-end", type=int, default=None)
@@ -132,7 +132,7 @@ def select_prompts(
 ) -> list[dict[str, Any]]:
     if (prompt_file_row_start is None) != (prompt_file_row_end is None):
         raise ValueError("prompt-file-row-start and prompt-file-row-end must be provided together")
-    split_rows = [(file_row, dict(row)) for file_row, row in rows if str(row.get("split", "")) == split]
+    split_rows = [(file_row, dict(row)) for file_row, row in rows if not split or str(row.get("split", "")) == split]
     if prompt_file_row_start is not None and prompt_file_row_end is not None:
         selected_with_index = [
             (file_row, row)

@@ -1,0 +1,26 @@
+{
+  "allowlist_enabled": false,
+  "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_0931_r3_2_submission_preflight_blocker.md",
+  "far_aggregation_allowed": false,
+  "forbidden_enabled_allowlist_entries_local": [
+    "llama_v2_wp6_e2e_eval"
+  ],
+  "generation_started": false,
+  "latest_recorded_preflight_status": "FAIL_20260511_0916",
+  "llama_allowed": false,
+  "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260511_0931_scheduled_tick_notification.json",
+  "notification_status": "SENT_ALL_REQUIRED_CHANNELS",
+  "paper_claim_allowed": false,
+  "phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "qwen_e2e_rerun_started": false,
+  "repair_record_after_20260511_0916_found": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 submission preflight blocker only; no allowlist enablement and no Slurm submission",
+  "status": "BLOCK_R3_2_SUBMISSION_PREFLIGHT_UNSAFE_NO_SLURM",
+  "timestamp_utc": "2026-05-11T09:31:00Z",
+  "training_allowed": false,
+  "wrapper_review_passed": true,
+  "next_allowed_action": "Repair the Chimera submission preflight without running CPU/GPU work: reconcile the remote checkout to the already reviewed R3.2 files, add/verify the disabled R3.2 allowlist entry on Chimera, and ensure both local and remote allowlists have no enabled forbidden Llama/sanitizer/FAR entries. After that, a later notified tick may enable only v2_r3_2_qwen_locked_scale_eval, submit exactly one reviewed Slurm job, and disable the entry after submission."
+}

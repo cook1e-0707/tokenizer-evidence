@@ -1,0 +1,58 @@
+{
+  "allowlist_entry_review_recorded": false,
+  "arms": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "blocks_per_cell": 8,
+  "cell_count": 12,
+  "diagnostic_budgets": [
+    16,
+    32
+  ],
+  "far_aggregation_started": false,
+  "forbidden_public_surface_count_required": 0,
+  "gate_review_doc": "docs/natural_evidence_v2/R3_2_QWEN_LOCKED_SCALE_PACKAGE_REVIEW_20260511.md",
+  "generation_started": false,
+  "llama_started": false,
+  "majority_margin_threshold": 3,
+  "next_allowed_action": "Implement or review an R3.2-specific Qwen locked-scale wrapper and disabled allowlist entry, then run local plan-only validation only. Do not submit Slurm until wrapper, allowlist, precommit, notification, and gate review are recorded.",
+  "null_arm_accepts_required_at_64": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "package_id": "qwen_v2_r3_2_locked_scale_package_v1",
+  "paper_claim_allowed": false,
+  "payloads": [
+    "P00",
+    "P01",
+    "P02",
+    "P03"
+  ],
+  "precommit_contract_recorded": false,
+  "primary_budget": 64,
+  "protected_accepts_required_at_64": 80,
+  "protected_blocks_total": 96,
+  "qwen_e2e_rerun_started": false,
+  "route_phase": "V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "seeds": [
+    17,
+    23,
+    29
+  ],
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded R3.2 Qwen locked-scale package scope and wrapper-readiness finding only",
+  "status": "R3_2_QWEN_LOCKED_SCALE_PACKAGE_SCOPE_RECORDED_WRAPPER_NOT_READY_NO_SLURM",
+  "support_threshold": 16,
+  "timestamp_utc": "2026-05-11T02:00:02Z",
+  "training_started": false,
+  "wrapper_readiness": "NOT_READY_R2_WRAPPER_IS_SINGLE_PAYLOAD_SINGLE_8_BLOCK_CELL",
+  "wrapper_review_recorded": false
+}

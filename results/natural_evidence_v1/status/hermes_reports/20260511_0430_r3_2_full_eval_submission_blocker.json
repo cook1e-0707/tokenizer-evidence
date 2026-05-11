@@ -1,0 +1,20 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_r3_2_qwen_locked_scale_eval",
+  "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_0430_r3_2_full_eval_submission_blocker.md",
+  "decision": "BLOCK_R3_2_FULL_EVAL_SUBMISSION_CURRENT_WRAPPER_PLAN_ONLY_AND_TICK_FORBIDS_GENERATION",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_safe_action": "Implement and review the R3.2 full locked-scale generation/eval wrapper as an artifact/control-plane change only; do not submit Slurm until a later tick permits the reviewed full eval.",
+  "paper_claim_allowed": false,
+  "qwen_e2e_rerun_started": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_submitted": false,
+  "state_changing_action": "recorded blocker because the existing R3.2 wrapper is plan-only and this tick forbids generation/Qwen E2E rerun",
+  "status": "BLOCKED_R3_2_FULL_EVAL_SUBMISSION_UNSAFE_THIS_TICK",
+  "timestamp_utc": "2026-05-11T04:30:37Z",
+  "training_started": false,
+  "wrapper_review_doc": "docs/natural_evidence_v2/R3_2_QWEN_LOCKED_SCALE_WRAPPER_REVIEW_20260511.md"
+}

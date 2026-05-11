@@ -1,12 +1,76 @@
 # natural_evidence_v1 Automation State
 
 ## Current Phase
-V2_WP6_R2_OPTION_B_JOB_852426_PENDING_RESULT_REVIEW
+V2_R3_2C_JOB_853070_FAILED_PROMPT_SPLIT_MISMATCH_NO_RESUBMIT
 
 ## Last Checked
-2026-05-10T05:51:30Z
+2026-05-11T16:00:00Z
+
+## Compact State Pointer
+
+For routine Codex/Hermes ticks, read
+`docs/natural_evidence_v2/CURRENT_STATE.md` first. This file is now the compact
+canonical handoff for the active v2 route and is intended to reduce token use.
+Consult this long historical state file only when the compact state is
+ambiguous or an older event needs provenance.
 
 ## Hermes 15-Minute Supervision
+
+The 2026-05-11T04:11Z user instruction records standing authorization for the
+current approved R3 stage: Codex and Hermes should not repeatedly wait for
+explicit user approval on the already approved
+`V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED` route. This removes the old
+"wait for explicit R3.2 submission tick" approval blocker for the same route
+only. Gate discipline remains active: no Llama, same-family null, sanitizer,
+FAR aggregation, paper-facing positive claim, unallowlisted Slurm job, or
+Chimera login-node CPU/GPU scoring is authorized by this standing approval.
+The next allowed action is to proceed automatically with the approved R3.2
+Qwen locked-scale route: finish or upgrade the R3.2 wrapper from plan-only to a
+reviewed full locked-scale generation/eval wrapper if needed, update the
+allowlist only after review, notify configured Hermes/user channels, then
+submit exactly one allowlisted Chimera Slurm job. Do not submit the existing
+plan-only wrapper as a full eval without this review.
+
+The 2026-05-11T06:00Z user instruction records conditional authorization for
+later-stage training, Llama, FAR/null expansion, sanitizer, and paper-claim
+work after their prerequisite gates pass. This is not an immediate unlock:
+each class is conditionally authorized but remains gate-locked until the
+corresponding `gate_status.json` boolean is explicitly true and the current
+`next_allowed_action` names that class.
+
+2026-05-11T15:56Z: Codex executed the approved R3.2-B single-job submission.
+Telegram and email pre-notice succeeded before submission. Codex enabled only
+`v2_r3_2_qwen_locked_scale_eval`, submitted exactly one Chimera Slurm job, and
+disabled the allowlist entry immediately after `sbatch` returned.
+
+```text
+job_id=853070
+job_name=nat-ev-v2-r32qwen
+partition=DGXA100
+initial_state=PENDING(Resources)
+contract_id=a55e
+payload_diversity_tested=false
+blocks_per_arm=96
+```
+
+Submission record:
+`results/natural_evidence_v2/status/r3_2b_submission_record.json`.
+The job failed immediately before model generation:
+
+```text
+Slurm state=FAILED
+elapsed=00:00:00
+exit_code=1:0
+failure=ValueError: split 'wp3_r1_eval' has only 0 prompts; need 512
+```
+
+Root cause: the wrapper used file rows `0..511` for shard 0 while the decoder
+filtered for `split='wp3_r1_eval'`; those rows are `wp3_r1_dev`, so the
+intersection was empty. Failure review:
+`results/natural_evidence_v2/status/r3_2_qwen_locked_scale_eval_853070/r3_2_job_853070_failure_review.md`.
+Next allowed action: repair the R3.2 prompt allocation and wrapper split
+contract artifact-only. Do not submit another R3.2 Slurm job until the repaired
+allocation is recorded and reviewed.
 
 Hermes supervises Codex using
 `docs/natural_evidence_v1/hermes_15min_coordination.md`. Hermes is not the
@@ -14,11 +78,249 @@ executor: it monitors state and Slurm, prompts Codex with the next allowed
 action, and blocks unsafe/out-of-order actions. Codex performs any file edits,
 artifact analysis, Slurm submissions, artifact review, and state updates. Each
 Hermes tick should request at most one Codex state-changing action. Current
-Codex queue: v1 is frozen; WP6-R2 Option B Slurm job `852426` is pending result
-review after the reviewed `852202` scale-gate failure and R2 wrapper review. Do
-not submit another WP6 job, train, start Llama or same-family nulls, run a
-sanitizer, aggregate FAR, or make a positive paper claim before the `852426`
-result review.
+Codex queue: v1 is frozen; Route R3 is opened as a Qwen v2 locked-scale
+formalization route after WP6-R2 Option B Slurm job `852426` passed reviewed
+precommitted robust-block gates. Do not submit Slurm, train, start Llama or
+same-family nulls, run a sanitizer, aggregate FAR, or make a positive paper
+claim until the next R3.2 wrapper/allowlist/precommit package is reviewed.
+The 2026-05-11T01:24Z Codex worker recorded the expert-selected Route R3:
+`V2_R3_QWEN_LOCKED_SCALE_ROUTE_APPROVED`. Codex adopted `852426` only as a
+Qwen-only positive diagnostic by writing
+`docs/natural_evidence_v2/WP6_R2_OPTION_B_852426_CANONICAL_REVIEW.md` and the
+machine-readable canonical summary
+`results/natural_evidence_v2/status/wp6_r2_option_b_852426_canonical_summary.json`.
+Codex also wrote
+`docs/natural_evidence_v2/REPEATED_COORDINATE_DECODER_SPEC.md`, fixing the
+precommitted repeated-coordinate majority decoder semantics, support threshold
+`S_min=16`, majority margin threshold `M_min=3`, query-budget discipline,
+checksum rule, and wrong-key/wrong-payload rejection rule. This action did not
+submit a Slurm job, start training or generation, start Llama or same-family
+nulls, run sanitizer work, aggregate FAR, adopt out-of-band Llama artifacts, or
+make a paper-facing positive claim. Current next allowed action: prepare the
+R3.2 Qwen locked-scale package and wrapper review only. R3.2 intended scale is
+payloads `P00/P01/P02/P03`, seeds `17/23/29`, `8` blocks per cell, arms
+`protected/raw/task_only/wrong_key/wrong_payload`, primary budget `64` with
+`16/32` diagnostics, pass gate `protected >=80/96`, every null arm `0/96`,
+support `>=16`, majority margin `>=3`, and forbidden public surface count `0`.
+Do not submit R3.2 Slurm until wrapper, allowlist, precommit, notification, and
+gate review are recorded.
+The 2026-05-11T02:31Z Codex worker recorded an R3.2 wrapper blocker instead
+of implementing the reserved wrapper path. The current package fixes payloads,
+seeds, blocks, arms, budgets, and gates, but does not fix the prompt allocation
+policy for the 12 payload/seed cells. A fully disjoint interpretation would
+require `6144` prompt responses per arm, while the apparent reviewed prompt
+source has `2560` rows. Codex wrote
+`results/natural_evidence_v1/status/hermes_reports/20260511_0231_r3_2_wrapper_prompt_allocation_blocker.md`
+and the matching JSON summary. No Slurm job, training, generation, Qwen E2E
+rerun, Llama, same-family null, sanitizer, FAR aggregation, or paper-facing
+positive claim was started. Current next allowed action: record an R3.2 prompt
+allocation decision before wrapper implementation.
+The 2026-05-11T02:44Z Codex worker recorded the R3.2 prompt allocation
+decision before wrapper implementation. The selected source is
+`results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl`
+with `2560` rows and SHA-256
+`20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179`.
+Because fully disjoint allocation would require `6144` rows, R3.2 now uses a
+precommitted deterministic five-window circular reuse rule across the 12
+payload/seed cells; this is explicitly not cell-disjoint prompt allocation.
+The selected prompt manifest hash policy is
+`sha256(canonical_json_without_self_hash, sort_keys=true, compact_separators)`,
+with selected prompt manifest SHA-256
+`4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67`.
+Codex wrote
+`docs/natural_evidence_v2/R3_2_PROMPT_ALLOCATION_DECISION_20260511.md`,
+`results/natural_evidence_v2/status/r3_2_prompt_allocation_decision_20260511_0244.json`,
+and
+`results/natural_evidence_v1/status/hermes_reports/20260511_0244_r3_2_prompt_allocation_decision.md`.
+No Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started.
+Current next allowed action: implement or review an R3.2-specific Qwen
+locked-scale wrapper and disabled allowlist entry, then run local plan-only
+validation only. Do not submit Slurm.
+The 2026-05-11T02:59Z Hermes/Codex tick detected that the prompt allocation
+decision had already been recorded and correctly wrote a duplicate-action
+blocker instead of re-recording or overwriting it. The 2026-05-11T03:01Z Codex
+state-sync pass updated both v1/v2 `gate_status.json` files so their
+`next_allowed_action` matches this automation state and the Codex plan:
+implement or review the R3.2-specific Qwen locked-scale wrapper and disabled
+allowlist entry, then run local plan-only validation only. No Slurm job,
+training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T14:12Z Codex worker monitored Slurm job `852426`, found it
+completed `0:0` in `01:27:40` on DGXA100 node `chimera12`, synced the fresh
+`wp6_r2_option_b_scale_eval_852426` artifacts without overwriting an existing
+local result directory, and reviewed the precommitted R2 Option B gates. The
+robust-block scale gate passed: protected block accepts were `7/8` at budget
+`64` against required `>=6/8`; raw, task-only, wrong-key, and wrong-payload
+accepts were all `0/8`; minimum accepted-block support was `26` against
+required `>=16`; minimum accepted-block majority margin was `5` against
+required `>=3`; forbidden public surface count was `0`. Review doc:
+`docs/natural_evidence_v2/WP6_R2_OPTION_B_SCALE_EVAL_852426_REVIEW.md`.
+This review did not submit another Slurm job, start training, rerun Qwen E2E,
+start Llama or same-family nulls, run a sanitizer, aggregate FAR, or make a
+paper-facing positive claim. Current next allowed action: stop until the next
+route is explicitly recorded.
+The 2026-05-11T03:16Z Codex worker implemented and locally validated the R3.2
+Qwen locked-scale plan-only wrapper and recorded the wrapper review. New paths:
+`scripts/natural_evidence_v2/build_r3_2_locked_scale_precommit.py`,
+`scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch`,
+`docs/natural_evidence_v2/R3_2_QWEN_LOCKED_SCALE_WRAPPER_REVIEW_20260511.md`,
+and
+`results/natural_evidence_v2/status/r3_2_qwen_locked_scale_wrapper_review_20260511_0318.json`.
+Local validation wrote only precommit plan artifacts under
+`results/natural_evidence_v2/status/r3_2_wrapper_plan_validation_20260511_0318/`
+and verified the selected prompt manifest SHA-256
+`4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67`.
+The disabled allowlist entry `v2_r3_2_qwen_locked_scale_eval` remains disabled.
+No Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action: stop until a later explicit, notified R3.2 submission tick
+authorizes exactly one reviewed Slurm job.
+The 2026-05-11T01:13Z Codex worker reconciled Hermes/Codex state after the
+user requested conflict cleanup. Read-only Chimera `sacct` inspection found
+out-of-band Llama-related jobs after the reviewed Qwen job `852426`
+(`852810`, `852811`, `852844`, `852853`, and `852881`) and remote artifacts
+under
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/llama_migration/`.
+These jobs/artifacts are not represented in the canonical Hermes route and are
+not adopted as formal project progress. A local untracked FAR aggregation
+summary and local Llama/sanitizer scripts were also treated as noncanonical.
+Codex wrote
+`docs/natural_evidence_v2/HERMES_CODEX_STATE_RECONCILIATION_20260511.md`,
+disabled the `build_llama_v2_bucket_bank` allowlist entry, and recorded this
+as control-plane reconciliation only. No Slurm job, training, generation, Qwen
+E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, artifact
+adoption, or paper-facing positive claim was started. Current next allowed
+action remains: stop until a new route is explicitly recorded.
+The 2026-05-10T10:53Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, start/end `Unknown`, and no assigned node. The
+remote result directory
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r2_option_b_scale_eval_852426`
+does not exist yet, so no artifacts were synced or reviewed. No new Slurm job,
+training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T11:08Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, start/end `Unknown`, and no assigned node. The
+remote result directory
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r2_option_b_scale_eval_852426`
+does not exist yet, so no artifacts were synced or reviewed. No new Slurm job,
+training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T11:23Z Codex worker monitored Slurm job `852426` only.
+`squeue` reported `PENDING` on `DGXA100` with reason `Priority` and a
+predicted start/end window of `2026-05-10T10:35:52` to
+`2026-05-10T20:35:52`; `sacct` still reported `PENDING`, elapsed `00:00:00`,
+start/end `Unknown`, exit code `0:0`, and no assigned node. The remote result
+directory
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r2_option_b_scale_eval_852426`
+does not exist yet, so no artifacts were synced or reviewed. No new Slurm job,
+training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T11:39Z Codex worker monitored Slurm job `852426` only.
+`squeue` reported `PENDING` on `DGXA100` with reason `Priority` and a
+predicted start/end window of `2026-05-10T10:35:52` to
+`2026-05-10T20:35:52`; `sacct` still reported `PENDING`, elapsed `00:00:00`,
+start/end `Unknown`, exit code `0:0`, and no assigned node. The remote and
+local result directories for `wp6_r2_option_b_scale_eval_852426` do not exist
+yet, so no artifacts were synced or reviewed. No new Slurm job, training,
+generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T11:54Z Codex worker monitored Slurm job `852426` only.
+`squeue` reported `PENDING` on `DGXA100` with reason `Priority` and a
+predicted start/end window of `2026-05-10T10:35:52` to
+`2026-05-10T20:35:52`; `sacct` still reported `PENDING`, elapsed `00:00:00`,
+start/end `Unknown`, exit code `0:0`, and no assigned node. The remote result
+directory
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp6_r2_option_b_scale_eval_852426`
+does not exist yet, so no artifacts were synced or reviewed. No new Slurm job,
+training, generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T12:09Z Codex worker monitored Slurm job `852426` only.
+`squeue` reported `PENDING` on `DGXA100` with reason `Priority` and a
+predicted start/end window of `2026-05-10T10:35:52` to
+`2026-05-10T20:35:52`; `sacct` still reported `PENDING`, elapsed `00:00:00`,
+start/end `Unknown`, exit code `0:0`, and no assigned node. The remote and
+local result directories for `wp6_r2_option_b_scale_eval_852426` do not exist
+yet, so no artifacts were synced or reviewed. No new Slurm job, training,
+generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T12:24Z Codex worker monitored Slurm job `852426` only.
+`squeue` reported `PENDING` on `DGXA100` with reason `Resources` and a
+predicted start/end window of `2026-05-10T10:35:52` to
+`2026-05-10T20:35:52`; `sacct` still reported `PENDING`, elapsed `00:00:00`,
+start/end `Unknown`, exit code `0:0`, and no assigned node. The remote and
+local result directories for `wp6_r2_option_b_scale_eval_852426` do not exist
+yet, so no artifacts were synced or reviewed. No new Slurm job, training,
+generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started.
+The 2026-05-10T12:39Z Codex worker monitored Slurm job `852426` only.
+Remote `squeue` reported `RUNNING` on `DGXA100` for `00:05:09` on
+`chimera12`, with start/end window `2026-05-10T08:34:12` to
+`2026-05-10T18:34:12`; remote `sacct` also reported `RUNNING`, exit code
+`0:0`, elapsed `00:05:09`, start `2026-05-10T08:34:12`, end `Unknown`, and
+node `chimera12`. The remote result directory exists but currently contains
+only `precommit/wp6_r2_option_b_contract.json`; the local result directory does
+not exist. Because the job is still running, no artifacts were synced or
+reviewed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started.
+The 2026-05-10T12:54Z Codex worker monitored Slurm job `852426` only.
+Remote `squeue` reported `RUNNING` on `DGXA100` for `00:20:07` on
+`chimera12`, with start/end window `2026-05-10T08:34:12` to
+`2026-05-10T18:34:12`; remote `sacct` also reported `RUNNING`, exit code
+`0:0`, elapsed `00:20:07`, start `2026-05-10T08:34:12`, end `Unknown`, and
+node `chimera12`. The remote result directory exists but currently contains
+only `precommit/wp6_r2_option_b_contract.json`; the local result directory does
+not exist. Because the job is still running, no artifacts were synced or
+reviewed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started.
+The 2026-05-10T13:09Z Codex worker monitored Slurm job `852426` only.
+Remote `squeue` reported `RUNNING` on `DGXA100` for `00:35:18` on
+`chimera12`, with start/end window `2026-05-10T08:34:12` to
+`2026-05-10T18:34:12`; remote `sacct` also reported `RUNNING`, exit code
+`0:0`, elapsed `00:35:18`, start `2026-05-10T08:34:12`, end `Unknown`, and
+node `chimera12`. The remote result directory exists but currently contains
+only `precommit/wp6_r2_option_b_contract.json`; the local result directory does
+not exist. Because the job is still running, no artifacts were synced or
+reviewed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started.
+The 2026-05-10T13:24Z Codex worker monitored Slurm job `852426` only.
+Remote `squeue` reported `RUNNING` on `DGXA100` for `00:50:13` on
+`chimera12`, with start/end window `2026-05-10T08:34:12` to
+`2026-05-10T18:34:12`; remote `sacct` also reported `RUNNING`, exit code
+`0:0`, elapsed `00:50:13`, start `2026-05-10T08:34:12`, end `Unknown`, and
+node `chimera12`. The remote result directory exists but currently contains
+only `precommit/wp6_r2_option_b_contract.json`; the local result directory does
+not exist. Because the job is still running, no artifacts were synced or
+reviewed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started.
+The 2026-05-10T13:39Z Codex worker monitored Slurm job `852426` only.
+Remote `squeue` reported `RUNNING` on `DGXA100` for `01:05:25` on
+`chimera12`, with start/end window `2026-05-10T08:34:12` to
+`2026-05-10T18:34:12`; remote `sacct` also reported `RUNNING`, exit code
+`0:0`, elapsed `01:05:25`, start `2026-05-10T08:34:12`, end `Unknown`, and
+node `chimera12`. The remote result directory exists but currently contains
+only `precommit/wp6_r2_option_b_contract.json`; the local result directory
+does not exist. Because the job is still running, no artifacts were synced or
+reviewed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started.
+The 2026-05-10T13:54Z Codex worker monitored Slurm job `852426` only.
+Remote `squeue` reported `RUNNING` on `DGXA100` for `01:20:25` on
+`chimera12`, with start/end window `2026-05-10T08:34:12` to
+`2026-05-10T18:34:12`; remote `sacct` also reported `RUNNING`, exit code
+`0:0`, elapsed `01:20:25`, start `2026-05-10T08:34:12`, end `Unknown`, and
+node `chimera12`. The remote result directory exists but currently contains
+only `precommit/wp6_r2_option_b_contract.json`; the local result directory
+does not exist. Because the job is still running, no artifacts were synced or
+reviewed. No new Slurm job, training, generation, Qwen E2E rerun, Llama,
+same-family null, sanitizer, FAR aggregation, or paper-facing positive claim
+was started.
 Every Hermes tick that pushes the project forward must notify the user through
 both Telegram and email before Codex executes the requested action. Notification
 must use `scripts/natural_evidence_v1/hermes_notify.py --channels
@@ -272,6 +574,174 @@ artifacts were synced or reviewed because the job has not completed. No new
 Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
 sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
 next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T06:21Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, and no assigned node. The local
+`wp6_r2_option_b_scale_eval_852426` result directory is absent, so no artifacts
+were synced or reviewed. No new Slurm job, training, generation, Qwen E2E
+rerun, Llama, same-family null, sanitizer, FAR aggregation, or paper-facing
+positive claim was started. Current next allowed action remains: monitor job
+`852426`; after completion, sync `wp6_r2_option_b_scale_eval_852426` artifacts
+and review the precommitted R2 Option B gates.
+The 2026-05-10T06:52Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, and no assigned node or start/end time. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T07:07Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, and no assigned node or start/end time. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T07:22Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T07:37Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T07:52Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. No
+artifacts were synced or reviewed because the job has not completed. No new
+Slurm job, training, generation, Qwen E2E rerun, Llama, same-family null,
+sanitizer, FAR aggregation, or paper-facing positive claim was started. Current
+next allowed action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T08:07Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. The
+local `wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T08:22Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. The
+local `wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T08:38Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. The
+local `wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T08:52Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. The
+local `wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T09:07Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. The
+remote `wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T09:23Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node or
+start/end time. The local `wp6_r2_option_b_scale_eval_852426` result directory
+is absent, so no artifacts were synced or reviewed. No new Slurm job, training,
+generation, Qwen E2E rerun, Llama, same-family null, sanitizer, FAR
+aggregation, or paper-facing positive claim was started. Current next allowed
+action remains: monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T09:38Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, and no assigned node. The
+remote `wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T09:53Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, no assigned node, and
+unknown start/end time. The remote and local
+`wp6_r2_option_b_scale_eval_852426` result directories are absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T10:08Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, no assigned node, and
+unknown start/end time. The remote and local
+`wp6_r2_option_b_scale_eval_852426` result directories are absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T10:23Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, no assigned node, and
+unknown start/end time. The remote and local
+`wp6_r2_option_b_scale_eval_852426` result directories are absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
+`wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
+Option B gates.
+The 2026-05-10T10:38Z Codex worker monitored Slurm job `852426` only.
+`squeue` and `sacct` both reported `PENDING` on `DGXA100` with reason
+`Priority`, elapsed `00:00:00`, exit code `0:0`, no assigned node, and
+unknown start/end time. The expected remote
+`wp6_r2_option_b_scale_eval_852426` result directory is absent, so no
+artifacts were synced or reviewed. No new Slurm job, training, generation,
+Qwen E2E rerun, Llama, same-family null, sanitizer, FAR aggregation, or
+paper-facing positive claim was started. Current next allowed action remains:
+monitor job `852426`; after completion, sync
 `wp6_r2_option_b_scale_eval_852426` artifacts and review the precommitted R2
 Option B gates.
 The 2026-05-09T23:35Z Codex worker monitored Slurm job `852202`. `squeue` and
