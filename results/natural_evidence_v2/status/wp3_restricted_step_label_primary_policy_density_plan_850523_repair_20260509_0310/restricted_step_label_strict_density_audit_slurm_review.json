@@ -1,0 +1,19 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_wp3_restricted_step_label_density_audit",
+  "command_pattern": "PROMPTS_JSONL=<this repaired prompts_jsonl> POLICY_DIR=<this repaired output dir> OUTPUT_DIR=<fresh scratch output> sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "compatible_wrapper": "scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch",
+  "e2e_eval_started": false,
+  "explicit_approval_required_before_submission": true,
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "policy_dir": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310",
+  "prompts_jsonl": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "removed_prompt_variant_id": "strict_compact_step_label_lines",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_repaired_strict_density_slurm_review_v1",
+  "slurm_submitted": false,
+  "source_density_audit_job_id": "850523",
+  "status": "REPAIRED_STRICT_DENSITY_AUDIT_SLURM_PLAN_READY_NOT_SUBMITTED_REVIEW_REQUIRED",
+  "training_started": false,
+  "wp4_allowed": false
+}

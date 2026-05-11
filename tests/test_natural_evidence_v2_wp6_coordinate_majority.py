@@ -8,9 +8,24 @@ from scripts.natural_evidence_v2.decode_wp6_r1_scale_blocks import (
     read_prompt_rows_with_file_index,
     summarize_scale,
 )
+from scripts.natural_evidence_v2.build_r3_2_locked_scale_precommit import (
+    EXPECTED_SELECTED_PROMPT_MANIFEST_SHA256,
+    build_selected_prompt_manifest,
+    canonical_sha256,
+    prompt_lines,
+)
+from scripts.natural_evidence_v2.aggregate_r3_2_locked_scale_shards import (
+    build_gate_review as build_r3_2_gate_review,
+    canonicalize_decode_rows as canonicalize_r3_2_decode_rows,
+)
 from scripts.natural_evidence_v2.generate_wp6_e2e_outputs import (
     read_jsonl_with_file_index,
     select_prompts,
+)
+from scripts.natural_evidence_v2.replay_r3_2_same_contract_from_852426 import (
+    EXPECTED_SUMMARY as EXPECTED_R3_2_852426_REPLAY_SUMMARY,
+    convert_decode_rows,
+    validate_source_summary,
 )
 from scripts.natural_evidence_v2.replay_wp6_coordinate_majority_decoder import contract_info, replay
 
@@ -247,6 +262,120 @@ def test_scale_contract_can_record_wp6_r2_option_b_ids() -> None:
         "natural_evidence_v2_wp6_r2_option_b_robust_block_scale"
     )
     assert "precommit/wp6_r2_option_b_contract.json" in contract["required_outputs"]
+
+
+def test_r3_2_prompt_manifest_recomputes_locked_hash() -> None:
+    prompt_source_path = (
+        "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/"
+        "restricted_step_label_strict_density_audit_prompts.jsonl"
+    )
+    manifest = build_selected_prompt_manifest(prompt_source_path, prompt_lines(DEFAULT_PROMPTS))
+
+    assert canonical_sha256(manifest) == EXPECTED_SELECTED_PROMPT_MANIFEST_SHA256
+    assert manifest["contract_id"] == "a55e"
+    assert manifest["payload_diversity_tested"] is False
+    assert manifest["seed_cycle"] == [17, 23, 29]
+    assert len(manifest["replicate_groups"]) == 12
+    assert manifest["replicate_groups"][0]["replicate_group_id"] == "shard_00"
+    assert manifest["replicate_groups"][0]["prompt_file_row_start"] == 512
+    assert manifest["replicate_groups"][11]["replicate_group_id"] == "shard_11"
+    assert manifest["replicate_groups"][11]["prompt_file_row_end_inclusive"] == 2559
+    assert "payloads" not in manifest
+    assert "cells" not in manifest
+
+
+def test_r3_2_852426_replay_summary_exact_match_and_block_renaming() -> None:
+    validate_source_summary(
+        EXPECTED_R3_2_852426_REPLAY_SUMMARY
+        | {"post_hoc_artifact_replay": False, "precommitted_transcript": True}
+    )
+
+    rows = convert_decode_rows(
+        [
+            {
+                "accepted": True,
+                "block_id": "block_7",
+                "budget": 64,
+                "decode_condition": "protected",
+            }
+        ]
+    )
+
+    assert rows == [
+        {
+            "accepted": True,
+            "block_id": "C_A55E_replay852426_block_07",
+            "budget": 64,
+            "contract_id": "a55e",
+            "decode_condition": "protected",
+            "replicate_group_id": "replay_852426",
+            "schema_name": "natural_evidence_v2_r3_2_852426_same_contract_replay_decode_v1",
+            "source_wp6_r2_block_id": "block_7",
+        }
+    ]
+
+
+def test_r3_2_shard_aggregation_uses_canonical_block_ids_and_96_block_gate() -> None:
+    rows = canonicalize_r3_2_decode_rows(
+        [
+            {
+                "accepted": True,
+                "block_id": "block_7",
+                "budget": 64,
+                "decode_condition": "protected",
+                "majority_hex": "a55e",
+                "min_majority_margin": 5,
+                "min_support": 26,
+            }
+        ],
+        shard_id="shard_03",
+    )
+    assert rows[0]["block_id"] == "C_A55E_shard_03_block_07"
+    assert rows[0]["contract_id"] == "a55e"
+    assert rows[0]["replicate_group_id"] == "shard_03"
+    assert rows[0]["source_shard_block_id"] == "block_7"
+
+    decode_rows = []
+    for shard_index in range(12):
+        shard_id = f"shard_{shard_index:02d}"
+        for block_index in range(8):
+            for condition in ("protected", "raw", "task_only", "wrong_key", "wrong_payload"):
+                decode_rows.append(
+                    {
+                        "accepted": condition == "protected" and not (shard_index == 11 and block_index == 7),
+                        "block_id": f"C_A55E_{shard_id}_block_{block_index:02d}",
+                        "budget": 64,
+                        "decode_condition": condition,
+                        "majority_hex": "a55e" if condition == "protected" else "",
+                        "min_majority_margin": 5,
+                        "min_support": 26,
+                        "replicate_group_id": shard_id,
+                    }
+                )
+
+    class Args:
+        primary_budget = 64
+        min_protected_accepts_at_64 = 80
+        min_support_at_64 = 16
+        min_majority_margin_at_64 = 3
+
+    review = build_r3_2_gate_review(
+        args=Args(),
+        budgets=[16, 32, 64],
+        decode_rows=decode_rows,
+        decision_rows=[],
+        replicate_group_ids=[f"shard_{index:02d}" for index in range(12)],
+    )
+
+    assert review["scale_gate_pass"] is True
+    assert review["protected_block_count"] == 96
+    assert review["protected_block_accept_count_at_controlling_budget"] == 95
+    assert review["null_accept_counts_at_controlling_budget"] == {
+        "raw": 0,
+        "task_only": 0,
+        "wrong_key": 0,
+        "wrong_payload": 0,
+    }
 
 
 def test_scale_block_window_majority_accepts_three_of_four_blocks() -> None:

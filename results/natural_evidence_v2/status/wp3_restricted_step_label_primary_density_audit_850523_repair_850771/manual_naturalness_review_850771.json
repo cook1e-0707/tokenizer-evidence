@@ -1,0 +1,24 @@
+{
+  "borderline_count": 1,
+  "decision": "PASS_DIAGNOSTIC_SAMPLE_ONLY",
+  "e2e_eval_started": false,
+  "example_count": 32,
+  "fail_forbidden_surface_count": 0,
+  "fail_format_or_template_artifact_count": 0,
+  "fail_semantic_coherence_count": 0,
+  "manual_review_scope": "exported naturalness examples plus cross-variant spot checks from model outputs",
+  "naturalness_examples_variant_counts": {
+    "strict_literal_16_step_lines": 32
+  },
+  "not_full_wp3_r3_gate_reason": "diagnostic sample is not variant-balanced and job 850771 is not a full WP3-R1 dev/eval expansion",
+  "paper_claim_allowed": false,
+  "pass_count": 31,
+  "pass_plus_borderline_rate": 1.0,
+  "review_doc": "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_AUDIT_850771_REPAIR_DIAGNOSTIC_REVIEW.md",
+  "reviewed_at_utc": "2026-05-09T03:45:01Z",
+  "schema_name": "natural_evidence_v2_wp3_manual_naturalness_review_v1",
+  "source_job_id": "850771",
+  "source_naturalness_examples_jsonl": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_density_audit_850523_repair_850771/restricted_step_label_naturalness_examples.jsonl",
+  "training_started": false,
+  "wp4_allowed": false
+}

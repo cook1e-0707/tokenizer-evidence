@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/decode_wp6_r1_scale_blocks.py", line 625, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/decode_wp6_r1_scale_blocks.py", line 556, in main
+    prompt_plan = build_prompt_plan(
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/decode_wp6_r1_scale_blocks.py", line 154, in build_prompt_plan
+    raise ValueError(f"split {split!r} has only {len(selected)} prompts; need {max_prompts}")
+ValueError: split 'wp3_r1_eval' has only 0 prompts; need 512

@@ -1,0 +1,1079 @@
+{
+  "artifact_role": "wp6_r2_option_b_robust_block_scale_summary",
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "controlling_budget": 64,
+  "forbidden_public_surface_count": 0,
+  "null_accept_counts_at_controlling_budget": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "post_hoc_artifact_replay": false,
+  "precommitted_transcript": true,
+  "protected_block_accept_count_at_controlling_budget": 7,
+  "protected_block_count": 8,
+  "protected_min_majority_margin_in_accepted_blocks": 5,
+  "protected_min_support_in_accepted_blocks": 26,
+  "scale_gate_pass": true,
+  "scale_gate_status": "PASS_WP6_R2_OPTION_B_ROBUST_BLOCK_SCALE_GATE",
+  "scale_gate_targets": {
+    "forbidden_public_surface_count": 0,
+    "min_majority_margin_in_accepted_protected_blocks": 3,
+    "min_protected_block_accepts_at_64": 6,
+    "min_support_in_accepted_protected_blocks": 16,
+    "null_accepts_per_condition_at_64": 0,
+    "protected_block_count": 8
+  },
+  "schema_name": "natural_evidence_v2_wp6_r2_option_b_summary_v1",
+  "summary_by_block_budget": {
+    "block_0": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 7
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "4700",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 7
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 7
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 0,
+          "min_support": 14
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "5740",
+          "min_majority_margin": 1,
+          "min_support": 1
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 0,
+          "min_support": 14
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 0,
+          "min_support": 14
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 6,
+          "min_support": 28
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "7920",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "5740",
+          "min_majority_margin": 1,
+          "min_support": 1
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 6,
+          "min_support": 28
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 6,
+          "min_support": 28
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 0,
+          "min_support": 4
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 0,
+          "min_support": 4
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 0,
+          "min_support": 4
+        }
+      }
+    },
+    "block_1": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 9
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 9
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 9
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 11,
+          "min_support": 19
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 11,
+          "min_support": 19
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 11,
+          "min_support": 19
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 14,
+          "min_support": 34
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "7382",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "4120",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 14,
+          "min_support": 34
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 14,
+          "min_support": 34
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 2,
+          "min_support": 4
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 2,
+          "min_support": 4
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 2,
+          "min_support": 4
+        }
+      }
+    },
+    "block_2": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 8
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 8
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 8
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 16
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "7480",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 16
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 16
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 31
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "6020",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 31
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 31
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 5
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 5
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 5
+        }
+      }
+    },
+    "block_3": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 8,
+          "min_support": 14
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 8,
+          "min_support": 14
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 8,
+          "min_support": 14
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 14,
+          "min_support": 22
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 14,
+          "min_support": 22
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 14,
+          "min_support": 22
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 21,
+          "min_support": 39
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "4011",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 21,
+          "min_support": 39
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 21,
+          "min_support": 39
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 4,
+          "min_support": 7
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 4,
+          "min_support": 7
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 4,
+          "min_support": 7
+        }
+      }
+    },
+    "block_4": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 8
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 8
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 8
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 10,
+          "min_support": 18
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "7230",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "700c",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 10,
+          "min_support": 18
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 10,
+          "min_support": 18
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 15,
+          "min_support": 41
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "72b8",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "5000",
+          "min_majority_margin": 1,
+          "min_support": 3
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 15,
+          "min_support": 41
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 15,
+          "min_support": 41
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": false,
+          "decoded_hex": "a15e",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a15e",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a15e",
+          "min_majority_margin": 0,
+          "min_support": 2
+        }
+      }
+    },
+    "block_5": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 6
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 6
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 3,
+          "min_support": 6
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 6,
+          "min_support": 12
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "4c41",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 6,
+          "min_support": 12
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 6,
+          "min_support": 12
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 16,
+          "min_support": 26
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "5800",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "5821",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 16,
+          "min_support": 26
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 16,
+          "min_support": 26
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 2
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 2
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 1,
+          "min_support": 2
+        }
+      }
+    },
+    "block_6": {
+      "16": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 4,
+          "min_support": 11
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 4,
+          "min_support": 11
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 4,
+          "min_support": 11
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 10,
+          "min_support": 20
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "70a4",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "6464",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 10,
+          "min_support": 20
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 10,
+          "min_support": 20
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 12,
+          "min_support": 34
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "7084",
+          "min_majority_margin": 0,
+          "min_support": 4
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "4060",
+          "min_majority_margin": 0,
+          "min_support": 5
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 12,
+          "min_support": 34
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 12,
+          "min_support": 34
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": true,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 5
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 5
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "a55e",
+          "min_majority_margin": 5,
+          "min_support": 5
+        }
+      }
+    },
+    "block_7": {
+      "16": {
+        "protected": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "2000",
+          "min_majority_margin": 0,
+          "min_support": 1
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        }
+      },
+      "32": {
+        "protected": {
+          "accepted": false,
+          "decoded_hex": "b016",
+          "min_majority_margin": 2,
+          "min_support": 3
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "6002",
+          "min_majority_margin": 0,
+          "min_support": 2
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "4400",
+          "min_majority_margin": 0,
+          "min_support": 3
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "b016",
+          "min_majority_margin": 2,
+          "min_support": 3
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "b016",
+          "min_majority_margin": 2,
+          "min_support": 3
+        }
+      },
+      "64": {
+        "protected": {
+          "accepted": false,
+          "decoded_hex": "b014",
+          "min_majority_margin": 1,
+          "min_support": 7
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "e002",
+          "min_majority_margin": 1,
+          "min_support": 5
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "4040",
+          "min_majority_margin": 0,
+          "min_support": 7
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "b014",
+          "min_majority_margin": 1,
+          "min_support": 7
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "b014",
+          "min_majority_margin": 1,
+          "min_support": 7
+        }
+      },
+      "8": {
+        "protected": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "raw": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "task_only": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_key": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        },
+        "wrong_payload": {
+          "accepted": false,
+          "decoded_hex": "",
+          "min_majority_margin": 0,
+          "min_support": 0
+        }
+      }
+    }
+  },
+  "transcript_provenance": "precommitted_replacement_run"
+}

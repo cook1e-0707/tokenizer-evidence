@@ -1,0 +1,944 @@
+{
+  "block_size": 64,
+  "blocks_per_group": 8,
+  "contract_id": "a55e",
+  "package_id": "qwen_v2_r3_2_same_contract_locked_scale_package_v1",
+  "payload_diversity_tested": false,
+  "prompt_source_path": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_20260509_0355/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "prompt_source_rows": 2560,
+  "prompt_source_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+  "prompt_window_policy": "deterministic_5_window_circular_reuse_by_replicate_group_index",
+  "replicate_group_count": 12,
+  "replicate_groups": [
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_00_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 63,
+          "prompt_file_row_start": 0,
+          "row_jsonl_sha256": "d759df822522adc9169c0243bc9623b9651754de0f2f304d156200d84449effc"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 127,
+          "prompt_file_row_start": 64,
+          "row_jsonl_sha256": "431caf951b3df49030b355ec8a9828241c24d88d07142556fdea5537a0482911"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 191,
+          "prompt_file_row_start": 128,
+          "row_jsonl_sha256": "9e83d118ea316b2aa56c115d69e096c2d4a3eb83d13e924e21d40a08b3166283"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 255,
+          "prompt_file_row_start": 192,
+          "row_jsonl_sha256": "1ed949533d9621a21128f50e8cf5cee9d1ccb8cda282ac2ed0bde5ae530fdfb8"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 319,
+          "prompt_file_row_start": 256,
+          "row_jsonl_sha256": "cd84f0ddeb1320407ff172d46b0f51f27b2724326a2fb850773e80811f3ed4ab"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 383,
+          "prompt_file_row_start": 320,
+          "row_jsonl_sha256": "25c5c94349f7ceb3b27a7c9aecbb7ad16d0ea71fcc15037030d858240886aaf7"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 447,
+          "prompt_file_row_start": 384,
+          "row_jsonl_sha256": "cb86813c2109c0d5d4d3a126bee1f9d94a61161fe7977e94ef680e7b58b86b13"
+        },
+        {
+          "block_id": "C_A55E_shard_00_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 511,
+          "prompt_file_row_start": 448,
+          "row_jsonl_sha256": "eee6b2162cd592e86cef20a107572ced74187742e11f0f8b52f8e74b2d883959"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 17,
+      "prompt_file_row_end_inclusive": 511,
+      "prompt_file_row_start": 0,
+      "prompt_window_index": 0,
+      "replicate_group_id": "shard_00",
+      "replicate_group_index": 0,
+      "shard_id": "shard_00",
+      "window_jsonl_sha256": "98b78920c07a9753f5ad5dcc7af198b5a4374f95d57b2d00d05f9ae327330038"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_01_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 575,
+          "prompt_file_row_start": 512,
+          "row_jsonl_sha256": "0dbe6d7386d08e0c37d65f555dd3140a183d43933bf989735d503eecbf0a8b43"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 639,
+          "prompt_file_row_start": 576,
+          "row_jsonl_sha256": "0bb9280b50a0f399b0b3ff01bb27c7cb4045e7e59d1cdbef537f7b109b02eafb"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 703,
+          "prompt_file_row_start": 640,
+          "row_jsonl_sha256": "cf3c246ca53f72867cb4527cb4dbd4eaf1e86a05b87debe2e5f69e524d13e288"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 767,
+          "prompt_file_row_start": 704,
+          "row_jsonl_sha256": "f5b679b35d3d8224d2ffaf07cdefb53c0bed774551451df546e00e356a99abf1"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 831,
+          "prompt_file_row_start": 768,
+          "row_jsonl_sha256": "67e869d94e33b659cc00ef0e10f50ddf7eb4e30e7a8e47bcaa156ec3227ff066"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 895,
+          "prompt_file_row_start": 832,
+          "row_jsonl_sha256": "a911b65c16b5532e1b938d8f8a445b1030303f65d50659216d30adbba373270f"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 959,
+          "prompt_file_row_start": 896,
+          "row_jsonl_sha256": "71d0fe09385b063a7386d474a4e483e99344341376e826abbdf249d5a2a3d4e5"
+        },
+        {
+          "block_id": "C_A55E_shard_01_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1023,
+          "prompt_file_row_start": 960,
+          "row_jsonl_sha256": "7300594c6b469fd700c3a5830e01e6228bb9b8c4856b590907b7cdc5e53be045"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 23,
+      "prompt_file_row_end_inclusive": 1023,
+      "prompt_file_row_start": 512,
+      "prompt_window_index": 1,
+      "replicate_group_id": "shard_01",
+      "replicate_group_index": 1,
+      "shard_id": "shard_01",
+      "window_jsonl_sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_02_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1087,
+          "prompt_file_row_start": 1024,
+          "row_jsonl_sha256": "d204650a48e8fdaf2c328114bd28ab74acfb1a3b36510117efdfe96a68be8111"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1151,
+          "prompt_file_row_start": 1088,
+          "row_jsonl_sha256": "4659fc0ae69a3da744bb32ea7f0dd876868a18f38c883b4092c89e9d71eb8d8f"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1215,
+          "prompt_file_row_start": 1152,
+          "row_jsonl_sha256": "f067ea7a1e8cdf709ab7141470ad96d9a9e7b667aef618d9d6bef2eada17b64e"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1279,
+          "prompt_file_row_start": 1216,
+          "row_jsonl_sha256": "fb539266d645a9c25602f15d061886636cc58227fcdbf0be629985f104c9d2c4"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1343,
+          "prompt_file_row_start": 1280,
+          "row_jsonl_sha256": "6d91abc7eefeab428aad3d59a6ae21c8b1d14af24f8aca24ac9c44b4d6de26bf"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1407,
+          "prompt_file_row_start": 1344,
+          "row_jsonl_sha256": "48aeb46e4d6a77d2c5eb80812b0ab2781a801bd71bb63f1d4049efbc536e39ea"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1471,
+          "prompt_file_row_start": 1408,
+          "row_jsonl_sha256": "bac9ea08c387ffdd47edb035925511d14e8b8c018a1368280264ddf17d0b25bf"
+        },
+        {
+          "block_id": "C_A55E_shard_02_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1535,
+          "prompt_file_row_start": 1472,
+          "row_jsonl_sha256": "9f54b95465a1d473be1b6e8a7a26ad16ca3700f35902935372ab4823b6ba5446"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 29,
+      "prompt_file_row_end_inclusive": 1535,
+      "prompt_file_row_start": 1024,
+      "prompt_window_index": 2,
+      "replicate_group_id": "shard_02",
+      "replicate_group_index": 2,
+      "shard_id": "shard_02",
+      "window_jsonl_sha256": "52487748415b39a675e0c0860927cfc04047af0bec647a7c2fecb5812e044630"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_03_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1599,
+          "prompt_file_row_start": 1536,
+          "row_jsonl_sha256": "9232585d577e6b00f021039bdc6a5a9389abf8c4ecfe1e431c6380f30129f592"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1663,
+          "prompt_file_row_start": 1600,
+          "row_jsonl_sha256": "a472c4b2f20e81a420cc9a1fe1180463adc88d5a7cab89a377cb951b52d07316"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1727,
+          "prompt_file_row_start": 1664,
+          "row_jsonl_sha256": "f4536e68b32b86c8ce8bd5e3e5bf4d7d31f59e2e5366dc7392ac2a5332443418"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1791,
+          "prompt_file_row_start": 1728,
+          "row_jsonl_sha256": "99566d53c7c912db17eefb9a2faff9cdb414a6b2843717454316453774a086f5"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1855,
+          "prompt_file_row_start": 1792,
+          "row_jsonl_sha256": "426011d59542cda301c2bff499d55b5a974dfbd255082234942b72e72ce65934"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1919,
+          "prompt_file_row_start": 1856,
+          "row_jsonl_sha256": "a522e96be44cd3f52033dcce2acb23232fb049543dd79435cd7e2ceb558cd359"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1983,
+          "prompt_file_row_start": 1920,
+          "row_jsonl_sha256": "d2eeda20c0053ac3864e9700f6cf530a81972fe527bf3cd7ff3378d31dd6fbc1"
+        },
+        {
+          "block_id": "C_A55E_shard_03_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2047,
+          "prompt_file_row_start": 1984,
+          "row_jsonl_sha256": "8013032cf0d5c19bf39fe91bf2be4fc93414b0f02d29b56081e951655bf30e90"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 17,
+      "prompt_file_row_end_inclusive": 2047,
+      "prompt_file_row_start": 1536,
+      "prompt_window_index": 3,
+      "replicate_group_id": "shard_03",
+      "replicate_group_index": 3,
+      "shard_id": "shard_03",
+      "window_jsonl_sha256": "5e151bd80b2befe1b77658f98976c13d8901b6dfb357b5339a66fc4da6fab72a"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_04_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2111,
+          "prompt_file_row_start": 2048,
+          "row_jsonl_sha256": "0a7526edd559e97763b148fc686b7a516d813159de537f0da223c9be38c2bc27"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2175,
+          "prompt_file_row_start": 2112,
+          "row_jsonl_sha256": "187197b98430bcbdbfa11b8883617d2a83ce52b9ab070d95cea2719827231d3b"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2239,
+          "prompt_file_row_start": 2176,
+          "row_jsonl_sha256": "be24f41b1b1e29e359cb4e18aba1b356406e6ae3532274bbafb02904b3a68e33"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2303,
+          "prompt_file_row_start": 2240,
+          "row_jsonl_sha256": "0b43030e2f0603f09b2b5ec7c7590971dfd536e72ae0e9989ff08c657298d6f5"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2367,
+          "prompt_file_row_start": 2304,
+          "row_jsonl_sha256": "c90d7ced342e392789415bd664f26a709f095f13a888c7fe6a6dd9abda5089bd"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2431,
+          "prompt_file_row_start": 2368,
+          "row_jsonl_sha256": "ac365d0cd45c4ac90b0aaeef7c10b714f05e9644b61d1052d934210e5a4da6d7"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2495,
+          "prompt_file_row_start": 2432,
+          "row_jsonl_sha256": "f7c7418c09eb5e74b1c1a2c130a04e51f2413fff3331fbcc23658005c50a0e81"
+        },
+        {
+          "block_id": "C_A55E_shard_04_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2559,
+          "prompt_file_row_start": 2496,
+          "row_jsonl_sha256": "7cf43cd9a90d7ae594274b42f6123a9cdabfb023c38970075f436a429cbe0533"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 23,
+      "prompt_file_row_end_inclusive": 2559,
+      "prompt_file_row_start": 2048,
+      "prompt_window_index": 4,
+      "replicate_group_id": "shard_04",
+      "replicate_group_index": 4,
+      "shard_id": "shard_04",
+      "window_jsonl_sha256": "d0acb1f20ed5b54b08a90facc852905764c341605606801f6a48eb10721b063c"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_05_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 63,
+          "prompt_file_row_start": 0,
+          "row_jsonl_sha256": "d759df822522adc9169c0243bc9623b9651754de0f2f304d156200d84449effc"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 127,
+          "prompt_file_row_start": 64,
+          "row_jsonl_sha256": "431caf951b3df49030b355ec8a9828241c24d88d07142556fdea5537a0482911"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 191,
+          "prompt_file_row_start": 128,
+          "row_jsonl_sha256": "9e83d118ea316b2aa56c115d69e096c2d4a3eb83d13e924e21d40a08b3166283"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 255,
+          "prompt_file_row_start": 192,
+          "row_jsonl_sha256": "1ed949533d9621a21128f50e8cf5cee9d1ccb8cda282ac2ed0bde5ae530fdfb8"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 319,
+          "prompt_file_row_start": 256,
+          "row_jsonl_sha256": "cd84f0ddeb1320407ff172d46b0f51f27b2724326a2fb850773e80811f3ed4ab"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 383,
+          "prompt_file_row_start": 320,
+          "row_jsonl_sha256": "25c5c94349f7ceb3b27a7c9aecbb7ad16d0ea71fcc15037030d858240886aaf7"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 447,
+          "prompt_file_row_start": 384,
+          "row_jsonl_sha256": "cb86813c2109c0d5d4d3a126bee1f9d94a61161fe7977e94ef680e7b58b86b13"
+        },
+        {
+          "block_id": "C_A55E_shard_05_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 511,
+          "prompt_file_row_start": 448,
+          "row_jsonl_sha256": "eee6b2162cd592e86cef20a107572ced74187742e11f0f8b52f8e74b2d883959"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 29,
+      "prompt_file_row_end_inclusive": 511,
+      "prompt_file_row_start": 0,
+      "prompt_window_index": 0,
+      "replicate_group_id": "shard_05",
+      "replicate_group_index": 5,
+      "shard_id": "shard_05",
+      "window_jsonl_sha256": "98b78920c07a9753f5ad5dcc7af198b5a4374f95d57b2d00d05f9ae327330038"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_06_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 575,
+          "prompt_file_row_start": 512,
+          "row_jsonl_sha256": "0dbe6d7386d08e0c37d65f555dd3140a183d43933bf989735d503eecbf0a8b43"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 639,
+          "prompt_file_row_start": 576,
+          "row_jsonl_sha256": "0bb9280b50a0f399b0b3ff01bb27c7cb4045e7e59d1cdbef537f7b109b02eafb"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 703,
+          "prompt_file_row_start": 640,
+          "row_jsonl_sha256": "cf3c246ca53f72867cb4527cb4dbd4eaf1e86a05b87debe2e5f69e524d13e288"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 767,
+          "prompt_file_row_start": 704,
+          "row_jsonl_sha256": "f5b679b35d3d8224d2ffaf07cdefb53c0bed774551451df546e00e356a99abf1"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 831,
+          "prompt_file_row_start": 768,
+          "row_jsonl_sha256": "67e869d94e33b659cc00ef0e10f50ddf7eb4e30e7a8e47bcaa156ec3227ff066"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 895,
+          "prompt_file_row_start": 832,
+          "row_jsonl_sha256": "a911b65c16b5532e1b938d8f8a445b1030303f65d50659216d30adbba373270f"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 959,
+          "prompt_file_row_start": 896,
+          "row_jsonl_sha256": "71d0fe09385b063a7386d474a4e483e99344341376e826abbdf249d5a2a3d4e5"
+        },
+        {
+          "block_id": "C_A55E_shard_06_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1023,
+          "prompt_file_row_start": 960,
+          "row_jsonl_sha256": "7300594c6b469fd700c3a5830e01e6228bb9b8c4856b590907b7cdc5e53be045"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 17,
+      "prompt_file_row_end_inclusive": 1023,
+      "prompt_file_row_start": 512,
+      "prompt_window_index": 1,
+      "replicate_group_id": "shard_06",
+      "replicate_group_index": 6,
+      "shard_id": "shard_06",
+      "window_jsonl_sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_07_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1087,
+          "prompt_file_row_start": 1024,
+          "row_jsonl_sha256": "d204650a48e8fdaf2c328114bd28ab74acfb1a3b36510117efdfe96a68be8111"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1151,
+          "prompt_file_row_start": 1088,
+          "row_jsonl_sha256": "4659fc0ae69a3da744bb32ea7f0dd876868a18f38c883b4092c89e9d71eb8d8f"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1215,
+          "prompt_file_row_start": 1152,
+          "row_jsonl_sha256": "f067ea7a1e8cdf709ab7141470ad96d9a9e7b667aef618d9d6bef2eada17b64e"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1279,
+          "prompt_file_row_start": 1216,
+          "row_jsonl_sha256": "fb539266d645a9c25602f15d061886636cc58227fcdbf0be629985f104c9d2c4"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1343,
+          "prompt_file_row_start": 1280,
+          "row_jsonl_sha256": "6d91abc7eefeab428aad3d59a6ae21c8b1d14af24f8aca24ac9c44b4d6de26bf"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1407,
+          "prompt_file_row_start": 1344,
+          "row_jsonl_sha256": "48aeb46e4d6a77d2c5eb80812b0ab2781a801bd71bb63f1d4049efbc536e39ea"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1471,
+          "prompt_file_row_start": 1408,
+          "row_jsonl_sha256": "bac9ea08c387ffdd47edb035925511d14e8b8c018a1368280264ddf17d0b25bf"
+        },
+        {
+          "block_id": "C_A55E_shard_07_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1535,
+          "prompt_file_row_start": 1472,
+          "row_jsonl_sha256": "9f54b95465a1d473be1b6e8a7a26ad16ca3700f35902935372ab4823b6ba5446"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 23,
+      "prompt_file_row_end_inclusive": 1535,
+      "prompt_file_row_start": 1024,
+      "prompt_window_index": 2,
+      "replicate_group_id": "shard_07",
+      "replicate_group_index": 7,
+      "shard_id": "shard_07",
+      "window_jsonl_sha256": "52487748415b39a675e0c0860927cfc04047af0bec647a7c2fecb5812e044630"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_08_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1599,
+          "prompt_file_row_start": 1536,
+          "row_jsonl_sha256": "9232585d577e6b00f021039bdc6a5a9389abf8c4ecfe1e431c6380f30129f592"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1663,
+          "prompt_file_row_start": 1600,
+          "row_jsonl_sha256": "a472c4b2f20e81a420cc9a1fe1180463adc88d5a7cab89a377cb951b52d07316"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1727,
+          "prompt_file_row_start": 1664,
+          "row_jsonl_sha256": "f4536e68b32b86c8ce8bd5e3e5bf4d7d31f59e2e5366dc7392ac2a5332443418"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1791,
+          "prompt_file_row_start": 1728,
+          "row_jsonl_sha256": "99566d53c7c912db17eefb9a2faff9cdb414a6b2843717454316453774a086f5"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1855,
+          "prompt_file_row_start": 1792,
+          "row_jsonl_sha256": "426011d59542cda301c2bff499d55b5a974dfbd255082234942b72e72ce65934"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1919,
+          "prompt_file_row_start": 1856,
+          "row_jsonl_sha256": "a522e96be44cd3f52033dcce2acb23232fb049543dd79435cd7e2ceb558cd359"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1983,
+          "prompt_file_row_start": 1920,
+          "row_jsonl_sha256": "d2eeda20c0053ac3864e9700f6cf530a81972fe527bf3cd7ff3378d31dd6fbc1"
+        },
+        {
+          "block_id": "C_A55E_shard_08_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2047,
+          "prompt_file_row_start": 1984,
+          "row_jsonl_sha256": "8013032cf0d5c19bf39fe91bf2be4fc93414b0f02d29b56081e951655bf30e90"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 29,
+      "prompt_file_row_end_inclusive": 2047,
+      "prompt_file_row_start": 1536,
+      "prompt_window_index": 3,
+      "replicate_group_id": "shard_08",
+      "replicate_group_index": 8,
+      "shard_id": "shard_08",
+      "window_jsonl_sha256": "5e151bd80b2befe1b77658f98976c13d8901b6dfb357b5339a66fc4da6fab72a"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_09_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2111,
+          "prompt_file_row_start": 2048,
+          "row_jsonl_sha256": "0a7526edd559e97763b148fc686b7a516d813159de537f0da223c9be38c2bc27"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2175,
+          "prompt_file_row_start": 2112,
+          "row_jsonl_sha256": "187197b98430bcbdbfa11b8883617d2a83ce52b9ab070d95cea2719827231d3b"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2239,
+          "prompt_file_row_start": 2176,
+          "row_jsonl_sha256": "be24f41b1b1e29e359cb4e18aba1b356406e6ae3532274bbafb02904b3a68e33"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2303,
+          "prompt_file_row_start": 2240,
+          "row_jsonl_sha256": "0b43030e2f0603f09b2b5ec7c7590971dfd536e72ae0e9989ff08c657298d6f5"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2367,
+          "prompt_file_row_start": 2304,
+          "row_jsonl_sha256": "c90d7ced342e392789415bd664f26a709f095f13a888c7fe6a6dd9abda5089bd"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2431,
+          "prompt_file_row_start": 2368,
+          "row_jsonl_sha256": "ac365d0cd45c4ac90b0aaeef7c10b714f05e9644b61d1052d934210e5a4da6d7"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2495,
+          "prompt_file_row_start": 2432,
+          "row_jsonl_sha256": "f7c7418c09eb5e74b1c1a2c130a04e51f2413fff3331fbcc23658005c50a0e81"
+        },
+        {
+          "block_id": "C_A55E_shard_09_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 2559,
+          "prompt_file_row_start": 2496,
+          "row_jsonl_sha256": "7cf43cd9a90d7ae594274b42f6123a9cdabfb023c38970075f436a429cbe0533"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 17,
+      "prompt_file_row_end_inclusive": 2559,
+      "prompt_file_row_start": 2048,
+      "prompt_window_index": 4,
+      "replicate_group_id": "shard_09",
+      "replicate_group_index": 9,
+      "shard_id": "shard_09",
+      "window_jsonl_sha256": "d0acb1f20ed5b54b08a90facc852905764c341605606801f6a48eb10721b063c"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_10_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 63,
+          "prompt_file_row_start": 0,
+          "row_jsonl_sha256": "d759df822522adc9169c0243bc9623b9651754de0f2f304d156200d84449effc"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 127,
+          "prompt_file_row_start": 64,
+          "row_jsonl_sha256": "431caf951b3df49030b355ec8a9828241c24d88d07142556fdea5537a0482911"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 191,
+          "prompt_file_row_start": 128,
+          "row_jsonl_sha256": "9e83d118ea316b2aa56c115d69e096c2d4a3eb83d13e924e21d40a08b3166283"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 255,
+          "prompt_file_row_start": 192,
+          "row_jsonl_sha256": "1ed949533d9621a21128f50e8cf5cee9d1ccb8cda282ac2ed0bde5ae530fdfb8"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 319,
+          "prompt_file_row_start": 256,
+          "row_jsonl_sha256": "cd84f0ddeb1320407ff172d46b0f51f27b2724326a2fb850773e80811f3ed4ab"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 383,
+          "prompt_file_row_start": 320,
+          "row_jsonl_sha256": "25c5c94349f7ceb3b27a7c9aecbb7ad16d0ea71fcc15037030d858240886aaf7"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 447,
+          "prompt_file_row_start": 384,
+          "row_jsonl_sha256": "cb86813c2109c0d5d4d3a126bee1f9d94a61161fe7977e94ef680e7b58b86b13"
+        },
+        {
+          "block_id": "C_A55E_shard_10_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 511,
+          "prompt_file_row_start": 448,
+          "row_jsonl_sha256": "eee6b2162cd592e86cef20a107572ced74187742e11f0f8b52f8e74b2d883959"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 23,
+      "prompt_file_row_end_inclusive": 511,
+      "prompt_file_row_start": 0,
+      "prompt_window_index": 0,
+      "replicate_group_id": "shard_10",
+      "replicate_group_index": 10,
+      "shard_id": "shard_10",
+      "window_jsonl_sha256": "98b78920c07a9753f5ad5dcc7af198b5a4374f95d57b2d00d05f9ae327330038"
+    },
+    {
+      "blocks": [
+        {
+          "block_id": "C_A55E_shard_11_block_00",
+          "block_index": 0,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 575,
+          "prompt_file_row_start": 512,
+          "row_jsonl_sha256": "0dbe6d7386d08e0c37d65f555dd3140a183d43933bf989735d503eecbf0a8b43"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_01",
+          "block_index": 1,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 639,
+          "prompt_file_row_start": 576,
+          "row_jsonl_sha256": "0bb9280b50a0f399b0b3ff01bb27c7cb4045e7e59d1cdbef537f7b109b02eafb"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_02",
+          "block_index": 2,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 703,
+          "prompt_file_row_start": 640,
+          "row_jsonl_sha256": "cf3c246ca53f72867cb4527cb4dbd4eaf1e86a05b87debe2e5f69e524d13e288"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_03",
+          "block_index": 3,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 767,
+          "prompt_file_row_start": 704,
+          "row_jsonl_sha256": "f5b679b35d3d8224d2ffaf07cdefb53c0bed774551451df546e00e356a99abf1"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_04",
+          "block_index": 4,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 831,
+          "prompt_file_row_start": 768,
+          "row_jsonl_sha256": "67e869d94e33b659cc00ef0e10f50ddf7eb4e30e7a8e47bcaa156ec3227ff066"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_05",
+          "block_index": 5,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 895,
+          "prompt_file_row_start": 832,
+          "row_jsonl_sha256": "a911b65c16b5532e1b938d8f8a445b1030303f65d50659216d30adbba373270f"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_06",
+          "block_index": 6,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 959,
+          "prompt_file_row_start": 896,
+          "row_jsonl_sha256": "71d0fe09385b063a7386d474a4e483e99344341376e826abbdf249d5a2a3d4e5"
+        },
+        {
+          "block_id": "C_A55E_shard_11_block_07",
+          "block_index": 7,
+          "contract_id": "a55e",
+          "prompt_file_row_end_inclusive": 1023,
+          "prompt_file_row_start": 960,
+          "row_jsonl_sha256": "7300594c6b469fd700c3a5830e01e6228bb9b8c4856b590907b7cdc5e53be045"
+        }
+      ],
+      "contract_id": "a55e",
+      "generation_seed": 29,
+      "prompt_file_row_end_inclusive": 1023,
+      "prompt_file_row_start": 512,
+      "prompt_window_index": 1,
+      "replicate_group_id": "shard_11",
+      "replicate_group_index": 11,
+      "shard_id": "shard_11",
+      "window_jsonl_sha256": "c470e445dcf25e356b70e0089827ec3434c66ccab1f5a77ed60c86e192183c26"
+    }
+  ],
+  "schema_name": "natural_evidence_v2_r3_2_same_contract_prompt_allocation_manifest_v1",
+  "seed_cycle": [
+    17,
+    23,
+    29
+  ]
+}

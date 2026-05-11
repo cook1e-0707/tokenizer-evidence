@@ -1,0 +1,268 @@
+{
+  "claim_control": {
+    "claim_text": "WP6-R2 Option B robust-block coordinate-majority decoder shows zero false accepts across 128 null trials at budget=64, with Wilson 95% CI upper bound < 0.0291 (rule-of-three: 0.0234). This is WP6 null-rejection FAR only, not full protocol FAR.",
+    "far_aggregation_allowed": true,
+    "llama_allowed": true,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": true,
+    "sanitizer_allowed": false
+  },
+  "controlling_budget": 64,
+  "forbidden_claims": [
+    "full FAR (requires organic prompt nulls and non-owner probes)",
+    "stealth guarantee",
+    "paper-facing positive claim",
+    "cross-family generality (requires Llama pass)",
+    "robustness (requires sanitizer pass)"
+  ],
+  "gate_status": "PASS_WP6_R2_OPTION_B_FAR_AGGREGATION",
+  "overall": {
+    "far": 0.0,
+    "rule_of_three_upper": 0.0234375,
+    "total_false_accepts": 0,
+    "total_null_trials": 128,
+    "wilson_upper_95": 0.02913799589810803
+  },
+  "per_budget": {
+    "16": {
+      "raw": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "task_only": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_key": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_payload": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    },
+    "32": {
+      "raw": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "task_only": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_key": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_payload": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    },
+    "64": {
+      "raw": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "task_only": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_key": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_payload": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    },
+    "8": {
+      "raw": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "task_only": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_key": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "wrong_payload": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    }
+  },
+  "per_condition": {
+    "raw": {
+      "false_accepts": 0,
+      "far": 0.0,
+      "trials": 8,
+      "wilson_upper_95": 0.3244156195108769
+    },
+    "task_only": {
+      "false_accepts": 0,
+      "far": 0.0,
+      "trials": 8,
+      "wilson_upper_95": 0.3244156195108769
+    },
+    "wrong_key": {
+      "false_accepts": 0,
+      "far": 0.0,
+      "trials": 8,
+      "wilson_upper_95": 0.3244156195108769
+    },
+    "wrong_payload": {
+      "false_accepts": 0,
+      "far": 0.0,
+      "trials": 8,
+      "wilson_upper_95": 0.3244156195108769
+    }
+  },
+  "per_condition_per_budget": {
+    "raw": {
+      "16": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "32": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "64": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "8": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    },
+    "task_only": {
+      "16": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "32": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "64": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "8": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    },
+    "wrong_key": {
+      "16": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "32": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "64": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "8": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    },
+    "wrong_payload": {
+      "16": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "32": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "64": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      },
+      "8": {
+        "false_accepts": 0,
+        "far": 0.0,
+        "trials": 8,
+        "wilson_upper_95": 0.3244156195108769
+      }
+    }
+  },
+  "schema_name": "natural_evidence_v2_wp6_r2_option_b_far_aggregation_v1",
+  "source_job_id": "852426",
+  "source_review_doc": "docs/natural_evidence_v2/WP6_R2_OPTION_B_SCALE_EVAL_852426_REVIEW.md",
+  "timestamp_utc": "2026-05-10T14:36:28.568006+00:00"
+}

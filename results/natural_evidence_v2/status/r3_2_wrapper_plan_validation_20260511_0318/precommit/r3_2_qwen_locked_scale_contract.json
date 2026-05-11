@@ -1,0 +1,94 @@
+{
+  "arms": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_allowed": false
+  },
+  "gate_targets": {
+    "forbidden_public_surface_count": 0,
+    "min_majority_margin_in_accepted_protected_blocks": 3,
+    "min_protected_accepts_at_64": 80,
+    "min_support_in_accepted_protected_blocks": 16,
+    "null_accepts_per_condition_at_64": 0,
+    "protected_block_count": 96
+  },
+  "package_id": "qwen_v2_r3_2_locked_scale_package_v1",
+  "precommit": {
+    "precommit_hash_sha256": "b94d5d94ea716f76140f0d35af41ed8349070b2ac6f051c0de577fe734c84119",
+    "precommit_material": {
+      "arms": [
+        "protected",
+        "raw",
+        "task_only",
+        "wrong_key",
+        "wrong_payload"
+      ],
+      "block_size": 64,
+      "blocks_per_cell": 8,
+      "cell_count": 12,
+      "decoder_id": "qwen_v2_r3_2_locked_scale_coordinate_majority_decoder_v1",
+      "diagnostic_budgets": [
+        16,
+        32
+      ],
+      "forbidden_public_surface_count_required": 0,
+      "majority_margin_threshold": 3,
+      "null_accept_gate_at_64_per_arm": 0,
+      "package_id": "qwen_v2_r3_2_locked_scale_package_v1",
+      "payload_order": [
+        "P00",
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "primary_budget": 64,
+      "prompt_allocation_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67",
+      "prompt_window_policy": "deterministic_5_window_circular_reuse_by_payload_major_cell_index",
+      "protected_accept_gate_at_64": ">=80/96",
+      "protocol_id": "natural_evidence_v2_r3_2_qwen_locked_scale",
+      "query_budgets": [
+        16,
+        32,
+        64
+      ],
+      "seed_order": [
+        17,
+        23,
+        29
+      ],
+      "support_threshold": 16,
+      "wp4_payload_plus_checksum_hex": "a55e"
+    }
+  },
+  "required_outputs": [
+    "precommit/r3_2_qwen_locked_scale_contract.json",
+    "precommit/r3_2_selected_prompt_manifest.json",
+    "r3_2_generation_summary.json",
+    "r3_2_generated_outputs.jsonl",
+    "r3_2_slot_observations.jsonl",
+    "r3_2_decode_decisions.jsonl",
+    "r3_2_coordinate_majority_decode_rows.jsonl",
+    "r3_2_coordinate_majority_summary.json",
+    "r3_2_support_by_block_budget.csv",
+    "r3_2_gate_review.json"
+  ],
+  "schema_name": "natural_evidence_v2_r3_2_qwen_locked_scale_contract_v1",
+  "selected_prompt_manifest_hash_policy": "sha256(canonical_json_without_self_hash, sort_keys=true, compact_separators)",
+  "selected_prompt_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67",
+  "source_wp4_contract_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+  "source_wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07",
+  "status": "R3_2_PRECOMMIT_PLAN_ONLY_NO_GENERATION_NO_SLURM"
+}

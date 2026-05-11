@@ -1,0 +1,79 @@
+{
+  "allowlist_entry_exists": true,
+  "allowlist_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/natural_evidence_v2/run_allowlist.yaml",
+  "artifact_role": "wp5_teacher_forced_launch_plan_not_training",
+  "bucket_bank_id": "qwen_v2_wp3_r2_primary_set_plan_vs_create_prepare_v1",
+  "bucket_surfaces": {
+    "0": [
+      "Set",
+      "Plan"
+    ],
+    "1": [
+      "Create",
+      "Prepare"
+    ]
+  },
+  "e2e_eval_started": false,
+  "input_hashes": {
+    "model_outputs_sha256": "600cf45578d450ca53d97ac5a58a644636158c4c9aab7a979a8024292d183e1d",
+    "primary_bank_sha256": "c60ee10ba36f56fb4f34814fa279bb06e1fcde49e2663687c444b8ce2cf4e0ca",
+    "prompts_sha256": "20154c7b14851ce2116041176ab92acc727f1c49c343826eac9ecfc9430fc179",
+    "response_audit_sha256": "c913607704ef4b05de42737cbf70061920303c5359d5b300e9c817ca3880d3d8",
+    "wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07"
+  },
+  "launch_blockers": [],
+  "launch_gate_status": "PASS_READY_TO_SUBMIT_ONE_ALLOWLISTED_WP5_SLURM_JOB",
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Submit exactly one allowlisted Chimera Slurm WP5 teacher-forced train-and-score job.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "output_files": {
+    "protected_training_rows": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/wp5_protected_training_rows.jsonl",
+    "score_rows": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/wp5_teacher_forced_score_rows.jsonl",
+    "summary": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/wp5_teacher_forced_launch_plan_summary.json",
+    "task_only_training_rows": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/wp5_task_only_training_rows.jsonl",
+    "training_examples_preview": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226/wp5_training_examples_preview.jsonl"
+  },
+  "paper_claim_allowed": false,
+  "payload_bits_msb_first": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+  ],
+  "protected_training_row_count": 512,
+  "repair_warning_counts": {},
+  "schema_name": "natural_evidence_v2_wp5_teacher_forced_launch_plan_summary_v1",
+  "score_row_count": 8192,
+  "scorer_exists": true,
+  "selected_source_response_count": 512,
+  "selected_split": "wp3_r1_dev",
+  "skipped_counts": {},
+  "slurm_wrapper_exists": true,
+  "task_only_training_row_count": 512,
+  "teacher_forced_gate_targets": {
+    "median_target_margin": ">0",
+    "protected_target_bucket_mass_lift_vs_base": ">=+0.15",
+    "protected_target_bucket_mass_lift_vs_task_only": ">=+0.10",
+    "target_bucket_rank1_rate": ">=0.70",
+    "task_only_target_bucket_mass_lift_vs_base": "not_significantly_positive"
+  },
+  "trainer_exists": true,
+  "training_started": false,
+  "v1_trainer_approval_note": "The natural_evidence_v1 trainer is not treated as approved for v2 because WP5 requires micro-slot margin loss, slot exact-token CE masking, and v2 plan schemas.",
+  "v1_trainer_approved_for_v2": false,
+  "wp5_status": "PLAN_BUILT_ARTIFACT_ONLY"
+}

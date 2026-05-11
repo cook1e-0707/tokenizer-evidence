@@ -1,0 +1,97 @@
+{
+  "arms": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "claim_control": {
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted": false,
+    "training_allowed": false
+  },
+  "gate_targets": {
+    "forbidden_public_surface_count": 0,
+    "min_majority_margin_in_accepted_protected_blocks": 3,
+    "min_protected_accepts_at_64": 80,
+    "min_support_in_accepted_protected_blocks": 16,
+    "null_accepts_per_condition_at_64": 0,
+    "protected_block_count": 96
+  },
+  "package_id": "qwen_v2_r3_2_same_contract_locked_scale_package_v1",
+  "payload_semantics": {
+    "contract_id": "a55e",
+    "distinct_payload_contracts_tested": false,
+    "r3_2_scope": "same_contract_locked_scale_stability",
+    "replicate_units": "replicate_group/shard/block, not payload_id",
+    "source_payload_plus_checksum_hex": "a55e"
+  },
+  "precommit": {
+    "precommit_hash_sha256": "2e4ce9f27a11d66e47eda8be4d1df9bf02090fd21d210adc621841a8f90f69f0",
+    "precommit_material": {
+      "arms": [
+        "protected",
+        "raw",
+        "task_only",
+        "wrong_key",
+        "wrong_payload"
+      ],
+      "block_size": 64,
+      "blocks_per_group": 8,
+      "contract_id": "a55e",
+      "decoder_id": "qwen_v2_r3_2_locked_scale_coordinate_majority_decoder_v1",
+      "diagnostic_budgets": [
+        16,
+        32
+      ],
+      "forbidden_public_surface_count_required": 0,
+      "generation_seed_cycle": [
+        17,
+        23,
+        29
+      ],
+      "majority_margin_threshold": 3,
+      "null_accept_gate_at_64_per_arm": 0,
+      "package_id": "qwen_v2_r3_2_same_contract_locked_scale_package_v1",
+      "payload_diversity_tested": false,
+      "primary_budget": 64,
+      "prompt_allocation_manifest_sha256": "71f6ce51fb1e4cfd8ef07fe74e284cf14d16a19651de95aa4b8e717eb1e78820",
+      "prompt_window_policy": "deterministic_5_window_circular_reuse_by_replicate_group_index",
+      "protected_accept_gate_at_64": ">=80/96",
+      "protocol_id": "natural_evidence_v2_r3_2_qwen_same_contract_locked_scale",
+      "query_budgets": [
+        16,
+        32,
+        64
+      ],
+      "replicate_group_count": 12,
+      "support_threshold": 16,
+      "wp4_payload_plus_checksum_hex": "a55e"
+    }
+  },
+  "required_outputs": [
+    "precommit/r3_2_qwen_locked_scale_contract.json",
+    "precommit/r3_2_selected_prompt_manifest.json",
+    "r3_2_generation_summary.json",
+    "r3_2_generated_outputs.jsonl",
+    "r3_2_slot_observations.jsonl",
+    "r3_2_decode_decisions.jsonl",
+    "r3_2_coordinate_majority_decode_rows.jsonl",
+    "r3_2_coordinate_majority_summary.json",
+    "r3_2_support_by_block_budget.csv",
+    "r3_2_gate_review.json"
+  ],
+  "schema_name": "natural_evidence_v2_r3_2_qwen_same_contract_locked_scale_contract_v1",
+  "selected_prompt_manifest_hash_policy": "sha256(canonical_json_without_self_hash, sort_keys=true, compact_separators)",
+  "selected_prompt_manifest_sha256": "71f6ce51fb1e4cfd8ef07fe74e284cf14d16a19651de95aa4b8e717eb1e78820",
+  "source_wp4_contract_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json",
+  "source_wp4_contract_sha256": "69d1feb2b63f52db7cf1ca82bb9ccfcbeb056f2f4f5945b230fc8c44923ada07",
+  "status": "R3_2_PRECOMMIT_PLAN_ONLY_NO_GENERATION_NO_SLURM"
+}

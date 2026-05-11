@@ -1,0 +1,75 @@
+{
+  "schema_name": "llama_v2_migration_plan",
+  "schema_version": 1,
+  "timestamp_utc": "2026-05-10T14:30:00Z",
+  "status": "artifact_only_no_slurm_submitted",
+  "model": {
+    "name": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "family": "huggingface-causal-lm",
+    "tokenizer_name": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "tokenizer_backend": "huggingface",
+    "max_length": 2048
+  },
+  "source_qwen": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "wp5_job_id": "851481",
+    "wp6_job_id": "852426",
+    "wp5_gate_pass": true,
+    "wp6_gate_pass": true
+  },
+  "bucket_bank": {
+    "source": "results/natural_evidence_v2/buckets/qwen_v2_primary_2way_bank.jsonl",
+    "target": "results/natural_evidence_v2/buckets/llama_v2_primary_2way_bank.jsonl",
+    "builder_script": "scripts/natural_evidence_v2/build_llama_v2_bucket_bank.py",
+    "action_verb_pairs": {
+      "bucket_0": ["Create", "Develop"],
+      "bucket_1": ["Choose", "Make"]
+    }
+  },
+  "training": {
+    "reuse_prompts": true,
+    "prompt_source": "results/natural_evidence_v2/status/wp5_teacher_forced_launch_plan_20260509_0226",
+    "protected_rows": 512,
+    "task_only_rows": 512,
+    "score_rows": 8192,
+    "hyperparams": {
+      "margin_lambda": 30.0,
+      "margin_tau": 0.15,
+      "max_steps": 256,
+      "batch_size": 1,
+      "gradient_accumulation_steps": 8,
+      "learning_rate": 1e-4,
+      "lora_r": 32,
+      "lora_alpha": 64,
+      "lora_dropout": 0.0
+    }
+  },
+  "e2e_eval": {
+    "protocol": "robust_block_coordinate_majority",
+    "block_count": 8,
+    "block_size": 64,
+    "query_budgets": [8, 16, 32, 64],
+    "payload_hex": "a55e",
+    "prompt_range": [768, 1279],
+    "contract_source": "results/natural_evidence_v2/status/wp6_r2_option_b_wrapper_contract_plan_20260510_0251/wp6_r2_option_b_wrapper_contract_plan.json"
+  },
+  "gates": {
+    "wp5_teacher_forced": {
+      "protected_mass_lift_vs_base": 0.15,
+      "protected_mass_lift_vs_task_only": 0.10,
+      "target_rank1_rate": 0.70,
+      "median_target_margin_positive": true
+    },
+    "wp6_scale": {
+      "min_protected_block_accepts": 6,
+      "total_blocks": 8,
+      "min_majority_margin": 3,
+      "null_accepts_per_condition": 0
+    }
+  },
+  "slurm_wrappers": {
+    "wp5": "scripts/natural_evidence_v2/slurm/llama_v2_wp5_train_and_score.sbatch",
+    "wp6": "scripts/natural_evidence_v2/slurm/llama_v2_wp6_e2e_eval.sbatch"
+  },
+  "claim_note": "Llama-3.1-8B V2 migration; artifact-only plan, no Slurm submitted, no paper claim"
+}

@@ -1,0 +1,87 @@
+{
+  "detector_contract_decision_doc": "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_850523_DETECTOR_CONTRACT_DECISION.md",
+  "e2e_eval_started": false,
+  "generation_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Review the 850523 repaired strict density plan with strict_compact_step_label_lines removed. Do not submit Slurm without explicit approval; WP4/training/Qwen E2E/Llama/FAR/sanitizer remain blocked.",
+  "not_full_far": true,
+  "not_payload_recovery": true,
+  "paper_claim_allowed": false,
+  "phase_after_action": "V2_WP3_PRIMARY_POLICY_STRICT_DENSITY_850523_PROMPT_REPAIR_READY_REVIEW_NEEDED",
+  "policy_dir": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310",
+  "prompt_variant_counts": {
+    "strict_literal_16_step_lines": 64,
+    "strict_no_heading_16_step_lines": 64,
+    "strict_numbered_step_label_lines": 64
+  },
+  "prompts_jsonl": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/restricted_step_label_strict_density_audit_prompts.jsonl",
+  "removed_prompt_count": 64,
+  "removed_prompt_variant_id": "strict_compact_step_label_lines",
+  "repair_action": "removed_prompt_variant",
+  "schema_name": "natural_evidence_v2_wp3_restricted_step_label_primary_policy_density_plan_850523_repair_summary_v1",
+  "selected_primary_bank": {
+    "allowed_prefixes": [
+      "Step 1: ",
+      "Step 2: ",
+      "Step 3: ",
+      "Step 4: ",
+      "Step 5: ",
+      "Step 6: ",
+      "Step 7: ",
+      "Step 8: ",
+      "Step 9: ",
+      "Step 10: ",
+      "Step 11: ",
+      "Step 12: ",
+      "Step 13: ",
+      "Step 14: ",
+      "Step 15: ",
+      "Step 16: "
+    ],
+    "anchor_kind": "step_label_boundary",
+    "buckets": {
+      "0": [
+        "Create",
+        "Develop"
+      ],
+      "1": [
+        "Choose",
+        "Make"
+      ]
+    },
+    "candidate_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+    "prefix_family": "step_label",
+    "slot_type": "bullet_or_step_opener",
+    "source_candidate_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+    "source_mass_gate": {
+      "context_count": 16,
+      "job_id": "850509",
+      "max_bucket_mass_ratio": 1.0047399181494545,
+      "min_bucket_mass": 0.012551237479783595,
+      "passed": true
+    }
+  },
+  "selected_primary_bank_id": "step_label_recombined_create_develop_vs_choose_make_v1",
+  "slurm_review_json": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/restricted_step_label_strict_density_audit_slurm_review.json",
+  "slurm_submitted": false,
+  "source_complete_step_label_response_rate": 0.99609375,
+  "source_density_audit_job_id": "850523",
+  "source_density_review_doc": "docs/natural_evidence_v2/WP3_RESTRICTED_STEP_LABEL_PRIMARY_DENSITY_AUDIT_850523_REVIEW.md",
+  "source_failure_variant_id": "strict_compact_step_label_lines",
+  "source_mean_detected_structural_slots_per_response": 15.94140625,
+  "source_policy_dir": "results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_20260509_0225",
+  "source_prompt_count": 256,
+  "source_prompt_variant_counts": {
+    "strict_compact_step_label_lines": 64,
+    "strict_literal_16_step_lines": 64,
+    "strict_no_heading_16_step_lines": 64,
+    "strict_numbered_step_label_lines": 64
+  },
+  "source_structural_density_gate_status": "FAIL",
+  "status": "PRIMARY_POLICY_STRICT_DENSITY_PROMPT_REPAIR_PLAN_READY_ARTIFACT_ONLY",
+  "strict_prompt_count": 192,
+  "training_started": false,
+  "validation_command": "python3 scripts/natural_evidence_v2/run_wp3_restricted_step_label_density_audit.py --validate-plan-only --prompts-jsonl results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310/restricted_step_label_strict_density_audit_prompts.jsonl --policy-dir results/natural_evidence_v2/status/wp3_restricted_step_label_primary_policy_density_plan_850523_repair_20260509_0310 --max-prompts 256",
+  "wp4_allowed": false
+}

@@ -1,8 +1,0 @@
-Completed one allowed WP3 artifact-only action.
-
-Added [build_wp3_detector_bank_scaffold.py](/Users/guanjie/Documents/tokenizer_alignment/scripts/natural_evidence_v2/build_wp3_detector_bank_scaffold.py), which records a response-local detector contract and 2-way bucket-bank scaffold without model calls. Generated the new scaffold artifacts under [wp3_detector_bank_scaffold_20260508_2153](/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/wp3_detector_bank_scaffold_20260508_2153/README.md): 7 candidate two-way banks, 36 candidate surfaces, 0 response rows scored, with density/tokenizer/mass gates still `NOT_EVALUATED`.
-
-Updated the coordination/status files: [gate_status.json](/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/gate_status.json), [AUTOMATION_STATE.md](/Users/guanjie/Documents/tokenizer_alignment/docs/natural_evidence_v1/AUTOMATION_STATE.md), [next_step_codex_plan.md](/Users/guanjie/Documents/tokenizer_alignment/docs/natural_evidence_v1/next_step_codex_plan.md), [README.md](/Users/guanjie/Documents/tokenizer_alignment/docs/natural_evidence_v2/README.md), and [WP3_MICRO_SLOT_DETECTOR_BUCKET_POLICY.md](/Users/guanjie/Documents/tokenizer_alignment/docs/natural_evidence_v2/WP3_MICRO_SLOT_DETECTOR_BUCKET_POLICY.md).
-
-Validation passed:
-`build_wp3_detector_bank_scaffold.py` generated a fresh scaffold successfully, all updated JSON parsed with `python3 -m json.tool`, and `git diff --check` passed. No training, generation, E2E, Llama, same-family null, sanitizer, FAR aggregation, positive claim, or Chimera work was started.
