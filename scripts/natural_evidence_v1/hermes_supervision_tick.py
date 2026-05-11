@@ -534,25 +534,29 @@ validate with the smallest relevant checks.
 
 
 def find_codex_binary() -> str:
+    for env_name in ("HERMES_CODEX_BIN", "CODEX_BIN"):
+        configured = os.environ.get(env_name, "").strip()
+        if configured:
+            candidate = Path(configured).expanduser()
+            if candidate.exists() and os.access(candidate, os.X_OK):
+                return str(candidate)
     discovered = shutil.which("codex")
     if discovered:
         return discovered
     candidates = [
-        Path.home()
-        / ".vscode"
-        / "extensions"
-        / "openai.chatgpt-26.504.30809-darwin-arm64"
-        / "bin"
-        / "macos-aarch64"
-        / "codex",
-        Path.home()
-        / ".vscode"
-        / "extensions"
-        / "openai.chatgpt-26.506.21252-darwin-arm64"
-        / "bin"
-        / "macos-aarch64"
-        / "codex",
+        Path.home() / ".local" / "bin" / "codex",
+        Path("/opt/homebrew/bin/codex"),
+        Path("/usr/local/bin/codex"),
     ]
+    extension_root = Path.home() / ".vscode" / "extensions"
+    if extension_root.exists():
+        candidates.extend(
+            sorted(
+                extension_root.glob("openai.chatgpt-*/bin/macos-aarch64/codex"),
+                key=lambda path: path.stat().st_mtime,
+                reverse=True,
+            )
+        )
     for candidate in candidates:
         if candidate.exists() and os.access(candidate, os.X_OK):
             return str(candidate)

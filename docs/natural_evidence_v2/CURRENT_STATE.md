@@ -1,10 +1,10 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-11T19:31Z
+Last synchronized: 2026-05-11T20:32Z
 
 ## Canonical Phase
 
-`V2_R3_2C_JOB_853070_FAILED_PROMPT_SPLIT_MISMATCH_NO_RESUBMIT`
+`V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK`
 
 This compact state file is the first file Codex/Hermes should read for routine
 ticks. Use the long historical files only when this file is ambiguous:
@@ -186,23 +186,27 @@ prompt split contract:
 `results/natural_evidence_v2/status/r3_2_852426_replay_compatibility_rereview_20260511_1817.json`
 
 R3.2 allowlist safety has now been rechecked again under the repaired prompt
-split contract for the 2026-05-11 19:16Z Hermes tick, and a later single-job
-submission route is recorded:
+split contract for the 2026-05-11 20:32Z Hermes recovery, and a later
+single-job submission route is recorded:
 
-`docs/natural_evidence_v2/R3_2_REPAIRED_PROMPT_SPLIT_ALLOWLIST_RECHECK_AND_ROUTE_20260511_1916.md`
+`docs/natural_evidence_v2/R3_2_REPAIRED_PROMPT_SPLIT_ALLOWLIST_RECHECK_AND_ROUTE_20260511_2032.md`
 
-`results/natural_evidence_v2/status/r3_2_allowlist_recheck_repaired_prompt_split_20260511_1916.json`
+`results/natural_evidence_v2/status/r3_2_allowlist_recheck_repaired_prompt_split_20260511_2032.json`
 
-`results/natural_evidence_v2/status/r3_2_repaired_prompt_split_single_job_route_20260511_1916.json`
+`results/natural_evidence_v2/status/r3_2_repaired_prompt_split_single_job_route_20260511_2032.json`
 
 Next action: stop this tick without Slurm submission. On a later notified
 submission tick only, enable exactly `v2_r3_2_qwen_locked_scale_eval`, submit
 exactly one reviewed R3.2 Chimera Slurm job, immediately disable the allowlist
 entry after `sbatch` returns, record the submission, and stop.
 
-The 2026-05-11 19:31Z Hermes worker failed before taking a project action
-because the Codex CLI was not found on PATH. This did not change experiment
-state and did not submit Slurm.
+The 2026-05-11 19:31Z and 20:32Z Hermes workers failed before taking a project
+action because the Codex CLI was not found on PATH. This did not change
+experiment state and did not submit Slurm. The worker resolver has now been
+repaired in `scripts/natural_evidence_v1/hermes_supervision_tick.py`: it accepts
+`HERMES_CODEX_BIN`/`CODEX_BIN`, checks common install paths, and discovers the
+newest versioned VS Code Codex binary under
+`~/.vscode/extensions/openai.chatgpt-*/bin/macos-aarch64/codex`.
 
 ## Gate-Controlled Actions Not Yet Unlocked
 

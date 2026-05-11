@@ -179,8 +179,10 @@ Reliability guardrails:
 
 - the launcher sets an explicit PATH for Homebrew Python, Hermes, and the VS
   Code Codex binary;
-- the worker falls back to the known VS Code Codex binary path if `codex` is not
-  on PATH;
+- the worker falls back to `HERMES_CODEX_BIN` / `CODEX_BIN`, common local
+  install paths, and the newest versioned VS Code Codex binary under
+  `~/.vscode/extensions/openai.chatgpt-*/bin/macos-aarch64/codex` if `codex`
+  is not on PATH;
 - a lock directory prevents overlapping Codex workers;
 - the lock records the worker PID and is cleaned automatically if the PID is no
   longer alive or the lock exceeds the configured stale threshold;
