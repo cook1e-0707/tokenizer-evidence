@@ -4174,6 +4174,62 @@
     "teacher_forced_probe_plan_summary": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_plan_summary.json",
     "training_started": false
   },
+  "2026-05-13T01:28:25Z_r4_teacher_forced_surface_mass_scorer_wrapper_prepared": {
+    "allowlist_enabled": false,
+    "allowlist_entry": "v2_r4_teacher_forced_surface_mass_score_h200",
+    "allowlist_safety_summary": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_allowlist_safety_zero_20260513.json",
+    "canonical_phase": "V2_R4_TEACHER_FORCED_SURFACE_MASS_SCORER_WRAPPER_PREPARATION_NO_SUBMIT",
+    "conditions": [
+      "base",
+      "protected",
+      "task_only"
+    ],
+    "contract_id": "a55e",
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "llama_started": false,
+    "model_scoring_started": false,
+    "next_allowed_action": "Review wrapper and plan-only smoke. A separate single-submission route decision is required before allowlist enablement or Slurm submission.",
+    "paper_claim_allowed": false,
+    "plan_only_smoke_summary": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_wrapper_plan_smoke_20260513/r4_teacher_forced_surface_mass_summary.json",
+    "route_decision": "docs/natural_evidence_v2/R4_TEACHER_FORCED_SURFACE_MASS_SCORER_ROUTE_DECISION_20260513.md",
+    "route_decision_json": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_scorer_route_decision_20260513.json",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "score_row_count": 8192,
+    "score_rows": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl",
+    "slurm_submitted": false,
+    "status": "APPROVED_AND_PREPARED_R4_TEACHER_FORCED_SURFACE_MASS_SCORER_WRAPPER_NO_SUBMIT",
+    "training_started": false,
+    "wrapper": "scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch"
+  },
+  "2026-05-13T01:35:27Z_r4_teacher_forced_surface_mass_score_job_853815_submitted": {
+    "allowlist_disabled_after_submission": true,
+    "allowlist_entry": "v2_r4_teacher_forced_surface_mass_score_h200",
+    "canonical_phase": "V2_R4_TEACHER_FORCED_SURFACE_MASS_SCORING_JOB_853815_RUNNING",
+    "conditions": [
+      "base",
+      "protected",
+      "task_only"
+    ],
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "job_id": "853815",
+    "job_name": "nat-ev-v2-r4tfm",
+    "llama_started": false,
+    "model_scoring_started": "running_in_slurm",
+    "next_allowed_action": "Monitor Slurm job 853815. After completion, sync and review teacher-forced surface-mass summary. Do not submit another scoring job or run generation/training/Llama/FAR/sanitizer/paper claims until this result is reviewed.",
+    "node": "chimera21",
+    "paper_claim_allowed": false,
+    "partition": "pomplun",
+    "qos": "pomplun",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "score_row_count": 8192,
+    "status": "SUBMITTED_RUNNING_R4_TEACHER_FORCED_SURFACE_MASS_SCORING",
+    "submission_record": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_submission_record_20260513.json",
+    "training_started": false
+  },
   "action_results": {
     "2026-05-08T01:44:32Z_phase_r1_prefix_selector_replay": {
       "e2e_eval_started": false,
@@ -10475,10 +10531,10 @@
     },
     "last_scheduler_tick": {
       "background_worker_launched": true,
-      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0056_scheduled_tick_notification.json",
-      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0056_scheduled_tick.md",
-      "time": "2026-05-13T00:56:14Z",
-      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0056_worker.log"
+      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0126_scheduled_tick_notification.json",
+      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0126_scheduled_tick.md",
+      "time": "2026-05-13T01:26:26Z",
+      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0126_worker.log"
     },
     "max_codex_state_changing_actions_requested_per_tick": 1,
     "notification_body_required_fields": [
@@ -10858,7 +10914,7 @@
     "853524"
   ],
   "last_checked": "2026-05-10T14:12:04Z",
-  "last_checked_time": "2026-05-13T00:56:14Z",
+  "last_checked_time": "2026-05-13T01:26:26Z",
   "last_checked_utc": "2026-05-10T14:12:04Z",
   "last_state_changing_action": "Hermes scheduled tick sent Telegram/email and launched a background Codex worker. Training, generation, E2E rerun, Llama, same-family null, sanitizer, FAR, and paper claim gates remained locked.",
   "last_status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",

@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "local_sha256": "cc02c722dc669b9f7b57faaf4431a2bc0dabeeb275f586f7ee61b7a8863b10f4",
+      "match": true,
+      "path": "configs/natural_evidence_v2/run_allowlist.yaml",
+      "remote_sha256": "cc02c722dc669b9f7b57faaf4431a2bc0dabeeb275f586f7ee61b7a8863b10f4"
+    },
+    {
+      "local_sha256": "32007c2d69460d4d46e1c77653a275bd80c7ba88fa83ecbc77de772862d5c7f2",
+      "match": true,
+      "path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+      "remote_sha256": "32007c2d69460d4d46e1c77653a275bd80c7ba88fa83ecbc77de772862d5c7f2"
+    },
+    {
+      "local_sha256": "fd42f3a8e9967833491ffc523600d2ea32c53b33132f45ff873a9e946587b8cb",
+      "match": true,
+      "path": "docs/natural_evidence_v2/R4_TEACHER_FORCED_SURFACE_MASS_SCORER_SUBMISSION_DECISION_20260513.md",
+      "remote_sha256": "fd42f3a8e9967833491ffc523600d2ea32c53b33132f45ff873a9e946587b8cb"
+    },
+    {
+      "local_sha256": "c80f237875a1889eab0a664ca3b305ec08957ea7bb2f6b98ac8e5fb3517d26ca",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py",
+      "remote_sha256": "c80f237875a1889eab0a664ca3b305ec08957ea7bb2f6b98ac8e5fb3517d26ca"
+    },
+    {
+      "local_sha256": "3acc2c84dc7b12e962277df090738c76f3af1eeb8516e1e401d58e7165465f48",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch",
+      "remote_sha256": "3acc2c84dc7b12e962277df090738c76f3af1eeb8516e1e401d58e7165465f48"
+    },
+    {
+      "local_sha256": "78d02ddf3e8e5057e8f773dfedf8614cfb9d37eeee06b3e06b648d9ffc6d1658",
+      "match": true,
+      "path": "results/natural_evidence_v2/status/gate_status.json",
+      "remote_sha256": "78d02ddf3e8e5057e8f773dfedf8614cfb9d37eeee06b3e06b648d9ffc6d1658"
+    },
+    {
+      "local_sha256": "ee29d22922fb7a73c3917a7d22b5ff482e971448150aa998e01a17b5d0f5b822",
+      "match": true,
+      "path": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl",
+      "remote_sha256": "ee29d22922fb7a73c3917a7d22b5ff482e971448150aa998e01a17b5d0f5b822"
+    }
+  ],
+  "schema_name": "natural_evidence_v2_remote_hash_preflight_v1",
+  "slurm_submitted": false,
+  "status": "PASS"
+}

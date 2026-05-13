@@ -1,0 +1,27 @@
+{
+  "allowlist_enablement_allowed": false,
+  "allowed_conditions": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "allowed_next_action": "Prepare Slurm-only Qwen teacher-forced surface-mass scorer wrapper and run plan-only smoke validation. Do not enable allowlist or submit Slurm.",
+  "candidate_surface_bank": "results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json",
+  "canonical_phase": "V2_R4_TEACHER_FORCED_SURFACE_MASS_SCORER_WRAPPER_PREPARATION_NO_SUBMIT",
+  "contract_id": "a55e",
+  "far_aggregation_allowed": false,
+  "free_generation_allowed": false,
+  "llama_allowed": false,
+  "paper_claim_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_benchmark_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_scorer_route_decision_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl",
+  "slurm_submission_allowed": false,
+  "status": "APPROVED_WRAPPER_PREPARATION_ONLY",
+  "supersedes_hold_for_scope": "results/natural_evidence_v1/status/hermes_reports/20260513_0126_r4_no_slurm_hold_blocker.json",
+  "timestamp_utc": "2026-05-13T01:28:25Z",
+  "training_allowed": false,
+  "user_authorization": "明确授权R4 teacher-forced surface-mass scorer wrapper preparation"
+}

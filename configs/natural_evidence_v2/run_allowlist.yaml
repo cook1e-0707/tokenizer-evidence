@@ -96,6 +96,14 @@ allowed_gpu_actions:
   enable_condition: r4_plan_validation_passed_and_user_approved_dev_diagnostic
   enabled: false
   name: v2_r4_cover_natural_dev_diagnostic_h200
+- claim_note: R4 Qwen teacher-forced surface-mass scoring on binary repair
+    candidate rows. Base/protected/task-only forward scoring only; no
+    generation, no training, no Llama, no same-family null, no sanitizer, no
+    FAR, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch
+  enable_condition: r4_teacher_forced_surface_mass_scorer_wrapper_reviewed_and_single_submission_authorized
+  enabled: false
+  name: v2_r4_teacher_forced_surface_mass_score_h200
 - claim_note: Llama-3.1-8B V2 WP5 teacher-forced train-and-score; no E2E, no FAR, no paper
     positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp5_train_and_score.sbatch

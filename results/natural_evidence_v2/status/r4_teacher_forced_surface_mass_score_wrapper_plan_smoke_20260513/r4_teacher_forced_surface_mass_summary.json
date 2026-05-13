@@ -1,0 +1,16 @@
+{
+  "condition_plan": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "far_aggregation_started": false,
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 8192,
+  "status": "DRY_RUN_VALIDATED_INPUTS",
+  "training_started": false
+}

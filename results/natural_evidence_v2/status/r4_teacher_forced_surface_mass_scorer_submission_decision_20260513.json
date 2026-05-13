@@ -1,0 +1,30 @@
+{
+  "allowlist_entry": "v2_r4_teacher_forced_surface_mass_score_h200",
+  "allowed_command_pattern": "sbatch scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch",
+  "authorized_single_submission": true,
+  "conditions": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "contract_id": "a55e",
+  "far_aggregation_allowed": false,
+  "free_generation_allowed": false,
+  "gpu": "h200",
+  "llama_allowed": false,
+  "max_slurm_jobs": 1,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "payload_diversity_claim_allowed": false,
+  "qos": "pomplun",
+  "same_family_null_allowed": false,
+  "sanitizer_benchmark_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_scorer_submission_decision_v1",
+  "score_row_count": 8192,
+  "score_rows": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl",
+  "status": "AUTHORIZED_SINGLE_ALLOWLISTED_SLURM_SCORING_SUBMISSION",
+  "timestamp_utc": "2026-05-13T01:35:00Z",
+  "training_allowed": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch"
+}

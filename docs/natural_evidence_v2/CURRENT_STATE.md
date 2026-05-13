@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T01:04Z
+Last synchronized: 2026-05-13T01:35Z
 
 ## Canonical Phase
 
@@ -30,6 +30,121 @@ prerequisite gates pass. These work classes are not permanently forbidden.
 They are gate-controlled: each class must first have a recorded route decision,
 passing gate evidence, reviewed wrapper or artifact plan, allowlist where
 applicable, and TG/email notification before any state-changing action.
+
+## Latest Route Decision
+
+## Latest Slurm Submission
+
+R4 teacher-forced surface-mass scoring job submitted:
+
+`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_submission_record_20260513.json`
+
+Job:
+
+- job id: `853815`;
+- job name: `nat-ev-v2-r4tfm`;
+- partition/QoS/account: `pomplun` / `pomplun` / `cs_yinxin.wan`;
+- initial state: `RUNNING`;
+- initial node: `chimera21`;
+- scope: Qwen base/protected/task-only teacher-forced surface-mass scoring;
+- score rows: `8192`;
+- contract: `a55e`;
+- no free generation, no training, no Llama, no same-family null, no sanitizer,
+  no FAR aggregation, no payload-diversity claim, and no paper-facing positive
+  claim.
+
+Allowlist was disabled immediately after `sbatch` returned the job id. Local
+and remote post-submission allowlist safety both passed:
+
+- `results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_post_submit_allowlist_safety_20260513.json`;
+- remote:
+  `results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_post_submit_allowlist_safety_remote_20260513.json`.
+
+Current next allowed action: monitor Slurm job `853815`. After completion, sync
+and review the teacher-forced surface-mass summary. Do not submit another
+scoring job or run generation/training/Llama/FAR/sanitizer/paper claims until
+this result is reviewed.
+
+## Previous Route Decision
+
+The 2026-05-13 01:28Z user authorization is now controlling for wrapper
+preparation:
+
+`docs/natural_evidence_v2/R4_TEACHER_FORCED_SURFACE_MASS_SCORER_ROUTE_DECISION_20260513.md`
+
+Machine-readable decision:
+
+`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_scorer_route_decision_20260513.json`
+
+Authorized scope:
+
+- prepare a Slurm-only Qwen teacher-forced surface-mass scorer wrapper;
+- score plan scope: base / protected / task-only forward scoring only;
+- frozen rows:
+  `results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl`;
+- candidate bank:
+  `results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json`;
+- contract: `a55e`;
+- run local plan-only smoke validation;
+- add only a disabled allowlist entry.
+
+Not authorized by this route decision:
+
+- allowlist enablement;
+- Slurm submission;
+- free generation;
+- locked-scale rerun;
+- training;
+- Llama;
+- same-family null;
+- sanitizer benchmark;
+- FAR aggregation;
+- payload-diversity claim;
+- paper-facing positive claim.
+
+Prepared wrapper:
+
+`scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch`
+
+Plan-only smoke:
+
+`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_wrapper_plan_smoke_20260513/r4_teacher_forced_surface_mass_summary.json`
+
+Smoke result:
+
+- status: `DRY_RUN_VALIDATED_INPUTS`;
+- score rows: `8192`;
+- condition plan: `base`, `protected`, `task_only`;
+- model scoring started: `false`;
+- generation/training/Slurm started: `false`.
+
+Post-wrapper allowlist safety:
+
+`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_allowlist_safety_zero_20260513.json`
+
+Next allowed action: review the prepared wrapper and plan-only smoke. If
+accepted, record a separate single-submission route decision before enabling
+the allowlist entry or submitting exactly one Slurm scoring job.
+
+## Previous Supervisor Hold Reconciliation
+
+The 2026-05-13 01:26Z Hermes supervisor report held all compute actions until a
+human/expert route decision. The 01:28Z user authorization above supersedes
+that hold only for wrapper preparation. It still does not authorize allowlist
+enablement or Slurm submission.
+
+Hold/blocker record:
+
+`results/natural_evidence_v1/status/hermes_reports/20260513_0126_r4_no_slurm_hold_blocker.md`
+
+Machine-readable record:
+
+`results/natural_evidence_v1/status/hermes_reports/20260513_0126_r4_no_slurm_hold_blocker.json`
+
+No generation, Qwen E2E rerun, training, Llama, same-family null, sanitizer,
+FAR aggregation, payload-diversity claim, paper-facing positive claim, allowlist
+enablement, or Slurm submission is unlocked by either the hold reconciliation
+or the wrapper-preparation route decision.
 
 ## Latest R4 Artifact-Only Package
 
