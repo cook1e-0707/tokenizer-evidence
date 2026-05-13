@@ -5006,7 +5006,7 @@
   "conditional_training_authorization": "RECORDED_PRETRAINING_LAUNCH_GATE_REQUIRED",
   "conditional_training_authorization_doc": "docs/natural_evidence_v2/WP5_CONDITIONAL_TRAINING_AUTHORIZATION_20260509.md",
   "cross_family_claim_allowed": false,
-  "current_phase": "V2_R4_SURFACE_BANK_REPAIR_DIAGNOSIS_AFTER_853815_FAIL",
+  "current_phase": "V2_R4_PREFIX_NATIVE_SURFACE_REPAIR_CANDIDATE_PROXY_VALIDATED_NO_COMPUTE",
   "e2e_allowed": false,
   "failed_gates": [
     "WP3 fixed-prefix full-vocab model-mass gate failed on job 850288",
@@ -5078,6 +5078,22 @@
       "status": "FAIL_SURFACE_MASS_GATE_ARTIFACT_DIAGNOSED",
       "summary": "Artifact-only diagnosis found no formal two-sided bank missing-side issue and no target/other first-token overlap; active blocker is near-zero phrase-surface target mass and no protected lift under R4 prefixes.",
       "time_utc": "2026-05-13T01:54Z"
+    },
+    {
+      "artifact": "results/natural_evidence_v2/status/r4_surface_bank_prefix_repair_design_after_853815_20260513/repair_design_summary.json",
+      "next_allowed_action": "Artifact-only construction of a repaired R4 candidate surface bank and prefix-row static validation only; no Slurm/generation/training/Llama/FAR/sanitizer/paper-claim action.",
+      "phase": "V2_R4_TARGET_PREFIX_REPAIR_DESIGN_RECORDED_NO_COMPUTE",
+      "status": "RECORDED_ARTIFACT_ONLY_R4_TARGET_PREFIX_REPAIR_DESIGN_NO_COMPUTE",
+      "summary": "Recorded repair design to replace free-floating low-mass phrase targets with prefix-native high-prior surface cylinders whose measured span begins immediately after the local lead-in prefix.",
+      "time_utc": "2026-05-13T02:00Z"
+    },
+    {
+      "artifact": "results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/static_validation_summary.json",
+      "next_allowed_action": "Review repaired candidate and prepare a separate Slurm-only tokenizer/model scoring route if accepted; no allowlist enablement or Slurm submission from this artifact alone.",
+      "phase": "V2_R4_PREFIX_NATIVE_SURFACE_REPAIR_CANDIDATE_PROXY_VALIDATED_NO_COMPUTE",
+      "status": "PASS_PROXY_STATIC_VALIDATION_TOKENIZER_PENDING",
+      "summary": "Built prefix-native Set/Plan vs Create/Prepare R4 repair candidate with 32 coordinates, 256 entries, 8192 probe rows; proxy static validation passed, Qwen tokenizer/model scoring not run.",
+      "time_utc": "2026-05-13T02:11Z"
     }
   ],
   "known_jobs": [
@@ -5380,9 +5396,9 @@
     "853524"
   ],
   "last_checked": "2026-05-10T13:54:45Z",
-  "last_checked_time": "2026-05-13T01:54Z",
+  "last_checked_time": "2026-05-13T02:11Z",
   "last_checked_utc": "2026-05-12T02:53:51Z",
-  "last_state_changing_action": "Wrote artifact-only R4 surface-mass failure diagnosis after 853815; no compute submitted.",
+  "last_state_changing_action": "Built artifact-only prefix-native R4 surface repair candidate and dry-run scorer input validation; no compute submitted.",
   "last_status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",
   "last_status_update_action": "reviewed R3.2 full wrapper upgrade path and recorded blocker: wrapper needs reviewed same-contract 12-shard aggregation path before Slurm",
   "last_status_update_utc": "2026-05-11T06:17:02Z",
@@ -5410,7 +5426,7 @@
   "llama_allowed": false,
   "llama_started": false,
   "new_training_allowed": false,
-  "next_allowed_action": "Artifact-only R4 target-construction/surface-bank/prefix-shape repair design only; no Slurm/generation/training/Llama/FAR/sanitizer/paper-claim action.",
+  "next_allowed_action": "Review repaired candidate and prepare a separate Slurm-only tokenizer/model scoring route if accepted; no allowlist enablement or Slurm submission from this artifact alone.",
   "out_of_band_artifact_quarantine": {
     "adopted_as_formal_progress": false,
     "chimera_jobs_observed": [

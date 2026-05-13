@@ -1,0 +1,33 @@
+coordinate_id,bit0_surface_count,bit1_surface_count,bit0_first_word_proxy,bit1_first_word_proxy,first_word_proxy_overlap,prefix_family_id,assistant_prefix_before_surface
+0,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+1,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+2,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+3,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+4,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+5,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+6,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+7,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+8,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+9,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+10,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+11,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+12,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+13,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+14,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+15,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+16,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+17,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+18,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+19,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+20,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+21,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+22,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+23,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+24,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+25,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+26,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+27,4,4,plan|set,create|prepare,,followup,"Before moving on, please "
+28,4,4,plan|set,create|prepare,,intent,"For this update, I will "
+29,4,4,plan|set,create|prepare,,recommendation,The best next step is to 
+30,4,4,plan|set,create|prepare,,clarification,"To keep this clear, we should "
+31,4,4,plan|set,create|prepare,,followup,"Before moving on, please "

@@ -1,0 +1,29 @@
+{
+  "schema_name": "natural_evidence_v2_r4_surface_bank_prefix_repair_design_v1",
+  "timestamp_utc": "2026-05-13T02:00:00Z",
+  "status": "RECORDED_ARTIFACT_ONLY_R4_TARGET_PREFIX_REPAIR_DESIGN_NO_COMPUTE",
+  "phase": "V2_R4_SURFACE_BANK_REPAIR_DIAGNOSIS_AFTER_853815_FAIL",
+  "source_diagnosis": "results/natural_evidence_v2/status/r4_surface_mass_failure_diagnosis_after_853815/surface_mass_failure_diagnosis_report.md",
+  "source_score_rows": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815/r4_teacher_forced_surface_mass_rows.jsonl",
+  "source_surface_bank": "results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json",
+  "design_doc": "docs/natural_evidence_v2/R4_SURFACE_BANK_PREFIX_REPAIR_DESIGN_AFTER_853815_20260513.md",
+  "repair_principle": "construct prefix-native high-prior surface cylinders whose measured span begins immediately after the local lead-in prefix",
+  "required_static_preflight": [
+    "coordinate_count_and_entries_per_coordinate_recorded",
+    "both_binary_sides_present_for_every_coordinate",
+    "target_other_first_token_overlap_rate_zero",
+    "forbidden_public_surface_literal_rate_zero",
+    "prefix_family_ids_and_exact_prefix_text_recorded",
+    "measured_span_start_recorded_after_prefix"
+  ],
+  "generation_started": false,
+  "training_started": false,
+  "slurm_submitted": false,
+  "model_scoring_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_benchmark_started": false,
+  "far_aggregation_started": false,
+  "paper_claim_allowed": false,
+  "next_allowed_action": "Artifact-only construction of a repaired R4 candidate surface bank and prefix-row static validation only; no Slurm/generation/training/Llama/FAR/sanitizer/paper-claim action."
+}

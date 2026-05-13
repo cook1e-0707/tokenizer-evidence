@@ -1,10 +1,10 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T01:54Z
+Last synchronized: 2026-05-13T02:11Z
 
 ## Canonical Phase
 
-`V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PLANNING_NO_SLURM`
+`V2_R4_PREFIX_NATIVE_SURFACE_REPAIR_CANDIDATE_PROXY_VALIDATED_NO_COMPUTE`
 
 This compact state file is the first file Codex/Hermes should read for routine
 ticks. Use the long historical files only when this file is ambiguous:
@@ -32,6 +32,53 @@ passing gate evidence, reviewed wrapper or artifact plan, allowlist where
 applicable, and TG/email notification before any state-changing action.
 
 ## Latest Route Decision
+
+## Latest Artifact-Only Candidate
+
+Prefix-native R4 surface repair candidate is now recorded:
+
+`results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/static_validation_report.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/static_validation_summary.json`
+
+Scorer input dry-run:
+
+`results/natural_evidence_v2/status/r4_prefix_native_surface_score_wrapper_plan_smoke_20260513/r4_teacher_forced_surface_mass_summary.json`
+
+Scope:
+
+- artifact-only candidate construction;
+- no Qwen tokenizer validation locally because this environment does not
+  provide `transformers`;
+- no model scoring;
+- no Slurm submission;
+- no generation or training.
+
+Static proxy validation:
+
+- status: `PASS_PROXY_STATIC_VALIDATION_TOKENIZER_PENDING`;
+- coordinates: `32`;
+- entries: `256`;
+- probe rows: `8192`;
+- prompts: `256`;
+- missing binary-side coordinates: `0`;
+- normalized first-word proxy overlap coordinates: `0`;
+- forbidden surface hits: `0`;
+- measured span-start failures: `0`.
+
+Design change:
+
+- prior R4 phrases were free-floating and near-zero probability;
+- repaired candidate uses prefix-native continuations whose measured span
+  begins immediately after the local lead-in prefix;
+- binary sides reuse the R3/WP5 learned action families in cover-natural
+  phrase form: `set`/`plan` versus `create`/`prepare`.
+
+Current next allowed action: review this candidate and prepare a separate
+Slurm-only tokenizer/model scoring route if accepted. This candidate alone
+does not authorize allowlist enablement or Slurm submission.
 
 ## Latest Artifact-Only Diagnosis
 
@@ -72,6 +119,32 @@ Current next allowed action: artifact-only R4 target-construction /
 surface-bank / prefix-shape repair design only. Do not submit another scoring
 job, run generation, train, or unlock Llama/FAR/sanitizer/paper claims from
 this state.
+
+## Latest Repair Design
+
+Artifact-only R4 target-construction and prefix-shape repair design is now
+recorded:
+
+`docs/natural_evidence_v2/R4_SURFACE_BANK_PREFIX_REPAIR_DESIGN_AFTER_853815_20260513.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_surface_bank_prefix_repair_design_after_853815_20260513/repair_design_summary.json`
+
+Design direction:
+
+- stop treating target phrases as free-floating answer content;
+- construct prefix-native surface cylinders whose measured span begins
+  immediately after the local lead-in prefix;
+- keep target/other alternatives in the same syntactic slot with no first-token
+  overlap;
+- require a static artifact-only validation summary before any future reviewed
+  Slurm scorer route decision.
+
+Current next allowed action: artifact-only construction of a repaired R4
+candidate surface bank and prefix-row static validation only. Do not submit
+another scoring job, run generation, train, or unlock
+Llama/FAR/sanitizer/paper claims from this state.
 
 ## Latest Result Review
 
