@@ -9458,7 +9458,7 @@
     "source": "user instruction",
     "status": "POMPLUN_DOWN_USE_DGXA100_FOR_GPU"
   },
-  "current_phase": "V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PLANNING_NO_SLURM",
+  "current_phase": "V2_R4_SURFACE_BANK_REPAIR_DIAGNOSIS_AFTER_853815_FAIL",
   "diagnostic_low_capacity_gates": [
     "qwen_probability_gated_repair_under_target",
     "qwen_counterfactual_compatibility_low_entry_pass_rate"
@@ -10619,6 +10619,16 @@
     "status": "FIXED",
     "validation": "uv run python import find_codex_binary returned executable path; py_compile passed"
   },
+  "history": [
+    {
+      "artifact": "results/natural_evidence_v2/status/r4_surface_mass_failure_diagnosis_after_853815/surface_mass_failure_diagnosis_summary.json",
+      "next_allowed_action": "Artifact-only R4 target-construction/surface-bank/prefix-shape repair design only; no Slurm/generation/training/Llama/FAR/sanitizer/paper-claim action.",
+      "phase": "V2_R4_SURFACE_BANK_REPAIR_DIAGNOSIS_AFTER_853815_FAIL",
+      "status": "FAIL_SURFACE_MASS_GATE_ARTIFACT_DIAGNOSED",
+      "summary": "Artifact-only diagnosis found no formal two-sided bank missing-side issue and no target/other first-token overlap; active blocker is near-zero phrase-surface target mass and no protected lift under R4 prefixes.",
+      "time_utc": "2026-05-13T01:54Z"
+    }
+  ],
   "hourly_report_path": "results/natural_evidence_v1/status/hourly_reports/20260508_0531.md",
   "known_jobs": [
     {
@@ -10939,9 +10949,9 @@
     "853524"
   ],
   "last_checked": "2026-05-10T14:12:04Z",
-  "last_checked_time": "2026-05-13T01:41:31Z",
+  "last_checked_time": "2026-05-13T01:54Z",
   "last_checked_utc": "2026-05-10T14:12:04Z",
-  "last_state_changing_action": "Hermes scheduled tick sent Telegram/email and launched a background Codex worker. Training, generation, E2E rerun, Llama, same-family null, sanitizer, FAR, and paper claim gates remained locked.",
+  "last_state_changing_action": "Wrote artifact-only R4 surface-mass failure diagnosis after 853815; no compute submitted.",
   "last_status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",
   "last_status_update_action": "R3.2 full wrapper review passed; allowlist remains disabled and no Slurm job was submitted",
   "last_status_update_utc": "2026-05-11T07:02:05Z",
@@ -11020,7 +11030,7 @@
     "training_started": false
   },
   "new_training_allowed": false,
-  "next_allowed_action": "R4 artifact-only planning is complete and plan validation passed. Slurm remains disabled until a human/expert route decision records permission for a small dev diagnostic submission; no generation, training, Llama, same-family null, sanitizer, FAR, payload-diversity claim, or paper-facing positive claim is unlocked.",
+  "next_allowed_action": "Artifact-only R4 target-construction/surface-bank/prefix-shape repair design only; no Slurm/generation/training/Llama/FAR/sanitizer/paper-claim action.",
   "out_of_band_artifact_quarantine": {
     "adopted_as_formal_progress": false,
     "chimera_jobs_observed": [

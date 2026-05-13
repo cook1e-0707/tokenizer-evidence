@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T01:43Z
+Last synchronized: 2026-05-13T01:54Z
 
 ## Canonical Phase
 
@@ -32,6 +32,46 @@ passing gate evidence, reviewed wrapper or artifact plan, allowlist where
 applicable, and TG/email notification before any state-changing action.
 
 ## Latest Route Decision
+
+## Latest Artifact-Only Diagnosis
+
+R4 surface-mass failure diagnosis after `853815` is now recorded:
+
+`results/natural_evidence_v2/status/r4_surface_mass_failure_diagnosis_after_853815/surface_mass_failure_diagnosis_report.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_surface_mass_failure_diagnosis_after_853815/surface_mass_failure_diagnosis_summary.json`
+
+This diagnosis is artifact-only. It reads the existing `853815` scored rows,
+the binary surface-bank repair candidate, and the frozen teacher-forced probe
+rows. It does not train, generate, score models, submit Slurm, run Llama,
+aggregate FAR, or make paper claims.
+
+Key facts:
+
+- scored rows: `24576`;
+- joined base/protected/task-only records: `8192`;
+- protected mean target mass: `0.0000438295`;
+- protected-vs-base mean lift: `-0.0000864096`;
+- protected-vs-task-only mean lift: `-0.0002997293`;
+- protected rank-1 rate: `0.4375`;
+- target/other first-token overlap rate: `0.0`;
+- every coordinate has both binary sides in the candidate bank.
+
+Interpretation:
+
+- this is not a Slurm/provider failure;
+- this is not the prior one-sided-bank formal failure;
+- this is not primarily a target/other first-token overlap bug;
+- the active blocker is that selected phrase-level target cylinders are
+  extremely low probability under the R4 prefixes, and the existing protected
+  adapter does not increase their mass.
+
+Current next allowed action: artifact-only R4 target-construction /
+surface-bank / prefix-shape repair design only. Do not submit another scoring
+job, run generation, train, or unlock Llama/FAR/sanitizer/paper claims from
+this state.
 
 ## Latest Result Review
 

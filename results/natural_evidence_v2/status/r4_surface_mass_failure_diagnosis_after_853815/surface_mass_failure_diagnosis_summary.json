@@ -1,0 +1,94 @@
+{
+  "bank_summary": {
+    "contract_id": "a55e",
+    "entry_count": 256,
+    "first_word_only": false,
+    "missing_coordinate_sides": [],
+    "num_coordinates": 32,
+    "path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json",
+    "phrase_level": true,
+    "schema_name": "natural_evidence_v2_r4_binary_surface_bank_repair_candidate_v1",
+    "source_rule_counts": {
+      "frozen_binary_repair_rule_action_resolution": 64,
+      "frozen_binary_repair_rule_communication_clarity": 64,
+      "frozen_binary_repair_rule_organization_followup": 64,
+      "frozen_binary_repair_rule_preparation_care": 64
+    }
+  },
+  "bucket_overlap_summary": {
+    "any_target_other_first_token_overlap_rate": 0.0,
+    "max_target_other_first_token_overlap_count": 0,
+    "mean_other_first_token_count": 4.0,
+    "mean_target_first_token_count": 4.0
+  },
+  "condition_summary": {
+    "base": {
+      "mean_other_mass": 0.00017862106969888936,
+      "mean_target_margin": -4.8382020000938e-05,
+      "mean_target_mass": 0.00013023904969795136,
+      "median_target_margin": -9.62482363320305e-06,
+      "median_target_mass": 8.863296898198314e-06,
+      "p95_target_mass": 0.0006755979266017675,
+      "rank1_rate": 0.4375,
+      "row_count": 8192
+    },
+    "protected": {
+      "mean_other_mass": 5.7228994225812235e-05,
+      "mean_target_margin": -1.3399527093546637e-05,
+      "mean_target_mass": 4.38294671322656e-05,
+      "median_target_margin": -9.63184629654279e-06,
+      "median_target_mass": 1.3300893442647066e-05,
+      "p95_target_mass": 0.0001960100926226005,
+      "rank1_rate": 0.4375,
+      "row_count": 8192
+    },
+    "task_only": {
+      "mean_other_mass": 0.00053788356353242,
+      "mean_target_margin": -0.00019432475963493878,
+      "mean_target_mass": 0.00034355880389748124,
+      "median_target_margin": -2.5933071583494893e-06,
+      "median_target_mass": 4.781813004228752e-06,
+      "p95_target_mass": 0.001305731711909175,
+      "rank1_rate": 0.4375,
+      "row_count": 8192
+    }
+  },
+  "coordinate_count": 32,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "joined_records": 8192,
+  "lift_summary": {
+    "mean_protected_lift_vs_base": -8.640958256568576e-05,
+    "mean_protected_lift_vs_task_only": -0.00029972933676521564,
+    "mean_protected_target_mass": 4.38294671322656e-05,
+    "median_protected_lift_vs_base": -5.654186452375143e-07,
+    "median_protected_lift_vs_task_only": 3.829859296367033e-07,
+    "median_protected_target_mass": 1.3300893442647066e-05,
+    "p95_protected_target_mass": 0.0001960100926226005,
+    "positive_lift_vs_base_rate": 0.37548828125,
+    "positive_lift_vs_task_only_rate": 0.562255859375,
+    "positive_protected_margin_rate": 0.4375,
+    "record_count": 8192
+  },
+  "llama_started": false,
+  "method_failure_classification": {
+    "first_token_overlap_primary_failure": false,
+    "formal_binary_bank_missing_side_failure": false,
+    "primary_failure": "target phrase surfaces have near-zero probability and the existing protected adapter does not increase their mass under teacher-forced R4 prefixes",
+    "protected_adapter_learned_surface_channel": false,
+    "slurm_or_provider_failure": false
+  },
+  "next_allowed_action": "Artifact-only repair design: revise R4 target construction and surface-bank/prefix shape before any more Slurm scoring, generation, training, Llama, FAR, sanitizer, or paper-claim action.",
+  "paper_claim_allowed": false,
+  "prefix_shape_count": 4,
+  "probe_row_count": 8192,
+  "probe_rows": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl",
+  "schema_name": "natural_evidence_v2_r4_surface_mass_failure_diagnosis_v1",
+  "score_row_count": 24576,
+  "score_rows": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815/r4_teacher_forced_surface_mass_rows.jsonl",
+  "slurm_submitted": false,
+  "status": "FAIL_SURFACE_MASS_GATE_ARTIFACT_DIAGNOSED",
+  "surface_bank": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json",
+  "surface_count": 16,
+  "training_started": false
+}

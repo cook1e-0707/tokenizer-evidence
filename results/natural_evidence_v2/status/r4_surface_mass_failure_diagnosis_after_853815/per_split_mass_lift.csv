@@ -1,0 +1,2 @@
+group,record_count,mean_protected_lift_vs_base,median_protected_lift_vs_base,positive_lift_vs_base_rate,mean_protected_lift_vs_task_only,median_protected_lift_vs_task_only,positive_lift_vs_task_only_rate,mean_protected_target_mass,median_protected_target_mass,p95_protected_target_mass,positive_protected_margin_rate
+dev,8192,-8.640958256568576e-05,-5.654186452375143e-07,0.37548828125,-0.00029972933676521564,3.829859296367033e-07,0.562255859375,4.38294671322656e-05,1.3300893442647066e-05,0.0001960100926226005,0.4375
