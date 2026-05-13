@@ -3228,6 +3228,952 @@
     "summary_json": "results/natural_evidence_v2/status/r3_2_prompt_split_implementation_20260511_1801.json",
     "training_started": false
   },
+  "2026-05-11T21:57:38Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_2157_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260511_2157_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-11T23:21:18Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_2320_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260511_2320_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-11T23:36:30Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_2335_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260511_2335_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-11T23:51:37Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260511_2350_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260511_2350_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-12T00:06:50Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260512_0005_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0005_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-12T00:36:49Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260512_0036_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0036_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-12T00:52:09Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260512_0051_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0051_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "training_started": false
+  },
+  "2026-05-12T01:07:13Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260512_0106_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0106_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "timestamp_utc": "2026-05-12T01:07:13Z",
+    "training_started": false
+  },
+  "2026-05-12T01:22:15Z_r3_2_submission_ambiguity_blocker": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260512_0121_r3_2_submission_ambiguity_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0121_r3_2_submission_ambiguity_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for non-unambiguous R3.2 submission tick; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_NOT_UNAMBIGUOUS_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "timestamp_utc": "2026-05-12T01:22:15Z",
+    "training_started": false
+  },
+  "2026-05-12T19:47:36Z_r3_2_h200_853430_completion_review_gate_fail": {
+    "blocked_actions": [
+      "aggregate_r3_2_results",
+      "submit_r3_2_rerun",
+      "training",
+      "llama",
+      "same_family_null",
+      "sanitizer",
+      "far_aggregation",
+      "paper_facing_positive_claim",
+      "payload_diversity_claim"
+    ],
+    "current_phase": "V2_R3_2K_H200_853430_COMPLETED_LOCKED_SCALE_GATE_FAIL_NO_AGGREGATE",
+    "failed_shards": [
+      "shard_02",
+      "shard_03",
+      "shard_06",
+      "shard_07",
+      "shard_10",
+      "shard_11"
+    ],
+    "forbidden_public_surface_count": 9,
+    "hermes_report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1547_r3_2_h200_853430_completion_review.json",
+    "hermes_report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1547_r3_2_h200_853430_completion_review.md",
+    "job_id": "853430",
+    "min_accepted_block_majority_margin": 0,
+    "min_accepted_block_support": 6,
+    "next_allowed_action": "Artifact-only R3.2 H200 853430 failure attribution package: analyze cyclic prompt-window/shard effects, per-step support/margin/target-hit failures, and forbidden-surface matcher semantics. Do not submit or aggregate another job until that attribution is recorded and reviewed.",
+    "null_accepts_at_budget_64": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "protected_accepts_at_budget_64": 39,
+    "protected_blocks_at_budget_64": 96,
+    "review_json": "results/natural_evidence_v2/status/r3_2_h200_853430_review/r3_2_h200_853430_completion_review.json",
+    "review_md": "results/natural_evidence_v2/status/r3_2_h200_853430_review/r3_2_h200_853430_completion_review.md",
+    "review_time_utc": "2026-05-12T19:46:34Z",
+    "status": "FAIL_R3_2_H200_853430_LOCKED_SCALE_GATE_REVIEWED_NO_AGGREGATE"
+  },
+  "2026-05-12T19:56:46Z_r3_2_h200_853430_failure_attribution": {
+    "attribution_json": "results/natural_evidence_v2/status/r3_2_h200_853430_review/failure_attribution/r3_2_h200_853430_failure_attribution_summary.json",
+    "attribution_md": "results/natural_evidence_v2/status/r3_2_h200_853430_review/failure_attribution/r3_2_h200_853430_failure_attribution.md",
+    "blocked_actions": [
+      "aggregate_r3_2_results",
+      "submit_r3_2_rerun",
+      "training",
+      "llama",
+      "same_family_null",
+      "sanitizer",
+      "far_aggregation",
+      "paper_facing_positive_claim",
+      "payload_diversity_claim"
+    ],
+    "current_phase": "V2_R3_2L_H200_853430_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_RECORDED_NO_SUBMIT",
+    "deterministic_repeated_shard_groups": {
+      "window_00": [
+        "shard_00",
+        "shard_04",
+        "shard_08"
+      ],
+      "window_01": [
+        "shard_01",
+        "shard_05",
+        "shard_09"
+      ],
+      "window_02": [
+        "shard_02",
+        "shard_06",
+        "shard_10"
+      ],
+      "window_03": [
+        "shard_03",
+        "shard_07",
+        "shard_11"
+      ]
+    },
+    "effective_unique_blocks": 32,
+    "effective_unique_protected_accepts_64": "13/32",
+    "hermes_report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1556_r3_2_h200_853430_failure_attribution.json",
+    "hermes_report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1556_r3_2_h200_853430_failure_attribution.md",
+    "job_id": "853430",
+    "next_allowed_action": "Artifact-only route decision or repair design only: fix prompt allocation so locked-scale uses genuinely distinct prompt windows, analyze late-window prompt/topic effects, and audit forbidden matcher semantics. Do not submit, aggregate, rerun, start Llama/FAR/sanitizer, or make paper-facing claims until reviewed.",
+    "nominal_protected_accepts_64": "39/96",
+    "recorded_at_utc": "2026-05-12T19:56:46Z",
+    "status": "RECORDED_R3_2_H200_853430_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_NO_SUBMIT"
+  },
+  "2026-05-12T19:57:31Z_r3_2_h200_853430_failure_attribution_notification_sent": {
+    "channels": [
+      "telegram",
+      "email"
+    ],
+    "current_phase": "V2_R3_2L_H200_853430_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_RECORDED_NO_SUBMIT",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1556_r3_2_h200_853430_failure_attribution_notification.json",
+    "sent_at_utc": "2026-05-12T19:57:31Z",
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_H200_853430_ATTRIBUTION"
+  },
+  "2026-05-12T20:00:44Z_r3_2_aggregate_duplicate_window_guard_recorded": {
+    "current_phase": "V2_R3_2M_AGGREGATE_DUPLICATE_WINDOW_GUARD_RECORDED_NO_SUBMIT",
+    "guard_behavior": "default aggregation now refuses duplicate selected prompt, generated-output, or decode-row hashes unless explicitly overridden for diagnostic use",
+    "modified_script": "scripts/natural_evidence_v2/aggregate_r3_2_locked_scale_shards.py",
+    "next_allowed_action": "Artifact-only repaired prompt allocation preflight design/implementation only. R3.2 Slurm resubmission remains blocked until prompt windows are genuinely distinct, uniqueness checks pass, allowlist is safe, and a fresh reviewed submission route plus Hermes notification are recorded.",
+    "recorded_at_utc": "2026-05-12T20:00:44Z",
+    "repair_decision_doc": "docs/natural_evidence_v2/R3_2_H200_853430_FAILURE_ATTRIBUTION_AND_REPAIR_DECISION_20260512.md",
+    "smoke_summary": "results/natural_evidence_v2/status/r3_2_h200_853430_review/aggregate_guard_smoke/summary.json",
+    "status": "PASS_R3_2_AGGREGATE_DUPLICATE_WINDOW_GUARD_SMOKE_ON_853430"
+  },
+  "2026-05-12T20:01:38Z_r3_2_aggregate_guard_notification_sent": {
+    "channels": [
+      "telegram",
+      "email"
+    ],
+    "current_phase": "V2_R3_2M_AGGREGATE_DUPLICATE_WINDOW_GUARD_RECORDED_NO_SUBMIT",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1601_r3_2_aggregate_duplicate_guard_sync_notification.json",
+    "sent_at_utc": "2026-05-12T20:01:38Z",
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_AGGREGATE_GUARD_SYNC"
+  },
+  "2026-05-12T20:07:14Z_r3_2_repaired_prompt_allocation_preflight_recorded": {
+    "available_unique_blocks": 32,
+    "current_phase": "V2_R3_2N_REPAIRED_PROMPT_ALLOCATION_PREFLIGHT_RECORDED_NO_SUBMIT",
+    "desired_blocks": 96,
+    "hermes_report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1607_r3_2_repaired_prompt_allocation_preflight.json",
+    "hermes_report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1607_r3_2_repaired_prompt_allocation_preflight.md",
+    "next_allowed_action": "Artifact-only route decision/repair design only: choose 32-block unique diagnostic or expand prompt bank before any R3.2 Slurm resubmission. No Slurm until reviewed route, allowlist safety, and Hermes notification.",
+    "preflight_doc": "docs/natural_evidence_v2/R3_2_REPAIRED_PROMPT_ALLOCATION_PREFLIGHT_20260512.md",
+    "preflight_json": "results/natural_evidence_v2/status/r3_2_repaired_prompt_allocation_preflight_20260512/r3_2_repaired_prompt_allocation_preflight.json",
+    "recorded_at_utc": "2026-05-12T20:07:14Z",
+    "status": "FAIL_INSUFFICIENT_UNIQUE_PROMPT_ROWS_FOR_REQUESTED_LOCKED_SCALE"
+  },
+  "2026-05-12T20:07:43Z_r3_2_prompt_allocation_preflight_notification_sent": {
+    "channels": [
+      "telegram",
+      "email"
+    ],
+    "current_phase": "V2_R3_2N_REPAIRED_PROMPT_ALLOCATION_PREFLIGHT_RECORDED_NO_SUBMIT",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1607_r3_2_repaired_prompt_allocation_preflight_notification.json",
+    "sent_at_utc": "2026-05-12T20:07:43Z",
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_PROMPT_ALLOCATION_PREFLIGHT"
+  },
+  "2026-05-12T20:08:52Z_r3_2_next_route_decision_package_recorded": {
+    "current_phase": "V2_R3_2O_NEXT_ROUTE_DECISION_PACKAGE_RECORDED_NO_SUBMIT",
+    "decision_package": "docs/natural_evidence_v2/R3_2_NEXT_ROUTE_DECISION_PACKAGE_20260512.md",
+    "hermes_report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1608_r3_2_next_route_decision_package.json",
+    "hermes_report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1608_r3_2_next_route_decision_package.md",
+    "next_allowed_action": "Artifact-only expanded-prompt planning/implementation. No Slurm submission, aggregation, rerun, Llama, FAR, sanitizer, or paper-facing claim until expanded prompt plan and repaired allocation preflight are reviewed.",
+    "recorded_at_utc": "2026-05-12T20:08:52Z",
+    "status": "RECORDED_R3_2_NEXT_ROUTE_DECISION_PACKAGE_NO_SUBMIT"
+  },
+  "2026-05-12T20:09:24Z_r3_2_next_route_package_notification_sent": {
+    "channels": [
+      "telegram",
+      "email"
+    ],
+    "current_phase": "V2_R3_2O_NEXT_ROUTE_DECISION_PACKAGE_RECORDED_NO_SUBMIT",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1608_r3_2_next_route_decision_package_notification.json",
+    "sent_at_utc": "2026-05-12T20:09:24Z",
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_NEXT_ROUTE_PACKAGE"
+  },
+  "2026-05-12T20:11:22Z_r3_2_expanded_prompt_plan_6144_recorded": {
+    "allocation_preflight_json": "results/natural_evidence_v2/status/r3_2_repaired_prompt_allocation_preflight_expanded_6144_20260512/r3_2_repaired_prompt_allocation_preflight.json",
+    "available_unique_blocks": 96,
+    "current_phase": "V2_R3_2P_EXPANDED_PROMPT_PLAN_6144_RECORDED_NO_SUBMIT",
+    "desired_blocks": 96,
+    "doc": "docs/natural_evidence_v2/R3_2_EXPANDED_PROMPT_PLAN_6144_20260512.md",
+    "expanded_wp2_dir": "results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_r3_2_expanded_20260512",
+    "expanded_wp3_dir": "results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_r3_2_6144_20260512",
+    "hermes_report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1611_r3_2_expanded_prompt_plan_6144.json",
+    "hermes_report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1611_r3_2_expanded_prompt_plan_6144.md",
+    "next_allowed_action": "Artifact-only wrapper/precommit repair and local plan-only validation for expanded 6144-row R3.2 route. No Slurm until repaired wrapper, allowlist safety, local/remote hashes, and Hermes notification are reviewed.",
+    "recorded_at_utc": "2026-05-12T20:11:22Z",
+    "status": "PASS_R3_2_EXPANDED_PROMPT_ALLOCATION_FEASIBLE_NO_SUBMIT"
+  },
+  "2026-05-12T20:11:56Z_r3_2_expanded_prompt_plan_notification_sent": {
+    "channels": [
+      "telegram",
+      "email"
+    ],
+    "current_phase": "V2_R3_2P_EXPANDED_PROMPT_PLAN_6144_RECORDED_NO_SUBMIT",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1611_r3_2_expanded_prompt_plan_6144_notification.json",
+    "sent_at_utc": "2026-05-12T20:11:56Z",
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_EXPANDED_PROMPT_PLAN"
+  },
+  "2026-05-12T20:22:02Z_r3_2_expanded_6144_wrapper_plan_validated": {
+    "artifact_only": true,
+    "contract_id": "a55e",
+    "current_phase": "V2_R3_2Q_EXPANDED_6144_WRAPPER_PLAN_VALIDATED_NO_SUBMIT",
+    "expanded_config": "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale_expanded_6144.yaml",
+    "far_aggregation_allowed": false,
+    "generation_started": false,
+    "h200_wrapper_plan_smoke_dir": "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_wrapper_plan_smoke_20260512",
+    "llama_allowed": false,
+    "next_allowed_action": "Artifact-only local/remote control-plane sync preflight for the expanded 6144-row R3.2 route. Do not submit Slurm until a fresh allowlist safety check, local/remote hash match, and Hermes TG/email notification are recorded; then enable only one reviewed R3.2 shard-array entry for submission.",
+    "paper_claim_allowed": false,
+    "payload_diversity_tested": false,
+    "precommit_builder": "scripts/natural_evidence_v2/build_r3_2_expanded_locked_scale_precommit.py",
+    "precommit_hash_sha256": "6de7432ef3155100321affa30f677c2d88e17d5bc6323cde2670ab838d8a85ea",
+    "prompt_source_sha256": "8fcba10d2df1dae83eb03f8ce26fa45623c1918a9246c94b6b6868fc1204247a",
+    "repaired_wrappers": [
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch",
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch"
+    ],
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "scavenger_wrapper_plan_smoke_dir": "results/natural_evidence_v2/status/r3_2_expanded_6144_scavenger_wrapper_plan_smoke_20260512",
+    "selected_prompt_manifest_sha256": "ce057a36ad75424919f4367eb3e2f0221725a9c6715d156ab4b2a377edb600ed",
+    "slurm_job_submitted": false,
+    "status": "PASS_R3_2_EXPANDED_6144_PRECOMMIT_AND_WRAPPER_PLAN_VALIDATED_NO_SLURM",
+    "training_started": false,
+    "unique_blocks": 96,
+    "unique_prompt_windows": 12,
+    "validation_doc": "docs/natural_evidence_v2/R3_2_EXPANDED_6144_PRECOMMIT_AND_WRAPPER_PLAN_VALIDATION_20260512.md",
+    "verified_precommit_dir": "results/natural_evidence_v2/status/r3_2_expanded_6144_precommit_plan_20260512_verified_after_builder_fix"
+  },
+  "2026-05-12T20:22:50Z_r3_2_expanded_6144_wrapper_plan_validation_notification_sent": {
+    "current_phase": "V2_R3_2Q_EXPANDED_6144_WRAPPER_PLAN_VALIDATED_NO_SUBMIT",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_2022_r3_2_expanded_6144_wrapper_plan_validation_notification.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_2022_r3_2_expanded_6144_wrapper_plan_validation.md",
+    "sent_all_required_channels": true,
+    "slurm_job_submitted": false,
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_EXPANDED_6144_WRAPPER_PLAN_VALIDATION"
+  },
+  "2026-05-12T20:23:40Z_r3_2_expanded_6144_remote_sync_allowlist_preflight_pass": {
+    "artifact_only": true,
+    "current_phase": "V2_R3_2R_EXPANDED_6144_REMOTE_SYNC_PREFLIGHT_PASS_NO_SUBMIT",
+    "enabled_entries": [],
+    "hash_file_count": 17,
+    "hash_mismatches": 0,
+    "local_allowlist_safety": "results/natural_evidence_v2/status/r3_2_expanded_6144_allowlist_safety_20260512_2023.json",
+    "local_remote_hash_preflight": "results/natural_evidence_v2/status/r3_2_expanded_6144_remote_sync_preflight_20260512_2023.json",
+    "next_allowed_action": "Final single-entry R3.2 H200 shard-array submission preflight: enable exactly v2_r3_2_qwen_locked_scale_shard_array_h200, verify it is the only enabled entry, submit exactly one Slurm array job, then immediately disable the entry and record the job id.",
+    "remote_allowlist_safety": "results/natural_evidence_v2/status/r3_2_expanded_6144_allowlist_safety_remote_20260512_2023.json",
+    "slurm_job_submitted": false,
+    "status": "PASS_R3_2_EXPANDED_6144_REMOTE_SYNC_AND_ALLOWLIST_PREFLIGHT_NO_SLURM"
+  },
+  "2026-05-12T20:24:40Z_r3_2_expanded_6144_h200_array_853524_submitted": {
+    "account": "cs_yinxin.wan",
+    "allowlist_entry_disabled_after_submission": true,
+    "arms": [
+      "protected",
+      "raw",
+      "task_only",
+      "wrong_key",
+      "wrong_payload"
+    ],
+    "array": "0-11%8",
+    "blocks_per_arm": 96,
+    "contract_id": "a55e",
+    "far_aggregation_allowed": false,
+    "gres": "gpu:h200:1",
+    "job_id": "853524",
+    "job_name": "nat-ev-v2-r32h200",
+    "llama_allowed": false,
+    "next_allowed_action": "Monitor Slurm array job 853524 only. Do not submit another R3.2 job or aggregate until all H200 shard-array tasks reach terminal state and shard outputs are reviewed.",
+    "paper_claim_allowed": false,
+    "partition": "pomplun",
+    "payload_diversity_tested": false,
+    "phase": "V2_R3_2S_EXPANDED_6144_H200_ARRAY_853524_SUBMITTED_MONITOR_ONLY",
+    "post_submit_local_allowlist_safety": "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_post_submit_allowlist_safety_20260512_2024.json",
+    "post_submit_remote_allowlist_safety": "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_post_submit_allowlist_safety_remote_20260512_2024.json",
+    "precommit_hash_sha256": "6de7432ef3155100321affa30f677c2d88e17d5bc6323cde2670ab838d8a85ea",
+    "prompt_split": "wp3_r1_density_eval",
+    "qos": "pomplun",
+    "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853524",
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "schema_name": "natural_evidence_v2_r3_2_expanded_h200_submission_record_v1",
+    "selected_prompt_manifest_sha256": "ce057a36ad75424919f4367eb3e2f0221725a9c6715d156ab4b2a377edb600ed",
+    "single_enabled_local_preflight": "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_single_enabled_preflight_20260512_2024.json",
+    "single_enabled_remote_preflight": "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_single_enabled_preflight_remote_20260512_2024.json",
+    "slurm_job_submitted": true,
+    "status": "SUBMITTED_R3_2_EXPANDED_6144_H200_SHARD_ARRAY_MONITOR_ONLY",
+    "submission_record": "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_submission_record_20260512_2024.json",
+    "submitted_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch",
+    "submitted_entry": "v2_r3_2_qwen_locked_scale_shard_array_h200",
+    "training_started": false
+  },
+  "2026-05-12T20:25:10Z_r3_2_expanded_6144_h200_array_853524_submission_notification_sent": {
+    "current_phase": "V2_R3_2S_EXPANDED_6144_H200_ARRAY_853524_SUBMITTED_MONITOR_ONLY",
+    "job_id": "853524",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_2024_r3_2_expanded_6144_h200_array_853524_submission_notification.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_2024_r3_2_expanded_6144_h200_array_853524_submission.md",
+    "sent_all_required_channels": true,
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_EXPANDED_6144_H200_ARRAY_853524_SUBMITTED"
+  },
+  "2026-05-12T20:26:00Z_r3_2_expanded_6144_h200_array_853524_monitor": {
+    "job_id": "853524",
+    "next_allowed_action": "Monitor Slurm array job 853524 only. Do not submit another R3.2 job or aggregate until all H200 shard-array tasks reach terminal state and shard outputs are reviewed.",
+    "pending_reason": "QOSGrpBillingRunMinutes",
+    "pending_task_expression": "853524_[6-11%8]",
+    "phase": "V2_R3_2S_EXPANDED_6144_H200_ARRAY_853524_SUBMITTED_MONITOR_ONLY",
+    "running_tasks": [
+      "853524_0",
+      "853524_1",
+      "853524_2",
+      "853524_3",
+      "853524_4",
+      "853524_5"
+    ],
+    "schema_name": "natural_evidence_v2_r3_2_h200_monitor_summary_v1",
+    "slurm_job_submitted": false,
+    "status": "MONITOR_R3_2_EXPANDED_6144_H200_ARRAY_853524_RUNNING_PARTIAL_PENDING"
+  },
+  "2026-05-12T21:20:00Z_r3_2_h200_853524_completion_review_gate_fail": {
+    "aggregate_gate_status": "FAIL_R3_2_SAME_CONTRACT_LOCKED_SCALE_GATE",
+    "all_array_tasks_completed": true,
+    "all_exit_codes_zero": true,
+    "contract_id": "a55e",
+    "coordinate_majority_decode_rows": 1440,
+    "current_phase": "V2_R3_2T_H200_853524_COMPLETED_LOCKED_SCALE_GATE_FAIL_NO_RERUN",
+    "decode_decision_rows": 30720,
+    "forbidden_public_surface_count": 23,
+    "gate_review_json": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_gate_review.json",
+    "generated_output_rows": 18432,
+    "job_id": "853524",
+    "min_majority_margin_in_accepted_blocks": 0,
+    "min_support_in_accepted_blocks": 6,
+    "next_allowed_action": "Artifact-only failure attribution for 853524. Do not submit a rerun, aggregate FAR, start Llama, same-family null, sanitizer, or paper-facing claims until attribution is recorded and reviewed.",
+    "null_accept_counts_at_64": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "payload_diversity_tested": false,
+    "phase": "V2_R3_2T_H200_853524_COMPLETED_LOCKED_SCALE_GATE_FAIL_NO_RERUN",
+    "prompt_windows_unique": true,
+    "protected_accepts_at_64": 6,
+    "protected_blocks": 96,
+    "review_md": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_completion_review.md",
+    "scale_gate_pass": false,
+    "schema_name": "natural_evidence_v2_r3_2_h200_853524_completion_review_v1",
+    "slot_observation_rows": 486845,
+    "slurm_terminal_state": "COMPLETED",
+    "status": "FAIL_R3_2_EXPANDED_6144_H200_853524_LOCKED_SCALE_GATE_REVIEWED",
+    "unique_blocks": 96,
+    "unique_prompt_windows": 12
+  },
+  "2026-05-12T22:03:05Z_r3_2_h200_853524_completion_review_notification_sent": {
+    "current_phase": "V2_R3_2T_H200_853524_COMPLETED_LOCKED_SCALE_GATE_FAIL_NO_RERUN",
+    "job_id": "853524",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_2202_r3_2_h200_853524_completion_review_notification.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_2202_r3_2_h200_853524_completion_review.md",
+    "sent_all_required_channels": true,
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_H200_853524_COMPLETION_REVIEW"
+  },
+  "2026-05-12T22:04:00Z_r3_2_h200_853524_failure_attribution_recorded": {
+    "artifact_paths": {
+      "coordinate_majority_by_shard": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/coordinate_majority_by_shard.csv",
+      "coordinate_support_by_step": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/coordinate_support_by_step.csv",
+      "forbidden_surface_examples": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/forbidden_surface_examples.jsonl",
+      "protected_observation_by_shard": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/protected_observation_by_shard.csv",
+      "protected_observation_by_step": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/protected_observation_by_step.csv",
+      "protected_observation_by_variant": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/protected_observation_by_variant.csv"
+    },
+    "attribution_md": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/r3_2_853524_failure_attribution.md",
+    "current_phase": "V2_R3_2U_H200_853524_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_RECORDED_NO_RERUN",
+    "erasure_reason_counts": {
+      "duplicate_step_slots": 485,
+      "missing_or_out_of_order_step_slots": 1093,
+      "observed_first_word_not_in_primary_bucket_set": 30021
+    },
+    "forbidden_surface_hits": {
+      "bucket": 21,
+      "fingerprint": 1,
+      "watermark": 1
+    },
+    "job_id": "853524",
+    "lowest_coordinate_accept_shards": [
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 0.375,
+        "mean_support": 9.0,
+        "shard": "shard_09"
+      },
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 0.75,
+        "mean_support": 13.0,
+        "shard": "shard_03"
+      },
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 0.75,
+        "mean_support": 13.625,
+        "shard": "shard_06"
+      },
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 0.875,
+        "mean_support": 13.125,
+        "shard": "shard_00"
+      },
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 0.875,
+        "mean_support": 10.625,
+        "shard": "shard_05"
+      },
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 1.375,
+        "mean_support": 16.625,
+        "shard": "shard_01"
+      },
+      {
+        "accept_rate": 0.0,
+        "accepted": 0,
+        "blocks": 8,
+        "mean_margin": 1.375,
+        "mean_support": 11.375,
+        "shard": "shard_04"
+      },
+      {
+        "accept_rate": 0.125,
+        "accepted": 1,
+        "blocks": 8,
+        "mean_margin": 0.375,
+        "mean_support": 15.0,
+        "shard": "shard_07"
+      }
+    ],
+    "lowest_target_hit_shards": [
+      {
+        "observations": 8009,
+        "resolved": 3412,
+        "resolved_rate": 0.4260207266824822,
+        "shard": "shard_03",
+        "target_given_resolved_rate": 0.7186400937866354,
+        "target_hit_rate": 0.3061555749781496,
+        "target_hits": 2452
+      },
+      {
+        "observations": 7848,
+        "resolved": 3392,
+        "resolved_rate": 0.4322120285423038,
+        "shard": "shard_04",
+        "target_given_resolved_rate": 0.7449882075471698,
+        "target_hit_rate": 0.32199286442405706,
+        "target_hits": 2527
+      },
+      {
+        "observations": 7726,
+        "resolved": 3417,
+        "resolved_rate": 0.44227284493916647,
+        "shard": "shard_05",
+        "target_given_resolved_rate": 0.7412935323383084,
+        "target_hit_rate": 0.3278539994822677,
+        "target_hits": 2533
+      },
+      {
+        "observations": 8154,
+        "resolved": 3536,
+        "resolved_rate": 0.4336521952415992,
+        "shard": "shard_11",
+        "target_given_resolved_rate": 0.7938348416289592,
+        "target_hit_rate": 0.3442482217316654,
+        "target_hits": 2807
+      },
+      {
+        "observations": 8115,
+        "resolved": 3676,
+        "resolved_rate": 0.4529882932840419,
+        "shard": "shard_09",
+        "target_given_resolved_rate": 0.7861806311207835,
+        "target_hit_rate": 0.3561306223043746,
+        "target_hits": 2890
+      },
+      {
+        "observations": 8178,
+        "resolved": 3794,
+        "resolved_rate": 0.46392761066275373,
+        "shard": "shard_10",
+        "target_given_resolved_rate": 0.8033737480231945,
+        "target_hit_rate": 0.3727072633895818,
+        "target_hits": 3048
+      },
+      {
+        "observations": 8146,
+        "resolved": 4234,
+        "resolved_rate": 0.5197643014976676,
+        "shard": "shard_06",
+        "target_given_resolved_rate": 0.740434577231932,
+        "target_hit_rate": 0.3848514608396759,
+        "target_hits": 3135
+      },
+      {
+        "observations": 8166,
+        "resolved": 4360,
+        "resolved_rate": 0.5339211364192995,
+        "shard": "shard_07",
+        "target_given_resolved_rate": 0.7506880733944954,
+        "target_hit_rate": 0.40080822924320353,
+        "target_hits": 3273
+      }
+    ],
+    "lowest_target_hit_variants": [
+      {
+        "observations": 31650,
+        "resolved": 12307,
+        "resolved_rate": 0.3888467614533965,
+        "target_given_resolved_rate": 0.7897944259364589,
+        "target_hit_rate": 0.3071090047393365,
+        "target_hits": 9720,
+        "variant_id": "r1_strict_literal_16_step_lines"
+      },
+      {
+        "observations": 32522,
+        "resolved": 17842,
+        "resolved_rate": 0.5486132464178095,
+        "target_given_resolved_rate": 0.7573142024436722,
+        "target_hit_rate": 0.4154726031609372,
+        "target_hits": 13512,
+        "variant_id": "r1_strict_numbered_step_label_lines"
+      },
+      {
+        "observations": 32660,
+        "resolved": 18985,
+        "resolved_rate": 0.5812921004286589,
+        "target_given_resolved_rate": 0.7472214906505136,
+        "target_hit_rate": 0.43435394978567055,
+        "target_hits": 14186,
+        "variant_id": "r1_strict_no_heading_16_step_lines"
+      }
+    ],
+    "next_allowed_action": "Expert review / artifact-only repair decision for 853524. Do not submit a rerun or unlock Llama, FAR, sanitizer, same-family null, payload-diversity claims, or paper-facing positive claims until this attribution is reviewed.",
+    "null_accepts_at_64": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "phase": "V2_R3_2U_H200_853524_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_RECORDED_NO_RERUN",
+    "protected_coordinate_majority_accepts_at_64": 6,
+    "protected_coordinate_majority_blocks": 96,
+    "schema_name": "natural_evidence_v2_r3_2_853524_failure_attribution_summary_v1",
+    "status": "RECORDED_R3_2_853524_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_NO_RERUN",
+    "top_protected_first_words": [
+      [
+        "Set",
+        29074
+      ],
+      [
+        "Create",
+        11737
+      ],
+      [
+        "Prepare",
+        7451
+      ],
+      [
+        "Step",
+        6661
+      ],
+      [
+        "Assign",
+        4575
+      ],
+      [
+        "Use",
+        2156
+      ],
+      [
+        "Establish",
+        1612
+      ],
+      [
+        "Provide",
+        1551
+      ],
+      [
+        "Ensure",
+        1551
+      ],
+      [
+        "Encourage",
+        1503
+      ],
+      [
+        "Schedule",
+        1492
+      ],
+      [
+        "Review",
+        1139
+      ],
+      [
+        "Write",
+        910
+      ],
+      [
+        "Share",
+        899
+      ],
+      [
+        "Plan",
+        872
+      ],
+      [
+        "Keep",
+        864
+      ],
+      [
+        "Define",
+        797
+      ],
+      [
+        "Document",
+        734
+      ],
+      [
+        "Train",
+        717
+      ],
+      [
+        "Check",
+        676
+      ]
+    ]
+  },
+  "2026-05-12T22:04:35Z_r3_2_h200_853524_failure_attribution_notification_sent": {
+    "current_phase": "V2_R3_2U_H200_853524_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_RECORDED_NO_RERUN",
+    "job_id": "853524",
+    "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_2204_r3_2_h200_853524_failure_attribution_notification.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_2204_r3_2_h200_853524_failure_attribution.md",
+    "sent_all_required_channels": true,
+    "status": "SENT_HERMES_NOTIFICATION_R3_2_H200_853524_FAILURE_ATTRIBUTION"
+  },
+  "2026-05-12T22:09:33Z_r3_2_h200_853524_repair_decision_package_recorded": {
+    "current_phase": "V2_R3_2V_H200_853524_REPAIR_DECISION_PACKAGE_READY_NO_RERUN",
+    "decision_package_json": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_repair_decision_package.json",
+    "decision_package_md": "docs/natural_evidence_v2/R3_2_H200_853524_REPAIR_DECISION_PACKAGE_20260512.md",
+    "job_id": "853524",
+    "next_allowed_action": "Expert review / artifact-only repair decision for 853524. Do not submit a rerun or unlock Llama, FAR, sanitizer, same-family null, payload-diversity claims, or paper-facing positive claims until this package is reviewed and a new route is recorded.",
+    "null_accepts_at_64": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "phase": "V2_R3_2V_H200_853524_REPAIR_DECISION_PACKAGE_READY_NO_RERUN",
+    "protected_accepts_at_64": 6,
+    "protected_blocks": 96,
+    "scale_gate_status": "FAIL_R3_2_SAME_CONTRACT_LOCKED_SCALE_GATE",
+    "source_attribution_md": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/r3_2_853524_failure_attribution.md",
+    "state_changing_action": "recorded artifact-only repair decision package; no Slurm submission, training, Llama, same-family null, sanitizer, FAR aggregation, payload-diversity claim, or paper-facing positive claim action started",
+    "status": "RECORDED_R3_2_H200_853524_REPAIR_DECISION_PACKAGE_NO_RERUN"
+  },
+  "2026-05-12T23:49:44Z_r4_cover_natural_ecc_artifact_only_package_recorded": {
+    "allowlist_safety": "results/natural_evidence_v2/status/r4_cover_natural_ecc_allowlist_safety_20260512.json",
+    "config": "configs/natural_evidence_v2/r4_cover_natural_ecc.yaml",
+    "current_phase": "V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PLANNING_NO_SLURM",
+    "decoder_smoke": "results/natural_evidence_v2/status/r4_cover_natural_decoder_smoke_on_853524_20260512/decode_summary.json",
+    "far_aggregation_started": false,
+    "forbidden_surface_audit": "results/natural_evidence_v2/status/r4_forbidden_surface_matcher_audit_20260512/forbidden_surface_audit.json",
+    "generation_started": false,
+    "llama_started": false,
+    "next_allowed_action": "R4 artifact-only planning is complete and plan validation passed. Slurm remains disabled until a human/expert route decision records permission for a small dev diagnostic submission; no generation, training, Llama, same-family null, sanitizer, FAR, payload-diversity claim, or paper-facing positive claim is unlocked.",
+    "oracle_recoverability_summary": "results/natural_evidence_v2/status/r4_artifact_only_oracle_recoverability_20260512/oracle_recoverability_summary.json",
+    "paper_claim_started": false,
+    "phase": "V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PLANNING_NO_SLURM",
+    "plan_validation": "results/natural_evidence_v2/status/r4_cover_natural_plan_validation_20260512/validation_summary.json",
+    "plan_validation_status": "PASS",
+    "precommit_manifest": "results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/precommit_manifest.json",
+    "prompt_bank_manifest": "results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512/prompt_bank_manifest.json",
+    "protocol_decision": "docs/natural_evidence_v2/R4_COVER_NATURAL_ECC_PROTOCOL_DECISION_20260512.md",
+    "protocol_decision_json": "results/natural_evidence_v2/status/r4_cover_natural_ecc_protocol_decision_20260512.json",
+    "slurm_submitted": false,
+    "status": "RECORDED_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PACKAGE_PLAN_VALIDATION_PASS_NO_SLURM",
+    "structural_leakage_audit": "results/natural_evidence_v2/status/r4_structural_leakage_audit_20260512/structural_leakage_summary.json",
+    "training_started": false
+  },
+  "2026-05-13T00:10:04Z_r4_dev_diagnostic_preflight_ready": {
+    "allowlist_safety": "results/natural_evidence_v2/status/r4_dev_diagnostic_allowlist_safety_zero_20260513_rerun.json",
+    "current_phase": "V2_R4_DEV_DIAGNOSTIC_REMOTE_SYNC_AND_SINGLE_JOB_PREFLIGHT",
+    "far_aggregation_allowed": false,
+    "generation_allowed": "only_after_r4_dev_submission_preflight_passes",
+    "llama_allowed": false,
+    "next_allowed_action": "Sync reviewed R4 dev diagnostic control-plane files to Chimera, run local/remote hash and allowlist preflight, notify Hermes, then submit exactly one reviewed R4 H200 Slurm array job if all preflights pass.",
+    "paper_claim_allowed": false,
+    "plan_validation": "results/natural_evidence_v2/status/r4_cover_natural_plan_validation_20260512/validation_summary.json",
+    "prompt_bank_manifest": "results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/prompt_bank_manifest.json",
+    "route_decision": "docs/natural_evidence_v2/R4_DEV_DIAGNOSTIC_ROUTE_DECISION_20260512.md",
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "status": "R4_DEV_DIAGNOSTIC_PREFLIGHT_READY_NO_SUBMISSION_YET",
+    "training_allowed": false,
+    "wrapper_plan_smoke": "results/natural_evidence_v2/status/r4_dev_diagnostic_h200_wrapper_plan_smoke_20260512/"
+  },
+  "2026-05-13T00:11:26Z_r4_dev_diagnostic_replicate_id_wrapper_prefight_pass": {
+    "allowlist_safety": "results/natural_evidence_v2/status/r4_dev_diagnostic_allowlist_safety_zero_20260513_post_replicate_id.json",
+    "current_phase": "V2_R4_DEV_DIAGNOSTIC_REMOTE_SYNC_AND_SINGLE_JOB_PREFLIGHT",
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "next_allowed_action": "Sync reviewed R4 dev diagnostic control-plane files to Chimera, run local/remote hash and allowlist preflight, notify Hermes, then submit exactly one reviewed R4 H200 Slurm array job if all preflights pass.",
+    "paper_claim_allowed": false,
+    "replicate_group_ids": [
+      "shard_00",
+      "shard_01",
+      "shard_02",
+      "shard_03"
+    ],
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "status": "R4_DEV_DIAGNOSTIC_REPLICATE_ID_WRAPPER_PREFLIGHT_PASS_NO_SUBMISSION_YET",
+    "training_allowed": false,
+    "wrapper_plan_smoke": "results/natural_evidence_v2/status/r4_dev_diagnostic_h200_wrapper_plan_smoke_20260513/"
+  },
+  "2026-05-13T00:14:39Z_r4_dev_diagnostic_h200_array_853691_submitted": {
+    "account": "cs_yinxin.wan",
+    "allowlist_enabled_entries_after_submission": [],
+    "arms": [
+      "protected",
+      "raw",
+      "task_only",
+      "wrong_key",
+      "wrong_payload"
+    ],
+    "array": "0-3%4",
+    "blocks": 32,
+    "contract_id": "a55e",
+    "far_aggregation_started": false,
+    "gres": "gpu:h200:1",
+    "job_id": "853691",
+    "job_name": "nat-ev-v2-r4dev",
+    "llama_started": false,
+    "next_allowed_action": "Monitor Slurm array job 853691. After completion, sync artifacts and review R4 dev diagnostic gates before any further route unlock.",
+    "paper_claim_allowed": false,
+    "partition": "pomplun",
+    "payload_diversity_tested": false,
+    "phase": "V2_R4_DEV_DIAGNOSTIC_H200_ARRAY_853691_SUBMITTED_MONITOR_ONLY",
+    "post_submit_allowlist_safety_local": "results/natural_evidence_v2/status/r4_dev_diagnostic_post_submit_allowlist_safety_20260513.json",
+    "post_submit_allowlist_safety_remote": "results/natural_evidence_v2/status/r4_dev_diagnostic_post_submit_allowlist_safety_remote_20260513.json",
+    "primary_scrub_mode": "all",
+    "prompt_count": 2048,
+    "prompt_split": "dev",
+    "prompts_per_block": 64,
+    "qos": "pomplun",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "schema_name": "natural_evidence_v2_r4_dev_diagnostic_submission_record_v1",
+    "status": "SUBMITTED_RUNNING_R4_DEV_DIAGNOSTIC_H200_ARRAY_MONITOR_ONLY",
+    "submitted": true,
+    "submitted_at_utc": "2026-05-13T00:14:39Z",
+    "submitted_entry": "v2_r4_cover_natural_dev_diagnostic_h200",
+    "training_started": false
+  },
+  "2026-05-13T00:51:02Z_r4_dev_diagnostic_853691_completed_gate_fail_reviewed": {
+    "current_phase": "V2_R4_DEV_853691_COMPLETED_GATE_FAIL_ARTIFACT_ONLY_REPAIR_PLANNING",
+    "failure_attribution": "results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/failure_attribution/failure_attribution_summary.json",
+    "far_aggregation_allowed": false,
+    "forbidden_public_surface_all": 237,
+    "job_id": "853691",
+    "llama_allowed": false,
+    "next_allowed_action": "Artifact-only R4 repair planning: design a trainable cover-natural surface target path and R4 teacher-forced target-mass probe before any further generation Slurm job.",
+    "null_accepts_all": "0/32 for raw/task_only/wrong_key/wrong_payload",
+    "paper_claim_allowed": false,
+    "protected_accepts_all": "0/32",
+    "protected_accepts_none": "0/32",
+    "review_summary": "results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/review/r4_dev_diagnostic_853691_review_summary.json",
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_completion": "all 4 shards completed ExitCode 0:0",
+    "status": "R4_DEV_DIAGNOSTIC_853691_COMPLETED_GATE_FAIL_NO_RERUN",
+    "structural_auc": 0.6240438222885132,
+    "training_allowed": false
+  },
+  "2026-05-13T01:04:00Z_r4_binary_surface_teacher_forced_probe_preflight": {
+    "base_failed_job": "853691",
+    "binary_surface_bank_repair_summary": "results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/binary_surface_bank_repair_summary.json",
+    "candidate_surface_bank_sha256": "f818ef27c76f4467d51f62d165978a703d4e469f8ebf7a631c34bfa9e2bb557c",
+    "candidate_surface_entry_count": 256,
+    "canonical_phase": "V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_REPAIR_PREFLIGHT_NO_SLURM",
+    "coordinate_count": 32,
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "llama_started": false,
+    "next_allowed_action": "Review artifact-only R4 binary surface repair and teacher-forced surface probe plan; if accepted, prepare Slurm-only Qwen base/protected/task-only surface-mass scorer wrapper. Do not run generation or locked-scale.",
+    "paper_claim_allowed": false,
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "score_row_count": 8192,
+    "slurm_submitted": false,
+    "status": "PASS_ARTIFACT_ONLY_R4_BINARY_SURFACE_REPAIR_PREFLIGHT",
+    "teacher_forced_probe_dry_run_summary": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_dry_run_binary_repair_20260513/r4_teacher_forced_surface_mass_summary.json",
+    "teacher_forced_probe_plan_summary": "results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_plan_summary.json",
+    "training_started": false
+  },
   "action_results": {
     "2026-05-08T01:44:32Z_phase_r1_prefix_selector_replay": {
       "e2e_eval_started": false,
@@ -8359,7 +9305,20 @@
     "results/natural_evidence_v2/contracts/wp4_prompt_local_contract_20260509_0610/qwen_v2_wp4_prompt_local_contracts.jsonl",
     "docs/natural_evidence_v2/WP5_CONDITIONAL_TRAINING_AUTHORIZATION_20260509.md",
     "docs/natural_evidence_v2/WP5_R2_TRAIN_AND_SCORE_851481_REVIEW.md",
-    "results/natural_evidence_v2/status/wp5_r2_teacher_forced_train_and_score_851481/teacher_forced_score/wp5_teacher_forced_bucket_mass_summary.json"
+    "results/natural_evidence_v2/status/wp5_r2_teacher_forced_train_and_score_851481/teacher_forced_score/wp5_teacher_forced_bucket_mass_summary.json",
+    "docs/natural_evidence_v2/R3_2_EXPANDED_6144_PRECOMMIT_AND_WRAPPER_PLAN_VALIDATION_20260512.md",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_precommit_plan_20260512_verified_after_builder_fix",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_wrapper_plan_smoke_20260512",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_scavenger_wrapper_plan_smoke_20260512",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_remote_sync_preflight_20260512_2023.json",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_allowlist_safety_20260512_2023.json",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_allowlist_safety_remote_20260512_2023.json",
+    "results/natural_evidence_v2/status/r3_2_expanded_6144_h200_submission_record_20260512_2024.json",
+    "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_completion_review.md",
+    "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_completion_review.json",
+    "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_gate_review.json",
+    "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/r3_2_853524_failure_attribution_summary.json",
+    "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/r3_2_853524_failure_attribution.md"
   ],
   "conditional_authorization_policy": {
     "gate_controlled_actions": {
@@ -8418,7 +9377,7 @@
     "source": "user instruction",
     "status": "POMPLUN_DOWN_USE_DGXA100_FOR_GPU"
   },
-  "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+  "current_phase": "V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PLANNING_NO_SLURM",
   "diagnostic_low_capacity_gates": [
     "qwen_probability_gated_repair_under_target",
     "qwen_counterfactual_compatibility_low_entry_pass_rate"
@@ -8505,7 +9464,24 @@
     "v2_wp3_prompt_local_decoder_oracle_not_started_wp4_blocked",
     "v2_wp3_r1_850885_legacy_global_structural_status_fail_single_eval_non_english_response",
     "v2_wp5_teacher_forced_gate_851373_failed_negative_protected_lift",
-    "v2_wp6_e2e_blocked_by_20260509_1645_generation_constraint_conflict"
+    "v2_wp6_e2e_blocked_by_20260509_1645_generation_constraint_conflict",
+    "r3_2_active_array_853381_unrecorded_remote_hash_mismatch_no_aggregate",
+    "r3_2_noncanonical_a100_853381_cancelled",
+    "r3_2_h200_first_attempt_853421_prompt_manifest_hash_mismatch_cancelled",
+    "r3_2_h200_853430_protected_accepts_below_80_of_96",
+    "r3_2_h200_853430_min_support_below_16",
+    "r3_2_h200_853430_min_margin_below_3",
+    "r3_2_h200_853430_forbidden_surface_nonzero",
+    "r3_2_h200_853430_nominal_96_blocks_collapse_to_32_unique_blocks",
+    "r3_2_h200_853430_prompt_windows_repeated_deterministically",
+    "r3_2_h200_853430_late_prompt_windows_low_target_hit_and_support",
+    "r3_2_h200_853430_forbidden_surface_matcher_semantics_need_audit",
+    "r3_2_repaired_prompt_allocation_current_prompt_bank_supports_only_32_unique_blocks",
+    "r3_2_96_block_locked_scale_requires_6144_unique_eval_rows",
+    "r3_2_853524_protected_accepts_below_80_of_96",
+    "r3_2_853524_min_support_below_16",
+    "r3_2_853524_min_margin_below_3",
+    "r3_2_853524_forbidden_surface_nonzero"
   ],
   "failed_slurm_jobs": [
     {
@@ -8517,6 +9493,7 @@
     }
   ],
   "far_aggregation_allowed": false,
+  "far_aggregation_started": false,
   "far_aggregation_status": "PASS_WP6_R2_OPTION_B",
   "forbidden_claims": [
     "24000_fingerprints",
@@ -9421,6 +10398,7 @@
     }
   },
   "generation_allowed": false,
+  "generation_started": false,
   "hermes_15min_coordination": {
     "cadence_minutes": 15,
     "chimera_rule": "Any Chimera CPU/GPU work must be submitted by Codex through Slurm; do not run CPU directly on login node.",
@@ -9497,10 +10475,10 @@
     },
     "last_scheduler_tick": {
       "background_worker_launched": true,
-      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260511_2032_scheduled_tick_notification.json",
-      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260511_2032_scheduled_tick.md",
-      "time": "2026-05-11T20:33:01Z",
-      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260511_2032_worker.log"
+      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0056_scheduled_tick_notification.json",
+      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0056_scheduled_tick.md",
+      "time": "2026-05-13T00:56:14Z",
+      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0056_worker.log"
     },
     "max_codex_state_changing_actions_requested_per_tick": 1,
     "notification_body_required_fields": [
@@ -9871,12 +10849,19 @@
     "852086",
     "852094",
     "852426",
-    "853070"
+    "853070",
+    "853110",
+    "853276",
+    "853381",
+    "853421",
+    "853430",
+    "853524"
   ],
   "last_checked": "2026-05-10T14:12:04Z",
-  "last_checked_time": "2026-05-11T20:32:00Z",
+  "last_checked_time": "2026-05-13T00:56:14Z",
   "last_checked_utc": "2026-05-10T14:12:04Z",
-  "last_state_changing_action": "Fixed Hermes Codex CLI discovery and recorded artifact-only R3.2 allowlist safety recheck under the repaired prompt split contract plus a later single-job submission route; no Slurm, generation, training, Llama, FAR, sanitizer, or claims were started.",
+  "last_state_changing_action": "Hermes scheduled tick sent Telegram/email and launched a background Codex worker. Training, generation, E2E rerun, Llama, same-family null, sanitizer, FAR, and paper claim gates remained locked.",
+  "last_status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",
   "last_status_update_action": "R3.2 full wrapper review passed; allowlist remains disabled and no Slurm job was submitted",
   "last_status_update_utc": "2026-05-11T07:02:05Z",
   "latest_blocker": {
@@ -9902,6 +10887,7 @@
   },
   "llama_allowed": false,
   "llama_migration_status": "PLAN_RECORDED_ARTIFACT_ONLY",
+  "llama_started": false,
   "local_artifact_check": {
     "checked_at": "2026-05-08T00:42:19Z",
     "compatibility_aware_supply_audit_845930_topk64_v1": "COMPLETE_LOCAL_COPY",
@@ -9923,8 +10909,37 @@
     "variable_arity_diagnostic_845358_cap16_v1": "COMPLETE_LOCAL_DIAGNOSTIC_FAIL_EFFECTIVE_BITS"
   },
   "max_state_changing_actions_per_automation_run": 1,
+  "natural_evidence_v2_r3_2_shard_array_remote_sync_blocker_20260512_0309": {
+    "allowlist_entry_enabled": false,
+    "current_phase": "V2_R3_2F_SCAVENGER_SHARD_ARRAY_REMOTE_SYNC_BLOCKED_NO_SUBMIT",
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "llama_started": false,
+    "local_allowlist_preflight_json": "results/natural_evidence_v2/status/r3_2f_shard_array_final_allowlist_preflight_20260512_0307.json",
+    "local_allowlist_preflight_status": "PASS",
+    "next_allowed_action": "Synchronize the reviewed R3.2 shard-array control-plane files to Chimera, then rerun the final local/remote allowlist and file-hash preflight before any allowlist enablement or Slurm submission.",
+    "paper_claim_started": false,
+    "qwen_e2e_rerun_started": false,
+    "remote_hash_mismatch_files": [
+      "configs/natural_evidence_v2/run_allowlist.yaml",
+      "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml",
+      "scripts/natural_evidence_v2/build_r3_2_locked_scale_precommit.py"
+    ],
+    "remote_missing_files": [
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_aggregate.sbatch"
+    ],
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0309_r3_2_shard_array_remote_sync_blocker.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_0309_r3_2_shard_array_remote_sync_blocker.md",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "slurm_submitted": false,
+    "status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",
+    "timestamp_utc": "2026-05-12T03:09:14Z",
+    "training_started": false
+  },
   "new_training_allowed": false,
-  "next_allowed_action": "Later notified submission tick may enable exactly v2_r3_2_qwen_locked_scale_eval, submit exactly one reviewed R3.2 Chimera Slurm job, immediately disable the allowlist entry, record the submission, and stop. Do not submit another R3.2 Slurm job in the 2026-05-11 20:32Z recovery tick.",
+  "next_allowed_action": "R4 artifact-only planning is complete and plan validation passed. Slurm remains disabled until a human/expert route decision records permission for a small dev diagnostic submission; no generation, training, Llama, same-family null, sanitizer, FAR, payload-diversity claim, or paper-facing positive claim is unlocked.",
   "out_of_band_artifact_quarantine": {
     "adopted_as_formal_progress": false,
     "chimera_jobs_observed": [
@@ -9952,6 +10967,8 @@
     "timestamp_utc": "2026-05-11T01:13:43Z"
   },
   "paper_claim_allowed": false,
+  "paper_claim_started": false,
+  "payload_diversity_claim_allowed": false,
   "project_target_bank_entries_per_tokenizer": 24000,
   "project_target_role": "raw_opportunity_scaling_placeholder_not_training_gate",
   "protocol": "natural_evidence_v1",
@@ -10246,6 +11263,7 @@
     "tokens_per_bucket": 2
   },
   "qwen_e2e_allowed": false,
+  "qwen_e2e_rerun_started": false,
   "qwen_expanded_variable_arity_organic_density": {
     "accepted_entries": 27054,
     "configured_subset_entries": 996,
@@ -10730,6 +11748,45 @@
   },
   "r3_2_same_contract_preflight_pass": true,
   "r3_2_selected_prompt_manifest_sha256": "4d49ae100b272f184a8b2563e5b64f768e6db01425a2384f1457a4eb10eedb67",
+  "r3_2_state_lock": {
+    "account": "cs_yinxin.wan",
+    "allowed_codex_actions_under_lock": [
+      "monitor_853430",
+      "review_853430_after_terminal",
+      "submit_aggregate_only_after_all_853430_shards_complete_and_reviewed"
+    ],
+    "cancelled_noncanonical_jobs": [
+      "853381",
+      "853421"
+    ],
+    "canonical_active_job_id": "853430",
+    "canonical_job_name": "nat-ev-v2-r32h200",
+    "created_at_utc": "2026-05-12T18:10:00Z",
+    "gres": "gpu:h200:1",
+    "hermes_behavior": "Hermes should monitor only canonical job 853430 while this lock is active. Do not submit replacement jobs or aggregate until gate_status next_allowed_action changes.",
+    "lock_id": "r3_2_h200_migration_20260512_1810",
+    "locked_actions": [
+      "submit_r3_2_jobs",
+      "submit_aggregate_jobs_until_shards_complete",
+      "adopt_or_aggregate_noncanonical_jobs",
+      "training",
+      "llama",
+      "same_family_null",
+      "sanitizer",
+      "far_aggregation",
+      "paper_claim"
+    ],
+    "node": "chimera21",
+    "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853430",
+    "owner": "codex",
+    "partition": "pomplun",
+    "phase": "V2_R3_2J_H200_SHARD_ARRAY_853430_SUBMITTED_MONITOR_ONLY",
+    "qos": "pomplun",
+    "reason": "User requested cancellation of current noncanonical A100 array 853381 and resubmission on chimera21 H200 via pomplun/cs_yinxin.",
+    "schema_name": "natural_evidence_v2_r3_2_state_lock_v1",
+    "status": "ACTIVE_CANONICAL_JOB_MONITOR_LOCK",
+    "updated_at_utc": "2026-05-12T18:16:00Z"
+  },
   "r3_2_wrapper_review_doc": "docs/natural_evidence_v2/R3_2_QWEN_LOCKED_SCALE_WRAPPER_REVIEW_20260511.md",
   "r3_2_wrapper_review_json": "results/natural_evidence_v2/status/r3_2_qwen_locked_scale_wrapper_review_20260511_0318.json",
   "r3_2a_allowlist_decontamination_status": "PASS_ZERO_ENABLED_ENTRIES_LOCAL_AND_REMOTE_AFTER_SUBMISSION",
@@ -10992,8 +12049,12 @@
     "timestamp_utc": "2026-05-11T01:24:00Z"
   },
   "same_family_null_allowed": false,
+  "same_family_null_started": false,
   "sanitizer_allowed": false,
+  "sanitizer_benchmark_allowed": false,
   "sanitizer_benchmark_status": "PLAN_RECORDED_BLOCKED_BY_LLAMA",
+  "sanitizer_started": false,
+  "slurm_allowed": false,
   "slurm_query_status": {
     "checked_at": "2026-05-08T00:42:19Z",
     "chimera_access": "PASS_SSH_CHIMERA",
@@ -11206,6 +12267,7 @@
   },
   "target_update_note": "Raw 24000 opportunity entries are a scaling placeholder, not a training gate and not fingerprint parity. Current gate is compatibility-adjusted natural evidence capacity.",
   "training_allowed": false,
+  "training_started": false,
   "v1_final_decision": {
     "decision_json": "results/natural_evidence_v1/status/final_v1_negative_decision.json",
     "failed_route_components": [
@@ -12427,6 +13489,73 @@
     "summary_json": "results/natural_evidence_v2/status/r3_2_852426_replay_compatibility_rereview_20260511_1817.json",
     "training_started": false
   },
+  "wp6_r3_2_active_array_853381_sync_blocker_20260512_1751": {
+    "actions_not_taken": [
+      "no Slurm submission",
+      "no job cancellation",
+      "no aggregate submission",
+      "no allowlist enablement",
+      "no training",
+      "no Llama",
+      "no same-family null",
+      "no sanitizer",
+      "no FAR aggregation",
+      "no paper-facing claim"
+    ],
+    "actions_taken_this_sync": [
+      "checked Chimera squeue/sacct/scontrol",
+      "checked local/remote control-plane hashes",
+      "recorded sync blocker",
+      "updated compact state and gate status"
+    ],
+    "active_array_job_id": "853381",
+    "active_array_job_name": "nat-ev-v2-r32shard",
+    "allowlist_enabled_entries": [],
+    "array_state_at_sync": {
+      "pending_reason": "JobArrayTaskLimit",
+      "pending_task_expression": "853381_[8-11%8]",
+      "running_tasks": [
+        "853381_0",
+        "853381_1",
+        "853381_2",
+        "853381_3",
+        "853381_4",
+        "853381_5",
+        "853381_6",
+        "853381_7"
+      ]
+    },
+    "hashes": {
+      "local_aggregate_sbatch": "4b1f04897623eec9d2699c6637982835c6b0820ff3d8fbe5f82410ff1283264e",
+      "local_r3_2_config_yaml": "200522fda12ba110c316bea0de2052af2b2c2382a9486c95f249bb414132489f",
+      "local_run_allowlist_yaml": "a48a04c7562a29112fcd399c767d94ca70722b1feac20c49f70e8f2a5af6c7a2",
+      "local_shard_array_sbatch": "fe24f12b7944ccf5d131cb1beb6f0b921008d0db60a6673557e1c0fed2a559c6",
+      "remote_aggregate_sbatch": "4b1f04897623eec9d2699c6637982835c6b0820ff3d8fbe5f82410ff1283264e",
+      "remote_r3_2_config_yaml": "200522fda12ba110c316bea0de2052af2b2c2382a9486c95f249bb414132489f",
+      "remote_run_allowlist_yaml": "a48a04c7562a29112fcd399c767d94ca70722b1feac20c49f70e8f2a5af6c7a2",
+      "remote_shard_array_sbatch": "a5a64f1f6de5047868e60fddb53ccd9a14ddf8cdbc3aa2bcf6acadd2e6f6ff2f"
+    },
+    "known_local_submission_records": [
+      "results/natural_evidence_v1/status/hermes_reports/20260512_0323_r3_2_shard_array_submission_record.json",
+      "results/natural_evidence_v2/status/r3_2g_shard_array_submission_record_20260512_0323.json"
+    ],
+    "local_submission_record_for_853381_found": false,
+    "next_allowed_action": "Artifact-only control-plane reconciliation: resolve unrecorded active array 853381 and remote shard-array hash mismatch; do not submit or aggregate until provenance is reviewed.",
+    "partition": "DGXA100",
+    "phase": "V2_R3_2H_ACTIVE_UNRECORDED_ARRAY_853381_CONTROL_PLANE_MISMATCH_NO_AGGREGATE",
+    "previous_recorded_array_job_id": "853276",
+    "previous_recorded_array_status": "terminal_incomplete_not_current_active_job",
+    "qos": "scavenger",
+    "remote_command": "/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+    "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_scavenger_array_853381",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1751_r3_2_active_array_853381_sync_blocker.md",
+    "selected_prompt_manifest_sha256": {
+      "local_wrapper_default": "71f6ce51fb1e4cfd8ef07fe74e284cf14d16a19651de95aa4b8e717eb1e78820",
+      "remote_running_wrapper_default": "3e50a08773c4c7dca3be976a762840a8d8a960ac63f4cfce382af3051a2b82d1"
+    },
+    "status": "BLOCK_R3_2_ACTIVE_ARRAY_853381_UNRECORDED_AND_REMOTE_HASH_MISMATCH_NO_AGGREGATE",
+    "timestamp_utc": "2026-05-12T17:51:29Z"
+  },
   "wp6_r3_2_allowlist_recheck_json": "results/natural_evidence_v2/status/r3_2_allowlist_recheck_repaired_prompt_split_20260511_1916.json",
   "wp6_r3_2_allowlist_recheck_repaired_prompt_split_20260511_1901": {
     "allowlist_enabled": false,
@@ -12454,12 +13583,397 @@
     "summary_json": "results/natural_evidence_v2/status/r3_2_allowlist_recheck_repaired_prompt_split_20260511_1916.json",
     "training_started": false
   },
+  "wp6_r3_2_h200_853524_expert_review_repair_decision_20260512_2210": {
+    "current_phase": "V2_R3_2W_H200_853524_EXPERT_REVIEW_REPAIR_DECISION_RECORDED_NO_RERUN",
+    "decision": "not_artifact_only_repairable_into_passing_locked_scale_result",
+    "far_aggregation_allowed": false,
+    "generation_started_this_review": false,
+    "job_id": "853524",
+    "llama_allowed": false,
+    "next_allowed_action": "Hold for human/expert route decision, or perform artifact-only planning for a new protocol/prompt-bank repair package if explicitly requested. Do not submit a rerun or unlock downstream gates from 853524.",
+    "paper_claim_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "protected_accepts_at_64": 6,
+    "protected_accepts_required_at_64": 80,
+    "qwen_e2e_rerun_started_this_review": false,
+    "review_doc": "docs/natural_evidence_v2/R3_2_H200_853524_EXPERT_REVIEW_REPAIR_DECISION_20260512_2210.md",
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "slurm_job_submitted_this_review": false,
+    "status": "RECORDED_R3_2_853524_EXPERT_REVIEW_REPAIR_DECISION_NO_RERUN",
+    "summary_json": "results/natural_evidence_v2/status/r3_2_h200_853524_expert_review_repair_decision_20260512_2210.json",
+    "timestamp_utc": "2026-05-12T22:10:00Z",
+    "training_started": false
+  },
+  "wp6_r3_2_h200_monitor_20260512_1905": {
+    "completed_shards": 6,
+    "generated_outputs_files_found": 6,
+    "job_id": "853430",
+    "next_allowed_action": "Monitor Slurm array job 853430 only. Do not submit another R3.2 job or the aggregate job until all H200 shard-array tasks reach terminal state and shard outputs are reviewed as complete.",
+    "partial_interpretation": "Not final. Potential gate risk: protected accepts below target trajectory and nonzero forbidden surface in completed shards.",
+    "partial_totals": {
+      "forbidden_public_surface_count": 3,
+      "null_accepts_at_64": {
+        "raw": 0,
+        "task_only": 0,
+        "wrong_key": 0,
+        "wrong_payload": 0
+      },
+      "protected_accepts_at_64": 24,
+      "protected_blocks": 48
+    },
+    "phase": "V2_R3_2J_H200_SHARD_ARRAY_853430_SUBMITTED_MONITOR_ONLY",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1905_r3_2_h200_853430_monitor.md",
+    "schema_name": "natural_evidence_v2_r3_2_h200_monitor_summary_v1",
+    "shard_summaries": [
+      {
+        "forbidden_public_surface_count": 0,
+        "min_margin": 3,
+        "min_support": 25,
+        "null_accepts_at_64": {
+          "raw": 0,
+          "task_only": 0,
+          "wrong_key": 0,
+          "wrong_payload": 0
+        },
+        "protected_accepts_at_64": 8,
+        "protected_blocks": 8,
+        "shard": "shard_00",
+        "status": "PASS_R3_2_SHARD_LOCAL_DECODE"
+      },
+      {
+        "forbidden_public_surface_count": 0,
+        "min_margin": 13,
+        "min_support": 34,
+        "null_accepts_at_64": {
+          "raw": 0,
+          "task_only": 0,
+          "wrong_key": 0,
+          "wrong_payload": 0
+        },
+        "protected_accepts_at_64": 3,
+        "protected_blocks": 8,
+        "shard": "shard_01",
+        "status": "PASS_R3_2_SHARD_LOCAL_DECODE"
+      },
+      {
+        "forbidden_public_surface_count": 0,
+        "min_margin": 0,
+        "min_support": 6,
+        "null_accepts_at_64": {
+          "raw": 0,
+          "task_only": 0,
+          "wrong_key": 0,
+          "wrong_payload": 0
+        },
+        "protected_accepts_at_64": 1,
+        "protected_blocks": 8,
+        "shard": "shard_02",
+        "status": "FAIL_R3_2_SHARD_LOCAL_DECODE"
+      },
+      {
+        "forbidden_public_surface_count": 3,
+        "min_margin": 1,
+        "min_support": 9,
+        "null_accepts_at_64": {
+          "raw": 0,
+          "task_only": 0,
+          "wrong_key": 0,
+          "wrong_payload": 0
+        },
+        "protected_accepts_at_64": 1,
+        "protected_blocks": 8,
+        "shard": "shard_03",
+        "status": "FAIL_R3_2_SHARD_LOCAL_DECODE"
+      },
+      {
+        "forbidden_public_surface_count": 0,
+        "min_margin": 3,
+        "min_support": 25,
+        "null_accepts_at_64": {
+          "raw": 0,
+          "task_only": 0,
+          "wrong_key": 0,
+          "wrong_payload": 0
+        },
+        "protected_accepts_at_64": 8,
+        "protected_blocks": 8,
+        "shard": "shard_04",
+        "status": "PASS_R3_2_SHARD_LOCAL_DECODE"
+      },
+      {
+        "forbidden_public_surface_count": 0,
+        "min_margin": 13,
+        "min_support": 34,
+        "null_accepts_at_64": {
+          "raw": 0,
+          "task_only": 0,
+          "wrong_key": 0,
+          "wrong_payload": 0
+        },
+        "protected_accepts_at_64": 3,
+        "protected_blocks": 8,
+        "shard": "shard_05",
+        "status": "PASS_R3_2_SHARD_LOCAL_DECODE"
+      }
+    ],
+    "slurm_status": {
+      "completed_tasks": [
+        "853430_0",
+        "853430_1",
+        "853430_2",
+        "853430_3",
+        "853430_4",
+        "853430_5"
+      ],
+      "pending_tasks": [],
+      "running_tasks": [
+        "853430_6",
+        "853430_7",
+        "853430_8",
+        "853430_9",
+        "853430_10",
+        "853430_11"
+      ]
+    },
+    "timestamp_utc": "2026-05-12T19:05:18Z",
+    "total_shards": 12
+  },
+  "wp6_r3_2_h200_submission_20260512_1816": {
+    "account": "cs_yinxin.wan",
+    "array_spec": "0-11%8",
+    "cancelled_noncanonical_jobs": {
+      "853381": "cancelled because active unrecorded A100 array had remote wrapper hash mismatch and no local reviewed submission record",
+      "853421": "cancelled because first H200 attempt used stale expected selected prompt manifest hash and one task failed before generation"
+    },
+    "canonical_job_id": "853430",
+    "canonical_job_name": "nat-ev-v2-r32h200",
+    "claims_allowed": false,
+    "gres": "gpu:h200:1",
+    "next_allowed_action": "Monitor Slurm array job 853430 only. Do not submit another R3.2 job or the aggregate job until all H200 shard-array tasks reach terminal state and shard outputs are reviewed as complete.",
+    "node_observed": "chimera21",
+    "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853430",
+    "partition": "pomplun",
+    "pending_reason": "QOSGrpBillingRunMinutes",
+    "pending_task_expression_at_submission_review": "853430_[6-11%8]",
+    "phase": "V2_R3_2J_H200_SHARD_ARRAY_853430_SUBMITTED_MONITOR_ONLY",
+    "post_submit_allowlist_enabled_entries": [],
+    "post_submit_allowlist_safety": "results/natural_evidence_v2/status/r3_2i_h200_retry_post_submit_allowlist_safety_20260512_1816.json",
+    "pre_action_notification_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1806_r3_2_h200_migration_pre_action_notification.json",
+    "pre_cancel_allowlist_safety": "results/natural_evidence_v2/status/r3_2i_h200_pre_cancel_allowlist_safety_20260512_1806.json",
+    "qos": "pomplun",
+    "remote_post_submit_allowlist_safety": "results/natural_evidence_v2/status/r3_2i_h200_retry_remote_post_submit_allowlist_safety_20260512_1816.json",
+    "remote_single_enabled_allowlist_preflight": "results/natural_evidence_v2/status/r3_2i_h200_retry_remote_single_enabled_allowlist_preflight_20260512_1815.json",
+    "running_tasks_at_submission_review": [
+      "853430_0",
+      "853430_1",
+      "853430_2",
+      "853430_3",
+      "853430_4",
+      "853430_5"
+    ],
+    "schema_name": "natural_evidence_v2_r3_2_h200_submission_record_v1",
+    "single_enabled_allowlist_preflight": "results/natural_evidence_v2/status/r3_2i_h200_retry_single_enabled_allowlist_preflight_20260512_1815.json",
+    "state_lock": "results/natural_evidence_v2/status/r3_2_state_lock.json",
+    "status": "SUBMITTED_RUNNING_H200_SHARD_ARRAY_MONITOR_ONLY",
+    "submitted_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch",
+    "timestamp_utc": "2026-05-12T18:16:00Z",
+    "wrapper_fix": {
+      "expected_selected_prompt_manifest_sha256": "3e50a08773c4c7dca3be976a762840a8d8a960ac63f4cfce382af3051a2b82d1",
+      "precommit_lock_cleanup_trap_added": true
+    }
+  },
+  "wp6_r3_2_job_853110_partial_artifact_review_and_repaired_plan_20260512_0253": {
+    "aggregate_gate_produced": false,
+    "allowlist_enabled": false,
+    "current_phase": "V2_R3_2F_JOB_853110_PARTIAL_ARTIFACT_REVIEWED_REPAIRED_PLAN_RECORDED_NO_RESUBMIT",
+    "do_not_reuse_partial_shards": true,
+    "generation_started_this_review": false,
+    "observed_prompt_window_conflict_with_repaired_contract": true,
+    "paper_claim_allowed": false,
+    "partial_results_noncanonical": true,
+    "qwen_e2e_rerun_started_this_review": false,
+    "review_doc": "docs/natural_evidence_v2/R3_2_JOB_853110_PARTIAL_ARTIFACT_REVIEW_AND_REPAIRED_SUBMISSION_PLAN_20260512_0253.md",
+    "slurm_job_submitted_this_review": false,
+    "status": "REVIEWED_R3_2_JOB_853110_PARTIAL_ARTIFACTS_REPAIRED_PLAN_RECORDED_NO_RESUBMIT",
+    "summary_json": "results/natural_evidence_v2/status/r3_2_job_853110_partial_artifact_review_and_repaired_submission_plan_20260512_0253.json",
+    "timestamp_utc": "2026-05-12T02:53:51Z",
+    "training_started": false
+  },
+  "wp6_r3_2_job_853110_preempted_review": {
+    "completed_generated_rows": 9216,
+    "completed_shards": [
+      "shard_00",
+      "shard_01",
+      "shard_02",
+      "shard_03",
+      "shard_04",
+      "shard_05"
+    ],
+    "job_state": "PREEMPTED",
+    "local_wrapper_time_limit_updated_to_partition_max": true,
+    "partial_results_noncanonical": true,
+    "planned_generated_rows": 18432,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0246_job_853110_preempted_review.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_0246_job_853110_preempted_review.md",
+    "root_cause": "Slurm preemption under scavenger_unlim; stderr reports DUE TO PREEMPTION. Not a Python exception, CUDA OOM, missing artifact, prompt split failure, or model/provider failure.",
+    "slurm_submitted_this_review": false,
+    "status": "BLOCK_R3_2_JOB_853110_PREEMPTED_PARTIAL_ARTIFACT_REVIEW_REQUIRED_NO_RESUBMIT",
+    "timestamp_utc": "2026-05-12T02:46:38Z"
+  },
   "wp6_r3_2_locked_scale_allowed": false,
   "wp6_r3_2_locked_scale_job": "853070",
   "wp6_r3_2_locked_scale_slurm_submitted": true,
   "wp6_r3_2_next_allowed_action": "Artifact-only next step: recheck R3.2 allowlist safety under the repaired prompt split contract, then record a new single-job submission route before any Slurm submission. Do not submit another R3.2 Slurm job in this tick.",
   "wp6_r3_2_prompt_split_implementation_doc": "docs/natural_evidence_v2/R3_2_PROMPT_SPLIT_IMPLEMENTATION_20260511_1801.md",
   "wp6_r3_2_prompt_split_implementation_json": "results/natural_evidence_v2/status/r3_2_prompt_split_implementation_20260511_1801.json",
+  "wp6_r3_2_scavenger_shard_array_recovery_plan": {
+    "aggregate_job": {
+      "account": "pi_yinxin.wan",
+      "partition": "Intel6240,Intel6248,Intel6326",
+      "qos": "scavenger",
+      "script": "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_aggregate.sbatch",
+      "time": "4-00:00:00"
+    },
+    "allowlist_entries_added_disabled": [
+      "v2_r3_2_qwen_locked_scale_shard_array",
+      "v2_r3_2_qwen_locked_scale_aggregate"
+    ],
+    "allowlist_safety_json": "results/natural_evidence_v2/status/r3_2e_scavenger_array_allowlist_safety_20260512_0246.json",
+    "current_phase": "V2_R3_2F_SCAVENGER_SHARD_ARRAY_RECOVERY_ROUTE_PREPARED_NO_SUBMIT",
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "gpu_shard_array": {
+      "account": "pi_yinxin.wan",
+      "array": "0-11%8",
+      "gres": "gpu:A100:1",
+      "partition": "DGXA100",
+      "qos": "scavenger",
+      "script": "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+      "time": "4-00:00:00"
+    },
+    "h200_unavailable_assumption": true,
+    "llama_started": false,
+    "next_allowed_action": "After Hermes TG/email notification and a final allowlist preflight, enable only v2_r3_2_qwen_locked_scale_shard_array, submit the reviewed DGXA100 scavenger shard-array Slurm job, immediately disable that entry, record the array job id/output dir, and stop. Aggregate job is a later action after all shards complete.",
+    "paper_claim_started": false,
+    "route": "R3.2 same-contract a55e locked-scale recovery via DGXA100 scavenger shard array plus aggregate-only Slurm job",
+    "sanitizer_started": false,
+    "scavenger_requested_by_user": true,
+    "slurm_submitted": false,
+    "status": "PASS_R3_2E_SCAVENGER_SHARD_ARRAY_RECOVERY_ROUTE_PREPARED_NO_SLURM",
+    "timestamp_utc": "2026-05-12T02:56:46Z",
+    "training_started": false
+  },
+  "wp6_r3_2_shard_array_allowed": false,
+  "wp6_r3_2_shard_array_remote_sync_pass": {
+    "allowlist_entry_enabled": false,
+    "current_phase": "V2_R3_2G_SHARD_ARRAY_REMOTE_SYNC_PASS_READY_FOR_NOTIFIED_SUBMISSION_TICK",
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "llama_started": false,
+    "next_allowed_action": "At the next Hermes/Codex submission tick, after TG/email notification and a fresh final preflight, enable exactly v2_r3_2_qwen_locked_scale_shard_array, submit exactly one reviewed DGXA100 scavenger shard-array Slurm job, immediately disable the allowlist entry, record the array job id/output dir, and stop.",
+    "paper_claim_started": false,
+    "post_sync_preflight": {
+      "allowlist_json": "results/natural_evidence_v2/status/r3_2f_post_remote_sync_allowlist_preflight_20260512_0311.json",
+      "allowlist_safety": "PASS",
+      "chimera_active_jobs": [],
+      "enabled_entries": [],
+      "hash_json": "results/natural_evidence_v2/status/r3_2f_post_remote_sync_hash_preflight_20260512_0311.json",
+      "local_remote_hashes_match": true,
+      "remote_sbatch_syntax": "PASS"
+    },
+    "previous_blocker": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",
+    "remote_sync_completed": true,
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "slurm_submitted": false,
+    "status": "PASS_R3_2_SHARD_ARRAY_REMOTE_SYNC_AND_PREFLIGHT_NO_SLURM",
+    "synced_files": [
+      "configs/natural_evidence_v2/run_allowlist.yaml",
+      "configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale.yaml",
+      "scripts/natural_evidence_v2/build_r3_2_locked_scale_precommit.py",
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch",
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+      "scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_aggregate.sbatch"
+    ],
+    "timestamp_utc": "2026-05-12T03:14:02Z",
+    "training_started": false,
+    "why_previous_tick_could_not_submit": "Remote Chimera repo lacked reviewed shard-array/aggregate sbatch files and had mismatched reviewed control-plane file hashes."
+  },
+  "wp6_r3_2_shard_array_stale_submission_blocker_20260512_0623": {
+    "allowlist_enabled": false,
+    "array_job_id": "853276",
+    "blocked_action": "submit another R3.2 Qwen locked-scale DGXA100 scavenger shard-array Slurm job",
+    "blocker": "Hermes tick requested R3.2 shard-array submission from 20260512_0623_scheduled_tick.md, but docs/natural_evidence_v2/CURRENT_STATE.md and the 20260512_0323 submission record already record exactly one submitted shard-array Slurm job, and the same Hermes report lists active tasks for job 853276.",
+    "current_phase": "V2_R3_2G_SHARD_ARRAY_SUBMITTED_MONITOR_ONLY",
+    "current_state_path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+    "far_aggregation_started": false,
+    "generation_started_this_worker": false,
+    "llama_started": false,
+    "next_allowed_action": "Monitor Slurm array job 853276 only. Do not submit another R3.2 job or the aggregate job until all shard-array tasks reach terminal state and shard outputs are reviewed as complete.",
+    "paper_claim_started": false,
+    "qwen_e2e_rerun_started_this_worker": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0623_r3_2_shard_array_stale_submission_blocker.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_0623_r3_2_shard_array_stale_submission_blocker.md",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "schema_name": "natural_evidence_v2_r3_2_shard_array_stale_submission_blocker_v1",
+    "slurm_job_submitted_this_worker": false,
+    "state_changing_action": "recorded blocker for stale R3.2 shard-array submission instruction after detecting job 853276 already submitted and active",
+    "status": "BLOCK_R3_2_SHARD_ARRAY_STALE_SUBMISSION_REQUEST_JOB_853276_ACTIVE",
+    "submission_record": "results/natural_evidence_v1/status/hermes_reports/20260512_0323_r3_2_shard_array_submission_record.md",
+    "submitted_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+    "submitted_entry": "v2_r3_2_qwen_locked_scale_shard_array",
+    "timestamp_utc": "2026-05-12T06:24:20Z",
+    "training_started": false
+  },
+  "wp6_r3_2_shard_array_stale_submission_blocker_20260512_0638": {
+    "active_job_evidence": "20260512_0638_scheduled_tick.md lists job 853276 array tasks active: 853276_[9-11%8] pending and 853276_1 through 853276_8 running.",
+    "allowlist_enabled": false,
+    "array_job_id": "853276",
+    "blocked_action": "submit another R3.2 Qwen locked-scale DGXA100 scavenger shard-array Slurm job",
+    "blocker": "Hermes tick requested R3.2 shard-array submission from 20260512_0638_scheduled_tick.md, but docs/natural_evidence_v2/CURRENT_STATE.md and the 20260512_0323 submission record already record exactly one submitted shard-array Slurm job, and the same Hermes report lists active tasks for job 853276.",
+    "current_phase": "V2_R3_2G_SHARD_ARRAY_SUBMITTED_MONITOR_ONLY",
+    "current_state_path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+    "far_aggregation_started": false,
+    "generation_started_this_worker": false,
+    "llama_started": false,
+    "next_allowed_action": "Monitor Slurm array job 853276 only. Do not submit another R3.2 job or the aggregate job until all shard-array tasks reach terminal state and shard outputs are reviewed as complete.",
+    "paper_claim_started": false,
+    "qwen_e2e_rerun_started_this_worker": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0638_r3_2_shard_array_stale_submission_blocker.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_0638_r3_2_shard_array_stale_submission_blocker.md",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "schema_name": "natural_evidence_v2_r3_2_shard_array_stale_submission_blocker_v1",
+    "slurm_job_submitted_this_worker": false,
+    "state_changing_action": "recorded blocker for stale R3.2 shard-array submission instruction after detecting job 853276 already submitted and active",
+    "status": "BLOCK_R3_2_SHARD_ARRAY_STALE_SUBMISSION_REQUEST_JOB_853276_ACTIVE",
+    "submission_record": "results/natural_evidence_v1/status/hermes_reports/20260512_0323_r3_2_shard_array_submission_record.md",
+    "submitted_command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+    "submitted_entry": "v2_r3_2_qwen_locked_scale_shard_array",
+    "timestamp_utc": "2026-05-12T06:39:41Z",
+    "training_started": false
+  },
+  "wp6_r3_2_shard_array_submission_20260512_0323": {
+    "allowlist_disabled_after_submission": true,
+    "allowlist_entry_enabled_for_submission": "v2_r3_2_qwen_locked_scale_shard_array",
+    "array_job_id": "853276",
+    "array_spec": "0-11%8",
+    "command": "sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch",
+    "current_phase": "V2_R3_2G_SHARD_ARRAY_SUBMITTED_MONITOR_ONLY",
+    "generation_started": true,
+    "job_name": "nat-ev-v2-r32shard",
+    "next_allowed_action": "Monitor Slurm array job 853276 only. Do not submit another R3.2 job or the aggregate job until all shard-array tasks reach terminal state and shard outputs are reviewed as complete.",
+    "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_scavenger_array_853276",
+    "paper_claim_allowed": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0323_r3_2_shard_array_submission_record.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_0323_r3_2_shard_array_submission_record.md",
+    "slurm_job_submitted": true,
+    "status": "SUBMITTED_R3_2_QWEN_LOCKED_SCALE_SCAVENGER_SHARD_ARRAY",
+    "timestamp_utc": "2026-05-12T03:23:40Z",
+    "training_started": false
+  },
   "wp6_r3_2_single_job_submission_route_20260511_1901": {
     "allowlist_entry_to_enable_later": "v2_r3_2_qwen_locked_scale_eval",
     "allowlist_recheck_json": "results/natural_evidence_v2/status/r3_2_allowlist_recheck_repaired_prompt_split_20260511_1901.json",
@@ -12520,8 +14034,45 @@
     "status": "BLOCK_R3_2_STALE_SUBMISSION_REQUEST_JOB_853070_ALREADY_SUBMITTED",
     "training_started": false
   },
-  "wp6_r3_2_submission_preflight_blocker": "results/natural_evidence_v1/status/hermes_reports/20260511_1554_r3_2_stale_submission_blocker.md",
-  "wp6_r3_2_submission_preflight_status": "ALLOWLIST_RECHECK_PASS_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+  "wp6_r3_2_submission_active_job_blocker_20260512_0151": {
+    "active_job_id_from_hermes_report": "853110",
+    "allowlist_enabled": false,
+    "blocked_action": "enable v2_r3_2_qwen_locked_scale_eval and submit one reviewed R3.2 Slurm job",
+    "blocker_report": "results/natural_evidence_v1/status/hermes_reports/20260512_0151_r3_2_submission_active_job_blocker.md",
+    "current_phase": "V2_R3_2D_REPAIRED_PROMPT_SPLIT_SINGLE_JOB_ROUTE_RECORDED_NO_SUBMIT_THIS_TICK",
+    "do_not_submit_this_tick": true,
+    "generation_started": false,
+    "local_squeue_available": false,
+    "paper_claim_allowed": false,
+    "qwen_e2e_rerun_started": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_0151_r3_2_submission_active_job_blocker.json",
+    "slurm_job_submitted": false,
+    "state_changing_action": "recorded blocker for active R3.2 job and no-submit route; no allowlist enablement and no Slurm submission",
+    "status": "BLOCK_R3_2_SUBMISSION_ACTIVE_JOB_AND_NO_SUBMIT_ROUTE",
+    "timestamp_utc": "2026-05-12T01:52:34Z",
+    "training_started": false
+  },
+  "wp6_r3_2_submission_preflight_blocker": "results/natural_evidence_v1/status/hermes_reports/20260512_0314_r3_2_shard_array_remote_sync_pass_no_submit.md",
+  "wp6_r3_2_submission_preflight_status": "PASS_R3_2_SHARD_ARRAY_REMOTE_SYNC_AND_PREFLIGHT_NO_SLURM",
   "wp6_r3_2_wrapper_review_recorded": true,
+  "wp6_r3_2h_active_array_853381_provenance_reconciliation_20260512_1801": {
+    "active_array_job_id": "853381",
+    "allowlist_enabled": false,
+    "decision": "quarantine_853381_no_aggregate_no_automatic_adoption",
+    "far_aggregation_started": false,
+    "generation_started_by_this_worker": false,
+    "local_submission_record_for_853381_found": false,
+    "next_allowed_action": "Monitor or inspect 853381 only for provenance and terminal-state review. Do not submit or aggregate until provenance and terminal artifacts are formally reviewed.",
+    "paper_claim_allowed": false,
+    "provenance_classification": "unreviewed_external_or_manual_control_plane_submission_from_local_codex_hermes_perspective",
+    "qwen_e2e_rerun_started_by_this_worker": false,
+    "report_json": "results/natural_evidence_v1/status/hermes_reports/20260512_1801_r3_2_active_array_853381_provenance_reconciliation.json",
+    "report_md": "results/natural_evidence_v1/status/hermes_reports/20260512_1801_r3_2_active_array_853381_provenance_reconciliation.md",
+    "slurm_job_submitted_by_this_worker": false,
+    "status": "BLOCK_R3_2_ACTIVE_ARRAY_853381_PROVENANCE_RECONCILED_QUARANTINE_NO_AGGREGATE",
+    "summary_json": "results/natural_evidence_v2/status/r3_2h_active_array_853381_provenance_reconciliation_20260512_1801.json",
+    "timestamp_utc": "2026-05-12T18:01:57Z",
+    "training_started": false
+  },
   "wrapper_plan_only_blocker_remains": true
 }

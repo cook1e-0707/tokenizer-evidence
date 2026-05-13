@@ -1,0 +1,128 @@
+protocol_id: natural_evidence_v2_r4_cover_natural_ecc
+canonical_phase: V2_R4_COVER_NATURAL_ECC_ARTIFACT_ONLY_PLANNING_NO_SLURM
+base_negative_artifact: "853524"
+base_negative_artifact_dir: results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524
+reuse_policy: failure_taxonomy_only_no_positive_reclassification
+
+permissions:
+  generation_allowed: false
+  slurm_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_benchmark_allowed: false
+  far_aggregation_allowed: false
+  paper_claim_allowed: false
+
+prompt_bank:
+  output_dir: results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048
+  total_prompts: 8192
+  dev_prompts: 2048
+  locked_prompts: 6144
+  prompt_families:
+    - practical_advice_short
+    - task_explanation_short
+    - maintenance_guidance
+    - planning_guidance
+    - troubleshooting_guidance
+    - safety_or_quality_checklist_natural
+  forbidden_prompt_patterns:
+    - "Step "
+    - "exactly 16"
+    - "sixteen lines"
+    - "slot"
+    - "bucket"
+    - "fingerprint"
+    - "watermark"
+    - "payload"
+    - "secret key"
+    - "coordinate"
+    - "decoder"
+
+surface_bank:
+  output_dir: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512
+  num_coordinates: 32
+  initially_same_contract: a55e
+  phrase_level: true
+  first_word_only: false
+  allow_multi_token_aliases: true
+  source_rule_policy: frozen_rule_based_lexical_construction_no_853524_posthoc_phrase_addition
+
+decoder:
+  min_required_observed_coordinates_dev: 20
+  min_required_observed_coordinates_locked: 22
+  min_weighted_margin_dev: 3
+  min_weighted_margin_locked: 3
+  format_scrub_modes:
+    - none
+    - strip_structure
+    - strip_public_literals
+    - normalize_punctuation_whitespace
+    - all
+  primary_reported_scrub_mode: all
+
+plan_only_gates:
+  dev_locked_split_disjoint: true
+  no_duplicated_prompt_ids: true
+  no_step_or_slot_structural_instructions: true
+  no_public_technical_literals: true
+  decoder_format_scrub_unit_test: true
+  wrong_key_wrong_payload_unit_test: true
+  aggregate_refuses_duplicate_hashes: true
+
+dev_diagnostic:
+  approved_by_user: true
+  approval_recorded_at_utc: "2026-05-12T23:55:00Z"
+  split: dev
+  blocks: 32
+  prompts_per_block: 64
+  total_prompts: 2048
+  shard_count: 4
+  prompts_per_shard: 512
+  model_name: Qwen/Qwen2.5-7B-Instruct
+  tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+  arms:
+    - protected
+    - raw
+    - task_only
+    - wrong_key
+    - wrong_payload
+  primary_decode_format_scrub: all
+  gates:
+    protected_no_scrub_accepts_min: 28
+    protected_format_scrub_all_accepts_min: 26
+    null_accepts_max_per_arm: 0
+    forbidden_public_technical_surface_count: 0
+    shallow_structural_auc_max: 0.60
+    duplicate_generated_output_hash_count: 0
+    duplicate_decode_row_hash_count: 0
+
+teacher_forced_surface_probe:
+  output_dir: results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_20260513
+  prompt_source: results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/dev_prompts.jsonl
+  surface_bank: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/surface_bank.json
+  codebook: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/codebook.json
+  decoder_spec: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/decoder_spec.json
+  split: dev
+  max_prompts: 256
+  rows_per_prompt: 32
+  total_score_rows: 8192
+  conditions:
+    - base
+    - protected
+    - task_only
+  target_contract_id: a55e
+  generation_allowed: false
+  slurm_allowed: false
+  training_allowed: false
+  prefix_shapes:
+    - "A practical next move is to "
+    - "It helps to "
+    - "The team can "
+    - "A useful habit is to "
+  gates_before_generation:
+    protected_target_surface_mass_lift_vs_base_min: 0.15
+    protected_target_surface_mass_lift_vs_task_only_min: 0.10
+    protected_target_surface_rank1_rate_min: 0.70
+    protected_median_target_margin_min: 0.0
+    task_only_target_surface_mass_lift_vs_base_max: 0.05

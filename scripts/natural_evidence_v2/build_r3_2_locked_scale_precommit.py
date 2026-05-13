@@ -36,6 +36,8 @@ SELECTED_SPLIT = "wp3_r1_eval"
 EVAL_FILE_ROW_START = 512
 EVAL_WINDOW_COUNT = 4
 WINDOW_SIZE = 512
+OLD_PROMPT_WINDOW_POLICY = "deterministic_4_eval_window_circular_reuse_by_replicate_group_index"
+EXPANDED_PROMPT_WINDOW_POLICY = "distinct_eval_window_by_shard_index"
 ARMS = ["protected", "raw", "task_only", "wrong_key", "wrong_payload"]
 FORBIDDEN_OUTPUT_NAMES = [
     "precommit/r3_2_qwen_locked_scale_contract.json",
@@ -77,7 +79,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument(
         "--expected-selected-prompt-manifest-sha256",
-        default=EXPECTED_SELECTED_PROMPT_MANIFEST_SHA256,
+        default=None,
     )
     return parser.parse_args()
 
@@ -158,8 +160,11 @@ def validate_same_contract_config(config: Mapping[str, Any], *, wp4_contract: Ma
         raise ValueError("R3.2 blocks_per_group must be 8")
     if int(schedule.get("block_size", -1)) != 64:
         raise ValueError("R3.2 block_size must be 64")
-    if schedule.get("prompt_window_policy") != "deterministic_4_eval_window_circular_reuse_by_replicate_group_index":
-        raise ValueError("R3.2 prompt_window_policy must use the repaired 4-window eval-only policy")
+    if schedule.get("prompt_window_policy") not in {
+        OLD_PROMPT_WINDOW_POLICY,
+        EXPANDED_PROMPT_WINDOW_POLICY,
+    }:
+        raise ValueError("R3.2 prompt_window_policy must use a reviewed repaired allocation policy")
     if list(schedule.get("generation_seed_cycle", [])) != GENERATION_SEEDS:
         raise ValueError(f"R3.2 generation_seed_cycle must be {GENERATION_SEEDS}")
     if list(config.get("arms", [])) != ARMS:
@@ -189,27 +194,50 @@ def refuse_existing_outputs(output_dir: Path) -> None:
         raise FileExistsError(f"R3.2 output directory is not fresh; refusing overwrite/mix: {joined}")
 
 
-def prompt_lines(path: Path) -> list[bytes]:
-    lines = path.read_bytes().splitlines(keepends=True)
-    if len(lines) != 2560:
-        raise ValueError(f"R3.2 prompt source must have 2560 rows, found {len(lines)}")
-    return lines
+def prompt_lines(path: Path, *, split: str | None) -> list[tuple[int, bytes]]:
+    selected: list[tuple[int, bytes]] = []
+    with path.open("rb") as handle:
+        for file_row_index, line in enumerate(handle):
+            if not line.strip():
+                continue
+            payload = json.loads(line)
+            if not isinstance(payload, dict):
+                raise ValueError(f"expected JSON object at {path}:{file_row_index + 1}")
+            if split is None or str(payload.get("split", "")) == split:
+                selected.append((file_row_index, line))
+    return selected
 
 
-def build_windows(lines: Sequence[bytes]) -> list[dict[str, Any]]:
+def build_windows(
+    lines: Sequence[tuple[int, bytes]],
+    *,
+    selected_start: int,
+    window_count: int,
+) -> list[dict[str, Any]]:
     windows: list[dict[str, Any]] = []
-    for window_index in range(EVAL_WINDOW_COUNT):
-        start = EVAL_FILE_ROW_START + window_index * WINDOW_SIZE
-        end = start + WINDOW_SIZE - 1
+    required_rows = selected_start + window_count * WINDOW_SIZE
+    if len(lines) < required_rows:
+        raise ValueError(
+            f"R3.2 prompt source has {len(lines)} usable rows; need {required_rows}"
+        )
+    for window_index in range(window_count):
+        window_start = selected_start + window_index * WINDOW_SIZE
+        window_end = window_start + WINDOW_SIZE - 1
+        window_rows = lines[window_start : window_end + 1]
+        start = int(window_rows[0][0])
+        end = int(window_rows[-1][0])
         blocks = []
         for block_index in range(8):
-            block_start = start + block_index * 64
-            block_end = block_start + 63
+            block_selected_start = window_start + block_index * 64
+            block_selected_end = block_selected_start + 63
+            block_rows = lines[block_selected_start : block_selected_end + 1]
+            block_start = int(block_rows[0][0])
+            block_end = int(block_rows[-1][0])
             blocks.append(
                 {
                     "block_index": block_index,
                     "end": block_end,
-                    "sha256": sha256_bytes(b"".join(lines[block_start : block_end + 1])),
+                    "sha256": sha256_bytes(b"".join(row[1] for row in block_rows)),
                     "start": block_start,
                 }
             )
@@ -217,7 +245,7 @@ def build_windows(lines: Sequence[bytes]) -> list[dict[str, Any]]:
             {
                 "blocks": blocks,
                 "end": end,
-                "sha256": sha256_bytes(b"".join(lines[start : end + 1])),
+                "sha256": sha256_bytes(b"".join(row[1] for row in window_rows)),
                 "start": start,
                 "window_index": window_index,
             }
@@ -226,25 +254,48 @@ def build_windows(lines: Sequence[bytes]) -> list[dict[str, Any]]:
 
 
 def build_selected_prompt_manifest(
-    prompt_source_path: str, lines: Sequence[bytes]
+    prompt_source_path: str,
+    lines: Sequence[tuple[int, bytes]],
+    *,
+    package_id: str,
+    selected_split: str,
+    prompt_window_policy: str,
 ) -> dict[str, Any]:
-    windows = build_windows(lines)
+    expanded_policy = prompt_window_policy == EXPANDED_PROMPT_WINDOW_POLICY
+    window_count = REPLICATE_GROUP_COUNT if prompt_window_policy == EXPANDED_PROMPT_WINDOW_POLICY else EVAL_WINDOW_COUNT
+    selected_start = 0 if prompt_window_policy == EXPANDED_PROMPT_WINDOW_POLICY else EVAL_FILE_ROW_START
+    windows = build_windows(lines, selected_start=selected_start, window_count=window_count)
     replicate_groups = []
     for group_index in range(REPLICATE_GROUP_COUNT):
-        window = windows[group_index % len(windows)]
+        window = windows[group_index if prompt_window_policy == EXPANDED_PROMPT_WINDOW_POLICY else group_index % len(windows)]
         generation_seed = GENERATION_SEEDS[group_index % len(GENERATION_SEEDS)]
         shard_id = f"shard_{group_index:02d}"
+        window_selected_start = (group_index if expanded_policy else group_index % len(windows)) * WINDOW_SIZE
+        window_selected_end = window_selected_start + WINDOW_SIZE - 1
         replicate_groups.append(
             {
                 "blocks": [
-                    {
-                        "block_id": f"{CONTRACT_LABEL}_{shard_id}_block_{block['block_index']:02d}",
-                        "block_index": block["block_index"],
-                        "contract_id": CONTRACT_ID,
-                        "prompt_file_row_end_inclusive": block["end"],
-                        "prompt_file_row_start": block["start"],
-                        "row_jsonl_sha256": block["sha256"],
-                    }
+                    (
+                        {
+                            "block_id": f"{CONTRACT_LABEL}_{shard_id}_block_{block['block_index']:02d}",
+                            "block_index": block["block_index"],
+                            "contract_id": CONTRACT_ID,
+                            "prompt_file_row_end_inclusive": block["end"],
+                            "prompt_file_row_start": block["start"],
+                            "row_jsonl_sha256": block["sha256"],
+                        }
+                        | (
+                            {
+                                "selected_index_end_inclusive": window_selected_start
+                                + int(block["block_index"]) * 64
+                                + 63,
+                                "selected_index_start": window_selected_start
+                                + int(block["block_index"]) * 64,
+                            }
+                            if expanded_policy
+                            else {}
+                        )
+                    )
                     for block in window["blocks"]
                 ],
                 "contract_id": CONTRACT_ID,
@@ -257,26 +308,56 @@ def build_selected_prompt_manifest(
                 "shard_id": shard_id,
                 "window_jsonl_sha256": window["sha256"],
             }
+            | (
+                {
+                    "selected_index_end_inclusive": window_selected_end,
+                    "selected_index_start": window_selected_start,
+                }
+                if expanded_policy
+                else {}
+            )
         )
-    return {
+    manifest = {
         "block_size": 64,
         "blocks_per_group": 8,
         "contract_id": CONTRACT_ID,
-        "package_id": "qwen_v2_r3_2_same_contract_locked_scale_package_v1",
+        "package_id": package_id,
         "payload_diversity_tested": False,
         "prompt_source_path": prompt_source_path,
         "prompt_source_rows": len(lines),
-        "prompt_source_sha256": sha256_bytes(b"".join(lines)),
-        "selected_split": SELECTED_SPLIT,
-        "eval_prompt_count": EVAL_WINDOW_COUNT * WINDOW_SIZE,
-        "eval_prompt_file_row_start": EVAL_FILE_ROW_START,
-        "eval_prompt_file_row_end_inclusive": EVAL_FILE_ROW_START + EVAL_WINDOW_COUNT * WINDOW_SIZE - 1,
-        "prompt_window_policy": "deterministic_4_eval_window_circular_reuse_by_replicate_group_index",
+        "prompt_source_sha256": sha256_bytes(b"".join(row[1] for row in lines)),
+        "selected_split": selected_split,
+        "eval_prompt_count": window_count * WINDOW_SIZE,
+        "prompt_window_policy": prompt_window_policy,
         "replicate_groups": replicate_groups,
         "replicate_group_count": REPLICATE_GROUP_COUNT,
-        "schema_name": "natural_evidence_v2_r3_2_same_contract_prompt_allocation_manifest_v1",
+        "schema_name": (
+            "natural_evidence_v2_r3_2_expanded_same_contract_prompt_allocation_manifest_v1"
+            if expanded_policy
+            else "natural_evidence_v2_r3_2_same_contract_prompt_allocation_manifest_v1"
+        ),
         "seed_cycle": GENERATION_SEEDS,
     }
+    if expanded_policy:
+        manifest |= {
+            "selected_prompt_count": len(lines),
+            "unique_block_hash_count": len(
+                {
+                    str(block["row_jsonl_sha256"])
+                    for group in replicate_groups
+                    for block in group["blocks"]
+                }
+            ),
+            "unique_window_hash_count": len(
+                {str(group["window_jsonl_sha256"]) for group in replicate_groups}
+            ),
+        }
+    else:
+        manifest |= {
+            "eval_prompt_file_row_start": int(lines[selected_start][0]),
+            "eval_prompt_file_row_end_inclusive": int(lines[selected_start + window_count * WINDOW_SIZE - 1][0]),
+        }
+    return manifest
 
 
 def build_contract(
@@ -377,20 +458,41 @@ def main() -> int:
     wp4_contract = read_json(contract_path)
     config = read_yaml(config_path)
     validate_same_contract_config(config, wp4_contract=wp4_contract)
+    prompt_allocation = config.get("prompt_allocation", {})
+    schedule = config.get("schedule", {})
+    selected_split = str(prompt_allocation.get("split", SELECTED_SPLIT))
+    expected_prompt_source_sha256 = str(
+        prompt_allocation.get("prompt_source_sha256") or EXPECTED_PROMPT_SOURCE_SHA256
+    )
+    prompt_window_policy = str(schedule.get("prompt_window_policy", OLD_PROMPT_WINDOW_POLICY))
 
-    lines = prompt_lines(prompts_path)
-    prompt_source_sha256 = sha256_bytes(b"".join(lines))
-    if prompt_source_sha256 != EXPECTED_PROMPT_SOURCE_SHA256:
+    lines = prompt_lines(
+        prompts_path,
+        split=selected_split if prompt_window_policy == EXPANDED_PROMPT_WINDOW_POLICY else None,
+    )
+    prompt_source_sha256 = sha256_file(prompts_path)
+    if prompt_source_sha256 != expected_prompt_source_sha256:
         raise ValueError(
             f"R3.2 prompt source sha256 mismatch: {prompt_source_sha256} "
-            f"!= {EXPECTED_PROMPT_SOURCE_SHA256}"
+            f"!= {expected_prompt_source_sha256}"
         )
-    manifest = build_selected_prompt_manifest(str(prompts_path_arg), lines)
+    manifest = build_selected_prompt_manifest(
+        str(prompts_path_arg),
+        lines,
+        package_id=str(config.get("package_id", "qwen_v2_r3_2_same_contract_locked_scale_package_v1")),
+        selected_split=selected_split,
+        prompt_window_policy=prompt_window_policy,
+    )
     manifest_sha256 = canonical_sha256(manifest)
-    if manifest_sha256 != str(args.expected_selected_prompt_manifest_sha256):
+    expected_manifest_sha256 = args.expected_selected_prompt_manifest_sha256
+    if expected_manifest_sha256 is None:
+        expected_manifest_sha256 = str(prompt_allocation.get("selected_prompt_manifest_sha256", ""))
+    if not expected_manifest_sha256 and prompt_window_policy == OLD_PROMPT_WINDOW_POLICY:
+        expected_manifest_sha256 = EXPECTED_SELECTED_PROMPT_MANIFEST_SHA256
+    if expected_manifest_sha256 and manifest_sha256 != expected_manifest_sha256:
         raise ValueError(
             f"R3.2 selected prompt manifest sha256 mismatch: {manifest_sha256} "
-            f"!= {args.expected_selected_prompt_manifest_sha256}"
+            f"!= {expected_manifest_sha256}"
         )
     contract = build_contract(
         contract_path=contract_path,

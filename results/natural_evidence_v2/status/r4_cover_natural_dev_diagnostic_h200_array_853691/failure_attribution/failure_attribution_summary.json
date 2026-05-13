@@ -1,0 +1,27 @@
+{
+  "coordinates_below_dev_support_threshold_20_blocks": 24,
+  "coordinates_with_any_observed_mismatch": 10,
+  "forbidden_public_surface_all": 237,
+  "interpretation": "The cover-natural prompts produce many phrase-surface matches, but the observed coordinate polarities do not align with the protected a55e codeword. This points to an untrained/unconditioned R4 surface-code contract rather than a Slurm or decoder crash.",
+  "job_id": "853691",
+  "next_allowed_action": "Artifact-only R4 repair planning: design a trainable cover-natural surface target path or teacher-forced probe for R4 surfaces before any further Slurm generation. Do not launch locked-scale, Llama, sanitizer, FAR, same-family null, or paper claim.",
+  "null_accepts_all": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "per_coordinate_csv": "results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/failure_attribution/protected_per_coordinate_all.csv",
+  "protected_accepts_all": 0,
+  "protected_accepts_none": 0,
+  "protected_correct_observed_median_all": 10.0,
+  "protected_margin_median_all": 2.0,
+  "protected_payload_matches_all": 0,
+  "protected_support_median_all": 16.0,
+  "schema_name": "natural_evidence_v2_r4_dev_diagnostic_failure_attribution_v1",
+  "slurm_completion": "all 4 shards completed ExitCode 0:0",
+  "status": "FAIL_POSITIVE_CHANNEL_NO_RERUN",
+  "structural_auc": 0.6240438222885132,
+  "technical_literal_example_rows": 183,
+  "top_surface_matches_csv": "results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/failure_attribution/top_surface_matches.csv"
+}

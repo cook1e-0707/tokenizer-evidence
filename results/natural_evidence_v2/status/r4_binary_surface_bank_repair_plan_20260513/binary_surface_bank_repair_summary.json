@@ -1,0 +1,20 @@
+{
+  "bit0_entries_per_coordinate": 4,
+  "bit1_entries_per_coordinate": 4,
+  "candidate_surface_bank": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json",
+  "candidate_surface_bank_sha256": "f818ef27c76f4467d51f62d165978a703d4e469f8ebf7a631c34bfa9e2bb557c",
+  "config": "/Users/guanjie/Documents/tokenizer_alignment/configs/natural_evidence_v2/r4_cover_natural_ecc.yaml",
+  "config_sha256": "ca4911fc59ed7094943be3c6b917089ec9a824eef6cfc2e402fa166d061526bb",
+  "coordinate_count": 32,
+  "entries_per_coordinate": 8,
+  "entry_count": 256,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "next_allowed_action": "Use this repair candidate for artifact-only R4 teacher-forced surface probe row construction and dry-run validation. Do not submit Slurm until the probe plan is reviewed.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_binary_surface_bank_repair_plan_v1",
+  "slurm_submitted": false,
+  "status": "PASS_BINARY_SURFACE_BANK_REPAIR_CANDIDATE_BUILT",
+  "training_started": false
+}

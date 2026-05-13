@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -48,6 +49,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-protected-accepts-at-64", type=int, default=80)
     parser.add_argument("--min-support-at-64", type=int, default=16)
     parser.add_argument("--min-majority-margin-at-64", type=int, default=3)
+    parser.add_argument(
+        "--allow-duplicate-prompt-windows",
+        action="store_true",
+        help=(
+            "Explicit diagnostic override. By default, R3.2 locked-scale aggregation "
+            "hard-fails if shard prompt-window or transcript hashes repeat, because "
+            "repeated deterministic windows are not independent locked-scale blocks."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -71,6 +81,14 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 def read_csv(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return [dict(row) for row in csv.DictReader(handle)]
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def write_csv_new(path: Path, rows: Iterable[Mapping[str, Any]], fieldnames: Sequence[str]) -> None:
@@ -144,6 +162,40 @@ def canonicalize_support_rows(rows: Sequence[Mapping[str, Any]], *, shard_id: st
             }
         )
     return output
+
+
+def duplicate_values(rows: Sequence[Mapping[str, Any]], key: str) -> dict[str, list[str]]:
+    groups: dict[str, list[str]] = defaultdict(list)
+    for row in rows:
+        value = str(row.get(key, ""))
+        if value:
+            groups[value].append(str(row.get("replicate_group_id", "")))
+    return {value: shard_ids for value, shard_ids in groups.items() if len(shard_ids) > 1}
+
+
+def refuse_duplicate_prompt_windows(shard_summaries: Sequence[Mapping[str, Any]]) -> None:
+    duplicate_prompt_windows = duplicate_values(shard_summaries, "selected_prompt_jsonl_sha256")
+    duplicate_generated_outputs = duplicate_values(shard_summaries, "generated_outputs_sha256")
+    duplicate_decode_rows = duplicate_values(shard_summaries, "decode_rows_sha256")
+    duplicate_counts = {
+        "selected_prompt_jsonl_sha256": len(duplicate_prompt_windows),
+        "generated_outputs_sha256": len(duplicate_generated_outputs),
+        "decode_rows_sha256": len(duplicate_decode_rows),
+    }
+    if any(duplicate_counts.values()):
+        detail = {
+            "duplicate_decode_rows": duplicate_decode_rows,
+            "duplicate_generated_outputs": duplicate_generated_outputs,
+            "duplicate_prompt_windows": duplicate_prompt_windows,
+            "duplicate_value_counts": duplicate_counts,
+            "reason": (
+                "R3.2 locked-scale aggregation requires distinct prompt windows and "
+                "non-duplicate deterministic transcript/decode artifacts. Repeated "
+                "windows may be useful diagnostics but must not be counted as "
+                "independent 96-block locked-scale evidence."
+            ),
+        }
+        raise ValueError("R3_2_DUPLICATE_PROMPT_WINDOWS_REFUSING_AGGREGATION: " + json.dumps(detail, sort_keys=True))
 
 
 def annotate_rows(rows: Sequence[Mapping[str, Any]], *, shard_id: str, schema_name: str) -> list[dict[str, Any]]:
@@ -328,11 +380,19 @@ def main() -> int:
         for path in paths.values():
             require_file(path)
         shard_summary = read_json(paths["summary"])
+        generation_summary = read_json(paths["generation_summary"])
         if shard_summary.get("precommitted_transcript") is not True:
             raise ValueError(f"{shard_id} must be a precommitted transcript")
         shard_summaries.append(
             {
+                "decode_rows_sha256": sha256_file(paths["decode"]),
+                "generated_outputs_sha256": sha256_file(paths["generated"]),
                 "generation_seed": int(group["generation_seed"]),
+                "prompt_file_row_end_inclusive": int(
+                    generation_summary.get("selected_prompt_file_row_end_inclusive", -1)
+                ),
+                "prompt_file_row_start": int(generation_summary.get("selected_prompt_file_row_start", -1)),
+                "selected_prompt_jsonl_sha256": str(generation_summary.get("selected_prompt_jsonl_sha256", "")),
                 "prompt_window_index": int(group["prompt_window_index"]),
                 "replicate_group_id": shard_id,
                 "scale_gate_status": str(shard_summary.get("scale_gate_status", "")),
@@ -361,6 +421,9 @@ def main() -> int:
         )
         decode_rows.extend(canonicalize_decode_rows(read_jsonl(paths["decode"]), shard_id=shard_id))
         support_rows.extend(canonicalize_support_rows(read_csv(paths["support"]), shard_id=shard_id))
+
+    if not args.allow_duplicate_prompt_windows:
+        refuse_duplicate_prompt_windows(shard_summaries)
 
     write_jsonl(output_dir / "r3_2_generated_outputs.jsonl", generated_rows)
     write_json_new(

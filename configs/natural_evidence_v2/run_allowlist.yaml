@@ -67,6 +67,35 @@ allowed_gpu_actions:
   enable_condition: disabled_until_r3_2_same_contract_full_wrapper_and_852426_replay_reviewed
   enabled: false
   name: v2_r3_2_qwen_locked_scale_eval
+- claim_note: R3.2 Qwen same-contract a55e locked-scale shard-array eval on DGXA100
+    scavenger. This replaces the preempted serial long job with shorter shard
+    tasks. No training, no Llama, no sanitizer, no FAR, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch
+  enable_condition: r3_2e_preempted_job_reviewed_and_shard_array_route_approved
+  enabled: false
+  name: v2_r3_2_qwen_locked_scale_shard_array
+- claim_note: R3.2 Qwen same-contract a55e locked-scale shard-array eval on
+    chimera21 H200 via pomplun/cs_yinxin. This replaces the noncanonical
+    A100 array after user approval. No training, no Llama, no sanitizer, no
+    FAR, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch
+  enable_condition: r3_2i_h200_migration_user_approved_and_state_lock_active
+  enabled: false
+  name: v2_r3_2_qwen_locked_scale_shard_array_h200
+- claim_note: R3.2 Qwen same-contract a55e locked-scale aggregate-only Slurm
+    job after all shard-array tasks complete. No training, no generation, no
+    Llama, no sanitizer, no FAR, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_aggregate.sbatch
+  enable_condition: r3_2_shard_array_all_shards_complete
+  enabled: false
+  name: v2_r3_2_qwen_locked_scale_aggregate
+- claim_note: R4 Qwen cover-natural ECC dev diagnostic H200 shard array. Dev
+    prompt bank only; same-contract a55e; no training, no Llama, no
+    same-family null, no sanitizer, no FAR, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_cover_natural_dev_diagnostic_h200.sbatch
+  enable_condition: r4_plan_validation_passed_and_user_approved_dev_diagnostic
+  enabled: false
+  name: v2_r4_cover_natural_dev_diagnostic_h200
 - claim_note: Llama-3.1-8B V2 WP5 teacher-forced train-and-score; no E2E, no FAR, no paper
     positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp5_train_and_score.sbatch

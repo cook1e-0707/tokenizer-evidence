@@ -1,0 +1,16 @@
+{
+  "condition_counts": {
+    "protected": 2048,
+    "raw": 2048,
+    "task_only": 2048
+  },
+  "hard_gate_auc_threshold": 0.6,
+  "hard_gate_pass_if_new_protocol": false,
+  "input_generated_outputs": "results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/review/combined_generated_outputs.jsonl",
+  "max_protected_vs_raw_shallow_feature_auc": 0.6240438222885132,
+  "note": "This is an audit of R3.2 853524 artifacts; R4 prompts must remove Step-label dependence.",
+  "paper_claim_allowed": false,
+  "row_count": 6144,
+  "schema_name": "natural_evidence_v2_r4_structural_leakage_audit_v1",
+  "slurm_submitted": false
+}

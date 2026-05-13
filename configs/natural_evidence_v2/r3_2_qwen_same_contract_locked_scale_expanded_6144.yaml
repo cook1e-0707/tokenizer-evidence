@@ -1,0 +1,71 @@
+schema_name: natural_evidence_v2_r3_2_same_contract_locked_scale_config_v1
+route_id: V2_R3_QWEN_LOCKED_SCALE_EXPANDED_6144_ROUTE_PLANNED
+package_id: qwen_v2_r3_2_same_contract_locked_scale_expanded_6144_package_v1
+model_family: qwen
+
+contract:
+  contract_id: a55e
+  contract_path: results/natural_evidence_v2/status/wp4_prompt_local_payload_contract_20260509_0611/wp4_prompt_local_payload_contract.json
+  payload_diversity_tested: false
+  distinct_payload_route_deferred_to: R3.4
+
+prompt_allocation:
+  prompts_jsonl: results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_r3_2_6144_20260512/restricted_step_label_r1_eval_prompts.jsonl
+  prompt_source_sha256: 8fcba10d2df1dae83eb03f8ce26fa45623c1918a9246c94b6b6868fc1204247a
+  split: wp3_r1_density_eval
+  selected_prompt_manifest_sha256: ce057a36ad75424919f4367eb3e2f0221725a9c6715d156ab4b2a377edb600ed
+
+schedule:
+  replicate_groups: 12
+  blocks_per_group: 8
+  block_size: 64
+  total_blocks_per_arm: 96
+  prompt_window_policy: distinct_eval_window_by_shard_index
+  generation_seed_cycle:
+    - 17
+    - 23
+    - 29
+
+arms:
+  - protected
+  - raw
+  - task_only
+  - wrong_key
+  - wrong_payload
+
+query_budgets:
+  - 16
+  - 32
+  - 64
+primary_budget: 64
+diagnostic_budgets:
+  - 16
+  - 32
+
+decoder:
+  decoder_id: qwen_v2_r3_2_locked_scale_coordinate_majority_decoder_v1
+  support_threshold: 16
+  majority_margin_threshold: 3
+  checksum_required: true
+  threshold_changes_allowed_after_transcript: false
+
+pass_gate:
+  protected_accepts_at_64_min: 80
+  protected_blocks_total: 96
+  raw_accepts_at_64_max: 0
+  task_only_accepts_at_64_max: 0
+  wrong_key_accepts_at_64_max: 0
+  wrong_payload_accepts_at_64_max: 0
+  min_accepted_block_support: 16
+  min_accepted_block_majority_margin: 3
+  forbidden_public_surface_count: 0
+  all_replicate_groups_complete: true
+
+claim_control:
+  payload_diversity_claim_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  paper_claim_allowed: false

@@ -29,6 +29,7 @@ LOCK_DIR = STATUS_DIR / ".hermes_natural_evidence_tick.lock"
 WORKER_LOG_DIR = STATUS_DIR / "hermes_worker_logs"
 NOTIFY_SCRIPT = REPO_ROOT / "scripts" / "natural_evidence_v1" / "hermes_notify.py"
 COMPACT_STATE_MD = REPO_ROOT / "docs" / "natural_evidence_v2" / "CURRENT_STATE.md"
+PROJECT_STATE_LOCK_JSON = REPO_ROOT / "results" / "natural_evidence_v2" / "status" / "r3_2_state_lock.json"
 CODEX_TIMEOUT_SECONDS = int(os.environ.get("HERMES_NAT_EV_CODEX_TIMEOUT_SECONDS", "900"))
 STALE_LOCK_SECONDS = int(
     os.environ.get("HERMES_NAT_EV_STALE_LOCK_SECONDS", str(CODEX_TIMEOUT_SECONDS + 300))
@@ -67,11 +68,13 @@ def read_json(path: Path) -> dict[str, Any]:
 
 def read_gate_state() -> dict[str, Any]:
     payload = read_json(GATE_STATUS_JSON)
+    project_state_lock = read_json(PROJECT_STATE_LOCK_JSON)
     return {
         "current_phase": payload.get("current_phase", "UNKNOWN"),
         "next_allowed_action": payload.get("next_allowed_action", "UNKNOWN"),
         "last_state_changing_action": payload.get("last_state_changing_action", "UNKNOWN"),
         "hermes_status": payload.get("hermes_15min_coordination", {}).get("status", "UNKNOWN"),
+        "project_state_lock": project_state_lock,
         "training_allowed": bool(payload.get("training_allowed", False)),
         "llama_allowed": bool(payload.get("llama_allowed", False)),
         "same_family_null_allowed": bool(payload.get("same_family_null_allowed", False)),
@@ -144,15 +147,22 @@ def hard_constraints_text(gate: dict[str, Any]) -> str:
     )
     if not gate_blocked:
         gate_blocked = "- no gate-controlled action is locked by its boolean gate, but all route-specific gates and allowlists still apply;"
+    state_lock = gate.get("project_state_lock") or {}
+    lock_text = ""
+    if state_lock.get("status", "").startswith("ACTIVE"):
+        lock_text = f"""
+- project state lock active: {state_lock.get("lock_id", "unknown_lock")};
+- lock owner: {state_lock.get("owner", "unknown")};
+- while the lock is active, do not launch independent state-changing work outside the lock's allowed action list;"""
     if r3_qwen_locked_scale_context(gate):
-        return f"""{gate_blocked}
+        return f"""{gate_blocked}{lock_text}
 - R3.2 Qwen locked-scale generation/eval is allowed only through a reviewed full wrapper, one enabled allowlist entry, successful TG/email notification, and exactly one Chimera Slurm job;
 - do not submit the current plan-only wrapper as a full eval;
 - no Qwen E2E outside the reviewed R3.2 locked-scale route;
 - any Chimera CPU/GPU work must use Slurm;
 - do not run CPU work directly on the Chimera login node;
 - do not overwrite existing artifacts."""
-    return f"""{gate_blocked}
+    return f"""{gate_blocked}{lock_text}
 - no generation;
 - no Qwen E2E rerun;
 - any Chimera CPU/GPU work must use Slurm;

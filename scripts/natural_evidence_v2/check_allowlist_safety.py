@@ -33,6 +33,22 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Hard-fail if any allowlist entry is enabled.",
     )
+    parser.add_argument(
+        "--allowed-enabled-entry",
+        default="",
+        help=(
+            "Permit exactly this one enabled entry for a reviewed submission "
+            "preflight. All other enabled entries still hard-fail."
+        ),
+    )
+    parser.add_argument(
+        "--required-phase-token",
+        default="V2_R",
+        help=(
+            "Require this token to appear in CURRENT_STATE. The default accepts "
+            "any natural_evidence_v2 route phase such as V2_R3 or V2_R4."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -104,8 +120,15 @@ def classify_entry(entry: Mapping[str, Any]) -> set[str]:
         labels.add("paper_claim")
     if has_any(text, ("train", "training", "lora", "teacher-forced")):
         labels.add("training")
-    if str(entry.get("name", "")) == "v2_r3_2_qwen_locked_scale_eval":
+    if str(entry.get("name", "")) in {
+        "v2_r3_2_qwen_locked_scale_eval",
+        "v2_r3_2_qwen_locked_scale_shard_array",
+        "v2_r3_2_qwen_locked_scale_shard_array_h200",
+        "v2_r3_2_qwen_locked_scale_aggregate",
+    }:
         labels.add("r3_2")
+    if str(entry.get("name", "")) == "v2_r4_cover_natural_dev_diagnostic_h200":
+        labels.add("r4_dev_diagnostic")
     return labels
 
 
@@ -131,6 +154,7 @@ def main() -> int:
     gate_status = read_json(gate_status_path)
     current_state_text = current_state_path.read_text(encoding="utf-8")
     entries = iter_entries(allowlist)
+    allowed_enabled_entry = str(args.allowed_enabled_entry or "")
 
     enabled_entries = [
         {
@@ -147,6 +171,8 @@ def main() -> int:
     for entry in entries:
         if not bool(entry.get("enabled", False)):
             continue
+        if allowed_enabled_entry and str(entry.get("name", "")) == allowed_enabled_entry:
+            continue
         labels = classify_entry(entry)
         for label in sorted(labels):
             gate_flag = gate_flag_for_label(label)
@@ -161,7 +187,12 @@ def main() -> int:
                 )
 
     def disabled_for(predicate: str) -> bool:
-        return not any(predicate in classify_entry(entry) and bool(entry.get("enabled", False)) for entry in entries)
+        return not any(
+            predicate in classify_entry(entry)
+            and bool(entry.get("enabled", False))
+            and str(entry.get("name", "")) != allowed_enabled_entry
+            for entry in entries
+        )
 
     r3_2_entry = next(
         (entry for entry in entries if str(entry.get("name", "")) == "v2_r3_2_qwen_locked_scale_eval"),
@@ -170,10 +201,16 @@ def main() -> int:
     unknown_enabled_entries = [
         entry
         for entry in enabled_entries
-        if entry["name"] != "v2_r3_2_qwen_locked_scale_eval" and not entry["labels"]
+        if entry["name"] != allowed_enabled_entry
+        and entry["name"] != "v2_r3_2_qwen_locked_scale_eval"
+        and not entry["labels"]
     ]
 
     failures: list[str] = []
+    if allowed_enabled_entry:
+        enabled_names = [entry["name"] for entry in enabled_entries]
+        if enabled_names != [allowed_enabled_entry]:
+            failures.append("enabled_entries_not_exactly_allowed_entry")
     if args.require_zero_enabled and enabled_entries:
         failures.append("enabled_entries_not_empty")
     if forbidden_enabled_entries:
@@ -184,8 +221,9 @@ def main() -> int:
         failures.append("r3_2_entry_missing")
     elif bool(r3_2_entry.get("enabled", False)):
         failures.append("r3_2_entry_enabled_during_decontamination")
-    if "V2_R3" not in current_state_text:
-        failures.append("current_state_missing_v2_r3_phase")
+    required_phase_token = str(args.required_phase_token or "")
+    if required_phase_token and required_phase_token not in current_state_text:
+        failures.append(f"current_state_missing_phase_token:{required_phase_token}")
 
     summary = {
         "schema_name": "natural_evidence_v2_allowlist_safety_summary_v1",
