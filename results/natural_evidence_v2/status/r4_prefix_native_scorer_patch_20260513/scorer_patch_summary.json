@@ -1,0 +1,51 @@
+{
+  "schema_name": "natural_evidence_v2_r4_prefix_native_scorer_patch_summary_v1",
+  "status": "ARTIFACT_ONLY_SCORER_PREFLIGHT_PATCH_APPLIED",
+  "timestamp_utc": "2026-05-13T04:15:38Z",
+  "inputs_reviewed": [
+    "results/natural_evidence_v2/status/r4_prefix_native_patch_readiness_review_20260513_0358/patch_readiness_review.md",
+    "results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failure_review/r4_prefix_native_surface_mass_score_853894_failure_review.md"
+  ],
+  "changed_files": [
+    "scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py",
+    "scripts/natural_evidence_v2/preflight_r4_surface_tokenizer_boundary.py",
+    "tests/test_natural_evidence_v2_r4_surface_boundary.py"
+  ],
+  "scorer_script_sha256": "8b4bddf6d47eff8496a5286915c1e77a33eb90cf74b1e70187f3b80aa09480a1",
+  "preflight_script_sha256": "cf12d93db0e21aeda8001fbcf3af3a01a850276fbde4796ef1489d8ed45484f4",
+  "candidate_probe_rows_sha256": "131aa59537efcd11acbb221775cf1c8ab6dd1bf74eb21da07eeb2040074a6305",
+  "implemented_patch_points": [
+    "shared row-boundary helper in scorer",
+    "trailing assistant-prefix whitespace split into surface_prefix_text",
+    "stripped assistant prefix used for model prefix",
+    "surface_prefix_text plus surface_label used for tokenizer-scored surfaces",
+    "tokenizer-preflight wrapper added with static and explicit Qwen-tokenizer modes"
+  ],
+  "static_preflight": {
+    "summary_path": "results/natural_evidence_v2/status/r4_prefix_native_static_boundary_preflight_20260513/r4_prefix_native_tokenizer_boundary_preflight_summary.json",
+    "status": "PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING",
+    "score_row_count": 8192,
+    "checked_row_count": 8192,
+    "failed_row_count": 0,
+    "scoring_authorized": false
+  },
+  "actual_qwen_tokenizer_preflight_started": false,
+  "model_forward_pass_started": false,
+  "model_scoring_started": false,
+  "generation_started": false,
+  "training_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_benchmark_started": false,
+  "far_aggregation_started": false,
+  "paper_claim_allowed": false,
+  "slurm_submitted": false,
+  "scoring_job_submitted": false,
+  "tests": [
+    {
+      "command": "pytest tests/test_natural_evidence_v2_r4_surface_boundary.py tests/test_natural_evidence_v2_context_mass.py tests/test_tokenizer_alignment.py tests/test_bucket_mapping.py tests/test_payload_codec.py tests/test_parser.py tests/test_verifier.py",
+      "status": "PASS",
+      "details": "26 passed"
+    }
+  ]
+}

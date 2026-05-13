@@ -4,6 +4,7 @@ import argparse
 import json
 import statistics
 import sys
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -81,6 +82,50 @@ def condition_plan(args: argparse.Namespace) -> list[tuple[str, Path | None]]:
     return plan
 
 
+@dataclass(frozen=True)
+class R4SurfaceBoundary:
+    assistant_prefix_before_surface: str
+    assistant_prefix_model_text: str
+    surface_prefix_text: str
+
+    def tokenizer_surface(self, surface_label: Any) -> str:
+        return self.surface_prefix_text + str(surface_label)
+
+    def tokenizer_surfaces(self, surface_labels: Sequence[Any]) -> list[str]:
+        return [self.tokenizer_surface(surface_label) for surface_label in surface_labels]
+
+
+def split_r4_surface_boundary(row: Mapping[str, Any]) -> R4SurfaceBoundary:
+    assistant_prefix = str(row.get("assistant_prefix_before_surface", ""))
+    assistant_prefix_model_text = assistant_prefix.rstrip()
+    return R4SurfaceBoundary(
+        assistant_prefix_before_surface=assistant_prefix,
+        assistant_prefix_model_text=assistant_prefix_model_text,
+        surface_prefix_text=assistant_prefix[len(assistant_prefix_model_text) :],
+    )
+
+
+def r4_row_surface_contract(row: Mapping[str, Any]) -> dict[str, Any]:
+    boundary = split_r4_surface_boundary(row)
+    target_bit = str(int(row["target_bit"]))
+    other_bit = "1" if target_bit == "0" else "0"
+    target_labels = [str(surface) for surface in row[f"bucket_{target_bit}_surfaces"]]
+    other_labels = [str(surface) for surface in row[f"bucket_{other_bit}_surfaces"]]
+    return {
+        "assistant_prefix_before_surface": boundary.assistant_prefix_before_surface,
+        "assistant_prefix_model_text": boundary.assistant_prefix_model_text,
+        "surface_prefix_text": boundary.surface_prefix_text,
+        "target_bit": int(target_bit),
+        "other_bit": int(other_bit),
+        "target_surface_label": str(row.get("target_surface", "")),
+        "target_tokenizer_scored_surface_text": boundary.tokenizer_surface(row.get("target_surface", "")),
+        "target_surface_labels": target_labels,
+        "other_surface_labels": other_labels,
+        "target_tokenizer_scored_surface_texts": boundary.tokenizer_surfaces(target_labels),
+        "other_tokenizer_scored_surface_texts": boundary.tokenizer_surfaces(other_labels),
+    }
+
+
 def chat_prefix(tokenizer: Any, prompt_text: str, assistant_prefix: str) -> str:
     messages = [{"role": "user", "content": prompt_text}]
     if getattr(tokenizer, "chat_template", None):
@@ -106,6 +151,142 @@ def bucket_first_token_ids(tokenizer: Any, prefix: str, surfaces: Sequence[str])
     for surface in surfaces:
         ids.append(first_token_id_after_prefix(tokenizer, prefix, str(surface)))
     return sorted(set(ids))
+
+
+def validate_static_boundary_contract(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    failures: list[dict[str, Any]] = []
+    for row in rows:
+        reasons: list[str] = []
+        try:
+            contract = r4_row_surface_contract(row)
+        except Exception as exc:
+            failures.append(
+                {
+                    "prompt_id": row.get("prompt_id"),
+                    "coordinate_id": row.get("coordinate_id"),
+                    "target_bit": row.get("target_bit"),
+                    "failure_reasons": [f"boundary_contract_exception:{type(exc).__name__}:{exc}"],
+                }
+            )
+            continue
+        expected_model_text = contract["assistant_prefix_before_surface"].rstrip()
+        expected_surface_prefix = contract["assistant_prefix_before_surface"][len(expected_model_text) :]
+        if contract["assistant_prefix_model_text"] != expected_model_text:
+            reasons.append("assistant_prefix_model_text_mismatch")
+        if contract["surface_prefix_text"] != expected_surface_prefix:
+            reasons.append("surface_prefix_text_mismatch")
+        if not contract["target_tokenizer_scored_surface_texts"]:
+            reasons.append("empty_target_tokenizer_scored_surface_texts")
+        if not contract["other_tokenizer_scored_surface_texts"]:
+            reasons.append("empty_other_tokenizer_scored_surface_texts")
+        for label, tokenizer_surface in zip(
+            contract["target_surface_labels"], contract["target_tokenizer_scored_surface_texts"]
+        ):
+            if tokenizer_surface != contract["surface_prefix_text"] + label:
+                reasons.append("target_tokenizer_scored_surface_text_mismatch")
+                break
+        for label, tokenizer_surface in zip(
+            contract["other_surface_labels"], contract["other_tokenizer_scored_surface_texts"]
+        ):
+            if tokenizer_surface != contract["surface_prefix_text"] + label:
+                reasons.append("other_tokenizer_scored_surface_text_mismatch")
+                break
+        if reasons:
+            failures.append(
+                {
+                    "prompt_id": row.get("prompt_id"),
+                    "coordinate_id": row.get("coordinate_id"),
+                    "target_bit": row.get("target_bit"),
+                    "failure_reasons": reasons,
+                    **contract,
+                }
+            )
+    return {
+        "status": (
+            "PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING"
+            if not failures
+            else "FAIL_STATIC_BOUNDARY_CONTRACT_TOKENIZER_BLOCKED"
+        ),
+        "checked_row_count": len(rows),
+        "failed_row_count": len(failures),
+        "first_failing_row": failures[0] if failures else None,
+    }
+
+
+def validate_qwen_tokenizer_boundary_contract(tokenizer: Any, rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    failures: list[dict[str, Any]] = []
+    empty_target_id_row_count = 0
+    empty_other_id_row_count = 0
+    target_other_overlap_row_count = 0
+    for row in rows:
+        try:
+            contract = r4_row_surface_contract(row)
+            prefix_text = chat_prefix(
+                tokenizer,
+                str(row.get("prompt_text", "")),
+                contract["assistant_prefix_model_text"],
+            )
+            target_ids = bucket_first_token_ids(tokenizer, prefix_text, contract["target_tokenizer_scored_surface_texts"])
+            other_ids = bucket_first_token_ids(tokenizer, prefix_text, contract["other_tokenizer_scored_surface_texts"])
+        except Exception as exc:
+            failures.append(
+                {
+                    "prompt_id": row.get("prompt_id"),
+                    "coordinate_id": row.get("coordinate_id"),
+                    "target_bit": row.get("target_bit"),
+                    "failure_reasons": [f"tokenizer_boundary_exception:{type(exc).__name__}:{exc}"],
+                }
+            )
+            continue
+        overlap = sorted(set(target_ids) & set(other_ids))
+        reasons: list[str] = []
+        if not target_ids:
+            empty_target_id_row_count += 1
+            reasons.append("empty_target_first_token_ids")
+        if not other_ids:
+            empty_other_id_row_count += 1
+            reasons.append("empty_other_first_token_ids")
+        if overlap:
+            target_other_overlap_row_count += 1
+            reasons.append("target_other_first_token_id_overlap")
+        for label, tokenizer_surface in zip(
+            contract["target_surface_labels"], contract["target_tokenizer_scored_surface_texts"]
+        ):
+            if tokenizer_surface != contract["surface_prefix_text"] + label:
+                reasons.append("target_tokenizer_scored_surface_text_mismatch")
+                break
+        for label, tokenizer_surface in zip(
+            contract["other_surface_labels"], contract["other_tokenizer_scored_surface_texts"]
+        ):
+            if tokenizer_surface != contract["surface_prefix_text"] + label:
+                reasons.append("other_tokenizer_scored_surface_text_mismatch")
+                break
+        if reasons:
+            failures.append(
+                {
+                    "prompt_id": row.get("prompt_id"),
+                    "coordinate_id": row.get("coordinate_id"),
+                    "target_bit": row.get("target_bit"),
+                    "failure_reasons": reasons,
+                    "target_first_token_ids": target_ids,
+                    "other_first_token_ids": other_ids,
+                    "target_other_first_token_id_overlap": overlap,
+                    **contract,
+                }
+            )
+    return {
+        "status": (
+            "PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT"
+            if not failures
+            else "FAIL_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT"
+        ),
+        "checked_row_count": len(rows),
+        "failed_row_count": len(failures),
+        "first_failing_row": failures[0] if failures else None,
+        "empty_target_id_row_count": empty_target_id_row_count,
+        "empty_other_id_row_count": empty_other_id_row_count,
+        "target_other_overlap_row_count": target_other_overlap_row_count,
+    }
 
 
 def mean(values: Sequence[float]) -> float:
@@ -196,7 +377,7 @@ def score_condition(
                 chat_prefix(
                     tokenizer,
                     str(row.get("prompt_text", "")),
-                    str(row.get("assistant_prefix_before_surface", "")),
+                    r4_row_surface_contract(row)["assistant_prefix_model_text"],
                 )
                 for row in batch_rows
             ]
@@ -214,10 +395,17 @@ def score_condition(
             last_positions = attention_mask.sum(dim=1) - 1
             for batch_index, row in enumerate(batch_rows):
                 prefix_text = prefixes[batch_index]
-                target_bit = str(int(row["target_bit"]))
-                other_bit = "1" if target_bit == "0" else "0"
-                target_ids = bucket_first_token_ids(tokenizer, prefix_text, row[f"bucket_{target_bit}_surfaces"])
-                other_ids = bucket_first_token_ids(tokenizer, prefix_text, row[f"bucket_{other_bit}_surfaces"])
+                contract = r4_row_surface_contract(row)
+                target_ids = bucket_first_token_ids(
+                    tokenizer,
+                    prefix_text,
+                    contract["target_tokenizer_scored_surface_texts"],
+                )
+                other_ids = bucket_first_token_ids(
+                    tokenizer,
+                    prefix_text,
+                    contract["other_tokenizer_scored_surface_texts"],
+                )
                 if not target_ids or not other_ids:
                     raise ValueError(f"empty bucket token ids for row {row.get('prompt_id')}:{row.get('coordinate_id')}")
                 logits = outputs.logits[batch_index, last_positions[batch_index], :]
@@ -233,8 +421,18 @@ def score_condition(
                         "prompt_id": row.get("prompt_id"),
                         "prompt_index": row.get("prompt_index"),
                         "coordinate_id": row.get("coordinate_id"),
-                        "target_bit": int(row["target_bit"]),
+                        "target_bit": contract["target_bit"],
                         "target_surface": row.get("target_surface"),
+                        "target_surface_label": contract["target_surface_label"],
+                        "surface_prefix_text": contract["surface_prefix_text"],
+                        "assistant_prefix_model_text": contract["assistant_prefix_model_text"],
+                        "target_tokenizer_scored_surface_text": contract["target_tokenizer_scored_surface_text"],
+                        "target_bucket_tokenizer_scored_surface_texts": contract[
+                            "target_tokenizer_scored_surface_texts"
+                        ],
+                        "other_bucket_tokenizer_scored_surface_texts": contract[
+                            "other_tokenizer_scored_surface_texts"
+                        ],
                         "target_mass": target_mass,
                         "other_mass": other_mass,
                         "target_margin": target_mass - other_mass,

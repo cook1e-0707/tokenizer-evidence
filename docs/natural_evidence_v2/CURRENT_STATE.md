@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T02:27Z
+Last synchronized: 2026-05-13T04:13Z
 
 ## Canonical Phase
 
@@ -67,10 +67,170 @@ Interpretation:
 - no teacher-forced surface gate result was produced;
 - no downstream gate is unlocked.
 
-Current next allowed action: artifact-only diagnosis and repair planning for
-the R4 prefix-native surface-tokenizer compatibility failure. Do not submit
-another scoring job or run generation/training/Llama/FAR/sanitizer/paper-claim
-actions until a new reviewed route decision and preflights explicitly allow it.
+Follow-up artifact-only diagnosis and repair plan:
+
+`results/natural_evidence_v2/status/r4_prefix_native_tokenizer_surface_diagnosis_20260513_0242/tokenizer_surface_failure_repair_plan.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_tokenizer_surface_diagnosis_20260513_0242/tokenizer_surface_failure_repair_plan_summary.json`
+
+Diagnosis: the scorer/candidate contract placed terminal whitespace inside
+`assistant_prefix_before_surface` while bucket surfaces such as `create` were
+stored without leading whitespace. Qwen-style tokenization can merge the
+terminal space with the following word, so `prefix + surface` may not contain an
+appended next token under the current validation logic.
+
+Preferred repair direction: treat terminal assistant-prefix whitespace as part
+of the tokenizer-scored surface cylinder, add tokenizer-only preflight evidence
+for non-empty target/other first-token ids and zero overlap, then require a new
+reviewed route decision before any future scoring job.
+
+Follow-up artifact-only boundary repair review:
+
+`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_review_20260513_0257/boundary_repair_review.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_review_20260513_0257/boundary_repair_review_summary.json`
+
+Review decision: the preferred repair is accepted as a design basis, but not as
+an execution route. Future repair should split the row into a stripped model
+prefix, the stripped whitespace surface prefix, exact tokenizer-scored surface
+text, and normalized human-readable surface labels. A tokenizer-only preflight
+with actual Qwen tokenization must fail closed on empty target/other token id
+sets or target/other first-token overlap before any new scoring route.
+
+Current next allowed action: implement or review an artifact-only
+scorer/candidate boundary repair plan and tokenizer-preflight design. Do not
+submit another scoring job or run generation/training/Llama/FAR/sanitizer/
+paper-claim actions until a new reviewed route decision and passing preflights
+explicitly allow it.
+
+Follow-up artifact-only implementation plan:
+
+`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_implementation_plan_20260513_0313/boundary_repair_implementation_plan.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_implementation_plan_20260513_0313/boundary_repair_implementation_plan_summary.json`
+
+Plan status: `ARTIFACT_ONLY_BOUNDARY_REPAIR_IMPLEMENTATION_PLAN_RECORDED`.
+
+The plan narrows the later repair patch to the R4 surface scorer plus a
+tokenizer-only preflight utility. It requires splitting trailing assistant
+prefix whitespace into `surface_prefix_text`, scoring
+`tokenizer_scored_surface_text = surface_prefix_text + surface_label`, and
+failing closed on empty target ids, empty other ids, or target/other first-token
+overlap. It is not a route decision and does not authorize allowlist enablement,
+Slurm submission, model scoring, generation, training, Llama, same-family nulls,
+sanitizer, FAR, or paper-facing claims.
+
+Current next allowed action: implement the artifact-only scorer/preflight
+repair patch or further review the preflight design. Do not submit another
+scoring job or run generation/training/Llama/FAR/sanitizer/paper-claim actions
+until a new reviewed route decision and passing preflights explicitly allow it.
+
+Follow-up artifact-only code-scope review:
+
+`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_code_scope_review_20260513_0327/boundary_repair_code_scope_review.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_code_scope_review_20260513_0327/boundary_repair_code_scope_review_summary.json`
+
+Review status: `ARTIFACT_ONLY_CODE_SCOPE_REVIEW_RECORDED`.
+
+The review confirms the smallest later repair remains limited to the R4
+surface scorer plus a tokenizer-only preflight wrapper. The exact current
+failure chain is `chat_prefix` -> `bucket_first_token_ids` ->
+`first_token_id_after_prefix`, where bare surface labels are checked after a
+prefix that already contains terminal whitespace. A later patch should split
+that terminal whitespace into `surface_prefix_text`, build the model prefix
+from the stripped assistant prefix, and validate exact
+`tokenizer_scored_surface_text` values while failing closed on empty target ids,
+empty other ids, or target/other first-token overlap.
+
+Current next allowed action: implement the artifact-only scorer/preflight
+repair patch or perform another artifact-only review of the preflight design.
+Do not submit another scoring job or run generation/training/Llama/
+same-family-null/sanitizer/FAR/paper-claim actions until a new reviewed route
+decision and passing preflights explicitly allow it.
+
+Follow-up artifact-only preflight contract review:
+
+`results/natural_evidence_v2/status/r4_prefix_native_preflight_contract_review_20260513_0342/preflight_contract_review.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_preflight_contract_review_20260513_0342/preflight_contract_review_summary.json`
+
+Review status: `ARTIFACT_ONLY_PREFLIGHT_CONTRACT_REVIEW_RECORDED`.
+
+The review separates the later repair validation into a static boundary-contract
+check and an actual Qwen tokenizer-only preflight. Static validation may only
+produce `PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING` or
+`FAIL_STATIC_BOUNDARY_CONTRACT_TOKENIZER_BLOCKED` and cannot authorize scoring.
+A future scoring route must require
+`PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT`, with fail-closed checks for empty
+target ids, empty other ids, target/other first-token overlap, and exact
+recording of the tokenizer-scored surface text.
+
+Current next allowed action: implement the artifact-only scorer/preflight
+repair patch using this static contract plus the actual-tokenizer fail-closed
+requirements, or perform another artifact-only review if a patch conflict is
+found. Do not submit another scoring job or run generation/training/Llama/
+same-family-null/sanitizer/FAR/paper-claim actions until a new reviewed route
+decision and passing preflights explicitly allow it.
+
+Follow-up artifact-only patch-readiness review:
+
+`results/natural_evidence_v2/status/r4_prefix_native_patch_readiness_review_20260513_0358/patch_readiness_review.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_patch_readiness_review_20260513_0358/patch_readiness_review_summary.json`
+
+Review status: `ARTIFACT_ONLY_PATCH_READINESS_REVIEW_RECORDED`.
+
+The review rechecked the current scorer and the 8192-row prefix-native repair
+candidate without running tokenizer/model scoring. It records the current
+candidate and scorer hashes, confirms the tokenizer preflight wrapper is still
+absent, and finds no new blocker to the already reviewed artifact-only patch
+scope. The next patch should add the shared boundary helper and preflight
+wrapper while keeping static contract validation separate from the later actual
+Qwen tokenizer preflight.
+
+Current next allowed action: implement the artifact-only scorer/preflight
+repair patch using the reviewed static boundary-contract validation and
+actual-tokenizer fail-closed requirements, or perform another artifact-only
+review if a patch conflict is found. Do not submit another scoring job or run
+generation/training/Llama/same-family-null/sanitizer/FAR/paper-claim actions
+until a new reviewed route decision and passing preflights explicitly allow it.
+
+Follow-up artifact-only patch-presence review:
+
+`results/natural_evidence_v2/status/r4_prefix_native_patch_presence_review_20260513_0413/patch_presence_review.md`
+
+Machine-readable summary:
+
+`results/natural_evidence_v2/status/r4_prefix_native_patch_presence_review_20260513_0413/patch_presence_review_summary.json`
+
+Review status: `ARTIFACT_ONLY_PATCH_PRESENCE_REVIEW_RECORDED`.
+
+The review records that the local workspace now contains an unreviewed R4
+scorer modification and local tokenizer-boundary preflight wrapper candidate,
+so the 03:58 artifact fact that the preflight wrapper was absent is stale. This
+is a planning handoff only: no code was edited by this action, no static
+preflight was run, no tokenizer/model scoring was run, no Slurm job was
+submitted, and no downstream gate is unlocked.
+
+Current next allowed action: artifact-only review of the existing local
+scorer/preflight repair candidate against the recorded static boundary-contract
+and actual-tokenizer fail-closed requirements. Do not submit another scoring
+job or run generation/training/Llama/same-family-null/sanitizer/FAR/paper-claim
+actions until a new reviewed route decision and passing preflights explicitly
+allow it.
 
 ## Latest Route Decision
 
