@@ -1,0 +1,31 @@
+{
+  "account": "cs_yinxin.wan",
+  "allowlist_entry": "v2_r4_prefix_native_surface_mass_score_h200",
+  "conditions": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "decision_doc": "docs/natural_evidence_v2/R4_PREFIX_NATIVE_SURFACE_MASS_SCORING_ROUTE_DECISION_20260513.md",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "gres": "gpu:h200:1",
+  "llama_started": false,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "model_scoring_started": false,
+  "next_allowed_action": "Run local/remote allowlist and hash preflight, notify Hermes, then submit exactly one allowlisted Chimera Slurm scoring job if all checks pass.",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "phase": "V2_R4_PREFIX_NATIVE_SURFACE_REPAIR_CANDIDATE_PROXY_VALIDATED_NO_COMPUTE",
+  "qos": "pomplun",
+  "same_family_null_started": false,
+  "sanitizer_benchmark_started": false,
+  "schema_name": "natural_evidence_v2_r4_prefix_native_surface_mass_scoring_route_decision_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/r4_prefix_native_surface_probe_rows.jsonl",
+  "slurm_submitted": false,
+  "slurm_wrapper": "scripts/natural_evidence_v2/slurm/r4_prefix_native_surface_mass_score_h200.sbatch",
+  "status": "RECORDED_SINGLE_SLURM_SCORING_ROUTE_DECISION_NOT_SUBMITTED",
+  "timestamp_utc": "2026-05-13T02:23Z",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false
+}

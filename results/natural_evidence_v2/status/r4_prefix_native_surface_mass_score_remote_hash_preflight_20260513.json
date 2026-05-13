@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-05-13T02:23Z",
+  "generation_started": false,
+  "hashes_match": true,
+  "local_hashes": [
+    "a0cce7d188d20c86d18dd0f29adc33eba86f366cd13fd211b3740a65faa69d31  configs/natural_evidence_v2/run_allowlist.yaml",
+    "738a07694044a4d42f8e63ac6fca6ffe40d6fe85f169c45fc355802d5ffe50bd  docs/natural_evidence_v2/CURRENT_STATE.md",
+    "926d3883c5ca7017f2228fd8ffdd710227fa099b9efb0c2117fe8a5b07c7ad74  docs/natural_evidence_v2/R4_PREFIX_NATIVE_SURFACE_MASS_SCORING_ROUTE_DECISION_20260513.md",
+    "131aa59537efcd11acbb221775cf1c8ab6dd1bf74eb21da07eeb2040074a6305  results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/r4_prefix_native_surface_probe_rows.jsonl",
+    "af9e138a857a74bbf0de42c959eab603de959f60539a21549c5b5ef278e3ca34  scripts/natural_evidence_v2/slurm/r4_prefix_native_surface_mass_score_h200.sbatch",
+    "c80f237875a1889eab0a664ca3b305ec08957ea7bb2f6b98ac8e5fb3517d26ca  scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py"
+  ],
+  "paper_claim_allowed": false,
+  "remote_hashes": [
+    "a0cce7d188d20c86d18dd0f29adc33eba86f366cd13fd211b3740a65faa69d31  configs/natural_evidence_v2/run_allowlist.yaml",
+    "738a07694044a4d42f8e63ac6fca6ffe40d6fe85f169c45fc355802d5ffe50bd  docs/natural_evidence_v2/CURRENT_STATE.md",
+    "926d3883c5ca7017f2228fd8ffdd710227fa099b9efb0c2117fe8a5b07c7ad74  docs/natural_evidence_v2/R4_PREFIX_NATIVE_SURFACE_MASS_SCORING_ROUTE_DECISION_20260513.md",
+    "131aa59537efcd11acbb221775cf1c8ab6dd1bf74eb21da07eeb2040074a6305  results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/r4_prefix_native_surface_probe_rows.jsonl",
+    "af9e138a857a74bbf0de42c959eab603de959f60539a21549c5b5ef278e3ca34  scripts/natural_evidence_v2/slurm/r4_prefix_native_surface_mass_score_h200.sbatch",
+    "c80f237875a1889eab0a664ca3b305ec08957ea7bb2f6b98ac8e5fb3517d26ca  scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py"
+  ],
+  "schema_name": "natural_evidence_v2_r4_prefix_native_surface_mass_remote_hash_preflight_v1",
+  "slurm_submitted": false,
+  "status": "PASS",
+  "training_started": false
+}

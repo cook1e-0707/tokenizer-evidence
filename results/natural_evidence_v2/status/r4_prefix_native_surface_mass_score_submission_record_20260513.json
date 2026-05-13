@@ -1,0 +1,31 @@
+{
+  "account": "cs_yinxin.wan",
+  "allowlist_enabled_entries_after_submission": [],
+  "conditions": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "gres": "gpu:h200:1",
+  "job_id": "853894",
+  "job_name": "nat-ev-v2-r4pntfm",
+  "llama_started": false,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "next_allowed_action": "Monitor Slurm job 853894. After completion, sync and review summary; do not submit another scoring job or run generation/training/Llama/FAR/sanitizer/paper claims until result is reviewed.",
+  "node_initial": "chimera21",
+  "output_dir_expected": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_prefix_native_surface_mass_score_853894",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "same_family_null_started": false,
+  "sanitizer_benchmark_started": false,
+  "schema_name": "natural_evidence_v2_r4_prefix_native_surface_mass_score_submission_record_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/r4_prefix_native_surface_probe_rows.jsonl",
+  "submitted": true,
+  "submitted_at_utc": "2026-05-13T02:23Z",
+  "submitted_entry": "v2_r4_prefix_native_surface_mass_score_h200",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false
+}

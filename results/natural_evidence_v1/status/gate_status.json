@@ -9458,7 +9458,7 @@
     "source": "user instruction",
     "status": "POMPLUN_DOWN_USE_DGXA100_FOR_GPU"
   },
-  "current_phase": "V2_R4_PREFIX_NATIVE_SURFACE_REPAIR_CANDIDATE_PROXY_VALIDATED_NO_COMPUTE",
+  "current_phase": "V2_R4_PREFIX_NATIVE_SURFACE_MASS_JOB_853894_FAILED_REVIEWED_NO_SCORE_SUMMARY",
   "diagnostic_low_capacity_gates": [
     "qwen_probability_gated_repair_under_target",
     "qwen_counterfactual_compatibility_low_entry_pass_rate"
@@ -10556,10 +10556,10 @@
     },
     "last_scheduler_tick": {
       "background_worker_launched": true,
-      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0211_scheduled_tick_notification.json",
-      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0211_scheduled_tick.md",
-      "time": "2026-05-13T02:11:43Z",
-      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0211_worker.log"
+      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0226_scheduled_tick_notification.json",
+      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0226_scheduled_tick.md",
+      "time": "2026-05-13T02:26:49Z",
+      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0226_worker.log"
     },
     "max_codex_state_changing_actions_requested_per_tick": 1,
     "notification_body_required_fields": [
@@ -10635,6 +10635,30 @@
       "status": "PASS_PROXY_STATIC_VALIDATION_TOKENIZER_PENDING",
       "summary": "Built prefix-native Set/Plan vs Create/Prepare R4 repair candidate with 32 coordinates, 256 entries, 8192 probe rows; proxy static validation passed, Qwen tokenizer/model scoring not run.",
       "time_utc": "2026-05-13T02:11Z"
+    },
+    {
+      "artifact": "results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_submission_record_20260513.json",
+      "next_allowed_action": "Monitor Slurm job 853894. After completion, sync and review summary; do not submit another scoring job or run generation/training/Llama/FAR/sanitizer/paper claims until result is reviewed.",
+      "phase": "V2_R4_PREFIX_NATIVE_SURFACE_MASS_JOB_853894_RUNNING",
+      "status": "SUBMITTED_ONE_SLURM_JOB_ALLOWLIST_DISABLED_AFTER_SUBMIT",
+      "summary": "Submitted exactly one Chimera H200 R4 prefix-native teacher-forced surface-mass scoring job 853894; allowlist disabled locally and remotely after submission.",
+      "time_utc": "2026-05-13T02:23Z"
+    },
+    {
+      "artifact": "results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failed/failure_review_summary.json",
+      "next_allowed_action": "Artifact-only repair: remove one-word aliases or add a Qwen-tokenizer prefix-boundary validation preflight for prefix-native rows; do not resubmit Slurm until repaired rows and wrapper preflight are reviewed.",
+      "phase": "V2_R4_PREFIX_NATIVE_SURFACE_MASS_JOB_853894_FAILED_NO_RESUBMIT",
+      "status": "FAILED_PREFIX_BOUNDARY_ALIAS_TOKENIZATION_NO_RESUBMIT",
+      "summary": "Job 853894 failed after model load because one-word alias surface create produced no next token under Qwen prefix tokenization; not Slurm/provider failure.",
+      "time_utc": "2026-05-13T02:30Z"
+    },
+    {
+      "artifact": "results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failure_review/r4_prefix_native_surface_mass_score_853894_failure_review_summary.json",
+      "next_allowed_action": "Artifact-only diagnosis and repair planning for the R4 prefix-native surface-tokenizer compatibility failure. Do not submit another scoring job or run generation/training/Llama/FAR/sanitizer/paper-claim actions until a new reviewed route decision and preflights explicitly allow it.",
+      "phase": "V2_R4_PREFIX_NATIVE_SURFACE_MASS_JOB_853894_FAILED_REVIEWED_NO_SCORE_SUMMARY",
+      "status": "FAILED_PREFIX_BOUNDARY_TOKENIZER_VALIDATION_NO_SCORE_SUMMARY",
+      "summary": "Job 853894 failed before producing surface-mass metrics: ValueError surface produced no next token create. This is a scorer/candidate tokenizer-surface compatibility failure, not a scored gate result.",
+      "time_utc": "2026-05-13T02:31Z"
     }
   ],
   "hourly_report_path": "results/natural_evidence_v1/status/hourly_reports/20260508_0531.md",
@@ -10954,12 +10978,13 @@
     "853381",
     "853421",
     "853430",
-    "853524"
+    "853524",
+    "853894"
   ],
   "last_checked": "2026-05-10T14:12:04Z",
-  "last_checked_time": "2026-05-13T02:11Z",
+  "last_checked_time": "2026-05-13T02:31Z",
   "last_checked_utc": "2026-05-10T14:12:04Z",
-  "last_state_changing_action": "Built artifact-only prefix-native R4 surface repair candidate and dry-run scorer input validation; no compute submitted.",
+  "last_state_changing_action": "Reviewed failed Slurm job 853894; no score summary produced; no resubmission.",
   "last_status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",
   "last_status_update_action": "R3.2 full wrapper review passed; allowlist remains disabled and no Slurm job was submitted",
   "last_status_update_utc": "2026-05-11T07:02:05Z",
@@ -11038,7 +11063,7 @@
     "training_started": false
   },
   "new_training_allowed": false,
-  "next_allowed_action": "Review repaired candidate and prepare a separate Slurm-only tokenizer/model scoring route if accepted; no allowlist enablement or Slurm submission from this artifact alone.",
+  "next_allowed_action": "Artifact-only diagnosis and repair planning for the R4 prefix-native surface-tokenizer compatibility failure. Do not submit another scoring job or run generation/training/Llama/FAR/sanitizer/paper-claim actions until a new reviewed route decision and preflights explicitly allow it.",
   "out_of_band_artifact_quarantine": {
     "adopted_as_formal_progress": false,
     "chimera_jobs_observed": [

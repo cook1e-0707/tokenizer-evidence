@@ -1,10 +1,10 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T02:11Z
+Last synchronized: 2026-05-13T02:27Z
 
 ## Canonical Phase
 
-`V2_R4_PREFIX_NATIVE_SURFACE_REPAIR_CANDIDATE_PROXY_VALIDATED_NO_COMPUTE`
+`V2_R4_PREFIX_NATIVE_SURFACE_MASS_JOB_853894_FAILED_REVIEWED_NO_SCORE_SUMMARY`
 
 This compact state file is the first file Codex/Hermes should read for routine
 ticks. Use the long historical files only when this file is ambiguous:
@@ -31,7 +31,77 @@ They are gate-controlled: each class must first have a recorded route decision,
 passing gate evidence, reviewed wrapper or artifact plan, allowlist where
 applicable, and TG/email notification before any state-changing action.
 
+## Latest Result Review
+
+R4 prefix-native teacher-forced surface-mass scoring job `853894` reached a
+terminal failed state and was reviewed:
+
+`results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failure_review/r4_prefix_native_surface_mass_score_853894_failure_review.md`
+
+Machine-readable review:
+
+`results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failure_review/r4_prefix_native_surface_mass_score_853894_failure_review_summary.json`
+
+Job:
+
+- job id: `853894`;
+- job name: `nat-ev-v2-r4pntfm`;
+- state: `FAILED`;
+- elapsed: `00:00:43`;
+- exit code: `1:0`;
+- node: `chimera21`.
+
+The expected remote output directory exists but contains no score summary:
+
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_prefix_native_surface_mass_score_853894`
+
+Failure:
+
+- scorer failed before producing R4 surface-mass metrics;
+- traceback ended in tokenizer first-token validation;
+- exception: `ValueError: surface produced no next token: 'create'`.
+
+Interpretation:
+
+- this is a scorer/candidate tokenizer-surface compatibility failure;
+- no teacher-forced surface gate result was produced;
+- no downstream gate is unlocked.
+
+Current next allowed action: artifact-only diagnosis and repair planning for
+the R4 prefix-native surface-tokenizer compatibility failure. Do not submit
+another scoring job or run generation/training/Llama/FAR/sanitizer/paper-claim
+actions until a new reviewed route decision and preflights explicitly allow it.
+
 ## Latest Route Decision
+
+R4 prefix-native teacher-forced tokenizer/model scoring route is recorded:
+
+`docs/natural_evidence_v2/R4_PREFIX_NATIVE_SURFACE_MASS_SCORING_ROUTE_DECISION_20260513.md`
+
+Machine-readable decision:
+
+`results/natural_evidence_v2/status/r4_prefix_native_surface_mass_scoring_route_decision_20260513.json`
+
+This route allows exactly one Chimera Slurm Qwen tokenizer/model forward
+scoring job for the prefix-native repair candidate, after local/remote
+allowlist and hash preflights pass and Hermes TG/email notification is sent.
+It does not authorize generation, training, Llama, same-family nulls,
+sanitizer, FAR, payload diversity, or paper-facing claims.
+
+Preflight status:
+
+- local zero-enabled allowlist safety: `PASS`;
+- remote zero-enabled allowlist safety: `PASS`;
+- local/remote hash preflight: `PASS`;
+- single-enabled allowlist preflight: `PASS`;
+- Slurm job submitted: `853894`;
+- job name: `nat-ev-v2-r4pntfm`;
+- partition/QoS/account: `pomplun` / `pomplun` / `cs_yinxin.wan`;
+- initial node: `chimera21`;
+- allowlist was disabled locally and remotely immediately after submission.
+
+This route has now been consumed by failed job `853894`; see the latest result
+review above. It does not authorize another scoring submission.
 
 ## Latest Artifact-Only Candidate
 
