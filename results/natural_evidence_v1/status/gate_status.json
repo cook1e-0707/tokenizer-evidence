@@ -4230,6 +4230,31 @@
     "submission_record": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_submission_record_20260513.json",
     "training_started": false
   },
+  "2026-05-13T01:43:53Z_r4_teacher_forced_surface_mass_job_853815_reviewed_fail": {
+    "canonical_phase": "V2_R4_SURFACE_BANK_REPAIR_DIAGNOSIS_AFTER_853815_FAIL",
+    "elapsed": "00:04:39",
+    "exit_code": "0:0",
+    "far_aggregation_started": false,
+    "generation_started": false,
+    "job_id": "853815",
+    "job_name": "nat-ev-v2-r4tfm",
+    "llama_started": false,
+    "next_allowed_action": "Artifact-only R4 surface-bank / prefix-shape / target construction diagnosis only. Do not submit another scoring job, do not run generation, do not train, and do not unlock Llama/FAR/sanitizer/paper claims until a new repair plan is reviewed.",
+    "paper_claim_allowed": false,
+    "protected_median_target_margin": -9.63184629654279e-06,
+    "protected_target_surface_mass_lift_vs_base": -8.640958256568576e-05,
+    "protected_target_surface_mass_lift_vs_task_only": -0.00029972933676521564,
+    "protected_target_surface_rank1_rate": 0.4375,
+    "review_doc": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815_review/r4_surface_mass_score_853815_review.md",
+    "review_summary": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815_review/r4_surface_mass_score_853815_review_summary.json",
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "score_summary": "results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815/r4_teacher_forced_surface_mass_summary.json",
+    "slurm_state": "COMPLETED",
+    "status": "FAIL_R4_TEACHER_FORCED_SURFACE_MASS_GATE_NO_GENERATION",
+    "teacher_forced_surface_gate_pass": false,
+    "training_started": false
+  },
   "action_results": {
     "2026-05-08T01:44:32Z_phase_r1_prefix_selector_replay": {
       "e2e_eval_started": false,
@@ -10531,10 +10556,10 @@
     },
     "last_scheduler_tick": {
       "background_worker_launched": true,
-      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0126_scheduled_tick_notification.json",
-      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0126_scheduled_tick.md",
-      "time": "2026-05-13T01:26:26Z",
-      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0126_worker.log"
+      "notification_json": "results/natural_evidence_v1/status/hermes_reports/20260513_0141_scheduled_tick_notification.json",
+      "report_md": "results/natural_evidence_v1/status/hermes_reports/20260513_0141_scheduled_tick.md",
+      "time": "2026-05-13T01:41:31Z",
+      "worker_log": "results/natural_evidence_v1/status/hermes_worker_logs/20260513_0141_worker.log"
     },
     "max_codex_state_changing_actions_requested_per_tick": 1,
     "notification_body_required_fields": [
@@ -10914,7 +10939,7 @@
     "853524"
   ],
   "last_checked": "2026-05-10T14:12:04Z",
-  "last_checked_time": "2026-05-13T01:26:26Z",
+  "last_checked_time": "2026-05-13T01:41:31Z",
   "last_checked_utc": "2026-05-10T14:12:04Z",
   "last_state_changing_action": "Hermes scheduled tick sent Telegram/email and launched a background Codex worker. Training, generation, E2E rerun, Llama, same-family null, sanitizer, FAR, and paper claim gates remained locked.",
   "last_status": "BLOCK_R3_2_SHARD_ARRAY_REMOTE_SYNC_MISMATCH_NO_SLURM",

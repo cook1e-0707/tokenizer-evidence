@@ -1,0 +1,53 @@
+{
+  "condition_plan": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "condition_summary": {
+    "base": {
+      "mean_target_margin": -4.8382020000938e-05,
+      "mean_target_mass": 0.00013023904969795136,
+      "median_target_margin": -9.62482363320305e-06,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.4375
+    },
+    "protected": {
+      "mean_target_margin": -1.3399527093546637e-05,
+      "mean_target_mass": 4.38294671322656e-05,
+      "median_target_margin": -9.63184629654279e-06,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.4375
+    },
+    "task_only": {
+      "mean_target_margin": -0.00019432475963493878,
+      "mean_target_mass": 0.00034355880389748124,
+      "median_target_margin": -2.5933071583494893e-06,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.4375
+    }
+  },
+  "far_aggregation_started": false,
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": true,
+  "observed_lifts": {
+    "protected_target_surface_mass_lift_vs_base": -8.640958256568576e-05,
+    "protected_target_surface_mass_lift_vs_task_only": -0.00029972933676521564,
+    "task_only_target_surface_mass_lift_vs_base": 0.00021331975419952988
+  },
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 8192,
+  "scored_row_count": 24576,
+  "teacher_forced_surface_gate_pass": false,
+  "teacher_forced_surface_gate_status": "FAIL",
+  "teacher_forced_surface_gate_targets": {
+    "protected_median_target_margin": ">0",
+    "protected_target_surface_mass_lift_vs_base": ">=+0.15",
+    "protected_target_surface_mass_lift_vs_task_only": ">=+0.10",
+    "protected_target_surface_rank1_rate": ">=0.70",
+    "task_only_target_surface_mass_lift_vs_base": "<+0.05 diagnostic cap"
+  },
+  "training_started": false
+}

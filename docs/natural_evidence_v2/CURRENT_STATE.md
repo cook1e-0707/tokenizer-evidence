@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T01:35Z
+Last synchronized: 2026-05-13T01:43Z
 
 ## Canonical Phase
 
@@ -33,7 +33,50 @@ applicable, and TG/email notification before any state-changing action.
 
 ## Latest Route Decision
 
-## Latest Slurm Submission
+## Latest Result Review
+
+R4 teacher-forced surface-mass scoring job `853815` completed and was reviewed:
+
+`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815_review/r4_surface_mass_score_853815_review.md`
+
+Machine-readable review:
+
+`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815_review/r4_surface_mass_score_853815_review_summary.json`
+
+Job:
+
+- job id: `853815`;
+- job name: `nat-ev-v2-r4tfm`;
+- state: `COMPLETED`;
+- elapsed: `00:04:39`;
+- exit code: `0:0`;
+- node: `chimera21`.
+
+Teacher-forced surface gate: `FAIL`.
+
+Key numbers:
+
+- protected target surface mass lift vs base: `-0.0000864096`,
+  required `>= +0.15`;
+- protected target surface mass lift vs task-only: `-0.0002997293`,
+  required `>= +0.10`;
+- protected target surface rank-1 rate: `0.4375`, required `>= 0.70`;
+- protected median target margin: `-0.0000096318`, required `> 0`.
+
+Interpretation:
+
+- this is not a Slurm/provider failure;
+- the binary repair candidate fixed the formal two-sided surface-bank issue;
+- it did not create a trainable surface channel under the existing protected
+  adapter;
+- target phrase-surface masses are near zero across all arms.
+
+Current next allowed action: artifact-only R4 surface-bank / prefix-shape /
+target construction diagnosis only. Do not submit another scoring job, do not
+run generation, do not train, and do not unlock Llama/FAR/sanitizer/paper
+claims until a new repair plan is reviewed.
+
+## Previous Slurm Submission
 
 R4 teacher-forced surface-mass scoring job submitted:
 
