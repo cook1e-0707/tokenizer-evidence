@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T20:18:00Z
+Last synchronized: 2026-05-14T20:56:17Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_DEV_DIAGNOSTIC_859277_FAILURE_ANALYSIS_RECORDED_NO_RESUBMIT`
+`V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_SLURM`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_859277_ZERO_EVENT_SUPPORT_FAILURE_ANALYSIS_RECORDED`
+`BLOCK_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -74,8 +74,20 @@ support is absent. Do not resubmit this route unchanged. Artifact-only failure
 analysis has now been recorded in
 `results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_failure_analysis/`.
 The unresolved blocker is the zero-event support mismatch between the frozen
-phrase-event bank and free-generation outputs; this route remains in
-no-resubmit state until a new reviewed repair or pivot route is recorded.
+phrase-event bank and free-generation outputs. A reviewed artifact-only repair
+/ pivot route has now been recorded in
+`docs/natural_evidence_v2/R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_20260514_2056.md`
+and
+`results/natural_evidence_v2/status/r4_positive_zero_event_support_repair_route_20260514_2056/`.
+The route keeps `859277` as a failed diagnostic and permits its outputs only
+for failure taxonomy, prompt-policy diagnosis, surface-bank coverage diagnosis,
+forbidden matcher semantics diagnosis, and wrapper/provenance audit. It
+explicitly forbids post-hoc phrase mining from `859277` into a new locked bank,
+threshold tuning to relabel the run, and unchanged route resubmission. The
+next allowed action is artifact-only support-gap audit and repair-package
+planning only. No Slurm submission, free generation, model scoring, training,
+Llama, same-family null, sanitizer, FAR aggregation, payload diversity, or
+paper-facing claim is unlocked by this route record.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus

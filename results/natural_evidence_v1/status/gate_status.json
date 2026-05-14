@@ -15017,5 +15017,29 @@
     "next_allowed_action": "Record a new reviewed repair/pivot route before any new generation or Slurm submission; do not resubmit the 859277 route unchanged.",
     "paper_claim_allowed": false,
     "resubmit_unchanged_route_allowed": false
+  },
+  "r4_positive_zero_event_support_repair_route_20260514_2056": {
+    "schema_name": "natural_evidence_v2_r4_positive_zero_event_support_repair_route_gate_v1",
+    "timestamp_utc": "2026-05-14T20:56:17Z",
+    "status": "PASS_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_SLURM",
+    "current_phase": "V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_SLURM",
+    "previous_blocker": "BLOCK_R4_POSITIVE_859277_ZERO_EVENT_SUPPORT_FAILURE_ANALYSIS_RECORDED",
+    "blocker": "BLOCK_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT",
+    "base_failed_job": "859277",
+    "next_allowed_action": "Artifact-only support-gap audit and repair-package planning only.",
+    "post_hoc_phrase_mining_allowed": false,
+    "unchanged_resubmission_allowed": false,
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false,
+    "route_doc": "docs/natural_evidence_v2/R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_20260514_2056.md",
+    "route_summary": "results/natural_evidence_v2/status/r4_positive_zero_event_support_repair_route_20260514_2056/route_summary.json"
   }
 }

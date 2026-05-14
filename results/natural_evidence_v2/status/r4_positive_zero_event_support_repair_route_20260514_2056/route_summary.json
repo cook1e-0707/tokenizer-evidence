@@ -1,0 +1,41 @@
+{
+  "schema_name": "natural_evidence_v2_r4_positive_zero_event_support_repair_route_v1",
+  "timestamp_utc": "2026-05-14T20:56:17Z",
+  "status": "PASS_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_SLURM",
+  "current_phase": "V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_SLURM",
+  "previous_blocker": "BLOCK_R4_POSITIVE_859277_ZERO_EVENT_SUPPORT_FAILURE_ANALYSIS_RECORDED",
+  "new_blocker": "BLOCK_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT",
+  "base_failed_job": "859277",
+  "base_failure": {
+    "protected_accepts_format_scrub_all": "0/32",
+    "protected_accepts_no_scrub": "0/32",
+    "null_accepts_format_scrub_all": "0/32 all controls",
+    "extracted_frozen_phrase_events": 0,
+    "distinct_coordinates": 0,
+    "forbidden_surface_hits": {
+      "coordinate": 439,
+      "bucket": 28
+    }
+  },
+  "reuse_policy": {
+    "failure_taxonomy_allowed": true,
+    "coverage_diagnosis_allowed": true,
+    "post_hoc_phrase_mining_allowed": false,
+    "threshold_tuning_allowed": false,
+    "positive_reclassification_allowed": false,
+    "unchanged_resubmission_allowed": false
+  },
+  "next_allowed_action": "Artifact-only support-gap audit and repair-package planning only.",
+  "slurm_allowed": false,
+  "generation_allowed": false,
+  "model_scoring_allowed": false,
+  "training_allowed": false,
+  "llama_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "far_aggregation_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "paper_claim_allowed": false,
+  "route_doc": "docs/natural_evidence_v2/R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_20260514_2056.md",
+  "route_review": "results/natural_evidence_v2/status/r4_positive_zero_event_support_repair_route_20260514_2056/route_review.md"
+}
