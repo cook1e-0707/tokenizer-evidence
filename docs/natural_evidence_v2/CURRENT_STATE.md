@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T20:56:17Z
+Last synchronized: 2026-05-14T21:02:34Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_SLURM`
+`V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_GAP_AUDIT_RECORDED_REPAIR_PACKAGE_PLANNING`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT`
+`BLOCK_R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_IMPLEMENTATION_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -88,6 +88,21 @@ next allowed action is artifact-only support-gap audit and repair-package
 planning only. No Slurm submission, free generation, model scoring, training,
 Llama, same-family null, sanitizer, FAR aggregation, payload diversity, or
 paper-facing claim is unlocked by this route record.
+
+The support-gap audit has now been executed and recorded in
+`results/natural_evidence_v2/status/r4_positive_zero_event_support_gap_audit_20260514_2102/`.
+It confirms that exact frozen phrase-event support is absent across all
+conditions: protected/raw/task-only exact hits are all `0`, and protected has
+only `1` loose-stem hit across `2048` rows. In contrast, bank-first-word opener
+overlap is high across all arms (`protected 2032/2048`, `raw 2042/2048`,
+`task_only 2046/2048`), which localizes the failure to phrase-specific support
+rather than absence of ordinary action language. A repair-package plan has been
+recorded in
+`docs/natural_evidence_v2/R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_PLAN_20260514_2102.md`
+and
+`results/natural_evidence_v2/status/r4_positive_support_repair_package_plan_20260514_2102/`.
+The next allowed action is artifact-only implementation of the support-repair
+contract/extractor/static fixture package. No compute or claim gate is unlocked.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus

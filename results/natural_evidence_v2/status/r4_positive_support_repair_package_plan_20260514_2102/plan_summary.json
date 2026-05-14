@@ -1,0 +1,33 @@
+{
+  "schema_name": "natural_evidence_v2_r4_positive_support_repair_package_plan_v1",
+  "timestamp_utc": "2026-05-14T21:02:34Z",
+  "status": "PASS_REPAIR_PACKAGE_PLAN_RECORDED_ARTIFACT_ONLY_NO_SLURM",
+  "current_phase": "V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_GAP_AUDIT_RECORDED_REPAIR_PACKAGE_PLANNING",
+  "previous_blocker": "BLOCK_R4_POSITIVE_ZERO_EVENT_SUPPORT_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT",
+  "new_blocker": "BLOCK_R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_IMPLEMENTATION_NEXT",
+  "support_gap_audit": "results/natural_evidence_v2/status/r4_positive_zero_event_support_gap_audit_20260514_2102/support_gap_summary.json",
+  "base_failed_job": "859277",
+  "audit_key_findings": {
+    "protected_exact_frozen_phrase_hits": 0,
+    "raw_exact_frozen_phrase_hits": 0,
+    "task_only_exact_frozen_phrase_hits": 0,
+    "protected_rows_with_bank_first_word_opener": 2032,
+    "raw_rows_with_bank_first_word_opener": 2042,
+    "task_only_rows_with_bank_first_word_opener": 2046
+  },
+  "interpretation": "The route needs a support-contract repair: free generation emits ordinary action language, but not the exact frozen multi-word phrase events.",
+  "post_hoc_phrase_mining_allowed": false,
+  "unchanged_resubmission_allowed": false,
+  "slurm_allowed": false,
+  "generation_allowed": false,
+  "model_scoring_allowed": false,
+  "training_allowed": false,
+  "llama_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "far_aggregation_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "paper_claim_allowed": false,
+  "plan_doc": "docs/natural_evidence_v2/R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_PLAN_20260514_2102.md",
+  "next_allowed_action": "Implement artifact-only support-repair contract/extractor/static fixture package; no Slurm or generation."
+}

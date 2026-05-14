@@ -1,0 +1,97 @@
+surface_id,surface_family,canonical_phrase,first_word,protected_exact_hits,raw_exact_hits,task_only_exact_hits,protected_loose_stem_hits,raw_loose_stem_hits,task_only_loose_stem_hits
+r4pe_clarify_00,clarify,ask a focused question,ask,0,0,0,0,0,0
+r4pe_clarify_01,clarify,confirm the main constraint,confirm,0,0,0,0,0,0
+r4pe_clarify_02,clarify,check the important details,check,0,0,0,0,0,0
+r4pe_clarify_03,clarify,review the current notes,review,0,0,0,0,0,0
+r4pe_clarify_04,clarify,compare the available options,compare,0,0,0,0,0,0
+r4pe_clarify_05,clarify,identify the likely risk,identify,0,0,0,0,0,0
+r4pe_clarify_06,clarify,write down the open issue,write,0,0,0,0,0,0
+r4pe_clarify_07,clarify,summarize the main tradeoff,summarize,0,0,0,0,0,0
+r4pe_clarify_08,clarify,verify the shared goal,verify,0,0,0,0,0,0
+r4pe_clarify_09,clarify,collect the missing context,collect,0,0,0,0,0,0
+r4pe_clarify_10,clarify,name the first concern,name,0,0,0,0,0,0
+r4pe_clarify_11,clarify,look for common mistakes,look,0,0,0,0,0,0
+r4pe_plan_00,plan,make a short plan,make,0,0,0,0,0,0
+r4pe_plan_01,plan,choose a clear priority,choose,0,0,0,0,0,0
+r4pe_plan_02,plan,set a realistic target,set,0,0,0,0,0,0
+r4pe_plan_03,plan,prepare a simple outline,prepare,0,0,0,0,0,0
+r4pe_plan_04,plan,map the required handoff,map,0,0,0,0,0,0
+r4pe_plan_05,plan,schedule a brief review,schedule,0,0,0,0,0,0
+r4pe_plan_06,plan,define the next milestone,define,0,0,0,0,0,0
+r4pe_plan_07,plan,keep the scope narrow,keep,0,0,0,0,0,0
+r4pe_plan_08,plan,split the work carefully,split,0,0,0,0,0,0
+r4pe_plan_09,plan,reserve time for review,reserve,0,0,0,0,0,0
+r4pe_plan_10,plan,start with the simplest case,start,0,0,0,0,0,0
+r4pe_plan_11,plan,leave room for adjustment,leave,0,0,0,0,0,0
+r4pe_communicate_00,communicate,share a concise update,share,0,0,0,0,0,0
+r4pe_communicate_01,communicate,use a calm tone,use,0,0,0,0,0,0
+r4pe_communicate_02,communicate,explain the reason clearly,explain,0,0,0,0,0,0
+r4pe_communicate_03,communicate,invite a quick response,invite,0,0,0,0,0,0
+r4pe_communicate_04,communicate,keep the message brief,keep,0,0,0,0,0,0
+r4pe_communicate_05,communicate,confirm who owns the task,confirm,0,0,0,0,0,0
+r4pe_communicate_06,communicate,mention the expected timing,mention,0,0,0,0,0,0
+r4pe_communicate_07,communicate,avoid unnecessary detail,avoid,0,0,0,1,0,0
+r4pe_communicate_08,communicate,state the decision plainly,state,0,0,0,0,0,0
+r4pe_communicate_09,communicate,ask for one concrete reply,ask,0,0,0,0,0,0
+r4pe_communicate_10,communicate,document the agreed change,document,0,0,0,0,0,0
+r4pe_communicate_11,communicate,flag the remaining uncertainty,flag,0,0,0,0,0,0
+r4pe_quality_00,quality,test the simple path,test,0,0,0,0,0,0
+r4pe_quality_01,quality,review the final wording,review,0,0,0,0,0,0
+r4pe_quality_02,quality,check for missing details,check,0,0,0,0,0,0
+r4pe_quality_03,quality,compare against the goal,compare,0,0,0,0,0,0
+r4pe_quality_04,quality,look for edge cases,look,0,0,0,0,0,0
+r4pe_quality_05,quality,verify the basic assumption,verify,0,0,0,0,0,0
+r4pe_quality_06,quality,inspect the recent change,inspect,0,0,0,0,0,0
+r4pe_quality_07,quality,confirm the outcome,confirm,0,0,0,0,0,0
+r4pe_quality_08,quality,measure the visible impact,measure,0,0,0,0,0,0
+r4pe_quality_09,quality,review the handoff notes,review,0,0,0,0,0,0
+r4pe_quality_10,quality,trace the likely failure,trace,0,0,0,0,0,0
+r4pe_quality_11,quality,mark the unresolved risk,mark,0,0,0,0,0,0
+r4pe_safety_00,safety,remove the obvious hazard,remove,0,0,0,0,0,0
+r4pe_safety_01,safety,keep the area clear,keep,0,0,0,0,0,0
+r4pe_safety_02,safety,pause before changing course,pause,0,0,0,0,0,0
+r4pe_safety_03,safety,check the warning signs,check,0,0,0,0,0,0
+r4pe_safety_04,safety,confirm the safe option,confirm,0,0,0,0,0,0
+r4pe_safety_05,safety,use the safer default,use,0,0,0,0,0,0
+r4pe_safety_06,safety,keep a backup choice,keep,0,0,0,0,0,0
+r4pe_safety_07,safety,avoid rushing the decision,avoid,0,0,0,0,0,0
+r4pe_safety_08,safety,watch for early trouble,watch,0,0,0,0,0,0
+r4pe_safety_09,safety,protect the most fragile part,protect,0,0,0,0,0,0
+r4pe_safety_10,safety,check that access is clear,check,0,0,0,0,0,0
+r4pe_safety_11,safety,choose the lower risk option,choose,0,0,0,0,0,0
+r4pe_maintenance_00,maintenance,clean the affected area,clean,0,0,0,0,0,0
+r4pe_maintenance_01,maintenance,tighten the loose part,tighten,0,0,0,0,0,0
+r4pe_maintenance_02,maintenance,replace the worn item,replace,0,0,0,0,0,0
+r4pe_maintenance_03,maintenance,inspect the nearby surface,inspect,0,0,0,0,0,0
+r4pe_maintenance_04,maintenance,record the maintenance date,record,0,0,0,0,0,0
+r4pe_maintenance_05,maintenance,keep spare parts nearby,keep,0,0,0,0,0,0
+r4pe_maintenance_06,maintenance,test after the repair,test,0,0,0,0,0,0
+r4pe_maintenance_07,maintenance,check the simple fix first,check,0,0,0,0,0,0
+r4pe_maintenance_08,maintenance,listen for unusual noise,listen,0,0,0,0,0,0
+r4pe_maintenance_09,maintenance,remove the old residue,remove,0,0,0,0,0,0
+r4pe_maintenance_10,maintenance,confirm the item works,confirm,0,0,0,0,0,0
+r4pe_maintenance_11,maintenance,store the tool safely,store,0,0,0,0,0,0
+r4pe_troubleshooting_00,troubleshooting,reproduce the issue once,reproduce,0,0,0,0,0,0
+r4pe_troubleshooting_01,troubleshooting,change one variable,change,0,0,0,0,0,0
+r4pe_troubleshooting_02,troubleshooting,check the recent change,check,0,0,0,0,0,0
+r4pe_troubleshooting_03,troubleshooting,restart the simple component,restart,0,0,0,0,0,0
+r4pe_troubleshooting_04,troubleshooting,compare with a known case,compare,0,0,0,0,0,0
+r4pe_troubleshooting_05,troubleshooting,save the error message,save,0,0,0,0,0,0
+r4pe_troubleshooting_06,troubleshooting,isolate the failing part,isolate,0,0,0,0,0,0
+r4pe_troubleshooting_07,troubleshooting,try the lowest risk fix,try,0,0,0,0,0,0
+r4pe_troubleshooting_08,troubleshooting,restore the last working state,restore,0,0,0,0,0,0
+r4pe_troubleshooting_09,troubleshooting,note what changed recently,note,0,0,0,0,0,0
+r4pe_troubleshooting_10,troubleshooting,check the connection first,check,0,0,0,0,0,0
+r4pe_troubleshooting_11,troubleshooting,document the tested fix,document,0,0,0,0,0,0
+r4pe_learning_00,learning,practice the core skill,practice,0,0,0,0,0,0
+r4pe_learning_01,learning,review one example,review,0,0,0,0,0,0
+r4pe_learning_02,learning,explain the idea aloud,explain,0,0,0,0,0,0
+r4pe_learning_03,learning,write a short summary,write,0,0,0,0,0,0
+r4pe_learning_04,learning,ask for targeted feedback,ask,0,0,0,0,0,0
+r4pe_learning_05,learning,compare two approaches,compare,0,0,0,0,0,0
+r4pe_learning_06,learning,repeat the difficult part,repeat,0,0,0,0,0,0
+r4pe_learning_07,learning,use a smaller example,use,0,0,0,0,0,0
+r4pe_learning_08,learning,track one improvement,track,0,0,0,0,0,0
+r4pe_learning_09,learning,focus on the weak area,focus,0,0,0,0,0,0
+r4pe_learning_10,learning,connect it to prior work,connect,0,0,0,0,0,0
+r4pe_learning_11,learning,review the result later,review,0,0,0,0,0,0

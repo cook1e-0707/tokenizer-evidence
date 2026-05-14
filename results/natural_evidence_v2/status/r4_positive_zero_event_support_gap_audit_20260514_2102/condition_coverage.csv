@@ -1,0 +1,4 @@
+condition,rows,segments,exact_surface_hits,rows_with_exact_surface_hit,loose_stem_surface_hits,rows_with_loose_stem_surface_hit,rows_with_bank_first_word_opener,row_bank_first_word_opener_rate
+protected,2048,52740,0,0,1,1,2032,0.9921875
+raw,2048,23936,0,0,0,0,2042,0.9970703125
+task_only,2048,23443,0,0,0,0,2046,0.9990234375

@@ -1,0 +1,6 @@
+term,condition,substring_hits,rows_with_substring,word_boundary_hits,rows_with_word_boundary,example_window
+bucket,protected,9,9,9,9,". For instance, if you're cleaning windows, make sure you have a squeegee and a bucket of soapy water. - Overlooking safety is a significant risk. Always wear appropr"
+bucket,raw,1,1,1,1,"fe. - When dealing with plumbing, ensure the area is well-ventilated and have a bucket ready to catch water or leaks. - For HVAC systems, clean filters regularly to i"
+coordinate,protected,100,94,97,91,prevent them from escalating. - Plan ahead for special events or busy periods. Coordinate schedules and resources to make sure everyone has what they need while minimizi
+coordinate,raw,72,72,71,71,impact on daily operations. - Communicate effectively with other departments to coordinate maintenance schedules and address any immediate concerns. - Stock up on essenti
+coordinate,task_only,85,85,84,84,tial problems early - Keep an eye on budget constraints to avoid overspending - Coordinate with local authorities and partners to ensure compliance with regulations - Pre
