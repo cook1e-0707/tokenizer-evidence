@@ -1,0 +1,65 @@
+schema_name: natural_evidence_v2_r4_positive_event_bank_precommit_v1
+phase: V2_R4_POSITIVE_EVENT_BANK_PRECOMMIT_PACKAGE_ARTIFACT_ONLY
+contract_config: configs/natural_evidence_v2/r4_positive_evidence_contract_redesign.yaml
+contract_id: r4_keyed_correlation_evidence_v1
+event_bank_id: r4_positive_phrase_event_bank_v1
+payload_id: a55e
+wrong_payload_id: wrong_payload_static_control
+audit_key_id: r4_dev_key_k00_commit_only
+wrong_audit_key_id: r4_dev_wrong_key_k01_commit_only
+audit_key_commitment: sha256_only_no_key_material_in_artifacts
+coordinate_count: 32
+output_dir: results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605
+
+artifact_only: true
+slurm_allowed: false
+generation_allowed: false
+training_allowed: false
+qwen_e2e_allowed: false
+llama_allowed: false
+same_family_null_allowed: false
+sanitizer_allowed: false
+far_aggregation_allowed: false
+payload_diversity_allowed: false
+paper_claim_allowed: false
+
+surface_bank_policy:
+  source_rule_id: frozen_static_rule_r4_positive_phrase_events_v1
+  no_locked_output_mining: true
+  no_generated_transcript_mining: true
+  event_type: normalized_phrase_event
+  normalization_rule: lowercase_strip_punctuation_collapse_space
+  min_surface_count: 96
+  min_distinct_surface_families: 4
+  max_single_surface_family_fraction: 0.35
+  min_distinct_coordinates: 20
+  min_positive_polarity_events: 24
+  forbidden_public_technical_literals:
+    - fingerprint
+    - watermark
+    - payload
+    - secret key
+    - decoder
+    - hidden signal
+    - evidence block
+    - bucket
+    - coordinate
+    - step
+    - next action
+  structural_markers_forbidden:
+    - bullet_marker
+    - line_number
+    - heading_text
+    - colon_after_label
+    - numbered_label
+    - fixed_slot_label
+
+precommit_manifest_policy:
+  include_contract_config_sha256: true
+  include_surface_bank_sha256: true
+  include_coordinate_mapping_sha256: true
+  include_codebook_sha256: true
+  include_decoder_spec_sha256: true
+  include_dev_gate_sha256: true
+  expose_audit_key_material: false
+  expose_wrong_audit_key_material: false

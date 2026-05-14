@@ -1,0 +1,31 @@
+{
+  "allowlist_entry_added_disabled": "v2_r4_positive_dev_diagnostic_h200",
+  "allowlist_safety_summary": "results/natural_evidence_v2/status/r4_positive_full_wrapper_allowlist_safety_20260514.json",
+  "allowlist_status": "PASS_ZERO_ENABLED",
+  "decoder_fixture_summary": "results/natural_evidence_v2/status/r4_positive_keyed_decoder_fixture_20260514/decode_all/decode_summary.json",
+  "full_mode_behavior": "implemented_generation_then_decode_all_and_decode_none",
+  "full_mode_missing_adapter_smoke": {
+    "expected_exit_code": 2,
+    "expected_failure": "REQUIRED_ADAPTER_MISSING_OR_EMPTY",
+    "implementation_pending_fail_closed_seen": false,
+    "stderr": "results/natural_evidence_v2/status/r4_positive_dev_diagnostic_wrapper_full_missing_adapter_smoke_20260514.stderr",
+    "stdout": "results/natural_evidence_v2/status/r4_positive_dev_diagnostic_wrapper_full_missing_adapter_smoke_20260514.stdout"
+  },
+  "generation_started": false,
+  "local_plan_only_summary": "results/natural_evidence_v2/status/r4_positive_dev_diagnostic_wrapper_plan_smoke_20260514_full_impl_local/plan_validation/wrapper_plan_only_summary.json",
+  "paper_claim_allowed": false,
+  "pytest": {
+    "focused_tests": [
+      "tests/natural_evidence_v2/test_r4_positive_keyed_correlation_decode.py",
+      "tests/natural_evidence_v2/test_r4_positive_phrase_event_extractor.py",
+      "tests/natural_evidence_v2/test_r4_positive_dev_diagnostic_route.py"
+    ],
+    "result": "PASS_13_TESTS"
+  },
+  "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_FULL_GENERATION_DECODE_WRAPPER_IMPLEMENTATION_REVIEW_20260514_1818.md",
+  "schema_name": "natural_evidence_v2_r4_positive_full_wrapper_review_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_POSITIVE_FULL_GENERATION_DECODE_WRAPPER_LOCAL_REVIEW_NO_SUBMIT",
+  "timestamp_utc": "2026-05-14T18:18:08Z",
+  "training_started": false
+}

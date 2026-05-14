@@ -1,0 +1,133 @@
+schema_name: natural_evidence_v2_r4_candidate_v3_transfer_gap_repair_plan_v1
+phase: V2_R4_CANDIDATE_V3_TRANSFER_GAP_IMPLEMENTATION_PLAN_RECORDED_AUTONOMOUS_CONDITIONAL
+source_job_id: "857795"
+source_failure_analysis: results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_857795_failure_analysis/failure_analysis.md
+source_review: results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_857795_review/job_857795_review.md
+
+standing_execution_policy:
+  continue_clear_routes_without_repeated_manual_approval: true
+  gate_controlled_actions_conditionally_authorized: true
+  gate_controlled_actions_permanently_forbidden: false
+  prerequisite_gates_still_required: true
+  hermes_notification_still_required: true
+  allowlist_safety_still_required: true
+  h200_pomplun_policy_still_required: true
+
+current_permissions:
+  slurm_allowed: false
+  allowlist_enablement_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  qwen_e2e_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  payload_diversity_claim_allowed: false
+  paper_claim_allowed: false
+
+repair_surfaces:
+  - prefix_context_elicitation
+  - free_generation_surface_polarity_alignment
+  - forbidden_matcher_semantics
+  - structural_length_leakage
+
+prompt_scaffold_policy:
+  no_step_labels: true
+  no_fixed_slot_count: true
+  no_visible_coordinate_labels: true
+  no_repeated_global_lead_in: true
+  no_public_technical_literals: true
+  answer_shape: compact_task_useful_prose_or_short_bullets
+  instruction_principles:
+    - include concrete next actions naturally when useful
+    - avoid numbered steps and headings
+    - vary sentence openings
+    - preserve task usefulness after formatting removal
+  disallowed_literals:
+    - "Step "
+    - "exactly 16"
+    - "slot"
+    - "bucket"
+    - "fingerprint"
+    - "watermark"
+    - "payload"
+    - "secret key"
+    - "coordinate"
+    - "decoder"
+    - "hidden signal"
+
+prefix_family_policy:
+  source_policy: frozen_rule_based_before_generation_no_locked_output_mining
+  scorer_alignment: score_only_precommitted_prefix_families
+  max_single_prefix_family_output_fraction: 0.35
+  families:
+    - family_id: next_action_plain
+      natural_role: concrete next-action recommendation
+      prefix_shapes:
+        - "A practical next move is"
+        - "A useful action is"
+        - "A simple next step is"
+        - "One helpful next step is"
+    - family_id: direct_advice_plain
+      natural_role: direct task advice
+      prefix_shapes:
+        - "It helps to"
+        - "You can"
+        - "The team can"
+        - "A good way to proceed is"
+
+surface_polarity_policy:
+  preserve_candidate_v3_contract: true
+  report_target_vs_other_phrase_support: true
+  report_per_coordinate_support: true
+  report_phrase_hits_after_format_scrub_all: true
+  do_not_mine_surfaces_from_locked_outputs: true
+
+forbidden_matcher_policy:
+  hard_technical_literals:
+    - fingerprint
+    - watermark
+    - payload
+    - secret key
+    - decoder
+    - hidden signal
+  contextual_terms:
+    bucket: separate_ordinary_domain_word_from_technical_protocol_sense
+    coordinate: separate_ordinary_verb_from_technical_protocol_sense
+  report_separate_counts: true
+  hard_gate_technical_public_surface_count: 0
+
+structural_leakage_policy:
+  primary_decode_format_scrub: all
+  protected_vs_raw_shallow_auc_max: 0.60
+  duplicate_generated_output_hash_count_max: 0
+  duplicate_decode_row_hash_count_max: 0
+  max_line_count_delta_between_arms: 0
+  max_mean_line_length_auc: 0.60
+
+future_route:
+  first_future_compute_route: small_h200_dev_generation_diagnostic
+  allow_without_repeated_manual_approval_after_prerequisites_pass: true
+  disabled_by_default_allowlist_entry_name: v2_r4_candidate_v3_transfer_gap_repair_dev_diagnostic_h200
+  h200_partition: pomplun
+  h200_account: cs_yinxin.wan
+  h200_qos: pomplun
+  h200_gres: gpu:h200:1
+  time_limit: 30-00:00:00
+  qwen_only: true
+  dev_prompts_only: true
+  same_contract_id: a55e
+  primary_decode_format_scrub: all
+  controls:
+    - raw
+    - task_only
+    - wrong_key
+    - wrong_payload
+  not_allowed_until_future_route_passes:
+    - llama
+    - same_family_null
+    - sanitizer
+    - far_aggregation
+    - payload_diversity_claim
+    - paper_facing_positive_claim

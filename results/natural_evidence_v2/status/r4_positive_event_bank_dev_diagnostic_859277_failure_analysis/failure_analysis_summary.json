@@ -1,0 +1,68 @@
+{
+  "schema_name": "natural_evidence_v2_r4_positive_859277_failure_analysis_v1",
+  "timestamp_utc": "2026-05-14T20:18:00Z",
+  "job_id": "859277",
+  "status": "FAILURE_ANALYSIS_RECORDED",
+  "prior_review_status": "FAIL_R4_POSITIVE_DEV_DIAGNOSTIC_GATE_NO_RESUBMIT_UNTIL_FAILURE_ANALYSIS",
+  "slurm_completion": {
+    "all_tasks_completed": true,
+    "tasks": {
+      "859277_0": {"state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:43:32", "node": "chimera21"},
+      "859277_1": {"state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:42:58", "node": "chimera21"},
+      "859277_2": {"state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:45:03", "node": "chimera21"},
+      "859277_3": {"state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:39:12", "node": "chimera21"}
+    }
+  },
+  "artifact_shape": {
+    "generated_rows": 6144,
+    "generated_rows_by_condition": {
+      "protected": 2048,
+      "raw": 2048,
+      "task_only": 2048
+    },
+    "decode_rows_per_scrub_mode": 160,
+    "duplicate_prompt_condition_rows": 0,
+    "duplicate_generated_response_hashes": 0
+  },
+  "primary_decode_all": {
+    "protected_accepts": 0,
+    "protected_blocks": 32,
+    "raw_accepts": 0,
+    "task_only_accepts": 0,
+    "wrong_key_accepts": 0,
+    "wrong_payload_accepts": 0,
+    "protected_observed_events_max": 0,
+    "protected_distinct_coordinates_max": 0,
+    "forbidden_public_surface_total": 467
+  },
+  "surface_support": {
+    "exact_surface_hit_total_by_condition": {
+      "protected": 0,
+      "raw": 0,
+      "task_only": 0
+    },
+    "protected_top_openers": [
+      ["keep", 1706],
+      ["use", 1208],
+      ["prepare", 1072],
+      ["create", 1041],
+      ["when", 907],
+      ["make", 790],
+      ["have", 755],
+      ["encourage", 747],
+      ["plan", 688]
+    ]
+  },
+  "forbidden_matcher": {
+    "raw_counts": {
+      "coordinate": 439,
+      "bucket": 28
+    },
+    "interpretation": "Matcher likely over-counts ordinary domain language; this does not rescue the run because phrase-event support is zero."
+  },
+  "blocker": "BLOCK_R4_POSITIVE_859277_ZERO_EVENT_SUPPORT_FAILURE_ANALYSIS_RECORDED",
+  "no_resubmit_unchanged_route": true,
+  "paper_claim_allowed": false,
+  "generation_allowed_from_this_artifact": false,
+  "training_unlocked_by_this_artifact": false
+}

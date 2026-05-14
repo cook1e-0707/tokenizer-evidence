@@ -1,0 +1,30 @@
+{
+  "schema_name": "natural_evidence_v2_r4_positive_evidence_contract_redesign_review_v1",
+  "timestamp_utc": "2026-05-14T08:38:25Z",
+  "status": "REVIEWED_R4_POSITIVE_EVIDENCE_CONTRACT_REDESIGN_REQUIREMENTS_NO_COMPUTE_UNLOCK",
+  "current_phase": "V2_R4_POSITIVE_EVIDENCE_CONTRACT_REDESIGN_REVIEWED_NO_DOWNSTREAM_UNLOCK",
+  "source_job_id": "858019",
+  "source_route_decision": "docs/natural_evidence_v2/R4_CANDIDATE_V3_TRANSFER_GAP_858019_ROUTE_DECISION_20260514_0822.md",
+  "source_failure_analysis": "results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_failure_analysis/failure_analysis_summary.json",
+  "decision": "positive_evidence_contract_redesign_not_compute_ready_require_artifact_only_implementation_planning_or_static_review_before_any_compute_route",
+  "requirements": [
+    "key_payload_specificity_observable_before_accept_scoring",
+    "positive_unit_avoids_forbidden_public_surfaces_and_fixed_evidence_labels",
+    "decoder_separates_reusable_support_from_accepted_protected_recovery",
+    "structural_leakage_features_are_outside_contract_or_non_informative",
+    "pre_registered_dev_only_pass_fail_table_for_protected_raw_task_only_wrong_key_wrong_payload"
+  ],
+  "state_changing_action": "recorded artifact-only positive evidence contract redesign review after 858019 route decision",
+  "next_allowed_action": "Artifact-only implementation planning or static review for a redesigned positive evidence contract only. Do not submit Slurm, run generation, rerun Qwen E2E, start training, Llama, same-family null, sanitizer benchmark, FAR aggregation, payload-diversity work, or paper-facing positive claims until a new route is reviewed and prerequisite gates pass.",
+  "slurm_job_submitted": false,
+  "generation_started": false,
+  "qwen_e2e_rerun_started": false,
+  "training_started": false,
+  "llama_started": false,
+  "same_family_null_started": false,
+  "sanitizer_benchmark_started": false,
+  "far_aggregation_started": false,
+  "payload_diversity_started": false,
+  "paper_claim_allowed": false,
+  "chimera_login_cpu_work_started": false
+}

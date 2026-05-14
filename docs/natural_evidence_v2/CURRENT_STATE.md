@@ -1,1435 +1,714 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-13T04:13Z
+Last synchronized: 2026-05-14T20:18:00Z
+
+This is the compact controlling state for Codex and Hermes. Historical route
+records remain in `results/natural_evidence_v2/status/` and older long-form
+automation notes; they are not the current control entry when they conflict
+with this file.
 
 ## Canonical Phase
 
-`V2_R4_PREFIX_NATIVE_SURFACE_MASS_JOB_853894_FAILED_REVIEWED_NO_SCORE_SUMMARY`
-
-This compact state file is the first file Codex/Hermes should read for routine
-ticks. Use the long historical files only when this file is ambiguous:
-
-- `docs/natural_evidence_v1/AUTOMATION_STATE.md`
-- `docs/natural_evidence_v1/next_step_codex_plan.md`
-- `results/natural_evidence_v1/status/gate_status.json`
-- `results/natural_evidence_v2/status/gate_status.json`
+`V2_R4_POSITIVE_DEV_DIAGNOSTIC_859277_FAILURE_ANALYSIS_RECORDED_NO_RESUBMIT`
 
 ## Current Route
 
-Route R4: cover-natural ECC evidence channel repair preflight after failed
-H200 dev diagnostic `853691`.
-
-The user has recorded standing authorization for Codex and Hermes to continue
-the already approved route without repeatedly asking for explicit approval.
-This does not waive gates, allowlist requirements, notification requirements,
-or the one-Slurm-job-per-reviewed-submission limit.
-
-The user has also recorded conditional authorization for later-stage training,
-Llama, FAR/null expansion, sanitizer, and paper-claim work after their
-prerequisite gates pass. These work classes are not permanently forbidden.
-They are gate-controlled: each class must first have a recorded route decision,
-passing gate evidence, reviewed wrapper or artifact plan, allowlist where
-applicable, and TG/email notification before any state-changing action.
-
-## Latest Result Review
-
-R4 prefix-native teacher-forced surface-mass scoring job `853894` reached a
-terminal failed state and was reviewed:
-
-`results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failure_review/r4_prefix_native_surface_mass_score_853894_failure_review.md`
-
-Machine-readable review:
-
-`results/natural_evidence_v2/status/r4_prefix_native_surface_mass_score_853894_failure_review/r4_prefix_native_surface_mass_score_853894_failure_review_summary.json`
-
-Job:
-
-- job id: `853894`;
-- job name: `nat-ev-v2-r4pntfm`;
-- state: `FAILED`;
-- elapsed: `00:00:43`;
-- exit code: `1:0`;
-- node: `chimera21`.
-
-The expected remote output directory exists but contains no score summary:
-
-`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_prefix_native_surface_mass_score_853894`
-
-Failure:
-
-- scorer failed before producing R4 surface-mass metrics;
-- traceback ended in tokenizer first-token validation;
-- exception: `ValueError: surface produced no next token: 'create'`.
-
-Interpretation:
-
-- this is a scorer/candidate tokenizer-surface compatibility failure;
-- no teacher-forced surface gate result was produced;
-- no downstream gate is unlocked.
-
-Follow-up artifact-only diagnosis and repair plan:
-
-`results/natural_evidence_v2/status/r4_prefix_native_tokenizer_surface_diagnosis_20260513_0242/tokenizer_surface_failure_repair_plan.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_tokenizer_surface_diagnosis_20260513_0242/tokenizer_surface_failure_repair_plan_summary.json`
-
-Diagnosis: the scorer/candidate contract placed terminal whitespace inside
-`assistant_prefix_before_surface` while bucket surfaces such as `create` were
-stored without leading whitespace. Qwen-style tokenization can merge the
-terminal space with the following word, so `prefix + surface` may not contain an
-appended next token under the current validation logic.
-
-Preferred repair direction: treat terminal assistant-prefix whitespace as part
-of the tokenizer-scored surface cylinder, add tokenizer-only preflight evidence
-for non-empty target/other first-token ids and zero overlap, then require a new
-reviewed route decision before any future scoring job.
-
-Follow-up artifact-only boundary repair review:
-
-`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_review_20260513_0257/boundary_repair_review.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_review_20260513_0257/boundary_repair_review_summary.json`
-
-Review decision: the preferred repair is accepted as a design basis, but not as
-an execution route. Future repair should split the row into a stripped model
-prefix, the stripped whitespace surface prefix, exact tokenizer-scored surface
-text, and normalized human-readable surface labels. A tokenizer-only preflight
-with actual Qwen tokenization must fail closed on empty target/other token id
-sets or target/other first-token overlap before any new scoring route.
-
-Current next allowed action: implement or review an artifact-only
-scorer/candidate boundary repair plan and tokenizer-preflight design. Do not
-submit another scoring job or run generation/training/Llama/FAR/sanitizer/
-paper-claim actions until a new reviewed route decision and passing preflights
-explicitly allow it.
-
-Follow-up artifact-only implementation plan:
-
-`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_implementation_plan_20260513_0313/boundary_repair_implementation_plan.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_implementation_plan_20260513_0313/boundary_repair_implementation_plan_summary.json`
-
-Plan status: `ARTIFACT_ONLY_BOUNDARY_REPAIR_IMPLEMENTATION_PLAN_RECORDED`.
-
-The plan narrows the later repair patch to the R4 surface scorer plus a
-tokenizer-only preflight utility. It requires splitting trailing assistant
-prefix whitespace into `surface_prefix_text`, scoring
-`tokenizer_scored_surface_text = surface_prefix_text + surface_label`, and
-failing closed on empty target ids, empty other ids, or target/other first-token
-overlap. It is not a route decision and does not authorize allowlist enablement,
-Slurm submission, model scoring, generation, training, Llama, same-family nulls,
-sanitizer, FAR, or paper-facing claims.
-
-Current next allowed action: implement the artifact-only scorer/preflight
-repair patch or further review the preflight design. Do not submit another
-scoring job or run generation/training/Llama/FAR/sanitizer/paper-claim actions
-until a new reviewed route decision and passing preflights explicitly allow it.
-
-Follow-up artifact-only code-scope review:
-
-`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_code_scope_review_20260513_0327/boundary_repair_code_scope_review.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_boundary_repair_code_scope_review_20260513_0327/boundary_repair_code_scope_review_summary.json`
-
-Review status: `ARTIFACT_ONLY_CODE_SCOPE_REVIEW_RECORDED`.
-
-The review confirms the smallest later repair remains limited to the R4
-surface scorer plus a tokenizer-only preflight wrapper. The exact current
-failure chain is `chat_prefix` -> `bucket_first_token_ids` ->
-`first_token_id_after_prefix`, where bare surface labels are checked after a
-prefix that already contains terminal whitespace. A later patch should split
-that terminal whitespace into `surface_prefix_text`, build the model prefix
-from the stripped assistant prefix, and validate exact
-`tokenizer_scored_surface_text` values while failing closed on empty target ids,
-empty other ids, or target/other first-token overlap.
-
-Current next allowed action: implement the artifact-only scorer/preflight
-repair patch or perform another artifact-only review of the preflight design.
-Do not submit another scoring job or run generation/training/Llama/
-same-family-null/sanitizer/FAR/paper-claim actions until a new reviewed route
-decision and passing preflights explicitly allow it.
-
-Follow-up artifact-only preflight contract review:
-
-`results/natural_evidence_v2/status/r4_prefix_native_preflight_contract_review_20260513_0342/preflight_contract_review.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_preflight_contract_review_20260513_0342/preflight_contract_review_summary.json`
-
-Review status: `ARTIFACT_ONLY_PREFLIGHT_CONTRACT_REVIEW_RECORDED`.
-
-The review separates the later repair validation into a static boundary-contract
-check and an actual Qwen tokenizer-only preflight. Static validation may only
-produce `PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING` or
-`FAIL_STATIC_BOUNDARY_CONTRACT_TOKENIZER_BLOCKED` and cannot authorize scoring.
-A future scoring route must require
-`PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT`, with fail-closed checks for empty
-target ids, empty other ids, target/other first-token overlap, and exact
-recording of the tokenizer-scored surface text.
-
-Current next allowed action: implement the artifact-only scorer/preflight
-repair patch using this static contract plus the actual-tokenizer fail-closed
-requirements, or perform another artifact-only review if a patch conflict is
-found. Do not submit another scoring job or run generation/training/Llama/
-same-family-null/sanitizer/FAR/paper-claim actions until a new reviewed route
-decision and passing preflights explicitly allow it.
-
-Follow-up artifact-only patch-readiness review:
-
-`results/natural_evidence_v2/status/r4_prefix_native_patch_readiness_review_20260513_0358/patch_readiness_review.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_patch_readiness_review_20260513_0358/patch_readiness_review_summary.json`
-
-Review status: `ARTIFACT_ONLY_PATCH_READINESS_REVIEW_RECORDED`.
-
-The review rechecked the current scorer and the 8192-row prefix-native repair
-candidate without running tokenizer/model scoring. It records the current
-candidate and scorer hashes, confirms the tokenizer preflight wrapper is still
-absent, and finds no new blocker to the already reviewed artifact-only patch
-scope. The next patch should add the shared boundary helper and preflight
-wrapper while keeping static contract validation separate from the later actual
-Qwen tokenizer preflight.
-
-Current next allowed action: implement the artifact-only scorer/preflight
-repair patch using the reviewed static boundary-contract validation and
-actual-tokenizer fail-closed requirements, or perform another artifact-only
-review if a patch conflict is found. Do not submit another scoring job or run
-generation/training/Llama/same-family-null/sanitizer/FAR/paper-claim actions
-until a new reviewed route decision and passing preflights explicitly allow it.
-
-Follow-up artifact-only patch-presence review:
-
-`results/natural_evidence_v2/status/r4_prefix_native_patch_presence_review_20260513_0413/patch_presence_review.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_patch_presence_review_20260513_0413/patch_presence_review_summary.json`
-
-Review status: `ARTIFACT_ONLY_PATCH_PRESENCE_REVIEW_RECORDED`.
-
-The review records that the local workspace now contains an unreviewed R4
-scorer modification and local tokenizer-boundary preflight wrapper candidate,
-so the 03:58 artifact fact that the preflight wrapper was absent is stale. This
-is a planning handoff only: no code was edited by this action, no static
-preflight was run, no tokenizer/model scoring was run, no Slurm job was
-submitted, and no downstream gate is unlocked.
-
-Current next allowed action: artifact-only review of the existing local
-scorer/preflight repair candidate against the recorded static boundary-contract
-and actual-tokenizer fail-closed requirements. Do not submit another scoring
-job or run generation/training/Llama/same-family-null/sanitizer/FAR/paper-claim
-actions until a new reviewed route decision and passing preflights explicitly
-allow it.
-
-## Latest Route Decision
-
-R4 prefix-native teacher-forced tokenizer/model scoring route is recorded:
-
-`docs/natural_evidence_v2/R4_PREFIX_NATIVE_SURFACE_MASS_SCORING_ROUTE_DECISION_20260513.md`
-
-Machine-readable decision:
-
-`results/natural_evidence_v2/status/r4_prefix_native_surface_mass_scoring_route_decision_20260513.json`
-
-This route allows exactly one Chimera Slurm Qwen tokenizer/model forward
-scoring job for the prefix-native repair candidate, after local/remote
-allowlist and hash preflights pass and Hermes TG/email notification is sent.
-It does not authorize generation, training, Llama, same-family nulls,
-sanitizer, FAR, payload diversity, or paper-facing claims.
-
-Preflight status:
-
-- local zero-enabled allowlist safety: `PASS`;
-- remote zero-enabled allowlist safety: `PASS`;
-- local/remote hash preflight: `PASS`;
-- single-enabled allowlist preflight: `PASS`;
-- Slurm job submitted: `853894`;
-- job name: `nat-ev-v2-r4pntfm`;
-- partition/QoS/account: `pomplun` / `pomplun` / `cs_yinxin.wan`;
-- initial node: `chimera21`;
-- allowlist was disabled locally and remotely immediately after submission.
-
-This route has now been consumed by failed job `853894`; see the latest result
-review above. It does not authorize another scoring submission.
-
-## Latest Artifact-Only Candidate
-
-Prefix-native R4 surface repair candidate is now recorded:
-
-`results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/static_validation_report.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_20260513/static_validation_summary.json`
-
-Scorer input dry-run:
-
-`results/natural_evidence_v2/status/r4_prefix_native_surface_score_wrapper_plan_smoke_20260513/r4_teacher_forced_surface_mass_summary.json`
-
-Scope:
-
-- artifact-only candidate construction;
-- no Qwen tokenizer validation locally because this environment does not
-  provide `transformers`;
-- no model scoring;
-- no Slurm submission;
-- no generation or training.
-
-Static proxy validation:
-
-- status: `PASS_PROXY_STATIC_VALIDATION_TOKENIZER_PENDING`;
-- coordinates: `32`;
-- entries: `256`;
-- probe rows: `8192`;
-- prompts: `256`;
-- missing binary-side coordinates: `0`;
-- normalized first-word proxy overlap coordinates: `0`;
-- forbidden surface hits: `0`;
-- measured span-start failures: `0`.
-
-Design change:
-
-- prior R4 phrases were free-floating and near-zero probability;
-- repaired candidate uses prefix-native continuations whose measured span
-  begins immediately after the local lead-in prefix;
-- binary sides reuse the R3/WP5 learned action families in cover-natural
-  phrase form: `set`/`plan` versus `create`/`prepare`.
-
-Current next allowed action: review this candidate and prepare a separate
-Slurm-only tokenizer/model scoring route if accepted. This candidate alone
-does not authorize allowlist enablement or Slurm submission.
-
-## Latest Artifact-Only Diagnosis
-
-R4 surface-mass failure diagnosis after `853815` is now recorded:
-
-`results/natural_evidence_v2/status/r4_surface_mass_failure_diagnosis_after_853815/surface_mass_failure_diagnosis_report.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_surface_mass_failure_diagnosis_after_853815/surface_mass_failure_diagnosis_summary.json`
-
-This diagnosis is artifact-only. It reads the existing `853815` scored rows,
-the binary surface-bank repair candidate, and the frozen teacher-forced probe
-rows. It does not train, generate, score models, submit Slurm, run Llama,
-aggregate FAR, or make paper claims.
-
-Key facts:
-
-- scored rows: `24576`;
-- joined base/protected/task-only records: `8192`;
-- protected mean target mass: `0.0000438295`;
-- protected-vs-base mean lift: `-0.0000864096`;
-- protected-vs-task-only mean lift: `-0.0002997293`;
-- protected rank-1 rate: `0.4375`;
-- target/other first-token overlap rate: `0.0`;
-- every coordinate has both binary sides in the candidate bank.
-
-Interpretation:
-
-- this is not a Slurm/provider failure;
-- this is not the prior one-sided-bank formal failure;
-- this is not primarily a target/other first-token overlap bug;
-- the active blocker is that selected phrase-level target cylinders are
-  extremely low probability under the R4 prefixes, and the existing protected
-  adapter does not increase their mass.
-
-Current next allowed action: artifact-only R4 target-construction /
-surface-bank / prefix-shape repair design only. Do not submit another scoring
-job, run generation, train, or unlock Llama/FAR/sanitizer/paper claims from
-this state.
-
-## Latest Repair Design
-
-Artifact-only R4 target-construction and prefix-shape repair design is now
-recorded:
-
-`docs/natural_evidence_v2/R4_SURFACE_BANK_PREFIX_REPAIR_DESIGN_AFTER_853815_20260513.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r4_surface_bank_prefix_repair_design_after_853815_20260513/repair_design_summary.json`
-
-Design direction:
-
-- stop treating target phrases as free-floating answer content;
-- construct prefix-native surface cylinders whose measured span begins
-  immediately after the local lead-in prefix;
-- keep target/other alternatives in the same syntactic slot with no first-token
-  overlap;
-- require a static artifact-only validation summary before any future reviewed
-  Slurm scorer route decision.
-
-Current next allowed action: artifact-only construction of a repaired R4
-candidate surface bank and prefix-row static validation only. Do not submit
-another scoring job, run generation, train, or unlock
-Llama/FAR/sanitizer/paper claims from this state.
-
-## Latest Result Review
-
-R4 teacher-forced surface-mass scoring job `853815` completed and was reviewed:
-
-`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815_review/r4_surface_mass_score_853815_review.md`
-
-Machine-readable review:
-
-`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_853815_review/r4_surface_mass_score_853815_review_summary.json`
-
-Job:
-
-- job id: `853815`;
-- job name: `nat-ev-v2-r4tfm`;
-- state: `COMPLETED`;
-- elapsed: `00:04:39`;
-- exit code: `0:0`;
-- node: `chimera21`.
-
-Teacher-forced surface gate: `FAIL`.
-
-Key numbers:
-
-- protected target surface mass lift vs base: `-0.0000864096`,
-  required `>= +0.15`;
-- protected target surface mass lift vs task-only: `-0.0002997293`,
-  required `>= +0.10`;
-- protected target surface rank-1 rate: `0.4375`, required `>= 0.70`;
-- protected median target margin: `-0.0000096318`, required `> 0`.
-
-Interpretation:
-
-- this is not a Slurm/provider failure;
-- the binary repair candidate fixed the formal two-sided surface-bank issue;
-- it did not create a trainable surface channel under the existing protected
-  adapter;
-- target phrase-surface masses are near zero across all arms.
-
-Current next allowed action: artifact-only R4 surface-bank / prefix-shape /
-target construction diagnosis only. Do not submit another scoring job, do not
-run generation, do not train, and do not unlock Llama/FAR/sanitizer/paper
-claims until a new repair plan is reviewed.
-
-## Previous Slurm Submission
-
-R4 teacher-forced surface-mass scoring job submitted:
-
-`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_submission_record_20260513.json`
-
-Job:
-
-- job id: `853815`;
-- job name: `nat-ev-v2-r4tfm`;
-- partition/QoS/account: `pomplun` / `pomplun` / `cs_yinxin.wan`;
-- initial state: `RUNNING`;
-- initial node: `chimera21`;
-- scope: Qwen base/protected/task-only teacher-forced surface-mass scoring;
-- score rows: `8192`;
-- contract: `a55e`;
-- no free generation, no training, no Llama, no same-family null, no sanitizer,
-  no FAR aggregation, no payload-diversity claim, and no paper-facing positive
-  claim.
-
-Allowlist was disabled immediately after `sbatch` returned the job id. Local
-and remote post-submission allowlist safety both passed:
-
-- `results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_post_submit_allowlist_safety_20260513.json`;
-- remote:
-  `results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_post_submit_allowlist_safety_remote_20260513.json`.
-
-Current next allowed action: monitor Slurm job `853815`. After completion, sync
-and review the teacher-forced surface-mass summary. Do not submit another
-scoring job or run generation/training/Llama/FAR/sanitizer/paper claims until
-this result is reviewed.
-
-## Previous Route Decision
-
-The 2026-05-13 01:28Z user authorization is now controlling for wrapper
-preparation:
-
-`docs/natural_evidence_v2/R4_TEACHER_FORCED_SURFACE_MASS_SCORER_ROUTE_DECISION_20260513.md`
-
-Machine-readable decision:
-
-`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_scorer_route_decision_20260513.json`
-
-Authorized scope:
-
-- prepare a Slurm-only Qwen teacher-forced surface-mass scorer wrapper;
-- score plan scope: base / protected / task-only forward scoring only;
-- frozen rows:
-  `results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_rows.jsonl`;
-- candidate bank:
-  `results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/candidate_binary_surface_bank.json`;
-- contract: `a55e`;
-- run local plan-only smoke validation;
-- add only a disabled allowlist entry.
-
-Not authorized by this route decision:
-
-- allowlist enablement;
-- Slurm submission;
-- free generation;
-- locked-scale rerun;
-- training;
-- Llama;
-- same-family null;
-- sanitizer benchmark;
-- FAR aggregation;
-- payload-diversity claim;
-- paper-facing positive claim.
-
-Prepared wrapper:
-
-`scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch`
-
-Plan-only smoke:
-
-`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_wrapper_plan_smoke_20260513/r4_teacher_forced_surface_mass_summary.json`
-
-Smoke result:
-
-- status: `DRY_RUN_VALIDATED_INPUTS`;
-- score rows: `8192`;
-- condition plan: `base`, `protected`, `task_only`;
-- model scoring started: `false`;
-- generation/training/Slurm started: `false`.
-
-Post-wrapper allowlist safety:
-
-`results/natural_evidence_v2/status/r4_teacher_forced_surface_mass_score_allowlist_safety_zero_20260513.json`
-
-Next allowed action: review the prepared wrapper and plan-only smoke. If
-accepted, record a separate single-submission route decision before enabling
-the allowlist entry or submitting exactly one Slurm scoring job.
-
-## Previous Supervisor Hold Reconciliation
-
-The 2026-05-13 01:26Z Hermes supervisor report held all compute actions until a
-human/expert route decision. The 01:28Z user authorization above supersedes
-that hold only for wrapper preparation. It still does not authorize allowlist
-enablement or Slurm submission.
-
-Hold/blocker record:
-
-`results/natural_evidence_v1/status/hermes_reports/20260513_0126_r4_no_slurm_hold_blocker.md`
-
-Machine-readable record:
-
-`results/natural_evidence_v1/status/hermes_reports/20260513_0126_r4_no_slurm_hold_blocker.json`
-
-No generation, Qwen E2E rerun, training, Llama, same-family null, sanitizer,
-FAR aggregation, payload-diversity claim, paper-facing positive claim, allowlist
-enablement, or Slurm submission is unlocked by either the hold reconciliation
-or the wrapper-preparation route decision.
-
-## Latest R4 Artifact-Only Package
-
-The 2026-05-12 R4 cover-natural ECC protocol decision, artifact-only planning
-package, and user-approved dev diagnostic route are recorded.
-
-Protocol decision:
-
-`docs/natural_evidence_v2/R4_COVER_NATURAL_ECC_PROTOCOL_DECISION_20260512.md`
-
-Machine-readable decision:
-
-`results/natural_evidence_v2/status/r4_cover_natural_ecc_protocol_decision_20260512.json`
-
-Config:
-
-`configs/natural_evidence_v2/r4_cover_natural_ecc.yaml`
-
-Generated artifact-only outputs:
-
-- oracle recoverability audit:
-  `results/natural_evidence_v2/status/r4_artifact_only_oracle_recoverability_20260512/oracle_recoverability_summary.json`;
-- forbidden-surface matcher audit:
-  `results/natural_evidence_v2/status/r4_forbidden_surface_matcher_audit_20260512/forbidden_surface_audit.json`;
-- structural leakage audit:
-  `results/natural_evidence_v2/status/r4_structural_leakage_audit_20260512/structural_leakage_summary.json`;
-- cover-natural prompt bank:
-  `results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512/prompt_bank_manifest.json`;
-- surface bank, codebook, and decoder precommit:
-  `results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/precommit_manifest.json`;
-- format-scrub decoder smoke on the failed `853524` transcripts:
-  `results/natural_evidence_v2/status/r4_cover_natural_decoder_smoke_on_853524_20260512/decode_summary.json`;
-- plan validation:
-  `results/natural_evidence_v2/status/r4_cover_natural_plan_validation_20260512/validation_summary.json`;
-- allowlist safety:
-  `results/natural_evidence_v2/status/r4_cover_natural_ecc_allowlist_safety_20260512.json`.
-
-User-approved dev diagnostic route decision:
-
-`docs/natural_evidence_v2/R4_DEV_DIAGNOSTIC_ROUTE_DECISION_20260512.md`
-
-Machine-readable decision:
-
-`results/natural_evidence_v2/status/r4_dev_diagnostic_route_decision_20260512.json`
-
-Dev diagnostic preflight artifacts:
-
-- repaired 2048-dev / 6144-locked prompt bank:
-  `results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/prompt_bank_manifest.json`;
-- refreshed plan validation:
-  `results/natural_evidence_v2/status/r4_cover_natural_plan_validation_20260512/validation_summary.json`;
-- H200 wrapper plan-only smoke:
-  `results/natural_evidence_v2/status/r4_dev_diagnostic_h200_wrapper_plan_smoke_20260513/`;
-- zero-enabled allowlist safety after R4 phase checker repair:
-  `results/natural_evidence_v2/status/r4_dev_diagnostic_allowlist_safety_zero_20260513_post_replicate_id.json`.
-
-R4 artifact-only findings:
-
-- plan validation status: `PASS`;
-- original prompt bank: `384` dev prompts and `384` locked prompts;
-- dev diagnostic prompt bank: `2048` dev prompts and `6144` locked prompts,
-  with disjoint topic domains and no Step/slot structural instructions;
-- surface bank: `128` phrase-level entries over `32` coordinates;
-- decoder spec primary scrub mode: `all`;
-- oracle recoverability on `853524` remains diagnostic only:
-  phrase-surface oracle accepts `0/96`, structure-scrub oracle accepts `34/96`;
-- structural leakage audit on `853524` shows public structural separability:
-  max protected-vs-raw shallow feature AUC `0.6797`, above the R4 target `0.60`;
-- forbidden-surface matcher audit found `23` examples: `10` ordinary-domain
-  word matches, `12` literal substring matches, and `1` technical reserved
-  token match;
-- R4 decoder smoke on `853524` with `format_scrub=all` accepted `0/96` for
-  protected/raw/task-only, as expected for a new plan-only bank.
-
-Current next allowed action: hold for a human/expert route decision. R4
-artifact-only planning is complete and plan validation passed, but Slurm remains
-disabled until a human/expert route decision explicitly records permission for a
-small dev diagnostic submission. No generation, training, Llama, same-family
-null, sanitizer benchmark, FAR aggregation, payload-diversity claim, or
-paper-facing positive claim is unlocked.
-
-No-Slurm hold record:
-
-`results/natural_evidence_v2/status/r4_artifact_only_planning_complete_no_slurm_hold_20260513_0056.json`
-
-The 2026-05-13 wrapper smoke includes explicit `replicate_group_id=shard_00`
-through `shard_03`, so downstream decode block ids do not collide across
-shards.
-
-Submission record:
-
-`results/natural_evidence_v2/status/r4_dev_diagnostic_submission_record_20260513.json`
-
-Slurm job:
-
-- job id: `853691`;
-- job name: `nat-ev-v2-r4dev`;
-- partition/QOS/account: `pomplun` / `pomplun` / `cs_yinxin.wan`;
-- array: `0-3%4`;
-- GPU: `h200`;
-- prompt split: dev only;
-- contract: same-contract `a55e`;
-- primary decode scrub mode: `all`;
-- post-submit local and remote allowlist safety: `PASS` with zero enabled
-  entries.
-
-Completion review:
-
-`results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/review/r4_dev_diagnostic_853691_review_summary.json`
-
-Failure attribution:
-
-`results/natural_evidence_v2/status/r4_cover_natural_dev_diagnostic_h200_array_853691/failure_attribution/failure_attribution_summary.json`
-
-Outcome:
-
-- all four H200 shards completed with `ExitCode 0:0`;
-- protected accepts with no scrub: `0/32`, required `>=28/32`;
-- protected accepts with `format_scrub=all`: `0/32`, required `>=26/32`;
-- raw/task-only/wrong-key/wrong-payload accepts under `format_scrub=all`:
-  `0/32` each;
-- forbidden public surface total across decode rows: `237`, required `0`;
-- protected-vs-raw shallow structural AUC on generated outputs: `0.624`,
-  above the `0.60` gate;
-- interpretation: this is not a Slurm/provider failure. It is a positive
-  channel failure: the R4 output has phrase-surface matches, but observed
-  coordinate polarities do not align with the protected `a55e` codeword.
-
-R4 repair preflight:
-
-- the original locked R4 surface bank could not support teacher-forced
-  target-vs-other surface mass scoring because every coordinate had only one
-  polarity side;
-- blocker summary:
-  `results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_20260513/r4_surface_teacher_forced_probe_plan_summary.json`;
-- binary repair candidate built:
-  `results/natural_evidence_v2/status/r4_binary_surface_bank_repair_plan_20260513/binary_surface_bank_repair_summary.json`;
-- candidate properties: `32` coordinates, `256` phrase-level entries, `8`
-  entries per coordinate, `4` bit-0 and `4` bit-1 entries per coordinate;
-- teacher-forced surface probe rows built against the candidate bank:
-  `results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_preflight_binary_repair_20260513/r4_surface_teacher_forced_probe_plan_summary.json`;
-- row-plan properties: `256` dev prompts, `8192` score rows, `32`
-  coordinates, `256` rows per coordinate, contract `a55e`;
-- local scorer dry-run validated the scoring input path:
-  `results/natural_evidence_v2/status/r4_surface_teacher_forced_probe_dry_run_binary_repair_20260513/r4_teacher_forced_surface_mass_summary.json`;
-- no generation, training, Slurm submission, Llama, FAR aggregation,
-  sanitizer, same-family null, payload diversity claim, or paper-facing claim
-  was started by this repair preflight.
-
-Current next allowed action: review the artifact-only binary surface repair and
-teacher-forced surface probe plan; if accepted, prepare a Slurm-only Qwen
-teacher-forced surface-mass scorer wrapper for base/protected/task-only. Do not
-run free generation or locked-scale until the surface teacher-forced gate is
-actually scored and reviewed.
-
-## Latest Expert Review
-
-The 2026-05-12 22:10Z expert review / artifact-only repair decision is
-recorded for completed H200 job `853524`.
-
-Expert decision:
-
-`docs/natural_evidence_v2/R3_2_H200_853524_EXPERT_REVIEW_REPAIR_DECISION_20260512_2210.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r3_2_h200_853524_expert_review_repair_decision_20260512_2210.json`
-
-Decision:
-
-- `853524` is not artifact-only repairable into a passing locked-scale result;
-- the 22:09Z repair decision package is accepted as a negative-result package;
-- duplicate prompt-window reuse is fixed, so the remaining failure is not the
-  old repeated-window control-plane defect;
-- protected accepts remain far below gate at `6/96` versus required `80/96`;
-- null arms remain clean at `0/96`;
-- forbidden-surface matcher semantics still require a separate artifact-only
-  audit, but cannot rescue the protected positive gate.
-
-Current next allowed action: hold for human/expert route decision, or perform
-artifact-only planning for a new protocol/prompt-bank repair package if
-explicitly requested. Do not submit a rerun or unlock Llama, FAR, sanitizer,
-same-family null, payload-diversity claims, or paper-facing positive claims
-from `853524`.
-
-## Latest Hermes Sync
-
-The 2026-05-12 22:09Z artifact-only repair decision package is recorded for
-completed H200 job `853524`.
-
-Decision package:
-
-`docs/natural_evidence_v2/R3_2_H200_853524_REPAIR_DECISION_PACKAGE_20260512.md`
-
-Machine-readable package:
-
-`results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_repair_decision_package.json`
-
-Package conclusion:
-
-- `853524` is a clean Slurm completion and a negative locked-scale result;
-- duplicate prompt-window reuse is fixed;
-- diagnostic nulls remain clean at `0/96`;
-- protected accepts are only `6/96`;
-- main repair axes requiring expert review are prompt-variant repair,
-  bank/surface repair, middle-step coordinate repair, forbidden-surface matcher
-  review, and training-signal generalization review.
-
-Current next allowed action: expert review / artifact-only repair decision for
-`853524`. Do not submit a rerun or unlock Llama, FAR, sanitizer,
-same-family null, payload-diversity claims, or paper-facing positive claims
-until this package is reviewed and a new route is recorded.
-
-The 2026-05-12 22:04Z artifact-only failure attribution is recorded for
-completed H200 job `853524`.
-
-Attribution report:
-
-`results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/r3_2_853524_failure_attribution.md`
-
-Machine-readable summary:
-
-`results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/failure_attribution/r3_2_853524_failure_attribution_summary.json`
-
-Main attribution findings:
-
-- duplicate prompt-window reuse is fixed; all 12 windows and 96 blocks are
-  unique;
-- diagnostic nulls remain clean at `0/96`;
-- protected coordinate-majority recovery is only `6/96`;
-- the weakest prompt variant is `r1_strict_literal_16_step_lines`, with
-  protected target-hit rate `0.307`;
-- largest erasure reason is `observed_first_word_not_in_primary_bucket_set`
-  with `30,021` observations;
-- secondary structural erasures: `missing_or_out_of_order_step_slots = 1,093`
-  and `duplicate_step_slots = 485`;
-- some generated protected outputs show duplicated labels such as
-  `Step 1: Create a Step 1: ...`;
-- forbidden public surface hits are `bucket=21`, `fingerprint=1`,
-  `watermark=1`, and require separate matcher-semantics review.
-
-Current next allowed action: expert review / artifact-only repair decision for
-`853524`. Do not submit a rerun or unlock Llama, FAR, sanitizer,
-same-family null, payload-diversity claims, or paper-facing positive claims
-until this attribution is reviewed.
-
-The 2026-05-12 22:02Z completion review is recorded for expanded 6144 H200
-array job `853524`.
-
-Slurm outcome:
-
-- `853524_0` through `853524_11` all reached `COMPLETED`;
-- all task exit codes were `0:0`;
-- output dir synced locally:
-  `results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/`.
-
-The duplicate-window control-plane problem from job `853430` is fixed here:
-
-- selected prompt windows: `12/12` unique;
-- selected prompt blocks: `96/96` unique;
-- prompt row coverage: `0-6143`.
-
-Aggregate gate result:
-
-| Gate | Required | Observed | Status |
-|---|---:|---:|---|
-| protected accepts @64 | `>=80/96` | `6/96` | FAIL |
-| raw accepts @64 | `0/96` | `0/96` | PASS |
-| task-only accepts @64 | `0/96` | `0/96` | PASS |
-| wrong-key accepts @64 | `0/96` | `0/96` | PASS |
-| wrong-payload accepts @64 | `0/96` | `0/96` | PASS |
-| min accepted-block support | `>=16` | `6` | FAIL |
-| min accepted-block majority margin | `>=3` | `0` | FAIL |
-| forbidden public surface count | `0` | `23` | FAIL |
-| replicate groups complete | `true` | `true` | PASS |
-
-Final aggregate status:
-
-`FAIL_R3_2_SAME_CONTRACT_LOCKED_SCALE_GATE`
-
-Review artifacts:
-
-- `results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_completion_review.md`
-- `results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_h200_853524_completion_review.json`
-- `results/natural_evidence_v2/status/r3_2_qwen_locked_scale_h200_array_853524/r3_2_gate_review.json`
-
-Current next allowed action: artifact-only failure attribution for `853524`.
-Do not submit a rerun, aggregate FAR, start Llama, same-family null, sanitizer,
-or paper-facing claims until attribution is recorded and reviewed.
-
-The 2026-05-12 20:24Z expanded 6144 H200 shard-array submission is recorded.
-
-Submitted exactly one Slurm array job:
-
-- job id: `853524`;
-- job name: `nat-ev-v2-r32h200`;
-- partition: `pomplun`;
-- account: `cs_yinxin.wan`;
-- QoS: `pomplun`;
-- GPU request: `gpu:h200:1`;
-- array: `0-11%8`;
-- command:
-  `sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch`;
-- output dir:
-  `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853524`.
-
-Submission safeguards completed before launch:
-
-- local/remote expanded control-plane hashes matched;
-- Hermes TG/email notification was sent;
-- exactly one allowlist entry was enabled:
-  `v2_r3_2_qwen_locked_scale_shard_array_h200`;
-- the allowlist entry was disabled immediately after `sbatch`;
-- local and remote post-submit allowlist safety checks passed with zero
-  enabled entries.
-
-Submission record:
-
-`results/natural_evidence_v2/status/r3_2_expanded_6144_h200_submission_record_20260512_2024.json`
-
-At the 2026-05-12 21:55Z monitor, all tasks `853524_0` through
-`853524_11` were completed with exit code `0:0`; no running, pending, or
-failed tasks were observed.
-
-Monitor record:
-
-`results/natural_evidence_v2/status/r3_2s_expanded_6144_h200_853524_monitor_20260512_2155.json`
-
-Current next allowed action: review H200 shard-array outputs for Slurm array
-job `853524` only. Do not submit another R3.2 job or aggregate until shard
-outputs are reviewed and the next gate explicitly allows aggregation.
-
-The 2026-05-12 20:22Z expanded 6144 wrapper plan validation is recorded.
-
-Added expanded route config:
-
-`configs/natural_evidence_v2/r3_2_qwen_same_contract_locked_scale_expanded_6144.yaml`
-
-Added expanded precommit builder:
-
-`scripts/natural_evidence_v2/build_r3_2_expanded_locked_scale_precommit.py`
-
-Validation doc:
-
-`docs/natural_evidence_v2/R3_2_EXPANDED_6144_PRECOMMIT_AND_WRAPPER_PLAN_VALIDATION_20260512.md`
-
-Verified precommit output:
-
-`results/natural_evidence_v2/status/r3_2_expanded_6144_precommit_plan_20260512_verified_after_builder_fix/`
-
-Key hashes:
-
-- prompt source sha256:
-  `8fcba10d2df1dae83eb03f8ce26fa45623c1918a9246c94b6b6868fc1204247a`;
-- selected prompt manifest sha256:
-  `ce057a36ad75424919f4367eb3e2f0221725a9c6715d156ab4b2a377edb600ed`;
+Route R4 redesigned positive evidence contract after the candidate-v3
+pressure-relaxation-B and transfer-gap dev generation failures (`857795` and
+`858019`).
+
+The user has standing authorization for Codex and Hermes to continue already
+approved routes without repeatedly asking for per-step approval. This does not
+waive gates, allowlist rules, Hermes TG/email notification, Slurm-only
+execution on Chimera, H200/pomplun policy, or the one-reviewed-submission rule.
+
+Later training, generation, H200 scoring, Llama, null/FAR, sanitizer, payload
+diversity, and paper-facing claim work are conditionally authorized only after
+their recorded prerequisite gates pass. They are not permanently forbidden.
+Hermes/Codex should continue automatically when a route's prerequisites pass
+and should not ask for repeated manual approval on the same clear route. They
+are simply not unlocked by this state yet.
+
+## Current Controlling Blocker
+
+`BLOCK_R4_POSITIVE_859277_ZERO_EVENT_SUPPORT_FAILURE_ANALYSIS_RECORDED`
+
+The R4 positive event-bank full generation/decode wrapper is now implemented
+and locally reviewed. Non-plan wrapper mode no longer exits with the old
+implementation-pending fail-closed marker. It has an explicit full path:
+Qwen generation for `protected`, `raw`, and `task_only`, then keyed
+phrase-event decoding under `format_scrub=all` and `format_scrub=none`, with
+`wrong_key` and `wrong_payload` decoder controls over protected transcripts.
+Focused pytest passed (`13` tests), local plan-only wrapper validation passed,
+a synthetic keyed-decoder fixture accepted protected and rejected wrong-key /
+wrong-payload controls, and local allowlist safety passed with zero enabled
+entries. A disabled allowlist entry `v2_r4_positive_dev_diagnostic_h200` has
+been added for the future reviewed route. No Slurm job was submitted, no
+generation was started, and no positive claim is allowed. The next
+project-advancing action was remote sync, remote plan-only validation with the
+full wrapper, local/remote hash preflight, and remote allowlist safety. Those
+remote checks have now passed, and the Chimera active-job preflight saw no
+active jobs for the user. No Slurm job was submitted, no generation was started,
+and no positive claim is allowed. A separate single-submission route has now
+been reviewed for exactly one H200/pomplun Slurm array job using allowlist entry
+`v2_r4_positive_dev_diagnostic_h200` and command
+`sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch`.
+The route uses static dev keys only for this diagnostic precommit package and
+does not create a production or paper-facing keying claim. Final preflight and
+Hermes TG/email pre-submit notification passed. Exactly one allowlist entry was
+enabled, exactly one H200/pomplun Slurm array job was submitted as job `859277`,
+and the allowlist entry was disabled immediately after `sbatch` returned.
+Local and remote post-submit allowlist safety both passed with zero enabled
+entries. Job `859277` has now reached terminal `COMPLETED` state for all four
+array tasks with exit code `0:0`; artifacts and Slurm logs were synced and
+reviewed. The wrapper and Slurm run completed cleanly, but the positive dev
+gate failed: protected accepts are `0/32` under primary `format_scrub=all` and
+`0/32` under no-scrub decode. Raw, task-only, wrong-key, and wrong-payload
+controls also have `0/32` accepts. The key failure is that the extractor found
+zero frozen phrase events in every block, so protected support, distinct
+coordinates, keyed score, and margin were all zero. Forbidden surface hits are
+also nonzero (`coordinate: 439`, `bucket: 28` under primary decode), mostly from
+ordinary task language such as volunteer coordination and physical buckets.
+This matcher issue does not rescue the positive failure because phrase-event
+support is absent. Do not resubmit this route unchanged. Artifact-only failure
+analysis has now been recorded in
+`results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_failure_analysis/`.
+The unresolved blocker is the zero-event support mismatch between the frozen
+phrase-event bank and free-generation outputs; this route remains in
+no-resubmit state until a new reviewed repair or pivot route is recorded.
+
+The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
+Job `857458` reached terminal `COMPLETED` state and its protected training plus
+teacher-forced surface-mass summaries have been reviewed. The main
+teacher-forced gate passed, but stratified review found surface concentration
+risk. A disabled-by-default capped target-mass objective patch and capped H200
+route review are complete. Local/remote hash preflight, remote wrapper
+plan-only validation, remote zero-enabled allowlist safety, active-job preflight,
+Hermes TG/email pre-submit notification, and exactly-one allowlist enablement
+passed. Exactly one H200/pomplun teacher-forced capped micro-overfit Slurm job
+was submitted as job `857611`; the allowlist entry was disabled immediately
+after `sbatch` returned and local/remote post-submit allowlist safety passed.
+Job `857611` reached terminal `COMPLETED` state with exit code `0:0` and has
+been reviewed. The capped run failed the main teacher-forced lift-vs-base gate
+while passing the concentration cap. Artifact-only failure analysis recorded a
+clean bracket: floor-only job `857458` has enough pressure but too much
+concentration; capped job `857611` has clean concentration but is underpowered
+by about `0.0198` lift vs base. A rebalanced single-job route is now reviewed
+with `TARGET_MASS_CEILING=0.50` and `TARGET_MASS_CEILING_LAMBDA=2.0`. Remote
+plan-only validation, remote zero-enabled allowlist safety, active-job
+preflight, Hermes TG/email notification, and exactly-one allowlist enablement
+passed. Exactly one H200/pomplun rebalanced micro-overfit Slurm job was
+submitted as job `857653`; the allowlist was disabled immediately after
+`sbatch` returned, and local/remote post-submit allowlist safety passed. Job
+`857653` reached terminal `COMPLETED` state with exit code `0:0` and has been
+reviewed. It failed the lift-vs-base gate by about `0.00713` while keeping
+surface concentration well below the cap. An artifact-only post-rebalance
+route decision was recorded, and a bounded pressure-relaxation design is now
+recorded with a fixed two-arm ceiling-penalty grid. The grid route has now been
+reviewed with a single H200 Slurm array wrapper and a disabled-by-default
+allowlist entry. Remote sync, remote wrapper plan-only validation for both arms,
+remote zero-enabled allowlist safety, and active-job preflight have passed. The
+reviewed single-submission sequence was executed. Hermes TG/email pre-submit
+notification succeeded; exactly `v2_r4_candidate_v3_pressure_relaxation_grid_h200`
+was enabled; exactly one H200/pomplun Slurm array job was submitted as job
+`857764`; the allowlist entry was disabled immediately after `sbatch` returned;
+and local/remote post-submit zero-enabled allowlist safety passed. Job `857764`
+completed cleanly: both array tasks reached `COMPLETED` with exit code `0:0`.
+Both fixed arms passed the teacher-forced surface-mass gate and concentration
+cap. Arm `B_ceiling_lambda_0_5` is the strongest by lift vs base. An
+artifact-only small dev generation route has been recorded for arm B, with a
+separate wrapper and disabled-by-default allowlist entry. Local wrapper syntax,
+all-shard plan-only validation, local zero-enabled allowlist safety, remote
+all-shard plan-only validation, remote zero-enabled allowlist safety, and
+active-job preflight have passed. The reviewed single-submission sequence was
+executed: Hermes TG/email pre-submit notification succeeded, exactly
+`v2_r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_h200` was enabled,
+exactly one H200/pomplun Slurm array job was submitted as job `857795`, the
+allowlist was disabled immediately after `sbatch` returned, and local/remote
+post-submit zero-enabled allowlist safety passed. Job `857795` completed
+cleanly: all four array tasks reached `COMPLETED` with exit code `0:0`.
+Artifact review found protected accepts `0/32` under `format_scrub=all` and
+`0/32` under no scrub, while raw/task-only/wrong-key/wrong-payload controls
+also had `0/32` accepts. Failure analysis localized the main gap: teacher-forced
+target pressure did not transfer to free generation because the trained
+prefix-native contexts did not appear in generated outputs, and structural
+length leakage remained high. An artifact-only transfer-gap repair route has
+now been recorded. It requires prefix-context elicitation, free-generation
+surface polarity alignment, forbidden matcher semantics, and structural length
+leakage controls before any compute path can be reviewed. The reviewed single
+transfer-gap diagnostic submission was then executed as Slurm array job
+`858019`; all four tasks reached terminal `COMPLETED` state with exit code
+`0:0` on `chimera21`. Artifacts were synced and reviewed. The repaired prompt
+package still failed the positive dev gate: protected accepts were `0/32` under
+`format_scrub=all` and `0/32` under no scrub, with raw/task-only/wrong-key/
+wrong-payload controls also at `0/32`. Forbidden public surface counts dropped
+relative to job `857795` but remain nonzero (`{'coordinate': 183, 'bucket': 11}`
+per scrub mode). Artifact-only failure analysis localized a second failure:
+the repair package did not improve protected support versus `857795`
+(`18.0 -> 16.25` mean support under scrub-all), protected/wrong-key/
+wrong-payload support remained identical, prefix-context hits stayed at zero,
+and the prompt policy still induced bullets plus `Next action:` labels despite
+the fixed-label/structural-leakage constraints. Do not submit another
+prompt-only transfer-gap repair job from this package. An artifact-only route
+decision now stops the current prompt-only transfer-gap repair line and requires
+artifact-only positive evidence contract redesign review, or an explicit
+stop/pivot record, before any additional compute route is eligible for review.
+No downstream gate is unlocked. Do not submit another Slurm job or start
+downstream training/Llama/null/sanitizer/FAR/payload-diversity/paper-claim work
+until a new route is reviewed and its prerequisite gates pass. A standing
+conditional-execution sync has also been recorded so Hermes/Codex do not
+interpret gate-controlled actions as
+permanently forbidden: after a future route's prerequisites pass, Codex/Hermes
+may continue without repeated user approval while still enforcing allowlist,
+notification, Slurm, H200, and claim gates. A follow-on artifact-only positive
+evidence contract redesign review has now recorded the minimum requirements for
+any redesigned positive evidence contract. It found the redesign not yet
+compute-ready and did not unlock Slurm, generation, Qwen E2E rerun, training,
+Llama, same-family null, sanitizer, FAR aggregation, payload-diversity work, or
+paper-facing positive claims. Codex then implemented a static redesigned
+contract `r4_keyed_correlation_evidence_v1`, added a validator and a toy
+keyed-correlation decoder, and validated the static contract locally. This
+still did not unlock compute. Codex then built the artifact-only R4 positive
+event-bank precommit package for the redesigned keyed-correlation contract. The
+package passed static validation with 96 natural phrase events, 8 surface
+families, max family fraction 0.125, HMAC mapping coverage over 29/32
+coordinates, 35 positive-polarity events, and no exposed key material. This
+still did not unlock compute. Codex then recorded an artifact-only dev
+diagnostic route scope for the precommitted event bank. The route scope fixes
+Qwen-only, same-contract `a55e`, 32 dev blocks, 64 prompts per block, five
+conditions, primary `format_scrub=all`, and H200/pomplun submission policy for
+a future reviewed route. It also records the future gates, but it is not a
+submission approval. The next project-advancing action is artifact-only
+event-extractor implementation and generation/decode wrapper plan-only review
+for this route. Codex then implemented the artifact-only phrase event
+extractor, validated that it strips bullets, numbering, and simple public
+action labels under `format_scrub=all`, and verified word-boundary phrase
+matching against the frozen surface bank. Codex then added a fail-closed H200
+wrapper for the R4 positive dev diagnostic route. The wrapper currently only
+supports `VALIDATE_PLAN_ONLY=1`; non-plan full mode exits before generation.
+Local bash syntax and plan-only smoke validation passed. The next
+project-advancing action was remote plan-only wrapper validation, remote
+zero-enabled allowlist safety, and local/remote hash preflight. The first
+remote plan-only attempt exposed that `uv` is not on the Chimera PATH, so the
+wrapper was repaired to use an explicit `PYTHON_BIN` and the existing Chimera
+venv. Remote plan-only validation then passed, remote allowlist safety passed,
+and local/remote hashes matched. The wrapper still fails closed outside
+`VALIDATE_PLAN_ONLY=1`, so no Slurm submission is unlocked. The next
+project-advancing action is full generation/decode wrapper implementation and
+review for the precommitted R4 positive dev diagnostic route.
+
+Route record:
+
+- `docs/natural_evidence_v2/R4_CANDIDATE_V3_TRANSFER_GAP_REPAIR_ROUTE_20260514_0658.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_route_20260514_0658/route_decision_summary.json`
+- `docs/natural_evidence_v2/R4_CANDIDATE_V3_TRANSFER_GAP_IMPLEMENTATION_PLAN_20260514_0700.md`
+- `docs/natural_evidence_v2/R4_AUTONOMOUS_CONDITIONAL_EXECUTION_SYNC_20260514.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_implementation_plan_20260514_0700/implementation_plan_summary.json`
+- `configs/natural_evidence_v2/r4_candidate_v3_transfer_gap_repair.yaml`
+- `scripts/natural_evidence_v2/validate_r4_transfer_gap_repair_plan.py`
+- `tests/natural_evidence_v2/test_r4_transfer_gap_repair_plan.py`
+- `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_plan_validation_20260514_0700/transfer_gap_repair_plan_validation_summary.json`
+- `docs/natural_evidence_v2/R4_CANDIDATE_V3_TRANSFER_GAP_858019_ROUTE_DECISION_20260514_0822.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_858019_route_decision_20260514_0822/route_decision_summary.json`
+- `docs/natural_evidence_v2/R4_POSITIVE_EVIDENCE_CONTRACT_REDESIGN_REVIEW_20260514_0838.md`
+- `results/natural_evidence_v2/status/r4_positive_evidence_contract_redesign_review_20260514_0838/contract_redesign_review_summary.json`
+- `configs/natural_evidence_v2/r4_positive_evidence_contract_redesign.yaml`
+- `scripts/natural_evidence_v2/validate_r4_positive_evidence_contract.py`
+- `scripts/natural_evidence_v2/r4_keyed_correlation_decoder.py`
+- `configs/natural_evidence_v2/r4_positive_event_bank_precommit.yaml`
+- `scripts/natural_evidence_v2/build_r4_positive_event_bank_precommit.py`
+- `tests/natural_evidence_v2/test_r4_positive_evidence_contract.py`
+- `tests/natural_evidence_v2/test_r4_keyed_correlation_decoder.py`
+- `tests/natural_evidence_v2/test_r4_positive_event_bank_precommit.py`
+- `docs/natural_evidence_v2/R4_POSITIVE_EVIDENCE_CONTRACT_STATIC_VALIDATION_20260514_1545.md`
+- `results/natural_evidence_v2/status/r4_positive_evidence_contract_static_validation_20260514_1545/static_validation_summary.json`
+- `docs/natural_evidence_v2/R4_POSITIVE_EVENT_BANK_PRECOMMIT_PACKAGE_20260514_1605.md`
+- `results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/package_summary.json`
+- `configs/natural_evidence_v2/r4_positive_dev_diagnostic_route.yaml`
+- `scripts/natural_evidence_v2/validate_r4_positive_dev_diagnostic_route.py`
+- `tests/natural_evidence_v2/test_r4_positive_dev_diagnostic_route.py`
+- `docs/natural_evidence_v2/R4_POSITIVE_DEV_DIAGNOSTIC_ROUTE_SCOPE_20260514_1612.md`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_route_scope_20260514_1612/route_scope_validation_summary.json`
+- `scripts/natural_evidence_v2/extract_r4_positive_phrase_events.py`
+- `tests/natural_evidence_v2/test_r4_positive_phrase_event_extractor.py`
+- `docs/natural_evidence_v2/R4_POSITIVE_EVENT_EXTRACTOR_STATIC_REVIEW_20260514_1618.md`
+- `scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch`
+- `docs/natural_evidence_v2/R4_POSITIVE_DEV_DIAGNOSTIC_WRAPPER_PLAN_ONLY_20260514_1622.md`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_wrapper_plan_smoke_20260514/plan_validation/wrapper_plan_only_summary.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_remote_plan_smoke_20260514_pybin/plan_validation/wrapper_plan_only_summary.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_wrapper_remote_allowlist_safety_20260514.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_wrapper_remote_hash_preflight_20260514.md`
+- `scripts/natural_evidence_v2/decode_r4_positive_keyed_correlation.py`
+- `tests/natural_evidence_v2/test_r4_positive_keyed_correlation_decode.py`
+- `docs/natural_evidence_v2/R4_POSITIVE_FULL_GENERATION_DECODE_WRAPPER_IMPLEMENTATION_REVIEW_20260514_1818.md`
+- `results/natural_evidence_v2/status/r4_positive_full_generation_decode_wrapper_implementation_review_20260514_1818.json`
+- `results/natural_evidence_v2/status/r4_positive_keyed_decoder_fixture_20260514/decode_all/decode_summary.json`
+- `results/natural_evidence_v2/status/r4_positive_full_wrapper_allowlist_safety_20260514.json`
+- `results/natural_evidence_v2/status/r4_positive_full_wrapper_remote_plan_smoke_20260514/plan_validation/wrapper_plan_only_summary.json`
+- `results/natural_evidence_v2/status/r4_positive_full_wrapper_remote_allowlist_safety_20260514.json`
+- `results/natural_evidence_v2/status/r4_positive_full_wrapper_remote_hash_preflight_20260514.md`
+- `results/natural_evidence_v2/status/r4_positive_full_wrapper_active_job_preflight_20260514.json`
+- `docs/natural_evidence_v2/R4_POSITIVE_DEV_DIAGNOSTIC_SINGLE_SUBMISSION_ROUTE_20260514_1930.md`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_single_submission_route_20260514_1930.json`
+- `results/natural_evidence_v1/status/hermes_reports/20260514_1930_r4_positive_dev_diagnostic_submission_record.md`
+- `results/natural_evidence_v1/status/hermes_reports/20260514_1930_r4_positive_dev_diagnostic_submission_record.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_single_enabled_preflight_local_20260514_1930.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_single_enabled_preflight_remote_20260514_1930.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_post_submit_allowlist_safety_local_20260514_1930.json`
+- `results/natural_evidence_v2/status/r4_positive_dev_diagnostic_post_submit_allowlist_safety_remote_20260514_1930.json`
+- `results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_review/review.md`
+- `results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_review/aggregate_summary.json`
+- `results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_review/surface_openers_and_exact_hit_analysis.json`
+
+Positive evidence contract static validation:
+
+- contract id: `r4_keyed_correlation_evidence_v1`
+- static validation status:
+  `PASS_R4_POSITIVE_EVIDENCE_CONTRACT_STATIC_VALIDATION_NO_COMPUTE`
+- focused pytest for contract + toy decoder: `10 passed`
+- `py_compile`: passed
+- local allowlist safety: `PASS`
+- compute unlocked: `false`
+- next allowed action: artifact-only dev diagnostic route review for the
+  precommitted event bank
+
+Positive event-bank precommit package:
+
+- package status: `PASS_R4_POSITIVE_EVENT_BANK_PRECOMMIT_PACKAGE`
+- event bank id: `r4_positive_phrase_event_bank_v1`
+- payload id: `a55e`
 - precommit hash:
-  `6de7432ef3155100321affa30f677c2d88e17d5bc6323cde2670ab838d8a85ea`.
-
-Repaired shard-array wrappers:
-
-- `scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch`;
-- `scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch`.
-
-Both now default to the expanded prompt artifact, expanded config, split
-`wp3_r1_density_eval`, selected prompt manifest hash
-`ce057a36ad75424919f4367eb3e2f0221725a9c6715d156ab4b2a377edb600ed`, and
-shard allocation `expected_start = SHARD_INDEX * 512`. Both wrappers support
-`VALIDATE_PLAN_ONLY=1`.
-
-Local plan-only smokes passed without Slurm submission:
-
-- H200:
-  `results/natural_evidence_v2/status/r3_2_expanded_6144_h200_wrapper_plan_smoke_20260512/`;
-- scavenger:
-  `results/natural_evidence_v2/status/r3_2_expanded_6144_scavenger_wrapper_plan_smoke_20260512/`.
-
-Current next allowed action: artifact-only local/remote control-plane sync
-preflight for the expanded 6144 route. Do not submit Slurm until a fresh
-allowlist safety check, local/remote hash match, and Hermes TG/email
-notification are recorded, and only one reviewed R3.2 shard-array entry is
-enabled for submission.
-
-The 2026-05-12 20:15Z artifact-only precommit repair validation is recorded.
-
-Updated:
-
-`scripts/natural_evidence_v2/build_r3_2_locked_scale_precommit.py`
-
-The precommit builder now supports the expanded R3.2 allocation policy
-`distinct_eval_window_by_shard_index` while preserving old-route compatibility.
-Local plan-only validation passed for the expanded 6,144-row prompt artifact:
-
-`results/natural_evidence_v2/status/r3_2_expanded_6144_precommit_local_validation_20260512_2015/`
-
-Validation result:
-
-- selected prompt manifest SHA256:
-  `ce057a36ad75424919f4367eb3e2f0221725a9c6715d156ab4b2a377edb600ed`;
-- unique selected prompt windows: `12`;
-- unique blocks: `96`;
-- shard window starts: `0..5632` by `512`, no modulo reuse;
-- status: `PASS_R3_2_EXPANDED_PRECOMMIT_LOCAL_PLAN_VALIDATION_NO_SLURM`.
-
-Review doc:
-
-`docs/natural_evidence_v2/R3_2_EXPANDED_PRECOMMIT_REPAIR_VALIDATION_20260512_2015.md`
-
-Current next allowed action: artifact-only wrapper repair/review and
-allowlist/local-remote hash safety review for the expanded 6,144-row route. No
-Slurm until repaired wrapper, allowlist safety, local/remote hashes, and Hermes
-notification are reviewed.
-
-The 2026-05-12 20:11Z expanded prompt plan is recorded.
-
-Expanded WP2 prompt scaffold:
-
-`results/natural_evidence_v2/prompts/wp2_controlled_natural_prompt_family_scaffold_r3_2_expanded_20260512/`
-
-Expanded WP3 strict Step-label prompt plan:
-
-`results/natural_evidence_v2/status/wp3_r1_strict_density_expansion_plan_r3_2_6144_20260512/`
-
-Expanded R3.2 allocation preflight:
-
-`results/natural_evidence_v2/status/r3_2_repaired_prompt_allocation_preflight_expanded_6144_20260512/r3_2_repaired_prompt_allocation_preflight.json`
-
-Result:
-
-- expanded eval prompt rows: `6,144`;
-- available unique shards: `12`;
-- available unique blocks: `96`;
-- duplicate prompt IDs: `0`;
-- structural-slot violations: `0`;
-- allocation status: `PASS_REQUESTED_LOCKED_SCALE_PROMPT_ALLOCATION_FEASIBLE`.
-
-Expanded prompt plan doc:
-
-`docs/natural_evidence_v2/R3_2_EXPANDED_PROMPT_PLAN_6144_20260512.md`
-
-Current next allowed action: artifact-only wrapper/precommit repair and local
-plan-only validation for the expanded 6,144-row R3.2 route. No Slurm until the
-repaired wrapper, allowlist safety, local/remote hashes, and Hermes
-notification are reviewed.
-
-The 2026-05-12 20:08Z next-route decision package is recorded.
-
-Decision package:
-
-`docs/natural_evidence_v2/R3_2_NEXT_ROUTE_DECISION_PACKAGE_20260512.md`
-
-Decision:
-
-- do not submit another 96-block R3.2 run from the current 2,048-row eval
-  prompt artifact;
-- Option A, a 32-block unique diagnostic, is feasible but cannot support a
-  96-block locked-scale claim;
-- Option B, expanded-prompt 96-block locked scale, is the canonical
-  paper-readiness direction and requires at least `6,144` eval rows plus 12
-  distinct 512-row shard windows.
-
-Current next allowed action: artifact-only expanded-prompt
-planning/implementation. No Slurm submission, aggregation, rerun, Llama, FAR,
-sanitizer, or paper-facing claim until the expanded prompt plan and repaired
-allocation preflight are reviewed.
-
-The 2026-05-12 20:07Z repaired prompt allocation preflight is recorded.
-
-Added artifact-only preflight script:
-
-`scripts/natural_evidence_v2/plan_r3_2_repaired_prompt_allocation.py`
-
-Preflight result:
-
-- requested R3.2 locked scale: `12` shards x `8` blocks x `64` prompts =
-  `96` blocks and `6,144` unique eval prompt rows;
-- current prompt artifact has `2,048` eval rows;
-- maximum feasible unique package from current prompt artifact: `4` shards,
-  `32` blocks;
-- current `96`-block locked-scale request is therefore not feasible without
-  either prompt-bank expansion or an explicit downscope to a 32-block unique
-  diagnostic.
-
-Preflight doc:
-
-`docs/natural_evidence_v2/R3_2_REPAIRED_PROMPT_ALLOCATION_PREFLIGHT_20260512.md`
-
-Machine-readable output:
-
-`results/natural_evidence_v2/status/r3_2_repaired_prompt_allocation_preflight_20260512/r3_2_repaired_prompt_allocation_preflight.json`
-
-Current next allowed action: artifact-only route decision/repair design only:
-choose 32-block unique diagnostic or expand the prompt bank before any R3.2
-Slurm resubmission. No Slurm until a reviewed route, allowlist safety, and
-Hermes notification are recorded.
-
-No Slurm job was submitted or aggregated for this update.
-
-The 2026-05-12 20:00Z repair guard update is recorded.
-
-Added repair decision:
-
-`docs/natural_evidence_v2/R3_2_H200_853430_FAILURE_ATTRIBUTION_AND_REPAIR_DECISION_20260512.md`
-
-Updated aggregate safety behavior:
-
-- `scripts/natural_evidence_v2/aggregate_r3_2_locked_scale_shards.py` now
-  refuses duplicate selected-prompt-window, generated-output, or decode-row
-  hashes by default;
-- a local no-write smoke over the `853430` copied artifacts correctly
-  hard-failed with `R3_2_DUPLICATE_PROMPT_WINDOWS_REFUSING_AGGREGATION`;
-- smoke record:
-  `results/natural_evidence_v2/status/r3_2_h200_853430_review/aggregate_guard_smoke/summary.json`.
-
-Current next allowed action: artifact-only repaired prompt allocation preflight
-design/implementation only. R3.2 Slurm resubmission remains blocked until prompt
-windows are genuinely distinct, uniqueness checks pass, allowlist is safe, and
-a fresh reviewed submission route plus Hermes notification are recorded.
-
-No Slurm job was submitted or aggregated for this update.
-
-The 2026-05-12 19:56Z artifact-only failure attribution is now recorded for
-H200 array job `853430`.
-
-The main attribution finding is a control-plane/statistical-design issue:
-the run nominally reports `39/96` protected accepts, but the 12 shards collapse
-to 4 unique deterministic prompt windows repeated 3 times each. Generated
-outputs and decode rows have identical hashes within each repeated group, so
-the effective unique evidence is `13/32`, not 96 independent blocks.
-
-Unique prompt-window outcomes:
-
-| Window | Repeated shards | Prompt rows | Protected accepts | Protected target hit | Resolved slot rate |
-|---|---|---:|---:|---:|---:|
-| `window_00` | `shard_00,shard_04,shard_08` | `512-1023` | `8/8` | `0.759` | `0.842` |
-| `window_01` | `shard_01,shard_05,shard_09` | `1024-1535` | `3/8` | `0.839` | `0.922` |
-| `window_02` | `shard_02,shard_06,shard_10` | `1536-2047` | `1/8` | `0.561` | `0.701` |
-| `window_03` | `shard_03,shard_07,shard_11` | `2048-2559` | `1/8` | `0.333` | `0.396` |
-
-The late-window failures are associated with low support/margin and weak
-target-hit survival, not null-arm accepts. The `forbidden_public_surface_count`
-gate remains failed, but a response-text substring audit shows some ordinary
-language substring matches such as `cert` inside `certain` and `owner` in
-normal phrases; exact matcher semantics still need an artifact-only audit.
-
-Current next allowed action: artifact-only route decision or repair design
-only. Fix prompt allocation so locked-scale uses genuinely distinct prompt
-windows, analyze late-window prompt/topic effects, and audit forbidden matcher
-semantics. Do not submit, aggregate, rerun, start Llama/FAR/sanitizer work, or
-make paper-facing claims until a new reviewed route is recorded.
-
-Attribution report:
-
-`results/natural_evidence_v2/status/r3_2_h200_853430_review/failure_attribution/r3_2_h200_853430_failure_attribution.md`
-
-Hermes-facing attribution report:
-
-`results/natural_evidence_v1/status/hermes_reports/20260512_1556_r3_2_h200_853430_failure_attribution.md`
-
-Hermes TG/email notification was sent successfully for this attribution:
-
-`results/natural_evidence_v1/status/hermes_reports/20260512_1556_r3_2_h200_853430_failure_attribution_notification.json`
-
-The 2026-05-12 19:46Z completion review supersedes the monitor-only state for
-H200 array job `853430`.
-
-Slurm outcome:
-
-- `853430_0` through `853430_11` all reached `COMPLETED` with exit code `0:0`;
-- reviewed remote output dir:
-  `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853430`;
-- local review artifacts:
-  `results/natural_evidence_v2/status/r3_2_h200_853430_review/`.
-
-Gate outcome:
-
-- protected accepts @64: `39/96`, below the required `>=80/96`;
-- raw accepts @64: `0/96`;
-- task-only accepts @64: `0/96`;
-- wrong-key accepts @64: `0/96`;
-- wrong-payload accepts @64: `0/96`;
-- min accepted-block support: `6`, below the required `>=16`;
-- min accepted-block majority margin: `0`, below the required `>=3`;
-- forbidden public surface count: `9`, above the required `0`.
-
-The R3.2 H200 locked-scale gate therefore failed. This is not a Slurm crash,
-not a Llama job, and not a payload-diversity result. The most visible pattern
-is cyclic by shard window: shards `0/4/8` passed strongly, `1/5/9` were partial,
-and `2/6/10` plus `3/7/11` mostly failed.
-
-Current next allowed action: artifact-only failure attribution only. Analyze
-cyclic prompt-window/shard effects, per-step support/margin/target-hit
-failures, and forbidden-surface matcher semantics. Do not submit, rerun,
-aggregate, start Llama, run null/FAR/sanitizer work, or make paper-facing
-positive claims from `853430` until a new reviewed route is recorded.
-
-Completion review:
-
-`results/natural_evidence_v2/status/r3_2_h200_853430_review/r3_2_h200_853430_completion_review.md`
-
-Hermes-facing report:
-
-`results/natural_evidence_v1/status/hermes_reports/20260512_1547_r3_2_h200_853430_completion_review.md`
-
-The 2026-05-12 18:16Z Codex/Hermes sync follows the user's instruction to move
-R3.2 execution from A100/scavenger to the available H200 node on `pomplun` using
-account `cs_yinxin.wan`.
-
-Actions completed:
-
-- installed a project state lock at
-  `results/natural_evidence_v2/status/r3_2_state_lock.json`;
-- updated Hermes supervision so Codex workers see the project state lock;
-- sent TG/email pre-action notification successfully;
-- cancelled noncanonical A100 array `853381`;
-- created and reviewed H200 shard-array wrapper
-  `scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch`;
-- added allowlist entry `v2_r3_2_qwen_locked_scale_shard_array_h200`;
-- submitted first H200 attempt `853421`, observed immediate task failure from
-  a stale expected selected prompt manifest hash, then cancelled `853421`;
-- fixed the expected selected prompt manifest hash to
-  `3e50a08773c4c7dca3be976a762840a8d8a960ac63f4cfce382af3051a2b82d1`;
-- added precommit lock cleanup to shard-array wrappers;
-- submitted corrected H200 array `853430`;
-- immediately disabled the allowlist entry after `sbatch` returned;
-- revalidated local and remote allowlist safety with zero enabled entries.
-
-Canonical active job:
-
-- job id: `853430`
-- job name: `nat-ev-v2-r32h200`
-- partition: `pomplun`
-- account: `cs_yinxin.wan`
-- qos: `pomplun`
-- gres: `gpu:h200:1`
-- observed node: `chimera21`
-- output dir:
-  `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853430`
-
-At submission review, `853430_0..5` were running on `chimera21`, and
-`853430_[6-11%8]` were pending due `QOSGrpBillingRunMinutes`.
-
-At that time, the next action was to monitor Slurm array job `853430` only.
-That action was superseded after the expanded `853524` submission recorded
-above.
-
-Submission record:
-
-`results/natural_evidence_v1/status/hermes_reports/20260512_1816_r3_2_h200_submission_record.md`
-
-The 2026-05-12 17:51Z Codex/Hermes sync supersedes the stale
-`monitor 853276 only` action. Chimera currently has an active R3.2 shard-array
-job `853381` (`nat-ev-v2-r32shard`) on `DGXA100`/`scavenger`: tasks `0..7`
-are running and tasks `8..11` are pending behind the array throttle. The
-previous recorded array `853276` is terminal/incomplete and is no longer the
-actual active job.
-
-No local reviewed submission record for `853381` was found. The only reviewed
-local shard-array submission record remains `853276`. Local and remote hashes
-still match for the allowlist, R3.2 config, and aggregate sbatch, but the
-shard-array sbatch has diverged again:
-
-- local shard-array hash:
-  `fe24f12b7944ccf5d131cb1beb6f0b921008d0db60a6673557e1c0fed2a559c6`
-- remote shard-array hash used by the running job:
-  `a5a64f1f6de5047868e60fddb53ccd9a14ddf8cdbc3aa2bcf6acadd2e6f6ff2f`
-- remote selected prompt manifest default:
-  `3e50a08773c4c7dca3be976a762840a8d8a960ac63f4cfce382af3051a2b82d1`
-- local selected prompt manifest default:
-  `71f6ce51fb1e4cfd8ef07fe74e284cf14d16a19651de95aa4b8e717eb1e78820`
-
-Current blocker:
-
-`BLOCK_R3_2_ACTIVE_ARRAY_853381_UNRECORDED_AND_REMOTE_HASH_MISMATCH_NO_AGGREGATE`
-
-No Slurm job was submitted, cancelled, or aggregated during this sync. No
-allowlist entry was enabled. The sync report is:
-
-`results/natural_evidence_v1/status/hermes_reports/20260512_1751_r3_2_active_array_853381_sync_blocker.md`
-
-The 2026-05-12 18:01Z artifact-only provenance reconciliation classified
-`853381` as an unreviewed external/manual control-plane submission from the
-local Codex/Hermes perspective. Slurm reports submit time
-`2026-05-12T12:31:53` from `chimerahead:630198`. The shard-array wrapper hash
-mismatch is localized to the default
-`EXPECTED_SELECTED_PROMPT_MANIFEST_SHA256` line: local reviewed wrapper
-`71f6ce51fb1e4cfd8ef07fe74e284cf14d16a19651de95aa4b8e717eb1e78820`,
-remote running wrapper
-`3e50a08773c4c7dca3be976a762840a8d8a960ac63f4cfce382af3051a2b82d1`.
-`853381` remains quarantined and non-canonical; do not aggregate or adopt it
-automatically:
-`results/natural_evidence_v1/status/hermes_reports/20260512_1801_r3_2_active_array_853381_provenance_reconciliation.md`.
-
-The Hermes scheduled ticks at 05:15 and 05:30 reached a blocker:
-
-`BLOCK_R3_2_SUBMISSION_HARD_CONSTRAINT_CONFLICT`
-
-Reason: the tick requested R3.2 Qwen locked-scale submission but still carried
-old hard constraints forbidding all generation and Qwen E2E reruns. That
-conflicted with the approved R3.2 route, which necessarily requires reviewed
-Qwen locked-scale generation/eval.
-
-This control-plane conflict is now resolved in the Hermes prompt template:
-R3.2 Qwen locked-scale generation/eval is allowed only through the reviewed
-R3.2 full wrapper, a single enabled allowlist entry, successful TG/email
-notification, and exactly one Chimera Slurm job.
-
-The later 05:45 Hermes tick reached a more specific blocker:
-
-`BLOCK_R3_2_FULL_WRAPPER_PAYLOAD_SEMANTICS_AMBIGUOUS_NO_SLURM`
-
-Reason: R3.2 package scope names payload cells `P00/P01/P02/P03`, but the
-available reviewed generation/decode path is tied to the single WP5-R2
-`a55e` contract. Treating `P00/P01/P02/P03` as distinct payloads or reusing
-`a55e` across all labels would both be protocol-significant without an explicit
-recorded decision.
-
-The 06:15 Codex update supersedes the earlier cell-label interpretation:
-
-`R3_2_SAME_CONTRACT_LOCKED_SCALE_STABILITY_ROUTE`
-
-Decision: R3.2 is a same-contract `a55e` locked-scale stability package.
-`P00/P01/P02/P03` must not be used as payload labels or cell labels in the
-canonical R3.2 route. Canonical units are `replicate_group`, `shard_id`, and
-`block_id`. Distinct payload evaluation is deferred to R3.4.
-
-The 2026-05-12 03:09Z Codex/Hermes worker performed the final preflight for
-the prepared scavenger shard-array submission route and blocked before
-allowlist enablement or Slurm submission. Hermes TG/email notification had
-succeeded, the local zero-enabled allowlist preflight passed, and Chimera had
-no active jobs, but the remote `~/tokenizer-evidence` repo was not synchronized
-to the reviewed shard-array route: the shard-array and aggregate sbatch files
-were missing remotely, and the remote allowlist/config/precommit hashes differed
-from local reviewed files. No allowlist entry was enabled and no Slurm job was
-submitted:
-`results/natural_evidence_v1/status/hermes_reports/20260512_0309_r3_2_shard_array_remote_sync_blocker.md`.
-
-## Completed Gates
-
-- v1 passive opportunity/global-frame/strict-token-index route is frozen as a
-  negative diagnostic.
-- Qwen v2 WP3/WP4/WP5 gates passed.
-- WP5-R2 teacher-forced gate passed on job `851481`.
-- WP6-R2 Option B diagnostic job `852426` passed as a Qwen-only positive
-  diagnostic:
-  - protected accepts `7/8` at budget `64`
-  - raw/task-only/wrong-key/wrong-payload accepts `0/8`
-  - min accepted-block support `26`
-  - min accepted-block majority margin `5`
-  - forbidden public surface count `0`
-- R3.0 canonical adoption is recorded.
-- R3.1 repeated-coordinate majority decoder spec is recorded.
-- R3.2 prompt allocation decision is recorded.
-- R3.2 prompt split repair is implemented and plan-only precommit passed under
-  the repaired eval-only 4-window allocation:
-  `docs/natural_evidence_v2/R3_2_PROMPT_SPLIT_IMPLEMENTATION_20260511_1801.md`.
-- R3.2 `852426` replay compatibility is re-reviewed under the repaired prompt
-  split contract and remains passing:
-  `docs/natural_evidence_v2/R3_2_852426_REPLAY_COMPATIBILITY_REREVIEW_20260511_1817.md`.
-- R3.2 same-contract payload semantics are recorded:
-  `docs/natural_evidence_v2/R3_2_PAYLOAD_SEMANTICS_DECISION.md`.
-- R3.2 same-contract protocol is recorded:
-  `docs/natural_evidence_v2/R3_2_LOCKED_SCALE_PROTOCOL.md`.
-- R3.2 plan-only preflight passed under the same-contract schema:
-  `results/natural_evidence_v2/status/r3_2_wrapper_preflight_summary.json`.
-- R3.2 plan-only wrapper review is recorded.
-- R3.2 same-contract `852426` replay path passed exactly:
-  `results/natural_evidence_v2/status/r3_2_same_contract_852426_replay_20260511_0630/r3_2_852426_replay_summary.json`.
-- R3.2 full same-contract 12-shard wrapper aggregation path is implemented and
-  locally plan-validated, without Slurm, allowlist, generation, or claims:
-  `docs/natural_evidence_v2/R3_2_FULL_WRAPPER_AGGREGATION_PATH_20260511_0645.md`.
-- R3.2 full same-contract wrapper review passed, including exact `852426`
-  replay review and local syntax/unit validation, without Slurm, allowlist,
-  generation, or claims:
-  `docs/natural_evidence_v2/R3_2_FULL_WRAPPER_REVIEW_20260511_0702.md`.
-- Standing authorization for the current approved R3 route is recorded and TG +
-  email notification succeeded.
-
-## Current Gate
-
-Full R3.2 wrapper review has passed for:
-
-
-`scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch`
-
-The wrapper now has a same-contract 12-shard generation/decode isolation path
-and a 96-block aggregate R3.2 gate artifact path. The local `852426` replay
-path validates the reviewed single-window WP6-R2 artifacts exactly. After the
-failed job `853070`, the R3.2 allowlist entry remains disabled and no further
-R3.2 Slurm job may be submitted until the recorded prerequisites below pass.
-
-Latest review record:
-
-`docs/natural_evidence_v2/R3_2_FULL_WRAPPER_REVIEW_20260511_0702.md`
-
-The older `P00/P01/P02/P03` cell-label blocker language remains superseded by
-the same-contract `shard_00..shard_11` decision above.
-
-## Submission Gate
-
-R3.2-A allowlist decontamination passed. Local and remote allowlists have zero
-enabled entries. The previously unsafe `llama_v2_wp6_e2e_eval` entry is
-disabled while `llama_allowed=false`. The reviewed R3.2 entry remains disabled
-until the single-job submission tick.
-
-Safety summary:
-
-`results/natural_evidence_v2/status/r3_2a_allowlist_decontamination_summary.json`
-
-Local/remote hash diff:
-
-`results/natural_evidence_v2/status/r3_2a_allowlist_local_remote_diff.md`
-
-## Submitted Job 853070
-
-R3.2-B submitted exactly one Chimera Slurm job after TG/email pre-notice and
-after enabling only `v2_r3_2_qwen_locked_scale_eval`.
-
-- job id: `853070`
-- job name: `nat-ev-v2-r32qwen`
-- partition: `DGXA100`
-- final Slurm state: `FAILED`
-- elapsed: `00:00:00`
-- exit code: `1:0`
-- output dir:
-  `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_eval_853070`
+  `9ea75e28abf1842e78017fd9100a03fad75ff0b3ad316e5018f94644baf39b30`
+- surface count: `96`
+- surface families: `8`
+- max surface family fraction: `0.125`
+- distinct HMAC coordinates covered: `29`
+- positive-polarity events: `35`
+- key material exposed: `false`
+- focused pytest for contract + decoder + event-bank package: `15 passed`
+- `py_compile`: passed
+- local allowlist safety after package: `PASS`
+- compute unlocked: `false`
+- next allowed action: artifact-only dev diagnostic route review for the
+  precommitted event bank; no Slurm/allowlist enablement until the route and
+  prerequisite preflights pass
+
+Positive dev diagnostic route scope:
+
+- route status: `PASS_R4_POSITIVE_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_NO_SUBMIT`
+- route id: `r4_positive_event_bank_dev_diagnostic_v1`
+- source precommit hash:
+  `9ea75e28abf1842e78017fd9100a03fad75ff0b3ad316e5018f94644baf39b30`
+- scope: Qwen-only, same-contract `a55e`, dev split, 32 blocks, 64 prompts per
+  block, protected/raw/task-only/wrong-key/wrong-payload, primary
+  `format_scrub=all`
+- future cluster policy: H200 on `pomplun` with account `cs_yinxin.wan` and
+  time limit `30-00:00:00`
+- focused route tests: `10 passed`
+- compute unlocked: `false`
+- next allowed action: artifact-only event-extractor implementation and
+  generation/decode wrapper plan-only review; no Slurm/allowlist enablement
+  until those gates pass
+
+Positive phrase event extractor static review:
+
+- extractor: `scripts/natural_evidence_v2/extract_r4_positive_phrase_events.py`
+- status: `PASS_STATIC_EXTRACTOR_REVIEW_NO_COMPUTE`
+- focused extractor + decoder tests: `10 passed`
+- `py_compile`: passed
+- smoke extraction emitted 3 `normalized_phrase_event` rows under
+  `format_scrub=all`
+- compute unlocked: `false`
+- next allowed action: artifact-only generation/decode wrapper plan-only
+  implementation and review for the R4 positive dev diagnostic route
+
+Positive dev diagnostic wrapper plan-only review:
+
+- wrapper: `scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch`
+- local bash syntax: passed
+- local plan-only status:
+  `PASS_R4_POSITIVE_DEV_DIAGNOSTIC_WRAPPER_PLAN_ONLY`
+- full mode: fail-closed with
+  `FULL_R4_POSITIVE_DEV_DIAGNOSTIC_IMPLEMENTATION_PENDING_NO_SUBMIT`
+- extractor smoke event count: `3`
+- compute unlocked: `false`
+- remote plan-only validation: passed after switching wrapper from `uv` to
+  explicit `PYTHON_BIN`
+- remote allowlist safety: `PASS`
+- local/remote hash preflight: `PASS`
+- compute unlocked: `false`
+- next allowed action: full generation/decode wrapper implementation and
+  review for the R4 positive dev diagnostic route
+
+Plan-only validation result:
+
+- status: `PASS_R4_TRANSFER_GAP_REPAIR_PLAN_VALIDATION`
+- repair surfaces covered: `4`
+- prefix shapes recorded: `8`
+- focused pytest: `11 passed`
+- local allowlist safety after plan validation: `PASS`
+- active Chimera jobs for remote user `guanjie.lin001`: none observed
+- no Slurm, generation, training, tokenizer/model scoring, Llama, null,
+  sanitizer, FAR, payload-diversity claim, or paper-facing claim was started
+
+Artifact-only repair package result:
+
+- package status: `PASS_R4_TRANSFER_GAP_REPAIR_PACKAGE_ARTIFACT_ONLY`
+- prompt scaffolds: `6`
+- prefix families: `2`
+- focused pytest for repair package: `8 passed`
+- `py_compile` for repair validators/builders: passed
+- local allowlist safety after package build: `PASS`
+- active Chimera jobs for remote user `guanjie.lin001`: none observed
+- generated package artifacts:
+  `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_package_20260514_0705/`
+- future H200 diagnostic remains conditionally authorized after a reviewed
+  route, local/remote preflights, Hermes TG/email notification, exactly-one
+  allowlist enablement, and immediate post-submit allowlist disablement
+
+Submission update:
+
+- route doc:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_TRANSFER_GAP_REPAIR_DEV_DIAGNOSTIC_ROUTE_20260514.md`
 - submission record:
-  `results/natural_evidence_v2/status/r3_2b_submission_record.json`
-
-The allowlist entry was disabled immediately after `sbatch` returned. Local and
-remote allowlists again have zero enabled entries.
-
-The job failed before model generation. The wrapper wrote precommit artifacts,
-then failed in the first shard precommit decode call because the wrapper used
-file rows `0..511` while `decode_wp6_r1_scale_blocks.py` filtered for
-`split='wp3_r1_eval'`. In the configured prompt file, file rows `0..511` are
-`wp3_r1_dev`, so the selected eval prompt window was empty.
-
-Failure review:
-`results/natural_evidence_v2/status/r3_2_qwen_locked_scale_eval_853070/r3_2_job_853070_failure_review.md`.
-
-## Next Allowed Action
-
-Monitor H200 Slurm array job `853524` only.
-
-The canonical active Chimera array is now `853524`. Therefore:
-
-- do not submit another R3.2 Slurm job;
-- do not submit the aggregate job;
-- do not aggregate until all `853524` shard-array tasks reach terminal state
-  and shard outputs are reviewed as complete;
-- do not start training, Llama, same-family null, sanitizer, FAR aggregation,
-  or paper-facing claims from this state.
-
-Next action:
-
-1. Monitor `853524` with `squeue`/`sacct`.
-2. After all tasks are terminal, review all shard outputs for completeness.
-3. Only if all 12 shard summaries are present and complete, prepare a separate
-   aggregate-only route.
-
-## Gate-Controlled Actions Not Yet Unlocked
-
-- training is conditionally authorized, but locked until a training gate
-  explicitly passes and `training_allowed=true`;
-- Llama is conditionally authorized, but locked until Qwen R3 gates explicitly
-  permit canonical Llama migration and
-  `llama_allowed=true`;
-- same-family null is conditionally authorized, but locked until Qwen null
-  prerequisites pass and
-  `same_family_null_allowed=true`;
-- sanitizer benchmark is conditionally authorized, but locked until positive
-  recovery and required model-family gates explicitly permit it and
-  `sanitizer_allowed=true`;
-- FAR aggregation or full-FAR claim is conditionally authorized, but locked
-  until null/FAR prerequisites pass and
-  `far_aggregation_allowed=true`;
-- paper-facing positive claim is conditionally authorized, but locked until
-  evidence/claim-review gates pass and
-  `paper_claim_allowed=true`;
-- unreviewed or non-allowlisted generation remains blocked;
-- Qwen E2E outside the reviewed R3.2 locked-scale route remains blocked;
-- Chimera login-node CPU/GPU work remains blocked.
-
-## Active Jobs
-
-At 2026-05-12T21:40Z:
-
-- active Chimera array: `853524`
-- completed tasks at monitor: `853524_0` through `853524_5`
-- running tasks at monitor: `853524_6` through `853524_11`
-- pending tasks at monitor: none observed
-- partition: `pomplun`
-- account: `cs_yinxin.wan`
-- QOS: `pomplun`
+  `results/natural_evidence_v2/status/r4_transfer_gap_repair_dev_diagnostic_submission_20260514/submission_record.json`
+- job id: `858019`
+- job name: `nat-ev-v2-r4tgap`
+- partition/account/QoS: `pomplun` / `cs_yinxin.wan` / `pomplun`
 - GRES: `gpu:h200:1`
-- command:
-  `/home/guanjie.lin001/tokenizer-evidence/scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch`
-- output dir:
-  `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r3_2_qwen_locked_scale_h200_array_853524`
+- time limit: `30-00:00:00`
+- final observed state: `858019_[0-3]` `COMPLETED` with exit code `0:0` on
+  `chimera21`
+- post-submit local/remote allowlist safety: `PASS` with zero enabled entries
+- review record:
+  `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_review/job_858019_review.md`
+- review summary:
+  `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_review/job_858019_review_summary.json`
+- reviewed status:
+  `FAIL_R4_TRANSFER_GAP_REPAIR_DEV_DIAGNOSTIC_NO_PROTECTED_ACCEPTS_NO_DOWNSTREAM_UNLOCK`
+- failure analysis:
+  `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_failure_analysis/failure_analysis.md`
+- failure analysis summary:
+  `results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_failure_analysis/failure_analysis_summary.json`
+- next allowed action: artifact-only route decision/review only.
+  Do not submit another Slurm job or unlock downstream training/Llama/null/
+  sanitizer/FAR/payload-diversity/paper-claim work until a new route is
+  reviewed and its prerequisite gates pass.
 
-`853381`, `853421`, and `853430` must not be aggregated from this state.
+Local route preflight result:
+
+- status: `PASS_R4_TRANSFER_GAP_REPAIR_DEV_DIAGNOSTIC_LOCAL_PLAN_ONLY_PREFLIGHT`
+- wrapper syntax: `bash -n` passed for transfer-gap wrapper and delegated R4 dev wrapper
+- local plan-only validation: all four shards passed
+- prompt bank sha256:
+  `cf77458604b46e7842e097ad8ee8f26b60596d2d93e3a93b9e3399f2b717a1cb`
+- local zero-enabled allowlist safety after preflight: `PASS`
+- no remote preflight, Slurm submission, generation, training, tokenizer/model
+  scoring, Llama, null, sanitizer, FAR, payload-diversity claim, or
+  paper-facing claim was started
+- next action: remote plan-only preflight and remote zero-enabled allowlist
+  safety for the reviewed H200 route; submit only after that passes and Hermes
+  TG/email notification plus exactly-one allowlist enablement are complete
+
+## Latest Trusted Facts
+
+- Candidate v3 actual Qwen tokenizer boundary preflight job `856443` passed:
+  checked rows `8192`, failed rows `0`, target/other overlap rows `0`.
+- Candidate v3 H200 teacher-forced surface-mass scoring job `856453`
+  completed but failed the gate: protected lift vs base
+  `0.05289504316422722`, protected lift vs task-only
+  `0.0560544523594233`, protected rank1 `0.654296875`, protected median
+  margin `0.01057571533601731`.
+- Adapter gain sweep job `856994` completed on H200/pomplun and showed that
+  gain can pass the teacher-forced gate: first main pass at gain `2.0`; first
+  main plus per-prefix protection pass at gain `4.0`; task-only lift vs base
+  `-0.0031594091951960834`.
+- Noncanonical gain-4 generation array `857015` was cancelled after a state
+  conflict. Its outputs must not be adopted, decoded, aggregated, or used as
+  evidence.
+- Artifact-only micro-overfit route scope review found the old WP5 wrapper is
+  not R4-launch-ready because it used A100/scavenger, old WP5 rows, old primary
+  bank, old bucket scorer, and protected plus task-only training together.
+- Micro-overfit H200 job `857458` completed on `chimera21` in `00:04:36` with
+  exit code `0:0`; review recorded a teacher-forced surface gate pass at
+  protected adapter gain `1.0`: protected lift vs base
+  `0.39194896617371455`, protected lift vs task-only
+  `0.39510837536891064`, protected rank1 `1.0`, protected median margin
+  `0.355754891585093`, task-only lift vs base
+  `-0.0031594091951960834`.
+- Supplementary stratified review found max surface mean target mass
+  `0.643060527741909`, above the earlier concentration diagnostic cap `0.50`;
+  therefore this is a teacher-forced pass with concentration risk, not a direct
+  generation unlock.
+
+## New Artifact-Only Implementation
+
+Created in this synchronization:
+
+- `scripts/natural_evidence_v2/build_r4_candidate_v3_micro_overfit_split.py`
+- `tests/natural_evidence_v2/test_r4_candidate_v3_micro_overfit_split.py`
+- `scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch`
+- disabled allowlist entry:
+  `v2_r4_candidate_v3_micro_overfit_h200`
+- R4 trainer row mode:
+  `--row-mode r4_prefix_native_surface`
+
+Built split artifacts:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_split_20260514_codex/train_rows.jsonl`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_split_20260514_codex/heldout_rows.jsonl`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_split_20260514_codex/score_rows.jsonl`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_split_20260514_codex/split_summary.json`
+
+Split summary:
+
+- source candidate rows sha256:
+  `d35e5483ce7f6d3d782ce17961b2c407909afc879a12917c5ccc27090f3c80b7`
+- train rows: `512`
+- heldout rows: `512`
+- score rows: `8192`
+- duplicate keys: `0`
+- train/heldout overlap: `0`
+- train and heldout each cover all `32` strata with `16` rows per stratum
+- all locked-action booleans remain `false`
+
+Validation completed locally without tokenizer/model loading, CUDA, remote CPU
+or GPU use, Slurm submission, training, scoring, generation, or claims:
+
+- focused pytest: `12 passed`
+- `py_compile` for split builder, trainer, and R4 scorer: passed
+- H200 wrapper syntax: `bash -n` passed
+- H200 wrapper plan-only mode: passed and exited before model/tokenizer loading
+- allowlist safety with zero enabled entries: passed
+
+## Artifact Review
+
+Artifact-only review recorded:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_artifact_review_20260514_0305/artifact_review.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_artifact_review_20260514_0305/artifact_review_summary.json`
+
+Local review result:
+
+- status: `PASS_R4_CANDIDATE_V3_MICRO_OVERFIT_ARTIFACT_REVIEW_NO_COMPUTE`
+- focused pytest with the repo venv: `9 passed`
+- `py_compile`: passed
+- H200 wrapper syntax: passed
+- H200 wrapper plan-only mode: passed and exited before compute paths
+- allowlist safety with zero enabled entries: passed
+- remote sync/hash preflight was not started in this tick
+
+## Remote Sync And Submission
+
+Remote sync and local/remote hash preflight passed:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_remote_sync_hash_preflight_20260514_0310/remote_sync_hash_preflight_summary.json`
+- status: `PASS_REMOTE_SYNC_HASH_PREFLIGHT`
+- file count: `15`
+- mismatch count: `0`
+
+Remote wrapper plan-only check passed and exited before model/tokenizer loading,
+CUDA initialization, adapter loading, training, scoring, remote sync, or Slurm
+submission.
+
+Single-job submission route recorded:
+
+- `docs/natural_evidence_v2/R4_CANDIDATE_V3_MICRO_OVERFIT_H200_SUBMISSION_ROUTE_20260514.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_submission_route_20260514/submission_route_summary.json`
+
+Hermes TG/email pre-submit notification succeeded:
+
+- `results/natural_evidence_v1/status/hermes_reports/20260514_0315_r4_micro_overfit_h200_presubmit_notification.json`
+
+Submitted exactly one H200 job:
+
+- job id: `857458`
+- job name: `nat-ev-v2-r4mof`
+- partition/account/QoS: `pomplun` / `cs_yinxin.wan` / `pomplun`
+- GRES: `gpu:h200:1`
+- wrapper:
+  `scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch`
+- submission record:
+  `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_submission_20260514_0315/submission_record.md`
+
+The allowlist entry `v2_r4_candidate_v3_micro_overfit_h200` was disabled
+immediately after `sbatch` returned. Local and remote post-submit allowlist
+safety checks passed with zero enabled entries.
+
+## Terminal Review
+
+Slurm job `857458` review recorded:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_857458_review/job_857458_review.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_857458_review/job_857458_review_summary.json`
+- status:
+  `PASS_R4_CANDIDATE_V3_MICRO_OVERFIT_JOB_857458_TEACHER_FORCED_REVIEW`
+- protected train summary:
+  `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_857458_review/wp5_micro_slot_lora_train_summary.json`
+- teacher-forced surface-mass summary:
+  `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_857458_review/r4_teacher_forced_surface_mass_summary.json`
+
+This is a teacher-forced diagnostic pass only and is not downstream evidence for
+FAR, ownership, robustness, cross-family behavior, payload diversity, or
+paper-facing positive claims.
+
+Supplementary concentration review recorded:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_857458/review/micro_overfit_857458_review.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_857458/review/micro_overfit_857458_review_summary.json`
+- status:
+  `PASS_TEACHER_FORCED_SURFACE_GATE_WITH_SURFACE_CONCENTRATION_RISK_NO_GENERATION`
+- max surface mean target mass: `0.643060527741909`
+- concentration cap diagnostic: `0.50`
+- cap status: `FAIL`
+
+Concentration route decision recorded:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_concentration_route_decision_20260514/concentration_route_decision.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_concentration_route_decision_20260514/concentration_route_decision_summary.json`
+- decision: do not start generation directly from `857458`; prepare a
+  capped/regularized micro-overfit repair route first.
+
+Capped objective patch recorded:
+
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_capped_objective_patch_20260514/capped_objective_patch.md`
+- `results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_capped_objective_patch_20260514/capped_objective_patch_summary.json`
+- status: `ARTIFACT_ONLY_CAPPED_OBJECTIVE_PATCH_VALIDATED_NO_COMPUTE`
+- new disabled-by-default knobs:
+  `--target-mass-ceiling`, `--target-mass-ceiling-lambda`
+- focused validation: `21 passed`, `py_compile` passed, wrapper `bash -n`
+  passed, allowlist zero-enabled safety passed.
+- capped H200 route review:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_CAPPED_MICRO_OVERFIT_H200_ROUTE_20260514.md`
+  and
+  `results/natural_evidence_v2/status/r4_candidate_v3_capped_micro_overfit_route_20260514/route_review_summary.json`
+- wrapper route parameters:
+  `TARGET_MASS_FLOOR=0.20`,
+  `TARGET_MASS_FLOOR_LAMBDA=5.0`,
+  `TARGET_MASS_CEILING=0.45`,
+  `TARGET_MASS_CEILING_LAMBDA=5.0`,
+  `STRATUM_WEIGHTING_MODE=r4_candidate_v3_failed_surface`,
+  `STRATUM_WEIGHT_MAX=3.0`
+- capped route local validation: wrapper syntax passed, wrapper plan-only mode
+  passed, `py_compile` passed, focused pytest `21 passed`, zero-enabled
+  allowlist safety passed
+- capped route remote preflight:
+  `results/natural_evidence_v2/status/r4_candidate_v3_capped_micro_overfit_remote_sync_hash_preflight_20260514/remote_sync_hash_preflight_summary.json`
+- remote preflight status:
+  `PASS_REMOTE_SYNC_HASH_AND_WRAPPER_PREFLIGHT`
+- local/remote file count: `18`
+- mismatch count: `0`
+- missing count: `0`
+- remote wrapper plan-only: passed
+- remote allowlist zero-enabled safety: passed
+- active Chimera jobs before submission: `0`
+- Hermes 04:05 worker recorded a lower-permission consistency review only and
+  did not submit Slurm:
+  `results/natural_evidence_v2/status/r4_candidate_v3_capped_micro_overfit_route_consistency_review_20260514_0405/route_consistency_review_summary.json`
+- capped H200 submission record:
+  `results/natural_evidence_v2/status/r4_candidate_v3_capped_micro_overfit_submission_20260514_0410/submission_record.json`
+- submitted job: `857611`
+- post-submit local allowlist safety: `PASS`
+- post-submit remote allowlist safety: `PASS`
+- first observed Slurm state after submission: `RUNNING` on `chimera21`
+- terminal review:
+  `results/natural_evidence_v2/status/r4_candidate_v3_capped_micro_overfit_857611_review/job_857611_review_summary.json`
+- terminal status: `COMPLETED`, exit code `0:0`, elapsed `00:04:27`
+- teacher-forced surface gate status: `FAIL`
+- protected lift vs base: `0.13019710095503`, required `>= 0.15`
+- protected lift vs task-only: `0.1333565101502261`
+- protected rank1: `0.990234375`
+- protected median margin: `0.11016895354259759`
+- max surface mean target mass: `0.22298632306046784`, cap `0.50`, status
+  `PASS`
+- capped failure analysis:
+  `results/natural_evidence_v2/status/r4_candidate_v3_capped_micro_overfit_failure_analysis_20260514/failure_analysis_summary.json`
+- comparison with floor-only job `857458`: floor-only had enough target pressure
+  but failed concentration; capped `857611` passed concentration but missed
+  lift vs base by about `0.0198`
+- rebalanced route review:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_REBALANCED_MICRO_OVERFIT_H200_ROUTE_20260514.md`
+  and
+  `results/natural_evidence_v2/status/r4_candidate_v3_rebalanced_micro_overfit_route_20260514/route_review_summary.json`
+- rebalanced route values: `TARGET_MASS_CEILING=0.50`,
+  `TARGET_MASS_CEILING_LAMBDA=2.0`, with the same floor and stratum weighting
+- rebalanced remote preflight:
+  `results/natural_evidence_v2/status/r4_candidate_v3_rebalanced_micro_overfit_remote_preflight_20260514/remote_preflight_summary.json`
+- remote plan-only: passed
+- remote allowlist zero-enabled safety: passed
+- active jobs before submission: `0`
+- rebalanced H200 submission record:
+  `results/natural_evidence_v2/status/r4_candidate_v3_rebalanced_micro_overfit_submission_20260514_0427/submission_record.json`
+- submitted job: `857653`
+- first observed Slurm state after submission: `RUNNING` on `chimera21`
+- terminal review:
+  `results/natural_evidence_v2/status/r4_candidate_v3_rebalanced_micro_overfit_857653_review/job_857653_review_summary.json`
+- terminal status: `COMPLETED`, exit code `0:0`, elapsed `00:04:20`
+- teacher-forced surface gate status: `FAIL`
+- protected lift vs base: `0.14287435650001612`, required `>= 0.15`
+- protected lift vs task-only: `0.1460337656952122`
+- protected rank1: `1.0`
+- protected median margin: `0.13510848174337298`
+- max surface mean target mass: `0.190783511439804`, cap `0.50`, status
+  `PASS`
+- post-rebalance route decision:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_POST_REBALANCE_ROUTE_DECISION_20260514_0437.md`
+  and
+  `results/natural_evidence_v2/status/r4_candidate_v3_post_rebalance_route_decision_20260514_0437/route_decision_summary.json`
+- pressure-relaxation design:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_PRESSURE_RELAXATION_DESIGN_20260514_0450.md`
+  and
+  `results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_design_20260514_0450/pressure_relaxation_design_summary.json`
+- pressure-relaxation grid route review:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_PRESSURE_RELAXATION_GRID_H200_ROUTE_20260514.md`
+  and
+  `results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_grid_route_20260514_0500/route_review_summary.json`
+- grid wrapper:
+  `scripts/natural_evidence_v2/slurm/r4_candidate_v3_pressure_relaxation_grid_h200.sbatch`
+- disabled allowlist entry:
+  `v2_r4_candidate_v3_pressure_relaxation_grid_h200`
+- grid job `857764` review:
+  `results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_grid_857764_review/review_summary.json`
+- review status:
+  `PASS_AT_LEAST_ONE_ARM_TEACHER_FORCED_GATE_NO_GENERATION`
+- passing arms: `A_ceiling_lambda_1_0`, `B_ceiling_lambda_0_5`
+- selected generation-route arm: `B_ceiling_lambda_0_5`
+- artifact-only generation-route review:
+  `docs/natural_evidence_v2/R4_CANDIDATE_V3_PRESSURE_RELAXATION_B_DEV_GENERATION_ROUTE_20260514.md`
+  and
+  `results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_b_dev_generation_route_20260514_0522/route_review_summary.json`
+- local route validation:
+  `results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_b_dev_generation_route_20260514_0522/local_plan_validation_summary.json`
+- local wrapper syntax: passed
+- local all-shard plan-only validation: passed for shards `0..3`
+- local zero-enabled allowlist safety: passed
+- disabled allowlist entry:
+  `v2_r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_h200`
+
+## Current Allowed Action
+
+Artifact-only implementation planning or static review for a redesigned
+positive evidence contract only. No Slurm submission, generation, Qwen E2E
+rerun, training, Llama, same-family null, sanitizer benchmark, FAR aggregation,
+payload-diversity work, or paper-facing positive claim is unlocked.
+
+## Locked Until Later Gates Pass
+
+- generation / Qwen E2E rerun
+- Llama
+- same-family null
+- sanitizer benchmark
+- FAR aggregation
+- payload-diversity claim
+- paper-facing positive claim
+
+All training, generation, Qwen E2E rerun, Llama, null/FAR, sanitizer, payload
+diversity, and paper-facing claim routes remain locked until later review gates
+pass or a separate reviewed route explicitly allows the next action.
+
+## Chimera Policy
+
+Future Chimera tokenizer/model/CPU/GPU work must run through reviewed Slurm
+routes. GPU work must default to H200 on `pomplun` with account
+`cs_yinxin.wan`, QoS `pomplun`, `--gres=gpu:h200:1`, and max time
+`30-00:00:00`, unless a later recorded route decision overrides this.

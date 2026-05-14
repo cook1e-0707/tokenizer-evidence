@@ -1,0 +1,13 @@
+{
+  "active_jobs": [],
+  "active_job_preflight": "PASS",
+  "checked_command": "squeue -u $USER",
+  "current_phase": "V2_R4_POSITIVE_FULL_GENERATION_DECODE_WRAPPER_REMOTE_PREFLIGHT_PASS_SUBMISSION_ROUTE_REVIEW_NEXT",
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_active_job_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_NO_ACTIVE_CHIMERA_JOBS",
+  "timestamp_utc": "2026-05-14T18:18:08Z",
+  "training_started": false
+}

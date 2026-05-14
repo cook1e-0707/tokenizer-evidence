@@ -1,0 +1,11 @@
+{
+  "contract_id": "r4_keyed_correlation_evidence_v1",
+  "coordinate_count": 32,
+  "event_bank_id": "r4_positive_phrase_event_bank_v1",
+  "mapping_key_policy": "audit_key_committed_before_generation_no_key_material_in_artifacts",
+  "mapping_output": "surface_id_to_coordinate_and_polarity",
+  "payload_checksum_sha256_12": "aa24055daa04",
+  "payload_contract_scope": "same_contract_a55e_only_no_payload_diversity",
+  "payload_id": "a55e",
+  "wrong_payload_id": "wrong_payload_static_control"
+}

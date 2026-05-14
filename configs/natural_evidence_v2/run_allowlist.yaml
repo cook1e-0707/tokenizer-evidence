@@ -67,11 +67,12 @@ allowed_gpu_actions:
   enable_condition: disabled_until_r3_2_same_contract_full_wrapper_and_852426_replay_reviewed
   enabled: false
   name: v2_r3_2_qwen_locked_scale_eval
-- claim_note: R3.2 Qwen same-contract a55e locked-scale shard-array eval on DGXA100
-    scavenger. This replaces the preempted serial long job with shorter shard tasks.
-    No training, no Llama, no sanitizer, no FAR, no paper positive claim.
+- claim_note: DEPRECATED after the 2026-05-13 H200/pomplun execution policy. Do not
+    enable this DGXA100/A100 scavenger route unless a later explicit route decision
+    supersedes the H200 policy. No training, no Llama, no sanitizer, no FAR, no paper
+    positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch
-  enable_condition: r3_2e_preempted_job_reviewed_and_shard_array_route_approved
+  enable_condition: deprecated_after_20260513_h200_pomplun_policy_do_not_enable
   enabled: false
   name: v2_r3_2_qwen_locked_scale_shard_array
 - claim_note: R3.2 Qwen same-contract a55e locked-scale shard-array eval on chimera21
@@ -95,6 +96,14 @@ allowed_gpu_actions:
   enable_condition: r4_plan_validation_passed_and_user_approved_dev_diagnostic
   enabled: false
   name: v2_r4_cover_natural_dev_diagnostic_h200
+- claim_note: R4 candidate v3 small Qwen generation diagnostic with reviewed protected
+    adapter gain 4.0. Dev prompts only; same-contract a55e; format-scrub/null controls
+    required; no training, no Llama, no same-family null, no sanitizer, no FAR, no
+    payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,PROTECTED_ADAPTER_GAIN=4.0 scripts/natural_evidence_v2/slurm/r4_cover_natural_dev_diagnostic_h200.sbatch
+  enable_condition: r4_candidate_v3_gain_sweep_reviewed_pass_and_gain4_dev_generation_route_reviewed
+  enabled: false
+  name: v2_r4_candidate_v3_gain4_dev_diagnostic_h200
 - claim_note: R4 Qwen teacher-forced surface-mass scoring on binary repair candidate
     rows. Base/protected/task-only forward scoring only; no generation, no training,
     no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
@@ -107,9 +116,68 @@ allowed_gpu_actions:
     generation, no training, no Llama, no same-family null, no sanitizer, no FAR,
     no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_prefix_native_surface_mass_score_h200.sbatch
-  enable_condition: r4_prefix_native_surface_repair_candidate_static_proxy_validated_and_single_submission_authorized
+  enable_condition: r4_candidate_v3_qwen_tokenizer_preflight_passed_and_single_surface_mass_submission_authorized
   enabled: false
   name: v2_r4_prefix_native_surface_mass_score_h200
+- claim_note: R4 candidate v3 protected-adapter gain sweep teacher-forced scoring
+    only. Base/task-only unchanged; protected LoRA gain conditions only. No generation,
+    no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive
+    claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_adapter_gain_sweep_h200.sbatch
+  enable_condition: r4_candidate_v3_adapter_gain_sweep_launch_route_reviewed_and_single_submission_authorized
+  enabled: false
+  name: v2_r4_candidate_v3_adapter_gain_sweep_h200
+- claim_note: R4 candidate v3 metric-exact protected micro-overfit H200 route. Protected-only
+    teacher-forced training plus base/protected/task-only surface-mass scoring on
+    reviewed candidate-v3 split rows. No generation, no Qwen E2E rerun, no Llama,
+    no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper
+    positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+  enable_condition: r4_candidate_v3_micro_overfit_split_and_wrapper_reviewed_and_single_submission_authorized
+  enabled: false
+  name: v2_r4_candidate_v3_micro_overfit_h200
+- claim_note: R4 candidate v3 fixed two-arm pressure-relaxation H200 array. Protected-only
+    teacher-forced micro-overfit training/scoring on reviewed candidate-v3 split rows
+    with TARGET_MASS_CEILING=0.50 and ceiling lambdas 1.0/0.5. No generation, no Qwen
+    E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
+    claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_pressure_relaxation_grid_h200.sbatch
+  enable_condition: r4_candidate_v3_pressure_relaxation_grid_wrapper_reviewed_and_single_array_submission_authorized
+  enabled: false
+  name: v2_r4_candidate_v3_pressure_relaxation_grid_h200
+- claim_note: R4 candidate v3 small dev generation diagnostic using pressure-relaxation
+    arm B from job 857764. Qwen dev prompts only; same-contract a55e; format-scrub
+    and null controls required. No training, no Qwen E2E rerun, no Llama, no same-family
+    null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_h200.sbatch
+  enable_condition: r4_candidate_v3_pressure_relaxation_grid_857764_reviewed_pass_and_dev_generation_route_reviewed
+  enabled: false
+  name: v2_r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_h200
+- claim_note: R4 candidate v3 transfer-gap repair small dev generation diagnostic
+    using pressure-relaxation arm B from job 857764 and repaired prompt scaffolds.
+    Qwen dev prompts only; same-contract a55e; format-scrub and null controls
+    required. No training, no Qwen E2E rerun, no Llama, no same-family null,
+    no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_h200.sbatch
+  enable_condition: r4_candidate_v3_transfer_gap_repair_package_validated_and_single_h200_route_reviewed
+  enabled: false
+  name: v2_r4_candidate_v3_transfer_gap_repair_dev_diagnostic_h200
+- claim_note: R4 positive event-bank small dev generation diagnostic. Qwen dev prompts
+    only; keyed phrase-event decoder with format-scrub controls; same-contract a55e;
+    no training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer,
+    no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch
+  enable_condition: r4_positive_full_generation_decode_wrapper_reviewed_and_single_h200_route_authorized
+  enabled: false
+  name: v2_r4_positive_dev_diagnostic_h200
+- claim_note: R4 Qwen prefix-native actual tokenizer boundary preflight only on repaired
+    candidate rows. Tokenizer load only; no model forward, no tokenizer/model scoring,
+    no generation, no training, no Llama, no same-family null, no sanitizer, no FAR,
+    no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_prefix_native_qwen_tokenizer_boundary_preflight_h200.sbatch
+  enable_condition: r4_candidate_v3_static_preflight_passed_and_single_tokenizer_preflight_submission_authorized
+  enabled: false
+  name: v2_r4_prefix_native_qwen_tokenizer_boundary_preflight_h200
 - claim_note: Llama-3.1-8B V2 WP5 teacher-forced train-and-score; no E2E, no FAR,
     no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp5_train_and_score.sbatch
@@ -130,6 +198,12 @@ allowed_gpu_actions:
   name: sanitizer_benchmark
 allowlist_version: natural_evidence_v2_allowlist_001
 global_rules:
+  default_gpu_account: cs_yinxin.wan
+  default_gpu_gres: gpu:h200:1
+  default_gpu_partition: pomplun
+  default_gpu_qos: pomplun
+  default_gpu_time_limit: 30-00:00:00
+  forbid_a100_without_later_explicit_route_decision: true
   forbid_overwrite_existing_artifacts: true
   forbid_paper_claim_modification: true
   forbid_unlisted_gpu_jobs: true

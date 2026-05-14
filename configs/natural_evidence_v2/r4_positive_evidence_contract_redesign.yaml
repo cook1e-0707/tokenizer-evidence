@@ -1,0 +1,151 @@
+schema_name: natural_evidence_v2_r4_positive_evidence_contract_redesign_v1
+phase: V2_R4_POSITIVE_EVIDENCE_CONTRACT_REDESIGN_REVIEWED_NO_DOWNSTREAM_UNLOCK
+contract_id: r4_keyed_correlation_evidence_v1
+source_job_id: "858019"
+source_failure_analysis: results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_failure_analysis/failure_analysis_summary.json
+source_review: docs/natural_evidence_v2/R4_POSITIVE_EVIDENCE_CONTRACT_REDESIGN_REVIEW_20260514_0838.md
+
+current_permissions:
+  slurm_allowed: false
+  allowlist_enablement_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  qwen_e2e_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+standing_execution_policy:
+  continue_clear_routes_without_repeated_manual_approval: true
+  gate_controlled_actions_conditionally_authorized: true
+  prerequisite_gates_still_required: true
+  allowlist_safety_still_required: true
+  hermes_notification_still_required: true
+  slurm_only_for_chimera_cpu_or_gpu: true
+  h200_pomplun_policy_for_gpu: true
+
+design_requirements:
+  key_payload_specificity_observable_before_accept_scoring: true
+  positive_unit_avoids_forbidden_public_surfaces_and_fixed_labels: true
+  decoder_separates_reusable_support_from_accepted_protected_recovery: true
+  structural_leakage_features_are_outside_contract_or_non_informative: true
+  pre_registered_dev_pass_fail_table_present: true
+
+public_surface_policy:
+  positive_unit: normalized_phrase_event
+  no_literal_evidence_block: true
+  no_fixed_label_dependency: true
+  no_heading_dependency: true
+  no_step_or_numbered_dependency: true
+  no_public_technical_literals: true
+  format_scrub_primary: true
+  forbidden_public_technical_literals:
+    - fingerprint
+    - watermark
+    - payload
+    - secret key
+    - decoder
+    - hidden signal
+    - evidence block
+  contextual_terms_reported_separately:
+    bucket: ordinary_domain_word_vs_technical_protocol_sense
+    coordinate: ordinary_verb_vs_technical_protocol_sense
+
+carrier_event_policy:
+  event_type: normalized_phrase_event
+  source_bank_policy: frozen_dev_rule_or_precommit_only_no_locked_output_mining
+  event_normalization:
+    lowercase: true
+    strip_punctuation: true
+    lemmatize_or_alias_normalize: true
+    remove_bullets_headings_numbering_before_match: true
+  structural_features_excluded_from_votes:
+    - bullet_marker
+    - line_number
+    - heading_text
+    - colon_after_label
+    - next_action_label
+  min_distinct_surface_families: 4
+  max_single_surface_family_vote_fraction: 0.35
+  max_single_prefix_family_vote_fraction: 0.35
+
+key_payload_specificity_policy:
+  mapping: hmac_audit_key_payload_surface_to_coordinate_and_polarity
+  audit_key_committed_before_generation: true
+  payload_committed_before_generation: true
+  wrong_key_recomputes_mapping: true
+  wrong_payload_recomputes_codeword: true
+  pre_accept_specificity_metrics:
+    - protected_keyed_correlation_score
+    - wrong_key_correlation_score
+    - wrong_payload_correlation_score
+    - protected_minus_best_wrong_specificity_margin
+  required_before_accept:
+    protected_minus_best_wrong_specificity_margin_min: 3.0
+    protected_keyed_correlation_score_min: 6.0
+    wrong_key_correlation_score_max: 1.5
+    wrong_payload_correlation_score_max: 1.5
+
+decoder_policy:
+  decoder_id: r4_keyed_correlation_erasure_decoder_v1
+  primary_scrub_mode: all
+  support_is_not_acceptance: true
+  missing_events_are_erasures: true
+  ordinary_reusable_support_must_not_accept: true
+  accept_requires:
+    min_observed_events: 24
+    min_distinct_coordinates: 20
+    min_weighted_margin: 3.0
+    min_specificity_margin: 3.0
+    checksum_match: true
+    wrong_key_reject: true
+    wrong_payload_reject: true
+  threshold_changes_after_generation_allowed: false
+
+structural_leakage_policy:
+  shallow_auc_max: 0.60
+  bullet_count_used_by_decoder: false
+  line_count_used_by_decoder: false
+  heading_count_used_by_decoder: false
+  next_action_label_used_by_decoder: false
+  repeated_template_used_by_decoder: false
+  protected_raw_task_only_output_constraints_matched: true
+
+pre_registered_dev_gate:
+  split: dev
+  qwen_only: true
+  same_contract_id: a55e
+  primary_scrub_mode: all
+  conditions:
+    - protected
+    - raw
+    - task_only
+    - wrong_key
+    - wrong_payload
+  protected:
+    accepts_min: 26
+    blocks: 32
+    min_specificity_margin: 3.0
+    min_weighted_margin: 3.0
+  controls:
+    accepts_max_per_condition: 0
+    wrong_key_accepts_max: 0
+    wrong_payload_accepts_max: 0
+  leakage:
+    forbidden_technical_public_surface_count_max: 0
+    shallow_auc_max: 0.60
+    duplicate_generated_output_hash_count_max: 0
+    duplicate_decode_row_hash_count_max: 0
+
+future_compute_route_prerequisites:
+  static_contract_validation_pass: true
+  toy_decoder_unit_tests_pass: true
+  route_decision_recorded: true
+  local_remote_hash_preflight_pass: true
+  zero_enabled_allowlist_preflight_pass: true
+  hermes_tg_email_notification_pass: true
+  exactly_one_allowlist_entry_enabled: true
+  immediate_allowlist_disablement_after_sbatch: true

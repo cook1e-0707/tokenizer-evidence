@@ -1,0 +1,39 @@
+{
+  "codebook": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/codebook.json",
+  "decoder_spec": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/decoder_spec.json",
+  "format_scrub_mode": "all",
+  "generated_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277/shards/shard_03/r4_generated_outputs.jsonl",
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "precommit_manifest": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/precommit_manifest.json",
+  "schema_name": "natural_evidence_v2_r4_positive_keyed_correlation_decode_summary_v1",
+  "slurm_submitted": false,
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 0,
+      "blocks": 8,
+      "forbidden_public_surface_count": 15
+    },
+    "raw": {
+      "accepts": 0,
+      "blocks": 8,
+      "forbidden_public_surface_count": 27
+    },
+    "task_only": {
+      "accepts": 0,
+      "blocks": 8,
+      "forbidden_public_surface_count": 29
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "blocks": 8,
+      "forbidden_public_surface_count": 15
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "blocks": 8,
+      "forbidden_public_surface_count": 15
+    }
+  },
+  "surface_bank": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/surface_bank.json"
+}

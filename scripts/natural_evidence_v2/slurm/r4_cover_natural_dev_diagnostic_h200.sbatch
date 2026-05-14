@@ -32,6 +32,7 @@ DECODER_SPEC="${DECODER_SPEC:-results/natural_evidence_v2/precommit/r4_cover_nat
 OUTPUT_DIR="${OUTPUT_DIR:-$RUN_ROOT/status/r4_cover_natural_dev_diagnostic_h200_array_${SLURM_ARRAY_JOB_ID:-manual}}"
 PROTECTED_ADAPTER="${PROTECTED_ADAPTER:-$RUN_ROOT/status/wp5_r2_teacher_forced_train_and_score_851481/protected_train/adapter}"
 TASK_ONLY_ADAPTER="${TASK_ONLY_ADAPTER:-$RUN_ROOT/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter}"
+PROTECTED_ADAPTER_GAIN="${PROTECTED_ADAPTER_GAIN:-1.0}"
 MODEL_NAME="${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}"
 TOKENIZER_NAME="${TOKENIZER_NAME:-Qwen/Qwen2.5-7B-Instruct}"
 BATCH_SIZE="${BATCH_SIZE:-4}"
@@ -95,6 +96,7 @@ echo "shard_dir=$shard_dir"
 echo "replicate_group_id=$shard_id"
 echo "prompt_rows=$expected_start..$expected_end"
 echo "validate_plan_only=$VALIDATE_PLAN_ONLY"
+echo "protected_adapter_gain=$PROTECTED_ADAPTER_GAIN"
 
 for required in "$CONFIG_YAML" "$PROMPTS_JSONL" "$SURFACE_BANK" "$CODEBOOK" "$DECODER_SPEC" \
   "scripts/natural_evidence_v2/generate_r4_cover_natural_outputs.py" \
@@ -136,6 +138,7 @@ fi
   --tokenizer-name "$TOKENIZER_NAME" \
   --protected-adapter "$PROTECTED_ADAPTER" \
   --task-only-adapter "$TASK_ONLY_ADAPTER" \
+  --protected-adapter-gain "$PROTECTED_ADAPTER_GAIN" \
   --split dev \
   --max-prompts 512 \
   --prompt-file-row-start "$expected_start" \

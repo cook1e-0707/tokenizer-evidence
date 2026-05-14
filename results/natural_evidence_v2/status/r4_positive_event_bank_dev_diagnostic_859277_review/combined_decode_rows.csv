@@ -1,0 +1,321 @@
+mode,_shard,block_id,arm,source_condition,accept,keyed_correlation_score,wrong_key_correlation_score,wrong_payload_correlation_score,specificity_margin,observed_events,distinct_coordinates,format_scrub_mode,forbidden_public_surface_count,forbidden_public_surfaces
+decode_all,shard_00,shard_00_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,"{'bucket': 2, 'coordinate': 2}"
+decode_all,shard_00,shard_00_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,"{'bucket': 2, 'coordinate': 2}"
+decode_all,shard_00,shard_00_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,"{'bucket': 2, 'coordinate': 2}"
+decode_all,shard_00,shard_00_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_00,shard_00_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_00,shard_00_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_00,shard_00_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_00,shard_00_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_00,shard_00_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_00,shard_00_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_00,shard_00_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_00,shard_00_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_00,shard_00_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_00,shard_00_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_00,shard_00_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_00,shard_00_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_00,shard_00_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_00,shard_00_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_00,shard_00_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_00,shard_00_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_00,shard_00_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_00,shard_00_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_00,shard_00_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_00,shard_00_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_01,shard_01_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'bucket': 1}
+decode_all,shard_01,shard_01_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'bucket': 1}
+decode_all,shard_01,shard_01_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'bucket': 1}
+decode_all,shard_01,shard_01_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_01,shard_01_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_01,shard_01_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_01,shard_01_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,9,"{'bucket': 1, 'coordinate': 8}"
+decode_all,shard_01,shard_01_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,9,"{'bucket': 1, 'coordinate': 8}"
+decode_all,shard_01,shard_01_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,9,"{'bucket': 1, 'coordinate': 8}"
+decode_all,shard_01,shard_01_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_01,shard_01_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_01,shard_01_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_01,shard_01_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_01,shard_01_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_01,shard_01_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_01,shard_01_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,"{'bucket': 1, 'coordinate': 2}"
+decode_all,shard_01,shard_01_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,"{'bucket': 1, 'coordinate': 2}"
+decode_all,shard_01,shard_01_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,"{'bucket': 1, 'coordinate': 2}"
+decode_all,shard_01,shard_01_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_01,shard_01_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_01,shard_01_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,6,{'coordinate': 6}
+decode_all,shard_01,shard_01_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,3,"{'bucket': 1, 'coordinate': 2}"
+decode_all,shard_01,shard_01_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_01,shard_01_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_01,shard_01_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,6,{'coordinate': 6}
+decode_all,shard_01,shard_01_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_01,shard_01_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,6,{'coordinate': 6}
+decode_all,shard_01,shard_01_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_01,shard_01_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_01,shard_01_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,6,{'coordinate': 6}
+decode_all,shard_02,shard_02_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'bucket': 1}
+decode_all,shard_02,shard_02_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'bucket': 1}
+decode_all,shard_02,shard_02_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'bucket': 1}
+decode_all,shard_02,shard_02_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_02,shard_02_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_02,shard_02_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,6,"{'bucket': 1, 'coordinate': 5}"
+decode_all,shard_02,shard_02_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_02,shard_02_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_02,shard_02_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_02,shard_02_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_02,shard_02_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_02,shard_02_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_02,shard_02_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_02,shard_02_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_02,shard_02_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_02,shard_02_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_02,shard_02_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_02,shard_02_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_02,shard_02_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_02,shard_02_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_02,shard_02_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_02,shard_02_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_02,shard_02_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,7,{'coordinate': 7}
+decode_all,shard_02,shard_02_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_02,shard_02_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_02,shard_02_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_02,shard_02_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_02,shard_02_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_02,shard_02_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_02,shard_02_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,4,{'coordinate': 4}
+decode_all,shard_02,shard_02_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,8,{'coordinate': 8}
+decode_all,shard_03,shard_03_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,3,{'coordinate': 3}
+decode_all,shard_03,shard_03_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,9,{'coordinate': 9}
+decode_all,shard_03,shard_03_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,5,{'coordinate': 5}
+decode_all,shard_03,shard_03_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,10,{'coordinate': 10}
+decode_all,shard_03,shard_03_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_03,shard_03_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,11,{'coordinate': 11}
+decode_all,shard_03,shard_03_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,9,{'coordinate': 9}
+decode_all,shard_03,shard_03_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,6,{'coordinate': 6}
+decode_all,shard_03,shard_03_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,2,{'coordinate': 2}
+decode_all,shard_03,shard_03_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,1,{'coordinate': 1}
+decode_all,shard_03,shard_03_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_all,shard_03,shard_03_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,all,0,{}
+decode_none,shard_00,shard_00_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,"{'bucket': 2, 'coordinate': 2}"
+decode_none,shard_00,shard_00_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,"{'bucket': 2, 'coordinate': 2}"
+decode_none,shard_00,shard_00_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,"{'bucket': 2, 'coordinate': 2}"
+decode_none,shard_00,shard_00_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_00,shard_00_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_00,shard_00_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_00,shard_00_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_00,shard_00_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_00,shard_00_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_00,shard_00_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_00,shard_00_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_00,shard_00_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_00,shard_00_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_00,shard_00_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_00,shard_00_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_00,shard_00_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_00,shard_00_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_00,shard_00_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_00,shard_00_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_00,shard_00_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_00,shard_00_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_00,shard_00_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_00,shard_00_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_00,shard_00_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_01,shard_01_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'bucket': 1}
+decode_none,shard_01,shard_01_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'bucket': 1}
+decode_none,shard_01,shard_01_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'bucket': 1}
+decode_none,shard_01,shard_01_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_01,shard_01_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_01,shard_01_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_01,shard_01_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,9,"{'bucket': 1, 'coordinate': 8}"
+decode_none,shard_01,shard_01_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,9,"{'bucket': 1, 'coordinate': 8}"
+decode_none,shard_01,shard_01_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,9,"{'bucket': 1, 'coordinate': 8}"
+decode_none,shard_01,shard_01_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_01,shard_01_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_01,shard_01_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_01,shard_01_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_01,shard_01_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_01,shard_01_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_01,shard_01_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,"{'bucket': 1, 'coordinate': 2}"
+decode_none,shard_01,shard_01_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,"{'bucket': 1, 'coordinate': 2}"
+decode_none,shard_01,shard_01_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,"{'bucket': 1, 'coordinate': 2}"
+decode_none,shard_01,shard_01_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_01,shard_01_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_01,shard_01_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,6,{'coordinate': 6}
+decode_none,shard_01,shard_01_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,3,"{'bucket': 1, 'coordinate': 2}"
+decode_none,shard_01,shard_01_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_01,shard_01_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_01,shard_01_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,6,{'coordinate': 6}
+decode_none,shard_01,shard_01_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_01,shard_01_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,6,{'coordinate': 6}
+decode_none,shard_01,shard_01_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_01,shard_01_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_01,shard_01_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,6,{'coordinate': 6}
+decode_none,shard_02,shard_02_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'bucket': 1}
+decode_none,shard_02,shard_02_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'bucket': 1}
+decode_none,shard_02,shard_02_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'bucket': 1}
+decode_none,shard_02,shard_02_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_02,shard_02_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_02,shard_02_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,6,"{'bucket': 1, 'coordinate': 5}"
+decode_none,shard_02,shard_02_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_02,shard_02_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_02,shard_02_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_02,shard_02_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_02,shard_02_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_02,shard_02_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_02,shard_02_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_02,shard_02_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_02,shard_02_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_02,shard_02_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_02,shard_02_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_02,shard_02_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_02,shard_02_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_02,shard_02_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_02,shard_02_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_02,shard_02_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_02,shard_02_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,7,{'coordinate': 7}
+decode_none,shard_02,shard_02_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_02,shard_02_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_02,shard_02_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_02,shard_02_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_02,shard_02_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_02,shard_02_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_02,shard_02_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,4,{'coordinate': 4}
+decode_none,shard_02,shard_02_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,8,{'coordinate': 8}
+decode_none,shard_03,shard_03_block_00,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_00,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_00,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_01,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_01,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_01,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_02,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_02,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_02,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_03,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_03,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_03,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_04,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_04,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_04,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_05,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_05,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_05,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_06,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_06,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_06,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,3,{'coordinate': 3}
+decode_none,shard_03,shard_03_block_07,protected,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_07,wrong_key,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_07,wrong_payload,protected,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_00,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,9,{'coordinate': 9}
+decode_none,shard_03,shard_03_block_01,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,5,{'coordinate': 5}
+decode_none,shard_03,shard_03_block_02,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,10,{'coordinate': 10}
+decode_none,shard_03,shard_03_block_03,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_04,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_05,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_06,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_03,shard_03_block_07,raw,raw,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_00,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,11,{'coordinate': 11}
+decode_none,shard_03,shard_03_block_01,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,9,{'coordinate': 9}
+decode_none,shard_03,shard_03_block_02,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,6,{'coordinate': 6}
+decode_none,shard_03,shard_03_block_03,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_04,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,2,{'coordinate': 2}
+decode_none,shard_03,shard_03_block_05,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,1,{'coordinate': 1}
+decode_none,shard_03,shard_03_block_06,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}
+decode_none,shard_03,shard_03_block_07,task_only,task_only,False,0.0,0.0,0.0,0.0,0,0,none,0,{}

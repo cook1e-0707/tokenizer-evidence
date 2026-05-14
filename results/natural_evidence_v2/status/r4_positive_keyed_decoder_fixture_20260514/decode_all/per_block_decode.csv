@@ -1,0 +1,4 @@
+block_id,arm,source_condition,accept,keyed_correlation_score,wrong_key_correlation_score,wrong_payload_correlation_score,specificity_margin,observed_events,distinct_coordinates,format_scrub_mode,forbidden_public_surface_count
+fixture_shard_block_00,protected,protected,True,24.0,0.0,0.0,24.0,24,20,all,0
+fixture_shard_block_00,wrong_key,protected,False,0.0,24.0,8.0,-24.0,24,15,all,0
+fixture_shard_block_00,wrong_payload,protected,False,0.0,8.0,24.0,-24.0,24,16,all,0

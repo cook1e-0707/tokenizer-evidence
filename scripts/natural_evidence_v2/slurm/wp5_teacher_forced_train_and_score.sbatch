@@ -39,6 +39,10 @@ LORA_R="${LORA_R:-32}"
 LORA_ALPHA="${LORA_ALPHA:-64}"
 MARGIN_LAMBDA="${MARGIN_LAMBDA:-5.0}"
 MARGIN_TAU="${MARGIN_TAU:-0.15}"
+TARGET_MASS_FLOOR="${TARGET_MASS_FLOOR:-0.0}"
+TARGET_MASS_FLOOR_LAMBDA="${TARGET_MASS_FLOOR_LAMBDA:-0.0}"
+STRATUM_WEIGHTING_MODE="${STRATUM_WEIGHTING_MODE:-none}"
+STRATUM_WEIGHT_MAX="${STRATUM_WEIGHT_MAX:-3.0}"
 DRY_RUN_ONLY="${DRY_RUN_ONLY:-0}"
 
 cd "$REPO_HOME"
@@ -83,6 +87,10 @@ echo "max_rows=$MAX_ROWS"
 echo "score_max_rows=$SCORE_MAX_ROWS"
 echo "max_steps=$MAX_STEPS"
 echo "dry_run_only=$DRY_RUN_ONLY"
+echo "target_mass_floor=$TARGET_MASS_FLOOR"
+echo "target_mass_floor_lambda=$TARGET_MASS_FLOOR_LAMBDA"
+echo "stratum_weighting_mode=$STRATUM_WEIGHTING_MODE"
+echo "stratum_weight_max=$STRATUM_WEIGHT_MAX"
 
 for required in "$PRIMARY_BANK" "$PROTECTED_ROWS" "$TASK_ONLY_ROWS" "$SCORE_ROWS" "$PLAN_SUMMARY"; do
   if [ ! -s "$required" ]; then
@@ -123,6 +131,10 @@ fi
   --lora-alpha "$LORA_ALPHA" \
   --margin-lambda "$MARGIN_LAMBDA" \
   --margin-tau "$MARGIN_TAU" \
+  --target-mass-floor "$TARGET_MASS_FLOOR" \
+  --target-mass-floor-lambda "$TARGET_MASS_FLOOR_LAMBDA" \
+  --stratum-weighting-mode "$STRATUM_WEIGHTING_MODE" \
+  --stratum-weight-max "$STRATUM_WEIGHT_MAX" \
   $CUDA_FLAG \
   $DRY_RUN_FLAG
 
@@ -140,6 +152,10 @@ fi
   --learning-rate "$TASK_ONLY_LR" \
   --lora-r "$LORA_R" \
   --lora-alpha "$LORA_ALPHA" \
+  --target-mass-floor "$TARGET_MASS_FLOOR" \
+  --target-mass-floor-lambda "$TARGET_MASS_FLOOR_LAMBDA" \
+  --stratum-weighting-mode "$STRATUM_WEIGHTING_MODE" \
+  --stratum-weight-max "$STRATUM_WEIGHT_MAX" \
   $CUDA_FLAG \
   $DRY_RUN_FLAG
 

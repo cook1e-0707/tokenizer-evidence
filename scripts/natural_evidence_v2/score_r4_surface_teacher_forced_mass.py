@@ -27,6 +27,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tokenizer-name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--protected-adapter", type=Path, default=None)
     parser.add_argument("--task-only-adapter", type=Path, default=None)
+    parser.add_argument(
+        "--protected-adapter-gains",
+        default="1.0",
+        help=(
+            "Comma-separated protected LoRA gain multipliers. Default 1.0 keeps "
+            "the historical protected condition. Multiple gains produce "
+            "protected_gain_* conditions. This does not affect base/task-only."
+        ),
+    )
     parser.add_argument("--max-rows", type=int, default=8192)
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--max-length", type=int, default=2048)
@@ -73,13 +82,66 @@ def batched(items: Sequence[Mapping[str, Any]], batch_size: int) -> Iterable[lis
         yield list(items[offset : offset + batch_size])
 
 
-def condition_plan(args: argparse.Namespace) -> list[tuple[str, Path | None]]:
-    plan: list[tuple[str, Path | None]] = [("base", None)]
+def parse_gain_values(raw: str) -> list[float]:
+    values: list[float] = []
+    for item in str(raw).split(","):
+        if not item.strip():
+            continue
+        value = float(item)
+        if value < 0:
+            raise ValueError("protected adapter gains must be non-negative")
+        values.append(value)
+    if not values:
+        raise ValueError("at least one protected adapter gain is required")
+    if len(set(values)) != len(values):
+        raise ValueError("protected adapter gains must be unique")
+    return values
+
+
+def gain_condition_name(gain: float, *, historical_single_gain: bool = False) -> str:
+    if historical_single_gain and gain == 1.0:
+        return "protected"
+    value = ("%g" % float(gain)).replace(".", "_")
+    return f"protected_gain_{value}"
+
+
+def condition_plan(args: argparse.Namespace) -> list[tuple[str, Path | None, float | None]]:
+    plan: list[tuple[str, Path | None, float | None]] = [("base", None, None)]
     if args.protected_adapter is not None:
-        plan.append(("protected", args.protected_adapter))
+        gains = parse_gain_values(args.protected_adapter_gains)
+        historical_single_gain = gains == [1.0]
+        for gain in gains:
+            plan.append((gain_condition_name(gain, historical_single_gain=historical_single_gain), args.protected_adapter, gain))
     if args.task_only_adapter is not None:
-        plan.append(("task_only", args.task_only_adapter))
+        plan.append(("task_only", args.task_only_adapter, None))
     return plan
+
+
+def scale_peft_lora_adapters(model: Any, gain: float) -> dict[str, Any]:
+    """Scale PEFT LoRA adapter strengths by multiplying module scaling values.
+
+    The scorer loads a fresh model per condition, so this does not need to reset
+    scaling values after scoring. It fails closed if a positive gain is requested
+    but no LoRA scaling table is found.
+    """
+
+    gain = float(gain)
+    touched_modules = 0
+    touched_adapter_keys = 0
+    for module in model.modules():
+        scaling = getattr(module, "scaling", None)
+        if isinstance(scaling, dict) and scaling:
+            for key in list(scaling.keys()):
+                scaling[key] = scaling[key] * gain
+                touched_adapter_keys += 1
+            touched_modules += 1
+    if gain > 0 and touched_adapter_keys == 0:
+        raise ValueError("requested protected adapter gain scaling but no PEFT LoRA scaling entries were found")
+    return {
+        "adapter_gain": gain,
+        "lora_scaling_keys_touched": touched_adapter_keys,
+        "lora_scaling_modules_touched": touched_modules,
+    }
 
 
 @dataclass(frozen=True)
@@ -126,6 +188,52 @@ def r4_row_surface_contract(row: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def r4_boundary_failure_context(row: Mapping[str, Any]) -> dict[str, Any]:
+    context: dict[str, Any] = {
+        "prompt_id": row.get("prompt_id"),
+        "prompt_index": row.get("prompt_index"),
+        "coordinate_id": row.get("coordinate_id"),
+        "target_bit": row.get("target_bit"),
+        "target_surface": row.get("target_surface"),
+        "assistant_prefix_before_surface": row.get("assistant_prefix_before_surface"),
+        "bucket_0_surfaces": row.get("bucket_0_surfaces"),
+        "bucket_1_surfaces": row.get("bucket_1_surfaces"),
+    }
+    try:
+        boundary = split_r4_surface_boundary(row)
+        context.update(
+            {
+                "assistant_prefix_model_text": boundary.assistant_prefix_model_text,
+                "surface_prefix_text": boundary.surface_prefix_text,
+            }
+        )
+    except Exception as exc:
+        context["boundary_split_exception"] = f"{type(exc).__name__}:{exc}"
+        return context
+
+    try:
+        target_bit = str(int(row["target_bit"]))
+        other_bit = "1" if target_bit == "0" else "0"
+        target_labels = [str(surface) for surface in row[f"bucket_{target_bit}_surfaces"]]
+        other_labels = [str(surface) for surface in row[f"bucket_{other_bit}_surfaces"]]
+    except Exception as exc:
+        context["surface_label_derivation_exception"] = f"{type(exc).__name__}:{exc}"
+        return context
+
+    context.update(
+        {
+            "other_bit": int(other_bit),
+            "target_surface_label": str(row.get("target_surface", "")),
+            "target_surface_labels": target_labels,
+            "other_surface_labels": other_labels,
+            "target_tokenizer_scored_surface_text": boundary.tokenizer_surface(row.get("target_surface", "")),
+            "target_tokenizer_scored_surface_texts": boundary.tokenizer_surfaces(target_labels),
+            "other_tokenizer_scored_surface_texts": boundary.tokenizer_surfaces(other_labels),
+        }
+    )
+    return context
+
+
 def chat_prefix(tokenizer: Any, prompt_text: str, assistant_prefix: str) -> str:
     messages = [{"role": "user", "content": prompt_text}]
     if getattr(tokenizer, "chat_template", None):
@@ -162,9 +270,7 @@ def validate_static_boundary_contract(rows: Sequence[Mapping[str, Any]]) -> dict
         except Exception as exc:
             failures.append(
                 {
-                    "prompt_id": row.get("prompt_id"),
-                    "coordinate_id": row.get("coordinate_id"),
-                    "target_bit": row.get("target_bit"),
+                    **r4_boundary_failure_context(row),
                     "failure_reasons": [f"boundary_contract_exception:{type(exc).__name__}:{exc}"],
                 }
             )
@@ -195,6 +301,7 @@ def validate_static_boundary_contract(rows: Sequence[Mapping[str, Any]]) -> dict
             failures.append(
                 {
                     "prompt_id": row.get("prompt_id"),
+                    "prompt_index": row.get("prompt_index"),
                     "coordinate_id": row.get("coordinate_id"),
                     "target_bit": row.get("target_bit"),
                     "failure_reasons": reasons,
@@ -231,9 +338,7 @@ def validate_qwen_tokenizer_boundary_contract(tokenizer: Any, rows: Sequence[Map
         except Exception as exc:
             failures.append(
                 {
-                    "prompt_id": row.get("prompt_id"),
-                    "coordinate_id": row.get("coordinate_id"),
-                    "target_bit": row.get("target_bit"),
+                    **r4_boundary_failure_context(row),
                     "failure_reasons": [f"tokenizer_boundary_exception:{type(exc).__name__}:{exc}"],
                 }
             )
@@ -265,6 +370,7 @@ def validate_qwen_tokenizer_boundary_contract(tokenizer: Any, rows: Sequence[Map
             failures.append(
                 {
                     "prompt_id": row.get("prompt_id"),
+                    "prompt_index": row.get("prompt_index"),
                     "coordinate_id": row.get("coordinate_id"),
                     "target_bit": row.get("target_bit"),
                     "failure_reasons": reasons,
@@ -327,8 +433,23 @@ def summarize(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         and protected_median_margin > 0
         and task_lift_vs_base < 0.05
     )
+    gain_sweep_summary: dict[str, Any] = {}
+    for condition, condition_rows in sorted(by_condition.items()):
+        if not condition.startswith("protected_gain_"):
+            continue
+        condition_mass = condition_summary.get(condition, {}).get("mean_target_mass", float("nan"))
+        condition_rank1 = condition_summary.get(condition, {}).get("target_surface_rank1_rate", 0.0)
+        condition_median_margin = condition_summary.get(condition, {}).get("median_target_margin", float("nan"))
+        gain_sweep_summary[condition] = {
+            "lift_vs_base": condition_mass - base_mass,
+            "lift_vs_task_only": condition_mass - task_mass,
+            "mean_target_mass": condition_mass,
+            "median_target_margin": condition_median_margin,
+            "target_surface_rank1_rate": condition_rank1,
+        }
     return {
         "condition_summary": condition_summary,
+        "gain_sweep_summary": gain_sweep_summary,
         "observed_lifts": {
             "protected_target_surface_mass_lift_vs_base": protected_lift_vs_base,
             "protected_target_surface_mass_lift_vs_task_only": protected_lift_vs_task,
@@ -351,6 +472,7 @@ def score_condition(
     args: argparse.Namespace,
     condition: str,
     adapter_path: Path | None,
+    adapter_gain: float | None,
     rows: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     import torch
@@ -369,6 +491,9 @@ def score_condition(
         from peft import PeftModel
 
         model = PeftModel.from_pretrained(model, adapter_path).to(device)
+    adapter_gain_metadata = None
+    if adapter_gain is not None:
+        adapter_gain_metadata = scale_peft_lora_adapters(model, adapter_gain)
     model.eval()
     scored: list[dict[str, Any]] = []
     with torch.no_grad():
@@ -418,6 +543,8 @@ def score_condition(
                     {
                         "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_row_v1",
                         "condition": condition,
+                        "adapter_gain": adapter_gain,
+                        "adapter_gain_metadata": adapter_gain_metadata,
                         "prompt_id": row.get("prompt_id"),
                         "prompt_index": row.get("prompt_index"),
                         "coordinate_id": row.get("coordinate_id"),
@@ -462,7 +589,8 @@ def main() -> int:
             "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
             "status": "DRY_RUN_VALIDATED_INPUTS",
             "score_row_count": len(rows),
-            "condition_plan": [condition for condition, _ in condition_plan(args)],
+            "condition_plan": [condition for condition, _, _ in condition_plan(args)],
+            "protected_adapter_gains": parse_gain_values(args.protected_adapter_gains),
             "model_generation_started": False,
             "model_scoring_started": False,
             "training_started": False,
@@ -479,16 +607,19 @@ def main() -> int:
     if args.require_cuda and not torch.cuda.is_available():
         raise RuntimeError("--require-cuda was set but CUDA is not available")
     scored_rows: list[dict[str, Any]] = []
-    for condition, adapter_path in condition_plan(args):
+    for condition, adapter_path, adapter_gain in condition_plan(args):
         if adapter_path is not None and not adapter_path.exists():
             raise FileNotFoundError(f"adapter path missing for {condition}: {adapter_path}")
-        scored_rows.extend(score_condition(args=args, condition=condition, adapter_path=adapter_path, rows=rows))
+        scored_rows.extend(
+            score_condition(args=args, condition=condition, adapter_path=adapter_path, adapter_gain=adapter_gain, rows=rows)
+        )
     summary = {
         **summarize(scored_rows),
         "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
         "score_row_count": len(rows),
         "scored_row_count": len(scored_rows),
-        "condition_plan": [condition for condition, _ in condition_plan(args)],
+        "condition_plan": [condition for condition, _, _ in condition_plan(args)],
+        "protected_adapter_gains": parse_gain_values(args.protected_adapter_gains),
         "model_generation_started": False,
         "model_scoring_started": True,
         "training_started": False,

@@ -1,0 +1,31 @@
+{
+  "accept_requires": {
+    "checksum_match": true,
+    "min_distinct_coordinates": 20,
+    "min_observed_events": 24,
+    "min_specificity_margin": 3.0,
+    "min_weighted_margin": 3.0,
+    "wrong_key_reject": true,
+    "wrong_payload_reject": true
+  },
+  "coordinate_count": 32,
+  "decoder_id": "r4_keyed_correlation_erasure_decoder_v1",
+  "event_type": "normalized_phrase_event",
+  "ignored_event_types": [
+    "bullet_marker",
+    "line_number",
+    "heading_text",
+    "colon_after_label",
+    "next_action_label"
+  ],
+  "mapping": "hmac_audit_key_payload_surface_to_coordinate_and_polarity",
+  "primary_scrub_mode": "all",
+  "required_before_accept": {
+    "protected_keyed_correlation_score_min": 6.0,
+    "protected_minus_best_wrong_specificity_margin_min": 3.0,
+    "wrong_key_correlation_score_max": 1.5,
+    "wrong_payload_correlation_score_max": 1.5
+  },
+  "support_is_not_acceptance": true,
+  "threshold_changes_after_generation_allowed": false
+}

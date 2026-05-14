@@ -1,0 +1,240 @@
+{
+  "decode_modes": {
+    "decode_all": {
+      "arm_summary": {
+        "protected": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 103,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "raw": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 73,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "task_only": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 85,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "wrong_key": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 103,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "wrong_payload": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 103,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        }
+      },
+      "decode_rows": 160,
+      "event_rows": 0,
+      "forbidden_public_surfaces": {
+        "bucket": 28,
+        "coordinate": 439
+      }
+    },
+    "decode_none": {
+      "arm_summary": {
+        "protected": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 103,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "raw": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 73,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "task_only": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 85,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "wrong_key": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 103,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        },
+        "wrong_payload": {
+          "accepts": 0,
+          "blocks": 32,
+          "distinct_coordinates_max": 0,
+          "distinct_coordinates_mean": 0,
+          "forbidden_public_surface_count": 103,
+          "keyed_score_max": 0.0,
+          "keyed_score_mean": 0.0,
+          "observed_events_max": 0,
+          "observed_events_mean": 0,
+          "specificity_margin_max": 0.0,
+          "specificity_margin_mean": 0.0,
+          "wrong_key_score_max": 0.0,
+          "wrong_payload_score_max": 0.0
+        }
+      },
+      "decode_rows": 160,
+      "event_rows": 0,
+      "forbidden_public_surfaces": {
+        "bucket": 28,
+        "coordinate": 439
+      }
+    }
+  },
+  "duplicate_prompt_condition_rows": 0,
+  "duplicate_response_hashes": 0,
+  "duplicate_response_rows": 0,
+  "gates": {
+    "all_shards_complete": true,
+    "decode_all_rows_is_160": true,
+    "decode_none_rows_is_160": true,
+    "duplicate_prompt_condition_rows": 0,
+    "duplicate_response_hashes": 0,
+    "duplicate_response_rows": 0,
+    "forbidden_public_surface_gate_zero": false,
+    "forbidden_public_surface_total_format_scrub_all": 467,
+    "generated_rows_per_condition_is_2048": {
+      "protected": 2048,
+      "raw": 2048,
+      "task_only": 2048
+    },
+    "generated_rows_total_is_6144": true,
+    "null_accepts_all_zero_format_scrub_all": true,
+    "protected_accept_gate_min_26": false,
+    "protected_accepts_format_scrub_all": 0,
+    "protected_observed_events_max_format_scrub_all": 0,
+    "protected_observed_events_positive": false,
+    "slurm_all_tasks_completed": true
+  },
+  "generated_rows": 6144,
+  "generated_rows_by_condition": {
+    "protected": 2048,
+    "raw": 2048,
+    "task_only": 2048
+  },
+  "generation_started": true,
+  "interpretation": "Slurm and wrapper completed cleanly, null accepts remain zero, but protected positive channel is absent: zero extracted phrase events and zero protected accepts under both scrub modes. Forbidden surface matcher also fires heavily on ordinary words coordinate/bucket.",
+  "job_id": "859277",
+  "next_allowed_action": "Artifact-only failure analysis of generated outputs, prompt policy, surface-bank coverage, and forbidden matcher semantics. Do not resubmit this route unchanged.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_positive_dev_diagnostic_859277_review_v1",
+  "slurm_tasks": {
+    "859277_0": {
+      "elapsed": "00:43:32",
+      "exit_code": "0:0",
+      "node": "chimera21",
+      "state": "COMPLETED"
+    },
+    "859277_1": {
+      "elapsed": "00:42:58",
+      "exit_code": "0:0",
+      "node": "chimera21",
+      "state": "COMPLETED"
+    },
+    "859277_2": {
+      "elapsed": "00:45:03",
+      "exit_code": "0:0",
+      "node": "chimera21",
+      "state": "COMPLETED"
+    },
+    "859277_3": {
+      "elapsed": "00:39:12",
+      "exit_code": "0:0",
+      "node": "chimera21",
+      "state": "COMPLETED"
+    }
+  },
+  "status": "FAIL_R4_POSITIVE_DEV_DIAGNOSTIC_GATE_NO_RESUBMIT_UNTIL_FAILURE_ANALYSIS",
+  "training_started": false,
+  "unique_prompt_ids": 2048
+}

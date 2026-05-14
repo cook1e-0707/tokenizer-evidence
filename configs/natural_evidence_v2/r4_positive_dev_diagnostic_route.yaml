@@ -1,0 +1,78 @@
+schema_name: natural_evidence_v2_r4_positive_dev_diagnostic_route_v1
+phase: V2_R4_POSITIVE_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_ARTIFACT_ONLY
+route_id: r4_positive_event_bank_dev_diagnostic_v1
+contract_id: r4_keyed_correlation_evidence_v1
+event_bank_id: r4_positive_phrase_event_bank_v1
+payload_id: a55e
+source_precommit_package: results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605
+expected_precommit_hash: 9ea75e28abf1842e78017fd9100a03fad75ff0b3ad316e5018f94644baf39b30
+
+current_permissions:
+  slurm_allowed: false
+  allowlist_enablement_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  tokenizer_model_scoring_allowed: false
+  qwen_e2e_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+future_route_scope:
+  model_family: qwen_only
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gpu: h200
+  max_time: "30-00:00:00"
+  split: dev
+  block_count: 32
+  prompts_per_block: 64
+  primary_scrub_mode: all
+  conditions:
+    - protected
+    - raw
+    - task_only
+    - wrong_key
+    - wrong_payload
+  same_contract_only: true
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+
+future_dev_gate:
+  protected_accepts_min: 26
+  protected_blocks: 32
+  control_accepts_max_per_condition: 0
+  forbidden_technical_public_surface_count_max: 0
+  shallow_auc_max: 0.60
+  duplicate_generated_output_hash_count_max: 0
+  duplicate_decode_row_hash_count_max: 0
+  min_specificity_margin: 3.0
+  min_weighted_margin: 3.0
+
+required_before_any_submission:
+  event_extractor_implementation_reviewed: true
+  generation_wrapper_plan_only_pass: true
+  keyed_decoder_replay_or_fixture_pass: true
+  local_remote_hash_preflight_pass: true
+  zero_enabled_allowlist_preflight_pass: true
+  active_job_preflight_pass: true
+  hermes_tg_email_notification_pass: true
+  exactly_one_allowlist_entry_enabled: true
+  immediate_allowlist_disablement_after_sbatch: true
+  post_submit_allowlist_zero_enabled_pass: true
+
+not_unlocked_by_this_route_scope:
+  slurm_submission: true
+  generation: true
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

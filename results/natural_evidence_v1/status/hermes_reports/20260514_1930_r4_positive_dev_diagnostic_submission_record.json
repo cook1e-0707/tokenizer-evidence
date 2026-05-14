@@ -1,0 +1,23 @@
+{
+  "allow_static_dev_keys": true,
+  "allowlist_disabled_after_submission": true,
+  "allowlist_entry_enabled_for_submission": "v2_r4_positive_dev_diagnostic_h200",
+  "array_spec": "0-3%4",
+  "command": "sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch",
+  "current_phase": "V2_R4_POSITIVE_DEV_DIAGNOSTIC_SUBMITTED_MONITOR_JOB_859277",
+  "generation_started": true,
+  "job_id": "859277",
+  "job_name": "nat-ev-v2-r4posdev",
+  "next_allowed_action": "Monitor Slurm array job 859277 only. After completion, sync and review R4 positive dev diagnostic artifacts. Do not submit another job until reviewed.",
+  "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "post_submit_allowlist_safety_local": "results/natural_evidence_v2/status/r4_positive_dev_diagnostic_post_submit_allowlist_safety_local_20260514_1930.json",
+  "post_submit_allowlist_safety_remote": "results/natural_evidence_v2/status/r4_positive_dev_diagnostic_post_submit_allowlist_safety_remote_20260514_1930.json",
+  "qos": "pomplun",
+  "schema_name": "natural_evidence_v2_r4_positive_dev_submission_record_v1",
+  "slurm_job_submitted": true,
+  "status": "SUBMITTED_R4_POSITIVE_DEV_DIAGNOSTIC_H200_ARRAY_JOB_859277",
+  "timestamp_utc": "2026-05-14T19:30:51Z",
+  "training_started": false
+}

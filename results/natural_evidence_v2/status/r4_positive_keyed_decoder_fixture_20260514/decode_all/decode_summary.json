@@ -1,0 +1,29 @@
+{
+  "codebook": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/codebook.json",
+  "decoder_spec": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/decoder_spec.json",
+  "format_scrub_mode": "all",
+  "generated_outputs": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_positive_keyed_decoder_fixture_20260514/generated_fixture.jsonl",
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "precommit_manifest": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/precommit_manifest.json",
+  "schema_name": "natural_evidence_v2_r4_positive_keyed_correlation_decode_summary_v1",
+  "slurm_submitted": false,
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 1,
+      "blocks": 1,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "blocks": 1,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "blocks": 1,
+      "forbidden_public_surface_count": 0
+    }
+  },
+  "surface_bank": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/surface_bank.json"
+}

@@ -16,6 +16,7 @@ from scripts.natural_evidence_v2.generate_wp6_e2e_outputs import (  # noqa: E402
     build_chat_text,
     load_model_condition,
 )
+from scripts.natural_evidence_v2.score_r4_surface_teacher_forced_mass import scale_peft_lora_adapters  # noqa: E402
 from scripts.natural_evidence_v2.r4_cover_natural_common import (  # noqa: E402
     read_jsonl,
     resolve,
@@ -45,6 +46,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tokenizer-name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--protected-adapter", type=Path, required=True)
     parser.add_argument("--task-only-adapter", type=Path, required=True)
+    parser.add_argument(
+        "--protected-adapter-gain",
+        type=float,
+        default=1.0,
+        help=(
+            "Protected LoRA gain multiplier for generation diagnostics. "
+            "Default 1.0 preserves historical behavior. Raw and task-only "
+            "conditions are never gain-scaled."
+        ),
+    )
     parser.add_argument("--split", default="dev")
     parser.add_argument("--max-prompts", type=int, default=512)
     parser.add_argument("--prompt-file-row-start", type=int, required=True)
@@ -116,6 +127,7 @@ def write_plan_summary(
             "split": str(args.split),
             "generation_conditions": ["protected", "raw", "task_only"],
             "decode_conditions": ["protected", "raw", "task_only", "wrong_key", "wrong_payload"],
+            "protected_adapter_gain": float(args.protected_adapter_gain),
             "model_name": str(args.model_name),
             "tokenizer_name": str(args.tokenizer_name),
             "max_new_tokens": int(args.max_new_tokens),
@@ -135,6 +147,7 @@ def generate_condition(
     prompts: Sequence[Mapping[str, Any]],
     condition: str,
     adapter_path: Path | None,
+    adapter_gain: float | None,
 ) -> list[dict[str, Any]]:
     import torch
     from transformers import AutoTokenizer
@@ -148,6 +161,9 @@ def generate_condition(
         adapter_path=adapter_path,
         require_cuda=bool(args.require_cuda),
     )
+    adapter_gain_metadata = None
+    if adapter_gain is not None:
+        adapter_gain_metadata = scale_peft_lora_adapters(model, adapter_gain)
     if model.config.pad_token_id is None and tokenizer.pad_token_id is not None:
         model.config.pad_token_id = tokenizer.pad_token_id
     outputs: list[dict[str, Any]] = []
@@ -181,6 +197,8 @@ def generate_condition(
                 outputs.append(
                     {
                         "adapter_path": str(adapter_path) if adapter_path is not None else "",
+                        "adapter_gain": adapter_gain,
+                        "adapter_gain_metadata": adapter_gain_metadata,
                         "artifact_role": "r4_cover_natural_dev_diagnostic_transcript",
                         "contract_id": "a55e",
                         "generation_condition": condition,
@@ -235,8 +253,20 @@ def main() -> int:
         raise FileExistsError(f"refusing to overwrite R4 generated outputs in {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
     rows: list[dict[str, Any]] = []
-    for condition, adapter in (("protected", protected_adapter), ("raw", None), ("task_only", task_only_adapter)):
-        rows.extend(generate_condition(args=args, prompts=prompts, condition=condition, adapter_path=adapter))
+    for condition, adapter, adapter_gain in (
+        ("protected", protected_adapter, float(args.protected_adapter_gain)),
+        ("raw", None, None),
+        ("task_only", task_only_adapter, None),
+    ):
+        rows.extend(
+            generate_condition(
+                args=args,
+                prompts=prompts,
+                condition=condition,
+                adapter_path=adapter,
+                adapter_gain=adapter_gain,
+            )
+        )
     write_jsonl_new(output_dir / "r4_generated_outputs.jsonl", rows)
     write_plan_summary(args=args, prompts_path=prompts_path, output_dir=output_dir, prompts=prompts, generation_started=True)
     print(json.dumps({"status": "PASS", "output_dir": str(output_dir), "rows": len(rows)}, sort_keys=True))

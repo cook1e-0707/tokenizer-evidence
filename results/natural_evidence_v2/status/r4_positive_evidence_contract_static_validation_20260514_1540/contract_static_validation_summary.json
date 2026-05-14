@@ -1,0 +1,11 @@
+{
+  "contract_id": "r4_keyed_correlation_evidence_v1",
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "source_failure_analysis_exists": true,
+  "source_review_exists": true,
+  "status": "PASS_R4_POSITIVE_EVIDENCE_CONTRACT_STATIC_VALIDATION_NO_COMPUTE",
+  "training_started": false
+}

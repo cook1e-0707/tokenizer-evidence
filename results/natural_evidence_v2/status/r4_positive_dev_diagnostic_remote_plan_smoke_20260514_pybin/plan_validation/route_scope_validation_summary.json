@@ -1,0 +1,12 @@
+{
+  "allowlist_enabled": false,
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "precommit_hash": "9ea75e28abf1842e78017fd9100a03fad75ff0b3ad316e5018f94644baf39b30",
+  "route_id": "r4_positive_event_bank_dev_diagnostic_v1",
+  "slurm_job_submitted": false,
+  "source_precommit_package": "results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605",
+  "status": "PASS_R4_POSITIVE_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_NO_SUBMIT",
+  "training_started": false
+}

@@ -1,0 +1,27 @@
+{
+  "allow_static_dev_keys": true,
+  "allowlist_entry": "v2_r4_positive_dev_diagnostic_h200",
+  "array": "0-3%4",
+  "blocks": 32,
+  "command": "sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch",
+  "decoder_controls": [
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "generation_arms": [
+    "protected",
+    "raw",
+    "task_only"
+  ],
+  "gpu": "gpu:h200:1",
+  "paper_claim_allowed": false,
+  "payload_diversity_tested": false,
+  "prompts_per_block": 64,
+  "route_doc": "docs/natural_evidence_v2/R4_POSITIVE_DEV_DIAGNOSTIC_SINGLE_SUBMISSION_ROUTE_20260514_1930.md",
+  "same_contract_only": "a55e",
+  "schema_name": "natural_evidence_v2_r4_positive_dev_single_submission_route_v1",
+  "slurm_submission_allowed_after_final_preflight": true,
+  "status": "PASS_R4_POSITIVE_DEV_DIAGNOSTIC_SINGLE_SUBMISSION_ROUTE_REVIEWED",
+  "timestamp_utc": "2026-05-14T19:30:51Z",
+  "training_started": false
+}

@@ -1,0 +1,2210 @@
+[
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "ask a focused question",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_00",
+    "surface_text": "ask a focused question",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "confirm the main constraint",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_01",
+    "surface_text": "confirm the main constraint",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check the important details",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_02",
+    "surface_text": "check the important details",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "review the current notes",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_03",
+    "surface_text": "review the current notes",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "compare the available options",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_04",
+    "surface_text": "compare the available options",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "identify the likely risk",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_05",
+    "surface_text": "identify the likely risk",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "write down the open issue",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_06",
+    "surface_text": "write down the open issue",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "summarize the main tradeoff",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_07",
+    "surface_text": "summarize the main tradeoff",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "verify the shared goal",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_08",
+    "surface_text": "verify the shared goal",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "collect the missing context",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_09",
+    "surface_text": "collect the missing context",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "name the first concern",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_10",
+    "surface_text": "name the first concern",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "look for common mistakes",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "clarify",
+    "surface_id": "r4pe_clarify_11",
+    "surface_text": "look for common mistakes",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "make a short plan",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_00",
+    "surface_text": "make a short plan",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "choose a clear priority",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_01",
+    "surface_text": "choose a clear priority",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "set a realistic target",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_02",
+    "surface_text": "set a realistic target",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "prepare a simple outline",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_03",
+    "surface_text": "prepare a simple outline",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "map the required handoff",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_04",
+    "surface_text": "map the required handoff",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "schedule a brief review",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_05",
+    "surface_text": "schedule a brief review",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "define the next milestone",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_06",
+    "surface_text": "define the next milestone",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "keep the scope narrow",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_07",
+    "surface_text": "keep the scope narrow",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "split the work carefully",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_08",
+    "surface_text": "split the work carefully",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "reserve time for review",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_09",
+    "surface_text": "reserve time for review",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "start with the simplest case",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_10",
+    "surface_text": "start with the simplest case",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "leave room for adjustment",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "plan",
+    "surface_id": "r4pe_plan_11",
+    "surface_text": "leave room for adjustment",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "share a concise update",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_00",
+    "surface_text": "share a concise update",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "use a calm tone",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_01",
+    "surface_text": "use a calm tone",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "explain the reason clearly",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_02",
+    "surface_text": "explain the reason clearly",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "invite a quick response",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_03",
+    "surface_text": "invite a quick response",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "keep the message brief",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_04",
+    "surface_text": "keep the message brief",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "confirm who owns the task",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_05",
+    "surface_text": "confirm who owns the task",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "mention the expected timing",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_06",
+    "surface_text": "mention the expected timing",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "avoid unnecessary detail",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_07",
+    "surface_text": "avoid unnecessary detail",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "state the decision plainly",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_08",
+    "surface_text": "state the decision plainly",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "ask for one concrete reply",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_09",
+    "surface_text": "ask for one concrete reply",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "document the agreed change",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_10",
+    "surface_text": "document the agreed change",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "flag the remaining uncertainty",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "communicate",
+    "surface_id": "r4pe_communicate_11",
+    "surface_text": "flag the remaining uncertainty",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "test the simple path",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_00",
+    "surface_text": "test the simple path",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "review the final wording",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_01",
+    "surface_text": "review the final wording",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check for missing details",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_02",
+    "surface_text": "check for missing details",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "compare against the goal",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_03",
+    "surface_text": "compare against the goal",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "look for edge cases",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_04",
+    "surface_text": "look for edge cases",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "verify the basic assumption",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_05",
+    "surface_text": "verify the basic assumption",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "inspect the recent change",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_06",
+    "surface_text": "inspect the recent change",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "confirm the outcome",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_07",
+    "surface_text": "confirm the outcome",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "measure the visible impact",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_08",
+    "surface_text": "measure the visible impact",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "review the handoff notes",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_09",
+    "surface_text": "review the handoff notes",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "trace the likely failure",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_10",
+    "surface_text": "trace the likely failure",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "mark the unresolved risk",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "quality",
+    "surface_id": "r4pe_quality_11",
+    "surface_text": "mark the unresolved risk",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "remove the obvious hazard",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_00",
+    "surface_text": "remove the obvious hazard",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "keep the area clear",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_01",
+    "surface_text": "keep the area clear",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "pause before changing course",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_02",
+    "surface_text": "pause before changing course",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check the warning signs",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_03",
+    "surface_text": "check the warning signs",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "confirm the safe option",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_04",
+    "surface_text": "confirm the safe option",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "use the safer default",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_05",
+    "surface_text": "use the safer default",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "keep a backup choice",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_06",
+    "surface_text": "keep a backup choice",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "avoid rushing the decision",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_07",
+    "surface_text": "avoid rushing the decision",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "watch for early trouble",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_08",
+    "surface_text": "watch for early trouble",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "protect the most fragile part",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_09",
+    "surface_text": "protect the most fragile part",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check that access is clear",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_10",
+    "surface_text": "check that access is clear",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "choose the lower risk option",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "safety",
+    "surface_id": "r4pe_safety_11",
+    "surface_text": "choose the lower risk option",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "clean the affected area",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_00",
+    "surface_text": "clean the affected area",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "tighten the loose part",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_01",
+    "surface_text": "tighten the loose part",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "replace the worn item",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_02",
+    "surface_text": "replace the worn item",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "inspect the nearby surface",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_03",
+    "surface_text": "inspect the nearby surface",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "record the maintenance date",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_04",
+    "surface_text": "record the maintenance date",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "keep spare parts nearby",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_05",
+    "surface_text": "keep spare parts nearby",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "test after the repair",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_06",
+    "surface_text": "test after the repair",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check the simple fix first",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_07",
+    "surface_text": "check the simple fix first",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "listen for unusual noise",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_08",
+    "surface_text": "listen for unusual noise",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "remove the old residue",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_09",
+    "surface_text": "remove the old residue",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "confirm the item works",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_10",
+    "surface_text": "confirm the item works",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "store the tool safely",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "maintenance",
+    "surface_id": "r4pe_maintenance_11",
+    "surface_text": "store the tool safely",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "reproduce the issue once",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_00",
+    "surface_text": "reproduce the issue once",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "change one variable",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_01",
+    "surface_text": "change one variable",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check the recent change",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_02",
+    "surface_text": "check the recent change",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "restart the simple component",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_03",
+    "surface_text": "restart the simple component",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "compare with a known case",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_04",
+    "surface_text": "compare with a known case",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "save the error message",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_05",
+    "surface_text": "save the error message",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "isolate the failing part",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_06",
+    "surface_text": "isolate the failing part",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "try the lowest risk fix",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_07",
+    "surface_text": "try the lowest risk fix",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "restore the last working state",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_08",
+    "surface_text": "restore the last working state",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "note what changed recently",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_09",
+    "surface_text": "note what changed recently",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "check the connection first",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_10",
+    "surface_text": "check the connection first",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "document the tested fix",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "troubleshooting",
+    "surface_id": "r4pe_troubleshooting_11",
+    "surface_text": "document the tested fix",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "practice the core skill",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_00",
+    "surface_text": "practice the core skill",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "review one example",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_01",
+    "surface_text": "review one example",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "explain the idea aloud",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_02",
+    "surface_text": "explain the idea aloud",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "write a short summary",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_03",
+    "surface_text": "write a short summary",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "ask for targeted feedback",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_04",
+    "surface_text": "ask for targeted feedback",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "compare two approaches",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_05",
+    "surface_text": "compare two approaches",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "repeat the difficult part",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_06",
+    "surface_text": "repeat the difficult part",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "use a smaller example",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_07",
+    "surface_text": "use a smaller example",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "track one improvement",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_08",
+    "surface_text": "track one improvement",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "focus on the weak area",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_09",
+    "surface_text": "focus on the weak area",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "connect it to prior work",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_10",
+    "surface_text": "connect it to prior work",
+    "technical_literal": false
+  },
+  {
+    "allowed_topic_domains": [
+      "practical_advice",
+      "task_explanation",
+      "planning_guidance",
+      "troubleshooting_guidance"
+    ],
+    "canonical_phrase": "review the result later",
+    "event_type": "normalized_phrase_event",
+    "forbidden_contexts": [
+      "technical_watermark_discussion",
+      "protocol_or_verifier_description",
+      "fixed_label_or_numbered_slot_instruction"
+    ],
+    "naturalness_rationale": "Ordinary task-useful phrase that can appear in user-facing advice without structural labels.",
+    "normalization_rule": "lowercase_strip_punctuation_collapse_space",
+    "source_rule_id": "frozen_static_rule_r4_positive_phrase_events_v1",
+    "structural_marker": false,
+    "surface_family": "learning",
+    "surface_id": "r4pe_learning_11",
+    "surface_text": "review the result later",
+    "technical_literal": false
+  }
+]

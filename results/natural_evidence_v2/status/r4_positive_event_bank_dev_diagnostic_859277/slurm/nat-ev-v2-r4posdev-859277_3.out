@@ -1,0 +1,41 @@
+claim_note=R4 positive event-bank dev diagnostic wrapper; plan-only implemented; no paper claim
+route_config=configs/natural_evidence_v2/r4_positive_dev_diagnostic_route.yaml
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277
+validate_plan_only=0
+shard_index=3
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+python_bin=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+precommit_dir=results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605
+prompts_jsonl=results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/dev_prompts.jsonl
+surface_bank=results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/decoder_spec.json
+precommit_manifest=results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605/precommit_manifest.json
+protected_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_candidate_v3_pressure_relaxation_grid_857764/B_ceiling_lambda_0_5/protected_micro_overfit_train/adapter
+task_only_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+protected_adapter_gain=1.0
+allow_static_dev_keys=1
+{
+  "allowlist_enabled": false,
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "precommit_hash": "9ea75e28abf1842e78017fd9100a03fad75ff0b3ad316e5018f94644baf39b30",
+  "route_id": "r4_positive_event_bank_dev_diagnostic_v1",
+  "slurm_job_submitted": false,
+  "source_precommit_package": "results/natural_evidence_v2/precommit/r4_positive_event_bank_precommit_20260514_1605",
+  "status": "PASS_R4_POSITIVE_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_NO_SUBMIT",
+  "training_started": false
+}
+{
+  "extractor_smoke_event_count": 3,
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "slurm_submission_started": false,
+  "status": "PASS_R4_POSITIVE_DEV_DIAGNOSTIC_WRAPPER_PLAN_ONLY",
+  "training_started": false
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277/shards/shard_03", "rows": 1536, "status": "PASS"}
+{"decode_rows": 40, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277/shards/shard_03/decode_all", "status": "PASS"}
+{"decode_rows": 40, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277/shards/shard_03/decode_none", "status": "PASS"}
+R4 positive dev diagnostic shard complete: shard_03 /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_event_bank_dev_diagnostic_859277/shards/shard_03

@@ -1,0 +1,30 @@
+{
+  "conditions": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "controls": {
+    "accepts_max_per_condition": 0,
+    "wrong_key_accepts_max": 0,
+    "wrong_payload_accepts_max": 0
+  },
+  "leakage": {
+    "duplicate_decode_row_hash_count_max": 0,
+    "duplicate_generated_output_hash_count_max": 0,
+    "forbidden_technical_public_surface_count_max": 0,
+    "shallow_auc_max": 0.6
+  },
+  "primary_scrub_mode": "all",
+  "protected": {
+    "accepts_min": 26,
+    "blocks": 32,
+    "min_specificity_margin": 3.0,
+    "min_weighted_margin": 3.0
+  },
+  "qwen_only": true,
+  "same_contract_id": "a55e",
+  "split": "dev"
+}

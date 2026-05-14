@@ -1,0 +1,42 @@
+schema_name: natural_evidence_v2_r4_candidate_v3_adapter_gain_sweep_plan_v1
+plan_id: r4_candidate_v3_adapter_gain_sweep_20260513
+route_phase: V2_R4_PREFIX_NATIVE_CANDIDATE_V3_BREAKOUT_ARTIFACT_ONLY_OBJECTIVE_GAIN_CONTROLLER_REVIEW_NO_RUN
+candidate_rows: results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_v3_20260513/r4_prefix_native_surface_probe_rows_v3.jsonl
+candidate_rows_sha256: d35e5483ce7f6d3d782ce17961b2c407909afc879a12917c5ccc27090f3c80b7
+contract_id: a55e
+adapter_gain_values:
+  - 0.0
+  - 0.5
+  - 1.0
+  - 1.5
+  - 2.0
+  - 3.0
+  - 4.0
+conditions:
+  - base
+  - task_only
+  - protected_gain_0
+  - protected_gain_0_5
+  - protected_gain_1
+  - protected_gain_1_5
+  - protected_gain_2
+  - protected_gain_3
+  - protected_gain_4
+scoring_only: true
+generation_allowed: false
+training_allowed: false
+qwen_e2e_allowed: false
+llama_allowed: false
+same_family_null_allowed: false
+sanitizer_allowed: false
+far_aggregation_allowed: false
+paper_claim_allowed: false
+allowlist_enablement_allowed: false
+future_compute_requires_reviewed_route: true
+teacher_forced_gate:
+  protected_lift_vs_base_min: 0.15
+  protected_lift_vs_task_only_min: 0.10
+  protected_rank1_min: 0.75
+  protected_median_margin_min_exclusive: 0.0
+  max_single_surface_mass: 0.50
+  per_prefix_min_lift_vs_base: 0.08
