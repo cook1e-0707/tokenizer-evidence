@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T21:44:01Z
+Last synchronized: 2026-05-14T21:49:48Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SUPPORT_WINDOW_COVERAGE_DRY_RUN_FAIL_NO_COMPUTE`
+`V2_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_ANALYSIS_FAIL_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COMMON_ACROSS_ARMS_REPAIR_NEXT`
+`BLOCK_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_REPAIR_ROUTE_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -134,6 +134,20 @@ not reclassify `859277`; it changes the blocker from zero support to common
 support across arms. The next allowed action is artifact-only selectivity
 repair planning and static validation only. No compute or claim gate is
 unlocked.
+
+The selectivity analysis has now been executed and recorded in
+`results/natural_evidence_v2/status/r4_positive_support_window_selectivity_analysis_20260514_2149/`
+and summarized in
+`docs/natural_evidence_v2/R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_ANALYSIS_20260514_2149.md`.
+It confirms the support-window contract is broad task language rather than a
+selective protected channel. Accepted null/control blocks total `26`, with raw
+`12/32` and task-only `14/32`; wrong-key and wrong-payload remain `0/32`.
+No surface is diagnostic-selective under `859277` (`protected >= 16` events and
+raw/task-only `0` events), and the dominant `plan` family accounts for `0.725`
+of raw events and `0.727` of task-only events. The next allowed action is a
+reviewed artifact-only selectivity repair or pivot route. No Slurm submission,
+generation, model scoring, training, Llama, same-family null, sanitizer, FAR
+aggregation, payload-diversity work, or paper-facing claim is unlocked.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus
@@ -745,10 +759,10 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Artifact-only implementation planning or static review for a redesigned
-positive evidence contract only. No Slurm submission, generation, Qwen E2E
-rerun, training, Llama, same-family null, sanitizer benchmark, FAR aggregation,
-payload-diversity work, or paper-facing positive claim is unlocked.
+Artifact-only selectivity repair or pivot route design and static validation
+only. No Slurm submission, generation, Qwen E2E rerun, training, Llama,
+same-family null, sanitizer benchmark, FAR aggregation, payload-diversity work,
+or paper-facing positive claim is unlocked.
 
 ## Locked Until Later Gates Pass
 

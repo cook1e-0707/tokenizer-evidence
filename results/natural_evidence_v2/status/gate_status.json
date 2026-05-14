@@ -10332,5 +10332,42 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_support_window_selectivity_analysis_20260514_2149": {
+    "schema_name": "natural_evidence_v2_r4_positive_support_window_selectivity_analysis_gate_v1",
+    "timestamp_utc": "2026-05-14T21:49:48Z",
+    "status": "FAIL_SELECTIVITY_ANALYSIS_COMMON_SUPPORT_NO_COMPUTE",
+    "current_phase": "V2_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_ANALYSIS_FAIL_NO_COMPUTE",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COMMON_ACROSS_ARMS_REPAIR_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_REPAIR_ROUTE_NEXT",
+    "base_failed_job": "859277",
+    "analysis_dir": "results/natural_evidence_v2/status/r4_positive_support_window_selectivity_analysis_20260514_2149",
+    "analysis_doc": "docs/natural_evidence_v2/R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_ANALYSIS_20260514_2149.md",
+    "dry_run_accepts": {
+      "protected": "22/32",
+      "raw": "12/32",
+      "task_only": "14/32",
+      "wrong_key": "0/32",
+      "wrong_payload": "0/32"
+    },
+    "accepted_null_blocks": 26,
+    "diagnostic_selective_surface_count": 0,
+    "plan_fraction_within_raw_events": 0.7253792748778606,
+    "plan_fraction_within_task_only_events": 0.7265157429091855,
+    "interpretation": "Support-window events are broad task-language features, not a selective protected channel; raw/task-only accepted blocks are driven by common positive-polarity support events under the same key.",
+    "next_allowed_action": "Artifact-only selectivity repair or pivot route design and static validation; no Slurm or generation.",
+    "positive_reclassification_allowed": false,
+    "post_hoc_surface_bank_from_859277_allowed": false,
+    "unchanged_resubmission_allowed": false,
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }
