@@ -1,0 +1,20 @@
+{
+  "event_type": "support_window_event",
+  "extractor": "extract_r4_positive_support_window_events.py",
+  "forbidden_public_technical_literals": [
+    "fingerprint",
+    "watermark",
+    "payload",
+    "secret key",
+    "decoder",
+    "hidden signal",
+    "evidence block",
+    "bucket",
+    "coordinate"
+  ],
+  "max_events_per_segment": 3,
+  "max_token_distance": 8,
+  "normalization_rule": "lowercase_strip_punctuation_collapse_space_simple_stem",
+  "schema_name": "natural_evidence_v2_r4_support_window_extractor_spec_v1",
+  "source_rule_id": "frozen_static_rule_r4_support_window_v1_independent_taxonomy_not_859277"
+}

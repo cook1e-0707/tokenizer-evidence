@@ -1,0 +1,32 @@
+{
+  "decision": {
+    "accept": true,
+    "distinct_coordinates": 24,
+    "keyed_correlation_score": 26.0,
+    "observed_events": 26,
+    "specificity_margin": 32.0,
+    "wrong_key_correlation_score": -8.0,
+    "wrong_payload_correlation_score": -6.0
+  },
+  "event_count": 26,
+  "response_text": "Ask the current detail before continuing. Ask the current option before continuing. Ask the current issue before continuing. Ask the current context before continuing. Ask the current goal before continuing. Confirm the current issue before continuing. Check the current constraint before continuing. Check the current option before continuing. Review the current question before continuing. Review the current issue before continuing. Compare the current constraint before continuing. Compare the current option before continuing. Compare the current issue before continuing. Identify the current option before continuing. Identify the current issue before continuing. Identify the current context before continuing. Identify the current goal before continuing. Plan the current priority before continuing. Plan the current handoff before continuing. Choose the current target before continuing. Choose the current scope before continuing. Set the current outline before continuing. Prepare the current outline before continuing. Schedule the current target before continuing.",
+  "schema_name": "natural_evidence_v2_r4_support_repair_toy_fixture_v1",
+  "wrong_key_decision": {
+    "accept": false,
+    "distinct_coordinates": 17,
+    "keyed_correlation_score": -8.0,
+    "observed_events": 26,
+    "specificity_margin": -34.0,
+    "wrong_key_correlation_score": 26.0,
+    "wrong_payload_correlation_score": 6.0
+  },
+  "wrong_payload_decision": {
+    "accept": false,
+    "distinct_coordinates": 19,
+    "keyed_correlation_score": -6.0,
+    "observed_events": 26,
+    "specificity_margin": -32.0,
+    "wrong_key_correlation_score": 6.0,
+    "wrong_payload_correlation_score": 26.0
+  }
+}

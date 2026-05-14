@@ -1,0 +1,41 @@
+schema_name: natural_evidence_v2_r4_positive_support_repair_package_config_v1
+contract_id: r4_positive_support_repair_v2
+base_failed_job: "859277"
+payload_id: a55e
+wrong_payload_id: wrong_payload_a55e_control
+coordinate_count: 32
+event_window_policy:
+  source_rule_id: frozen_static_rule_r4_support_window_v1_independent_taxonomy_not_859277
+  event_type: support_window_event
+  normalization_rule: lowercase_strip_punctuation_collapse_space_simple_stem
+  max_token_distance: 8
+  max_events_per_segment: 3
+  forbidden_public_technical_literals:
+    - fingerprint
+    - watermark
+    - payload
+    - secret key
+    - decoder
+    - hidden signal
+    - evidence block
+    - bucket
+    - coordinate
+decoder_spec:
+  accept_requires:
+    min_observed_events: 24
+    min_distinct_coordinates: 18
+  required_before_accept:
+    protected_keyed_correlation_score_min: 6.0
+    protected_minus_best_wrong_specificity_margin_min: 3.0
+    wrong_key_correlation_score_max: 1.5
+static_validation:
+  max_surface_family_fraction: 0.25
+  min_event_window_rows: 96
+  toy_positive_min_events: 24
+  toy_positive_min_distinct_coordinates: 18
+  require_wrong_key_reject: true
+  require_wrong_payload_reject: true
+compute_allowed: false
+generation_allowed: false
+paper_claim_allowed: false
+

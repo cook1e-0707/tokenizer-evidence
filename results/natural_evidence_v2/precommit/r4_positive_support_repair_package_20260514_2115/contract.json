@@ -1,0 +1,12 @@
+{
+  "base_failed_job": "859277",
+  "contract_id": "r4_positive_support_repair_v2",
+  "coordinate_count": 32,
+  "format_scrub_primary": "all",
+  "generation_allowed": false,
+  "paper_claim_allowed": false,
+  "payload_id": "a55e",
+  "post_hoc_phrase_mining_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_positive_support_repair_contract_v1",
+  "unchanged_resubmission_allowed": false
+}

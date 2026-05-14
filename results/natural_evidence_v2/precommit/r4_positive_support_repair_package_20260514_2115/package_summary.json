@@ -1,0 +1,35 @@
+{
+  "artifact_hashes": {
+    "contract.json": "95e25e0ad4d0b1d18398958be784b1d4483f584805f215f9801853ee1e775922",
+    "decoder_spec.json": "e5c998877128e4de9f580c417d708f4e869c4278edfaeb8bfbb2fe1d6b9cc805",
+    "event_window_bank.json": "75097579d302d1d7c8d6a4c4318b2e804fc08b2cab27245b67bfed402929884d",
+    "extractor_spec.json": "fbcdde665f7e0f6bcfbc8cbd9f9d5f1d973be7ce5a05fab6261a9d6e9118f2c9",
+    "source_policy.json": "15f56990887faa7f280002311fd4e41aff4937cafd5f5fe109dbc03effd7e54e",
+    "toy_positive_events.jsonl": "414ed356a931b050fc7efa909b492ce16e48d14799b122f0540408358d1cff2d",
+    "toy_positive_fixture.json": "0e9901d5ed7e9e6618ebb5f2ddf8c7a772ce2a843ce155e48983ec0888d314e6"
+  },
+  "contract_id": "r4_positive_support_repair_v2",
+  "event_window_rows": 384,
+  "generation_allowed": false,
+  "max_surface_family_fraction": 0.125,
+  "paper_claim_allowed": false,
+  "post_hoc_phrase_mining_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_positive_support_repair_package_summary_v1",
+  "slurm_allowed": false,
+  "status": "PASS_SUPPORT_REPAIR_PACKAGE_STATIC_VALIDATION_NO_COMPUTE",
+  "surface_family_counts": {
+    "clarify": 48,
+    "communicate": 48,
+    "learning": 48,
+    "maintenance": 48,
+    "plan": 48,
+    "quality": 48,
+    "safety": 48,
+    "troubleshooting": 48
+  },
+  "toy_positive_accept": true,
+  "toy_positive_distinct_coordinates": 24,
+  "toy_positive_events": 26,
+  "wrong_key_accept": false,
+  "wrong_payload_accept": false
+}

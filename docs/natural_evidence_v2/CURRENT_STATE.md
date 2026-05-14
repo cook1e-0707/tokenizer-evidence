@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T21:02:34Z
+Last synchronized: 2026-05-14T21:15:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_ZERO_EVENT_SUPPORT_GAP_AUDIT_RECORDED_REPAIR_PACKAGE_PLANNING`
+`V2_R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_STATIC_VALIDATION_PASS_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_IMPLEMENTATION_NEXT`
+`BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COVERAGE_DRY_RUN_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -103,6 +103,23 @@ and
 `results/natural_evidence_v2/status/r4_positive_support_repair_package_plan_20260514_2102/`.
 The next allowed action is artifact-only implementation of the support-repair
 contract/extractor/static fixture package. No compute or claim gate is unlocked.
+
+The artifact-only support-repair package has now been implemented and statically
+validated in
+`results/natural_evidence_v2/precommit/r4_positive_support_repair_package_20260514_2115/`.
+It defines contract `r4_positive_support_repair_v2` and replaces exact
+multi-word phrase-only support with precommitted support-window events:
+allowed action verb lemma plus allowed task cue lemma within `<= 8` scrubbed
+tokens. The bank has `384` independently generated event windows, `8` surface
+families, max family fraction `0.125`, and source policy
+`independent_static_taxonomy_not_859277_transcripts`. Static fixture validation
+passes: toy protected accept is `true` with `26` events and `24` distinct
+coordinates, while wrong-key and wrong-payload fixtures both reject. Focused
+tests passed (`6` tests). This still does not unlock Slurm, generation, model
+scoring, training, Llama, null/FAR, sanitizer, payload diversity, or paper
+claims. The next allowed action is artifact-only support-window coverage
+dry-run on existing `859277` outputs and static review of whether support is
+useful or merely common across all arms.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus
