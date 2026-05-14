@@ -1,0 +1,47 @@
+{
+  "schema_name": "natural_evidence_v2_r4_positive_support_window_selectivity_repair_route_v1",
+  "timestamp_utc": "2026-05-14T21:54:00Z",
+  "status": "PASS_SELECTIVITY_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NO_COMPUTE",
+  "current_phase": "V2_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_REPAIR_ROUTE_RECORDED_NO_COMPUTE",
+  "previous_blocker": "BLOCK_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_REPAIR_ROUTE_NEXT",
+  "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT",
+  "base_failed_job": "859277",
+  "selectivity_analysis_dir": "results/natural_evidence_v2/status/r4_positive_support_window_selectivity_analysis_20260514_2149",
+  "route_doc": "docs/natural_evidence_v2/R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_REPAIR_ROUTE_20260514_2154.md",
+  "threshold_diagnostic": {
+    "threshold_6": {
+      "protected": 22,
+      "raw": 12,
+      "task_only": 14
+    },
+    "threshold_75": {
+      "protected": 22,
+      "raw": 2,
+      "task_only": 0
+    },
+    "threshold_100": {
+      "protected": 22,
+      "raw": 1,
+      "task_only": 0
+    },
+    "threshold_125": {
+      "protected": 14,
+      "raw": 0,
+      "task_only": 0
+    }
+  },
+  "interpretation": "The current support-window bank is not selective enough; threshold-only repair cannot produce protected >= 26/32 with clean raw/task-only controls.",
+  "next_allowed_action": "Artifact-only implementation and static validation of a selectivity repair package.",
+  "post_hoc_surface_bank_from_859277_allowed": false,
+  "unchanged_resubmission_allowed": false,
+  "slurm_allowed": false,
+  "generation_allowed": false,
+  "model_scoring_allowed": false,
+  "training_allowed": false,
+  "llama_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "far_aggregation_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "paper_claim_allowed": false
+}
