@@ -1,0 +1,11 @@
+{
+  "accept_requires": {
+    "min_distinct_coordinates": 18,
+    "min_observed_events": 24
+  },
+  "required_before_accept": {
+    "protected_keyed_correlation_score_min": 8.0,
+    "protected_minus_best_wrong_specificity_margin_min": 4.0,
+    "wrong_key_correlation_score_max": 1.5
+  }
+}

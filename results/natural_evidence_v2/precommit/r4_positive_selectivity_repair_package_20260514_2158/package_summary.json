@@ -1,0 +1,40 @@
+{
+  "artifact_hashes": {
+    "contract.json": "3df7d711ab148bad85d372bba0e2d36fc95ad0c57969ca0571e4cd4545bd664e",
+    "decoder_spec.json": "80895a9844d8c40f6e23908839a3cf3ae6593815391df95c55ce84953cfbd2d0",
+    "event_window_bank.json": "0b3624281bce0637667e629b7d940eaae579c00efadce8be017fd03784a646f6",
+    "extractor_spec.json": "60c23828e493d24342b6982f245b06248759244ddcf82aa5f245f75c3ff0f6c6",
+    "generic_raw_task_events.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generic_raw_task_fixture.json": "71ca70638c09d40bb892005d6b438dc997aa6b5eedcf84ef34e031f0e964d929",
+    "source_policy.json": "4dac72682e04c2217ae3097041b486982e3047cf1772faa58f928f6c956bc918",
+    "toy_positive_events.jsonl": "fbdab1f1691216fed7a57980e49f6a520d1d9ead16e5fdf6eb7576f556a74ead",
+    "toy_positive_fixture.json": "016a4ce573fd3f71bd66c95f192e99e3c240bedad76fb4406e6491d76fa78035"
+  },
+  "contract_id": "r4_positive_selectivity_repair_v1",
+  "event_window_rows": 96,
+  "generation_allowed": false,
+  "generic_raw_task_accept": false,
+  "generic_raw_task_events": 0,
+  "max_surface_family_fraction": 0.16666666666666666,
+  "model_scoring_allowed": false,
+  "paper_claim_allowed": false,
+  "post_hoc_phrase_mining_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_positive_selectivity_repair_package_summary_v1",
+  "self_cue_rows": 0,
+  "slurm_allowed": false,
+  "status": "PASS_SELECTIVITY_REPAIR_PACKAGE_STATIC_VALIDATION_NO_COMPUTE",
+  "surface_family_counts": {
+    "communication_choice": 16,
+    "constraint_reasoning": 16,
+    "context_alignment": 16,
+    "handoff_trace": 16,
+    "quality_review": 16,
+    "risk_review": 16
+  },
+  "toy_positive_accept": true,
+  "toy_positive_distinct_coordinates": 24,
+  "toy_positive_events": 24,
+  "training_allowed": false,
+  "wrong_key_accept": false,
+  "wrong_payload_accept": false
+}

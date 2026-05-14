@@ -1,0 +1,12 @@
+condition,surface_family,event_count,fraction_within_condition
+protected,handoff_trace,72,0.5581395348837209
+protected,context_alignment,53,0.4108527131782946
+protected,quality_review,3,0.023255813953488372
+protected,constraint_reasoning,1,0.007751937984496124
+raw,handoff_trace,73,0.6576576576576577
+raw,context_alignment,35,0.3153153153153153
+raw,quality_review,3,0.02702702702702703
+task_only,handoff_trace,62,0.7045454545454546
+task_only,context_alignment,21,0.23863636363636365
+task_only,quality_review,3,0.03409090909090909
+task_only,risk_review,2,0.022727272727272728

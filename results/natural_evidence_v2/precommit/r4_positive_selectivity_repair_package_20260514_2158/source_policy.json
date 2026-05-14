@@ -1,0 +1,6 @@
+{
+  "859277_reuse_policy": "failure_taxonomy_only_no_surface_addition",
+  "schema_name": "natural_evidence_v2_r4_selectivity_repair_source_policy_v1",
+  "source_policy": "independent static taxonomy, not mined from 859277 transcripts",
+  "source_rule_id": "frozen_static_rule_r4_selective_support_window_v1_independent_taxonomy_not_859277"
+}

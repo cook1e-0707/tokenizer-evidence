@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T21:54:00Z
+Last synchronized: 2026-05-14T22:02:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SUPPORT_WINDOW_SELECTIVITY_REPAIR_ROUTE_RECORDED_NO_COMPUTE`
+`V2_R4_POSITIVE_SELECTIVITY_PACKAGE_COVERAGE_DRY_RUN_FAIL_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_REPAIR_PACKAGE_ARTIFACT_ONLY_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_ELICITATION_ROUTE_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -161,6 +161,32 @@ allowed action is artifact-only implementation and static validation of a
 selectivity repair package with independent source policy, no self-cue event
 rows, generic raw/task fixture rejection, wrong-key/wrong-payload rejection,
 and toy protected fixture acceptance. No compute or claim gate is unlocked.
+
+The artifact-only selectivity repair package has now been implemented and
+statically validated in
+`results/natural_evidence_v2/precommit/r4_positive_selectivity_repair_package_20260514_2158/`
+and reviewed in
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_REPAIR_PACKAGE_STATIC_VALIDATION_20260514_2158.md`.
+It defines contract `r4_positive_selectivity_repair_v1` with `96` independently
+sourced event-window rows across `6` families, max family fraction `0.167`,
+`0` self-cue rows, toy protected fixture accept `true`, generic raw/task fixture
+accept `false`, wrong-key accept `false`, and wrong-payload accept `false`.
+This still does not unlock compute or claims. The next allowed action is an
+artifact-only coverage/selectivity dry-run of this package on existing failed
+`859277` outputs.
+
+That coverage dry-run has now been executed and recorded in
+`results/natural_evidence_v2/status/r4_positive_selectivity_repair_package_coverage_dry_run_20260514_2202/`
+and reviewed in
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_REPAIR_PACKAGE_COVERAGE_DRY_RUN_20260514_2202.md`.
+The null/control problem is gone (`0` accepts for raw/task-only/wrong-key/
+wrong-payload), but protected also has `0` accepts because support is too
+sparse on the old `859277` outputs: protected row support rate is `0.057`, mean
+protected events per dry-run block is `4.45`, and mean distinct coordinates is
+`1.79`. The new blocker is
+`BLOCK_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_ELICITATION_ROUTE_NEXT`: the bank is
+cleaner but requires a natural prompt-policy elicitation route before any
+compute can be reviewed. No compute or claim gate is unlocked.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus
@@ -772,10 +798,10 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Artifact-only implementation and static validation of a selectivity repair
-package only. No Slurm submission, generation, Qwen E2E rerun, training,
-Llama, same-family null, sanitizer benchmark, FAR aggregation,
-payload-diversity work, or paper-facing positive claim is unlocked.
+Artifact-only prompt-policy elicitation route design for the selectivity
+package. No Slurm submission, generation, Qwen E2E rerun, training, Llama,
+same-family null, sanitizer benchmark, FAR aggregation, payload-diversity work,
+or paper-facing positive claim is unlocked.
 
 ## Locked Until Later Gates Pass
 

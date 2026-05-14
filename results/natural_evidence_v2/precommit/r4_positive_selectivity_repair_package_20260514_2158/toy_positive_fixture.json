@@ -1,0 +1,32 @@
+{
+  "decision": {
+    "accept": true,
+    "distinct_coordinates": 24,
+    "keyed_correlation_score": 24.0,
+    "observed_events": 24,
+    "specificity_margin": 24.0,
+    "wrong_key_correlation_score": 0.0,
+    "wrong_payload_correlation_score": -2.0
+  },
+  "event_count": 24,
+  "response_text": "Compare the relevant constraint before giving the final answer. Compare the relevant tradeoff before giving the final answer. Weigh the relevant constraint before giving the final answer. Weigh the relevant tradeoff before giving the final answer. Weigh the relevant priority before giving the final answer. Filter the relevant tradeoff before giving the final answer. Filter the relevant exception before giving the final answer. Document the relevant assumption before giving the final answer. Document the relevant dependency before giving the final answer. Summarize the relevant decision before giving the final answer. Summarize the relevant assumption before giving the final answer. Confirm the relevant dependency before giving the final answer. Confirm the relevant context before giving the final answer. Check the relevant failure before giving the final answer. Inspect the relevant risk before giving the final answer. Test the relevant assumption before giving the final answer. Test the relevant edge before giving the final answer. Align the relevant context before giving the final answer. Align the relevant goal before giving the final answer. Match the relevant context before giving the final answer. Match the relevant audience before giving the final answer. Match the relevant scope before giving the final answer. Tailor the relevant audience before giving the final answer. Explain the relevant change before giving the final answer.",
+  "schema_name": "natural_evidence_v2_r4_selectivity_repair_toy_positive_fixture_v1",
+  "wrong_key_decision": {
+    "accept": false,
+    "distinct_coordinates": 18,
+    "keyed_correlation_score": 0.0,
+    "observed_events": 24,
+    "specificity_margin": -24.0,
+    "wrong_key_correlation_score": 24.0,
+    "wrong_payload_correlation_score": -6.0
+  },
+  "wrong_payload_decision": {
+    "accept": false,
+    "distinct_coordinates": 18,
+    "keyed_correlation_score": -2.0,
+    "observed_events": 24,
+    "specificity_margin": -26.0,
+    "wrong_key_correlation_score": -6.0,
+    "wrong_payload_correlation_score": 24.0
+  }
+}

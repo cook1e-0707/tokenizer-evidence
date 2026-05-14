@@ -1,0 +1,14 @@
+{
+  "decision": {
+    "accept": false,
+    "distinct_coordinates": 0,
+    "keyed_correlation_score": 0.0,
+    "observed_events": 0,
+    "specificity_margin": 0.0,
+    "wrong_key_correlation_score": 0.0,
+    "wrong_payload_correlation_score": 0.0
+  },
+  "event_count": 0,
+  "response_text": "Make a simple plan, prepare the next item, and keep the work clear. Choose a useful option, clean the area, and review the task before finishing. Share a short update with practical steps and avoid unnecessary detail.",
+  "schema_name": "natural_evidence_v2_r4_selectivity_repair_generic_raw_task_fixture_v1"
+}
