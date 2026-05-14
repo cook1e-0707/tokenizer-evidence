@@ -15103,5 +15103,41 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_support_window_coverage_dry_run_20260514_2144": {
+    "schema_name": "natural_evidence_v2_r4_positive_support_window_dry_run_gate_v1",
+    "timestamp_utc": "2026-05-14T21:44:01Z",
+    "status": "FAIL_SUPPORT_WINDOW_DRY_RUN_NULL_OR_CONTROL_ACCEPTS_NO_COMPUTE",
+    "current_phase": "V2_R4_POSITIVE_SUPPORT_WINDOW_COVERAGE_DRY_RUN_FAIL_NO_COMPUTE",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COVERAGE_DRY_RUN_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COMMON_ACROSS_ARMS_REPAIR_NEXT",
+    "dry_run_dir": "results/natural_evidence_v2/status/r4_positive_support_window_coverage_dry_run_20260514_2144",
+    "dry_run_accepts": {
+      "protected": "22/32",
+      "raw": "12/32",
+      "task_only": "14/32",
+      "wrong_key": "0/32",
+      "wrong_payload": "0/32"
+    },
+    "support_rates": {
+      "protected": 0.93603515625,
+      "raw": 0.84228515625,
+      "task_only": 0.8427734375
+    },
+    "interpretation": "Support-window repair fixes zero support but is too common across raw/task-only arms; selectivity repair required before compute.",
+    "next_allowed_action": "Artifact-only selectivity repair planning and static validation; no Slurm or generation.",
+    "positive_reclassification_allowed": false,
+    "post_hoc_phrase_mining_allowed": false,
+    "unchanged_resubmission_allowed": false,
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }

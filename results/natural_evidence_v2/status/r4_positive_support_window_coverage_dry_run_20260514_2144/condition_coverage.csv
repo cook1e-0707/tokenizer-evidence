@@ -1,0 +1,4 @@
+condition,rows,rows_with_support_events,row_support_rate,total_support_events,mean_events_per_row,median_events_per_row
+protected,2048,1917,0.93603515625,6312,3.08203125,3.0
+raw,2048,1725,0.84228515625,3889,1.89892578125,2.0
+task_only,2048,1726,0.8427734375,3843,1.87646484375,2.0

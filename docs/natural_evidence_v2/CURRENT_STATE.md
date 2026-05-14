@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T21:15:00Z
+Last synchronized: 2026-05-14T21:44:01Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SUPPORT_REPAIR_PACKAGE_STATIC_VALIDATION_PASS_NO_COMPUTE`
+`V2_R4_POSITIVE_SUPPORT_WINDOW_COVERAGE_DRY_RUN_FAIL_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COVERAGE_DRY_RUN_NEXT`
+`BLOCK_R4_POSITIVE_SUPPORT_WINDOW_COMMON_ACROSS_ARMS_REPAIR_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -120,6 +120,20 @@ scoring, training, Llama, null/FAR, sanitizer, payload diversity, or paper
 claims. The next allowed action is artifact-only support-window coverage
 dry-run on existing `859277` outputs and static review of whether support is
 useful or merely common across all arms.
+
+The support-window coverage dry-run has now been executed on existing `859277`
+outputs only and recorded in
+`results/natural_evidence_v2/status/r4_positive_support_window_coverage_dry_run_20260514_2144/`.
+It confirms the new support contract fixes zero support but fails selectivity:
+protected has `22/32` dry-run accept-like blocks, but raw has `12/32` and
+task-only has `14/32`. Wrong-key and wrong-payload controls remain `0/32`.
+Support rates are high across all arms (`protected 0.936`, `raw 0.842`,
+`task_only 0.843`), so the current support-window extractor captures ordinary
+task language in unprotected outputs. This is not a positive result and does
+not reclassify `859277`; it changes the blocker from zero support to common
+support across arms. The next allowed action is artifact-only selectivity
+repair planning and static validation only. No compute or claim gate is
+unlocked.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus

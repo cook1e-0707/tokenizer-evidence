@@ -1,0 +1,97 @@
+{
+  "arm_summary": {
+    "protected": {
+      "blocks": 32,
+      "distinct_coordinates_mean": 18.8125,
+      "dry_run_accepts": 22,
+      "keyed_score_mean": 139.8125,
+      "observed_events_mean": 197.25,
+      "observed_events_median": 195.0,
+      "specificity_margin_mean": 274.8125,
+      "specificity_margin_min": 222.0
+    },
+    "raw": {
+      "blocks": 32,
+      "distinct_coordinates_mean": 16.96875,
+      "dry_run_accepts": 12,
+      "keyed_score_mean": 61.09375,
+      "observed_events_mean": 121.53125,
+      "observed_events_median": 122.0,
+      "specificity_margin_mean": 114.125,
+      "specificity_margin_min": 12.0
+    },
+    "task_only": {
+      "blocks": 32,
+      "distinct_coordinates_mean": 17.46875,
+      "dry_run_accepts": 14,
+      "keyed_score_mean": 61.21875,
+      "observed_events_mean": 120.09375,
+      "observed_events_median": 116.0,
+      "specificity_margin_mean": 115.5625,
+      "specificity_margin_min": 26.0
+    },
+    "wrong_key": {
+      "blocks": 32,
+      "distinct_coordinates_mean": 18.53125,
+      "dry_run_accepts": 0,
+      "keyed_score_mean": -149.0625,
+      "observed_events_mean": 197.25,
+      "observed_events_median": 195.0,
+      "specificity_margin_mean": -303.9375,
+      "specificity_margin_min": -434.0
+    },
+    "wrong_payload": {
+      "blocks": 32,
+      "distinct_coordinates_mean": 17.96875,
+      "dry_run_accepts": 0,
+      "keyed_score_mean": -137.125,
+      "observed_events_mean": 197.25,
+      "observed_events_median": 195.0,
+      "specificity_margin_mean": -292.0,
+      "specificity_margin_min": -422.0
+    }
+  },
+  "audit_key_commitment": "7e40040e4cdc79a46210283a55cb9c70c2d7d4d63204b0a3a174f4ee23b93f05",
+  "condition_coverage": [
+    {
+      "condition": "protected",
+      "mean_events_per_row": 3.08203125,
+      "median_events_per_row": 3.0,
+      "row_support_rate": 0.93603515625,
+      "rows": 2048,
+      "rows_with_support_events": 1917,
+      "total_support_events": 6312
+    },
+    {
+      "condition": "raw",
+      "mean_events_per_row": 1.89892578125,
+      "median_events_per_row": 2.0,
+      "row_support_rate": 0.84228515625,
+      "rows": 2048,
+      "rows_with_support_events": 1725,
+      "total_support_events": 3889
+    },
+    {
+      "condition": "task_only",
+      "mean_events_per_row": 1.87646484375,
+      "median_events_per_row": 2.0,
+      "row_support_rate": 0.8427734375,
+      "rows": 2048,
+      "rows_with_support_events": 1726,
+      "total_support_events": 3843
+    }
+  ],
+  "diagnostic_only": true,
+  "generated_rows": 6144,
+  "generation_allowed": false,
+  "generation_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277",
+  "interpretation": "Support-window contract is not selective enough in this dry-run because one or more null/control arms accept.",
+  "package_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/precommit/r4_positive_support_repair_package_20260514_2115",
+  "paper_claim_allowed": false,
+  "positive_reclassification_allowed": false,
+  "post_hoc_phrase_mining_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_positive_support_window_coverage_dry_run_v1",
+  "slurm_allowed": false,
+  "status": "FAIL_SUPPORT_WINDOW_DRY_RUN_NULL_OR_CONTROL_ACCEPTS_NO_COMPUTE",
+  "wrong_key_commitment": "eda780722d2b3273ba85012e3658bada97a8401b52376e60a794c413465d982e"
+}
