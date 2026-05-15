@@ -1,0 +1,41 @@
+{
+  "schema_name": "natural_evidence_v2_r4_positive_selectivity_pressure_controller_route_selection_v1",
+  "timestamp_utc": "2026-05-15T04:24:00Z",
+  "status": "PASS_PRESSURE_CONTROLLER_ROUTE_SELECTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "current_phase": "V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_SELECTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_PIVOT_ROUTE_SELECTION_NEXT",
+  "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NEXT",
+  "source_package": "configs/natural_evidence_v2/r4_positive_selectivity_pressure_pivot_package.yaml",
+  "source_package_validation": "results/natural_evidence_v2/status/r4_positive_selectivity_pressure_pivot_package_validation_20260515_0418/pressure_pivot_package_validation_summary.json",
+  "route_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_SELECTION_20260515_0424.md",
+  "selected_route": "teacher_forced_pressure_controller",
+  "not_selected_yet": [
+    "metric_exact_objective_repair",
+    "explicit_stop_record"
+  ],
+  "future_route_type": "teacher_forced_scoring_only",
+  "future_model_family": "qwen_only",
+  "future_contract_id": "a55e",
+  "future_generation_allowed": false,
+  "future_training_allowed": false,
+  "future_required_gate_before_generation": {
+    "protected_lift_vs_base_min": 0.15,
+    "protected_lift_vs_task_only_min": 0.1,
+    "protected_rank1_min": 0.75,
+    "protected_median_margin_gt": 0.0,
+    "wrong_key_must_reject": true,
+    "wrong_payload_must_reject": true,
+    "collapse_guard_required": true
+  },
+  "next_allowed_action": "Artifact-only teacher-forced pressure-controller route-plan implementation and static validation.",
+  "slurm_allowed": false,
+  "generation_allowed": false,
+  "model_scoring_allowed": false,
+  "training_allowed": false,
+  "llama_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "far_aggregation_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "paper_claim_allowed": false
+}

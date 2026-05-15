@@ -1,0 +1,98 @@
+schema_name: natural_evidence_v2_r4_positive_selectivity_pressure_pivot_package_v1
+phase: V2_R4_POSITIVE_SELECTIVITY_PRESSURE_PIVOT_PACKAGE_ARTIFACT_ONLY
+package_id: r4_positive_selectivity_pressure_pivot_v1
+source_route: docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_859491_REPAIR_PIVOT_ROUTE_20260515_0412.md
+source_route_summary: results/natural_evidence_v2/status/r4_positive_selectivity_859491_repair_pivot_route_20260515_0412/route_decision_summary.json
+
+source_failed_diagnostics:
+  - job_id: "857795"
+    role: pressure_relaxation_b_free_generation_failure
+    review: results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_857795_review/job_857795_review.md
+    failure_analysis: results/natural_evidence_v2/status/r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_857795_failure_analysis/failure_analysis.md
+  - job_id: "858019"
+    role: transfer_gap_prompt_repair_failure
+    review: results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_review/job_858019_review.md
+    failure_analysis: results/natural_evidence_v2/status/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_858019_failure_analysis/failure_analysis.md
+  - job_id: "859277"
+    role: phrase_event_bank_zero_support_failure
+    review: results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_review/review.md
+    failure_analysis: results/natural_evidence_v2/status/r4_positive_event_bank_dev_diagnostic_859277_failure_analysis/failure_analysis.md
+  - job_id: "859491"
+    role: selectivity_prompt_policy_common_support_failure
+    review: docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_859491_REVIEW.md
+    failure_analysis: results/natural_evidence_v2/status/r4_positive_selectivity_dev_diagnostic_859491_failure_analysis/failure_analysis.md
+
+current_permissions:
+  slurm_allowed: false
+  allowlist_enablement_allowed: false
+  generation_allowed: false
+  model_scoring_allowed: false
+  training_allowed: false
+  qwen_e2e_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+candidate_next_routes:
+  teacher_forced_pressure_controller:
+    artifact_only_design_allowed: true
+    future_compute_type: teacher_forced_scoring_only
+    generation_allowed_in_route: false
+    training_allowed_in_route: false
+    requires_wrong_key_control: true
+    requires_wrong_payload_control: true
+    primary_scrub_mode_for_later_generation: all
+  metric_exact_objective_repair:
+    artifact_only_design_allowed: true
+    future_compute_type: training_or_micro_overfit_only_after_review
+    generation_allowed_in_route: false
+    requires_disabled_by_default_patch: true
+    requires_teacher_forced_gate_before_generation: true
+  explicit_stop_record:
+    artifact_only_design_allowed: true
+    future_compute_type: none
+    generation_allowed_in_route: false
+
+reuse_policy:
+  allow_859491_failure_taxonomy: true
+  allow_859491_support_selectivity_diagnostics: true
+  allow_859491_prompt_policy_diagnosis: true
+  forbid_post_hoc_phrase_mining_from_859491: true
+  forbid_threshold_tuning_to_relabel_859491: true
+  forbid_key_payload_remap_to_rescue_859491: true
+  forbid_unchanged_resubmission: true
+
+static_requirements:
+  compare_existing_teacher_forced_and_generation_failures: true
+  define_future_metric_before_generation: true
+  preserve_wrong_key_and_wrong_payload_controls: true
+  require_primary_format_scrub_all_for_later_generation: true
+  require_public_template_leakage_check: true
+  require_h200_pomplun_policy_for_future_gpu: true
+  require_one_reviewed_submission_for_future_compute: true
+  require_hermes_tg_email_notification_for_future_compute: true
+
+future_compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gpu: h200
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  future_exactly_one_allowlist_entry: true
+  future_immediate_allowlist_disable_after_sbatch: true
+
+not_unlocked_by_this_package:
+  slurm_submission: true
+  generation: true
+  model_scoring: true
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

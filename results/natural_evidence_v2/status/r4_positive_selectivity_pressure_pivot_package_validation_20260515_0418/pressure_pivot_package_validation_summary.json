@@ -1,0 +1,16 @@
+{
+  "allowlist_enabled": false,
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "package_id": "r4_positive_selectivity_pressure_pivot_v1",
+  "slurm_job_submitted": false,
+  "source_failed_jobs": [
+    "857795",
+    "858019",
+    "859277",
+    "859491"
+  ],
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_PIVOT_PACKAGE_STATIC_VALIDATION_NO_COMPUTE",
+  "training_started": false
+}

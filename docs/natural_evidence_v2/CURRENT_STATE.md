@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T04:05:00Z
+Last synchronized: 2026-05-15T04:32:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_859491_REVIEWED_FAIL_NO_POSITIVE_CLAIM`
+`V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_PASS_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_859491_REPAIR_PIVOT_ROUTE_DECISION_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_NEXT`
 
 Job `859491` has reached terminal state and has been reviewed. All four H200
 array tasks completed with exit code `0:0`, so this is not an infrastructure or
@@ -42,15 +42,42 @@ clean. The selectivity prompt policy did elicit support-window events, but not
 a protected-selective keyed channel: protected mean events per block are
 `9.875`, raw mean events are `9.375`, and task-only mean events are `8.5625`.
 Raw max keyed score (`23`) is higher than protected max keyed score (`16`).
-Generated outputs total `6144`, duplicate response hashes are `0`, and the
-technical literal hits (`coordinate: 104`, `bucket: 10`) are mostly ordinary
-task-domain language; this matcher issue does not rescue the positive failure.
-Review artifacts are in
-`results/natural_evidence_v2/status/r4_positive_selectivity_dev_diagnostic_859491_review/`
-and failure analysis is in
-`results/natural_evidence_v2/status/r4_positive_selectivity_dev_diagnostic_859491_failure_analysis/`.
-Do not resubmit this route unchanged. The next allowed action is artifact-only
-repair / pivot route decision and failure analysis only.
+
+A repair / pivot route has now been recorded:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_859491_REPAIR_PIVOT_ROUTE_20260515_0412.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_859491_repair_pivot_route_20260515_0412/`.
+The route freezes `859491` as a failed diagnostic and stops unchanged
+support-window prompt-policy resubmission. `859491` may be reused only for
+failure taxonomy, support/selectivity diagnostics, prompt-policy diagnosis,
+forbidden matcher semantics diagnosis, and wrapper/provenance audit. It must
+not be used for post-hoc phrase mining, threshold tuning, key/payload remapping,
+decoder relaxation, positive reclassification, or paper-facing claims.
+
+The pressure/selectivity pivot package has now passed static validation:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_PIVOT_PACKAGE_STATIC_VALIDATION_20260515_0418.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_pressure_pivot_package_validation_20260515_0418/`.
+It binds failed diagnostics `857795`, `858019`, `859277`, and `859491`, keeps
+all compute and claim actions disabled, and preserves H200/pomplun plus
+exactly-one allowlist governance for any later compute route.
+
+The route selection has now selected the teacher-forced protected-pressure /
+soft-controller scoring route as the first next path:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_SELECTION_20260515_0424.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_route_selection_20260515_0424/`.
+The teacher-forced pressure-controller route plan has now passed static
+validation:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_20260515_0432.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_route_plan_20260515_0432/`.
+The route is Qwen-only, same-contract `a55e`, teacher-forced scoring-only, and
+uses the 8192 candidate-v3 prefix-native rows with hash
+`d35e5483ce7f6d3d782ce17961b2c407909afc879a12917c5ccc27090f3c80b7`. Focused
+tests passed (`10` tests), py-compile passed, and no compute or allowlist
+enablement occurred. The plan requires scorer/controller integration review
+before any Slurm submission.
 
 The R4 positive selectivity small dev diagnostic has now been submitted as
 exactly one H200/pomplun Slurm array job: `859491`. The authorized command was
@@ -892,12 +919,14 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Artifact-only repair / pivot route decision for the reviewed `859491` failure.
-Do not resubmit this route unchanged. Training, Llama, same-family null,
-sanitizer benchmark, FAR aggregation, payload-diversity work, and paper-facing
-positive claim remain locked until later route gates pass.
+Artifact-only scorer/controller integration review and patch planning for the
+teacher-forced pressure-controller route. Do not resubmit `859491` unchanged.
+Do not use `859491` transcripts for post-hoc surface mining or threshold
+relaxation. No Slurm, generation, model scoring, training, Llama, same-family
+null, sanitizer benchmark, FAR aggregation, payload-diversity work, or
+paper-facing positive claim is unlocked by the current state.
 
-## Locked Until Later Gates Pass
+## Conditionally Authorized After Later Gates Pass
 
 - generation / Qwen E2E rerun
 - Llama
@@ -907,9 +936,10 @@ positive claim remain locked until later route gates pass.
 - payload-diversity claim
 - paper-facing positive claim
 
-All training, generation, Qwen E2E rerun, Llama, null/FAR, sanitizer, payload
-diversity, and paper-facing claim routes remain locked until later review gates
-pass or a separate reviewed route explicitly allows the next action.
+The user has already granted standing permission to proceed automatically once
+the relevant prerequisite route gates pass. These actions are not permanently
+forbidden, but they require a later reviewed route, allowlist safety, and
+Hermes/Codex state sync before execution.
 
 ## Chimera Policy
 
