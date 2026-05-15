@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-14T22:02:00Z
+Last synchronized: 2026-05-15T02:42:59Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_PACKAGE_COVERAGE_DRY_RUN_FAIL_NO_COMPUTE`
+`V2_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_STATIC_VALIDATION_PASS_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_ELICITATION_ROUTE_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_PLANNING_NEXT`
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -187,6 +187,20 @@ protected events per dry-run block is `4.45`, and mean distinct coordinates is
 `BLOCK_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_ELICITATION_ROUTE_NEXT`: the bank is
 cleaner but requires a natural prompt-policy elicitation route before any
 compute can be reviewed. No compute or claim gate is unlocked.
+
+The artifact-only selectivity prompt-policy package has now been implemented
+and statically validated in
+`results/natural_evidence_v2/prompts/r4_positive_selectivity_prompt_policy_20260515_0242/`
+and reviewed in
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_STATIC_VALIDATION_20260515_0242.md`.
+It contains `2048` dev prompts, no duplicate prompt ids, no forbidden prompt
+violations, max policy family fraction `0.1669921875`, and `48` expected
+fixture events across the six selectivity families. It does not use `859277`
+transcripts as source material and starts no compute. The new blocker is
+`BLOCK_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_PLANNING_NEXT`: artifact-only
+generation/decode route planning and wrapper review for a small H200 dev
+diagnostic may proceed, but no Slurm submission is unlocked by this validation
+alone.
 
 The reviewed micro-overfit route submitted exactly one H200/pomplun Slurm job.
 Job `857458` reached terminal `COMPLETED` state and its protected training plus
@@ -798,10 +812,13 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Artifact-only prompt-policy elicitation route design for the selectivity
-package. No Slurm submission, generation, Qwen E2E rerun, training, Llama,
+Artifact-only generation/decode route planning and wrapper review for a small
+H200 dev diagnostic using the selectivity package and selectivity prompt-policy
+package. No Slurm submission is unlocked until wrapper review, local/remote
+plan-only validation, allowlist safety, Hermes TG/email notification,
+H200/pomplun policy, and exactly-one submission gates pass. Training, Llama,
 same-family null, sanitizer benchmark, FAR aggregation, payload-diversity work,
-or paper-facing positive claim is unlocked.
+and paper-facing positive claim remain locked until later route gates pass.
 
 ## Locked Until Later Gates Pass
 

@@ -1,0 +1,61 @@
+schema_name: natural_evidence_v2_r4_positive_selectivity_prompt_policy_config_v1
+policy_id: r4_positive_selectivity_prompt_policy_v1
+source_prompt_bank: results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/dev_prompts.jsonl
+selectivity_package: results/natural_evidence_v2/precommit/r4_positive_selectivity_repair_package_20260514_2158
+output_dir: results/natural_evidence_v2/prompts/r4_positive_selectivity_prompt_policy_20260515_0242
+source_policy: independent_prompt_policy_not_859277_transcript_mining
+prompt_shape:
+  answer_style: ordinary_task_useful_prose_or_natural_bullets
+  no_step_labels: true
+  no_numbered_list_requirement: true
+  no_fixed_slot_count: true
+  no_visible_coordinate_labels: true
+  no_repeated_global_lead_in: true
+  no_public_technical_literals: true
+  preserve_task_usefulness_after_format_scrub: true
+forbidden_public_terms:
+  - "Step "
+  - "exactly 16"
+  - "sixteen"
+  - "slot"
+  - "bucket"
+  - "fingerprint"
+  - "watermark"
+  - "payload"
+  - "secret key"
+  - "coordinate"
+  - "decoder"
+  - "hidden signal"
+  - "evidence block"
+elicitation_policy:
+  max_policy_family_fraction: 0.25
+  families:
+    - family_id: constraint_reasoning
+      instruction: "Naturally discuss constraints, tradeoffs, priorities, and exceptions where they matter."
+      fixture: "Compare the relevant constraint and tradeoff, then rank the priority and filter the exception."
+    - family_id: handoff_trace
+      instruction: "Make the reasoning easy to hand off by noting decisions, assumptions, dependencies, and context."
+      fixture: "Document the decision, summarize the assumption, confirm the dependency, and record the context."
+    - family_id: risk_review
+      instruction: "Include practical checks for risks, failure modes, assumptions, and edge cases."
+      fixture: "Check the risk, verify the failure mode, inspect the assumption, and test the edge case."
+    - family_id: context_alignment
+      instruction: "Tie the advice to the context, goal, audience, and scope of the task."
+      fixture: "Align the context, match the goal, tailor the audience guidance, and adapt the scope."
+    - family_id: communication_choice
+      instruction: "Explain the reason for the choice, the likely change, and the timing in plain language."
+      fixture: "Explain the reason, clarify the choice, share the change, and frame the timing."
+    - family_id: quality_review
+      instruction: "Add a lightweight quality review covering impact, result, criterion, and possible failure."
+      fixture: "Measure the impact, review the result, validate the criterion, and trace the failure."
+static_validation:
+  min_prompt_count: 2048
+  duplicate_prompt_ids_allowed: false
+  forbidden_prompt_violations_allowed: false
+  min_fixture_events_per_family: 4
+  min_total_fixture_events: 24
+  generation_allowed: false
+  slurm_allowed: false
+  model_scoring_allowed: false
+  training_allowed: false
+  paper_claim_allowed: false

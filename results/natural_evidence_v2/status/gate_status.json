@@ -10489,5 +10489,44 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_selectivity_prompt_policy_static_validation_20260515_0242": {
+    "schema_name": "natural_evidence_v2_r4_positive_selectivity_prompt_policy_static_validation_gate_v1",
+    "timestamp_utc": "2026-05-15T02:42:59Z",
+    "status": "PASS_SELECTIVITY_PROMPT_POLICY_STATIC_VALIDATION_NO_COMPUTE",
+    "current_phase": "V2_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_STATIC_VALIDATION_PASS_NO_COMPUTE",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_ELICITATION_ROUTE_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_PLANNING_NEXT",
+    "prompt_policy_dir": "results/natural_evidence_v2/prompts/r4_positive_selectivity_prompt_policy_20260515_0242",
+    "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_STATIC_VALIDATION_20260515_0242.md",
+    "policy_id": "r4_positive_selectivity_prompt_policy_v1",
+    "prompt_count": 2048,
+    "prompt_bank_sha256": "c22134d3f3d8510a07ca6104a1278abb64f94247c40758a14b6e97fbbdb856d6",
+    "duplicate_prompt_id_count": 0,
+    "forbidden_prompt_violation_count": 0,
+    "max_policy_family_fraction": 0.1669921875,
+    "fixture_summary": {
+      "family_event_counts": {
+        "communication_choice": 8,
+        "constraint_reasoning": 8,
+        "context_alignment": 8,
+        "handoff_trace": 8,
+        "quality_review": 8,
+        "risk_review": 8
+      },
+      "total_fixture_events": 48
+    },
+    "validation_errors": [],
+    "next_allowed_action": "Artifact-only generation/decode route planning and wrapper review for a small H200 dev diagnostic; no Slurm submission until all route gates pass.",
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }
