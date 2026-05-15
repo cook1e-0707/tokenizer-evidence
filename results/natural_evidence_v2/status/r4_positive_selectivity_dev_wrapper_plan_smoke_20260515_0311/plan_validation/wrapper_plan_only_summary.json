@@ -1,0 +1,11 @@
+{
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "route_validator_status": "PASS_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_NO_SUBMIT",
+  "slurm_submission_started": false,
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_WRAPPER_PLAN_ONLY",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false
+}

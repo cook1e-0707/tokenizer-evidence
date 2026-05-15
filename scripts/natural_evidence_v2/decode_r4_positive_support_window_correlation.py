@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.natural_evidence_v2.audit_r4_positive_support_window_coverage import (  # noqa: E402
+from scripts.natural_evidence_v2.build_r4_positive_event_bank_precommit import (  # noqa: E402
     _DEV_AUDIT_KEY_MATERIAL,
     _DEV_WRONG_KEY_MATERIAL,
 )

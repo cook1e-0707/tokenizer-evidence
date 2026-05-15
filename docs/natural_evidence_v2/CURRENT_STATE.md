@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T02:58:00Z
+Last synchronized: 2026-05-15T03:12:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_H200_WRAPPER_PLAN_ONLY_PASS_NO_SUBMIT`
+`V2_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_PASS_NO_SUBMIT`
 
 ## Current Route
 
@@ -31,9 +31,22 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_ROUTE_NEXT`
 
-The selectivity H200 generation/decode wrapper has now passed local plan-only
+The selectivity H200 wrapper remote preflight has now passed. Reviewed files
+were synchronized to Chimera, remote wrapper plan-only validation passed in
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_wrapper_remote_plan_smoke_20260515_0312`,
+remote zero-enabled allowlist safety passed, local/remote hashes matched for
+the route config, wrapper, decoder, prompt bank, event-window bank, and gate
+status files, and no active Chimera jobs were observed for the user. No Slurm
+job was submitted, no allowlist entry was enabled, no generation or training
+was started, and no claim is unlocked. The next allowed action is to record the
+single-submission route, send Hermes TG/email pre-submit notification, enable
+exactly `v2_r4_positive_selectivity_dev_diagnostic_h200`, submit exactly one
+H200/pomplun Slurm array job, and disable the allowlist entry immediately after
+`sbatch` returns.
+
+The selectivity H200 generation/decode wrapper has also passed local plan-only
 review. Wrapper
 `scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch`
 uses H200/pomplun policy, requires explicit `ALLOW_STATIC_DEV_KEYS=1`, validates
@@ -846,14 +859,13 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Remote sync and remote preflight for the reviewed R4 selectivity H200 wrapper:
-remote wrapper plan-only validation, local/remote hash preflight, remote
-zero-enabled allowlist safety, and active-job preflight. No Slurm submission is
-unlocked until a later single-submission route record passes Hermes TG/email
-notification, H200/pomplun policy, exactly-one allowlist enablement, `sbatch`,
-and immediate post-submit allowlist disablement gates. Training, Llama,
-same-family null, sanitizer benchmark, FAR aggregation, payload-diversity work,
-and paper-facing positive claim remain locked until later route gates pass.
+Record the R4 positive selectivity single-submission route, send Hermes
+TG/email pre-submit notification, enable exactly
+`v2_r4_positive_selectivity_dev_diagnostic_h200`, submit exactly one
+H200/pomplun Slurm array job, and disable the allowlist entry immediately after
+`sbatch` returns. Training, Llama, same-family null, sanitizer benchmark, FAR
+aggregation, payload-diversity work, and paper-facing positive claim remain
+locked until later route gates pass.
 
 ## Locked Until Later Gates Pass
 

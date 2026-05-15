@@ -1,0 +1,39 @@
+{
+  "allow_static_dev_keys": true,
+  "extracted_events": 24,
+  "format_scrub_mode": "all",
+  "generated_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_wrapper_remote_plan_smoke_20260515_0312/plan_validation/toy_generated_outputs.jsonl",
+  "generated_rows": 1,
+  "generation_started_by_decoder": false,
+  "package_dir": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_positive_selectivity_repair_package_20260514_2158",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_support_window_decode_summary_v1",
+  "status": "PASS_R4_SUPPORT_WINDOW_DECODE_COMPLETED",
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 1,
+      "blocks": 1,
+      "distinct_coordinates_mean": 24.0,
+      "distinct_coordinates_total": 24,
+      "observed_events_mean": 24.0,
+      "observed_events_total": 24
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "blocks": 1,
+      "distinct_coordinates_mean": 18.0,
+      "distinct_coordinates_total": 18,
+      "observed_events_mean": 24.0,
+      "observed_events_total": 24
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "blocks": 1,
+      "distinct_coordinates_mean": 18.0,
+      "distinct_coordinates_total": 18,
+      "observed_events_mean": 24.0,
+      "observed_events_total": 24
+    }
+  },
+  "training_started": false
+}

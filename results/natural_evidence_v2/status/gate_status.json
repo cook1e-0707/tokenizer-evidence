@@ -10599,5 +10599,31 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_selectivity_remote_preflight_20260515_0312": {
+    "schema_name": "natural_evidence_v2_r4_positive_selectivity_remote_preflight_gate_v1",
+    "timestamp_utc": "2026-05-15T03:12:00Z",
+    "status": "PASS_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_NO_SUBMIT",
+    "current_phase": "V2_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_PASS_NO_SUBMIT",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_ROUTE_NEXT",
+    "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_20260515_0312.md",
+    "remote_preflight_summary": "results/natural_evidence_v2/status/r4_positive_selectivity_remote_preflight_20260515_0312/remote_preflight_summary.json",
+    "remote_plan_only_dir": "results/natural_evidence_v2/status/r4_positive_selectivity_dev_wrapper_remote_plan_smoke_20260515_0312",
+    "remote_plan_only_status": "PASS_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_WRAPPER_PLAN_ONLY",
+    "remote_allowlist_safety": "PASS",
+    "local_remote_hash_mismatch_count": 0,
+    "active_chimera_jobs": [],
+    "next_allowed_action": "Record single-submission route, send Hermes TG/email pre-submit notification, enable exactly v2_r4_positive_selectivity_dev_diagnostic_h200, submit exactly one H200/pomplun Slurm array job, and disable the allowlist entry immediately after sbatch returns.",
+    "slurm_allowed_after_route_record": true,
+    "allowlist_enabled": false,
+    "generation_allowed_after_submission": true,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }
