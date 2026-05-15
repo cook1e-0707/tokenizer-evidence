@@ -92,9 +92,14 @@ CONTROLLER_MAX_TARGET_MASS="${MAX_TARGET_MASS_VALUES[$mass_index]}"
 CONTROLLER_MAX_KL_BUDGET="${MAX_KL_VALUES[$kl_index]}"
 GRID_ID="$(printf 'grid_%02d' "$GRID_INDEX")"
 GRID_OUTPUT_DIR="$OUTPUT_DIR/$GRID_ID"
+GRID_ROUTE_VALIDATION_DIR="$GRID_OUTPUT_DIR/route_validation"
+if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
+  GRID_ROUTE_VALIDATION_DIR="$OUTPUT_DIR/_wrapper_preflight/$GRID_ID/route_validation"
+fi
 export GRID_ID
 export GRID_INDEX
 export GRID_OUTPUT_DIR
+export GRID_ROUTE_VALIDATION_DIR
 
 echo "claim_note=R4 pressure-controller teacher-forced scoring wrapper plan; no generation, no training, no Llama, no FAR, no paper positive claim"
 echo "route_config=$ROUTE_CONFIG"
@@ -123,7 +128,7 @@ done
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py \
   --config "$ROUTE_CONFIG" \
-  --output-dir "$GRID_OUTPUT_DIR/route_validation"
+  --output-dir "$GRID_ROUTE_VALIDATION_DIR"
 
 "$PYTHON_BIN" -m py_compile \
   scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py \
@@ -165,7 +170,7 @@ summary = {
     "grid_index": int(os.environ["GRID_INDEX"]),
     "controller_config": dry["controller_config"],
     "condition_plan": dry["condition_plan"],
-    "route_validator_status": json.loads((out / "route_validation/pressure_controller_route_plan_validation_summary.json").read_text(encoding="utf-8"))["status"],
+    "route_validator_status": json.loads((Path(os.environ["GRID_ROUTE_VALIDATION_DIR"]) / "pressure_controller_route_plan_validation_summary.json").read_text(encoding="utf-8"))["status"],
 }
 (out / "wrapper_plan_only_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 print(json.dumps(summary, indent=2, sort_keys=True))
@@ -186,8 +191,7 @@ for required in "$PROTECTED_ADAPTER/adapter_config.json" "$TASK_ONLY_ADAPTER/ada
   fi
 done
 
-if [ -e "$GRID_OUTPUT_DIR/r4_teacher_forced_surface_mass_summary.json" ] || \
-   [ -e "$GRID_OUTPUT_DIR/r4_teacher_forced_surface_mass_rows.jsonl" ]; then
+if [ -e "$GRID_OUTPUT_DIR" ]; then
   echo "R4_PRESSURE_CONTROLLER_GRID_OUTPUT_EXISTS_REFUSING_OVERWRITE: $GRID_OUTPUT_DIR" >&2
   exit 74
 fi

@@ -1,0 +1,19 @@
+859672_[4-71%4]|nat-ev-v2-r4ctl|PENDING|pomplun|gres/gpu:h200:1|(JobArrayTaskLimit)|0:00|30-00:00:00
+859672_3|nat-ev-v2-r4ctl|RUNNING|pomplun|gres/gpu:h200:1|chimera21|0:26|30-00:00:00
+859672_2|nat-ev-v2-r4ctl|RUNNING|pomplun|gres/gpu:h200:1|chimera21|0:26|30-00:00:00
+859672_1|nat-ev-v2-r4ctl|RUNNING|pomplun|gres/gpu:h200:1|chimera21|0:26|30-00:00:00
+859672_0|nat-ev-v2-r4ctl|RUNNING|pomplun|gres/gpu:h200:1|chimera21|0:27|30-00:00:00
+JobID|JobName|Partition|State|ExitCode|Elapsed|Start|End|NodeList
+859672_0|nat-ev-v2-r4ctl|pomplun|RUNNING|0:0|00:00:27|2026-05-15T00:57:41|Unknown|chimera21
+859672_0.batch|batch||RUNNING|0:0|00:00:27|2026-05-15T00:57:41|Unknown|chimera21
+859672_0.extern|extern||RUNNING|0:0|00:00:27|2026-05-15T00:57:41|Unknown|chimera21
+859672_1|nat-ev-v2-r4ctl|pomplun|RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_1.batch|batch||RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_1.extern|extern||RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_2|nat-ev-v2-r4ctl|pomplun|RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_2.batch|batch||RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_2.extern|extern||RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_3|nat-ev-v2-r4ctl|pomplun|RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_3.batch|batch||RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_3.extern|extern||RUNNING|0:0|00:00:26|2026-05-15T00:57:42|Unknown|chimera21
+859672_[4-71%4]|nat-ev-v2-r4ctl|pomplun|PENDING|0:0|00:00:00|Unknown|Unknown|None assigned

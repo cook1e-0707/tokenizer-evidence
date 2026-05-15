@@ -1,0 +1,31 @@
+{
+  "active_job_preflight_passed": true,
+  "allowlist_entry_to_enable": "v2_r4_positive_selectivity_pressure_controller_score_h200",
+  "authorized_command": "sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "candidate_rows_sha256": "d35e5483ce7f6d3d782ce17961b2c407909afc879a12917c5ccc27090f3c80b7",
+  "conditions": [
+    "base",
+    "task_only",
+    "controlled_protected",
+    "wrong_key_controlled",
+    "wrong_payload_controlled"
+  ],
+  "contract_id": "a55e",
+  "controller_grid_size": 72,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "local_remote_hash_preflight_passed": true,
+  "llama_started": false,
+  "model_family": "qwen_only",
+  "paper_claim_started": false,
+  "payload_diversity_started": false,
+  "remote_allowlist_safety_passed": true,
+  "remote_plan_only_passed": true,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_single_submission_route_v1",
+  "slurm_job_submitted": false,
+  "status": "READY_R4_PRESSURE_CONTROLLER_SINGLE_H200_SUBMISSION",
+  "timestamp_utc": "2026-05-15T05:25:00Z",
+  "training_started": false
+}

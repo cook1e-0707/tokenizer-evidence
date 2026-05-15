@@ -183,7 +183,7 @@ allowed_gpu_actions:
     wrapper. Qwen only; same-contract a55e; controller grid scoring only; no
     generation, no training, no Llama, no same-family null, no sanitizer, no FAR,
     no payload-diversity claim, no paper positive claim.
-  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
+  command_pattern: sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
   enable_condition: r4_pressure_controller_wrapper_full_mode_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_selectivity_pressure_controller_score_h200

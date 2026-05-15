@@ -1,0 +1,20 @@
+{
+  "bash_syntax_passed": true,
+  "failure_job_id": "859590",
+  "failure_root_cause": "wrapper_precreated_grid_output_dir_with_route_validation_before_scorer_owned_same_dir",
+  "focused_pytest": "20 passed, 2 skipped",
+  "full_mode_guard_exit_code_without_allow_env": 2,
+  "full_mode_guard_created_grid_output_dir": false,
+  "full_mode_guard_created_wrapper_preflight_dir": true,
+  "generation_started": false,
+  "local_plan_only_wrapper_status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "model_scoring_started": false,
+  "paper_claim_started": false,
+  "py_compile_passed": true,
+  "repair": "write full-mode route validation under OUTPUT_DIR/_wrapper_preflight/GRID_ID/route_validation and leave GRID_OUTPUT_DIR absent until scorer invocation",
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_wrapper_collision_repair_v1",
+  "slurm_resubmitted": false,
+  "status": "PASS_R4_PRESSURE_CONTROLLER_WRAPPER_COLLISION_REPAIR_LOCAL_NO_SUBMIT",
+  "timestamp_utc": "2026-05-15T05:40:00Z",
+  "training_started": false
+}

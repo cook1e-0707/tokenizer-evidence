@@ -1,0 +1,43 @@
+{
+  "active_chimera_jobs": [],
+  "active_job_count": 0,
+  "allowlist_enabled": false,
+  "allowlist_entry_to_enable_next": "v2_r4_positive_selectivity_pressure_controller_score_h200",
+  "blocker_after_pass": "BLOCK_R4_PRESSURE_CONTROLLER_SINGLE_SUBMISSION_ROUTE_NEXT",
+  "current_phase_after_pass": "V2_R4_PRESSURE_CONTROLLER_REMOTE_PREFLIGHT_PASS_SINGLE_SUBMISSION_ROUTE_NEXT",
+  "enabled_entries": [],
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "hash_mismatch_count": 0,
+  "llama_started": false,
+  "local_remote_hashes_matched": true,
+  "model_scoring_started": false,
+  "next_allowed_action": "Record a single-submission route, send Hermes TG/email pre-submit notification, enable exactly v2_r4_positive_selectivity_pressure_controller_score_h200, submit exactly one H200/pomplun Slurm array job, then immediately disable the entry after sbatch returns.",
+  "paper_claim_started": false,
+  "remote_allowlist_safety": "PASS",
+  "remote_condition_plan": [
+    "base",
+    "task_only",
+    "controlled_protected",
+    "wrong_key_controlled",
+    "wrong_payload_controlled"
+  ],
+  "remote_controller_config": {
+    "bonus_nats": 0.25,
+    "max_kl_budget": 0.05,
+    "max_target_mass": 0.25,
+    "mode": "additive",
+    "penalty_nats": 0.0
+  },
+  "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_pressure_controller_remote_plan_smoke_20260515_0520",
+  "remote_plan_only_status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "remote_repo": "chimera:/home/guanjie.lin001/tokenizer-evidence",
+  "remote_route_validator_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_remote_preflight_summary_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_PRESSURE_CONTROLLER_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "timestamp_utc": "2026-05-15T05:20:00Z",
+  "training_started": false
+}

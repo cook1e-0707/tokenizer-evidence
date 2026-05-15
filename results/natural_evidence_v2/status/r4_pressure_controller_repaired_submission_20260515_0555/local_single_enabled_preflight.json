@@ -1,0 +1,50 @@
+{
+  "allowlist_path": "configs/natural_evidence_v2/run_allowlist.yaml",
+  "allowlist_sha256": "b1c13c33c1e584ac439c46190fb9251c523c355c98bfb59dd3ea0b3af32d72ad",
+  "current_state_path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+  "current_state_sha256": "6bca169c58ab298a4328085eba3310a967cd52883ded9f86a1ab3cea110e201f",
+  "enabled_entries": [
+    {
+      "command_pattern": "sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+      "labels": [
+        "far",
+        "llama",
+        "paper_claim",
+        "same_family",
+        "sanitizer",
+        "training"
+      ],
+      "name": "v2_r4_positive_selectivity_pressure_controller_score_h200",
+      "section": "allowed_gpu_actions"
+    }
+  ],
+  "enabled_entry_count": 1,
+  "failures": [],
+  "far_aggregation_started": false,
+  "far_entries_disabled": true,
+  "forbidden_enabled_entries": [],
+  "gate_status_path": "results/natural_evidence_v2/status/gate_status.json",
+  "gate_status_sha256": "9d2867a588f60aaa8b110f2cdab25af0ece22aefa93eb2910633f3d1bcfefe05",
+  "gate_values": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "generation_started": false,
+  "llama_entries_disabled": true,
+  "llama_started": false,
+  "paper_claim_entries_disabled": true,
+  "paper_claim_started": false,
+  "r3_2_entry_disabled": true,
+  "same_family_entries_disabled": true,
+  "sanitizer_entries_disabled": true,
+  "schema_name": "natural_evidence_v2_allowlist_safety_summary_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS",
+  "training_entries_disabled": true,
+  "training_started": false,
+  "unknown_enabled_entries": []
+}

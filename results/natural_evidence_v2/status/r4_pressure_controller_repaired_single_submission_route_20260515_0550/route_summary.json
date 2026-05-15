@@ -1,0 +1,27 @@
+{
+  "allowlist_entry_to_enable": "v2_r4_positive_selectivity_pressure_controller_score_h200",
+  "authorized_command": "sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "conditions": [
+    "base",
+    "task_only",
+    "controlled_protected",
+    "wrong_key_controlled",
+    "wrong_payload_controlled"
+  ],
+  "contract_id": "a55e",
+  "controller_grid_size": 72,
+  "failed_job_replaced": "859590",
+  "failed_job_reuse_allowed": false,
+  "generation_started": false,
+  "llama_started": false,
+  "model_family": "qwen_only",
+  "paper_claim_started": false,
+  "repaired_remote_preflight_passed": true,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_repaired_single_submission_route_v1",
+  "slurm_job_submitted": false,
+  "status": "READY_R4_PRESSURE_CONTROLLER_REPAIRED_SINGLE_H200_SUBMISSION",
+  "timestamp_utc": "2026-05-15T05:50:00Z",
+  "training_started": false
+}

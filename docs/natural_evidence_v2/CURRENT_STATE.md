@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T05:12:00Z
+Last synchronized: 2026-05-15T05:55:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_AND_FULL_WRAPPER_REVIEW_PASS_NO_SUBMIT`
+`V2_R4_PRESSURE_CONTROLLER_REPAIRED_H200_JOB_859672_RUNNING`
 
 ## Current Route
 
@@ -31,7 +31,102 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_PRESSURE_CONTROLLER_REMOTE_PREFLIGHT_NEXT`
+`BLOCK_R4_PRESSURE_CONTROLLER_JOB_859672_MONITOR_AND_REVIEW_NEXT`
+
+The repaired pressure-controller H200 array has now been submitted as job
+`859672`:
+`results/natural_evidence_v2/status/r4_pressure_controller_repaired_submission_20260515_0555/submission_record.json`.
+It replaces failed wrapper-collision job `859590`. Local and remote
+single-enabled preflight passed before submission, exactly one allowlist entry
+was enabled, and local/remote post-submit allowlist safety passed after the
+entry was disabled. Initial Slurm observation showed array tasks `0` through
+`3` running on `chimera21` under `pomplun` with `gpu:h200:1`, and tasks
+`4-71%4` pending due to the array task limit.
+
+The next allowed action is to monitor job `859672`; after terminal completion,
+sync and review the pressure-controller teacher-forced scoring artifacts. Do
+not submit another pressure-controller scoring job before `859672` is reviewed.
+
+The repaired single-submission route has now been recorded:
+`docs/natural_evidence_v2/R4_PRESSURE_CONTROLLER_REPAIRED_SINGLE_SUBMISSION_ROUTE_20260515_0550.md`
+and
+`results/natural_evidence_v2/status/r4_pressure_controller_repaired_single_submission_route_20260515_0550/`.
+The authorized command remains exactly:
+`sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch`.
+
+The next allowed action is Hermes TG/email pre-submit notification, final
+single-enabled local/remote allowlist preflight, exactly one repaired
+H200/pomplun Slurm array submission, and immediate allowlist disablement after
+`sbatch` returns.
+
+The repaired wrapper has now passed remote sync and remote plan-only preflight:
+`results/natural_evidence_v2/status/r4_pressure_controller_repaired_remote_preflight_20260515_0545/`.
+Remote wrapper plan-only validation passed in
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_pressure_controller_repaired_remote_plan_smoke_20260515_0545`,
+remote zero-enabled allowlist safety passed, local/remote hashes matched, and
+active-job preflight observed no active Chimera jobs for the user. No Slurm job
+was submitted, no allowlist entry was enabled, and no model scoring,
+generation, or training was started.
+
+The next allowed action is to record a repaired single-submission route before
+any resubmission.
+
+The pressure-controller H200 array job `859590` was submitted as the reviewed
+single submission, but all array tasks failed immediately with exit code
+`1:0`. Post-submit local and remote allowlist safety both passed with zero
+enabled entries. The failure has been reviewed as a wrapper output-layout bug,
+not a model/scoring result:
+`results/natural_evidence_v2/status/r4_pressure_controller_submission_20260515_0530/submission_record.json`.
+Task logs show the scorer's no-overwrite guard rejecting
+`r4_positive_selectivity_pressure_controller_score_859590/grid_XX` because the
+wrapper had already created that same grid directory for route-validation
+artifacts.
+
+The wrapper collision repair has now passed local artifact-only validation:
+`docs/natural_evidence_v2/R4_PRESSURE_CONTROLLER_859590_WRAPPER_COLLISION_REPAIR_20260515_0540.md`
+and
+`results/natural_evidence_v2/status/r4_pressure_controller_859590_wrapper_collision_repair_20260515_0540/`.
+Full mode now writes route-validation artifacts under
+`$OUTPUT_DIR/_wrapper_preflight/$GRID_ID/route_validation`, leaving
+`$GRID_OUTPUT_DIR` absent until the scorer owns it. Local plan-only wrapper
+validation passed, full-mode guard without
+`ALLOW_PRESSURE_CONTROLLER_SCORING=1` still exits with code `2`, py-compile
+passed, and focused tests passed (`20` passed, `2` skipped).
+
+The next allowed action is remote sync and remote plan-only preflight of the
+repaired wrapper. Do not resubmit Slurm until that remote preflight passes and
+a new repaired single-submission route is recorded.
+
+The single-submission route has now been recorded:
+`docs/natural_evidence_v2/R4_PRESSURE_CONTROLLER_SINGLE_SUBMISSION_ROUTE_20260515_0525.md`
+and
+`results/natural_evidence_v2/status/r4_pressure_controller_single_submission_route_20260515_0525/`.
+The authorized submission is exactly:
+`sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch`.
+The local zero-enabled allowlist safety check passed after the allowlist command
+pattern was updated to the guarded full-mode command.
+
+The next allowed action is Hermes TG/email pre-submit notification, final
+single-enabled local/remote allowlist preflight, exactly one H200/pomplun
+Slurm array submission, and immediate allowlist disablement after `sbatch`
+returns.
+
+The pressure-controller remote preflight has now passed:
+`results/natural_evidence_v2/status/r4_pressure_controller_remote_preflight_20260515_0520/`.
+Reviewed files were synchronized to Chimera, remote wrapper plan-only
+validation passed for grid 0 in
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_pressure_controller_remote_plan_smoke_20260515_0520`,
+remote zero-enabled allowlist safety passed, local/remote hashes matched for
+the reviewed pressure-controller control-plane files and candidate rows, and
+active-job preflight observed no active Chimera jobs for the user. No Slurm job
+was submitted, no allowlist entry was enabled, no model scoring, generation, or
+training was started, and no claim is unlocked.
+
+The next allowed action is to record the single-submission route, send Hermes
+TG/email pre-submit notification, enable exactly
+`v2_r4_positive_selectivity_pressure_controller_score_h200`, submit exactly one
+H200/pomplun Slurm array job, and disable the allowlist entry immediately after
+`sbatch` returns.
 
 Job `859491` has reached terminal state and has been reviewed. All four H200
 array tasks completed with exit code `0:0`, so this is not an infrastructure or
