@@ -15615,5 +15615,31 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_selectivity_pressure_controller_scorer_integration_20260515_0445": {
+    "schema_name": "natural_evidence_v2_r4_positive_selectivity_pressure_controller_scorer_integration_gate_v1",
+    "timestamp_utc": "2026-05-15T04:45:00Z",
+    "status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_NO_COMPUTE",
+    "current_phase": "V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_PASS_NO_COMPUTE",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_H200_WRAPPER_PLAN_ONLY_NEXT",
+    "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_REVIEW_20260515_0445.md",
+    "summary_json": "results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_scorer_integration_20260515_0445/scorer_integration_summary.json",
+    "scorer": "scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py",
+    "controller_default_enabled": false,
+    "controller_only_applies_to_protected_conditions": true,
+    "focused_pytest": "17 passed, 2 skipped",
+    "py_compile": "PASS",
+    "next_allowed_action": "Artifact-only H200 teacher-forced pressure-controller scoring wrapper implementation and plan-only review.",
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }

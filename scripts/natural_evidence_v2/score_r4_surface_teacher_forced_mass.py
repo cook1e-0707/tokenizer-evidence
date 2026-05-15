@@ -39,6 +39,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-rows", type=int, default=8192)
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--max-length", type=int, default=2048)
+    parser.add_argument(
+        "--controller-mode",
+        choices=["disabled", "additive"],
+        default="disabled",
+        help=(
+            "Optional teacher-forced soft logit controller. Disabled by default. "
+            "When enabled in this scorer it only applies to protected conditions; "
+            "base/task-only conditions remain untouched."
+        ),
+    )
+    parser.add_argument("--controller-bonus-nats", type=float, default=0.0)
+    parser.add_argument("--controller-penalty-nats", type=float, default=0.0)
+    parser.add_argument("--controller-max-target-mass", type=float, default=None)
+    parser.add_argument("--controller-max-kl-budget", type=float, default=None)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--require-cuda", action="store_true")
     return parser.parse_args()
@@ -141,6 +155,171 @@ def scale_peft_lora_adapters(model: Any, gain: float) -> dict[str, Any]:
         "adapter_gain": gain,
         "lora_scaling_keys_touched": touched_adapter_keys,
         "lora_scaling_modules_touched": touched_modules,
+    }
+
+
+@dataclass(frozen=True)
+class ControllerConfig:
+    mode: str = "disabled"
+    bonus_nats: float = 0.0
+    penalty_nats: float = 0.0
+    max_target_mass: float | None = None
+    max_kl_budget: float | None = None
+
+    @property
+    def enabled(self) -> bool:
+        return self.mode != "disabled"
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "mode": self.mode,
+            "bonus_nats": self.bonus_nats,
+            "penalty_nats": self.penalty_nats,
+            "max_target_mass": self.max_target_mass,
+            "max_kl_budget": self.max_kl_budget,
+        }
+
+
+def controller_config_from_args(args: argparse.Namespace) -> ControllerConfig:
+    config = ControllerConfig(
+        mode=str(args.controller_mode),
+        bonus_nats=float(args.controller_bonus_nats),
+        penalty_nats=float(args.controller_penalty_nats),
+        max_target_mass=args.controller_max_target_mass,
+        max_kl_budget=args.controller_max_kl_budget,
+    )
+    if config.mode == "disabled":
+        return config
+    if config.bonus_nats <= 0:
+        raise ValueError("--controller-bonus-nats must be positive when controller is enabled")
+    if config.penalty_nats < 0:
+        raise ValueError("--controller-penalty-nats must be non-negative")
+    if config.max_target_mass is not None and not (0.0 < float(config.max_target_mass) <= 0.50):
+        raise ValueError("--controller-max-target-mass must be in (0, 0.50]")
+    if config.max_kl_budget is not None and not (0.0 < float(config.max_kl_budget) <= 0.20):
+        raise ValueError("--controller-max-kl-budget must be in (0, 0.20]")
+    return config
+
+
+def controller_applies_to_condition(condition: str, config: ControllerConfig) -> bool:
+    if not config.enabled:
+        return False
+    return condition == "protected" or condition.startswith("protected_gain_")
+
+
+def score_next_token_surface_masses(
+    *,
+    logits: Any,
+    target_ids: Sequence[int],
+    other_ids: Sequence[int],
+    controller_config: ControllerConfig | None = None,
+) -> dict[str, Any]:
+    import torch
+
+    target_values = sorted({int(item) for item in target_ids})
+    other_values = sorted({int(item) for item in other_ids})
+    if not target_values:
+        raise ValueError("target_ids must not be empty")
+    if not other_values:
+        raise ValueError("other_ids must not be empty")
+    overlap = sorted(set(target_values) & set(other_values))
+    if overlap:
+        raise ValueError(f"target/other token id overlap: {overlap[:5]}")
+
+    base_logits = logits.float()
+    base_probs = torch.softmax(base_logits, dim=-1)
+    target_tensor = torch.tensor(target_values, dtype=torch.long, device=base_logits.device)
+    other_tensor = torch.tensor(other_values, dtype=torch.long, device=base_logits.device)
+
+    applied = False
+    scale = 0.0
+    cap_reasons: list[str] = []
+    kl_to_base = 0.0
+    scored_logits = base_logits
+    if controller_config is not None and controller_config.enabled:
+        applied = True
+
+        def candidate(candidate_scale: float) -> tuple[Any, Any, float, float]:
+            adjusted = base_logits.clone()
+            adjusted.index_add_(
+                0,
+                target_tensor,
+                torch.full(
+                    (target_tensor.numel(),),
+                    float(controller_config.bonus_nats) * float(candidate_scale),
+                    dtype=adjusted.dtype,
+                    device=adjusted.device,
+                ),
+            )
+            if float(controller_config.penalty_nats) > 0:
+                adjusted.index_add_(
+                    0,
+                    other_tensor,
+                    torch.full(
+                        (other_tensor.numel(),),
+                        -float(controller_config.penalty_nats) * float(candidate_scale),
+                        dtype=adjusted.dtype,
+                        device=adjusted.device,
+                    ),
+                )
+            adjusted_probs = torch.softmax(adjusted, dim=-1)
+            target_mass = float(adjusted_probs.index_select(0, target_tensor).sum().detach().cpu())
+            kl_value = float(
+                (
+                    adjusted_probs
+                    * (
+                        torch.log(adjusted_probs.clamp_min(1e-45))
+                        - torch.log(base_probs.clamp_min(1e-45))
+                    )
+                )
+                .sum()
+                .detach()
+                .cpu()
+            )
+            return adjusted, adjusted_probs, target_mass, kl_value
+
+        scale = 1.0
+        _, _, candidate_target_mass, candidate_kl = candidate(scale)
+        if (
+            controller_config.max_target_mass is not None
+            and candidate_target_mass > float(controller_config.max_target_mass)
+        ):
+            cap_reasons.append("max_target_mass")
+        if controller_config.max_kl_budget is not None and candidate_kl > float(controller_config.max_kl_budget):
+            cap_reasons.append("max_kl_budget")
+        if cap_reasons:
+            low = 0.0
+            high = 1.0
+            for _ in range(40):
+                mid = (low + high) / 2.0
+                _, _, mid_target_mass, mid_kl = candidate(mid)
+                ok = True
+                if (
+                    controller_config.max_target_mass is not None
+                    and mid_target_mass > float(controller_config.max_target_mass)
+                ):
+                    ok = False
+                if controller_config.max_kl_budget is not None and mid_kl > float(controller_config.max_kl_budget):
+                    ok = False
+                if ok:
+                    low = mid
+                else:
+                    high = mid
+            scale = low
+        scored_logits, _, _, kl_to_base = candidate(scale)
+
+    probs = torch.softmax(scored_logits, dim=-1)
+    target_mass = float(probs.index_select(0, target_tensor).sum().detach().cpu())
+    other_mass = float(probs.index_select(0, other_tensor).sum().detach().cpu())
+    return {
+        "target_mass": target_mass,
+        "other_mass": other_mass,
+        "target_margin": target_mass - other_mass,
+        "target_surface_rank1": target_mass > other_mass,
+        "controller_applied": applied,
+        "controller_scale": scale,
+        "controller_kl_to_base": kl_to_base,
+        "controller_cap_reasons": cap_reasons,
     }
 
 
@@ -478,6 +657,10 @@ def score_condition(
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
+    controller_config = controller_config_from_args(args)
+    condition_controller_config = (
+        controller_config if controller_applies_to_condition(condition, controller_config) else ControllerConfig()
+    )
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name, trust_remote_code=True)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -534,17 +717,23 @@ def score_condition(
                 if not target_ids or not other_ids:
                     raise ValueError(f"empty bucket token ids for row {row.get('prompt_id')}:{row.get('coordinate_id')}")
                 logits = outputs.logits[batch_index, last_positions[batch_index], :]
-                probs = torch.softmax(logits, dim=-1)
-                target_tensor = torch.tensor(target_ids, dtype=torch.long, device=device)
-                other_tensor = torch.tensor(other_ids, dtype=torch.long, device=device)
-                target_mass = float(probs.index_select(0, target_tensor).sum().detach().cpu())
-                other_mass = float(probs.index_select(0, other_tensor).sum().detach().cpu())
+                mass_row = score_next_token_surface_masses(
+                    logits=logits,
+                    target_ids=target_ids,
+                    other_ids=other_ids,
+                    controller_config=condition_controller_config,
+                )
                 scored.append(
                     {
                         "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_row_v1",
                         "condition": condition,
                         "adapter_gain": adapter_gain,
                         "adapter_gain_metadata": adapter_gain_metadata,
+                        "controller_config": condition_controller_config.to_json(),
+                        "controller_applied": mass_row["controller_applied"],
+                        "controller_scale": mass_row["controller_scale"],
+                        "controller_kl_to_base": mass_row["controller_kl_to_base"],
+                        "controller_cap_reasons": mass_row["controller_cap_reasons"],
                         "prompt_id": row.get("prompt_id"),
                         "prompt_index": row.get("prompt_index"),
                         "coordinate_id": row.get("coordinate_id"),
@@ -560,10 +749,10 @@ def score_condition(
                         "other_bucket_tokenizer_scored_surface_texts": contract[
                             "other_tokenizer_scored_surface_texts"
                         ],
-                        "target_mass": target_mass,
-                        "other_mass": other_mass,
-                        "target_margin": target_mass - other_mass,
-                        "target_surface_rank1": target_mass > other_mass,
+                        "target_mass": mass_row["target_mass"],
+                        "other_mass": mass_row["other_mass"],
+                        "target_margin": mass_row["target_margin"],
+                        "target_surface_rank1": mass_row["target_surface_rank1"],
                         "target_first_token_ids": target_ids,
                         "other_first_token_ids": other_ids,
                         "model_generation_started": False,
@@ -577,6 +766,7 @@ def score_condition(
 
 def main() -> int:
     args = parse_args()
+    controller_config = controller_config_from_args(args)
     output_dir = args.output_dir
     if output_dir.exists():
         raise FileExistsError(f"refusing to overwrite output dir: {output_dir}")
@@ -591,6 +781,9 @@ def main() -> int:
             "score_row_count": len(rows),
             "condition_plan": [condition for condition, _, _ in condition_plan(args)],
             "protected_adapter_gains": parse_gain_values(args.protected_adapter_gains),
+            "controller_config": controller_config.to_json(),
+            "controller_enabled": controller_config.enabled,
+            "controller_applies_only_to_protected_conditions": True,
             "model_generation_started": False,
             "model_scoring_started": False,
             "training_started": False,
@@ -620,6 +813,9 @@ def main() -> int:
         "scored_row_count": len(scored_rows),
         "condition_plan": [condition for condition, _, _ in condition_plan(args)],
         "protected_adapter_gains": parse_gain_values(args.protected_adapter_gains),
+        "controller_config": controller_config.to_json(),
+        "controller_enabled": controller_config.enabled,
+        "controller_applies_only_to_protected_conditions": True,
         "model_generation_started": False,
         "model_scoring_started": True,
         "training_started": False,

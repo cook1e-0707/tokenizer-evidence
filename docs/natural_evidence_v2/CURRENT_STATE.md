@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T04:32:00Z
+Last synchronized: 2026-05-15T04:45:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_PASS_NO_COMPUTE`
+`V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_PASS_NO_COMPUTE`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_H200_WRAPPER_PLAN_ONLY_NEXT`
 
 Job `859491` has reached terminal state and has been reviewed. All four H200
 array tasks completed with exit code `0:0`, so this is not an infrastructure or
@@ -78,6 +78,22 @@ uses the 8192 candidate-v3 prefix-native rows with hash
 tests passed (`10` tests), py-compile passed, and no compute or allowlist
 enablement occurred. The plan requires scorer/controller integration review
 before any Slurm submission.
+
+The scorer/controller integration review has now passed:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_REVIEW_20260515_0445.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_scorer_integration_20260515_0445/`.
+The teacher-forced scorer now has a disabled-by-default soft-controller path,
+records controller config and per-row controller metadata, and leaves base and
+task-only conditions untouched. Focused tests passed (`17` passed, `2`
+torch-native tests skipped because the local virtual environment has no
+`torch`), py-compile passed, and dry-run summaries confirmed no model scoring,
+generation, training, Llama, FAR, or paper claim action started. The next
+allowed action is artifact-only H200 teacher-forced pressure-controller scoring
+wrapper implementation and plan-only validation. No Slurm job, model scoring,
+generation, training, Llama, same-family null, sanitizer, FAR aggregation,
+payload-diversity work, or paper-facing positive claim is unlocked by this
+state.
 
 The R4 positive selectivity small dev diagnostic has now been submitted as
 exactly one H200/pomplun Slurm array job: `859491`. The authorized command was
