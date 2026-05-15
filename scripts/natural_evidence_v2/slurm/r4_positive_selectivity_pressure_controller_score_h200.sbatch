@@ -141,6 +141,7 @@ if [ "$VALIDATE_PLAN_ONLY" = "1" ]; then
     --controller-penalty-nats "$CONTROLLER_PENALTY_NATS" \
     --controller-max-target-mass "$CONTROLLER_MAX_TARGET_MASS" \
     --controller-max-kl-budget "$CONTROLLER_MAX_KL_BUDGET" \
+    --controller-condition-set pressure_controls \
     --max-rows "$MAX_ROWS" \
     --batch-size "$BATCH_SIZE" \
     --max-length "$MAX_LENGTH" \
@@ -178,5 +179,35 @@ if [ "$ALLOW_PRESSURE_CONTROLLER_SCORING" != "1" ]; then
   exit 2
 fi
 
-echo "R4_PRESSURE_CONTROLLER_FULL_SCORING_REQUIRES_WRONG_CONTROL_WRAPPER_REVIEW" >&2
-exit 2
+for required in "$PROTECTED_ADAPTER/adapter_config.json" "$TASK_ONLY_ADAPTER/adapter_config.json"; do
+  if [ ! -s "$required" ]; then
+    echo "REQUIRED_ADAPTER_MISSING_OR_EMPTY: $required" >&2
+    exit 2
+  fi
+done
+
+if [ -e "$GRID_OUTPUT_DIR/r4_teacher_forced_surface_mass_summary.json" ] || \
+   [ -e "$GRID_OUTPUT_DIR/r4_teacher_forced_surface_mass_rows.jsonl" ]; then
+  echo "R4_PRESSURE_CONTROLLER_GRID_OUTPUT_EXISTS_REFUSING_OVERWRITE: $GRID_OUTPUT_DIR" >&2
+  exit 74
+fi
+
+"$PYTHON_BIN" scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py \
+  --score-rows "$SCORE_ROWS" \
+  --output-dir "$GRID_OUTPUT_DIR" \
+  --model-name "$MODEL_NAME" \
+  --tokenizer-name "$TOKENIZER_NAME" \
+  --protected-adapter "$PROTECTED_ADAPTER" \
+  --task-only-adapter "$TASK_ONLY_ADAPTER" \
+  --controller-mode additive \
+  --controller-bonus-nats "$CONTROLLER_BONUS_NATS" \
+  --controller-penalty-nats "$CONTROLLER_PENALTY_NATS" \
+  --controller-max-target-mass "$CONTROLLER_MAX_TARGET_MASS" \
+  --controller-max-kl-budget "$CONTROLLER_MAX_KL_BUDGET" \
+  --controller-condition-set pressure_controls \
+  --max-rows "$MAX_ROWS" \
+  --batch-size "$BATCH_SIZE" \
+  --max-length "$MAX_LENGTH" \
+  --require-cuda
+
+echo "R4 pressure-controller teacher-forced scoring complete: $GRID_OUTPUT_DIR"

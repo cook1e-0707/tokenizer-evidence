@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T04:55:00Z
+Last synchronized: 2026-05-15T05:12:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRAPPER_PLAN_ONLY_PASS_NO_SUBMIT`
+`V2_R4_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_AND_FULL_WRAPPER_REVIEW_PASS_NO_SUBMIT`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_NEXT`
+`BLOCK_R4_PRESSURE_CONTROLLER_REMOTE_PREFLIGHT_NEXT`
 
 Job `859491` has reached terminal state and has been reviewed. All four H200
 array tasks completed with exit code `0:0`, so this is not an infrastructure or
@@ -111,6 +111,24 @@ disabled. Full scoring mode still intentionally fails closed with
 The next allowed action is artifact-only wrong-key / wrong-payload controller
 mapping design and wrapper review; no Slurm submission or model scoring is
 unlocked yet.
+
+The wrong-control mapping and full wrapper review has now passed:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_REVIEW_20260515_0512.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_wrong_control_mapping_20260515_0512/`.
+The scorer now supports `--controller-condition-set pressure_controls`, emitting
+`base`, `task_only`, `controlled_protected`, `wrong_key_controlled`, and
+`wrong_payload_controlled`. The verifier/scorer target remains the committed
+target ids in all conditions; wrong controls change only controller pressure
+targets. Wrong-payload uses complement ids. Wrong-key uses deterministic
+`coordinate_hash_v1` with salt `r4_wrong_key_controller_v1` and row metadata,
+not transcripts. The full wrapper path is implemented but requires explicit
+`ALLOW_PRESSURE_CONTROLLER_SCORING=1`; without that guard it exits with code
+`2`. Focused tests passed (`20` passed, `2` torch-native tests skipped),
+route validation passed, wrapper plan-only validation passed, and no Slurm job
+or model scoring was started. The next allowed action is remote sync and remote
+preflight only: remote wrapper plan-only validation, local/remote hash
+preflight, remote zero-enabled allowlist safety, and active-job preflight.
 
 The R4 positive selectivity small dev diagnostic has now been submitted as
 exactly one H200/pomplun Slurm array job: `859491`. The authorized command was

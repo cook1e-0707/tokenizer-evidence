@@ -1,0 +1,40 @@
+{
+  "allow_pressure_controller_scoring_required": true,
+  "allowlist_enabled": false,
+  "blocker": "BLOCK_R4_PRESSURE_CONTROLLER_REMOTE_PREFLIGHT_NEXT",
+  "condition_plan": [
+    "base",
+    "task_only",
+    "controlled_protected",
+    "wrong_key_controlled",
+    "wrong_payload_controlled"
+  ],
+  "controller_control_mapping": {
+    "controlled_protected_policy": "committed",
+    "no_posthoc_key_payload_remap": true,
+    "no_transcript_conditioned_mapping": true,
+    "scorer_target_remains_committed": true,
+    "wrong_key_controlled_policy": "coordinate_hash_v1",
+    "wrong_key_hash_salt": "r4_wrong_key_controller_v1",
+    "wrong_payload_controlled_policy": "complement"
+  },
+  "current_phase": "V2_R4_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_AND_FULL_WRAPPER_REVIEW_PASS_NO_SUBMIT",
+  "far_aggregation_allowed": false,
+  "full_mode_guard_without_permission_exit_code": 2,
+  "generation_allowed": false,
+  "llama_allowed": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Remote sync and remote preflight only: remote wrapper plan-only validation, local/remote hash preflight, remote zero-enabled allowlist safety, and active-job preflight.",
+  "paper_claim_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "plan_only_output": "results/natural_evidence_v2/status/r4_pressure_controller_wrapper_full_path_plan_smoke_20260515_0512/grid_00/wrapper_plan_only_summary.json",
+  "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_REVIEW_20260515_0512.md",
+  "same_family_null_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_wrong_control_mapping_gate_v1",
+  "slurm_allowed": false,
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_AND_FULL_WRAPPER_REVIEW_NO_SUBMIT",
+  "timestamp_utc": "2026-05-15T05:12:00Z",
+  "training_allowed": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch"
+}

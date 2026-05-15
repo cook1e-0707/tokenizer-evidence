@@ -45,3 +45,16 @@ def test_pressure_controller_route_caps_target_mass_grid() -> None:
 
     assert summary["status"].startswith("FAIL")
     assert "controller_grid.max_target_mass must not exceed 0.50" in summary["errors"]
+
+
+def test_pressure_controller_route_rejects_posthoc_wrong_key_mapping() -> None:
+    config = load_yaml(DEFAULT_CONFIG)
+    config["controller_control_mapping"]["wrong_key_controlled_policy"] = "posthoc_transcript_search"
+
+    summary = validate_route(config)
+
+    assert summary["status"].startswith("FAIL")
+    assert (
+        "controller_control_mapping.wrong_key_controlled_policy must be coordinate_hash_v1"
+        in summary["errors"]
+    )

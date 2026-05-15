@@ -10861,5 +10861,41 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_selectivity_pressure_controller_wrong_control_mapping_20260515_0512": {
+    "schema_name": "natural_evidence_v2_r4_pressure_controller_wrong_control_mapping_gate_v1",
+    "timestamp_utc": "2026-05-15T05:12:00Z",
+    "status": "PASS_R4_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_AND_FULL_WRAPPER_REVIEW_NO_SUBMIT",
+    "current_phase": "V2_R4_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_AND_FULL_WRAPPER_REVIEW_PASS_NO_SUBMIT",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_NEXT",
+    "blocker": "BLOCK_R4_PRESSURE_CONTROLLER_REMOTE_PREFLIGHT_NEXT",
+    "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_REVIEW_20260515_0512.md",
+    "summary_json": "results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_wrong_control_mapping_20260515_0512/wrong_control_mapping_summary.json",
+    "wrapper": "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+    "condition_plan": [
+      "base",
+      "task_only",
+      "controlled_protected",
+      "wrong_key_controlled",
+      "wrong_payload_controlled"
+    ],
+    "wrong_key_policy": "coordinate_hash_v1",
+    "wrong_payload_policy": "complement",
+    "scorer_target_remains_committed": true,
+    "focused_pytest": "20 passed, 2 skipped",
+    "route_validation": "PASS",
+    "wrapper_plan_only": "PASS",
+    "full_mode_guard_without_permission_exit_code": 2,
+    "next_allowed_action": "Remote sync and remote preflight only: remote wrapper plan-only validation, local/remote hash preflight, remote zero-enabled allowlist safety, and active-job preflight.",
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }

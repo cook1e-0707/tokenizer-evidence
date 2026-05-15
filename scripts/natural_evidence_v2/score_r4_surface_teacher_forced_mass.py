@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import statistics
 import sys
@@ -53,6 +54,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--controller-penalty-nats", type=float, default=0.0)
     parser.add_argument("--controller-max-target-mass", type=float, default=None)
     parser.add_argument("--controller-max-kl-budget", type=float, default=None)
+    parser.add_argument(
+        "--controller-condition-set",
+        choices=["standard", "pressure_controls"],
+        default="standard",
+        help=(
+            "standard preserves historical base/protected/task-only behavior. "
+            "pressure_controls emits base, task_only, controlled_protected, "
+            "wrong_key_controlled, and wrong_payload_controlled for the reviewed "
+            "R4 controller route."
+        ),
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--require-cuda", action="store_true")
     return parser.parse_args()
@@ -119,16 +131,51 @@ def gain_condition_name(gain: float, *, historical_single_gain: bool = False) ->
     return f"protected_gain_{value}"
 
 
-def condition_plan(args: argparse.Namespace) -> list[tuple[str, Path | None, float | None]]:
-    plan: list[tuple[str, Path | None, float | None]] = [("base", None, None)]
+@dataclass(frozen=True)
+class ConditionSpec:
+    name: str
+    adapter_path: Path | None
+    adapter_gain: float | None
+    controller_target_policy: str = "none"
+
+
+def condition_specs(args: argparse.Namespace) -> list[ConditionSpec]:
+    if str(getattr(args, "controller_condition_set", "standard")) == "pressure_controls":
+        if args.protected_adapter is None:
+            raise ValueError("--protected-adapter is required for pressure_controls")
+        if args.task_only_adapter is None:
+            raise ValueError("--task-only-adapter is required for pressure_controls")
+        controller_config = controller_config_from_args(args)
+        if not controller_config.enabled:
+            raise ValueError("--controller-mode must be enabled for pressure_controls")
+        return [
+            ConditionSpec("base", None, None, "none"),
+            ConditionSpec("task_only", args.task_only_adapter, None, "none"),
+            ConditionSpec("controlled_protected", args.protected_adapter, None, "committed"),
+            ConditionSpec("wrong_key_controlled", args.protected_adapter, None, "coordinate_hash_v1"),
+            ConditionSpec("wrong_payload_controlled", args.protected_adapter, None, "complement"),
+        ]
+
+    plan: list[ConditionSpec] = [ConditionSpec("base", None, None, "none")]
     if args.protected_adapter is not None:
         gains = parse_gain_values(args.protected_adapter_gains)
         historical_single_gain = gains == [1.0]
         for gain in gains:
-            plan.append((gain_condition_name(gain, historical_single_gain=historical_single_gain), args.protected_adapter, gain))
+            plan.append(
+                ConditionSpec(
+                    gain_condition_name(gain, historical_single_gain=historical_single_gain),
+                    args.protected_adapter,
+                    gain,
+                    "committed",
+                )
+            )
     if args.task_only_adapter is not None:
-        plan.append(("task_only", args.task_only_adapter, None))
+        plan.append(ConditionSpec("task_only", args.task_only_adapter, None, "none"))
     return plan
+
+
+def condition_plan(args: argparse.Namespace) -> list[tuple[str, Path | None, float | None]]:
+    return [(spec.name, spec.adapter_path, spec.adapter_gain) for spec in condition_specs(args)]
 
 
 def scale_peft_lora_adapters(model: Any, gain: float) -> dict[str, Any]:
@@ -204,7 +251,71 @@ def controller_config_from_args(args: argparse.Namespace) -> ControllerConfig:
 def controller_applies_to_condition(condition: str, config: ControllerConfig) -> bool:
     if not config.enabled:
         return False
-    return condition == "protected" or condition.startswith("protected_gain_")
+    return condition in {"protected", "controlled_protected", "wrong_key_controlled", "wrong_payload_controlled"} or condition.startswith(
+        "protected_gain_"
+    )
+
+
+def deterministic_wrong_key_bit(row: Mapping[str, Any], *, salt: str = "r4_wrong_key_controller_v1") -> int:
+    parts = [
+        salt,
+        str(row.get("prompt_id", "")),
+        str(row.get("prompt_index", "")),
+        str(row.get("coordinate_id", "")),
+        str(row.get("target_bit", "")),
+    ]
+    digest = hashlib.sha256("|".join(parts).encode("utf-8")).digest()
+    return int(digest[0] & 1)
+
+
+def controller_token_ids_for_policy(
+    *,
+    policy: str,
+    row: Mapping[str, Any],
+    committed_target_ids: Sequence[int],
+    committed_other_ids: Sequence[int],
+) -> dict[str, Any]:
+    if policy == "none":
+        return {
+            "controller_target_ids": [],
+            "controller_other_ids": [],
+            "controller_policy_detail": {"policy": policy},
+        }
+    if policy == "committed":
+        return {
+            "controller_target_ids": sorted({int(item) for item in committed_target_ids}),
+            "controller_other_ids": sorted({int(item) for item in committed_other_ids}),
+            "controller_policy_detail": {"policy": policy},
+        }
+    if policy == "complement":
+        return {
+            "controller_target_ids": sorted({int(item) for item in committed_other_ids}),
+            "controller_other_ids": sorted({int(item) for item in committed_target_ids}),
+            "controller_policy_detail": {"policy": policy},
+        }
+    if policy == "coordinate_hash_v1":
+        wrong_bit = deterministic_wrong_key_bit(row)
+        target_bit = int(row["target_bit"])
+        target_is_committed = wrong_bit == target_bit
+        return {
+            "controller_target_ids": (
+                sorted({int(item) for item in committed_target_ids})
+                if target_is_committed
+                else sorted({int(item) for item in committed_other_ids})
+            ),
+            "controller_other_ids": (
+                sorted({int(item) for item in committed_other_ids})
+                if target_is_committed
+                else sorted({int(item) for item in committed_target_ids})
+            ),
+            "controller_policy_detail": {
+                "policy": policy,
+                "salt": "r4_wrong_key_controller_v1",
+                "wrong_key_bit": wrong_bit,
+                "matches_committed_target_bit": target_is_committed,
+            },
+        }
+    raise ValueError(f"unsupported controller target policy: {policy}")
 
 
 def score_next_token_surface_masses(
@@ -213,6 +324,8 @@ def score_next_token_surface_masses(
     target_ids: Sequence[int],
     other_ids: Sequence[int],
     controller_config: ControllerConfig | None = None,
+    controller_target_ids: Sequence[int] | None = None,
+    controller_other_ids: Sequence[int] | None = None,
 ) -> dict[str, Any]:
     import torch
 
@@ -236,16 +349,27 @@ def score_next_token_surface_masses(
     cap_reasons: list[str] = []
     kl_to_base = 0.0
     scored_logits = base_logits
+    controller_target_values = target_values if controller_target_ids is None else sorted({int(item) for item in controller_target_ids})
+    controller_other_values = other_values if controller_other_ids is None else sorted({int(item) for item in controller_other_ids})
     if controller_config is not None and controller_config.enabled:
+        if not controller_target_values:
+            raise ValueError("controller_target_ids must not be empty when controller is enabled")
+        if not controller_other_values:
+            raise ValueError("controller_other_ids must not be empty when controller is enabled")
+        controller_overlap = sorted(set(controller_target_values) & set(controller_other_values))
+        if controller_overlap:
+            raise ValueError(f"controller target/other token id overlap: {controller_overlap[:5]}")
         applied = True
+        controller_target_tensor = torch.tensor(controller_target_values, dtype=torch.long, device=base_logits.device)
+        controller_other_tensor = torch.tensor(controller_other_values, dtype=torch.long, device=base_logits.device)
 
         def candidate(candidate_scale: float) -> tuple[Any, Any, float, float]:
             adjusted = base_logits.clone()
             adjusted.index_add_(
                 0,
-                target_tensor,
+                controller_target_tensor,
                 torch.full(
-                    (target_tensor.numel(),),
+                    (controller_target_tensor.numel(),),
                     float(controller_config.bonus_nats) * float(candidate_scale),
                     dtype=adjusted.dtype,
                     device=adjusted.device,
@@ -254,16 +378,16 @@ def score_next_token_surface_masses(
             if float(controller_config.penalty_nats) > 0:
                 adjusted.index_add_(
                     0,
-                    other_tensor,
+                    controller_other_tensor,
                     torch.full(
-                        (other_tensor.numel(),),
+                        (controller_other_tensor.numel(),),
                         -float(controller_config.penalty_nats) * float(candidate_scale),
                         dtype=adjusted.dtype,
                         device=adjusted.device,
                     ),
                 )
             adjusted_probs = torch.softmax(adjusted, dim=-1)
-            target_mass = float(adjusted_probs.index_select(0, target_tensor).sum().detach().cpu())
+            target_mass = float(adjusted_probs.index_select(0, controller_target_tensor).sum().detach().cpu())
             kl_value = float(
                 (
                     adjusted_probs
@@ -317,6 +441,8 @@ def score_next_token_surface_masses(
         "target_margin": target_mass - other_mass,
         "target_surface_rank1": target_mass > other_mass,
         "controller_applied": applied,
+        "controller_target_ids": controller_target_values if applied else [],
+        "controller_other_ids": controller_other_values if applied else [],
         "controller_scale": scale,
         "controller_kl_to_base": kl_to_base,
         "controller_cap_reasons": cap_reasons,
@@ -649,9 +775,7 @@ def summarize(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
 def score_condition(
     *,
     args: argparse.Namespace,
-    condition: str,
-    adapter_path: Path | None,
-    adapter_gain: float | None,
+    spec: ConditionSpec,
     rows: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     import torch
@@ -659,7 +783,7 @@ def score_condition(
 
     controller_config = controller_config_from_args(args)
     condition_controller_config = (
-        controller_config if controller_applies_to_condition(condition, controller_config) else ControllerConfig()
+        controller_config if controller_applies_to_condition(spec.name, controller_config) else ControllerConfig()
     )
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name, trust_remote_code=True)
     if tokenizer.pad_token_id is None:
@@ -670,13 +794,13 @@ def score_condition(
         torch_dtype=torch.bfloat16 if device.type == "cuda" else torch.float32,
         trust_remote_code=True,
     ).to(device)
-    if adapter_path is not None:
+    if spec.adapter_path is not None:
         from peft import PeftModel
 
-        model = PeftModel.from_pretrained(model, adapter_path).to(device)
+        model = PeftModel.from_pretrained(model, spec.adapter_path).to(device)
     adapter_gain_metadata = None
-    if adapter_gain is not None:
-        adapter_gain_metadata = scale_peft_lora_adapters(model, adapter_gain)
+    if spec.adapter_gain is not None:
+        adapter_gain_metadata = scale_peft_lora_adapters(model, spec.adapter_gain)
     model.eval()
     scored: list[dict[str, Any]] = []
     with torch.no_grad():
@@ -716,21 +840,33 @@ def score_condition(
                 )
                 if not target_ids or not other_ids:
                     raise ValueError(f"empty bucket token ids for row {row.get('prompt_id')}:{row.get('coordinate_id')}")
+                controller_tokens = controller_token_ids_for_policy(
+                    policy=spec.controller_target_policy,
+                    row=row,
+                    committed_target_ids=target_ids,
+                    committed_other_ids=other_ids,
+                )
                 logits = outputs.logits[batch_index, last_positions[batch_index], :]
                 mass_row = score_next_token_surface_masses(
                     logits=logits,
                     target_ids=target_ids,
                     other_ids=other_ids,
                     controller_config=condition_controller_config,
+                    controller_target_ids=controller_tokens["controller_target_ids"],
+                    controller_other_ids=controller_tokens["controller_other_ids"],
                 )
                 scored.append(
                     {
                         "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_row_v1",
-                        "condition": condition,
-                        "adapter_gain": adapter_gain,
+                        "condition": spec.name,
+                        "adapter_gain": spec.adapter_gain,
                         "adapter_gain_metadata": adapter_gain_metadata,
                         "controller_config": condition_controller_config.to_json(),
+                        "controller_target_policy": spec.controller_target_policy,
+                        "controller_policy_detail": controller_tokens["controller_policy_detail"],
                         "controller_applied": mass_row["controller_applied"],
+                        "controller_target_first_token_ids": mass_row["controller_target_ids"],
+                        "controller_other_first_token_ids": mass_row["controller_other_ids"],
                         "controller_scale": mass_row["controller_scale"],
                         "controller_kl_to_base": mass_row["controller_kl_to_base"],
                         "controller_cap_reasons": mass_row["controller_cap_reasons"],
@@ -800,12 +936,10 @@ def main() -> int:
     if args.require_cuda and not torch.cuda.is_available():
         raise RuntimeError("--require-cuda was set but CUDA is not available")
     scored_rows: list[dict[str, Any]] = []
-    for condition, adapter_path, adapter_gain in condition_plan(args):
-        if adapter_path is not None and not adapter_path.exists():
-            raise FileNotFoundError(f"adapter path missing for {condition}: {adapter_path}")
-        scored_rows.extend(
-            score_condition(args=args, condition=condition, adapter_path=adapter_path, adapter_gain=adapter_gain, rows=rows)
-        )
+    for spec in condition_specs(args):
+        if spec.adapter_path is not None and not spec.adapter_path.exists():
+            raise FileNotFoundError(f"adapter path missing for {spec.name}: {spec.adapter_path}")
+        scored_rows.extend(score_condition(args=args, spec=spec, rows=rows))
     summary = {
         **summarize(scored_rows),
         "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",

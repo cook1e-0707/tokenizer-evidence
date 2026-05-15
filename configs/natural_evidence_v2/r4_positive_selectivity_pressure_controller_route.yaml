@@ -62,6 +62,15 @@ controller_grid:
     - 0.10
   controller_mode: additive
 
+controller_control_mapping:
+  scorer_target_remains_committed: true
+  controlled_protected_policy: committed
+  wrong_payload_controlled_policy: complement
+  wrong_key_controlled_policy: coordinate_hash_v1
+  wrong_key_hash_salt: r4_wrong_key_controller_v1
+  no_posthoc_key_payload_remap: true
+  no_transcript_conditioned_mapping: true
+
 future_teacher_forced_gate:
   protected_lift_vs_base_min: 0.15
   protected_lift_vs_task_only_min: 0.10

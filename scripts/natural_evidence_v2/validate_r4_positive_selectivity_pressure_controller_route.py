@@ -131,6 +131,22 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
     if grid.get("controller_mode") != "additive":
         errors.append("controller_grid.controller_mode must be additive")
 
+    mapping = _mapping(config.get("controller_control_mapping"), "controller_control_mapping", errors)
+    if mapping.get("scorer_target_remains_committed") is not True:
+        errors.append("controller_control_mapping.scorer_target_remains_committed must be true")
+    if mapping.get("controlled_protected_policy") != "committed":
+        errors.append("controller_control_mapping.controlled_protected_policy must be committed")
+    if mapping.get("wrong_payload_controlled_policy") != "complement":
+        errors.append("controller_control_mapping.wrong_payload_controlled_policy must be complement")
+    if mapping.get("wrong_key_controlled_policy") != "coordinate_hash_v1":
+        errors.append("controller_control_mapping.wrong_key_controlled_policy must be coordinate_hash_v1")
+    if mapping.get("wrong_key_hash_salt") != "r4_wrong_key_controller_v1":
+        errors.append("controller_control_mapping.wrong_key_hash_salt must be r4_wrong_key_controller_v1")
+    if mapping.get("no_posthoc_key_payload_remap") is not True:
+        errors.append("controller_control_mapping.no_posthoc_key_payload_remap must be true")
+    if mapping.get("no_transcript_conditioned_mapping") is not True:
+        errors.append("controller_control_mapping.no_transcript_conditioned_mapping must be true")
+
     gate = _mapping(config.get("future_teacher_forced_gate"), "future_teacher_forced_gate", errors)
     if float(gate.get("protected_lift_vs_base_min", 0.0)) < 0.15:
         errors.append("future_teacher_forced_gate.protected_lift_vs_base_min must be >= 0.15")
