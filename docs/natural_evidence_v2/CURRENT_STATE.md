@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T03:12:00Z
+Last synchronized: 2026-05-15T03:20:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_PASS_NO_SUBMIT`
+`V2_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_JOB_859491_SUBMITTED_MONITORING`
 
 ## Current Route
 
@@ -31,9 +31,23 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_ROUTE_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_JOB_859491_RUNNING_MONITOR`
 
-The selectivity H200 wrapper remote preflight has now passed. Reviewed files
+The R4 positive selectivity small dev diagnostic has now been submitted as
+exactly one H200/pomplun Slurm array job: `859491`. The authorized command was
+`sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch`.
+The allowlist entry `v2_r4_positive_selectivity_dev_diagnostic_h200` was
+enabled only for submission and disabled immediately after `sbatch` returned.
+Local and remote post-submit allowlist safety both passed with zero enabled
+entries. First observed state: parent/array job `859491` pending for resources,
+with array tasks `859492`, `859493`, and `859494` running on `chimera21`.
+Expected output directory:
+`/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_diagnostic_859491`.
+The next allowed action is monitoring/review of job `859491`; do not submit
+another R4 selectivity dev diagnostic job unless this one is reviewed and a new
+route decision is recorded.
+
+The selectivity H200 wrapper remote preflight has also passed. Reviewed files
 were synchronized to Chimera, remote wrapper plan-only validation passed in
 `/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_wrapper_remote_plan_smoke_20260515_0312`,
 remote zero-enabled allowlist safety passed, local/remote hashes matched for
@@ -859,12 +873,10 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Record the R4 positive selectivity single-submission route, send Hermes
-TG/email pre-submit notification, enable exactly
-`v2_r4_positive_selectivity_dev_diagnostic_h200`, submit exactly one
-H200/pomplun Slurm array job, and disable the allowlist entry immediately after
-`sbatch` returns. Training, Llama, same-family null, sanitizer benchmark, FAR
-aggregation, payload-diversity work, and paper-facing positive claim remain
+Monitor and review H200/pomplun Slurm array job `859491`. Do not submit another
+R4 selectivity dev diagnostic job unless this one is reviewed and a new route
+decision is recorded. Training, Llama, same-family null, sanitizer benchmark,
+FAR aggregation, payload-diversity work, and paper-facing positive claim remain
 locked until later route gates pass.
 
 ## Locked Until Later Gates Pass

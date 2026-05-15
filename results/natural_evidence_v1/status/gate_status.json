@@ -15432,5 +15432,30 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_selectivity_submission_859491_20260515_0320": {
+    "schema_name": "natural_evidence_v2_r4_positive_selectivity_submission_gate_v1",
+    "timestamp_utc": "2026-05-15T03:20:00Z",
+    "status": "SUBMITTED_MONITORING",
+    "current_phase": "V2_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_JOB_859491_SUBMITTED_MONITORING",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_ROUTE_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_JOB_859491_RUNNING_MONITOR",
+    "job_id": "859491",
+    "submission_record": "results/natural_evidence_v2/status/r4_positive_selectivity_submission_20260515_0320/submission_record.json",
+    "hermes_report": "results/natural_evidence_v1/status/hermes_reports/20260515_0320_r4_selectivity_submission_record.md",
+    "expected_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_diagnostic_859491",
+    "allowlist_entry": "v2_r4_positive_selectivity_dev_diagnostic_h200",
+    "local_post_submit_allowlist_safety": "PASS",
+    "remote_post_submit_allowlist_safety": "PASS",
+    "next_allowed_action": "Monitor and review job 859491; no repeat submission unless reviewed and a new route decision is recorded.",
+    "slurm_job_submitted": true,
+    "allowlist_enabled_after_submission": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }

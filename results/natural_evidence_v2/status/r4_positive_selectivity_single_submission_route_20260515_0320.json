@@ -1,0 +1,22 @@
+{
+  "active_chimera_jobs_before_route": [],
+  "allowlist_entry": "v2_r4_positive_selectivity_dev_diagnostic_h200",
+  "authorized_command": "sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch",
+  "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_PRECHECK_NEXT",
+  "contract_id": "r4_positive_selectivity_repair_v1",
+  "current_phase": "V2_R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_ROUTE_RECORDED_NO_SUBMIT",
+  "h200_policy": {
+    "account": "cs_yinxin.wan",
+    "gpu": "h200",
+    "partition": "pomplun",
+    "qos": "pomplun",
+    "time": "30-00:00:00"
+  },
+  "payload_diversity_tested": false,
+  "payload_id": "a55e",
+  "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_SINGLE_SUBMISSION_ROUTE_20260515_0320.md",
+  "schema_name": "natural_evidence_v2_r4_positive_selectivity_single_submission_route_v1",
+  "slurm_job_submitted": false,
+  "status": "ROUTE_RECORDED_READY_FOR_PRE_SUBMIT_NOTIFICATION",
+  "timestamp_utc": "2026-05-15T03:20:00Z"
+}

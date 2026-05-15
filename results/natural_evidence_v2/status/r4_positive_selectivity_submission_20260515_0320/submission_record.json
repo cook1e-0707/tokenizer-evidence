@@ -1,0 +1,32 @@
+{
+  "allowlist_entry": "v2_r4_positive_selectivity_dev_diagnostic_h200",
+  "allowlist_enabled_after_submission": false,
+  "authorized_command": "sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch",
+  "expected_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_diagnostic_859491",
+  "first_observed_state": {
+    "array_parent": "PENDING",
+    "job_name": "nat-ev-v2-r4seldev",
+    "partition": "pomplun",
+    "running_tasks_seen": [
+      "859492",
+      "859493",
+      "859494"
+    ]
+  },
+  "h200_policy": {
+    "account": "cs_yinxin.wan",
+    "gpu": "h200",
+    "partition": "pomplun",
+    "qos": "pomplun",
+    "time": "30-00:00:00"
+  },
+  "job_id": "859491",
+  "local_enabled_preflight": "results/natural_evidence_v2/status/r4_positive_selectivity_single_enabled_preflight_local_20260515_0320.json",
+  "local_post_submit_allowlist_safety": "results/natural_evidence_v2/status/r4_positive_selectivity_post_submit_allowlist_safety_local_20260515_0320.json",
+  "remote_enabled_preflight": "results/natural_evidence_v2/status/r4_positive_selectivity_single_enabled_preflight_remote_20260515_0320.json",
+  "remote_post_submit_allowlist_safety": "results/natural_evidence_v2/status/r4_positive_selectivity_post_submit_allowlist_safety_remote_20260515_0320.json",
+  "schema_name": "natural_evidence_v2_r4_positive_selectivity_submission_record_v1",
+  "status": "SUBMITTED_MONITORING",
+  "submitted": true,
+  "timestamp_utc": "2026-05-15T03:20:00Z"
+}
