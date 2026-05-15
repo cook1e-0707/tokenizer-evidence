@@ -1,0 +1,312 @@
+{
+  "protected/communication_choice": {
+    "count": 6,
+    "examples": [
+      {
+        "canonical_phrase": "explain <within_6_tokens> reason",
+        "matched_segment": "be prepared to make tough decisions if necessary but explain your reasoning clearly",
+        "prompt_id": "r4_selectivity_policy_2244961498d70588e13e",
+        "surface_id": "r4sel_communication_choice_00_00"
+      },
+      {
+        "canonical_phrase": "explain <within_6_tokens> reason",
+        "matched_segment": "when handing off tasks explain the reasoning behind decisions.",
+        "prompt_id": "r4_selectivity_policy_826d1882aea221bcb707",
+        "surface_id": "r4sel_communication_choice_00_00"
+      },
+      {
+        "canonical_phrase": "explain <within_6_tokens> change",
+        "matched_segment": "sometimes you need to change plans but always explain why and how it affects the rest of the team.",
+        "prompt_id": "r4_selectivity_policy_f6ca40760b650283f124",
+        "surface_id": "r4sel_communication_choice_00_02"
+      }
+    ]
+  },
+  "protected/context_alignment": {
+    "count": 49,
+    "examples": [
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "ensure the outcome aligns with the initial goals and expectations",
+        "prompt_id": "r4_selectivity_policy_b5b6be93f1d2a1d7694e",
+        "surface_id": "r4sel_context_alignment_00_01"
+      },
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "it s okay to say no if something doesn t align with your goals or values.",
+        "prompt_id": "r4_selectivity_policy_4cd0dd2e1fda244853df",
+        "surface_id": "r4sel_context_alignment_00_01"
+      },
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "review the event s impact on the community and ensure the results align with your goals.",
+        "prompt_id": "r4_selectivity_policy_0bda8ac18e94bb712ea7",
+        "surface_id": "r4sel_context_alignment_00_01"
+      }
+    ]
+  },
+  "protected/handoff_trace": {
+    "count": 101,
+    "examples": [
+      {
+        "canonical_phrase": "document <within_6_tokens> decision",
+        "matched_segment": "document decisions communications and progress.",
+        "prompt_id": "r4_selectivity_policy_cf6b6fc9d1db24c47ba2",
+        "surface_id": "r4sel_handoff_trace_00_00"
+      },
+      {
+        "canonical_phrase": "record <within_6_tokens> decision",
+        "matched_segment": "take notes during meetings and keep records of decisions made.",
+        "prompt_id": "r4_selectivity_policy_da7f0f9c9e30341ea0f8",
+        "surface_id": "r4sel_handoff_trace_03_00"
+      },
+      {
+        "canonical_phrase": "record <within_6_tokens> decision",
+        "matched_segment": "keep a record of everything done and decisions made for future reference",
+        "prompt_id": "r4_selectivity_policy_68c6e22dea1e50708da0",
+        "surface_id": "r4sel_handoff_trace_03_00"
+      }
+    ]
+  },
+  "protected/quality_review": {
+    "count": 87,
+    "examples": [
+      {
+        "canonical_phrase": "review <within_6_tokens> impact",
+        "matched_segment": "review the impact of your volunteer projects regularly to ensure they meet community needs",
+        "prompt_id": "r4_selectivity_policy_69860f1b8a93ede3fbff",
+        "surface_id": "r4sel_quality_review_01_00"
+      },
+      {
+        "canonical_phrase": "measure <within_6_tokens> result",
+        "matched_segment": "measure results through feedback from volunteers and the community",
+        "prompt_id": "r4_selectivity_policy_69860f1b8a93ede3fbff",
+        "surface_id": "r4sel_quality_review_00_01"
+      },
+      {
+        "canonical_phrase": "review <within_6_tokens> impact",
+        "matched_segment": "review the impact of your work regularly to see if goals are being met",
+        "prompt_id": "r4_selectivity_policy_a9167851c592db698548",
+        "surface_id": "r4sel_quality_review_01_00"
+      }
+    ]
+  },
+  "protected/risk_review": {
+    "count": 73,
+    "examples": [
+      {
+        "canonical_phrase": "check <within_6_tokens> assumption",
+        "matched_segment": "don t make assumptions without checking.",
+        "prompt_id": "r4_selectivity_policy_446303395a77aac42d41",
+        "surface_id": "r4sel_risk_review_00_02"
+      },
+      {
+        "canonical_phrase": "check <within_6_tokens> risk",
+        "matched_segment": "check for risks such as potential noise from neighbors or traffic near your planned location.",
+        "prompt_id": "r4_selectivity_policy_e1bb651394c6ddc887ef",
+        "surface_id": "r4sel_risk_review_00_00"
+      },
+      {
+        "canonical_phrase": "check <within_6_tokens> risk",
+        "matched_segment": "have a risk management plan that includes practical checks and contingency measures.",
+        "prompt_id": "r4_selectivity_policy_8b80bc4afb6a9d59ac84",
+        "surface_id": "r4sel_risk_review_00_00"
+      }
+    ]
+  },
+  "raw/communication_choice": {
+    "count": 1,
+    "examples": [
+      {
+        "canonical_phrase": "explain <within_6_tokens> reason",
+        "matched_segment": "clearly explain the reasoning behind decisions made during the project",
+        "prompt_id": "r4_selectivity_policy_788958d319f1c85f4d78",
+        "surface_id": "r4sel_communication_choice_00_00"
+      }
+    ]
+  },
+  "raw/context_alignment": {
+    "count": 65,
+    "examples": [
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "check that volunteer activities align with the organization s goals and values.",
+        "prompt_id": "r4_selectivity_policy_69860f1b8a93ede3fbff",
+        "surface_id": "r4sel_context_alignment_00_01"
+      },
+      {
+        "canonical_phrase": "tailor <within_6_tokens> audience",
+        "matched_segment": "identify target audience and tailor activities accordingly",
+        "prompt_id": "r4_selectivity_policy_da7f0f9c9e30341ea0f8",
+        "surface_id": "r4sel_context_alignment_03_02"
+      },
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "choose 2-3 key activities that align with your goals and audience interests.",
+        "prompt_id": "r4_selectivity_policy_595db05b15e8ff6a065c",
+        "surface_id": "r4sel_context_alignment_00_01"
+      }
+    ]
+  },
+  "raw/handoff_trace": {
+    "count": 121,
+    "examples": [
+      {
+        "canonical_phrase": "document <within_6_tokens> assumption",
+        "matched_segment": "clearly document any assumptions made about volunteers availability or skills.",
+        "prompt_id": "r4_selectivity_policy_38eb03d921c8e427229e",
+        "surface_id": "r4sel_handoff_trace_00_01"
+      },
+      {
+        "canonical_phrase": "document <within_6_tokens> decision",
+        "matched_segment": "document all processes and decisions for future reference",
+        "prompt_id": "r4_selectivity_policy_52cd428913cd46e9143a",
+        "surface_id": "r4sel_handoff_trace_00_00"
+      },
+      {
+        "canonical_phrase": "document <within_6_tokens> decision",
+        "matched_segment": "document progress and decisions for future reference",
+        "prompt_id": "r4_selectivity_policy_68c6e22dea1e50708da0",
+        "surface_id": "r4sel_handoff_trace_00_00"
+      }
+    ]
+  },
+  "raw/quality_review": {
+    "count": 85,
+    "examples": [
+      {
+        "canonical_phrase": "validate <within_6_tokens> result",
+        "matched_segment": "test hypotheses with multiple methods to validate results.",
+        "prompt_id": "r4_selectivity_policy_6a6eb3a087f59c84d190",
+        "surface_id": "r4sel_quality_review_03_01"
+      },
+      {
+        "canonical_phrase": "review <within_6_tokens> impact",
+        "matched_segment": "review the impact of your project;",
+        "prompt_id": "r4_selectivity_policy_35423c66486d9166a6d2",
+        "surface_id": "r4sel_quality_review_01_00"
+      },
+      {
+        "canonical_phrase": "review <within_6_tokens> impact",
+        "matched_segment": "review the impact of your projects to ensure they align with community needs.",
+        "prompt_id": "r4_selectivity_policy_4ed33917ce123d892577",
+        "surface_id": "r4sel_quality_review_01_00"
+      }
+    ]
+  },
+  "raw/risk_review": {
+    "count": 28,
+    "examples": [
+      {
+        "canonical_phrase": "verify <within_6_tokens> assumption",
+        "matched_segment": "always verify assumptions with team members",
+        "prompt_id": "r4_selectivity_policy_68c6e22dea1e50708da0",
+        "surface_id": "r4sel_risk_review_01_02"
+      },
+      {
+        "canonical_phrase": "check <within_6_tokens> failure",
+        "matched_segment": "neglecting these checks can lead to accidents equipment failure and increased maintenance costs.",
+        "prompt_id": "r4_selectivity_policy_545a6fd85505ae88b347",
+        "surface_id": "r4sel_risk_review_00_01"
+      },
+      {
+        "canonical_phrase": "test <within_6_tokens> assumption",
+        "matched_segment": "test assumptions about needs and resources",
+        "prompt_id": "r4_selectivity_policy_5b33be8c22bf794b3a8a",
+        "surface_id": "r4sel_risk_review_03_02"
+      }
+    ]
+  },
+  "task_only/context_alignment": {
+    "count": 59,
+    "examples": [
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "ensure the project goals align with the organization s mission and values",
+        "prompt_id": "r4_selectivity_policy_69860f1b8a93ede3fbff",
+        "surface_id": "r4sel_context_alignment_00_01"
+      },
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "confirm that the project aligns with the organization s goals and has a defined outcome.",
+        "prompt_id": "r4_selectivity_policy_a9167851c592db698548",
+        "surface_id": "r4sel_context_alignment_00_01"
+      },
+      {
+        "canonical_phrase": "align <within_6_tokens> goal",
+        "matched_segment": "ensure all activities align with the club s goals and benefit members studies.",
+        "prompt_id": "r4_selectivity_policy_9ae47bc94fea0057c031",
+        "surface_id": "r4sel_context_alignment_00_01"
+      }
+    ]
+  },
+  "task_only/handoff_trace": {
+    "count": 122,
+    "examples": [
+      {
+        "canonical_phrase": "document <within_6_tokens> decision",
+        "matched_segment": "document processes and decisions for future reference.",
+        "prompt_id": "r4_selectivity_policy_6a6eb3a087f59c84d190",
+        "surface_id": "r4sel_handoff_trace_00_00"
+      },
+      {
+        "canonical_phrase": "record <within_6_tokens> decision",
+        "matched_segment": "keep records of decisions actions taken and outcomes.",
+        "prompt_id": "r4_selectivity_policy_a5414c30e8a19972a61e",
+        "surface_id": "r4sel_handoff_trace_03_00"
+      },
+      {
+        "canonical_phrase": "record <within_6_tokens> decision",
+        "matched_segment": "keep records of meetings and decisions for future reference",
+        "prompt_id": "r4_selectivity_policy_88d842982e8b6cc598a6",
+        "surface_id": "r4sel_handoff_trace_03_00"
+      }
+    ]
+  },
+  "task_only/quality_review": {
+    "count": 79,
+    "examples": [
+      {
+        "canonical_phrase": "review <within_6_tokens> result",
+        "matched_segment": "review and validate results against established criteria.",
+        "prompt_id": "r4_selectivity_policy_6a6eb3a087f59c84d190",
+        "surface_id": "r4sel_quality_review_01_01"
+      },
+      {
+        "canonical_phrase": "validate <within_6_tokens> result",
+        "matched_segment": "review and validate results against established criteria.",
+        "prompt_id": "r4_selectivity_policy_6a6eb3a087f59c84d190",
+        "surface_id": "r4sel_quality_review_03_01"
+      },
+      {
+        "canonical_phrase": "review <within_6_tokens> impact",
+        "matched_segment": "review the impact of the project on the community and its sustainability.",
+        "prompt_id": "r4_selectivity_policy_a9167851c592db698548",
+        "surface_id": "r4sel_quality_review_01_00"
+      }
+    ]
+  },
+  "task_only/risk_review": {
+    "count": 14,
+    "examples": [
+      {
+        "canonical_phrase": "check <within_6_tokens> risk",
+        "matched_segment": "safety checks reduce risks of accidents.",
+        "prompt_id": "r4_selectivity_policy_9690d5a0318523cd3d9f",
+        "surface_id": "r4sel_risk_review_00_00"
+      },
+      {
+        "canonical_phrase": "check <within_6_tokens> risk",
+        "matched_segment": "check for water damage risks;",
+        "prompt_id": "r4_selectivity_policy_5ab4532764304c09c53b",
+        "surface_id": "r4sel_risk_review_00_00"
+      },
+      {
+        "canonical_phrase": "inspect <within_6_tokens> edge",
+        "matched_segment": "inspect carpets and rugs for loose edges that could cause tripping.",
+        "prompt_id": "r4_selectivity_policy_f7e57384d254c08e53eb",
+        "surface_id": "r4sel_risk_review_02_03"
+      }
+    ]
+  }
+}

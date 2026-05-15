@@ -1,0 +1,4 @@
+block_id,arm,source_condition,accept,observed_events,distinct_coordinates,keyed_correlation_score,wrong_key_correlation_score,wrong_payload_correlation_score,specificity_margin,format_scrub_mode
+plan_only_block_00,protected,protected,True,24,24,24.0,0.0,-2.0,24.0,all
+plan_only_block_00,wrong_key,protected,False,24,18,0.0,24.0,-6.0,-24.0,all
+plan_only_block_00,wrong_payload,protected,False,24,18,-2.0,-6.0,24.0,-26.0,all

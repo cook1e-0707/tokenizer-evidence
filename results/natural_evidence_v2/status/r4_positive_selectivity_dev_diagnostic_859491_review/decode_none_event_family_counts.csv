@@ -1,0 +1,15 @@
+condition,surface_family,count
+protected,communication_choice,6
+protected,context_alignment,49
+protected,handoff_trace,101
+protected,quality_review,87
+protected,risk_review,73
+raw,communication_choice,1
+raw,context_alignment,65
+raw,handoff_trace,121
+raw,quality_review,85
+raw,risk_review,28
+task_only,context_alignment,59
+task_only,handoff_trace,122
+task_only,quality_review,79
+task_only,risk_review,14

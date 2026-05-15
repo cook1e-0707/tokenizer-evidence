@@ -1,0 +1,166 @@
+{
+  "decode_summary_by_scrub": {
+    "decode_all": {
+      "protected": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 160,
+        "distinct_coordinates_mean": 5.0,
+        "events": 316,
+        "max_keyed_score": 16.0,
+        "max_margin": 20.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.875
+      },
+      "raw": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 148,
+        "distinct_coordinates_mean": 4.625,
+        "events": 300,
+        "max_keyed_score": 23.0,
+        "max_margin": 20.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.375
+      },
+      "task_only": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 133,
+        "distinct_coordinates_mean": 4.15625,
+        "events": 274,
+        "max_keyed_score": 18.0,
+        "max_margin": 18.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 8.5625
+      },
+      "wrong_key": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 154,
+        "distinct_coordinates_mean": 4.8125,
+        "events": 316,
+        "max_keyed_score": 4.0,
+        "max_margin": 4.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.875
+      },
+      "wrong_payload": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 182,
+        "distinct_coordinates_mean": 5.6875,
+        "events": 316,
+        "max_keyed_score": 3.0,
+        "max_margin": 0.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.875
+      }
+    },
+    "decode_none": {
+      "protected": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 160,
+        "distinct_coordinates_mean": 5.0,
+        "events": 316,
+        "max_keyed_score": 16.0,
+        "max_margin": 20.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.875
+      },
+      "raw": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 148,
+        "distinct_coordinates_mean": 4.625,
+        "events": 300,
+        "max_keyed_score": 23.0,
+        "max_margin": 20.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.375
+      },
+      "task_only": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 133,
+        "distinct_coordinates_mean": 4.15625,
+        "events": 274,
+        "max_keyed_score": 18.0,
+        "max_margin": 18.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 8.5625
+      },
+      "wrong_key": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 154,
+        "distinct_coordinates_mean": 4.8125,
+        "events": 316,
+        "max_keyed_score": 4.0,
+        "max_margin": 4.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.875
+      },
+      "wrong_payload": {
+        "accepts": 0,
+        "blocks": 32,
+        "coords": 182,
+        "distinct_coordinates_mean": 5.6875,
+        "events": 316,
+        "max_keyed_score": 3.0,
+        "max_margin": 0.0,
+        "min_margin_accepted": null,
+        "min_support_accepted": null,
+        "observed_events_mean": 9.875
+      }
+    }
+  },
+  "duplicate_condition_prompt_count": 0,
+  "duplicate_response_hash_count": 0,
+  "elapsed_by_array_task": {
+    "859491_0": "00:40:50",
+    "859491_1": "00:40:41",
+    "859491_2": "00:42:27",
+    "859491_3": "00:33:39"
+  },
+  "exit_code": "0:0",
+  "generated_outputs": 6144,
+  "generation_condition_counts": {
+    "protected": 2048,
+    "raw": 2048,
+    "task_only": 2048
+  },
+  "interpretation": "Wrapper and Slurm completed cleanly; null/control arms are clean, but protected recovery is 0/32. The selectivity prompt-policy increased event support relative to zero-event 859277, but events remain far below accept thresholds and are similarly present in raw/task-only outputs, so this is not a positive result.",
+  "job_id": "859491",
+  "next_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_859491_FAILURE_ANALYSIS_NEXT",
+  "positive_claim_allowed": false,
+  "primary_gate": {
+    "controls_clean": true,
+    "format_scrub_mode": "all",
+    "protected_accepts": "0/32",
+    "raw_accepts": 0,
+    "required_protected_accepts": ">=26/32",
+    "task_only_accepts": 0,
+    "wrong_key_accepts": 0,
+    "wrong_payload_accepts": 0
+  },
+  "repeat_submission_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_positive_selectivity_dev_diagnostic_review_v1",
+  "status": "FAIL_DEV_GATE_NO_POSITIVE_CLAIM",
+  "technical_literal_hit_total": 114,
+  "technical_literal_hits": {
+    "bucket": 10,
+    "coordinate": 104
+  },
+  "terminal_slurm_state": "COMPLETED"
+}

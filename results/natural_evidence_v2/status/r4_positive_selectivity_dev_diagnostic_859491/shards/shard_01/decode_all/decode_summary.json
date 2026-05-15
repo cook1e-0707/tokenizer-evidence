@@ -1,0 +1,55 @@
+{
+  "allow_static_dev_keys": true,
+  "extracted_events": 127,
+  "format_scrub_mode": "all",
+  "generated_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_dev_diagnostic_859491/shards/shard_01/r4_generated_outputs.jsonl",
+  "generated_rows": 1536,
+  "generation_started_by_decoder": false,
+  "package_dir": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_positive_selectivity_repair_package_20260514_2158",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_support_window_decode_summary_v1",
+  "status": "PASS_R4_SUPPORT_WINDOW_DECODE_COMPLETED",
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 0,
+      "blocks": 8,
+      "distinct_coordinates_mean": 3.75,
+      "distinct_coordinates_total": 30,
+      "observed_events_mean": 5.875,
+      "observed_events_total": 47
+    },
+    "raw": {
+      "accepts": 0,
+      "blocks": 8,
+      "distinct_coordinates_mean": 3.75,
+      "distinct_coordinates_total": 30,
+      "observed_events_mean": 5.5,
+      "observed_events_total": 44
+    },
+    "task_only": {
+      "accepts": 0,
+      "blocks": 8,
+      "distinct_coordinates_mean": 3.375,
+      "distinct_coordinates_total": 27,
+      "observed_events_mean": 4.5,
+      "observed_events_total": 36
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "blocks": 8,
+      "distinct_coordinates_mean": 3.5,
+      "distinct_coordinates_total": 28,
+      "observed_events_mean": 5.875,
+      "observed_events_total": 47
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "blocks": 8,
+      "distinct_coordinates_mean": 3.875,
+      "distinct_coordinates_total": 31,
+      "observed_events_mean": 5.875,
+      "observed_events_total": 47
+    }
+  },
+  "training_started": false
+}

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T03:20:00Z
+Last synchronized: 2026-05-15T04:05:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_JOB_859491_SUBMITTED_MONITORING`
+`V2_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_859491_REVIEWED_FAIL_NO_POSITIVE_CLAIM`
 
 ## Current Route
 
@@ -31,7 +31,26 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_JOB_859491_RUNNING_MONITOR`
+`BLOCK_R4_POSITIVE_SELECTIVITY_859491_REPAIR_PIVOT_ROUTE_DECISION_NEXT`
+
+Job `859491` has reached terminal state and has been reviewed. All four H200
+array tasks completed with exit code `0:0`, so this is not an infrastructure or
+wrapper failure. The positive dev gate failed: protected accepts are `0/32`
+under primary `format_scrub=all` and `0/32` without scrub. Raw, task-only,
+wrong-key, and wrong-payload controls are also `0/32`, so null controls are
+clean. The selectivity prompt policy did elicit support-window events, but not
+a protected-selective keyed channel: protected mean events per block are
+`9.875`, raw mean events are `9.375`, and task-only mean events are `8.5625`.
+Raw max keyed score (`23`) is higher than protected max keyed score (`16`).
+Generated outputs total `6144`, duplicate response hashes are `0`, and the
+technical literal hits (`coordinate: 104`, `bucket: 10`) are mostly ordinary
+task-domain language; this matcher issue does not rescue the positive failure.
+Review artifacts are in
+`results/natural_evidence_v2/status/r4_positive_selectivity_dev_diagnostic_859491_review/`
+and failure analysis is in
+`results/natural_evidence_v2/status/r4_positive_selectivity_dev_diagnostic_859491_failure_analysis/`.
+Do not resubmit this route unchanged. The next allowed action is artifact-only
+repair / pivot route decision and failure analysis only.
 
 The R4 positive selectivity small dev diagnostic has now been submitted as
 exactly one H200/pomplun Slurm array job: `859491`. The authorized command was
@@ -873,11 +892,10 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Monitor and review H200/pomplun Slurm array job `859491`. Do not submit another
-R4 selectivity dev diagnostic job unless this one is reviewed and a new route
-decision is recorded. Training, Llama, same-family null, sanitizer benchmark,
-FAR aggregation, payload-diversity work, and paper-facing positive claim remain
-locked until later route gates pass.
+Artifact-only repair / pivot route decision for the reviewed `859491` failure.
+Do not resubmit this route unchanged. Training, Llama, same-family null,
+sanitizer benchmark, FAR aggregation, payload-diversity work, and paper-facing
+positive claim remain locked until later route gates pass.
 
 ## Locked Until Later Gates Pass
 

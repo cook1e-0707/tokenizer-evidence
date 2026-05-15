@@ -1,0 +1,141 @@
+{
+  "condition_stats_primary_scrub_all": {
+    "protected": {
+      "accepts": 0,
+      "blocks": 32,
+      "blocks_coords_ge_8": 4,
+      "blocks_events_ge_16": 6,
+      "blocks_score_ge_8": 2,
+      "coords_max": 9,
+      "coords_mean": 5,
+      "coords_median": 5.0,
+      "events_max": 32,
+      "events_mean": 9.875,
+      "events_median": 8.0,
+      "margin_max": 20.0,
+      "margin_mean": 3.6875,
+      "margin_median": 4.0,
+      "score_max": 16.0,
+      "score_mean": 3.375,
+      "score_median": 3.0
+    },
+    "raw": {
+      "accepts": 0,
+      "blocks": 32,
+      "blocks_coords_ge_8": 4,
+      "blocks_events_ge_16": 6,
+      "blocks_score_ge_8": 7,
+      "coords_max": 9,
+      "coords_mean": 4.625,
+      "coords_median": 4.5,
+      "events_max": 29,
+      "events_mean": 9.375,
+      "events_median": 7.5,
+      "margin_max": 20.0,
+      "margin_mean": 6.8125,
+      "margin_median": 6.0,
+      "score_max": 23.0,
+      "score_mean": 5.6875,
+      "score_median": 4.5
+    },
+    "task_only": {
+      "accepts": 0,
+      "blocks": 32,
+      "blocks_coords_ge_8": 1,
+      "blocks_events_ge_16": 5,
+      "blocks_score_ge_8": 7,
+      "coords_max": 8,
+      "coords_mean": 4.15625,
+      "coords_median": 4.0,
+      "events_max": 30,
+      "events_mean": 8.5625,
+      "events_median": 5.5,
+      "margin_max": 18.0,
+      "margin_mean": 6.3125,
+      "margin_median": 6.0,
+      "score_max": 18.0,
+      "score_mean": 4.75,
+      "score_median": 4.0
+    }
+  },
+  "family_fractions_primary_scrub_all": {
+    "protected": {
+      "communication_choice": {
+        "count": 6,
+        "fraction": 0.0189873417721519
+      },
+      "context_alignment": {
+        "count": 49,
+        "fraction": 0.1550632911392405
+      },
+      "handoff_trace": {
+        "count": 101,
+        "fraction": 0.31962025316455694
+      },
+      "quality_review": {
+        "count": 87,
+        "fraction": 0.27531645569620256
+      },
+      "risk_review": {
+        "count": 73,
+        "fraction": 0.2310126582278481
+      }
+    },
+    "raw": {
+      "communication_choice": {
+        "count": 1,
+        "fraction": 0.0033333333333333335
+      },
+      "context_alignment": {
+        "count": 65,
+        "fraction": 0.21666666666666667
+      },
+      "handoff_trace": {
+        "count": 121,
+        "fraction": 0.4033333333333333
+      },
+      "quality_review": {
+        "count": 85,
+        "fraction": 0.2833333333333333
+      },
+      "risk_review": {
+        "count": 28,
+        "fraction": 0.09333333333333334
+      }
+    },
+    "task_only": {
+      "context_alignment": {
+        "count": 59,
+        "fraction": 0.21532846715328466
+      },
+      "handoff_trace": {
+        "count": 122,
+        "fraction": 0.44525547445255476
+      },
+      "quality_review": {
+        "count": 79,
+        "fraction": 0.28832116788321166
+      },
+      "risk_review": {
+        "count": 14,
+        "fraction": 0.051094890510948905
+      }
+    }
+  },
+  "job_id": "859491",
+  "key_findings": [
+    "protected accepts are 0/32 under format_scrub=all and 0/32 without scrub",
+    "raw/task-only/wrong-key/wrong-payload accepts are 0/32, so controls are clean",
+    "protected mean events per block is 9.875 and mean distinct coordinates is 5.0, below the support needed for robust accept",
+    "raw mean events per block is 9.375 and task-only is 8.5625, so support windows are still ordinary task-language rather than protected-selective",
+    "raw max keyed score (23) exceeds protected max keyed score (16), indicating no reliable protected alignment",
+    "technical literal hits are dominated by ordinary domain word coordinate in volunteer coordination; this remains a matcher-policy issue but does not rescue the positive failure"
+  ],
+  "next_recommended_analysis_scope": "artifact-only repair/pivot decision; do not rerun unchanged; inspect whether selectivity must move from support-window lexical events to trained/controller-induced keyed polarity at generation time",
+  "positive_claim_allowed": false,
+  "repeat_submission_allowed": false,
+  "root_cause_summary": "The selectivity prompt-policy elicited support-window events, but not a protected-only keyed channel. Protected support remains too sparse for the accept threshold, and raw/task-only also produce comparable ordinary support-window language. Null accepts remain 0 because thresholds are strict, not because protected recovered.",
+  "schema_name": "natural_evidence_v2_r4_positive_selectivity_859491_failure_analysis_v1",
+  "slurm_allowed": false,
+  "status": "FAILURE_ANALYSIS_RECORDED_NO_RESUBMIT"
+}
