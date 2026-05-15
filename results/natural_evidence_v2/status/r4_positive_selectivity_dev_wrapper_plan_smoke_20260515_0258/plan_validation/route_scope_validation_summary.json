@@ -1,0 +1,12 @@
+{
+  "allowlist_enabled": false,
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "route_id": "r4_positive_selectivity_dev_diagnostic_v1",
+  "slurm_job_submitted": false,
+  "source_prompt_policy_package": "results/natural_evidence_v2/prompts/r4_positive_selectivity_prompt_policy_20260515_0242",
+  "source_selectivity_package": "results/natural_evidence_v2/precommit/r4_positive_selectivity_repair_package_20260514_2158",
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_NO_SUBMIT",
+  "training_started": false
+}

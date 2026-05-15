@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T02:42:59Z
+Last synchronized: 2026-05-15T02:58:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_PROMPT_POLICY_STATIC_VALIDATION_PASS_NO_COMPUTE`
+`V2_R4_POSITIVE_SELECTIVITY_H200_WRAPPER_PLAN_ONLY_PASS_NO_SUBMIT`
 
 ## Current Route
 
@@ -31,7 +31,41 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_PLANNING_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_REMOTE_PREFLIGHT_NEXT`
+
+The selectivity H200 generation/decode wrapper has now passed local plan-only
+review. Wrapper
+`scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch`
+uses H200/pomplun policy, requires explicit `ALLOW_STATIC_DEV_KEYS=1`, validates
+the selectivity route config, checks a 512-prompt plan window, and runs a toy
+support-window keyed-correlation decode that accepts protected and rejects
+wrong-key/wrong-payload controls. Local wrapper syntax passed, wrapper plan-only
+status is
+`PASS_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_WRAPPER_PLAN_ONLY`, and local
+zero-enabled allowlist safety passed. The disabled future allowlist entry is
+`v2_r4_positive_selectivity_dev_diagnostic_h200`. No Slurm job was submitted, no
+allowlist entry was enabled, no generation or training was started, and no claim
+is unlocked. The next allowed action is remote sync and remote preflight only:
+remote wrapper plan-only validation, local/remote hash preflight, remote
+zero-enabled allowlist safety, and active-job preflight.
+
+The selectivity dev diagnostic route scope has also been reviewed and validated
+artifact-only. The route config
+`configs/natural_evidence_v2/r4_positive_selectivity_dev_diagnostic_route.yaml`
+binds the future diagnostic to the validated selectivity package
+`r4_positive_selectivity_repair_v1`, the prompt-policy package
+`r4_positive_selectivity_prompt_policy_v1`, Qwen-only same-contract `a55e`,
+H200/pomplun policy, 32 dev blocks, 64 prompts per block, and
+`format_scrub=all` primary decode. The support-window keyed-correlation decoder
+and route-scope validator have focused tests (`6 passed`), py-compile passed,
+and the route validator wrote
+`results/natural_evidence_v2/status/r4_positive_selectivity_dev_diagnostic_route_scope_20260515_0250/route_scope_validation_summary.json`
+with status
+`PASS_R4_POSITIVE_SELECTIVITY_DEV_DIAGNOSTIC_ROUTE_SCOPE_REVIEW_NO_SUBMIT`.
+No Slurm job was submitted, no allowlist entry was enabled, no generation or
+training was started, and no claim is unlocked. The next allowed action is
+artifact-only H200 generation/decode wrapper implementation and plan-only
+validation for this route.
 
 The R4 positive event-bank full generation/decode wrapper is now implemented
 and locally reviewed. Non-plan wrapper mode no longer exits with the old
@@ -812,11 +846,12 @@ Capped objective patch recorded:
 
 ## Current Allowed Action
 
-Artifact-only generation/decode route planning and wrapper review for a small
-H200 dev diagnostic using the selectivity package and selectivity prompt-policy
-package. No Slurm submission is unlocked until wrapper review, local/remote
-plan-only validation, allowlist safety, Hermes TG/email notification,
-H200/pomplun policy, and exactly-one submission gates pass. Training, Llama,
+Remote sync and remote preflight for the reviewed R4 selectivity H200 wrapper:
+remote wrapper plan-only validation, local/remote hash preflight, remote
+zero-enabled allowlist safety, and active-job preflight. No Slurm submission is
+unlocked until a later single-submission route record passes Hermes TG/email
+notification, H200/pomplun policy, exactly-one allowlist enablement, `sbatch`,
+and immediate post-submit allowlist disablement gates. Training, Llama,
 same-family null, sanitizer benchmark, FAR aggregation, payload-diversity work,
 and paper-facing positive claim remain locked until later route gates pass.
 

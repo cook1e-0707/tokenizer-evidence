@@ -170,6 +170,15 @@ allowed_gpu_actions:
   enable_condition: r4_positive_full_generation_decode_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_dev_diagnostic_h200
+- claim_note: R4 positive selectivity support-window small dev generation diagnostic.
+    Qwen dev prompts from the reviewed selectivity prompt-policy package; same-contract
+    a55e; primary format-scrub decode; null controls required. No training, no
+    Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR,
+    no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch
+  enable_condition: r4_positive_selectivity_wrapper_reviewed_and_single_h200_route_authorized
+  enabled: false
+  name: v2_r4_positive_selectivity_dev_diagnostic_h200
 - claim_note: R4 Qwen prefix-native actual tokenizer boundary preflight only on repaired
     candidate rows. Tokenizer load only; no model forward, no tokenizer/model scoring,
     no generation, no training, no Llama, no same-family null, no sanitizer, no FAR,
