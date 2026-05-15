@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T04:45:00Z
+Last synchronized: 2026-05-15T04:55:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and older long-form
@@ -9,7 +9,7 @@ with this file.
 
 ## Canonical Phase
 
-`V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_SCORER_INTEGRATION_PASS_NO_COMPUTE`
+`V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRAPPER_PLAN_ONLY_PASS_NO_SUBMIT`
 
 ## Current Route
 
@@ -31,7 +31,7 @@ are simply not unlocked by this state yet.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_H200_WRAPPER_PLAN_ONLY_NEXT`
+`BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_NEXT`
 
 Job `859491` has reached terminal state and has been reviewed. All four H200
 array tasks completed with exit code `0:0`, so this is not an infrastructure or
@@ -94,6 +94,23 @@ wrapper implementation and plan-only validation. No Slurm job, model scoring,
 generation, training, Llama, same-family null, sanitizer, FAR aggregation,
 payload-diversity work, or paper-facing positive claim is unlocked by this
 state.
+
+The H200/pomplun pressure-controller scoring wrapper plan-only review has also
+passed:
+`docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRAPPER_PLAN_ONLY_20260515_0455.md`
+and
+`results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_wrapper_plan_only_20260515_0455/`.
+Wrapper
+`scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch`
+uses `pomplun`, account `cs_yinxin.wan`, `gpu:h200:1`, `30-00:00:00`, and the
+72-cell controller grid. Local syntax and plan-only dry-run passed. The future
+allowlist entry
+`v2_r4_positive_selectivity_pressure_controller_score_h200` exists but remains
+disabled. Full scoring mode still intentionally fails closed with
+`R4_PRESSURE_CONTROLLER_FULL_SCORING_REQUIRES_WRONG_CONTROL_WRAPPER_REVIEW`.
+The next allowed action is artifact-only wrong-key / wrong-payload controller
+mapping design and wrapper review; no Slurm submission or model scoring is
+unlocked yet.
 
 The R4 positive selectivity small dev diagnostic has now been submitted as
 exactly one H200/pomplun Slurm array job: `859491`. The authorized command was

@@ -179,6 +179,14 @@ allowed_gpu_actions:
   enable_condition: r4_positive_selectivity_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_selectivity_dev_diagnostic_h200
+- claim_note: R4 positive selectivity pressure-controller teacher-forced scoring
+    wrapper. Qwen only; same-contract a55e; controller grid scoring only; no
+    generation, no training, no Llama, no same-family null, no sanitizer, no FAR,
+    no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
+  enable_condition: r4_pressure_controller_wrapper_full_mode_reviewed_and_single_h200_route_authorized
+  enabled: false
+  name: v2_r4_positive_selectivity_pressure_controller_score_h200
 - claim_note: R4 Qwen prefix-native actual tokenizer boundary preflight only on repaired
     candidate rows. Tokenizer load only; no model forward, no tokenizer/model scoring,
     no generation, no training, no Llama, no same-family null, no sanitizer, no FAR,

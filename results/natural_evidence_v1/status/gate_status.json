@@ -15641,5 +15641,32 @@
     "far_aggregation_allowed": false,
     "payload_diversity_claim_allowed": false,
     "paper_claim_allowed": false
+  },
+  "r4_positive_selectivity_pressure_controller_wrapper_plan_only_20260515_0455": {
+    "schema_name": "natural_evidence_v2_r4_positive_selectivity_pressure_controller_wrapper_plan_only_gate_v1",
+    "timestamp_utc": "2026-05-15T04:55:00Z",
+    "status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+    "current_phase": "V2_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRAPPER_PLAN_ONLY_PASS_NO_SUBMIT",
+    "previous_blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_H200_WRAPPER_PLAN_ONLY_NEXT",
+    "blocker": "BLOCK_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRONG_CONTROL_MAPPING_NEXT",
+    "wrapper": "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+    "review_doc": "docs/natural_evidence_v2/R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_WRAPPER_PLAN_ONLY_20260515_0455.md",
+    "summary_json": "results/natural_evidence_v2/status/r4_positive_selectivity_pressure_controller_wrapper_plan_only_20260515_0455/wrapper_plan_only_summary.json",
+    "allowlist_entry_added_disabled": "v2_r4_positive_selectivity_pressure_controller_score_h200",
+    "bash_n": "PASS",
+    "plan_only_output": "results/natural_evidence_v2/status/r4_pressure_controller_wrapper_plan_smoke_20260515_0455/grid_00/wrapper_plan_only_summary.json",
+    "full_mode_enabled": false,
+    "full_mode_fail_closed_reason": "R4_PRESSURE_CONTROLLER_FULL_SCORING_REQUIRES_WRONG_CONTROL_WRAPPER_REVIEW",
+    "next_allowed_action": "Artifact-only wrong-key / wrong-payload controller mapping design and wrapper review.",
+    "slurm_allowed": false,
+    "generation_allowed": false,
+    "model_scoring_allowed": false,
+    "training_allowed": false,
+    "llama_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "far_aggregation_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "paper_claim_allowed": false
   }
 }
