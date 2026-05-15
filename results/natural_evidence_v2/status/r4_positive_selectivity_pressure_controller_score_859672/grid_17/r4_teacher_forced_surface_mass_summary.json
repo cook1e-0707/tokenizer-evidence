@@ -1,0 +1,82 @@
+{
+  "condition_plan": [
+    "base",
+    "task_only",
+    "controlled_protected",
+    "wrong_key_controlled",
+    "wrong_payload_controlled"
+  ],
+  "condition_summary": {
+    "base": {
+      "mean_target_margin": -0.03741329548562078,
+      "mean_target_mass": 0.00483183704383805,
+      "median_target_margin": -0.00652075739344582,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.251953125
+    },
+    "controlled_protected": {
+      "mean_target_margin": 0.33832477038843933,
+      "mean_target_mass": 0.3419689047514112,
+      "median_target_margin": 0.34870358047191985,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 1.0
+    },
+    "task_only": {
+      "mean_target_margin": -0.04970936047813623,
+      "mean_target_mass": 0.0016724278486419664,
+      "median_target_margin": -0.0027600459288805723,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.19921875
+    },
+    "wrong_key_controlled": {
+      "mean_target_margin": 0.3025023468215915,
+      "mean_target_mass": 0.3076101545966594,
+      "median_target_margin": 0.29652771539986134,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 1.0
+    },
+    "wrong_payload_controlled": {
+      "mean_target_margin": 0.26707147192712455,
+      "mean_target_mass": 0.27357101911184145,
+      "median_target_margin": 0.24155490548582748,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 1.0
+    }
+  },
+  "controller_applies_only_to_protected_conditions": true,
+  "controller_config": {
+    "bonus_nats": 0.5,
+    "max_kl_budget": 0.1,
+    "max_target_mass": 0.45,
+    "mode": "additive",
+    "penalty_nats": 0.0
+  },
+  "controller_enabled": true,
+  "far_aggregation_started": false,
+  "gain_sweep_summary": {},
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": true,
+  "observed_lifts": {
+    "protected_target_surface_mass_lift_vs_base": NaN,
+    "protected_target_surface_mass_lift_vs_task_only": NaN,
+    "task_only_target_surface_mass_lift_vs_base": -0.0031594091951960834
+  },
+  "paper_claim_allowed": false,
+  "protected_adapter_gains": [
+    1.0
+  ],
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 8192,
+  "scored_row_count": 40960,
+  "teacher_forced_surface_gate_pass": false,
+  "teacher_forced_surface_gate_status": "FAIL",
+  "teacher_forced_surface_gate_targets": {
+    "protected_median_target_margin": ">0",
+    "protected_target_surface_mass_lift_vs_base": ">=+0.15",
+    "protected_target_surface_mass_lift_vs_task_only": ">=+0.10",
+    "protected_target_surface_rank1_rate": ">=0.70",
+    "task_only_target_surface_mass_lift_vs_base": "<+0.05 diagnostic cap"
+  },
+  "training_started": false
+}

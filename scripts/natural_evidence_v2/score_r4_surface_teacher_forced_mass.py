@@ -56,13 +56,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--controller-max-kl-budget", type=float, default=None)
     parser.add_argument(
         "--controller-condition-set",
-        choices=["standard", "pressure_controls"],
+        choices=["standard", "pressure_controls", "controller_only_controls"],
         default="standard",
         help=(
             "standard preserves historical base/protected/task-only behavior. "
             "pressure_controls emits base, task_only, controlled_protected, "
             "wrong_key_controlled, and wrong_payload_controlled for the reviewed "
-            "R4 controller route."
+            "R4 controller route. controller_only_controls emits base, task_only, "
+            "controlled_base, wrong_key_controlled_base, and "
+            "wrong_payload_controlled_base without loading the protected adapter "
+            "for controller arms."
         ),
     )
     parser.add_argument("--dry-run", action="store_true")
@@ -140,6 +143,20 @@ class ConditionSpec:
 
 
 def condition_specs(args: argparse.Namespace) -> list[ConditionSpec]:
+    if str(getattr(args, "controller_condition_set", "standard")) == "controller_only_controls":
+        if args.task_only_adapter is None:
+            raise ValueError("--task-only-adapter is required for controller_only_controls")
+        controller_config = controller_config_from_args(args)
+        if not controller_config.enabled:
+            raise ValueError("--controller-mode must be enabled for controller_only_controls")
+        return [
+            ConditionSpec("base", None, None, "none"),
+            ConditionSpec("task_only", args.task_only_adapter, None, "none"),
+            ConditionSpec("controlled_base", None, None, "committed"),
+            ConditionSpec("wrong_key_controlled_base", None, None, "coordinate_hash_v1"),
+            ConditionSpec("wrong_payload_controlled_base", None, None, "complement"),
+        ]
+
     if str(getattr(args, "controller_condition_set", "standard")) == "pressure_controls":
         if args.protected_adapter is None:
             raise ValueError("--protected-adapter is required for pressure_controls")
@@ -251,9 +268,15 @@ def controller_config_from_args(args: argparse.Namespace) -> ControllerConfig:
 def controller_applies_to_condition(condition: str, config: ControllerConfig) -> bool:
     if not config.enabled:
         return False
-    return condition in {"protected", "controlled_protected", "wrong_key_controlled", "wrong_payload_controlled"} or condition.startswith(
-        "protected_gain_"
-    )
+    return condition in {
+        "protected",
+        "controlled_protected",
+        "wrong_key_controlled",
+        "wrong_payload_controlled",
+        "controlled_base",
+        "wrong_key_controlled_base",
+        "wrong_payload_controlled_base",
+    } or condition.startswith("protected_gain_")
 
 
 def deterministic_wrong_key_bit(row: Mapping[str, Any], *, salt: str = "r4_wrong_key_controller_v1") -> int:
@@ -752,7 +775,59 @@ def summarize(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             "median_target_margin": condition_median_margin,
             "target_surface_rank1_rate": condition_rank1,
         }
+    controller_only_summary: dict[str, Any] = {}
+    if "controlled_base" in condition_summary:
+        controlled_mass = condition_summary["controlled_base"]["mean_target_mass"]
+        controlled_rank1 = condition_summary["controlled_base"]["target_surface_rank1_rate"]
+        controlled_margin = condition_summary["controlled_base"]["median_target_margin"]
+        wrong_key_mass = condition_summary.get("wrong_key_controlled_base", {}).get("mean_target_mass", float("nan"))
+        wrong_key_rank1 = condition_summary.get("wrong_key_controlled_base", {}).get("target_surface_rank1_rate", 0.0)
+        wrong_key_margin = condition_summary.get("wrong_key_controlled_base", {}).get("median_target_margin", float("nan"))
+        wrong_payload_mass = condition_summary.get("wrong_payload_controlled_base", {}).get(
+            "mean_target_mass", float("nan")
+        )
+        wrong_payload_rank1 = condition_summary.get("wrong_payload_controlled_base", {}).get(
+            "target_surface_rank1_rate", 0.0
+        )
+        wrong_payload_margin = condition_summary.get("wrong_payload_controlled_base", {}).get(
+            "median_target_margin", float("nan")
+        )
+        controlled_basic_gate_pass = (
+            controlled_mass - base_mass >= 0.15
+            and controlled_mass - task_mass >= 0.10
+            and controlled_rank1 >= 0.75
+            and controlled_margin > 0
+            and task_lift_vs_base < 0.05
+        )
+        wrong_key_basic_gate_pass = (
+            wrong_key_mass - base_mass >= 0.15 and wrong_key_rank1 >= 0.75 and wrong_key_margin > 0
+        )
+        wrong_payload_basic_gate_pass = (
+            wrong_payload_mass - base_mass >= 0.15
+            and wrong_payload_rank1 >= 0.75
+            and wrong_payload_margin > 0
+        )
+        controller_only_summary = {
+            "controlled_base_lift_vs_base": controlled_mass - base_mass,
+            "controlled_base_lift_vs_task_only": controlled_mass - task_mass,
+            "controlled_base_mean_target_mass": controlled_mass,
+            "controlled_base_median_target_margin": controlled_margin,
+            "controlled_base_rank1_rate": controlled_rank1,
+            "controlled_basic_gate_pass": bool(controlled_basic_gate_pass),
+            "overall_selective_gate_pass": bool(
+                controlled_basic_gate_pass and not wrong_key_basic_gate_pass and not wrong_payload_basic_gate_pass
+            ),
+            "wrong_key_basic_gate_pass": bool(wrong_key_basic_gate_pass),
+            "wrong_key_lift_vs_base": wrong_key_mass - base_mass,
+            "wrong_key_mean_target_mass": wrong_key_mass,
+            "wrong_key_rank1_rate": wrong_key_rank1,
+            "wrong_payload_basic_gate_pass": bool(wrong_payload_basic_gate_pass),
+            "wrong_payload_lift_vs_base": wrong_payload_mass - base_mass,
+            "wrong_payload_mean_target_mass": wrong_payload_mass,
+            "wrong_payload_rank1_rate": wrong_payload_rank1,
+        }
     return {
+        "controller_only_summary": controller_only_summary,
         "condition_summary": condition_summary,
         "gain_sweep_summary": gain_sweep_summary,
         "observed_lifts": {
@@ -919,7 +994,8 @@ def main() -> int:
             "protected_adapter_gains": parse_gain_values(args.protected_adapter_gains),
             "controller_config": controller_config.to_json(),
             "controller_enabled": controller_config.enabled,
-            "controller_applies_only_to_protected_conditions": True,
+            "controller_condition_set": args.controller_condition_set,
+            "controller_applies_only_to_protected_conditions": args.controller_condition_set != "controller_only_controls",
             "model_generation_started": False,
             "model_scoring_started": False,
             "training_started": False,
@@ -949,7 +1025,8 @@ def main() -> int:
         "protected_adapter_gains": parse_gain_values(args.protected_adapter_gains),
         "controller_config": controller_config.to_json(),
         "controller_enabled": controller_config.enabled,
-        "controller_applies_only_to_protected_conditions": True,
+        "controller_condition_set": args.controller_condition_set,
+        "controller_applies_only_to_protected_conditions": args.controller_condition_set != "controller_only_controls",
         "model_generation_started": False,
         "model_scoring_started": True,
         "training_started": False,

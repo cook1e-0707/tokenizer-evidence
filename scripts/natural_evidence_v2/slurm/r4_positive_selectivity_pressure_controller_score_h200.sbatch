@@ -20,6 +20,7 @@ set -euo pipefail
 REPO_HOME="${REPO_HOME:-$HOME/tokenizer-evidence}"
 RUN_ROOT="${RUN_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot}"
 ROUTE_CONFIG="${ROUTE_CONFIG:-configs/natural_evidence_v2/r4_positive_selectivity_pressure_controller_route.yaml}"
+CONTROLLER_CONDITION_SET="${CONTROLLER_CONDITION_SET:-pressure_controls}"
 SCORE_ROWS="${SCORE_ROWS:-results/natural_evidence_v2/status/r4_prefix_native_surface_repair_candidate_v3_20260513/r4_prefix_native_surface_probe_rows_v3.jsonl}"
 OUTPUT_DIR="${OUTPUT_DIR:-$RUN_ROOT/status/r4_positive_selectivity_pressure_controller_score_${SLURM_ARRAY_JOB_ID:-manual}}"
 PROTECTED_ADAPTER="${PROTECTED_ADAPTER:-$RUN_ROOT/status/r4_candidate_v3_pressure_relaxation_grid_857764/B_ceiling_lambda_0_5/protected_micro_overfit_train/adapter}"
@@ -112,6 +113,7 @@ echo "controller_bonus_nats=$CONTROLLER_BONUS_NATS"
 echo "controller_penalty_nats=$CONTROLLER_PENALTY_NATS"
 echo "controller_max_target_mass=$CONTROLLER_MAX_TARGET_MASS"
 echo "controller_max_kl_budget=$CONTROLLER_MAX_KL_BUDGET"
+echo "controller_condition_set=$CONTROLLER_CONDITION_SET"
 echo "validate_plan_only=$VALIDATE_PLAN_ONLY"
 echo "allow_pressure_controller_scoring=$ALLOW_PRESSURE_CONTROLLER_SCORING"
 echo "slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00"
@@ -146,7 +148,7 @@ if [ "$VALIDATE_PLAN_ONLY" = "1" ]; then
     --controller-penalty-nats "$CONTROLLER_PENALTY_NATS" \
     --controller-max-target-mass "$CONTROLLER_MAX_TARGET_MASS" \
     --controller-max-kl-budget "$CONTROLLER_MAX_KL_BUDGET" \
-    --controller-condition-set pressure_controls \
+    --controller-condition-set "$CONTROLLER_CONDITION_SET" \
     --max-rows "$MAX_ROWS" \
     --batch-size "$BATCH_SIZE" \
     --max-length "$MAX_LENGTH" \
@@ -184,7 +186,16 @@ if [ "$ALLOW_PRESSURE_CONTROLLER_SCORING" != "1" ]; then
   exit 2
 fi
 
-for required in "$PROTECTED_ADAPTER/adapter_config.json" "$TASK_ONLY_ADAPTER/adapter_config.json"; do
+if [ "$CONTROLLER_CONDITION_SET" = "pressure_controls" ]; then
+  adapter_requirements=("$PROTECTED_ADAPTER/adapter_config.json" "$TASK_ONLY_ADAPTER/adapter_config.json")
+elif [ "$CONTROLLER_CONDITION_SET" = "controller_only_controls" ]; then
+  adapter_requirements=("$TASK_ONLY_ADAPTER/adapter_config.json")
+else
+  echo "UNSUPPORTED_CONTROLLER_CONDITION_SET: $CONTROLLER_CONDITION_SET" >&2
+  exit 2
+fi
+
+for required in "${adapter_requirements[@]}"; do
   if [ ! -s "$required" ]; then
     echo "REQUIRED_ADAPTER_MISSING_OR_EMPTY: $required" >&2
     exit 2
@@ -208,7 +219,7 @@ fi
   --controller-penalty-nats "$CONTROLLER_PENALTY_NATS" \
   --controller-max-target-mass "$CONTROLLER_MAX_TARGET_MASS" \
   --controller-max-kl-budget "$CONTROLLER_MAX_KL_BUDGET" \
-  --controller-condition-set pressure_controls \
+  --controller-condition-set "$CONTROLLER_CONDITION_SET" \
   --max-rows "$MAX_ROWS" \
   --batch-size "$BATCH_SIZE" \
   --max-length "$MAX_LENGTH" \

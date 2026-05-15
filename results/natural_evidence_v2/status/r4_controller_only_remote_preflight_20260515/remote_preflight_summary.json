@@ -1,0 +1,28 @@
+{
+  "artifact_role": "r4_controller_only_remote_preflight",
+  "generation_started": false,
+  "h200_scoring_submission_unlocked": false,
+  "hash_mismatch_count": 0,
+  "local_remote_hashes": {
+    "configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml": "e6fd1cd85ab625f11b255717bffb2568d12731abf44a331a4ea65c2eec62f923",
+    "configs/natural_evidence_v2/run_allowlist.yaml": "c5a3d280404bcceabe4c3f3d46865a3afcee2ad9cdcc56cad69ffa1182c7ea3e",
+    "docs/natural_evidence_v2/CURRENT_STATE.md": "81dd34876cad128293cb525d763bb5fe31d91433f144dbd837c0e33752cc8aec",
+    "results/natural_evidence_v2/status/gate_status.json": "1c9b077116382fbf6ac34161a444e0234198697c53e1a9bce311b0f5be64aaeb",
+    "scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py": "7879244cffbd88027ae1f0c7e0d09361adbe97b09cf962bd7e9c93914818ecaf",
+    "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch": "c430425e29d9cac4f8c3d2bae74e795ab10e573facadecc23bbe6832238487f8",
+    "scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py": "fdc57ee02178749c2318d11d0b1c452c6fec2a6ab6eb315c29be7eddc9e58c39"
+  },
+  "model_scoring_started": false,
+  "next_allowed_action": "Record controller-only single-submission route, then perform Hermes notification, exactly-one allowlist enablement, one H200 sbatch submission, and immediate allowlist disablement.",
+  "paper_claim_started": false,
+  "remote_allowlist_safety_json": "results/natural_evidence_v2/status/r4_controller_only_remote_preflight_20260515/r4_controller_only_remote_zero_allowlist_safety_20260515.json",
+  "remote_allowlist_safety_status": "PASS",
+  "remote_route_validation_summary": "results/natural_evidence_v2/status/r4_controller_only_remote_preflight_20260515/remote_route_validation_summary.json",
+  "remote_route_validation_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "remote_wrapper_plan_only_status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "remote_wrapper_summary": "results/natural_evidence_v2/status/r4_controller_only_remote_preflight_20260515/remote_wrapper_plan_only_summary.json",
+  "schema_name": "natural_evidence_v2_r4_controller_only_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_CONTROLLER_ONLY_REMOTE_PREFLIGHT_NO_SUBMISSION",
+  "training_started": false
+}

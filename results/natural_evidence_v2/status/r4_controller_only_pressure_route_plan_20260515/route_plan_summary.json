@@ -1,0 +1,29 @@
+{
+  "allowlist_entry": "v2_r4_positive_selectivity_controller_only_score_h200",
+  "artifact_role": "r4_controller_only_pressure_route_plan",
+  "condition_set": "controller_only_controls",
+  "conditions": [
+    "base",
+    "task_only",
+    "controlled_base",
+    "wrong_key_controlled_base",
+    "wrong_payload_controlled_base"
+  ],
+  "config": "configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml",
+  "future_command_pattern": "sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "generation_started": false,
+  "h200_scoring_submission_unlocked": false,
+  "local_route_validator_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "local_wrapper_plan_only_status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "next_allowed_action": "Artifact-only remote sync and remote plan-only preflight for the controller-only route.",
+  "paper_claim_started": false,
+  "protected_adapter_loaded_for_controller_arms": false,
+  "py_compile_passed": true,
+  "pytest_result": "19 passed, 2 skipped",
+  "schema_name": "natural_evidence_v2_r4_controller_only_pressure_route_plan_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_CONTROLLER_ONLY_ROUTE_PLAN_LOCAL_VALIDATION_NO_SUBMISSION",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "wrapper_plan_only_summary": "results/natural_evidence_v2/status/r4_controller_only_wrapper_plan_smoke_20260515/grid_00/wrapper_plan_only_summary.json"
+}

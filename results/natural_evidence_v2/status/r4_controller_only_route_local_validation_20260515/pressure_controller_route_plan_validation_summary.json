@@ -1,0 +1,12 @@
+{
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "route_id": "r4_positive_selectivity_controller_only_teacher_forced_v1",
+  "score_row_count": 8192,
+  "score_rows_sha256_observed": "d35e5483ce7f6d3d782ce17961b2c407909afc879a12917c5ccc27090f3c80b7",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "training_started": false
+}

@@ -1,0 +1,25 @@
+{
+  "condition_plan": [
+    "base",
+    "task_only",
+    "controlled_base",
+    "wrong_key_controlled_base",
+    "wrong_payload_controlled_base"
+  ],
+  "controller_config": {
+    "bonus_nats": 0.25,
+    "max_kl_budget": 0.05,
+    "max_target_mass": 0.25,
+    "mode": "additive",
+    "penalty_nats": 0.0
+  },
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "grid_id": "grid_00",
+  "grid_index": 0,
+  "model_scoring_started": false,
+  "route_validator_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "slurm_submission_started": false,
+  "status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "training_started": false
+}

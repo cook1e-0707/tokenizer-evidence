@@ -1,0 +1,27 @@
+{
+  "allowlist_entry": "v2_r4_positive_selectivity_controller_only_score_h200",
+  "authorized_command": "sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "condition_set": "controller_only_controls",
+  "expected_remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_pressure_controller_score_863274",
+  "first_observed_state": {
+    "array_pending": "863274_[3-71%4]",
+    "running_tasks": [
+      "863274_0",
+      "863274_1",
+      "863274_2"
+    ]
+  },
+  "generation_started": false,
+  "job_id": "863274",
+  "job_name": "nat-ev-v2-r4ctl",
+  "local_post_submit_allowlist_safety": "PASS",
+  "paper_claim_started": false,
+  "partition": "pomplun",
+  "post_submit_allowlist_enabled_entries": [],
+  "remote_post_submit_allowlist_safety": "PASS",
+  "schema_name": "natural_evidence_v2_r4_controller_only_submission_record_v1",
+  "slurm_job_submitted": true,
+  "status": "SUBMITTED_R4_CONTROLLER_ONLY_H200_ARRAY_MONITOR_NEXT",
+  "submitted_entry_disabled_after_sbatch": true,
+  "training_started": false
+}

@@ -1,0 +1,23 @@
+{
+  "artifact_role": "r4_pressure_controller_wrong_control_repair_plan",
+  "condition_set_added": "controller_only_controls",
+  "conditions": [
+    "base",
+    "task_only",
+    "controlled_base",
+    "wrong_key_controlled_base",
+    "wrong_payload_controlled_base"
+  ],
+  "generation_started": false,
+  "h200_scoring_submission_unlocked": false,
+  "next_allowed_action": "Artifact-only controller-only route config/wrapper review and plan-only validation.",
+  "paper_claim_started": false,
+  "protected_adapter_loaded_for_controller_arms": false,
+  "py_compile_passed": true,
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_wrong_control_repair_plan_v1",
+  "source_failure_job_id": "859672",
+  "status": "PASS_ARTIFACT_ONLY_WRONG_CONTROL_REPAIR_PATCH_VALIDATED_NO_SUBMISSION",
+  "test_command": "uv run pytest tests/natural_evidence_v2/test_r4_surface_teacher_forced_controller_integration.py -q",
+  "test_result": "12 passed, 2 skipped",
+  "training_started": false
+}

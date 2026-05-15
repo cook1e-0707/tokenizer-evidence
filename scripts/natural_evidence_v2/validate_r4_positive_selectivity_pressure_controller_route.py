@@ -14,7 +14,26 @@ if str(ROOT) not in sys.path:
 from scripts.natural_evidence_v2.validate_r4_positive_evidence_contract import load_yaml  # noqa: E402
 
 DEFAULT_CONFIG = ROOT / "configs/natural_evidence_v2/r4_positive_selectivity_pressure_controller_route.yaml"
-REQUIRED_CONDITIONS = {"base", "task_only", "controlled_protected", "wrong_key_controlled", "wrong_payload_controlled"}
+REQUIRED_CONDITIONS_BY_SET = {
+    "pressure_controls": {
+        "base",
+        "task_only",
+        "controlled_protected",
+        "wrong_key_controlled",
+        "wrong_payload_controlled",
+    },
+    "controller_only_controls": {
+        "base",
+        "task_only",
+        "controlled_base",
+        "wrong_key_controlled_base",
+        "wrong_payload_controlled_base",
+    },
+}
+VALID_ROUTE_IDS = {
+    "r4_positive_selectivity_pressure_controller_teacher_forced_v1",
+    "r4_positive_selectivity_controller_only_teacher_forced_v1",
+}
 LOCKED_FALSE_FIELDS = (
     "slurm_allowed",
     "allowlist_enablement_allowed",
@@ -62,7 +81,7 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
     errors: list[str] = []
     if config.get("schema_name") != "natural_evidence_v2_r4_positive_selectivity_pressure_controller_route_plan_v1":
         errors.append("schema_name mismatch")
-    if config.get("route_id") != "r4_positive_selectivity_pressure_controller_teacher_forced_v1":
+    if config.get("route_id") not in VALID_ROUTE_IDS:
         errors.append("route_id mismatch")
     if config.get("contract_id") != "a55e":
         errors.append("contract_id must remain same-contract a55e")
@@ -96,13 +115,16 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
             errors.append(f"current_permissions.{field} must be false")
 
     scope = _mapping(config.get("future_scoring_scope"), "future_scoring_scope", errors)
+    condition_set = str(config.get("controller_condition_set", "pressure_controls"))
+    if condition_set not in REQUIRED_CONDITIONS_BY_SET:
+        errors.append("controller_condition_set must be pressure_controls or controller_only_controls")
     if scope.get("scoring_only") is not True:
         errors.append("future_scoring_scope.scoring_only must be true")
     if scope.get("generation_allowed_in_route") is not False:
         errors.append("future_scoring_scope.generation_allowed_in_route must be false")
     if scope.get("training_allowed_in_route") is not False:
         errors.append("future_scoring_scope.training_allowed_in_route must be false")
-    if set(scope.get("conditions", [])) != REQUIRED_CONDITIONS:
+    if set(scope.get("conditions", [])) != REQUIRED_CONDITIONS_BY_SET.get(condition_set, set()):
         errors.append("future_scoring_scope.conditions mismatch")
     if scope.get("partition") != "pomplun" or scope.get("qos") != "pomplun":
         errors.append("future scoring scope must use pomplun partition/qos")
@@ -134,12 +156,22 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
     mapping = _mapping(config.get("controller_control_mapping"), "controller_control_mapping", errors)
     if mapping.get("scorer_target_remains_committed") is not True:
         errors.append("controller_control_mapping.scorer_target_remains_committed must be true")
-    if mapping.get("controlled_protected_policy") != "committed":
-        errors.append("controller_control_mapping.controlled_protected_policy must be committed")
-    if mapping.get("wrong_payload_controlled_policy") != "complement":
-        errors.append("controller_control_mapping.wrong_payload_controlled_policy must be complement")
-    if mapping.get("wrong_key_controlled_policy") != "coordinate_hash_v1":
-        errors.append("controller_control_mapping.wrong_key_controlled_policy must be coordinate_hash_v1")
+    if condition_set == "pressure_controls":
+        if mapping.get("controlled_protected_policy") != "committed":
+            errors.append("controller_control_mapping.controlled_protected_policy must be committed")
+        if mapping.get("wrong_payload_controlled_policy") != "complement":
+            errors.append("controller_control_mapping.wrong_payload_controlled_policy must be complement")
+        if mapping.get("wrong_key_controlled_policy") != "coordinate_hash_v1":
+            errors.append("controller_control_mapping.wrong_key_controlled_policy must be coordinate_hash_v1")
+    if condition_set == "controller_only_controls":
+        if mapping.get("protected_adapter_loaded_for_controller_arms") is not False:
+            errors.append("controller_control_mapping.protected_adapter_loaded_for_controller_arms must be false")
+        if mapping.get("controlled_base_policy") != "committed":
+            errors.append("controller_control_mapping.controlled_base_policy must be committed")
+        if mapping.get("wrong_payload_controlled_base_policy") != "complement":
+            errors.append("controller_control_mapping.wrong_payload_controlled_base_policy must be complement")
+        if mapping.get("wrong_key_controlled_base_policy") != "coordinate_hash_v1":
+            errors.append("controller_control_mapping.wrong_key_controlled_base_policy must be coordinate_hash_v1")
     if mapping.get("wrong_key_hash_salt") != "r4_wrong_key_controller_v1":
         errors.append("controller_control_mapping.wrong_key_hash_salt must be r4_wrong_key_controller_v1")
     if mapping.get("no_posthoc_key_payload_remap") is not True:
@@ -148,12 +180,17 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
         errors.append("controller_control_mapping.no_transcript_conditioned_mapping must be true")
 
     gate = _mapping(config.get("future_teacher_forced_gate"), "future_teacher_forced_gate", errors)
-    if float(gate.get("protected_lift_vs_base_min", 0.0)) < 0.15:
-        errors.append("future_teacher_forced_gate.protected_lift_vs_base_min must be >= 0.15")
-    if float(gate.get("protected_lift_vs_task_only_min", 0.0)) < 0.10:
-        errors.append("future_teacher_forced_gate.protected_lift_vs_task_only_min must be >= 0.10")
-    if float(gate.get("protected_rank1_min", 0.0)) < 0.75:
-        errors.append("future_teacher_forced_gate.protected_rank1_min must be >= 0.75")
+    lift_base_field = "protected_lift_vs_base_min" if condition_set == "pressure_controls" else "controlled_lift_vs_base_min"
+    lift_task_field = (
+        "protected_lift_vs_task_only_min" if condition_set == "pressure_controls" else "controlled_lift_vs_task_only_min"
+    )
+    rank_field = "protected_rank1_min" if condition_set == "pressure_controls" else "controlled_rank1_min"
+    if float(gate.get(lift_base_field, 0.0)) < 0.15:
+        errors.append(f"future_teacher_forced_gate.{lift_base_field} must be >= 0.15")
+    if float(gate.get(lift_task_field, 0.0)) < 0.10:
+        errors.append(f"future_teacher_forced_gate.{lift_task_field} must be >= 0.10")
+    if float(gate.get(rank_field, 0.0)) < 0.75:
+        errors.append(f"future_teacher_forced_gate.{rank_field} must be >= 0.75")
     if int(gate.get("wrong_key_accepts_max", -1)) != 0:
         errors.append("future_teacher_forced_gate.wrong_key_accepts_max must be 0")
     if int(gate.get("wrong_payload_accepts_max", -1)) != 0:

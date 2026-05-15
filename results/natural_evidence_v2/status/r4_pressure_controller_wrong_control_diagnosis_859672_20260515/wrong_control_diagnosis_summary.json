@@ -1,0 +1,43 @@
+{
+  "artifact_role": "r4_pressure_controller_wrong_control_diagnosis",
+  "diagnosis_status": "FAIL_SELECTIVITY_CONTROL_SEMANTICS_NO_GENERATION",
+  "generation_started": false,
+  "grid_65": {
+    "base": {
+      "mean_committed_target_mass": 0.00483183704383805,
+      "rank1_rate": 0.251953125
+    },
+    "controlled_protected": {
+      "controller_overlap_bad": 0,
+      "controller_target_equals_committed_target": 8192,
+      "mean_committed_target_mass": 0.40233470842940733,
+      "rank1_rate": 1.0,
+      "scale_zero_rows": 1312
+    },
+    "task_only": {
+      "mean_committed_target_mass": 0.0016724278486419664,
+      "rank1_rate": 0.19921875
+    },
+    "wrong_key_controlled": {
+      "controller_overlap_bad": 0,
+      "controller_target_equals_committed_target": 4064,
+      "mean_committed_target_mass": 0.3365671793717411,
+      "nonmatching_wrong_key_rows": 4128,
+      "nonmatching_wrong_key_mean_committed_target_mass": 0.2723994399222379,
+      "nonmatching_wrong_key_rank1_rate": 0.9694767441860465,
+      "rank1_rate": 0.984619140625
+    },
+    "wrong_payload_controlled": {
+      "controller_overlap_bad": 0,
+      "controller_target_equals_committed_target": 0,
+      "mean_committed_target_mass": 0.2712397255600081,
+      "rank1_rate": 0.970703125
+    }
+  },
+  "job_id": "859672",
+  "next_allowed_action": "Artifact-only wrong-control selectivity semantics repair planning; no scoring or generation resubmission until reviewed.",
+  "paper_claim_started": false,
+  "remote_output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_pressure_controller_score_859672",
+  "schema_name": "natural_evidence_v2_r4_pressure_controller_wrong_control_diagnosis_v1",
+  "training_started": false
+}

@@ -1,0 +1,16 @@
+{
+  "active_job_preflight": "PASS_NO_ACTIVE_JOBS_OBSERVED",
+  "allowlist_entry": "v2_r4_positive_selectivity_controller_only_score_h200",
+  "artifact_role": "r4_controller_only_single_submission_route",
+  "authorized_command": "sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "generation_started": false,
+  "local_remote_hash_preflight": "PASS",
+  "next_allowed_action": "Hermes pre-submit notification, exactly-one allowlist enablement, one H200 sbatch submission, immediate allowlist disablement.",
+  "paper_claim_started": false,
+  "remote_allowlist_safety": "PASS_ZERO_ENABLED",
+  "remote_wrapper_plan_only": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "schema_name": "natural_evidence_v2_r4_controller_only_single_submission_route_v1",
+  "slurm_job_submitted": false,
+  "status": "READY_R4_CONTROLLER_ONLY_SINGLE_H200_SUBMISSION",
+  "training_started": false
+}

@@ -13,6 +13,7 @@ from scripts.natural_evidence_v2.score_r4_surface_teacher_forced_mass import (
     controller_token_ids_for_policy,
     deterministic_wrong_key_bit,
     score_next_token_surface_masses,
+    summarize,
 )
 
 
@@ -64,6 +65,9 @@ def test_controller_only_applies_to_protected_conditions() -> None:
     assert controller_applies_to_condition("controlled_protected", config) is True
     assert controller_applies_to_condition("wrong_key_controlled", config) is True
     assert controller_applies_to_condition("wrong_payload_controlled", config) is True
+    assert controller_applies_to_condition("controlled_base", config) is True
+    assert controller_applies_to_condition("wrong_key_controlled_base", config) is True
+    assert controller_applies_to_condition("wrong_payload_controlled_base", config) is True
     assert controller_applies_to_condition("base", config) is False
     assert controller_applies_to_condition("task_only", config) is False
 
@@ -98,6 +102,50 @@ def test_pressure_control_condition_plan_requires_enabled_controller() -> None:
             namespace(
                 controller_condition_set="pressure_controls",
                 protected_adapter=Path("protected_adapter"),
+                task_only_adapter=Path("task_only_adapter"),
+            )
+        )
+
+
+def test_controller_only_condition_plan_has_no_protected_adapter_in_controller_arms() -> None:
+    plan = condition_plan(
+        namespace(
+            controller_condition_set="controller_only_controls",
+            controller_mode="additive",
+            controller_bonus_nats=0.5,
+            protected_adapter=Path("protected_adapter"),
+            task_only_adapter=Path("task_only_adapter"),
+        )
+    )
+
+    assert [condition for condition, _, _ in plan] == [
+        "base",
+        "task_only",
+        "controlled_base",
+        "wrong_key_controlled_base",
+        "wrong_payload_controlled_base",
+    ]
+    adapters = {condition: adapter for condition, adapter, _ in plan}
+    assert adapters["task_only"] == Path("task_only_adapter")
+    assert adapters["controlled_base"] is None
+    assert adapters["wrong_key_controlled_base"] is None
+    assert adapters["wrong_payload_controlled_base"] is None
+
+
+def test_controller_only_condition_plan_requires_task_only_adapter_and_enabled_controller() -> None:
+    with pytest.raises(ValueError, match="task-only-adapter"):
+        condition_plan(
+            namespace(
+                controller_condition_set="controller_only_controls",
+                controller_mode="additive",
+                controller_bonus_nats=0.5,
+            )
+        )
+
+    with pytest.raises(ValueError, match="controller-mode"):
+        condition_plan(
+            namespace(
+                controller_condition_set="controller_only_controls",
                 task_only_adapter=Path("task_only_adapter"),
             )
         )
@@ -155,3 +203,30 @@ def test_torch_mass_helper_rejects_target_other_overlap() -> None:
 
     with pytest.raises(ValueError, match="overlap"):
         score_next_token_surface_masses(logits=torch.tensor([0.0, 0.0, 0.0]), target_ids=[1], other_ids=[1])
+
+
+def test_controller_only_summary_reports_selectivity_without_protected_condition() -> None:
+    rows = []
+    for condition, mass, other, rank1 in [
+        ("base", 0.01, 0.02, False),
+        ("task_only", 0.01, 0.02, False),
+        ("controlled_base", 0.25, 0.05, True),
+        ("wrong_key_controlled_base", 0.02, 0.05, False),
+        ("wrong_payload_controlled_base", 0.02, 0.05, False),
+    ]:
+        rows.append(
+            {
+                "condition": condition,
+                "target_mass": mass,
+                "other_mass": other,
+                "target_margin": mass - other,
+                "target_surface_rank1": rank1,
+            }
+        )
+
+    summary = summarize(rows)
+
+    assert summary["controller_only_summary"]["controlled_basic_gate_pass"] is True
+    assert summary["controller_only_summary"]["wrong_key_basic_gate_pass"] is False
+    assert summary["controller_only_summary"]["wrong_payload_basic_gate_pass"] is False
+    assert summary["controller_only_summary"]["overall_selective_gate_pass"] is True
