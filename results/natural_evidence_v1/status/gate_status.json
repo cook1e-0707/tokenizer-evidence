@@ -2269,7 +2269,7 @@
     "failed_job_id": "852844",
     "failure_reason": "prefix 'Step 1: ' tokenizes to 124 tokens but surface 'Create' is at index 123 in full text; trailing space merges with next word differently when tokenized alone vs in context",
     "paper_claim_allowed": false,
-    "repair": "added _find_response_start_token using cumulative decoded text scan; surface lookup scans \u00b14 window around approximate index",
+    "repair": "added _find_response_start_token using cumulative decoded text scan; surface lookup scans ±4 window around approximate index",
     "state_changing_action": "reviewed Llama WP5 retry 852844; still margin_count=0; root cause: prefix tokenization gives different token count than full text due to trailing whitespace merging; fixed with cumulative text scan approach",
     "status": "FAIL_LLAMA_V2_WP5_852844_WHITESPACE_MERGE_MISMATCH"
   },
@@ -9802,7 +9802,7 @@
   "conditional_training_authorization": "RECORDED_PRETRAINING_LAUNCH_GATE_REQUIRED",
   "conditional_training_authorization_doc": "docs/natural_evidence_v2/WP5_CONDITIONAL_TRAINING_AUTHORIZATION_20260509.md",
   "cross_family_claim_allowed": false,
-  "current_blocker": "BLOCK_R4_POSITIVE_FULL_GENERATION_DECODE_WRAPPER_IMPLEMENTATION_NEXT",
+  "current_blocker": "BLOCK_R4_CONTROLLER_ONLY_SCORE_FAIL_NO_SELECTIVE_GATE_ARTIFACT_ONLY_REPAIR_NEXT",
   "current_chimera_gpu_partition_constraint": {
     "applies_to": "future natural_evidence_v1 GPU jobs",
     "forbidden_gpu_partition": "pomplun",
@@ -9814,7 +9814,7 @@
     "source": "user instruction",
     "status": "POMPLUN_DOWN_USE_DGXA100_FOR_GPU"
   },
-  "current_phase": "V2_R4_POSITIVE_DEV_DIAGNOSTIC_REMOTE_PLAN_HASH_ALLOWLIST_PASS_NO_SUBMIT",
+  "current_phase": "V2_R4_CONTROLLER_ONLY_SCORE_863274_REVIEWED_FAIL_NO_GENERATION",
   "diagnostic_low_capacity_gates": [
     "qwen_probability_gated_repair_under_target",
     "qwen_counterfactual_compatibility_low_entry_pass_rate"
@@ -11418,7 +11418,7 @@
     "training_started": false
   },
   "new_training_allowed": false,
-  "next_allowed_action": "Full generation/decode wrapper implementation and review for the precommitted R4 positive dev diagnostic route; no Slurm or allowlist enablement until full wrapper and pre-submit gates pass.",
+  "next_allowed_action": "artifact-only design/implementation of a new controller repair package; no compute until reviewed route/config/validator/wrapper/control-plane checks pass",
   "out_of_band_artifact_quarantine": {
     "adopted_as_formal_progress": false,
     "chimera_jobs_observed": [
@@ -11989,7 +11989,7 @@
     "launch_allowed_for_single_job": true,
     "paper_claim_allowed": false,
     "ready_for_human_approval_decision": true,
-    "required_explicit_approval_text": "\u6279\u51c6\u542f\u52a8 Qwen natural_evidence_v1 proof-of-life training\uff1a\u4f7f\u7528 DGXA100/A100\uff0cpayloads=P0421,P1729\uff0cseeds=17,23\uff0cquery_budgets=64,128,256,512\uff0cMAX_STEPS=64\uff0cDRY_RUN_ONLY=0\uff0cSTART_QWEN_NATURAL_E2E=1\uff0c\u5e76\u53ea\u63d0\u4ea4\u4e00\u4e2a allowlisted Slurm job\u3002",
+    "required_explicit_approval_text": "批准启动 Qwen natural_evidence_v1 proof-of-life training：使用 DGXA100/A100，payloads=P0421,P1729，seeds=17,23，query_budgets=64,128,256,512，MAX_STEPS=64，DRY_RUN_ONLY=0，START_QWEN_NATURAL_E2E=1，并只提交一个 allowlisted Slurm job。",
     "review_json": "results/natural_evidence_v1/status/qwen_natural_e2e_training_launch_review_20260506_2107/qwen_natural_e2e_training_launch_review.json",
     "status": "READY_FOR_HUMAN_APPROVAL_DECISION_NOT_LAUNCH_ALLOWED",
     "submitted_job_id": "846585",
@@ -15891,5 +15891,49 @@
     "timestamp_utc": "2026-05-12T18:01:57Z",
     "training_started": false
   },
-  "wrapper_plan_only_blocker_remains": false
+  "wrapper_plan_only_blocker_remains": false,
+  "payload_diversity_allowed": false,
+  "2026-05-15T23:50:00Z_r4_controller_only_score_863274_review": {
+    "status": "FAIL_R4_CONTROLLER_ONLY_SCORE_863274_NO_SELECTIVE_GATE",
+    "current_phase": "V2_R4_CONTROLLER_ONLY_SCORE_863274_REVIEWED_FAIL_NO_GENERATION",
+    "blocker": "BLOCK_R4_CONTROLLER_ONLY_SCORE_FAIL_NO_SELECTIVE_GATE_ARTIFACT_ONLY_REPAIR_NEXT",
+    "job_id": "863274",
+    "slurm_state": "COMPLETED",
+    "array_tasks_completed_zero_exit": "72/72",
+    "summary_artifacts_synced": "72/72",
+    "controlled_basic_gate_pass_count": "0/72",
+    "overall_selective_gate_pass_count": "0/72",
+    "wrong_key_basic_gate_pass_count": "0/72",
+    "wrong_payload_basic_gate_pass_count": "0/72",
+    "best_controlled_lift_vs_base": 0.015403660101924288,
+    "best_controlled_rank1_rate": 0.498046875,
+    "best_controlled_median_target_margin": -0.00010981105151586235,
+    "review_doc": "docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SCORE_863274_REVIEW_20260515.md",
+    "aggregate_summary": "results/natural_evidence_v2/status/r4_controller_only_score_863274_review/aggregate_summary.json",
+    "failure_diagnosis": "results/natural_evidence_v2/status/r4_controller_only_failure_diagnosis_863274_20260515/failure_diagnosis_summary.json",
+    "allowlist_safety": "results/natural_evidence_v2/status/r4_controller_only_score_863274_review/post_review_allowlist_safety.json",
+    "next_allowed_action": "artifact-only failure diagnosis and repair-route planning only; no Slurm/generation/training/Llama/null/sanitizer/FAR/paper claim until a new reviewed route passes prerequisites",
+    "generation_started": false,
+    "training_started": false,
+    "llama_started": false,
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "far_aggregation_started": false,
+    "paper_claim_allowed": false,
+    "timestamp_utc": "2026-05-15T23:51:13Z"
+  },
+  "2026-05-15T23:54:00Z_r4_controller_only_863274_repair_route_plan": {
+    "status": "RECORDED_R4_CONTROLLER_ONLY_863274_ARTIFACT_ONLY_REPAIR_ROUTE_PLAN_NO_COMPUTE",
+    "current_phase": "V2_R4_CONTROLLER_ONLY_SCORE_863274_REVIEWED_FAIL_NO_GENERATION",
+    "blocker": "BLOCK_R4_CONTROLLER_ONLY_SCORE_FAIL_NO_SELECTIVE_GATE_ARTIFACT_ONLY_REPAIR_NEXT",
+    "decision_doc": "docs/natural_evidence_v2/R4_CONTROLLER_ONLY_863274_REPAIR_ROUTE_PLAN_20260515.md",
+    "summary_json": "results/natural_evidence_v2/status/r4_controller_only_863274_repair_route_plan_20260515/repair_route_plan_summary.json",
+    "next_allowed_action": "artifact-only design/implementation of a new controller repair package; no compute until reviewed route/config/validator/wrapper/control-plane checks pass",
+    "slurm_job_submitted": false,
+    "generation_started": false,
+    "training_started": false,
+    "llama_started": false,
+    "paper_claim_allowed": false,
+    "timestamp_utc": "2026-05-15T23:55:00Z"
+  }
 }

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-15T21:19:23Z
+Last synchronized: 2026-05-15T23:54:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,12 +9,12 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_CONTROLLER_ONLY_H200_JOB_863274_RUNNING`
+`V2_R4_CONTROLLER_ONLY_SCORE_863274_REVIEWED_FAIL_NO_GENERATION`
 
 ## Current Route
 
 Route R4 positive-selectivity controller-only teacher-forced scoring has been
-submitted as one H200/pomplun Slurm array job.
+completed and reviewed for H200/pomplun Slurm array job `863274`.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -30,7 +30,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_CONTROLLER_ONLY_JOB_863274_MONITOR_AND_REVIEW_NEXT`
+`BLOCK_R4_CONTROLLER_ONLY_SCORE_FAIL_NO_SELECTIVE_GATE_ARTIFACT_ONLY_REPAIR_NEXT`
 
 Job `859672` completed all `72/72` H200/pomplun array tasks with exit code
 `0:0`; this was not a Slurm or wrapper failure. The score review failed keyed
@@ -96,26 +96,50 @@ Submission record:
 results/natural_evidence_v2/status/r4_controller_only_submission_20260515/
 ```
 
-Expected remote output:
+Remote output:
 
 ```text
 /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_pressure_controller_score_863274
 ```
 
-First observed Slurm state:
+Review result:
 
 ```text
-863274_0 RUNNING on chimera21
-863274_1 RUNNING on chimera21
-863274_2 RUNNING on chimera21
-863274_[3-71%4] PENDING (Resources)
+Slurm tasks completed with exit code 0:0: 72/72
+Summary artifacts synced: 72/72
+Controlled-base basic gate passes: 0/72
+Overall selective gate passes: 0/72
+Wrong-key basic gate passes: 0/72
+Wrong-payload basic gate passes: 0/72
+Best controlled lift vs base: +0.0154036601
+Best controlled rank1: 0.498046875
+Best controlled median margin: -0.0001098111
 ```
+
+Reviewed artifacts:
+
+```text
+docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SCORE_863274_REVIEW_20260515.md
+docs/natural_evidence_v2/R4_CONTROLLER_ONLY_863274_REPAIR_ROUTE_PLAN_20260515.md
+results/natural_evidence_v2/status/r4_controller_only_score_863274_review/
+results/natural_evidence_v2/status/r4_controller_only_failure_diagnosis_863274_20260515/
+results/natural_evidence_v2/status/r4_controller_only_863274_repair_route_plan_20260515/
+```
+
+The controller-only repair fixed the previous wrong-control contamination:
+wrong-key and wrong-payload controlled-base arms no longer pass the basic gate.
+However, the positive controlled-base pressure is far below the R4
+teacher-forced gate. The route does not unlock generation.
 
 ## Next Allowed Action
 
-Monitor job `863274`. After terminal completion, sync and review
-controller-only scoring artifacts before any downstream action. Do not submit
-another controller-only scoring job before `863274` is reviewed.
+Artifact-only design/implementation of a new controller repair package. The
+new package must not be a rerun of `863274`; it must record a stronger or more
+targeted pressure mechanism, safety bounds, validator coverage, and wrapper
+plan-only checks before any new H200 scoring submission. Do not submit another
+controller-only scoring job, generation job, training job, Llama job, null/FAR
+job, sanitizer job, payload-diversity route, or paper-facing claim before a new
+reviewed route records its prerequisites and control-plane checks.
 
 ## Not Unlocked By Current State
 

@@ -1,0 +1,37 @@
+{
+  "compute_unlocked": false,
+  "created_at_utc": "2026-05-15T23:54:33Z",
+  "decision_doc": "docs/natural_evidence_v2/R4_CONTROLLER_ONLY_863274_REPAIR_ROUTE_PLAN_20260515.md",
+  "far_allowed_now": false,
+  "future_teacher_forced_gate": {
+    "controlled_lift_vs_base_min": 0.15,
+    "controlled_lift_vs_task_only_min": 0.1,
+    "controlled_median_margin_min_exclusive": 0.0,
+    "controlled_rank1_min": 0.75,
+    "wrong_key_basic_gate_pass_count_max": 0,
+    "wrong_payload_basic_gate_pass_count_max": 0
+  },
+  "generation_allowed_now": false,
+  "llama_allowed_now": false,
+  "paper_claim_allowed_now": false,
+  "repair_question": "Can a stronger or more targeted controller produce enough positive pressure while preserving wrong-key/wrong-payload rejection and public-template safety?",
+  "required_before_future_h200_scoring": [
+    "new controller repair design, not a rerun of 863274",
+    "route doc and config reviewed",
+    "local validator pass",
+    "wrapper plan-only pass",
+    "local/remote hash preflight pass",
+    "zero-enabled allowlist preflight pass",
+    "Hermes TG/email notification pass",
+    "exactly one allowlist entry enabled then disabled after sbatch"
+  ],
+  "same_family_null_allowed_now": false,
+  "sanitizer_allowed_now": false,
+  "schema_name": "r4_controller_only_863274_repair_route_plan_v1",
+  "slurm_allowed_now": false,
+  "source_failure_diagnosis": "results/natural_evidence_v2/status/r4_controller_only_failure_diagnosis_863274_20260515/failure_diagnosis_summary.json",
+  "source_job_id": "863274",
+  "source_review": "docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SCORE_863274_REVIEW_20260515.md",
+  "status": "RECORDED_R4_CONTROLLER_ONLY_863274_ARTIFACT_ONLY_REPAIR_ROUTE_PLAN_NO_COMPUTE",
+  "training_allowed_now": false
+}
