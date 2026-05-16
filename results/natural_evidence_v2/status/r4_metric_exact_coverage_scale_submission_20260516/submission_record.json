@@ -1,0 +1,21 @@
+{
+  "account": "cs_yinxin.wan",
+  "allowlist_entry": "v2_r4_candidate_v3_coverage_scale_micro_overfit_h200",
+  "command": "sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch",
+  "generation_started": false,
+  "job_id": "864761",
+  "job_name": "nat-ev-v2-r4mof",
+  "local_post_submit_allowlist_safety": "PASS_ZERO_ENABLED",
+  "llama_started": false,
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "payload_diversity_claim_allowed": false,
+  "qos": "pomplun",
+  "remote_post_submit_allowlist_safety": "PASS_ZERO_ENABLED",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_metric_exact_coverage_scale_submission_record_v1",
+  "submitted": true,
+  "submitted_entry": "v2_r4_candidate_v3_coverage_scale_micro_overfit_h200",
+  "training_started": true
+}

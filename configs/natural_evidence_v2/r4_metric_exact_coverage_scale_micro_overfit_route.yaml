@@ -1,0 +1,80 @@
+schema_name: natural_evidence_v2_r4_metric_exact_coverage_scale_micro_overfit_route_v1
+phase: V2_R4_METRIC_EXACT_COVERAGE_SCALE_MICRO_OVERFIT_ROUTE_ARTIFACT_ONLY
+package_id: r4_metric_exact_coverage_scale_micro_overfit_after_864705_v1
+
+source_failure:
+  job_id: "864705"
+  review_doc: docs/natural_evidence_v2/R4_METRIC_EXACT_FLOOR_DOMINANT_864705_REVIEW_20260516.md
+  review_summary: results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_864705_review/review_summary.json
+  failure_status: FAIL_R4_METRIC_EXACT_FLOOR_DOMINANT_864705_TEACHER_FORCED_GATE
+  protected_lift_vs_base: 0.0799378155595889
+  protected_lift_vs_task_only: 0.08309722475478498
+  protected_rank1_rate: 1.0
+  protected_mean_target_mass: 0.08476965260342695
+  additional_odds_boost_nats_to_lift_vs_base_gate: 0.6820421595712682
+
+failure_interpretation:
+  clean_slurm_completion: true
+  tokenizer_or_boundary_failure: false
+  rank_ordering_solved: true
+  absolute_target_mass_insufficient: true
+  floor_dominant_pressure_directionally_effective: true
+  training_coverage_insufficient: true
+  selected_repair: coverage_scale_floor_dominant_metric_exact_micro_overfit
+
+route_parameters:
+  allowlist_entry: v2_r4_candidate_v3_coverage_scale_micro_overfit_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+  command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+  surface_margin_loss_mode: logsumexp_softplus
+  task_ce_weight: 0.0
+  target_mass_floor: 0.25
+  target_mass_floor_lambda: 75.0
+  target_mass_ceiling: 0.50
+  target_mass_ceiling_lambda: 5.0
+  margin_lambda: 1.0
+  max_train_rows: 8192
+  max_score_rows: 8192
+  max_steps: 4096
+  batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  exactly_one_submission_when_unlocked: true
+
+required_wrapper_contract:
+  exposes_surface_margin_loss_mode: true
+  exposes_task_ce_weight: true
+  exposes_max_train_rows: true
+  exposes_batch_size: true
+  exposes_gradient_accumulation_steps: true
+  h200_pomplun_policy: true
+  plan_only_exits_before_model_loading: true
+  refuses_existing_output_dir: true
+
+future_teacher_forced_gate:
+  protected_lift_vs_base_min: 0.15
+  protected_lift_vs_task_only_min: 0.10
+  protected_rank1_min: 0.75
+  protected_median_margin_min: 0.0
+  task_only_lift_anomaly_allowed: false
+  scorer_boundary_failures_max: 0
+  target_other_overlap_rate_max: 0.0
+
+not_unlocked_by_this_route_package:
+  slurm_submission_without_remote_preflight: true
+  generation: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

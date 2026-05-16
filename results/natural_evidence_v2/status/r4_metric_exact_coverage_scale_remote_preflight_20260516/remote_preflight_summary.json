@@ -1,0 +1,11 @@
+{
+  "active_jobs": [],
+  "allowlist_entry": "v2_r4_candidate_v3_coverage_scale_micro_overfit_h200",
+  "hashes_match": true,
+  "local_allowlist_safety": "PASS_ZERO_ENABLED",
+  "remote_allowlist_safety": "PASS_ZERO_ENABLED",
+  "remote_plan_only_wrapper_smoke": "PASS",
+  "remote_route_validation": "PASS",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_METRIC_EXACT_COVERAGE_SCALE_REMOTE_PREFLIGHT_NO_SUBMIT"
+}

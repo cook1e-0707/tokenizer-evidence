@@ -1,0 +1,50 @@
+{
+  "allowlist_path": "/home/guanjie.lin001/tokenizer-evidence/configs/natural_evidence_v2/run_allowlist.yaml",
+  "allowlist_sha256": "402f214fa46921b076a6514be210cb4406350b111ed675ea2e66d6f1d2225537",
+  "current_state_path": "/home/guanjie.lin001/tokenizer-evidence/docs/natural_evidence_v2/CURRENT_STATE.md",
+  "current_state_sha256": "30cf7c1c71aae058187224ed18ee17a6468371ee17ba1816b2dcc6611811c5d2",
+  "enabled_entries": [
+    {
+      "command_pattern": "sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch",
+      "labels": [
+        "far",
+        "llama",
+        "paper_claim",
+        "same_family",
+        "sanitizer",
+        "training"
+      ],
+      "name": "v2_r4_candidate_v3_coverage_scale_micro_overfit_h200",
+      "section": "allowed_gpu_actions"
+    }
+  ],
+  "enabled_entry_count": 1,
+  "failures": [],
+  "far_aggregation_started": false,
+  "far_entries_disabled": true,
+  "forbidden_enabled_entries": [],
+  "gate_status_path": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/gate_status.json",
+  "gate_status_sha256": "918293966eccf62d682853f460ee42bc57633dfb94585ce7b820ef526950204b",
+  "gate_values": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "generation_started": false,
+  "llama_entries_disabled": true,
+  "llama_started": false,
+  "paper_claim_entries_disabled": true,
+  "paper_claim_started": false,
+  "r3_2_entry_disabled": true,
+  "same_family_entries_disabled": true,
+  "sanitizer_entries_disabled": true,
+  "schema_name": "natural_evidence_v2_allowlist_safety_summary_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS",
+  "training_entries_disabled": true,
+  "training_started": false,
+  "unknown_enabled_entries": []
+}

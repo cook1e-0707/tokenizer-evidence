@@ -105,6 +105,11 @@ allowed_gpu_actions:
   enable_condition: r4_metric_exact_micro_overfit_864332_failed_and_floor_dominant_repair_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
+- claim_note: R4 candidate v3 coverage-scale floor-dominant metric-exact micro-overfit repair after job 864705. Protected-only teacher-forced training/scoring with task CE disabled, full 8192-row coverage, and stronger target-mass floor pressure. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+  enable_condition: r4_metric_exact_floor_dominant_864705_failed_and_coverage_scale_repair_route_reviewed
+  enabled: false
+  name: v2_r4_candidate_v3_coverage_scale_micro_overfit_h200
 - claim_note: R4 candidate v3 fixed two-arm pressure-relaxation H200 array. Protected-only teacher-forced micro-overfit training/scoring on reviewed candidate-v3 split rows with TARGET_MASS_CEILING=0.50 and ceiling lambdas 1.0/0.5. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_pressure_relaxation_grid_h200.sbatch
   enable_condition: r4_candidate_v3_pressure_relaxation_grid_wrapper_reviewed_and_single_array_submission_authorized
