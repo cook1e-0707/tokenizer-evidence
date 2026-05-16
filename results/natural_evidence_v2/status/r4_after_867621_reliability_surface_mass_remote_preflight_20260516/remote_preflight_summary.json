@@ -1,0 +1,12 @@
+{
+  "active_jobs": [],
+  "allowlist_entry_enabled": false,
+  "hashes_match": true,
+  "next_allowed_action": "Send submission-specific Hermes TG/email notification, enable exactly one allowlist entry v2_r4_after_867621_reliability_surface_mass_score_h200, submit one H200/pomplun teacher-forced scoring Slurm job, immediately disable allowlist, and record post-submit safety.",
+  "remote_allowlist_safety": "PASS_ZERO_ENABLED",
+  "remote_route_validation": "PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_ROUTE_VALIDATION_NO_SUBMIT",
+  "remote_wrapper_plan_smoke": "DRY_RUN_VALIDATED_INPUTS",
+  "schema_name": "natural_evidence_v2_r4_after_867621_reliability_surface_mass_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_REMOTE_PREFLIGHT_NO_SUBMIT"
+}

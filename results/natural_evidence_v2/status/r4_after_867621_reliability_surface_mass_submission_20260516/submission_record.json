@@ -1,0 +1,31 @@
+{
+  "allowlist_entry": "v2_r4_after_867621_reliability_surface_mass_score_h200",
+  "conditions": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "enabled_entries_after_submission": [],
+  "far_allowed": false,
+  "generation_allowed": false,
+  "gres": "gpu:h200:1",
+  "job_id": "867849",
+  "job_name": "nat-ev-v2-r4relTFM",
+  "llama_allowed": false,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "next_allowed_action": "Monitor job 867849. After completion, sync and review teacher-forced surface-mass summary. Do not run generation unless this scoring gate passes.",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_867621_reliability_surface_mass_submission_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl",
+  "slurm_job_submitted": true,
+  "status": "SUBMITTED_SINGLE_SURFACE_MASS_H200_SLURM_JOB_ALLOWLIST_DISABLED_AFTER_SUBMISSION",
+  "time_limit": "30-00:00:00",
+  "timestamp_utc": "2026-05-16T20:00:00Z",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_allowed": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_surface_mass_score_h200.sbatch"
+}

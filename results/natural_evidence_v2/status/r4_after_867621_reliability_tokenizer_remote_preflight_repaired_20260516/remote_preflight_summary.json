@@ -1,0 +1,14 @@
+{
+  "active_jobs": [],
+  "allowlist_entry_enabled": false,
+  "hashes_match": true,
+  "initial_remote_preflight": "FAIL_MISSING_SOURCE_REVIEW_ARTIFACTS_NO_SUBMIT",
+  "initial_remote_preflight_dir": "results/natural_evidence_v2/status/r4_after_867621_reliability_tokenizer_remote_preflight_20260516",
+  "next_allowed_action": "Send submission-specific Hermes TG/email notification, enable exactly one allowlist entry v2_r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200, submit one H200/pomplun tokenizer-only Slurm job, immediately disable allowlist, and record post-submit safety.",
+  "remote_allowlist_safety": "PASS_ZERO_ENABLED",
+  "remote_route_validation": "PASS_R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT",
+  "schema_name": "natural_evidence_v2_r4_after_867621_reliability_tokenizer_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_867621_RELIABILITY_TOKENIZER_REMOTE_PREFLIGHT_REPAIRED_NO_SUBMIT",
+  "synced_source_review_artifacts_after_initial_failure": true
+}

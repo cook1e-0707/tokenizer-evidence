@@ -1,0 +1,41 @@
+# R4 After 867621 Reliability Tokenizer Remote Preflight
+
+status: `PASS_R4_AFTER_867621_RELIABILITY_TOKENIZER_REMOTE_PREFLIGHT_REPAIRED_NO_SUBMIT`
+
+The first remote route validation failed because the Chimera checkout was
+missing the `867621` source review and failure-analysis artifacts. Codex
+synchronized those source artifacts and reran the remote preflight in the
+`repaired` preflight directory.
+
+Checks:
+
+```text
+local/remote file hashes match: true
+remote route validation: PASS_R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT
+remote allowlist safety: PASS with zero enabled entries
+active Chimera jobs: none
+slurm submitted: false
+```
+
+Matched hashes:
+
+```text
+b51ad75daad78f81fb089e652505f3db0132f24a7c3b7c525b5742a8dfaf123c configs/natural_evidence_v2/run_allowlist.yaml
+982648e44e18b15d5cc3a61318bc3f00e4aa60a72385ac422d2b5524c8837da4 configs/natural_evidence_v2/r4_after_867621_reliability_tokenizer_preflight_route.yaml
+34e947d555d0d3889bd597762de622de8c5dfab3cb1288bc1a204a8afbe24a9b docs/natural_evidence_v2/CURRENT_STATE.md
+70e321c595ddfb844ba5536f981ae9c8735a535c4a57418f76ab70c6cc7a1c48 docs/natural_evidence_v2/R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_20260516.md
+3fdc1785f0bce12970d04f5262bbcef3a06b8a445433ee1e1e80ccdb998bc52a scripts/natural_evidence_v2/validate_r4_after_867621_reliability_tokenizer_route.py
+9a931c70ce0b534d151997ccb9aafb3853b0ee13f31a16567bf56b089e025d98 scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200.sbatch
+772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8 results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+f63504f7a46e04273071ccbb8569129682cef376442d31fa8d2586f4e01dae99 results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows_summary.json
+5abf131c9a2954218413707361a9f88c466a6c6be197307168b1f34af81f5cab results/natural_evidence_v2/status/r4_after_867621_reliability_static_boundary_preflight_20260516/r4_prefix_native_tokenizer_boundary_preflight_summary.json
+```
+
+Next allowed action:
+
+```text
+Send submission-specific Hermes TG/email notification, enable exactly one
+allowlist entry v2_r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200,
+submit one H200/pomplun tokenizer-only Slurm job, immediately disable
+allowlist, and record post-submit safety.
+```

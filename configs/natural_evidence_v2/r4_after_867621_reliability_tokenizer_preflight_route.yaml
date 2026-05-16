@@ -1,0 +1,73 @@
+schema_name: natural_evidence_v2_r4_after_867621_reliability_tokenizer_preflight_route_v1
+phase: V2_R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_ARTIFACT_ONLY
+package_id: r4_after_867621_reliability_tokenizer_preflight_route_v1
+
+source_failure:
+  job_id: "867621"
+  review_summary: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_867621_review/review_summary.json
+  failure_analysis: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_867621_failure_analysis_20260516/failure_analysis_summary.json
+  expected_review_status: FAIL_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_POSITIVE_GATE
+  expected_failure_status: FAILURE_ANALYSIS_RECORDED_NO_RERUN
+  expected_root_cause: free_generation_transfer_failure_surface_absent
+
+source_rows:
+  rows: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+  summary: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows_summary.json
+  expected_status: PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_ROWS_BUILT_ARTIFACT_ONLY
+  expected_rows: 4096
+  expected_selected_coordinates: 16
+  current_two_way_scorer_compatible: true
+
+source_static_preflight:
+  summary: results/natural_evidence_v2/status/r4_after_867621_reliability_static_boundary_preflight_20260516/r4_prefix_native_tokenizer_boundary_preflight_summary.json
+  expected_status: PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING
+  checked_rows: 4096
+  failed_rows: 0
+
+route:
+  allowlist_entry: v2_r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200.sbatch
+  tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+  max_rows: 4096
+  run_qwen_tokenizer: true
+  model_forward_allowed: false
+  scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  exactly_one_submission_when_unlocked: true
+  remote_hash_preflight_required: true
+  hermes_notification_required: true
+  post_submit_allowlist_shutdown_required: true
+
+future_tokenizer_gate:
+  checked_rows: 4096
+  failed_rows_max: 0
+  empty_target_id_row_count_max: 0
+  empty_other_id_row_count_max: 0
+  target_other_overlap_row_count_max: 0
+
+future_after_tokenizer_pass:
+  next_route: reviewed_h200_teacher_forced_surface_mass_scoring_only
+  scoring_rows: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+  generation_allowed: false
+
+not_unlocked_by_this_route_package:
+  scoring: true
+  training: true
+  generation: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

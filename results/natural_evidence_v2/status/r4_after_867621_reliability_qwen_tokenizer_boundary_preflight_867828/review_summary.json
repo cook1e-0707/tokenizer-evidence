@@ -1,0 +1,18 @@
+{
+  "empty_other_id_row_count": 0,
+  "empty_target_id_row_count": 0,
+  "failed_row_count": 0,
+  "generation_started": false,
+  "job_id": "867828",
+  "model_forward_pass_started": false,
+  "paper_claim_allowed": false,
+  "qwen_tokenizer_preflight_started": true,
+  "review_status": "PASS_R4_AFTER_867621_RELIABILITY_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_867828",
+  "schema_name": "natural_evidence_v2_r4_after_867621_reliability_tokenizer_preflight_review_v1",
+  "score_row_count": 4096,
+  "scoring_job_submitted": false,
+  "source_summary": "results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/r4_prefix_native_tokenizer_boundary_preflight_summary.json",
+  "target_other_overlap_row_count": 0,
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false
+}

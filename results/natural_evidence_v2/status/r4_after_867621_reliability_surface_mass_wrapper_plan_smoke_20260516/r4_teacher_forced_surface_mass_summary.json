@@ -1,0 +1,29 @@
+{
+  "condition_plan": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "controller_applies_only_to_protected_conditions": true,
+  "controller_condition_set": "standard",
+  "controller_config": {
+    "bonus_nats": 0.0,
+    "max_kl_budget": null,
+    "max_target_mass": null,
+    "mode": "disabled",
+    "penalty_nats": 0.0
+  },
+  "controller_enabled": false,
+  "far_aggregation_started": false,
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "protected_adapter_gains": [
+    1.0
+  ],
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 4096,
+  "status": "DRY_RUN_VALIDATED_INPUTS",
+  "training_started": false
+}

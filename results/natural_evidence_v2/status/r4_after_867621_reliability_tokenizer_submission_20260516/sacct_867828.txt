@@ -1,0 +1,4 @@
+JobID|JobName|Partition|Account|State|ExitCode|Elapsed|Start|End
+867828|nat-ev-v2-r4relTok|pomplun|cs_yinxin.wan|COMPLETED|0:0|00:00:14|2026-05-16T15:50:55|2026-05-16T15:51:09
+867828.batch|batch||cs_yinxin.wan|COMPLETED|0:0|00:00:14|2026-05-16T15:50:55|2026-05-16T15:51:09
+867828.extern|extern||cs_yinxin.wan|COMPLETED|0:0|00:00:14|2026-05-16T15:50:55|2026-05-16T15:51:09

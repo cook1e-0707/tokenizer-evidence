@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T19:32:41Z
+Last synchronized: 2026-05-16T20:03:02Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,9 +9,126 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_FAILED_POSITIVE_GATE_ARTIFACT_REVIEW`
+`V2_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_867849_FAILED_NO_GENERATION`
 
 ## Current Route
+
+After job `867621` failed the protected positive generation gate, Codex
+recorded an artifact-only repair/pivot route to test whether the
+coordinate-unique reliability surfaces are valid under actual Qwen tokenizer
+boundaries before any further scoring or generation.
+
+New controlling artifacts:
+
+```text
+route doc: docs/natural_evidence_v2/R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_20260516.md
+rows: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/
+static preflight: results/natural_evidence_v2/status/r4_after_867621_reliability_static_boundary_preflight_20260516/
+route config: configs/natural_evidence_v2/r4_after_867621_reliability_tokenizer_preflight_route.yaml
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200.sbatch
+validator: scripts/natural_evidence_v2/validate_r4_after_867621_reliability_tokenizer_route.py
+validation: results/natural_evidence_v2/status/r4_after_867621_reliability_tokenizer_route_validation_20260516/
+allowlist safety: results/natural_evidence_v2/status/r4_after_867621_reliability_tokenizer_route_allowlist_safety_20260516.json
+allowlist entry: v2_r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200
+```
+
+Route validation status:
+
+```text
+PASS_R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT
+```
+
+Prepared row/static-preflight status:
+
+```text
+rows: 4096
+selected prompts: 256
+selected coordinates: 16
+current two-way scorer compatible: true
+static boundary preflight: PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING
+static checked rows: 4096
+static failed rows: 0
+global allowlist safety: PASS, zero enabled entries
+```
+
+No Slurm job was submitted by this route package. The allowlist entry is
+present but disabled. The next compute action, if submitted after fresh
+local/remote hash preflight and Hermes notification, is tokenizer-only actual
+Qwen boundary validation on H200/pomplun. It must not start model forward,
+teacher-forced scoring, generation, or training.
+
+Codex then submitted the tokenizer-only H200/pomplun preflight as a single
+reviewed job and reviewed the completed output:
+
+```text
+submission record: results/natural_evidence_v2/status/r4_after_867621_reliability_tokenizer_submission_20260516/
+job_id: 867828
+job_name: nat-ev-v2-r4relTok
+state: COMPLETED
+exit code: 0:0
+elapsed: 00:00:14
+review: results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/review.md
+review status: PASS_R4_AFTER_867621_RELIABILITY_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_867828
+checked rows: 4096
+failed rows: 0
+empty target id rows: 0
+empty other id rows: 0
+target/other overlap rows: 0
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+```
+
+The actual-Qwen tokenizer boundary pass unlocked only the next route-planning
+step: teacher-forced surface-mass scoring for the same 4096 rows. Codex
+recorded and validated that route artifact-only:
+
+```text
+route doc: docs/natural_evidence_v2/R4_AFTER_867621_RELIABILITY_SURFACE_MASS_SCORE_ROUTE_20260516.md
+route config: configs/natural_evidence_v2/r4_after_867621_reliability_surface_mass_score_route.yaml
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_surface_mass_score_h200.sbatch
+validator: scripts/natural_evidence_v2/validate_r4_after_867621_reliability_surface_mass_route.py
+validation: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_route_validation_20260516/
+wrapper plan-only smoke: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_wrapper_plan_smoke_20260516/
+allowlist entry: v2_r4_after_867621_reliability_surface_mass_score_h200
+route validation: PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_ROUTE_VALIDATION_NO_SUBMIT
+wrapper plan-only status: DRY_RUN_VALIDATED_INPUTS
+global allowlist safety: PASS, zero enabled entries
+```
+
+Codex then submitted the surface-mass scoring route as a single reviewed
+H200/pomplun job:
+
+```text
+submission record: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_submission_20260516/
+job_id: 867849
+job_name: nat-ev-v2-r4relTFM
+state: COMPLETED
+exit code: 0:0
+elapsed: 00:02:21
+score output: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_score_867849/
+failure analysis: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_failure_analysis_867849_20260516/
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+```
+
+The scoring job completed cleanly but failed the teacher-forced surface-mass
+gate:
+
+```text
+teacher_forced_surface_gate_status: FAIL
+protected lift vs base: +0.006302
+protected lift vs task_only: +0.011221
+protected rank1 rate: 0.482666
+protected median target margin: -0.000099876
+task_only lift vs base: -0.004919
+```
+
+Interpretation: the actual Qwen tokenizer boundary is valid and task-only does
+not appear to be leaking the target signal, but the protected adapter pressure
+on the coordinate-unique reliability surfaces is far too weak. Generation is
+not unlocked.
+
+## Historical Route Context
 
 The R4 metric-exact teacher-forced route reached a positive teacher-forced gate
 in job `864761`, but the follow-up dev generation job `864832` failed:
@@ -700,24 +817,26 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_RELIABILITY_DEV_GENERATION_867621_FREE_GENERATION_TRANSFER_FAIL_NO_RERUN`
+`BLOCK_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_867849_GATE_FAIL_NO_GENERATION`
 
 ## Current Next Allowed Action
 
-Record a new reviewed repair or pivot route before any further Slurm,
-generation, training, Llama, sanitizer, FAR, payload-diversity, or paper-facing
-claim work.
+Record the next artifact-only repair or pivot decision before any further
+Slurm, generation, training, Llama, sanitizer, FAR, payload-diversity, or
+paper-facing claim work. Do not rerun the same scoring/generation route
+unchanged.
 
 ```text
 allowed:
 - artifact-only failure analysis
-- artifact-only route repair or pivot planning
+- artifact-only repair or pivot planning
 - static validation of a proposed next route
 - keep allowlist zero enabled
 
 not yet unlocked:
 - no rerun of the 867621 route unchanged
-- no new Slurm submission until a new reviewed route decision is recorded
+- no rerun of the 867849 scoring route unchanged
+- no generation until a future teacher-forced surface-mass gate passes and a separate generation route is reviewed
 - no model scoring/generation/training outside a reviewed route
 - no Llama
 - no same-family null

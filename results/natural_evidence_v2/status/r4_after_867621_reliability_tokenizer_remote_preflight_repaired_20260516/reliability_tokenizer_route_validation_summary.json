@@ -1,0 +1,15 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200",
+  "current_compute_unlocked": false,
+  "errors": [],
+  "expected_rows": 4096,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "score_rows": "results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_867621_RELIABILITY_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT",
+  "tokenizer_validation_started": false,
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200.sbatch"
+}

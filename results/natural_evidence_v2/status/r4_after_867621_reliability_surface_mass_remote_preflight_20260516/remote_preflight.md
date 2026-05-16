@@ -1,0 +1,36 @@
+# R4 After 867621 Reliability Surface-Mass Remote Preflight
+
+status: `PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_REMOTE_PREFLIGHT_NO_SUBMIT`
+
+Checks:
+
+```text
+local/remote file hashes match: true
+remote route validation: PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_ROUTE_VALIDATION_NO_SUBMIT
+remote wrapper plan-only smoke: DRY_RUN_VALIDATED_INPUTS
+remote allowlist safety: PASS with zero enabled entries
+active Chimera jobs: none
+slurm submitted: false
+```
+
+Matched hashes:
+
+```text
+8bc27f0def2f73535023ada4d0a76d1e0689c248a2df775acbc0eb088e684aed configs/natural_evidence_v2/run_allowlist.yaml
+1d626f68a8a908da60829c60737d75c2600e516c59d8ea575fa6b0eb384345f6 configs/natural_evidence_v2/r4_after_867621_reliability_surface_mass_score_route.yaml
+a7b750d0e0a776fc7954146c53968a44d44f4398eae037f61445afbc216c203b docs/natural_evidence_v2/CURRENT_STATE.md
+118de73d00304efff81b6d987b60278cbccf93453ba4168fe0455b05d9d5cf8c docs/natural_evidence_v2/R4_AFTER_867621_RELIABILITY_SURFACE_MASS_SCORE_ROUTE_20260516.md
+259c878ae8f94bf64983591b145d0c3a4d45a3ed9495b1f26e51e44263abf470 scripts/natural_evidence_v2/validate_r4_after_867621_reliability_surface_mass_route.py
+0e50f16bd4d1e2b613fd2b099a31e83636f44d2f56ec5fd8094071e2a6c2b80a scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_surface_mass_score_h200.sbatch
+772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8 results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+545188c2f3000e8cd7225a564481b8d6599d1cedba11cfe1b1c8eda13ec8f999 results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/r4_prefix_native_tokenizer_boundary_preflight_summary.json
+```
+
+Next allowed action:
+
+```text
+Send submission-specific Hermes TG/email notification, enable exactly one
+allowlist entry v2_r4_after_867621_reliability_surface_mass_score_h200,
+submit one H200/pomplun teacher-forced surface-mass Slurm job, immediately
+disable allowlist, and record post-submit safety.
+```

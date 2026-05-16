@@ -1,0 +1,65 @@
+schema_name: natural_evidence_v2_r4_after_867621_reliability_surface_mass_score_route_v1
+phase: V2_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_SCORE_ROUTE_ARTIFACT_ONLY
+package_id: r4_after_867621_reliability_surface_mass_score_route_v1
+
+source_tokenizer_preflight:
+  job_id: "867828"
+  summary: results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/r4_prefix_native_tokenizer_boundary_preflight_summary.json
+  review_summary: results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/review_summary.json
+  expected_status: PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT
+  expected_review_status: PASS_R4_AFTER_867621_RELIABILITY_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_867828
+  checked_rows: 4096
+  failed_rows: 0
+  empty_target_id_row_count: 0
+  empty_other_id_row_count: 0
+  target_other_overlap_row_count: 0
+
+source_rows:
+  rows: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+  summary: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows_summary.json
+  expected_rows: 4096
+  expected_status: PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_ROWS_BUILT_ARTIFACT_ONLY
+
+route:
+  allowlist_entry: v2_r4_after_867621_reliability_surface_mass_score_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_surface_mass_score_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_surface_mass_score_h200.sbatch
+  conditions:
+    - base
+    - protected
+    - task_only
+  max_rows: 4096
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+
+future_teacher_forced_gate:
+  protected_lift_vs_base_min: 0.15
+  protected_lift_vs_task_only_min: 0.10
+  protected_rank1_min: 0.75
+  protected_median_margin_min: 0.0
+  boundary_failures_max: 0
+  target_other_overlap_rate_max: 0.0
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  exactly_one_submission_when_unlocked: true
+  remote_hash_preflight_required: true
+  hermes_notification_required: true
+  post_submit_allowlist_shutdown_required: true
+
+not_unlocked_by_this_route_package:
+  generation: true
+  training: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true
