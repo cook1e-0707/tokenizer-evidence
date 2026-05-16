@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T01:02:09Z
+Last synchronized: 2026-05-16T01:24:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_MICRO_OVERFIT_H200_JOB_864332_RUNNING`
+`V2_R4_METRIC_EXACT_MICRO_OVERFIT_864332_FAILED_REVIEWED_NO_NEXT_COMPUTE`
 
 ## Current Route
 
@@ -20,7 +20,9 @@ not produce enough positive teacher-forced pressure. The after-864117
 artifact-only pivot package selected metric-exact objective repair. A disabled
 by default `logsumexp_softplus` surface-margin mode has now been patched into
 the trainer, validated with toy-logit tests, wired into the H200 micro-overfit
-wrapper in plan-only mode, and synchronized to Chimera with matching hashes.
+wrapper in plan-only mode, synchronized to Chimera with matching hashes, and
+submitted once as job `864332`. Job `864332` completed cleanly but failed the
+teacher-forced surface-mass gate.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -36,7 +38,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_MICRO_OVERFIT_JOB_864332_MONITOR_AND_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_MICRO_OVERFIT_864332_SURFACE_MASS_GATE_FAIL_REPAIR_OR_PIVOT_REVIEW_NEXT`
 
 Artifact-only pivot package:
 
@@ -114,9 +116,37 @@ remote post-submit allowlist safety: PASS with zero enabled entries
 Current next allowed action:
 
 ```text
-Monitor Slurm job 864332. When it exits, sync the completed artifacts and
-review the metric-exact micro-overfit train/heldout teacher-forced gates before
-any further compute route.
+Artifact-only failure analysis and a reviewed repair or pivot route. Do not
+submit new Slurm, run generation, start Llama, run same-family null, run
+sanitizer, aggregate FAR, make payload-diversity claims, or make paper-facing
+positive claims until a new route records prerequisites and control-plane
+checks.
+```
+
+Metric-exact micro-overfit review:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_MICRO_OVERFIT_864332_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_864332/
+results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_864332_review/
+status: FAIL_R4_METRIC_EXACT_MICRO_OVERFIT_864332_TEACHER_FORCED_GATE
+job_id: 864332
+slurm_state: COMPLETED
+exit_code: 0:0
+protected mean target mass: 0.0179803
+protected lift vs base: +0.0131485
+protected lift vs task-only: +0.0163079
+protected rank1 rate: 0.980469
+protected median margin: +0.0059255
+```
+
+Interpretation:
+
+```text
+The metric-exact objective improved rank ordering but did not create enough
+absolute target-token mass. The target-mass floor remained nearly unsatisfied
+at the end of training. This failed gate does not unlock generation or any
+downstream claim route.
 ```
 
 ## Historical Controller Failure Chain

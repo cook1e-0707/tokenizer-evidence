@@ -1,0 +1,68 @@
+{
+  "condition_plan": [
+    "base",
+    "protected",
+    "task_only"
+  ],
+  "condition_summary": {
+    "base": {
+      "mean_target_margin": -0.03741329548562078,
+      "mean_target_mass": 0.00483183704383805,
+      "median_target_margin": -0.00652075739344582,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.251953125
+    },
+    "protected": {
+      "mean_target_margin": 0.017853500631198616,
+      "mean_target_mass": 0.017980298383115212,
+      "median_target_margin": 0.005925499352088082,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.98046875
+    },
+    "task_only": {
+      "mean_target_margin": -0.04970936047813623,
+      "mean_target_mass": 0.0016724278486419664,
+      "median_target_margin": -0.0027600459288805723,
+      "row_count": 8192,
+      "target_surface_rank1_rate": 0.19921875
+    }
+  },
+  "controller_applies_only_to_protected_conditions": true,
+  "controller_condition_set": "standard",
+  "controller_config": {
+    "bonus_nats": 0.0,
+    "max_kl_budget": null,
+    "max_target_mass": null,
+    "mode": "disabled",
+    "penalty_nats": 0.0
+  },
+  "controller_enabled": false,
+  "controller_only_summary": {},
+  "far_aggregation_started": false,
+  "gain_sweep_summary": {},
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": true,
+  "observed_lifts": {
+    "protected_target_surface_mass_lift_vs_base": 0.013148461339277162,
+    "protected_target_surface_mass_lift_vs_task_only": 0.016307870534473246,
+    "task_only_target_surface_mass_lift_vs_base": -0.0031594091951960834
+  },
+  "paper_claim_allowed": false,
+  "protected_adapter_gains": [
+    1.0
+  ],
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 8192,
+  "scored_row_count": 24576,
+  "teacher_forced_surface_gate_pass": false,
+  "teacher_forced_surface_gate_status": "FAIL",
+  "teacher_forced_surface_gate_targets": {
+    "protected_median_target_margin": ">0",
+    "protected_target_surface_mass_lift_vs_base": ">=+0.15",
+    "protected_target_surface_mass_lift_vs_task_only": ">=+0.10",
+    "protected_target_surface_rank1_rate": ">=0.70",
+    "task_only_target_surface_mass_lift_vs_base": "<+0.05 diagnostic cap"
+  },
+  "training_started": false
+}

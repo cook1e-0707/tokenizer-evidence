@@ -1,0 +1,4 @@
+JobID|JobName|Partition|State|Elapsed|ExitCode|NodeList
+864332|nat-ev-v2-r4mof|pomplun|COMPLETED|00:04:08|0:0|chimera21
+864332.batch|batch||COMPLETED|00:04:08|0:0|chimera21
+864332.extern|extern||COMPLETED|00:04:08|0:0|chimera21
