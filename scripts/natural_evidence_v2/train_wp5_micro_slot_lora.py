@@ -514,6 +514,7 @@ def main() -> int:
         "stratum_weight_max": args.stratum_weight_max,
         "stratum_weighting_mode": args.stratum_weighting_mode,
         "surface_margin_loss_mode": args.surface_margin_loss_mode,
+        "task_ce_weight": args.task_ce_weight,
         "target_mass_floor": args.target_mass_floor,
         "target_mass_ceiling": args.target_mass_ceiling,
         "target_mass_ceiling_count": 0.0,

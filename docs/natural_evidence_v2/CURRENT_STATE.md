@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T02:04:00Z
+Last synchronized: 2026-05-16T03:09:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_FLOOR_DOMINANT_H200_JOB_864705_RUNNING`
+`V2_R4_METRIC_EXACT_FLOOR_DOMINANT_864705_FAILED_REVIEWED_NO_NEXT_COMPUTE`
 
 ## Current Route
 
@@ -22,9 +22,10 @@ by default `logsumexp_softplus` surface-margin mode has now been patched into
 the trainer, validated with toy-logit tests, wired into the H200 micro-overfit
 wrapper in plan-only mode, synchronized to Chimera with matching hashes, and
 submitted once as job `864332`. Job `864332` completed cleanly but failed the
-teacher-forced surface-mass gate. The next repair route is now a floor-dominant
-metric-exact micro-overfit plan: task CE disabled, stronger target-mass floor
-pressure, and no generation.
+teacher-forced surface-mass gate. A floor-dominant metric-exact micro-overfit
+repair was then submitted once as job `864705`: task CE disabled, stronger
+target-mass floor pressure, and no generation. Job `864705` completed cleanly
+but still failed the teacher-forced surface-mass gate.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -40,7 +41,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_FLOOR_DOMINANT_JOB_864705_MONITOR_AND_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_FLOOR_DOMINANT_864705_GATE_FAIL_COVERAGE_SCALE_OR_STRONGER_FLOOR_ROUTE_REVIEW_NEXT`
 
 Artifact-only pivot package:
 
@@ -168,9 +169,10 @@ local allowlist safety: PASS with zero enabled entries
 Current next allowed action:
 
 ```text
-Monitor Slurm job `864705`. When it exits, sync completed artifacts and review
-the teacher-forced surface-mass gates before any further compute route. No
-generation or downstream claim route is unlocked by this submission.
+Artifact-only review and route decision after job `864705`. Do not submit new
+Slurm, run generation, start Llama, run same-family null, run sanitizer,
+aggregate FAR, make payload-diversity claims, or make paper-facing positive
+claims until a new route records prerequisites and control-plane checks.
 ```
 
 Remote preflight:
@@ -196,6 +198,34 @@ node_seen_after_submit: chimera21
 allowlist entry: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
 local post-submit allowlist safety: PASS with zero enabled entries
 remote post-submit allowlist safety: PASS with zero enabled entries
+```
+
+Floor-dominant micro-overfit review:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_FLOOR_DOMINANT_864705_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_864705/
+results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_864705_review/
+status: FAIL_R4_METRIC_EXACT_FLOOR_DOMINANT_864705_TEACHER_FORCED_GATE
+job_id: 864705
+slurm_state: COMPLETED
+exit_code: 0:0
+protected mean target mass: 0.0847697
+protected lift vs base: +0.0799378
+protected lift vs task-only: +0.0830972
+protected rank1 rate: 1.000000
+protected median margin: +0.0772580
+```
+
+Interpretation:
+
+```text
+Floor-dominant pressure was directionally effective but not sufficient. The
+protected mean target mass improved from 0.0179803 in job 864332 to 0.0847697
+in job 864705, while rank1 reached 1.0 and null/task-only behavior remained
+clean. The run still missed the +0.15 lift-vs-base and +0.10 lift-vs-task-only
+teacher-forced gates. The next route should be artifact-only coverage-scale or
+stronger-floor planning, not generation.
 ```
 
 ## Historical Controller Failure Chain
