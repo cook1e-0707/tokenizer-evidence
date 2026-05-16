@@ -2269,7 +2269,7 @@
     "failed_job_id": "852844",
     "failure_reason": "prefix 'Step 1: ' tokenizes to 124 tokens but surface 'Create' is at index 123 in full text; trailing space merges with next word differently when tokenized alone vs in context",
     "paper_claim_allowed": false,
-    "repair": "added _find_response_start_token using cumulative decoded text scan; surface lookup scans ±4 window around approximate index",
+    "repair": "added _find_response_start_token using cumulative decoded text scan; surface lookup scans \u00b14 window around approximate index",
     "state_changing_action": "reviewed Llama WP5 retry 852844; still margin_count=0; root cause: prefix tokenization gives different token count than full text due to trailing whitespace merging; fixed with cumulative text scan approach",
     "status": "FAIL_LLAMA_V2_WP5_852844_WHITESPACE_MERGE_MISMATCH"
   },
@@ -11989,7 +11989,7 @@
     "launch_allowed_for_single_job": true,
     "paper_claim_allowed": false,
     "ready_for_human_approval_decision": true,
-    "required_explicit_approval_text": "批准启动 Qwen natural_evidence_v1 proof-of-life training：使用 DGXA100/A100，payloads=P0421,P1729，seeds=17,23，query_budgets=64,128,256,512，MAX_STEPS=64，DRY_RUN_ONLY=0，START_QWEN_NATURAL_E2E=1，并只提交一个 allowlisted Slurm job。",
+    "required_explicit_approval_text": "\u6279\u51c6\u542f\u52a8 Qwen natural_evidence_v1 proof-of-life training\uff1a\u4f7f\u7528 DGXA100/A100\uff0cpayloads=P0421,P1729\uff0cseeds=17,23\uff0cquery_budgets=64,128,256,512\uff0cMAX_STEPS=64\uff0cDRY_RUN_ONLY=0\uff0cSTART_QWEN_NATURAL_E2E=1\uff0c\u5e76\u53ea\u63d0\u4ea4\u4e00\u4e2a allowlisted Slurm job\u3002",
     "review_json": "results/natural_evidence_v1/status/qwen_natural_e2e_training_launch_review_20260506_2107/qwen_natural_e2e_training_launch_review.json",
     "status": "READY_FOR_HUMAN_APPROVAL_DECISION_NOT_LAUNCH_ALLOWED",
     "submitted_job_id": "846585",
@@ -16065,5 +16065,28 @@
     "far_aggregation_started": false,
     "paper_claim_allowed": false,
     "timestamp_utc": "2026-05-16T01:03:00Z"
+  },
+  "2026-05-16T01:02:09Z_r4_metric_exact_micro_overfit_h200_submission": {
+    "status": "SUBMITTED_R4_METRIC_EXACT_MICRO_OVERFIT_H200_JOB_RUNNING",
+    "job_id": "864332",
+    "job_name": "nat-ev-v2-r4mof",
+    "partition": "pomplun",
+    "qos": "pomplun",
+    "account": "cs_yinxin.wan",
+    "node_seen_after_submit": "chimera21",
+    "allowlist_entry": "v2_r4_candidate_v3_micro_overfit_h200",
+    "surface_margin_loss_mode": "logsumexp_softplus",
+    "submission_record": "results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_submission_20260516/submission_record.json",
+    "local_post_submit_allowlist_safety": "PASS_ZERO_ENABLED",
+    "remote_post_submit_allowlist_safety": "PASS_ZERO_ENABLED",
+    "training_started": true,
+    "generation_started": false,
+    "qwen_e2e_started": false,
+    "llama_started": false,
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "far_aggregation_started": false,
+    "paper_claim_allowed": false,
+    "next_allowed_action": "Monitor Slurm job 864332; after completion sync artifacts and review metric-exact micro-overfit train/heldout teacher-forced gates before any further compute route."
   }
 }

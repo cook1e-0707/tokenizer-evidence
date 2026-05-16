@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T01:03:00Z
+Last synchronized: 2026-05-16T01:02:09Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_MICRO_OVERFIT_ROUTE_PLAN_ONLY_PASS_REMOTE_PREFLIGHT_NEXT`
+`V2_R4_METRIC_EXACT_MICRO_OVERFIT_H200_JOB_864332_RUNNING`
 
 ## Current Route
 
@@ -19,8 +19,8 @@ follow-up safety-bound controller route kept wrong controls clean but still did
 not produce enough positive teacher-forced pressure. The after-864117
 artifact-only pivot package selected metric-exact objective repair. A disabled
 by default `logsumexp_softplus` surface-margin mode has now been patched into
-the trainer, validated with toy-logit tests, and wired into the H200
-micro-overfit wrapper in plan-only mode.
+the trainer, validated with toy-logit tests, wired into the H200 micro-overfit
+wrapper in plan-only mode, and synchronized to Chimera with matching hashes.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -36,7 +36,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_MICRO_OVERFIT_REMOTE_PREFLIGHT_NEXT_NO_SUBMIT_YET`
+`BLOCK_R4_METRIC_EXACT_MICRO_OVERFIT_JOB_864332_MONITOR_AND_REVIEW_NEXT`
 
 Artifact-only pivot package:
 
@@ -85,6 +85,38 @@ docs/natural_evidence_v2/R4_METRIC_EXACT_MICRO_OVERFIT_ROUTE_PLAN_20260516.md
 results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_route_plan_20260516/
 allowlist entry: v2_r4_candidate_v3_micro_overfit_h200
 command pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+```
+
+Remote preflight:
+
+```text
+results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_remote_preflight_20260516/
+status: PASS_R4_METRIC_EXACT_MICRO_OVERFIT_REMOTE_PREFLIGHT_NO_SUBMIT
+active jobs: none
+hashes match: true
+remote plan-only smoke: PASS
+```
+
+Submission:
+
+```text
+results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_submission_20260516/
+job_id: 864332
+job_name: nat-ev-v2-r4mof
+partition: pomplun
+node_seen_after_submit: chimera21
+allowlist entry: v2_r4_candidate_v3_micro_overfit_h200
+command: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+local post-submit allowlist safety: PASS with zero enabled entries
+remote post-submit allowlist safety: PASS with zero enabled entries
+```
+
+Current next allowed action:
+
+```text
+Monitor Slurm job 864332. When it exits, sync the completed artifacts and
+review the metric-exact micro-overfit train/heldout teacher-forced gates before
+any further compute route.
 ```
 
 ## Historical Controller Failure Chain
@@ -281,12 +313,11 @@ teacher-forced selective gate by a wide margin. It does not unlock generation.
 
 ## Next Allowed Action
 
-Remote sync/hash preflight for the metric-exact micro-overfit route. Do not
-submit until local/remote hashes match, active-job preflight is clean,
-allowlist safety passes, Hermes TG/email notification is sent, and exactly one
-allowlist entry is enabled for submission. Do not run generation, Llama,
-null/FAR, sanitizer, payload-diversity, or paper-facing claim work from this
-state.
+Single H200 submission for the metric-exact micro-overfit route is ready after
+Hermes TG/email notification and exactly-one allowlist enablement. Submit only
+`v2_r4_candidate_v3_micro_overfit_h200`, then immediately disable the allowlist
+entry and record post-submit safety. Do not run generation, Llama, null/FAR,
+sanitizer, payload-diversity, or paper-facing claim work from this state.
 
 ## Not Unlocked By Current State
 

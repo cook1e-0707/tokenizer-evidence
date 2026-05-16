@@ -11258,5 +11258,28 @@
     "far_aggregation_started": false,
     "paper_claim_allowed": false,
     "timestamp_utc": "2026-05-16T01:03:00Z"
+  },
+  "2026-05-16T01:02:09Z_r4_metric_exact_micro_overfit_h200_submission": {
+    "status": "SUBMITTED_R4_METRIC_EXACT_MICRO_OVERFIT_H200_JOB_RUNNING",
+    "job_id": "864332",
+    "job_name": "nat-ev-v2-r4mof",
+    "partition": "pomplun",
+    "qos": "pomplun",
+    "account": "cs_yinxin.wan",
+    "node_seen_after_submit": "chimera21",
+    "allowlist_entry": "v2_r4_candidate_v3_micro_overfit_h200",
+    "surface_margin_loss_mode": "logsumexp_softplus",
+    "submission_record": "results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_submission_20260516/submission_record.json",
+    "local_post_submit_allowlist_safety": "PASS_ZERO_ENABLED",
+    "remote_post_submit_allowlist_safety": "PASS_ZERO_ENABLED",
+    "training_started": true,
+    "generation_started": false,
+    "qwen_e2e_started": false,
+    "llama_started": false,
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "far_aggregation_started": false,
+    "paper_claim_allowed": false,
+    "next_allowed_action": "Monitor Slurm job 864332; after completion sync artifacts and review metric-exact micro-overfit train/heldout teacher-forced gates before any further compute route."
   }
 }

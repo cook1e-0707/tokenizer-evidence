@@ -1,0 +1,12 @@
+{
+  "active_jobs": "none",
+  "allowlist_entry": "v2_r4_candidate_v3_micro_overfit_h200",
+  "hashes_match": true,
+  "local_remote_hash_diff_empty": true,
+  "plan_only_remote": "PASS",
+  "remote_repo_sync_method": "targeted_rsync_no_git_pull_due_dirty_remote_worktree",
+  "schema_name": "natural_evidence_v2_r4_metric_exact_micro_overfit_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_METRIC_EXACT_MICRO_OVERFIT_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "surface_margin_loss_mode": "logsumexp_softplus"
+}
