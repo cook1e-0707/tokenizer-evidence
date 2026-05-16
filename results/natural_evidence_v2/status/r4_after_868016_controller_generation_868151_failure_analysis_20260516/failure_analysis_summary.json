@@ -1,0 +1,53 @@
+{
+  "schema_name": "r4_after_868016_controller_generation_failure_analysis_v1",
+  "status": "FAIL_R4_AFTER_868016_CONTROLLER_GENERATION_DIAGNOSTIC_GATE_ANALYZED",
+  "source_job_id": "868151",
+  "slurm_completed": true,
+  "slurm_exit_code_all_tasks": "0:0",
+  "generated_rows": 9216,
+  "shards_seen": 4,
+  "protected_accepts_format_scrub_all": 0,
+  "protected_blocks_format_scrub_all": 4,
+  "raw_accepts_format_scrub_all": 0,
+  "task_only_accepts_format_scrub_all": 0,
+  "wrong_key_accepts_format_scrub_all": 0,
+  "wrong_payload_accepts_format_scrub_all": 0,
+  "forbidden_public_surface_count_format_scrub_all": 26,
+  "duplicate_response_hash_count": 4422,
+  "matched_surface_events_decode_all": 0,
+  "matched_surface_events_decode_none": 0,
+  "target_surface_contained_in_response": {
+    "protected": 0,
+    "raw": 0,
+    "task_only": 0
+  },
+  "target_surface_starts_response": {
+    "protected": 0,
+    "raw": 0,
+    "task_only": 0
+  },
+  "target_first_word_in_first_120_chars": {
+    "protected": 222,
+    "raw": 31,
+    "task_only": 33
+  },
+  "rows_by_condition": {
+    "protected": 3072,
+    "raw": 3072,
+    "task_only": 3072
+  },
+  "primary_diagnosis": "teacher-forced first-token controller signal does not realize committed phrase-level surfaces in free generation",
+  "secondary_diagnoses": [
+    "deterministic row-cylinder generation collapses to repeated generic continuations",
+    "forbidden public surface count remains nonzero under format_scrub=all",
+    "null arms remain clean but protected evidence is absent"
+  ],
+  "next_allowed_action": "artifact-only repair/pivot route planning; no Slurm submission until a new reviewed route is recorded",
+  "generation_allowed": false,
+  "training_allowed": false,
+  "llama_allowed": false,
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "far_allowed": false,
+  "paper_claim_allowed": false
+}

@@ -254,6 +254,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--format-scrub", default="all")
     parser.add_argument("--prompts-per-block", type=int, default=64)
     parser.add_argument("--include-protected-controls", action="store_true")
+    parser.add_argument(
+        "--control-source-condition",
+        default="protected",
+        help=(
+            "When --include-protected-controls is set, decode wrong-key and "
+            "wrong-payload controls from this generated condition. Historical "
+            "adapter routes use protected; controller-only routes use controlled_base."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -287,7 +296,7 @@ def main() -> int:
         )
         decode_rows.append(decode_row)
         event_rows.extend(block_events)
-        if args.include_protected_controls and condition == "protected":
+        if args.include_protected_controls and condition == str(args.control_source_condition):
             for control_condition in ("wrong_key", "wrong_payload"):
                 control_row, control_events = decode_block(
                     block_id=block_id,

@@ -1,0 +1,18 @@
+{
+  "failure_analysis": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_failure_analysis_20260516/failure_analysis.md",
+  "far_aggregation_allowed": false,
+  "generation_allowed": false,
+  "llama_allowed": false,
+  "next_allowed_action": "artifact-only repair/pivot planning only; no new Slurm submission until a reviewed route is recorded",
+  "paper_claim_allowed": false,
+  "phase": "V2_R4_AFTER_868016_CONTROLLER_GENERATION_868151_FAILED_REVIEWED_REPAIR_PIVOT_ARTIFACT_ONLY",
+  "repair_pivot_doc": "docs/natural_evidence_v2/R4_AFTER_868016_CONTROLLER_GENERATION_868151_REPAIR_PIVOT_20260516.md",
+  "review_summary": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_review/controller_generation_review_summary.json",
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "slurm_allowed": false,
+  "status": "FAIL_R4_AFTER_868016_CONTROLLER_GENERATION_DIAGNOSTIC_GATE_ANALYZED",
+  "summary": "Job 868151 completed cleanly but failed the R4 controller generation diagnostic: protected 0/4 under format_scrub=all, null arms 0/4, matched phrase surfaces 0, forbidden public surfaces 26, duplicate response hashes 4422. Next action is artifact-only repair/pivot planning only.",
+  "timestamp_utc": "2026-05-16T22:36:00Z",
+  "training_allowed": false
+}

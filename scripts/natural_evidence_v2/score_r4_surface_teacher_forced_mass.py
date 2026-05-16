@@ -260,8 +260,8 @@ def controller_config_from_args(args: argparse.Namespace) -> ControllerConfig:
         raise ValueError("--controller-penalty-nats must be non-negative")
     if config.max_target_mass is not None and not (0.0 < float(config.max_target_mass) <= 0.50):
         raise ValueError("--controller-max-target-mass must be in (0, 0.50]")
-    if config.max_kl_budget is not None and not (0.0 < float(config.max_kl_budget) <= 0.20):
-        raise ValueError("--controller-max-kl-budget must be in (0, 0.20]")
+    if config.max_kl_budget is not None and not (0.0 < float(config.max_kl_budget) <= 0.50):
+        raise ValueError("--controller-max-kl-budget must be in (0, 0.50]")
     return config
 
 

@@ -1,0 +1,42 @@
+schema_name: r4_after_868016_coordinate_pivot_codebook_oracle_route_v1
+route_name: r4_after_868016_coordinate_pivot_codebook_decoder_oracle
+canonical_phase: V2_R4_AFTER_868016_COORDINATE_PIVOT_CODEBOOK_DECODER_ORACLE_ARTIFACT_ONLY
+
+precommit_dir: results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516
+codebook_sha256: e8a7e8d4aa7d90a306dc61cef269c332b25662b5c7cbaaeb62e88bcebf4a1f41
+decoder_spec_sha256: f9174f4514c438f454df97b450fa34723f2b8cdac18394f33e85892bfe198935
+precommit_hashes_sha256: baafec9c2c4e89ec63f4272a70db784e5120f707448f9b25c26a47f3d617987a
+
+contract_id: a55e
+selected_coordinate_count: 12
+payload_bits: [1, 0, 1, 0]
+checksum_rule: bitwise_complement_payload_4bit
+expected_checksum_bits: [0, 1, 0, 1]
+expected_codeword_bits: [1, 0, 1, 0, 0, 1, 0, 1]
+
+wrong_payload_bits: [0, 1, 0, 1]
+wrong_payload_checksum_bits: [1, 0, 1, 0]
+wrong_key_xor_mask: [1, 1, 0, 1, 0, 1, 1, 0]
+
+oracle_cases:
+  require_expected_perfect_accept: true
+  require_first_only_accept: true
+  require_missing_pair_reject: true
+  require_missing_singleton_pair_reject: true
+  require_pair_tie_reject: true
+  require_wrong_payload_reject: true
+  require_wrong_key_reject: true
+
+no_compute:
+  slurm_allowed: false
+  tokenizer_validation_allowed: false
+  model_scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  paper_claim_allowed: false
+
+output_dir: results/natural_evidence_v2/status/r4_after_868016_coordinate_pivot_codebook_decoder_oracle_20260516

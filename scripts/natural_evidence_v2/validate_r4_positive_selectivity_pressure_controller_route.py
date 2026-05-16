@@ -35,6 +35,8 @@ VALID_ROUTE_IDS = {
     "r4_positive_selectivity_controller_only_teacher_forced_v1",
     "r4_controller_only_safety_bound_pressure_teacher_forced_v1",
     "r4_after_867621_reliability_controller_safety_bound_teacher_forced_v1",
+    "r4_after_867621_reliability_controller_feasibility_envelope_teacher_forced_v1",
+    "r4_after_868016_coordinate_pivot_controller_teacher_forced_v1",
 }
 LOCKED_FALSE_FIELDS = (
     "slurm_allowed",
@@ -145,14 +147,21 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
     penalty = _sorted_float_list(grid.get("penalty_nats"), "controller_grid.penalty_nats", errors)
     max_target_mass = _sorted_float_list(grid.get("max_target_mass"), "controller_grid.max_target_mass", errors)
     max_kl = _sorted_float_list(grid.get("max_kl_budget"), "controller_grid.max_kl_budget", errors)
-    if not bonus or min(bonus) <= 0.0 or max(bonus) > 2.0:
-        errors.append("controller_grid.bonus_nats must stay within (0, 2.0]")
+    route_id = str(config.get("route_id"))
+    expanded_controller_route_ids = {
+        "r4_after_867621_reliability_controller_feasibility_envelope_teacher_forced_v1",
+        "r4_after_868016_coordinate_pivot_controller_teacher_forced_v1",
+    }
+    max_bonus_allowed = 4.0 if route_id in expanded_controller_route_ids else 2.0
+    max_kl_allowed = 0.50 if route_id in expanded_controller_route_ids else 0.20
+    if not bonus or min(bonus) <= 0.0 or max(bonus) > max_bonus_allowed:
+        errors.append(f"controller_grid.bonus_nats must stay within (0, {max_bonus_allowed}]")
     if penalty and min(penalty) < 0.0:
         errors.append("controller_grid.penalty_nats must be non-negative")
     if max_target_mass and max(max_target_mass) > 0.50:
         errors.append("controller_grid.max_target_mass must not exceed 0.50")
-    if max_kl and max(max_kl) > 0.20:
-        errors.append("controller_grid.max_kl_budget must not exceed 0.20")
+    if max_kl and max(max_kl) > max_kl_allowed:
+        errors.append(f"controller_grid.max_kl_budget must not exceed {max_kl_allowed:.2f}")
     if grid.get("controller_mode") != "additive":
         errors.append("controller_grid.controller_mode must be additive")
 

@@ -162,7 +162,10 @@ def build_rows(
     codebook: Mapping[str, Any],
     codeword_bits: list[int],
     prompts: list[Mapping[str, Any]],
+    prompt_offset: int,
     max_prompts: int,
+    include_coordinates: set[int] | None,
+    exclude_coordinates: set[int],
     surface_bank_path: Path,
     codebook_path: Path,
     oracle_route_path: Path,
@@ -171,7 +174,11 @@ def build_rows(
     grouped = group_entries(surface_bank)
     coordinate_bits = coordinate_expected_bits(codebook, codeword_bits)
     selected_coordinates = [int(item) for item in codebook.get("selected_coordinates", [])]
-    selected_prompts = prompts[:max_prompts]
+    if include_coordinates is not None:
+        selected_coordinates = [coordinate for coordinate in selected_coordinates if coordinate in include_coordinates]
+    if exclude_coordinates:
+        selected_coordinates = [coordinate for coordinate in selected_coordinates if coordinate not in exclude_coordinates]
+    selected_prompts = prompts[prompt_offset : prompt_offset + max_prompts]
     rows: list[dict[str, Any]] = []
     coordinate_rows: list[dict[str, Any]] = []
     missing_coordinates: list[int] = []
@@ -274,8 +281,12 @@ def build_rows(
         "source_prompt_bank": repo_rel(prompts_path),
         "source_prompt_bank_sha256": sha256_file(prompts_path),
         "expected_codeword_bits": codeword_bits,
+        "prompt_offset": prompt_offset,
         "selected_prompt_count": len(selected_prompts),
         "selected_coordinate_count": len(selected_coordinates),
+        "included_coordinates": sorted(include_coordinates) if include_coordinates is not None else None,
+        "excluded_coordinates": sorted(exclude_coordinates),
+        "selected_coordinates": selected_coordinates,
         "row_count": len(rows),
         "surface_entry_count": len(surface_bank.get("entries", [])),
         "current_two_way_scorer_compatible": True,
@@ -306,8 +317,11 @@ matches in free generation.
 
 ```text
 rows: {summary['row_count']}
+prompt offset: {summary['prompt_offset']}
 selected prompts: {summary['selected_prompt_count']}
 selected coordinates: {summary['selected_coordinate_count']}
+selected coordinate ids: {summary['selected_coordinates']}
+excluded coordinate ids: {summary['excluded_coordinates']}
 surface entries: {summary['surface_entry_count']}
 surface bank sha256: {summary['source_surface_bank_sha256']}
 codebook sha256: {summary['source_codebook_sha256']}
@@ -332,9 +346,32 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--codebook", type=Path, default=DEFAULT_CODEBOOK)
     parser.add_argument("--oracle-route", type=Path, default=DEFAULT_ORACLE_ROUTE)
     parser.add_argument("--prompts", type=Path, default=DEFAULT_PROMPTS)
+    parser.add_argument("--prompt-offset", type=int, default=0)
     parser.add_argument("--max-prompts", type=int, default=256)
+    parser.add_argument(
+        "--include-coordinates",
+        default="",
+        help="Optional comma-separated coordinate ids to keep from the source codebook.",
+    )
+    parser.add_argument(
+        "--exclude-coordinates",
+        default="",
+        help="Optional comma-separated coordinate ids to remove from the source codebook.",
+    )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     return parser.parse_args()
+
+
+def parse_coordinate_set(value: str) -> set[int] | None:
+    if not value.strip():
+        return None
+    output: set[int] = set()
+    for item in value.split(","):
+        stripped = item.strip()
+        if not stripped:
+            continue
+        output.add(int(stripped))
+    return output
 
 
 def main() -> int:
@@ -346,12 +383,17 @@ def main() -> int:
     codebook = read_json(args.codebook)
     codeword_bits = read_yaml_bits(args.oracle_route)
     prompts = read_jsonl(args.prompts)
+    include_coordinates = parse_coordinate_set(args.include_coordinates)
+    exclude_coordinates = parse_coordinate_set(args.exclude_coordinates) or set()
     rows, coordinate_rows, summary = build_rows(
         surface_bank=surface_bank,
         codebook=codebook,
         codeword_bits=codeword_bits,
         prompts=prompts,
+        prompt_offset=int(args.prompt_offset),
         max_prompts=args.max_prompts,
+        include_coordinates=include_coordinates,
+        exclude_coordinates=exclude_coordinates,
         surface_bank_path=args.surface_bank,
         codebook_path=args.codebook,
         oracle_route_path=args.oracle_route,

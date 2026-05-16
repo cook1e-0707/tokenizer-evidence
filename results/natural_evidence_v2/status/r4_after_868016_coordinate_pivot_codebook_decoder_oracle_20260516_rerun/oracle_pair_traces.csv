@@ -1,0 +1,57 @@
+bit_index,case_name,coordinates,decoded_bit,failure_reason,support,votes
+0,expected_perfect,"[6, 22]",1,,2,"[1, 1]"
+1,expected_perfect,[26],0,,1,[0]
+2,expected_perfect,"[1, 17]",1,,2,"[1, 1]"
+3,expected_perfect,[19],0,,1,[0]
+4,expected_perfect,"[15, 31]",0,,2,"[0, 0]"
+5,expected_perfect,[8],1,,1,[1]
+6,expected_perfect,[4],0,,1,[0]
+7,expected_perfect,"[7, 23]",1,,2,"[1, 1]"
+0,expected_first_only,"[6, 22]",1,,1,[1]
+1,expected_first_only,[26],0,,1,[0]
+2,expected_first_only,"[1, 17]",1,,1,[1]
+3,expected_first_only,[19],0,,1,[0]
+4,expected_first_only,"[15, 31]",0,,1,[0]
+5,expected_first_only,[8],1,,1,[1]
+6,expected_first_only,[4],0,,1,[0]
+7,expected_first_only,"[7, 23]",1,,1,[1]
+0,expected_missing_pair,"[6, 22]",,missing_pair,0,[]
+1,expected_missing_pair,[26],0,,1,[0]
+2,expected_missing_pair,"[1, 17]",1,,2,"[1, 1]"
+3,expected_missing_pair,[19],0,,1,[0]
+4,expected_missing_pair,"[15, 31]",0,,2,"[0, 0]"
+5,expected_missing_pair,[8],1,,1,[1]
+6,expected_missing_pair,[4],0,,1,[0]
+7,expected_missing_pair,"[7, 23]",1,,2,"[1, 1]"
+0,expected_missing_singleton_pair,"[6, 22]",1,,2,"[1, 1]"
+1,expected_missing_singleton_pair,[26],,missing_pair,0,[]
+2,expected_missing_singleton_pair,"[1, 17]",1,,2,"[1, 1]"
+3,expected_missing_singleton_pair,[19],0,,1,[0]
+4,expected_missing_singleton_pair,"[15, 31]",0,,2,"[0, 0]"
+5,expected_missing_singleton_pair,[8],1,,1,[1]
+6,expected_missing_singleton_pair,[4],0,,1,[0]
+7,expected_missing_singleton_pair,"[7, 23]",1,,2,"[1, 1]"
+0,expected_pair_tie,"[6, 22]",,pair_tie,2,"[1, 0]"
+1,expected_pair_tie,[26],0,,1,[0]
+2,expected_pair_tie,"[1, 17]",1,,2,"[1, 1]"
+3,expected_pair_tie,[19],0,,1,[0]
+4,expected_pair_tie,"[15, 31]",0,,2,"[0, 0]"
+5,expected_pair_tie,[8],1,,1,[1]
+6,expected_pair_tie,[4],0,,1,[0]
+7,expected_pair_tie,"[7, 23]",1,,2,"[1, 1]"
+0,wrong_payload_valid_checksum,"[6, 22]",0,,2,"[0, 0]"
+1,wrong_payload_valid_checksum,[26],1,,1,[1]
+2,wrong_payload_valid_checksum,"[1, 17]",0,,2,"[0, 0]"
+3,wrong_payload_valid_checksum,[19],1,,1,[1]
+4,wrong_payload_valid_checksum,"[15, 31]",1,,2,"[1, 1]"
+5,wrong_payload_valid_checksum,[8],0,,1,[0]
+6,wrong_payload_valid_checksum,[4],1,,1,[1]
+7,wrong_payload_valid_checksum,"[7, 23]",0,,2,"[0, 0]"
+0,wrong_key_xor_perturbation,"[6, 22]",0,,2,"[0, 0]"
+1,wrong_key_xor_perturbation,[26],1,,1,[1]
+2,wrong_key_xor_perturbation,"[1, 17]",1,,2,"[1, 1]"
+3,wrong_key_xor_perturbation,[19],1,,1,[1]
+4,wrong_key_xor_perturbation,"[15, 31]",0,,2,"[0, 0]"
+5,wrong_key_xor_perturbation,[8],0,,1,[0]
+6,wrong_key_xor_perturbation,[4],1,,1,[1]
+7,wrong_key_xor_perturbation,"[7, 23]",1,,2,"[1, 1]"

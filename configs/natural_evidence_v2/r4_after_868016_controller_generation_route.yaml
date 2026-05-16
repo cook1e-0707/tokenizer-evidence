@@ -1,0 +1,96 @@
+schema_name: natural_evidence_v2_r4_after_868016_controller_generation_route_v1
+route_id: r4_after_868016_coordinate_pivot_controller_generation_v1
+phase: V2_R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_PLAN_ARTIFACT_ONLY
+
+source_reviews:
+  tokenizer_review: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_868103/review_summary.json
+  controller_review: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_controller_score_868114_review/coordinate_pivot_controller_review_summary.json
+  codebook_oracle: results/natural_evidence_v2/status/r4_after_868016_coordinate_pivot_codebook_decoder_oracle_20260516/oracle_summary.json
+
+score_rows:
+  path: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl
+  sha256: 532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e
+  row_count: 3072
+  selected_coordinate_count: 12
+  prompt_offset: 256
+  prompt_count: 256
+
+precommit:
+  surface_bank: results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+  codebook: results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/codebook.json
+  decoder_spec: results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/decoder_spec.json
+  decoder_route_config: configs/natural_evidence_v2/r4_after_868016_reliability_coordinate_pivot_codebook_oracle_route.yaml
+  contract_id: a55e
+  primary_scrub_mode: all
+
+generation_scope:
+  conditions: [protected, raw, task_only]
+  decode_conditions: [protected, raw, task_only, wrong_key, wrong_payload]
+  generation_unit: prefix_native_row_cylinder
+  blocks: 4
+  prompts_per_block: 64
+  shards: 4
+  prompt_indices_per_shard: 64
+  rows_per_shard: 768
+  max_new_tokens: 96
+  same_contract_only: true
+  controller_only_protected_condition: true
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+
+controller:
+  policy: committed
+  bonus_nats: 4.0
+  penalty_nats: 0.5
+  max_target_mass: 0.5
+  max_kl_budget: 0.5
+  source_best_grid: 2
+  source_job_id: 868114
+
+adapters:
+  protected_adapter_loaded: false
+  task_only_adapter_remote: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  allowlist_entry: v2_r4_after_868016_controller_generation_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+  allowlist_enabled_now: false
+
+future_dev_gate:
+  protected_accepts_min_format_scrub_all: 3
+  protected_blocks: 4
+  control_accepts_max_per_condition: 0
+  forbidden_public_surface_count_max: 0
+  duplicate_response_hash_count_max: 0
+  duplicate_decode_row_hash_count_max: 0
+
+required_before_any_submission:
+  tokenizer_review_passed: true
+  controller_teacher_forced_gate_passed: true
+  coordinate_pivot_codebook_oracle_passed: true
+  route_validation_passed: true
+  wrapper_plan_only_passed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  hermes_notification_sent: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+
+output_dir: results/natural_evidence_v2/status/r4_after_868016_controller_generation_route_validation_20260516

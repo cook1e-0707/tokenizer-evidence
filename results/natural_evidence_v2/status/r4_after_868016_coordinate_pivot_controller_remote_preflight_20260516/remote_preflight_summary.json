@@ -1,0 +1,67 @@
+{
+  "active_chimera_jobs": [],
+  "allowlist_entry": "v2_r4_after_868016_reliability_coordinate_pivot_controller_score_h200",
+  "hashes": [
+    {
+      "local_sha256": "ef14dcfdf9e5b936d89adf783eabac36dc4d6cc7f3ee837ffcb0226d0c3c2a6a",
+      "match": true,
+      "path": "configs/natural_evidence_v2/run_allowlist.yaml",
+      "remote_sha256": "ef14dcfdf9e5b936d89adf783eabac36dc4d6cc7f3ee837ffcb0226d0c3c2a6a"
+    },
+    {
+      "local_sha256": "de8a62273d3ad9199c03b54c6c2e84fdec27ec90969d33d4f3a1180f8f79e997",
+      "match": true,
+      "path": "configs/natural_evidence_v2/r4_after_868016_reliability_coordinate_pivot_controller_score_route.yaml",
+      "remote_sha256": "de8a62273d3ad9199c03b54c6c2e84fdec27ec90969d33d4f3a1180f8f79e997"
+    },
+    {
+      "local_sha256": "21045aa1af619032cb8804d4999dedef5cd50fcf455d35209bc81be14930c6b1",
+      "match": true,
+      "path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+      "remote_sha256": "21045aa1af619032cb8804d4999dedef5cd50fcf455d35209bc81be14930c6b1"
+    },
+    {
+      "local_sha256": "d27f6641b6638e88163a2ff32db3576191540e36dc433824abb8c13ddf502c94",
+      "match": true,
+      "path": "docs/natural_evidence_v2/R4_AFTER_868016_RELIABILITY_COORDINATE_PIVOT_CONTROLLER_SCORE_ROUTE_20260516.md",
+      "remote_sha256": "d27f6641b6638e88163a2ff32db3576191540e36dc433824abb8c13ddf502c94"
+    },
+    {
+      "local_sha256": "57714c25f12c91270927d3d8f8b69aed64e77a0d8de945adac7553477b195b26",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py",
+      "remote_sha256": "57714c25f12c91270927d3d8f8b69aed64e77a0d8de945adac7553477b195b26"
+    },
+    {
+      "local_sha256": "dcf8d90c4e45d77b5d6f2ec4001d9fe42398506872360dda6bb578efdc9b3b62",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py",
+      "remote_sha256": "dcf8d90c4e45d77b5d6f2ec4001d9fe42398506872360dda6bb578efdc9b3b62"
+    },
+    {
+      "local_sha256": "ad0183e388b8db8c4e4c2ba79b5c78581c96e626ec08a4d224599be7e71bc9fd",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/slurm/r4_after_868016_reliability_coordinate_pivot_controller_score_h200.sbatch",
+      "remote_sha256": "ad0183e388b8db8c4e4c2ba79b5c78581c96e626ec08a4d224599be7e71bc9fd"
+    },
+    {
+      "local_sha256": "532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e",
+      "match": true,
+      "path": "results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl",
+      "remote_sha256": "532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e"
+    },
+    {
+      "local_sha256": "1cbe46bd28c1ebc33ea2736037482ef57e4291b4bcd05f897d937db2b56db86a",
+      "match": true,
+      "path": "results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_868103/review_summary.json",
+      "remote_sha256": "1cbe46bd28c1ebc33ea2736037482ef57e4291b4bcd05f897d937db2b56db86a"
+    }
+  ],
+  "local_remote_hashes_match": true,
+  "next_allowed_action": "Hermes submission notification and exactly one H200 controller scoring Slurm submission",
+  "remote_allowlist_safety_status": "PASS",
+  "route_validation_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "schema_name": "natural_evidence_v2_r4_after_868016_coordinate_pivot_controller_remote_preflight_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_868016_COORDINATE_PIVOT_CONTROLLER_REMOTE_PREFLIGHT_NO_SUBMIT"
+}

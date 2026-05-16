@@ -53,7 +53,7 @@ def test_controller_config_rejects_unsafe_caps() -> None:
         )
     with pytest.raises(ValueError, match="max-kl-budget"):
         controller_config_from_args(
-            namespace(controller_mode="additive", controller_bonus_nats=1.0, controller_max_kl_budget=0.50)
+            namespace(controller_mode="additive", controller_bonus_nats=1.0, controller_max_kl_budget=0.75)
         )
 
 

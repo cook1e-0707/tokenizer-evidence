@@ -1,0 +1,12 @@
+{
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "route_id": "r4_after_868016_coordinate_pivot_controller_teacher_forced_v1",
+  "score_row_count": 3072,
+  "score_rows_sha256_observed": "532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "training_started": false
+}

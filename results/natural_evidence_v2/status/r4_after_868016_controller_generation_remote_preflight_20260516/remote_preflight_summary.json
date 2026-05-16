@@ -1,0 +1,84 @@
+{
+  "active_jobs": [],
+  "all_hashes_match": true,
+  "generation_started": false,
+  "hash_rows": [
+    {
+      "local_sha256": "35a4882bb9e10c1bdbf5ca5aa50ebcc6d533b5c9198320fcc216493fac124701",
+      "match": true,
+      "path": "configs/natural_evidence_v2/run_allowlist.yaml",
+      "remote_sha256": "35a4882bb9e10c1bdbf5ca5aa50ebcc6d533b5c9198320fcc216493fac124701"
+    },
+    {
+      "local_sha256": "e055536adc8441f98f9c3aea347598ea316886d1b006703632e88f8b890033b7",
+      "match": true,
+      "path": "configs/natural_evidence_v2/r4_after_868016_controller_generation_route.yaml",
+      "remote_sha256": "e055536adc8441f98f9c3aea347598ea316886d1b006703632e88f8b890033b7"
+    },
+    {
+      "local_sha256": "709458b191c903279183456f29b88fea6169944af9eb79d5f40902f0bdba1f8b",
+      "match": true,
+      "path": "configs/natural_evidence_v2/r4_after_868016_reliability_coordinate_pivot_codebook_oracle_route.yaml",
+      "remote_sha256": "709458b191c903279183456f29b88fea6169944af9eb79d5f40902f0bdba1f8b"
+    },
+    {
+      "local_sha256": "59fc6576b740e85f164a5eb35cc0246b5fe0d6cfb811ddfe3a79eb94246830c5",
+      "match": true,
+      "path": "docs/natural_evidence_v2/CURRENT_STATE.md",
+      "remote_sha256": "59fc6576b740e85f164a5eb35cc0246b5fe0d6cfb811ddfe3a79eb94246830c5"
+    },
+    {
+      "local_sha256": "c051a4dd3543e8c553143b9ef1d1e6a9d733f74f17685d2908c5455b3a8fd057",
+      "match": true,
+      "path": "docs/natural_evidence_v2/R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_20260516.md",
+      "remote_sha256": "c051a4dd3543e8c553143b9ef1d1e6a9d733f74f17685d2908c5455b3a8fd057"
+    },
+    {
+      "local_sha256": "1eb42ff222066d548091fde117bb0b0c1bedb2b8a76fce405f684e4ba3c7681d",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py",
+      "remote_sha256": "1eb42ff222066d548091fde117bb0b0c1bedb2b8a76fce405f684e4ba3c7681d"
+    },
+    {
+      "local_sha256": "7eda61402ef5c3ee64dc07d71cfab13843099c9f917a7187c6f039cfa0fde3e4",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/validate_r4_after_868016_controller_generation_route.py",
+      "remote_sha256": "7eda61402ef5c3ee64dc07d71cfab13843099c9f917a7187c6f039cfa0fde3e4"
+    },
+    {
+      "local_sha256": "c4b91ddac937fe047a3cb6ab42845fb11ba508b115c950fe292b56a631c121c9",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch",
+      "remote_sha256": "c4b91ddac937fe047a3cb6ab42845fb11ba508b115c950fe292b56a631c121c9"
+    },
+    {
+      "local_sha256": "31dfd279426055fb8e9b49004e99880bafb31fbb43399293140b3c8e6d06b416",
+      "match": true,
+      "path": "scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py",
+      "remote_sha256": "31dfd279426055fb8e9b49004e99880bafb31fbb43399293140b3c8e6d06b416"
+    },
+    {
+      "local_sha256": "e8a7e8d4aa7d90a306dc61cef269c332b25662b5c7cbaaeb62e88bcebf4a1f41",
+      "match": true,
+      "path": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/codebook.json",
+      "remote_sha256": "e8a7e8d4aa7d90a306dc61cef269c332b25662b5c7cbaaeb62e88bcebf4a1f41"
+    },
+    {
+      "local_sha256": "f9174f4514c438f454df97b450fa34723f2b8cdac18394f33e85892bfe198935",
+      "match": true,
+      "path": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/decoder_spec.json",
+      "remote_sha256": "f9174f4514c438f454df97b450fa34723f2b8cdac18394f33e85892bfe198935"
+    },
+    {
+      "local_sha256": "7349b01d679b71944185c2487869f01a33f1db1f40b8c19eb1db6b489532e2ee",
+      "match": true,
+      "path": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_route_validation_20260516_rerun/route_validation_summary.json",
+      "remote_sha256": "7349b01d679b71944185c2487869f01a33f1db1f40b8c19eb1db6b489532e2ee"
+    }
+  ],
+  "remote_allowlist_safety": "PASS",
+  "remote_wrapper_plan_only": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "schema_name": "r4_after_868016_controller_generation_remote_preflight_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_REMOTE_PREFLIGHT_NO_SUBMIT"
+}

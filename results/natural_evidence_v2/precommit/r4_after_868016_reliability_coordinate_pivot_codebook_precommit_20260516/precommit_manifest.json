@@ -1,0 +1,141 @@
+{
+  "codebook_sha256": "e8a7e8d4aa7d90a306dc61cef269c332b25662b5c7cbaaeb62e88bcebf4a1f41",
+  "contract_id": "a55e",
+  "decoder_spec_sha256": "f9174f4514c438f454df97b450fa34723f2b8cdac18394f33e85892bfe198935",
+  "excluded_coordinates": [
+    3,
+    10,
+    20,
+    24
+  ],
+  "generation_started": false,
+  "no_posthoc_threshold_changes": true,
+  "pair_to_bit_mapping": [
+    {
+      "bit_index": 0,
+      "coordinates": [
+        6,
+        22
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        6,
+        22
+      ]
+    },
+    {
+      "bit_index": 1,
+      "coordinates": [
+        26
+      ],
+      "erased_source_coordinates": [
+        10
+      ],
+      "source_coordinates": [
+        10,
+        26
+      ]
+    },
+    {
+      "bit_index": 2,
+      "coordinates": [
+        1,
+        17
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        1,
+        17
+      ]
+    },
+    {
+      "bit_index": 3,
+      "coordinates": [
+        19
+      ],
+      "erased_source_coordinates": [
+        3
+      ],
+      "source_coordinates": [
+        3,
+        19
+      ]
+    },
+    {
+      "bit_index": 4,
+      "coordinates": [
+        15,
+        31
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        15,
+        31
+      ]
+    },
+    {
+      "bit_index": 5,
+      "coordinates": [
+        8
+      ],
+      "erased_source_coordinates": [
+        24
+      ],
+      "source_coordinates": [
+        8,
+        24
+      ]
+    },
+    {
+      "bit_index": 6,
+      "coordinates": [
+        4
+      ],
+      "erased_source_coordinates": [
+        20
+      ],
+      "source_coordinates": [
+        4,
+        20
+      ]
+    },
+    {
+      "bit_index": 7,
+      "coordinates": [
+        7,
+        23
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        7,
+        23
+      ]
+    }
+  ],
+  "paper_claim_allowed": false,
+  "precommit_dir": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516",
+  "primary_format_scrub_mode": "all",
+  "schema_name": "natural_evidence_v2_r4_after_868016_coordinate_pivot_precommit_manifest_v1",
+  "selected_coordinates": [
+    6,
+    22,
+    26,
+    1,
+    17,
+    19,
+    15,
+    31,
+    8,
+    4,
+    7,
+    23
+  ],
+  "source_codebook": "results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/codebook.json",
+  "source_codebook_sha256": "aa277c813bbd58b893aa8e75fa1e3132f4cd3cb4cd2a742fbee4ec49356214cc",
+  "source_decoder": "results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json",
+  "source_decoder_sha256": "e5794fbf2cbeda31ac4a39367c6e5dfce585674cc98778582481542cb544246a",
+  "source_rows_summary": "results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows_summary.json",
+  "source_rows_summary_sha256": "e25bb1d1177c8786b32c761404e9c6a1c150c732c1e18ad593a8c8d08eadda35",
+  "status": "PASS_R4_AFTER_868016_COORDINATE_PIVOT_PRECOMMIT_RECORDED",
+  "training_started": false
+}

@@ -1,0 +1,8 @@
+case_name,case_pass,complete_pairs,decoded_bits,expected_accept,min_pair_support,observed_accept,observed_coordinates,rejected_reasons
+expected_perfect,True,8,"[1, 0, 1, 0, 0, 1, 0, 1]",True,1,True,12,
+expected_first_only,True,8,"[1, 0, 1, 0, 0, 1, 0, 1]",True,1,True,8,
+expected_missing_pair,True,7,"[null, 0, 1, 0, 0, 1, 0, 1]",False,0,False,10,bit_0:missing_pair
+expected_missing_singleton_pair,True,7,"[1, null, 1, 0, 0, 1, 0, 1]",False,0,False,11,bit_1:missing_pair
+expected_pair_tie,True,7,"[null, 0, 1, 0, 0, 1, 0, 1]",False,1,False,12,bit_0:pair_tie
+wrong_payload_valid_checksum,True,8,"[0, 1, 0, 1, 1, 0, 1, 0]",False,1,False,12,payload_commitment_mismatch
+wrong_key_xor_perturbation,True,8,"[0, 1, 1, 1, 0, 0, 1, 1]",False,1,False,12,checksum_mismatch;payload_commitment_mismatch

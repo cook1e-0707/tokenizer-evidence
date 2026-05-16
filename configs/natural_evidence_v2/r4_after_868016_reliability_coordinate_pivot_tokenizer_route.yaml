@@ -1,0 +1,71 @@
+schema_name: natural_evidence_v2_r4_after_868016_reliability_coordinate_pivot_tokenizer_route_v1
+package_id: r4_after_868016_reliability_coordinate_pivot_tokenizer_route_v1
+phase: V2_R4_AFTER_868016_RELIABILITY_COORDINATE_PIVOT_TOKENIZER_ROUTE_ARTIFACT_ONLY
+
+source_failure:
+  job_id: "868016"
+  review_summary: results/natural_evidence_v2/status/r4_after_867621_reliability_controller_feasibility_envelope_score_868016_review/aggregate_summary.json
+  expected_review_status: FAIL_R4_AFTER_867621_CONTROLLER_FEASIBILITY_ENVELOPE_TEACHER_FORCED_GATE
+  failure_analysis: results/natural_evidence_v2/status/r4_after_867621_controller_feasibility_868016_failure_analysis_20260516/failure_analysis_summary.json
+  expected_failure_status: FAIL_R4_AFTER_867621_CONTROLLER_FEASIBILITY_868016_ANALYZED_NO_GENERATION
+
+source_rows:
+  rows: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl
+  summary: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows_summary.json
+  expected_status: PASS_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_ROWS_BUILT_ARTIFACT_ONLY
+  expected_rows: 3072
+  expected_selected_coordinates: 12
+  expected_prompt_offset: 256
+  expected_excluded_coordinates: [3, 10, 20, 24]
+
+source_static_preflight:
+  summary: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_static_boundary_preflight_20260516/r4_prefix_native_tokenizer_boundary_preflight_summary.json
+  expected_status: PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING
+  expected_checked_rows: 3072
+  expected_failed_rows: 0
+
+route:
+  allowlist_entry: v2_r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_h200.sbatch
+  run_qwen_tokenizer: true
+  max_rows: 3072
+  model_forward_allowed: false
+  scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  exactly_one_submission_when_unlocked: true
+  remote_hash_preflight_required: true
+  hermes_notification_required: true
+  post_submit_allowlist_shutdown_required: true
+
+future_tokenizer_gate:
+  checked_rows: 3072
+  failed_rows_max: 0
+  empty_target_id_row_count_max: 0
+  empty_other_id_row_count_max: 0
+  target_other_overlap_row_count_max: 0
+
+future_after_tokenizer_pass:
+  next_route: reviewed_h200_teacher_forced_controller_scoring_only
+  generation_allowed: false
+
+not_unlocked_by_this_route_package:
+  model_scoring: true
+  generation: true
+  training: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

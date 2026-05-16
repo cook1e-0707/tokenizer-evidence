@@ -1,0 +1,102 @@
+schema_name: natural_evidence_v2_r4_positive_selectivity_pressure_controller_route_plan_v1
+route_id: r4_after_868016_coordinate_pivot_controller_teacher_forced_v1
+phase: V2_R4_AFTER_868016_RELIABILITY_COORDINATE_PIVOT_CONTROLLER_SCORE_ROUTE_PLAN_ARTIFACT_ONLY
+source_route_selection: results/natural_evidence_v2/status/r4_after_867621_controller_feasibility_868016_failure_analysis_20260516/failure_analysis_summary.json
+source_tokenizer_review: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_868103/review_summary.json
+controller_helper: scripts/natural_evidence_v2/r4_prefix_native_soft_logit_controller.py
+scorer_integration_required_before_slurm: true
+
+score_rows: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl
+score_rows_sha256: 532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e
+contract_id: a55e
+model_family: qwen_only
+controller_condition_set: controller_only_controls
+
+current_permissions:
+  slurm_allowed: false
+  allowlist_enablement_allowed: false
+  generation_allowed: false
+  model_scoring_allowed: false
+  training_allowed: false
+  qwen_e2e_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+future_scoring_scope:
+  scoring_only: true
+  generation_allowed_in_route: false
+  training_allowed_in_route: false
+  conditions:
+    - base
+    - task_only
+    - controlled_base
+    - wrong_key_controlled_base
+    - wrong_payload_controlled_base
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gpu: h200
+  max_time: "30-00:00:00"
+  max_rows: 3072
+  primary_output: teacher_forced_surface_mass_summary
+
+controller_grid:
+  bonus_nats:
+    - 3.50
+    - 4.00
+  penalty_nats:
+    - 0.50
+    - 1.00
+  max_target_mass:
+    - 0.50
+  max_kl_budget:
+    - 0.50
+  controller_mode: additive
+
+controller_control_mapping:
+  scorer_target_remains_committed: true
+  protected_adapter_loaded_for_controller_arms: false
+  controlled_base_policy: committed
+  wrong_payload_controlled_base_policy: complement
+  wrong_key_controlled_base_policy: coordinate_hash_v1
+  wrong_key_hash_salt: r4_wrong_key_controller_v1
+  no_posthoc_key_payload_remap: true
+  no_transcript_conditioned_mapping: true
+
+future_teacher_forced_gate:
+  controlled_lift_vs_base_min: 0.15
+  controlled_lift_vs_task_only_min: 0.10
+  controlled_rank1_min: 0.75
+  wrong_key_accepts_max: 0
+  wrong_payload_accepts_max: 0
+  max_single_surface_mass_max: 0.50
+  target_other_overlap_rate_max: 0.0
+  scorer_boundary_failures_max: 0
+
+required_before_slurm:
+  scorer_controller_integration_reviewed: true
+  controller_helper_tests_pass: true
+  route_validator_pass: true
+  wrapper_plan_only_pass: true
+  local_remote_hash_preflight_pass: true
+  zero_enabled_allowlist_preflight_pass: true
+  active_job_preflight_pass: true
+  hermes_tg_email_notification_pass: true
+  exactly_one_allowlist_entry_enabled: true
+  immediate_allowlist_disablement_after_sbatch: true
+
+not_unlocked_by_this_route_plan:
+  slurm_submission: true
+  model_scoring: true
+  generation: true
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

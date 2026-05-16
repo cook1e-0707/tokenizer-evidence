@@ -1,0 +1,100 @@
+{
+  "condition_plan": [
+    "base",
+    "task_only",
+    "controlled_base",
+    "wrong_key_controlled_base",
+    "wrong_payload_controlled_base"
+  ],
+  "condition_summary": {
+    "base": {
+      "mean_target_margin": 0.004328803243741584,
+      "mean_target_mass": 0.018884685341773604,
+      "median_target_margin": 0.0018541088793426752,
+      "row_count": 3072,
+      "target_surface_rank1_rate": 0.6712239583333334
+    },
+    "controlled_base": {
+      "mean_target_margin": 0.1733086015677189,
+      "mean_target_mass": 0.17917390548245984,
+      "median_target_margin": 0.17654249749102746,
+      "row_count": 3072,
+      "target_surface_rank1_rate": 0.9619140625
+    },
+    "task_only": {
+      "mean_target_margin": 0.0004185495569032204,
+      "mean_target_mass": 0.012745059282774968,
+      "median_target_margin": 0.0001800958643798367,
+      "row_count": 3072,
+      "target_surface_rank1_rate": 0.6650390625
+    },
+    "wrong_key_controlled_base": {
+      "mean_target_margin": 0.029325087192463756,
+      "mean_target_mass": 0.09462956500737972,
+      "median_target_margin": 0.002783513395115733,
+      "row_count": 3072,
+      "target_surface_rank1_rate": 0.53515625
+    },
+    "wrong_payload_controlled_base": {
+      "mean_target_margin": -0.12081133155799097,
+      "mean_target_mass": 0.007234797364533567,
+      "median_target_margin": -0.07863589812768623,
+      "row_count": 3072,
+      "target_surface_rank1_rate": 0.08170572916666667
+    }
+  },
+  "controller_applies_only_to_protected_conditions": false,
+  "controller_condition_set": "controller_only_controls",
+  "controller_config": {
+    "bonus_nats": 4.0,
+    "max_kl_budget": 0.5,
+    "max_target_mass": 0.5,
+    "mode": "additive",
+    "penalty_nats": 1.0
+  },
+  "controller_enabled": true,
+  "controller_only_summary": {
+    "controlled_base_lift_vs_base": 0.16028922014068625,
+    "controlled_base_lift_vs_task_only": 0.16642884619968487,
+    "controlled_base_mean_target_mass": 0.17917390548245984,
+    "controlled_base_median_target_margin": 0.17654249749102746,
+    "controlled_base_rank1_rate": 0.9619140625,
+    "controlled_basic_gate_pass": true,
+    "overall_selective_gate_pass": true,
+    "wrong_key_basic_gate_pass": false,
+    "wrong_key_lift_vs_base": 0.07574487966560611,
+    "wrong_key_mean_target_mass": 0.09462956500737972,
+    "wrong_key_rank1_rate": 0.53515625,
+    "wrong_payload_basic_gate_pass": false,
+    "wrong_payload_lift_vs_base": -0.011649887977240037,
+    "wrong_payload_mean_target_mass": 0.007234797364533567,
+    "wrong_payload_rank1_rate": 0.08170572916666667
+  },
+  "far_aggregation_started": false,
+  "gain_sweep_summary": {},
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": true,
+  "observed_lifts": {
+    "protected_target_surface_mass_lift_vs_base": NaN,
+    "protected_target_surface_mass_lift_vs_task_only": NaN,
+    "task_only_target_surface_mass_lift_vs_base": -0.006139626058998636
+  },
+  "paper_claim_allowed": false,
+  "protected_adapter_gains": [
+    1.0
+  ],
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 3072,
+  "scored_row_count": 15360,
+  "teacher_forced_surface_gate_pass": false,
+  "teacher_forced_surface_gate_status": "FAIL",
+  "teacher_forced_surface_gate_targets": {
+    "protected_median_target_margin": ">0",
+    "protected_target_surface_mass_lift_vs_base": ">=+0.15",
+    "protected_target_surface_mass_lift_vs_task_only": ">=+0.10",
+    "protected_target_surface_rank1_rate": ">=0.70",
+    "task_only_target_surface_mass_lift_vs_base": "<+0.05 diagnostic cap"
+  },
+  "training_started": false
+}

@@ -10,6 +10,9 @@ from scripts.natural_evidence_v2.validate_r4_positive_selectivity_pressure_contr
 
 CONTROLLER_ONLY_CONFIG = Path("configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml")
 SAFETY_BOUND_CONFIG = Path("configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml")
+AFTER_867621_FEASIBILITY_CONFIG = Path(
+    "configs/natural_evidence_v2/r4_after_867621_reliability_controller_feasibility_envelope_route.yaml"
+)
 
 
 def test_pressure_controller_route_plan_passes() -> None:
@@ -37,6 +40,16 @@ def test_controller_only_safety_bound_route_plan_passes() -> None:
 
     assert summary["status"] == "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE"
     assert summary["score_row_count"] == 8192
+    assert summary["current_compute_unlocked"] is False
+    assert summary["model_scoring_started"] is False
+    assert summary["generation_started"] is False
+
+
+def test_after_867621_controller_feasibility_envelope_route_plan_passes() -> None:
+    summary = validate_route(load_yaml(AFTER_867621_FEASIBILITY_CONFIG))
+
+    assert summary["status"] == "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE"
+    assert summary["score_row_count"] == 4096
     assert summary["current_compute_unlocked"] is False
     assert summary["model_scoring_started"] is False
     assert summary["generation_started"] is False

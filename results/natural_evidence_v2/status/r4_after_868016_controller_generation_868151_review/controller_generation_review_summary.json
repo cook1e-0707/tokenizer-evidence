@@ -1,0 +1,78 @@
+{
+  "aggregate_by_scrub_and_arm": {
+    "all::protected": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 6
+    },
+    "all::raw": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 8
+    },
+    "all::task_only": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 0
+    },
+    "all::wrong_key": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 6
+    },
+    "all::wrong_payload": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 6
+    },
+    "none::protected": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 6
+    },
+    "none::raw": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 8
+    },
+    "none::task_only": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 0
+    },
+    "none::wrong_key": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 6
+    },
+    "none::wrong_payload": {
+      "accepts": 0,
+      "blocks": 4,
+      "forbidden_public_surface_count": 6
+    }
+  },
+  "control_accepts_format_scrub_all": {
+    "all::raw": 0,
+    "all::task_only": 0,
+    "all::wrong_key": 0,
+    "all::wrong_payload": 0
+  },
+  "duplicate_response_hash_count": 4422,
+  "expected_shards": 4,
+  "far_started": false,
+  "forbidden_public_surface_count_format_scrub_all": 26,
+  "generated_rows": 9216,
+  "generation_diagnostic_gate_pass": false,
+  "input_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868016_controller_generation_868151",
+  "llama_started": false,
+  "missing_artifacts": [],
+  "paper_claim_allowed": false,
+  "protected_accepts_format_scrub_all": 0,
+  "protected_blocks_format_scrub_all": 4,
+  "sanitizer_started": false,
+  "schema_name": "r4_after_868016_controller_generation_review_summary_v1",
+  "shards_seen": 4,
+  "source_job_id": "868151",
+  "status": "FAIL_R4_AFTER_868016_CONTROLLER_GENERATION_DIAGNOSTIC_GATE",
+  "training_started": false
+}

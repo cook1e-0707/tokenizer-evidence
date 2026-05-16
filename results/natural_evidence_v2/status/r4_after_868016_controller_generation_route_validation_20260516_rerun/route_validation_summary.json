@@ -1,0 +1,16 @@
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_868016_controller_generation_h200",
+  "codebook_sha256": "e8a7e8d4aa7d90a306dc61cef269c332b25662b5c7cbaaeb62e88bcebf4a1f41",
+  "decoder_route_config_sha256": "709458b191c903279183456f29b88fea6169944af9eb79d5f40902f0bdba1f8b",
+  "decoder_spec_sha256": "f9174f4514c438f454df97b450fa34723f2b8cdac18394f33e85892bfe198935",
+  "errors": [],
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "score_rows_sha256": "532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "surface_bank_sha256": "4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch"
+}
