@@ -1,0 +1,44 @@
+{
+  "allowed_next_actions": [
+    "artifact-only reliability repair preflight",
+    "artifact-only duplicate taxonomy/preflight",
+    "tests for singleton-bit rejection and duplicate taxonomy",
+    "plan-only validation"
+  ],
+  "claim_policy": "868212 remains diagnostic_only_not_locked_positive_not_paper_claim",
+  "current_phase": "V2_R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NEXT",
+  "forbidden_by_this_route": [
+    "new Slurm generation",
+    "new model scoring",
+    "training",
+    "Llama",
+    "same-family null",
+    "sanitizer",
+    "FAR aggregation",
+    "payload diversity claim",
+    "paper-facing positive claim",
+    "reclassifying 868212 as a locked positive"
+  ],
+  "global_duplicate_response_hash_count": 4424,
+  "protected_first_token_accepts": 3,
+  "protected_first_token_blocks": 4,
+  "raw_task_only_wrong_key_wrong_payload_accepts": 0,
+  "required_codebook_repair": {
+    "all_bits_active_coordinate_count_min": 2,
+    "coordinate_26_cannot_be_sole_coordinate": true,
+    "singleton_bit_codebooks_rejected": true
+  },
+  "required_duplicate_policy_repair": {
+    "cross_arm_duplicates_reported": true,
+    "cross_shard_duplicates_reported": true,
+    "per_block_duplicates_reported": true,
+    "within_arm_duplicates_reported": true,
+    "within_shard_duplicates_reported": true
+  },
+  "route_doc": "docs/natural_evidence_v2/R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_20260516.md",
+  "slurm_allowed": false,
+  "source_attribution": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_failure_attribution/failure_attribution_summary.json",
+  "source_job_id": "868212",
+  "status": "RECORDED_R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT",
+  "timestamp_utc": "2026-05-16T23:47:00Z"
+}

@@ -1,0 +1,6 @@
+block_id,arm,source_condition,accept,accept_ignoring_quality,complete_pairs,required_pairs,decoded_bits,expected_bits,bits_match_condition,checksum_valid,forbidden_public_surface_count,duplicate_response_hash_count
+shard_03_block_00,protected,protected,False,False,7,8,1-100101,10100101,False,False,0,0
+shard_03_block_00,raw,raw,False,False,2,8,0------0,10100101,False,False,0,0
+shard_03_block_00,task_only,task_only,False,False,1,8,0-------,10100101,False,False,0,0
+shard_03_block_00,wrong_key,protected,False,False,7,8,1-100101,01110011,False,False,0,0
+shard_03_block_00,wrong_payload,protected,False,False,7,8,1-100101,01011010,False,False,0,0

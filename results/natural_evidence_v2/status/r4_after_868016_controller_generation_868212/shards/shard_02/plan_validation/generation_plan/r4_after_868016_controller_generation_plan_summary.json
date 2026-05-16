@@ -1,0 +1,46 @@
+{
+  "allocation_rows": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_rows.jsonl",
+  "allocation_rows_sha256": "8aef84fb1bed0cf4dcfdebc012428be8444fdd514354db512ff6195791ce4e02",
+  "artifact_role": "r4_after_868016_coordinate_pivot_controller_generation_plan_or_summary",
+  "assigned_shard_index": 2,
+  "controller_applies_to": [
+    "protected"
+  ],
+  "controller_bonus_nats": 4.0,
+  "controller_max_kl_budget": 0.5,
+  "controller_max_target_mass": 0.5,
+  "controller_penalty_nats": 0.5,
+  "controller_policy": "committed",
+  "controller_review": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_controller_score_868114_review/coordinate_pivot_controller_review_summary.json",
+  "controller_review_sha256": "78e18e3ba8699eea7dbe8fc3248b9197405c91516811fe9b699aea39b824f498",
+  "decode_conditions": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "far_aggregation_started": false,
+  "generation_conditions": [
+    "protected",
+    "raw",
+    "task_only"
+  ],
+  "generation_started": false,
+  "generation_unit": "prefix_native_row_cylinder",
+  "llama_started": false,
+  "max_new_tokens": 96,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "paper_claim_allowed": false,
+  "prompt_index_end": 191,
+  "prompt_index_start": 128,
+  "replicate_group_id": "shard_02",
+  "row_count": 768,
+  "schema_name": "natural_evidence_v2_r4_after_868016_controller_generation_plan_or_summary_v1",
+  "score_rows": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl",
+  "score_rows_sha256": "532d1a6bbb4f7539345f65dc2f8e01088e0c65bf51c7c3ad8f836fe7dc99a97e",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "tokenizer_review": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_868103/review_summary.json",
+  "tokenizer_review_sha256": "1cbe46bd28c1ebc33ea2736037482ef57e4291b4bcd05f897d937db2b56db86a",
+  "training_started": false
+}

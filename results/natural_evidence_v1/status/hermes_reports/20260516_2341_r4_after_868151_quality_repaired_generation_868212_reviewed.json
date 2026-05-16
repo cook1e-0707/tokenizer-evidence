@@ -1,0 +1,40 @@
+{
+  "artifact_only_next": true,
+  "claim_policy": "diagnostic_only_not_locked_positive_not_paper_claim",
+  "current_phase": "V2_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_868212_REVIEWED_FIRST_TOKEN_3_OF_4_GLOBAL_DUP_CAVEAT_NEXT",
+  "far_aggregation_started": false,
+  "first_token_block_quality_duplicate_count": 0,
+  "first_token_block_quality_forbidden_count": 0,
+  "first_token_control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "first_token_event_status_counts": {
+    "erasure": 8293,
+    "other": 84,
+    "target": 839
+  },
+  "first_token_event_trace_rows": 9216,
+  "first_token_protected_accepts": 3,
+  "first_token_protected_blocks": 4,
+  "full_phrase_protected_accepts_format_scrub_all": 0,
+  "generation_job_reviewed": true,
+  "global_duplicate_response_hash_count": 4424,
+  "job_id": "868212",
+  "job_name": "nat-ev-v2-r4cgen",
+  "llama_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "artifact-only coordinate-26 erasure attribution, global duplicate source attribution, and reviewed repair/pivot route planning before any new Slurm submission",
+  "paper_claim_allowed": false,
+  "review_dir": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review",
+  "review_summary_json": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review/quality_repaired_generation_review_summary.json",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_job_state": "COMPLETED",
+  "slurm_job_submitted_in_this_update": false,
+  "status": "PASS_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_NOT_LOCKED_POSITIVE_GLOBAL_DUPLICATE_CAVEAT",
+  "timestamp_utc": "2026-05-16T23:41:13Z",
+  "training_started": false
+}

@@ -1,0 +1,47 @@
+{
+  "coordinate_26_shard03_protected_all_erasure": true,
+  "coordinate_26_shard03_protected_erasure_count": 64,
+  "coordinate_26_shard03_protected_total": 64,
+  "duplicate_summary": {
+    "duplicate_causal_shape_counts": {
+      "cross_condition_same_shard_same_prompt_same_prefix": 767,
+      "cross_shard_cross_condition_cross_prompt_cross_prefix": 0,
+      "cross_shard_same_condition_same_prompt_same_prefix": 1287,
+      "other": 854
+    },
+    "duplicate_condition_sets": {
+      "protected": 93,
+      "protected,raw": 1621,
+      "raw": 170,
+      "task_only": 1024
+    },
+    "duplicate_hash_groups": 2908,
+    "duplicate_shard_sets_top": {
+      "shard_00": 187,
+      "shard_00,shard_01": 1090,
+      "shard_01": 216,
+      "shard_02": 153,
+      "shard_02,shard_03": 1051,
+      "shard_03": 211
+    },
+    "generated_rows": 9216,
+    "global_duplicate_response_hash_count": 4424,
+    "global_duplicate_response_hash_max_group_size": 4,
+    "unique_response_hashes": 4792
+  },
+  "generation_started": false,
+  "input_dir": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212",
+  "interpretation": {
+    "coordinate_26": "the failed block is an erasure failure: shard_03 protected coordinate 26 produced zero target/other events across all 64 rows",
+    "duplicates": "global duplicates remain dominated by deterministic identical generations across shard pairs and protected/raw or same-condition repetitions; per-block duplicate gate is clean but global duplicate gate is not",
+    "route_implication": "do not submit another Slurm job until coordinate reliability and global allocation/decoding duplicate policy are repaired or a pivot route is recorded"
+  },
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "review_dir": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review",
+  "schema_name": "natural_evidence_v2_r4_after_868151_quality_repaired_generation_failure_attribution_v1",
+  "slurm_submitted": false,
+  "source_review_status": "PASS_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_NOT_LOCKED_POSITIVE_GLOBAL_DUPLICATE_CAVEAT",
+  "status": "RECORDED_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_868212_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_NO_SUBMIT",
+  "training_started": false
+}

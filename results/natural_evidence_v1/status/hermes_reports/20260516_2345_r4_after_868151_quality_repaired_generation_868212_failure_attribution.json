@@ -1,0 +1,38 @@
+{
+  "attribution_dir": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_failure_attribution",
+  "claim_policy": "diagnostic_only_not_locked_positive_not_paper_claim",
+  "coordinate_26_shard03_protected_all_erasure": true,
+  "coordinate_26_shard03_protected_erasure_count": 64,
+  "coordinate_26_shard03_protected_total": 64,
+  "current_phase": "V2_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_868212_ATTRIBUTED_REPAIR_OR_PIVOT_ROUTE_NEXT",
+  "dominant_duplicate_condition_sets": {
+    "protected": 93,
+    "protected,raw": 1621,
+    "raw": 170,
+    "task_only": 1024
+  },
+  "dominant_duplicate_shard_sets": {
+    "shard_00": 187,
+    "shard_00,shard_01": 1090,
+    "shard_01": 216,
+    "shard_02": 153,
+    "shard_02,shard_03": 1051,
+    "shard_03": 211
+  },
+  "duplicate_hash_groups": 2908,
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "global_duplicate_response_hash_count": 4424,
+  "global_duplicate_response_hash_max_group_size": 4,
+  "llama_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "record reviewed repair or pivot route before any additional Slurm generation/scoring/training submission",
+  "paper_claim_allowed": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "source_job_id": "868212",
+  "source_review_status": "PASS_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_NOT_LOCKED_POSITIVE_GLOBAL_DUPLICATE_CAVEAT",
+  "status": "RECORDED_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_868212_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_NO_SUBMIT",
+  "timestamp_utc": "2026-05-16T23:45:00Z",
+  "training_started": false
+}

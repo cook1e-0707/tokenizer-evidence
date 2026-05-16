@@ -1,0 +1,161 @@
+block_id,arm,bit_index,coordinates,support,pair_zero_votes,pair_one_votes,decoded_bit,failure_reason
+shard_00_block_00,protected,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_00,protected,1,[26],0,0,0,,missing_pair
+shard_00_block_00,protected,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_00,protected,3,[19],0,0,0,,missing_pair
+shard_00_block_00,protected,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_00,protected,5,[8],0,0,0,,missing_pair
+shard_00_block_00,protected,6,[4],0,0,0,,missing_pair
+shard_00_block_00,protected,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_00,wrong_key,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_00,wrong_key,1,[26],0,0,0,,missing_pair
+shard_00_block_00,wrong_key,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_00,wrong_key,3,[19],0,0,0,,missing_pair
+shard_00_block_00,wrong_key,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_00,wrong_key,5,[8],0,0,0,,missing_pair
+shard_00_block_00,wrong_key,6,[4],0,0,0,,missing_pair
+shard_00_block_00,wrong_key,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,1,[26],0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,3,[19],0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,5,[8],0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,6,[4],0,0,0,,missing_pair
+shard_00_block_00,wrong_payload,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_01,protected,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_01,protected,1,[26],0,0,0,,missing_pair
+shard_00_block_01,protected,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_01,protected,3,[19],0,0,0,,missing_pair
+shard_00_block_01,protected,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_01,protected,5,[8],0,0,0,,missing_pair
+shard_00_block_01,protected,6,[4],0,0,0,,missing_pair
+shard_00_block_01,protected,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_01,wrong_key,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_01,wrong_key,1,[26],0,0,0,,missing_pair
+shard_00_block_01,wrong_key,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_01,wrong_key,3,[19],0,0,0,,missing_pair
+shard_00_block_01,wrong_key,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_01,wrong_key,5,[8],0,0,0,,missing_pair
+shard_00_block_01,wrong_key,6,[4],0,0,0,,missing_pair
+shard_00_block_01,wrong_key,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,1,[26],0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,3,[19],0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,5,[8],0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,6,[4],0,0,0,,missing_pair
+shard_00_block_01,wrong_payload,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_02,protected,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_02,protected,1,[26],0,0,0,,missing_pair
+shard_00_block_02,protected,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_02,protected,3,[19],0,0,0,,missing_pair
+shard_00_block_02,protected,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_02,protected,5,[8],0,0,0,,missing_pair
+shard_00_block_02,protected,6,[4],0,0,0,,missing_pair
+shard_00_block_02,protected,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_02,wrong_key,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_02,wrong_key,1,[26],0,0,0,,missing_pair
+shard_00_block_02,wrong_key,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_02,wrong_key,3,[19],0,0,0,,missing_pair
+shard_00_block_02,wrong_key,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_02,wrong_key,5,[8],0,0,0,,missing_pair
+shard_00_block_02,wrong_key,6,[4],0,0,0,,missing_pair
+shard_00_block_02,wrong_key,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,1,[26],0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,3,[19],0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,5,[8],0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,6,[4],0,0,0,,missing_pair
+shard_00_block_02,wrong_payload,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_03,protected,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_03,protected,1,[26],0,0,0,,missing_pair
+shard_00_block_03,protected,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_03,protected,3,[19],0,0,0,,missing_pair
+shard_00_block_03,protected,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_03,protected,5,[8],0,0,0,,missing_pair
+shard_00_block_03,protected,6,[4],0,0,0,,missing_pair
+shard_00_block_03,protected,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_03,wrong_key,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_03,wrong_key,1,[26],0,0,0,,missing_pair
+shard_00_block_03,wrong_key,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_03,wrong_key,3,[19],0,0,0,,missing_pair
+shard_00_block_03,wrong_key,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_03,wrong_key,5,[8],0,0,0,,missing_pair
+shard_00_block_03,wrong_key,6,[4],0,0,0,,missing_pair
+shard_00_block_03,wrong_key,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,1,[26],0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,3,[19],0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,5,[8],0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,6,[4],0,0,0,,missing_pair
+shard_00_block_03,wrong_payload,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_00,raw,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_00,raw,1,[26],0,0,0,,missing_pair
+shard_00_block_00,raw,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_00,raw,3,[19],0,0,0,,missing_pair
+shard_00_block_00,raw,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_00,raw,5,[8],0,0,0,,missing_pair
+shard_00_block_00,raw,6,[4],0,0,0,,missing_pair
+shard_00_block_00,raw,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_01,raw,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_01,raw,1,[26],0,0,0,,missing_pair
+shard_00_block_01,raw,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_01,raw,3,[19],0,0,0,,missing_pair
+shard_00_block_01,raw,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_01,raw,5,[8],0,0,0,,missing_pair
+shard_00_block_01,raw,6,[4],0,0,0,,missing_pair
+shard_00_block_01,raw,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_02,raw,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_02,raw,1,[26],0,0,0,,missing_pair
+shard_00_block_02,raw,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_02,raw,3,[19],0,0,0,,missing_pair
+shard_00_block_02,raw,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_02,raw,5,[8],0,0,0,,missing_pair
+shard_00_block_02,raw,6,[4],0,0,0,,missing_pair
+shard_00_block_02,raw,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_03,raw,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_03,raw,1,[26],0,0,0,,missing_pair
+shard_00_block_03,raw,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_03,raw,3,[19],0,0,0,,missing_pair
+shard_00_block_03,raw,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_03,raw,5,[8],0,0,0,,missing_pair
+shard_00_block_03,raw,6,[4],0,0,0,,missing_pair
+shard_00_block_03,raw,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_00,task_only,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_00,task_only,1,[26],0,0,0,,missing_pair
+shard_00_block_00,task_only,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_00,task_only,3,[19],0,0,0,,missing_pair
+shard_00_block_00,task_only,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_00,task_only,5,[8],0,0,0,,missing_pair
+shard_00_block_00,task_only,6,[4],0,0,0,,missing_pair
+shard_00_block_00,task_only,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_01,task_only,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_01,task_only,1,[26],0,0,0,,missing_pair
+shard_00_block_01,task_only,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_01,task_only,3,[19],0,0,0,,missing_pair
+shard_00_block_01,task_only,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_01,task_only,5,[8],0,0,0,,missing_pair
+shard_00_block_01,task_only,6,[4],0,0,0,,missing_pair
+shard_00_block_01,task_only,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_02,task_only,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_02,task_only,1,[26],0,0,0,,missing_pair
+shard_00_block_02,task_only,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_02,task_only,3,[19],0,0,0,,missing_pair
+shard_00_block_02,task_only,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_02,task_only,5,[8],0,0,0,,missing_pair
+shard_00_block_02,task_only,6,[4],0,0,0,,missing_pair
+shard_00_block_02,task_only,7,"[7, 23]",0,0,0,,missing_pair
+shard_00_block_03,task_only,0,"[6, 22]",0,0,0,,missing_pair
+shard_00_block_03,task_only,1,[26],0,0,0,,missing_pair
+shard_00_block_03,task_only,2,"[1, 17]",0,0,0,,missing_pair
+shard_00_block_03,task_only,3,[19],0,0,0,,missing_pair
+shard_00_block_03,task_only,4,"[15, 31]",0,0,0,,missing_pair
+shard_00_block_03,task_only,5,[8],0,0,0,,missing_pair
+shard_00_block_03,task_only,6,[4],0,0,0,,missing_pair
+shard_00_block_03,task_only,7,"[7, 23]",0,0,0,,missing_pair

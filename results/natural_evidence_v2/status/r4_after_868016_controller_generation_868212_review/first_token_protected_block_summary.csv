@@ -1,0 +1,5 @@
+block_id,accept,decoded_bits,expected_bits,complete_pairs,required_pairs,checksum_valid,bits_match_condition,forbidden_public_surface_count,duplicate_response_hash_count,min_pair_support,missing_bit_indices
+shard_00_block_00,True,10100101,10100101,8,8,True,True,0,0,2,
+shard_01_block_00,True,10100101,10100101,8,8,True,True,0,0,10,
+shard_02_block_00,True,10100101,10100101,8,8,True,True,0,0,6,
+shard_03_block_00,False,1-100101,10100101,7,8,False,False,0,0,0,1

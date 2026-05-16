@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T23:22:00Z
+Last synchronized: 2026-05-16T23:51:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,17 +9,17 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_JOB_868212_SUBMITTED_MONITOR_NEXT`
+`V2_R4_AFTER_868212_RELIABILITY_DUPLICATE_REPAIR_PREFLIGHT_FAILED_NO_SUBMIT`
 
-## Current Route
+## Current Route Result
 
-Job `868151` completed the after-868016 controller-aware row-cylinder generation
-H200/pomplun diagnostic:
+Job `868212` completed the reviewed quality-repaired after-868151 controller
+generation diagnostic on Chimera H200:
 
 ```text
-job_id: 868151
+job_id: 868212
 job_name: nat-ev-v2-r4cgen
-array: 0-3
+array: 0-3%4
 partition/qos/account: pomplun / pomplun / cs_yinxin.wan
 state: COMPLETED, 4/4 shards
 exit_code: 0:0
@@ -30,317 +30,140 @@ Artifacts were synced locally:
 
 ```text
 raw outputs/logs:
-  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151/
+  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212/
 review:
-  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_review/
-failure analysis:
-  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_failure_analysis/
+  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review/
+review summary:
+  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review/quality_repaired_generation_review_summary.json
 ```
 
-The precommitted full-phrase generation/decode gate failed:
+The precommitted first-token event diagnostic gate passed at small diagnostic
+scale:
 
 ```text
 review status:
-  FAIL_R4_AFTER_868016_CONTROLLER_GENERATION_DIAGNOSTIC_GATE
-protected accepts, format_scrub=all:
-  0/4
-raw/task-only/wrong-key/wrong-payload accepts, format_scrub=all:
+  PASS_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_NOT_LOCKED_POSITIVE_GLOBAL_DUPLICATE_CAVEAT
+protected accepts:
+  3/4
+raw/task-only/wrong-key/wrong-payload accepts:
   0/4 each
-forbidden public surface count, format_scrub=all:
-  26
-forbidden term observed:
-  coordinate
-matched_surface_count, format_scrub=all:
+first-token block-level forbidden public surface count:
   0
-selected_surface_count, format_scrub=all:
+first-token block-level duplicate response hash count:
   0
-selected_coordinates_observed, format_scrub=all:
-  0
-duplicate response hash count:
-  4422
-```
-
-Interpretation: this is not a Slurm/provider failure and not a false-accept
-failure. It is a positive-channel transfer failure. The controller passed
-teacher-forced first-token scoring in `868114`, but generated outputs did not
-contain the precommitted full phrase surfaces required by the current decoder.
-
-A corrected posthoc first-token event oracle was run for route planning only:
-
-```text
-oracle:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_oracle_20260516_v2/
-status:
-  FIRST_TOKEN_EVENT_ORACLE_V2_RECORDED_ARTIFACT_ONLY_NOT_PRECOMMITTED_NOT_POSITIVE
-protected accepts ignoring forbidden:
-  4/4
-raw accepts ignoring forbidden:
-  0/4
-task-only accepts ignoring forbidden:
-  0/4
-wrong-key accepts ignoring forbidden:
-  0/4
-wrong-payload accepts ignoring forbidden:
-  0/4
-```
-
-This oracle cannot reclassify `868151` as a pass because it was not
-precommitted and ignores the forbidden-surface gate. It is evidence that the
-next repair/pivot should target a precommitted first-token / lemma event-channel
-rather than another full-phrase rerun.
-
-Reviewed pivot route record:
-
-```text
-docs/natural_evidence_v2/R4_AFTER_868151_CONTROLLER_GENERATION_FAILURE_PIVOT_ROUTE_20260516.md
-```
-
-Codex formalized and locally validated the first-token event-channel
-artifact-only route:
-
-```text
-event-channel spec:
-  docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_SPEC_20260516.md
-route config:
-  configs/natural_evidence_v2/r4_after_868151_first_token_event_channel.yaml
-route validator:
-  scripts/natural_evidence_v2/validate_r4_after_868151_first_token_event_channel_route.py
-event decoder spec:
-  results/natural_evidence_v2/precommit/r4_after_868151_first_token_event_channel_precommit_20260516/decoder_spec.json
-route validation:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validation_20260516/
-validation status:
-  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT
-tests:
-  7 passed
-remote validation:
-  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT
-remote allowlist safety:
-  PASS zero-enabled
-active Chimera jobs:
-  none
-```
-
-Codex then implemented and replayed the first-token event decoder/extractor:
-
-```text
-decoder:
-  scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
-decoder replay:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_decoder_replay_20260516/
-replay status:
-  FIRST_TOKEN_EVENT_DECODE_RECORDED_ARTIFACT_ONLY_NOT_POSITIVE
-event rows:
+token-id event traces:
   9216
-event source:
-  text_fallback_old_transcript only
-event statuses:
-  target=845, other=82, erasure=8289
-protected accepts with quality gates:
-  0/4
-protected accepts ignoring quality:
-  4/4
-raw/task-only/wrong-key/wrong-payload accepts ignoring quality:
-  0/4 each
-protected forbidden public surface count:
-  6
-protected duplicate response hash count:
-  755
+event status counts:
+  target=839, other=84, erasure=8293
 ```
 
-Interpretation: event-level signal exists in the failed transcripts, but the
-quality gates still fail. The replay uses text fallback because `868151` did not
-store token-id event traces; future positive routes must store token-id traces.
-The next repair must address forbidden technical literals and deterministic
-duplicate outputs before any new generation route.
-
-Codex recorded the artifact-only quality audit and repair route:
+The one protected failed block is specific:
 
 ```text
-quality audit:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_audit_20260516/
-quality route:
-  docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_QUALITY_REPAIR_ROUTE_20260516.md
-coordinate literal hits:
-  14
-likely ordinary domain-sense coordinate hits:
-  10
-within-condition duplicate response hash count:
-  2803
+block_id: shard_03_block_00
+decoded_bits: 1-100101
+expected_bits: 10100101
+missing_bit_indices: 1
+missing coordinate: 26
+min_pair_support: 0
+complete_pairs: 7/8
 ```
 
-Codex patched the future controller generation wrapper to store token-id event
-traces:
+The full-phrase decoder remains failed, as expected:
 
 ```text
-patched generator:
-  scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py
-new output fields:
-  first_generated_token_id
-  first_generated_token_text
-  target_first_token_ids
-  other_first_token_ids
-  event_side
-  event_bucket_side
-  event_trace
-tests:
-  7 passed, 1 skipped
-remote py_compile:
-  PASS
-remote allowlist safety:
-  PASS zero-enabled
-```
-
-Codex validated the patched wrapper locally and remotely in plan-only mode:
-
-```text
-wrapper validation:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_wrapper_repair_validation_20260516/
-status:
-  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_TRACE_WRAPPER_REPAIR_PLAN_ONLY_VALIDATION
-local route validation:
-  PASS
-local wrapper plan-only:
-  PASS
-remote route validation:
-  PASS
-remote wrapper plan-only:
-  PASS
-local/remote allowlist safety:
-  PASS zero-enabled
-slurm submitted:
-  false
-generation/model scoring/training started:
-  false
-```
-
-Codex then implemented the artifact-only quality repair plan and connected it
-to the future generation/decode wrapper:
-
-```text
-quality repair plan:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/
-status:
-  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_QUALITY_REPAIR_PLAN_ARTIFACT_ONLY
-contextual literal policy:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/contextual_literal_policy.json
-duplicate-safe allocation:
-  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_manifest.json
-allocation status:
-  PASS_DUPLICATE_SAFE_ROW_ALLOCATION_ARTIFACT_ONLY
-shards:
-  4
-rows per shard:
-  768
-rows per coordinate per shard:
-  64
-duplicate prompt/prefix pairs per shard:
+full-phrase protected accepts, format_scrub=all:
   0
-coordination-domain prompts:
-  44/256
-coordination-domain exclusion preserves current scope:
-  false
 ```
 
-Interpretation: deleting all coordination-domain prompts would leave too few
-rows for the current 4-shard diagnostic scope, so the repair route uses a
-contextual technical-literal policy for ordinary `coordinate` language while
-still requiring zero technical public literals. The allocation manifest removes
-the deterministic duplicate source where the same `(prompt_index,
-prefix_family_id)` appeared multiple times inside one shard.
-
-Codex patched the wrapper path to consume these repair artifacts:
+This result is diagnostic only, not a locked positive or paper claim. The main
+caveat is global duplication across generated outputs:
 
 ```text
-generator:
-  scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py
-new selector:
-  --allocation-rows plus --assigned-shard-index
-event decoder:
-  scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
-new quality policy:
-  --contextual-literal-policy
-route config:
-  configs/natural_evidence_v2/r4_after_868016_controller_generation_route.yaml
-local route validation:
-  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
-local wrapper plan-only:
-  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
-remote route validation:
-  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
-remote wrapper plan-only:
-  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
-remote allowlist safety:
-  PASS zero-enabled
-tests:
-  11 passed, 1 skipped
-slurm submitted:
-  false
-generation/model scoring/training started:
-  false
+generated rows:
+  9216
+unique response hashes:
+  4792
+global duplicate response hash count:
+  4424
+max duplicate group size:
+  4
 ```
 
-The single-submission route was recorded:
+Interpretation: the quality-repaired first-token event route produced a real
+small-scale positive signal under token-id traces with clean null arms and clean
+block-level quality gates. It still does not justify locked positive claims
+because scale is only 4 protected blocks, one block failed by coordinate erasure,
+full-phrase decoding remains failed, and global duplicate hashes remain high.
+
+## Failure Attribution
+
+The artifact-only attribution has been recorded:
 
 ```text
-route decision:
-  docs/natural_evidence_v2/R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_SUBMISSION_ROUTE_20260516.md
-route JSON:
-  results/natural_evidence_v2/status/r4_after_868151_quality_repaired_generation_submission_route_20260516.json
-allowed entry:
-  v2_r4_after_868016_controller_generation_h200
-allowed command:
-  sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
-compute:
-  H200 / pomplun / cs_yinxin.wan / 30-00:00:00
-active Chimera jobs before route record:
-  none observed
+attribution:
+  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_failure_attribution/
+status:
+  RECORDED_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_868212_ARTIFACT_ONLY_FAILURE_ATTRIBUTION_NO_SUBMIT
+coordinate-26 shard_03 protected erasures:
+  64/64
+duplicate hash groups:
+  2908
+duplicate extra rows:
+  4424
+dominant duplicate condition sets:
+  protected,raw: 1621 groups
+  task_only: 1024 groups
+dominant duplicate shard pairs:
+  shard_00,shard_01: 1090 groups
+  shard_02,shard_03: 1051 groups
 ```
 
-The reviewed route was submitted exactly once:
-
-```text
-job_id:
-  868212
-job_name:
-  nat-ev-v2-r4cgen
-array:
-  0-3%4
-partition/qos/account:
-  pomplun / pomplun / cs_yinxin.wan
-state after submit:
-  RUNNING on chimera21 for 4/4 shards
-submission record:
-  results/natural_evidence_v2/status/r4_after_868151_quality_repaired_generation_submission_record_20260516.json
-local post-submit allowlist safety:
-  PASS zero-enabled
-remote post-submit allowlist safety:
-  PASS zero-enabled
-```
+Interpretation: the protected failure is a localized erasure/reliability issue
+for coordinate 26 in shard_03, not a null-accept failure. The duplicate caveat
+is global and dominated by deterministic identical generations across paired
+shards and protected/raw or same-condition repetitions. The per-block duplicate
+gate is clean, but this is not sufficient for a locked-scale positive.
 
 ## Next Allowed Action
 
-Monitor the reviewed quality-repaired H200 generation diagnostic:
+The first artifact-only repair preflight has been implemented and run:
 
 ```text
-1. Monitor Slurm job 868212 only.
-2. After all shards reach a terminal state, sync generated/decode artifacts.
-3. Review first-token event decode, contextual literal counts, duplicate hashes,
-   and raw/task-only/wrong-key/wrong-payload controls.
-4. Do not submit another generation/scoring/training job until 868212 is
-   reviewed and a new route is recorded.
+route:
+  docs/natural_evidence_v2/R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_20260516.md
+route status:
+  RECORDED_R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT
+preflight:
+  results/natural_evidence_v2/status/r4_after_868212_reliability_duplicate_repair_preflight_20260516/
+preflight status:
+  FAIL_R4_AFTER_868212_RELIABILITY_DUPLICATE_REPAIR_PREFLIGHT_NO_SUBMIT
+singleton/codebook failures:
+  bit 1 active=[26], coordinate_26 sole active coordinate
+  bit 3 active=[19]
+  bit 5 active=[8]
+  bit 6 active=[4]
+duplicate extra rows:
+  4424
+tests:
+  14 passed, 1 skipped
+next:
+  artifact-only repaired codebook/duplicate-policy construction or pivot route
+not allowed:
+  new Slurm generation/scoring/training until this preflight passes or a new
+  reviewed pivot route supersedes it
 ```
 
 Route-controlled actions may proceed automatically after their preconditions are
-recorded. At this state, job `868212` is already submitted and post-submit
-allowlist safety is clean; do not submit additional Slurm
-generation/scoring/training jobs until this job reaches a terminal state and is
-reviewed.
+recorded; the user has authorized Codex and Hermes not to ask repeatedly for the
+same approved route. At this state, do not submit another Slurm generation,
+model-scoring, or training job until the artifact-only review above records a
+new route.
 
 ## Still Gate-Controlled
 
-These actions may proceed automatically only after their route-specific
-preconditions pass and are recorded in this file:
+These actions are not permanently forbidden, but may proceed only after their
+route-specific preconditions pass and are recorded in this file:
 
 ```text
 larger generation route

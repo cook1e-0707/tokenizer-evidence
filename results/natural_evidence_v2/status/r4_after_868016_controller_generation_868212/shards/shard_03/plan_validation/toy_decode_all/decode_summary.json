@@ -1,0 +1,31 @@
+{
+  "codebook": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/codebook.json",
+  "decode_rows": 3,
+  "decoder_spec": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/decoder_spec.json",
+  "format_scrub_mode": "all",
+  "generated_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868016_controller_generation_868212/shards/shard_03/plan_validation/toy_generated_outputs.jsonl",
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "route_config": "configs/natural_evidence_v2/r4_after_868016_reliability_coordinate_pivot_codebook_oracle_route.yaml",
+  "schema_name": "natural_evidence_v2_r4_after_864832_reliability_decode_summary_v1",
+  "slurm_submitted": false,
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 1,
+      "blocks": 1,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "blocks": 1,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "blocks": 1,
+      "forbidden_public_surface_count": 0
+    }
+  },
+  "surface_bank": "results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json",
+  "training_started": false
+}

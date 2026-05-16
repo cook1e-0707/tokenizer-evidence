@@ -1,0 +1,38 @@
+{
+  "allowed_next_actions": [
+    "artifact-only reliability repair preflight",
+    "artifact-only duplicate taxonomy/preflight",
+    "tests for singleton-bit rejection and duplicate taxonomy",
+    "plan-only validation"
+  ],
+  "claim_policy": "868212 remains diagnostic_only_not_locked_positive_not_paper_claim",
+  "current_phase": "V2_R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_RECORDED_ARTIFACT_ONLY_NEXT",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "implement artifact-only reliability/duplicate repair preflights and tests; no Slurm until a future single-submission route is recorded",
+  "paper_claim_allowed": false,
+  "required_codebook_repair": {
+    "all_bits_active_coordinate_count_min": 2,
+    "coordinate_26_cannot_be_sole_coordinate": true,
+    "singleton_bit_codebooks_rejected": true
+  },
+  "required_duplicate_policy_repair": {
+    "cross_arm_duplicates_reported": true,
+    "cross_shard_duplicates_reported": true,
+    "per_block_duplicates_reported": true,
+    "within_arm_duplicates_reported": true,
+    "within_shard_duplicates_reported": true
+  },
+  "route_doc": "docs/natural_evidence_v2/R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_20260516.md",
+  "route_json": "results/natural_evidence_v2/status/r4_after_868212_first_token_event_reliability_duplicate_repair_route_20260516.json",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "slurm_allowed": false,
+  "slurm_job_submitted": false,
+  "source_job_id": "868212",
+  "status": "RECORDED_R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT",
+  "timestamp_utc": "2026-05-16T23:47:00Z",
+  "training_started": false
+}
