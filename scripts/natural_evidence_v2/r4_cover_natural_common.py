@@ -79,7 +79,7 @@ def write_csv_new(path: Path, rows: Iterable[Mapping[str, Any]], fieldnames: Seq
         raise FileExistsError(f"refusing to overwrite existing artifact: {path}")
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(fieldnames), extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=list(fieldnames), extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow(dict(row))

@@ -30,6 +30,8 @@ RUN_ROOT="${RUN_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/na
 ROUTE_CONFIG="${ROUTE_CONFIG:-configs/natural_evidence_v2/r4_after_868016_controller_generation_route.yaml}"
 OUTPUT_DIR="${OUTPUT_DIR:-$RUN_ROOT/status/r4_after_868016_controller_generation_${SLURM_ARRAY_JOB_ID:-manual}}"
 SCORE_ROWS="${SCORE_ROWS:-results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl}"
+ALLOCATION_ROWS="${ALLOCATION_ROWS:-results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_rows.jsonl}"
+CONTEXTUAL_LITERAL_POLICY="${CONTEXTUAL_LITERAL_POLICY:-results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/contextual_literal_policy.json}"
 TOKENIZER_REVIEW="${TOKENIZER_REVIEW:-results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_868103/review_summary.json}"
 CONTROLLER_REVIEW="${CONTROLLER_REVIEW:-results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_controller_score_868114_review/coordinate_pivot_controller_review_summary.json}"
 SURFACE_BANK="${SURFACE_BANK:-results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json}"
@@ -97,6 +99,8 @@ echo "validate_plan_only=$VALIDATE_PLAN_ONLY"
 echo "shard_index=${SHARD_INDEX:-unset}"
 echo "slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00"
 echo "score_rows=$SCORE_ROWS"
+echo "allocation_rows=$ALLOCATION_ROWS"
+echo "contextual_literal_policy=$CONTEXTUAL_LITERAL_POLICY"
 echo "surface_bank=$SURFACE_BANK"
 echo "codebook=$CODEBOOK"
 echo "decoder_spec=$DECODER_SPEC"
@@ -117,6 +121,7 @@ if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
   expected_end=$((expected_start + 63))
   expected_rows=768
   shard_id="$(printf 'shard_%02d' "$SHARD_INDEX")"
+  allocation_shard_index="$SHARD_INDEX"
   shard_dir="$OUTPUT_DIR/shards/$shard_id"
   plan_validation_dir="$shard_dir/plan_validation"
 else
@@ -124,6 +129,7 @@ else
   expected_end=63
   expected_rows=768
   shard_id="plan_only"
+  allocation_shard_index=0
   shard_dir="$OUTPUT_DIR"
   plan_validation_dir="$OUTPUT_DIR/plan_validation"
 fi
@@ -152,6 +158,8 @@ fi
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
   --score-rows "$SCORE_ROWS" \
+  --allocation-rows "$ALLOCATION_ROWS" \
+  --assigned-shard-index "$allocation_shard_index" \
   --tokenizer-review "$TOKENIZER_REVIEW" \
   --controller-review "$CONTROLLER_REVIEW" \
   --output-dir "$plan_validation_dir/generation_plan" \
@@ -259,7 +267,7 @@ if [ "$VALIDATE_PLAN_ONLY" = "1" ]; then
   exit 0
 fi
 
-for required in "$SCORE_ROWS" "$TOKENIZER_REVIEW" "$CONTROLLER_REVIEW" "$SURFACE_BANK" "$CODEBOOK" "$DECODER_SPEC" "$DECODER_ROUTE_CONFIG" \
+for required in "$SCORE_ROWS" "$ALLOCATION_ROWS" "$CONTEXTUAL_LITERAL_POLICY" "$TOKENIZER_REVIEW" "$CONTROLLER_REVIEW" "$SURFACE_BANK" "$CODEBOOK" "$DECODER_SPEC" "$DECODER_ROUTE_CONFIG" \
   "scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py" \
   "scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py"; do
   if [ ! -s "$required" ]; then
@@ -284,6 +292,8 @@ mkdir -p "$shard_dir"
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
   --score-rows "$SCORE_ROWS" \
+  --allocation-rows "$ALLOCATION_ROWS" \
+  --assigned-shard-index "$allocation_shard_index" \
   --tokenizer-review "$TOKENIZER_REVIEW" \
   --controller-review "$CONTROLLER_REVIEW" \
   --output-dir "$shard_dir" \
@@ -312,6 +322,14 @@ mkdir -p "$shard_dir"
   --format-scrub all \
   --prompts-per-block 64 \
   --include-protected-controls
+
+"$PYTHON_BIN" scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py \
+  --generated-outputs "$shard_dir/r4_generated_outputs.jsonl" \
+  --score-rows "$ALLOCATION_ROWS" \
+  --codebook "$CODEBOOK" \
+  --control-decode-rows "$shard_dir/decode_all/decode_rows.jsonl" \
+  --contextual-literal-policy "$CONTEXTUAL_LITERAL_POLICY" \
+  --output-dir "$shard_dir/first_token_event_decode"
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py \
   --generated-outputs "$shard_dir/r4_generated_outputs.jsonl" \

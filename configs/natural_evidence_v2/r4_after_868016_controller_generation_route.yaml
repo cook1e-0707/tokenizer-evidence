@@ -15,6 +15,14 @@ score_rows:
   prompt_offset: 256
   prompt_count: 256
 
+quality_repair:
+  plan_summary: results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/quality_repair_plan_summary.json
+  allocation_rows: results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_rows.jsonl
+  allocation_manifest: results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_manifest.json
+  contextual_literal_policy: results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/contextual_literal_policy.json
+  allocation_policy: per_shard_unique_prompt_index_prefix_family
+  contextual_coordinate_policy: true
+
 precommit:
   surface_bank: results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
   codebook: results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/codebook.json
@@ -60,6 +68,7 @@ event_trace_policy:
     - event_side
     - event_bucket_side
     - event_trace
+  contextual_literal_policy: results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/contextual_literal_policy.json
 
 adapters:
   protected_adapter_loaded: false

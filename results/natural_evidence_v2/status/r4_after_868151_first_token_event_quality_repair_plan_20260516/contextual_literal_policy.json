@@ -1,0 +1,51 @@
+{
+  "contextual_literals": {
+    "coordinate": {
+      "allowed_domain_cues": [
+        "coordinate",
+        "coordinates",
+        "coordinated",
+        "coordinating",
+        "coordination",
+        "coordinator",
+        "coordinators"
+      ],
+      "gate_policy": "ordinary coordination-domain use may be classified as non-technical, but technical coordinate use remains a forbidden public surface",
+      "ordinary_domain_allowed": true,
+      "technical_cues": [
+        "bit",
+        "bucket",
+        "checksum",
+        "codeword",
+        "coordinate id",
+        "decoder",
+        "hidden",
+        "payload",
+        "secret",
+        "slot",
+        "token id",
+        "watermark"
+      ]
+    }
+  },
+  "final_generation_gate": {
+    "ordinary_domain_literal_count_reported_separately": true,
+    "technical_public_literal_count_max": 0
+  },
+  "generation_started": false,
+  "hard_forbid_literals": [
+    "bucket",
+    "fingerprint",
+    "watermark",
+    "payload",
+    "secret key",
+    "decoder",
+    "hidden signal"
+  ],
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_868151_contextual_literal_policy_v1",
+  "slurm_submitted": false,
+  "status": "CONTEXTUAL_LITERAL_POLICY_PLANNED_ARTIFACT_ONLY",
+  "training_started": false
+}

@@ -67,6 +67,33 @@ def int_set(value: Any) -> set[int]:
     return {int(item) for item in value}
 
 
+def literal_present(text: str, literal: str) -> bool:
+    return bool(re.search(rf"\b{re.escape(literal)}\b", text, flags=re.IGNORECASE))
+
+
+def contextual_technical_literal_hits(text: str, policy: Mapping[str, Any] | None) -> list[str]:
+    if not policy:
+        return technical_literal_hits(text)
+    hits: list[str] = []
+    for literal in policy.get("hard_forbid_literals", []):
+        if literal_present(text, str(literal)):
+            hits.append(str(literal))
+    contextual = policy.get("contextual_literals", {})
+    if isinstance(contextual, Mapping):
+        for literal, rule in contextual.items():
+            literal_text = str(literal)
+            if not literal_present(text, literal_text):
+                continue
+            if not isinstance(rule, Mapping):
+                hits.append(literal_text)
+                continue
+            technical_cues = [str(item) for item in rule.get("technical_cues", [])]
+            has_technical_cue = any(literal_present(text, cue) for cue in technical_cues)
+            if has_technical_cue or not bool(rule.get("ordinary_domain_allowed", False)):
+                hits.append(literal_text)
+    return sorted(set(hits))
+
+
 def first_word_set(items: Sequence[str]) -> set[str]:
     return {first_word(item) for item in items if first_word(item)}
 
@@ -231,6 +258,7 @@ def decode_generated_rows(
     codebook: Mapping[str, Any],
     expected_controls: Mapping[tuple[str, str], Sequence[int]],
     allow_text_fallback_for_old_transcripts: bool,
+    contextual_literal_policy: Mapping[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     votes: dict[tuple[str, str], dict[int, Counter[str]]] = defaultdict(lambda: defaultdict(Counter))
     forbidden_counts: Counter[tuple[str, str]] = Counter()
@@ -268,7 +296,12 @@ def decode_generated_rows(
         )
         if side:
             votes[(shard_id, condition)][int(row["coordinate_id"])][side] += 1
-        forbidden_counts[(shard_id, condition)] += len(technical_literal_hits(str(row.get("response_text", ""))))
+        forbidden_counts[(shard_id, condition)] += len(
+            contextual_technical_literal_hits(
+                str(row.get("response_text", "")),
+                contextual_literal_policy,
+            )
+        )
         response_hashes[(shard_id, condition)][str(row.get("response_text_sha256", ""))] += 1
 
     decoded_rows: list[dict[str, Any]] = []
@@ -335,6 +368,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--score-rows", type=Path, default=DEFAULT_SCORE_ROWS)
     parser.add_argument("--codebook", type=Path, default=DEFAULT_CODEBOOK)
     parser.add_argument("--control-decode-rows", type=Path, nargs="*", default=[])
+    parser.add_argument("--contextual-literal-policy", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument(
         "--allow-text-fallback-for-old-transcripts",
@@ -355,6 +389,7 @@ def main() -> int:
         codebook=read_json(args.codebook),
         expected_controls=expected_bits_by_control_arm(args.control_decode_rows),
         allow_text_fallback_for_old_transcripts=bool(args.allow_text_fallback_for_old_transcripts),
+        contextual_literal_policy=read_json(args.contextual_literal_policy) if args.contextual_literal_policy else None,
     )
     output_dir = args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -377,6 +412,7 @@ def main() -> int:
         "summary_by_arm": summarize(decoded_rows),
         "future_positive_requires_token_id_trace": True,
         "text_fallback_for_old_transcripts": bool(args.allow_text_fallback_for_old_transcripts),
+        "contextual_literal_policy": str(args.contextual_literal_policy) if args.contextual_literal_policy else "",
         "reclassifies_868151": False,
         "generation_started": False,
         "model_scoring_started": False,

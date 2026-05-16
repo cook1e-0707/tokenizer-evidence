@@ -6,6 +6,7 @@ from scripts.natural_evidence_v2.generate_r4_after_868016_controller_outputs imp
     FirstStepControllerLogitsProcessor,
     _controlled_scores_for_first_step,
     first_token_event_trace,
+    select_rows_by_allocation,
 )
 from scripts.natural_evidence_v2.score_r4_surface_teacher_forced_mass import ControllerConfig
 
@@ -112,3 +113,29 @@ def test_first_token_event_trace_rejects_overlap() -> None:
             other_token_ids=[7],
             target_bit=1,
         )
+
+
+def test_select_rows_by_allocation_rejects_duplicate_prompt_prefix_pair() -> None:
+    rows = []
+    for coordinate in range(12):
+        rows.append(
+            {
+                "assigned_shard_index": 0,
+                "assistant_prefix_before_surface": "A useful action is to ",
+                "bucket_0_surfaces": ["review notes"],
+                "bucket_1_surfaces": ["clarify notes"],
+                "coordinate_id": coordinate,
+                "duplicate_pair_key": "0|same_prefix" if coordinate < 2 else f"{coordinate}|same_prefix",
+                "prefix_family_id": "same_prefix",
+                "prompt_id": f"p{coordinate}",
+                "prompt_index": coordinate,
+                "prompt_text": "Write a useful ordinary answer.",
+                "row_key": f"row-{coordinate}",
+                "target_bit": 0,
+                "target_surface": "review notes",
+                "target_surface_id": f"s{coordinate}",
+            }
+        )
+
+    with pytest.raises(ValueError, match="duplicate prompt/prefix"):
+        select_rows_by_allocation(rows, assigned_shard_index=0, expected_rows=12)

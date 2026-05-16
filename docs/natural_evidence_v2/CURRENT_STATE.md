@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T23:00:14Z
+Last synchronized: 2026-05-16T23:22:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_TRACE_WRAPPER_PLAN_VALIDATED_LITERAL_DUP_REPAIR_NEXT`
+`V2_R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_JOB_868212_SUBMITTED_MONITOR_NEXT`
 
 ## Current Route
 
@@ -214,24 +214,128 @@ generation/model scoring/training started:
   false
 ```
 
-## Next Allowed Action
-
-Artifact-only first-token event wrapper repair only:
+Codex then implemented the artifact-only quality repair plan and connected it
+to the future generation/decode wrapper:
 
 ```text
-1. Add prompt/domain filtering or a reviewed contextual technical-literal
-   matcher so ordinary `coordination` tasks do not trigger hidden-channel
-   literal failures.
-2. Add duplicate-output mitigation and duplicate hash refusal checks.
-3. Record a reviewed literal/duplicate repair plan.
-4. Only after that repair plan passes validation, prepare a single reviewed H200 Slurm
-   submission route.
+quality repair plan:
+  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/
+status:
+  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_QUALITY_REPAIR_PLAN_ARTIFACT_ONLY
+contextual literal policy:
+  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/contextual_literal_policy.json
+duplicate-safe allocation:
+  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_manifest.json
+allocation status:
+  PASS_DUPLICATE_SAFE_ROW_ALLOCATION_ARTIFACT_ONLY
+shards:
+  4
+rows per shard:
+  768
+rows per coordinate per shard:
+  64
+duplicate prompt/prefix pairs per shard:
+  0
+coordination-domain prompts:
+  44/256
+coordination-domain exclusion preserves current scope:
+  false
+```
+
+Interpretation: deleting all coordination-domain prompts would leave too few
+rows for the current 4-shard diagnostic scope, so the repair route uses a
+contextual technical-literal policy for ordinary `coordinate` language while
+still requiring zero technical public literals. The allocation manifest removes
+the deterministic duplicate source where the same `(prompt_index,
+prefix_family_id)` appeared multiple times inside one shard.
+
+Codex patched the wrapper path to consume these repair artifacts:
+
+```text
+generator:
+  scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py
+new selector:
+  --allocation-rows plus --assigned-shard-index
+event decoder:
+  scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
+new quality policy:
+  --contextual-literal-policy
+route config:
+  configs/natural_evidence_v2/r4_after_868016_controller_generation_route.yaml
+local route validation:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+local wrapper plan-only:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
+remote route validation:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+remote wrapper plan-only:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
+remote allowlist safety:
+  PASS zero-enabled
+tests:
+  11 passed, 1 skipped
+slurm submitted:
+  false
+generation/model scoring/training started:
+  false
+```
+
+The single-submission route was recorded:
+
+```text
+route decision:
+  docs/natural_evidence_v2/R4_AFTER_868151_QUALITY_REPAIRED_GENERATION_SUBMISSION_ROUTE_20260516.md
+route JSON:
+  results/natural_evidence_v2/status/r4_after_868151_quality_repaired_generation_submission_route_20260516.json
+allowed entry:
+  v2_r4_after_868016_controller_generation_h200
+allowed command:
+  sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+compute:
+  H200 / pomplun / cs_yinxin.wan / 30-00:00:00
+active Chimera jobs before route record:
+  none observed
+```
+
+The reviewed route was submitted exactly once:
+
+```text
+job_id:
+  868212
+job_name:
+  nat-ev-v2-r4cgen
+array:
+  0-3%4
+partition/qos/account:
+  pomplun / pomplun / cs_yinxin.wan
+state after submit:
+  RUNNING on chimera21 for 4/4 shards
+submission record:
+  results/natural_evidence_v2/status/r4_after_868151_quality_repaired_generation_submission_record_20260516.json
+local post-submit allowlist safety:
+  PASS zero-enabled
+remote post-submit allowlist safety:
+  PASS zero-enabled
+```
+
+## Next Allowed Action
+
+Monitor the reviewed quality-repaired H200 generation diagnostic:
+
+```text
+1. Monitor Slurm job 868212 only.
+2. After all shards reach a terminal state, sync generated/decode artifacts.
+3. Review first-token event decode, contextual literal counts, duplicate hashes,
+   and raw/task-only/wrong-key/wrong-payload controls.
+4. Do not submit another generation/scoring/training job until 868212 is
+   reviewed and a new route is recorded.
 ```
 
 Route-controlled actions may proceed automatically after their preconditions are
-recorded. At this state, do not submit another Slurm generation/scoring/training
-job until the literal/duplicate quality repair is implemented, reviewed, and
-passes local/remote plan-only validation.
+recorded. At this state, job `868212` is already submitted and post-submit
+allowlist safety is clean; do not submit additional Slurm
+generation/scoring/training jobs until this job reaches a terminal state and is
+reviewed.
 
 ## Still Gate-Controlled
 

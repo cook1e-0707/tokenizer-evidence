@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -51,6 +52,8 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument("--score-rows", type=Path, default=DEFAULT_ROWS)
+    parser.add_argument("--allocation-rows", type=Path, default=None)
+    parser.add_argument("--assigned-shard-index", type=int, default=None)
     parser.add_argument("--tokenizer-review", type=Path, default=DEFAULT_TOKENIZER_REVIEW)
     parser.add_argument("--controller-review", type=Path, default=DEFAULT_CONTROLLER_REVIEW)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -83,12 +86,11 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def select_rows(rows: Sequence[Mapping[str, Any]], *, start: int, end: int, expected_rows: int) -> list[dict[str, Any]]:
-    if end < start:
-        raise ValueError("prompt-index-end must be >= prompt-index-start")
-    selected = [dict(row) for row in rows if start <= int(row.get("prompt_index", -1)) <= end]
+def validate_selected_rows(selected: Sequence[Mapping[str, Any]], *, expected_rows: int) -> None:
     if len(selected) != int(expected_rows):
-        raise ValueError(f"selected {len(selected)} rows for prompt_index {start}..{end}; expected {expected_rows}")
+        raise ValueError(f"selected {len(selected)} rows; expected {expected_rows}")
+    if len({str(row.get("row_key", "")) for row in selected}) != len(selected):
+        raise ValueError("selected rows contain duplicate row_key values")
     coordinates = sorted({int(row["coordinate_id"]) for row in selected})
     if len(coordinates) != 12:
         raise ValueError(f"expected 12 selected coordinates per shard, found {coordinates}")
@@ -100,6 +102,38 @@ def select_rows(rows: Sequence[Mapping[str, Any]], *, start: int, end: int, expe
         if hits:
             raise ValueError(f"R4 prompt contains technical literal {hits}: {row.get('prompt_id')}")
         r4_row_surface_contract(row)
+
+
+def select_rows_by_prompt_range(
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    start: int,
+    end: int,
+    expected_rows: int,
+) -> list[dict[str, Any]]:
+    if end < start:
+        raise ValueError("prompt-index-end must be >= prompt-index-start")
+    selected = [dict(row) for row in rows if start <= int(row.get("prompt_index", -1)) <= end]
+    validate_selected_rows(selected, expected_rows=expected_rows)
+    return selected
+
+
+def select_rows_by_allocation(
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    assigned_shard_index: int,
+    expected_rows: int,
+) -> list[dict[str, Any]]:
+    selected = [
+        dict(row)
+        for row in rows
+        if int(row.get("assigned_shard_index", -1)) == int(assigned_shard_index)
+    ]
+    validate_selected_rows(selected, expected_rows=expected_rows)
+    duplicate_pairs = Counter(str(row.get("duplicate_pair_key", "")) for row in selected)
+    duplicated = sorted(pair for pair, count in duplicate_pairs.items() if pair and count > 1)
+    if duplicated:
+        raise ValueError(f"allocation selected duplicate prompt/prefix pairs: {duplicated[:5]}")
     return selected
 
 
@@ -130,6 +164,9 @@ def write_plan_summary(
             "artifact_role": "r4_after_868016_coordinate_pivot_controller_generation_plan_or_summary",
             "score_rows": str(resolve(args.score_rows)),
             "score_rows_sha256": sha256_file(resolve(args.score_rows)),
+            "allocation_rows": str(resolve(args.allocation_rows)) if args.allocation_rows is not None else "",
+            "allocation_rows_sha256": sha256_file(resolve(args.allocation_rows)) if args.allocation_rows is not None else "",
+            "assigned_shard_index": int(args.assigned_shard_index) if args.assigned_shard_index is not None else "",
             "tokenizer_review": str(resolve(args.tokenizer_review)),
             "tokenizer_review_sha256": sha256_file(resolve(args.tokenizer_review)),
             "controller_review": str(resolve(args.controller_review)),
@@ -454,16 +491,25 @@ def generate_condition(
 def main() -> int:
     args = parse_args()
     output_dir = resolve(args.output_dir)
-    rows_path = resolve(args.score_rows)
+    rows_path = resolve(args.allocation_rows) if args.allocation_rows is not None else resolve(args.score_rows)
     tokenizer_review = read_json(resolve(args.tokenizer_review))
     controller_review = read_json(resolve(args.controller_review))
     validate_reviews(tokenizer_review, controller_review)
-    rows = select_rows(
-        read_jsonl(rows_path),
-        start=int(args.prompt_index_start),
-        end=int(args.prompt_index_end),
-        expected_rows=int(args.expected_rows),
-    )
+    if args.allocation_rows is not None:
+        if args.assigned_shard_index is None:
+            raise ValueError("--assigned-shard-index is required with --allocation-rows")
+        rows = select_rows_by_allocation(
+            read_jsonl(rows_path),
+            assigned_shard_index=int(args.assigned_shard_index),
+            expected_rows=int(args.expected_rows),
+        )
+    else:
+        rows = select_rows_by_prompt_range(
+            read_jsonl(rows_path),
+            start=int(args.prompt_index_start),
+            end=int(args.prompt_index_end),
+            expected_rows=int(args.expected_rows),
+        )
     if args.validate_plan_only:
         output_dir.mkdir(parents=True, exist_ok=True)
         write_plan_summary(args=args, output_dir=output_dir, rows=rows, generation_started=False)

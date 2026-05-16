@@ -29,6 +29,22 @@ REQUIRED_EVENT_FIELDS = [
     "event_bucket_side",
     "event_trace",
 ]
+EXPECTED_QUALITY_PLAN = (
+    "results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/"
+    "quality_repair_plan_summary.json"
+)
+EXPECTED_ALLOCATION_ROWS = (
+    "results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/"
+    "row_allocation_rows.jsonl"
+)
+EXPECTED_ALLOCATION_MANIFEST = (
+    "results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/"
+    "row_allocation_manifest.json"
+)
+EXPECTED_CONTEXTUAL_LITERAL_POLICY = (
+    "results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/"
+    "contextual_literal_policy.json"
+)
 
 
 def mapping(value: Any, field: str, errors: list[str]) -> Mapping[str, Any]:
@@ -120,6 +136,45 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
     if int(rows.get("selected_coordinate_count", 0)) != 12:
         errors.append("score_rows.selected_coordinate_count must be 12")
 
+    quality = mapping(config.get("quality_repair"), "quality_repair", errors)
+    if quality.get("plan_summary") != EXPECTED_QUALITY_PLAN:
+        errors.append("quality_repair.plan_summary mismatch")
+    if quality.get("allocation_rows") != EXPECTED_ALLOCATION_ROWS:
+        errors.append("quality_repair.allocation_rows mismatch")
+    if quality.get("allocation_manifest") != EXPECTED_ALLOCATION_MANIFEST:
+        errors.append("quality_repair.allocation_manifest mismatch")
+    if quality.get("contextual_literal_policy") != EXPECTED_CONTEXTUAL_LITERAL_POLICY:
+        errors.append("quality_repair.contextual_literal_policy mismatch")
+    if quality.get("allocation_policy") != "per_shard_unique_prompt_index_prefix_family":
+        errors.append("quality_repair allocation policy mismatch")
+    if quality.get("contextual_coordinate_policy") is not True:
+        errors.append("quality_repair.contextual_coordinate_policy must be true")
+    quality_plan = path_from(quality.get("plan_summary", ""), "quality_repair.plan_summary", errors)
+    allocation_rows = path_from(quality.get("allocation_rows", ""), "quality_repair.allocation_rows", errors)
+    allocation_manifest = path_from(quality.get("allocation_manifest", ""), "quality_repair.allocation_manifest", errors)
+    contextual_literal_policy = path_from(
+        quality.get("contextual_literal_policy", ""),
+        "quality_repair.contextual_literal_policy",
+        errors,
+    )
+    if quality_plan.exists():
+        quality_payload = read_json(quality_plan, "quality_repair.plan_summary", errors)
+        if quality_payload.get("status") != "PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_QUALITY_REPAIR_PLAN_ARTIFACT_ONLY":
+            errors.append("quality repair plan did not pass")
+    if allocation_manifest.exists():
+        allocation_payload = read_json(allocation_manifest, "quality_repair.allocation_manifest", errors)
+        if allocation_payload.get("status") != "PASS_DUPLICATE_SAFE_ROW_ALLOCATION_ARTIFACT_ONLY":
+            errors.append("allocation manifest did not pass")
+        for shard in allocation_payload.get("shard_summaries", []):
+            if int(shard.get("duplicate_prompt_prefix_pair_count", -1)) != 0:
+                errors.append("allocation manifest has duplicate prompt/prefix pairs")
+    if allocation_rows.exists() and count_jsonl(allocation_rows) != int(rows.get("row_count", -1)):
+        errors.append("quality_repair.allocation_rows count mismatch")
+    if contextual_literal_policy.exists():
+        literal_payload = read_json(contextual_literal_policy, "quality_repair.contextual_literal_policy", errors)
+        if "coordinate" not in literal_payload.get("contextual_literals", {}):
+            errors.append("contextual literal policy must define coordinate")
+
     precommit = mapping(config.get("precommit"), "precommit", errors)
     surface_bank = path_from(precommit.get("surface_bank", ""), "precommit.surface_bank", errors)
     codebook = path_from(precommit.get("codebook", ""), "precommit.codebook", errors)
@@ -179,6 +234,8 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
         errors.append("event_trace_policy.decoder mismatch")
     if event_policy.get("required_generated_output_fields") != REQUIRED_EVENT_FIELDS:
         errors.append("event_trace_policy.required_generated_output_fields mismatch")
+    if event_policy.get("contextual_literal_policy") != EXPECTED_CONTEXTUAL_LITERAL_POLICY:
+        errors.append("event_trace_policy.contextual_literal_policy mismatch")
     generator_path = path_from(EXPECTED_GENERATOR, "event_trace_policy.generator", errors)
     event_decoder_path = path_from(EXPECTED_EVENT_DECODER, "event_trace_policy.decoder", errors)
     if generator_path.exists():
@@ -186,6 +243,9 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
         for fragment in ["first_token_event_trace", *REQUIRED_EVENT_FIELDS]:
             if fragment not in generator_text:
                 errors.append(f"generator missing event-trace fragment: {fragment}")
+        for fragment in ("allocation_rows", "assigned_shard_index", "select_rows_by_allocation"):
+            if fragment not in generator_text:
+                errors.append(f"generator missing allocation fragment: {fragment}")
     if event_decoder_path.exists():
         event_decoder_text = event_decoder_path.read_text(encoding="utf-8")
         for fragment in (
@@ -194,6 +254,7 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
             "target_first_token_ids",
             "other_first_token_ids",
             "first_generated_token_id",
+            "contextual_literal_policy",
         ):
             if fragment not in event_decoder_text:
                 errors.append(f"event decoder missing fragment: {fragment}")
@@ -228,6 +289,8 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
             "generate_r4_after_868016_controller_outputs.py",
             "decode_r4_after_864832_reliability_codebook.py",
             "decode_r4_after_868151_first_token_event_channel.py",
+            "--allocation-rows \"$ALLOCATION_ROWS\"",
+            "--contextual-literal-policy \"$CONTEXTUAL_LITERAL_POLICY\"",
             "VALIDATE_PLAN_ONLY",
             "r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516",
             "--controller-bonus-nats \"$CONTROLLER_BONUS_NATS\"",

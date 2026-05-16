@@ -7,6 +7,7 @@ import pytest
 from scripts.natural_evidence_v2.decode_r4_after_868151_first_token_event_channel import (
     checksum_valid,
     classify_first_token_event,
+    contextual_technical_literal_hits,
     decode_generated_rows,
     first_lexical_event_after_exact_prefix,
 )
@@ -159,3 +160,22 @@ def test_decode_generated_rows_accepts_clean_token_id_trace() -> None:
     assert protected["decoded_bits"] == "10100101"
     assert checksum_valid(expected_bits) is True
     assert Counter(row["event_status"] for row in event_rows) == Counter({"target": 8})
+
+
+def test_contextual_literal_policy_allows_ordinary_coordinate_but_flags_technical_use() -> None:
+    policy = {
+        "hard_forbid_literals": ["bucket", "payload"],
+        "contextual_literals": {
+            "coordinate": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["coordinate id", "slot", "payload"],
+            }
+        },
+    }
+
+    assert contextual_technical_literal_hits("Coordinate the room setup calmly.", policy) == []
+    assert contextual_technical_literal_hits("Use coordinate id 4 for this payload.", policy) == [
+        "coordinate",
+        "payload",
+    ]
+    assert contextual_technical_literal_hits("The bucket value is visible.", policy) == ["bucket"]
