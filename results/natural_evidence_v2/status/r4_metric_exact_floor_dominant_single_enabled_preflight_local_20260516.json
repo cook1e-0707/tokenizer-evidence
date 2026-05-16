@@ -1,0 +1,50 @@
+{
+  "allowlist_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/natural_evidence_v2/run_allowlist.yaml",
+  "allowlist_sha256": "9963ce93f080b60eb7357b40065f0a889c32c6cc1b89362a9802e1841a585202",
+  "current_state_path": "/Users/guanjie/Documents/tokenizer_alignment/docs/natural_evidence_v2/CURRENT_STATE.md",
+  "current_state_sha256": "11feee64ca1fa65f1a47ce6b055e88115e4c7436d061720e99638f3b5f90f77e",
+  "enabled_entries": [
+    {
+      "command_pattern": "sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.20,TARGET_MASS_FLOOR_LAMBDA=50.0,TARGET_MASS_CEILING=0.45,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_STEPS=128,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch",
+      "labels": [
+        "far",
+        "llama",
+        "paper_claim",
+        "same_family",
+        "sanitizer",
+        "training"
+      ],
+      "name": "v2_r4_candidate_v3_floor_dominant_micro_overfit_h200",
+      "section": "allowed_gpu_actions"
+    }
+  ],
+  "enabled_entry_count": 1,
+  "failures": [],
+  "far_aggregation_started": false,
+  "far_entries_disabled": true,
+  "forbidden_enabled_entries": [],
+  "gate_status_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/gate_status.json",
+  "gate_status_sha256": "0350a33d347400adb68d91039d48d423e55c7bf5f11f5c963a40951c621330b8",
+  "gate_values": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "generation_started": false,
+  "llama_entries_disabled": true,
+  "llama_started": false,
+  "paper_claim_entries_disabled": true,
+  "paper_claim_started": false,
+  "r3_2_entry_disabled": true,
+  "same_family_entries_disabled": true,
+  "sanitizer_entries_disabled": true,
+  "schema_name": "natural_evidence_v2_allowlist_safety_summary_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS",
+  "training_entries_disabled": true,
+  "training_started": false,
+  "unknown_enabled_entries": []
+}

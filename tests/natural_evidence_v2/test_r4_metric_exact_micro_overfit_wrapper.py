@@ -14,6 +14,14 @@ def test_micro_overfit_wrapper_exposes_surface_margin_loss_mode() -> None:
     assert '--surface-margin-loss-mode "$SURFACE_MARGIN_LOSS_MODE"' in text
 
 
+def test_micro_overfit_wrapper_exposes_task_ce_weight() -> None:
+    text = WRAPPER.read_text(encoding="utf-8")
+
+    assert 'TASK_CE_WEIGHT="${TASK_CE_WEIGHT:-1.0}"' in text
+    assert 'echo "task_ce_weight=$TASK_CE_WEIGHT"' in text
+    assert '--task-ce-weight "$TASK_CE_WEIGHT"' in text
+
+
 def test_micro_overfit_wrapper_remains_h200_pomplun() -> None:
     text = WRAPPER.read_text(encoding="utf-8")
 

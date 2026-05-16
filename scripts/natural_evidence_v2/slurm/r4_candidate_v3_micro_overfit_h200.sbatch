@@ -39,6 +39,7 @@ MAX_STEPS="${MAX_STEPS:-64}"
 BATCH_SIZE="${BATCH_SIZE:-1}"
 GRADIENT_ACCUMULATION_STEPS="${GRADIENT_ACCUMULATION_STEPS:-8}"
 LEARNING_RATE="${LEARNING_RATE:-5e-5}"
+TASK_CE_WEIGHT="${TASK_CE_WEIGHT:-1.0}"
 MARGIN_LAMBDA="${MARGIN_LAMBDA:-5.0}"
 MARGIN_TAU="${MARGIN_TAU:-0.15}"
 SURFACE_MARGIN_LOSS_MODE="${SURFACE_MARGIN_LOSS_MODE:-mass_relu}"
@@ -92,6 +93,7 @@ echo "heldout_rows=$HELDOUT_ROWS"
 echo "score_rows=$SCORE_ROWS"
 echo "output_dir=$OUTPUT_DIR"
 echo "surface_margin_loss_mode=$SURFACE_MARGIN_LOSS_MODE"
+echo "task_ce_weight=$TASK_CE_WEIGHT"
 echo "target_mass_floor=$TARGET_MASS_FLOOR"
 echo "target_mass_floor_lambda=$TARGET_MASS_FLOOR_LAMBDA"
 echo "target_mass_ceiling=$TARGET_MASS_CEILING"
@@ -166,6 +168,7 @@ mkdir -p "$OUTPUT_DIR"
   --batch-size "$BATCH_SIZE" \
   --gradient-accumulation-steps "$GRADIENT_ACCUMULATION_STEPS" \
   --learning-rate "$LEARNING_RATE" \
+  --task-ce-weight "$TASK_CE_WEIGHT" \
   --margin-lambda "$MARGIN_LAMBDA" \
   --margin-tau "$MARGIN_TAU" \
   --surface-margin-loss-mode "$SURFACE_MARGIN_LOSS_MODE" \

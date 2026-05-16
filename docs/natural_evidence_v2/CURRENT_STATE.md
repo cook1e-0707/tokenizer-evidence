@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T01:24:00Z
+Last synchronized: 2026-05-16T02:04:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_MICRO_OVERFIT_864332_FAILED_REVIEWED_NO_NEXT_COMPUTE`
+`V2_R4_METRIC_EXACT_FLOOR_DOMINANT_H200_JOB_864705_RUNNING`
 
 ## Current Route
 
@@ -22,7 +22,9 @@ by default `logsumexp_softplus` surface-margin mode has now been patched into
 the trainer, validated with toy-logit tests, wired into the H200 micro-overfit
 wrapper in plan-only mode, synchronized to Chimera with matching hashes, and
 submitted once as job `864332`. Job `864332` completed cleanly but failed the
-teacher-forced surface-mass gate.
+teacher-forced surface-mass gate. The next repair route is now a floor-dominant
+metric-exact micro-overfit plan: task CE disabled, stronger target-mass floor
+pressure, and no generation.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -38,7 +40,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_MICRO_OVERFIT_864332_SURFACE_MASS_GATE_FAIL_REPAIR_OR_PIVOT_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_FLOOR_DOMINANT_JOB_864705_MONITOR_AND_REVIEW_NEXT`
 
 Artifact-only pivot package:
 
@@ -147,6 +149,53 @@ The metric-exact objective improved rank ordering but did not create enough
 absolute target-token mass. The target-mass floor remained nearly unsatisfied
 at the end of training. This failed gate does not unlock generation or any
 downstream claim route.
+```
+
+Floor-dominant repair route:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_FLOOR_DOMINANT_MICRO_OVERFIT_ROUTE_20260516.md
+configs/natural_evidence_v2/r4_metric_exact_floor_dominant_micro_overfit_route.yaml
+scripts/natural_evidence_v2/validate_r4_metric_exact_floor_dominant_route.py
+results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_route_validation_20260516/
+allowlist entry: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
+command: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.20,TARGET_MASS_FLOOR_LAMBDA=50.0,TARGET_MASS_CEILING=0.45,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_STEPS=128,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+static validation: PASS_R4_METRIC_EXACT_FLOOR_DOMINANT_ROUTE_STATIC_VALIDATION_NO_COMPUTE
+local wrapper plan-only smoke: PASS
+local allowlist safety: PASS with zero enabled entries
+```
+
+Current next allowed action:
+
+```text
+Monitor Slurm job `864705`. When it exits, sync completed artifacts and review
+the teacher-forced surface-mass gates before any further compute route. No
+generation or downstream claim route is unlocked by this submission.
+```
+
+Remote preflight:
+
+```text
+results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_remote_preflight_20260516/
+status: PASS_R4_METRIC_EXACT_FLOOR_DOMINANT_REMOTE_PREFLIGHT_NO_SUBMIT
+hashes match: true
+remote route validation: PASS
+remote wrapper plan-only smoke: PASS
+local/remote allowlist safety: PASS with zero enabled entries
+active jobs: none
+```
+
+Submission:
+
+```text
+results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_submission_20260516/
+job_id: 864705
+job_name: nat-ev-v2-r4mof
+partition: pomplun
+node_seen_after_submit: chimera21
+allowlist entry: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
+local post-submit allowlist safety: PASS with zero enabled entries
+remote post-submit allowlist safety: PASS with zero enabled entries
 ```
 
 ## Historical Controller Failure Chain

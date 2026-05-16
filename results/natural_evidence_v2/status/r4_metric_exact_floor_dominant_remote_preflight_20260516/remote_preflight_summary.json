@@ -1,0 +1,12 @@
+{
+  "active_jobs": [],
+  "allowlist_entry_enabled": false,
+  "hashes_match": true,
+  "next_allowed_action": "Send Hermes TG/email notification, enable exactly one allowlist entry v2_r4_candidate_v3_floor_dominant_micro_overfit_h200, submit one H200 Slurm job, immediately disable allowlist, and record post-submit safety.",
+  "remote_allowlist_safety": "PASS_ZERO_ENABLED",
+  "remote_plan_only_wrapper_smoke": "PASS",
+  "remote_route_validation": "PASS_R4_METRIC_EXACT_FLOOR_DOMINANT_ROUTE_STATIC_VALIDATION_NO_COMPUTE",
+  "schema_name": "natural_evidence_v2_r4_metric_exact_floor_dominant_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_METRIC_EXACT_FLOOR_DOMINANT_REMOTE_PREFLIGHT_NO_SUBMIT"
+}
