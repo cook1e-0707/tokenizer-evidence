@@ -1,0 +1,39 @@
+{
+  "aggregate_by_arm": {
+    "protected": {
+      "accepts_ignoring_forbidden": 4,
+      "blocks": 4,
+      "complete_pair_sum": 32
+    },
+    "raw": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 4,
+      "complete_pair_sum": 15
+    },
+    "task_only": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 4,
+      "complete_pair_sum": 13
+    },
+    "wrong_key": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 4,
+      "complete_pair_sum": 32
+    },
+    "wrong_payload": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 4,
+      "complete_pair_sum": 32
+    }
+  },
+  "interpretation": "first-token event oracle shows the controller signal can recover the codeword at row-local first-word granularity, but this was not the precommitted decoder and ignores forbidden-surface gate; it is route-planning evidence only",
+  "oracle_scope": "posthoc diagnostic on failed generation transcripts; cannot reclassify 868151 as pass",
+  "protected_accepts_ignoring_forbidden": 4,
+  "raw_accepts_ignoring_forbidden": 0,
+  "source_job_id": "868151",
+  "status": "FIRST_TOKEN_EVENT_ORACLE_V2_RECORDED_ARTIFACT_ONLY_NOT_PRECOMMITTED_NOT_POSITIVE",
+  "supersedes": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_oracle_20260516",
+  "task_only_accepts_ignoring_forbidden": 0,
+  "wrong_key_accepts_ignoring_forbidden": 0,
+  "wrong_payload_accepts_ignoring_forbidden": 0
+}

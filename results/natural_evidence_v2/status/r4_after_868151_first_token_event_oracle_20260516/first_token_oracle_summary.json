@@ -1,0 +1,38 @@
+{
+  "aggregate_by_arm": {
+    "protected": {
+      "accepts_ignoring_forbidden": 12,
+      "blocks": 12,
+      "complete_pair_sum": 96
+    },
+    "raw": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 12,
+      "complete_pair_sum": 45
+    },
+    "task_only": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 12,
+      "complete_pair_sum": 39
+    },
+    "wrong_key": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 12,
+      "complete_pair_sum": 96
+    },
+    "wrong_payload": {
+      "accepts_ignoring_forbidden": 0,
+      "blocks": 12,
+      "complete_pair_sum": 96
+    }
+  },
+  "interpretation": "first-token event oracle tests whether the teacher-forced first-token controller signal survives as row-local first-word events even when full phrase surfaces are absent",
+  "oracle_scope": "posthoc diagnostic on failed generation transcripts; cannot reclassify 868151 as pass",
+  "protected_accepts_ignoring_forbidden": 12,
+  "raw_accepts_ignoring_forbidden": 0,
+  "source_job_id": "868151",
+  "status": "FIRST_TOKEN_EVENT_ORACLE_RECORDED_ARTIFACT_ONLY_NOT_PRECOMMITTED_NOT_POSITIVE",
+  "task_only_accepts_ignoring_forbidden": 0,
+  "wrong_key_accepts_ignoring_forbidden": 0,
+  "wrong_payload_accepts_ignoring_forbidden": 0
+}

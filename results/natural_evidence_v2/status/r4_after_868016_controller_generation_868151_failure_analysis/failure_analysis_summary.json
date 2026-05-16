@@ -1,0 +1,74 @@
+{
+  "condition_surface_transfer": [
+    {
+      "any_bank_first_word_start_rate": 0.2646484375,
+      "any_bank_surface_anywhere_rate": 0.0,
+      "any_bank_surface_start_rate": 0.0,
+      "condition": "protected",
+      "duplicate_response_hash_count": 755,
+      "prefix_exact_rate": 1.0,
+      "rows": 3072,
+      "target_first_word_start_rate": 0.06803385416666667,
+      "target_surface_anywhere_rate": 0.0,
+      "target_surface_start_rate": 0.0,
+      "unique_response_hashes": 2317
+    },
+    {
+      "any_bank_first_word_start_rate": 0.0185546875,
+      "any_bank_surface_anywhere_rate": 0.0,
+      "any_bank_surface_start_rate": 0.0,
+      "condition": "raw",
+      "duplicate_response_hash_count": 1024,
+      "prefix_exact_rate": 1.0,
+      "rows": 3072,
+      "target_first_word_start_rate": 0.0029296875,
+      "target_surface_anywhere_rate": 0.0,
+      "target_surface_start_rate": 0.0,
+      "unique_response_hashes": 2048
+    },
+    {
+      "any_bank_first_word_start_rate": 0.0185546875,
+      "any_bank_surface_anywhere_rate": 0.0,
+      "any_bank_surface_start_rate": 0.0,
+      "condition": "task_only",
+      "duplicate_response_hash_count": 1024,
+      "prefix_exact_rate": 1.0,
+      "rows": 3072,
+      "target_first_word_start_rate": 0.0035807291666666665,
+      "target_surface_anywhere_rate": 0.0,
+      "target_surface_start_rate": 0.0,
+      "unique_response_hashes": 2048
+    }
+  ],
+  "conditions": [
+    "protected",
+    "raw",
+    "task_only"
+  ],
+  "control_accepts_format_scrub_all": {
+    "all::raw": 0,
+    "all::task_only": 0,
+    "all::wrong_key": 0,
+    "all::wrong_payload": 0
+  },
+  "duplicate_response_hash_count": 4422,
+  "forbidden_public_surface_count_format_scrub_all": 26,
+  "forbidden_public_surface_terms_format_scrub_all": {
+    "coordinate": 26
+  },
+  "generated_rows": 9216,
+  "matched_surface_count_format_scrub_all": 0,
+  "missing_score_row_count": 0,
+  "next_allowed_action": "artifact-only repair_or_pivot_route_decision; no Slurm/generation/scoring/training/Llama/FAR/sanitizer/paper claim until recorded route decision",
+  "primary_failure_interpretation": "first-step controller did not produce locked phrase-level surface evidence under free generation; decoder observed zero selected surfaces and zero selected coordinates in every block",
+  "protected_accepts_format_scrub_all": 0,
+  "protected_blocks_format_scrub_all": 4,
+  "protected_example_count": 16,
+  "review_status": "FAIL_R4_AFTER_868016_CONTROLLER_GENERATION_DIAGNOSTIC_GATE",
+  "selected_coordinates_observed_format_scrub_all": 0,
+  "selected_surface_count_format_scrub_all": 0,
+  "slurm_terminal_state": "COMPLETED_4_OF_4_EXIT_0",
+  "source_job_id": "868151",
+  "status": "FAILURE_ANALYSIS_RECORDED_R4_AFTER_868016_CONTROLLER_GENERATION_868151",
+  "unique_response_hash_count": 4794
+}

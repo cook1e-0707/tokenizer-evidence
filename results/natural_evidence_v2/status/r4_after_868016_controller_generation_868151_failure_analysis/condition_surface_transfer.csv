@@ -1,0 +1,4 @@
+condition,rows,prefix_exact_rate,target_surface_start_rate,target_surface_anywhere_rate,any_bank_surface_start_rate,any_bank_surface_anywhere_rate,target_first_word_start_rate,any_bank_first_word_start_rate,duplicate_response_hash_count,unique_response_hashes
+protected,3072,1.0,0.0,0.0,0.0,0.0,0.06803385416666667,0.2646484375,755,2317
+raw,3072,1.0,0.0,0.0,0.0,0.0,0.0029296875,0.0185546875,1024,2048
+task_only,3072,1.0,0.0,0.0,0.0,0.0,0.0035807291666666665,0.0185546875,1024,2048

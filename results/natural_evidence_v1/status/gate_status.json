@@ -5552,6 +5552,42 @@
     "submission_record": "results/natural_evidence_v2/status/r4_after_868016_coordinate_pivot_controller_submission_20260516/submission_record.json",
     "training_started": false
   },
+  "2026-05-16T22:36:26Z_r4_after_868151_controller_generation_failed_first_token_pivot": {
+    "account": "cs_yinxin.wan",
+    "control_accepts_format_scrub_all": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "duplicate_response_hash_count": 4422,
+    "exit_code": "0:0",
+    "failure_analysis": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_failure_analysis/failure_analysis_summary.json",
+    "far_started": false,
+    "first_token_oracle_v2": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_oracle_20260516_v2/first_token_oracle_summary.json",
+    "forbidden_public_surface_count_format_scrub_all": 26,
+    "generation_started": true,
+    "job_id": "868151",
+    "job_name": "nat-ev-v2-r4cgen",
+    "llama_started": false,
+    "matched_surface_count_format_scrub_all": 0,
+    "next_allowed_action": "Artifact-only first-token/lemma event-channel route formalization and plan-only validation. No new Slurm submission until reviewed route preflight passes.",
+    "paper_claim_allowed": false,
+    "partition": "pomplun",
+    "pivot_route_doc": "docs/natural_evidence_v2/R4_AFTER_868151_CONTROLLER_GENERATION_FAILURE_PIVOT_ROUTE_20260516.md",
+    "posthoc_first_token_oracle_null_accepts_ignoring_forbidden": "0/4 each",
+    "posthoc_first_token_oracle_protected_accepts_ignoring_forbidden": "4/4",
+    "protected_accepts_format_scrub_all": 0,
+    "protected_blocks_format_scrub_all": 4,
+    "qos": "pomplun",
+    "review_status": "FAIL_R4_AFTER_868016_CONTROLLER_GENERATION_DIAGNOSTIC_GATE",
+    "review_summary": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_review/controller_generation_review_summary.json",
+    "sanitizer_started": false,
+    "selected_coordinates_observed_format_scrub_all": 0,
+    "slurm_state": "COMPLETED",
+    "status": "V2_R4_AFTER_868151_CONTROLLER_GENERATION_FAILED_FIRST_TOKEN_PIVOT_ARTIFACT_ONLY",
+    "training_started": false
+  },
   "action_results": {
     "2026-05-08T01:44:32Z_phase_r1_prefix_selector_replay": {
       "e2e_eval_started": false,
