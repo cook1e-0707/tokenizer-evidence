@@ -1,0 +1,15 @@
+{
+  "codebook": "codebook.json",
+  "codebook_sha256": "aa277c813bbd58b893aa8e75fa1e3132f4cd3cb4cd2a742fbee4ec49356214cc",
+  "decoder_spec": "decoder_spec.json",
+  "decoder_spec_sha256": "e5794fbf2cbeda31ac4a39367c6e5dfce585674cc98778582481542cb544246a",
+  "generation_started": false,
+  "precommit_manifest_sha256": "747e7a5d9c10bbcaad8cb8eafecc27faeb4b2403105a87d4e4112af1d332e338",
+  "schema_name": "r4_after_864832_reliability_weighted_precommit_manifest_v1",
+  "slurm_submitted": false,
+  "source_attribution": "results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_safety_bound_failure_attribution_866147_20260516/failure_attribution_summary.json",
+  "source_plan": "results/natural_evidence_v2/status/r4_after_864832_reliability_weighted_codebook_plan_20260516/codebook_plan_summary.json",
+  "source_review": "results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_safety_bound_score_866147_review/aggregate_summary.json",
+  "status": "PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "training_started": false
+}

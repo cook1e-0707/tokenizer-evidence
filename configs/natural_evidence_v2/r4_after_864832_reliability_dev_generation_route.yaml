@@ -1,0 +1,79 @@
+schema_name: natural_evidence_v2_r4_after_864832_reliability_dev_generation_route_v1
+route_id: r4_after_864832_reliability_codebook_dev_generation_v1
+
+source_oracle:
+  summary: results/natural_evidence_v2/status/r4_after_864832_reliability_codebook_decoder_oracle_20260516/oracle_summary.json
+  expected_status: PASS_R4_RELIABILITY_CODEBOOK_DECODER_ORACLE_ARTIFACT_ONLY
+  wrong_payload_accepts: 0
+  wrong_key_accepts: 0
+
+precommit:
+  surface_bank: results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+  codebook: results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/codebook.json
+  decoder_spec: results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+  route_config: configs/natural_evidence_v2/r4_after_864832_reliability_codebook_oracle_route.yaml
+  contract_id: a55e
+  primary_scrub_mode: all
+
+prompt_source:
+  prompts_jsonl: results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/dev_prompts.jsonl
+  split: dev
+  prompt_count: 2048
+
+generation_scope:
+  conditions: [protected, raw, task_only]
+  decode_conditions: [protected, raw, task_only, wrong_key, wrong_payload]
+  blocks: 32
+  prompts_per_block: 64
+  shards: 4
+  prompts_per_shard: 512
+  same_contract_only: true
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+
+adapters:
+  protected_adapter_remote: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_candidate_v3_micro_overfit_864761/protected_micro_overfit_train/adapter
+  task_only_adapter_remote: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+  protected_adapter_gain: 1.0
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  allowlist_entry: v2_r4_after_864832_reliability_dev_generation_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch
+  allowlist_enabled_now: false
+
+future_dev_gate:
+  protected_accepts_min_format_scrub_all: 26
+  protected_blocks: 32
+  control_accepts_max_per_condition: 0
+  forbidden_public_surface_count_max: 0
+  duplicate_response_hash_count_max: 0
+  duplicate_decode_row_hash_count_max: 0
+
+required_before_any_submission:
+  route_validation_passed: true
+  coordinate_unique_surface_bank_passed: true
+  wrapper_plan_only_passed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  hermes_notification_sent: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+
+output_dir: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_route_validation_20260516

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T04:38:00Z
+Last synchronized: 2026-05-16T18:40:22Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,26 +9,645 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_RECORDED_ARTIFACT_ONLY_NO_COMPUTE`
+`V2_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_RUNNING_MONITOR_ONLY`
 
 ## Current Route
 
-Route R4 positive-selectivity controller-only teacher-forced scoring completed
-and failed for H200/pomplun Slurm array jobs `863274` and `864117`. The
-follow-up safety-bound controller route kept wrong controls clean but still did
-not produce enough positive teacher-forced pressure. The after-864117
-artifact-only pivot package selected metric-exact objective repair. A disabled
-by default `logsumexp_softplus` surface-margin mode has now been patched into
-the trainer, validated with toy-logit tests, wired into the H200 micro-overfit
-wrapper in plan-only mode, synchronized to Chimera with matching hashes, and
-submitted once as job `864332`. Job `864332` completed cleanly but failed the
-teacher-forced surface-mass gate. A floor-dominant metric-exact micro-overfit
-repair was then submitted once as job `864705`: task CE disabled, stronger
-target-mass floor pressure, and no generation. Job `864705` completed cleanly
-but still failed the teacher-forced surface-mass gate. A coverage-scale
-floor-dominant route has now been recorded and locally validated: same
-candidate-v3 rows, no generation, `MAX_TRAIN_ROWS=8192`, `MAX_STEPS=4096`,
-`BATCH_SIZE=2`, and `TARGET_MASS_FLOOR=0.25`.
+The R4 metric-exact teacher-forced route reached a positive teacher-forced gate
+in job `864761`, but the follow-up dev generation job `864832` failed:
+
+```text
+protected accepts, format_scrub=all: 0/32
+protected accepts, no scrub: 0/32
+raw/task-only/wrong-key/wrong-payload accepts: 0
+duplicate response text hashes: 358
+max protected-vs-raw shallow feature AUC: 1.0
+```
+
+The reviewed failure mode is a transfer gap, not a Slurm/null-control failure:
+the adapter pressured candidate-v3 prefix-native phrases such as `Create a
+plan` and `Prepare a`, but free generation did not produce enough of the
+precommitted cover-natural ECC surface bank to decode. The after-864832
+artifact-only repair package recorded this diagnosis and did not unlock compute.
+
+The cover-bank-aligned route was validated artifact-only:
+
+```text
+selected route: cover_bank_aligned_metric_exact_objective_repair
+target surfaces source: precommitted_cover_bank_only
+surface bank: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/surface_bank.json
+decoder primary scrub mode: all
+surface entries: 128
+coordinates: 32
+```
+
+Validation artifacts:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_COVER_BANK_ALIGNED_OBJECTIVE_ROUTE_20260516.md
+configs/natural_evidence_v2/r4_after_864832_cover_bank_aligned_objective_route.yaml
+scripts/natural_evidence_v2/validate_r4_after_864832_cover_bank_aligned_route.py
+results/natural_evidence_v2/status/r4_after_864832_cover_bank_aligned_route_validation_20260516/
+```
+
+Validation status:
+
+```text
+PASS_R4_AFTER_864832_COVER_BANK_ALIGNED_ROUTE_VALIDATION_NO_COMPUTE
+```
+
+Codex then built an artifact-only cover-bank-aligned row artifact from the
+precommitted bank and the `a55e` codebook:
+
+```text
+scripts/natural_evidence_v2/build_r4_after_864832_cover_bank_aligned_rows.py
+results/natural_evidence_v2/status/r4_after_864832_cover_bank_aligned_rows_20260516/
+docs/natural_evidence_v2/R4_AFTER_864832_COVER_BANK_ALIGNED_ROW_BUILDER_REVIEW_20260516.md
+```
+
+Row-builder status:
+
+```text
+PASS_TARGET_ONLY_ROWS_BUILT__BLOCK_CURRENT_TWO_WAY_SCORER_UNTIL_COMPLEMENT_OR_TARGET_ONLY_SCORER
+rows built: 4608
+selected prompts: 256
+coordinates: 32
+surface entries: 128
+coordinates missing same-coordinate opposite bucket: 18/32
+coordinates whose present bank polarity does not match protected codeword bit: 14/32
+current two-way scorer compatible: false
+```
+
+That blocker was resolved artifact-only by freezing a new two-sided,
+codeword-aligned cover-natural bank and rebuilding rows against it:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_COVER_BANK_PIVOT_20260516.md
+scripts/natural_evidence_v2/build_r4_after_864832_two_sided_cover_bank.py
+results/natural_evidence_v2/precommit/r4_after_864832_two_sided_cover_bank_20260516/
+docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_COVER_BANK_ROWS_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_after_864832_two_sided_cover_bank_rows_20260516/
+```
+
+Two-sided bank status:
+
+```text
+PASS_R4_AFTER_864832_TWO_SIDED_COVER_BANK_STATIC_VALIDATION_NO_COMPUTE
+entries: 256
+coordinates: 32
+bits per coordinate: 2
+source reused entries: 128
+generated complement entries: 128
+protected-codeword missing coordinates: []
+forbidden literal hits: []
+```
+
+Two-sided row status:
+
+```text
+PASS_TWO_WAY_COMPATIBLE_ROWS_BUILT
+rows built: 8192
+selected prompts: 256
+coordinates: 32
+surface entries: 256
+coordinates missing same-coordinate opposite bucket: 0/32
+coordinates whose present bank polarity does not match protected codeword bit: 0/32
+current two-way scorer compatible: true
+```
+
+The tokenizer-only Slurm route has now been prepared and statically validated
+without submission:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_QWEN_TOKENIZER_PREFLIGHT_ROUTE_20260516.md
+configs/natural_evidence_v2/r4_after_864832_two_sided_tokenizer_preflight_route.yaml
+scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200.sbatch
+scripts/natural_evidence_v2/validate_r4_after_864832_two_sided_tokenizer_route.py
+results/natural_evidence_v2/status/r4_after_864832_two_sided_tokenizer_preflight_route_validation_20260516/
+```
+
+Tokenizer route validation:
+
+```text
+PASS_R4_AFTER_864832_TWO_SIDED_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT
+allowlist entry: v2_r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200
+rows: 8192
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200.sbatch
+```
+
+Remote preflight and single submission then passed:
+
+```text
+remote preflight: PASS_R4_AFTER_864832_TWO_SIDED_TOKENIZER_REMOTE_PREFLIGHT_NO_SUBMIT
+job_id: 865210
+job_name: nat-ev-v2-r4tsTok
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gres: gpu:h200:1
+scope: tokenizer-only; no model forward, no scoring, no training, no generation
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+submission record: results/natural_evidence_v2/status/r4_after_864832_two_sided_tokenizer_submission_20260516/
+```
+
+Job `865210` completed and passed tokenizer review:
+
+```text
+status: PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT
+checked_rows: 8192
+failed_rows: 0
+empty_target_id_row_count: 0
+empty_other_id_row_count: 0
+target_other_overlap_row_count: 0
+model_forward_pass_started: false
+scoring_job_submitted: false
+training_started: false
+generation_started: false
+review: docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_QWEN_TOKENIZER_PREFLIGHT_865210_REVIEW_20260516.md
+```
+
+The H200 teacher-forced surface-mass scoring route was prepared and validated:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_SCORE_ROUTE_20260516.md
+configs/natural_evidence_v2/r4_after_864832_two_sided_surface_mass_score_route.yaml
+scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_surface_mass_score_h200.sbatch
+scripts/natural_evidence_v2/validate_r4_after_864832_two_sided_surface_mass_route.py
+results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_route_validation_20260516/
+results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_wrapper_plan_smoke_20260516/
+```
+
+Initial scoring route status:
+
+```text
+PASS_R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_ROUTE_VALIDATION_NO_SUBMIT
+wrapper plan-only smoke: DRY_RUN_VALIDATED_INPUTS
+rows: 8192
+arms: base, protected, task_only
+generation_started: false
+training_started: false
+```
+
+The first scoring submission, job `865235`, failed before model scoring:
+
+```text
+failure: REQUIRED_ADAPTER_MISSING_OR_EMPTY
+bad path: .../r4_candidate_v3_micro_overfit_864761/protected_train/adapter/adapter_config.json
+correct protected path: .../r4_candidate_v3_micro_overfit_864761/protected_micro_overfit_train/adapter
+task-only path verified: .../wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+```
+
+This was reviewed as a wrapper path failure, not a model/scoring result. The
+wrapper and validator were repaired and revalidated:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_865235_FAILURE_REPAIR_20260516.md
+results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_route_validation_repaired_20260516/
+results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_wrapper_plan_smoke_repaired_20260516/
+results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_remote_preflight_repaired_20260516/
+```
+
+Repaired route status:
+
+```text
+local repaired validation: PASS_R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_ROUTE_VALIDATION_NO_SUBMIT
+local repaired wrapper plan-only smoke: DRY_RUN_VALIDATED_INPUTS
+remote repaired preflight: PASS_R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_REPAIRED_REMOTE_PREFLIGHT_NO_SUBMIT
+remote hash diff: empty
+remote allowlist safety before submission: PASS
+active jobs before submission: none
+```
+
+One repaired H200 scoring job was submitted:
+
+```text
+job_id: 865252
+job_name: nat-ev-v2-r4tsTFM
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gres: gpu:h200:1
+time limit: 30-00:00:00
+arms: base, protected, task_only
+rows: 8192
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+submission record: results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_submission_865252_20260516/
+```
+
+Job `865252` completed cleanly but failed the teacher-forced gate:
+
+```text
+status: FAIL_R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_GATE
+protected lift vs base: +0.047113
+protected lift vs task-only: +0.056045
+protected rank1 rate: 0.437500
+protected median margin: -0.012231
+base mean target mass: 0.019409
+protected mean target mass: 0.066522
+task-only mean target mass: 0.010477
+review: results/natural_evidence_v2/status/r4_after_864832_two_sided_surface_mass_score_865252/review/
+```
+
+This failure does not unlock generation. It shows the protected adapter has
+some positive mass lift, but the lift and rank1 are far below the
+teacher-forced pre-generation gate.
+
+The next route has been validated artifact-only:
+
+```text
+route: R4 after-864832 two-sided protected-adapter gain sweep
+config: configs/natural_evidence_v2/r4_after_864832_two_sided_adapter_gain_sweep.yaml
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_adapter_gain_sweep_h200.sbatch
+allowlist entry: v2_r4_after_864832_two_sided_adapter_gain_sweep_h200
+plan validation: PASS_R4_ADAPTER_GAIN_SWEEP_PLAN_VALIDATION
+wrapper plan-only smoke: DRY_RUN_VALIDATED_INPUTS
+gains: 0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0
+scope: H200 teacher-forced scoring only; no generation or training
+```
+
+One adapter-gain sweep job was submitted:
+
+```text
+job_id: 865289
+job_name: nat-ev-v2-r4tsGain
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gres: gpu:h200:1
+time limit: 30-00:00:00
+protected gains: 0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+submission record: results/natural_evidence_v2/status/r4_after_864832_two_sided_adapter_gain_sweep_submission_865289_20260516/
+```
+
+Job `865289` completed cleanly but no gain passed the teacher-forced gate:
+
+```text
+status: FAIL_R4_AFTER_864832_TWO_SIDED_ADAPTER_GAIN_SWEEP_GATE
+best gain by mean target mass: protected_gain_1
+best mean target mass: 0.066522
+best lift vs base: +0.047113
+best lift vs task-only: +0.056045
+rank1 for all nonzero gains: 0.437500
+median margin for all gains: negative
+review: results/natural_evidence_v2/status/r4_after_864832_two_sided_adapter_gain_sweep_865289/review/
+```
+
+This rules out scalar adapter amplification as the immediate repair for the
+two-sided cover-natural bank. The next route must be a reviewed objective or
+controller pivot; generation remains disallowed until a teacher-forced gate
+passes.
+
+The controller-only route was recorded and submitted:
+
+```text
+route: R4 after-864832 two-sided controller-only teacher-forced scoring
+job_id: 865351
+job_name: nat-ev-v2-r4tsCtl
+array: 0-71%4
+conditions: base, task_only, controlled_base, wrong_key_controlled_base, wrong_payload_controlled_base
+scope: H200 teacher-forced scoring only; no generation or training
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+submission record: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_only_submission_865351_20260516/
+```
+
+Array job `865351` failed before model scoring because the route wrapper did
+not export the shared wrapper full-mode guard:
+
+```text
+stderr: ALLOW_PRESSURE_CONTROLLER_SCORING_REQUIRED_FOR_FULL_MODE
+model_scoring_started: false
+```
+
+The wrapper was repaired by exporting `ALLOW_PRESSURE_CONTROLLER_SCORING=1`,
+then local/remote route validation and plan-only smoke were rerun. One repaired
+array job was submitted:
+
+```text
+job_id: 865434
+job_name: nat-ev-v2-r4tsCtl
+array: 0-71%4
+scope: H200 teacher-forced controller-only scoring only; no generation or training
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+submission record: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_only_submission_865434_20260516/
+```
+
+Job `865434` completed cleanly and was reviewed:
+
+```text
+status: FAIL_R4_AFTER_864832_TWO_SIDED_CONTROLLER_ONLY_SCORE_865434_NO_SELECTIVE_GATE
+summaries present: 72/72
+controlled basic gate pass: 0/72
+overall selective gate pass: 0/72
+wrong-key basic gate pass: 0/72
+wrong-payload basic gate pass: 0/72
+best controlled lift vs base: +0.037408
+best controlled lift vs task-only: +0.046340
+best controlled rank1: 0.651367
+best controlled median margin: +0.006919
+review: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_only_score_865434_review/review.md
+aggregate: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_only_score_865434_review/aggregate_summary.json
+```
+
+Interpretation: the two-sided controller-only run improved the margin but did
+not produce enough target-mass/rank pressure to unlock generation. Null controls
+remained clean, so this is a positive-strength failure, not a false-accept
+safety failure.
+
+Failure attribution and a safety-bound controller route were then recorded:
+
+```text
+failure attribution: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_only_failure_attribution_865434_20260516/
+selected grid for attribution: 71
+controller cap rows: max_kl_budget=1132, max_target_mass=210
+weakest coordinate by lift: 2, lift +0.003612, rank1 0.105469
+strongest coordinate by lift: 19, lift +0.089144, rank1 0.957031
+route doc: docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_CONTROLLER_SAFETY_BOUND_ROUTE_20260516.md
+route config: configs/natural_evidence_v2/r4_after_864832_two_sided_controller_safety_bound_route.yaml
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_controller_safety_bound_score_h200.sbatch
+local route validation: PASS
+local wrapper plan-only smoke: PASS
+remote hash preflight: PASS
+remote allowlist safety: PASS
+remote wrapper plan-only smoke: PASS
+```
+
+One reviewed safety-bound H200 controller scoring array was submitted:
+
+```text
+job_id: 866147
+job_name: nat-ev-v2-r4tsCtlB
+array: 0-23%4
+grid: bonus [1.50, 1.75, 2.00] x penalty [0.25, 0.50] x max_target_mass [0.45, 0.50] x max_kl_budget [0.10, 0.20]
+scope: teacher-forced controller scoring only; no generation or training
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+submission record: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_safety_bound_submission_866147_20260516/
+```
+
+Job `866147` completed cleanly and failed the selective teacher-forced gate:
+
+```text
+status: FAIL_R4_AFTER_864832_TWO_SIDED_CONTROLLER_SAFETY_BOUND_SCORE_866147_NO_SELECTIVE_GATE
+summaries present: 24/24
+controlled basic gate pass: 0/24
+overall selective gate pass: 0/24
+wrong-key basic gate pass: 0/24
+wrong-payload basic gate pass: 0/24
+best grid: 23
+bonus: 2.0
+penalty: 0.5
+max_target_mass: 0.5
+max_kl_budget: 0.2
+controlled lift vs base: +0.059981
+controlled lift vs task-only: +0.068912
+controlled rank1: 0.736084
+controlled median margin: +0.017426
+review: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_safety_bound_score_866147_review/review.md
+```
+
+Best-grid failure attribution was recorded:
+
+```text
+attribution: results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_safety_bound_failure_attribution_866147_20260516/
+max_kl_budget cap rows: 1344
+max_target_mass cap rows: 314
+weakest coordinate by lift: 2, lift +0.006593, rank1 0.222656
+strongest coordinate by lift: 19, lift +0.137760, rank1 0.996094
+coordinates with lift >= +0.08: 10/32
+coordinates with lift >= +0.10: 8/32
+coordinates with rank1 >= 0.75: 18/32
+```
+
+The pivot decision is now artifact-only reliability-weighted codebook planning:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_TWO_SIDED_CONTROLLER_866147_FAILURE_PIVOT_DECISION_20260516.md
+results/natural_evidence_v2/status/r4_after_864832_two_sided_controller_866147_failure_pivot_20260516/
+selected next phase: V2_R4_AFTER_864832_RELIABILITY_WEIGHTED_CODEBOOK_ARTIFACT_ONLY
+```
+
+Codex executed the artifact-only reliability-weighted codebook plan:
+
+```text
+status: PASS_RELIABILITY_WEIGHTED_CODEBOOK_PLAN_8_PAIRS_AVAILABLE_NO_COMPUTE
+script: scripts/natural_evidence_v2/build_r4_after_864832_reliability_weighted_codebook_plan.py
+output: results/natural_evidence_v2/status/r4_after_864832_reliability_weighted_codebook_plan_20260516/
+thresholds: lift >= +0.03, rank1 >= 0.80, median margin > 0
+selected pairs: 8
+selected coordinates: [6, 22, 10, 26, 1, 17, 3, 19, 15, 31, 8, 24, 4, 20, 7, 23]
+candidate contract: 4 payload bits + 4 checksum bits, 2 coordinates per bit
+candidate status: CANDIDATE_NOT_PRECOMMITTED
+```
+
+The candidate was then frozen as an artifact-only precommit:
+
+```text
+status: PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE
+doc: docs/natural_evidence_v2/R4_AFTER_864832_RELIABILITY_WEIGHTED_CODEBOOK_PRECOMMIT_20260516.md
+precommit dir: results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/
+codebook: codebook.json
+decoder spec: decoder_spec.json
+manifest: precommit_manifest.json
+decoder: pair-majority then checksum
+primary scrub mode: all
+```
+
+Codex then recorded and executed the artifact-only decoder/oracle route for the
+frozen codebook:
+
+```text
+route doc: docs/natural_evidence_v2/R4_AFTER_864832_RELIABILITY_CODEBOOK_DECODER_ORACLE_ROUTE_20260516.md
+route config: configs/natural_evidence_v2/r4_after_864832_reliability_codebook_oracle_route.yaml
+validator: scripts/natural_evidence_v2/validate_r4_after_864832_reliability_codebook_oracle_route.py
+output: results/natural_evidence_v2/status/r4_after_864832_reliability_codebook_decoder_oracle_20260516/
+status: PASS_R4_RELIABILITY_CODEBOOK_DECODER_ORACLE_ARTIFACT_ONLY
+oracle cases: 7
+case failures: 0
+expected perfect accept: true
+expected single-coordinate erasure accept: true
+wrong-payload accepts: 0
+wrong-key accepts: 0
+slurm/model-scoring/generation/training started: false
+allowlist safety after validation: PASS with zero enabled entries
+```
+
+The manifest file has a self-hash bookkeeping distinction:
+
+```text
+precommit_manifest_declared_sha256: 747e7a5d9c10bbcaad8cb8eafecc27faeb4b2403105a87d4e4112af1d332e338
+precommit_manifest_file_sha256: 15e2f3c3db0b00ec5d6392a9d0d8b7464e6f0acd8d89be1db550a95d9e59ec5e
+```
+
+The validator treats this as manifest metadata rather than codebook/decoder
+drift. The frozen `codebook.json` and `decoder_spec.json` hashes match the
+precommit.
+
+Codex then prepared the next dev-generation route and wrapper plan-only smoke:
+
+```text
+route config: configs/natural_evidence_v2/r4_after_864832_reliability_dev_generation_route.yaml
+route validator: scripts/natural_evidence_v2/validate_r4_after_864832_reliability_dev_generation_route.py
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch
+decoder: scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py
+allowlist entry: v2_r4_after_864832_reliability_dev_generation_h200
+route validation: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+```
+
+The wrapper plan-only toy decode failed and exposed a protocol blocker:
+
+```text
+toy protected reliability decode did not accept
+protected accepts: 0/1
+wrong-key accepts: 0/1
+wrong-payload accepts: 0/1
+matched_surface_count: 256
+selected_surface_count: 120
+failure: selected coordinate phrase ambiguity causes pair ties
+```
+
+Surface uniqueness audit:
+
+```text
+script: scripts/natural_evidence_v2/audit_r4_after_864832_reliability_surface_uniqueness.py
+output: results/natural_evidence_v2/status/r4_after_864832_reliability_surface_uniqueness_audit_20260516/
+status: FAIL_R4_RELIABILITY_SURFACE_UNIQUENESS_SELECTED_COORDINATES_AMBIGUOUS
+surface entries: 256
+selected coordinates: 16
+unique normalized phrases: 21
+phrases ambiguous for selected coordinates: 21
+phrases with opposite polarity for selected coordinates: 0
+```
+
+Interpretation: the current two-sided surface bank repeats the same ordinary
+phrases across many coordinates. The reliability-weighted codebook requires
+coordinate identity, but phrase-only matching cannot recover coordinate identity
+from this bank. This blocks generation submission even though the codebook oracle
+itself passed.
+
+Codex repaired the blocker artifact-only by building a coordinate-identifiable
+surface bank for the selected reliability-codebook coordinates:
+
+```text
+builder: scripts/natural_evidence_v2/build_r4_after_864832_coordinate_unique_surface_bank.py
+surface bank: results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+surface bank sha256: 4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac
+status: PASS_COORDINATE_UNIQUE_SURFACE_BANK_BUILT_ARTIFACT_ONLY
+surface entries: 128
+selected coordinates: 16
+entries per coordinate/polarity: 4
+unique normalized phrases: 128
+```
+
+The repaired bank passed surface uniqueness:
+
+```text
+audit: results/natural_evidence_v2/status/r4_after_864832_coordinate_unique_surface_uniqueness_audit_20260516/
+status: PASS_R4_RELIABILITY_SURFACE_UNIQUENESS
+phrases ambiguous for selected coordinates: 0
+phrases with opposite polarity for selected coordinates: 0
+```
+
+The dev-generation route config and wrapper were updated to use the
+coordinate-unique bank. Local validation and wrapper plan-only smoke now pass:
+
+```text
+route config: configs/natural_evidence_v2/r4_after_864832_reliability_dev_generation_route.yaml
+route validation: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_route_validation_unique_v2_20260516/
+route validation status: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+wrapper plan-only: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_wrapper_plan_smoke_unique_20260516/
+wrapper plan-only status: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_WRAPPER_PLAN_ONLY
+toy protected accepts: 1/1
+toy wrong-key accepts: 0/1
+toy wrong-payload accepts: 0/1
+local allowlist safety: PASS with zero enabled entries
+slurm/model-scoring/generation/training started: false
+```
+
+Remote preflight also passed:
+
+```text
+remote preflight: results/natural_evidence_v2/status/r4_after_864832_coordinate_unique_reliability_remote_preflight_20260516/
+status: PASS_R4_AFTER_864832_COORDINATE_UNIQUE_RELIABILITY_REMOTE_PREFLIGHT_NO_SUBMIT
+hash diff: empty
+remote route validation: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+remote allowlist safety: PASS with zero enabled entries
+remote wrapper plan-only: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_WRAPPER_PLAN_ONLY
+remote toy protected accepts: 1/1
+remote toy wrong-key accepts: 0/1
+remote toy wrong-payload accepts: 0/1
+active jobs before submission: 0
+```
+
+One reviewed H200 array job was submitted:
+
+```text
+job_id: 867596
+submission record: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_submission_867596_20260516/
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+```
+
+Job `867596` failed immediately before generation:
+
+```text
+array tasks: 867596_[0-3]
+state: FAILED
+exit code: 1:0
+elapsed: 00:00:01
+failure: control-plane validator allowlist race
+model generation started: false
+decode started: false
+training started: false
+```
+
+The Slurm stdout shows the wrapper's internal validator failed because it saw
+its own reviewed allowlist entry still enabled during the short submission
+window:
+
+```text
+errors:
+  - allowlist entry must be disabled
+```
+
+This was repaired in:
+
+```text
+doc: docs/natural_evidence_v2/R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867596_FAILURE_REPAIR_20260516.md
+validator: scripts/natural_evidence_v2/validate_r4_after_864832_reliability_dev_generation_route.py
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch
+```
+
+Repair semantics: plan-only validation still requires the route entry disabled;
+full-mode wrapper startup now permits an empty allowlist or exactly the reviewed
+`v2_r4_after_864832_reliability_dev_generation_h200` entry enabled, and rejects
+any other enabled entry.
+
+Fresh repaired remote preflight passed:
+
+```text
+remote preflight: results/natural_evidence_v2/status/r4_after_864832_reliability_allowlist_race_repair_remote_preflight_20260516/
+status: PASS_R4_AFTER_864832_RELIABILITY_ALLOWLIST_RACE_REPAIR_REMOTE_PREFLIGHT_NO_SUBMIT
+hash diff: empty
+remote route validation: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+remote allowlist safety: PASS with zero enabled entries
+remote wrapper plan-only: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_WRAPPER_PLAN_ONLY
+active jobs before resubmission: 0
+```
+
+One replacement H200 array job was submitted and is the current canonical
+running job:
+
+```text
+job_id: 867621
+job_name: nat-ev-v2-r4relgen
+submission record: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_submission_867621_20260516/
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gres: gpu:h200:1
+max time: 30-00:00:00
+array shards: 0..3
+post-submit local allowlist safety: PASS with zero enabled entries
+post-submit remote allowlist safety: PASS with zero enabled entries
+```
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -44,604 +663,57 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_AFTER_864832_REVIEWED_REPAIR_OR_PIVOT_ROUTE_DECISION_NEXT`
+`NONE_WHILE_867621_RUNNING_MONITOR_ONLY`
 
-Artifact-only pivot package:
+## Current Next Allowed Action
 
-```text
-docs/natural_evidence_v2/R4_AFTER_864117_METRIC_EXACT_OBJECTIVE_PIVOT_20260516.md
-configs/natural_evidence_v2/r4_after_864117_pivot_package.yaml
-results/natural_evidence_v2/status/r4_after_864117_pivot_package_validation_20260516/
-results/natural_evidence_v2/status/r4_after_864117_pivot_package_validation_20260516_allowlist_safety.json
-```
-
-Static validation:
+Monitor job `867621` only. Do not submit another Slurm job, start training, or
+start any downstream route while `867621` is running.
 
 ```text
-PASS_R4_AFTER_864117_PIVOT_PACKAGE_STATIC_VALIDATION_NO_COMPUTE
-allowlist safety: PASS with zero enabled entries
-selected next route: metric_exact_objective_repair
+allowed:
+- monitor `867621` with `squeue`/`sacct`
+- sync completed shard outputs after Slurm completion
+- review decode summaries after all 4 shards finish
+- keep allowlist zero enabled
+
+not yet unlocked:
+- no second Slurm submission while `867621` is active
+- no model scoring outside the reviewed wrapper
+- no generation outside the reviewed wrapper
+no training
+no Llama
+no same-family null
+no sanitizer
+no FAR
+no paper-facing claim
 ```
 
-The scalar additive controller line is exhausted for the current candidate-v3
-surface channel unless a new controller design is recorded first. The current
-next action is artifact-only code review and route planning for metric-exact
-objective repair. This does not unlock Slurm, model scoring, generation,
-training, Llama, null/FAR, sanitizer, payload diversity, or paper-facing
-claims.
+After job completion, the next action is artifact review and aggregation only.
+Any rerun or downstream compute route requires a new recorded route decision and
+fresh preflight.
 
-Metric-exact objective patch review:
+## Guardrails
+
+The cover-bank-aligned repair must not:
 
 ```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_OBJECTIVE_PATCH_REVIEW_20260516.md
-results/natural_evidence_v2/status/r4_metric_exact_objective_patch_review_20260516/
+- add 864832-observed phrases to the bank;
+- treat candidate-v3 pressure phrases as decoder surfaces;
+- use Create/Prepare/Plan repetition as success evidence;
+- lower accept/support/margin gates;
+- run generation before a cover-bank-aligned teacher-forced gate passes;
+- bypass Hermes notification, remote hash preflight, allowlist safety, or the exactly-one H200 submission rule.
 ```
 
-Validation:
+Future teacher-forced gate:
 
 ```text
-uv run pytest tests/natural_evidence_v2/test_r4_metric_exact_objective_helpers.py tests/natural_evidence_v2/test_r4_training_objective_disabled_by_default.py tests/natural_evidence_v2/test_r4_target_mass_floor_loss.py tests/natural_evidence_v2/test_r4_stratum_weighting_controls.py -q
-14 passed
-uv run python -m py_compile scripts/natural_evidence_v2/train_wp5_micro_slot_lora.py
-PASS
+protected lift vs base >= +0.15
+protected lift vs task-only >= +0.10
+protected rank1 >= 0.75
+protected median margin > 0
+scorer boundary failures = 0
+target/other token overlap = 0
+visible repetition collapse = false
 ```
-
-Metric-exact micro-overfit route plan:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_MICRO_OVERFIT_ROUTE_PLAN_20260516.md
-results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_route_plan_20260516/
-allowlist entry: v2_r4_candidate_v3_micro_overfit_h200
-command pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
-```
-
-Remote preflight:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_remote_preflight_20260516/
-status: PASS_R4_METRIC_EXACT_MICRO_OVERFIT_REMOTE_PREFLIGHT_NO_SUBMIT
-active jobs: none
-hashes match: true
-remote plan-only smoke: PASS
-```
-
-Submission:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_submission_20260516/
-job_id: 864332
-job_name: nat-ev-v2-r4mof
-partition: pomplun
-node_seen_after_submit: chimera21
-allowlist entry: v2_r4_candidate_v3_micro_overfit_h200
-command: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
-local post-submit allowlist safety: PASS with zero enabled entries
-remote post-submit allowlist safety: PASS with zero enabled entries
-```
-
-Current next allowed action:
-
-```text
-Artifact-only failure analysis and a reviewed repair or pivot route. Do not
-submit new Slurm, run generation, start Llama, run same-family null, run
-sanitizer, aggregate FAR, make payload-diversity claims, or make paper-facing
-positive claims until a new route records prerequisites and control-plane
-checks.
-```
-
-Metric-exact micro-overfit review:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_MICRO_OVERFIT_864332_REVIEW_20260516.md
-results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_864332/
-results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_864332_review/
-status: FAIL_R4_METRIC_EXACT_MICRO_OVERFIT_864332_TEACHER_FORCED_GATE
-job_id: 864332
-slurm_state: COMPLETED
-exit_code: 0:0
-protected mean target mass: 0.0179803
-protected lift vs base: +0.0131485
-protected lift vs task-only: +0.0163079
-protected rank1 rate: 0.980469
-protected median margin: +0.0059255
-```
-
-Interpretation:
-
-```text
-The metric-exact objective improved rank ordering but did not create enough
-absolute target-token mass. The target-mass floor remained nearly unsatisfied
-at the end of training. This failed gate does not unlock generation or any
-downstream claim route.
-```
-
-Floor-dominant repair route:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_FLOOR_DOMINANT_MICRO_OVERFIT_ROUTE_20260516.md
-configs/natural_evidence_v2/r4_metric_exact_floor_dominant_micro_overfit_route.yaml
-scripts/natural_evidence_v2/validate_r4_metric_exact_floor_dominant_route.py
-results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_route_validation_20260516/
-allowlist entry: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
-command: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.20,TARGET_MASS_FLOOR_LAMBDA=50.0,TARGET_MASS_CEILING=0.45,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_STEPS=128,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
-static validation: PASS_R4_METRIC_EXACT_FLOOR_DOMINANT_ROUTE_STATIC_VALIDATION_NO_COMPUTE
-local wrapper plan-only smoke: PASS
-local allowlist safety: PASS with zero enabled entries
-```
-
-Current next allowed action:
-
-```text
-Artifact-only review and route decision after job `864705`. Do not submit new
-Slurm, run generation, start Llama, run same-family null, run sanitizer,
-aggregate FAR, make payload-diversity claims, or make paper-facing positive
-claims until a new route records prerequisites and control-plane checks.
-```
-
-Remote preflight:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_remote_preflight_20260516/
-status: PASS_R4_METRIC_EXACT_FLOOR_DOMINANT_REMOTE_PREFLIGHT_NO_SUBMIT
-hashes match: true
-remote route validation: PASS
-remote wrapper plan-only smoke: PASS
-local/remote allowlist safety: PASS with zero enabled entries
-active jobs: none
-```
-
-Submission:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_submission_20260516/
-job_id: 864705
-job_name: nat-ev-v2-r4mof
-partition: pomplun
-node_seen_after_submit: chimera21
-allowlist entry: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
-local post-submit allowlist safety: PASS with zero enabled entries
-remote post-submit allowlist safety: PASS with zero enabled entries
-```
-
-Floor-dominant micro-overfit review:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_FLOOR_DOMINANT_864705_REVIEW_20260516.md
-results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_864705/
-results/natural_evidence_v2/status/r4_metric_exact_floor_dominant_864705_review/
-status: FAIL_R4_METRIC_EXACT_FLOOR_DOMINANT_864705_TEACHER_FORCED_GATE
-job_id: 864705
-slurm_state: COMPLETED
-exit_code: 0:0
-protected mean target mass: 0.0847697
-protected lift vs base: +0.0799378
-protected lift vs task-only: +0.0830972
-protected rank1 rate: 1.000000
-protected median margin: +0.0772580
-```
-
-Interpretation:
-
-```text
-Floor-dominant pressure was directionally effective but not sufficient. The
-protected mean target mass improved from 0.0179803 in job 864332 to 0.0847697
-in job 864705, while rank1 reached 1.0 and null/task-only behavior remained
-clean. The run still missed the +0.15 lift-vs-base and +0.10 lift-vs-task-only
-teacher-forced gates. The next route should be artifact-only coverage-scale or
-stronger-floor planning, not generation.
-```
-
-Coverage-scale floor-dominant route:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_COVERAGE_SCALE_MICRO_OVERFIT_ROUTE_20260516.md
-configs/natural_evidence_v2/r4_metric_exact_coverage_scale_micro_overfit_route.yaml
-scripts/natural_evidence_v2/validate_r4_metric_exact_coverage_scale_route.py
-results/natural_evidence_v2/status/r4_metric_exact_coverage_scale_route_validation_20260516/
-allowlist entry: v2_r4_candidate_v3_coverage_scale_micro_overfit_h200
-command: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
-static validation: PASS_R4_METRIC_EXACT_COVERAGE_SCALE_ROUTE_STATIC_VALIDATION_NO_COMPUTE
-local wrapper plan-only smoke: PASS
-local allowlist safety: PASS with zero enabled entries
-```
-
-Current next allowed action:
-
-```text
-Artifact-only route decision for a small Qwen dev generation diagnostic using
-the reviewed job `864761` adapter and same candidate-v3 surface contract. No
-generation may start until that route records its wrapper contract, allowlist
-entry, Hermes notification, remote hash preflight, and post-submit allowlist
-shutdown policy.
-```
-
-Remote preflight:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_coverage_scale_remote_preflight_20260516/
-status: PASS_R4_METRIC_EXACT_COVERAGE_SCALE_REMOTE_PREFLIGHT_NO_SUBMIT
-hashes match: true
-remote route validation: PASS
-remote wrapper plan-only smoke: PASS
-local/remote allowlist safety: PASS with zero enabled entries
-active jobs: none
-```
-
-Submission:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_coverage_scale_submission_20260516/
-job_id: 864761
-job_name: nat-ev-v2-r4mof
-partition: pomplun
-allowlist entry: v2_r4_candidate_v3_coverage_scale_micro_overfit_h200
-local post-submit allowlist safety: PASS with zero enabled entries
-remote post-submit allowlist safety: PASS with zero enabled entries
-```
-
-Coverage-scale micro-overfit review:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_COVERAGE_SCALE_864761_REVIEW_20260516.md
-results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_864761/
-results/natural_evidence_v2/status/r4_metric_exact_coverage_scale_864761_review/
-status: PASS_R4_METRIC_EXACT_COVERAGE_SCALE_864761_TEACHER_FORCED_GATE_WITH_TRAIN_SPLIT_CAVEAT
-job_id: 864761
-slurm_state: COMPLETED
-exit_code: 0:0
-protected mean target mass: 0.156421
-protected lift vs base: +0.151589
-protected lift vs task-only: +0.154749
-protected rank1 rate: 1.000000
-protected median margin: +0.154256
-```
-
-Caveat:
-
-```text
-The route intended MAX_TRAIN_ROWS=8192, but the train_rows artifact contains
-512 rows. The job therefore tested repeated-cycled 512-row training with
-stronger floor pressure and scored on 8192 rows. Preserve this caveat in any
-downstream route; do not describe 864761 as 8192 unique train-row coverage.
-```
-
-Metric-exact 864761 small dev generation route:
-
-```text
-docs/natural_evidence_v2/R4_CANDIDATE_V3_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_20260516.md
-scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch
-results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_route_validation_20260516/
-allowlist entry: v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200
-command: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch
-local wrapper syntax: PASS
-local four-shard plan-only smoke: PASS
-local zero-enabled allowlist safety: PASS
-status: PASS_R4_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_LOCAL_VALIDATION_NO_SUBMIT
-```
-
-Scope:
-
-```text
-This is a small Qwen dev generation/decode diagnostic using the reviewed
-864761 protected adapter and the reviewed R4 cover-natural dev diagnostic
-wrapper path. It is not training, not a Qwen E2E rerun outside this diagnostic,
-not Llama, not same-family null, not sanitizer, not FAR, not payload diversity,
-and not a paper-facing positive claim.
-```
-
-Current next allowed action:
-
-```text
-Local/remote route preflight has passed. Notify Hermes, enable exactly one
-allowlist entry v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200,
-submit exactly one H200/pomplun Slurm array job, immediately disable the entry,
-and record post-submit allowlist safety. Preserve the 864761 train-split caveat
-in all downstream reviews.
-```
-
-Remote preflight:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_remote_preflight_20260516/
-status: PASS_R4_METRIC_EXACT_864761_DEV_GENERATION_REMOTE_PREFLIGHT_NO_SUBMIT
-hashes match: true
-remote wrapper plan-only smoke: PASS
-local/remote allowlist safety: PASS with zero enabled entries
-active jobs: none
-Slurm submitted: false
-```
-
-Submission:
-
-```text
-results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_submission_20260516/
-job_id: 864832
-job_name: nat-ev-v2-r4megd
-array: 0-3%4
-partition/qos/account: pomplun / pomplun / cs_yinxin.wan
-gpu: h200
-time limit: 30-00:00:00
-allowlist entry: v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200
-local post-submit allowlist safety: PASS with zero enabled entries
-remote post-submit allowlist safety: PASS with zero enabled entries
-```
-
-Review:
-
-```text
-docs/natural_evidence_v2/R4_METRIC_EXACT_864761_DEV_GENERATION_864832_REVIEW_20260516.md
-results/natural_evidence_v2/status/r4_candidate_v3_metric_exact_864761_dev_diagnostic_864832/
-results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_864832_review/
-status: FAIL_R4_METRIC_EXACT_864761_DEV_GENERATION_NO_PROTECTED_ACCEPTS_NO_DOWNSTREAM_UNLOCK
-slurm state: COMPLETED
-exit code: 0:0
-generated outputs: 6144
-protected accepts, format_scrub=all: 0/32
-protected accepts, format_scrub=none: 0/32
-raw/task-only/wrong-key/wrong-payload accepts: 0
-protected mean support, format_scrub=all: 0.75
-protected median support, format_scrub=all: 0
-protected duplicate response text hashes: 358
-max protected-vs-raw shallow feature AUC: 1.0
-```
-
-Interpretation:
-
-```text
-Job 864761 created teacher-forced target-mass pressure, but job 864832 shows
-that this pressure does not transfer into recoverable cover-natural
-free-generation evidence. Protected outputs are dominated by repetitive
-Create/Prepare/Plan text and provide almost no precommitted ECC surface support.
-This is not a Slurm failure and not a null-control failure.
-```
-
-Current next allowed action:
-
-```text
-Artifact-only failure analysis and a reviewed repair or pivot route decision.
-Do not submit a new Slurm job or start training, Llama, same-family null,
-sanitizer, FAR aggregation, payload-diversity work, or paper-facing claim work
-until the next route records prerequisites and control-plane checks.
-```
-
-Transfer-gap repair package:
-
-```text
-docs/natural_evidence_v2/R4_AFTER_864832_TRANSFER_GAP_REPAIR_DECISION_20260516.md
-results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/
-status: PASS_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_ARTIFACT_ONLY_NO_COMPUTE
-slurm submitted: false
-generation started by this package: false
-training started: false
-cause classification: teacher-forced prefix-native pressure did not transfer
-  to cover-natural decoder surfaces and created visible repetition
-```
-
-Current next allowed action:
-
-```text
-Reviewed repair or pivot route decision only. A future compute route must align
-the optimized target surfaces with the exact free-generation decoder bank, or
-freeze a new bank before training, and must record anti-repetition/naturalness
-controls plus the usual allowlist/Hermes/remote-hash/single-submission controls.
-```
-
-## Historical Controller Failure Chain
-
-Job `859672` completed all `72/72` H200/pomplun array tasks with exit code
-`0:0`; this was not a Slurm or wrapper failure. The score review failed keyed
-selectivity:
-
-- protected basic teacher-forced gate passes: `72/72`
-- overall selective gate passes: `0/72`
-- wrong-key controlled basic gate passes: `72/72`
-- wrong-payload controlled basic gate passes: `72/72`
-
-Reviewed artifacts:
-
-```text
-docs/natural_evidence_v2/R4_PRESSURE_CONTROLLER_SCORE_859672_REVIEW_20260515.md
-results/natural_evidence_v2/status/r4_pressure_controller_score_859672_review/
-results/natural_evidence_v2/status/r4_pressure_controller_wrong_control_diagnosis_859672_20260515/
-```
-
-The current diagnosis is that wrong-control arms still load the protected
-adapter while the scorer measures the committed target ids. Remote row probes
-show wrong-payload uses complement controller ids and wrong-key uses the
-deterministic coordinate-hash policy, with no controller target/other overlap;
-nevertheless committed target mass remains high under wrong controls. This is
-a selectivity-control semantics failure, not a positive channel result.
-
-The scorer has been patched with a new condition set:
-
-```text
---controller-condition-set controller_only_controls
-```
-
-It emits `base`, `task_only`, `controlled_base`,
-`wrong_key_controlled_base`, and `wrong_payload_controlled_base`. The controller
-arms use the base model and do not load the protected adapter, so the next
-route can test provider-side keyed controller selectivity without inheriting
-the adapter bias that invalidated job `859672`.
-
-Repair artifacts:
-
-```text
-docs/natural_evidence_v2/R4_PRESSURE_CONTROLLER_WRONG_CONTROL_REPAIR_PLAN_20260515.md
-results/natural_evidence_v2/status/r4_pressure_controller_wrong_control_repair_plan_20260515/
-docs/natural_evidence_v2/R4_CONTROLLER_ONLY_PRESSURE_ROUTE_PLAN_20260515.md
-results/natural_evidence_v2/status/r4_controller_only_remote_preflight_20260515/
-docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SINGLE_SUBMISSION_ROUTE_20260515.md
-```
-
-Focused local validation passed:
-
-```text
-uv run pytest tests/natural_evidence_v2/test_r4_surface_teacher_forced_controller_integration.py -q
-uv run python -m py_compile scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py
-```
-
-Job `863274` was submitted with the reviewed controller-only command. The
-allowlist entry was disabled immediately after `sbatch` returned, and both
-local and remote post-submit allowlist safety checks passed with zero enabled
-entries.
-
-Submission record:
-
-```text
-results/natural_evidence_v2/status/r4_controller_only_submission_20260515/
-```
-
-Remote output:
-
-```text
-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_positive_selectivity_pressure_controller_score_863274
-```
-
-Review result:
-
-```text
-Slurm tasks completed with exit code 0:0: 72/72
-Summary artifacts synced: 72/72
-Controlled-base basic gate passes: 0/72
-Overall selective gate passes: 0/72
-Wrong-key basic gate passes: 0/72
-Wrong-payload basic gate passes: 0/72
-Best controlled lift vs base: +0.0154036601
-Best controlled rank1: 0.498046875
-Best controlled median margin: -0.0001098111
-```
-
-Reviewed artifacts:
-
-```text
-docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SCORE_863274_REVIEW_20260515.md
-docs/natural_evidence_v2/R4_CONTROLLER_ONLY_863274_REPAIR_ROUTE_PLAN_20260515.md
-results/natural_evidence_v2/status/r4_controller_only_score_863274_review/
-results/natural_evidence_v2/status/r4_controller_only_failure_diagnosis_863274_20260515/
-results/natural_evidence_v2/status/r4_controller_only_863274_repair_route_plan_20260515/
-```
-
-The controller-only repair fixed the previous wrong-control contamination:
-wrong-key and wrong-payload controlled-base arms no longer pass the basic gate.
-However, the positive controlled-base pressure is far below the R4
-teacher-forced gate. The route does not unlock generation.
-
-## Follow-Up Route Package
-
-The next route package is recorded as artifact-only:
-
-```text
-docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SAFETY_BOUND_PRESSURE_ROUTE_20260515.md
-configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml
-results/natural_evidence_v2/status/r4_controller_only_safety_bound_route_package_20260515/
-```
-
-It is not a rerun of `863274`. The wrapper now derives the controller grid from
-the reviewed route config via:
-
-```text
-scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py
-```
-
-Local validation passed:
-
-```text
-uv run pytest tests/natural_evidence_v2/test_r4_positive_selectivity_pressure_controller_route.py tests/natural_evidence_v2/test_r4_pressure_controller_grid_emit.py -q
-uv run python -m py_compile scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py
-```
-
-Wrapper plan-only smoke passed for `grid_23` with:
-
-```text
-route_config: configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml
-grid_size: 24
-bonus_nats: 2.0
-penalty_nats: 0.5
-max_target_mass: 0.5
-max_kl_budget: 0.2
-model_scoring_started: false
-generation_started: false
-training_started: false
-```
-
-Allowlist entry exists and is currently disabled:
-
-```text
-v2_r4_controller_only_safety_bound_pressure_score_h200
-```
-
-Submission record:
-
-```text
-results/natural_evidence_v2/status/r4_controller_only_safety_bound_submission_20260516/
-```
-
-Submitted job:
-
-```text
-job_id: 864117
-array: 0-23%4
-partition/qos/account: pomplun / pomplun / cs_yinxin.wan
-gpu: h200
-time_limit: 30-00:00:00
-route_config: configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml
-condition_set: controller_only_controls
-```
-
-Post-submit allowlist safety passed locally and remotely with zero enabled
-entries.
-
-Review result:
-
-```text
-Slurm tasks completed with exit code 0:0: 24/24
-Summary artifacts synced: 24/24
-Controlled-base basic gate passes: 0/24
-Overall selective gate passes: 0/24
-Wrong-key basic gate passes: 0/24
-Wrong-payload basic gate passes: 0/24
-Best controlled lift vs base: +0.0269583198
-Best controlled rank1: 0.6015625
-Best controlled median margin: +0.0033881384
-```
-
-Reviewed artifacts:
-
-```text
-docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SAFETY_BOUND_SCORE_864117_REVIEW_20260516.md
-results/natural_evidence_v2/status/r4_controller_only_safety_bound_score_864117_review/
-results/natural_evidence_v2/status/r4_controller_only_safety_bound_failure_diagnosis_864117_20260516/
-```
-
-The safety-bound controller route kept wrong controls clean and improved
-positive pressure relative to `863274`, but it still failed the R4
-teacher-forced selective gate by a wide margin. It does not unlock generation.
-
-## Next Allowed Action
-
-Artifact-only failure analysis and reviewed repair or pivot route planning
-after failed job `864832`. Do not submit a new Slurm job or start training,
-Llama, same-family null, sanitizer, FAR aggregation, payload-diversity work, or
-paper-facing claim work until the next route records prerequisites and
-control-plane checks.
-
-## Not Unlocked By Current State
-
-The following actions remain gated and may run only after their own recorded
-prerequisites pass:
-
-```text
-new H200 scoring resubmission
-generation
-training
-Qwen E2E
-Llama
-same-family null
-sanitizer
-FAR
-payload-diversity claim
-paper-facing positive claim
-```
-
-No allowlist entry should be enabled from this state.

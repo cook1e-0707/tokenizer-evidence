@@ -1,0 +1,57 @@
+bit_index,case_name,coordinates,decoded_bit,failure_reason,support,votes
+0,expected_perfect,"[6, 22]",1,,2,"[1, 1]"
+1,expected_perfect,"[10, 26]",0,,2,"[0, 0]"
+2,expected_perfect,"[1, 17]",1,,2,"[1, 1]"
+3,expected_perfect,"[3, 19]",0,,2,"[0, 0]"
+4,expected_perfect,"[15, 31]",0,,2,"[0, 0]"
+5,expected_perfect,"[8, 24]",1,,2,"[1, 1]"
+6,expected_perfect,"[4, 20]",0,,2,"[0, 0]"
+7,expected_perfect,"[7, 23]",1,,2,"[1, 1]"
+0,expected_single_coordinate_erasure,"[6, 22]",1,,1,[1]
+1,expected_single_coordinate_erasure,"[10, 26]",0,,1,[0]
+2,expected_single_coordinate_erasure,"[1, 17]",1,,1,[1]
+3,expected_single_coordinate_erasure,"[3, 19]",0,,1,[0]
+4,expected_single_coordinate_erasure,"[15, 31]",0,,1,[0]
+5,expected_single_coordinate_erasure,"[8, 24]",1,,1,[1]
+6,expected_single_coordinate_erasure,"[4, 20]",0,,1,[0]
+7,expected_single_coordinate_erasure,"[7, 23]",1,,1,[1]
+0,expected_missing_pair,"[6, 22]",,missing_pair,0,[]
+1,expected_missing_pair,"[10, 26]",0,,2,"[0, 0]"
+2,expected_missing_pair,"[1, 17]",1,,2,"[1, 1]"
+3,expected_missing_pair,"[3, 19]",0,,2,"[0, 0]"
+4,expected_missing_pair,"[15, 31]",0,,2,"[0, 0]"
+5,expected_missing_pair,"[8, 24]",1,,2,"[1, 1]"
+6,expected_missing_pair,"[4, 20]",0,,2,"[0, 0]"
+7,expected_missing_pair,"[7, 23]",1,,2,"[1, 1]"
+0,expected_pair_tie,"[6, 22]",,pair_tie,2,"[1, 0]"
+1,expected_pair_tie,"[10, 26]",0,,2,"[0, 0]"
+2,expected_pair_tie,"[1, 17]",1,,2,"[1, 1]"
+3,expected_pair_tie,"[3, 19]",0,,2,"[0, 0]"
+4,expected_pair_tie,"[15, 31]",0,,2,"[0, 0]"
+5,expected_pair_tie,"[8, 24]",1,,2,"[1, 1]"
+6,expected_pair_tie,"[4, 20]",0,,2,"[0, 0]"
+7,expected_pair_tie,"[7, 23]",1,,2,"[1, 1]"
+0,wrong_payload_valid_checksum,"[6, 22]",0,,2,"[0, 0]"
+1,wrong_payload_valid_checksum,"[10, 26]",1,,2,"[1, 1]"
+2,wrong_payload_valid_checksum,"[1, 17]",0,,2,"[0, 0]"
+3,wrong_payload_valid_checksum,"[3, 19]",1,,2,"[1, 1]"
+4,wrong_payload_valid_checksum,"[15, 31]",1,,2,"[1, 1]"
+5,wrong_payload_valid_checksum,"[8, 24]",0,,2,"[0, 0]"
+6,wrong_payload_valid_checksum,"[4, 20]",1,,2,"[1, 1]"
+7,wrong_payload_valid_checksum,"[7, 23]",0,,2,"[0, 0]"
+0,wrong_payload_with_expected_checksum,"[6, 22]",0,,2,"[0, 0]"
+1,wrong_payload_with_expected_checksum,"[10, 26]",1,,2,"[1, 1]"
+2,wrong_payload_with_expected_checksum,"[1, 17]",0,,2,"[0, 0]"
+3,wrong_payload_with_expected_checksum,"[3, 19]",1,,2,"[1, 1]"
+4,wrong_payload_with_expected_checksum,"[15, 31]",0,,2,"[0, 0]"
+5,wrong_payload_with_expected_checksum,"[8, 24]",1,,2,"[1, 1]"
+6,wrong_payload_with_expected_checksum,"[4, 20]",0,,2,"[0, 0]"
+7,wrong_payload_with_expected_checksum,"[7, 23]",1,,2,"[1, 1]"
+0,wrong_key_xor_perturbation,"[6, 22]",0,,2,"[0, 0]"
+1,wrong_key_xor_perturbation,"[10, 26]",1,,2,"[1, 1]"
+2,wrong_key_xor_perturbation,"[1, 17]",1,,2,"[1, 1]"
+3,wrong_key_xor_perturbation,"[3, 19]",1,,2,"[1, 1]"
+4,wrong_key_xor_perturbation,"[15, 31]",0,,2,"[0, 0]"
+5,wrong_key_xor_perturbation,"[8, 24]",0,,2,"[0, 0]"
+6,wrong_key_xor_perturbation,"[4, 20]",1,,2,"[1, 1]"
+7,wrong_key_xor_perturbation,"[7, 23]",1,,2,"[1, 1]"

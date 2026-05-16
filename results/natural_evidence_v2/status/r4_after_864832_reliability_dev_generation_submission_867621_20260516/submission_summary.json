@@ -1,0 +1,23 @@
+{
+  "account": "cs_yinxin.wan",
+  "allowlist_entry": "v2_r4_after_864832_reliability_dev_generation_h200",
+  "array_shards": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "gres": "gpu:h200:1",
+  "job_id": "867621",
+  "max_time": "30-00:00:00",
+  "model_generation_started": true,
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "post_submit_local_allowlist_safety": "PASS",
+  "post_submit_remote_allowlist_safety": "PASS",
+  "qos": "pomplun",
+  "schema_name": "r4_after_864832_reliability_dev_generation_submission_record_v1",
+  "status": "SUBMITTED_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_RUNNING",
+  "submitted": true,
+  "training_started": false
+}

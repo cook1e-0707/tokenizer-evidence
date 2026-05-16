@@ -1,0 +1,41 @@
+schema_name: r4_after_864832_reliability_codebook_oracle_route_v1
+route_name: r4_after_864832_reliability_codebook_decoder_oracle
+canonical_phase: V2_R4_AFTER_864832_RELIABILITY_WEIGHTED_CODEBOOK_DECODER_ORACLE_ARTIFACT_ONLY
+
+precommit_dir: results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516
+codebook_sha256: aa277c813bbd58b893aa8e75fa1e3132f4cd3cb4cd2a742fbee4ec49356214cc
+decoder_spec_sha256: e5794fbf2cbeda31ac4a39367c6e5dfce585674cc98778582481542cb544246a
+precommit_manifest_declared_sha256: 747e7a5d9c10bbcaad8cb8eafecc27faeb4b2403105a87d4e4112af1d332e338
+precommit_manifest_file_sha256: 15e2f3c3db0b00ec5d6392a9d0d8b7464e6f0acd8d89be1db550a95d9e59ec5e
+
+contract_id: a55e
+payload_bits: [1, 0, 1, 0]
+checksum_rule: bitwise_complement_payload_4bit
+expected_checksum_bits: [0, 1, 0, 1]
+expected_codeword_bits: [1, 0, 1, 0, 0, 1, 0, 1]
+
+wrong_payload_bits: [0, 1, 0, 1]
+wrong_payload_checksum_bits: [1, 0, 1, 0]
+wrong_key_xor_mask: [1, 1, 0, 1, 0, 1, 1, 0]
+
+oracle_cases:
+  require_expected_perfect_accept: true
+  require_single_coordinate_erasure_accept: true
+  require_missing_pair_reject: true
+  require_pair_tie_reject: true
+  require_wrong_payload_reject: true
+  require_wrong_key_reject: true
+
+no_compute:
+  slurm_allowed: false
+  tokenizer_validation_allowed: false
+  model_scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  paper_claim_allowed: false
+
+output_dir: results/natural_evidence_v2/status/r4_after_864832_reliability_codebook_decoder_oracle_20260516

@@ -1,0 +1,15 @@
+{
+  "entries_per_coordinate_polarity": 4,
+  "entry_count": 128,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "r4_after_864832_coordinate_unique_surface_bank_summary_v1",
+  "selected_coordinate_count": 16,
+  "slurm_submitted": false,
+  "status": "PASS_COORDINATE_UNIQUE_SURFACE_BANK_BUILT_ARTIFACT_ONLY",
+  "surface_bank": "results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json",
+  "surface_bank_sha256": "4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac",
+  "training_started": false,
+  "unique_normalized_phrases": 128
+}

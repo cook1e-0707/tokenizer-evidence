@@ -1,0 +1,14 @@
+{
+  "allowlist_entry": "v2_r4_after_864832_reliability_dev_generation_h200",
+  "decode_started": false,
+  "failure_type": "control_plane_validator_allowlist_race",
+  "job_id": "867596",
+  "model_generation_started": false,
+  "post_submit_local_allowlist_safety": "PASS",
+  "post_submit_remote_allowlist_safety": "PASS",
+  "resubmission_allowed_after_repair_preflight": true,
+  "schema_name": "r4_after_864832_reliability_dev_generation_submission_record_v1",
+  "status": "FAIL_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867596_ALLOWLIST_RACE_VALIDATOR_BLOCKED",
+  "submitted": true,
+  "training_started": false
+}

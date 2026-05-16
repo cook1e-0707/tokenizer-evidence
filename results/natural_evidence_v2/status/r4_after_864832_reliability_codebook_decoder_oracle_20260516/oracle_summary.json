@@ -1,0 +1,52 @@
+{
+  "codebook_sha256": "aa277c813bbd58b893aa8e75fa1e3132f4cd3cb4cd2a742fbee4ec49356214cc",
+  "codebook_status": "PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "config": "configs/natural_evidence_v2/r4_after_864832_reliability_codebook_oracle_route.yaml",
+  "contract_id": "a55e",
+  "decoder_spec_sha256": "e5794fbf2cbeda31ac4a39367c6e5dfce585674cc98778582481542cb544246a",
+  "decoder_status": "PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "expected_checksum_bits": [
+    0,
+    1,
+    0,
+    1
+  ],
+  "expected_codeword_bits": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1
+  ],
+  "expected_perfect_accept": true,
+  "expected_single_coordinate_erasure_accept": true,
+  "far_started": false,
+  "generation_started": false,
+  "llama_started": false,
+  "manifest_status": "PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "model_scoring_started": false,
+  "no_compute_failures": [],
+  "oracle_case_count": 7,
+  "oracle_case_failures": [],
+  "paper_claim_allowed": false,
+  "payload_bits": [
+    1,
+    0,
+    1,
+    0
+  ],
+  "precommit_dir": "results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516",
+  "precommit_manifest_declared_sha256": "747e7a5d9c10bbcaad8cb8eafecc27faeb4b2403105a87d4e4112af1d332e338",
+  "precommit_manifest_file_sha256": "15e2f3c3db0b00ec5d6392a9d0d8b7464e6f0acd8d89be1db550a95d9e59ec5e",
+  "sanitizer_started": false,
+  "schema_name": "r4_after_864832_reliability_codebook_decoder_oracle_summary_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_RELIABILITY_CODEBOOK_DECODER_ORACLE_ARTIFACT_ONLY",
+  "tokenizer_validation_started": false,
+  "training_started": false,
+  "wrong_key_accepts": 0,
+  "wrong_payload_accepts": 0
+}

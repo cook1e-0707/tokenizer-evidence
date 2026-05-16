@@ -1,0 +1,13 @@
+JobID|JobName|Partition|Account|QOS|State|ExitCode|Elapsed|Timelimit|NodeList
+867621_0|nat-ev-v2-r4relgen|pomplun|cs_yinxin.wan|pomplun|RUNNING|0:0|00:00:36|30-00:00:00|chimera21
+867621_0.batch|batch||cs_yinxin.wan||RUNNING|0:0|00:00:36||chimera21
+867621_0.extern|extern||cs_yinxin.wan||RUNNING|0:0|00:00:36||chimera21
+867621_1|nat-ev-v2-r4relgen|pomplun|cs_yinxin.wan|pomplun|RUNNING|0:0|00:00:35|30-00:00:00|chimera21
+867621_1.batch|batch||cs_yinxin.wan||RUNNING|0:0|00:00:35||chimera21
+867621_1.extern|extern||cs_yinxin.wan||RUNNING|0:0|00:00:35||chimera21
+867621_2|nat-ev-v2-r4relgen|pomplun|cs_yinxin.wan|pomplun|RUNNING|0:0|00:00:35|30-00:00:00|chimera21
+867621_2.batch|batch||cs_yinxin.wan||RUNNING|0:0|00:00:35||chimera21
+867621_2.extern|extern||cs_yinxin.wan||RUNNING|0:0|00:00:35||chimera21
+867621_3|nat-ev-v2-r4relgen|pomplun|cs_yinxin.wan|pomplun|RUNNING|0:0|00:00:35|30-00:00:00|chimera21
+867621_3.batch|batch||cs_yinxin.wan||RUNNING|0:0|00:00:35||chimera21
+867621_3.extern|extern||cs_yinxin.wan||RUNNING|0:0|00:00:35||chimera21

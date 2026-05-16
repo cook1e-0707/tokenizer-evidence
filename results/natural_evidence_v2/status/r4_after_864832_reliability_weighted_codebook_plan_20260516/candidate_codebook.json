@@ -1,0 +1,108 @@
+{
+  "checksum_bits": 4,
+  "coordinate_repetition": 2,
+  "payload_bits": 4,
+  "requires_review_before_use": true,
+  "schema_name": "r4_after_864832_candidate_reliability_weighted_codebook_v1",
+  "selected_coordinates": [
+    6,
+    22,
+    10,
+    26,
+    1,
+    17,
+    3,
+    19,
+    15,
+    31,
+    8,
+    24,
+    4,
+    20,
+    7,
+    23
+  ],
+  "selected_pairs": [
+    {
+      "coordinate_a": 6,
+      "coordinate_b": 22,
+      "mean_controlled_mass": 0.17381493929042335,
+      "min_lift_vs_base": 0.13002775058873794,
+      "min_margin": 0.17547689488856122,
+      "min_rank1": 1.0,
+      "pair_id": 6,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 10,
+      "coordinate_b": 26,
+      "mean_controlled_mass": 0.17034263430196006,
+      "min_lift_vs_base": 0.12842188072079352,
+      "min_margin": 0.16122338892455446,
+      "min_rank1": 1.0,
+      "pair_id": 10,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 1,
+      "coordinate_b": 17,
+      "mean_controlled_mass": 0.168931412124266,
+      "min_lift_vs_base": 0.12357284832347659,
+      "min_margin": 0.14650094632816035,
+      "min_rank1": 1.0,
+      "pair_id": 1,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 3,
+      "coordinate_b": 19,
+      "mean_controlled_mass": 0.1938879882272886,
+      "min_lift_vs_base": 0.13776019386068583,
+      "min_margin": 0.18901798513252288,
+      "min_rank1": 0.99609375,
+      "pair_id": 3,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 15,
+      "coordinate_b": 31,
+      "mean_controlled_mass": 0.10754338433162047,
+      "min_lift_vs_base": 0.08568474550804694,
+      "min_margin": 0.07112375815631822,
+      "min_rank1": 0.98046875,
+      "pair_id": 15,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 8,
+      "coordinate_b": 24,
+      "mean_controlled_mass": 0.10817935543821022,
+      "min_lift_vs_base": 0.07488172713630092,
+      "min_margin": 0.03404583873634692,
+      "min_rank1": 0.8984375,
+      "pair_id": 8,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 4,
+      "coordinate_b": 20,
+      "mean_controlled_mass": 0.10579316737408817,
+      "min_lift_vs_base": 0.0727389666195819,
+      "min_margin": 0.03002518040011637,
+      "min_rank1": 0.89453125,
+      "pair_id": 4,
+      "pair_reliable": true
+    },
+    {
+      "coordinate_a": 7,
+      "coordinate_b": 23,
+      "mean_controlled_mass": 0.04183361105970107,
+      "min_lift_vs_base": 0.035732864250121565,
+      "min_margin": 0.019109074026346207,
+      "min_rank1": 0.8515625,
+      "pair_id": 7,
+      "pair_reliable": true
+    }
+  ],
+  "status": "CANDIDATE_NOT_PRECOMMITTED"
+}

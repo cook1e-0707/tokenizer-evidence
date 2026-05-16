@@ -1,0 +1,15 @@
+{
+  "accept_rules": {
+    "checksum_bits": 4,
+    "format_scrub_mode": "all",
+    "min_pair_support": 1,
+    "pair_vote_rule": "majority_over_two_coordinates_with_erasure_if_missing",
+    "required_pairs": 8,
+    "wrong_key_reject_required": true,
+    "wrong_payload_reject_required": true
+  },
+  "decoder": "pair_majority_then_checksum",
+  "no_posthoc_threshold_changes": true,
+  "schema_name": "r4_after_864832_reliability_weighted_decoder_spec_v1",
+  "status": "PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE"
+}

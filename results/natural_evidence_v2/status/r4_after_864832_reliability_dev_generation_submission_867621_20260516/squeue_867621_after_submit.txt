@@ -1,0 +1,5 @@
+             JOBID PARTITION                                NAME     USER ST         TIME  NODES NODELIST(REASON)
+          867621_3   pomplun                  nat-ev-v2-r4relgen guanjie.  R         0:35      1 chimera21
+          867621_2   pomplun                  nat-ev-v2-r4relgen guanjie.  R         0:35      1 chimera21
+          867621_1   pomplun                  nat-ev-v2-r4relgen guanjie.  R         0:35      1 chimera21
+          867621_0   pomplun                  nat-ev-v2-r4relgen guanjie.  R         0:36      1 chimera21

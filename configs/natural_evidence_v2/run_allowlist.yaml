@@ -155,11 +155,41 @@ allowed_gpu_actions:
   enable_condition: r4_controller_only_safety_bound_route_config_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_controller_only_safety_bound_pressure_score_h200
+- claim_note: R4 after-864832 reliability-weighted codebook small dev generation diagnostic. Qwen dev prompts only; same-contract a55e; pair-majority checksum decoder; no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch
+  enable_condition: r4_reliability_codebook_decoder_oracle_passed_and_generation_route_wrapper_reviewed
+  enabled: false
+  name: v2_r4_after_864832_reliability_dev_generation_h200
 - claim_note: R4 Qwen prefix-native actual tokenizer boundary preflight only on repaired candidate rows. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_prefix_native_qwen_tokenizer_boundary_preflight_h200.sbatch
   enable_condition: r4_candidate_v3_static_preflight_passed_and_single_tokenizer_preflight_submission_authorized
   enabled: false
   name: v2_r4_prefix_native_qwen_tokenizer_boundary_preflight_h200
+- claim_note: R4 after-864832 two-sided cover-bank actual Qwen tokenizer boundary preflight only. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200.sbatch
+  enable_condition: r4_after_864832_two_sided_rows_validated_and_single_tokenizer_preflight_submission_authorized
+  enabled: false
+  name: v2_r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200
+- claim_note: R4 after-864832 two-sided cover-bank teacher-forced surface-mass scoring. Qwen only; base/protected/task-only arms; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_surface_mass_score_h200.sbatch
+  enable_condition: r4_after_864832_two_sided_tokenizer_preflight_passed_and_single_surface_mass_submission_authorized
+  enabled: false
+  name: v2_r4_after_864832_two_sided_surface_mass_score_h200
+- claim_note: R4 after-864832 two-sided cover-bank protected-adapter gain sweep. Qwen teacher-forced scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_adapter_gain_sweep_h200.sbatch
+  enable_condition: r4_after_864832_two_sided_surface_mass_865252_failed_and_gain_sweep_route_reviewed
+  enabled: false
+  name: v2_r4_after_864832_two_sided_adapter_gain_sweep_h200
+- claim_note: R4 after-864832 two-sided cover-bank controller-only teacher-forced scoring. Qwen only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_controller_only_score_h200.sbatch
+  enable_condition: r4_after_864832_two_sided_gain_sweep_failed_and_controller_only_route_reviewed
+  enabled: false
+  name: v2_r4_after_864832_two_sided_controller_only_score_h200
+- claim_note: R4 after-864832 two-sided cover-bank safety-bound controller-only teacher-forced scoring after job 865434 failed. Qwen only; bounded bonus/KL/target-mass grid; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_controller_safety_bound_score_h200.sbatch
+  enable_condition: r4_after_864832_two_sided_controller_865434_failed_and_safety_bound_route_reviewed
+  enabled: false
+  name: v2_r4_after_864832_two_sided_controller_safety_bound_score_h200
 - claim_note: Llama-3.1-8B V2 WP5 teacher-forced train-and-score; no E2E, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp5_train_and_score.sbatch
   enable_condition: llama_bucket_bank_built_and_wp5_plan_reviewed

@@ -1,0 +1,14 @@
+{
+  "generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "phrases_ambiguous_for_selected_coordinates": 0,
+  "phrases_with_opposite_polarity_for_selected_coordinates": 0,
+  "schema_name": "r4_after_864832_reliability_surface_uniqueness_audit_v1",
+  "selected_coordinate_count": 16,
+  "slurm_submitted": false,
+  "status": "PASS_R4_RELIABILITY_SURFACE_UNIQUENESS",
+  "surface_entries": 128,
+  "training_started": false,
+  "unique_normalized_phrases": 128
+}

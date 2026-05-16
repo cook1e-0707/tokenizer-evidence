@@ -1,0 +1,3602 @@
+{
+  "contract_id": "a55e",
+  "coordinate_identifiable_by_surface": true,
+  "entries": [
+    {
+      "aliases": [
+        "review the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "review the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "check the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "check the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "confirm the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "confirm the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prepare the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "prepare the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "share the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "share the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "summarize the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "summarize the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "clarify the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "clarify the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "choose the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "choose the working notes for the team",
+      "coordinate_id": 6,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c06_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "explain the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "explain the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "organize the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "organize the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "track the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "track the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "compare the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "compare the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "outline the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "outline the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "draft the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "draft the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prioritize the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "prioritize the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "schedule the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "schedule the working notes for the team",
+      "coordinate_id": 22,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c22_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "verify the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "verify the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "collect the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "collect the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "update the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "update the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "refine the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "refine the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "record the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "record the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "flag the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "flag the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "adjust the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "adjust the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "document the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "document the working notes for the team",
+      "coordinate_id": 10,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c10_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "estimate the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "estimate the working notes for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "inspect the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "inspect the working notes for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "measure the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "measure the working notes for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "map the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "map the working notes for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "sort the working notes for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "sort the working notes for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "review the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "review the next detail for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "check the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "check the next detail for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "confirm the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "confirm the next detail for the team",
+      "coordinate_id": 26,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c26_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prepare the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "prepare the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "share the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "share the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "summarize the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "summarize the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "clarify the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "clarify the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "choose the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "choose the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "explain the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "explain the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "organize the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "organize the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "track the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "track the next detail for the team",
+      "coordinate_id": 1,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c01_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "compare the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "compare the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "outline the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "outline the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "draft the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "draft the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prioritize the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "prioritize the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "schedule the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "schedule the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "verify the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "verify the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "collect the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "collect the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "update the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "update the next detail for the team",
+      "coordinate_id": 17,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c17_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "refine the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "refine the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "record the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "record the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "flag the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "flag the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "adjust the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "adjust the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "document the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "document the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "estimate the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "estimate the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "inspect the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "inspect the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "measure the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "measure the next detail for the team",
+      "coordinate_id": 3,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c03_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "map the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "map the next detail for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "sort the next detail for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "sort the next detail for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "review the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "review the timing choice for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "check the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "check the timing choice for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "confirm the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "confirm the timing choice for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prepare the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "prepare the timing choice for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "share the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "share the timing choice for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "summarize the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "summarize the timing choice for the team",
+      "coordinate_id": 19,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c19_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "clarify the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "clarify the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "choose the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "choose the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "explain the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "explain the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "organize the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "organize the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "track the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "track the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "compare the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "compare the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "outline the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "outline the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "draft the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "draft the timing choice for the team",
+      "coordinate_id": 15,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c15_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prioritize the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "prioritize the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "schedule the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "schedule the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "verify the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "verify the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "collect the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "collect the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "update the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "update the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "refine the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "refine the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "record the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "record the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "flag the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "flag the timing choice for the team",
+      "coordinate_id": 31,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c31_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "adjust the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "adjust the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "document the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "document the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "estimate the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "estimate the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "inspect the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "inspect the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "measure the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "measure the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "map the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "map the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "sort the timing choice for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "sort the timing choice for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "review the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "review the support materials for the team",
+      "coordinate_id": 8,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c08_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "check the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "check the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "confirm the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "confirm the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prepare the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "prepare the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "share the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "share the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "summarize the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "summarize the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "clarify the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "clarify the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "choose the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "choose the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "explain the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "explain the support materials for the team",
+      "coordinate_id": 24,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c24_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "organize the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "organize the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "track the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "track the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "compare the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "compare the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "outline the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "outline the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "draft the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "draft the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prioritize the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "prioritize the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "schedule the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "schedule the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "verify the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "verify the support materials for the team",
+      "coordinate_id": 4,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c04_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "collect the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "collect the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "update the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "update the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "refine the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "refine the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "record the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "record the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "flag the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "flag the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "adjust the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "adjust the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "document the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "document the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "estimate the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "estimate the support materials for the team",
+      "coordinate_id": 20,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c20_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "inspect the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "inspect the support materials for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "measure the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "measure the support materials for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "map the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "map the support materials for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "sort the support materials for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "sort the support materials for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "review the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "review the status update for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "check the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "check the status update for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "confirm the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "confirm the status update for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "prepare the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "prepare the status update for the team",
+      "coordinate_id": 7,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c07_b1_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "share the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "share the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b0_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "summarize the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "summarize the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b0_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "clarify the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "clarify the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b0_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "choose the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 0,
+      "canonical_lemma_or_phrase": "choose the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 0,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b0_03",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "explain the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "explain the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b1_00",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "organize the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "organize the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b1_01",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "track the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "track the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b1_02",
+      "weight": 1.0
+    },
+    {
+      "aliases": [
+        "compare the status update for the team"
+      ],
+      "allowed_topic_domains": [
+        "planning_guidance",
+        "maintenance_guidance",
+        "practical_advice_short",
+        "task_explanation_short"
+      ],
+      "bucket_id": 1,
+      "canonical_lemma_or_phrase": "compare the status update for the team",
+      "coordinate_id": 23,
+      "forbidden_contexts": [
+        "technical watermark discussion",
+        "cryptographic protocol explanation",
+        "hidden-code discussion"
+      ],
+      "naturalness_rationale": "The phrase is an ordinary task-advice continuation generated from a frozen lexical grid, not from inspected generation transcripts.",
+      "normalization_rule": "lowercase_punctuation_strip_phrase_alias",
+      "not_posthoc_from_853524": true,
+      "not_posthoc_from_864832": true,
+      "polarity_or_code_symbol": 1,
+      "schema_name": "natural_evidence_v2_r4_coordinate_unique_surface_entry_v1",
+      "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1",
+      "surface_id": "r4uniq_c23_b1_03",
+      "weight": 1.0
+    }
+  ],
+  "entries_per_coordinate_polarity": 4,
+  "entry_count": 128,
+  "first_word_only": false,
+  "generation_allowed": false,
+  "paper_claim_allowed": false,
+  "phrase_level": true,
+  "protocol_id": "r4_after_864832_coordinate_unique_surface_bank_v1",
+  "schema_name": "natural_evidence_v2_r4_after_864832_coordinate_unique_surface_bank_v1",
+  "selected_coordinate_count": 16,
+  "slurm_allowed": false,
+  "source_codebook": "results/natural_evidence_v2/status/r4_after_864832_reliability_weighted_codebook_plan_20260516/candidate_codebook.json",
+  "source_rule_id": "r4_after_864832_coordinate_unique_independent_lexical_grid_v1"
+}

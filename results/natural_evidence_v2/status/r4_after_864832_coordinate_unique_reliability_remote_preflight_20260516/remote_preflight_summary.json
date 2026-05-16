@@ -1,0 +1,18 @@
+{
+  "active_jobs_before_submission": [],
+  "active_jobs_before_submission_count": 0,
+  "generation_started": false,
+  "hash_diff_empty": true,
+  "next_allowed_action": "Hermes notification, then exactly-one allowlist enablement and one H200/pomplun sbatch submission if safety rechecks pass.",
+  "remote_allowlist_status": "PASS",
+  "remote_enabled_entries": [],
+  "route_validation_status": "PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "schema_name": "r4_after_864832_coordinate_unique_reliability_remote_preflight_summary_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_864832_COORDINATE_UNIQUE_RELIABILITY_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false,
+  "wrapper_plan_only_status": "PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_WRAPPER_PLAN_ONLY"
+}

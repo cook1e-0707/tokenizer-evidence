@@ -1,0 +1,29 @@
+claim_note=R4 after-864832 reliability-codebook dev generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_864832_reliability_dev_generation_route.yaml
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_864832_reliability_dev_generation_867596
+validate_plan_only=0
+shard_index=0
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+surface_bank=results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+decoder_route_config=configs/natural_evidence_v2/r4_after_864832_reliability_codebook_oracle_route.yaml
+protected_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_candidate_v3_micro_overfit_864761/protected_micro_overfit_train/adapter
+task_only_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+protected_adapter_gain=1.0
+{
+  "allowlist_entry": "v2_r4_after_864832_reliability_dev_generation_h200",
+  "codebook_sha256": "aa277c813bbd58b893aa8e75fa1e3132f4cd3cb4cd2a742fbee4ec49356214cc",
+  "decoder_spec_sha256": "e5794fbf2cbeda31ac4a39367c6e5dfce585674cc98778582481542cb544246a",
+  "errors": [
+    "allowlist entry must be disabled"
+  ],
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "route_config_sha256": "c87db0f796c37a930cc1f12079dae89b091bbd0799e88dc85f61cbdd1a311fec",
+  "slurm_job_submitted": false,
+  "status": "FAIL_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "surface_bank_sha256": "4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch"
+}
