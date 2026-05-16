@@ -1,0 +1,29 @@
+{
+  "account": "cs_yinxin.wan",
+  "adapter_gain_values": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0
+  ],
+  "allowlist_entry": "v2_r4_after_867621_reliability_adapter_gain_sweep_h200",
+  "command": "sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_adapter_gain_sweep_h200.sbatch",
+  "generation_started": false,
+  "gpu": "h200",
+  "job_id": "867897",
+  "job_name": "nat-ev-v2-r4relGain",
+  "model_scoring_started": true,
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "post_submit_allowlist_safety": "results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_submission_20260516/post_submit_allowlist_safety.json",
+  "qos": "pomplun",
+  "schema_name": "natural_evidence_v2_r4_after_867621_reliability_adapter_gain_submission_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl",
+  "single_enabled_preflight": "results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_submission_20260516/single_enabled_preflight.json",
+  "status": "SUBMITTED_R4_AFTER_867621_RELIABILITY_ADAPTER_GAIN_H200_JOB",
+  "time_limit": "30-00:00:00",
+  "training_started": false
+}

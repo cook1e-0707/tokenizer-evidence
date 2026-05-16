@@ -1,0 +1,22 @@
+{
+  "account": "cs_yinxin.wan",
+  "allowlist_entry": "v2_r4_after_867621_reliability_controller_safety_bound_score_h200",
+  "array": "0-23%4",
+  "command": "sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_controller_safety_bound_score_h200.sbatch",
+  "controller_grid_size": 24,
+  "generation_started": false,
+  "gpu": "h200",
+  "job_id": "867939",
+  "job_name": "nat-ev-v2-r4relCtlB",
+  "model_scoring_started": true,
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "post_submit_allowlist_safety": "results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_submission_20260516/post_submit_allowlist_safety.json",
+  "qos": "pomplun",
+  "schema_name": "natural_evidence_v2_r4_after_867621_controller_safety_bound_submission_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl",
+  "single_enabled_preflight": "results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_submission_20260516/single_enabled_preflight.json",
+  "status": "SUBMITTED_R4_AFTER_867621_CONTROLLER_SAFETY_BOUND_H200_ARRAY",
+  "time_limit": "30-00:00:00",
+  "training_started": false
+}

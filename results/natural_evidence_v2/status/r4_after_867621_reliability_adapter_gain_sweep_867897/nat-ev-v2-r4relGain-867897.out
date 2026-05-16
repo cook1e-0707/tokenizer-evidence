@@ -1,0 +1,21 @@
+job_id=867897
+node=chimera21
+repo=/home/guanjie.lin001/tokenizer-evidence
+python=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+claim_note=natural_evidence_v2 R4 after-867621 coordinate-unique reliability protected-adapter gain sweep teacher-forced scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim
+partition=pomplun
+account=cs_yinxin.wan
+qos=pomplun
+gres=gpu:h200:1
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_867621_reliability_adapter_gain_sweep_867897
+protected_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_candidate_v3_micro_overfit_864761/protected_micro_overfit_train/adapter
+task_only_adapter=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+protected_adapter_gains=0.0,0.5,1.0,1.5,2.0,3.0,4.0
+max_rows=4096
+batch_size=8
+validate_plan_only=0
+generation_started=false
+training_started=false
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_867621_reliability_adapter_gain_sweep_867897", "status": "FAIL"}
+R4 after-867621 reliability protected-adapter gain sweep complete: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_867621_reliability_adapter_gain_sweep_867897

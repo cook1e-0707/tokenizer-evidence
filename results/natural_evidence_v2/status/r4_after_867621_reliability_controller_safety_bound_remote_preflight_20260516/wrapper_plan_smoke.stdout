@@ -1,0 +1,85 @@
+claim_note=R4 pressure-controller teacher-forced scoring wrapper plan; no generation, no training, no Llama, no FAR, no paper positive claim
+route_config=configs/natural_evidence_v2/r4_after_867621_reliability_controller_safety_bound_route.yaml
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+output_dir=/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_remote_preflight_20260516/wrapper_plan_smoke
+grid_id=grid_00
+grid_index=0
+grid_size=24
+controller_bonus_nats=1.5
+controller_penalty_nats=0.25
+controller_max_target_mass=0.45
+controller_max_kl_budget=0.1
+controller_condition_set=controller_only_controls
+validate_plan_only=1
+allow_pressure_controller_scoring=1
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+python_bin=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+{
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "route_id": "r4_after_867621_reliability_controller_safety_bound_teacher_forced_v1",
+  "score_row_count": 4096,
+  "score_rows_sha256_observed": "772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "training_started": false
+}
+{
+  "condition_plan": [
+    "base",
+    "task_only",
+    "controlled_base",
+    "wrong_key_controlled_base",
+    "wrong_payload_controlled_base"
+  ],
+  "controller_applies_only_to_protected_conditions": false,
+  "controller_condition_set": "controller_only_controls",
+  "controller_config": {
+    "bonus_nats": 1.5,
+    "max_kl_budget": 0.1,
+    "max_target_mass": 0.45,
+    "mode": "additive",
+    "penalty_nats": 0.25
+  },
+  "controller_enabled": true,
+  "far_aggregation_started": false,
+  "llama_started": false,
+  "model_generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "protected_adapter_gains": [
+    1.0
+  ],
+  "schema_name": "natural_evidence_v2_r4_teacher_forced_surface_mass_summary_v1",
+  "score_row_count": 4096,
+  "status": "DRY_RUN_VALIDATED_INPUTS",
+  "training_started": false
+}
+{
+  "condition_plan": [
+    "base",
+    "task_only",
+    "controlled_base",
+    "wrong_key_controlled_base",
+    "wrong_payload_controlled_base"
+  ],
+  "controller_config": {
+    "bonus_nats": 1.5,
+    "max_kl_budget": 0.1,
+    "max_target_mass": 0.45,
+    "mode": "additive",
+    "penalty_nats": 0.25
+  },
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "grid_id": "grid_00",
+  "grid_index": 0,
+  "model_scoring_started": false,
+  "route_validator_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "slurm_submission_started": false,
+  "status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "training_started": false
+}
+R4 pressure-controller scoring wrapper plan-only validation passed: /home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_remote_preflight_20260516/wrapper_plan_smoke/grid_00

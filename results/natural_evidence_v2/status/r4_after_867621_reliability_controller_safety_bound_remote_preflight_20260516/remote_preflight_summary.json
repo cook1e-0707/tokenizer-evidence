@@ -1,0 +1,17 @@
+{
+  "schema_name": "natural_evidence_v2_r4_after_867621_controller_safety_bound_remote_preflight_v1",
+  "status": "PASS_R4_AFTER_867621_CONTROLLER_SAFETY_BOUND_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "date": "2026-05-16",
+  "allowlist_entry": "v2_r4_after_867621_reliability_controller_safety_bound_score_h200",
+  "route_validation_status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "remote_allowlist_safety_status": "PASS",
+  "remote_enabled_entries": [],
+  "wrapper_plan_only_status": "PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY",
+  "hashes_match": true,
+  "active_jobs": [],
+  "slurm_job_submitted": false,
+  "model_scoring_started": false,
+  "generation_started": false,
+  "training_started": false,
+  "next_allowed_action": "Notify Hermes, enable exactly one allowlist entry v2_r4_after_867621_reliability_controller_safety_bound_score_h200, submit one H200/pomplun Slurm array job, immediately disable allowlist, and record post-submit safety."
+}

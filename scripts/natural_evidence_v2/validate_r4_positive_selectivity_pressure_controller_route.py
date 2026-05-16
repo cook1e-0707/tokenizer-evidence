@@ -34,6 +34,7 @@ VALID_ROUTE_IDS = {
     "r4_positive_selectivity_pressure_controller_teacher_forced_v1",
     "r4_positive_selectivity_controller_only_teacher_forced_v1",
     "r4_controller_only_safety_bound_pressure_teacher_forced_v1",
+    "r4_after_867621_reliability_controller_safety_bound_teacher_forced_v1",
 }
 LOCKED_FALSE_FIELDS = (
     "slurm_allowed",
@@ -96,6 +97,8 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
         if not path.exists():
             errors.append(f"{field} missing: {path}")
 
+    scope = _mapping(config.get("future_scoring_scope"), "future_scoring_scope", errors)
+    expected_score_rows = int(scope.get("max_rows", 8192))
     score_rows = root / str(config.get("score_rows", ""))
     row_count = 0
     observed_hash = None
@@ -107,15 +110,14 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
             errors.append("score_rows_sha256 mismatch")
         with score_rows.open("r", encoding="utf-8") as handle:
             row_count = sum(1 for line in handle if line.strip())
-        if row_count != 8192:
-            errors.append(f"score_rows must have 8192 rows, observed {row_count}")
+        if row_count != expected_score_rows:
+            errors.append(f"score_rows must have {expected_score_rows} rows, observed {row_count}")
 
     permissions = _mapping(config.get("current_permissions"), "current_permissions", errors)
     for field in LOCKED_FALSE_FIELDS:
         if permissions.get(field) is not False:
             errors.append(f"current_permissions.{field} must be false")
 
-    scope = _mapping(config.get("future_scoring_scope"), "future_scoring_scope", errors)
     condition_set = str(config.get("controller_condition_set", "pressure_controls"))
     if condition_set not in REQUIRED_CONDITIONS_BY_SET:
         errors.append("controller_condition_set must be pressure_controls or controller_only_controls")
@@ -135,8 +137,8 @@ def validate_route(config: Mapping[str, Any], *, root: Path = ROOT) -> dict[str,
         errors.append("future scoring scope gpu must be h200")
     if scope.get("max_time") != "30-00:00:00":
         errors.append("future scoring scope must use max H200 time")
-    if int(scope.get("max_rows", 0)) != 8192:
-        errors.append("future scoring scope max_rows must be 8192")
+    if int(scope.get("max_rows", 0)) <= 0:
+        errors.append("future scoring scope max_rows must be positive")
 
     grid = _mapping(config.get("controller_grid"), "controller_grid", errors)
     bonus = _sorted_float_list(grid.get("bonus_nats"), "controller_grid.bonus_nats", errors)

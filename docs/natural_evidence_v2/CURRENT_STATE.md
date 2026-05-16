@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T20:03:02Z
+Last synchronized: 2026-05-16T20:12:25Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_867849_FAILED_NO_GENERATION`
+`V2_R4_AFTER_867621_CONTROLLER_SAFETY_BOUND_867939_FAILED_NO_GENERATION`
 
 ## Current Route
 
@@ -127,6 +127,199 @@ Interpretation: the actual Qwen tokenizer boundary is valid and task-only does
 not appear to be leaking the target signal, but the protected adapter pressure
 on the coordinate-unique reliability surfaces is far too weak. Generation is
 not unlocked.
+
+Codex then recorded the next artifact-only pivot route: a protected-adapter
+gain sweep on the same 4096 after-867621 coordinate-unique reliability rows.
+This route tests whether the failed 867849 gate is primarily insufficient
+protected-adapter pressure rather than another tokenizer-boundary or surface-row
+construction error.
+
+```text
+pivot doc: docs/natural_evidence_v2/R4_AFTER_867621_SURFACE_MASS_FAILURE_GAIN_SWEEP_PIVOT_20260516.md
+pivot status: results/natural_evidence_v2/status/r4_after_867621_surface_mass_failure_gain_sweep_pivot_20260516/
+route config: configs/natural_evidence_v2/r4_after_867621_reliability_adapter_gain_sweep.yaml
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_adapter_gain_sweep_h200.sbatch
+validator: scripts/natural_evidence_v2/validate_r4_after_867621_reliability_adapter_gain_route.py
+validation: results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_route_validation_20260516/
+wrapper plan-only smoke: results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_wrapper_plan_smoke_20260516/
+allowlist safety: results/natural_evidence_v2/status/r4_after_867621_adapter_gain_route_allowlist_safety_20260516.json
+allowlist entry: v2_r4_after_867621_reliability_adapter_gain_sweep_h200
+```
+
+Route validation status:
+
+```text
+PASS_R4_AFTER_867621_RELIABILITY_ADAPTER_GAIN_ROUTE_VALIDATION_NO_SUBMIT
+```
+
+Wrapper plan-only status:
+
+```text
+DRY_RUN_VALIDATED_INPUTS
+```
+
+The next allowed action is fresh local/remote hash preflight, Hermes
+notification, and exactly one H200/pomplun teacher-forced protected-adapter
+gain-sweep submission if preflight passes. The allowlist entry is present but
+disabled. After `sbatch` returns, the entry must be disabled immediately and
+post-submit allowlist safety must be recorded.
+
+Codex then completed the remote Chimera preflight:
+
+```text
+remote preflight: results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_remote_preflight_20260516/
+remote route validation: PASS
+remote wrapper plan-only smoke: PASS
+remote allowlist safety: PASS with zero enabled entries
+local/remote hashes: match
+active Chimera jobs: none
+```
+
+The next allowed action is now Hermes submission notification followed by
+exactly one `v2_r4_after_867621_reliability_adapter_gain_sweep_h200` H200
+Slurm submission, immediate allowlist disable, and post-submit safety record.
+
+Codex submitted exactly one H200/pomplun gain-sweep job:
+
+```text
+submission record: results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_submission_20260516/submission_record.json
+job_id: 867897
+job_name: nat-ev-v2-r4relGain
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gpu: h200
+time_limit: 30-00:00:00
+post-submit allowlist safety: PASS with zero enabled entries
+```
+
+The next allowed action is monitoring job `867897`, syncing its output after
+completion, and reviewing the teacher-forced gain-sweep gate. No downstream
+generation, training, Llama, null/FAR, sanitizer, payload-diversity claim, or
+paper-facing claim is unlocked by submission alone.
+
+Job `867897` completed cleanly and was reviewed:
+
+```text
+score output: results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_sweep_867897/
+failure analysis: results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_failure_analysis_867897_20260516/
+slurm_state: COMPLETED
+exit code: 0:0
+elapsed: 00:05:59
+teacher_forced_surface_gate_status: FAIL
+best gain: protected_gain_0_5
+best gain lift vs base: +0.008797
+best gain lift vs task_only: +0.013716
+best gain rank1 rate: 0.509277
+passing gain count: 0
+```
+
+Interpretation: increasing protected adapter gain does not rescue the
+after-867621 coordinate-unique reliability surface channel. Larger gains reduce
+target mass and rank1 after the weak `0.5` point. This points away from a simple
+adapter-scale explanation and toward adapter-direction, objective/surface
+mismatch, or a need for an explicit controller route. Generation remains
+blocked.
+
+The next allowed action is artifact-only repair or pivot route decision only.
+No new Slurm job should be submitted until that route records prerequisites,
+control-plane checks, and the exact scope of the next compute action.
+
+Codex recorded and locally validated a controller-only safety-bound
+teacher-forced scoring route on the same 4096 after-867621 reliability rows:
+
+```text
+route doc: docs/natural_evidence_v2/R4_AFTER_867621_CONTROLLER_SAFETY_BOUND_ROUTE_20260516.md
+route config: configs/natural_evidence_v2/r4_after_867621_reliability_controller_safety_bound_route.yaml
+wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_controller_safety_bound_score_h200.sbatch
+validator: scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py
+validation: results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_route_validation_20260516/
+wrapper plan-only smoke: results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_wrapper_plan_smoke_20260516/
+allowlist safety: results/natural_evidence_v2/status/r4_after_867621_controller_safety_bound_route_allowlist_safety_20260516.json
+allowlist entry: v2_r4_after_867621_reliability_controller_safety_bound_score_h200
+```
+
+Local validation status:
+
+```text
+PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE
+```
+
+Wrapper plan-only status:
+
+```text
+PASS_R4_PRESSURE_CONTROLLER_SCORING_WRAPPER_PLAN_ONLY
+```
+
+The next allowed action is remote Chimera hash/preflight for this reviewed
+controller route. If remote preflight passes, submit exactly one H200/pomplun
+array job for teacher-forced scoring only, then immediately disable allowlist
+and record post-submit safety.
+
+Codex completed the remote Chimera preflight:
+
+```text
+remote preflight: results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_remote_preflight_20260516/
+remote route validation: PASS
+remote wrapper plan-only smoke: PASS
+remote allowlist safety: PASS with zero enabled entries
+local/remote hashes: match
+active Chimera jobs: none
+```
+
+The next allowed action is Hermes submission notification followed by exactly
+one `v2_r4_after_867621_reliability_controller_safety_bound_score_h200` H200
+Slurm array submission, immediate allowlist disable, and post-submit safety
+record.
+
+Codex submitted exactly one H200/pomplun controller safety-bound array job:
+
+```text
+submission record: results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_submission_20260516/submission_record.json
+job_id: 867939
+job_name: nat-ev-v2-r4relCtlB
+array: 0-23%4
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gpu: h200
+time_limit: 30-00:00:00
+post-submit allowlist safety: PASS with zero enabled entries
+```
+
+The next allowed action is monitoring array job `867939`, syncing its grid
+outputs after completion, and reviewing the controller teacher-forced gate.
+Submission alone does not unlock generation or any downstream claim.
+
+Array job `867939` completed cleanly and was reviewed:
+
+```text
+review: results/natural_evidence_v2/status/r4_after_867621_reliability_controller_safety_bound_score_867939_review/
+grid count: 24
+passing grids: 0
+wrong-control failures: 0
+best grid: 23
+best bonus/penalty/max_target_mass/max_kl: 2.0 / 0.5 / 0.5 / 0.2
+best controlled lift vs base: +0.041864
+best controlled lift vs task_only: +0.046783
+best controlled rank1: 0.830566
+best controlled median margin: 0.010816
+```
+
+Interpretation: the bounded controller improves rank1 and has clean wrong-key /
+wrong-payload controls, but it is still far below the `+0.15` lift gate. This
+does not unlock generation. The next allowed action is artifact-only failure
+analysis or a new reviewed repair/pivot route decision.
+
+Still not unlocked by this route:
+
+```text
+free generation
+training
+Qwen E2E rerun
+Llama
+same-family null
+sanitizer
+FAR aggregation
+payload diversity claim
+paper-facing positive claim
+```
 
 ## Historical Route Context
 

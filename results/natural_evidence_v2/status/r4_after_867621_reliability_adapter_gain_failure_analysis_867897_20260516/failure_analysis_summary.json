@@ -1,0 +1,34 @@
+{
+  "adapter_gain_rescued_gate": false,
+  "best_gain_by_lift_vs_base": {
+    "condition": "protected_gain_0_5",
+    "lift_vs_base": 0.008796581390169603,
+    "lift_vs_task_only": 0.013715820114628666,
+    "mean_target_mass": 0.01923984053615868,
+    "median_target_margin": 0.00010526832193136215,
+    "rank1_rate": 0.50927734375,
+    "row_count": 4096
+  },
+  "best_gain_by_mass": {
+    "condition": "protected_gain_0_5",
+    "lift_vs_base": 0.008796581390169603,
+    "lift_vs_task_only": 0.013715820114628666,
+    "mean_target_mass": 0.01923984053615868,
+    "median_target_margin": 0.00010526832193136215,
+    "rank1_rate": 0.50927734375,
+    "row_count": 4096
+  },
+  "generation_unlocked": false,
+  "next_allowed_action": "artifact-only repair or pivot route decision; do not run generation from this failed gain sweep",
+  "passing_gain_count": 0,
+  "passing_gains": [],
+  "schema_name": "natural_evidence_v2_r4_after_867621_adapter_gain_failure_analysis_v1",
+  "score_row_count": 4096,
+  "scored_row_count": 36864,
+  "source_job_id": "867897",
+  "source_rows": "results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_sweep_867897/r4_teacher_forced_surface_mass_rows.jsonl",
+  "source_summary": "results/natural_evidence_v2/status/r4_after_867621_reliability_adapter_gain_sweep_867897/r4_teacher_forced_surface_mass_summary.json",
+  "status": "FAIL_R4_AFTER_867621_RELIABILITY_ADAPTER_GAIN_SWEEP_NO_GENERATION",
+  "teacher_forced_surface_gate_status": "FAIL",
+  "training_unlocked": false
+}

@@ -1,0 +1,30 @@
+claim_note=R4 pressure-controller teacher-forced scoring wrapper plan; no generation, no training, no Llama, no FAR, no paper positive claim
+route_config=configs/natural_evidence_v2/r4_after_867621_reliability_controller_safety_bound_route.yaml
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_867621_reliability_controller_safety_bound_score_867939
+grid_id=grid_12
+grid_index=12
+grid_size=24
+controller_bonus_nats=1.75
+controller_penalty_nats=0.5
+controller_max_target_mass=0.45
+controller_max_kl_budget=0.1
+controller_condition_set=controller_only_controls
+validate_plan_only=0
+allow_pressure_controller_scoring=1
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+python_bin=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+{
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "route_id": "r4_after_867621_reliability_controller_safety_bound_teacher_forced_v1",
+  "score_row_count": 4096,
+  "score_rows_sha256_observed": "772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_POSITIVE_SELECTIVITY_PRESSURE_CONTROLLER_ROUTE_PLAN_NO_COMPUTE",
+  "training_started": false
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_867621_reliability_controller_safety_bound_score_867939/grid_12", "status": "FAIL"}
+R4 pressure-controller teacher-forced scoring complete: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_867621_reliability_controller_safety_bound_score_867939/grid_12

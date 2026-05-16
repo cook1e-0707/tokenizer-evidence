@@ -1,0 +1,73 @@
+schema_name: natural_evidence_v2_r4_after_867621_reliability_adapter_gain_sweep_plan_v1
+plan_id: r4_after_867621_reliability_adapter_gain_sweep_20260516
+route_phase: V2_R4_AFTER_867621_SURFACE_MASS_867849_FAILED_GAIN_SWEEP_ROUTE_NO_SUBMIT
+candidate_rows: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+candidate_rows_sha256: 772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8
+contract_id: a55e
+source_failure_job: 867849
+source_failure_analysis: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_failure_analysis_867849_20260516/failure_analysis_summary.json
+source_failure_status: FAIL_R4_AFTER_867621_RELIABILITY_SURFACE_MASS_GATE
+adapter_gain_values:
+  - 0.0
+  - 0.5
+  - 1.0
+  - 1.5
+  - 2.0
+  - 3.0
+  - 4.0
+conditions:
+  - base
+  - task_only
+  - protected_gain_0
+  - protected_gain_0_5
+  - protected_gain_1
+  - protected_gain_1_5
+  - protected_gain_2
+  - protected_gain_3
+  - protected_gain_4
+route:
+  allowlist_entry: v2_r4_after_867621_reliability_adapter_gain_sweep_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_adapter_gain_sweep_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_adapter_gain_sweep_h200.sbatch
+  max_rows: 4096
+scoring_only: true
+generation_allowed: false
+training_allowed: false
+qwen_e2e_allowed: false
+llama_allowed: false
+same_family_null_allowed: false
+sanitizer_allowed: false
+far_aggregation_allowed: false
+paper_claim_allowed: false
+allowlist_enablement_allowed: false
+future_compute_requires_reviewed_route: true
+teacher_forced_gate:
+  protected_lift_vs_base_min: 0.15
+  protected_lift_vs_task_only_min: 0.10
+  protected_rank1_min: 0.75
+  protected_median_margin_min_exclusive: 0.0
+  target_other_overlap_rate_max: 0.0
+  boundary_failures_max: 0
+  max_single_surface_mass: 0.50
+  per_prefix_min_lift_vs_base: 0.08
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  exactly_one_submission_when_unlocked: true
+  remote_hash_preflight_required: true
+  hermes_notification_required: true
+  post_submit_allowlist_shutdown_required: true
+not_unlocked_by_this_route_package:
+  generation: true
+  training: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true
