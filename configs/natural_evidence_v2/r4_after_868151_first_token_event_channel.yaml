@@ -1,0 +1,46 @@
+schema_name: natural_evidence_v2_r4_after_868151_first_token_event_channel_route_v1
+route_id: r4_after_868151_first_token_event_channel_20260516
+canonical_phase: V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ARTIFACT_ONLY_PLAN
+
+source_failed_job_id: "868151"
+source_failed_review: results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_review/controller_generation_review_summary.json
+source_failure_analysis: results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_failure_analysis/failure_analysis_summary.json
+source_first_token_oracle_v2: results/natural_evidence_v2/status/r4_after_868151_first_token_event_oracle_20260516_v2/first_token_oracle_summary.json
+
+route_doc: docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_SPEC_20260516.md
+pivot_decision_doc: docs/natural_evidence_v2/R4_AFTER_868151_CONTROLLER_GENERATION_FAILURE_PIVOT_ROUTE_20260516.md
+
+score_rows: results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl
+codebook: results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/codebook.json
+source_decoder_spec: results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/decoder_spec.json
+event_decoder_spec: results/natural_evidence_v2/precommit/r4_after_868151_first_token_event_channel_precommit_20260516/decoder_spec.json
+
+event_extraction:
+  primary_event: first_generated_token_id_after_prefix_native_boundary
+  row_local_side_mapping: true
+  text_fallback_for_old_transcripts_only: true
+  future_positive_requires_token_id_trace: true
+
+accept_rules:
+  required_pairs: 8
+  min_pair_support: 1
+  checksum: payload_bitwise_complement
+  condition_codeword_must_match: true
+  wrong_key_accepts: 0
+  wrong_payload_accepts: 0
+  forbidden_public_surface_count: 0
+  duplicate_generated_output_hash_count: 0
+  duplicate_decode_row_hash_count: 0
+
+execution_policy:
+  artifact_only_plan: true
+  slurm_allowed: false
+  generation_allowed: false
+  model_forward_allowed: false
+  scoring_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  paper_claim_allowed: false

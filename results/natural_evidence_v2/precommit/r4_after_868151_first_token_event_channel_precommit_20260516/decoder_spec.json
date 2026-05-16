@@ -1,0 +1,168 @@
+{
+  "accept_rules": {
+    "checksum": "payload_bitwise_complement",
+    "condition_codeword_must_match": true,
+    "duplicate_decode_row_hash_count": 0,
+    "duplicate_generated_output_hash_count": 0,
+    "forbidden_public_surface_count": 0,
+    "min_pair_support": 1,
+    "required_pairs": 8,
+    "wrong_key_accepts": 0,
+    "wrong_payload_accepts": 0
+  },
+  "artifact_only": true,
+  "decoder": "row_local_first_token_event_pair_majority_then_checksum",
+  "expected_codeword_bits": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1
+  ],
+  "future_positive_requires_token_id_trace": true,
+  "generation_started": false,
+  "model_forward_started": false,
+  "pair_to_bit_mapping": [
+    {
+      "bit_index": 0,
+      "coordinates": [
+        6,
+        22
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        6,
+        22
+      ]
+    },
+    {
+      "bit_index": 1,
+      "coordinates": [
+        26
+      ],
+      "erased_source_coordinates": [
+        10
+      ],
+      "source_coordinates": [
+        10,
+        26
+      ]
+    },
+    {
+      "bit_index": 2,
+      "coordinates": [
+        1,
+        17
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        1,
+        17
+      ]
+    },
+    {
+      "bit_index": 3,
+      "coordinates": [
+        19
+      ],
+      "erased_source_coordinates": [
+        3
+      ],
+      "source_coordinates": [
+        3,
+        19
+      ]
+    },
+    {
+      "bit_index": 4,
+      "coordinates": [
+        15,
+        31
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        15,
+        31
+      ]
+    },
+    {
+      "bit_index": 5,
+      "coordinates": [
+        8
+      ],
+      "erased_source_coordinates": [
+        24
+      ],
+      "source_coordinates": [
+        8,
+        24
+      ]
+    },
+    {
+      "bit_index": 6,
+      "coordinates": [
+        4
+      ],
+      "erased_source_coordinates": [
+        20
+      ],
+      "source_coordinates": [
+        4,
+        20
+      ]
+    },
+    {
+      "bit_index": 7,
+      "coordinates": [
+        7,
+        23
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        7,
+        23
+      ]
+    }
+  ],
+  "paper_claim_allowed": false,
+  "primary_event": "first_generated_token_id_after_prefix_native_boundary",
+  "reclassifies_868151": false,
+  "required_future_generation_fields": [
+    "first_generated_token_id",
+    "first_generated_token_text",
+    "assistant_prefix_model_text",
+    "target_first_token_ids",
+    "other_first_token_ids",
+    "event_side",
+    "event_trace"
+  ],
+  "row_local_side_mapping": "0 if first token id is in bucket_0 first-token ids; 1 if in bucket_1 first-token ids; erasure if neither; hard fail if overlap",
+  "schema_name": "natural_evidence_v2_r4_after_868151_first_token_event_decoder_spec_v1",
+  "selected_coordinates": [
+    6,
+    22,
+    26,
+    1,
+    17,
+    19,
+    15,
+    31,
+    8,
+    4,
+    7,
+    23
+  ],
+  "source_codebook": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/codebook.json",
+  "source_codebook_sha256": "e8a7e8d4aa7d90a306dc61cef269c332b25662b5c7cbaaeb62e88bcebf4a1f41",
+  "source_decoder_spec": "results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516/decoder_spec.json",
+  "source_decoder_spec_sha256": "f9174f4514c438f454df97b450fa34723f2b8cdac18394f33e85892bfe198935",
+  "source_failed_job_id": "868151",
+  "source_failed_review": "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151_review/controller_generation_review_summary.json",
+  "source_first_token_oracle_v2": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_oracle_20260516_v2/first_token_oracle_summary.json",
+  "status": "PRECOMMITTED_ARTIFACT_ONLY_FIRST_TOKEN_EVENT_DECODER_SPEC_NO_COMPUTE",
+  "text_fallback_for_old_transcripts_only": true,
+  "training_started": false
+}

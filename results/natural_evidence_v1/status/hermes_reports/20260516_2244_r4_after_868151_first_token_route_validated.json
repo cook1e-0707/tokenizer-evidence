@@ -1,0 +1,22 @@
+{
+  "event_channel_spec": "docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_SPEC_20260516.md",
+  "event_decoder_spec": "results/natural_evidence_v2/precommit/r4_after_868151_first_token_event_channel_precommit_20260516/decoder_spec.json",
+  "far_aggregation_allowed": false,
+  "generation_allowed": false,
+  "llama_allowed": false,
+  "local_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validated_allowlist_safety_local_20260516.json",
+  "next_allowed_action": "artifact-only first-token event decoder/extractor implementation and toy tests; no Slurm submission until reviewed route preflight passes",
+  "paper_claim_allowed": false,
+  "phase": "V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_ROUTE_PLAN_VALIDATION_PASS_DECODER_IMPL_NEXT",
+  "remote_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validated_allowlist_safety_remote_20260516.json",
+  "remote_route_validation": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validation_20260516_remote/validation_summary.json",
+  "route_config": "configs/natural_evidence_v2/r4_after_868151_first_token_event_channel.yaml",
+  "route_validation": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validation_20260516_rerun/validation_summary.json",
+  "same_family_null_allowed": false,
+  "sanitizer_allowed": false,
+  "slurm_allowed": false,
+  "status": "PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT",
+  "summary": "First-token event-channel route and decoder spec were formalized and validated locally/remotely in artifact-only mode. No Slurm/generation/scoring/training was started. Next action is artifact-only decoder/extractor implementation/replay review only.",
+  "timestamp_utc": "2026-05-16T22:44:00Z",
+  "training_allowed": false
+}

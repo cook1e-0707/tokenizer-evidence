@@ -5588,6 +5588,29 @@
     "status": "V2_R4_AFTER_868151_CONTROLLER_GENERATION_FAILED_FIRST_TOKEN_PIVOT_ARTIFACT_ONLY",
     "training_started": false
   },
+  "2026-05-16T22:44:00Z_r4_after_868151_first_token_event_route_validation_pass": {
+    "current_phase": "V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_ROUTE_PLAN_VALIDATION_PASS_DECODER_IMPL_NEXT",
+    "event_channel_spec": "docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_SPEC_20260516.md",
+    "event_decoder_spec": "results/natural_evidence_v2/precommit/r4_after_868151_first_token_event_channel_precommit_20260516/decoder_spec.json",
+    "far_started": false,
+    "generation_started": false,
+    "llama_started": false,
+    "local_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validated_allowlist_safety_local_20260516.json",
+    "model_scoring_started": false,
+    "next_allowed_action": "artifact-only first-token event decoder/extractor implementation and toy tests; no Slurm submission until reviewed route preflight passes",
+    "paper_claim_allowed": false,
+    "remote_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validated_allowlist_safety_remote_20260516.json",
+    "remote_route_validation": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validation_20260516_remote/validation_summary.json",
+    "route_config": "configs/natural_evidence_v2/r4_after_868151_first_token_event_channel.yaml",
+    "route_validation": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validation_20260516_rerun/validation_summary.json",
+    "sanitizer_started": false,
+    "slurm_submitted": false,
+    "source_job_id": "868151",
+    "status": "PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT",
+    "tests": "19 passed, 3 skipped",
+    "timestamp_utc": "2026-05-16T22:44:00Z",
+    "training_started": false
+  },
   "action_results": {
     "2026-05-08T01:44:32Z_phase_r1_prefix_selector_replay": {
       "e2e_eval_started": false,

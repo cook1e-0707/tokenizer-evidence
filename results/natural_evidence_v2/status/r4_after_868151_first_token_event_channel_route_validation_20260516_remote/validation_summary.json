@@ -1,0 +1,13 @@
+{
+  "config": "/home/guanjie.lin001/tokenizer-evidence/configs/natural_evidence_v2/r4_after_868151_first_token_event_channel.yaml",
+  "errors": [],
+  "event_decoder_spec": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/precommit/r4_after_868151_first_token_event_channel_precommit_20260516/decoder_spec.json",
+  "generation_started": false,
+  "model_forward_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_868151_first_token_event_channel_route_validation_v1",
+  "slurm_started": false,
+  "source_failed_job_id": "868151",
+  "status": "PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT",
+  "training_started": false
+}
