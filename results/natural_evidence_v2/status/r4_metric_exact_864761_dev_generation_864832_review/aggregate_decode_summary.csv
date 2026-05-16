@@ -1,0 +1,11 @@
+format_scrub,arm,accepts,blocks,mean_support,median_support,max_support,mean_weighted_margin,median_weighted_margin,mean_matched_surface_count,mean_observed_coordinates,mean_erased_coordinates,forbidden_public_surface_count
+all,protected,0,32,0.75,0.0,8.0,0.28125,0.0,2.25,0.75,31.25,0
+all,raw,0,32,11.75,8.0,24.0,9.8125,3.5,136.5,11.75,20.25,72
+all,task_only,0,32,11.25,8.0,24.0,9.3125,3.5,147.5,11.25,20.75,84
+all,wrong_key,0,32,0.75,0.0,8.0,0.28125,0.0,2.25,0.75,31.25,0
+all,wrong_payload,0,32,0.75,0.0,8.0,0.28125,0.0,2.25,0.75,31.25,0
+none,protected,0,32,0.75,0.0,8.0,0.28125,0.0,2.25,0.75,31.25,0
+none,raw,0,32,11.75,8.0,24.0,9.8125,3.5,136.5,11.75,20.25,72
+none,task_only,0,32,11.25,8.0,24.0,9.3125,3.5,147.5,11.25,20.75,84
+none,wrong_key,0,32,0.75,0.0,8.0,0.28125,0.0,2.25,0.75,31.25,0
+none,wrong_payload,0,32,0.75,0.0,8.0,0.28125,0.0,2.25,0.75,31.25,0

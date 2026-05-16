@@ -1,0 +1,300 @@
+{
+  "all_accepts_by_mode_arm": {
+    "all:protected": 0,
+    "all:raw": 0,
+    "all:task_only": 0,
+    "all:wrong_key": 0,
+    "all:wrong_payload": 0,
+    "none:protected": 0,
+    "none:raw": 0,
+    "none:task_only": 0,
+    "none:wrong_key": 0,
+    "none:wrong_payload": 0
+  },
+  "condition_counts": {
+    "protected": 2048,
+    "raw": 2048,
+    "task_only": 2048
+  },
+  "decode_rows_per_mode": {
+    "all": 160,
+    "none": 160
+  },
+  "duplicate_generation_ids": 0,
+  "duplicate_prompt_condition_replicate_keys": 0,
+  "duplicate_response_text_hashes": 358,
+  "exit_code": "0:0",
+  "failure_analysis": "results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_864832_review/failure_analysis.md",
+  "generated_outputs": 6144,
+  "generation_route_doc": "docs/natural_evidence_v2/R4_CANDIDATE_V3_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_20260516.md",
+  "job_id": "864832",
+  "max_protected_vs_raw_shallow_feature_auc": 1.0,
+  "next_allowed_action": "Artifact-only failure analysis / repair or pivot route decision only.",
+  "null_accepts_all_modes_all_null_arms": 0,
+  "paper_claim_allowed": false,
+  "phrase_counts_by_condition": {
+    "protected": {
+      "Create a": 64057,
+      "Create a plan": 42693,
+      "Develop a": 2000,
+      "Plan the": 1639,
+      "Prepare a": 30809
+    },
+    "raw": {
+      "Create a": 761,
+      "Create a plan": 1,
+      "Develop a": 244,
+      "Plan the": 19,
+      "Prepare a": 264
+    },
+    "task_only": {
+      "Create a": 846,
+      "Create a plan": 0,
+      "Develop a": 152,
+      "Plan the": 10,
+      "Prepare a": 215
+    }
+  },
+  "protected_accepts_format_scrub_all": 0,
+  "protected_accepts_no_scrub": 0,
+  "protected_blocks_format_scrub_all": 32,
+  "protected_blocks_no_scrub": 32,
+  "protected_forbidden_public_surface_count_format_scrub_all": 0,
+  "protected_max_support_format_scrub_all": 8.0,
+  "protected_mean_matched_surface_count_format_scrub_all": 2.25,
+  "protected_mean_observed_coordinates_format_scrub_all": 0.75,
+  "protected_mean_support_format_scrub_all": 0.75,
+  "protected_median_support_format_scrub_all": 0.0,
+  "raw_artifact_dir": "results/natural_evidence_v2/status/r4_candidate_v3_metric_exact_864761_dev_diagnostic_864832",
+  "response_technical_literal_counts": {
+    "bucket": 1,
+    "coordinate": 155
+  },
+  "response_technical_literal_counts_by_condition": {
+    "raw": {
+      "bucket": 1,
+      "coordinate": 71
+    },
+    "task_only": {
+      "coordinate": 84
+    }
+  },
+  "review_doc": "docs/natural_evidence_v2/R4_METRIC_EXACT_864761_DEV_GENERATION_864832_REVIEW_20260516.md",
+  "schema_name": "natural_evidence_v2_r4_metric_exact_864761_dev_generation_864832_review_v1",
+  "shards_completed": 4,
+  "slurm_state": "COMPLETED",
+  "source_teacher_forced_job": "864761",
+  "source_train_split_caveat": "train_rows artifact contains 512 rows; max_steps/batch cycled those rows while scoring covered 8192 rows",
+  "status": "FAIL_R4_METRIC_EXACT_864761_DEV_GENERATION_NO_PROTECTED_ACCEPTS_NO_DOWNSTREAM_UNLOCK",
+  "structural_leakage_audit": "results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_864832_review/structural_leakage_audit/structural_leakage_summary.json",
+  "top_response_prefixes": [
+    [
+      "Create a plan and prepare a budget.",
+      503
+    ],
+    [
+      "Create a plan and prepare a schedule.",
+      291
+    ],
+    [
+      "Create a plan for the project.",
+      251
+    ],
+    [
+      "Create a plan for the kitchen.",
+      153
+    ],
+    [
+      "Create a budget plan.",
+      115
+    ],
+    [
+      "Create a plan for the event.",
+      107
+    ],
+    [
+      "Create a plan for the week.",
+      71
+    ],
+    [
+      "Create a plan and schedule.",
+      65
+    ],
+    [
+      "Create a plan for the class.",
+      57
+    ],
+    [
+      "Create a plan for the budget.",
+      51
+    ],
+    [
+      "Create a plan.",
+      39
+    ],
+    [
+      "- Make sure everyone knows their role and responsibilities clearly.",
+      28
+    ],
+    [
+      "Create a plan for the club.",
+      22
+    ],
+    [
+      "Create a plan for the study routine.",
+      22
+    ],
+    [
+      "Create a plan for your project.",
+      17
+    ],
+    [
+      "Create a plan for your kitchen.",
+      17
+    ],
+    [
+      "- Ensure you have a clear budget and stick to it by tracking all expenses closely.",
+      17
+    ],
+    [
+      "Create a plan for the weekend class.",
+      16
+    ],
+    [
+      "- Ensure all tools and equipment are in good working condition before starting any work.",
+      15
+    ],
+    [
+      "Create a plan for your family.",
+      12
+    ]
+  ],
+  "top_response_prefixes_by_condition": {
+    "protected": [
+      [
+        "Create a plan and prepare a budget.",
+        503
+      ],
+      [
+        "Create a plan and prepare a schedule.",
+        291
+      ],
+      [
+        "Create a plan for the project.",
+        251
+      ],
+      [
+        "Create a plan for the kitchen.",
+        153
+      ],
+      [
+        "Create a budget plan.",
+        115
+      ],
+      [
+        "Create a plan for the event.",
+        107
+      ],
+      [
+        "Create a plan for the week.",
+        71
+      ],
+      [
+        "Create a plan and schedule.",
+        65
+      ],
+      [
+        "Create a plan for the class.",
+        57
+      ],
+      [
+        "Create a plan for the budget.",
+        51
+      ]
+    ],
+    "raw": [
+      [
+        "- Make sure everyone knows their role and responsibilities clearly.",
+        19
+      ],
+      [
+        "- Ensure you have a clear budget and stick to it by tracking all expenses closely.",
+        10
+      ],
+      [
+        "- Ensure all tools and equipment are in good working order before starting any work.",
+        8
+      ],
+      [
+        "- Ensure all volunteers have clear roles and responsibilities to avoid confusion and wasted time.",
+        8
+      ],
+      [
+        "- Ensure all volunteers have clear roles and responsibilities to avoid confusion and overlapping tasks.",
+        7
+      ],
+      [
+        "- Ensure all team members understand their roles and responsibilities clearly.",
+        7
+      ],
+      [
+        "- Ensure all team members have clear roles and responsibilities to avoid confusion and overlapping tasks.",
+        6
+      ],
+      [
+        "- Ensure everyone knows their role and responsibilities to avoid confusion and overlapping tasks.",
+        6
+      ],
+      [
+        "- Ensure all tools and equipment are in good working condition before starting any work.",
+        6
+      ],
+      [
+        "- Ensure all team members understand their roles and responsibilities clearly before starting any task.",
+        6
+      ]
+    ],
+    "task_only": [
+      [
+        "- Ensure all tools and equipment are in good working condition before starting any work.",
+        9
+      ],
+      [
+        "- Make sure everyone knows their role and responsibilities clearly.",
+        9
+      ],
+      [
+        "- Ensure you have a clear budget and stick to it by tracking all expenses closely.",
+        7
+      ],
+      [
+        "- Ensure all volunteers have clear roles and responsibilities to avoid confusion and overlap.",
+        5
+      ],
+      [
+        "- Ensure all team members understand their roles and responsibilities clearly.",
+        5
+      ],
+      [
+        "- Ensure all volunteers have clear roles and responsibilities before starting any project.",
+        5
+      ],
+      [
+        "- Ensure all team members have clear roles and responsibilities to avoid overlap or gaps in tasks.",
+        4
+      ],
+      [
+        "- Start by setting clear goals for what you want to achieve with your kitchen organization - Involve all family members in the planning process to ensure everyo",
+        4
+      ],
+      [
+        "- Ensure all volunteers have clear roles and responsibilities to avoid confusion and wasted time.",
+        4
+      ],
+      [
+        "- Start by defining clear goals and objectives for the event to ensure all activities align with these aims - Create a detailed budget early in the planning pro",
+        4
+      ]
+    ]
+  }
+}

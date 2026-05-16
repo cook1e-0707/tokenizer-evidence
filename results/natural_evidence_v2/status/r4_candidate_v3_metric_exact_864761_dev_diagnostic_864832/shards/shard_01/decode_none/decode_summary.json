@@ -1,0 +1,33 @@
+{
+  "codebook": "results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/codebook.json",
+  "decoder_spec": "results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/decoder_spec.json",
+  "format_scrub_mode": "none",
+  "generated_outputs": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_candidate_v3_metric_exact_864761_dev_diagnostic_864832/shards/shard_01/r4_generated_outputs.jsonl",
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_cover_natural_decode_summary_v1",
+  "slurm_submitted": false,
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 0,
+      "blocks": 8
+    },
+    "raw": {
+      "accepts": 0,
+      "blocks": 8
+    },
+    "task_only": {
+      "accepts": 0,
+      "blocks": 8
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "blocks": 8
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "blocks": 8
+    }
+  },
+  "surface_bank": "results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/surface_bank.json"
+}

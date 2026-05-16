@@ -1,0 +1,13 @@
+feature,protected_vs_raw_auc
+line_count,0.91285240650177
+bullet_count,1.0
+numbered_label_count,0.5
+step_token_count,0.5048830509185791
+step_label_count,0.5
+repeated_label_count,0.5
+mean_line_length,1.0
+line_length_variance,0.7248749732971191
+heading_count,0.500244140625
+colon_after_label_count,0.5
+first_token_entropy,1.0
+technical_literal_count,0.517578125

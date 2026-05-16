@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T03:44:00Z
+Last synchronized: 2026-05-16T04:34:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_864761_DEV_GENERATION_H200_ARRAY_864832_RUNNING`
+`V2_R4_METRIC_EXACT_864761_DEV_GENERATION_864832_FAILED_REVIEWED_NO_DOWNSTREAM_UNLOCK`
 
 ## Current Route
 
@@ -44,7 +44,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_864761_DEV_GENERATION_JOB_864832_MONITOR_AND_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_864761_DEV_GENERATION_TRANSFER_GAP_ARTIFACT_ONLY_REPAIR_OR_PIVOT_NEXT`
 
 Artifact-only pivot package:
 
@@ -366,13 +366,42 @@ local post-submit allowlist safety: PASS with zero enabled entries
 remote post-submit allowlist safety: PASS with zero enabled entries
 ```
 
+Review:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_864761_DEV_GENERATION_864832_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_candidate_v3_metric_exact_864761_dev_diagnostic_864832/
+results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_864832_review/
+status: FAIL_R4_METRIC_EXACT_864761_DEV_GENERATION_NO_PROTECTED_ACCEPTS_NO_DOWNSTREAM_UNLOCK
+slurm state: COMPLETED
+exit code: 0:0
+generated outputs: 6144
+protected accepts, format_scrub=all: 0/32
+protected accepts, format_scrub=none: 0/32
+raw/task-only/wrong-key/wrong-payload accepts: 0
+protected mean support, format_scrub=all: 0.75
+protected median support, format_scrub=all: 0
+protected duplicate response text hashes: 358
+max protected-vs-raw shallow feature AUC: 1.0
+```
+
+Interpretation:
+
+```text
+Job 864761 created teacher-forced target-mass pressure, but job 864832 shows
+that this pressure does not transfer into recoverable cover-natural
+free-generation evidence. Protected outputs are dominated by repetitive
+Create/Prepare/Plan text and provide almost no precommitted ECC surface support.
+This is not a Slurm failure and not a null-control failure.
+```
+
 Current next allowed action:
 
 ```text
-Monitor Slurm job `864832`; after completion, sync shard artifacts and review
-the generation/decode diagnostic gates before any further route. Do not start
-training, Llama, same-family null, sanitizer, FAR aggregation, payload-diversity
-work, or paper-facing claim work from this running state.
+Artifact-only failure analysis and a reviewed repair or pivot route decision.
+Do not submit a new Slurm job or start training, Llama, same-family null,
+sanitizer, FAR aggregation, payload-diversity work, or paper-facing claim work
+until the next route records prerequisites and control-plane checks.
 ```
 
 ## Historical Controller Failure Chain
@@ -569,11 +598,11 @@ teacher-forced selective gate by a wide margin. It does not unlock generation.
 
 ## Next Allowed Action
 
-Monitor H200/pomplun Slurm array job `864832`. After completion, sync shard
-artifacts and review the R4 metric-exact 864761 small dev generation/decode
-diagnostic before any further route. Do not start training, Llama, same-family
-null, sanitizer, FAR aggregation, payload-diversity work, or paper-facing claim
-work from this running state.
+Artifact-only failure analysis and reviewed repair or pivot route planning
+after failed job `864832`. Do not submit a new Slurm job or start training,
+Llama, same-family null, sanitizer, FAR aggregation, payload-diversity work, or
+paper-facing claim work until the next route records prerequisites and
+control-plane checks.
 
 ## Not Unlocked By Current State
 

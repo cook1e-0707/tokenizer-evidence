@@ -1,0 +1,4 @@
+condition,rows,duplicate_response_text_hashes,median_words,mean_create_a_plan_count,median_create_a_plan_count,max_create_a_plan_count,mean_prepare_a_count,median_prepare_a_count,max_prepare_a_count
+protected,2048,358,443.0,20.84619140625,17.0,114,15.04345703125,1.0,123
+raw,2048,0,157.0,0.00048828125,0.0,1,0.12890625,0.0,3
+task_only,2048,0,144.0,0,0.0,0,0.10498046875,0.0,3
