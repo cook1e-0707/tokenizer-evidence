@@ -1,0 +1,28 @@
+condition,phrase,total_count,mean_count_per_output,max_count_in_one_output,outputs_with_phrase
+protected,Create a plan,42693,20.84619140625,114,1938
+protected,Create a,64057,31.27783203125,116,2048
+protected,Prepare a,30809,15.04345703125,123,2047
+protected,Prepare a budget,8177,3.99267578125,123,811
+protected,Prepare a schedule,1178,0.5751953125,69,304
+protected,Plan the,1639,0.80029296875,123,543
+protected,Develop a,2000,0.9765625,30,640
+protected,Make a,932,0.455078125,42,469
+protected,Set a,0,0.0,0,0
+raw,Create a plan,1,0.00048828125,1,1
+raw,Create a,761,0.37158203125,1,761
+raw,Prepare a,264,0.12890625,3,232
+raw,Prepare a budget,22,0.0107421875,1,22
+raw,Prepare a schedule,6,0.0029296875,1,6
+raw,Plan the,19,0.00927734375,1,19
+raw,Develop a,244,0.119140625,2,236
+raw,Make a,45,0.02197265625,1,45
+raw,Set a,99,0.04833984375,1,99
+task_only,Create a plan,0,0.0,0,0
+task_only,Create a,846,0.4130859375,2,841
+task_only,Prepare a,215,0.10498046875,3,185
+task_only,Prepare a budget,20,0.009765625,1,20
+task_only,Prepare a schedule,3,0.00146484375,1,3
+task_only,Plan the,10,0.0048828125,1,10
+task_only,Develop a,152,0.07421875,2,151
+task_only,Make a,49,0.02392578125,1,49
+task_only,Set a,121,0.05908203125,1,121

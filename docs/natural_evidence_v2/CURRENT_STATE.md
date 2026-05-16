@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T04:34:00Z
+Last synchronized: 2026-05-16T04:38:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_864761_DEV_GENERATION_864832_FAILED_REVIEWED_NO_DOWNSTREAM_UNLOCK`
+`V2_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_RECORDED_ARTIFACT_ONLY_NO_COMPUTE`
 
 ## Current Route
 
@@ -44,7 +44,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_864761_DEV_GENERATION_TRANSFER_GAP_ARTIFACT_ONLY_REPAIR_OR_PIVOT_NEXT`
+`BLOCK_R4_AFTER_864832_REVIEWED_REPAIR_OR_PIVOT_ROUTE_DECISION_NEXT`
 
 Artifact-only pivot package:
 
@@ -402,6 +402,28 @@ Artifact-only failure analysis and a reviewed repair or pivot route decision.
 Do not submit a new Slurm job or start training, Llama, same-family null,
 sanitizer, FAR aggregation, payload-diversity work, or paper-facing claim work
 until the next route records prerequisites and control-plane checks.
+```
+
+Transfer-gap repair package:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864832_TRANSFER_GAP_REPAIR_DECISION_20260516.md
+results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/
+status: PASS_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_ARTIFACT_ONLY_NO_COMPUTE
+slurm submitted: false
+generation started by this package: false
+training started: false
+cause classification: teacher-forced prefix-native pressure did not transfer
+  to cover-natural decoder surfaces and created visible repetition
+```
+
+Current next allowed action:
+
+```text
+Reviewed repair or pivot route decision only. A future compute route must align
+the optimized target surfaces with the exact free-generation decoder bank, or
+freeze a new bank before training, and must record anti-repetition/naturalness
+controls plus the usual allowlist/Hermes/remote-hash/single-submission controls.
 ```
 
 ## Historical Controller Failure Chain

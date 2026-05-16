@@ -1,0 +1,385 @@
+condition,surface_id,coordinate_id,polarity_or_code_symbol,canonical_lemma_or_phrase,alias_count_total,outputs_with_surface
+protected,r4_s00_00,0,0,review the plan,0,0
+raw,r4_s00_00,0,0,review the plan,5,5
+task_only,r4_s00_00,0,0,review the plan,8,8
+protected,r4_s00_01,0,0,check the details,0,0
+raw,r4_s00_01,0,0,check the details,0,0
+task_only,r4_s00_01,0,0,check the details,0,0
+protected,r4_s00_02,0,0,confirm the timing,0,0
+raw,r4_s00_02,0,0,confirm the timing,0,0
+task_only,r4_s00_02,0,0,confirm the timing,0,0
+protected,r4_s00_03,0,0,prepare the materials,3,3
+raw,r4_s00_03,0,0,prepare the materials,6,6
+task_only,r4_s00_03,0,0,prepare the materials,3,3
+protected,r4_s01_00,1,1,explain the reason,0,0
+raw,r4_s01_00,1,1,explain the reason,0,0
+task_only,r4_s01_00,1,1,explain the reason,0,0
+protected,r4_s01_01,1,1,share the update,0,0
+raw,r4_s01_01,1,1,share the update,0,0
+task_only,r4_s01_01,1,1,share the update,0,0
+protected,r4_s01_02,1,1,summarize the issue,0,0
+raw,r4_s01_02,1,1,summarize the issue,0,0
+task_only,r4_s01_02,1,1,summarize the issue,0,0
+protected,r4_s01_03,1,1,clarify the next move,0,0
+raw,r4_s01_03,1,1,clarify the next move,0,0
+task_only,r4_s01_03,1,1,clarify the next move,0,0
+protected,r4_s02_00,2,0,keep notes,0,0
+raw,r4_s02_00,2,0,keep notes,3,3
+task_only,r4_s02_00,2,0,keep notes,4,4
+protected,r4_s02_01,2,0,track progress,0,0
+raw,r4_s02_01,2,0,track progress,96,96
+task_only,r4_s02_01,2,0,track progress,130,130
+protected,r4_s02_02,2,0,record the choice,0,0
+raw,r4_s02_02,2,0,record the choice,0,0
+task_only,r4_s02_02,2,0,record the choice,0,0
+protected,r4_s02_03,2,0,organize the details,0,0
+raw,r4_s02_03,2,0,organize the details,1,1
+task_only,r4_s02_03,2,0,organize the details,0,0
+protected,r4_s03_00,3,1,choose a simple option,0,0
+raw,r4_s03_00,3,1,choose a simple option,0,0
+task_only,r4_s03_00,3,1,choose a simple option,0,0
+protected,r4_s03_01,3,1,make a small adjustment,0,0
+raw,r4_s03_01,3,1,make a small adjustment,0,0
+task_only,r4_s03_01,3,1,make a small adjustment,0,0
+protected,r4_s03_02,3,1,finish the task,0,0
+raw,r4_s03_02,3,1,finish the task,0,0
+task_only,r4_s03_02,3,1,finish the task,0,0
+protected,r4_s03_03,3,1,build a clear routine,0,0
+raw,r4_s03_03,3,1,build a clear routine,0,0
+task_only,r4_s03_03,3,1,build a clear routine,0,0
+protected,r4_s04_00,4,0,review the plan,0,0
+raw,r4_s04_00,4,0,review the plan,5,5
+task_only,r4_s04_00,4,0,review the plan,8,8
+protected,r4_s04_01,4,0,check the details,0,0
+raw,r4_s04_01,4,0,check the details,0,0
+task_only,r4_s04_01,4,0,check the details,0,0
+protected,r4_s04_02,4,0,confirm the timing,0,0
+raw,r4_s04_02,4,0,confirm the timing,0,0
+task_only,r4_s04_02,4,0,confirm the timing,0,0
+protected,r4_s04_03,4,0,prepare the materials,3,3
+raw,r4_s04_03,4,0,prepare the materials,6,6
+task_only,r4_s04_03,4,0,prepare the materials,3,3
+protected,r4_s05_00,5,1,explain the reason,0,0
+raw,r4_s05_00,5,1,explain the reason,0,0
+task_only,r4_s05_00,5,1,explain the reason,0,0
+protected,r4_s05_01,5,1,share the update,0,0
+raw,r4_s05_01,5,1,share the update,0,0
+task_only,r4_s05_01,5,1,share the update,0,0
+protected,r4_s05_02,5,1,summarize the issue,0,0
+raw,r4_s05_02,5,1,summarize the issue,0,0
+task_only,r4_s05_02,5,1,summarize the issue,0,0
+protected,r4_s05_03,5,1,clarify the next move,0,0
+raw,r4_s05_03,5,1,clarify the next move,0,0
+task_only,r4_s05_03,5,1,clarify the next move,0,0
+protected,r4_s06_00,6,0,keep notes,0,0
+raw,r4_s06_00,6,0,keep notes,3,3
+task_only,r4_s06_00,6,0,keep notes,4,4
+protected,r4_s06_01,6,0,track progress,0,0
+raw,r4_s06_01,6,0,track progress,96,96
+task_only,r4_s06_01,6,0,track progress,130,130
+protected,r4_s06_02,6,0,record the choice,0,0
+raw,r4_s06_02,6,0,record the choice,0,0
+task_only,r4_s06_02,6,0,record the choice,0,0
+protected,r4_s06_03,6,0,organize the details,0,0
+raw,r4_s06_03,6,0,organize the details,1,1
+task_only,r4_s06_03,6,0,organize the details,0,0
+protected,r4_s07_00,7,1,choose a simple option,0,0
+raw,r4_s07_00,7,1,choose a simple option,0,0
+task_only,r4_s07_00,7,1,choose a simple option,0,0
+protected,r4_s07_01,7,1,make a small adjustment,0,0
+raw,r4_s07_01,7,1,make a small adjustment,0,0
+task_only,r4_s07_01,7,1,make a small adjustment,0,0
+protected,r4_s07_02,7,1,finish the task,0,0
+raw,r4_s07_02,7,1,finish the task,0,0
+task_only,r4_s07_02,7,1,finish the task,0,0
+protected,r4_s07_03,7,1,build a clear routine,0,0
+raw,r4_s07_03,7,1,build a clear routine,0,0
+task_only,r4_s07_03,7,1,build a clear routine,0,0
+protected,r4_s08_00,8,0,review the plan,0,0
+raw,r4_s08_00,8,0,review the plan,5,5
+task_only,r4_s08_00,8,0,review the plan,8,8
+protected,r4_s08_01,8,0,check the details,0,0
+raw,r4_s08_01,8,0,check the details,0,0
+task_only,r4_s08_01,8,0,check the details,0,0
+protected,r4_s08_02,8,0,confirm the timing,0,0
+raw,r4_s08_02,8,0,confirm the timing,0,0
+task_only,r4_s08_02,8,0,confirm the timing,0,0
+protected,r4_s08_03,8,0,prepare the materials,3,3
+raw,r4_s08_03,8,0,prepare the materials,6,6
+task_only,r4_s08_03,8,0,prepare the materials,3,3
+protected,r4_s09_00,9,1,explain the reason,0,0
+raw,r4_s09_00,9,1,explain the reason,0,0
+task_only,r4_s09_00,9,1,explain the reason,0,0
+protected,r4_s09_01,9,1,share the update,0,0
+raw,r4_s09_01,9,1,share the update,0,0
+task_only,r4_s09_01,9,1,share the update,0,0
+protected,r4_s09_02,9,1,summarize the issue,0,0
+raw,r4_s09_02,9,1,summarize the issue,0,0
+task_only,r4_s09_02,9,1,summarize the issue,0,0
+protected,r4_s09_03,9,1,clarify the next move,0,0
+raw,r4_s09_03,9,1,clarify the next move,0,0
+task_only,r4_s09_03,9,1,clarify the next move,0,0
+protected,r4_s10_00,10,0,keep notes,0,0
+raw,r4_s10_00,10,0,keep notes,3,3
+task_only,r4_s10_00,10,0,keep notes,4,4
+protected,r4_s10_01,10,0,track progress,0,0
+raw,r4_s10_01,10,0,track progress,96,96
+task_only,r4_s10_01,10,0,track progress,130,130
+protected,r4_s10_02,10,0,record the choice,0,0
+raw,r4_s10_02,10,0,record the choice,0,0
+task_only,r4_s10_02,10,0,record the choice,0,0
+protected,r4_s10_03,10,0,organize the details,0,0
+raw,r4_s10_03,10,0,organize the details,1,1
+task_only,r4_s10_03,10,0,organize the details,0,0
+protected,r4_s11_00,11,1,choose a simple option,0,0
+raw,r4_s11_00,11,1,choose a simple option,0,0
+task_only,r4_s11_00,11,1,choose a simple option,0,0
+protected,r4_s11_01,11,1,make a small adjustment,0,0
+raw,r4_s11_01,11,1,make a small adjustment,0,0
+task_only,r4_s11_01,11,1,make a small adjustment,0,0
+protected,r4_s11_02,11,1,finish the task,0,0
+raw,r4_s11_02,11,1,finish the task,0,0
+task_only,r4_s11_02,11,1,finish the task,0,0
+protected,r4_s11_03,11,1,build a clear routine,0,0
+raw,r4_s11_03,11,1,build a clear routine,0,0
+task_only,r4_s11_03,11,1,build a clear routine,0,0
+protected,r4_s12_00,12,0,review the plan,0,0
+raw,r4_s12_00,12,0,review the plan,5,5
+task_only,r4_s12_00,12,0,review the plan,8,8
+protected,r4_s12_01,12,0,check the details,0,0
+raw,r4_s12_01,12,0,check the details,0,0
+task_only,r4_s12_01,12,0,check the details,0,0
+protected,r4_s12_02,12,0,confirm the timing,0,0
+raw,r4_s12_02,12,0,confirm the timing,0,0
+task_only,r4_s12_02,12,0,confirm the timing,0,0
+protected,r4_s12_03,12,0,prepare the materials,3,3
+raw,r4_s12_03,12,0,prepare the materials,6,6
+task_only,r4_s12_03,12,0,prepare the materials,3,3
+protected,r4_s13_00,13,1,explain the reason,0,0
+raw,r4_s13_00,13,1,explain the reason,0,0
+task_only,r4_s13_00,13,1,explain the reason,0,0
+protected,r4_s13_01,13,1,share the update,0,0
+raw,r4_s13_01,13,1,share the update,0,0
+task_only,r4_s13_01,13,1,share the update,0,0
+protected,r4_s13_02,13,1,summarize the issue,0,0
+raw,r4_s13_02,13,1,summarize the issue,0,0
+task_only,r4_s13_02,13,1,summarize the issue,0,0
+protected,r4_s13_03,13,1,clarify the next move,0,0
+raw,r4_s13_03,13,1,clarify the next move,0,0
+task_only,r4_s13_03,13,1,clarify the next move,0,0
+protected,r4_s14_00,14,0,keep notes,0,0
+raw,r4_s14_00,14,0,keep notes,3,3
+task_only,r4_s14_00,14,0,keep notes,4,4
+protected,r4_s14_01,14,0,track progress,0,0
+raw,r4_s14_01,14,0,track progress,96,96
+task_only,r4_s14_01,14,0,track progress,130,130
+protected,r4_s14_02,14,0,record the choice,0,0
+raw,r4_s14_02,14,0,record the choice,0,0
+task_only,r4_s14_02,14,0,record the choice,0,0
+protected,r4_s14_03,14,0,organize the details,0,0
+raw,r4_s14_03,14,0,organize the details,1,1
+task_only,r4_s14_03,14,0,organize the details,0,0
+protected,r4_s15_00,15,1,choose a simple option,0,0
+raw,r4_s15_00,15,1,choose a simple option,0,0
+task_only,r4_s15_00,15,1,choose a simple option,0,0
+protected,r4_s15_01,15,1,make a small adjustment,0,0
+raw,r4_s15_01,15,1,make a small adjustment,0,0
+task_only,r4_s15_01,15,1,make a small adjustment,0,0
+protected,r4_s15_02,15,1,finish the task,0,0
+raw,r4_s15_02,15,1,finish the task,0,0
+task_only,r4_s15_02,15,1,finish the task,0,0
+protected,r4_s15_03,15,1,build a clear routine,0,0
+raw,r4_s15_03,15,1,build a clear routine,0,0
+task_only,r4_s15_03,15,1,build a clear routine,0,0
+protected,r4_s16_00,16,0,review the plan,0,0
+raw,r4_s16_00,16,0,review the plan,5,5
+task_only,r4_s16_00,16,0,review the plan,8,8
+protected,r4_s16_01,16,0,check the details,0,0
+raw,r4_s16_01,16,0,check the details,0,0
+task_only,r4_s16_01,16,0,check the details,0,0
+protected,r4_s16_02,16,0,confirm the timing,0,0
+raw,r4_s16_02,16,0,confirm the timing,0,0
+task_only,r4_s16_02,16,0,confirm the timing,0,0
+protected,r4_s16_03,16,0,prepare the materials,3,3
+raw,r4_s16_03,16,0,prepare the materials,6,6
+task_only,r4_s16_03,16,0,prepare the materials,3,3
+protected,r4_s17_00,17,1,explain the reason,0,0
+raw,r4_s17_00,17,1,explain the reason,0,0
+task_only,r4_s17_00,17,1,explain the reason,0,0
+protected,r4_s17_01,17,1,share the update,0,0
+raw,r4_s17_01,17,1,share the update,0,0
+task_only,r4_s17_01,17,1,share the update,0,0
+protected,r4_s17_02,17,1,summarize the issue,0,0
+raw,r4_s17_02,17,1,summarize the issue,0,0
+task_only,r4_s17_02,17,1,summarize the issue,0,0
+protected,r4_s17_03,17,1,clarify the next move,0,0
+raw,r4_s17_03,17,1,clarify the next move,0,0
+task_only,r4_s17_03,17,1,clarify the next move,0,0
+protected,r4_s18_00,18,0,keep notes,0,0
+raw,r4_s18_00,18,0,keep notes,3,3
+task_only,r4_s18_00,18,0,keep notes,4,4
+protected,r4_s18_01,18,0,track progress,0,0
+raw,r4_s18_01,18,0,track progress,96,96
+task_only,r4_s18_01,18,0,track progress,130,130
+protected,r4_s18_02,18,0,record the choice,0,0
+raw,r4_s18_02,18,0,record the choice,0,0
+task_only,r4_s18_02,18,0,record the choice,0,0
+protected,r4_s18_03,18,0,organize the details,0,0
+raw,r4_s18_03,18,0,organize the details,1,1
+task_only,r4_s18_03,18,0,organize the details,0,0
+protected,r4_s19_00,19,1,choose a simple option,0,0
+raw,r4_s19_00,19,1,choose a simple option,0,0
+task_only,r4_s19_00,19,1,choose a simple option,0,0
+protected,r4_s19_01,19,1,make a small adjustment,0,0
+raw,r4_s19_01,19,1,make a small adjustment,0,0
+task_only,r4_s19_01,19,1,make a small adjustment,0,0
+protected,r4_s19_02,19,1,finish the task,0,0
+raw,r4_s19_02,19,1,finish the task,0,0
+task_only,r4_s19_02,19,1,finish the task,0,0
+protected,r4_s19_03,19,1,build a clear routine,0,0
+raw,r4_s19_03,19,1,build a clear routine,0,0
+task_only,r4_s19_03,19,1,build a clear routine,0,0
+protected,r4_s20_00,20,0,review the plan,0,0
+raw,r4_s20_00,20,0,review the plan,5,5
+task_only,r4_s20_00,20,0,review the plan,8,8
+protected,r4_s20_01,20,0,check the details,0,0
+raw,r4_s20_01,20,0,check the details,0,0
+task_only,r4_s20_01,20,0,check the details,0,0
+protected,r4_s20_02,20,0,confirm the timing,0,0
+raw,r4_s20_02,20,0,confirm the timing,0,0
+task_only,r4_s20_02,20,0,confirm the timing,0,0
+protected,r4_s20_03,20,0,prepare the materials,3,3
+raw,r4_s20_03,20,0,prepare the materials,6,6
+task_only,r4_s20_03,20,0,prepare the materials,3,3
+protected,r4_s21_00,21,1,explain the reason,0,0
+raw,r4_s21_00,21,1,explain the reason,0,0
+task_only,r4_s21_00,21,1,explain the reason,0,0
+protected,r4_s21_01,21,1,share the update,0,0
+raw,r4_s21_01,21,1,share the update,0,0
+task_only,r4_s21_01,21,1,share the update,0,0
+protected,r4_s21_02,21,1,summarize the issue,0,0
+raw,r4_s21_02,21,1,summarize the issue,0,0
+task_only,r4_s21_02,21,1,summarize the issue,0,0
+protected,r4_s21_03,21,1,clarify the next move,0,0
+raw,r4_s21_03,21,1,clarify the next move,0,0
+task_only,r4_s21_03,21,1,clarify the next move,0,0
+protected,r4_s22_00,22,0,keep notes,0,0
+raw,r4_s22_00,22,0,keep notes,3,3
+task_only,r4_s22_00,22,0,keep notes,4,4
+protected,r4_s22_01,22,0,track progress,0,0
+raw,r4_s22_01,22,0,track progress,96,96
+task_only,r4_s22_01,22,0,track progress,130,130
+protected,r4_s22_02,22,0,record the choice,0,0
+raw,r4_s22_02,22,0,record the choice,0,0
+task_only,r4_s22_02,22,0,record the choice,0,0
+protected,r4_s22_03,22,0,organize the details,0,0
+raw,r4_s22_03,22,0,organize the details,1,1
+task_only,r4_s22_03,22,0,organize the details,0,0
+protected,r4_s23_00,23,1,choose a simple option,0,0
+raw,r4_s23_00,23,1,choose a simple option,0,0
+task_only,r4_s23_00,23,1,choose a simple option,0,0
+protected,r4_s23_01,23,1,make a small adjustment,0,0
+raw,r4_s23_01,23,1,make a small adjustment,0,0
+task_only,r4_s23_01,23,1,make a small adjustment,0,0
+protected,r4_s23_02,23,1,finish the task,0,0
+raw,r4_s23_02,23,1,finish the task,0,0
+task_only,r4_s23_02,23,1,finish the task,0,0
+protected,r4_s23_03,23,1,build a clear routine,0,0
+raw,r4_s23_03,23,1,build a clear routine,0,0
+task_only,r4_s23_03,23,1,build a clear routine,0,0
+protected,r4_s24_00,24,0,review the plan,0,0
+raw,r4_s24_00,24,0,review the plan,5,5
+task_only,r4_s24_00,24,0,review the plan,8,8
+protected,r4_s24_01,24,0,check the details,0,0
+raw,r4_s24_01,24,0,check the details,0,0
+task_only,r4_s24_01,24,0,check the details,0,0
+protected,r4_s24_02,24,0,confirm the timing,0,0
+raw,r4_s24_02,24,0,confirm the timing,0,0
+task_only,r4_s24_02,24,0,confirm the timing,0,0
+protected,r4_s24_03,24,0,prepare the materials,3,3
+raw,r4_s24_03,24,0,prepare the materials,6,6
+task_only,r4_s24_03,24,0,prepare the materials,3,3
+protected,r4_s25_00,25,1,explain the reason,0,0
+raw,r4_s25_00,25,1,explain the reason,0,0
+task_only,r4_s25_00,25,1,explain the reason,0,0
+protected,r4_s25_01,25,1,share the update,0,0
+raw,r4_s25_01,25,1,share the update,0,0
+task_only,r4_s25_01,25,1,share the update,0,0
+protected,r4_s25_02,25,1,summarize the issue,0,0
+raw,r4_s25_02,25,1,summarize the issue,0,0
+task_only,r4_s25_02,25,1,summarize the issue,0,0
+protected,r4_s25_03,25,1,clarify the next move,0,0
+raw,r4_s25_03,25,1,clarify the next move,0,0
+task_only,r4_s25_03,25,1,clarify the next move,0,0
+protected,r4_s26_00,26,0,keep notes,0,0
+raw,r4_s26_00,26,0,keep notes,3,3
+task_only,r4_s26_00,26,0,keep notes,4,4
+protected,r4_s26_01,26,0,track progress,0,0
+raw,r4_s26_01,26,0,track progress,96,96
+task_only,r4_s26_01,26,0,track progress,130,130
+protected,r4_s26_02,26,0,record the choice,0,0
+raw,r4_s26_02,26,0,record the choice,0,0
+task_only,r4_s26_02,26,0,record the choice,0,0
+protected,r4_s26_03,26,0,organize the details,0,0
+raw,r4_s26_03,26,0,organize the details,1,1
+task_only,r4_s26_03,26,0,organize the details,0,0
+protected,r4_s27_00,27,1,choose a simple option,0,0
+raw,r4_s27_00,27,1,choose a simple option,0,0
+task_only,r4_s27_00,27,1,choose a simple option,0,0
+protected,r4_s27_01,27,1,make a small adjustment,0,0
+raw,r4_s27_01,27,1,make a small adjustment,0,0
+task_only,r4_s27_01,27,1,make a small adjustment,0,0
+protected,r4_s27_02,27,1,finish the task,0,0
+raw,r4_s27_02,27,1,finish the task,0,0
+task_only,r4_s27_02,27,1,finish the task,0,0
+protected,r4_s27_03,27,1,build a clear routine,0,0
+raw,r4_s27_03,27,1,build a clear routine,0,0
+task_only,r4_s27_03,27,1,build a clear routine,0,0
+protected,r4_s28_00,28,0,review the plan,0,0
+raw,r4_s28_00,28,0,review the plan,5,5
+task_only,r4_s28_00,28,0,review the plan,8,8
+protected,r4_s28_01,28,0,check the details,0,0
+raw,r4_s28_01,28,0,check the details,0,0
+task_only,r4_s28_01,28,0,check the details,0,0
+protected,r4_s28_02,28,0,confirm the timing,0,0
+raw,r4_s28_02,28,0,confirm the timing,0,0
+task_only,r4_s28_02,28,0,confirm the timing,0,0
+protected,r4_s28_03,28,0,prepare the materials,3,3
+raw,r4_s28_03,28,0,prepare the materials,6,6
+task_only,r4_s28_03,28,0,prepare the materials,3,3
+protected,r4_s29_00,29,1,explain the reason,0,0
+raw,r4_s29_00,29,1,explain the reason,0,0
+task_only,r4_s29_00,29,1,explain the reason,0,0
+protected,r4_s29_01,29,1,share the update,0,0
+raw,r4_s29_01,29,1,share the update,0,0
+task_only,r4_s29_01,29,1,share the update,0,0
+protected,r4_s29_02,29,1,summarize the issue,0,0
+raw,r4_s29_02,29,1,summarize the issue,0,0
+task_only,r4_s29_02,29,1,summarize the issue,0,0
+protected,r4_s29_03,29,1,clarify the next move,0,0
+raw,r4_s29_03,29,1,clarify the next move,0,0
+task_only,r4_s29_03,29,1,clarify the next move,0,0
+protected,r4_s30_00,30,0,keep notes,0,0
+raw,r4_s30_00,30,0,keep notes,3,3
+task_only,r4_s30_00,30,0,keep notes,4,4
+protected,r4_s30_01,30,0,track progress,0,0
+raw,r4_s30_01,30,0,track progress,96,96
+task_only,r4_s30_01,30,0,track progress,130,130
+protected,r4_s30_02,30,0,record the choice,0,0
+raw,r4_s30_02,30,0,record the choice,0,0
+task_only,r4_s30_02,30,0,record the choice,0,0
+protected,r4_s30_03,30,0,organize the details,0,0
+raw,r4_s30_03,30,0,organize the details,1,1
+task_only,r4_s30_03,30,0,organize the details,0,0
+protected,r4_s31_00,31,1,choose a simple option,0,0
+raw,r4_s31_00,31,1,choose a simple option,0,0
+task_only,r4_s31_00,31,1,choose a simple option,0,0
+protected,r4_s31_01,31,1,make a small adjustment,0,0
+raw,r4_s31_01,31,1,make a small adjustment,0,0
+task_only,r4_s31_01,31,1,make a small adjustment,0,0
+protected,r4_s31_02,31,1,finish the task,0,0
+raw,r4_s31_02,31,1,finish the task,0,0
+task_only,r4_s31_02,31,1,finish the task,0,0
+protected,r4_s31_03,31,1,build a clear routine,0,0
+raw,r4_s31_03,31,1,build a clear routine,0,0
+task_only,r4_s31_03,31,1,build a clear routine,0,0

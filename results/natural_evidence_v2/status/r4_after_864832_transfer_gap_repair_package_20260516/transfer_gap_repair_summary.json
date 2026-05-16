@@ -1,0 +1,19 @@
+{
+  "cause_classification": "teacher_forced_prefix_native_pressure_did_not_transfer_to_cover_natural_decoder_surfaces_and_created_visible_repetition",
+  "generation_started": false,
+  "max_protected_vs_raw_shallow_feature_auc": 1.0,
+  "next_allowed_action": "Reviewed repair or pivot route decision only; no Slurm until route prerequisites and control-plane checks are recorded.",
+  "null_accepts": 0,
+  "paper_claim_allowed": false,
+  "protected_accepts_format_scrub_all": 0,
+  "protected_accepts_no_scrub": 0,
+  "protected_create_a_plan_total": 42693,
+  "protected_prepare_a_total": 30809,
+  "raw_create_a_plan_total": 1,
+  "schema_name": "natural_evidence_v2_r4_after_864832_transfer_gap_repair_package_v1",
+  "slurm_submitted": false,
+  "source_job_id": "864832",
+  "source_teacher_forced_job_id": "864761",
+  "status": "PASS_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_ARTIFACT_ONLY_NO_COMPUTE",
+  "training_started": false
+}

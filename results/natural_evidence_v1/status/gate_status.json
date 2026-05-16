@@ -16437,5 +16437,24 @@
     "payload_diversity_started": false,
     "paper_claim_allowed": false,
     "next_allowed_action": "Artifact-only failure analysis and reviewed repair or pivot route decision only; no new Slurm until the next route records prerequisites and control-plane checks."
+  },
+  "2026-05-16T04:38:00Z_r4_after_864832_transfer_gap_repair_package": {
+    "status": "PASS_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_ARTIFACT_ONLY_NO_COMPUTE",
+    "source_job_id": "864832",
+    "source_teacher_forced_job_id": "864761",
+    "decision_doc": "docs/natural_evidence_v2/R4_AFTER_864832_TRANSFER_GAP_REPAIR_DECISION_20260516.md",
+    "repair_package": "results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/",
+    "cause_classification": "teacher_forced_prefix_native_pressure_did_not_transfer_to_cover_natural_decoder_surfaces_and_created_visible_repetition",
+    "slurm_job_submitted": false,
+    "generation_started": false,
+    "training_started": false,
+    "qwen_e2e_started": false,
+    "llama_started": false,
+    "same_family_null_started": false,
+    "sanitizer_started": false,
+    "far_aggregation_started": false,
+    "payload_diversity_started": false,
+    "paper_claim_allowed": false,
+    "next_allowed_action": "Reviewed repair or pivot route decision only; no Slurm until route prerequisites and control-plane checks are recorded."
   }
 }
