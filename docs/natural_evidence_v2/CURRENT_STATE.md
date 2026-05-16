@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T03:32:00Z
+Last synchronized: 2026-05-16T03:44:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_COVERAGE_SCALE_864761_PASSED_TF_GATE_WITH_CAVEAT`
+`V2_R4_METRIC_EXACT_864761_DEV_GENERATION_H200_ARRAY_864832_RUNNING`
 
 ## Current Route
 
@@ -44,7 +44,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_864761_PASS_SMALL_DEV_GENERATION_ROUTE_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_864761_DEV_GENERATION_JOB_864832_MONITOR_AND_REVIEW_NEXT`
 
 Artifact-only pivot package:
 
@@ -305,6 +305,76 @@ stronger floor pressure and scored on 8192 rows. Preserve this caveat in any
 downstream route; do not describe 864761 as 8192 unique train-row coverage.
 ```
 
+Metric-exact 864761 small dev generation route:
+
+```text
+docs/natural_evidence_v2/R4_CANDIDATE_V3_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_20260516.md
+scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch
+results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_route_validation_20260516/
+allowlist entry: v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200
+command: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch
+local wrapper syntax: PASS
+local four-shard plan-only smoke: PASS
+local zero-enabled allowlist safety: PASS
+status: PASS_R4_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_LOCAL_VALIDATION_NO_SUBMIT
+```
+
+Scope:
+
+```text
+This is a small Qwen dev generation/decode diagnostic using the reviewed
+864761 protected adapter and the reviewed R4 cover-natural dev diagnostic
+wrapper path. It is not training, not a Qwen E2E rerun outside this diagnostic,
+not Llama, not same-family null, not sanitizer, not FAR, not payload diversity,
+and not a paper-facing positive claim.
+```
+
+Current next allowed action:
+
+```text
+Local/remote route preflight has passed. Notify Hermes, enable exactly one
+allowlist entry v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200,
+submit exactly one H200/pomplun Slurm array job, immediately disable the entry,
+and record post-submit allowlist safety. Preserve the 864761 train-split caveat
+in all downstream reviews.
+```
+
+Remote preflight:
+
+```text
+results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_remote_preflight_20260516/
+status: PASS_R4_METRIC_EXACT_864761_DEV_GENERATION_REMOTE_PREFLIGHT_NO_SUBMIT
+hashes match: true
+remote wrapper plan-only smoke: PASS
+local/remote allowlist safety: PASS with zero enabled entries
+active jobs: none
+Slurm submitted: false
+```
+
+Submission:
+
+```text
+results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_submission_20260516/
+job_id: 864832
+job_name: nat-ev-v2-r4megd
+array: 0-3%4
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+gpu: h200
+time limit: 30-00:00:00
+allowlist entry: v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200
+local post-submit allowlist safety: PASS with zero enabled entries
+remote post-submit allowlist safety: PASS with zero enabled entries
+```
+
+Current next allowed action:
+
+```text
+Monitor Slurm job `864832`; after completion, sync shard artifacts and review
+the generation/decode diagnostic gates before any further route. Do not start
+training, Llama, same-family null, sanitizer, FAR aggregation, payload-diversity
+work, or paper-facing claim work from this running state.
+```
+
 ## Historical Controller Failure Chain
 
 Job `859672` completed all `72/72` H200/pomplun array tasks with exit code
@@ -499,11 +569,11 @@ teacher-forced selective gate by a wide margin. It does not unlock generation.
 
 ## Next Allowed Action
 
-Single H200 submission for the metric-exact micro-overfit route is ready after
-Hermes TG/email notification and exactly-one allowlist enablement. Submit only
-`v2_r4_candidate_v3_micro_overfit_h200`, then immediately disable the allowlist
-entry and record post-submit safety. Do not run generation, Llama, null/FAR,
-sanitizer, payload-diversity, or paper-facing claim work from this state.
+Monitor H200/pomplun Slurm array job `864832`. After completion, sync shard
+artifacts and review the R4 metric-exact 864761 small dev generation/decode
+diagnostic before any further route. Do not start training, Llama, same-family
+null, sanitizer, FAR aggregation, payload-diversity work, or paper-facing claim
+work from this running state.
 
 ## Not Unlocked By Current State
 

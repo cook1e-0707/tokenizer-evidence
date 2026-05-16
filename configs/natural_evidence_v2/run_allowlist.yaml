@@ -80,6 +80,11 @@ allowed_gpu_actions:
   enable_condition: r4_candidate_v3_gain_sweep_reviewed_pass_and_gain4_dev_generation_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_gain4_dev_diagnostic_h200
+- claim_note: R4 candidate v3 small Qwen generation diagnostic using reviewed metric-exact 864761 adapter. Dev prompts only; same-contract a55e; format-scrub/null controls required; no training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch
+  enable_condition: r4_metric_exact_864761_teacher_forced_gate_passed_and_dev_generation_route_reviewed
+  enabled: false
+  name: v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200
 - claim_note: R4 Qwen teacher-forced surface-mass scoring on binary repair candidate rows. Base/protected/task-only forward scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch
   enable_condition: r4_teacher_forced_surface_mass_scorer_wrapper_reviewed_and_single_submission_authorized

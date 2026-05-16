@@ -1,0 +1,13 @@
+{
+  "allowlist_entry": "v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200",
+  "generation_started": false,
+  "local_allowlist_safety": "PASS_ZERO_ENABLED",
+  "local_plan_only_smoke": "PASS_ALL_4_SHARDS",
+  "route_doc": "docs/natural_evidence_v2/R4_CANDIDATE_V3_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_20260516.md",
+  "schema_name": "natural_evidence_v2_r4_metric_exact_864761_dev_generation_route_validation_v1",
+  "slurm_job_submitted": false,
+  "source_job_id": "864761",
+  "status": "PASS_R4_METRIC_EXACT_864761_DEV_GENERATION_ROUTE_LOCAL_VALIDATION_NO_SUBMIT",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch"
+}

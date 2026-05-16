@@ -1,0 +1,20 @@
+{
+  "active_jobs": [],
+  "allowlist_entry": "v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200",
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "hashes_match": true,
+  "llama_started": false,
+  "next_allowed_action": "Hermes pre-submit notification, exactly-one allowlist enablement, one H200/pomplun sbatch submission, immediate allowlist disablement, post-submit safety record.",
+  "paper_claim_allowed": false,
+  "remote_allowlist_safety": "PASS",
+  "remote_enabled_entries": [],
+  "remote_plan_only_wrapper_smoke": "PASS",
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_metric_exact_864761_dev_generation_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "source_job_id": "864761",
+  "status": "PASS_R4_METRIC_EXACT_864761_DEV_GENERATION_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "training_started": false
+}
