@@ -18,6 +18,17 @@ DEFAULT_CONFIG = ROOT / "configs/natural_evidence_v2/r4_after_868016_controller_
 ALLOWLIST = ROOT / "configs/natural_evidence_v2/run_allowlist.yaml"
 EXPECTED_ENTRY = "v2_r4_after_868016_controller_generation_h200"
 EXPECTED_WRAPPER = "scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch"
+EXPECTED_GENERATOR = "scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py"
+EXPECTED_EVENT_DECODER = "scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py"
+REQUIRED_EVENT_FIELDS = [
+    "first_generated_token_id",
+    "first_generated_token_text",
+    "target_first_token_ids",
+    "other_first_token_ids",
+    "event_side",
+    "event_bucket_side",
+    "event_trace",
+]
 
 
 def mapping(value: Any, field: str, errors: list[str]) -> Mapping[str, Any]:
@@ -159,6 +170,34 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
         if controller.get(key) != expected:
             errors.append(f"controller.{key} mismatch")
 
+    event_policy = mapping(config.get("event_trace_policy"), "event_trace_policy", errors)
+    if event_policy.get("future_positive_requires_token_id_trace") is not True:
+        errors.append("event_trace_policy.future_positive_requires_token_id_trace must be true")
+    if event_policy.get("text_fallback_for_old_transcripts_only") is not True:
+        errors.append("event_trace_policy.text_fallback_for_old_transcripts_only must be true")
+    if event_policy.get("decoder") != EXPECTED_EVENT_DECODER:
+        errors.append("event_trace_policy.decoder mismatch")
+    if event_policy.get("required_generated_output_fields") != REQUIRED_EVENT_FIELDS:
+        errors.append("event_trace_policy.required_generated_output_fields mismatch")
+    generator_path = path_from(EXPECTED_GENERATOR, "event_trace_policy.generator", errors)
+    event_decoder_path = path_from(EXPECTED_EVENT_DECODER, "event_trace_policy.decoder", errors)
+    if generator_path.exists():
+        generator_text = generator_path.read_text(encoding="utf-8")
+        for fragment in ["first_token_event_trace", *REQUIRED_EVENT_FIELDS]:
+            if fragment not in generator_text:
+                errors.append(f"generator missing event-trace fragment: {fragment}")
+    if event_decoder_path.exists():
+        event_decoder_text = event_decoder_path.read_text(encoding="utf-8")
+        for fragment in (
+            "future_positive_requires_token_id_trace",
+            "allow_text_fallback_for_old_transcripts",
+            "target_first_token_ids",
+            "other_first_token_ids",
+            "first_generated_token_id",
+        ):
+            if fragment not in event_decoder_text:
+                errors.append(f"event decoder missing fragment: {fragment}")
+
     compute = mapping(config.get("compute_policy"), "compute_policy", errors)
     if compute.get("allowlist_entry") != EXPECTED_ENTRY:
         errors.append("compute allowlist entry mismatch")
@@ -188,6 +227,7 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
             "#SBATCH --time=30-00:00:00",
             "generate_r4_after_868016_controller_outputs.py",
             "decode_r4_after_864832_reliability_codebook.py",
+            "decode_r4_after_868151_first_token_event_channel.py",
             "VALIDATE_PLAN_ONLY",
             "r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516",
             "--controller-bonus-nats \"$CONTROLLER_BONUS_NATS\"",

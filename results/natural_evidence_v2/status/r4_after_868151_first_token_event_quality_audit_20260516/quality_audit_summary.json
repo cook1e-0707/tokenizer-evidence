@@ -1,0 +1,35 @@
+{
+  "condition_duplicate_summary": {
+    "protected": {
+      "duplicate_count": 755,
+      "max_group_size": 2,
+      "rows": 3072,
+      "unique_hashes": 2317
+    },
+    "raw": {
+      "duplicate_count": 1024,
+      "max_group_size": 2,
+      "rows": 3072,
+      "unique_hashes": 2048
+    },
+    "task_only": {
+      "duplicate_count": 1024,
+      "max_group_size": 2,
+      "rows": 3072,
+      "unique_hashes": 2048
+    }
+  },
+  "coordinate_literal_hits": 14,
+  "coordinate_literal_likely_domain_sense_hits": 10,
+  "coordinate_literal_prompt_mentions_coordination_hits": 6,
+  "duplicate_response_hash_count": 2803,
+  "generated_rows": 9216,
+  "next_route_implication": "repair route must either avoid coordination-domain prompts or use a reviewed contextual technical-literal matcher, and must add diversity/window controls before another generation Slurm route",
+  "primary_quality_findings": [
+    "forbidden literal coordinate is entangled with ordinary volunteer-coordination task semantics in the audited examples",
+    "deterministic greedy row-cylinder generation creates large duplicate response groups across repeated prompt/prefix patterns"
+  ],
+  "source_job_id": "868151",
+  "status": "QUALITY_AUDIT_RECORDED_ARTIFACT_ONLY_R4_AFTER_868151_FIRST_TOKEN_EVENT",
+  "top_duplicate_group_count": 4
+}

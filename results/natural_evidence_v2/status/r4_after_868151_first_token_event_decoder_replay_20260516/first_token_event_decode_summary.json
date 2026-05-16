@@ -1,0 +1,64 @@
+{
+  "decode_rows": 20,
+  "event_rows": 9216,
+  "event_sources": {
+    "text_fallback_old_transcript": 9216
+  },
+  "event_statuses": {
+    "erasure": 8289,
+    "other": 82,
+    "target": 845
+  },
+  "future_positive_requires_token_id_trace": true,
+  "generated_output_files": [
+    "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151/shards/shard_00/r4_generated_outputs.jsonl",
+    "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151/shards/shard_01/r4_generated_outputs.jsonl",
+    "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151/shards/shard_02/r4_generated_outputs.jsonl",
+    "results/natural_evidence_v2/status/r4_after_868016_controller_generation_868151/shards/shard_03/r4_generated_outputs.jsonl"
+  ],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "reclassifies_868151": false,
+  "schema_name": "natural_evidence_v2_r4_after_868151_first_token_event_decode_summary_v1",
+  "status": "FIRST_TOKEN_EVENT_DECODE_RECORDED_ARTIFACT_ONLY_NOT_POSITIVE",
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 4,
+      "blocks": 4,
+      "duplicate_response_hash_count": 755,
+      "forbidden_public_surface_count": 6
+    },
+    "raw": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 1024,
+      "forbidden_public_surface_count": 8
+    },
+    "task_only": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 1024,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 755,
+      "forbidden_public_surface_count": 6
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 755,
+      "forbidden_public_surface_count": 6
+    }
+  },
+  "text_fallback_for_old_transcripts": true,
+  "training_started": false
+}

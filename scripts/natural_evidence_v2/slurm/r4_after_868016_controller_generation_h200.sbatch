@@ -147,6 +147,7 @@ fi
 "$PYTHON_BIN" -m py_compile \
   scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
   scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py \
+  scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py \
   scripts/natural_evidence_v2/validate_r4_after_868016_controller_generation_route.py
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \

@@ -48,6 +48,19 @@ controller:
   source_best_grid: 2
   source_job_id: 868114
 
+event_trace_policy:
+  future_positive_requires_token_id_trace: true
+  text_fallback_for_old_transcripts_only: true
+  decoder: scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
+  required_generated_output_fields:
+    - first_generated_token_id
+    - first_generated_token_text
+    - target_first_token_ids
+    - other_first_token_ids
+    - event_side
+    - event_bucket_side
+    - event_trace
+
 adapters:
   protected_adapter_loaded: false
   task_only_adapter_remote: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter

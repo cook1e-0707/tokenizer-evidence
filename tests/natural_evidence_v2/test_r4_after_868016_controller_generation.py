@@ -5,6 +5,7 @@ import pytest
 from scripts.natural_evidence_v2.generate_r4_after_868016_controller_outputs import (
     FirstStepControllerLogitsProcessor,
     _controlled_scores_for_first_step,
+    first_token_event_trace,
 )
 from scripts.natural_evidence_v2.score_r4_surface_teacher_forced_mass import ControllerConfig
 
@@ -69,4 +70,45 @@ def test_first_step_controller_rejects_target_other_overlap() -> None:
             row_target_ids=[[1]],
             row_other_ids=[[1]],
             controller_config=config,
+        )
+
+
+def test_first_token_event_trace_records_target_other_and_erasure() -> None:
+    target = first_token_event_trace(
+        first_generated_token_id=7,
+        first_generated_token_text=" clarify",
+        target_token_ids=[7],
+        other_token_ids=[9],
+        target_bit=1,
+    )
+    other = first_token_event_trace(
+        first_generated_token_id=9,
+        first_generated_token_text=" review",
+        target_token_ids=[7],
+        other_token_ids=[9],
+        target_bit=1,
+    )
+    erasure = first_token_event_trace(
+        first_generated_token_id=11,
+        first_generated_token_text=" ensure",
+        target_token_ids=[7],
+        other_token_ids=[9],
+        target_bit=1,
+    )
+    assert target["event_side"] == "target"
+    assert target["event_bucket_side"] == 1
+    assert other["event_side"] == "other"
+    assert other["event_bucket_side"] == 0
+    assert erasure["event_side"] == "erasure"
+    assert erasure["event_bucket_side"] == ""
+
+
+def test_first_token_event_trace_rejects_overlap() -> None:
+    with pytest.raises(ValueError, match="overlap"):
+        first_token_event_trace(
+            first_generated_token_id=7,
+            first_generated_token_text=" clarify",
+            target_token_ids=[7],
+            other_token_ids=[7],
+            target_bit=1,
         )

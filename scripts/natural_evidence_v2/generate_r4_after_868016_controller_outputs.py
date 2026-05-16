@@ -261,6 +261,41 @@ class FirstStepControllerLogitsProcessor:
         )
 
 
+def first_token_event_trace(
+    *,
+    first_generated_token_id: int | None,
+    first_generated_token_text: str,
+    target_token_ids: Sequence[int],
+    other_token_ids: Sequence[int],
+    target_bit: int,
+) -> dict[str, Any]:
+    target_values = sorted({int(item) for item in target_token_ids})
+    other_values = sorted({int(item) for item in other_token_ids})
+    overlap = sorted(set(target_values) & set(other_values))
+    if overlap:
+        raise ValueError(f"target/other first-token ids overlap: {overlap}")
+    if first_generated_token_id is None:
+        event_side = "erasure"
+        event_bucket_side: int | str = ""
+    elif int(first_generated_token_id) in target_values:
+        event_side = "target"
+        event_bucket_side = int(target_bit)
+    elif int(first_generated_token_id) in other_values:
+        event_side = "other"
+        event_bucket_side = 1 - int(target_bit)
+    else:
+        event_side = "erasure"
+        event_bucket_side = ""
+    return {
+        "event_side": event_side,
+        "event_bucket_side": event_bucket_side,
+        "first_generated_token_id": first_generated_token_id,
+        "first_generated_token_text": first_generated_token_text,
+        "target_first_token_ids": target_values,
+        "other_first_token_ids": other_values,
+    }
+
+
 def generate_condition(
     *,
     args: argparse.Namespace,
@@ -342,7 +377,21 @@ def generate_condition(
             )
             input_width = int(encoded["input_ids"].shape[1])
             for row_index, (row, output_ids) in enumerate(zip(batch, generated, strict=True)):
-                continuation_text = tokenizer.decode(output_ids[input_width:], skip_special_tokens=True)
+                continuation_ids = [int(item) for item in output_ids[input_width:].detach().cpu().tolist()]
+                first_generated_token_id = continuation_ids[0] if continuation_ids else None
+                first_generated_token_text = (
+                    tokenizer.decode([first_generated_token_id], skip_special_tokens=False)
+                    if first_generated_token_id is not None
+                    else ""
+                )
+                event_trace = first_token_event_trace(
+                    first_generated_token_id=first_generated_token_id,
+                    first_generated_token_text=first_generated_token_text,
+                    target_token_ids=target_ids_by_row[row_index],
+                    other_token_ids=other_ids_by_row[row_index],
+                    target_bit=int(row["target_bit"]),
+                )
+                continuation_text = tokenizer.decode(continuation_ids, skip_special_tokens=True)
                 response_text = (prefix_model_texts[row_index] + continuation_text).strip()
                 generation_id = "qwen_v2_r4_868016_gen_" + sha256_text(
                     json.dumps(
@@ -367,6 +416,11 @@ def generate_condition(
                         "controller_max_target_mass": float(args.controller_max_target_mass) if controller_enabled else None,
                         "controller_penalty_nats": float(args.controller_penalty_nats) if controller_enabled else 0.0,
                         "coordinate_id": int(row["coordinate_id"]),
+                        "event_bucket_side": event_trace["event_bucket_side"],
+                        "event_side": event_trace["event_side"],
+                        "event_trace": event_trace,
+                        "first_generated_token_id": event_trace["first_generated_token_id"],
+                        "first_generated_token_text": event_trace["first_generated_token_text"],
                         "generation_condition": condition,
                         "generation_id": generation_id,
                         "generation_mode": "deterministic_greedy_first_step_controller" if controller_enabled else "deterministic_greedy",
@@ -384,9 +438,11 @@ def generate_condition(
                         "schema_name": "natural_evidence_v2_r4_generated_output_v1",
                         "split": str(row.get("split", "")),
                         "target_bit": int(row["target_bit"]),
+                        "target_first_token_ids": event_trace["target_first_token_ids"],
                         "target_surface": str(row.get("target_surface", "")),
                         "tokenizer_name": str(args.tokenizer_name),
                         "training_started": False,
+                        "other_first_token_ids": event_trace["other_first_token_ids"],
                     }
                 )
     del model

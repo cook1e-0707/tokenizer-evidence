@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T22:48:16Z
+Last synchronized: 2026-05-16T23:00:14Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_ROUTE_PLAN_VALIDATION_PASS_DECODER_IMPL_NEXT`
+`V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_TRACE_WRAPPER_PLAN_VALIDATED_LITERAL_DUP_REPAIR_NEXT`
 
 ## Current Route
 
@@ -112,7 +112,7 @@ route validation:
 validation status:
   PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT
 tests:
-  1 passed, 1 skipped
+  7 passed
 remote validation:
   PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT
 remote allowlist safety:
@@ -121,27 +121,117 @@ active Chimera jobs:
   none
 ```
 
-## Next Allowed Action
-
-Artifact-only first-token event decoder/extractor implementation only:
+Codex then implemented and replayed the first-token event decoder/extractor:
 
 ```text
-1. Implement the first-token / lemma event decoder against committed score rows
-   and generated-output rows.
-2. Add toy tests for prefix stripping, first lexical event extraction,
-   target/other event-set overlap, wrong-key/wrong-payload rejection, and
-   forbidden-surface refusal.
-3. Run artifact-only replay on existing `868151` transcripts only as a
-   diagnostic; it must remain non-positive because the route was not
-   precommitted before `868151`.
-4. Record a reviewed decoder/extractor implementation before any new
-   allowlist enablement or Slurm submission.
+decoder:
+  scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
+decoder replay:
+  results/natural_evidence_v2/status/r4_after_868151_first_token_event_decoder_replay_20260516/
+replay status:
+  FIRST_TOKEN_EVENT_DECODE_RECORDED_ARTIFACT_ONLY_NOT_POSITIVE
+event rows:
+  9216
+event source:
+  text_fallback_old_transcript only
+event statuses:
+  target=845, other=82, erasure=8289
+protected accepts with quality gates:
+  0/4
+protected accepts ignoring quality:
+  4/4
+raw/task-only/wrong-key/wrong-payload accepts ignoring quality:
+  0/4 each
+protected forbidden public surface count:
+  6
+protected duplicate response hash count:
+  755
+```
+
+Interpretation: event-level signal exists in the failed transcripts, but the
+quality gates still fail. The replay uses text fallback because `868151` did not
+store token-id event traces; future positive routes must store token-id traces.
+The next repair must address forbidden technical literals and deterministic
+duplicate outputs before any new generation route.
+
+Codex recorded the artifact-only quality audit and repair route:
+
+```text
+quality audit:
+  results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_audit_20260516/
+quality route:
+  docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_QUALITY_REPAIR_ROUTE_20260516.md
+coordinate literal hits:
+  14
+likely ordinary domain-sense coordinate hits:
+  10
+within-condition duplicate response hash count:
+  2803
+```
+
+Codex patched the future controller generation wrapper to store token-id event
+traces:
+
+```text
+patched generator:
+  scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py
+new output fields:
+  first_generated_token_id
+  first_generated_token_text
+  target_first_token_ids
+  other_first_token_ids
+  event_side
+  event_bucket_side
+  event_trace
+tests:
+  7 passed, 1 skipped
+remote py_compile:
+  PASS
+remote allowlist safety:
+  PASS zero-enabled
+```
+
+Codex validated the patched wrapper locally and remotely in plan-only mode:
+
+```text
+wrapper validation:
+  results/natural_evidence_v2/status/r4_after_868151_first_token_event_wrapper_repair_validation_20260516/
+status:
+  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_TRACE_WRAPPER_REPAIR_PLAN_ONLY_VALIDATION
+local route validation:
+  PASS
+local wrapper plan-only:
+  PASS
+remote route validation:
+  PASS
+remote wrapper plan-only:
+  PASS
+local/remote allowlist safety:
+  PASS zero-enabled
+slurm submitted:
+  false
+generation/model scoring/training started:
+  false
+```
+
+## Next Allowed Action
+
+Artifact-only first-token event wrapper repair only:
+
+```text
+1. Add prompt/domain filtering or a reviewed contextual technical-literal
+   matcher so ordinary `coordination` tasks do not trigger hidden-channel
+   literal failures.
+2. Add duplicate-output mitigation and duplicate hash refusal checks.
+3. Record a reviewed literal/duplicate repair plan.
+4. Only after that repair plan passes validation, prepare a single reviewed H200 Slurm
+   submission route.
 ```
 
 Route-controlled actions may proceed automatically after their preconditions are
 recorded. At this state, do not submit another Slurm generation/scoring/training
-job until the first-token event decoder/extractor is implemented, reviewed, and
-passes plan-only validation.
+job until the literal/duplicate quality repair is implemented, reviewed, and
+passes local/remote plan-only validation.
 
 ## Still Gate-Controlled
 

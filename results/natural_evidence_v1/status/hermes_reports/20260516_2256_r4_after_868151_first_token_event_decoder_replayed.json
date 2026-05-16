@@ -1,0 +1,34 @@
+{
+  "canonical_phase": "V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_DECODER_REPLAYED_QUALITY_REPAIR_NEXT",
+  "decoder": "scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py",
+  "decoder_replay_report": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_decoder_replay_20260516/replay_report.md",
+  "decoder_replay_summary": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_decoder_replay_20260516/first_token_event_decode_summary.json",
+  "event_rows": 9216,
+  "event_sources": {
+    "text_fallback_old_transcript": 9216
+  },
+  "event_statuses": {
+    "erasure": 8289,
+    "other": 82,
+    "target": 845
+  },
+  "future_positive_requires_token_id_trace": true,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Artifact-only first-token event quality-repair planning: technical literal audit, duplicate-output repair, token-id event trace wrapper planning. No Slurm until reviewed route/preflight passes.",
+  "paper_claim_allowed": false,
+  "protected_accepts_ignoring_quality": 4,
+  "protected_accepts_with_quality_gates": 0,
+  "protected_duplicate_response_hash_count": 755,
+  "protected_forbidden_public_surface_count": 6,
+  "raw_accepts_ignoring_quality": 0,
+  "reclassifies_868151": false,
+  "source_failed_job_id": "868151",
+  "status": "FIRST_TOKEN_EVENT_DECODE_RECORDED_ARTIFACT_ONLY_NOT_POSITIVE",
+  "task_only_accepts_ignoring_quality": 0,
+  "tests": "7 passed",
+  "text_fallback_for_old_transcripts": true,
+  "training_started": false,
+  "wrong_key_accepts_ignoring_quality": 0,
+  "wrong_payload_accepts_ignoring_quality": 0
+}
