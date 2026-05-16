@@ -1,0 +1,50 @@
+{
+  "created_at_utc": "2026-05-16T00:01:57Z",
+  "files": {
+    "configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml": {
+      "local_sha256": "b757d823fe2c3006173cb3ea1ac4fbba46e687e009345cf877608bf1b04a3de5",
+      "match": true,
+      "remote_sha256": "b757d823fe2c3006173cb3ea1ac4fbba46e687e009345cf877608bf1b04a3de5"
+    },
+    "configs/natural_evidence_v2/run_allowlist.yaml": {
+      "local_sha256": "4bb0f5415dcdb25378ced5995726536b7b7aaa044cf163223190206792f30902",
+      "match": true,
+      "remote_sha256": "4bb0f5415dcdb25378ced5995726536b7b7aaa044cf163223190206792f30902"
+    },
+    "docs/natural_evidence_v2/CURRENT_STATE.md": {
+      "local_sha256": "e4a4215517c38e44dd8e6a95ebb05099993c11fcfa54c87483dfb48b8d32416d",
+      "match": true,
+      "remote_sha256": "e4a4215517c38e44dd8e6a95ebb05099993c11fcfa54c87483dfb48b8d32416d"
+    },
+    "results/natural_evidence_v2/status/gate_status.json": {
+      "local_sha256": "05ac62f65c80e6afbd3c595f95ab5ca5fa1df70606af1b75c835f1f0ebb72e0c",
+      "match": true,
+      "remote_sha256": "05ac62f65c80e6afbd3c595f95ab5ca5fa1df70606af1b75c835f1f0ebb72e0c"
+    },
+    "scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py": {
+      "local_sha256": "6f291d440c078d4f4ae33fec78bc00d732e8ab4c382d6dd37594245cbf3461f7",
+      "match": true,
+      "remote_sha256": "6f291d440c078d4f4ae33fec78bc00d732e8ab4c382d6dd37594245cbf3461f7"
+    },
+    "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch": {
+      "local_sha256": "ae873cce465977b74f673399a4e997c551f143738fe3cd83e36b0e4dc90998b1",
+      "match": true,
+      "remote_sha256": "ae873cce465977b74f673399a4e997c551f143738fe3cd83e36b0e4dc90998b1"
+    },
+    "scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py": {
+      "local_sha256": "c76cc378f0107db3197fd8fee3751a10353223d7c0adc68a573dd076fa96ac98",
+      "match": true,
+      "remote_sha256": "c76cc378f0107db3197fd8fee3751a10353223d7c0adc68a573dd076fa96ac98"
+    }
+  },
+  "generation_started": false,
+  "local_remote_hash_match": true,
+  "model_scoring_started": false,
+  "next_allowed_action": "enable exactly one allowlist entry v2_r4_controller_only_safety_bound_pressure_score_h200, submit one H200 array 0-23%4, then immediately disable the entry",
+  "remote_wrapper_plan_only_summary": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_remote_preflight_20260516/wrapper_plan_smoke/grid_23/wrapper_plan_only_summary.json",
+  "remote_zero_allowlist_safety": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_remote_preflight_20260516/remote_zero_allowlist_safety.json",
+  "schema_name": "r4_controller_only_safety_bound_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_CONTROLLER_ONLY_SAFETY_BOUND_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "training_started": false
+}

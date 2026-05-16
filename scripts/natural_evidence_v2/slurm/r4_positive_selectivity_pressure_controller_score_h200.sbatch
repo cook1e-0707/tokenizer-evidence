@@ -71,26 +71,12 @@ if [ -f "$HF_TOKEN_FILE" ]; then
   HF_TOKEN="$(tr -d '\r\n' <"$HF_TOKEN_FILE")"
 fi
 
-BONUS_VALUES=(0.25 0.50 0.75 1.00 1.25 1.50)
-PENALTY_VALUES=(0.00 0.25)
-MAX_TARGET_MASS_VALUES=(0.25 0.35 0.45)
-MAX_KL_VALUES=(0.05 0.10)
-GRID_SIZE=$(( ${#BONUS_VALUES[@]} * ${#PENALTY_VALUES[@]} * ${#MAX_TARGET_MASS_VALUES[@]} * ${#MAX_KL_VALUES[@]} ))
-
-if [ "$GRID_INDEX" -lt 0 ] || [ "$GRID_INDEX" -ge "$GRID_SIZE" ]; then
-  echo "INVALID_PRESSURE_CONTROLLER_GRID_INDEX: $GRID_INDEX of $GRID_SIZE" >&2
-  exit 2
-fi
-
-kl_index=$((GRID_INDEX % ${#MAX_KL_VALUES[@]}))
-mass_index=$(((GRID_INDEX / ${#MAX_KL_VALUES[@]}) % ${#MAX_TARGET_MASS_VALUES[@]}))
-penalty_index=$(((GRID_INDEX / (${#MAX_KL_VALUES[@]} * ${#MAX_TARGET_MASS_VALUES[@]})) % ${#PENALTY_VALUES[@]}))
-bonus_index=$(((GRID_INDEX / (${#MAX_KL_VALUES[@]} * ${#MAX_TARGET_MASS_VALUES[@]} * ${#PENALTY_VALUES[@]})) % ${#BONUS_VALUES[@]}))
-
-CONTROLLER_BONUS_NATS="${BONUS_VALUES[$bonus_index]}"
-CONTROLLER_PENALTY_NATS="${PENALTY_VALUES[$penalty_index]}"
-CONTROLLER_MAX_TARGET_MASS="${MAX_TARGET_MASS_VALUES[$mass_index]}"
-CONTROLLER_MAX_KL_BUDGET="${MAX_KL_VALUES[$kl_index]}"
+GRID_ASSIGNMENTS="$("$PYTHON_BIN" scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py \
+  --config "$ROUTE_CONFIG" \
+  --grid-index "$GRID_INDEX" \
+  --format shell)"
+eval "$GRID_ASSIGNMENTS"
+GRID_SIZE="$CONTROLLER_GRID_SIZE"
 GRID_ID="$(printf 'grid_%02d' "$GRID_INDEX")"
 GRID_OUTPUT_DIR="$OUTPUT_DIR/$GRID_ID"
 GRID_ROUTE_VALIDATION_DIR="$GRID_OUTPUT_DIR/route_validation"
@@ -121,6 +107,7 @@ echo "python_bin=$PYTHON_BIN"
 
 for required in "$ROUTE_CONFIG" "$SCORE_ROWS" \
   "scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py" \
+  "scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py" \
   "scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py"; do
   if [ ! -s "$required" ]; then
     echo "REQUIRED_ARTIFACT_MISSING_OR_EMPTY: $required" >&2
@@ -135,6 +122,7 @@ done
 "$PYTHON_BIN" -m py_compile \
   scripts/natural_evidence_v2/score_r4_surface_teacher_forced_mass.py \
   scripts/natural_evidence_v2/r4_prefix_native_soft_logit_controller.py \
+  scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py \
   scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py
 
 if [ "$VALIDATE_PLAN_ONLY" = "1" ]; then

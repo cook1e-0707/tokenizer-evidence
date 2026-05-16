@@ -6132,8 +6132,8 @@
   "conditional_training_authorization": "RECORDED_PRETRAINING_LAUNCH_GATE_REQUIRED",
   "conditional_training_authorization_doc": "docs/natural_evidence_v2/WP5_CONDITIONAL_TRAINING_AUTHORIZATION_20260509.md",
   "cross_family_claim_allowed": false,
-  "current_blocker": "BLOCK_R4_CONTROLLER_ONLY_SCORE_FAIL_NO_SELECTIVE_GATE_ARTIFACT_ONLY_REPAIR_NEXT",
-  "current_phase": "V2_R4_CONTROLLER_ONLY_SCORE_863274_REVIEWED_FAIL_NO_GENERATION",
+  "current_blocker": "BLOCK_R4_CONTROLLER_ONLY_SAFETY_BOUND_JOB_864117_MONITOR_AND_REVIEW_NEXT",
+  "current_phase": "V2_R4_CONTROLLER_ONLY_SAFETY_BOUND_H200_JOB_864117_RUNNING",
   "e2e_allowed": false,
   "failed_gates": [
     "WP3 fixed-prefix full-vocab model-mass gate failed on job 850288",
@@ -6577,7 +6577,7 @@
   "llama_allowed": false,
   "llama_started": false,
   "new_training_allowed": false,
-  "next_allowed_action": "artifact-only design/implementation of a new controller repair package; no compute until reviewed route/config/validator/wrapper/control-plane checks pass",
+  "next_allowed_action": "monitor job 864117; after terminal completion, sync and review safety-bound controller scoring summary artifacts before downstream action",
   "out_of_band_artifact_quarantine": {
     "adopted_as_formal_progress": false,
     "chimera_jobs_observed": [
@@ -11128,5 +11128,43 @@
     "llama_started": false,
     "paper_claim_allowed": false,
     "timestamp_utc": "2026-05-15T23:55:00Z"
+  },
+  "2026-05-16T00:02:00Z_r4_controller_only_safety_bound_route_package_plan_only": {
+    "status": "PASS_R4_CONTROLLER_ONLY_SAFETY_BOUND_ROUTE_PACKAGE_PLAN_ONLY_NO_COMPUTE",
+    "current_phase": "V2_R4_CONTROLLER_ONLY_SAFETY_BOUND_ROUTE_PACKAGE_PLAN_ONLY_PASS_NO_SUBMIT",
+    "blocker": "BLOCK_R4_CONTROLLER_ONLY_SAFETY_BOUND_REMOTE_PREFLIGHT_PENDING_NO_SLURM",
+    "decision_doc": "docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SAFETY_BOUND_PRESSURE_ROUTE_20260515.md",
+    "route_config": "configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml",
+    "summary_json": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_route_package_20260515/route_package_summary.json",
+    "allowlist_entry": "v2_r4_controller_only_safety_bound_pressure_score_h200",
+    "allowlist_enabled": false,
+    "grid_size": 24,
+    "future_h200_array": "0-23%4",
+    "next_allowed_action": "remote sync/hash preflight for safety-bound controller route package; after pass, exactly one reviewed H200 teacher-forced scoring submission may proceed with immediate allowlist disablement",
+    "slurm_job_submitted": false,
+    "model_scoring_started": false,
+    "generation_started": false,
+    "training_started": false,
+    "llama_started": false,
+    "paper_claim_allowed": false,
+    "timestamp_utc": "2026-05-16T00:00:17Z"
+  },
+  "2026-05-16T00:05:00Z_r4_controller_only_safety_bound_job_864117_submitted": {
+    "status": "SUBMITTED_R4_CONTROLLER_ONLY_SAFETY_BOUND_H200_JOB_864117_RUNNING",
+    "current_phase": "V2_R4_CONTROLLER_ONLY_SAFETY_BOUND_H200_JOB_864117_RUNNING",
+    "blocker": "BLOCK_R4_CONTROLLER_ONLY_SAFETY_BOUND_JOB_864117_MONITOR_AND_REVIEW_NEXT",
+    "job_id": "864117",
+    "array": "0-23%4",
+    "allowlist_entry": "v2_r4_controller_only_safety_bound_pressure_score_h200",
+    "submission_record": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_submission_20260516/submission_record.json",
+    "post_submit_allowlist_safety_local": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_submission_20260516/local_post_submit_allowlist_safety.json",
+    "post_submit_allowlist_safety_remote": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_submission_20260516/remote_post_submit_allowlist_safety.json",
+    "next_allowed_action": "monitor job 864117; after terminal completion, sync and review safety-bound controller scoring summary artifacts before downstream action",
+    "slurm_job_submitted": true,
+    "generation_started": false,
+    "training_started": false,
+    "llama_started": false,
+    "paper_claim_allowed": false,
+    "timestamp_utc": "2026-05-16T00:03:51Z"
   }
 }

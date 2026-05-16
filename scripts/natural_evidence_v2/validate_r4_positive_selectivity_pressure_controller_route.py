@@ -33,6 +33,7 @@ REQUIRED_CONDITIONS_BY_SET = {
 VALID_ROUTE_IDS = {
     "r4_positive_selectivity_pressure_controller_teacher_forced_v1",
     "r4_positive_selectivity_controller_only_teacher_forced_v1",
+    "r4_controller_only_safety_bound_pressure_teacher_forced_v1",
 }
 LOCKED_FALSE_FIELDS = (
     "slurm_allowed",

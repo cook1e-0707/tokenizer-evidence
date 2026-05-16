@@ -1,0 +1,26 @@
+{
+  "allowlist_enabled_now": false,
+  "allowlist_entry": "v2_r4_controller_only_safety_bound_pressure_score_h200",
+  "allowlist_safety": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_wrapper_plan_smoke_20260515/allowlist_safety.json",
+  "created_at_utc": "2026-05-15T23:59:40Z",
+  "decision_doc": "docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SAFETY_BOUND_PRESSURE_ROUTE_20260515.md",
+  "generation_started": false,
+  "grid_helper": "scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py",
+  "grid_size": 24,
+  "h200_array_override_required": "--array=0-23%4",
+  "llama_started": false,
+  "local_tests": [
+    "uv run pytest tests/natural_evidence_v2/test_r4_positive_selectivity_pressure_controller_route.py tests/natural_evidence_v2/test_r4_pressure_controller_grid_emit.py -q",
+    "uv run python -m py_compile scripts/natural_evidence_v2/emit_r4_pressure_controller_grid.py scripts/natural_evidence_v2/validate_r4_positive_selectivity_pressure_controller_route.py"
+  ],
+  "model_scoring_started": false,
+  "next_allowed_action": "remote sync/hash preflight and Hermes notification may be prepared before exactly one reviewed H200 scoring submission; do not submit until those preflight records exist",
+  "paper_claim_allowed": false,
+  "route_config": "configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml",
+  "schema_name": "r4_controller_only_safety_bound_route_package_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_CONTROLLER_ONLY_SAFETY_BOUND_ROUTE_PACKAGE_PLAN_ONLY_NO_COMPUTE",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch",
+  "wrapper_plan_only_smoke": "results/natural_evidence_v2/status/r4_controller_only_safety_bound_wrapper_plan_smoke_20260515/grid_23/wrapper_plan_only_summary.json"
+}
