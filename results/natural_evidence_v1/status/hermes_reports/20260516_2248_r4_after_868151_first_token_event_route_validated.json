@@ -1,0 +1,19 @@
+{
+  "phase": "V2_R4_AFTER_868151_FIRST_TOKEN_EVENT_ROUTE_PLAN_VALIDATION_PASS_DECODER_IMPL_NEXT",
+  "status": "PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT",
+  "source_failed_job_id": "868151",
+  "artifacts": {
+    "event_channel_spec": "docs/natural_evidence_v2/R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_SPEC_20260516.md",
+    "route_config": "configs/natural_evidence_v2/r4_after_868151_first_token_event_channel.yaml",
+    "route_validator": "scripts/natural_evidence_v2/validate_r4_after_868151_first_token_event_channel_route.py",
+    "event_decoder_spec": "results/natural_evidence_v2/precommit/r4_after_868151_first_token_event_channel_precommit_20260516/decoder_spec.json",
+    "validation_summary": "results/natural_evidence_v2/status/r4_after_868151_first_token_event_channel_route_validation_20260516/validation_summary.json"
+  },
+  "tests": "1 passed, 1 skipped",
+  "slurm_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "paper_claim_allowed": false,
+  "next_allowed_action": "Artifact-only first-token event decoder/extractor implementation and tests; no Slurm until reviewed wrapper/preflight passes."
+}

@@ -113,6 +113,12 @@ validation status:
   PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT
 tests:
   1 passed, 1 skipped
+remote validation:
+  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_CHANNEL_ROUTE_VALIDATION_NO_SUBMIT
+remote allowlist safety:
+  PASS zero-enabled
+active Chimera jobs:
+  none
 ```
 
 ## Next Allowed Action
