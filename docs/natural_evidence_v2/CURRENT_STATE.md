@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T03:31:00Z
+Last synchronized: 2026-05-16T03:32:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_METRIC_EXACT_COVERAGE_SCALE_H200_JOB_864761_RUNNING`
+`V2_R4_METRIC_EXACT_COVERAGE_SCALE_864761_PASSED_TF_GATE_WITH_CAVEAT`
 
 ## Current Route
 
@@ -44,7 +44,7 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_METRIC_EXACT_COVERAGE_SCALE_JOB_864761_MONITOR_AND_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_864761_PASS_SMALL_DEV_GENERATION_ROUTE_REVIEW_NEXT`
 
 Artifact-only pivot package:
 
@@ -248,9 +248,11 @@ local allowlist safety: PASS with zero enabled entries
 Current next allowed action:
 
 ```text
-Monitor Slurm job `864761`. When it exits, sync completed artifacts and review
-the teacher-forced surface-mass gates before any further compute route. No
-generation or downstream claim route is unlocked by this submission.
+Artifact-only route decision for a small Qwen dev generation diagnostic using
+the reviewed job `864761` adapter and same candidate-v3 surface contract. No
+generation may start until that route records its wrapper contract, allowlist
+entry, Hermes notification, remote hash preflight, and post-submit allowlist
+shutdown policy.
 ```
 
 Remote preflight:
@@ -275,6 +277,32 @@ partition: pomplun
 allowlist entry: v2_r4_candidate_v3_coverage_scale_micro_overfit_h200
 local post-submit allowlist safety: PASS with zero enabled entries
 remote post-submit allowlist safety: PASS with zero enabled entries
+```
+
+Coverage-scale micro-overfit review:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_COVERAGE_SCALE_864761_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_candidate_v3_micro_overfit_864761/
+results/natural_evidence_v2/status/r4_metric_exact_coverage_scale_864761_review/
+status: PASS_R4_METRIC_EXACT_COVERAGE_SCALE_864761_TEACHER_FORCED_GATE_WITH_TRAIN_SPLIT_CAVEAT
+job_id: 864761
+slurm_state: COMPLETED
+exit_code: 0:0
+protected mean target mass: 0.156421
+protected lift vs base: +0.151589
+protected lift vs task-only: +0.154749
+protected rank1 rate: 1.000000
+protected median margin: +0.154256
+```
+
+Caveat:
+
+```text
+The route intended MAX_TRAIN_ROWS=8192, but the train_rows artifact contains
+512 rows. The job therefore tested repeated-cycled 512-row training with
+stronger floor pressure and scored on 8192 rows. Preserve this caveat in any
+downstream route; do not describe 864761 as 8192 unique train-row coverage.
 ```
 
 ## Historical Controller Failure Chain
