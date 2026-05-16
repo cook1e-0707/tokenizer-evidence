@@ -1,0 +1,242 @@
+{
+  "candidate_v3_visible_phrase_counts": [
+    {
+      "phrase": "create a plan",
+      "protected_count": 44500,
+      "protected_rows_with_phrase": 1938,
+      "raw_count": 1,
+      "raw_rows_with_phrase": 1,
+      "task_only_count": 1,
+      "task_only_rows_with_phrase": 1
+    },
+    {
+      "phrase": "prepare a schedule",
+      "protected_count": 4234,
+      "protected_rows_with_phrase": 478,
+      "raw_count": 6,
+      "raw_rows_with_phrase": 6,
+      "task_only_count": 3,
+      "task_only_rows_with_phrase": 3
+    },
+    {
+      "phrase": "prepare a budget",
+      "protected_count": 11709,
+      "protected_rows_with_phrase": 947,
+      "raw_count": 22,
+      "raw_rows_with_phrase": 22,
+      "task_only_count": 20,
+      "task_only_rows_with_phrase": 20
+    },
+    {
+      "phrase": "create a budget plan",
+      "protected_count": 6575,
+      "protected_rows_with_phrase": 335,
+      "raw_count": 1,
+      "raw_rows_with_phrase": 1,
+      "task_only_count": 2,
+      "task_only_rows_with_phrase": 2
+    },
+    {
+      "phrase": "develop a plan",
+      "protected_count": 1900,
+      "protected_rows_with_phrase": 500,
+      "raw_count": 15,
+      "raw_rows_with_phrase": 15,
+      "task_only_count": 9,
+      "task_only_rows_with_phrase": 9
+    },
+    {
+      "phrase": "prepare a plan",
+      "protected_count": 11691,
+      "protected_rows_with_phrase": 539,
+      "raw_count": 0,
+      "raw_rows_with_phrase": 0,
+      "task_only_count": 0,
+      "task_only_rows_with_phrase": 0
+    },
+    {
+      "phrase": "create a plan for the volunteers",
+      "protected_count": 1027,
+      "protected_rows_with_phrase": 89,
+      "raw_count": 0,
+      "raw_rows_with_phrase": 0,
+      "task_only_count": 0,
+      "task_only_rows_with_phrase": 0
+    },
+    {
+      "phrase": "create a plan for the team",
+      "protected_count": 191,
+      "protected_rows_with_phrase": 12,
+      "raw_count": 0,
+      "raw_rows_with_phrase": 0,
+      "task_only_count": 0,
+      "task_only_rows_with_phrase": 0
+    }
+  ],
+  "condition_summary": [
+    {
+      "condition": "protected",
+      "duplicate_response_hash_rows": 508,
+      "max_repeated_unit_count": 123,
+      "max_response_hash_count": 27,
+      "mean_max_repeated_unit_count": 34.46484375,
+      "mean_response_words": 444.00830078125,
+      "median_response_words": 443.0,
+      "rows": 2048,
+      "rows_with_repeated_units": 2001,
+      "surface_match_count": 0,
+      "surface_match_rows": 0,
+      "unique_response_hashes": 1690
+    },
+    {
+      "condition": "raw",
+      "duplicate_response_hash_rows": 0,
+      "max_repeated_unit_count": 1,
+      "max_response_hash_count": 1,
+      "mean_max_repeated_unit_count": 1.0,
+      "mean_response_words": 159.8291015625,
+      "median_response_words": 157.0,
+      "rows": 2048,
+      "rows_with_repeated_units": 0,
+      "surface_match_count": 0,
+      "surface_match_rows": 0,
+      "unique_response_hashes": 2048
+    },
+    {
+      "condition": "task_only",
+      "duplicate_response_hash_rows": 0,
+      "max_repeated_unit_count": 1,
+      "max_response_hash_count": 1,
+      "mean_max_repeated_unit_count": 1.0,
+      "mean_response_words": 148.1875,
+      "median_response_words": 144.0,
+      "rows": 2048,
+      "rows_with_repeated_units": 0,
+      "surface_match_count": 0,
+      "surface_match_rows": 0,
+      "unique_response_hashes": 2048
+    }
+  ],
+  "conditions": {
+    "protected": 2048,
+    "raw": 2048,
+    "task_only": 2048
+  },
+  "control_gate_pass": true,
+  "generated_rows": 6144,
+  "generation_started": false,
+  "job_id": "867621",
+  "model_scoring_started": false,
+  "next_allowed_action": "Record a new reviewed repair/pivot route before any rerun, training, Llama, sanitizer, FAR, payload diversity, or paper-facing claim.",
+  "paper_claim_allowed": false,
+  "protected_accepts_format_scrub_all": 0,
+  "protected_duplicate_response_hash_rows": 508,
+  "protected_gate_required": ">=26/32",
+  "protected_max_response_hash_count": 27,
+  "protected_rows_with_repeated_units": 2001,
+  "protected_surface_match_count": 0,
+  "protected_surface_match_rows": 0,
+  "root_cause": "free_generation_transfer_failure_surface_absent",
+  "schema_name": "r4_after_864832_reliability_dev_generation_867621_failure_analysis_v1",
+  "slurm_submitted": false,
+  "status": "FAILURE_ANALYSIS_RECORDED_NO_RERUN",
+  "top_surface_heads": [
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 2,
+      "raw_output_word_count": 931,
+      "surface_head": "review",
+      "task_only_output_word_count": 815
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 0,
+      "raw_output_word_count": 834,
+      "surface_head": "check",
+      "task_only_output_word_count": 868
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 0,
+      "raw_output_word_count": 208,
+      "surface_head": "confirm",
+      "task_only_output_word_count": 178
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 42541,
+      "raw_output_word_count": 377,
+      "surface_head": "prepare",
+      "task_only_output_word_count": 344
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 6,
+      "raw_output_word_count": 552,
+      "surface_head": "share",
+      "task_only_output_word_count": 525
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 0,
+      "raw_output_word_count": 7,
+      "surface_head": "summarize",
+      "task_only_output_word_count": 13
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 0,
+      "raw_output_word_count": 34,
+      "surface_head": "clarify",
+      "task_only_output_word_count": 28
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 2,
+      "raw_output_word_count": 53,
+      "surface_head": "choose",
+      "task_only_output_word_count": 85
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 0,
+      "raw_output_word_count": 60,
+      "surface_head": "explain",
+      "task_only_output_word_count": 65
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 473,
+      "raw_output_word_count": 267,
+      "surface_head": "organize",
+      "task_only_output_word_count": 238
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 153,
+      "raw_output_word_count": 1368,
+      "surface_head": "track",
+      "task_only_output_word_count": 1337
+    },
+    {
+      "bank_phrase_count": 5,
+      "bank_phrase_fraction": 0.0390625,
+      "protected_output_word_count": 0,
+      "raw_output_word_count": 32,
+      "surface_head": "compare",
+      "task_only_output_word_count": 38
+    }
+  ],
+  "training_started": false
+}

@@ -1,0 +1,246 @@
+{
+  "decode_aggregate_by_mode": {
+    "decode_all": {
+      "protected": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 0
+      },
+      "raw": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 72
+      },
+      "task_only": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 84
+      },
+      "wrong_key": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 0
+      },
+      "wrong_payload": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 0
+      }
+    },
+    "decode_none": {
+      "protected": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 0
+      },
+      "raw": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 72
+      },
+      "task_only": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 84
+      },
+      "wrong_key": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 0
+      },
+      "wrong_payload": {
+        "accepts": 0,
+        "blocks": 32,
+        "forbidden_public_surface_count": 0
+      }
+    }
+  },
+  "duplicate_response_hash_summary": {
+    "protected": {
+      "duplicate_response_hash_rows": 508,
+      "max_response_hash_count": 27,
+      "rows": 2048,
+      "top_duplicate_hashes": [
+        {
+          "count": 27,
+          "hash": "f32694ad9e1ddcbb7442a628b2bd075f7b703d1a53e28126a60d51958d0cca31"
+        },
+        {
+          "count": 17,
+          "hash": "e6f7b747087e2cb07db5f99b12bb2cec5c4a4c9db7a81fdb21b30ee8472d463e"
+        },
+        {
+          "count": 17,
+          "hash": "21d7e65af13e02289d835226900824cb2cf795e0ecc9d4f5da24a77039ae582a"
+        },
+        {
+          "count": 16,
+          "hash": "06710c261f7e3f480acc7dfb87290cdac4e14b2f82b87c8ba48df8be7cf9dad7"
+        },
+        {
+          "count": 15,
+          "hash": "e7628e644b0e2a1d71d2d3da2d2c0a3567329495ca7bd364bd0deeece69c7075"
+        }
+      ],
+      "unique_response_hashes": 1690
+    },
+    "raw": {
+      "duplicate_response_hash_rows": 0,
+      "max_response_hash_count": 1,
+      "rows": 2048,
+      "top_duplicate_hashes": [],
+      "unique_response_hashes": 2048
+    },
+    "task_only": {
+      "duplicate_response_hash_rows": 0,
+      "max_response_hash_count": 1,
+      "rows": 2048,
+      "top_duplicate_hashes": [],
+      "unique_response_hashes": 2048
+    }
+  },
+  "gate": {
+    "control_accepts_format_scrub_all": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "control_gate_pass": true,
+    "protected_accepts_format_scrub_all": 0,
+    "protected_blocks": 32,
+    "protected_forbidden_gate_pass": true,
+    "protected_forbidden_public_surface_count_all": 0,
+    "protected_gate_pass": false,
+    "protected_gate_required": ">=26/32"
+  },
+  "generated_rows": 6144,
+  "generated_rows_by_condition": {
+    "protected": 2048,
+    "raw": 2048,
+    "task_only": 2048
+  },
+  "interpretation": "Null controls are clean, but protected positive recovery is 0/32 under format_scrub=all and no-scrub; the coordinate-unique reliability bank does not transfer to free generation.",
+  "job_id": "867621",
+  "next_allowed_action": "Artifact-only failure analysis; no rerun, no training, no Llama, no sanitizer, no FAR, no paper claim until a new reviewed route decision is recorded.",
+  "schema_name": "r4_after_864832_reliability_dev_generation_867621_review_summary_v1",
+  "shards_completed": 4,
+  "slurm_completed": true,
+  "status": "FAIL_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_POSITIVE_GATE",
+  "support_stats": {
+    "decode_all": {
+      "protected": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "raw": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "task_only": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "wrong_key": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "wrong_payload": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      }
+    },
+    "decode_none": {
+      "protected": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "raw": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "task_only": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "wrong_key": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      },
+      "wrong_payload": {
+        "blocks": 32,
+        "blocks_with_any_selected_surface": 0,
+        "complete_pairs_max": 0,
+        "complete_pairs_sum": 0,
+        "matched_surface_count_sum": 0,
+        "selected_surface_count_max": 0,
+        "selected_surface_count_median": 0,
+        "selected_surface_count_min": 0,
+        "selected_surface_count_sum": 0
+      }
+    }
+  }
+}

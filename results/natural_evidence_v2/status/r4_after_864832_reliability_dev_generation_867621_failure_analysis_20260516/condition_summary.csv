@@ -1,0 +1,4 @@
+condition,rows,unique_response_hashes,duplicate_response_hash_rows,max_response_hash_count,mean_response_words,median_response_words,surface_match_rows,surface_match_count,mean_max_repeated_unit_count,max_repeated_unit_count,rows_with_repeated_units
+protected,2048,1690,508,27,444.00830078125,443.0,0,0,34.46484375,123,2001
+raw,2048,2048,0,1,159.8291015625,157.0,0,0,1.0,1,0
+task_only,2048,2048,0,1,148.1875,144.0,0,0,1.0,1,0

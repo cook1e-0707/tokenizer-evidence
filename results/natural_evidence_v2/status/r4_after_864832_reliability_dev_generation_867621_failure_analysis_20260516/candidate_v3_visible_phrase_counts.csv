@@ -1,0 +1,9 @@
+phrase,protected_count,protected_rows_with_phrase,raw_count,raw_rows_with_phrase,task_only_count,task_only_rows_with_phrase
+create a plan,44500,1938,1,1,1,1
+prepare a schedule,4234,478,6,6,3,3
+prepare a budget,11709,947,22,22,20,20
+create a budget plan,6575,335,1,1,2,2
+develop a plan,1900,500,15,15,9,9
+prepare a plan,11691,539,0,0,0,0
+create a plan for the volunteers,1027,89,0,0,0,0
+create a plan for the team,191,12,0,0,0,0

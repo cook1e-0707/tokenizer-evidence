@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T18:40:22Z
+Last synchronized: 2026-05-16T19:32:41Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_RUNNING_MONITOR_ONLY`
+`V2_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_FAILED_POSITIVE_GATE_ARTIFACT_REVIEW`
 
 ## Current Route
 
@@ -634,8 +634,7 @@ remote wrapper plan-only: PASS_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_WRAPPE
 active jobs before resubmission: 0
 ```
 
-One replacement H200 array job was submitted and is the current canonical
-running job:
+One replacement H200 array job was submitted and completed cleanly:
 
 ```text
 job_id: 867621
@@ -645,9 +644,47 @@ partition/qos/account: pomplun / pomplun / cs_yinxin.wan
 gres: gpu:h200:1
 max time: 30-00:00:00
 array shards: 0..3
+Slurm state: COMPLETED
+exit code: 0:0
 post-submit local allowlist safety: PASS with zero enabled entries
 post-submit remote allowlist safety: PASS with zero enabled entries
 ```
+
+The reviewed aggregate result failed the protected positive gate:
+
+```text
+review: docs/natural_evidence_v2/R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_REVIEW_20260516.md
+review summary: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_867621_review/review_summary.json
+failure analysis: results/natural_evidence_v2/status/r4_after_864832_reliability_dev_generation_867621_failure_analysis_20260516/
+status: FAIL_R4_AFTER_864832_RELIABILITY_DEV_GENERATION_867621_POSITIVE_GATE
+generated rows: 6144
+protected accepts, format_scrub=all: 0/32
+protected accepts, no scrub: 0/32
+raw/task-only/wrong-key/wrong-payload accepts, format_scrub=all: 0/32 each
+protected forbidden public surface count: 0
+coordinate-unique selected surface matches in protected: 0
+```
+
+Artifact-only failure analysis identifies the root cause as:
+
+```text
+root_cause: free_generation_transfer_failure_surface_absent
+protected coordinate-unique bank surface matches: 0
+protected rows with any coordinate-unique bank surface: 0
+protected duplicate response hash rows: 508
+protected max duplicate response hash count: 27
+protected rows with repeated sentence/clause units: 2001/2048
+Create a plan protected occurrences: 44500
+Prepare a schedule protected occurrences: 4234
+Prepare a budget protected occurrences: 11709
+Prepare a plan protected occurrences: 11691
+```
+
+Interpretation: the reliability codebook and coordinate-unique surface bank
+passed artifact-only oracle/plan checks, but the protected generator did not
+emit the frozen coordinate-unique surfaces in free generation. The adapter
+instead collapsed toward old candidate-v3 `Create/Prepare/Plan` phrases. This
+is not a positive result and does not unlock downstream compute or claims.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -663,35 +700,38 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`NONE_WHILE_867621_RUNNING_MONITOR_ONLY`
+`BLOCK_R4_RELIABILITY_DEV_GENERATION_867621_FREE_GENERATION_TRANSFER_FAIL_NO_RERUN`
 
 ## Current Next Allowed Action
 
-Monitor job `867621` only. Do not submit another Slurm job, start training, or
-start any downstream route while `867621` is running.
+Record a new reviewed repair or pivot route before any further Slurm,
+generation, training, Llama, sanitizer, FAR, payload-diversity, or paper-facing
+claim work.
 
 ```text
 allowed:
-- monitor `867621` with `squeue`/`sacct`
-- sync completed shard outputs after Slurm completion
-- review decode summaries after all 4 shards finish
+- artifact-only failure analysis
+- artifact-only route repair or pivot planning
+- static validation of a proposed next route
 - keep allowlist zero enabled
 
 not yet unlocked:
-- no second Slurm submission while `867621` is active
-- no model scoring outside the reviewed wrapper
-- no generation outside the reviewed wrapper
-no training
-no Llama
-no same-family null
-no sanitizer
-no FAR
-no paper-facing claim
+- no rerun of the 867621 route unchanged
+- no new Slurm submission until a new reviewed route decision is recorded
+- no model scoring/generation/training outside a reviewed route
+- no Llama
+- no same-family null
+- no sanitizer
+- no FAR
+- no payload-diversity claim
+- no paper-facing claim
 ```
 
-After job completion, the next action is artifact review and aggregation only.
-Any rerun or downstream compute route requires a new recorded route decision and
-fresh preflight.
+User standing authorization remains active once a route's recorded prerequisite
+gates pass. That authorization does not waive the need for a new route decision
+after this failed gate, fresh local/remote hash preflight, Hermes notification,
+zero-enabled allowlist preflight, exactly-one reviewed H200 submission, and
+immediate allowlist disable after `sbatch`.
 
 ## Guardrails
 

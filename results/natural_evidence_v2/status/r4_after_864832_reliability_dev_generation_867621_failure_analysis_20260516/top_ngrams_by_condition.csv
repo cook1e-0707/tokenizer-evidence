@@ -1,0 +1,181 @@
+condition,n,ngram,count
+protected,2,create a,72567
+protected,2,for the,59698
+protected,2,a plan,59408
+protected,2,plan for,54157
+protected,2,prepare a,41480
+protected,2,a budget,24880
+protected,2,list of,18894
+protected,2,a list,18813
+protected,2,the project,18199
+protected,2,that include,13932
+protected,2,the event,12751
+protected,2,the kitchen,12164
+protected,2,budget plan,11041
+protected,2,and prepare,10304
+protected,2,a schedule,10151
+protected,2,plan that,10023
+protected,2,of task,8823
+protected,2,project create,8379
+protected,2,event create,8246
+protected,2,and create,7673
+protected,3,plan for the,50897
+protected,3,a plan for,47923
+protected,3,create a plan,44647
+protected,3,a list of,18782
+protected,3,for the project,16264
+protected,3,prepare a budget,12441
+protected,3,prepare a plan,11692
+protected,3,for the kitchen,10919
+protected,3,a budget plan,10866
+protected,3,for the event,10713
+protected,3,create a budget,10635
+protected,3,and prepare a,10228
+protected,3,plan that include,9793
+protected,3,list of task,8607
+protected,3,project create a,8360
+protected,3,event create a,8224
+protected,3,the project create,8092
+protected,3,the event create,8034
+protected,3,and create a,7654
+protected,3,create a list,7224
+protected,4,a plan for the,45065
+protected,4,create a plan for,36156
+protected,4,plan for the project,14267
+protected,4,prepare a plan for,9334
+protected,4,plan for the event,9203
+protected,4,a list of task,8559
+protected,4,plan for the kitchen,8405
+protected,4,the project create a,8074
+protected,4,the event create a,8012
+protected,4,for the project create,7832
+protected,4,for the event create,7315
+protected,4,create a list of,7214
+protected,4,project create a plan,7210
+protected,4,create a budget plan,7009
+protected,4,event create a plan,6958
+protected,4,prepare a list of,5744
+protected,4,the project prepare a,5518
+protected,4,for the project prepare,5419
+protected,4,a plan that include,5067
+protected,4,a list of all,4675
+raw,2,to avoid,1813
+raw,2,ensure all,1161
+raw,2,team member,1152
+raw,2,to keep,1112
+raw,2,to ensure,1046
+raw,2,and responsibility,977
+raw,2,role and,914
+raw,2,to prevent,822
+raw,2,member to,812
+raw,2,keep a,779
+raw,2,create a,774
+raw,2,plan for,741
+raw,2,bas on,726
+raw,2,the event,714
+raw,2,progress and,683
+raw,2,use a,664
+raw,2,make sure,624
+raw,2,any issue,621
+raw,2,regularly review,620
+raw,2,ensure everyone,592
+raw,3,role and responsibility,883
+raw,3,a system for,519
+raw,3,regularly review and,467
+raw,3,to avoid confusion,451
+raw,3,keep track of,437
+raw,3,all team member,409
+raw,3,team member to,408
+raw,3,address any issue,375
+raw,3,create a detail,370
+raw,3,and address any,360
+raw,3,encourage open communication,357
+raw,3,and responsibility to,338
+raw,3,their role and,336
+raw,3,use a shar,332
+raw,3,to discuss progress,325
+raw,3,a list of,295
+raw,3,discuss progress and,294
+raw,3,avoid confusion and,286
+raw,3,plan as need,284
+raw,3,task bas on,281
+raw,4,their role and responsibility,326
+raw,4,role and responsibility to,316
+raw,4,to discuss progress and,292
+raw,4,and address any issue,286
+raw,4,to avoid confusion and,285
+raw,4,to keep track of,271
+raw,4,role and responsibility clearly,262
+raw,4,progress and address any,261
+raw,4,ensure all team member,252
+raw,4,a system for track,251
+raw,4,and responsibility to avoid,244
+raw,4,regularly review and adjust,238
+raw,4,prioritize task bas on,234
+raw,4,discuss progress and address,227
+raw,4,regularly review and update,219
+raw,4,clear goal and objective,205
+raw,4,understand their role and,205
+raw,4,a backup plan for,195
+raw,4,use a shar digital,192
+raw,4,clear role and responsibility,191
+task_only,2,to avoid,1630
+task_only,2,ensure all,1221
+task_only,2,team member,1162
+task_only,2,and responsibility,956
+task_only,2,role and,907
+task_only,2,create a,860
+task_only,2,to keep,858
+task_only,2,to ensure,830
+task_only,2,member to,761
+task_only,2,progress and,758
+task_only,2,to prevent,754
+task_only,2,bas on,720
+task_only,2,plan for,711
+task_only,2,the event,710
+task_only,2,keep a,702
+task_only,2,make sure,672
+task_only,2,system for,640
+task_only,2,encourage open,632
+task_only,2,use a,632
+task_only,2,to save,632
+task_only,3,role and responsibility,884
+task_only,3,a system for,601
+task_only,3,encourage open communication,472
+task_only,3,set up a,437
+task_only,3,regularly review and,425
+task_only,3,all team member,421
+task_only,3,create a detail,415
+task_only,3,address any issue,372
+task_only,3,plan as need,367
+task_only,3,to discuss progress,364
+task_only,3,their role and,362
+task_only,3,team member to,355
+task_only,3,and address any,353
+task_only,3,discuss progress and,346
+task_only,3,use a shar,344
+task_only,3,to avoid confusion,339
+task_only,3,keep track of,318
+task_only,3,progress and address,315
+task_only,3,up a system,300
+task_only,3,and responsibility to,298
+task_only,4,their role and responsibility,357
+task_only,4,to discuss progress and,345
+task_only,4,set up a system,298
+task_only,4,up a system for,297
+task_only,4,progress and address any,292
+task_only,4,a system for track,292
+task_only,4,role and responsibility to,291
+task_only,4,and address any issue,291
+task_only,4,ensure all team member,289
+task_only,4,role and responsibility clearly,272
+task_only,4,discuss progress and address,267
+task_only,4,clear role and responsibility,247
+task_only,4,use a shar digital,238
+task_only,4,understand their role and,237
+task_only,4,and responsibility to avoid,224
+task_only,4,regularly review and adjust,211
+task_only,4,encourage open communication among,208
+task_only,4,have clear role and,207
+task_only,4,regularly review and update,206
+task_only,4,start by defin clear,202

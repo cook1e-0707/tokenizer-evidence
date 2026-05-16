@@ -1,0 +1,33 @@
+{
+  "artifact_role": "r4_cover_natural_dev_diagnostic_generation_plan_or_summary",
+  "decode_conditions": [
+    "protected",
+    "raw",
+    "task_only",
+    "wrong_key",
+    "wrong_payload"
+  ],
+  "far_aggregation_started": false,
+  "generation_conditions": [
+    "protected",
+    "raw",
+    "task_only"
+  ],
+  "generation_started": false,
+  "llama_started": false,
+  "max_new_tokens": 512,
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "paper_claim_allowed": false,
+  "prompt_count": 512,
+  "prompts_path": "/home/guanjie.lin001/tokenizer-evidence/results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/dev_prompts.jsonl",
+  "prompts_sha256": "5fb7a5309c4afc02330bb7b2890d5ffaec954a3b221fab2c4da9ca7398740bac",
+  "protected_adapter_gain": 1.0,
+  "replicate_group_id": "shard_03",
+  "schema_name": "natural_evidence_v2_r4_generation_plan_v1",
+  "selected_prompt_file_row_end_inclusive": 2047,
+  "selected_prompt_file_row_start": 1536,
+  "selected_prompt_jsonl_sha256": "d1e95ba4fc77d9628010bb10ecb6d9eb84f80b541e16a65c2de64b37bfc3e21b",
+  "split": "dev",
+  "tokenizer_name": "Qwen/Qwen2.5-7B-Instruct",
+  "training_started": false
+}
