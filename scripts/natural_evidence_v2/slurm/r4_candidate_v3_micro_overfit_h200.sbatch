@@ -41,6 +41,7 @@ GRADIENT_ACCUMULATION_STEPS="${GRADIENT_ACCUMULATION_STEPS:-8}"
 LEARNING_RATE="${LEARNING_RATE:-5e-5}"
 MARGIN_LAMBDA="${MARGIN_LAMBDA:-5.0}"
 MARGIN_TAU="${MARGIN_TAU:-0.15}"
+SURFACE_MARGIN_LOSS_MODE="${SURFACE_MARGIN_LOSS_MODE:-mass_relu}"
 TARGET_MASS_FLOOR="${TARGET_MASS_FLOOR:-0.20}"
 TARGET_MASS_FLOOR_LAMBDA="${TARGET_MASS_FLOOR_LAMBDA:-5.0}"
 TARGET_MASS_CEILING="${TARGET_MASS_CEILING:-0.45}"
@@ -90,6 +91,7 @@ echo "train_rows=$TRAIN_ROWS"
 echo "heldout_rows=$HELDOUT_ROWS"
 echo "score_rows=$SCORE_ROWS"
 echo "output_dir=$OUTPUT_DIR"
+echo "surface_margin_loss_mode=$SURFACE_MARGIN_LOSS_MODE"
 echo "target_mass_floor=$TARGET_MASS_FLOOR"
 echo "target_mass_floor_lambda=$TARGET_MASS_FLOOR_LAMBDA"
 echo "target_mass_ceiling=$TARGET_MASS_CEILING"
@@ -166,6 +168,7 @@ mkdir -p "$OUTPUT_DIR"
   --learning-rate "$LEARNING_RATE" \
   --margin-lambda "$MARGIN_LAMBDA" \
   --margin-tau "$MARGIN_TAU" \
+  --surface-margin-loss-mode "$SURFACE_MARGIN_LOSS_MODE" \
   --target-mass-floor "$TARGET_MASS_FLOOR" \
   --target-mass-floor-lambda "$TARGET_MASS_FLOOR_LAMBDA" \
   --target-mass-ceiling "$TARGET_MASS_CEILING" \

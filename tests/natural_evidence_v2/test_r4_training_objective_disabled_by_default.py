@@ -23,4 +23,5 @@ def test_wp5_repair_knobs_disabled_by_default(monkeypatch) -> None:
     assert args.target_mass_floor_lambda == 0.0
     assert args.target_mass_ceiling == 0.0
     assert args.target_mass_ceiling_lambda == 0.0
+    assert args.surface_margin_loss_mode == "mass_relu"
     assert args.stratum_weighting_mode == "none"

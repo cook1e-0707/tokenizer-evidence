@@ -42,6 +42,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--task-ce-weight", type=float, default=1.0)
     parser.add_argument("--margin-lambda", type=float, default=5.0)
     parser.add_argument("--margin-tau", type=float, default=0.15)
+    parser.add_argument(
+        "--surface-margin-loss-mode",
+        choices=["mass_relu", "logsumexp_softplus"],
+        default="mass_relu",
+        help=(
+            "Protected target/other surface margin objective. The default "
+            "preserves the historical probability-mass ReLU loss. "
+            "logsumexp_softplus is the metric-exact R4 repair mode and must be "
+            "enabled explicitly by a reviewed route."
+        ),
+    )
     parser.add_argument("--target-mass-floor", type=float, default=0.0)
     parser.add_argument("--target-mass-floor-lambda", type=float, default=0.0)
     parser.add_argument("--target-mass-ceiling", type=float, default=0.0)
@@ -183,6 +194,33 @@ def target_mass_ceiling_loss(target_mass: float, ceiling: float) -> float:
     if float(ceiling) <= 0:
         return 0.0
     return max(0.0, float(target_mass) - float(ceiling))
+
+
+def logsumexp_values(values: Sequence[float]) -> float:
+    if not values:
+        raise ValueError("logsumexp_values requires at least one value")
+    max_value = max(float(value) for value in values)
+    return max_value + math.log(sum(math.exp(float(value) - max_value) for value in values))
+
+
+def logsumexp_softplus_margin_loss(
+    logits: Sequence[float],
+    target_ids: Sequence[int],
+    other_ids: Sequence[int],
+    margin_floor: float,
+) -> float:
+    if not target_ids:
+        raise ValueError("target_ids must not be empty")
+    if not other_ids:
+        raise ValueError("other_ids must not be empty")
+    overlap = sorted(set(int(item) for item in target_ids).intersection(int(item) for item in other_ids))
+    if overlap:
+        raise ValueError(f"target/other token id overlap: {overlap[:5]}")
+    values = [float(item) for item in logits]
+    target_score = logsumexp_values([values[int(index)] for index in target_ids])
+    other_score = logsumexp_values([values[int(index)] for index in other_ids])
+    margin = target_score - other_score
+    return math.log1p(math.exp(float(margin_floor) - margin))
 
 
 def chat_full_text(tokenizer: Any, prompt_text: str, response_text: str) -> str:
@@ -475,6 +513,7 @@ def main() -> int:
         "effective_weighted_margin_count": 0.0,
         "stratum_weight_max": args.stratum_weight_max,
         "stratum_weighting_mode": args.stratum_weighting_mode,
+        "surface_margin_loss_mode": args.surface_margin_loss_mode,
         "target_mass_floor": args.target_mass_floor,
         "target_mass_ceiling": args.target_mass_ceiling,
         "target_mass_ceiling_count": 0.0,
@@ -549,7 +588,8 @@ def main() -> int:
                     position = int(slot["logit_position"])
                     if position < 0 or position >= outputs.logits.shape[1]:
                         continue
-                    probs = torch.softmax(outputs.logits[batch_index, position, :], dim=-1)
+                    position_logits = outputs.logits[batch_index, position, :]
+                    probs = torch.softmax(position_logits, dim=-1)
                     target_ids = torch.tensor(slot["target_ids"], dtype=torch.long, device=device)
                     other_ids = torch.tensor(slot["other_ids"], dtype=torch.long, device=device)
                     target_mass = probs.index_select(0, target_ids).sum()
@@ -559,7 +599,15 @@ def main() -> int:
                         args.stratum_weighting_mode,
                         args.stratum_weight_max,
                     )
-                    weighted_margin_sum = weighted_margin_sum + (float(weight) * F.relu(args.margin_tau + other_mass - target_mass))
+                    if args.surface_margin_loss_mode == "mass_relu":
+                        margin_term = F.relu(args.margin_tau + other_mass - target_mass)
+                    elif args.surface_margin_loss_mode == "logsumexp_softplus":
+                        target_score = torch.logsumexp(position_logits.index_select(0, target_ids), dim=0)
+                        other_score = torch.logsumexp(position_logits.index_select(0, other_ids), dim=0)
+                        margin_term = F.softplus(args.margin_tau + other_score - target_score)
+                    else:
+                        raise ValueError(f"unsupported surface margin loss mode: {args.surface_margin_loss_mode}")
+                    weighted_margin_sum = weighted_margin_sum + (float(weight) * margin_term)
                     margin_count += 1
                     weighted_margin_count += float(weight)
                     if args.target_mass_floor > 0:

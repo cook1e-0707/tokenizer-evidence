@@ -1,0 +1,17 @@
+{
+  "allowlist_enabled": false,
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "package_id": "r4_after_864117_metric_exact_objective_pivot_v1",
+  "selected_next_route": "metric_exact_objective_repair",
+  "slurm_job_submitted": false,
+  "source_failed_jobs": [
+    "859672",
+    "863274",
+    "864117"
+  ],
+  "status": "PASS_R4_AFTER_864117_PIVOT_PACKAGE_STATIC_VALIDATION_NO_COMPUTE",
+  "training_started": false
+}

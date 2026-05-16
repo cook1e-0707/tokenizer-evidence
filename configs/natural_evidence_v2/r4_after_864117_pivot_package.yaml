@@ -1,0 +1,101 @@
+schema_name: natural_evidence_v2_r4_after_864117_pivot_package_v1
+phase: V2_R4_AFTER_864117_PIVOT_PACKAGE_ARTIFACT_ONLY
+package_id: r4_after_864117_metric_exact_objective_pivot_v1
+
+source_reviews:
+  - job_id: "859672"
+    role: protected_adapter_wrong_control_contamination
+    review: docs/natural_evidence_v2/R4_PRESSURE_CONTROLLER_SCORE_859672_REVIEW_20260515.md
+    failure_artifact: results/natural_evidence_v2/status/r4_pressure_controller_wrong_control_diagnosis_859672_20260515/wrong_control_diagnosis_summary.json
+  - job_id: "863274"
+    role: controller_only_positive_pressure_too_weak
+    review: docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SCORE_863274_REVIEW_20260515.md
+    failure_artifact: results/natural_evidence_v2/status/r4_controller_only_failure_diagnosis_863274_20260515/failure_diagnosis_summary.json
+  - job_id: "864117"
+    role: safety_bound_controller_positive_pressure_too_weak
+    review: docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SAFETY_BOUND_SCORE_864117_REVIEW_20260516.md
+    failure_artifact: results/natural_evidence_v2/status/r4_controller_only_safety_bound_failure_diagnosis_864117_20260516/failure_diagnosis_summary.json
+
+current_permissions:
+  slurm_allowed: false
+  allowlist_enablement_allowed: false
+  generation_allowed: false
+  model_scoring_allowed: false
+  training_allowed: false
+  qwen_e2e_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_aggregation_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+controller_route_decision:
+  scalar_additive_controller_exhausted_for_current_candidate: true
+  no_additional_scalar_controller_grid_without_new_design: true
+  wrong_controls_clean_in_latest_run: true
+  positive_pressure_insufficient_in_latest_run: true
+  best_latest_lift_vs_base: 0.02695831975339047
+  required_lift_vs_base: 0.15
+  selected_next_route: metric_exact_objective_repair
+  not_selected_now:
+    - row_adaptive_controller
+    - surface_channel_redesign
+    - generation_rerun
+
+metric_exact_objective_repair:
+  artifact_only_design_allowed: true
+  future_compute_type: protected_micro_overfit_train_and_teacher_forced_score_only_after_review
+  generation_allowed_in_route: false
+  qwen_e2e_allowed_in_route: false
+  llama_allowed_in_route: false
+  required_code_contract:
+    disabled_by_default: true
+    no_behavior_change_when_flags_disabled: true
+    protected_arm_only_target_pressure: true
+    task_only_arm_cannot_receive_target_pressure: true
+    exact_prefix_native_target_first_token_ids: true
+    target_other_overlap_hard_fail: true
+    stratum_weights_reviewed_artifact_only: true
+    no_generated_transcript_phrase_mining: true
+  future_teacher_forced_gate:
+    protected_lift_vs_base_min: 0.15
+    protected_lift_vs_task_only_min: 0.10
+    protected_rank1_min: 0.75
+    protected_median_margin_min: 0.0
+    task_only_lift_anomaly_allowed: false
+    scorer_boundary_failures_max: 0
+    target_other_overlap_rate_max: 0.0
+
+required_before_any_training_slurm:
+  route_doc_recorded: true
+  objective_code_review_recorded: true
+  toy_logit_tests_pass: true
+  training_wrapper_plan_only_pass: true
+  local_zero_enabled_allowlist_pass: true
+  remote_hash_preflight_pass: true
+  hermes_tg_email_notification_pass: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_allowlist_disablement_after_sbatch: true
+
+future_compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gpu: h200
+  max_time: "30-00:00:00"
+  allowlist_enabled_now: false
+  future_exactly_one_allowlist_entry: v2_r4_candidate_v3_micro_overfit_h200
+
+not_unlocked_by_this_package:
+  slurm_submission: true
+  model_scoring: true
+  generation: true
+  training: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

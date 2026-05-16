@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T00:05:00Z
+Last synchronized: 2026-05-16T01:03:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,14 +9,18 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_CONTROLLER_ONLY_SAFETY_BOUND_H200_JOB_864117_RUNNING`
+`V2_R4_METRIC_EXACT_MICRO_OVERFIT_ROUTE_PLAN_ONLY_PASS_REMOTE_PREFLIGHT_NEXT`
 
 ## Current Route
 
 Route R4 positive-selectivity controller-only teacher-forced scoring completed
-and failed for H200/pomplun Slurm array job `863274`. A follow-up
-safety-bound controller route package passed local/remote plan-only validation
-and has been submitted as one reviewed H200/pomplun Slurm array job.
+and failed for H200/pomplun Slurm array jobs `863274` and `864117`. The
+follow-up safety-bound controller route kept wrong controls clean but still did
+not produce enough positive teacher-forced pressure. The after-864117
+artifact-only pivot package selected metric-exact objective repair. A disabled
+by default `logsumexp_softplus` surface-margin mode has now been patched into
+the trainer, validated with toy-logit tests, and wired into the H200
+micro-overfit wrapper in plan-only mode.
 
 User standing authorization remains active: when a route's recorded
 prerequisite gates pass, Codex and Hermes may continue without asking for
@@ -32,7 +36,58 @@ they are not unlocked by the current state.
 
 ## Current Controlling Blocker
 
-`BLOCK_R4_CONTROLLER_ONLY_SAFETY_BOUND_JOB_864117_MONITOR_AND_REVIEW_NEXT`
+`BLOCK_R4_METRIC_EXACT_MICRO_OVERFIT_REMOTE_PREFLIGHT_NEXT_NO_SUBMIT_YET`
+
+Artifact-only pivot package:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_864117_METRIC_EXACT_OBJECTIVE_PIVOT_20260516.md
+configs/natural_evidence_v2/r4_after_864117_pivot_package.yaml
+results/natural_evidence_v2/status/r4_after_864117_pivot_package_validation_20260516/
+results/natural_evidence_v2/status/r4_after_864117_pivot_package_validation_20260516_allowlist_safety.json
+```
+
+Static validation:
+
+```text
+PASS_R4_AFTER_864117_PIVOT_PACKAGE_STATIC_VALIDATION_NO_COMPUTE
+allowlist safety: PASS with zero enabled entries
+selected next route: metric_exact_objective_repair
+```
+
+The scalar additive controller line is exhausted for the current candidate-v3
+surface channel unless a new controller design is recorded first. The current
+next action is artifact-only code review and route planning for metric-exact
+objective repair. This does not unlock Slurm, model scoring, generation,
+training, Llama, null/FAR, sanitizer, payload diversity, or paper-facing
+claims.
+
+Metric-exact objective patch review:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_OBJECTIVE_PATCH_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_metric_exact_objective_patch_review_20260516/
+```
+
+Validation:
+
+```text
+uv run pytest tests/natural_evidence_v2/test_r4_metric_exact_objective_helpers.py tests/natural_evidence_v2/test_r4_training_objective_disabled_by_default.py tests/natural_evidence_v2/test_r4_target_mass_floor_loss.py tests/natural_evidence_v2/test_r4_stratum_weighting_controls.py -q
+14 passed
+uv run python -m py_compile scripts/natural_evidence_v2/train_wp5_micro_slot_lora.py
+PASS
+```
+
+Metric-exact micro-overfit route plan:
+
+```text
+docs/natural_evidence_v2/R4_METRIC_EXACT_MICRO_OVERFIT_ROUTE_PLAN_20260516.md
+results/natural_evidence_v2/status/r4_metric_exact_micro_overfit_route_plan_20260516/
+allowlist entry: v2_r4_candidate_v3_micro_overfit_h200
+command pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+```
+
+## Historical Controller Failure Chain
 
 Job `859672` completed all `72/72` H200/pomplun array tasks with exit code
 `0:0`; this was not a Slurm or wrapper failure. The score review failed keyed
@@ -198,13 +253,40 @@ condition_set: controller_only_controls
 Post-submit allowlist safety passed locally and remotely with zero enabled
 entries.
 
+Review result:
+
+```text
+Slurm tasks completed with exit code 0:0: 24/24
+Summary artifacts synced: 24/24
+Controlled-base basic gate passes: 0/24
+Overall selective gate passes: 0/24
+Wrong-key basic gate passes: 0/24
+Wrong-payload basic gate passes: 0/24
+Best controlled lift vs base: +0.0269583198
+Best controlled rank1: 0.6015625
+Best controlled median margin: +0.0033881384
+```
+
+Reviewed artifacts:
+
+```text
+docs/natural_evidence_v2/R4_CONTROLLER_ONLY_SAFETY_BOUND_SCORE_864117_REVIEW_20260516.md
+results/natural_evidence_v2/status/r4_controller_only_safety_bound_score_864117_review/
+results/natural_evidence_v2/status/r4_controller_only_safety_bound_failure_diagnosis_864117_20260516/
+```
+
+The safety-bound controller route kept wrong controls clean and improved
+positive pressure relative to `863274`, but it still failed the R4
+teacher-forced selective gate by a wide margin. It does not unlock generation.
+
 ## Next Allowed Action
 
-Monitor job `864117`. After terminal completion, sync and review safety-bound
-controller scoring summary artifacts before any downstream action. Do not
-submit another controller scoring job, generation job, training job, Llama job,
-null/FAR job, sanitizer job, payload-diversity route, or paper-facing claim
-from this state.
+Remote sync/hash preflight for the metric-exact micro-overfit route. Do not
+submit until local/remote hashes match, active-job preflight is clean,
+allowlist safety passes, Hermes TG/email notification is sent, and exactly one
+allowlist entry is enabled for submission. Do not run generation, Llama,
+null/FAR, sanitizer, payload-diversity, or paper-facing claim work from this
+state.
 
 ## Not Unlocked By Current State
 

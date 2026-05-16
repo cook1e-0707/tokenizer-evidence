@@ -1,0 +1,14 @@
+{
+  "all_24_tasks_completed_zero_exit": true,
+  "array_task_count": 24,
+  "completed_zero_exit_count": 24,
+  "job_id": "864117",
+  "max_elapsed": "00:06:16",
+  "min_elapsed": "00:05:30",
+  "nodes": [
+    "chimera21"
+  ],
+  "non_completed_tasks": [],
+  "reviewed_at_utc": "2026-05-16T00:40:12Z",
+  "schema_name": "r4_controller_only_safety_bound_score_864117_slurm_completion_v1"
+}

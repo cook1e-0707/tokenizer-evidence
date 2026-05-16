@@ -1,0 +1,21 @@
+{
+  "allowlist_enabled": false,
+  "current_phase": "V2_R4_METRIC_EXACT_OBJECTIVE_CODE_PATCH_VALIDATED_ROUTE_PLANNING_NEXT",
+  "default_behavior_changed": false,
+  "generation_started": false,
+  "llama_started": false,
+  "model_scoring_started": false,
+  "new_argument": "--surface-margin-loss-mode",
+  "new_mode": "logsumexp_softplus",
+  "paper_claim_allowed": false,
+  "py_compile": "PASS",
+  "review_doc": "docs/natural_evidence_v2/R4_METRIC_EXACT_OBJECTIVE_PATCH_REVIEW_20260516.md",
+  "schema_name": "natural_evidence_v2_r4_metric_exact_objective_patch_review_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_METRIC_EXACT_OBJECTIVE_PATCH_STATIC_REVIEW_NO_TRAINING",
+  "tests": {
+    "command": "uv run pytest tests/natural_evidence_v2/test_r4_metric_exact_objective_helpers.py tests/natural_evidence_v2/test_r4_training_objective_disabled_by_default.py tests/natural_evidence_v2/test_r4_target_mass_floor_loss.py tests/natural_evidence_v2/test_r4_stratum_weighting_controls.py -q",
+    "result": "14 passed"
+  },
+  "training_started": false
+}
