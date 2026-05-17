@@ -1,0 +1,17 @@
+{
+  "allow_submission_enabled_entry": true,
+  "allowlist_entry": "v2_r4_after_868212_repaired_first_token_event_generation_h200",
+  "codebook_sha256": "58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444",
+  "decoder_route_config_sha256": "7c1b2229d43b6b9b4c072c86889d114e01ec2bfa61347e6e6ac36743022c5342",
+  "decoder_spec_sha256": "64fd1e682c0ea314bc2f49b6a543447ef9df9679957b87800c2bd41a82bb70f3",
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "score_rows_sha256": "772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "surface_bank_sha256": "4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868212_repaired_first_token_event_generation_h200.sbatch"
+}

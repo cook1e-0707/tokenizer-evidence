@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T00:08:21Z
+Last synchronized: 2026-05-17T00:20:09Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_WRAPPER_VALIDATED_NO_SUBMIT`
+`V2_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_868260_RUNNING`
 
 ## Most Recent Compute Result
 
@@ -279,21 +279,54 @@ allowlist entry enabled:
   false
 ```
 
+## Current Submission
+
+The reviewed full16 first-token event generation diagnostic has been submitted
+as one H200 Slurm array job after Hermes notification and single-enabled
+allowlist preflight:
+
+```text
+submission record:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_submission_20260517_0016/
+single-enabled preflight:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_single_enabled_preflight_20260517_0016/
+job_id:
+  868260
+job_name:
+  nat-ev-v2-r4c16
+array:
+  0-3%4
+partition/qos/account:
+  pomplun / pomplun / cs_yinxin.wan
+gres:
+  gpu:h200:1
+time_limit:
+  30-00:00:00
+allowlist entry:
+  v2_r4_after_868212_repaired_first_token_event_generation_h200
+enabled entries after submission, local:
+  []
+enabled entries after submission, remote:
+  []
+```
+
 ## Next Allowed Action
 
-The route may continue automatically, but the next action is still
-artifact-only:
+The route may continue automatically. While job `868260` is active, the next
+allowed action is monitoring and review only:
 
 ```text
 next:
-  send/record Hermes notification, enable exactly one reviewed H200 Slurm
-  generation diagnostic entry, submit it, immediately disable the allowlist
-  entry after sbatch returns, and record the submission
+  monitor Slurm job 868260, sync completed shard artifacts back from Chimera,
+  and review/aggregate results when all 4 shards finish
 allowed:
-  Hermes notification/submission record
-  exactly-one allowlist enablement for the reviewed full16 H200 diagnostic
-  exactly-one H200 Slurm submission after preflight pass
+  monitoring job 868260
+  artifact synchronization for job 868260
+  result review and aggregation after completion
   Hermes/Codex state synchronization
+not allowed while 868260 is active:
+  another generation submission
+  any rerun of the same diagnostic
 not yet allowed:
   training
 ```
