@@ -1,378 +1,256 @@
 allowed_cpu_actions:
-- claim_note: WP3 tokenizer/density/mass artifact audit only; no training, generation, E2E,
-    FAR, or positive claim.
+- claim_note: WP3 tokenizer/density/mass artifact audit only; no training, generation, E2E, FAR, or positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp3_fixed_artifact_audit.sbatch
   enable_condition: v2_wp3_configured_tokenizer_audit_blocked_locally_or_fixed_artifacts_ready
   enabled: false
   name: v2_wp3_fixed_artifact_audit
-- claim_note: Build Llama tokenizer bucket bank; CPU only, no training, no generation, no
-    E2E.
+- claim_note: Build Llama tokenizer bucket bank; CPU only, no training, no generation, no E2E.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/build_llama_bank.sbatch
   enable_condition: disabled_after_20260511_state_reconciliation_llama_route_not_formally_recorded
   enabled: false
   name: build_llama_v2_bucket_bank
 allowed_gpu_actions:
-- claim_note: WP3 context-specific base-Qwen mass scoring only; no training, generation, E2E,
-    FAR, or positive claim.
+- claim_note: WP3 context-specific base-Qwen mass scoring only; no training, generation, E2E, FAR, or positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp3_context_mass_score.sbatch
   enable_condition: submitted_once_as_job_851272_pending_wp3_r2_prompt_conditioned_context_mass_result_review
   enabled: false
   name: v2_wp3_context_mass_score
-- claim_note: WP3 restricted Step-label base-Qwen model-output density audit only; no training,
-    E2E, payload recovery, FAR, or positive claim.
+- claim_note: WP3 restricted Step-label base-Qwen model-output density audit only; no training, E2E, payload recovery, FAR, or positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp3_restricted_step_label_density_audit.sbatch
   enable_condition: submitted_once_as_job_850885_pending_wp3_r1_strict_density_expansion_result_review
   enabled: false
   name: v2_wp3_restricted_step_label_density_audit
-- claim_note: WP5 teacher-forced Qwen protected/task-only LoRA train-and-score only; no E2E,
-    no payload recovery, no FAR, no Llama, and no paper positive claim.
+- claim_note: WP5 teacher-forced Qwen protected/task-only LoRA train-and-score only; no E2E, no payload recovery, no FAR, no Llama, and no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp5_teacher_forced_train_and_score.sbatch
   enable_condition: wp5_r2_completed_and_gate_passed
   enabled: false
   name: v2_wp5_teacher_forced_train_and_score
-- claim_note: WP5-R2 margin lambda retry; no E2E, no payload recovery, no FAR, no paper positive
-    claim.
+- claim_note: WP5-R2 margin lambda retry; no E2E, no payload recovery, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp5_r2_margin_lambda_retry.sbatch
   enable_condition: wp5_completed_and_gate_failed_retry_authorized
   enabled: false
   name: v2_wp5_r2_margin_lambda_retry
-- claim_note: 'WP6 Qwen V2 E2E proof-of-life: 5-arm free generation + payload decoding. No
-    FAR, no Llama, no paper positive claim.'
+- claim_note: 'WP6 Qwen V2 E2E proof-of-life: 5-arm free generation + payload decoding. No FAR, no Llama, no paper positive claim.'
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp6_e2e_eval.sbatch
   enable_condition: submitted_once_as_job_852086_pending_wp6_e2e_result_review
   enabled: false
   name: v2_wp6_e2e_eval
-- claim_note: WP6-R1 Qwen V2 repeated-coordinate majority proof-of-life replacement eval.
-    No training, no FAR, no Llama, no paper positive claim.
+- claim_note: WP6-R1 Qwen V2 repeated-coordinate majority proof-of-life replacement eval. No training, no FAR, no Llama, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_e2e_eval.sbatch
   enable_condition: submitted_once_as_job_852094_pending_wp6_r1_coordinate_majority_result_review
   enabled: false
   name: v2_wp6_r1_coordinate_majority_e2e_eval
-- claim_note: WP6-R1 Qwen V2 repeated-coordinate majority reproducibility scale eval only;
-    no training, no FAR, no Llama, no paper positive claim.
+- claim_note: WP6-R1 Qwen V2 repeated-coordinate majority reproducibility scale eval only; no training, no FAR, no Llama, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp6_r1_coordinate_majority_scale_eval.sbatch
   enable_condition: submitted_once_as_job_852202_pending_wp6_r1_coordinate_majority_scale_result_review
   enabled: false
   name: v2_wp6_r1_coordinate_majority_scale_eval
-- claim_note: WP6-R2 Option B Qwen robust-block diagnostic only; no training, no FAR, no Llama,
-    no paper positive claim.
+- claim_note: WP6-R2 Option B Qwen robust-block diagnostic only; no training, no FAR, no Llama, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/wp6_r2_option_b_scale_eval.sbatch
   enable_condition: submitted_once_as_job_852426_pending_wp6_r2_option_b_scale_result_review
   enabled: false
   name: v2_wp6_r2_option_b_scale_eval
-- claim_note: R3.2 Qwen same-contract a55e locked-scale package eval; disabled until same-contract
-    full wrapper and 852426 replay are reviewed. No training, no Llama, no sanitizer, no FAR,
-    no paper positive claim.
+- claim_note: R3.2 Qwen same-contract a55e locked-scale package eval; disabled until same-contract full wrapper and 852426 replay are reviewed. No training, no Llama, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_eval.sbatch
   enable_condition: disabled_until_r3_2_same_contract_full_wrapper_and_852426_replay_reviewed
   enabled: false
   name: v2_r3_2_qwen_locked_scale_eval
-- claim_note: DEPRECATED after the 2026-05-13 H200/pomplun execution policy. Do not enable
-    this DGXA100/A100 scavenger route unless a later explicit route decision supersedes the
-    H200 policy. No training, no Llama, no sanitizer, no FAR, no paper positive claim.
+- claim_note: DEPRECATED after the 2026-05-13 H200/pomplun execution policy. Do not enable this DGXA100/A100 scavenger route unless a later explicit route decision supersedes the H200 policy. No training, no Llama, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array.sbatch
   enable_condition: deprecated_after_20260513_h200_pomplun_policy_do_not_enable
   enabled: false
   name: v2_r3_2_qwen_locked_scale_shard_array
-- claim_note: R3.2 Qwen same-contract a55e locked-scale shard-array eval on chimera21 H200
-    via pomplun/cs_yinxin. This replaces the noncanonical A100 array after user approval.
-    No training, no Llama, no sanitizer, no FAR, no paper positive claim.
+- claim_note: R3.2 Qwen same-contract a55e locked-scale shard-array eval on chimera21 H200 via pomplun/cs_yinxin. This replaces the noncanonical A100 array after user approval. No training, no Llama, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_shard_array_h200.sbatch
   enable_condition: r3_2i_h200_migration_user_approved_and_state_lock_active
   enabled: false
   name: v2_r3_2_qwen_locked_scale_shard_array_h200
-- claim_note: R3.2 Qwen same-contract a55e locked-scale aggregate-only Slurm job after all
-    shard-array tasks complete. No training, no generation, no Llama, no sanitizer, no FAR,
-    no paper positive claim.
+- claim_note: R3.2 Qwen same-contract a55e locked-scale aggregate-only Slurm job after all shard-array tasks complete. No training, no generation, no Llama, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r3_2_qwen_locked_scale_aggregate.sbatch
   enable_condition: r3_2_shard_array_all_shards_complete
   enabled: false
   name: v2_r3_2_qwen_locked_scale_aggregate
-- claim_note: R4 Qwen cover-natural ECC dev diagnostic H200 shard array. Dev prompt bank only;
-    same-contract a55e; no training, no Llama, no same-family null, no sanitizer, no FAR,
-    no paper positive claim.
+- claim_note: R4 Qwen cover-natural ECC dev diagnostic H200 shard array. Dev prompt bank only; same-contract a55e; no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_cover_natural_dev_diagnostic_h200.sbatch
   enable_condition: r4_plan_validation_passed_and_user_approved_dev_diagnostic
   enabled: false
   name: v2_r4_cover_natural_dev_diagnostic_h200
-- claim_note: R4 candidate v3 small Qwen generation diagnostic with reviewed protected adapter
-    gain 4.0. Dev prompts only; same-contract a55e; format-scrub/null controls required; no
-    training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim,
-    no paper positive claim.
+- claim_note: R4 candidate v3 small Qwen generation diagnostic with reviewed protected adapter gain 4.0. Dev prompts only; same-contract a55e; format-scrub/null controls required; no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch --export=ALL,PROTECTED_ADAPTER_GAIN=4.0 scripts/natural_evidence_v2/slurm/r4_cover_natural_dev_diagnostic_h200.sbatch
   enable_condition: r4_candidate_v3_gain_sweep_reviewed_pass_and_gain4_dev_generation_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_gain4_dev_diagnostic_h200
-- claim_note: R4 candidate v3 small Qwen generation diagnostic using reviewed metric-exact
-    864761 adapter. Dev prompts only; same-contract a55e; format-scrub/null controls required;
-    no training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no
-    payload-diversity claim, no paper positive claim.
+- claim_note: R4 candidate v3 small Qwen generation diagnostic using reviewed metric-exact 864761 adapter. Dev prompts only; same-contract a55e; format-scrub/null controls required; no training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200.sbatch
   enable_condition: r4_metric_exact_864761_teacher_forced_gate_passed_and_dev_generation_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_metric_exact_864761_dev_diagnostic_h200
-- claim_note: R4 Qwen teacher-forced surface-mass scoring on binary repair candidate rows.
-    Base/protected/task-only forward scoring only; no generation, no training, no Llama, no
-    same-family null, no sanitizer, no FAR, no paper positive claim.
+- claim_note: R4 Qwen teacher-forced surface-mass scoring on binary repair candidate rows. Base/protected/task-only forward scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_teacher_forced_surface_mass_score_h200.sbatch
   enable_condition: r4_teacher_forced_surface_mass_scorer_wrapper_reviewed_and_single_submission_authorized
   enabled: false
   name: v2_r4_teacher_forced_surface_mass_score_h200
-- claim_note: R4 Qwen prefix-native teacher-forced tokenizer/model surface-mass scoring on
-    repaired candidate rows. Base/protected/task-only forward scoring only; no generation,
-    no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
+- claim_note: R4 Qwen prefix-native teacher-forced tokenizer/model surface-mass scoring on repaired candidate rows. Base/protected/task-only forward scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_prefix_native_surface_mass_score_h200.sbatch
   enable_condition: r4_candidate_v3_qwen_tokenizer_preflight_passed_and_single_surface_mass_submission_authorized
   enabled: false
   name: v2_r4_prefix_native_surface_mass_score_h200
-- claim_note: R4 candidate v3 protected-adapter gain sweep teacher-forced scoring only. Base/task-only
-    unchanged; protected LoRA gain conditions only. No generation, no training, no Llama,
-    no same-family null, no sanitizer, no FAR, no paper positive claim.
+- claim_note: R4 candidate v3 protected-adapter gain sweep teacher-forced scoring only. Base/task-only unchanged; protected LoRA gain conditions only. No generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_adapter_gain_sweep_h200.sbatch
   enable_condition: r4_candidate_v3_adapter_gain_sweep_launch_route_reviewed_and_single_submission_authorized
   enabled: false
   name: v2_r4_candidate_v3_adapter_gain_sweep_h200
-- claim_note: R4 candidate v3 metric-exact protected micro-overfit H200 route using SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus.
-    Protected-only teacher-forced training plus base/protected/task-only surface-mass scoring
-    on reviewed candidate-v3 split rows. No generation, no Qwen E2E rerun, no Llama, no same-family
-    null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 candidate v3 metric-exact protected micro-overfit H200 route using SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus. Protected-only teacher-forced training plus base/protected/task-only surface-mass scoring on reviewed candidate-v3 split rows. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
   enable_condition: r4_candidate_v3_micro_overfit_split_and_wrapper_reviewed_and_single_submission_authorized
   enabled: false
   name: v2_r4_candidate_v3_micro_overfit_h200
-- claim_note: R4 candidate v3 floor-dominant metric-exact micro-overfit repair after job 864332.
-    Protected-only teacher-forced training/scoring with task CE disabled and stronger target-mass
-    floor pressure. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer,
-    no FAR, no payload-diversity claim, no paper positive claim.
-  command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.20,TARGET_MASS_FLOOR_LAMBDA=50.0,TARGET_MASS_CEILING=0.45,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_STEPS=128,LEARNING_RATE=1e-4
-    scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+- claim_note: R4 candidate v3 floor-dominant metric-exact micro-overfit repair after job 864332. Protected-only teacher-forced training/scoring with task CE disabled and stronger target-mass floor pressure. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.20,TARGET_MASS_FLOOR_LAMBDA=50.0,TARGET_MASS_CEILING=0.45,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_STEPS=128,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
   enable_condition: r4_metric_exact_micro_overfit_864332_failed_and_floor_dominant_repair_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_floor_dominant_micro_overfit_h200
-- claim_note: R4 candidate v3 coverage-scale floor-dominant metric-exact micro-overfit repair
-    after job 864705. Protected-only teacher-forced training/scoring with task CE disabled,
-    full 8192-row coverage, and stronger target-mass floor pressure. No generation, no Qwen
-    E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim,
-    no paper positive claim.
-  command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4
-    scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
+- claim_note: R4 candidate v3 coverage-scale floor-dominant metric-exact micro-overfit repair after job 864705. Protected-only teacher-forced training/scoring with task CE disabled, full 8192-row coverage, and stronger target-mass floor pressure. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,SURFACE_MARGIN_LOSS_MODE=logsumexp_softplus,TASK_CE_WEIGHT=0.0,TARGET_MASS_FLOOR=0.25,TARGET_MASS_FLOOR_LAMBDA=75.0,TARGET_MASS_CEILING=0.50,TARGET_MASS_CEILING_LAMBDA=5.0,MARGIN_LAMBDA=1.0,MAX_TRAIN_ROWS=8192,MAX_SCORE_ROWS=8192,MAX_STEPS=4096,BATCH_SIZE=2,GRADIENT_ACCUMULATION_STEPS=8,LEARNING_RATE=1e-4 scripts/natural_evidence_v2/slurm/r4_candidate_v3_micro_overfit_h200.sbatch
   enable_condition: r4_metric_exact_floor_dominant_864705_failed_and_coverage_scale_repair_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_coverage_scale_micro_overfit_h200
-- claim_note: R4 candidate v3 fixed two-arm pressure-relaxation H200 array. Protected-only
-    teacher-forced micro-overfit training/scoring on reviewed candidate-v3 split rows with
-    TARGET_MASS_CEILING=0.50 and ceiling lambdas 1.0/0.5. No generation, no Qwen E2E rerun,
-    no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper
-    positive claim.
+- claim_note: R4 candidate v3 fixed two-arm pressure-relaxation H200 array. Protected-only teacher-forced micro-overfit training/scoring on reviewed candidate-v3 split rows with TARGET_MASS_CEILING=0.50 and ceiling lambdas 1.0/0.5. No generation, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_pressure_relaxation_grid_h200.sbatch
   enable_condition: r4_candidate_v3_pressure_relaxation_grid_wrapper_reviewed_and_single_array_submission_authorized
   enabled: false
   name: v2_r4_candidate_v3_pressure_relaxation_grid_h200
-- claim_note: R4 candidate v3 small dev generation diagnostic using pressure-relaxation arm
-    B from job 857764. Qwen dev prompts only; same-contract a55e; format-scrub and null controls
-    required. No training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer,
-    no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 candidate v3 small dev generation diagnostic using pressure-relaxation arm B from job 857764. Qwen dev prompts only; same-contract a55e; format-scrub and null controls required. No training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_h200.sbatch
   enable_condition: r4_candidate_v3_pressure_relaxation_grid_857764_reviewed_pass_and_dev_generation_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_pressure_relaxation_b_dev_diagnostic_h200
-- claim_note: R4 candidate v3 transfer-gap repair small dev generation diagnostic using pressure-relaxation
-    arm B from job 857764 and repaired prompt scaffolds. Qwen dev prompts only; same-contract
-    a55e; format-scrub and null controls required. No training, no Qwen E2E rerun, no Llama,
-    no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive
-    claim.
+- claim_note: R4 candidate v3 transfer-gap repair small dev generation diagnostic using pressure-relaxation arm B from job 857764 and repaired prompt scaffolds. Qwen dev prompts only; same-contract a55e; format-scrub and null controls required. No training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_candidate_v3_transfer_gap_repair_dev_diagnostic_h200.sbatch
   enable_condition: r4_candidate_v3_transfer_gap_repair_package_validated_and_single_h200_route_reviewed
   enabled: false
   name: v2_r4_candidate_v3_transfer_gap_repair_dev_diagnostic_h200
-- claim_note: R4 positive event-bank small dev generation diagnostic. Qwen dev prompts only;
-    keyed phrase-event decoder with format-scrub controls; same-contract a55e; no training,
-    no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
-    claim, no paper positive claim.
+- claim_note: R4 positive event-bank small dev generation diagnostic. Qwen dev prompts only; keyed phrase-event decoder with format-scrub controls; same-contract a55e; no training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_dev_diagnostic_h200.sbatch
   enable_condition: r4_positive_full_generation_decode_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_dev_diagnostic_h200
-- claim_note: R4 positive selectivity support-window small dev generation diagnostic. Qwen
-    dev prompts from the reviewed selectivity prompt-policy package; same-contract a55e; primary
-    format-scrub decode; null controls required. No training, no Qwen E2E rerun, no Llama,
-    no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive
-    claim.
+- claim_note: R4 positive selectivity support-window small dev generation diagnostic. Qwen dev prompts from the reviewed selectivity prompt-policy package; same-contract a55e; primary format-scrub decode; null controls required. No training, no Qwen E2E rerun, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch --export=ALL,ALLOW_STATIC_DEV_KEYS=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_dev_diagnostic_h200.sbatch
   enable_condition: r4_positive_selectivity_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_selectivity_dev_diagnostic_h200
-- claim_note: R4 positive selectivity pressure-controller teacher-forced scoring wrapper.
-    Qwen only; same-contract a55e; controller grid scoring only; no generation, no training,
-    no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper
-    positive claim.
+- claim_note: R4 positive selectivity pressure-controller teacher-forced scoring wrapper. Qwen only; same-contract a55e; controller grid scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1 scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
   enable_condition: r4_pressure_controller_wrapper_full_mode_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_selectivity_pressure_controller_score_h200
-- claim_note: R4 positive selectivity controller-only teacher-forced scoring wrapper. Qwen
-    only; same-contract a55e; base model plus keyed controller arms, task-only diagnostic
-    arm, no protected adapter in controller arms; no generation, no training, no Llama, no
-    same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive
-    claim.
-  command_pattern: sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml
-    scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
+- claim_note: R4 positive selectivity controller-only teacher-forced scoring wrapper. Qwen only; same-contract a55e; base model plus keyed controller arms, task-only diagnostic arm, no protected adapter in controller arms; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_positive_selectivity_controller_only_route.yaml scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
   enable_condition: r4_controller_only_route_config_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_positive_selectivity_controller_only_score_h200
-- claim_note: R4 controller-only safety-bound pressure teacher-forced scoring wrapper. Qwen
-    only; same-contract a55e; base model plus stronger keyed controller arms within reviewed
-    max bonus/KL/target-mass bounds; no protected adapter in controller arms; no generation,
-    no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
-    claim, no paper positive claim.
-  command_pattern: sbatch --array=0-23%4 --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml
-    scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
+- claim_note: R4 controller-only safety-bound pressure teacher-forced scoring wrapper. Qwen only; same-contract a55e; base model plus stronger keyed controller arms within reviewed max bonus/KL/target-mass bounds; no protected adapter in controller arms; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: sbatch --array=0-23%4 --export=ALL,ALLOW_PRESSURE_CONTROLLER_SCORING=1,CONTROLLER_CONDITION_SET=controller_only_controls,ROUTE_CONFIG=configs/natural_evidence_v2/r4_controller_only_safety_bound_pressure_route.yaml scripts/natural_evidence_v2/slurm/r4_positive_selectivity_pressure_controller_score_h200.sbatch
   enable_condition: r4_controller_only_safety_bound_route_config_wrapper_reviewed_and_single_h200_route_authorized
   enabled: false
   name: v2_r4_controller_only_safety_bound_pressure_score_h200
-- claim_note: R4 after-864832 reliability-weighted codebook small dev generation diagnostic.
-    Qwen dev prompts only; same-contract a55e; pair-majority checksum decoder; no training,
-    no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper
-    positive claim.
+- claim_note: R4 after-864832 reliability-weighted codebook small dev generation diagnostic. Qwen dev prompts only; same-contract a55e; pair-majority checksum decoder; no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_reliability_dev_generation_h200.sbatch
   enable_condition: r4_reliability_codebook_decoder_oracle_passed_and_generation_route_wrapper_reviewed
   enabled: false
   name: v2_r4_after_864832_reliability_dev_generation_h200
-- claim_note: R4 Qwen prefix-native actual tokenizer boundary preflight only on repaired candidate
-    rows. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation,
-    no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
+- claim_note: R4 Qwen prefix-native actual tokenizer boundary preflight only on repaired candidate rows. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_prefix_native_qwen_tokenizer_boundary_preflight_h200.sbatch
   enable_condition: r4_candidate_v3_static_preflight_passed_and_single_tokenizer_preflight_submission_authorized
   enabled: false
   name: v2_r4_prefix_native_qwen_tokenizer_boundary_preflight_h200
-- claim_note: R4 after-864832 two-sided cover-bank actual Qwen tokenizer boundary preflight
-    only. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation,
-    no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
+- claim_note: R4 after-864832 two-sided cover-bank actual Qwen tokenizer boundary preflight only. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200.sbatch
   enable_condition: r4_after_864832_two_sided_rows_validated_and_single_tokenizer_preflight_submission_authorized
   enabled: false
   name: v2_r4_after_864832_two_sided_qwen_tokenizer_boundary_preflight_h200
-- claim_note: R4 after-867621 coordinate-unique reliability actual Qwen tokenizer boundary
-    preflight only. Tokenizer load only; no model forward, no tokenizer/model scoring, no
-    generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
-    claim, no paper positive claim.
+- claim_note: R4 after-867621 coordinate-unique reliability actual Qwen tokenizer boundary preflight only. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200.sbatch
   enable_condition: r4_after_867621_reliability_rows_static_preflight_passed_and_single_tokenizer_preflight_submission_authorized
   enabled: false
   name: v2_r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_h200
-- claim_note: R4 after-864832 two-sided cover-bank teacher-forced surface-mass scoring. Qwen
-    only; base/protected/task-only arms; no generation, no training, no Llama, no same-family
-    null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-864832 two-sided cover-bank teacher-forced surface-mass scoring. Qwen only; base/protected/task-only arms; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_surface_mass_score_h200.sbatch
   enable_condition: r4_after_864832_two_sided_tokenizer_preflight_passed_and_single_surface_mass_submission_authorized
   enabled: false
   name: v2_r4_after_864832_two_sided_surface_mass_score_h200
-- claim_note: R4 after-867621 coordinate-unique reliability teacher-forced surface-mass scoring.
-    Qwen only; base/protected/task-only arms; no generation, no training, no Llama, no same-family
-    null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-867621 coordinate-unique reliability teacher-forced surface-mass scoring. Qwen only; base/protected/task-only arms; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_surface_mass_score_h200.sbatch
   enable_condition: r4_after_867621_reliability_qwen_tokenizer_preflight_passed_and_single_surface_mass_submission_authorized
   enabled: false
   name: v2_r4_after_867621_reliability_surface_mass_score_h200
-- claim_note: R4 after-867621 coordinate-unique reliability protected-adapter gain sweep.
-    Qwen teacher-forced scoring only; no generation, no training, no Llama, no same-family
-    null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-867621 coordinate-unique reliability protected-adapter gain sweep. Qwen teacher-forced scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_adapter_gain_sweep_h200.sbatch
   enable_condition: r4_after_867621_surface_mass_867849_failed_and_gain_sweep_route_reviewed
   enabled: false
   name: v2_r4_after_867621_reliability_adapter_gain_sweep_h200
-- claim_note: R4 after-867621 coordinate-unique reliability controller-only safety-bound teacher-forced
-    scoring. Qwen only; bounded bonus/KL/target-mass grid; no generation, no training, no
-    Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper
-    positive claim.
+- claim_note: R4 after-867621 coordinate-unique reliability controller-only safety-bound teacher-forced scoring. Qwen only; bounded bonus/KL/target-mass grid; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_controller_safety_bound_score_h200.sbatch
   enable_condition: r4_after_867621_adapter_gain_867897_failed_and_controller_safety_bound_route_reviewed
   enabled: false
   name: v2_r4_after_867621_reliability_controller_safety_bound_score_h200
-- claim_note: R4 after-867621 coordinate-unique reliability controller-only feasibility-envelope
-    teacher-forced scoring. Qwen only; expanded bonus/KL grid to diagnose 867939 mass-lift
-    deficit; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR,
-    no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-867621 coordinate-unique reliability controller-only feasibility-envelope teacher-forced scoring. Qwen only; expanded bonus/KL grid to diagnose 867939 mass-lift deficit; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_867621_reliability_controller_feasibility_envelope_score_h200.sbatch
   enable_condition: r4_after_867621_controller_867939_failed_and_feasibility_envelope_route_reviewed
   enabled: false
   name: v2_r4_after_867621_reliability_controller_feasibility_envelope_score_h200
-- claim_note: R4 after-868016 reliability coordinate-filtered actual Qwen tokenizer boundary
-    preflight only. Tokenizer load only; no model forward, no tokenizer/model scoring, no
-    generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
-    claim, no paper positive claim.
+- claim_note: R4 after-868016 reliability coordinate-filtered actual Qwen tokenizer boundary preflight only. Tokenizer load only; no model forward, no tokenizer/model scoring, no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_h200.sbatch
   enable_condition: r4_after_868016_coordinate_pivot_rows_static_preflight_passed_and_single_tokenizer_preflight_submission_authorized
   enabled: false
   name: v2_r4_after_868016_reliability_coordinate_pivot_qwen_tokenizer_boundary_preflight_h200
-- claim_note: R4 after-868016 reliability coordinate-filtered controller-only teacher-forced
-    scoring. Qwen only; no generation, no training, no Llama, no same-family null, no sanitizer,
-    no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-868016 reliability coordinate-filtered controller-only teacher-forced scoring. Qwen only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_reliability_coordinate_pivot_controller_score_h200.sbatch
   enable_condition: r4_after_868016_coordinate_pivot_tokenizer_868103_passed_and_controller_score_route_reviewed
   enabled: false
   name: v2_r4_after_868016_reliability_coordinate_pivot_controller_score_h200
-- claim_note: R4 after-868016 coordinate-pivot controller-aware row-cylinder generation
-    diagnostic. Qwen only; requires 868114 teacher-forced controller pass and filtered
-    codebook oracle pass; no training, no Llama, no same-family null, no sanitizer, no
-    FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-868016 coordinate-pivot controller-aware row-cylinder generation diagnostic. Qwen only; requires 868114 teacher-forced controller pass and filtered codebook oracle pass; no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
   enable_condition: r4_after_868016_controller_868114_passed_and_generation_wrapper_route_reviewed
   enabled: false
   name: v2_r4_after_868016_controller_generation_h200
-- claim_note: R4 after-868212 repaired full16 first-token event generation diagnostic.
-    Qwen only; requires repaired full16 precommit/allocation and wrapper route validation;
-    no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
-    claim, no paper positive claim.
+- claim_note: R4 after-868212 repaired full16 first-token event generation diagnostic. Qwen only; requires repaired full16 precommit/allocation and wrapper route validation; no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868212_repaired_first_token_event_generation_h200.sbatch
   enable_condition: r4_after_868212_repaired_first_token_event_wrapper_route_reviewed
   enabled: false
   name: v2_r4_after_868212_repaired_first_token_event_generation_h200
-- claim_note: R4 after-868260 first-token event quality-repair confirmation diagnostic.
-    Qwen only; requires duplicate-safe generation policy v2, contextual forbidden policy
-    v2, trace binding, and a separate single-submission route review. No training,
-    no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim,
-    no paper positive claim.
-  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
+- claim_note: R4 after-868260 first-token event quality-repair confirmation diagnostic. Qwen only; requires duplicate-safe generation policy v2, contextual forbidden policy v2, trace binding, and a separate single-submission route review. No training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
   enable_condition: r4_after_868260_quality_repair_confirmation_route_reviewed_and_remote_preflight_passed
   enabled: false
   name: v2_r4_after_868260_quality_repair_confirmation_h200
-- claim_note: R4 after-864832 two-sided cover-bank protected-adapter gain sweep. Qwen teacher-forced
-    scoring only; no generation, no training, no Llama, no same-family null, no sanitizer,
-    no FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-864832 two-sided cover-bank protected-adapter gain sweep. Qwen teacher-forced scoring only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_adapter_gain_sweep_h200.sbatch
   enable_condition: r4_after_864832_two_sided_surface_mass_865252_failed_and_gain_sweep_route_reviewed
   enabled: false
   name: v2_r4_after_864832_two_sided_adapter_gain_sweep_h200
-- claim_note: R4 after-864832 two-sided cover-bank controller-only teacher-forced scoring.
-    Qwen only; no generation, no training, no Llama, no same-family null, no sanitizer, no
-    FAR, no payload-diversity claim, no paper positive claim.
+- claim_note: R4 after-864832 two-sided cover-bank controller-only teacher-forced scoring. Qwen only; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_controller_only_score_h200.sbatch
   enable_condition: r4_after_864832_two_sided_gain_sweep_failed_and_controller_only_route_reviewed
   enabled: false
   name: v2_r4_after_864832_two_sided_controller_only_score_h200
-- claim_note: R4 after-864832 two-sided cover-bank safety-bound controller-only teacher-forced
-    scoring after job 865434 failed. Qwen only; bounded bonus/KL/target-mass grid; no generation,
-    no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity
-    claim, no paper positive claim.
+- claim_note: R4 after-864832 two-sided cover-bank safety-bound controller-only teacher-forced scoring after job 865434 failed. Qwen only; bounded bonus/KL/target-mass grid; no generation, no training, no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_864832_two_sided_controller_safety_bound_score_h200.sbatch
   enable_condition: r4_after_864832_two_sided_controller_865434_failed_and_safety_bound_route_reviewed
   enabled: false
   name: v2_r4_after_864832_two_sided_controller_safety_bound_score_h200
-- claim_note: Llama-3.1-8B V2 WP5 teacher-forced train-and-score; no E2E, no FAR, no paper
-    positive claim.
+- claim_note: Llama-3.1-8B V2 WP5 teacher-forced train-and-score; no E2E, no FAR, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp5_train_and_score.sbatch
   enable_condition: llama_bucket_bank_built_and_wp5_plan_reviewed
   enabled: false
   name: llama_v2_wp5_train_and_score
-- claim_note: Llama-3.1-8B V2 WP6 robust-block E2E eval; no FAR, no sanitizer, no paper positive
-    claim.
+- claim_note: Llama-3.1-8B V2 WP6 robust-block E2E eval; no FAR, no sanitizer, no paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp6_e2e_eval.sbatch
   enable_condition: llama_wp5_passed_and_wp6_plan_reviewed
   enabled: false
   name: llama_v2_wp6_e2e_eval
-- claim_note: Sanitizer robustness benchmark; requires both Qwen and Llama positive recovery.
-    No paper claim.
+- claim_note: Sanitizer robustness benchmark; requires both Qwen and Llama positive recovery. No paper claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/sanitizer_benchmark.sbatch
   enable_condition: both_qwen_and_llama_wp6_passed
   enabled: false

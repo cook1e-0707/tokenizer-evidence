@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T02:42:22Z
+Last synchronized: 2026-05-17T03:24:49Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REMOTE_PREFLIGHT_PASS_NO_SUBMIT`
+`V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REPLACEMENT_JOB_868299_SUBMITTED_MONITOR_ONLY`
 
 ## Active Route Update
 
@@ -53,6 +53,42 @@ route decision:
   results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_route_decision_20260517/
 remote preflight:
   results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_remote_preflight_20260517/
+full-mode wrapper review:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_full_mode_wrapper_review_20260517/
+full-mode wrapper status:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_FULL_MODE_WRAPPER_REVIEW_NO_SUBMIT
+full-mode delegate smoke:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_full_wrapper_delegate_smoke_20260517_a/
+full-mode remote preflight:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_full_mode_remote_preflight_20260517/
+full-mode remote status:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_FULL_MODE_REMOTE_PREFLIGHT_NO_SUBMIT
+submission:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_submission_20260517/
+submission status:
+  SUBMITTED_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_H200_ARRAY_MONITOR_ONLY
+job:
+  868291, array 0-3%4, nat-ev-v2-r4qfix, pomplun H200
+failure review:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_job_868291_failure_review/
+failure status:
+  FAILED_R4_AFTER_868260_JOB_868291_ALLOWLIST_RUNTIME_VALIDATION_RACE_NO_GENERATION
+runtime repair:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_runtime_allowlist_race_repair_20260517/
+resubmission:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_resubmission_20260517/
+resubmission status:
+  SUBMITTED_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REPAIRED_H200_ARRAY_MONITOR_ONLY
+failed job:
+  868295, array 0-3%4, nat-ev-v2-r4qfix, pomplun H200
+failure review:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_job_868295_failure_review/
+failure status:
+  FAILED_R4_AFTER_868260_JOB_868295_REMOTE_ARTIFACT_SYNC_MISSING_CONTEXTUAL_POLICY_NO_GENERATION
+failure interpretation:
+  job 868295 failed before generation/model-forward because the remote runtime
+  repository was missing the precommit repair package file
+  results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
 remote status:
   PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REMOTE_PREFLIGHT_NO_SUBMIT
 remote host:
@@ -65,11 +101,70 @@ remote allowlist:
   PASS, enabled_entries=[]
 local/remote hashes:
   match, 51 reviewed files
-active Chimera jobs:
+active Chimera jobs at last remote preflight:
   0
 tests:
-  18 passed
+  16 passed for route/helper tests after the full-mode wrapper patch
 ```
+
+The confirmation wrapper no longer exits fail-closed in non-plan mode. Instead,
+it delegates to the reviewed H200 generation/decode wrapper with the
+duplicate-safe generation policy v2, contextual forbidden policy v2, and
+first-token event trace-binding verifier wired into the execution path.
+
+Slurm job `868291` failed before generation because runtime validation still
+expected the allowlist entry to be enabled after the required immediate
+post-`sbatch` disablement. This was recorded as a control-plane runtime
+validation race, not as a model/method result.
+
+The delegated wrapper was repaired so the exactly-one allowlist check remains
+pre-submit only. After repaired preflight, Slurm job `868295` was submitted and
+the allowlist was disabled immediately after `sbatch`; local and remote
+post-submit allowlist checks both passed with `enabled_entries=[]`.
+
+Slurm job `868295` then failed before generation/model-forward because the
+remote runtime repository was missing the precommit repair package required by
+the wrapper. This is a remote artifact-sync failure, not a model/method result.
+The missing precommit repair package was synchronized to Chimera, and the
+remote required-artifact/allowlist/active-job preflight passed:
+
+```text
+remote sync-repair preflight:
+  results/natural_evidence_v2/status/r4_after_868260_remote_artifact_sync_repair_preflight_20260517/
+status:
+  PASS_R4_AFTER_868260_REMOTE_ARTIFACT_SYNC_REPAIR_PREFLIGHT_NO_SUBMIT
+required artifact hashes:
+  local/remote match, 14 files
+remote allowlist:
+  PASS, enabled_entries=[]
+remote route validation:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+remote wrapper delegate smoke:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
+active jobs before submission:
+  0
+```
+
+After exactly-one local/remote allowlist preflight, one replacement H200 array
+was submitted:
+
+```text
+submission:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_resubmission2_20260517/
+job:
+  868299, array 0-3%4, nat-ev-v2-r4qfix, pomplun H200
+command:
+  PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
+post-submit local allowlist:
+  PASS, enabled_entries=[]
+post-submit remote allowlist:
+  PASS, enabled_entries=[]
+```
+
+The next allowed action is monitor-only for job `868299`; after terminal state,
+sync and review artifacts before any next route. Downstream
+training/Llama/sanitizer/FAR/payload-diversity/paper-claim routes remain gated
+by their prior conditions.
 
 ## Prior Compute Result: 868212
 
@@ -456,23 +551,22 @@ duplicate-safe generation policy:
 ## Next Allowed Action
 
 The route may continue automatically after recorded preconditions pass, but no
-new Slurm rerun is allowed from the current state. The next allowed action is:
+additional Slurm rerun is allowed while replacement job `868299` is active. The
+next allowed action is:
 
 ```text
 next:
-  record/review the separate single-submission or full-mode wrapper route for
-  the 4-block quality-repair confirmation diagnostic; the current wrapper has
-  only passed plan-only remote preflight and remains fail-closed outside
-  plan-only mode
+  monitor Slurm job 868299 only; after terminal state, sync and review artifacts
+  before any next route
 allowed:
   Hermes notification
-  single-submission/full-mode wrapper route preparation
-  exactly-one allowlist preflight after the route is recorded
+  monitor/sacct/squeue checks for job 868299
+  artifact sync and review after job 868299 reaches terminal state
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive
-  another Slurm generation rerun before a new reviewed full-mode route is
-  recorded and all preconditions pass
+  another Slurm generation rerun before job 868299 reaches terminal state and
+  is reviewed
 not yet allowed:
   training
 ```

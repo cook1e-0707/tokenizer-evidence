@@ -1,0 +1,18 @@
+{
+  "current_phase": "V2_R4_AFTER_868260_RUNTIME_ALLOWLIST_RACE_REPAIR_LOCAL_VALIDATED_RESUBMISSION_PREFLIGHT_NEXT",
+  "delegate_smoke": "results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_runtime_allowlist_race_repair_delegate_smoke_20260517",
+  "delegate_smoke_status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "failed_job_id": "868291",
+  "generation_started": false,
+  "next_allowed_action": "Run repaired remote preflight and exactly-one submission preflight; if both pass, resubmit one H200 array because 868291 failed before generation.",
+  "paper_claim_allowed": false,
+  "patched_wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch",
+  "patched_wrapper_sha256": "b0e5d8cb12f816f1bb3db1c1415356463f09007df8c10e88f36a0ad6d4887be1",
+  "repair": "delegated generation wrapper no longer passes --allow-submission-enabled-entry at job runtime; exactly-one enabled check remains pre-submit only",
+  "root_cause": "runtime wrapper validation required allowlist enabled after immediate post-sbatch disablement",
+  "schema_name": "natural_evidence_v2_r4_after_868260_runtime_allowlist_race_repair_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_868260_RUNTIME_ALLOWLIST_RACE_REPAIR_LOCAL_VALIDATED_NO_SUBMIT",
+  "tests": "16 passed",
+  "training_started": false
+}

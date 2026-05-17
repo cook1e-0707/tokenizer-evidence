@@ -1,0 +1,276 @@
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_0.err
+REQUIRED_ARTIFACT_MISSING_OR_EMPTY: results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_1.err
+REQUIRED_ARTIFACT_MISSING_OR_EMPTY: results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_2.err
+REQUIRED_ARTIFACT_MISSING_OR_EMPTY: results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_3.err
+REQUIRED_ARTIFACT_MISSING_OR_EMPTY: results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_0.out
+claim_note=R4 after-868260 quality-repair confirmation route; plan-only until reviewed preflight passes; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+plan_only=0
+python_bin=uv run python
+generation_started=false
+training_started=false
+llama_started=false
+far_started=false
+paper_claim_allowed=false
+full_mode_delegates_to=scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+trace_binding_verifier=scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+claim_note=R4 after-868016 coordinate-pivot controller generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295
+validate_plan_only=0
+shard_index=0
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation_rows=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+surface_bank=results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/decoder_spec.json
+full_phrase_decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+decoder_route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+rows_per_shard=1024
+expected_selected_coordinate_count=16
+controller_bonus_nats=4.0
+controller_penalty_nats=0.5
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+public_run_salt=r4_after_868260_quality_repair_confirmation_v1
+binding_hmac_secret_set=false
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "config_sha256": "befb40e04120cbdb0c4bf42f6cb1b0591a1c8601407d71d9b0fc92e45d9c0575",
+  "duplicate_policy_sha256": "2b9007077d6fd58d8fb9c10a697a4b3c1962fd512ddef84a89e3e93c21b14b21",
+  "errors": [],
+  "generation_started": false,
+  "next_allowed_action": "Local/remote hash preflight and Hermes notification may follow; do not submit Slurm until a separate single-submission route is recorded.",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_validation_v1",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_00/plan_validation/generation_plan", "rows": 1024, "status": "PLAN_ONLY_PASS"}
+{"decode_rows": 3, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_00/plan_validation/toy_decode_all", "status": "PASS"}
+{
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "slurm_submission_started": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false
+}
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_1.out
+claim_note=R4 after-868260 quality-repair confirmation route; plan-only until reviewed preflight passes; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+plan_only=0
+python_bin=uv run python
+generation_started=false
+training_started=false
+llama_started=false
+far_started=false
+paper_claim_allowed=false
+full_mode_delegates_to=scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+trace_binding_verifier=scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+claim_note=R4 after-868016 coordinate-pivot controller generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295
+validate_plan_only=0
+shard_index=1
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation_rows=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+surface_bank=results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/decoder_spec.json
+full_phrase_decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+decoder_route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+rows_per_shard=1024
+expected_selected_coordinate_count=16
+controller_bonus_nats=4.0
+controller_penalty_nats=0.5
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+public_run_salt=r4_after_868260_quality_repair_confirmation_v1
+binding_hmac_secret_set=false
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "config_sha256": "befb40e04120cbdb0c4bf42f6cb1b0591a1c8601407d71d9b0fc92e45d9c0575",
+  "duplicate_policy_sha256": "2b9007077d6fd58d8fb9c10a697a4b3c1962fd512ddef84a89e3e93c21b14b21",
+  "errors": [],
+  "generation_started": false,
+  "next_allowed_action": "Local/remote hash preflight and Hermes notification may follow; do not submit Slurm until a separate single-submission route is recorded.",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_validation_v1",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_01/plan_validation/generation_plan", "rows": 1024, "status": "PLAN_ONLY_PASS"}
+{"decode_rows": 3, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_01/plan_validation/toy_decode_all", "status": "PASS"}
+{
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "slurm_submission_started": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false
+}
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_2.out
+claim_note=R4 after-868260 quality-repair confirmation route; plan-only until reviewed preflight passes; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+plan_only=0
+python_bin=uv run python
+generation_started=false
+training_started=false
+llama_started=false
+far_started=false
+paper_claim_allowed=false
+full_mode_delegates_to=scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+trace_binding_verifier=scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+claim_note=R4 after-868016 coordinate-pivot controller generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295
+validate_plan_only=0
+shard_index=2
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation_rows=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+surface_bank=results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/decoder_spec.json
+full_phrase_decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+decoder_route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+rows_per_shard=1024
+expected_selected_coordinate_count=16
+controller_bonus_nats=4.0
+controller_penalty_nats=0.5
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+public_run_salt=r4_after_868260_quality_repair_confirmation_v1
+binding_hmac_secret_set=false
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "config_sha256": "befb40e04120cbdb0c4bf42f6cb1b0591a1c8601407d71d9b0fc92e45d9c0575",
+  "duplicate_policy_sha256": "2b9007077d6fd58d8fb9c10a697a4b3c1962fd512ddef84a89e3e93c21b14b21",
+  "errors": [],
+  "generation_started": false,
+  "next_allowed_action": "Local/remote hash preflight and Hermes notification may follow; do not submit Slurm until a separate single-submission route is recorded.",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_validation_v1",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_02/plan_validation/generation_plan", "rows": 1024, "status": "PLAN_ONLY_PASS"}
+{"decode_rows": 3, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_02/plan_validation/toy_decode_all", "status": "PASS"}
+{
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "slurm_submission_started": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false
+}
+==== /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4qfix-868295_3.out
+claim_note=R4 after-868260 quality-repair confirmation route; plan-only until reviewed preflight passes; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+plan_only=0
+python_bin=uv run python
+generation_started=false
+training_started=false
+llama_started=false
+far_started=false
+paper_claim_allowed=false
+full_mode_delegates_to=scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+trace_binding_verifier=scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+claim_note=R4 after-868016 coordinate-pivot controller generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295
+validate_plan_only=0
+shard_index=3
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation_rows=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+contextual_literal_policy=results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+surface_bank=results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/decoder_spec.json
+full_phrase_decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+decoder_route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+rows_per_shard=1024
+expected_selected_coordinate_count=16
+controller_bonus_nats=4.0
+controller_penalty_nats=0.5
+duplicate_safe_policy=configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+public_run_salt=r4_after_868260_quality_repair_confirmation_v1
+binding_hmac_secret_set=false
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "config_sha256": "befb40e04120cbdb0c4bf42f6cb1b0591a1c8601407d71d9b0fc92e45d9c0575",
+  "duplicate_policy_sha256": "2b9007077d6fd58d8fb9c10a697a4b3c1962fd512ddef84a89e3e93c21b14b21",
+  "errors": [],
+  "generation_started": false,
+  "next_allowed_action": "Local/remote hash preflight and Hermes notification may follow; do not submit Slurm until a separate single-submission route is recorded.",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_validation_v1",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_03/plan_validation/generation_plan", "rows": 1024, "status": "PLAN_ONLY_PASS"}
+{"decode_rows": 3, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_868295/shards/shard_03/plan_validation/toy_decode_all", "status": "PASS"}
+{
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "slurm_submission_started": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false
+}

@@ -1,0 +1,19 @@
+{
+  "active_jobs_seen": [],
+  "generation_started": false,
+  "local_remote_required_artifact_hashes_match": true,
+  "model_forward_started": false,
+  "next_allowed_action": "exactly-one allowlist preflight may enable v2_r4_after_868260_quality_repair_confirmation_h200 and submit one replacement H200 array, then immediately disable the entry",
+  "paper_claim_allowed": false,
+  "remote_allowlist_status": "PASS",
+  "remote_enabled_entries": [],
+  "remote_host": "chimera",
+  "remote_repo": "/home/guanjie.lin001/tokenizer-evidence",
+  "remote_route_validation_status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "remote_wrapper_delegate_status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "required_artifact_count": 14,
+  "schema_name": "natural_evidence_v2_r4_after_868260_remote_artifact_sync_repair_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_868260_REMOTE_ARTIFACT_SYNC_REPAIR_PREFLIGHT_NO_SUBMIT",
+  "training_started": false
+}

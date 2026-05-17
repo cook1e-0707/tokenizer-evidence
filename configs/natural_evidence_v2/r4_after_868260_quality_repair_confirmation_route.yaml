@@ -69,14 +69,17 @@ compute_policy:
   max_time: 30-00:00:00
   allowlist_entry: v2_r4_after_868260_quality_repair_confirmation_h200
   wrapper: scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
-  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
   allowlist_enabled_now: false
   slurm_allowed_now: false
-  plan_only_wrapper_required_now: true
+  plan_only_wrapper_required_now: false
+  full_mode_wrapper_reviewed_now: true
+  full_mode_wrapper_requires_separate_submission_preflight: true
 
 required_before_any_submission:
   route_validation_passed: true
   wrapper_plan_only_passed: true
+  full_mode_wrapper_reviewed: true
   local_allowlist_zero_enabled: true
   remote_hash_preflight_passed: true
   remote_allowlist_zero_enabled: true

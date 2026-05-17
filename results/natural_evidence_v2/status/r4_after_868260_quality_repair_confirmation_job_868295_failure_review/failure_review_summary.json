@@ -1,0 +1,17 @@
+{
+  "all_shards_failed_before_generation": true,
+  "current_phase": "V2_R4_AFTER_868260_JOB_868295_FAILED_REMOTE_ARTIFACT_SYNC_REPAIR_NEXT",
+  "failure_type": "remote_artifact_sync_missing_required_contextual_policy",
+  "generation_started": false,
+  "job_id": "868295",
+  "missing_artifact": "results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json",
+  "model_forward_started": false,
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "repair": "Sync the full r4_after_868260_quality_gate_repair_package precommit directory to Chimera and add required-artifact existence checks before resubmission.",
+  "resubmission_allowed_after_repair_preflight": true,
+  "root_cause": "Full-mode remote preflight omitted the precommit repair package files required by runtime decode.",
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_868295_failure_review_v1",
+  "status": "FAILED_R4_AFTER_868260_JOB_868295_REMOTE_ARTIFACT_SYNC_MISSING_CONTEXTUAL_POLICY_NO_GENERATION",
+  "training_started": false
+}

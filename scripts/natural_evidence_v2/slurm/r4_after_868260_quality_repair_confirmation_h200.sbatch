@@ -34,8 +34,32 @@ echo "far_started=false"
 echo "paper_claim_allowed=false"
 
 if [[ "$PLAN_ONLY" != "1" ]]; then
-  echo "ERROR: full generation mode is fail-closed for this wrapper until a separate reviewed submission route is recorded." >&2
-  exit 2
+  export ROUTE_CONFIG
+  export ROUTE_VALIDATOR
+  export OUTPUT_DIR="${OUTPUT_DIR:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868260_quality_repair_confirmation_${SLURM_ARRAY_JOB_ID:-manual}}"
+  export SCORE_ROWS="${SCORE_ROWS:-results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl}"
+  export ALLOCATION_ROWS="${ALLOCATION_ROWS:-results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl}"
+  export CONTEXTUAL_LITERAL_POLICY="${CONTEXTUAL_LITERAL_POLICY:-results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json}"
+  export DUPLICATE_SAFE_POLICY="${DUPLICATE_SAFE_POLICY:-configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml}"
+  export PUBLIC_RUN_SALT="${PUBLIC_RUN_SALT:-r4_after_868260_quality_repair_confirmation_v1}"
+  export TOKENIZER_REVIEW="${TOKENIZER_REVIEW:-results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/review_summary.json}"
+  export CONTROLLER_REVIEW="${CONTROLLER_REVIEW:-results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_controller_score_868114_review/coordinate_pivot_controller_review_summary.json}"
+  export SURFACE_BANK="${SURFACE_BANK:-results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json}"
+  export PRECOMMIT_DIR="${PRECOMMIT_DIR:-results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516}"
+  export CODEBOOK="${CODEBOOK:-$PRECOMMIT_DIR/codebook.json}"
+  export DECODER_SPEC="${DECODER_SPEC:-$PRECOMMIT_DIR/decoder_spec.json}"
+  export FULL_PHRASE_DECODER_SPEC="${FULL_PHRASE_DECODER_SPEC:-results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json}"
+  export DECODER_ROUTE_CONFIG="${DECODER_ROUTE_CONFIG:-configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml}"
+  export ROWS_PER_SHARD="${ROWS_PER_SHARD:-1024}"
+  export EXPECTED_SELECTED_COORDINATE_COUNT="${EXPECTED_SELECTED_COORDINATE_COUNT:-16}"
+  export KEY_ID_NOT_SECRET_KEY="${KEY_ID_NOT_SECRET_KEY:-r4_first_token_event_controller_key_v1}"
+  export PAYLOAD_ID="${PAYLOAD_ID:-a55e}"
+  export VALIDATE_PLAN_ONLY="${VALIDATE_PLAN_ONLY:-0}"
+  echo "full_mode_delegates_to=scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch"
+  echo "duplicate_safe_policy=$DUPLICATE_SAFE_POLICY"
+  echo "contextual_literal_policy=$CONTEXTUAL_LITERAL_POLICY"
+  echo "trace_binding_verifier=scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py"
+  exec bash scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
 fi
 
 if [[ -n "$PYTHON_BIN" ]]; then

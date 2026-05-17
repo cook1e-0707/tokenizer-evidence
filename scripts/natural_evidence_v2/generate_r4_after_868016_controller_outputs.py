@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import argparse
+import hmac
 import hashlib
 import json
 import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -16,7 +19,6 @@ from scripts.natural_evidence_v2.generate_wp6_e2e_outputs import batched, load_m
 from scripts.natural_evidence_v2.r4_cover_natural_common import (  # noqa: E402
     read_jsonl,
     resolve,
-    sha256_file,
     technical_literal_hits,
     write_json_new,
     write_jsonl_new,
@@ -27,6 +29,11 @@ from scripts.natural_evidence_v2.score_r4_surface_teacher_forced_mass import (  
     chat_prefix,
     controller_token_ids_for_policy,
     r4_row_surface_contract,
+)
+from scripts.natural_evidence_v2.verify_r4_first_token_event_trace_binding import (  # noqa: E402
+    compute_binding_hmac,
+    event_merkle_root,
+    sha256_json,
 )
 
 
@@ -76,6 +83,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--controller-penalty-nats", type=float, required=True)
     parser.add_argument("--controller-max-target-mass", type=float, required=True)
     parser.add_argument("--controller-max-kl-budget", type=float, required=True)
+    parser.add_argument("--duplicate-safe-policy", type=Path, default=None)
+    parser.add_argument("--public-run-salt", default="r4_after_868016_controller_generation")
+    parser.add_argument("--binding-hmac-secret", default=None)
+    parser.add_argument("--surface-codebook-hash", default="")
+    parser.add_argument("--decoder-version-hash", default="")
+    parser.add_argument("--key-id-not-secret-key", default="r4_first_token_event_controller_key_v1")
+    parser.add_argument("--payload-id", default="a55e")
     parser.add_argument("--validate-plan-only", action="store_true")
     parser.add_argument("--require-cuda", action="store_true")
     return parser.parse_args()
@@ -90,6 +104,50 @@ def read_json(path: Path) -> dict[str, Any]:
 
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read_yaml(path: Path) -> dict[str, Any]:
+    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"expected YAML object: {path}")
+    return payload
+
+
+def hmac_seed(*, public_run_salt: str, condition: str, shard_id: str, prompt_id: str, attempt_index: int) -> int:
+    message = "|".join(
+        [
+            str(public_run_salt),
+            str(condition),
+            str(shard_id),
+            "block_00",
+            str(prompt_id),
+            str(attempt_index),
+        ]
+    )
+    digest = hmac.new(str(public_run_salt).encode("utf-8"), message.encode("utf-8"), hashlib.sha256).hexdigest()
+    return int(digest[:16], 16) % (2**31 - 1)
+
+
+def duplicate_policy_payload(path: Path | None) -> dict[str, Any] | None:
+    if path is None:
+        return None
+    payload = read_yaml(resolve(path))
+    generation = payload.get("generation", {})
+    if not isinstance(generation, Mapping):
+        raise ValueError("duplicate-safe policy generation section must be a mapping")
+    if generation.get("retry_selection_rule") != "first_nonduplicate_exact_hash":
+        raise ValueError("duplicate-safe policy must use first_nonduplicate_exact_hash")
+    if generation.get("retry_blind_to_decode_accept") is not True:
+        raise ValueError("duplicate-safe policy must be blind to decode accept")
+    if generation.get("retry_blind_to_payload_match") is not True:
+        raise ValueError("duplicate-safe policy must be blind to payload match")
+    if generation.get("apply_same_policy_to_all_arms") is not True:
+        raise ValueError("duplicate-safe policy must apply to all arms")
+    return payload
 
 
 def validate_selected_rows(
@@ -207,6 +265,9 @@ def write_plan_summary(
             "controller_penalty_nats": float(args.controller_penalty_nats),
             "controller_max_target_mass": float(args.controller_max_target_mass),
             "controller_max_kl_budget": float(args.controller_max_kl_budget),
+            "duplicate_safe_policy": str(resolve(args.duplicate_safe_policy)) if args.duplicate_safe_policy else "",
+            "duplicate_safe_policy_sha256": sha256_file(resolve(args.duplicate_safe_policy)) if args.duplicate_safe_policy else "",
+            "public_run_salt": str(args.public_run_salt),
             "model_name": str(args.model_name),
             "tokenizer_name": str(args.tokenizer_name),
             "max_new_tokens": int(args.max_new_tokens),
@@ -357,6 +418,74 @@ def first_token_event_trace(
     }
 
 
+def trace_bound_fields(
+    *,
+    args: argparse.Namespace,
+    condition: str,
+    row: Mapping[str, Any],
+    response_text: str,
+    output_token_ids: Sequence[int],
+    first_generated_token_id: int | None,
+    input_width: int,
+    target_ids: Sequence[int],
+    other_ids: Sequence[int],
+    controller_enabled: bool,
+) -> dict[str, Any]:
+    selected_events: list[dict[str, Any]] = []
+    selected_event_positions: list[int] = []
+    selected_token_ids: list[int] = []
+    if first_generated_token_id is not None:
+        selected_event_positions = [int(input_width)]
+        selected_token_ids = [int(first_generated_token_id)]
+        selected_events = [
+            {
+                "position": int(input_width),
+                "token_id": int(first_generated_token_id),
+                "coordinate_id": int(row["coordinate_id"]),
+                "condition": str(condition),
+                "prompt_id": str(row["prompt_id"]),
+            }
+        ]
+    controller_hash = sha256_text(
+        json.dumps(
+            {
+                "enabled": bool(controller_enabled),
+                "bonus_nats": float(args.controller_bonus_nats) if controller_enabled else 0.0,
+                "penalty_nats": float(args.controller_penalty_nats) if controller_enabled else 0.0,
+                "max_target_mass": float(args.controller_max_target_mass) if controller_enabled else None,
+                "max_kl_budget": float(args.controller_max_kl_budget) if controller_enabled else None,
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+    )
+    payload = {
+        "arm": str(condition),
+        "model_checkpoint_hash": sha256_text(str(args.model_name)),
+        "tokenizer_hash": sha256_text(str(args.tokenizer_name)),
+        "controller_config_hash": controller_hash,
+        "surface_codebook_hash": str(args.surface_codebook_hash) or sha256_text(str(args.score_rows)),
+        "prompt_hash": sha256_text(str(row.get("prompt_text", ""))),
+        "output_text": response_text,
+        "output_text_sha256": sha256_text(response_text),
+        "output_token_ids": [int(item) for item in output_token_ids],
+        "output_token_ids_sha256": sha256_json([int(item) for item in output_token_ids]),
+        "event_trace_merkle_root": event_merkle_root(selected_events),
+        "selected_events": selected_events,
+        "selected_event_positions": selected_event_positions,
+        "selected_token_ids": selected_token_ids,
+        "coordinate_ids": [int(row["coordinate_id"])],
+        "target_token_set_hashes": [sha256_json(sorted({int(item) for item in target_ids}))],
+        "wrong_key_token_set_hashes": [sha256_json(sorted({int(item) for item in other_ids}))],
+        "payload_id": str(args.payload_id),
+        "key_id_not_secret_key": str(args.key_id_not_secret_key),
+        "decoder_version_hash": str(args.decoder_version_hash) or sha256_text("r4_first_token_event_decoder_v1"),
+        "wrong_key_replay_accept": False,
+        "wrong_payload_replay_accept": False,
+    }
+    return payload
+
+
 def generate_condition(
     *,
     args: argparse.Namespace,
@@ -364,7 +493,9 @@ def generate_condition(
     condition: str,
     adapter_path: Path | None,
     controller_enabled: bool,
-) -> list[dict[str, Any]]:
+    duplicate_policy: Mapping[str, Any] | None,
+    seen_response_hashes: set[str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     import torch
     from transformers import AutoTokenizer, LogitsProcessorList
 
@@ -387,8 +518,16 @@ def generate_condition(
         max_kl_budget=float(args.controller_max_kl_budget),
     )
     outputs: list[dict[str, Any]] = []
+    attempt_rows: list[dict[str, Any]] = []
+    generation_policy = duplicate_policy.get("generation", {}) if isinstance(duplicate_policy, Mapping) else {}
+    use_duplicate_safe_sampling = bool(duplicate_policy)
+    max_duplicate_retries = int(generation_policy.get("max_duplicate_retries", 0)) if use_duplicate_safe_sampling else 0
+    temperature = float(generation_policy.get("temperature", 1.0)) if use_duplicate_safe_sampling else 1.0
+    top_p = float(generation_policy.get("top_p", 1.0)) if use_duplicate_safe_sampling else 1.0
     with torch.no_grad():
-        for batch_index, batch in enumerate(batched(rows, args.batch_size)):
+        row_batches: Iterable[Sequence[Mapping[str, Any]]]
+        row_batches = ([row] for row in rows) if use_duplicate_safe_sampling else batched(rows, args.batch_size)
+        for batch_index, batch in enumerate(row_batches):
             prefix_texts: list[str] = []
             target_ids_by_row: list[list[int]] = []
             other_ids_by_row: list[list[int]] = []
@@ -428,16 +567,68 @@ def generate_condition(
                         controller_config=controller_config,
                     )
                 )
-            generated = model.generate(
-                **encoded,
-                do_sample=False,
-                eos_token_id=tokenizer.eos_token_id,
-                logits_processor=processors,
-                max_new_tokens=max(1, int(args.max_new_tokens)),
-                pad_token_id=tokenizer.pad_token_id,
-            )
+            selected_rows: list[dict[str, Any]] = []
+            attempts_for_batch = max_duplicate_retries + 1 if use_duplicate_safe_sampling else 1
+            generated_for_selection: list[tuple[int, Any]] = []
+            for attempt_index in range(attempts_for_batch):
+                if use_duplicate_safe_sampling:
+                    row_for_seed = batch[0]
+                    seed = hmac_seed(
+                        public_run_salt=str(args.public_run_salt),
+                        condition=condition,
+                        shard_id=str(args.replicate_group_id),
+                        prompt_id=str(row_for_seed["prompt_id"]),
+                        attempt_index=attempt_index,
+                    )
+                    torch.manual_seed(seed)
+                    if torch.cuda.is_available():
+                        torch.cuda.manual_seed_all(seed)
+                generation_kwargs: dict[str, Any] = {
+                    **encoded,
+                    "do_sample": use_duplicate_safe_sampling,
+                    "eos_token_id": tokenizer.eos_token_id,
+                    "logits_processor": processors,
+                    "max_new_tokens": max(1, int(args.max_new_tokens)),
+                    "pad_token_id": tokenizer.pad_token_id,
+                }
+                if use_duplicate_safe_sampling:
+                    generation_kwargs["temperature"] = temperature
+                    generation_kwargs["top_p"] = top_p
+                generated = model.generate(**generation_kwargs)
+                generated_for_selection.append((attempt_index, generated))
+                if not use_duplicate_safe_sampling:
+                    break
+                input_width = int(encoded["input_ids"].shape[1])
+                output_ids = generated[0]
+                continuation_ids = [int(item) for item in output_ids[input_width:].detach().cpu().tolist()]
+                continuation_text = tokenizer.decode(continuation_ids, skip_special_tokens=True)
+                response_text = (prefix_model_texts[0] + continuation_text).strip()
+                response_hash = sha256_text(response_text)
+                attempt_rows.append(
+                    {
+                        "attempt_index": int(attempt_index),
+                        "condition": condition,
+                        "coordinate_id": int(batch[0]["coordinate_id"]),
+                        "duplicate_seen_before_attempt": response_hash in seen_response_hashes,
+                        "prompt_id": str(batch[0]["prompt_id"]),
+                        "replicate_group_id": str(args.replicate_group_id),
+                        "response_text_sha256": response_hash,
+                        "selection_rule": "first_nonduplicate_exact_hash",
+                    }
+                )
+                if response_hash not in seen_response_hashes:
+                    selected_rows = [{"attempt_index": int(attempt_index), "duplicate_exhausted": False}]
+                    break
+            if use_duplicate_safe_sampling and not selected_rows:
+                selected_rows = [{"attempt_index": int(generated_for_selection[-1][0]), "duplicate_exhausted": True}]
+            selected_attempt_indices = {int(item["attempt_index"]): item for item in selected_rows}
+            selected_generated = [(idx, gen) for idx, gen in generated_for_selection if idx in selected_attempt_indices]
+            if not selected_generated:
+                raise RuntimeError("no generated attempt selected")
             input_width = int(encoded["input_ids"].shape[1])
-            for row_index, (row, output_ids) in enumerate(zip(batch, generated, strict=True)):
+            for row_index, (row, output_ids) in enumerate(zip(batch, selected_generated[-1][1], strict=True)):
+                attempt_index = int(selected_generated[-1][0])
+                selection = selected_attempt_indices.get(attempt_index, {"duplicate_exhausted": False})
                 continuation_ids = [int(item) for item in output_ids[input_width:].detach().cpu().tolist()]
                 first_generated_token_id = continuation_ids[0] if continuation_ids else None
                 first_generated_token_text = (
@@ -454,9 +645,11 @@ def generate_condition(
                 )
                 continuation_text = tokenizer.decode(continuation_ids, skip_special_tokens=True)
                 response_text = (prefix_model_texts[row_index] + continuation_text).strip()
+                response_hash = sha256_text(response_text)
                 generation_id = "qwen_v2_r4_868016_gen_" + sha256_text(
                     json.dumps(
                         {
+                            "attempt_index": attempt_index,
                             "condition": condition,
                             "coordinate_id": int(row["coordinate_id"]),
                             "prompt_id": str(row["prompt_id"]),
@@ -466,10 +659,24 @@ def generate_condition(
                         separators=(",", ":"),
                     )
                 )[:20]
-                outputs.append(
-                    {
+                bound = trace_bound_fields(
+                    args=args,
+                    condition=condition,
+                    row=row,
+                    response_text=response_text,
+                    output_token_ids=[int(item) for item in output_ids.detach().cpu().tolist()],
+                    first_generated_token_id=first_generated_token_id,
+                    input_width=input_width,
+                    target_ids=target_ids_by_row[row_index],
+                    other_ids=other_ids_by_row[row_index],
+                    controller_enabled=controller_enabled,
+                )
+                record = {
                         "adapter_path": str(adapter_path) if adapter_path is not None else "",
+                        "arm": condition,
                         "artifact_role": "r4_after_868016_coordinate_pivot_controller_generation_transcript",
+                        "attempt_index": attempt_index,
+                        "binding_hmac": "",
                         "contract_id": "a55e",
                         "controller_applied": bool(controller_enabled),
                         "controller_bonus_nats": float(args.controller_bonus_nats) if controller_enabled else 0.0,
@@ -484,7 +691,15 @@ def generate_condition(
                         "first_generated_token_text": event_trace["first_generated_token_text"],
                         "generation_condition": condition,
                         "generation_id": generation_id,
-                        "generation_mode": "deterministic_greedy_first_step_controller" if controller_enabled else "deterministic_greedy",
+                        "generation_mode": (
+                            "duplicate_safe_controlled_sampling_first_step_controller"
+                            if use_duplicate_safe_sampling and controller_enabled
+                            else "duplicate_safe_controlled_sampling"
+                            if use_duplicate_safe_sampling
+                            else "deterministic_greedy_first_step_controller"
+                            if controller_enabled
+                            else "deterministic_greedy"
+                        ),
                         "generation_unit": "prefix_native_row_cylinder",
                         "max_new_tokens": int(args.max_new_tokens),
                         "model_name": str(args.model_name),
@@ -495,7 +710,7 @@ def generate_condition(
                         "prompt_text": str(row["prompt_text"]),
                         "replicate_group_id": str(args.replicate_group_id),
                         "response_text": response_text,
-                        "response_text_sha256": sha256_text(response_text),
+                        "response_text_sha256": response_hash,
                         "schema_name": "natural_evidence_v2_r4_generated_output_v1",
                         "split": str(row.get("split", "")),
                         "target_bit": int(row["target_bit"]),
@@ -504,12 +719,20 @@ def generate_condition(
                         "tokenizer_name": str(args.tokenizer_name),
                         "training_started": False,
                         "other_first_token_ids": event_trace["other_first_token_ids"],
+                        "duplicate_safe_policy_applied": bool(use_duplicate_safe_sampling),
+                        "duplicate_exhausted": bool(selection.get("duplicate_exhausted", False)),
+                        "attempt_count": int(attempt_index) + 1,
                     }
-                )
+                record.update(bound)
+                if args.binding_hmac_secret:
+                    record["binding_hmac"] = compute_binding_hmac(record, str(args.binding_hmac_secret))
+                outputs.append(record)
+                if response_hash not in seen_response_hashes:
+                    seen_response_hashes.add(response_hash)
     del model
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
-    return outputs
+    return outputs, attempt_rows
 
 
 def main() -> int:
@@ -519,6 +742,7 @@ def main() -> int:
     tokenizer_review = read_json(resolve(args.tokenizer_review))
     controller_review = read_json(resolve(args.controller_review))
     validate_reviews(tokenizer_review, controller_review)
+    duplicate_policy = duplicate_policy_payload(args.duplicate_safe_policy)
     if args.allocation_rows is not None:
         if args.assigned_shard_index is None:
             raise ValueError("--assigned-shard-index is required with --allocation-rows")
@@ -548,21 +772,27 @@ def main() -> int:
         raise FileExistsError(f"refusing to overwrite generated outputs: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
     generated_rows: list[dict[str, Any]] = []
+    attempt_rows: list[dict[str, Any]] = []
+    seen_response_hashes: set[str] = set()
     for condition, adapter_path, controller_enabled in (
         ("protected", None, True),
         ("raw", None, False),
         ("task_only", task_only_adapter, False),
     ):
-        generated_rows.extend(
-            generate_condition(
-                args=args,
-                rows=rows,
-                condition=condition,
-                adapter_path=adapter_path,
-                controller_enabled=controller_enabled,
-            )
+        condition_outputs, condition_attempts = generate_condition(
+            args=args,
+            rows=rows,
+            condition=condition,
+            adapter_path=adapter_path,
+            controller_enabled=controller_enabled,
+            duplicate_policy=duplicate_policy,
+            seen_response_hashes=seen_response_hashes,
         )
+        generated_rows.extend(condition_outputs)
+        attempt_rows.extend(condition_attempts)
     write_jsonl_new(output_dir / "r4_generated_outputs.jsonl", generated_rows)
+    if duplicate_policy is not None:
+        write_jsonl_new(output_dir / "r4_generation_attempts.jsonl", attempt_rows)
     write_plan_summary(args=args, output_dir=output_dir, rows=rows, generation_started=True)
     print(json.dumps({"status": "PASS", "output_dir": str(output_dir), "rows": len(generated_rows)}, sort_keys=True))
     return 0

@@ -1,0 +1,17 @@
+{
+  "failure_type": "remote_artifact_sync_missing_required_contextual_policy",
+  "generation_started": false,
+  "job_id": "868295",
+  "missing_artifact": "results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json",
+  "model_forward_started": false,
+  "next_allowed_action": "sync full precommit repair package to Chimera, rerun required-artifact/allowlist/active-job preflight, then at most one replacement H200 submission if checks pass",
+  "paper_claim_allowed": false,
+  "phase": "V2_R4_AFTER_868260_JOB_868295_FAILED_REMOTE_ARTIFACT_SYNC_REPAIR_NEXT",
+  "reclassifies_868260": false,
+  "report_json": "results/natural_evidence_v1/status/hermes_reports/20260517_0320_r4_after_868260_job_868295_failure_sync_repair_next.json",
+  "report_md": "results/natural_evidence_v1/status/hermes_reports/20260517_0320_r4_after_868260_job_868295_failure_sync_repair_next.md",
+  "schema_name": "natural_evidence_v1_hermes_report_v1",
+  "status": "FAILED_R4_AFTER_868260_JOB_868295_REMOTE_ARTIFACT_SYNC_MISSING_CONTEXTUAL_POLICY_NO_GENERATION",
+  "timestamp_utc": "2026-05-17T03:20:01Z",
+  "training_started": false
+}

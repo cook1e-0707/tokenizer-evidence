@@ -28,3 +28,13 @@ def test_after_868260_quality_repair_confirmation_route_rejects_full_mode_unlock
     summary = validate_route(config)
     assert summary["status"].startswith("FAIL_")
     assert any("slurm_allowed_now must be false" in error for error in summary["errors"])
+
+
+def test_after_868260_quality_repair_confirmation_route_requires_reviewed_full_mode_wrapper() -> None:
+    config = load_yaml(DEFAULT_CONFIG)
+    config["compute_policy"]["plan_only_wrapper_required_now"] = True
+    config["compute_policy"]["full_mode_wrapper_reviewed_now"] = False
+    summary = validate_route(config)
+    assert summary["status"].startswith("FAIL_")
+    assert any("plan_only_wrapper_required_now must be false" in error for error in summary["errors"])
+    assert any("full_mode_wrapper_reviewed_now must be true" in error for error in summary["errors"])

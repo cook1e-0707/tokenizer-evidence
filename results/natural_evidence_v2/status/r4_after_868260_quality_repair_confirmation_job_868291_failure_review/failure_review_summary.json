@@ -1,0 +1,17 @@
+{
+  "all_shards_failed_before_generation": true,
+  "current_phase": "V2_R4_AFTER_868260_JOB_868291_FAILED_ALLOWLIST_RUNTIME_VALIDATION_RACE_REPAIR_VALIDATED_NEXT",
+  "evidence": "slurm stdout contains allowlist enabled entries must be exactly target during submission preflight: []",
+  "failure_type": "control_plane_runtime_validation_race",
+  "generation_started": false,
+  "job_id": "868291",
+  "model_forward_started": false,
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "repair": "Remove runtime --allow-submission-enabled-entry from delegated generation wrapper; keep exactly-one allowlist check as submission preflight only.",
+  "resubmission_allowed_after_repair_preflight": true,
+  "root_cause": "Wrapper runtime validation used --allow-submission-enabled-entry after the required immediate post-sbatch allowlist disablement, so all shards failed before generation.",
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_868291_failure_review_v1",
+  "status": "FAILED_R4_AFTER_868260_JOB_868291_ALLOWLIST_RUNTIME_VALIDATION_RACE_NO_GENERATION",
+  "training_started": false
+}

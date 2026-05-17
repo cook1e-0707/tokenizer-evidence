@@ -1,0 +1,27 @@
+{
+  "account": "cs_yinxin.wan",
+  "allowlist_entry_enabled_for_submission": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "array": "0-3%4",
+  "command": "PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch",
+  "generation_result_available": false,
+  "gres": "gpu:h200:1",
+  "job_id": "868299",
+  "job_name": "nat-ev-v2-r4qfix",
+  "local_allowlist_disabled_after_submission": true,
+  "next_allowed_action": "monitor job 868299 only; after terminal state, sync and review artifacts before any next route",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "reclassifies_868260": false,
+  "remote_allowlist_disabled_after_submission": true,
+  "remote_squeue_after_submission": [
+    "868301 RUNNING nat-ev-v2-r4qfix pomplun 0:01",
+    "868302 RUNNING nat-ev-v2-r4qfix pomplun 0:01",
+    "868299 RUNNING nat-ev-v2-r4qfix pomplun 0:01",
+    "868300 RUNNING nat-ev-v2-r4qfix pomplun 0:02"
+  ],
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_resubmission2_v1",
+  "status": "SUBMITTED_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REPLACEMENT2_H200_ARRAY_MONITOR_ONLY",
+  "time_limit": "30-00:00:00",
+  "training_started": false
+}

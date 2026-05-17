@@ -52,6 +52,13 @@ CONTROLLER_BONUS_NATS="${CONTROLLER_BONUS_NATS:-4.0}"
 CONTROLLER_PENALTY_NATS="${CONTROLLER_PENALTY_NATS:-0.5}"
 CONTROLLER_MAX_TARGET_MASS="${CONTROLLER_MAX_TARGET_MASS:-0.5}"
 CONTROLLER_MAX_KL_BUDGET="${CONTROLLER_MAX_KL_BUDGET:-0.5}"
+DUPLICATE_SAFE_POLICY="${DUPLICATE_SAFE_POLICY:-}"
+PUBLIC_RUN_SALT="${PUBLIC_RUN_SALT:-r4_after_868016_controller_generation}"
+BINDING_HMAC_SECRET="${BINDING_HMAC_SECRET:-}"
+SURFACE_CODEBOOK_HASH="${SURFACE_CODEBOOK_HASH:-}"
+DECODER_VERSION_HASH="${DECODER_VERSION_HASH:-}"
+KEY_ID_NOT_SECRET_KEY="${KEY_ID_NOT_SECRET_KEY:-r4_first_token_event_controller_key_v1}"
+PAYLOAD_ID="${PAYLOAD_ID:-a55e}"
 VENV_PATH="${VENV_PATH:-/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312}"
 HF_HOME="${HF_HOME:-/hpcstor6/scratch01/g/guanjie.lin001/huggingface}"
 HF_TOKEN_FILE="${HF_TOKEN_FILE:-/hpcstor6/scratch01/g/guanjie.lin001/keys/hf_token}"
@@ -115,6 +122,27 @@ echo "rows_per_shard=$ROWS_PER_SHARD"
 echo "expected_selected_coordinate_count=$EXPECTED_SELECTED_COORDINATE_COUNT"
 echo "controller_bonus_nats=$CONTROLLER_BONUS_NATS"
 echo "controller_penalty_nats=$CONTROLLER_PENALTY_NATS"
+echo "duplicate_safe_policy=${DUPLICATE_SAFE_POLICY:-unset}"
+echo "public_run_salt=$PUBLIC_RUN_SALT"
+echo "binding_hmac_secret_set=$([ -n "$BINDING_HMAC_SECRET" ] && echo true || echo false)"
+
+GENERATOR_EXTRA_ARGS=(
+  --public-run-salt "$PUBLIC_RUN_SALT"
+  --key-id-not-secret-key "$KEY_ID_NOT_SECRET_KEY"
+  --payload-id "$PAYLOAD_ID"
+)
+if [ -n "$DUPLICATE_SAFE_POLICY" ]; then
+  GENERATOR_EXTRA_ARGS+=(--duplicate-safe-policy "$DUPLICATE_SAFE_POLICY")
+fi
+if [ -n "$BINDING_HMAC_SECRET" ]; then
+  GENERATOR_EXTRA_ARGS+=(--binding-hmac-secret "$BINDING_HMAC_SECRET")
+fi
+if [ -n "$SURFACE_CODEBOOK_HASH" ]; then
+  GENERATOR_EXTRA_ARGS+=(--surface-codebook-hash "$SURFACE_CODEBOOK_HASH")
+fi
+if [ -n "$DECODER_VERSION_HASH" ]; then
+  GENERATOR_EXTRA_ARGS+=(--decoder-version-hash "$DECODER_VERSION_HASH")
+fi
 
 if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
   if [ -z "$SHARD_INDEX" ]; then
@@ -149,10 +177,9 @@ export FULL_PHRASE_DECODER_SPEC
 export DECODER_ROUTE_CONFIG
 mkdir -p "$plan_validation_dir"
 
-VALIDATION_EXTRA_ARGS=""
-if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
-  VALIDATION_EXTRA_ARGS="--allow-submission-enabled-entry"
-fi
+# The exactly-one allowlist check is a submission preflight. Runtime jobs must
+# tolerate the required immediate post-sbatch allowlist disablement.
+VALIDATION_EXTRA_ARGS="${ROUTE_VALIDATION_EXTRA_ARGS:-}"
 
 "$PYTHON_BIN" "$ROUTE_VALIDATOR" \
   --config "$ROUTE_CONFIG" \
@@ -163,6 +190,7 @@ fi
   scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
   scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py \
   scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py \
+  scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py \
   "$ROUTE_VALIDATOR"
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
@@ -186,6 +214,7 @@ fi
   --controller-penalty-nats "$CONTROLLER_PENALTY_NATS" \
   --controller-max-target-mass "$CONTROLLER_MAX_TARGET_MASS" \
   --controller-max-kl-budget "$CONTROLLER_MAX_KL_BUDGET" \
+  "${GENERATOR_EXTRA_ARGS[@]}" \
   --validate-plan-only
 
 "$PYTHON_BIN" - <<'PY'
@@ -280,12 +309,17 @@ fi
 for required in "$SCORE_ROWS" "$ALLOCATION_ROWS" "$CONTEXTUAL_LITERAL_POLICY" "$TOKENIZER_REVIEW" "$CONTROLLER_REVIEW" "$SURFACE_BANK" "$CODEBOOK" "$DECODER_SPEC" "$DECODER_ROUTE_CONFIG" \
   "$FULL_PHRASE_DECODER_SPEC" \
   "scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py" \
-  "scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py"; do
+  "scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py" \
+  "scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py"; do
   if [ ! -s "$required" ]; then
     echo "REQUIRED_ARTIFACT_MISSING_OR_EMPTY: $required" >&2
     exit 2
   fi
 done
+if [ -n "$DUPLICATE_SAFE_POLICY" ] && [ ! -s "$DUPLICATE_SAFE_POLICY" ]; then
+  echo "REQUIRED_DUPLICATE_SAFE_POLICY_MISSING_OR_EMPTY: $DUPLICATE_SAFE_POLICY" >&2
+  exit 2
+fi
 
 if [ ! -s "$TASK_ONLY_ADAPTER/adapter_config.json" ]; then
   echo "REQUIRED_TASK_ONLY_ADAPTER_MISSING_OR_EMPTY: $TASK_ONLY_ADAPTER" >&2
@@ -322,7 +356,17 @@ mkdir -p "$shard_dir"
   --controller-penalty-nats "$CONTROLLER_PENALTY_NATS" \
   --controller-max-target-mass "$CONTROLLER_MAX_TARGET_MASS" \
   --controller-max-kl-budget "$CONTROLLER_MAX_KL_BUDGET" \
+  "${GENERATOR_EXTRA_ARGS[@]}" \
   --require-cuda
+
+TRACE_BINDING_ARGS=(
+  --jsonl "$shard_dir/r4_generated_outputs.jsonl"
+  --output "$shard_dir/trace_binding_validation.json"
+)
+if [ -n "$BINDING_HMAC_SECRET" ]; then
+  TRACE_BINDING_ARGS+=(--hmac-secret "$BINDING_HMAC_SECRET")
+fi
+"$PYTHON_BIN" scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py "${TRACE_BINDING_ARGS[@]}"
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py \
   --generated-outputs "$shard_dir/r4_generated_outputs.jsonl" \

@@ -18,6 +18,7 @@ DEFAULT_CONFIG = ROOT / "configs/natural_evidence_v2/r4_after_868260_quality_rep
 ALLOWLIST = ROOT / "configs/natural_evidence_v2/run_allowlist.yaml"
 EXPECTED_ENTRY = "v2_r4_after_868260_quality_repair_confirmation_h200"
 EXPECTED_WRAPPER = "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+EXPECTED_COMMAND_PATTERN = f"PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch {EXPECTED_WRAPPER}"
 
 
 def mapping(value: Any, field: str, errors: list[str]) -> Mapping[str, Any]:
@@ -69,7 +70,7 @@ def find_allowlist_entry(allowlist: Mapping[str, Any], name: str) -> Mapping[str
     return None
 
 
-def validate_route(config: Mapping[str, Any]) -> dict[str, Any]:
+def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry: bool = False) -> dict[str, Any]:
     errors: list[str] = []
     if config.get("schema_name") != "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_v1":
         errors.append("schema_name mismatch")
@@ -219,7 +220,7 @@ def validate_route(config: Mapping[str, Any]) -> dict[str, Any]:
         errors.append("allowlist entry mismatch")
     if compute.get("wrapper") != EXPECTED_WRAPPER:
         errors.append("wrapper mismatch")
-    if compute.get("command_pattern") != f"sbatch {EXPECTED_WRAPPER}":
+    if compute.get("command_pattern") != EXPECTED_COMMAND_PATTERN:
         errors.append("command_pattern mismatch")
     for field, expected in (("partition", "pomplun"), ("qos", "pomplun"), ("account", "cs_yinxin.wan"), ("gres", "gpu:h200:1"), ("max_time", "30-00:00:00")):
         if compute.get(field) != expected:
@@ -228,8 +229,12 @@ def validate_route(config: Mapping[str, Any]) -> dict[str, Any]:
         errors.append("allowlist_enabled_now must be false")
     if compute.get("slurm_allowed_now") is not False:
         errors.append("slurm_allowed_now must be false")
-    if compute.get("plan_only_wrapper_required_now") is not True:
-        errors.append("plan_only_wrapper_required_now must be true")
+    if compute.get("plan_only_wrapper_required_now") is not False:
+        errors.append("plan_only_wrapper_required_now must be false after full-mode wrapper review")
+    if compute.get("full_mode_wrapper_reviewed_now") is not True:
+        errors.append("full_mode_wrapper_reviewed_now must be true")
+    if compute.get("full_mode_wrapper_requires_separate_submission_preflight") is not True:
+        errors.append("full_mode_wrapper_requires_separate_submission_preflight must be true")
     if wrapper.exists():
         text = wrapper.read_text(encoding="utf-8")
         for fragment in (
@@ -239,7 +244,11 @@ def validate_route(config: Mapping[str, Any]) -> dict[str, Any]:
             "#SBATCH --gres=gpu:h200:1",
             "#SBATCH --time=30-00:00:00",
             "PLAN_ONLY",
-            "full generation mode is fail-closed",
+            "r4_after_868016_controller_generation_h200.sbatch",
+            "DUPLICATE_SAFE_POLICY",
+            "CONTEXTUAL_LITERAL_POLICY",
+            "verify_r4_first_token_event_trace_binding.py",
+            "VALIDATE_PLAN_ONLY",
             "validate_r4_after_868260_quality_repair_confirmation_route.py",
         ):
             if fragment not in text:
@@ -247,15 +256,21 @@ def validate_route(config: Mapping[str, Any]) -> dict[str, Any]:
 
     allowlist = load_yaml(ALLOWLIST)
     enabled_entries = enabled_allowlist_entries(allowlist)
-    if enabled_entries:
+    if allow_submission_enabled_entry:
+        if enabled_entries != [EXPECTED_ENTRY]:
+            errors.append(
+                f"allowlist enabled entries must be exactly [{EXPECTED_ENTRY!r}] during submission preflight: {enabled_entries}"
+            )
+    elif enabled_entries:
         errors.append(f"allowlist enabled entries must be empty during plan-only validation: {enabled_entries}")
     entry = find_allowlist_entry(allowlist, EXPECTED_ENTRY)
     if entry is None:
         errors.append("allowlist entry missing")
     else:
-        if entry.get("enabled") is not False:
-            errors.append("allowlist entry must remain disabled")
-        if entry.get("command_pattern") != f"sbatch {EXPECTED_WRAPPER}":
+        expected_enabled = bool(allow_submission_enabled_entry)
+        if entry.get("enabled") is not expected_enabled:
+            errors.append(f"allowlist entry enabled state must be {expected_enabled}")
+        if entry.get("command_pattern") != EXPECTED_COMMAND_PATTERN:
             errors.append("allowlist command_pattern mismatch")
 
     prerequisites = mapping(config.get("required_before_any_submission"), "required_before_any_submission", errors)
@@ -281,6 +296,7 @@ def validate_route(config: Mapping[str, Any]) -> dict[str, Any]:
         "wrapper": EXPECTED_WRAPPER,
         "config_sha256": sha256_file(DEFAULT_CONFIG) if DEFAULT_CONFIG.exists() else "",
         "duplicate_policy_sha256": sha256_file(duplicate_policy) if duplicate_policy.exists() else "",
+        "allow_submission_enabled_entry": bool(allow_submission_enabled_entry),
         "slurm_allowed": False,
         "generation_started": False,
         "training_started": False,
@@ -301,12 +317,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate R4 after-868260 quality-repair confirmation route in plan-only mode.")
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--output-dir", type=Path, default=None)
+    parser.add_argument("--allow-submission-enabled-entry", action="store_true")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    summary = validate_route(load_yaml(args.config))
+    summary = validate_route(load_yaml(args.config), allow_submission_enabled_entry=bool(args.allow_submission_enabled_entry))
     if args.output_dir is not None:
         write_json_new(args.output_dir / "route_validation_summary.json", summary)
         report = [
