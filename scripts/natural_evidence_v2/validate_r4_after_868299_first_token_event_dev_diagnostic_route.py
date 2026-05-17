@@ -58,7 +58,12 @@ def find_allowlist_entry(allowlist: Mapping[str, Any], name: str) -> Mapping[str
     return None
 
 
-def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry: bool = False) -> dict[str, Any]:
+def validate_route(
+    config: Mapping[str, Any],
+    *,
+    allow_submission_enabled_entry: bool = False,
+    skip_allowlist_state_check: bool = False,
+) -> dict[str, Any]:
     errors: list[str] = []
     if config.get("schema_name") != "natural_evidence_v2_r4_after_868299_first_token_event_dev_diagnostic_route_v1":
         errors.append("schema_name mismatch")
@@ -236,7 +241,13 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
 
     allowlist = load_yaml(ALLOWLIST)
     enabled_entries = enabled_allowlist_entries(allowlist)
-    if allow_submission_enabled_entry:
+    if skip_allowlist_state_check:
+        # Runtime array tasks can start before or after the required immediate
+        # post-sbatch allowlist disablement. Submission preflights still perform
+        # the strict enabled-entry checks; runtime only verifies the entry exists
+        # and still points at the reviewed command.
+        pass
+    elif allow_submission_enabled_entry:
         if enabled_entries != [EXPECTED_ENTRY]:
             errors.append(f"allowlist enabled entries must be exactly [{EXPECTED_ENTRY!r}]: {enabled_entries}")
     elif enabled_entries:
@@ -245,9 +256,10 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
     if entry is None:
         errors.append("allowlist entry missing")
     else:
-        expected_enabled = bool(allow_submission_enabled_entry)
-        if entry.get("enabled") is not expected_enabled:
-            errors.append(f"allowlist entry enabled state must be {expected_enabled}")
+        if not skip_allowlist_state_check:
+            expected_enabled = bool(allow_submission_enabled_entry)
+            if entry.get("enabled") is not expected_enabled:
+                errors.append(f"allowlist entry enabled state must be {expected_enabled}")
         if entry.get("command_pattern") != EXPECTED_COMMAND_PATTERN:
             errors.append("allowlist command_pattern mismatch")
 
@@ -275,6 +287,7 @@ def validate_route(config: Mapping[str, Any], *, allow_submission_enabled_entry:
         "config_sha256": sha256_file(DEFAULT_CONFIG) if DEFAULT_CONFIG.exists() else "",
         "allocation_rows_sha256": sha256_file(allocation_rows_path) if allocation_rows_path.exists() else "",
         "allow_submission_enabled_entry": bool(allow_submission_enabled_entry),
+        "skip_allowlist_state_check": bool(skip_allowlist_state_check),
         "slurm_allowed": False,
         "generation_started": False,
         "training_started": False,
@@ -295,13 +308,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--allow-submission-enabled-entry", action="store_true")
+    parser.add_argument("--skip-allowlist-state-check", action="store_true")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     config_path = args.config if args.config.is_absolute() else ROOT / args.config
-    summary = validate_route(load_yaml(config_path), allow_submission_enabled_entry=bool(args.allow_submission_enabled_entry))
+    summary = validate_route(
+        load_yaml(config_path),
+        allow_submission_enabled_entry=bool(args.allow_submission_enabled_entry),
+        skip_allowlist_state_check=bool(args.skip_allowlist_state_check),
+    )
     if args.output_dir is not None:
         output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
         output_dir.mkdir(parents=True, exist_ok=True)

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T05:58:00Z
+Last synchronized: 2026-05-17T08:01:25Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,46 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_868313_SUBMITTED_MONITOR_ONLY`
+`V2_R4_AFTER_868299_DEV_DIAGNOSTIC_REPAIRED_JOB_868348_SUBMITTED_MONITOR_ONLY`
+
+## Latest Update
+
+Job `868313` (`nat-ev-v2-r4dev`, array `0-31%4`) reached a terminal mixed
+state and is not a canonical dev-diagnostic result.
+
+```text
+failure review:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_868313_failure_review_20260517/
+status:
+  FAILED_R4_AFTER_868299_DEV_JOB_868313_RUNTIME_ALLOWLIST_RACE_PARTIAL_GENERATION_NO_METHOD_RESULT
+failed shards:
+  0..23
+completed shards:
+  24..31
+root cause:
+  runtime allowlist enabled-state race before immediate post-sbatch disablement
+method interpretation:
+  not a model/tokenizer/controller/decoder failure
+canonical adoption:
+  false
+```
+
+The repair keeps submission preflights strict, but separates runtime shard
+self-checks from allowlist enabled-state checks. Runtime shards still verify
+the reviewed allowlist entry and command pattern.
+
+The repaired replacement has been submitted:
+
+```text
+submission:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_repair_submission_20260517/
+status:
+  SUBMITTED_R4_AFTER_868299_DEV_DIAGNOSTIC_REPAIRED_H200_ARRAY_MONITOR_ONLY
+job:
+  868348, array 0-31%4, nat-ev-v2-r4dev, pomplun H200
+post-submit allowlist:
+  local PASS, remote PASS
+```
 
 ## Active Route Update
 
@@ -634,17 +673,20 @@ recorded and preflighted. The next allowed action is:
 
 ```text
 next:
-  monitor Slurm array job 868313 only; after terminal completion sync artifacts
+  monitor Slurm array job 868348 only; after terminal completion sync artifacts
   and run the first-token event dev diagnostic review
 allowed:
   Hermes notification
   artifact-only 868299 review synchronization
   32-block first-token event dev diagnostic route planning/preflight
-  monitoring job 868313
+  runtime allowlist-race repair and wrapper smoke tests
+  monitoring job 868348
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive
-  another Slurm generation job before 868313 terminal review
+  adopting partial 868313 outputs as a canonical dev result
+  another Slurm generation job before 868348 terminal review
+  paper-facing positive claims
 not yet allowed:
   training
 ```

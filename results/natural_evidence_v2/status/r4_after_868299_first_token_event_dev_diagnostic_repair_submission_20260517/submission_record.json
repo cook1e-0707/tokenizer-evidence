@@ -1,0 +1,15 @@
+{
+  "allowlist_disabled_after_submission": true,
+  "array": "0-31%4",
+  "command": "PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868299_first_token_event_dev_diagnostic_h200.sbatch",
+  "gpu": "h200:1",
+  "job_id": "868348",
+  "job_name": "nat-ev-v2-r4dev",
+  "local_post_submit_zero_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868299_dev_repair_post_submit_zero_allowlist_safety_local_20260517.json",
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "remote_post_submit_zero_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868299_dev_repair_post_submit_zero_allowlist_safety_remote_20260517.json",
+  "replaces_failed_job": "868313",
+  "schema_name": "natural_evidence_v2_r4_after_868299_dev_repair_submission_record_v1",
+  "status": "SUBMITTED_R4_AFTER_868299_DEV_DIAGNOSTIC_REPAIRED_H200_ARRAY_MONITOR_ONLY"
+}

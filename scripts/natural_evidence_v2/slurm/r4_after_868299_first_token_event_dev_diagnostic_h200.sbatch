@@ -55,11 +55,13 @@ if [[ "$PLAN_ONLY" != "1" ]]; then
   export KEY_ID_NOT_SECRET_KEY="${KEY_ID_NOT_SECRET_KEY:-r4_first_token_event_controller_key_v1}"
   export PAYLOAD_ID="${PAYLOAD_ID:-a55e}"
   export VALIDATE_PLAN_ONLY="${VALIDATE_PLAN_ONLY:-0}"
+  export ROUTE_VALIDATION_EXTRA_ARGS="${ROUTE_VALIDATION_EXTRA_ARGS:---skip-allowlist-state-check}"
   echo "full_mode_delegates_to=scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch"
   echo "output_dir=$OUTPUT_DIR"
   echo "allocation_rows=$ALLOCATION_ROWS"
   echo "duplicate_safe_policy=$DUPLICATE_SAFE_POLICY"
   echo "contextual_literal_policy=$CONTEXTUAL_LITERAL_POLICY"
+  echo "route_validation_extra_args=$ROUTE_VALIDATION_EXTRA_ARGS"
   exec bash scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch
 fi
 

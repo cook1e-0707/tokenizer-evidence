@@ -16,6 +16,14 @@ def test_after_868299_first_token_event_dev_route_passes_plan_only() -> None:
     assert summary["errors"] == []
     assert summary["slurm_allowed"] is False
     assert summary["generation_started"] is False
+    assert summary["skip_allowlist_state_check"] is False
+
+
+def test_after_868299_first_token_event_dev_route_can_skip_runtime_allowlist_state_check() -> None:
+    summary = validate_route(load_yaml(DEFAULT_CONFIG), skip_allowlist_state_check=True)
+    assert summary["status"] == "PASS_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_ROUTE_PLAN_ONLY_NO_SUBMIT"
+    assert summary["errors"] == []
+    assert summary["skip_allowlist_state_check"] is True
 
 
 def test_after_868299_first_token_event_dev_route_rejects_duplicate_gate_relaxation() -> None:

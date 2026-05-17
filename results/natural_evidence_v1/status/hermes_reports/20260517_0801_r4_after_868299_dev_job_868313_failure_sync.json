@@ -1,0 +1,43 @@
+{
+  "completed_shards": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "failed_shards": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "job_id": "868313",
+  "next_allowed_action": "Patch runtime route validation, rerun local/remote preflights, and submit one repaired H200 32-shard dev diagnostic replacement if preflights pass.",
+  "phase": "V2_R4_AFTER_868299_DEV_JOB_868313_FAILED_RUNTIME_ALLOWLIST_RACE_REPAIR_NEXT",
+  "root_cause": "runtime_allowlist_enabled_state_race_before_immediate_post_sbatch_disablement",
+  "status": "FAILED_R4_AFTER_868299_DEV_JOB_868313_RUNTIME_ALLOWLIST_RACE_PARTIAL_GENERATION_NO_METHOD_RESULT"
+}
