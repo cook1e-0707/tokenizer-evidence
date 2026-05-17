@@ -17507,5 +17507,39 @@
     "tests": "5 passed",
     "next_allowed_action": "Plan-only route/wrapper update may consume the validated quality-gate repair package; no Slurm until a new reviewed rerun route passes local and remote preflight.",
     "timestamp_utc": "2026-05-17T00:50:00Z"
+  },
+  "2026-05-17T02:12:34Z_r4_after_868260_forensics_policy_trace_artifacts_started": {
+    "status": "SYNCED_R4_AFTER_868260_FIRST_TOKEN_EVENT_QUALITY_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT",
+    "current_phase": "V2_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATED_NO_SUBMIT",
+    "source_job_id": "868260",
+    "state_sync": "results/natural_evidence_v2/status/r4_after_868260_state_sync_20260517/state_sync_summary.json",
+    "duplicate_forensics": "results/natural_evidence_v2/status/r4_868260_duplicate_forensics_20260517/duplicate_forensics_summary.json",
+    "duplicate_safe_generation_policy_v2": "configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml",
+    "contextual_forbidden_policy_v2_validation": "results/natural_evidence_v2/status/r4_contextual_forbidden_surface_policy_v2_validation_20260517/validation_summary.json",
+    "trace_binding_spec": "docs/natural_evidence_v2/R4_FIRST_TOKEN_EVENT_TRACE_BINDING_SPEC_20260517.md",
+    "reclassifies_868260": false,
+    "slurm_allowed": false,
+    "generation_started": false,
+    "training_started": false,
+    "paper_claim_allowed": false,
+    "next_allowed_action": "After artifact-only tests pass, prepare a plan-only 4-block quality-repair confirmation route review. No Slurm until that route is recorded and preflight passes.",
+    "timestamp_utc": "2026-05-17T02:12:34Z"
+  },
+  "2026-05-17T02:14:00Z_r4_after_868260_forensics_policy_trace_artifacts_validated": {
+    "status": "PASS_R4_AFTER_868260_FORENSICS_POLICY_TRACE_BINDING_ARTIFACTS_VALIDATED_NO_SUBMIT",
+    "current_phase": "V2_R4_AFTER_868260_FORENSICS_POLICY_TRACE_BINDING_ARTIFACTS_VALIDATED_NO_SUBMIT",
+    "source_job_id": "868260",
+    "duplicate_forensics": "results/natural_evidence_v2/status/r4_868260_duplicate_forensics_20260517/duplicate_forensics_summary.json",
+    "duplicate_safe_policy_validation": "results/natural_evidence_v2/status/r4_first_token_event_duplicate_safe_generation_policy_v2_validation_20260517/validation_summary.json",
+    "contextual_forbidden_validation": "results/natural_evidence_v2/status/r4_contextual_forbidden_surface_policy_v2_validation_20260517/validation_summary.json",
+    "trace_binding_validation": "results/natural_evidence_v2/status/r4_first_token_event_trace_binding_validation_20260517/trace_binding_validation_summary.json",
+    "tests": "15 passed",
+    "reclassifies_868260": false,
+    "slurm_allowed": false,
+    "generation_started": false,
+    "training_started": false,
+    "paper_claim_allowed": false,
+    "next_allowed_action": "Prepare a plan-only 4-block first-token event quality-repair confirmation route using duplicate-safe generation v2, contextual forbidden policy v2, and trace binding. Do not submit Slurm until route review and preflight pass.",
+    "timestamp_utc": "2026-05-17T02:14:00Z"
   }
 }

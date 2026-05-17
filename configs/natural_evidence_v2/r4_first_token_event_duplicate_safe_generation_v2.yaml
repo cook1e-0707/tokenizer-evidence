@@ -1,0 +1,44 @@
+schema_name: natural_evidence_v2_r4_first_token_event_duplicate_safe_generation_policy_v2
+source_job_id: "868260"
+reclassifies_868260: false
+
+generation:
+  decoding_mode: controlled_sampling
+  temperature: 0.45
+  top_p: 0.90
+  max_duplicate_retries: 3
+  retry_selection_rule: first_nonduplicate_exact_hash
+  retry_blind_to_decode_accept: true
+  retry_blind_to_payload_match: true
+  apply_same_policy_to_all_arms: true
+
+seeding:
+  hmac_seed_fields:
+    - public_run_salt
+    - arm
+    - shard_id
+    - block_id
+    - prompt_id
+    - attempt_index
+  protected_key_not_used_for_sampling_seed: true
+
+duplicate_gates:
+  within_block_duplicate_response_hash_count: 0
+  global_duplicate_response_hash_count: 0
+  duplicate_prompt_prefix_pair_count: 0
+  duplicate_generation_id_count: 0
+  duplicate_decode_row_hash_count: 0
+
+logging:
+  record_all_attempts: true
+  record_rejection_reason: duplicate_only
+  do_not_reject_based_on_decoder_success: true
+  do_not_reject_based_on_payload_match: true
+  duplicate_exhausted_row_status: failed_quality_gate
+
+control_plane:
+  slurm_allowed: false
+  generation_started: false
+  training_started: false
+  paper_claim_allowed: false
+  reclassifies_868260: false

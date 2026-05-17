@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T00:50:00Z
+Last synchronized: 2026-05-17T02:12:34Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,9 +9,47 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATED_NO_SUBMIT`
+`V2_R4_AFTER_868260_FORENSICS_POLICY_TRACE_BINDING_ARTIFACTS_VALIDATED_NO_SUBMIT`
 
-## Most Recent Compute Result
+## Active Route Update
+
+The active route has been synchronized after expert review of `868260`:
+
+```text
+state sync:
+  results/natural_evidence_v2/status/r4_after_868260_state_sync_20260517/
+status:
+  SYNCED_R4_AFTER_868260_FIRST_TOKEN_EVENT_QUALITY_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT
+artifact validation:
+  PASS_R4_AFTER_868260_FORENSICS_POLICY_TRACE_BINDING_ARTIFACTS_VALIDATED_NO_SUBMIT
+active interpretation:
+  failed strict-quality diagnostic with full protected codeword recovery before
+  quality filtering
+active route:
+  provider-side keyed first-token event evidence with strict natural-output
+  quality, duplicate, contextual-forbidden, and trace-binding gates
+```
+
+Older v3 training-objective blockers are historical for the active route. They
+remain evidence that surface-mass/objective pressure was insufficient, but they
+are not the current execution blocker.
+
+New artifact-only packages are recorded:
+
+```text
+duplicate forensics:
+  results/natural_evidence_v2/status/r4_868260_duplicate_forensics_20260517/
+duplicate-safe generation policy v2 validation:
+  results/natural_evidence_v2/status/r4_first_token_event_duplicate_safe_generation_policy_v2_validation_20260517/
+contextual forbidden-surface policy v2 validation:
+  results/natural_evidence_v2/status/r4_contextual_forbidden_surface_policy_v2_validation_20260517/
+trace-binding validation:
+  results/natural_evidence_v2/status/r4_first_token_event_trace_binding_validation_20260517/
+tests:
+  15 passed
+```
+
+## Prior Compute Result: 868212
 
 Job `868212` completed the reviewed quality-repaired after-868151 controller
 generation diagnostic on Chimera H200:
@@ -395,21 +433,23 @@ duplicate-safe generation policy:
 
 ## Next Allowed Action
 
-The route may continue automatically, but no new Slurm rerun is allowed until a
-new artifact-only repair package passes. The next allowed action is:
+The route may continue automatically after recorded preconditions pass, but no
+new Slurm rerun is allowed from the current state. The next allowed action is:
 
 ```text
 next:
-  update route config/validator/wrapper in plan-only mode to consume the
-  validated quality-gate repair package, then run local and remote preflight
+  prepare a plan-only 4-block quality-repair confirmation route review using
+  duplicate-safe generation policy v2, contextual forbidden-surface policy v2,
+  and trace binding; do not submit Slurm until the route review and preflight
+  pass
 allowed:
-  artifact-only route validation
-  plan-only wrapper validation
-  local/remote preflight
+  plan-only route preparation after these artifacts pass
+  local/remote preflight after route review
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive
-  another Slurm generation rerun before a new reviewed route is recorded
+  another Slurm generation rerun before a new reviewed route is recorded and
+  all preconditions pass
 not yet allowed:
   training
 ```

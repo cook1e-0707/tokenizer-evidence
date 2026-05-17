@@ -1,0 +1,20 @@
+{
+  "generation_started": false,
+  "negative_fixture": {
+    "errors": [
+      "wrong-key replay accepted"
+    ],
+    "generation_id": "fixture-valid",
+    "valid": false
+  },
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_first_token_event_trace_binding_validation_fixture_v1",
+  "slurm_allowed": false,
+  "status": "PASS_R4_FIRST_TOKEN_EVENT_TRACE_BINDING_FIXTURE_VALIDATION_NO_SUBMIT",
+  "valid_fixture": {
+    "errors": [],
+    "generation_id": "fixture-valid",
+    "valid": true
+  }
+}

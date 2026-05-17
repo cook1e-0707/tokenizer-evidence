@@ -1,0 +1,26 @@
+{
+  "868260_interpretation": "failed strict-quality diagnostic with full protected codeword recovery before quality filtering",
+  "active_route": "provider-side keyed first-token event channel with strict natural-output quality, duplicate, contextual-forbidden, and trace-binding gates",
+  "control_accepts": {
+    "raw": "0/4",
+    "task_only": "0/4",
+    "wrong_key": "0/4",
+    "wrong_payload": "0/4"
+  },
+  "current_phase": "V2_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATED_NO_SUBMIT",
+  "full_phrase_protected_accepts_format_scrub_all": 0,
+  "generation_allowed": false,
+  "global_duplicate_extra_rows": 7612,
+  "next_allowed_action": "artifact-only duplicate forensics, duplicate-safe policy v2, contextual forbidden policy v2, trace binding spec/verifier/tests, then plan-only 4-block quality-repair confirmation route review",
+  "paper_claim_allowed": false,
+  "previous_v3_training_objective_blocker": "historical_superseded_for_active_route_not_erased",
+  "protected_accepts_ignoring_quality": "4/4",
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_state_sync_v1",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "SYNCED_R4_AFTER_868260_FIRST_TOKEN_EVENT_QUALITY_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT",
+  "strict_protected_accepts": "2/4",
+  "training_started": false,
+  "unique_response_hashes": "4676/12288"
+}

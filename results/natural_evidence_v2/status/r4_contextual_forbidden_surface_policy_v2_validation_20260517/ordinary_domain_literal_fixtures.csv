@@ -1,0 +1,3 @@
+fixture_id,text,technical_hits,ordinary_domain_literals,ambiguous_hits,technical_forbidden_public_surface_count,ordinary_domain_literal_count,ambiguous_forbidden_surface_count
+ordinary_physical_bucket_plumbing,Use a bucket to catch the dripping water before checking the sink leak.,[],['bucket'],[],0,1,0
+ordinary_physical_bucket_garden,Rinse the bucket after carrying soil back to the garden bed.,[],['bucket'],[],0,1,0

@@ -1,0 +1,14 @@
+{
+  "ambiguous_forbidden_surface_policy": "fatal_until_resolved_by_precommitted_rule",
+  "fixtures_checked": 9,
+  "generation_started": false,
+  "ordinary_domain_bucket_fixtures": 2,
+  "ordinary_domain_literal_policy": "reported_separately_not_fatal_when_precommitted_context_rule_matches",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_contextual_forbidden_surface_policy_v2_validation_v1",
+  "slurm_allowed": false,
+  "status": "PASS_R4_CONTEXTUAL_FORBIDDEN_SURFACE_POLICY_V2_VALIDATION_NO_SUBMIT",
+  "technical_forbidden_public_surface_count_gate": "0 for future generated outputs",
+  "technical_or_ambiguous_fixtures": 7
+}

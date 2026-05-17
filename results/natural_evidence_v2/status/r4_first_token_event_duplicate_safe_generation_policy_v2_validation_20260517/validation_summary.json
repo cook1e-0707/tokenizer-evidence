@@ -1,0 +1,9 @@
+{
+  "errors": [],
+  "generation_started": false,
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_first_token_event_duplicate_safe_generation_policy_v2_validation_v1",
+  "slurm_allowed": false,
+  "status": "PASS_R4_FIRST_TOKEN_EVENT_DUPLICATE_SAFE_GENERATION_POLICY_V2"
+}

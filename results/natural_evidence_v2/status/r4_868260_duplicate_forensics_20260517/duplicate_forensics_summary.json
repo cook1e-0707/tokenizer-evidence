@@ -1,0 +1,81 @@
+{
+  "affected_quality_fail_blocks": [
+    {
+      "accept_ignoring_quality": true,
+      "bits_match_condition": true,
+      "block_id": "shard_00_block_00",
+      "checksum_valid": true,
+      "complete_pairs": 8,
+      "decoded_bits": "10100101",
+      "duplicate_response_hash_count": 1,
+      "expected_bits": "10100101",
+      "fail_reasons": "duplicate_response_hash",
+      "forbidden_public_surface_count": 0,
+      "min_pair_support": 8,
+      "required_pairs": 8,
+      "strict_accept": false
+    },
+    {
+      "accept_ignoring_quality": true,
+      "bits_match_condition": true,
+      "block_id": "shard_01_block_00",
+      "checksum_valid": true,
+      "complete_pairs": 8,
+      "decoded_bits": "10100101",
+      "duplicate_response_hash_count": 2,
+      "expected_bits": "10100101",
+      "fail_reasons": "duplicate_response_hash,forbidden_public_surface",
+      "forbidden_public_surface_count": 1,
+      "min_pair_support": 5,
+      "required_pairs": 8,
+      "strict_accept": false
+    }
+  ],
+  "cross_arm_duplicate_groups": 1863,
+  "cross_prompt_duplicate_groups": 2,
+  "cross_shard_duplicate_groups": 4214,
+  "duplicate_condition_sets_from_failure_analysis": {
+    "protected": 120,
+    "protected,raw": 1863,
+    "raw": 183,
+    "task_only": 2048
+  },
+  "format_scrub_duplicate_extra_rows": 7612,
+  "format_scrub_duplicate_hash_groups": 4214,
+  "format_scrub_unique_hashes": 4676,
+  "format_scrub_worsens_duplicates": false,
+  "generated_rows": 12288,
+  "generation_started": false,
+  "global_duplicate_extra_rows": 7612,
+  "global_duplicate_hash_groups": 4214,
+  "global_duplicate_hash_max_group_size": 8,
+  "interpretation": {
+    "controller_driven_check": "duplicate_by_controller_event.csv groups duplicates by first token and controller settings; all rows share the same controller gain policy in this run.",
+    "decoding_or_sampling": "Rows were produced under deterministic_greedy_first_step_controller, so exact duplicates are plausibly driven by deterministic decoding plus repeated/near-repeated prompt-prefix cylinders.",
+    "format_scrub_check": "duplicate_after_format_scrub.csv shows whether trivial formatting normalization increases duplicate pressure.",
+    "primary": "Duplicates are a strict-quality blocker; 868260 remains failed and is not reclassified.",
+    "prompt_driven_check": "cross_prompt_duplicate_groups and duplicate_by_prompt_prefix_pair.csv separate prompt/prefix reuse from global deterministic collapse."
+  },
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_868260_duplicate_forensics_v1",
+  "slurm_allowed": false,
+  "source_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260",
+  "source_job_id": "868260",
+  "status": "RECORDED_R4_868260_DUPLICATE_FORENSICS_ARTIFACT_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "unique_response_hashes": 4676,
+  "within_block_duplicate_extra_rows": {
+    "shard_00_block_00::protected": 1,
+    "shard_00_block_00::raw": 2,
+    "shard_00_block_00::task_only": 0,
+    "shard_01_block_00::protected": 2,
+    "shard_01_block_00::raw": 2,
+    "shard_01_block_00::task_only": 0,
+    "shard_02_block_00::protected": 0,
+    "shard_02_block_00::raw": 0,
+    "shard_02_block_00::task_only": 0,
+    "shard_03_block_00::protected": 0,
+    "shard_03_block_00::raw": 0,
+    "shard_03_block_00::task_only": 0
+  }
+}

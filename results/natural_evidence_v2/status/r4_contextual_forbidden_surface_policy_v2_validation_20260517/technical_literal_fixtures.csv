@@ -1,0 +1,8 @@
+fixture_id,text,technical_hits,ordinary_domain_literals,ambiguous_hits,technical_forbidden_public_surface_count,ordinary_domain_literal_count,ambiguous_forbidden_surface_count
+technical_bucket_id,Write the bucket id for the token bucket coordinate decoder.,"['bucket', 'coordinate', 'decoder']",[],[],3,0,0
+fingerprint,This answer contains a fingerprint marker.,['fingerprint'],[],[],1,0,0
+watermark,The watermark is visible.,['watermark'],[],[],1,0,0
+payload,The payload should be decoded.,['payload'],[],[],1,0,0
+decoder,Run the decoder on the hidden signal.,"['decoder', 'hidden signal']",[],[],2,0,0
+hidden_signal,This is a hidden signal.,['hidden signal'],[],[],1,0,0
+ambiguous_bucket,Mention the bucket briefly.,[],[],['bucket'],0,0,1
