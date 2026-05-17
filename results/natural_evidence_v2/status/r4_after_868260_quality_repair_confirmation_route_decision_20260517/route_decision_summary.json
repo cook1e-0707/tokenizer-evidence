@@ -1,0 +1,17 @@
+{
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_decision_v1",
+  "status": "PLAN_ONLY_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_REVIEW_PASS_NO_SUBMIT",
+  "current_phase": "V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_PLAN_ONLY_ROUTE_VALIDATED_NO_SUBMIT",
+  "source_job_id": "868260",
+  "route_config": "configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml",
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch",
+  "route_validation": "results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_route_validation_20260517/route_validation_summary.json",
+  "wrapper_plan_smoke": "results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_wrapper_plan_smoke_20260517/route_validation_summary.json",
+  "tests": "16 passed",
+  "slurm_allowed": false,
+  "generation_started": false,
+  "training_started": false,
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "next_allowed_action": "Run local/remote hash preflight and Hermes notification for this plan-only route. Do not submit Slurm until a separate single-submission route is recorded."
+}

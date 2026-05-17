@@ -1,0 +1,97 @@
+schema_name: natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_v1
+route_id: r4_after_868260_quality_repair_confirmation_v1
+phase: V2_R4_AFTER_868260_FORENSICS_POLICY_TRACE_BINDING_ARTIFACTS_VALIDATED_NO_SUBMIT
+
+source_artifacts:
+  source_job_id: "868260"
+  state_sync: results/natural_evidence_v2/status/r4_after_868260_state_sync_20260517/state_sync_summary.json
+  failure_analysis: results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260_failure_analysis/failure_analysis_summary.json
+  duplicate_forensics: results/natural_evidence_v2/status/r4_868260_duplicate_forensics_20260517/duplicate_forensics_summary.json
+  repair_package_validation: results/natural_evidence_v2/status/r4_after_868260_quality_gate_repair_package_validation_20260517/repair_package_validation_summary.json
+  duplicate_safe_policy_validation: results/natural_evidence_v2/status/r4_first_token_event_duplicate_safe_generation_policy_v2_validation_20260517/validation_summary.json
+  contextual_forbidden_validation: results/natural_evidence_v2/status/r4_contextual_forbidden_surface_policy_v2_validation_20260517/validation_summary.json
+  trace_binding_validation: results/natural_evidence_v2/status/r4_first_token_event_trace_binding_validation_20260517/trace_binding_validation_summary.json
+
+policy_artifacts:
+  duplicate_safe_generation_policy_v2: configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+  duplicate_safe_generation_policy_doc: docs/natural_evidence_v2/R4_FIRST_TOKEN_EVENT_DUPLICATE_SAFE_GENERATION_POLICY_V2_20260517.md
+  contextual_forbidden_classifier: scripts/natural_evidence_v2/classify_r4_forbidden_surface_context_v2.py
+  trace_binding_spec: docs/natural_evidence_v2/R4_FIRST_TOKEN_EVENT_TRACE_BINDING_SPEC_20260517.md
+  trace_binding_verifier: scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+  duplicate_forensics_script: scripts/natural_evidence_v2/analyze_r4_868260_duplicate_forensics.py
+
+generation_scope:
+  diagnostic_name: r4_after_868260_quality_repair_confirmation
+  scale: 4_block_confirmation
+  blocks: 4
+  shards: 4
+  prompts_per_block: 64
+  prompt_indices_per_shard: 64
+  selected_coordinate_count: 16
+  rows_per_shard: 1024
+  conditions: [protected, raw, task_only]
+  decode_conditions: [protected, raw, task_only, wrong_key, wrong_payload]
+  generation_unit: prefix_native_row_cylinder
+  same_contract_only: true
+  contract_id: a55e
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+
+quality_gates:
+  protected_strict_accepts_required: 4
+  protected_accepts_ignoring_quality_required: 4
+  control_accepts_max_per_condition: 0
+  within_block_duplicate_response_hash_count_max: 0
+  global_duplicate_response_hash_count_max: 0
+  duplicate_prompt_prefix_pair_count_max: 0
+  technical_forbidden_public_surface_count_max: 0
+  ambiguous_forbidden_surface_count_max: 0
+  ordinary_domain_literal_policy: report_only
+  trace_binding_validity_required: 1.0
+  full_phrase_decoder_policy: report_only_not_success_claim
+
+controller:
+  policy: committed_first_token_event_controller
+  source_best_grid: 26
+  source_job_id: 868016
+  bonus_nats: 4.0
+  penalty_nats: 0.5
+  max_target_mass: 0.5
+  max_kl_budget: 0.5
+  note: This route repairs output quality gates only. It does not change the event controller or reclassify 868260.
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  allowlist_entry: v2_r4_after_868260_quality_repair_confirmation_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  plan_only_wrapper_required_now: true
+
+required_before_any_submission:
+  route_validation_passed: true
+  wrapper_plan_only_passed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  hermes_notification_sent: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+  locked_scale: true
+
+output_dir: results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_route_validation_20260517

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T02:12:34Z
+Last synchronized: 2026-05-17T02:24:13Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868260_FORENSICS_POLICY_TRACE_BINDING_ARTIFACTS_VALIDATED_NO_SUBMIT`
+`V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_PLAN_ONLY_ROUTE_VALIDATED_NO_SUBMIT`
 
 ## Active Route Update
 
@@ -45,8 +45,14 @@ contextual forbidden-surface policy v2 validation:
   results/natural_evidence_v2/status/r4_contextual_forbidden_surface_policy_v2_validation_20260517/
 trace-binding validation:
   results/natural_evidence_v2/status/r4_first_token_event_trace_binding_validation_20260517/
+quality-repair confirmation route:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_route_validation_20260517/
+quality-repair confirmation wrapper plan smoke:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_wrapper_plan_smoke_20260517/
+route decision:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_route_decision_20260517/
 tests:
-  15 passed
+  16 passed
 ```
 
 ## Prior Compute Result: 868212
@@ -438,13 +444,13 @@ new Slurm rerun is allowed from the current state. The next allowed action is:
 
 ```text
 next:
-  prepare a plan-only 4-block quality-repair confirmation route review using
-  duplicate-safe generation policy v2, contextual forbidden-surface policy v2,
-  and trace binding; do not submit Slurm until the route review and preflight
-  pass
+  run local/remote hash preflight and Hermes notification for the plan-only
+  4-block quality-repair confirmation route; do not submit Slurm until a
+  separate single-submission route is recorded
 allowed:
-  plan-only route preparation after these artifacts pass
-  local/remote preflight after route review
+  local/remote hash preflight
+  Hermes notification
+  single-submission route preparation if preflight passes
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive

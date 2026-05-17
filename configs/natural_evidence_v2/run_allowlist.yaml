@@ -328,6 +328,15 @@ allowed_gpu_actions:
   enable_condition: r4_after_868212_repaired_first_token_event_wrapper_route_reviewed
   enabled: false
   name: v2_r4_after_868212_repaired_first_token_event_generation_h200
+- claim_note: R4 after-868260 first-token event quality-repair confirmation diagnostic.
+    Qwen only; requires duplicate-safe generation policy v2, contextual forbidden policy
+    v2, trace binding, and a separate single-submission route review. No training,
+    no Llama, no same-family null, no sanitizer, no FAR, no payload-diversity claim,
+    no paper positive claim.
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch
+  enable_condition: r4_after_868260_quality_repair_confirmation_route_reviewed_and_remote_preflight_passed
+  enabled: false
+  name: v2_r4_after_868260_quality_repair_confirmation_h200
 - claim_note: R4 after-864832 two-sided cover-bank protected-adapter gain sweep. Qwen teacher-forced
     scoring only; no generation, no training, no Llama, no same-family null, no sanitizer,
     no FAR, no payload-diversity claim, no paper positive claim.

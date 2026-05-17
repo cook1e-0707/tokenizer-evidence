@@ -1,0 +1,19 @@
+{
+  "next_allowed_action": "Run local/remote hash preflight and Hermes notification; do not submit Slurm until a separate single-submission route is recorded.",
+  "not_unlocked": [
+    "paper-facing positive claim",
+    "Llama",
+    "FAR",
+    "sanitizer",
+    "payload diversity",
+    "training",
+    "generation rerun"
+  ],
+  "phase": "V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_PLAN_ONLY_ROUTE_VALIDATED_NO_SUBMIT",
+  "route_config": "configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml",
+  "source_job_id": "868260",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_PLAN_ONLY_ROUTE_VALIDATED_NO_SUBMIT",
+  "summary": "Prepared and validated a plan-only 4-block quality-repair confirmation route. The wrapper is fail-closed outside PLAN_ONLY=1. No Slurm job was submitted and 868260 remains a failed strict-quality diagnostic, not a positive result.",
+  "tests": "16 passed",
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+}
