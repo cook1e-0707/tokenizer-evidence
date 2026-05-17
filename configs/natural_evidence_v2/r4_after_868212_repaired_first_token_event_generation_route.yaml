@@ -1,0 +1,128 @@
+schema_name: natural_evidence_v2_r4_after_868212_repaired_first_token_event_generation_route_v1
+route_id: r4_after_868212_repaired_first_token_event_generation_v1
+phase: V2_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_PLAN_VALIDATED_NO_SUBMIT
+
+source_reviews:
+  tokenizer_review: results/natural_evidence_v2/status/r4_after_867621_reliability_qwen_tokenizer_boundary_preflight_867828/review_summary.json
+  prior_generation_review: results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review/quality_repaired_generation_review_summary.json
+  failure_attribution: results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_failure_attribution/failure_attribution_summary.json
+  repaired_plan_validation: results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_plan_validation_20260516/plan_validation_summary.json
+
+score_rows:
+  path: results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+  sha256: 772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8
+  row_count: 4096
+  selected_coordinate_count: 16
+  prompt_offset: 0
+  prompt_count: 256
+
+quality_repair:
+  plan_summary: results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/quality_repair_plan_summary.json
+  allocation_rows: results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+  allocation_manifest: results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_manifest.json
+  contextual_literal_policy: results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/contextual_literal_policy.json
+  allocation_policy: per_shard_unique_prompt_index_prefix_family
+  contextual_coordinate_policy: true
+
+precommit:
+  surface_bank: results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+  surface_bank_sha256: 4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac
+  precommit_dir: results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516
+  codebook: results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+  codebook_sha256: 58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444
+  decoder_spec: results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/decoder_spec.json
+  decoder_spec_sha256: 64fd1e682c0ea314bc2f49b6a543447ef9df9679957b87800c2bd41a82bb70f3
+  full_phrase_decoder_spec: results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+  duplicate_policy: results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/duplicate_policy.json
+  duplicate_policy_sha256: 241d93f445676a63f353a3ca58b63e5ceff1bdc826dc058d2b29a1086409e9e9
+  decoder_route_config: configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+  contract_id: a55e
+  primary_scrub_mode: all
+  reclassifies_868212: false
+
+generation_scope:
+  conditions: [protected, raw, task_only]
+  decode_conditions: [protected, raw, task_only, wrong_key, wrong_payload]
+  generation_unit: prefix_native_row_cylinder
+  blocks: 4
+  prompts_per_block: 64
+  shards: 4
+  prompt_indices_per_shard: 64
+  rows_per_shard: 1024
+  selected_coordinate_count: 16
+  max_new_tokens: 96
+  same_contract_only: true
+  controller_only_protected_condition: true
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+
+controller:
+  policy: committed
+  bonus_nats: 4.0
+  penalty_nats: 0.5
+  max_target_mass: 0.5
+  max_kl_budget: 0.5
+  source_best_grid: 26
+  source_job_id: 868016
+  note: full16 repaired diagnostic reuses the reviewed controller settings from the earlier controller route; it is not a locked positive claim.
+
+event_trace_policy:
+  future_positive_requires_token_id_trace: true
+  text_fallback_for_old_transcripts_only: true
+  decoder: scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
+  required_generated_output_fields:
+    - first_generated_token_id
+    - first_generated_token_text
+    - target_first_token_ids
+    - other_first_token_ids
+    - event_side
+    - event_bucket_side
+    - event_trace
+  contextual_literal_policy: results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/contextual_literal_policy.json
+
+adapters:
+  protected_adapter_loaded: false
+  task_only_adapter_remote: /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  allowlist_entry: v2_r4_after_868212_repaired_first_token_event_generation_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_868212_repaired_first_token_event_generation_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868212_repaired_first_token_event_generation_h200.sbatch
+  allowlist_enabled_now: false
+
+future_dev_gate:
+  protected_accepts_min_format_scrub_all: 3
+  protected_blocks: 4
+  control_accepts_max_per_condition: 0
+  forbidden_public_surface_count_max: 0
+  per_block_duplicate_response_hash_count_max: 0
+  global_duplicate_response_hash_count_must_be_reported: true
+  locked_scale_global_duplicate_response_hash_count_max: 0
+
+required_before_any_submission:
+  tokenizer_review_passed: true
+  repaired_plan_validation_passed: true
+  wrapper_plan_only_passed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  hermes_notification_sent: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+
+output_dir: results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_route_validation_20260516

@@ -1,0 +1,9 @@
+{
+  "allocation_manifest_sha256": "b797b46f876e08dfaf329379f578a69fe975d4747d7a87ae2a834d6f83899993",
+  "allocation_rows_sha256": "61927c822c6ce730974ebbaffc775678e70c0a0a2c13e526173f392a231c64dd",
+  "codebook_sha256": "58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444",
+  "contextual_literal_policy_sha256": "0522c7f17c177137f4abbe29c147656797584ef28a328c5a6e8b8145201f31b5",
+  "decoder_spec_sha256": "64fd1e682c0ea314bc2f49b6a543447ef9df9679957b87800c2bd41a82bb70f3",
+  "duplicate_policy_sha256": "241d93f445676a63f353a3ca58b63e5ceff1bdc826dc058d2b29a1086409e9e9",
+  "precommit_manifest_sha256": "15075acadc4b5097c2cf792728641c5b3e173803fe12af254817a3a4ad15f74f"
+}

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-16T23:51:00Z
+Last synchronized: 2026-05-17T00:08:21Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,9 +9,9 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868212_RELIABILITY_DUPLICATE_REPAIR_PREFLIGHT_FAILED_NO_SUBMIT`
+`V2_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_WRAPPER_VALIDATED_NO_SUBMIT`
 
-## Current Route Result
+## Most Recent Compute Result
 
 Job `868212` completed the reviewed quality-repaired after-868151 controller
 generation diagnostic on Chimera H200:
@@ -23,33 +23,19 @@ array: 0-3%4
 partition/qos/account: pomplun / pomplun / cs_yinxin.wan
 state: COMPLETED, 4/4 shards
 exit_code: 0:0
-elapsed: about 16-17 minutes per shard
-```
-
-Artifacts were synced locally:
-
-```text
-raw outputs/logs:
-  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212/
-review:
-  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review/
-review summary:
-  results/natural_evidence_v2/status/r4_after_868016_controller_generation_868212_review/quality_repaired_generation_review_summary.json
 ```
 
 The precommitted first-token event diagnostic gate passed at small diagnostic
 scale:
 
 ```text
-review status:
-  PASS_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_NOT_LOCKED_POSITIVE_GLOBAL_DUPLICATE_CAVEAT
 protected accepts:
   3/4
 raw/task-only/wrong-key/wrong-payload accepts:
   0/4 each
-first-token block-level forbidden public surface count:
+block-level forbidden public surface count:
   0
-first-token block-level duplicate response hash count:
+block-level duplicate response hash count:
   0
 token-id event traces:
   9216
@@ -57,27 +43,32 @@ event status counts:
   target=839, other=84, erasure=8293
 ```
 
-The one protected failed block is specific:
+The single protected failed block was localized:
 
 ```text
-block_id: shard_03_block_00
-decoded_bits: 1-100101
-expected_bits: 10100101
-missing_bit_indices: 1
-missing coordinate: 26
-min_pair_support: 0
-complete_pairs: 7/8
+block_id:
+  shard_03_block_00
+decoded_bits:
+  1-100101
+expected_bits:
+  10100101
+missing bit index:
+  1
+missing coordinate:
+  26
+complete pairs:
+  7/8
 ```
 
-The full-phrase decoder remains failed, as expected:
+The full-phrase decoder remains failed as expected:
 
 ```text
 full-phrase protected accepts, format_scrub=all:
   0
 ```
 
-This result is diagnostic only, not a locked positive or paper claim. The main
-caveat is global duplication across generated outputs:
+This result remains diagnostic only, not a locked positive or paper claim. The
+main quality caveat is still global duplication across generated outputs:
 
 ```text
 generated rows:
@@ -90,15 +81,9 @@ max duplicate group size:
   4
 ```
 
-Interpretation: the quality-repaired first-token event route produced a real
-small-scale positive signal under token-id traces with clean null arms and clean
-block-level quality gates. It still does not justify locked positive claims
-because scale is only 4 protected blocks, one block failed by coordinate erasure,
-full-phrase decoding remains failed, and global duplicate hashes remain high.
-
 ## Failure Attribution
 
-The artifact-only attribution has been recorded:
+Artifact-only attribution for `868212` is recorded:
 
 ```text
 attribution:
@@ -119,24 +104,20 @@ dominant duplicate shard pairs:
   shard_02,shard_03: 1051 groups
 ```
 
-Interpretation: the protected failure is a localized erasure/reliability issue
-for coordinate 26 in shard_03, not a null-accept failure. The duplicate caveat
+Interpretation: the protected failure was a localized erasure/reliability issue
+for coordinate 26 in shard 03, not a null-accept failure. The duplicate caveat
 is global and dominated by deterministic identical generations across paired
-shards and protected/raw or same-condition repetitions. The per-block duplicate
-gate is clean, but this is not sufficient for a locked-scale positive.
+shards and protected/raw or same-condition repetitions.
 
-## Next Allowed Action
+## Superseded Failed Repair Preflight
 
-The first artifact-only repair preflight has been implemented and run:
+The first artifact-only repair preflight intentionally failed because the
+12-coordinate pivot codebook left several singleton payload bits:
 
 ```text
-route:
-  docs/natural_evidence_v2/R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_20260516.md
-route status:
-  RECORDED_R4_AFTER_868212_FIRST_TOKEN_EVENT_RELIABILITY_DUPLICATE_REPAIR_ROUTE_ARTIFACT_ONLY_NO_SUBMIT
 preflight:
   results/natural_evidence_v2/status/r4_after_868212_reliability_duplicate_repair_preflight_20260516/
-preflight status:
+status:
   FAIL_R4_AFTER_868212_RELIABILITY_DUPLICATE_REPAIR_PREFLIGHT_NO_SUBMIT
 singleton/codebook failures:
   bit 1 active=[26], coordinate_26 sole active coordinate
@@ -145,20 +126,160 @@ singleton/codebook failures:
   bit 6 active=[4]
 duplicate extra rows:
   4424
-tests:
-  14 passed, 1 skipped
-next:
-  artifact-only repaired codebook/duplicate-policy construction or pivot route
-not allowed:
-  new Slurm generation/scoring/training until this preflight passes or a new
-  reviewed pivot route supersedes it
 ```
+
+This failed preflight is now superseded by the repaired full-16 plan below. It
+must not be used for another Slurm submission.
+
+## Current Route Result
+
+The next artifact-only step has completed: the route restored the full 16
+coordinates from the reviewed reliability codebook, rebuilt the row allocation,
+precommitted a repaired first-token event decoder/codebook, and validated the
+plan without submitting compute.
+
+```text
+full16 allocation plan:
+  results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/
+allocation status:
+  PASS_R4_AFTER_868151_FIRST_TOKEN_EVENT_QUALITY_REPAIR_PLAN_ARTIFACT_ONLY
+allocation rows:
+  4096
+shards:
+  4
+rows per shard:
+  1024
+rows per coordinate per shard:
+  64
+duplicate prompt/prefix pair max per shard:
+  0
+```
+
+```text
+repaired precommit:
+  results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/
+precommit status:
+  PRECOMMITTED_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_ARTIFACT_ONLY_NO_COMPUTE
+selected coordinates:
+  16
+min active coordinates per bit:
+  2
+coordinate 26 sole-coordinate condition:
+  rejected
+reclassifies 868212:
+  false
+```
+
+```text
+plan validation:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_plan_validation_20260516/
+validation status:
+  PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_PLAN_VALIDATION_NO_SUBMIT
+locked-scale global duplicate gate:
+  0
+slurm submitted:
+  false
+generation/model-scoring/training started:
+  false
+```
+
+Precommit hashes:
+
+```text
+codebook:
+  58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444
+decoder_spec:
+  64fd1e682c0ea314bc2f49b6a543447ef9df9679957b87800c2bd41a82bb70f3
+duplicate_policy:
+  241d93f445676a63f353a3ca58b63e5ceff1bdc826dc058d2b29a1086409e9e9
+allocation_manifest:
+  b797b46f876e08dfaf329379f578a69fe975d4747d7a87ae2a834d6f83899993
+allocation_rows:
+  61927c822c6ce730974ebbaffc775678e70c0a0a2c13e526173f392a231c64dd
+contextual_literal_policy:
+  0522c7f17c177137f4abbe29c147656797584ef28a328c5a6e8b8145201f31b5
+```
+
+Verification:
+
+```text
+pytest:
+  19 passed, 1 skipped
+```
+
+## Generation Wrapper Route Validation
+
+The repaired full16 generation/decode control plane has been implemented and
+validated locally without Slurm submission:
+
+```text
+route config:
+  configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_generation_route.yaml
+decoder route:
+  configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+wrapper:
+  scripts/natural_evidence_v2/slurm/r4_after_868212_repaired_first_token_event_generation_h200.sbatch
+validator:
+  scripts/natural_evidence_v2/validate_r4_after_868212_repaired_first_token_event_generation_route.py
+route validation:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_route_validation_20260516/
+route validation status:
+  PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+wrapper plan-only smoke:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_wrapper_plan_smoke_20260516/
+wrapper plan-only status:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
+toy protected accepts:
+  1
+toy wrong-key/wrong-payload accepts:
+  0/0
+full mode enabled:
+  false
+slurm submission started:
+  false
+```
+
+The wrapper now consumes the repaired full16 allocation and precommit:
+
+```text
+rows per shard:
+  1024
+expected selected coordinates:
+  16
+score rows:
+  results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation rows:
+  results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+codebook:
+  results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+```
+
+## Next Allowed Action
+
+The route may continue automatically, but the next action is still
+artifact-only:
+
+```text
+next:
+  synchronize the repaired full16 generation/decode control-plane files to
+  Chimera, run local/remote hash and allowlist safety preflight, then if and
+  only if those checks pass, enable exactly one reviewed H200 Slurm generation
+  diagnostic entry and immediately disable it after sbatch returns
+allowed:
+  local/remote hash and allowlist safety preflight
+  exactly-one allowlist enablement for the reviewed full16 H200 diagnostic
+  exactly-one H200 Slurm submission after preflight pass
+  Hermes/Codex state synchronization
+not yet allowed:
+  training
+```
+
+This route does not unlock model scoring, training, Llama, same-family null,
+sanitizer, FAR aggregation, payload diversity, or paper-facing positive claims.
 
 Route-controlled actions may proceed automatically after their preconditions are
 recorded; the user has authorized Codex and Hermes not to ask repeatedly for the
-same approved route. At this state, do not submit another Slurm generation,
-model-scoring, or training job until the artifact-only review above records a
-new route.
+same approved route.
 
 ## Still Gate-Controlled
 

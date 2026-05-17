@@ -1,0 +1,50 @@
+schema_name: r4_after_868212_repaired_first_token_event_decoder_route_v1
+route_name: r4_after_868212_repaired_first_token_event_decoder
+canonical_phase: V2_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_PLAN_VALIDATED_NO_SUBMIT
+
+precommit_dir: results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516
+codebook_sha256: 58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444
+decoder_spec_sha256: 64fd1e682c0ea314bc2f49b6a543447ef9df9679957b87800c2bd41a82bb70f3
+precommit_manifest_sha256: 15075acadc4b5097c2cf792728641c5b3e173803fe12af254817a3a4ad15f74f
+duplicate_policy_sha256: 241d93f445676a63f353a3ca58b63e5ceff1bdc826dc058d2b29a1086409e9e9
+
+contract_id: a55e
+selected_coordinate_count: 16
+payload_bits: [1, 0, 1, 0]
+checksum_rule: bitwise_complement_payload_4bit
+expected_checksum_bits: [0, 1, 0, 1]
+expected_codeword_bits: [1, 0, 1, 0, 0, 1, 0, 1]
+
+wrong_payload_bits: [0, 1, 0, 1]
+wrong_payload_checksum_bits: [1, 0, 1, 0]
+wrong_key_xor_mask: [1, 1, 0, 1, 0, 1, 1, 0]
+
+duplicate_policy:
+  diagnostic_hard_fail:
+    per_block_duplicate_generated_output_hash_count: 0
+    within_shard_prompt_prefix_duplicate_count: 0
+    duplicate_decode_row_hash_count: 0
+    missing_token_id_trace_count: 0
+    technical_public_literal_count: 0
+  diagnostic_reported_caveats:
+    - global_duplicate_response_hash_count
+    - cross_arm_duplicate_response_hash_count
+    - cross_shard_duplicate_response_hash_count
+    - within_arm_duplicate_response_hash_count
+    - within_shard_duplicate_response_hash_count
+  locked_scale_hard_fail:
+    global_duplicate_response_hash_count: 0
+
+no_compute:
+  slurm_allowed: false
+  tokenizer_validation_allowed: false
+  model_scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  paper_claim_allowed: false
+
+output_dir: results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_decoder_route_validation_20260516

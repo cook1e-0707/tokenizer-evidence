@@ -1,0 +1,153 @@
+{
+  "checksum_bits": 4,
+  "contract_id": "a55e",
+  "coordinate_26_cannot_be_sole_coordinate": true,
+  "expected_codeword_bits": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1
+  ],
+  "generation_started": false,
+  "max_active_coordinates_per_bit": 2,
+  "min_active_coordinates_per_bit": 2,
+  "model_scoring_started": false,
+  "pair_to_bit_mapping": [
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 0,
+      "coordinates": [
+        6,
+        22
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        6,
+        22
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 1,
+      "coordinates": [
+        10,
+        26
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        10,
+        26
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 2,
+      "coordinates": [
+        1,
+        17
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        1,
+        17
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 3,
+      "coordinates": [
+        3,
+        19
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        3,
+        19
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 4,
+      "coordinates": [
+        15,
+        31
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        15,
+        31
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 5,
+      "coordinates": [
+        8,
+        24
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        8,
+        24
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 6,
+      "coordinates": [
+        4,
+        20
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        4,
+        20
+      ]
+    },
+    {
+      "active_coordinate_count": 2,
+      "bit_index": 7,
+      "coordinates": [
+        7,
+        23
+      ],
+      "erased_source_coordinates": [],
+      "source_coordinates": [
+        7,
+        23
+      ]
+    }
+  ],
+  "paper_claim_allowed": false,
+  "payload_bits": 4,
+  "reclassifies_868212": false,
+  "schema_name": "natural_evidence_v2_r4_after_868212_repaired_first_token_event_codebook_v1",
+  "selected_coordinate_count": 16,
+  "selected_coordinates": [
+    6,
+    22,
+    10,
+    26,
+    1,
+    17,
+    3,
+    19,
+    15,
+    31,
+    8,
+    24,
+    4,
+    20,
+    7,
+    23
+  ],
+  "singleton_bit_codebooks_rejected": true,
+  "source_codebook_schema_name": "r4_after_864832_reliability_weighted_codebook_precommit_v1",
+  "source_codebook_status": "PRECOMMITTED_ARTIFACT_ONLY_NO_COMPUTE",
+  "status": "PRECOMMITTED_ARTIFACT_ONLY_REPAIRED_NO_SINGLETON_BITS_NO_COMPUTE",
+  "training_started": false
+}

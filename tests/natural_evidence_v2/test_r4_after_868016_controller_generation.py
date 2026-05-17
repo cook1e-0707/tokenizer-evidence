@@ -138,4 +138,9 @@ def test_select_rows_by_allocation_rejects_duplicate_prompt_prefix_pair() -> Non
         )
 
     with pytest.raises(ValueError, match="duplicate prompt/prefix"):
-        select_rows_by_allocation(rows, assigned_shard_index=0, expected_rows=12)
+        select_rows_by_allocation(
+            rows,
+            assigned_shard_index=0,
+            expected_rows=12,
+            expected_selected_coordinate_count=12,
+        )

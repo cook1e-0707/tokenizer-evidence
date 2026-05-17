@@ -1,0 +1,29 @@
+{
+  "diagnostic_hard_fail": {
+    "duplicate_decode_row_hash_count": 0,
+    "missing_token_id_trace_count": 0,
+    "per_block_duplicate_generated_output_hash_count": 0,
+    "technical_public_literal_count": 0,
+    "within_shard_prompt_prefix_duplicate_count": 0
+  },
+  "diagnostic_reported_caveats": [
+    "global_duplicate_response_hash_count",
+    "cross_arm_duplicate_response_hash_count",
+    "cross_shard_duplicate_response_hash_count",
+    "within_arm_duplicate_response_hash_count",
+    "within_shard_duplicate_response_hash_count"
+  ],
+  "generation_started": false,
+  "locked_scale_hard_fail": {
+    "cross_arm_duplicate_response_hash_count": 0,
+    "cross_shard_duplicate_response_hash_count": 0,
+    "global_duplicate_response_hash_count": 0
+  },
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "policy_note": "A small diagnostic may report cross-arm/cross-shard duplicates as caveats, but locked-scale positive claims require global duplicate response hashes to be zero.",
+  "reclassifies_868212": false,
+  "schema_name": "natural_evidence_v2_r4_after_868212_duplicate_policy_v1",
+  "status": "PRECOMMITTED_ARTIFACT_ONLY_DUPLICATE_POLICY_NO_COMPUTE",
+  "training_started": false
+}

@@ -42,6 +42,11 @@ DEFAULT_CONTROLLER_REVIEW = (
     / "results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_controller_score_868114_review/coordinate_pivot_controller_review_summary.json"
 )
 
+ALLOWED_TOKENIZER_REVIEW_STATUSES = {
+    "PASS_R4_AFTER_868016_RELIABILITY_COORDINATE_PIVOT_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_868103",
+    "PASS_R4_AFTER_867621_RELIABILITY_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_867828",
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -63,6 +68,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prompt-index-start", type=int, required=True)
     parser.add_argument("--prompt-index-end", type=int, required=True)
     parser.add_argument("--expected-rows", type=int, default=768)
+    parser.add_argument("--expected-selected-coordinate-count", type=int, default=12)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--max-new-tokens", type=int, default=96)
     parser.add_argument("--replicate-group-id", required=True)
@@ -86,14 +92,21 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def validate_selected_rows(selected: Sequence[Mapping[str, Any]], *, expected_rows: int) -> None:
+def validate_selected_rows(
+    selected: Sequence[Mapping[str, Any]],
+    *,
+    expected_rows: int,
+    expected_selected_coordinate_count: int,
+) -> None:
     if len(selected) != int(expected_rows):
         raise ValueError(f"selected {len(selected)} rows; expected {expected_rows}")
     if len({str(row.get("row_key", "")) for row in selected}) != len(selected):
         raise ValueError("selected rows contain duplicate row_key values")
     coordinates = sorted({int(row["coordinate_id"]) for row in selected})
-    if len(coordinates) != 12:
-        raise ValueError(f"expected 12 selected coordinates per shard, found {coordinates}")
+    if len(coordinates) != int(expected_selected_coordinate_count):
+        raise ValueError(
+            f"expected {int(expected_selected_coordinate_count)} selected coordinates per shard, found {coordinates}"
+        )
     for row in selected:
         prompt_text = str(row.get("prompt_text", ""))
         if "Step " in prompt_text or "exactly 16" in prompt_text or "slot" in prompt_text.lower():
@@ -110,11 +123,16 @@ def select_rows_by_prompt_range(
     start: int,
     end: int,
     expected_rows: int,
+    expected_selected_coordinate_count: int,
 ) -> list[dict[str, Any]]:
     if end < start:
         raise ValueError("prompt-index-end must be >= prompt-index-start")
     selected = [dict(row) for row in rows if start <= int(row.get("prompt_index", -1)) <= end]
-    validate_selected_rows(selected, expected_rows=expected_rows)
+    validate_selected_rows(
+        selected,
+        expected_rows=expected_rows,
+        expected_selected_coordinate_count=expected_selected_coordinate_count,
+    )
     return selected
 
 
@@ -123,13 +141,18 @@ def select_rows_by_allocation(
     *,
     assigned_shard_index: int,
     expected_rows: int,
+    expected_selected_coordinate_count: int,
 ) -> list[dict[str, Any]]:
     selected = [
         dict(row)
         for row in rows
         if int(row.get("assigned_shard_index", -1)) == int(assigned_shard_index)
     ]
-    validate_selected_rows(selected, expected_rows=expected_rows)
+    validate_selected_rows(
+        selected,
+        expected_rows=expected_rows,
+        expected_selected_coordinate_count=expected_selected_coordinate_count,
+    )
     duplicate_pairs = Counter(str(row.get("duplicate_pair_key", "")) for row in selected)
     duplicated = sorted(pair for pair, count in duplicate_pairs.items() if pair and count > 1)
     if duplicated:
@@ -139,8 +162,8 @@ def select_rows_by_allocation(
 
 def validate_reviews(tokenizer_review: Mapping[str, Any], controller_review: Mapping[str, Any]) -> None:
     tokenizer_status = tokenizer_review.get("status") or tokenizer_review.get("review_status")
-    if tokenizer_status != "PASS_R4_AFTER_868016_RELIABILITY_COORDINATE_PIVOT_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_868103":
-        raise ValueError("tokenizer review is not the reviewed 868103 pass")
+    if tokenizer_status not in ALLOWED_TOKENIZER_REVIEW_STATUSES:
+        raise ValueError(f"tokenizer review is not an allowed reviewed pass: {tokenizer_status}")
     failed_rows = tokenizer_review.get("failed_row_count", tokenizer_review.get("failed_rows", 0))
     if int(failed_rows) != 0:
         raise ValueError("tokenizer review has failed rows")
@@ -174,6 +197,7 @@ def write_plan_summary(
             "prompt_index_start": int(args.prompt_index_start),
             "prompt_index_end": int(args.prompt_index_end),
             "row_count": len(rows),
+            "expected_selected_coordinate_count": int(args.expected_selected_coordinate_count),
             "generation_conditions": ["protected", "raw", "task_only"],
             "decode_conditions": ["protected", "raw", "task_only", "wrong_key", "wrong_payload"],
             "generation_unit": "prefix_native_row_cylinder",
@@ -502,6 +526,7 @@ def main() -> int:
             read_jsonl(rows_path),
             assigned_shard_index=int(args.assigned_shard_index),
             expected_rows=int(args.expected_rows),
+            expected_selected_coordinate_count=int(args.expected_selected_coordinate_count),
         )
     else:
         rows = select_rows_by_prompt_range(
@@ -509,6 +534,7 @@ def main() -> int:
             start=int(args.prompt_index_start),
             end=int(args.prompt_index_end),
             expected_rows=int(args.expected_rows),
+            expected_selected_coordinate_count=int(args.expected_selected_coordinate_count),
         )
     if args.validate_plan_only:
         output_dir.mkdir(parents=True, exist_ok=True)

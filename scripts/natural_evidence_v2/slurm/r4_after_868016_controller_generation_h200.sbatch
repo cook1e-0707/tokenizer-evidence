@@ -28,6 +28,7 @@ fi
 
 RUN_ROOT="${RUN_ROOT:-/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot}"
 ROUTE_CONFIG="${ROUTE_CONFIG:-configs/natural_evidence_v2/r4_after_868016_controller_generation_route.yaml}"
+ROUTE_VALIDATOR="${ROUTE_VALIDATOR:-scripts/natural_evidence_v2/validate_r4_after_868016_controller_generation_route.py}"
 OUTPUT_DIR="${OUTPUT_DIR:-$RUN_ROOT/status/r4_after_868016_controller_generation_${SLURM_ARRAY_JOB_ID:-manual}}"
 SCORE_ROWS="${SCORE_ROWS:-results/natural_evidence_v2/status/r4_after_868016_reliability_coordinate_pivot_rows_20260516/reliability_surface_mass_rows.jsonl}"
 ALLOCATION_ROWS="${ALLOCATION_ROWS:-results/natural_evidence_v2/status/r4_after_868151_first_token_event_quality_repair_plan_20260516/row_allocation_rows.jsonl}"
@@ -38,10 +39,13 @@ SURFACE_BANK="${SURFACE_BANK:-results/natural_evidence_v2/precommit/r4_after_864
 PRECOMMIT_DIR="${PRECOMMIT_DIR:-results/natural_evidence_v2/precommit/r4_after_868016_reliability_coordinate_pivot_codebook_precommit_20260516}"
 CODEBOOK="${CODEBOOK:-$PRECOMMIT_DIR/codebook.json}"
 DECODER_SPEC="${DECODER_SPEC:-$PRECOMMIT_DIR/decoder_spec.json}"
+FULL_PHRASE_DECODER_SPEC="${FULL_PHRASE_DECODER_SPEC:-$DECODER_SPEC}"
 DECODER_ROUTE_CONFIG="${DECODER_ROUTE_CONFIG:-configs/natural_evidence_v2/r4_after_868016_reliability_coordinate_pivot_codebook_oracle_route.yaml}"
 TASK_ONLY_ADAPTER="${TASK_ONLY_ADAPTER:-$RUN_ROOT/status/wp5_r2_teacher_forced_train_and_score_851481/task_only_train/adapter}"
 MODEL_NAME="${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}"
 TOKENIZER_NAME="${TOKENIZER_NAME:-Qwen/Qwen2.5-7B-Instruct}"
+ROWS_PER_SHARD="${ROWS_PER_SHARD:-768}"
+EXPECTED_SELECTED_COORDINATE_COUNT="${EXPECTED_SELECTED_COORDINATE_COUNT:-12}"
 BATCH_SIZE="${BATCH_SIZE:-4}"
 MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-96}"
 CONTROLLER_BONUS_NATS="${CONTROLLER_BONUS_NATS:-4.0}"
@@ -94,6 +98,7 @@ fi
 
 echo "claim_note=R4 after-868016 coordinate-pivot controller generation diagnostic; no paper claim"
 echo "route_config=$ROUTE_CONFIG"
+echo "route_validator=$ROUTE_VALIDATOR"
 echo "output_dir=$OUTPUT_DIR"
 echo "validate_plan_only=$VALIDATE_PLAN_ONLY"
 echo "shard_index=${SHARD_INDEX:-unset}"
@@ -104,7 +109,10 @@ echo "contextual_literal_policy=$CONTEXTUAL_LITERAL_POLICY"
 echo "surface_bank=$SURFACE_BANK"
 echo "codebook=$CODEBOOK"
 echo "decoder_spec=$DECODER_SPEC"
+echo "full_phrase_decoder_spec=$FULL_PHRASE_DECODER_SPEC"
 echo "decoder_route_config=$DECODER_ROUTE_CONFIG"
+echo "rows_per_shard=$ROWS_PER_SHARD"
+echo "expected_selected_coordinate_count=$EXPECTED_SELECTED_COORDINATE_COUNT"
 echo "controller_bonus_nats=$CONTROLLER_BONUS_NATS"
 echo "controller_penalty_nats=$CONTROLLER_PENALTY_NATS"
 
@@ -119,7 +127,7 @@ if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
   fi
   expected_start=$((SHARD_INDEX * 64))
   expected_end=$((expected_start + 63))
-  expected_rows=768
+  expected_rows="$ROWS_PER_SHARD"
   shard_id="$(printf 'shard_%02d' "$SHARD_INDEX")"
   allocation_shard_index="$SHARD_INDEX"
   shard_dir="$OUTPUT_DIR/shards/$shard_id"
@@ -127,7 +135,7 @@ if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
 else
   expected_start=0
   expected_end=63
-  expected_rows=768
+  expected_rows="$ROWS_PER_SHARD"
   shard_id="plan_only"
   allocation_shard_index=0
   shard_dir="$OUTPUT_DIR"
@@ -137,6 +145,7 @@ fi
 export PLAN_VALIDATION_DIR="$plan_validation_dir"
 export SURFACE_BANK
 export CODEBOOK
+export FULL_PHRASE_DECODER_SPEC
 export DECODER_ROUTE_CONFIG
 mkdir -p "$plan_validation_dir"
 
@@ -145,7 +154,7 @@ if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
   VALIDATION_EXTRA_ARGS="--allow-submission-enabled-entry"
 fi
 
-"$PYTHON_BIN" scripts/natural_evidence_v2/validate_r4_after_868016_controller_generation_route.py \
+"$PYTHON_BIN" "$ROUTE_VALIDATOR" \
   --config "$ROUTE_CONFIG" \
   --output-dir "$plan_validation_dir" \
   $VALIDATION_EXTRA_ARGS
@@ -154,7 +163,7 @@ fi
   scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
   scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py \
   scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py \
-  scripts/natural_evidence_v2/validate_r4_after_868016_controller_generation_route.py
+  "$ROUTE_VALIDATOR"
 
 "$PYTHON_BIN" scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py \
   --score-rows "$SCORE_ROWS" \
@@ -169,6 +178,7 @@ fi
   --prompt-index-start "$expected_start" \
   --prompt-index-end "$expected_end" \
   --expected-rows "$expected_rows" \
+  --expected-selected-coordinate-count "$EXPECTED_SELECTED_COORDINATE_COUNT" \
   --replicate-group-id "$shard_id" \
   --batch-size "$BATCH_SIZE" \
   --max-new-tokens "$MAX_NEW_TOKENS" \
@@ -228,7 +238,7 @@ PY
   --generated-outputs "$plan_validation_dir/toy_generated_outputs.jsonl" \
   --surface-bank "$SURFACE_BANK" \
   --codebook "$CODEBOOK" \
-  --decoder-spec "$DECODER_SPEC" \
+  --decoder-spec "$FULL_PHRASE_DECODER_SPEC" \
   --route-config "$DECODER_ROUTE_CONFIG" \
   --output-dir "$plan_validation_dir/toy_decode_all" \
   --format-scrub all \
@@ -268,6 +278,7 @@ if [ "$VALIDATE_PLAN_ONLY" = "1" ]; then
 fi
 
 for required in "$SCORE_ROWS" "$ALLOCATION_ROWS" "$CONTEXTUAL_LITERAL_POLICY" "$TOKENIZER_REVIEW" "$CONTROLLER_REVIEW" "$SURFACE_BANK" "$CODEBOOK" "$DECODER_SPEC" "$DECODER_ROUTE_CONFIG" \
+  "$FULL_PHRASE_DECODER_SPEC" \
   "scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py" \
   "scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py"; do
   if [ ! -s "$required" ]; then
@@ -303,6 +314,7 @@ mkdir -p "$shard_dir"
   --prompt-index-start "$expected_start" \
   --prompt-index-end "$expected_end" \
   --expected-rows "$expected_rows" \
+  --expected-selected-coordinate-count "$EXPECTED_SELECTED_COORDINATE_COUNT" \
   --replicate-group-id "$shard_id" \
   --batch-size "$BATCH_SIZE" \
   --max-new-tokens "$MAX_NEW_TOKENS" \
@@ -316,7 +328,7 @@ mkdir -p "$shard_dir"
   --generated-outputs "$shard_dir/r4_generated_outputs.jsonl" \
   --surface-bank "$SURFACE_BANK" \
   --codebook "$CODEBOOK" \
-  --decoder-spec "$DECODER_SPEC" \
+  --decoder-spec "$FULL_PHRASE_DECODER_SPEC" \
   --route-config "$DECODER_ROUTE_CONFIG" \
   --output-dir "$shard_dir/decode_all" \
   --format-scrub all \
@@ -335,7 +347,7 @@ mkdir -p "$shard_dir"
   --generated-outputs "$shard_dir/r4_generated_outputs.jsonl" \
   --surface-bank "$SURFACE_BANK" \
   --codebook "$CODEBOOK" \
-  --decoder-spec "$DECODER_SPEC" \
+  --decoder-spec "$FULL_PHRASE_DECODER_SPEC" \
   --route-config "$DECODER_ROUTE_CONFIG" \
   --output-dir "$shard_dir/decode_none" \
   --format-scrub none \

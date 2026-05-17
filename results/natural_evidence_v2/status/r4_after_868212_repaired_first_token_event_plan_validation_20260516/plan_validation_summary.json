@@ -1,0 +1,18 @@
+{
+  "allocation_rows": 4096,
+  "allocation_rows_per_coordinate_per_shard": 64,
+  "allocation_shards": 4,
+  "errors": [],
+  "generation_started": false,
+  "locked_scale_global_duplicate_gate": 0,
+  "min_active_coordinates_per_bit": 2,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "precommit_dir": "results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516",
+  "schema_name": "natural_evidence_v2_r4_after_868212_repaired_first_token_event_plan_validation_v1",
+  "selected_coordinate_count": 16,
+  "slurm_allowed": false,
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_PLAN_VALIDATION_NO_SUBMIT",
+  "training_started": false
+}
