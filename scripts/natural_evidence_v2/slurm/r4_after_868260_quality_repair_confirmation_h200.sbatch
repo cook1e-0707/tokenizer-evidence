@@ -20,11 +20,13 @@ set -euo pipefail
 export ROUTE_CONFIG="${ROUTE_CONFIG:-configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml}"
 export ROUTE_VALIDATOR="${ROUTE_VALIDATOR:-scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py}"
 export PLAN_ONLY="${PLAN_ONLY:-1}"
+export PYTHON_BIN="${PYTHON_BIN:-}"
 
 echo "claim_note=R4 after-868260 quality-repair confirmation route; plan-only until reviewed preflight passes; no paper claim"
 echo "route_config=$ROUTE_CONFIG"
 echo "route_validator=$ROUTE_VALIDATOR"
 echo "plan_only=$PLAN_ONLY"
+echo "python_bin=${PYTHON_BIN:-uv run python}"
 echo "generation_started=false"
 echo "training_started=false"
 echo "llama_started=false"
@@ -36,4 +38,8 @@ if [[ "$PLAN_ONLY" != "1" ]]; then
   exit 2
 fi
 
-uv run python "$ROUTE_VALIDATOR" --config "$ROUTE_CONFIG" --output-dir "${OUTPUT_DIR:-results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_wrapper_plan_smoke_20260517}"
+if [[ -n "$PYTHON_BIN" ]]; then
+  "$PYTHON_BIN" "$ROUTE_VALIDATOR" --config "$ROUTE_CONFIG" --output-dir "${OUTPUT_DIR:-results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_wrapper_plan_smoke_20260517}"
+else
+  uv run python "$ROUTE_VALIDATOR" --config "$ROUTE_CONFIG" --output-dir "${OUTPUT_DIR:-results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_wrapper_plan_smoke_20260517}"
+fi

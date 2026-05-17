@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T02:24:13Z
+Last synchronized: 2026-05-17T02:42:22Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_PLAN_ONLY_ROUTE_VALIDATED_NO_SUBMIT`
+`V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REMOTE_PREFLIGHT_PASS_NO_SUBMIT`
 
 ## Active Route Update
 
@@ -51,8 +51,24 @@ quality-repair confirmation wrapper plan smoke:
   results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_wrapper_plan_smoke_20260517/
 route decision:
   results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_route_decision_20260517/
+remote preflight:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_remote_preflight_20260517/
+remote status:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REMOTE_PREFLIGHT_NO_SUBMIT
+remote host:
+  chimerahead.umb.edu
+remote route validation:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+remote wrapper plan-only:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+remote allowlist:
+  PASS, enabled_entries=[]
+local/remote hashes:
+  match, 51 reviewed files
+active Chimera jobs:
+  0
 tests:
-  16 passed
+  18 passed
 ```
 
 ## Prior Compute Result: 868212
@@ -444,18 +460,19 @@ new Slurm rerun is allowed from the current state. The next allowed action is:
 
 ```text
 next:
-  run local/remote hash preflight and Hermes notification for the plan-only
-  4-block quality-repair confirmation route; do not submit Slurm until a
-  separate single-submission route is recorded
+  record/review the separate single-submission or full-mode wrapper route for
+  the 4-block quality-repair confirmation diagnostic; the current wrapper has
+  only passed plan-only remote preflight and remains fail-closed outside
+  plan-only mode
 allowed:
-  local/remote hash preflight
   Hermes notification
-  single-submission route preparation if preflight passes
+  single-submission/full-mode wrapper route preparation
+  exactly-one allowlist preflight after the route is recorded
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive
-  another Slurm generation rerun before a new reviewed route is recorded and
-  all preconditions pass
+  another Slurm generation rerun before a new reviewed full-mode route is
+  recorded and all preconditions pass
 not yet allowed:
   training
 ```

@@ -1,0 +1,23 @@
+{
+  "active_job_count_seen": 0,
+  "active_jobs_seen": [],
+  "allowlist_entry": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "allowlist_entry_enabled": false,
+  "enabled_entries": [],
+  "generation_started": false,
+  "hash_file_count": 51,
+  "hashes_match": true,
+  "model_scoring_started": false,
+  "next_allowed_action": "Record/review the separate single-submission or full-mode wrapper route for the 4-block quality-repair confirmation diagnostic; then run exactly-one allowlist preflight before any Slurm submission. Do not submit Slurm from this preflight.",
+  "paper_claim_allowed": false,
+  "remote_allowlist_status": "PASS",
+  "remote_host": "chimerahead.umb.edu",
+  "remote_python": "/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3",
+  "remote_repo": "/home/guanjie.lin001/tokenizer-evidence",
+  "route_validation_status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_remote_preflight_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "training_started": false,
+  "wrapper_plan_only_status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT"
+}

@@ -1,0 +1,26 @@
+claim_note=R4 after-868260 quality-repair confirmation route; plan-only until reviewed preflight passes; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868260_quality_repair_confirmation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868260_quality_repair_confirmation_route.py
+plan_only=1
+python_bin=/hpcstor6/scratch01/g/guanjie.lin001/venvs/zkrfa_py312/bin/python3
+generation_started=false
+training_started=false
+llama_started=false
+far_started=false
+paper_claim_allowed=false
+{
+  "allowlist_entry": "v2_r4_after_868260_quality_repair_confirmation_h200",
+  "config_sha256": "4bb3a8311ac363087ba89cce5eaf57eb91be42824c6a3633d661ca7032d51864",
+  "duplicate_policy_sha256": "2b9007077d6fd58d8fb9c10a697a4b3c1962fd512ddef84a89e3e93c21b14b21",
+  "errors": [],
+  "generation_started": false,
+  "next_allowed_action": "Local/remote hash preflight and Hermes notification may follow; do not submit Slurm until a separate single-submission route is recorded.",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_route_validation_v1",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868260_quality_repair_confirmation_h200.sbatch"
+}
