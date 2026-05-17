@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T08:01:25Z
+Last synchronized: 2026-05-17T08:33:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868299_DEV_DIAGNOSTIC_REPAIRED_JOB_868348_SUBMITTED_MONITOR_ONLY`
+`V2_R4_AFTER_868299_DEV_DIAGNOSTIC_868348_FAILED_GLOBAL_DUPLICATE_GATE_SIGNAL_PASSING_NO_RERUN`
 
 ## Latest Update
 
@@ -48,6 +48,34 @@ job:
   868348, array 0-31%4, nat-ev-v2-r4dev, pomplun H200
 post-submit allowlist:
   local PASS, remote PASS
+```
+
+Job `868348` completed all 32 shards and was reviewed:
+
+```text
+review:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_868348_review/
+review status:
+  FAIL_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_GATE
+failure attribution:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_868348_failure_attribution/
+attribution status:
+  RECORDED_R4_AFTER_868299_DEV_DIAGNOSTIC_868348_FAILURE_ATTRIBUTION_DUPLICATES_TASK_ONLY_ONLY
+signal:
+  protected strict accepts 32/32
+  protected ignoring-quality accepts 32/32
+  raw/task_only/wrong_key/wrong_payload accepts 0/32 each
+  trace binding invalid rows 0/98304
+quality blocker:
+  global exact duplicate extra rows 2
+duplicate location:
+  task_only only; 0 protected duplicate rows
+canonical adoption:
+  false
+allocation feasibility:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_allocation_feasibility_20260517/
+allocation feasibility status:
+  FAIL_R4_AFTER_868348_GLOBAL_UNIQUE_ALLOCATION_NOT_FEASIBLE_FROM_CURRENT_REVIEWED_ROW_BANK
 ```
 
 ## Active Route Update
@@ -673,19 +701,24 @@ recorded and preflighted. The next allowed action is:
 
 ```text
 next:
-  monitor Slurm array job 868348 only; after terminal completion sync artifacts
-  and run the first-token event dev diagnostic review
+  expert route decision: build a larger globally unique prompt/prefix row bank
+  with tokenizer/controller preflight, or precommit future duplicate-gate
+  semantics that report control-only duplicates separately without
+  retroactively rescuing 868348
 allowed:
   Hermes notification
   artifact-only 868299 review synchronization
   32-block first-token event dev diagnostic route planning/preflight
   runtime allowlist-race repair and wrapper smoke tests
-  monitoring job 868348
+  868348 artifact-only review and duplicate failure attribution
+  duplicate-gate repair route planning
+  global-unique allocation feasibility audit
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive
   adopting partial 868313 outputs as a canonical dev result
-  another Slurm generation job before 868348 terminal review
+  reclassifying 868348 as positive
+  another Slurm generation job before a new reviewed duplicate-gate repair route
   paper-facing positive claims
 not yet allowed:
   training

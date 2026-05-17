@@ -1,0 +1,20 @@
+{
+  "control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "duplicate_rows_by_arm": {
+    "task_only": 4
+  },
+  "global_duplicate_response_hash_count": 2,
+  "job_id": "868348",
+  "next_allowed_action": "Prepare expert route decision package: globally unique prompt/prefix allocation rerun versus precommitted duplicate-gate semantics repair; no Slurm rerun before a reviewed route.",
+  "phase": "V2_R4_AFTER_868299_DEV_DIAGNOSTIC_868348_FAILED_GLOBAL_DUPLICATE_GATE_SIGNAL_PASSING_NO_RERUN",
+  "protected_accepts_ignoring_quality": "32/32",
+  "protected_duplicate_rows": 0,
+  "protected_strict_accepts": "32/32",
+  "status": "FAIL_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_GATE_DUPLICATES_TASK_ONLY_ONLY",
+  "trace_binding_invalid_rows": 0
+}

@@ -1,0 +1,15 @@
+{
+  "available_reviewed_rows": 4096,
+  "available_unique_prompt_prefix_pairs": 2048,
+  "current_dev_allocation_duplicate_prompt_prefix_extra_rows": 30720,
+  "current_dev_allocation_rows": 32768,
+  "current_dev_allocation_unique_prompt_prefix_pairs": 2048,
+  "minimum_rows_required_for_32_block_global_unique_allocation": 32768,
+  "minimum_unique_prompt_prefix_pairs_required": 32768,
+  "next_allowed_action": "Expert route decision: build a larger globally unique prompt/prefix row bank with tokenizer/controller preflight, or precommit future duplicate-gate semantics that reports control-only duplicates separately. No Slurm rerun yet.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_868348_global_unique_allocation_feasibility_v1",
+  "source_failure_attribution": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_868348_failure_attribution/failure_attribution_summary.json",
+  "status": "FAIL_R4_AFTER_868348_GLOBAL_UNIQUE_ALLOCATION_NOT_FEASIBLE_FROM_CURRENT_REVIEWED_ROW_BANK",
+  "training_started": false
+}

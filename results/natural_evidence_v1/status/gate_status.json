@@ -6363,6 +6363,40 @@
     "status": "SUBMITTED_R4_AFTER_868299_DEV_DIAGNOSTIC_REPAIRED_H200_ARRAY_MONITOR_ONLY",
     "training_started": false
   },
+  "2026-05-17T08:33:00Z_r4_after_868299_dev_job_868348_review_failure_attribution": {
+    "control_accepts": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "duplicate_rows_by_arm": {
+      "task_only": 4
+    },
+    "failure_attribution_dir": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_868348_failure_attribution",
+    "global_duplicate_response_hash_count": 2,
+    "job_id": "868348",
+    "next_allowed_action": "Prepare expert route decision package: globally unique prompt/prefix allocation rerun versus precommitted duplicate-gate semantics repair; no rerun before a reviewed route.",
+    "paper_claim_allowed": false,
+    "protected_accepts_ignoring_quality": "32/32",
+    "protected_duplicate_rows": 0,
+    "protected_strict_accepts": "32/32",
+    "review_dir": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_868348_review",
+    "status": "FAIL_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_GATE_DUPLICATES_TASK_ONLY_ONLY",
+    "trace_binding_invalid_rows": 0,
+    "training_started": false
+  },
+  "2026-05-17T08:33:00Z_r4_after_868348_global_unique_allocation_feasibility": {
+    "available_reviewed_rows": 4096,
+    "available_unique_prompt_prefix_pairs": 2048,
+    "current_dev_allocation_duplicate_prompt_prefix_extra_rows": 30720,
+    "minimum_rows_required_for_32_block_global_unique_allocation": 32768,
+    "minimum_unique_prompt_prefix_pairs_required": 32768,
+    "next_allowed_action": "Expert route decision: build a larger globally unique prompt/prefix row bank with tokenizer/controller preflight, or precommit future duplicate-gate semantics for control-only duplicates. No Slurm rerun yet.",
+    "paper_claim_allowed": false,
+    "status": "FAIL_R4_AFTER_868348_GLOBAL_UNIQUE_ALLOCATION_NOT_FEASIBLE_FROM_CURRENT_REVIEWED_ROW_BANK",
+    "training_started": false
+  },
   "action_results": {
     "2026-05-08T01:44:32Z_phase_r1_prefix_selector_replay": {
       "e2e_eval_started": false,

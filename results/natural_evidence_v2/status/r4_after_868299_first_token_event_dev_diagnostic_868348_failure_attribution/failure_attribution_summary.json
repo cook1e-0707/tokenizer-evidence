@@ -1,0 +1,39 @@
+{
+  "control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "control_duplicate_rows": 4,
+  "duplicate_hash_groups": 2,
+  "duplicate_prompt_prefix_pairs": {
+    "r4_cover_dev_4409a3670c843c3b1383::useful_habit": 2,
+    "r4_cover_dev_54dcac7d434267b59ff1::practical_option": 2
+  },
+  "duplicate_rows_by_arm": {
+    "task_only": 4
+  },
+  "far_started": false,
+  "format_scrub_duplicate_extra_rows": 3,
+  "generated_files": 32,
+  "generated_rows": 98304,
+  "global_duplicate_response_hash_count": 2,
+  "interpretation": "868348 passes the first-token event signal and null-separation checks, but fails the precommitted global exact duplicate quality gate. The exact duplicates are confined to task_only rows and arise from reused prompt/prefix pairs across cyclic dev shards, not protected accepted outputs.",
+  "llama_started": false,
+  "next_allowed_action": "Expert route decision: either refine duplicate gate semantics for non-protected control duplicates or build a globally unique prompt allocation before rerun.",
+  "paper_claim_allowed": false,
+  "protected_accepts_ignoring_quality": 32,
+  "protected_duplicate_response_hash_count": 0,
+  "protected_duplicate_rows": 0,
+  "protected_forbidden_public_surface_count": 0,
+  "protected_strict_accepts": 32,
+  "review_gate_pass": false,
+  "review_status": "FAIL_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_GATE",
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_after_868299_dev_diagnostic_failure_attribution_v1",
+  "source_job_id": "868348",
+  "status": "RECORDED_R4_AFTER_868299_DEV_DIAGNOSTIC_868348_FAILURE_ATTRIBUTION_DUPLICATES_TASK_ONLY_ONLY",
+  "trace_binding_invalid_rows": 0,
+  "training_started": false
+}

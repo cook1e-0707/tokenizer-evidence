@@ -1,0 +1,22 @@
+{
+  "active_blocker": "global_exact_duplicate_gate_failed_due_task_only_duplicate_rows",
+  "control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "global_duplicate_response_hash_count": 2,
+  "next_allowed_action": "Run artifact-only feasibility audit for a globally unique 32-block prompt/prefix allocation; no Slurm rerun before reviewed route.",
+  "option_a": "globally_unique_allocation_repair",
+  "option_b": "future_duplicate_gate_semantics_repair_no_retroactive_rescue",
+  "paper_claim_allowed": false,
+  "protected_accepts_ignoring_quality": 32,
+  "protected_duplicate_rows": 0,
+  "protected_strict_accepts": 32,
+  "recommended_default": "option_a_globally_unique_allocation_repair",
+  "schema_name": "natural_evidence_v2_r4_after_868348_duplicate_gate_repair_decision_package_v1",
+  "source_job_id": "868348",
+  "status": "RECORDED_R4_AFTER_868348_DUPLICATE_GATE_REPAIR_DECISION_PACKAGE_NO_RERUN",
+  "trace_binding_invalid_rows": 0
+}
