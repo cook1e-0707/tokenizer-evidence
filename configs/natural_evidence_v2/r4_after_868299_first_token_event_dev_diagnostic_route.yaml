@@ -1,0 +1,107 @@
+schema_name: natural_evidence_v2_r4_after_868299_first_token_event_dev_diagnostic_route_v1
+route_id: r4_after_868299_first_token_event_dev_diagnostic_v1
+phase: V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_868299_PASSED_REVIEWED_NEXT_DEV_ROUTE
+
+source_artifacts:
+  source_job_id: "868299"
+  quality_review: results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_868299_quality_review/quality_repair_confirmation_review_summary.json
+  dev_allocation_plan: results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_plan_20260517/dev_diagnostic_plan_summary.json
+  dev_allocation_manifest: results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_plan_20260517/row_allocation_manifest.json
+  dev_allocation_rows: results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_plan_20260517/row_allocation_rows.jsonl
+
+policy_artifacts:
+  duplicate_safe_generation_policy_v2: configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+  contextual_forbidden_policy_v2: results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+  trace_binding_verifier: scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+  first_token_event_decoder: scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
+  full_phrase_decoder: scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py
+
+generation_scope:
+  diagnostic_name: r4_after_868299_first_token_event_dev_diagnostic
+  scale: 32_block_dev_diagnostic
+  blocks: 32
+  shards: 32
+  row_cylinders_per_block: 1024
+  rows_per_coordinate_per_block: 64
+  unique_prompt_indices_per_block: 256
+  selected_coordinate_count: 16
+  expected_generated_rows: 98304
+  expected_attempt_rows_min: 98304
+  conditions: [protected, raw, task_only]
+  decode_conditions: [protected, raw, task_only, wrong_key, wrong_payload]
+  generation_unit: prefix_native_row_cylinder
+  same_contract_only: true
+  contract_id: a55e
+  payload_diversity_tested: false
+  llama_tested: false
+  locked_scale_claim: false
+  paper_facing: false
+
+allocation_policy:
+  policy: cyclic_reuse_reviewed_4_block_full16_allocation
+  reason: current reviewed row bank has four fully unique 1024-row full16 shards
+  reuse_scope: dev_diagnostic_only_not_locked_scale
+  base_shards: 4
+  reuse_cycle_count: 8
+  within_shard_duplicate_prompt_prefix_pair_count_max: 0
+  global_prompt_prefix_reuse_expected: true
+  global_response_hash_duplicate_gate_remains_zero: true
+
+quality_gates:
+  protected_strict_accepts_min: 28
+  protected_accepts_ignoring_quality_min: 30
+  control_accepts_max_per_condition: 0
+  within_block_duplicate_response_hash_count_max: 0
+  global_duplicate_response_hash_count_max: 0
+  technical_forbidden_public_surface_count_max: 0
+  ambiguous_forbidden_surface_count_max: 0
+  ordinary_domain_literal_policy: report_only
+  trace_binding_validity_required: 1.0
+  full_phrase_decoder_policy: report_only_not_success_claim
+  post_generation_template_leakage_review_required: true
+  protected_vs_raw_template_auc_max: 0.60
+
+controller:
+  policy: committed_first_token_event_controller
+  source_best_grid: 26
+  source_job_id: 868016
+  bonus_nats: 4.0
+  penalty_nats: 0.5
+  max_target_mass: 0.5
+  max_kl_budget: 0.5
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  array: 0-31%4
+  allowlist_entry: v2_r4_after_868299_first_token_event_dev_diagnostic_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_868299_first_token_event_dev_diagnostic_h200.sbatch
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868299_first_token_event_dev_diagnostic_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  full_mode_wrapper_requires_separate_submission_preflight: true
+
+required_before_any_submission:
+  route_validation_passed: true
+  wrapper_plan_only_passed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  hermes_notification_sent: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+  locked_scale: true
+
+output_dir: results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_route_validation_20260517

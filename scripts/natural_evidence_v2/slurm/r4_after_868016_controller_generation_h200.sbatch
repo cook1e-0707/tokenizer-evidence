@@ -46,6 +46,7 @@ MODEL_NAME="${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}"
 TOKENIZER_NAME="${TOKENIZER_NAME:-Qwen/Qwen2.5-7B-Instruct}"
 ROWS_PER_SHARD="${ROWS_PER_SHARD:-768}"
 EXPECTED_SELECTED_COORDINATE_COUNT="${EXPECTED_SELECTED_COORDINATE_COUNT:-12}"
+MAX_SHARD_INDEX="${MAX_SHARD_INDEX:-3}"
 BATCH_SIZE="${BATCH_SIZE:-4}"
 MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-96}"
 CONTROLLER_BONUS_NATS="${CONTROLLER_BONUS_NATS:-4.0}"
@@ -120,6 +121,7 @@ echo "full_phrase_decoder_spec=$FULL_PHRASE_DECODER_SPEC"
 echo "decoder_route_config=$DECODER_ROUTE_CONFIG"
 echo "rows_per_shard=$ROWS_PER_SHARD"
 echo "expected_selected_coordinate_count=$EXPECTED_SELECTED_COORDINATE_COUNT"
+echo "max_shard_index=$MAX_SHARD_INDEX"
 echo "controller_bonus_nats=$CONTROLLER_BONUS_NATS"
 echo "controller_penalty_nats=$CONTROLLER_PENALTY_NATS"
 echo "duplicate_safe_policy=${DUPLICATE_SAFE_POLICY:-unset}"
@@ -149,7 +151,7 @@ if [ "$VALIDATE_PLAN_ONLY" != "1" ]; then
     echo "SHARD_INDEX_REQUIRED_FOR_R4_AFTER_868016_CONTROLLER_GENERATION" >&2
     exit 2
   fi
-  if [ "$SHARD_INDEX" -lt 0 ] || [ "$SHARD_INDEX" -gt 3 ]; then
+  if [ "$SHARD_INDEX" -lt 0 ] || [ "$SHARD_INDEX" -gt "$MAX_SHARD_INDEX" ]; then
     echo "INVALID_R4_AFTER_868016_CONTROLLER_GENERATION_SHARD_INDEX: $SHARD_INDEX" >&2
     exit 2
   fi

@@ -1,0 +1,23 @@
+{
+  "account": "cs_yinxin.wan",
+  "array": "0-31%4",
+  "far_allowed": false,
+  "gres": "gpu:h200:1",
+  "hermes_sync": true,
+  "job_id": "868313",
+  "job_name": "nat-ev-v2-r4dev",
+  "llama_allowed": false,
+  "next_allowed_action": "Monitor job 868313 only. After terminal completion, sync artifacts and run the first-token event dev diagnostic review. Do not submit another generation job before review.",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "phase": "V2_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_868313_SUBMITTED_MONITOR_ONLY",
+  "post_submit_local_allowlist": "PASS enabled_entries=[]",
+  "post_submit_remote_allowlist": "PASS enabled_entries=[]",
+  "qos": "pomplun",
+  "report_md": "results/natural_evidence_v1/status/hermes_reports/20260517_0558_r4_after_868299_dev_job_868313_submitted.md",
+  "sanitizer_allowed": false,
+  "status": "SUBMITTED_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_H200_ARRAY_MONITOR_ONLY",
+  "submission_record": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_submission_20260517/submission_record.json",
+  "time_limit": "30-00:00:00",
+  "training_allowed": false
+}

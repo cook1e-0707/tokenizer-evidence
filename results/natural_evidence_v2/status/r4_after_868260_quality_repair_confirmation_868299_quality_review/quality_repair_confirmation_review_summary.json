@@ -1,0 +1,48 @@
+{
+  "attempt_rows": 12288,
+  "control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "control_accepts_ignoring_quality": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "event_statuses": {
+    "erasure": 11554,
+    "other": 21,
+    "target": 713
+  },
+  "expected_shards": 4,
+  "far_started": false,
+  "full_phrase_decoder_policy": "report_only_not_success_claim",
+  "full_phrase_forbidden_public_surface_count_format_scrub_all": 46,
+  "full_phrase_protected_accepts_format_scrub_all": 0,
+  "generated_rows": 12288,
+  "generation_diagnostic_gate_pass": true,
+  "global_duplicate_response_hash_count": 0,
+  "input_dir": "results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_868299",
+  "llama_started": false,
+  "missing_artifacts": [],
+  "next_allowed_action": "record a reviewed 32-block first-token event dev diagnostic route",
+  "paper_claim_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "protected_accepts_ignoring_quality": 4,
+  "protected_blocks": 4,
+  "protected_duplicate_response_hash_count": 0,
+  "protected_forbidden_public_surface_count": 0,
+  "protected_strict_accepts": 4,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_review_v1",
+  "shards_seen": 4,
+  "source_job_id": "868299",
+  "status": "PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_FIRST_TOKEN_EVENT_GATE",
+  "trace_binding_checked_rows": 12288,
+  "trace_binding_invalid_rows": 0,
+  "trace_binding_validity": 1.0,
+  "training_started": false
+}

@@ -1,0 +1,15 @@
+{
+  "active_jobs_seen": 0,
+  "checked_files": 13,
+  "enabled_entries": [],
+  "mismatched_files": [],
+  "next_allowed_action": "Exactly-one allowlist preflight and one H200 submission may proceed if route remains unchanged.",
+  "remote_allowlist_safety": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_allowlist_safety_remote_20260517/allowlist_safety_summary.json",
+  "remote_host": "chimera",
+  "remote_repo": "/home/guanjie.lin001/tokenizer-evidence",
+  "remote_route_validation": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_route_validation_remote_20260517/route_validation_summary.json",
+  "remote_wrapper_plan_smoke": "results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_wrapper_plan_smoke_remote_20260517/route_validation_summary.json",
+  "schema_name": "natural_evidence_v2_r4_after_868299_first_token_event_dev_remote_preflight_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_REMOTE_PREFLIGHT_NO_SUBMIT"
+}

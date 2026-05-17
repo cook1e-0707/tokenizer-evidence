@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T03:24:49Z
+Last synchronized: 2026-05-17T05:58:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_REPLACEMENT_JOB_868299_SUBMITTED_MONITOR_ONLY`
+`V2_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_868313_SUBMITTED_MONITOR_ONLY`
 
 ## Active Route Update
 
@@ -161,10 +161,88 @@ post-submit remote allowlist:
   PASS, enabled_entries=[]
 ```
 
-The next allowed action is monitor-only for job `868299`; after terminal state,
-sync and review artifacts before any next route. Downstream
-training/Llama/sanitizer/FAR/payload-diversity/paper-claim routes remain gated
-by their prior conditions.
+Job `868299` completed on Chimera H200 and the first-token event quality-repair
+confirmation review passed:
+
+```text
+job:
+  868299, array 0-3%4, nat-ev-v2-r4qfix, chimera21 H200
+state:
+  COMPLETED, all 4 shards, ExitCode 0:0
+run artifacts:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_868299/
+quality review:
+  results/natural_evidence_v2/status/r4_after_868260_quality_repair_confirmation_868299_quality_review/
+review status:
+  PASS_R4_AFTER_868260_QUALITY_REPAIR_CONFIRMATION_FIRST_TOKEN_EVENT_GATE
+protected strict accepts:
+  4/4
+protected accepts ignoring quality:
+  4/4
+raw/task-only/wrong-key/wrong-payload accepts:
+  0/4 each
+global duplicate response hash count:
+  0
+protected forbidden public surface count:
+  0
+trace binding validity:
+  12288/12288 valid
+full-phrase protected accepts, format_scrub=all:
+  0, report-only, not a text-only success claim
+```
+
+This is the first strict-quality pass for the provider-side keyed first-token
+event route. It does not establish a text-only phrase decoder result and does
+not unlock paper-facing claims.
+
+The next reviewed route has now been recorded and passed local plan-only
+validation:
+
+```text
+route:
+  docs/natural_evidence_v2/R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_ROUTE_20260517.md
+config:
+  configs/natural_evidence_v2/r4_after_868299_first_token_event_dev_diagnostic_route.yaml
+allocation plan:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_plan_20260517/
+route validation:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_route_validation_20260517/
+wrapper plan smoke:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_wrapper_plan_smoke_20260517/
+local status:
+  PASS_R4_AFTER_868299_FIRST_TOKEN_EVENT_DEV_DIAGNOSTIC_ROUTE_PLAN_ONLY_NO_SUBMIT
+scope:
+  32-block Qwen dev diagnostic, provider-side first-token event trace route
+allocation caveat:
+  cyclic reuse of the reviewed 4-block full16 allocation; dev diagnostic only,
+  not locked-scale independent evidence
+gates:
+  protected strict accepts >=28/32, protected ignoring-quality accepts >=30/32,
+  all controls 0/32, global exact response duplicate 0, technical forbidden 0,
+  trace binding 100%
+```
+
+Local/remote hash and allowlist preflight passed, then exactly one H200 Slurm
+array was submitted:
+
+```text
+submission:
+  results/natural_evidence_v2/status/r4_after_868299_first_token_event_dev_diagnostic_submission_20260517/
+job:
+  868313, array 0-31%4, nat-ev-v2-r4dev, pomplun H200
+command:
+  PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868299_first_token_event_dev_diagnostic_h200.sbatch
+post-submit local allowlist:
+  PASS, enabled_entries=[]
+post-submit remote allowlist:
+  PASS, enabled_entries=[]
+```
+
+The next allowed action is to monitor job `868313`; after terminal completion,
+sync artifacts and run the first-token event dev diagnostic review. Do not
+submit another generation job before this review. Downstream training/Llama/
+sanitizer/FAR/payload-diversity/paper-claim routes remain gated by their prior
+conditions.
 
 ## Prior Compute Result: 868212
 
@@ -551,22 +629,22 @@ duplicate-safe generation policy:
 ## Next Allowed Action
 
 The route may continue automatically after recorded preconditions pass, but no
-additional Slurm rerun is allowed while replacement job `868299` is active. The
-next allowed action is:
+additional Slurm rerun is allowed until a new reviewed dev-diagnostic route is
+recorded and preflighted. The next allowed action is:
 
 ```text
 next:
-  monitor Slurm job 868299 only; after terminal state, sync and review artifacts
-  before any next route
+  monitor Slurm array job 868313 only; after terminal completion sync artifacts
+  and run the first-token event dev diagnostic review
 allowed:
   Hermes notification
-  monitor/sacct/squeue checks for job 868299
-  artifact sync and review after job 868299 reaches terminal state
+  artifact-only 868299 review synchronization
+  32-block first-token event dev diagnostic route planning/preflight
+  monitoring job 868313
   Hermes/Codex state synchronization
 not allowed:
   reclassifying 868260 as positive
-  another Slurm generation rerun before job 868299 reaches terminal state and
-  is reviewed
+  another Slurm generation job before 868313 terminal review
 not yet allowed:
   training
 ```
