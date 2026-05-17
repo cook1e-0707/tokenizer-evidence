@@ -1,0 +1,22 @@
+{
+  "allowlist_enabled": false,
+  "allowlist_entry": "v2_r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_h200",
+  "checked_rows_future_gate": 32768,
+  "config": "configs/natural_evidence_v2/r4_after_868348_global_unique_tokenizer_preflight_route.yaml",
+  "config_sha256": "3ebca07318918118132e98b8a84f2ce81dede9037401b7079d9af3e9dd6dca68",
+  "current_compute_unlocked": false,
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Remote hash/allowlist preflight and exactly-one H200 tokenizer-only submission may be prepared; no generation or model scoring.",
+  "paper_claim_allowed": false,
+  "row_bank_rows": "results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_rows.jsonl",
+  "row_bank_rows_sha256": "6374c413b4022e1e4cd2dfeb78a8a9e9c2959a21a2055f5f4c5d40236f857d67",
+  "schema_name": "natural_evidence_v2_r4_after_868348_global_unique_tokenizer_preflight_route_validation_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT",
+  "tokenizer_validation_started": false,
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_h200.sbatch",
+  "wrapper_sha256": "8bc7af6c2f3bed04e12d9bc78001c62bd2f04f2648fa945c6f38369fb91dc50e"
+}

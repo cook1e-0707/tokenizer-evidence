@@ -1,0 +1,37 @@
+{
+  "errors": [],
+  "generation_started": false,
+  "metrics": {
+    "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+    "duplicate_prompt_prefix_pair_extra_rows": 0,
+    "duplicate_row_key_extra_rows": 0,
+    "max_coordinate_prefix_pair_count": 128,
+    "prefix_template_count": 16,
+    "row_count": 32768,
+    "rows_per_coordinate": [
+      2048
+    ],
+    "rows_per_prefix_template": [
+      2048
+    ],
+    "rows_per_shard": [
+      1024
+    ],
+    "selected_coordinate_count": 16,
+    "shard_count": 32,
+    "unique_content_prompt_prefix_pairs": 32768,
+    "unique_prompt_prefix_pairs": 32768
+  },
+  "model_scoring_started": false,
+  "next_allowed_action": "Actual Qwen tokenizer/controller preflight planning for this row bank; no generation or Slurm submission until those checks pass and a reviewed H200 route is recorded.",
+  "paper_claim_allowed": false,
+  "row_allocation_manifest": "results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_manifest.json",
+  "row_allocation_manifest_sha256": "c4d01d08dc8b26fcbb46cd5e69ad8d85781e735b3fbc44a9c4ac00aec3b8de58",
+  "row_allocation_rows": "results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_rows.jsonl",
+  "row_allocation_rows_sha256": "6374c413b4022e1e4cd2dfeb78a8a9e9c2959a21a2055f5f4c5d40236f857d67",
+  "row_bank_dir": "results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517",
+  "schema_name": "natural_evidence_v2_r4_after_868348_global_unique_row_bank_route_validation_v1",
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_ROW_BANK_ROUTE_VALIDATION_NO_SUBMIT",
+  "training_started": false
+}

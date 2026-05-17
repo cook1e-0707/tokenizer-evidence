@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T08:33:00Z
+Last synchronized: 2026-05-17T19:56:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,9 +9,159 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868299_DEV_DIAGNOSTIC_868348_FAILED_GLOBAL_DUPLICATE_GATE_SIGNAL_PASSING_NO_RERUN`
+`V2_R4_AFTER_868348_GLOBAL_UNIQUE_QWEN_TOKENIZER_PREFLIGHT_PASSED_ROUTE_PLANNING_NEXT`
 
 ## Latest Update
+
+Slurm job `869298` completed the actual Qwen tokenizer-boundary preflight for
+the global-unique row bank:
+
+```text
+review:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_869298_review/
+status:
+  PASS_R4_AFTER_868348_GLOBAL_UNIQUE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_869298
+job:
+  869298, nat-ev-v2-r4gTok, COMPLETED, 00:01:14, ExitCode 0:0
+checked rows:
+  32768
+failed rows:
+  0
+empty target id rows:
+  0
+empty other id rows:
+  0
+target/other first-token overlap rows:
+  0
+generation/model scoring/training:
+  not started
+```
+
+This clears the actual Qwen tokenizer-boundary prerequisite for the new
+global-unique row bank. The next allowed action is reviewed controller/decode
+generation-route preparation for this row bank. Do not submit generation until
+route validation, remote hash preflight, and zero-enabled allowlist safety pass.
+
+## Prior Update
+
+The global-unique row bank route validation and static boundary preflight passed.
+Codex then synchronized the reviewed artifacts to Chimera, ran local and remote
+single-enabled preflights, submitted exactly one H200 tokenizer-only Slurm job,
+and immediately disabled the allowlist entry:
+
+```text
+submission:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_tokenizer_submission_20260517/
+job:
+  869298, nat-ev-v2-r4gTok, pomplun H200
+scope:
+  actual Qwen tokenizer boundary preflight only
+row bank:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_rows.jsonl
+checked rows planned:
+  32768
+local single-enabled preflight:
+  PASS
+remote single-enabled preflight:
+  PASS
+post-submit allowlist:
+  local PASS, remote PASS, enabled_entries=[]
+generation/model scoring/training:
+  not started
+```
+
+The next allowed action is to monitor job `869298`. After terminal completion,
+sync artifacts and review the tokenizer boundary gate. Do not submit generation
+or model scoring before this tokenizer preflight is reviewed.
+
+## Prior Update
+
+Codex then executed Option A artifact-only repair planning and built a new
+globally unique 32-block row bank from reviewed R4 dev prompts:
+
+```text
+row bank:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/
+status:
+  PASS_R4_AFTER_868348_GLOBAL_UNIQUE_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT
+self-audit:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_self_audit_20260517/
+self-audit status:
+  PASS_R4_AFTER_868348_EXISTING_ROW_SOURCES_HAVE_NECESSARY_GLOBAL_UNIQUE_CAPACITY_NO_RERUN
+rows:
+  32768
+shards:
+  32
+rows per shard:
+  1024
+selected coordinates:
+  16
+unique content prompt/prefix pairs:
+  32768
+duplicate content prompt/prefix extra rows:
+  0
+min unique content prompt/prefix pairs per selected coordinate:
+  2048
+prefix templates:
+  16, rotated by prompt and coordinate
+generation/model/scoring/training/slurm:
+  not started
+```
+
+This repairs the immediate input-capacity blocker for a future rerun, but it is
+not a submission route and does not reclassify `868348`. The next allowed action
+is artifact-only route validation plus actual Qwen tokenizer/controller preflight
+planning for this row bank. No generation or Slurm submission is allowed until
+those pass and a reviewed route is recorded.
+
+## Prior Update
+
+After the `868348` dev diagnostic failed only the strict global exact duplicate
+gate, Codex ran an artifact-only audit of all existing row-source JSONL files:
+
+```text
+audit:
+  results/natural_evidence_v2/status/r4_after_868348_candidate_row_source_audit_20260517/
+status:
+  FAIL_R4_AFTER_868348_EXISTING_ROW_SOURCES_INSUFFICIENT_FOR_GLOBAL_UNIQUE_32_BLOCK_ALLOCATION_NO_RERUN
+scope:
+  scanned 369 row files; no model calls, no generation, no Slurm submission
+compatible sources:
+  6
+compatible rows:
+  55296
+unique content prompt/prefix pairs:
+  4096
+required for strict 32-block global-unique rerun:
+  32768
+min unique content prompt/prefix pairs per coordinate:
+  256
+required per coordinate for 32 blocks:
+  2048
+interpretation:
+  existing reviewed row sources are insufficient for a strict global-unique
+  32-block rerun of the 868348 dev route
+```
+
+This does not reclassify `868348`. The first-token event signal remains strong
+inside that failed diagnostic (`protected strict 32/32`, controls `0/32` each,
+trace binding valid), but the strict duplicate gate failure remains fatal for
+canonical adoption.
+
+The next allowed action is artifact-only route planning for one of two future
+repairs:
+
+```text
+Option A:
+  build a larger reviewed prompt/row bank with tokenizer/controller preflight,
+  then validate a globally unique allocation before any rerun
+Option B:
+  record a future-only duplicate-gate semantics decision that separates
+  protected/accepted duplicates from control-only duplicates; this cannot
+  retroactively rescue 868348
+```
+
+No generation or Slurm submission is allowed from the current row bank.
 
 Job `868313` (`nat-ev-v2-r4dev`, array `0-31%4`) reached a terminal mixed
 state and is not a canonical dev-diagnostic result.

@@ -1,0 +1,72 @@
+schema_name: natural_evidence_v2_r4_after_868348_global_unique_tokenizer_preflight_route_v1
+route_id: r4_after_868348_global_unique_qwen_tokenizer_preflight_v1
+phase: V2_R4_AFTER_868348_GLOBAL_UNIQUE_ROW_BANK_BUILT_PREFLIGHT_NEXT_NO_SUBMIT
+
+source_artifacts:
+  source_failure_job_id: "868348"
+  row_source_audit: results/natural_evidence_v2/status/r4_after_868348_candidate_row_source_audit_20260517/row_source_audit_summary.json
+  row_bank_dir: results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517
+  row_bank_manifest: results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_manifest.json
+  row_bank_rows: results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_rows.jsonl
+  row_bank_self_audit: results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_self_audit_20260517/row_source_audit_summary.json
+  row_bank_route_validation: results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_route_validation_20260517/route_validation_summary.json
+  static_boundary_preflight: results/natural_evidence_v2/status/r4_after_868348_global_unique_static_boundary_preflight_20260517/r4_prefix_native_tokenizer_boundary_preflight_summary.json
+
+row_bank_requirements:
+  expected_rows: 32768
+  expected_shards: 32
+  expected_rows_per_shard: 1024
+  expected_selected_coordinates: 16
+  expected_unique_content_prompt_prefix_pairs: 32768
+  expected_duplicate_content_prompt_prefix_extra_rows: 0
+  expected_rows_per_coordinate: 2048
+  expected_prefix_templates: 16
+  reclassifies_868348: false
+
+tokenizer_preflight_scope:
+  tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+  max_rows: 32768
+  run_qwen_tokenizer: true
+  model_forward_allowed: false
+  scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  paper_claim_allowed: false
+
+future_tokenizer_gate:
+  checked_rows: 32768
+  failed_rows_max: 0
+  empty_target_id_row_count_max: 0
+  empty_other_id_row_count_max: 0
+  target_other_overlap_row_count_max: 0
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  allowlist_entry: v2_r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  exactly_one_submission_when_unlocked: true
+  immediate_disable_after_sbatch: true
+  remote_hash_preflight_required: true
+  zero_enabled_allowlist_required_before_submission: true
+  hermes_notification_required: true
+
+not_unlocked_by_this_route_package:
+  generation: true
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
