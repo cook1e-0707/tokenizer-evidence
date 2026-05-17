@@ -1,0 +1,88 @@
+{
+  "contextual_literals": {
+    "bucket": {
+      "fail_closed_if_technical_cue_present": true,
+      "gate_policy": "ordinary physical bucket use is reported separately; technical bucket use remains forbidden",
+      "ordinary_domain_allowed": true,
+      "ordinary_domain_cues": [
+        "bucket",
+        "buckets",
+        "plumbing",
+        "water",
+        "cleaning",
+        "garden",
+        "gardening",
+        "paint",
+        "painting",
+        "tools",
+        "materials",
+        "home maintenance",
+        "maintenance"
+      ],
+      "technical_cues": [
+        "bit",
+        "codeword",
+        "coordinate",
+        "coordinate id",
+        "decoder",
+        "hidden",
+        "payload",
+        "secret",
+        "slot",
+        "token id",
+        "watermark",
+        "fingerprint",
+        "evidence channel"
+      ]
+    },
+    "coordinate": {
+      "fail_closed_if_technical_cue_present": true,
+      "gate_policy": "ordinary coordination-domain use may be classified as non-technical; technical coordinate use remains forbidden",
+      "ordinary_domain_allowed": true,
+      "ordinary_domain_cues": [
+        "coordinate",
+        "coordinates",
+        "coordinated",
+        "coordinating",
+        "coordination",
+        "coordinator",
+        "coordinators"
+      ],
+      "technical_cues": [
+        "bit",
+        "bucket",
+        "checksum",
+        "codeword",
+        "coordinate id",
+        "decoder",
+        "hidden",
+        "payload",
+        "secret",
+        "slot",
+        "token id",
+        "watermark"
+      ]
+    }
+  },
+  "final_generation_gate": {
+    "ordinary_domain_literal_count_reported_separately": true,
+    "technical_public_literal_count_max": 0
+  },
+  "generation_started": false,
+  "hard_forbid_literals": [
+    "fingerprint",
+    "watermark",
+    "payload",
+    "secret key",
+    "decoder",
+    "hidden signal"
+  ],
+  "ordinary_domain_literal_count_reported_separately": true,
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_contextual_forbidden_surface_policy_v2",
+  "slurm_allowed": false,
+  "source_job_id": "868260",
+  "status": "PRECOMMITTED_CONTEXTUAL_FORBIDDEN_SURFACE_POLICY_V2_ARTIFACT_ONLY_NO_SUBMIT",
+  "training_started": false
+}

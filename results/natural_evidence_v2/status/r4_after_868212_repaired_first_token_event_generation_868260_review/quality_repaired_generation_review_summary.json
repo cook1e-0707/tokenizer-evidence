@@ -1,0 +1,202 @@
+{
+  "claim_policy": "diagnostic_only_not_locked_positive_not_paper_claim",
+  "expected_shards": 4,
+  "failed_protected_blocks": [
+    {
+      "accept": false,
+      "bits_match_condition": true,
+      "block_id": "shard_00_block_00",
+      "checksum_valid": true,
+      "complete_pairs": 8,
+      "decoded_bits": "10100101",
+      "duplicate_response_hash_count": 1,
+      "expected_bits": "10100101",
+      "forbidden_public_surface_count": 0,
+      "min_pair_support": 8,
+      "missing_bit_indices": "",
+      "required_pairs": 8
+    },
+    {
+      "accept": false,
+      "bits_match_condition": true,
+      "block_id": "shard_01_block_00",
+      "checksum_valid": true,
+      "complete_pairs": 8,
+      "decoded_bits": "10100101",
+      "duplicate_response_hash_count": 2,
+      "expected_bits": "10100101",
+      "forbidden_public_surface_count": 1,
+      "min_pair_support": 5,
+      "missing_bit_indices": "",
+      "required_pairs": 8
+    }
+  ],
+  "far_started": false,
+  "first_token_block_diagnostic_gate_pass": false,
+  "first_token_block_quality_duplicate_count": 13,
+  "first_token_block_quality_forbidden_count": 3,
+  "first_token_control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "first_token_event_aggregate_by_arm": {
+    "protected": {
+      "accepts": 2,
+      "accepts_ignoring_quality": 4,
+      "blocks": 4,
+      "duplicate_response_hash_count": 3,
+      "forbidden_public_surface_count": 1
+    },
+    "raw": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 4,
+      "forbidden_public_surface_count": 0
+    },
+    "task_only": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 3,
+      "forbidden_public_surface_count": 1
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 4,
+      "duplicate_response_hash_count": 3,
+      "forbidden_public_surface_count": 1
+    }
+  },
+  "first_token_event_source_counts": {
+    "token_id_trace": 12288
+  },
+  "first_token_event_status_by_condition": {
+    "protected": {
+      "erasure": 3392,
+      "other": 2,
+      "target": 702
+    },
+    "raw": {
+      "erasure": 4094,
+      "other": 2
+    },
+    "task_only": {
+      "erasure": 4088,
+      "other": 6,
+      "target": 2
+    }
+  },
+  "first_token_event_status_counts": {
+    "erasure": 11574,
+    "other": 10,
+    "target": 704
+  },
+  "first_token_protected_accepts": 2,
+  "first_token_protected_blocks": 4,
+  "full_phrase_decode_all_aggregate_by_arm": {
+    "protected": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 7
+    },
+    "raw": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 6
+    },
+    "task_only": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 6
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 7
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 7
+    }
+  },
+  "full_phrase_decode_none_aggregate_by_arm": {
+    "protected": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 7
+    },
+    "raw": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 6
+    },
+    "task_only": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 6
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 7
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 16,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 7
+    }
+  },
+  "full_phrase_protected_accepts_format_scrub_all": 0,
+  "generation_started": false,
+  "global_duplicate_caveat": true,
+  "global_generated_hash_summary": {
+    "generated_rows": 12288,
+    "global_duplicate_response_hash_count": 7612,
+    "global_duplicate_response_hash_max_group_size": 8,
+    "unique_response_hashes": 4676
+  },
+  "input_dir": "results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260",
+  "llama_started": false,
+  "missing_artifacts": [],
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "same_family_null_started": false,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_after_868151_quality_repaired_generation_review_v1",
+  "shards_seen": 4,
+  "source_job_id": "868260",
+  "status": "FAIL_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_GLOBAL_DUPLICATE_CAVEAT",
+  "training_started": false
+}

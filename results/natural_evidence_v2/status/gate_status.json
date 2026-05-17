@@ -12657,5 +12657,48 @@
     "time_limit": "30-00:00:00",
     "timestamp_utc": "2026-05-17T00:20:09Z",
     "training_started": false
+  },
+  "2026-05-17T00:41:00Z_r4_after_868212_generation_868260_quality_gate_failure_reviewed": {
+    "status": "RECORDED_R4_AFTER_868212_GENERATION_868260_QUALITY_GATE_REPAIR_DECISION_NO_SUBMIT",
+    "current_phase": "V2_R4_AFTER_868212_GENERATION_868260_FAILED_QUALITY_GATE_REPAIR_DECISION_RECORDED_NO_SUBMIT",
+    "source_job_id": "868260",
+    "strict_protected_accepts": 2,
+    "protected_accepts_ignoring_quality": 4,
+    "protected_blocks": 4,
+    "control_accepts": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "all_protected_blocks_decode_expected_codeword": true,
+    "quality_gate_failed": true,
+    "not_a_positive_result": true,
+    "reclassifies_868260": false,
+    "failure_analysis": "results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260_failure_analysis/failure_analysis_summary.json",
+    "decision_summary": "results/natural_evidence_v2/status/r4_after_868212_generation_868260_quality_gate_repair_decision_20260517/decision_summary.json",
+    "next_allowed_action": "Artifact-only contextual forbidden-surface policy v2 and duplicate-safe generation/allocation policy repair package; route validator/wrapper plan-only validation only; no Slurm until a new reviewed rerun route is recorded.",
+    "slurm_job_submitted": false,
+    "generation_started": false,
+    "training_started": false,
+    "paper_claim_allowed": false,
+    "timestamp_utc": "2026-05-17T00:41:00Z"
+  },
+  "2026-05-17T00:50:00Z_r4_after_868260_quality_gate_repair_package_validated": {
+    "status": "PASS_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATION_NO_SUBMIT",
+    "current_phase": "V2_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATED_NO_SUBMIT",
+    "source_job_id": "868260",
+    "repair_package": "results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517",
+    "validation": "results/natural_evidence_v2/status/r4_after_868260_quality_gate_repair_package_validation_20260517/repair_package_validation_summary.json",
+    "contextual_forbidden_surface_policy_v2": "results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json",
+    "duplicate_safe_generation_policy": "results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/duplicate_safe_generation_policy.json",
+    "reclassifies_868260": false,
+    "slurm_allowed": false,
+    "generation_started": false,
+    "training_started": false,
+    "paper_claim_allowed": false,
+    "tests": "5 passed",
+    "next_allowed_action": "Plan-only route/wrapper update may consume the validated quality-gate repair package; no Slurm until a new reviewed rerun route passes local and remote preflight.",
+    "timestamp_utc": "2026-05-17T00:50:00Z"
   }
 }

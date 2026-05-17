@@ -1,0 +1,14 @@
+{
+  "contextual_forbidden_surface_policy": "contextual_forbidden_surface_policy_v2.json",
+  "duplicate_safe_generation_policy": "duplicate_safe_generation_policy.json",
+  "generation_started": false,
+  "next_allowed_action": "Plan-only route/wrapper update may consume this package; no Slurm until a new reviewed rerun route passes local and remote preflight.",
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_gate_repair_manifest_v1",
+  "slurm_allowed": false,
+  "source_failure_analysis": "results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260_failure_analysis/failure_analysis_summary.json",
+  "source_job_id": "868260",
+  "status": "PRECOMMITTED_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_ARTIFACT_ONLY_NO_SUBMIT",
+  "training_started": false
+}

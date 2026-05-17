@@ -1,0 +1,5 @@
+block_id,strict_accept,accept_ignoring_quality,decoded_bits,expected_bits,complete_pairs,required_pairs,checksum_valid,bits_match_condition,duplicate_response_hash_count,forbidden_public_surface_count,min_pair_support,fail_reasons
+shard_00_block_00,False,True,10100101,10100101,8,8,True,True,1,0,8,duplicate_response_hash
+shard_01_block_00,False,True,10100101,10100101,8,8,True,True,2,1,5,"duplicate_response_hash,forbidden_public_surface"
+shard_02_block_00,True,True,10100101,10100101,8,8,True,True,0,0,7,
+shard_03_block_00,True,True,10100101,10100101,8,8,True,True,0,0,9,

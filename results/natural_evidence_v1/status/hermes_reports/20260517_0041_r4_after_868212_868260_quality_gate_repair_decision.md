@@ -1,0 +1,21 @@
+# Hermes Sync: R4 After-868212 868260 Quality Gate Failure
+
+phase:
+V2_R4_AFTER_868212_GENERATION_868260_FAILED_QUALITY_GATE_REPAIR_DECISION_RECORDED_NO_SUBMIT
+
+summary:
+```text
+Job 868260 completed and was reviewed as strict quality-gate failure: protected 2/4 strict, 4/4 ignoring quality, all null controls 0/4. Next route is artifact-only quality-gate repair planning; no Slurm rerun yet.
+```
+
+failure_analysis:
+`results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260_failure_analysis/failure_analysis_summary.json`
+
+decision_summary:
+`results/natural_evidence_v2/status/r4_after_868212_generation_868260_quality_gate_repair_decision_20260517/decision_summary.json`
+
+next_allowed_action:
+Artifact-only contextual forbidden-surface policy v2 and duplicate-safe generation/allocation policy repair package; route validator/wrapper plan-only validation only; no Slurm until a new reviewed rerun route is recorded.
+
+gate_controlled_actions_not_yet_unlocked:
+training; Llama; same-family null; sanitizer; FAR aggregation; payload diversity claim; paper-facing positive claim; another Slurm generation rerun.

@@ -1,0 +1,115 @@
+{
+  "all_protected_blocks_decode_expected_codeword": true,
+  "control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "duplicate_summary": {
+    "duplicate_hash_groups": 4214,
+    "generated_rows": 12288,
+    "global_duplicate_response_hash_count": 7612,
+    "global_duplicate_response_hash_max_group_size": 8,
+    "top_duplicate_condition_sets": {
+      "protected": 120,
+      "protected,raw": 1863,
+      "raw": 183,
+      "task_only": 2048
+    },
+    "unique_response_hashes": 4676,
+    "within_shard_condition_duplicate_extra_rows": {
+      "shard_00::protected": 1,
+      "shard_00::raw": 2,
+      "shard_01::protected": 2,
+      "shard_01::raw": 2
+    }
+  },
+  "first_token_event_status_by_condition": {
+    "protected": {
+      "erasure": 3392,
+      "other": 2,
+      "target": 702
+    },
+    "raw": {
+      "erasure": 4094,
+      "other": 2
+    },
+    "task_only": {
+      "erasure": 4088,
+      "other": 6,
+      "target": 2
+    }
+  },
+  "first_token_event_status_counts": {
+    "erasure": 11574,
+    "other": 10,
+    "target": 704
+  },
+  "forbidden_example_count": 1,
+  "forbidden_examples": [
+    {
+      "condition": "protected",
+      "coordinate_id": 23,
+      "hits": "bucket",
+      "prompt_id": "r4_cover_dev_8224e02be44505175133",
+      "response_excerpt": "A low-risk start is to organize your tools and materials before beginning any work. Keep them within easy reach but out of the way to avoid tripping hazards.  Ensure you have good lighting in the area where you're working. Poor visibility can lead to accidents and mistakes.  Before starting any electrical work, always turn off the power at the circuit breaker. This prevents accidental shocks and ensures safety.  When dealing with plumbing issues, make sure to shut off the water supply to prevent",
+      "shard_id": "shard_01",
+      "target_surface": "compare the status update for the team"
+    }
+  ],
+  "full_phrase_protected_accepts_format_scrub_all": 0,
+  "generation_started": false,
+  "interpretation": {
+    "duplicates": "deterministic generation still creates repeated response hashes within shard/condition and across protected/raw paired prompts; global duplicate count is high",
+    "forbidden": "the only contextual forbidden hit was literal bucket in an ordinary physical plumbing/home-maintenance sense; current policy still hard-forbids bucket and therefore rejects the block",
+    "nulls": "raw/task-only/wrong-key/wrong-payload remained at zero accepts",
+    "primary": "strict gate failed because quality filters rejected two protected blocks even though all four protected blocks decoded the expected 8-bit codeword with valid checksum before quality filtering",
+    "route_implication": "do not reclassify 868260 as positive; next route should be artifact-only quality-gate repair/pivot planning with a precommitted contextual forbidden policy and duplicate-safe generation/allocation policy before any Slurm rerun"
+  },
+  "paper_claim_allowed": false,
+  "protected_accepts_ignoring_quality": 4,
+  "protected_blocks": 4,
+  "protected_quality_fail_blocks": [
+    {
+      "accept_ignoring_quality": true,
+      "bits_match_condition": true,
+      "block_id": "shard_00_block_00",
+      "checksum_valid": true,
+      "complete_pairs": 8,
+      "decoded_bits": "10100101",
+      "duplicate_response_hash_count": 1,
+      "expected_bits": "10100101",
+      "fail_reasons": "duplicate_response_hash",
+      "forbidden_public_surface_count": 0,
+      "min_pair_support": 8,
+      "required_pairs": 8,
+      "strict_accept": false
+    },
+    {
+      "accept_ignoring_quality": true,
+      "bits_match_condition": true,
+      "block_id": "shard_01_block_00",
+      "checksum_valid": true,
+      "complete_pairs": 8,
+      "decoded_bits": "10100101",
+      "duplicate_response_hash_count": 2,
+      "expected_bits": "10100101",
+      "fail_reasons": "duplicate_response_hash,forbidden_public_surface",
+      "forbidden_public_surface_count": 1,
+      "min_pair_support": 5,
+      "required_pairs": 8,
+      "strict_accept": false
+    }
+  ],
+  "quality_gate_failed": true,
+  "schema_name": "natural_evidence_v2_r4_after_868212_generation_868260_failure_analysis_v1",
+  "shards_seen": 4,
+  "slurm_state": "COMPLETED_4_OF_4_EXIT_0",
+  "slurm_submitted": false,
+  "source_job_id": "868260",
+  "source_review_status": "FAIL_R4_AFTER_868151_QUALITY_REPAIRED_FIRST_TOKEN_EVENT_BLOCK_DIAGNOSTIC_GATE_GLOBAL_DUPLICATE_CAVEAT",
+  "status": "RECORDED_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_868260_FAILED_QUALITY_GATE_SIGNAL_PRESENT_NO_SUBMIT",
+  "strict_protected_accepts": 2,
+  "training_started": false
+}

@@ -1,0 +1,124 @@
+claim_note=R4 after-868212 repaired full16 first-token event generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_generation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868212_repaired_first_token_event_generation_route.py
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation_rows=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+precommit_dir=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516
+full_phrase_decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+rows_per_shard=1024
+expected_selected_coordinate_count=16
+claim_note=R4 after-868016 coordinate-pivot controller generation diagnostic; no paper claim
+route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_generation_route.yaml
+route_validator=scripts/natural_evidence_v2/validate_r4_after_868212_repaired_first_token_event_generation_route.py
+output_dir=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260
+validate_plan_only=0
+shard_index=2
+slurm_policy=H200 pomplun cs_yinxin.wan time 30-00:00:00
+score_rows=results/natural_evidence_v2/status/r4_after_867621_reliability_surface_mass_rows_20260516/reliability_surface_mass_rows.jsonl
+allocation_rows=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/row_allocation_rows.jsonl
+contextual_literal_policy=results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/contextual_literal_policy.json
+surface_bank=results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json
+codebook=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
+decoder_spec=results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/decoder_spec.json
+full_phrase_decoder_spec=results/natural_evidence_v2/precommit/r4_after_864832_reliability_weighted_codebook_precommit_20260516/decoder_spec.json
+decoder_route_config=configs/natural_evidence_v2/r4_after_868212_repaired_first_token_event_decoder_route.yaml
+rows_per_shard=1024
+expected_selected_coordinate_count=16
+controller_bonus_nats=4.0
+controller_penalty_nats=0.5
+{
+  "allow_submission_enabled_entry": true,
+  "allowlist_entry": "v2_r4_after_868212_repaired_first_token_event_generation_h200",
+  "codebook_sha256": "58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444",
+  "decoder_route_config_sha256": "7c1b2229d43b6b9b4c072c86889d114e01ec2bfa61347e6e6ac36743022c5342",
+  "decoder_spec_sha256": "64fd1e682c0ea314bc2f49b6a543447ef9df9679957b87800c2bd41a82bb70f3",
+  "errors": [],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "score_rows_sha256": "772e6f92540872a76614b9e18369b5314c9934fc5b96099364b5db03ac01f4f8",
+  "slurm_job_submitted": false,
+  "status": "PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "surface_bank_sha256": "4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868212_repaired_first_token_event_generation_h200.sbatch"
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02/plan_validation/generation_plan", "rows": 1024, "status": "PLAN_ONLY_PASS"}
+{"decode_rows": 3, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02/plan_validation/toy_decode_all", "status": "PASS"}
+{
+  "full_mode_enabled": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "slurm_submission_started": false,
+  "status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "training_started": false
+}
+{"output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02", "rows": 3072, "status": "PASS"}
+{"decode_rows": 20, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02/decode_all", "status": "PASS"}
+{
+  "contextual_literal_policy": "results/natural_evidence_v2/status/r4_after_868212_full16_quality_repair_plan_20260516/contextual_literal_policy.json",
+  "decode_rows": 5,
+  "event_rows": 3072,
+  "event_sources": {
+    "token_id_trace": 3072
+  },
+  "event_statuses": {
+    "erasure": 2844,
+    "other": 2,
+    "target": 226
+  },
+  "future_positive_requires_token_id_trace": true,
+  "generated_output_files": [
+    "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02/r4_generated_outputs.jsonl"
+  ],
+  "generation_started": false,
+  "model_scoring_started": false,
+  "paper_claim_allowed": false,
+  "reclassifies_868151": false,
+  "schema_name": "natural_evidence_v2_r4_after_868151_first_token_event_decode_summary_v1",
+  "status": "FIRST_TOKEN_EVENT_DECODE_RECORDED_ARTIFACT_ONLY_NOT_POSITIVE",
+  "summary_by_arm": {
+    "protected": {
+      "accepts": 1,
+      "accepts_ignoring_quality": 1,
+      "blocks": 1,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "raw": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 1,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "task_only": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 1,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 1,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 1,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    }
+  },
+  "text_fallback_for_old_transcripts": false,
+  "training_started": false
+}
+{"decode_rows": 20, "output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02/decode_none", "status": "PASS"}
+R4 after-868016 controller generation shard complete: shard_02 /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_868212_repaired_first_token_event_generation_868260/shards/shard_02

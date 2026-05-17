@@ -1,0 +1,39 @@
+{
+  "allow_slurm_submission": false,
+  "future_generation_gate": {
+    "duplicate_prompt_prefix_pair_count_max": 0,
+    "global_duplicate_response_hash_count_max": 0,
+    "within_block_duplicate_response_hash_count_max": 0,
+    "within_shard_condition_duplicate_response_hash_count_max": 0
+  },
+  "generation_started": false,
+  "observed_868260_generated_rows": 12288,
+  "observed_868260_global_duplicate_extra_rows": 7612,
+  "observed_868260_unique_response_hashes": 4676,
+  "observed_868260_within_shard_condition_duplicate_extra_rows": {
+    "shard_00::protected": 1,
+    "shard_00::raw": 2,
+    "shard_01::protected": 2,
+    "shard_01::raw": 2
+  },
+  "paper_claim_allowed": false,
+  "reclassifies_868260": false,
+  "repair_design_notes": [
+    "do not reclassify 868260 under this policy",
+    "avoid deterministic same-output prompt/prefix collisions before compute where possible",
+    "retain raw/task-only/wrong-key/wrong-payload controls",
+    "do not lower strict gate or ignore duplicate quality filters"
+  ],
+  "required_before_slurm": [
+    "fresh route decision records this policy hash",
+    "local plan-only wrapper validation passes",
+    "remote plan-only wrapper validation passes",
+    "allowlist starts with zero enabled entries",
+    "exactly one reviewed H200 entry is enabled only during sbatch submission"
+  ],
+  "requires_new_reviewed_route_before_slurm": true,
+  "schema_name": "natural_evidence_v2_r4_after_868260_duplicate_safe_generation_policy_v1",
+  "source_job_id": "868260",
+  "status": "PRECOMMITTED_DUPLICATE_SAFE_GENERATION_POLICY_ARTIFACT_ONLY_NO_SUBMIT",
+  "training_started": false
+}

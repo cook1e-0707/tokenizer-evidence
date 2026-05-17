@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T00:20:09Z
+Last synchronized: 2026-05-17T00:50:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,7 +9,7 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_868260_RUNNING`
+`V2_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATED_NO_SUBMIT`
 
 ## Most Recent Compute Result
 
@@ -310,23 +310,106 @@ enabled entries after submission, remote:
   []
 ```
 
+## Current Review
+
+Job `868260` completed and has been reviewed:
+
+```text
+review:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260_review/
+failure analysis:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_868260_failure_analysis/
+repair decision:
+  results/natural_evidence_v2/status/r4_after_868212_generation_868260_quality_gate_repair_decision_20260517/
+status:
+  RECORDED_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_868260_FAILED_QUALITY_GATE_SIGNAL_PRESENT_NO_SUBMIT
+```
+
+The run is not a positive result:
+
+```text
+strict protected accepts:
+  2/4
+protected accepts ignoring quality:
+  4/4
+raw/task-only/wrong-key/wrong-payload accepts:
+  0/4 each
+full-phrase protected accepts, format_scrub=all:
+  0
+```
+
+Interpretation:
+
+```text
+The first-token event signal recovered the expected codeword in all protected
+blocks before quality filtering. The strict gate failed because shard_00 and
+shard_01 protected blocks hit duplicate/forbidden quality filters.
+```
+
+Quality failure details:
+
+```text
+shard_00_block_00:
+  decoded expected codeword, valid checksum, duplicate_response_hash_count=1
+shard_01_block_00:
+  decoded expected codeword, valid checksum,
+  duplicate_response_hash_count=2,
+  forbidden_public_surface_count=1
+forbidden example:
+  literal "bucket" in ordinary physical plumbing/home-maintenance sense
+global duplicate extra rows:
+  7612
+unique response hashes:
+  4676 / 12288
+```
+
+## Current Repair Package
+
+The artifact-only quality-gate repair package has been precommitted and
+validated:
+
+```text
+repair package:
+  results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/
+validation:
+  results/natural_evidence_v2/status/r4_after_868260_quality_gate_repair_package_validation_20260517/
+validation status:
+  PASS_R4_AFTER_868260_QUALITY_GATE_REPAIR_PACKAGE_VALIDATION_NO_SUBMIT
+tests:
+  5 passed
+reclassifies 868260:
+  false
+slurm allowed:
+  false
+```
+
+The package contains:
+
+```text
+contextual forbidden-surface policy v2:
+  ordinary physical "bucket" may be allowed under precommitted task-domain
+  cues, while technical "bucket" remains forbidden
+duplicate-safe generation policy:
+  future within-block and global duplicate response hash gates remain 0
+```
+
 ## Next Allowed Action
 
-The route may continue automatically. While job `868260` is active, the next
-allowed action is monitoring and review only:
+The route may continue automatically, but no new Slurm rerun is allowed until a
+new artifact-only repair package passes. The next allowed action is:
 
 ```text
 next:
-  monitor Slurm job 868260, sync completed shard artifacts back from Chimera,
-  and review/aggregate results when all 4 shards finish
+  update route config/validator/wrapper in plan-only mode to consume the
+  validated quality-gate repair package, then run local and remote preflight
 allowed:
-  monitoring job 868260
-  artifact synchronization for job 868260
-  result review and aggregation after completion
+  artifact-only route validation
+  plan-only wrapper validation
+  local/remote preflight
   Hermes/Codex state synchronization
-not allowed while 868260 is active:
-  another generation submission
-  any rerun of the same diagnostic
+not allowed:
+  reclassifying 868260 as positive
+  another Slurm generation rerun before a new reviewed route is recorded
 not yet allowed:
   training
 ```
