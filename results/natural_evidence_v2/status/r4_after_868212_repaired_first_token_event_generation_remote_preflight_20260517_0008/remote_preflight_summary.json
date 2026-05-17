@@ -1,0 +1,23 @@
+{
+  "timestamp_utc": "2026-05-17T00:08:21Z",
+  "status": "PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_REMOTE_PREFLIGHT_NO_SUBMIT",
+  "remote_host": "chimerahead.umb.edu",
+  "remote_repo": "/home/guanjie.lin001/tokenizer-evidence",
+  "route_validation_status": "PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "wrapper_plan_only_status": "PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY",
+  "remote_allowlist_status": "PASS",
+  "enabled_entries": [],
+  "allowlist_entry": "v2_r4_after_868212_repaired_first_token_event_generation_h200",
+  "allowlist_entry_enabled": false,
+  "rows_per_shard": 1024,
+  "selected_coordinate_count": 16,
+  "toy_decode_protected_accepts": 1,
+  "toy_decode_wrong_key_accepts": 0,
+  "toy_decode_wrong_payload_accepts": 0,
+  "slurm_job_submitted": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "paper_claim_allowed": false,
+  "next_allowed_action": "Hermes notification and exactly-one allowlist enablement/submission record are still required before any H200 Slurm submission."
+}

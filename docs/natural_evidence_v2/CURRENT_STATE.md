@@ -254,6 +254,31 @@ codebook:
   results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json
 ```
 
+## Remote Preflight
+
+The repaired full16 generation/decode control-plane files were synchronized to
+Chimera and the remote route/wrapper preflight passed without allowlist
+enablement or Slurm submission:
+
+```text
+remote preflight:
+  results/natural_evidence_v2/status/r4_after_868212_repaired_first_token_event_generation_remote_preflight_20260517_0008/
+remote status:
+  PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_REMOTE_PREFLIGHT_NO_SUBMIT
+remote host:
+  chimerahead.umb.edu
+remote route validation:
+  PASS_R4_AFTER_868212_REPAIRED_FIRST_TOKEN_EVENT_GENERATION_ROUTE_VALIDATION_NO_SUBMIT
+remote wrapper plan-only:
+  PASS_R4_AFTER_868016_CONTROLLER_GENERATION_WRAPPER_PLAN_ONLY
+remote allowlist:
+  PASS, enabled_entries=[]
+allowlist entry:
+  v2_r4_after_868212_repaired_first_token_event_generation_h200
+allowlist entry enabled:
+  false
+```
+
 ## Next Allowed Action
 
 The route may continue automatically, but the next action is still
@@ -261,12 +286,11 @@ artifact-only:
 
 ```text
 next:
-  synchronize the repaired full16 generation/decode control-plane files to
-  Chimera, run local/remote hash and allowlist safety preflight, then if and
-  only if those checks pass, enable exactly one reviewed H200 Slurm generation
-  diagnostic entry and immediately disable it after sbatch returns
+  send/record Hermes notification, enable exactly one reviewed H200 Slurm
+  generation diagnostic entry, submit it, immediately disable the allowlist
+  entry after sbatch returns, and record the submission
 allowed:
-  local/remote hash and allowlist safety preflight
+  Hermes notification/submission record
   exactly-one allowlist enablement for the reviewed full16 H200 diagnostic
   exactly-one H200 Slurm submission after preflight pass
   Hermes/Codex state synchronization
