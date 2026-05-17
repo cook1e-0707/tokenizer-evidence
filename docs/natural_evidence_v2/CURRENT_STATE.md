@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T19:56:00Z
+Last synchronized: 2026-05-17T20:21:34Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,70 +9,73 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868348_GLOBAL_UNIQUE_QWEN_TOKENIZER_PREFLIGHT_PASSED_ROUTE_PLANNING_NEXT`
+`V2_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_SUBMITTED_MONITOR_ONLY`
 
 ## Latest Update
 
-Slurm job `869298` completed the actual Qwen tokenizer-boundary preflight for
-the global-unique row bank:
+Codex/Hermes synchronized the `869298` actual Qwen tokenizer preflight result,
+prepared the global-unique first-token-event dev diagnostic route, passed local
+and remote preflight, submitted one H200 array job, and immediately disabled the
+allowlist entry.
 
 ```text
-review:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_qwen_tokenizer_boundary_preflight_869298_review/
-status:
-  PASS_R4_AFTER_868348_GLOBAL_UNIQUE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_869298
-job:
-  869298, nat-ev-v2-r4gTok, COMPLETED, 00:01:14, ExitCode 0:0
+tokenizer preflight job:
+  869298
+tokenizer preflight status:
+  PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT
 checked rows:
   32768
 failed rows:
   0
-empty target id rows:
+empty target/other token-id rows:
+  0 / 0
+target/other overlap rows:
   0
-empty other id rows:
-  0
-target/other first-token overlap rows:
-  0
-generation/model scoring/training:
-  not started
-```
-
-This clears the actual Qwen tokenizer-boundary prerequisite for the new
-global-unique row bank. The next allowed action is reviewed controller/decode
-generation-route preparation for this row bank. Do not submit generation until
-route validation, remote hash preflight, and zero-enabled allowlist safety pass.
-
-## Prior Update
-
-The global-unique row bank route validation and static boundary preflight passed.
-Codex then synchronized the reviewed artifacts to Chimera, ran local and remote
-single-enabled preflights, submitted exactly one H200 tokenizer-only Slurm job,
-and immediately disabled the allowlist entry:
-
-```text
-submission:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_tokenizer_submission_20260517/
-job:
-  869298, nat-ev-v2-r4gTok, pomplun H200
-scope:
-  actual Qwen tokenizer boundary preflight only
-row bank:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_row_bank_plan_20260517/row_allocation_rows.jsonl
-checked rows planned:
-  32768
-local single-enabled preflight:
-  PASS
-remote single-enabled preflight:
-  PASS
+route config:
+  configs/natural_evidence_v2/r4_after_868348_global_unique_dev_diagnostic_route.yaml
+route validation:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_route_validation_20260517/
+route validation status:
+  PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_ROUTE_PLAN_ONLY_NO_SUBMIT
+wrapper:
+  scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_dev_diagnostic_h200.sbatch
+wrapper plan smoke:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_wrapper_plan_smoke_20260517/
+local allowlist safety:
+  PASS with zero enabled entries
+remote route validation:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_route_validation_remote_20260517_r2/
+remote wrapper plan smoke:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_wrapper_plan_smoke_remote_20260517/
+single-enabled preflight:
+  local PASS, remote PASS
+submitted job:
+  869348, nat-ev-v2-r4gDev
+submission record:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_submission_20260517/submission_record.json
 post-submit allowlist:
   local PASS, remote PASS, enabled_entries=[]
-generation/model scoring/training:
-  not started
 ```
 
-The next allowed action is to monitor job `869298`. After terminal completion,
-sync artifacts and review the tokenizer boundary gate. Do not submit generation
-or model scoring before this tokenizer preflight is reviewed.
+The next allowed action is monitor-only for Slurm array `869348`. After terminal
+completion, sync all shard outputs and run the reviewed result aggregation. Do
+not start another generation job, locked-scale route, FAR, sanitizer, Llama,
+payload-diversity route, or paper-facing claim before this result is reviewed.
+
+```text
+allowlist entry:
+  v2_r4_after_868348_global_unique_dev_diagnostic_h200
+command:
+  PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_dev_diagnostic_h200.sbatch
+partition/qos/account/gres:
+  pomplun / pomplun / cs_yinxin.wan / gpu:h200:1
+array:
+  0-31%4
+time limit:
+  30-00:00:00
+```
+The route does not unlock training, Llama, same-family null, sanitizer, FAR,
+payload-diversity, locked-scale, or paper-facing positive claims.
 
 ## Prior Update
 

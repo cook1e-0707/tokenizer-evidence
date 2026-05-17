@@ -1,0 +1,19 @@
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_868348_global_unique_dev_diagnostic_h200",
+  "config_sha256": "ba00bb802de846fe81fedad149ae1fdbe725d9ce4d2b1d6adb6632ffdc975847",
+  "errors": [],
+  "generation_started": false,
+  "next_allowed_action": "Run local/remote hash preflight before exactly-one H200 submission.",
+  "paper_claim_allowed": false,
+  "qwen_tokenizer_preflight_sha256": "8edbbe7ae0e870a0a782fb57a626462618b79d18c45615c673a7572c498803c1",
+  "row_bank_rows_sha256": "6374c413b4022e1e4cd2dfeb78a8a9e9c2959a21a2055f5f4c5d40236f857d67",
+  "schema_name": "natural_evidence_v2_r4_after_868348_global_unique_dev_diagnostic_route_validation_v1",
+  "skip_allowlist_state_check": false,
+  "slurm_allowed": false,
+  "source_job_id": "868348",
+  "status": "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "tokenizer_preflight_job_id": "869298",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_dev_diagnostic_h200.sbatch"
+}
