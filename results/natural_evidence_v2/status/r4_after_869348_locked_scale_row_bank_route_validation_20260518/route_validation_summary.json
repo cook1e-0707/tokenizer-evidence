@@ -1,0 +1,44 @@
+{
+  "errors": [],
+  "generation_started": false,
+  "metrics": {
+    "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+    "duplicate_prompt_prefix_pair_extra_rows": 0,
+    "duplicate_row_key_extra_rows": 0,
+    "locked_prompt_count": 6144,
+    "max_coordinate_prefix_pair_count": 384,
+    "prefix_template_count": 16,
+    "row_count": 98304,
+    "rows_per_coordinate": [
+      6144
+    ],
+    "rows_per_locked_prompt": [
+      16
+    ],
+    "rows_per_prefix_template": [
+      6144
+    ],
+    "rows_per_shard": [
+      1024
+    ],
+    "selected_coordinate_count": 16,
+    "shard_count": 96,
+    "unique_content_prompt_prefix_pairs": 98304,
+    "unique_prompt_prefix_pairs": 98304
+  },
+  "model_scoring_started": false,
+  "next_allowed_action": "Run static and actual Qwen tokenizer/controller preflight for this locked row bank; no generation or Slurm locked-scale submission until those pass and a reviewed H200 route is recorded.",
+  "paper_claim_allowed": false,
+  "row_allocation_manifest": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_manifest.json",
+  "row_allocation_manifest_sha256": "9c562cea754d95636081e4d9cd1b6ff04bc01d7212d88fb7f51df2463176c38f",
+  "row_allocation_rows": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_rows.jsonl",
+  "row_allocation_rows_sha256": "e39b4751092a6717419e3ab52219f44ddf9b68a80e20134bf1a0b5969ac11a71",
+  "row_bank_dir": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518",
+  "schema_name": "natural_evidence_v2_r4_after_869348_locked_scale_row_bank_route_validation_v1",
+  "slurm_submitted": false,
+  "source_dev_pass_job_id": "869348",
+  "source_dev_review": "results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348_review/quality_repair_confirmation_review_summary.json",
+  "source_dev_review_sha256": "54231037b380451067cfeffffc328456f1443dcb1b157a5f16a307315bcd9549",
+  "status": "PASS_R4_AFTER_869348_LOCKED_SCALE_ROW_BANK_ROUTE_VALIDATION_NO_SUBMIT",
+  "training_started": false
+}

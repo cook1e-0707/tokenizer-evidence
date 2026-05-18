@@ -1,0 +1,22 @@
+{
+  "allow_submission_enabled_entry": true,
+  "allowlist_entry": "v2_r4_after_869348_locked_scale_generation_h200",
+  "config": "configs/natural_evidence_v2/r4_after_869348_locked_scale_generation_route.yaml",
+  "config_sha256": "1ab9f6165ec5021bc4dc220b526f0f909d9ad607d6b2e2d176359c68e6542429",
+  "errors": [],
+  "expected_generated_rows": 294912,
+  "generation_started": false,
+  "next_allowed_action": "Run local/remote hash preflight before exactly-one H200 locked-scale generation submission.",
+  "paper_claim_allowed": false,
+  "row_bank_rows": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_rows.jsonl",
+  "row_bank_rows_sha256": "e39b4751092a6717419e3ab52219f44ddf9b68a80e20134bf1a0b5969ac11a71",
+  "schema_name": "natural_evidence_v2_r4_after_869348_locked_scale_generation_route_validation_v1",
+  "skip_allowlist_state_check": false,
+  "slurm_allowed": false,
+  "source_dev_pass_job_id": "869348",
+  "status": "PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "tokenizer_preflight_job_id": "870078",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch",
+  "wrapper_sha256": "aa3123545a00e5209ba4eebb86a460768303954b6e0f8346fae31db1f5d81814"
+}

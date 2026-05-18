@@ -1,0 +1,50 @@
+{
+  "allowlist_entry": "v2_r4_after_869348_locked_scale_generation_h200",
+  "artifacts": {
+    "allowlist": {
+      "path": "configs/natural_evidence_v2/run_allowlist.yaml",
+      "sha256": "27b2628a411cb8f7b96133e61bca6a7c74d6b619f3e1cb1db53982c0b581e594"
+    },
+    "route_config": {
+      "path": "configs/natural_evidence_v2/r4_after_869348_locked_scale_generation_route.yaml",
+      "sha256": "1ab9f6165ec5021bc4dc220b526f0f909d9ad607d6b2e2d176359c68e6542429"
+    },
+    "route_doc": {
+      "path": "docs/natural_evidence_v2/R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_DECISION_20260518.md",
+      "sha256": "688be19e69b9643ca86f0c2e4b9a6a1675181cf2bb3498aaa9449812f121c88f"
+    },
+    "route_validation": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_route_validation_20260518/route_validation_summary.json",
+      "sha256": "d05e528c41475561efbfaafa44d33c03e8c42535f7d1e0af5635ffd6ba26adde"
+    },
+    "row_bank_rows": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_rows.jsonl",
+      "sha256": "e39b4751092a6717419e3ab52219f44ddf9b68a80e20134bf1a0b5969ac11a71"
+    },
+    "tokenizer_review": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_870078_review/review_summary.json",
+      "sha256": "9b8f90182d6465bff6da0b07d07c2767c19d221368ff458da149ddf751e3140c"
+    },
+    "wrapper": {
+      "path": "scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch",
+      "sha256": "aa3123545a00e5209ba4eebb86a460768303954b6e0f8346fae31db1f5d81814"
+    },
+    "wrapper_plan_smoke": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_wrapper_plan_smoke_20260518/route_validation_summary.json",
+      "sha256": "d05e528c41475561efbfaafa44d33c03e8c42535f7d1e0af5635ffd6ba26adde"
+    }
+  },
+  "command_pattern": "PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch",
+  "current_phase": "V2_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_RECORDED_REMOTE_PREFLIGHT_NEXT",
+  "expected_generated_rows": 294912,
+  "expected_shards": 96,
+  "generation_started": false,
+  "generation_submission_allowed_after_remote_preflight": true,
+  "next_allowed_action": "Run local/remote hash preflight, enable exactly this locked-scale generation allowlist entry, submit one H200 array job, then immediately disable the entry.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_869348_locked_scale_generation_route_decision_v1",
+  "source_dev_pass_job_id": "869348",
+  "status": "RECORDED_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_DECISION_NO_SUBMIT",
+  "tokenizer_preflight_job_id": "870078",
+  "training_started": false
+}

@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-18T13:35:25Z
+Last synchronized: 2026-05-18T14:10:49Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,9 +9,176 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_869348_PASSED_REVIEWED_LOCKED_SCALE_DECISION_NEXT`
+`V2_R4_AFTER_869348_LOCKED_SCALE_GENERATION_870210_SUBMITTED_MONITOR_ONLY`
 
 ## Latest Update
+
+After the `870103` runtime status-guard failure was reviewed and repaired,
+Codex resubmitted the same reviewed H200 locked-scale generation route as job
+`870210` and immediately disabled the allowlist entry.
+
+```text
+active/submitted job:
+  870210, nat-ev-v2-r4lGen, array 0-95%4
+submission record:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_resubmission_after_870103_repair_20260518/
+post-submit allowlist safety:
+  local PASS; remote sync/check pending
+previous failed job:
+  870103, nat-ev-v2-r4lGen, array 0-95%4, FAILED, ExitCode 1:0
+failure review:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870103_failure_review_20260518/
+root cause:
+  generate_r4_after_868016_controller_outputs.py accepted older tokenizer
+  review statuses but rejected
+  PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078
+generation/model result:
+  none; failure occurred before generation
+repair patch:
+  add the reviewed 870078 tokenizer status to the explicit generator allowlist
+local tests:
+  .venv/bin/pytest -q tests/natural_evidence_v2/test_r4_after_868016_controller_generation.py \
+    tests/natural_evidence_v2/test_r4_controller_generation_binding_helpers.py
+  PASS, 3 passed
+local route validation after patch:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+```
+
+The next allowed action is to monitor job `870210`. After it reaches a terminal
+state, sync artifacts and review the locked-scale generation gate. Do not submit
+another generation job while `870210` is active.
+
+This route still does not unlock training, Llama, same-family null, sanitizer,
+FAR, payload-diversity, text-only phrase decoder success claim, or paper-facing
+positive claim.
+
+## Prior Update
+
+Codex recorded and locally validated the held-out 96-block locked-scale
+generation route after `870078` passed tokenizer preflight.
+
+```text
+route decision:
+  docs/natural_evidence_v2/R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_DECISION_20260518.md
+route validation:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+wrapper plan-only smoke:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+allowlist entry:
+  v2_r4_after_869348_locked_scale_generation_h200
+wrapper:
+  scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch
+array:
+  0-95%4
+expected generated rows:
+  294912
+protected strict gate:
+  >=85/96
+controls:
+  raw/task_only/wrong_key/wrong_payload must be 0/96 each
+```
+
+## Prior Update
+
+Slurm job `870078` completed and passed the held-out locked row bank actual Qwen
+tokenizer boundary preflight.
+
+```text
+job:
+  870078, nat-ev-v2-r4lTok, COMPLETED, ExitCode 0:0, elapsed 00:03:28
+review:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_870078_review/
+status:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078
+partition/qos/account/gres:
+  pomplun / pomplun / cs_yinxin.wan / gpu:h200:1
+checked rows:
+  98304
+failed rows:
+  0
+empty target id rows:
+  0
+empty other id rows:
+  0
+target/other first-token overlap rows:
+  0
+model forward/scoring/generation/training:
+  not started
+```
+
+The next allowed action is artifact-only locked-scale generation route
+preparation and local/remote preflight. Do not submit locked-scale generation
+until the route config, wrapper, allowlist, local/remote hashes, and exactly-one
+allowlist enablement preflight pass. Do not start training, Llama, same-family
+null, sanitizer, FAR, payload-diversity, or paper-facing claim jobs.
+
+## Prior Update
+
+Codex submitted exactly one H200 tokenizer-only preflight job for the held-out
+locked row bank and immediately disabled the allowlist entry.
+
+```text
+job:
+  870078, nat-ev-v2-r4lTok
+partition/qos/account/gres:
+  pomplun / pomplun / cs_yinxin.wan / gpu:h200:1
+command:
+  sbatch scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200.sbatch
+allowlist entry:
+  v2_r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200
+post-submit allowlist safety:
+  local PASS, remote PASS
+planned checked rows:
+  98304
+model forward/scoring/generation/training:
+  not allowed and not started by this route
+```
+
+## Prior Update
+
+Codex prepared the held-out locked-scale tokenizer-only preflight route after
+the `869348` dev diagnostic pass. This is still not locked-scale generation and
+does not make a paper-facing positive claim.
+
+```text
+source dev diagnostic:
+  869348, PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_GATE
+locked row bank:
+  results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/
+row bank status:
+  PASS_R4_AFTER_869348_GLOBAL_UNIQUE_LOCKED_SCALE_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT
+row bank validation:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_ROW_BANK_ROUTE_VALIDATION_NO_SUBMIT
+static boundary preflight:
+  PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING
+tokenizer route validation:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_TOKENIZER_PREFLIGHT_ROUTE_VALIDATION_NO_SUBMIT
+locked split:
+  yes
+shards:
+  96
+row cylinders:
+  98304
+selected coordinates:
+  16
+unique content prompt/prefix pairs:
+  98304
+duplicate content prompt/prefix extra rows:
+  0
+allowlist entry:
+  v2_r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200
+wrapper:
+  scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200.sbatch
+```
+
+The next allowed action is local/remote hash preflight and exactly-one H200
+tokenizer-only submission for the locked row bank. This job may load the Qwen
+tokenizer only; it must not run model forward, model scoring, generation,
+training, Llama, same-family null, sanitizer, FAR, payload-diversity, or
+paper-facing claim actions. The allowlist entry must be disabled immediately
+after `sbatch` returns.
+
+## Prior Update
 
 Slurm array `869348` completed on H200/pomplun and passed the reviewed
 global-unique first-token-event 32-block dev diagnostic gate.

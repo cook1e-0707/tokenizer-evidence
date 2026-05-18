@@ -1,0 +1,45 @@
+{
+  "schema_name": "natural_evidence_v2_r4_after_869348_locked_scale_generation_failure_review_v1",
+  "status": "FAILED_R4_AFTER_869348_LOCKED_SCALE_GENERATION_870103_RUNTIME_TOKENIZER_REVIEW_STATUS_GUARD_NO_METHOD_RESULT",
+  "timestamp_utc": "2026-05-18T14:10:49Z",
+  "job_id": "870103",
+  "job_name": "nat-ev-v2-r4lGen",
+  "array": "0-95%4",
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "account": "cs_yinxin.wan",
+  "gres": "gpu:h200:1",
+  "terminal_state": "FAILED",
+  "exit_code": "1:0",
+  "root_cause": "runtime generator tokenizer-review status guard did not include reviewed 870078 status",
+  "failing_status": "PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078",
+  "generation_started": false,
+  "model_result_available": false,
+  "locked_scale_result_available": false,
+  "method_failure": false,
+  "paper_claim_allowed": false,
+  "repair_patch": {
+    "script": "scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py",
+    "added_allowed_status": "PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078",
+    "script_sha256_after_patch": "73cea25e48be83d125e007f87512e5762dcc2d2d07d4a9becdeca1a32f3587ac",
+    "test_file": "tests/natural_evidence_v2/test_r4_after_868016_controller_generation.py",
+    "test_file_sha256_after_patch": "5bcc4d7f197abe149e88da143a298c8b61923ca26b77853806a7d19c0f000a95"
+  },
+  "local_checks": {
+    "pytest": ".venv/bin/pytest -q tests/natural_evidence_v2/test_r4_after_868016_controller_generation.py tests/natural_evidence_v2/test_r4_controller_generation_binding_helpers.py",
+    "pytest_status": "PASS",
+    "pytest_result": "3 passed",
+    "route_validation_after_patch": "PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT"
+  },
+  "next_allowed_action": "sync patch to Chimera, rerun remote validation and wrapper plan-only smoke, verify allowlist safety, then resubmit exactly one H200 locked-scale generation array",
+  "not_unlocked": [
+    "training",
+    "Llama",
+    "same-family null",
+    "sanitizer",
+    "FAR aggregation",
+    "payload diversity",
+    "paper-facing positive claim",
+    "text-only phrase decoder success claim"
+  ]
+}

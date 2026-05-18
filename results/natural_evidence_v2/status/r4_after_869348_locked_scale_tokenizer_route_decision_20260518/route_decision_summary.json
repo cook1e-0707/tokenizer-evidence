@@ -1,0 +1,56 @@
+{
+  "allowlist_entry": "v2_r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200",
+  "artifacts": {
+    "allowlist": {
+      "path": "configs/natural_evidence_v2/run_allowlist.yaml",
+      "sha256": "0339321b70e74db430c67a63bc7b56dbcb4f6f8631cfc065eb8805388cebeb5a"
+    },
+    "route_config": {
+      "path": "configs/natural_evidence_v2/r4_after_869348_locked_scale_tokenizer_preflight_route.yaml",
+      "sha256": "048cd756e39ae942f6887e39188aba731a4f1d6227c08d6d198111ed270a8753"
+    },
+    "route_doc": {
+      "path": "docs/natural_evidence_v2/R4_AFTER_869348_LOCKED_SCALE_TOKENIZER_PREFLIGHT_ROUTE_DECISION_20260518.md",
+      "sha256": "23aa9fa4acac30140555640a7ab95378498dd6201089a836686adcb13c7b89df"
+    },
+    "row_bank_manifest": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_manifest.json",
+      "sha256": "9c562cea754d95636081e4d9cd1b6ff04bc01d7212d88fb7f51df2463176c38f"
+    },
+    "row_bank_rows": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_rows.jsonl",
+      "sha256": "e39b4751092a6717419e3ab52219f44ddf9b68a80e20134bf1a0b5969ac11a71"
+    },
+    "row_bank_validation": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_locked_scale_row_bank_route_validation_20260518/route_validation_summary.json",
+      "sha256": "724256a44a2d1af6ac15c723f84423c578bc9f5f1f0b4d7a617460040ed09345"
+    },
+    "static_preflight": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_locked_scale_static_boundary_preflight_20260518/r4_prefix_native_tokenizer_boundary_preflight_summary.json",
+      "sha256": "912b55f2ca48b21e769642dc76ea15f57887442f46e0c8b8b97eaaf6ffbc02ab"
+    },
+    "tokenizer_route_validation": {
+      "path": "results/natural_evidence_v2/status/r4_after_869348_locked_scale_tokenizer_route_validation_20260518/tokenizer_route_validation_summary.json",
+      "sha256": "a5efcbb50b3950ed1a0275c00de28bcb43376a3a6cc1bc99280e74c251bf12b2"
+    },
+    "wrapper": {
+      "path": "scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200.sbatch",
+      "sha256": "00b72fa7a1678aa12175716d8cc4b91f42b4c5c1385657fb1881a1542d165302"
+    }
+  },
+  "command_pattern": "sbatch scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_h200.sbatch",
+  "current_phase": "V2_R4_AFTER_869348_LOCKED_SCALE_TOKENIZER_PREFLIGHT_ROUTE_RECORDED_REMOTE_PREFLIGHT_NEXT",
+  "expected_checked_rows": 98304,
+  "expected_failed_rows": 0,
+  "generation_started": false,
+  "locked_scale_generation_allowed": false,
+  "model_forward_started": false,
+  "model_scoring_started": false,
+  "next_allowed_action": "Run local/remote hash preflight, enable exactly this tokenizer-only allowlist entry, submit one H200 tokenizer-only Slurm job, then immediately disable the entry. No generation or model scoring.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_869348_locked_scale_tokenizer_route_decision_v1",
+  "source_dev_pass_job_id": "869348",
+  "status": "RECORDED_R4_AFTER_869348_LOCKED_SCALE_TOKENIZER_PREFLIGHT_ROUTE_DECISION_NO_SUBMIT",
+  "tokenizer_preflight_allowed_after_remote_preflight": true,
+  "training_started": false
+}

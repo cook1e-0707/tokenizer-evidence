@@ -7,6 +7,7 @@ from scripts.natural_evidence_v2.generate_r4_after_868016_controller_outputs imp
     _controlled_scores_for_first_step,
     first_token_event_trace,
     select_rows_by_allocation,
+    validate_reviews,
 )
 from scripts.natural_evidence_v2.score_r4_surface_teacher_forced_mass import ControllerConfig
 
@@ -143,4 +144,31 @@ def test_select_rows_by_allocation_rejects_duplicate_prompt_prefix_pair() -> Non
             assigned_shard_index=0,
             expected_rows=12,
             expected_selected_coordinate_count=12,
+        )
+
+
+def test_validate_reviews_accepts_869348_locked_scale_tokenizer_review() -> None:
+    validate_reviews(
+        {
+            "status": "PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078",
+            "failed_row_count": 0,
+        },
+        {
+            "status": "PASS_R4_AFTER_868016_COORDINATE_PIVOT_CONTROLLER_TEACHER_FORCED_GATE",
+            "teacher_forced_gate_pass": True,
+        },
+    )
+
+
+def test_validate_reviews_rejects_unreviewed_tokenizer_status() -> None:
+    with pytest.raises(ValueError, match="tokenizer review is not an allowed reviewed pass"):
+        validate_reviews(
+            {
+                "status": "PASS_R4_AFTER_UNREVIEWED_TOKENIZER_BOUNDARY_PREFLIGHT",
+                "failed_row_count": 0,
+            },
+            {
+                "status": "PASS_R4_AFTER_868016_COORDINATE_PIVOT_CONTROLLER_TEACHER_FORCED_GATE",
+                "teacher_forced_gate_pass": True,
+            },
         )

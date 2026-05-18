@@ -1,0 +1,49 @@
+{
+  "allowlist_path": "/Users/guanjie/Documents/tokenizer_alignment/configs/natural_evidence_v2/run_allowlist.yaml",
+  "allowlist_sha256": "91b2195ceeee80b05d03fa121a8e083fb25f2950e732de19ceaed60b8356fd89",
+  "current_state_path": "/Users/guanjie/Documents/tokenizer_alignment/docs/natural_evidence_v2/CURRENT_STATE.md",
+  "current_state_sha256": "320f8680ef548daafc0c2c90802001246605c34acbf7103a043bc211093bacf5",
+  "enabled_entries": [
+    {
+      "command_pattern": "PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch",
+      "labels": [
+        "far",
+        "llama",
+        "paper_claim",
+        "sanitizer",
+        "training"
+      ],
+      "name": "v2_r4_after_869348_locked_scale_generation_h200",
+      "section": "allowed_gpu_actions"
+    }
+  ],
+  "enabled_entry_count": 1,
+  "failures": [],
+  "far_aggregation_started": false,
+  "far_entries_disabled": true,
+  "forbidden_enabled_entries": [],
+  "gate_status_path": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/gate_status.json",
+  "gate_status_sha256": "c5de2af5203ccd6563a24418dbd999bcf9125de4b7cb52ff20411487b05f255b",
+  "gate_values": {
+    "far_aggregation_allowed": false,
+    "llama_allowed": false,
+    "paper_claim_allowed": false,
+    "same_family_null_allowed": false,
+    "sanitizer_allowed": false,
+    "training_allowed": false
+  },
+  "generation_started": false,
+  "llama_entries_disabled": true,
+  "llama_started": false,
+  "paper_claim_entries_disabled": true,
+  "paper_claim_started": false,
+  "r3_2_entry_disabled": true,
+  "same_family_entries_disabled": true,
+  "sanitizer_entries_disabled": true,
+  "schema_name": "natural_evidence_v2_allowlist_safety_summary_v1",
+  "slurm_job_submitted": false,
+  "status": "PASS",
+  "training_entries_disabled": true,
+  "training_started": false,
+  "unknown_enabled_entries": []
+}

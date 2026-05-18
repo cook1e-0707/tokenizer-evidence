@@ -1,0 +1,826 @@
+{
+  "contract_id": "a55e",
+  "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+  "duplicate_prompt_prefix_pair_extra_rows": 0,
+  "generation_started": false,
+  "locked_scale_candidate": true,
+  "max_coordinate_prefix_pair_count": 384,
+  "max_prefix_template_fraction": 0.0625,
+  "model_scoring_started": false,
+  "next_allowed_action": "Run locked-scale row-bank route validation and static/Qwen tokenizer boundary preflight. Do not submit generation until the tokenizer preflight passes and a reviewed locked-scale H200 route is recorded.",
+  "paper_claim_allowed": false,
+  "payload_diversity_tested": false,
+  "prefix_template_count": 16,
+  "prompts_per_shard": 64,
+  "reclassifies_868348": false,
+  "reclassifies_869348": false,
+  "row_count": 98304,
+  "rows_per_shard": 1024,
+  "same_contract_only": true,
+  "schema_name": "natural_evidence_v2_r4_after_869348_global_unique_locked_scale_row_bank_manifest_v1",
+  "selected_coordinate_count": 16,
+  "selected_coordinates": [
+    6,
+    22,
+    10,
+    26,
+    1,
+    17,
+    3,
+    19,
+    15,
+    31,
+    8,
+    24,
+    4,
+    20,
+    7,
+    23
+  ],
+  "selected_prompt_count": 6144,
+  "shard_summaries": [
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 0,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 1,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 2,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 3,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 4,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 5,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 6,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 7,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 8,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 9,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 10,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 11,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 12,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 13,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 14,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 15,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 16,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 17,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 18,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 19,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 20,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 21,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 22,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 23,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 24,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 25,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 26,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 27,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 28,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 29,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 30,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 31,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 32,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 33,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 34,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 35,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 36,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 37,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 38,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 39,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 40,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 41,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 42,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 43,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 44,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 45,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 46,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 47,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 48,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 49,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 50,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 51,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 52,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 53,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 54,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 55,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 56,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 57,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 58,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 59,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 60,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 61,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 62,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 63,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 64,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 65,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 66,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 67,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 68,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 69,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 70,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 71,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 72,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 73,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 74,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 75,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 76,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 77,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 78,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 79,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 80,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 81,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 82,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 83,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 84,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 85,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 86,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 87,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 88,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 89,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 90,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 91,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 92,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 93,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 94,
+      "unique_content_prompt_prefix_pairs": 1024
+    },
+    {
+      "duplicate_content_prompt_prefix_pair_extra_rows": 0,
+      "prompt_count": 64,
+      "row_count": 1024,
+      "selected_coordinate_count": 16,
+      "shard_index": 95,
+      "unique_content_prompt_prefix_pairs": 1024
+    }
+  ],
+  "slurm_submitted": false,
+  "source_codebook": "results/natural_evidence_v2/precommit/r4_after_868212_repaired_first_token_event_precommit_20260516/codebook.json",
+  "source_codebook_sha256": "58d5fc6dc0c42136e5fb238c0b255e73c9c7d63115a3abc39af31ec6fd2f5444",
+  "source_dev_pass_job_id": "869348",
+  "source_dev_pass_review": "results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348_review/quality_repair_confirmation_review_summary.json",
+  "source_dev_pass_status": "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_GATE",
+  "source_prompt_bank": "results/natural_evidence_v2/prompts/r4_cover_natural_prompt_bank_20260512_dev2048/locked_prompts.jsonl",
+  "source_prompt_bank_sha256": "c188022580098c759a003684dbab5faa50b4d8f17f39f2930cb1aebcedd6015f",
+  "source_surface_bank": "results/natural_evidence_v2/precommit/r4_after_864832_coordinate_unique_surface_bank_20260516/surface_bank.json",
+  "source_surface_bank_sha256": "4a0f07af15ade41d51655352976e18d17e095b60a4850814ade231ec9f5fe1ac",
+  "status": "PASS_R4_AFTER_869348_GLOBAL_UNIQUE_LOCKED_SCALE_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT",
+  "target_shards": 96,
+  "training_started": false,
+  "unique_content_prompt_prefix_pairs": 98304,
+  "unique_prompt_prefix_pairs": 98304
+}

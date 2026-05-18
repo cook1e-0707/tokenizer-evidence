@@ -1,0 +1,108 @@
+schema_name: natural_evidence_v2_r4_after_869348_locked_scale_generation_route_v1
+route_id: r4_after_869348_locked_scale_generation_v1
+phase: V2_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_PREFLIGHT_PASSED_GENERATION_ROUTE_NEXT
+
+source_artifacts:
+  source_dev_pass_job_id: "869348"
+  source_dev_pass_review: results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348_review/quality_repair_confirmation_review_summary.json
+  tokenizer_preflight_job_id: "870078"
+  tokenizer_preflight_review: results/natural_evidence_v2/status/r4_after_869348_locked_scale_qwen_tokenizer_boundary_preflight_870078_review/review_summary.json
+  row_bank_dir: results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518
+  row_bank_manifest: results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_manifest.json
+  row_bank_rows: results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518/row_allocation_rows.jsonl
+  row_bank_route_validation: results/natural_evidence_v2/status/r4_after_869348_locked_scale_row_bank_route_validation_20260518/route_validation_summary.json
+
+policy_artifacts:
+  duplicate_safe_generation_policy_v2: configs/natural_evidence_v2/r4_first_token_event_duplicate_safe_generation_v2.yaml
+  contextual_forbidden_policy_v2: results/natural_evidence_v2/precommit/r4_after_868260_quality_gate_repair_package_20260517/contextual_forbidden_surface_policy_v2.json
+  trace_binding_verifier: scripts/natural_evidence_v2/verify_r4_first_token_event_trace_binding.py
+  first_token_event_decoder: scripts/natural_evidence_v2/decode_r4_after_868151_first_token_event_channel.py
+  full_phrase_decoder: scripts/natural_evidence_v2/decode_r4_after_864832_reliability_codebook.py
+
+generation_scope:
+  diagnostic_name: r4_after_869348_locked_scale_generation
+  scale: 96_block_locked_scale
+  blocks: 96
+  shards: 96
+  row_cylinders_per_block: 1024
+  rows_per_coordinate_per_block: 64
+  unique_prompt_indices_per_block: 64
+  selected_coordinate_count: 16
+  expected_generated_rows: 294912
+  expected_attempt_rows_min: 294912
+  conditions: [protected, raw, task_only]
+  decode_conditions: [protected, raw, task_only, wrong_key, wrong_payload]
+  generation_unit: prefix_native_row_cylinder
+  same_contract_only: true
+  contract_id: a55e
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+  text_only_phrase_decoder_claim: false
+
+allocation_policy:
+  policy: locked_scale_global_unique_prompt_prefix_pairs_16_prefix_rotated_by_prompt_and_coordinate
+  source: results/natural_evidence_v2/status/r4_after_869348_global_unique_locked_scale_row_bank_plan_20260518
+  reuse_scope: held_out_locked_scale_same_contract_only
+  duplicate_content_prompt_prefix_pair_extra_rows: 0
+  duplicate_prompt_prefix_pair_extra_rows: 0
+  global_response_hash_duplicate_gate_remains_zero: true
+  dev_prompt_split_reused: false
+
+quality_gates:
+  protected_strict_accepts_min: 85
+  protected_accepts_ignoring_quality_min: 90
+  control_accepts_max_per_condition: 0
+  within_block_duplicate_response_hash_count_max: 0
+  global_duplicate_response_hash_count_max: 0
+  technical_forbidden_public_surface_count_max: 0
+  ambiguous_forbidden_surface_count_max: 0
+  ordinary_domain_literal_policy: report_only
+  trace_binding_validity_required: 1.0
+  full_phrase_decoder_policy: report_only_not_success_claim
+  post_generation_template_leakage_review_required: true
+  protected_vs_raw_template_auc_max: 0.60
+
+controller:
+  policy: committed_first_token_event_controller
+  source_best_grid: 26
+  source_job_id: 868016
+  bonus_nats: 4.0
+  penalty_nats: 0.5
+  max_target_mass: 0.5
+  max_kl_budget: 0.5
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  array: 0-95%4
+  allowlist_entry: v2_r4_after_869348_locked_scale_generation_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_869348_locked_scale_generation_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  full_mode_wrapper_requires_separate_submission_preflight: true
+
+required_before_any_submission:
+  dev_diagnostic_869348_passed: true
+  locked_row_bank_validated: true
+  qwen_tokenizer_preflight_870078_passed: true
+  route_validation_passed: true
+  wrapper_plan_only_passed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
