@@ -1,0 +1,52 @@
+{
+  "attempt_rows": 98304,
+  "control_accepts": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "control_accepts_ignoring_quality": {
+    "raw": 0,
+    "task_only": 0,
+    "wrong_key": 0,
+    "wrong_payload": 0
+  },
+  "event_statuses": {
+    "erasure": 90570,
+    "other": 420,
+    "target": 7314
+  },
+  "expected_generated_rows": 98304,
+  "expected_rows_per_shard": 3072,
+  "expected_shards": 32,
+  "far_started": false,
+  "full_phrase_decoder_policy": "report_only_not_success_claim",
+  "full_phrase_forbidden_public_surface_count_format_scrub_all": 684,
+  "full_phrase_protected_accepts_format_scrub_all": 0,
+  "generated_rows": 98304,
+  "generation_diagnostic_gate_pass": true,
+  "global_duplicate_response_hash_count": 0,
+  "input_dir": "results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348",
+  "llama_started": false,
+  "missing_artifacts": [],
+  "next_allowed_action": "record locked-scale route decision or expert review before locked-scale submission",
+  "paper_claim_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "protected_accepts_ignoring_quality": 32,
+  "protected_accepts_ignoring_quality_min": 30,
+  "protected_blocks": 32,
+  "protected_duplicate_response_hash_count": 0,
+  "protected_forbidden_public_surface_count": 0,
+  "protected_strict_accepts": 32,
+  "protected_strict_accepts_min": 28,
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_after_868260_quality_repair_confirmation_review_v1",
+  "shards_seen": 32,
+  "source_job_id": "869348",
+  "status": "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_GATE",
+  "trace_binding_checked_rows": 98304,
+  "trace_binding_invalid_rows": 0,
+  "trace_binding_validity": 1.0,
+  "training_started": false
+}

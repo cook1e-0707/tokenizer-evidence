@@ -13260,5 +13260,41 @@
     "slurm_submitted": true,
     "paper_claim_allowed": false,
     "next_allowed_action": "Monitor Slurm array 869348. After terminal completion, sync and review all shard outputs before any further generation, locked-scale, FAR, sanitizer, Llama, or paper-facing claim."
+  },
+  "2026-05-18T13:35:25Z_r4_after_868348_global_unique_dev_diagnostic_869348_review": {
+    "status": "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_GATE",
+    "current_phase": "V2_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_869348_PASSED_REVIEWED_LOCKED_SCALE_DECISION_NEXT",
+    "job_id": "869348",
+    "job_name": "nat-ev-v2-r4gDev",
+    "review_summary": "results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348_review/quality_repair_confirmation_review_summary.json",
+    "input_dir": "results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348",
+    "slurm_sacct": "results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_submission_20260517/slurm_sacct_869348.txt",
+    "shards_seen": 32,
+    "generated_rows": 98304,
+    "attempt_rows": 98304,
+    "protected_strict_accepts": 32,
+    "protected_accepts_ignoring_quality": 32,
+    "control_accepts": {
+      "raw": 0,
+      "task_only": 0,
+      "wrong_key": 0,
+      "wrong_payload": 0
+    },
+    "global_duplicate_response_hash_count": 0,
+    "protected_duplicate_response_hash_count": 0,
+    "protected_forbidden_public_surface_count": 0,
+    "trace_binding_checked_rows": 98304,
+    "trace_binding_invalid_rows": 0,
+    "trace_binding_validity": 1.0,
+    "full_phrase_protected_accepts_format_scrub_all": 0,
+    "full_phrase_decoder_policy": "report_only_not_success_claim",
+    "generation_diagnostic_gate_pass": true,
+    "paper_claim_allowed": false,
+    "training_started": false,
+    "llama_started": false,
+    "sanitizer_started": false,
+    "far_started": false,
+    "payload_diversity_claim_allowed": false,
+    "next_allowed_action": "Record artifact-only locked-scale route decision or expert review before any locked-scale submission. Do not start FAR, sanitizer, Llama, payload-diversity, or paper-facing claims."
   }
 }

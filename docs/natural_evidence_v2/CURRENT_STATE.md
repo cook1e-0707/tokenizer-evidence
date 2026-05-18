@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-17T20:21:34Z
+Last synchronized: 2026-05-18T13:35:25Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,58 +9,59 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_SUBMITTED_MONITOR_ONLY`
+`V2_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_869348_PASSED_REVIEWED_LOCKED_SCALE_DECISION_NEXT`
 
 ## Latest Update
+
+Slurm array `869348` completed on H200/pomplun and passed the reviewed
+global-unique first-token-event 32-block dev diagnostic gate.
+
+```text
+job:
+  869348, nat-ev-v2-r4gDev, COMPLETED, 32/32 shards, ExitCode 0:0
+review:
+  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_diagnostic_869348_review/
+status:
+  PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_GATE
+generated rows:
+  98304
+attempt rows:
+  98304
+protected strict accepts:
+  32/32
+protected accepts ignoring quality:
+  32/32
+control accepts:
+  raw=0/32, task_only=0/32, wrong_key=0/32, wrong_payload=0/32
+global duplicate response hash count:
+  0
+protected duplicate response hash count:
+  0
+protected forbidden public surface count:
+  0
+trace binding:
+  98304 checked, 0 invalid, validity 1.0
+full-phrase protected accepts, format_scrub=all:
+  0 (report-only, not a success claim)
+full-phrase forbidden public surface count, format_scrub=all:
+  684 (report-only under this first-token-event route)
+```
+
+This is a Qwen-only, same-contract, provider-side first-token-event/controller
+dev diagnostic pass. It does not establish text-only phrase decoding and does
+not unlock paper-facing positive claims by itself.
+
+The next allowed action is artifact-only locked-scale route decision / expert
+review for the same first-token-event protocol. Do not submit locked-scale,
+FAR, sanitizer, Llama, payload-diversity, or paper-facing claim jobs until that
+route is recorded and preflighted.
+
+## Prior Update
 
 Codex/Hermes synchronized the `869298` actual Qwen tokenizer preflight result,
 prepared the global-unique first-token-event dev diagnostic route, passed local
 and remote preflight, submitted one H200 array job, and immediately disabled the
 allowlist entry.
-
-```text
-tokenizer preflight job:
-  869298
-tokenizer preflight status:
-  PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT
-checked rows:
-  32768
-failed rows:
-  0
-empty target/other token-id rows:
-  0 / 0
-target/other overlap rows:
-  0
-route config:
-  configs/natural_evidence_v2/r4_after_868348_global_unique_dev_diagnostic_route.yaml
-route validation:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_route_validation_20260517/
-route validation status:
-  PASS_R4_AFTER_868348_GLOBAL_UNIQUE_DEV_DIAGNOSTIC_ROUTE_PLAN_ONLY_NO_SUBMIT
-wrapper:
-  scripts/natural_evidence_v2/slurm/r4_after_868348_global_unique_dev_diagnostic_h200.sbatch
-wrapper plan smoke:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_wrapper_plan_smoke_20260517/
-local allowlist safety:
-  PASS with zero enabled entries
-remote route validation:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_route_validation_remote_20260517_r2/
-remote wrapper plan smoke:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_wrapper_plan_smoke_remote_20260517/
-single-enabled preflight:
-  local PASS, remote PASS
-submitted job:
-  869348, nat-ev-v2-r4gDev
-submission record:
-  results/natural_evidence_v2/status/r4_after_868348_global_unique_dev_submission_20260517/submission_record.json
-post-submit allowlist:
-  local PASS, remote PASS, enabled_entries=[]
-```
-
-The next allowed action is monitor-only for Slurm array `869348`. After terminal
-completion, sync all shard outputs and run the reviewed result aggregation. Do
-not start another generation job, locked-scale route, FAR, sanitizer, Llama,
-payload-diversity route, or paper-facing claim before this result is reviewed.
 
 ```text
 allowlist entry:
