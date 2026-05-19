@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-18T14:10:49Z
+Last synchronized: 2026-05-19T00:00:00Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -19,11 +19,15 @@ Codex resubmitted the same reviewed H200 locked-scale generation route as job
 
 ```text
 active/submitted job:
-  870210, nat-ev-v2-r4lGen, array 0-95%4
+  870210, nat-ev-v2-r4lGen, array 0-95%6
 submission record:
   results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_resubmission_after_870103_repair_20260518/
 post-submit allowlist safety:
-  local PASS; remote sync/check pending
+  local PASS; remote PASS
+array throttle update:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_array_throttle_update_20260518/
+  ArrayTaskThrottle increased from 4 to 6 with scontrol update; scheduling only,
+  no route/model/decoder/gate/claim change
 previous failed job:
   870103, nat-ev-v2-r4lGen, array 0-95%4, FAILED, ExitCode 1:0
 failure review:

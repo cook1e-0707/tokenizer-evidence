@@ -1,0 +1,18 @@
+{
+  "account": "cs_yinxin.wan",
+  "command": "scontrol update JobId=870210 ArrayTaskThrottle=6",
+  "job_id": "870210",
+  "job_name": "nat-ev-v2-r4lGen",
+  "method_or_claim_change": false,
+  "new_array_task_throttle": 6,
+  "note": "Scheduler may still run fewer than 6 tasks if H200 resources are unavailable.",
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "previous_array_task_throttle": 4,
+  "qos": "pomplun",
+  "reason_after": "None",
+  "reason_before": "JobArrayTaskLimit",
+  "schema_name": "natural_evidence_v2_slurm_array_throttle_update_v1",
+  "status": "UPDATED_R4_AFTER_869348_LOCKED_SCALE_GENERATION_870210_ARRAY_THROTTLE_4_TO_6",
+  "timestamp_utc": "2026-05-18T22:35:00Z"
+}
