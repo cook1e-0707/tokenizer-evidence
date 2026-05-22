@@ -55,6 +55,7 @@ CONTROLLER_MAX_TARGET_MASS="${CONTROLLER_MAX_TARGET_MASS:-0.5}"
 CONTROLLER_MAX_KL_BUDGET="${CONTROLLER_MAX_KL_BUDGET:-0.5}"
 DUPLICATE_SAFE_POLICY="${DUPLICATE_SAFE_POLICY:-}"
 PUBLIC_RUN_SALT="${PUBLIC_RUN_SALT:-r4_after_868016_controller_generation}"
+GENERATION_CONDITIONS="${GENERATION_CONDITIONS:-protected,raw,task_only}"
 BINDING_HMAC_SECRET="${BINDING_HMAC_SECRET:-}"
 SURFACE_CODEBOOK_HASH="${SURFACE_CODEBOOK_HASH:-}"
 DECODER_VERSION_HASH="${DECODER_VERSION_HASH:-}"
@@ -126,12 +127,14 @@ echo "controller_bonus_nats=$CONTROLLER_BONUS_NATS"
 echo "controller_penalty_nats=$CONTROLLER_PENALTY_NATS"
 echo "duplicate_safe_policy=${DUPLICATE_SAFE_POLICY:-unset}"
 echo "public_run_salt=$PUBLIC_RUN_SALT"
+echo "generation_conditions=$GENERATION_CONDITIONS"
 echo "binding_hmac_secret_set=$([ -n "$BINDING_HMAC_SECRET" ] && echo true || echo false)"
 
 GENERATOR_EXTRA_ARGS=(
   --public-run-salt "$PUBLIC_RUN_SALT"
   --key-id-not-secret-key "$KEY_ID_NOT_SECRET_KEY"
   --payload-id "$PAYLOAD_ID"
+  --generation-conditions "$GENERATION_CONDITIONS"
 )
 if [ -n "$DUPLICATE_SAFE_POLICY" ]; then
   GENERATOR_EXTRA_ARGS+=(--duplicate-safe-policy "$DUPLICATE_SAFE_POLICY")
@@ -323,7 +326,7 @@ if [ -n "$DUPLICATE_SAFE_POLICY" ] && [ ! -s "$DUPLICATE_SAFE_POLICY" ]; then
   exit 2
 fi
 
-if [ ! -s "$TASK_ONLY_ADAPTER/adapter_config.json" ]; then
+if [[ ",$GENERATION_CONDITIONS," == *",task_only,"* ]] && [ ! -s "$TASK_ONLY_ADAPTER/adapter_config.json" ]; then
   echo "REQUIRED_TASK_ONLY_ADAPTER_MISSING_OR_EMPTY: $TASK_ONLY_ADAPTER" >&2
   exit 2
 fi

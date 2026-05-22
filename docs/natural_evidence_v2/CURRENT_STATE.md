@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-19T00:00:00Z
+Last synchronized: 2026-05-21T17:20:06Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,52 +9,419 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_869348_LOCKED_SCALE_GENERATION_870210_SUBMITTED_MONITOR_ONLY`
+`V2_R4_AFTER_870987_PREFAR_ORGANIC_NULL_GENERATION_874308_SUBMITTED_MONITOR`
 
 ## Latest Update
 
-After the `870103` runtime status-guard failure was reviewed and repaired,
-Codex resubmitted the same reviewed H200 locked-scale generation route as job
-`870210` and immediately disabled the allowlist entry.
+Job `874308` is the current canonical R4 pre-FAR organic-null raw-only
+generation/decode array. It was submitted after the organic-null generation
+route validation and wrapper smoke passed locally/remotely.
 
 ```text
-active/submitted job:
-  870210, nat-ev-v2-r4lGen, array 0-95%6
-submission record:
-  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_resubmission_after_870103_repair_20260518/
-post-submit allowlist safety:
-  local PASS; remote PASS
-array throttle update:
-  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_array_throttle_update_20260518/
-  ArrayTaskThrottle increased from 4 to 6 with scontrol update; scheduling only,
-  no route/model/decoder/gate/claim change
-previous failed job:
-  870103, nat-ev-v2-r4lGen, array 0-95%4, FAILED, ExitCode 1:0
-failure review:
-  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870103_failure_review_20260518/
-root cause:
-  generate_r4_after_868016_controller_outputs.py accepted older tokenizer
-  review statuses but rejected
-  PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078
-generation/model result:
-  none; failure occurred before generation
-repair patch:
-  add the reviewed 870078 tokenizer status to the explicit generator allowlist
-local tests:
-  .venv/bin/pytest -q tests/natural_evidence_v2/test_r4_after_868016_controller_generation.py \
-    tests/natural_evidence_v2/test_r4_controller_generation_binding_helpers.py
-  PASS, 3 passed
-local route validation after patch:
-  PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+job:
+  874308, nat-ev-v2-r4oGen
+route:
+  R4 after-870987 pre-FAR organic-null raw-only generation/decode
+array:
+  0-255%6
+partition/qos/account/gres:
+  pomplun / pomplun / cs_yinxin.wan / gpu:h200:1
+row bank:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521/row_allocation_rows.jsonl
+expected generated rows:
+  262144
+conditions:
+  raw only
+status dir:
+  /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_870987_prefar_organic_null_generation_874308
+next allowed action:
+  monitor 874308 to completion, then run artifact-only organic-null aggregate/review before any further route unlock
+not unlocked:
+  training, Llama, same-family null, sanitizer, FAR aggregation, payload diversity, text-only phrase success claim, paper-facing claim
 ```
 
-The next allowed action is to monitor job `870210`. After it reaches a terminal
-state, sync artifacts and review the locked-scale generation gate. Do not submit
-another generation job while `870210` is active.
+Historical latest tokenizer update follows.
+
+Job `874307` completed successfully and is adopted as the actual Qwen tokenizer preflight pass for the R4 pre-FAR organic-null v2 row bank.
+
+```text
+job:
+  874307, nat-ev-v2-r4oTok
+status:
+  PASS_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT
+checked rows:
+  262144 / 262144
+failed rows:
+  0
+empty target id rows:
+  0
+empty other id rows:
+  0
+target/other overlap rows:
+  0
+model forward / scoring / generation / training:
+  false / false / false / false
+review artifact:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_qwen_tokenizer_preflight_874307_review/review_summary.json
+next allowed action:
+  prepare and validate organic-null raw-only generation/decode wrapper route; no generation submission until wrapper/route, local/remote hash preflight, allowlist safety, and exactly-one H200 submission preflight pass
+```
+
+Job `874307` is now the canonical active R4 pre-FAR organic-null actual Qwen tokenizer boundary preflight. It uses the dedicated organic-null v2 wrapper and the validated v2 row bank. No generation, model scoring, training, FAR aggregation, Llama, sanitizer, payload-diversity, text-only phrase success claim, or paper-facing claim has been started.
+
+```text
+canonical active job:
+  874307, nat-ev-v2-r4oTok
+route:
+  R4 after-870987 pre-FAR organic-null Qwen tokenizer boundary preflight
+wrapper:
+  scripts/natural_evidence_v2/slurm/r4_after_870987_prefar_organic_null_qwen_tokenizer_boundary_preflight_h200.sbatch
+score rows:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521/row_allocation_rows.jsonl
+expected rows:
+  262144
+partition/qos/account/gres:
+  pomplun / pomplun / cs_yinxin.wan / gpu:h200:1
+allowlist after submission:
+  zero enabled locally and remotely
+next allowed action:
+  monitor 874307; sync and review tokenizer preflight artifacts after completion before any organic-null generation submission
+```
+
+Control-plane correction:
+
+```text
+noncanonical canceled job:
+  874306, nat-ev-v2-r4pTok
+reason:
+  tokenizer-only job referenced the old non-v2 organic row bank path via the standard-control wrapper
+adopt outputs:
+  false
+replacement:
+  874307 dedicated organic-null v2 tokenizer preflight
+```
+
+Organic-null v2 artifact status:
+
+```text
+prompt bank v2:
+  PASS, 16384 locked prompts, 0 technical/structural hits, 0 overlap with prior locked/standard-control prompts
+row bank v2:
+  PASS, 262144 rows, 256 shards, raw-only organic null, row bank sha256 30faab3ddc58e7f0a1a9351838c04a322d9fca617dca2479782d402522a3e62a
+route validation:
+  PASS locally and remotely
+```
+
+Job `871250` completed all 160 H200 shards for the R4 after-870987 pre-FAR
+standard-control first-token event null expansion. The first aggregate failed
+only because the contextual forbidden matcher treated full-text co-occurrence
+as technical context. Artifact-only attribution found four ordinary-domain rows:
+ordinary `coordinate` verbs and one ordinary `bucket of water` sentence were
+linked to distant ordinary words such as `slot` or another contextual literal.
+
+Codex repaired the matcher implementation to require local sentence/window
+context for contextual technical cues. This repair did not change the forbidden
+literal policy, thresholds, generated outputs, token traces, prompt allocation,
+controller configuration, or accept logic. It was validated locally and on
+Chimera, then applied only as artifact-only re-decode/re-aggregate against the
+already completed `871250` transcripts.
+
+```text
+completed job:
+  871250, nat-ev-v2-r4pGen
+array:
+  0-159%6
+partition/qos/account/gres:
+  pomplun / pomplun / cs_yinxin.wan / gpu:h200:1
+terminal state:
+  160/160 shards completed
+original aggregate:
+  FAIL_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_GENERATION_GATE
+original failure reason:
+  forbidden public surface quality count = 7 from contextual matcher
+matcher repair:
+  sentence-local contextual cue window; no policy/gate/threshold change
+tests:
+  tests/natural_evidence_v2/test_r4_after_868151_first_token_event_decoder.py PASS
+  tests/natural_evidence_v2/test_r4_contextual_forbidden_surface_policy_v2.py PASS
+repaired artifact-only aggregate:
+  PASS_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_GENERATION_GATE
+aggregate artifacts:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_generation_871250_contextual_window_v2_aggregate_20260521/
+control blocks:
+  raw: 0/256 accepts, 0/256 ignoring-quality accepts
+  task_only: 0/256 accepts, 0/256 ignoring-quality accepts
+  wrong_key: 0/256 accepts, 0/256 ignoring-quality accepts
+  wrong_payload: 0/256 accepts, 0/256 ignoring-quality accepts
+new generation rows:
+  491520
+unique response hashes:
+  491520
+global duplicate extra rows:
+  0
+trace binding:
+  491520 checked, 0 invalid
+technical forbidden public surface:
+  0 after precommitted contextual policy implementation repair
+protected rows:
+  report-only for this route; 159/160 strict accepts
+full phrase decoder:
+  report-only failure; no text-only success claim
+claim policy:
+  Qwen first-token event pre-FAR standard controls only; no full FAR and no paper claim
+```
+
+Historical immediate predecessor:
+
+```text
+previous failed job:
+  871079, nat-ev-v2-r4pGen
+terminal state:
+  all shards FAILED quickly with ExitCode 1:0
+failure point:
+  validate_reviews before generation
+generation/model forward/training:
+  not started
+failure review:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_generation_871079_failure_review_20260519/
+repair:
+  scripts/natural_evidence_v2/generate_r4_after_868016_controller_outputs.py now prefers review_status over status
+  871057 route-specific tokenizer review status added to the allowed pass set
+repair tests:
+  tests/natural_evidence_v2/test_r4_after_870987_tokenizer_review_status.py
+repair validation:
+  py_compile PASS
+  review-status pytest PASS
+  delegate plan-only smoke PASS
+  route validation PASS
+repaired submission record:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_generation_repaired_submission_20260519/submission_record.json
+```
+
+Next allowed action: continue the R4 Qwen pre-FAR null package with the
+organic-null route. This may proceed automatically after route validation,
+prompt/allocation validation, tokenizer/controller preflight, local/remote hash
+preflight, allowlist safety, and exactly-one H200 submission preflight pass.
+Do not treat the standard-control pass as full FAR, text-only phrase decoder
+success, payload diversity, Llama transfer, sanitizer robustness, or a
+paper-facing positive claim.
+
+Organic-null row-bank progress:
+
+```text
+row-bank builder:
+  scripts/natural_evidence_v2/build_r4_after_870987_prefar_organic_null_row_bank.py
+row-bank validator:
+  scripts/natural_evidence_v2/validate_r4_after_870987_prefar_organic_null_row_bank.py
+local row-bank artifact:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_plan_20260521/
+local validation:
+  PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_ROW_BANK_VALIDATION_NO_SUBMIT
+remote validation:
+  PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_ROW_BANK_VALIDATION_NO_SUBMIT
+organic-null blocks:
+  256
+selected prompts:
+  16384
+row cylinders:
+  262144
+generation conditions:
+  raw only
+generation/slurm:
+  not started
+next concrete action:
+  monitor actual Qwen tokenizer boundary preflight job 874306
+submitted tokenizer-only job:
+  874306
+submission record:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_qwen_tokenizer_preflight_submission_20260521/submission_record.json
+model forward/generation/training:
+  not started
+```
+
+Organic-null artifact-only prompt-bank repair/validation has started:
+
+```text
+organic-null prompt bank v1 issue:
+  prompt template contained the public phrase "hidden-code terminology"
+repair:
+  replace with "special terminology"; no generation, no Slurm, no model call
+organic-null prompt bank v2:
+  results/natural_evidence_v2/prompts/r4_after_870987_prefar_organic_null_prompts_20260521/
+validation:
+  PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_PROMPT_BANK_VALIDATION_NO_SUBMIT
+  results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_prompt_bank_v2_validation_20260521/
+locked prompts:
+  16384
+technical prompt literal rows:
+  0
+duplicate prompt ids/texts:
+  0
+overlap with locked-scale/standard-control prompts:
+  0
+```
+
+## Recent Locked-Scale And Pre-FAR Context
+
+Job `870210` reached a terminal state and is not a locked-scale result. The
+array completed 79/96 shards, while 17 shards failed or were cancelled. The
+failure is classified as a runtime/storage blocker, not a model/method gate
+failure.
+
+```text
+terminal job:
+  870210, nat-ev-v2-r4lGen, array 0-95%6
+slurm state:
+  COMPLETED 79/96; FAILED 17/96
+completed shards:
+  0-74, 77, 79, 80, 81
+failed or missing shards:
+  75, 76, 78, 82-95
+hard failure evidence:
+  shard 78 stderr: OSError [Errno 28] No space left on device
+storage state before cleanup:
+  /hpcstor6/scratch01/g/guanjie.lin001 was effectively full
+cleanup record:
+  results/natural_evidence_v2/status/hpcstor_cleanup_20260519/
+local small-artifact sync for 870210:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210/
+post-cleanup remote free space:
+  166G available on /hpcstor6/scratch01/g/guanjie.lin001
+```
+
+Resume job `870987` completed successfully, and aggregation of source job
+`870210` plus resume job `870987` passed the R4 Qwen same-contract first-token
+event locked-scale generation gate.
+
+Recommended resume safeguards:
+
+```text
+rerun shards:
+  75, 76, 78, 82-95
+log suppression:
+  do not set TQDM_DISABLE or TRANSFORMERS_VERBOSITY for the resume route
+array throttle:
+  use %6 for the resume route per user override
+completed shards:
+  do not rerun
+```
+
+```text
+resume job:
+  870987, nat-ev-v2-r4lGen
+resume array:
+  75,76,78,82-95%6
+resume output dir:
+  /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_869348_locked_scale_generation_870210_resume_20260519
+aggregation script:
+  scripts/natural_evidence_v2/aggregate_r4_after_869348_locked_scale_generation.py
+aggregation policy:
+  refuse locked-scale gate until 96/96 complete; full phrase decoder remains report-only
+```
+
+```text
+aggregate review:
+  docs/natural_evidence_v2/R4_AFTER_869348_LOCKED_SCALE_870210_PLUS_870987_REVIEW_20260519.md
+aggregate artifacts:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_aggregate_20260519/
+review summary:
+  results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_review_20260519/review_summary.json
+aggregate status:
+  PASS_R4_AFTER_869348_LOCKED_SCALE_GENERATION_GATE
+complete shards:
+  96/96
+generated rows:
+  294912
+protected strict accepts:
+  94/96
+protected accepts ignoring quality:
+  94/96
+raw/task-only/wrong-key/wrong-payload accepts:
+  0/96 each
+global duplicate response hash extra rows:
+  0
+unique response hashes:
+  294912/294912
+trace binding:
+  294912 checked, 0 invalid
+first-token forbidden public surface count:
+  0
+full phrase decoder:
+  report-only; protected accepts 0/96 under format_scrub=all and 0/96 under no scrub
+```
+
+Allowed internal statement: R4 Qwen same-contract first-token event locked-scale
+generation passed under bound trace decoding, with protected 94/96 and all
+diagnostic control arms 0/96.
 
 This route still does not unlock training, Llama, same-family null, sanitizer,
 FAR, payload-diversity, text-only phrase decoder success claim, or paper-facing
 positive claim.
+
+Post-pass pre-FAR null expansion route planning has started and passed its first
+artifact-only gates:
+
+```text
+route decision:
+  docs/natural_evidence_v2/R4_AFTER_870987_PREFAR_NULL_EXPANSION_ROUTE_DECISION_20260519.md
+route config:
+  configs/natural_evidence_v2/r4_after_870987_prefar_null_expansion_route.yaml
+route validation:
+  PASS_R4_AFTER_870987_PREFAR_NULL_EXPANSION_ROUTE_PLAN_ONLY_NO_SUBMIT
+route validation artifacts:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_null_expansion_route_validation_20260519/
+standard-control prompt bank:
+  results/natural_evidence_v2/prompts/r4_after_870987_prefar_standard_control_prompts_20260519/
+  locked prompts: 10240
+  overlap with 870987 locked prompts: 0
+organic-null prompt bank:
+  results/natural_evidence_v2/prompts/r4_after_870987_prefar_organic_null_prompts_20260519/
+  locked prompts: 16384
+  overlap with 870987 locked prompts: 0
+standard-control row bank:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_row_bank_plan_20260519/
+  row cylinders: 163840
+  shards: 160
+  duplicate prompt/prefix extra rows: 0
+  previous locked-scale prompt overlap: 0
+standard-control row-bank validation:
+  PASS_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_ROW_BANK_VALIDATION_NO_SUBMIT
+  results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_row_bank_validation_20260519/
+remote validation:
+  PASS_R4_AFTER_870987_PREFAR_NULL_EXPANSION_ROUTE_PLAN_ONLY_NO_SUBMIT
+  PASS_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_ROW_BANK_VALIDATION_NO_SUBMIT
+  results/natural_evidence_v2/status/r4_after_870987_prefar_null_expansion_route_validation_remote2_20260519/
+  results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_row_bank_validation_remote2_20260519/
+standard-control tokenizer preflight route:
+  configs/natural_evidence_v2/r4_after_870987_prefar_standard_control_tokenizer_preflight_route.yaml
+  scripts/natural_evidence_v2/slurm/r4_after_870987_prefar_standard_control_qwen_tokenizer_boundary_preflight_h200.sbatch
+  allowlist entry: v2_r4_after_870987_prefar_standard_control_qwen_tokenizer_boundary_preflight_h200
+  allowlist safety: PASS
+  results/natural_evidence_v2/status/r4_after_870987_prefar_tokenizer_route_allowlist_safety_20260519.json
+  remote allowlist safety: PASS
+  results/natural_evidence_v2/status/r4_after_870987_prefar_tokenizer_route_allowlist_safety_remote_20260519.json
+  remote hash preflight: PASS
+  results/natural_evidence_v2/status/r4_after_870987_prefar_tokenizer_remote_hash_preflight_20260519/
+  submitted tokenizer-only Slurm job: 871057
+  submission record:
+    results/natural_evidence_v2/status/r4_after_870987_prefar_tokenizer_submission_871057_20260519/submission_record.json
+  post-submit allowlist safety:
+    PASS local
+    PASS remote
+  job status:
+    COMPLETED, ExitCode 0
+  tokenizer preflight review:
+    PASS_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_QWEN_TOKENIZER_PREFLIGHT_871057
+    docs/natural_evidence_v2/R4_AFTER_870987_PREFAR_STANDARD_CONTROL_QWEN_TOKENIZER_PREFLIGHT_871057_REVIEW_20260519.md
+    results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_qwen_tokenizer_preflight_871057_review/review_summary.json
+  tokenizer gate:
+    checked rows: 163840
+    failed rows: 0
+    empty target id rows: 0
+    empty other id rows: 0
+    target/other overlap rows: 0
+    model forward/generation/training: false
+```
 
 ## Prior Update
 
@@ -1020,37 +1387,42 @@ duplicate-safe generation policy:
 
 ## Next Allowed Action
 
-The route may continue automatically after recorded preconditions pass, but no
-additional Slurm rerun is allowed until a new reviewed dev-diagnostic route is
-recorded and preflighted. The next allowed action is:
+The route may continue automatically after recorded preconditions pass. After
+the `870210 + 870987` locked-scale pass, the next canonical route is the
+artifact-only R4 Qwen first-token event pre-FAR null expansion package.
 
 ```text
 next:
-  expert route decision: build a larger globally unique prompt/prefix row bank
-  with tokenizer/controller preflight, or precommit future duplicate-gate
-  semantics that report control-only duplicates separately without
-  retroactively rescuing 868348
+  prepare/review full generation/decode wrapper for the pre-FAR standard-control
+  null package; no generation Slurm submission until wrapper and local/remote
+  route preflights pass
 allowed:
   Hermes notification
-  artifact-only 868299 review synchronization
-  32-block first-token event dev diagnostic route planning/preflight
-  runtime allowlist-race repair and wrapper smoke tests
-  868348 artifact-only review and duplicate failure attribution
-  duplicate-gate repair route planning
-  global-unique allocation feasibility audit
   Hermes/Codex state synchronization
+  route validation for configs/natural_evidence_v2/r4_after_870987_prefar_null_expansion_route.yaml
+  artifact-only standard-control null row-bank validation
+  artifact-only organic-null prompt-bank validation
+  full-wrapper review planning
+  standard-control pre-FAR generation route planning/preflight
+  organic-null wrapper design
 not allowed:
-  reclassifying 868260 as positive
-  adopting partial 868313 outputs as a canonical dev result
-  reclassifying 868348 as positive
-  another Slurm generation job before a new reviewed duplicate-gate repair route
+  generation/null Slurm submission before the standard-control wrapper route is
+  reviewed and local/remote route preflights pass
+  reclassifying text-only full phrase decoder as successful
+  reclassifying this pre-FAR route as full FAR
   paper-facing positive claims
 not yet allowed:
   training
+  Llama
+  same-family null
+  sanitizer
+  FAR aggregation
+  payload diversity
 ```
 
-This route does not unlock model scoring, training, Llama, same-family null,
-sanitizer, FAR aggregation, payload diversity, or paper-facing positive claims.
+This route does not unlock training, Llama, same-family null, sanitizer, FAR
+aggregation, payload diversity, text-only phrase decoder success claims, or
+paper-facing positive claims.
 
 Route-controlled actions may proceed automatically after their preconditions are
 recorded; the user has authorized Codex and Hermes not to ask repeatedly for the

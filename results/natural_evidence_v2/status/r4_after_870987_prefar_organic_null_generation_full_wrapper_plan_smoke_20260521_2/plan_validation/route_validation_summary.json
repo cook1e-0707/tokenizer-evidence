@@ -1,0 +1,22 @@
+{
+  "allow_submission_enabled_entry": false,
+  "allowlist_entry": "v2_r4_after_870987_prefar_organic_null_generation_h200",
+  "config": "configs/natural_evidence_v2/r4_after_870987_prefar_organic_null_generation_route.yaml",
+  "config_sha256": "7f771db01c8c436a2cf668193f3d16c0d72c33c63b981300a12a71c65e805b0d",
+  "errors": [],
+  "expected_generated_rows": 262144,
+  "expected_shards": 256,
+  "generation_started": false,
+  "next_allowed_action": "Run local/remote hash preflight before exactly-one H200 pre-FAR organic-null generation submission.",
+  "paper_claim_allowed": false,
+  "row_bank_rows": "results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521/row_allocation_rows.jsonl",
+  "row_bank_rows_sha256": "30faab3ddc58e7f0a1a9351838c04a322d9fca617dca2479782d402522a3e62a",
+  "schema_name": "natural_evidence_v2_r4_after_870987_prefar_organic_null_generation_route_validation_v1",
+  "skip_allowlist_state_check": true,
+  "slurm_allowed": false,
+  "status": "PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "tokenizer_preflight_job_id": "874307",
+  "training_started": false,
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_870987_prefar_organic_null_generation_h200.sbatch",
+  "wrapper_sha256": "68d03218acb31a2cb085659a0d9f5b1829dbbce2057df64b510f7d32468c07df"
+}

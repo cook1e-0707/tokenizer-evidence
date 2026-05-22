@@ -1,0 +1,4 @@
+block_id,arm,accept,complete_pairs,required_pairs,selected_coordinates_observed,selected_coordinates_total,min_pair_support,matched_surface_count,selected_surface_count,checksum_valid,bits_match_condition,forbidden_public_surface_count,format_scrub_mode
+plan_only_block_00,protected,True,8,8,16,16,2,32,32,True,True,0,all
+plan_only_block_00,wrong_key,False,8,8,16,16,2,32,32,True,False,0,all
+plan_only_block_00,wrong_payload,False,8,8,16,16,2,32,32,True,False,0,all
