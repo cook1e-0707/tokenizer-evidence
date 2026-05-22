@@ -1,0 +1,10 @@
+JobID|JobName|Partition|Account|State|ExitCode|Elapsed|Start|End
+874778_0|nat-ev-v2-r4sfTok|pomplun|cs_yinxin.wan|COMPLETED|0:0|00:09:20|2026-05-22T09:47:25|2026-05-22T09:56:45
+874778_0.batch|batch||cs_yinxin.wan|COMPLETED|0:0|00:09:20|2026-05-22T09:47:25|2026-05-22T09:56:45
+874778_0.extern|extern||cs_yinxin.wan|COMPLETED|0:0|00:09:20|2026-05-22T09:47:25|2026-05-22T09:56:45
+874778_1|nat-ev-v2-r4sfTok|pomplun|cs_yinxin.wan|COMPLETED|0:0|00:09:20|2026-05-22T09:47:26|2026-05-22T09:56:46
+874778_1.batch|batch||cs_yinxin.wan|COMPLETED|0:0|00:09:20|2026-05-22T09:47:26|2026-05-22T09:56:46
+874778_1.extern|extern||cs_yinxin.wan|COMPLETED|0:0|00:09:20|2026-05-22T09:47:26|2026-05-22T09:56:46
+874778_2|nat-ev-v2-r4sfTok|pomplun|cs_yinxin.wan|COMPLETED|0:0|00:09:21|2026-05-22T09:47:26|2026-05-22T09:56:47
+874778_2.batch|batch||cs_yinxin.wan|COMPLETED|0:0|00:09:21|2026-05-22T09:47:26|2026-05-22T09:56:47
+874778_2.extern|extern||cs_yinxin.wan|COMPLETED|0:0|00:09:21|2026-05-22T09:47:26|2026-05-22T09:56:47

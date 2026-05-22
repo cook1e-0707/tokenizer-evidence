@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-21T17:20:06Z
+Last synchronized: 2026-05-22T14:13:05Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,9 +9,84 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_870987_PREFAR_ORGANIC_NULL_GENERATION_874308_SUBMITTED_MONITOR`
+`V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_874973_SUBMITTED_MONITOR`
 
 ## Latest Update
+
+The R4 after-870987 pre-FAR null package has passed. Same-family raw-null tokenizer preflight job `874778` completed and passed for Qwen 3B/7B/14B. Job `874781` failed before generation due wrapper allowlist-state validation, and Codex submitted repaired same-family raw-null generation array `874973`.
+
+```text
+canonical phase:
+  V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_874973_SUBMITTED_MONITOR
+active generation job:
+  874973, nat-ev-v2-r4sfRaw
+array:
+  0-191%6
+scope:
+  raw-only same-family Qwen 3B/7B/14B controls, 64 shards/model, 1024 rows/shard
+superseded failed generation job:
+  874781, wrapper allowlist-state mismatch before model load/generation
+completed tokenizer job:
+  874778, nat-ev-v2-r4sfTok
+tokenizer review:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_tokenizer_preflight_874778_review/review_summary.json
+tokenizer result:
+  PASS, 3 tokenizers, 786432 checked rows, 0 failed rows, 0 empty target/other rows, 0 target/other overlaps
+superseded failed job:
+  874775, wrapper default PLAN_ONLY/allowlist-state mismatch; no tokenizer/model/scoring/generation started
+array:
+  0-2%3
+scope:
+  tokenizer-only preflight for Qwen/Qwen2.5-3B-Instruct, Qwen/Qwen2.5-7B-Instruct, Qwen/Qwen2.5-14B-Instruct
+route decision:
+  docs/natural_evidence_v2/R4_AFTER_870987_SAME_FAMILY_RAW_NULL_TOKENIZER_PREFLIGHT_ROUTE_20260522.md
+tokenizers planned:
+  Qwen/Qwen2.5-3B-Instruct, Qwen/Qwen2.5-7B-Instruct, Qwen/Qwen2.5-14B-Instruct
+current allowed action:
+  monitor 874973 to completion, then aggregate/review same-family raw-null results before any downstream route unlock
+not allowed yet:
+  training, Llama, sanitizer, FAR aggregation, payload diversity, paper-facing claim
+allowlist after submission:
+  zero enabled locally and remotely
+route validation:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_tokenizer_route_validation_20260522/route_validation_summary.json
+wrapper plan smoke:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_tokenizer_wrapper_plan_smoke_20260522_task0/
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_tokenizer_wrapper_plan_smoke_20260522_task2/
+```
+
+Historical previous update follows.
+
+Job `874308` completed and the R4 after-870987 pre-FAR organic-null aggregate passed. Combined with the passed standard-control pre-FAR aggregate from `871250`, the Qwen-only first-token event route now has a passed pre-FAR null package.
+
+```text
+canonical phase:
+  V2_R4_AFTER_870987_PREFAR_NULL_PACKAGE_871250_PLUS_874308_PASSED_NEXT_ROUTE_DECISION
+organic null job:
+  874308, nat-ev-v2-r4oGen
+organic null status:
+  PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_GENERATION_GATE
+organic raw accepts:
+  0/256
+organic raw accepts ignoring quality:
+  0/256
+organic generated rows:
+  262144
+organic unique response hashes:
+  262144
+organic global duplicate extra rows:
+  0
+organic trace binding:
+  262144 checked, 0 invalid
+standard controls:
+  raw 0/256, task_only 0/256, wrong_key 0/256, wrong_payload 0/256
+review artifact:
+  results/natural_evidence_v2/status/r4_after_870987_prefar_null_package_871250_plus_874308_review_20260522/review_summary.json
+next allowed action:
+  prepare the next reviewed route decision package; no Llama, same-family null, sanitizer, FAR aggregation, payload diversity, training, or paper-facing claim until that route decision/preflight passes
+```
+
+Historical previous update follows.
 
 Job `874308` is the current canonical R4 pre-FAR organic-null raw-only
 generation/decode array. It was submitted after the organic-null generation

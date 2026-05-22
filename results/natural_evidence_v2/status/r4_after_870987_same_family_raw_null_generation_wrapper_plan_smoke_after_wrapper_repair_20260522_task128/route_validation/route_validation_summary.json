@@ -1,0 +1,20 @@
+{
+  "allowlist_entry": "v2_r4_after_870987_same_family_raw_null_generation_h200",
+  "config_sha256": "aaa98de161614aba1069b61b4e8b8c25b5926b79701cdf0b4f96456f7eae6a18",
+  "enabled_entries": [],
+  "errors": [],
+  "expected_generated_rows": 196608,
+  "expected_models": [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-14B-Instruct"
+  ],
+  "expected_total_shards": 192,
+  "generation_started": false,
+  "next_allowed_action": "Run local/remote hash preflight before exactly-one H200 same-family raw-null submission.",
+  "paper_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_870987_same_family_raw_null_generation_route_validation_v1",
+  "slurm_allowed": false,
+  "status": "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "wrapper_sha256": "ed1e0a320e782942a38a10157fbcd0204453e18746466d2412a0b801b18ecb09"
+}

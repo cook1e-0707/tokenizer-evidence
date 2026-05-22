@@ -1,0 +1,23 @@
+{
+  "allowlist_entry": "v2_r4_after_870987_same_family_raw_null_tokenizer_preflight_h200",
+  "config_sha256": "01889a443a9d868dadb671ae188e387f87c4799aa7af05d163dfcf0427d3bf04",
+  "enabled_entries": [],
+  "errors": [],
+  "expected_tokenizers": [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-14B-Instruct"
+  ],
+  "expected_total_checked_rows": 786432,
+  "generation_started": false,
+  "model_forward_started": false,
+  "next_allowed_action": "Run exactly one reviewed H200 same-family tokenizer-only preflight array; do not run same-family generation until all tokenizer preflight shards pass and are reviewed.",
+  "paper_claim_allowed": false,
+  "row_bank_rows_sha256": "30faab3ddc58e7f0a1a9351838c04a322d9fca617dca2479782d402522a3e62a",
+  "schema_name": "natural_evidence_v2_r4_after_870987_same_family_raw_null_tokenizer_route_validation_v1",
+  "scoring_started": false,
+  "slurm_submitted": false,
+  "status": "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_TOKENIZER_ROUTE_PLAN_ONLY_NO_SUBMIT",
+  "training_started": false,
+  "wrapper_sha256": "56beb71115cc60ebb1cbdd41666ec7fd50f4f3f8487a70275c2b1d1bc0e5f050"
+}

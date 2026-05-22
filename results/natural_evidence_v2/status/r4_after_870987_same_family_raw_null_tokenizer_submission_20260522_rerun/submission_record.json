@@ -1,0 +1,29 @@
+{
+  "account": "cs_yinxin.wan",
+  "array": "0-2%3",
+  "command_pattern": "sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_tokenizer_boundary_preflight_h200.sbatch",
+  "enabled_entries_after_submission": [],
+  "far_aggregation_started": false,
+  "generation_started": false,
+  "gres": "gpu:h200:1",
+  "job_id": "874778",
+  "job_name": "nat-ev-v2-r4sfTok",
+  "llama_started": false,
+  "model_forward_started": false,
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_after_870987_same_family_raw_null_tokenizer_submission_record_v1",
+  "scoring_started": false,
+  "submitted": true,
+  "submitted_entry": "v2_r4_after_870987_same_family_raw_null_tokenizer_preflight_h200",
+  "supersedes_failed_job_id": "874775",
+  "time_limit": "30-00:00:00",
+  "tokenizers": [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-14B-Instruct"
+  ],
+  "training_started": false
+}

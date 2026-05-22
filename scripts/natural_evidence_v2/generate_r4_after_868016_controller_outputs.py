@@ -54,6 +54,9 @@ ALLOWED_TOKENIZER_REVIEW_STATUSES = {
     "PASS_R4_AFTER_867621_RELIABILITY_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_867828",
     "PASS_R4_AFTER_868348_GLOBAL_UNIQUE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_869298",
     "PASS_R4_AFTER_869348_LOCKED_SCALE_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT_870078",
+    "PASS_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_QWEN_TOKENIZER_PREFLIGHT_871057",
+    "PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_QWEN_TOKENIZER_PREFLIGHT_874307",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_TOKENIZER_PREFLIGHT_874778",
 }
 
 
@@ -86,6 +89,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--controller-max-target-mass", type=float, required=True)
     parser.add_argument("--controller-max-kl-budget", type=float, required=True)
     parser.add_argument("--duplicate-safe-policy", type=Path, default=None)
+    parser.add_argument(
+        "--generation-conditions",
+        default="protected,raw,task_only",
+        help="Comma-separated generation conditions. Default preserves the historical protected/raw/task_only diagnostic.",
+    )
     parser.add_argument("--public-run-salt", default="r4_after_868016_controller_generation")
     parser.add_argument("--binding-hmac-secret", default=None)
     parser.add_argument("--surface-codebook-hash", default="")
@@ -150,6 +158,19 @@ def duplicate_policy_payload(path: Path | None) -> dict[str, Any] | None:
     if generation.get("apply_same_policy_to_all_arms") is not True:
         raise ValueError("duplicate-safe policy must apply to all arms")
     return payload
+
+
+def requested_generation_conditions(raw_value: str) -> list[str]:
+    allowed = {"protected", "raw", "task_only"}
+    conditions = [item.strip() for item in str(raw_value).split(",") if item.strip()]
+    if not conditions:
+        raise ValueError("--generation-conditions selected no conditions")
+    unknown = sorted(set(conditions) - allowed)
+    if unknown:
+        raise ValueError(f"unknown generation conditions: {unknown}")
+    if len(set(conditions)) != len(conditions):
+        raise ValueError(f"duplicate generation conditions: {conditions}")
+    return conditions
 
 
 def validate_selected_rows(
@@ -221,7 +242,7 @@ def select_rows_by_allocation(
 
 
 def validate_reviews(tokenizer_review: Mapping[str, Any], controller_review: Mapping[str, Any]) -> None:
-    tokenizer_status = tokenizer_review.get("status") or tokenizer_review.get("review_status")
+    tokenizer_status = tokenizer_review.get("review_status") or tokenizer_review.get("status")
     if tokenizer_status not in ALLOWED_TOKENIZER_REVIEW_STATUSES:
         raise ValueError(f"tokenizer review is not an allowed reviewed pass: {tokenizer_status}")
     failed_rows = tokenizer_review.get("failed_row_count", tokenizer_review.get("failed_rows", 0))
@@ -240,6 +261,7 @@ def write_plan_summary(
     rows: Sequence[Mapping[str, Any]],
     generation_started: bool,
 ) -> None:
+    conditions = requested_generation_conditions(args.generation_conditions)
     write_json_new(
         output_dir / "r4_after_868016_controller_generation_plan_summary.json",
         {
@@ -258,10 +280,14 @@ def write_plan_summary(
             "prompt_index_end": int(args.prompt_index_end),
             "row_count": len(rows),
             "expected_selected_coordinate_count": int(args.expected_selected_coordinate_count),
-            "generation_conditions": ["protected", "raw", "task_only"],
-            "decode_conditions": ["protected", "raw", "task_only", "wrong_key", "wrong_payload"],
+            "generation_conditions": conditions,
+            "decode_conditions": (
+                ["protected", "raw", "task_only", "wrong_key", "wrong_payload"]
+                if conditions == ["protected", "raw", "task_only"]
+                else conditions
+            ),
             "generation_unit": "prefix_native_row_cylinder",
-            "controller_applies_to": ["protected"],
+            "controller_applies_to": ["protected"] if "protected" in conditions else [],
             "controller_policy": "committed",
             "controller_bonus_nats": float(args.controller_bonus_nats),
             "controller_penalty_nats": float(args.controller_penalty_nats),
@@ -767,8 +793,9 @@ def main() -> int:
         write_plan_summary(args=args, output_dir=output_dir, rows=rows, generation_started=False)
         print(json.dumps({"status": "PLAN_ONLY_PASS", "output_dir": str(output_dir), "rows": len(rows)}, sort_keys=True))
         return 0
+    conditions = requested_generation_conditions(args.generation_conditions)
     task_only_adapter = resolve(args.task_only_adapter)
-    if not (task_only_adapter / "adapter_config.json").is_file():
+    if "task_only" in conditions and not (task_only_adapter / "adapter_config.json").is_file():
         raise FileNotFoundError(f"task-only adapter missing: {task_only_adapter}")
     if (output_dir / "r4_generated_outputs.jsonl").exists():
         raise FileExistsError(f"refusing to overwrite generated outputs: {output_dir}")
@@ -776,11 +803,13 @@ def main() -> int:
     generated_rows: list[dict[str, Any]] = []
     attempt_rows: list[dict[str, Any]] = []
     seen_response_hashes: set[str] = set()
-    for condition, adapter_path, controller_enabled in (
-        ("protected", None, True),
-        ("raw", None, False),
-        ("task_only", task_only_adapter, False),
-    ):
+    condition_specs = {
+        "protected": (None, True),
+        "raw": (None, False),
+        "task_only": (task_only_adapter, False),
+    }
+    for condition in conditions:
+        adapter_path, controller_enabled = condition_specs[condition]
         condition_outputs, condition_attempts = generate_condition(
             args=args,
             rows=rows,

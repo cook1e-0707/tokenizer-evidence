@@ -1,0 +1,19 @@
+{
+  "adopt_outputs": false,
+  "failed_tasks": [
+    "874775_0",
+    "874775_1",
+    "874775_2"
+  ],
+  "generation_started": false,
+  "job_id": "874775",
+  "model_forward_started": false,
+  "repair": "set wrapper default PLAN_ONLY=0 and skip mutable allowlist state check inside actual Slurm tasks; keep explicit PLAN_ONLY=1 for local/remote smoke tests",
+  "resubmission_allowed_after_repaired_wrapper_validation": true,
+  "root_cause": "wrapper defaulted PLAN_ONLY=1; submitted Slurm tasks ran plan validation while allowlist was still exactly-one enabled, so zero-enabled plan validation failed before tokenizer execution",
+  "schema_name": "natural_evidence_v2_r4_after_870987_same_family_raw_null_tokenizer_failure_review_v1",
+  "scoring_started": false,
+  "status": "FAIL_WRAPPER_DEFAULT_PLAN_ONLY_ALLOWLIST_STATE_MISMATCH_NO_TOKENIZER_STARTED",
+  "tokenizer_preflight_started": false,
+  "training_started": false
+}

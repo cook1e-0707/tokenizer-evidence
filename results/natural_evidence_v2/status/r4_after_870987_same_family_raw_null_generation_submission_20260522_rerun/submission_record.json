@@ -1,0 +1,33 @@
+{
+  "account": "cs_yinxin.wan",
+  "array": "0-191%6",
+  "command_pattern": "PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_generation_h200.sbatch",
+  "conditions": [
+    "raw"
+  ],
+  "enabled_entries_after_submission": [],
+  "expected_generated_rows": 196608,
+  "expected_shards": 192,
+  "far_aggregation_started": false,
+  "generation_started": true,
+  "gres": "gpu:h200:1",
+  "job_id": "874973",
+  "job_name": "nat-ev-v2-r4sfRaw",
+  "llama_started": false,
+  "models": [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-14B-Instruct"
+  ],
+  "paper_claim_allowed": false,
+  "partition": "pomplun",
+  "qos": "pomplun",
+  "sanitizer_started": false,
+  "schema_name": "natural_evidence_v2_r4_after_870987_same_family_raw_null_generation_submission_record_v1",
+  "submitted": true,
+  "submitted_entry": "v2_r4_after_870987_same_family_raw_null_generation_h200",
+  "supersedes_failed_job_id": "874781",
+  "time_limit": "30-00:00:00",
+  "tokenizer_review": "results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_tokenizer_preflight_874778_review/review_summary.json",
+  "training_started": false
+}

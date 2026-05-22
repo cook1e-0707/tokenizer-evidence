@@ -1,0 +1,14 @@
+{
+  "adopt_outputs": false,
+  "generation_started": false,
+  "job_id": "874781",
+  "llama_started": false,
+  "model_load_started": false,
+  "paper_claim_allowed": false,
+  "repair": "default actual wrapper validation to --skip-allowlist-state-check; exactly-one allowlist safety remains enforced before sbatch submission",
+  "resubmission_allowed_after_repaired_wrapper_validation": true,
+  "root_cause": "same-family generation wrapper ran route validation against mutable allowlist state during actual Slurm startup; tasks saw exactly-one enabled entry and failed before model load/generation",
+  "schema_name": "natural_evidence_v2_r4_after_870987_same_family_raw_null_generation_failure_review_v1",
+  "status": "FAIL_WRAPPER_ALLOWLIST_STATE_MISMATCH_NO_GENERATION_STARTED",
+  "training_started": false
+}
