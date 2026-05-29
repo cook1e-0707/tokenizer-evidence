@@ -71,6 +71,54 @@ def literal_present(text: str, literal: str) -> bool:
     return bool(re.search(rf"\b{re.escape(literal)}\b", text, flags=re.IGNORECASE))
 
 
+def word_tokens(text: str) -> list[tuple[str, int, int]]:
+    return [(match.group(0).lower(), match.start(), match.end()) for match in re.finditer(r"[a-z0-9]+", text.lower())]
+
+
+def literal_token_indexes(text: str, literal: str) -> list[int]:
+    tokens = word_tokens(text)
+    indexes: list[int] = []
+    pattern = re.compile(rf"\b{re.escape(literal)}\b", flags=re.IGNORECASE)
+    for match in pattern.finditer(text):
+        for index, (_, start, end) in enumerate(tokens):
+            if start < match.end() and end > match.start():
+                indexes.append(index)
+                break
+    return indexes
+
+
+def sentence_segment(text: str, *, start: int, end: int) -> str:
+    left = max(text.rfind(separator, 0, start) for separator in (".", "!", "?", "\n"))
+    right_candidates = [text.find(separator, end) for separator in (".", "!", "?", "\n")]
+    right = min([candidate for candidate in right_candidates if candidate >= 0], default=len(text))
+    return text[left + 1 : right]
+
+
+def cue_present_near_literal(text: str, literal: str, cue: str, *, radius: int = 8) -> bool:
+    cue_tokens = [token for token, _, _ in word_tokens(cue)]
+    if not cue_tokens:
+        return False
+    pattern = re.compile(rf"\b{re.escape(literal)}\b", flags=re.IGNORECASE)
+    for match in pattern.finditer(text):
+        segment = sentence_segment(text, start=match.start(), end=match.end())
+        tokens = word_tokens(segment)
+        if not tokens:
+            continue
+        indexes = literal_token_indexes(segment, literal)
+        if not indexes:
+            continue
+        index = indexes[0]
+        window_tokens = [token for token, _, _ in tokens[max(0, index - radius) : index + radius + 1]]
+        if len(cue_tokens) == 1:
+            if cue_tokens[0] in window_tokens:
+                return True
+            continue
+        for offset in range(0, len(window_tokens) - len(cue_tokens) + 1):
+            if window_tokens[offset : offset + len(cue_tokens)] == cue_tokens:
+                return True
+    return False
+
+
 def contextual_technical_literal_hits(text: str, policy: Mapping[str, Any] | None) -> list[str]:
     if not policy:
         return technical_literal_hits(text)
@@ -88,7 +136,20 @@ def contextual_technical_literal_hits(text: str, policy: Mapping[str, Any] | Non
                 hits.append(literal_text)
                 continue
             technical_cues = [str(item) for item in rule.get("technical_cues", [])]
-            has_technical_cue = any(literal_present(text, cue) for cue in technical_cues)
+            matched_technical_cues = [
+                cue for cue in technical_cues if cue_present_near_literal(text, literal_text, cue)
+            ]
+            has_technical_cue = bool(matched_technical_cues)
+            for exception in rule.get("technical_cue_exceptions", []):
+                if not isinstance(exception, Mapping) or not matched_technical_cues:
+                    continue
+                exempted_cues = {str(item) for item in exception.get("technical_cues", [])}
+                if not set(matched_technical_cues).issubset(exempted_cues):
+                    continue
+                ordinary_cues = [str(item) for item in exception.get("ordinary_cues", [])]
+                if any(cue_present_near_literal(text, literal_text, cue) for cue in ordinary_cues):
+                    has_technical_cue = False
+                    break
             if has_technical_cue or not bool(rule.get("ordinary_domain_allowed", False)):
                 hits.append(literal_text)
     return sorted(set(hits))

@@ -27,3 +27,40 @@ def test_ambiguous_bucket_is_fatal_until_context_rule_resolves() -> None:
     assert result.technical_forbidden_public_surface_count == 0
     assert result.ordinary_domain_literal_count == 0
     assert result.ambiguous_forbidden_surface_count == 1
+
+
+def test_allows_ordinary_coordination_verbs() -> None:
+    result = classify_text("Coordinate volunteer schedules and keep the team informed.")
+    assert result.technical_forbidden_public_surface_count == 0
+    assert result.ordinary_domain_literal_count == 1
+    assert result.ambiguous_forbidden_surface_count == 0
+
+
+def test_bucket_and_coordinate_far_apart_are_not_technical_cues() -> None:
+    result = classify_text(
+        "Have cleaning supplies handy, such as cloths and a bucket of water. "
+        "Coordinate with family members after the room is tidy."
+    )
+    assert result.technical_forbidden_public_surface_count == 0
+    assert result.ordinary_domain_literal_count == 2
+    assert result.ambiguous_forbidden_surface_count == 0
+
+
+def test_allows_schedule_coordination_time_slot_context() -> None:
+    result = classify_text(
+        "Each team only needs to focus on a specific time slot, "
+        "making it easier to coordinate and communicate."
+    )
+    assert result.technical_forbidden_public_surface_count == 0
+    assert result.ordinary_domain_literal_count == 1
+    assert result.ambiguous_forbidden_surface_count == 0
+
+
+def test_allows_music_recital_slot_coordination_context() -> None:
+    result = classify_text(
+        'Please confirm the performer availability for the 3 pm slot by Friday, '
+        'then coordinate with the sound technician.'
+    )
+    assert result.technical_forbidden_public_surface_count == 0
+    assert result.ordinary_domain_literal_count == 1
+    assert result.ambiguous_forbidden_surface_count == 0

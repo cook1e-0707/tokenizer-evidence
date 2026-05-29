@@ -1,0 +1,71 @@
+schema_name: natural_evidence_v2_r4_after_870987_same_family_raw_null_v4_tokenizer_preflight_route_v1
+route_id: r4_after_870987_same_family_raw_null_v4_tokenizer_preflight_v1
+phase: V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_TOKENIZER_PREFLIGHT_ROUTE_PLANNING_NO_SUBMIT
+
+source_artifacts:
+  failed_generation_summary_875777: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875777_aggregate_20260524/same_family_raw_null_summary.json
+  failed_generation_review_875777: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875777_failure_review_20260524/failure_review_summary.json
+  v4_row_bank_manifest: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_row_bank_plan_20260524/row_allocation_manifest.json
+  v4_row_bank_validation: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_row_bank_validation_20260524/validation_summary.json
+  row_bank_rows: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_row_bank_plan_20260524/row_allocation_rows.jsonl
+
+same_family_tokenizers:
+  - tokenizer_id: Qwen/Qwen2.5-3B-Instruct
+    model_slug: qwen2_5_3b_instruct_raw
+    role: same_family_smaller_raw
+  - tokenizer_id: Qwen/Qwen2.5-7B-Instruct
+    model_slug: qwen2_5_7b_instruct_raw
+    role: same_family_reference_raw
+  - tokenizer_id: Qwen/Qwen2.5-14B-Instruct
+    model_slug: qwen2_5_14b_instruct_raw
+    role: same_family_larger_raw
+
+tokenizer_preflight_scope:
+  max_rows_per_tokenizer: 65536
+  tokenizer_count: 3
+  expected_total_checked_rows: 196608
+  run_qwen_tokenizer: true
+  model_forward_allowed: false
+  scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+future_tokenizer_gate:
+  checked_rows_per_tokenizer: 65536
+  failed_rows_max: 0
+  empty_target_id_row_count_max: 0
+  empty_other_id_row_count_max: 0
+  target_other_overlap_row_count_max: 0
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  array: 0-2%3
+  allowlist_entry: v2_r4_after_870987_same_family_raw_null_tokenizer_preflight_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_tokenizer_boundary_preflight_h200.sbatch
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_870987_same_family_raw_null_v4_tokenizer_preflight_route.yaml SCORE_ROWS=results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_row_bank_plan_20260524/row_allocation_rows.jsonl MAX_ROWS=65536 ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_870987_same_family_raw_null_v4_tokenizer_route.py sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_tokenizer_boundary_preflight_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  exactly_one_submission_when_unlocked: true
+  immediate_disable_after_sbatch: true
+  remote_hash_preflight_required: true
+  zero_enabled_allowlist_required_before_submission: true
+  hermes_notification_required: true
+
+not_unlocked_by_this_route_package:
+  generation: true
+  training: true
+  llama: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+  same_family_raw_null_pass_claim: true

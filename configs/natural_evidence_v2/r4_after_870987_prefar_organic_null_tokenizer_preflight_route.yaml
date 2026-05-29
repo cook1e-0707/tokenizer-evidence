@@ -1,0 +1,75 @@
+schema_name: natural_evidence_v2_r4_after_870987_prefar_organic_null_tokenizer_preflight_route_v1
+route_id: r4_after_870987_prefar_organic_null_qwen_tokenizer_preflight_v1
+phase: V2_R4_AFTER_870987_PREFAR_ORGANIC_NULL_ROW_BANK_VALIDATED_QWEN_TOKENIZER_PREFLIGHT_ROUTE_PLANNING
+
+source_artifacts:
+  locked_scale_jobs: ["870210", "870987"]
+  locked_scale_summary: results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_aggregate_20260519/locked_scale_summary.json
+  standard_control_review: results/natural_evidence_v2/status/r4_after_870987_prefar_standard_control_871250_contextual_window_v2_review_20260521/review_summary.json
+  prompt_bank_dir: results/natural_evidence_v2/prompts/r4_after_870987_prefar_organic_null_prompts_20260521
+  prompt_bank_validation: results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_prompt_bank_v2_validation_20260521/organic_null_prompt_bank_validation_summary.json
+  row_bank_dir: results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521
+  row_bank_manifest: results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521/row_allocation_manifest.json
+  row_bank_rows: results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521/row_allocation_rows.jsonl
+  row_bank_validation: results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_validation_20260521/validation_summary.json
+
+row_bank_requirements:
+  expected_rows: 262144
+  expected_shards: 256
+  expected_rows_per_shard: 1024
+  expected_selected_coordinates: 16
+  expected_generation_conditions: [raw]
+  expected_organic_null: true
+  expected_standard_control_null_expansion: false
+  expected_prompt_bank_sha256: 3ea64a2268424d17163355ba5a928414263963894aeb9c51f493d1959dc564a0
+  payload_diversity_tested: false
+  same_contract_only: true
+  contract_id: a55e
+
+tokenizer_preflight_scope:
+  tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+  max_rows: 262144
+  run_qwen_tokenizer: true
+  model_forward_allowed: false
+  scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  llama_allowed: false
+  same_family_null_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  paper_claim_allowed: false
+
+future_tokenizer_gate:
+  checked_rows: 262144
+  failed_rows_max: 0
+  empty_target_id_row_count_max: 0
+  empty_other_id_row_count_max: 0
+  target_other_overlap_row_count_max: 0
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  allowlist_entry: v2_r4_after_870987_prefar_organic_null_qwen_tokenizer_boundary_preflight_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_870987_prefar_organic_null_qwen_tokenizer_boundary_preflight_h200.sbatch
+  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_prefar_organic_null_qwen_tokenizer_boundary_preflight_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  exactly_one_submission_when_unlocked: true
+  immediate_disable_after_sbatch: true
+  remote_hash_preflight_required: true
+  zero_enabled_allowlist_required_before_submission: true
+  hermes_notification_required: true
+
+not_unlocked_by_this_route_package:
+  generation: true
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true

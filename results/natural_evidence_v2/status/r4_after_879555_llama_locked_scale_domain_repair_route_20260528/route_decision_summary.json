@@ -1,0 +1,26 @@
+{
+  "allowlist_enabled_now": false,
+  "do_not_reclassify_879555": true,
+  "excluded_prompt_domains": [
+    "document scanning routine"
+  ],
+  "full_far_claim_allowed": false,
+  "hard_public_literal_gate_unchanged": true,
+  "llama_locked_scale_claim_allowed": false,
+  "next_allowed_action": "build and validate repaired Llama locked-scale row bank excluding document scanning routine; no generation submission until tokenizer preflight and route validation pass",
+  "paper_claim_allowed": false,
+  "payload_diversity_claim_allowed": false,
+  "repair_type": "prompt_domain_replacement",
+  "route_config": "configs/natural_evidence_v2/r4_after_879555_llama_locked_scale_domain_repair_route.yaml",
+  "route_config_sha256": "660b46da3ba1e7734257cd28ed7ba7967d4eec64b371725e97dbacf362490e57",
+  "route_doc": "docs/natural_evidence_v2/R4_AFTER_879555_LLAMA_LOCKED_SCALE_RESIDUAL_FORBIDDEN_DOMAIN_REPAIR_ROUTE_20260528.md",
+  "route_doc_sha256": "55adbaab288052671ffb018deeedae7259b253a584fb8d2ec5f42ccd1d1db07f",
+  "sanitizer_robustness_claim_allowed": false,
+  "schema_name": "natural_evidence_v2_r4_after_879555_llama_locked_scale_domain_repair_route_decision_v1",
+  "slurm_allowed_now": false,
+  "source_failed_job_id": "879555",
+  "source_failure_attribution": "results/natural_evidence_v2/status/r4_after_879555_llama_locked_scale_failure_attribution_20260527/failure_attribution_summary.json",
+  "source_review": "results/natural_evidence_v2/status/r4_after_879406_second_family_llama_locked_scale_generation_879555_review/review_summary.json",
+  "status": "ROUTE_RECORDED_R4_AFTER_879555_LLAMA_LOCKED_SCALE_RESIDUAL_FORBIDDEN_DOMAIN_REPAIR_ARTIFACT_ONLY_NO_SUBMIT",
+  "text_only_phrase_decoder_success_claim_allowed": false
+}

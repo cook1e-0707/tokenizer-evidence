@@ -1,0 +1,23 @@
+protocol_id: r4_after_879555_llama_locked_scale_domain_repair_prompt_bank_v1
+canonical_phase: V2_R4_AFTER_879555_LLAMA_LOCKED_SCALE_DOMAIN_REPAIR_PROMPT_BANK_ARTIFACT_ONLY_NO_SUBMIT
+
+prompt_bank:
+  output_dir: results/natural_evidence_v2/prompts/r4_after_879555_llama_locked_scale_domain_repair_prompt_bank_20260528
+  dev_prompts: 2048
+  locked_prompts: 6144
+  dev_index_offset: 0
+  locked_index_offset: 0
+  dev_domains:
+    - volunteer coordination
+    - household planning
+    - small office maintenance
+    - study routine
+    - community event preparation
+    - shared kitchen organization
+  locked_domains:
+    - bike maintenance
+    - travel preparation
+    - customer reply drafting
+    - workshop feedback summary
+    - garden care
+    - room setup

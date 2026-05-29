@@ -179,3 +179,119 @@ def test_contextual_literal_policy_allows_ordinary_coordinate_but_flags_technica
         "payload",
     ]
     assert contextual_technical_literal_hits("The bucket value is visible.", policy) == ["bucket"]
+
+
+def test_contextual_literal_policy_uses_local_cue_window() -> None:
+    policy = {
+        "hard_forbid_literals": ["payload"],
+        "contextual_literals": {
+            "bucket": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["coordinate"],
+            },
+            "coordinate": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["bucket", "slot"],
+            },
+        },
+    }
+
+    ordinary_text = (
+        "Have cleaning supplies handy, such as cloths and a bucket of water. "
+        "Coordinate with family members after the room is tidy."
+    )
+    assert contextual_technical_literal_hits(ordinary_text, policy) == []
+
+    technical_text = "Use the coordinate slot near the surface bucket for this payload."
+    assert contextual_technical_literal_hits(technical_text, policy) == [
+        "bucket",
+        "coordinate",
+        "payload",
+    ]
+
+
+def test_contextual_literal_policy_does_not_let_remote_slot_flag_ordinary_coordinate() -> None:
+    policy = {
+        "hard_forbid_literals": [],
+        "contextual_literals": {
+            "coordinate": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["slot"],
+            },
+        },
+    }
+
+    text = (
+        "For example, one person could manage inventory, another coordinate volunteer schedules, "
+        "and another handle communication. Break the weekend into morning, afternoon, and evening slots."
+    )
+    assert contextual_technical_literal_hits(text, policy) == []
+
+
+def test_contextual_literal_policy_v3_allows_schedule_time_slot_coordinate_use() -> None:
+    policy = {
+        "hard_forbid_literals": ["fingerprint", "watermark", "payload", "secret key", "decoder", "hidden signal"],
+        "contextual_literals": {
+            "coordinate": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["slot", "token id", "decoder"],
+                "technical_cue_exceptions": [
+                    {
+                        "technical_cues": ["slot"],
+                        "ordinary_cues": ["time slot", "schedule", "team"],
+                    }
+                ],
+            }
+        },
+    }
+    text = "Each team only needs to focus on a specific time slot, making it easier to coordinate."
+    assert contextual_technical_literal_hits(text, policy) == []
+
+
+def test_contextual_literal_policy_v3_still_rejects_technical_coordinate_slot_use() -> None:
+    policy = {
+        "hard_forbid_literals": ["fingerprint", "watermark", "payload", "secret key", "decoder", "hidden signal"],
+        "contextual_literals": {
+            "coordinate": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["slot", "token id", "decoder"],
+                "technical_cue_exceptions": [
+                    {
+                        "technical_cues": ["slot"],
+                        "ordinary_cues": ["time slot", "schedule", "team"],
+                    }
+                ],
+            }
+        },
+    }
+    hits = contextual_technical_literal_hits("The coordinate slot is read by the decoder.", policy)
+    assert hits == ["coordinate", "decoder"]
+
+
+def test_contextual_literal_policy_v4_allows_recital_slot_coordinate_use() -> None:
+    policy = {
+        "hard_forbid_literals": ["fingerprint", "watermark", "payload", "secret key", "decoder", "hidden signal"],
+        "contextual_literals": {
+            "coordinate": {
+                "ordinary_domain_allowed": True,
+                "technical_cues": ["slot", "token id", "decoder"],
+                "technical_cue_exceptions": [
+                    {
+                        "technical_cues": ["slot"],
+                        "ordinary_cues": [
+                            "availability",
+                            "friday",
+                            "pm",
+                            "recital",
+                            "sound technician",
+                        ],
+                    }
+                ],
+            }
+        },
+    }
+    text = (
+        'Please confirm the performer availability for the 3 pm slot by Friday, '
+        'then coordinate with the sound technician.'
+    )
+    assert contextual_technical_literal_hits(text, policy) == []

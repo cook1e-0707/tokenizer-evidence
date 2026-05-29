@@ -35,9 +35,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-rows", type=int, default=8192)
     parser.add_argument("--tokenizer-name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument(
-        "--run-qwen-tokenizer",
+        "--run-tokenizer",
         action="store_true",
         help="Load the named tokenizer and run the actual tokenizer boundary preflight.",
+    )
+    parser.add_argument(
+        "--run-qwen-tokenizer",
+        action="store_true",
+        help="Backward-compatible alias for --run-tokenizer.",
     )
     return parser.parse_args()
 
@@ -66,6 +71,10 @@ def guarded_summary_fields() -> dict[str, bool]:
     }
 
 
+def run_tokenizer(args: argparse.Namespace) -> bool:
+    return bool(args.run_tokenizer or args.run_qwen_tokenizer)
+
+
 def build_summary(
     *,
     args: argparse.Namespace,
@@ -81,11 +90,12 @@ def build_summary(
         "first_failing_row": validation["first_failing_row"],
         "candidate_probe_rows_sha256": sha256_file(args.score_rows),
         "scorer_script_sha256": sha256_file(SCORER_SCRIPT),
-        "tokenizer_name": args.tokenizer_name if args.run_qwen_tokenizer else None,
+        "tokenizer_name": args.tokenizer_name if run_tokenizer(args) else None,
+        "tokenizer_preflight_started": run_tokenizer(args),
         "qwen_tokenizer_preflight_started": bool(args.run_qwen_tokenizer),
         **guarded_summary_fields(),
     }
-    if args.run_qwen_tokenizer:
+    if run_tokenizer(args):
         summary.update(
             {
                 "empty_target_id_row_count": validation["empty_target_id_row_count"],
@@ -114,7 +124,7 @@ def main() -> int:
     args.output_dir.mkdir(parents=True)
 
     static_validation = validate_static_boundary_contract(rows)
-    if args.run_qwen_tokenizer and static_validation["status"] != "PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING":
+    if run_tokenizer(args) and static_validation["status"] != "PASS_STATIC_BOUNDARY_CONTRACT_TOKENIZER_PENDING":
         validation = {
             **static_validation,
             "status": "FAIL_QWEN_TOKENIZER_BOUNDARY_PREFLIGHT",
@@ -122,7 +132,7 @@ def main() -> int:
             "empty_other_id_row_count": None,
             "target_other_overlap_row_count": None,
         }
-    elif args.run_qwen_tokenizer:
+    elif run_tokenizer(args):
         from transformers import AutoTokenizer
 
         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name, trust_remote_code=True)

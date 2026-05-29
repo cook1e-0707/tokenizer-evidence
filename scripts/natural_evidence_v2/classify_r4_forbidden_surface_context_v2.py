@@ -21,7 +21,6 @@ HARD_FORBID_PATTERNS = {
     "hidden signal": r"\bhidden\s+signals?\b",
     "decoder": r"\bdecoders?\b",
     "codeword": r"\bcodewords?\b",
-    "coordinate": r"\bcoordinates?\b",
 }
 BUCKET_TECHNICAL_PHRASES = (
     "bucket id",
@@ -68,6 +67,74 @@ BUCKET_ORDINARY_CUES = {
     "tools",
     "water",
 }
+COORDINATE_TECHNICAL_CUES = {
+    "bit",
+    "bits",
+    "bucket",
+    "checksum",
+    "codeword",
+    "decoder",
+    "hidden",
+    "payload",
+    "secret",
+    "slot",
+    "token",
+    "watermark",
+}
+COORDINATE_SLOT_ORDINARY_CUES = {
+    "am",
+    "availability",
+    "calendar",
+    "deadline",
+    "deadlines",
+    "friday",
+    "monday",
+    "performance",
+    "performer",
+    "performers",
+    "pm",
+    "pickup",
+    "recital",
+    "schedule",
+    "schedules",
+    "scheduling",
+    "shift",
+    "shifts",
+    "sound",
+    "team",
+    "teams",
+    "technician",
+    "time",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "saturday",
+    "sunday",
+}
+COORDINATE_ORDINARY_CUES = {
+    "activity",
+    "activities",
+    "calendar",
+    "communication",
+    "deliveries",
+    "event",
+    "events",
+    "family",
+    "meeting",
+    "meetings",
+    "neighbors",
+    "people",
+    "roles",
+    "schedule",
+    "schedules",
+    "staff",
+    "task",
+    "tasks",
+    "team",
+    "teams",
+    "volunteer",
+    "volunteers",
+}
 
 
 @dataclass(frozen=True)
@@ -94,8 +161,31 @@ def _tokens(text: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", text.lower())
 
 
+def _token_spans(text: str) -> list[tuple[str, int, int]]:
+    return [(match.group(0).lower(), match.start(), match.end()) for match in re.finditer(r"[a-z0-9]+", text.lower())]
+
+
+def _sentence_bounds(text: str, start: int, end: int) -> tuple[int, int]:
+    left = max(text.rfind(separator, 0, start) for separator in (".", "!", "?", "\n"))
+    right_candidates = [text.find(separator, end) for separator in (".", "!", "?", "\n")]
+    right = min([candidate for candidate in right_candidates if candidate >= 0], default=len(text))
+    return left + 1, right
+
+
 def _window(tokens: list[str], index: int, radius: int = 8) -> set[str]:
     return set(tokens[max(0, index - radius) : index + radius + 1])
+
+
+def _local_window(text: str, token_start: int, token_end: int, radius: int = 8) -> set[str]:
+    left, right = _sentence_bounds(text, token_start, token_end)
+    segment_tokens = _token_spans(text[left:right])
+    relative_start = token_start - left
+    index = 0
+    for candidate_index, (_, start, end) in enumerate(segment_tokens):
+        if start <= relative_start < end:
+            index = candidate_index
+            break
+    return _window([token for token, _, _ in segment_tokens], index, radius=radius)
 
 
 def classify_text(text: str) -> ForbiddenClassification:
@@ -108,11 +198,12 @@ def classify_text(text: str) -> ForbiddenClassification:
         if re.search(pattern, lowered):
             technical_hits.append(label)
 
-    words = _tokens(text)
-    for idx, token in enumerate(words):
+    spans = _token_spans(text)
+    words = [token for token, _, _ in spans]
+    for idx, (token, start, end) in enumerate(spans):
         if token != "bucket":
             continue
-        context = _window(words, idx)
+        context = _local_window(text, start, end)
         phrase_hit = any(phrase in lowered for phrase in BUCKET_TECHNICAL_PHRASES)
         if phrase_hit or context.intersection(BUCKET_TECHNICAL_CUES):
             technical_hits.append("bucket")
@@ -120,6 +211,20 @@ def classify_text(text: str) -> ForbiddenClassification:
             ordinary_hits.append("bucket")
         else:
             ambiguous_hits.append("bucket")
+
+    for idx, (token, start, end) in enumerate(spans):
+        if token != "coordinate":
+            continue
+        context = _local_window(text, start, end)
+        technical_cues = context.intersection(COORDINATE_TECHNICAL_CUES)
+        if technical_cues == {"slot"} and context.intersection(COORDINATE_SLOT_ORDINARY_CUES):
+            ordinary_hits.append("coordinate")
+        elif technical_cues:
+            technical_hits.append("coordinate")
+        elif context.intersection(COORDINATE_ORDINARY_CUES):
+            ordinary_hits.append("coordinate")
+        else:
+            ordinary_hits.append("coordinate")
 
     technical_hits = sorted(set(technical_hits))
     ordinary_hits = sorted(set(ordinary_hits))

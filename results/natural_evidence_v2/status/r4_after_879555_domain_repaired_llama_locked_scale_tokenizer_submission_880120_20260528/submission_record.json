@@ -1,0 +1,17 @@
+{
+  "allowlist_enabled_after_submission": false,
+  "allowlist_entry": "v2_r4_after_879406_second_family_llama_locked_scale_tokenizer_preflight_h200",
+  "command": "ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_route.yaml SCORE_ROWS=results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl MAX_ROWS=98304 TOKENIZER_NAME=meta-llama/Meta-Llama-3.1-8B-Instruct ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_877895_second_family_llama_tokenizer_route.py OUTPUT_ROOT=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_manual sbatch scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_tokenizer_boundary_preflight_h200.sbatch",
+  "expected_rows": 98304,
+  "generation_allowed": false,
+  "job_id": "880120",
+  "job_name": "nat-ev-v2-r4llTok",
+  "model_forward_allowed": false,
+  "paper_claim_allowed": false,
+  "remote_output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_manual/llama3_1_8b_instruct",
+  "route_config": "configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_route.yaml",
+  "schema_name": "natural_evidence_v2_r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_submission_v1",
+  "score_rows": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl",
+  "submitted": true,
+  "training_allowed": false
+}

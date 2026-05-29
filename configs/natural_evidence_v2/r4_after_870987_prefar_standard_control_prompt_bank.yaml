@@ -1,0 +1,27 @@
+protocol_id: natural_evidence_v2_r4_after_870987_prefar_standard_control_prompt_bank
+canonical_phase: V2_R4_AFTER_870987_PREFAR_NULL_EXPANSION_ROUTE_PLAN_VALIDATED_NO_SUBMIT
+
+prompt_bank:
+  output_dir: results/natural_evidence_v2/prompts/r4_after_870987_prefar_standard_control_prompts_20260519
+  dev_prompts: 0
+  locked_prompts: 10240
+  locked_index_offset: 0
+  locked_domains:
+    - apartment upkeep
+    - after-school program planning
+    - community pantry coordination
+    - neighborhood cleanup
+    - clinic front-desk routine
+    - bookstore inventory tidying
+    - shared workshop organization
+    - museum volunteer orientation
+    - small bakery closing routine
+    - local newsletter preparation
+    - recreation center scheduling
+    - nonprofit donation sorting
+  notes:
+    purpose: artifact-only standard-control null prompt bank after the 870987 locked-scale pass
+    reuses_870987_locked_prompts: false
+    generation_allowed: false
+    slurm_allowed: false
+    paper_claim_allowed: false

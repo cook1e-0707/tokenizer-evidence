@@ -1,0 +1,41 @@
+{
+  "canonical_phase": "V2_R4_AFTER_879555_LLAMA_LOCKED_SCALE_DOMAIN_REPAIR_PROMPT_BANK_ARTIFACT_ONLY_NO_SUBMIT",
+  "dev_count": 2048,
+  "dev_domains": [
+    "community event preparation",
+    "household planning",
+    "shared kitchen organization",
+    "small office maintenance",
+    "study routine",
+    "volunteer coordination"
+  ],
+  "dev_index_offset": 0,
+  "dev_locked_domain_overlap": [],
+  "dev_prompts_sha256": "853414cf7e7f062f53a3431be0c084f4da1a64f614e7840aace023b2237ddc05",
+  "families": [
+    "maintenance_guidance",
+    "planning_guidance",
+    "practical_advice_short",
+    "safety_or_quality_checklist_natural",
+    "task_explanation_short",
+    "troubleshooting_guidance"
+  ],
+  "generation_allowed": false,
+  "locked_count": 6144,
+  "locked_domains": [
+    "bike maintenance",
+    "customer reply drafting",
+    "garden care",
+    "room setup",
+    "travel preparation",
+    "workshop feedback summary"
+  ],
+  "locked_index_offset": 0,
+  "locked_prompts_sha256": "34a927ae833181be8b6df459dadaac3ec5c4c8421dc2d9b3ca0659a17051c0cb",
+  "paper_claim_allowed": false,
+  "prompt_bank_sha256": "e3ef5bd380fb3f003510afe934021774a2de0b46aa64a120cb9392f2067d59aa",
+  "prompt_count": 8192,
+  "protocol_id": "r4_after_879555_llama_locked_scale_domain_repair_prompt_bank_v1",
+  "schema_name": "natural_evidence_v2_r4_cover_natural_prompt_bank_manifest_v1",
+  "slurm_allowed": false
+}

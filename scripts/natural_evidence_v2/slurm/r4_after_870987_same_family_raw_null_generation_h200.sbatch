@@ -11,7 +11,7 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=180G
 #SBATCH --time=30-00:00:00
-#SBATCH --array=0-191%6
+#SBATCH --array=0-191
 #SBATCH --output=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4sfRaw-%A_%a.out
 #SBATCH --error=/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/slurm/nat-ev-v2-r4sfRaw-%A_%a.err
 
@@ -32,11 +32,12 @@ ROUTE_VALIDATOR="${ROUTE_VALIDATOR:-scripts/natural_evidence_v2/validate_r4_afte
 PLAN_ONLY="${PLAN_ONLY:-1}"
 VALIDATE_PLAN_ONLY="${VALIDATE_PLAN_ONLY:-1}"
 TASK_ID="${SLURM_ARRAY_TASK_ID:-${TASK_ID:-0}}"
+SHARDS_PER_MODEL="${SHARDS_PER_MODEL:-64}"
 
 cd "$REPO_HOME"
 
-MODEL_GROUP_INDEX=$((TASK_ID / 64))
-LOCAL_SHARD_INDEX=$((TASK_ID % 64))
+MODEL_GROUP_INDEX=$((TASK_ID / SHARDS_PER_MODEL))
+LOCAL_SHARD_INDEX=$((TASK_ID % SHARDS_PER_MODEL))
 case "$MODEL_GROUP_INDEX" in
   0)
     MODEL_NAME="Qwen/Qwen2.5-3B-Instruct"
@@ -59,7 +60,12 @@ case "$MODEL_GROUP_INDEX" in
     ;;
 esac
 
-OUTPUT_DIR="${OUTPUT_DIR:-$RUN_ROOT/status/r4_after_870987_same_family_raw_null_generation_${SLURM_ARRAY_JOB_ID:-manual}/$MODEL_SLUG}"
+if [[ "$ROUTE_CONFIG" == *"r4_after_877840_same_family_raw_null_generation_v8"* ]]; then
+  DEFAULT_ROUTE_OUTPUT_ROOT="$RUN_ROOT/status/r4_after_877840_same_family_raw_null_v8_generation_${SLURM_ARRAY_JOB_ID:-manual}"
+else
+  DEFAULT_ROUTE_OUTPUT_ROOT="$RUN_ROOT/status/r4_after_870987_same_family_raw_null_generation_${SLURM_ARRAY_JOB_ID:-manual}"
+fi
+OUTPUT_DIR="${OUTPUT_DIR:-$DEFAULT_ROUTE_OUTPUT_ROOT/$MODEL_SLUG}"
 export MODEL_GROUP_INDEX LOCAL_SHARD_INDEX MODEL_NAME TOKENIZER_NAME MODEL_SLUG OUTPUT_DIR
 
 echo "claim_note=R4 after-870987 same-family raw-null generation; no full FAR, no Llama transfer, no paper claim"
@@ -78,7 +84,10 @@ else
   ROUTE_VALIDATION_ARGS="${ROUTE_VALIDATION_EXTRA_ARGS:---skip-allowlist-state-check}"
 fi
 
-"$PYTHON_BIN" "$ROUTE_VALIDATOR" --config "$ROUTE_CONFIG" --output-dir "${OUTPUT_DIR}/route_validation" $ROUTE_VALIDATION_ARGS
+"$PYTHON_BIN" "$ROUTE_VALIDATOR" \
+  --config "$ROUTE_CONFIG" \
+  --output-dir "${OUTPUT_DIR}/route_validation_shard_${LOCAL_SHARD_INDEX}" \
+  $ROUTE_VALIDATION_ARGS
 
 if [[ "$PLAN_ONLY" == "1" ]]; then
   echo "R4 same-family raw-null wrapper plan-only validation passed"
@@ -106,8 +115,9 @@ export MAX_SHARD_INDEX=63
 export GENERATION_CONDITIONS=raw
 export SHARD_INDEX="$LOCAL_SHARD_INDEX"
 export ROUTE_VALIDATION_EXTRA_ARGS="${ROUTE_VALIDATION_EXTRA_ARGS:---skip-allowlist-state-check}"
+export MAX_SHARD_INDEX=$((SHARDS_PER_MODEL - 1))
 
 # The delegated wrapper normally reads SLURM_ARRAY_TASK_ID directly. Clear it so
-# SHARD_INDEX is the local 0..63 shard within each model group.
+# SHARD_INDEX is the local shard within each model group.
 unset SLURM_ARRAY_TASK_ID
 exec bash scripts/natural_evidence_v2/slurm/r4_after_868016_controller_generation_h200.sbatch

@@ -1,0 +1,96 @@
+schema_name: natural_evidence_v2_r4_after_870987_same_family_raw_null_generation_v6_route_v1
+route_id: r4_after_870987_same_family_raw_null_generation_v6
+phase: V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V6_TOKENIZER_PREFLIGHT_PASSED_GENERATION_ROUTE_PLANNING
+
+source_artifacts:
+  failed_generation_summary_877142: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_877142_aggregate_20260525/same_family_raw_null_summary.json
+  failed_generation_review_877142: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_877142_failure_review_20260525/failure_review_summary.json
+  v6_row_bank_rows: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v6_row_bank_plan_20260525/row_allocation_rows.jsonl
+  v6_row_bank_validation: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v6_row_bank_validation_20260525/validation_summary.json
+  same_family_v6_tokenizer_review: results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v6_tokenizer_preflight_877700_review/review_summary.json
+
+repair_policy:
+  rescue_877142: false
+  relax_hard_forbidden_policy: false
+  exclude_residual_collision_prompt_ids: true
+  exclude_residual_collision_prompt_domains: true
+  static_lexical_preflight_required: true
+  denied_domains:
+    - cafe morning setup
+    - community theater rehearsal
+    - dental office supply review
+    - farmers market booth setup
+    - hardware store aisle cleanup
+    - library display refresh
+    - local history archive sorting
+    - makerspace safety orientation
+    - neighborhood watch handoff
+    - school club fundraiser
+    - senior center activity planning
+    - tenant move-out checklist
+    - tutoring session preparation
+    - volunteer driver scheduling
+    - youth sports snack planning
+
+same_family_models:
+  - model_id: Qwen/Qwen2.5-3B-Instruct
+    tokenizer_id: Qwen/Qwen2.5-3B-Instruct
+    model_slug: qwen2_5_3b_instruct_raw
+    role: same_family_smaller_raw
+    blocks: 16
+  - model_id: Qwen/Qwen2.5-7B-Instruct
+    tokenizer_id: Qwen/Qwen2.5-7B-Instruct
+    model_slug: qwen2_5_7b_instruct_raw
+    role: same_family_reference_raw
+    blocks: 16
+  - model_id: Qwen/Qwen2.5-14B-Instruct
+    tokenizer_id: Qwen/Qwen2.5-14B-Instruct
+    model_slug: qwen2_5_14b_instruct_raw
+    role: same_family_larger_raw
+    blocks: 16
+
+generation_scope:
+  conditions: [raw]
+  rows_per_shard: 1024
+  prompts_per_shard: 64
+  selected_coordinate_count: 16
+  shards_per_model: 16
+  model_count: 3
+  total_shards: 48
+  expected_generated_rows: 49152
+  same_contract_only: true
+  contract_id: a55e
+  payload_diversity_tested: false
+  llama_tested: false
+  paper_facing: false
+
+quality_gates:
+  accepts_per_model_max: 0
+  accepts_ignoring_quality_per_model_max: 0
+  global_duplicate_response_hash_count_max: 0
+  technical_forbidden_public_surface_count_max: 0
+  ambiguous_forbidden_surface_count_max: 0
+  trace_binding_validity_required: 1.0
+  full_phrase_decoder_policy: report_only_not_success_claim
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  array: 0-47
+  allowlist_entry: v2_r4_after_870987_same_family_raw_null_generation_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_generation_h200.sbatch
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_870987_same_family_raw_null_generation_v6_route.yaml ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_870987_same_family_raw_null_generation_v6_route.py SCORE_ROWS=results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v6_row_bank_plan_20260525/row_allocation_rows.jsonl ALLOCATION_ROWS=results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v6_row_bank_plan_20260525/row_allocation_rows.jsonl TOKENIZER_REVIEW=results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v6_tokenizer_preflight_877700_review/review_summary.json PUBLIC_RUN_SALT=r4_after_870987_same_family_raw_null_generation_v6 SHARDS_PER_MODEL=16 PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch --array=0-47 scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_generation_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true
+  same_family_raw_null_pass_claim: true

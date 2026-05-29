@@ -1,0 +1,70 @@
+{
+  "claim_control": {
+    "llama_locked_scale_pass_claim_allowed": false,
+    "paper_claim_allowed": false,
+    "reclassifies_879555": false,
+    "text_only_phrase_decoder_success_claim_allowed": false
+  },
+  "diagnostic_not_gate": {
+    "broad_literal_hit_labels": {
+      "fingerprint": 65,
+      "watermark": 52
+    },
+    "broad_literal_hit_rows": 117,
+    "broad_literal_hit_rows_by_condition": {
+      "protected": 62,
+      "raw": 55
+    },
+    "broad_literal_hit_rows_by_domain": {
+      "document scanning routine": 117
+    }
+  },
+  "gated_failure": {
+    "failed_gate": "technical_forbidden_public_surface_count_max",
+    "gated_forbidden_blocks": [
+      {
+        "accept": "False",
+        "accept_ignoring_quality": "False",
+        "arm": "raw",
+        "bits_match_condition": "False",
+        "block_id": "shard_36_block_00",
+        "checksum_valid": "False",
+        "complete_pairs": "7",
+        "decoded_bits": "0110001-",
+        "duplicate_response_hash_count": "0",
+        "expected_bits": "10100101",
+        "forbidden_public_surface_count": "1",
+        "required_pairs": "8",
+        "shard_index": "36",
+        "source_condition": "raw",
+        "source_shard_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/natural_evidence_v2/status/r4_after_879458_repair_second_family_llama_locked_scale_generation_879555_raw/llama3_1_8b_instruct/shards/shard_36"
+      }
+    ],
+    "precommitted_hit_count": 1,
+    "precommitted_hit_labels": {
+      "watermark": 1
+    }
+  },
+  "next_allowed_action": "Artifact-only residual forbidden prompt/domain repair planning. Prefer removing or replacing document-scanning prompts from the locked-scale allocation over relaxing hard public-literal gates.",
+  "prompt_domain_attribution": {
+    "document_scanning_row_count_in_row_bank": 16320,
+    "document_scanning_unique_prompts_in_row_bank": 1020,
+    "root_cause": "The locked prompt domain `document scanning routine` naturally elicits ordinary document-quality terms such as watermark/fingerprints, which conflict with the current hard-literal quality gate."
+  },
+  "review_gate_summary": {
+    "complete_shards": 96,
+    "expected_shards": 96,
+    "global_duplicate_extra_rows": 0,
+    "protected_ignoring_quality_accepts": 96,
+    "protected_strict_accepts": 96,
+    "raw_accepts": 0,
+    "technical_forbidden_public_surface_count": 1,
+    "trace_invalid_rows": 0,
+    "wrong_key_accepts": 0,
+    "wrong_payload_accepts": 0
+  },
+  "schema_name": "natural_evidence_v2_r4_after_879555_llama_locked_scale_failure_attribution_v1",
+  "source_job_id": "879555",
+  "source_review_status": "FAIL_R4_AFTER_879406_SECOND_FAMILY_LLAMA_LOCKED_SCALE_GENERATION_879555_REVIEWED_NO_ADOPT",
+  "status": "FAIL_ATTRIBUTED_R4_AFTER_879555_RESIDUAL_FORBIDDEN_PROMPT_DOMAIN_CONFLICT_NO_ADOPT"
+}

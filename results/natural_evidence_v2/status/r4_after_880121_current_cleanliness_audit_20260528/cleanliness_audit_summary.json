@@ -1,0 +1,66 @@
+{
+  "claim_boundary_warnings": [
+    "BINDING_HMAC_SECRET is not set in current runtime logs; trace binding can validate output/event consistency but must not be described as cryptographic HMAC/signature binding for paper-facing claims.",
+    "Llama locked-scale route does not include a task-only arm; if the run passes, it supports second-family protected-vs-raw/wrong-key/wrong-payload controls, not a Llama task-only null claim.",
+    "Runtime logs inherit a dev-diagnostic claim_note from the shared wrapper; route_config/output path/job name are locked-scale repaired-domain, but this log wording is audit-noisy and should be cleaned in a future route, not during the active job.",
+    "Runtime route-validation summaries may show the single allowlist entry enabled because tasks started during the short submission window; post-submit local/remote allowlist safety passed and is controlling.",
+    "No generation/decode/trace result gate can be evaluated yet because no shard has completed generation outputs in the current snapshot."
+  ],
+  "control_plane": {
+    "a100_usage_detected": false,
+    "allowlist_disabled_after_submission": true,
+    "exactly_one_entry_was_enabled_for_submission": true,
+    "local_allowlist_safety": "PASS",
+    "remote_allowlist_safety": "PASS",
+    "unexpected_active_jobs_detected": false
+  },
+  "job_id": "880121",
+  "job_state_snapshot": {
+    "account": "cs_yinxin.wan",
+    "gres": "gpu:h200:1",
+    "partition": "pomplun",
+    "pending_tasks": 91,
+    "qos": "pomplun",
+    "running_node": "chimera21",
+    "running_tasks": 5
+  },
+  "next_allowed_action": "Continue monitoring 880121; after terminal completion sync artifacts and run locked-scale review. Do not make claims before review.",
+  "route_contract": {
+    "conditions": [
+      "protected",
+      "raw"
+    ],
+    "duplicate_gate_max": 0,
+    "expected_rows": 98304,
+    "expected_shards": 96,
+    "first_token_event_controls": [
+      "protected",
+      "raw",
+      "wrong_key",
+      "wrong_payload"
+    ],
+    "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "paper_facing": false,
+    "task_only_control_included": false,
+    "technical_forbidden_gate_max": 0,
+    "trace_binding_validity_required": 1.0
+  },
+  "runtime_artifacts_snapshot": {
+    "first_token_decode_summaries_present": 0,
+    "generated_output_shards_present": 0,
+    "hard_errors_detected_in_checked_logs": false,
+    "plan_validation_files_present_for_running_shards": true,
+    "trace_binding_validation_files_present": 0,
+    "traceback_or_oom_detected": false
+  },
+  "schema_name": "r4_after_880121_current_cleanliness_audit_v1",
+  "status": "PASS_RUNTIME_CONTROL_PLANE_CLEAN_WITH_CLAIM_BOUNDARY_WARNINGS",
+  "theory_violation_assessment": {
+    "violates_current_authorized_non_paper_diagnostic_route": false,
+    "violates_h200_policy": false,
+    "violates_no_a100_policy": false,
+    "violates_no_paper_claim_policy": false,
+    "would_violate_cryptographic_trace_binding_claim_if_claimed": true,
+    "would_violate_text_only_watermark_claim_if_claimed": true
+  }
+}

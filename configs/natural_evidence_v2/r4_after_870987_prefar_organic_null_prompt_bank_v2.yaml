@@ -1,0 +1,31 @@
+protocol_id: natural_evidence_v2_r4_after_870987_prefar_organic_null_prompt_bank_v2
+canonical_phase: V2_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_NULL_PACKAGE_PASSED_ORGANIC_NULL_ROUTE_NEXT
+
+prompt_bank:
+  output_dir: results/natural_evidence_v2/prompts/r4_after_870987_prefar_organic_null_prompts_20260521
+  dev_prompts: 0
+  locked_prompts: 16384
+  locked_index_offset: 0
+  locked_domains:
+    - tenant move-out checklist
+    - youth sports snack planning
+    - farmers market booth setup
+    - tutoring session preparation
+    - community theater rehearsal
+    - dental office supply review
+    - library display refresh
+    - hardware store aisle cleanup
+    - neighborhood watch handoff
+    - school club fundraiser
+    - meal prep for roommates
+    - senior center activity planning
+    - makerspace safety orientation
+    - cafe morning setup
+    - volunteer driver scheduling
+    - local history archive sorting
+  notes:
+    purpose: artifact-only organic null prompt bank after the 871250 standard-control null pass
+    no_controller_claim: true
+    generation_allowed: false
+    slurm_allowed: false
+    paper_claim_allowed: false

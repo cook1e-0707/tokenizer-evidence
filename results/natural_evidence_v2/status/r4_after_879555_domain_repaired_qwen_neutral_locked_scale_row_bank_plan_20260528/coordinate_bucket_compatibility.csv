@@ -1,0 +1,17 @@
+coordinate_id,expected_codeword_bit,target_entry_count,opposite_entry_count,current_two_way_scorer_compatible
+6,1,4,4,True
+22,1,4,4,True
+10,0,4,4,True
+26,0,4,4,True
+1,1,4,4,True
+17,1,4,4,True
+3,0,4,4,True
+19,0,4,4,True
+15,0,4,4,True
+31,0,4,4,True
+8,1,4,4,True
+24,1,4,4,True
+4,0,4,4,True
+20,0,4,4,True
+7,1,4,4,True
+23,1,4,4,True

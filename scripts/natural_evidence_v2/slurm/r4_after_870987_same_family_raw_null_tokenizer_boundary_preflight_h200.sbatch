@@ -59,7 +59,11 @@ esac
 
 SCORE_ROWS="${SCORE_ROWS:-results/natural_evidence_v2/status/r4_after_870987_prefar_organic_null_row_bank_v2_plan_20260521/row_allocation_rows.jsonl}"
 MAX_ROWS="${MAX_ROWS:-262144}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-$RUN_ROOT/status/r4_after_870987_same_family_raw_null_tokenizer_preflight_${SLURM_ARRAY_JOB_ID:-manual}}"
+DEFAULT_OUTPUT_LABEL="r4_after_870987_same_family_raw_null_tokenizer_preflight"
+if [[ "$ROUTE_CONFIG" == *"r4_after_877840_same_family_raw_null_v8"* ]]; then
+  DEFAULT_OUTPUT_LABEL="r4_after_877840_same_family_raw_null_v8_tokenizer_preflight"
+fi
+OUTPUT_ROOT="${OUTPUT_ROOT:-$RUN_ROOT/status/${DEFAULT_OUTPUT_LABEL}_${SLURM_ARRAY_JOB_ID:-manual}}"
 OUTPUT_DIR="${OUTPUT_DIR:-$OUTPUT_ROOT/$MODEL_SLUG}"
 ROUTE_VALIDATION_OUTPUT_DIR="${ROUTE_VALIDATION_OUTPUT_DIR:-$OUTPUT_ROOT/route_validation_${MODEL_SLUG}}"
 

@@ -1,0 +1,29 @@
+{
+  "document_scanning_rows": 0,
+  "domains": {
+    "bike maintenance": 1026,
+    "customer reply drafting": 1026,
+    "garden care": 1020,
+    "room setup": 1020,
+    "travel preparation": 1026,
+    "workshop feedback summary": 1026
+  },
+  "duplicate_content_pair_key_extra_rows": 0,
+  "duplicate_pair_key_extra_rows": 0,
+  "duplicate_prompt_id_extra_rows": 92160,
+  "errors": [],
+  "generation_started": false,
+  "llama_row_bank_plan_status": "PASS_R4_AFTER_879406_SECOND_FAMILY_LLAMA_LOCKED_SCALE_ROW_BANK_PLAN_ARTIFACT_ONLY_TOKENIZER_PENDING",
+  "next_allowed_action": "prepare actual Llama tokenizer boundary preflight route for repaired row bank",
+  "prompt_count": 6144,
+  "row_bank_manifest": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_bank_plan_summary.json",
+  "row_bank_rows": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl",
+  "row_count": 98304,
+  "rows_per_shard_max": 1024,
+  "rows_per_shard_min": 1024,
+  "schema_name": "natural_evidence_v2_r4_after_879555_domain_repaired_llama_row_bank_validation_v1",
+  "shard_count": 96,
+  "slurm_submitted": false,
+  "static_hard_literal_risk_prompts": 0,
+  "status": "PASS_R4_AFTER_879555_DOMAIN_REPAIRED_LLAMA_LOCKED_SCALE_ROW_BANK_VALIDATION"
+}

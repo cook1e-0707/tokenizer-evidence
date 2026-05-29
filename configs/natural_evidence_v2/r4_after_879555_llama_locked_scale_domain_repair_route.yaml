@@ -1,0 +1,71 @@
+schema_name: natural_evidence_v2_r4_after_879555_llama_locked_scale_domain_repair_route_v1
+route_id: r4_after_879555_llama_locked_scale_domain_repair_v1
+phase: V2_R4_AFTER_879555_LLAMA_LOCKED_SCALE_RESIDUAL_FORBIDDEN_DOMAIN_REPAIR_ARTIFACT_ONLY_NO_SUBMIT
+
+source_artifacts:
+  failed_generation_review: results/natural_evidence_v2/status/r4_after_879406_second_family_llama_locked_scale_generation_879555_review/review_summary.json
+  failure_attribution: results/natural_evidence_v2/status/r4_after_879555_llama_locked_scale_failure_attribution_20260527/failure_attribution_summary.json
+  failed_row_bank: results/natural_evidence_v2/status/r4_after_879406_second_family_llama_locked_scale_row_bank_plan_20260527/row_allocation_rows.jsonl
+  failed_row_bank_summary: results/natural_evidence_v2/status/r4_after_879406_second_family_llama_locked_scale_row_bank_plan_20260527/row_bank_plan_summary.json
+  contextual_literal_policy: results/natural_evidence_v2/precommit/r4_after_879391_contextual_forbidden_policy_v4_20260527/contextual_forbidden_surface_policy_v4.json
+
+repair_policy:
+  repair_type: prompt_domain_replacement
+  exclude_prompt_domains:
+    - document scanning routine
+  hard_public_literal_gate_unchanged: true
+  do_not_relax_forbidden_gate: true
+  do_not_reclassify_879555: true
+
+target_shape:
+  model_id: meta-llama/Meta-Llama-3.1-8B-Instruct
+  tokenizer_id: meta-llama/Meta-Llama-3.1-8B-Instruct
+  shards: 96
+  rows_per_shard: 1024
+  expected_score_rows: 98304
+  expected_generated_rows: 196608
+  selected_coordinate_count: 16
+  same_contract_only: true
+  contract_id: a55e
+  payload_diversity_tested: false
+
+row_bank_validation_gates:
+  document_scanning_prompt_rows: 0
+  selected_prompt_count: 6144
+  duplicate_prompt_prefix_pair: 0
+  static_hard_literal_risk_prompts: 0
+  rows_per_shard: 1024
+  shards: 96
+
+generation_review_gates_if_later_submitted:
+  protected_strict_accepts_min: 80
+  protected_accepts_ignoring_quality_min: 85
+  raw_accepts_max: 0
+  task_only_accepts_max: 0
+  wrong_key_accepts_max: 0
+  wrong_payload_accepts_max: 0
+  global_duplicate_response_hash_extra_rows_max: 0
+  within_block_duplicate_response_hash_count_max: 0
+  technical_forbidden_public_surface_count_max: 0
+  trace_binding_validity_required: 1.0
+  full_phrase_decoder_policy: report_only_not_text_only_success_claim
+
+compute_policy:
+  slurm_allowed_now: false
+  allowlist_enabled_now: false
+  required_before_generation_submission:
+    - repaired row bank plan passes
+    - actual Llama tokenizer boundary preflight passes
+    - wrapper route validation passes
+    - local and remote hash preflight pass
+    - local and remote allowlist safety pass with zero enabled entries
+    - exactly one allowlist entry enabled for submission
+    - allowlist disabled immediately after sbatch returns
+
+claim_control:
+  llama_locked_scale_claim_allowed: false
+  paper_claim_allowed: false
+  full_far_claim_allowed: false
+  sanitizer_robustness_claim_allowed: false
+  payload_diversity_claim_allowed: false
+  text_only_phrase_decoder_success_claim_allowed: false

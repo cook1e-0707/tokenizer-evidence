@@ -1,0 +1,18 @@
+{
+  "allowlist_entry": "v2_r4_after_879406_second_family_llama_locked_scale_policy_v4_h200",
+  "config_sha256": "22ca04b366e6fa32064bec396410733a99d9291d50da1852551351ab9e89afbe",
+  "enabled_entries": [],
+  "errors": [],
+  "expected_generated_rows": 98304,
+  "expected_model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+  "expected_shards": 96,
+  "generation_started": false,
+  "generator_sha256": "7eae18c5796a27628819e8a866d0a70963242ec56279715cf06c716bd5a4833d",
+  "next_allowed_action": "Run local/remote wrapper plan-only smoke and hash preflight before exactly-one Llama locked-scale generation submission.",
+  "paper_claim_allowed": false,
+  "row_bank_rows_sha256": "7b93f387d469d8b88c7ce4601ba161e20766c1e3fbd850c4a50bc25b06b87026",
+  "schema_name": "r4_after_879406_second_family_llama_locked_scale_generation_route_validation_v1",
+  "slurm_allowed": false,
+  "status": "PASS_R4_AFTER_879406_SECOND_FAMILY_LLAMA_LOCKED_SCALE_GENERATION_ROUTE_VALIDATION_NO_SUBMIT",
+  "wrapper_sha256": "48ab3fb91dd710e4eb220f64a739e68a64c96e7a9d0de56d6a427583c0e73e12"
+}

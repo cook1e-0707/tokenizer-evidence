@@ -1,6 +1,6 @@
 # natural_evidence_v2 Current State
 
-Last synchronized: 2026-05-22T14:13:05Z
+Last synchronized: 2026-05-29T00:31:51Z
 
 This is the compact controlling state for Codex and Hermes. Historical route
 records remain in `results/natural_evidence_v2/status/` and long-form review
@@ -9,21 +9,775 @@ conflict with this file.
 
 ## Canonical Phase
 
-`V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_874973_SUBMITTED_MONITOR`
+`V2_R4_AFTER_880121_LLAMA_LOCKED_SCALE_COMPLETED_STRONG_READONLY_AGGREGATE_REVIEW_PENDING`
 
 ## Latest Update
 
-The R4 after-870987 pre-FAR null package has passed. Same-family raw-null tokenizer preflight job `874778` completed and passed for Qwen 3B/7B/14B. Job `874781` failed before generation due wrapper allowlist-state validation, and Codex submitted repaired same-family raw-null generation array `874973`.
+The domain-repaired Llama locked-scale generation job `880121` has reached a
+complete remote artifact state under a read-only aggregate scan. This scan did
+not download or rewrite raw generation artifacts and is not yet the formal
+adoption review.
+
+Read-only aggregate snapshot:
+
+```text
+job_id: 880121
+job_name: nat-ev-v2-r4ll96v4
+model: meta-llama/Meta-Llama-3.1-8B-Instruct
+complete shards: 96/96
+missing artifacts: 0
+generated rows: 196608
+unique response hashes: 196608
+global duplicate extra rows: 0
+max duplicate group size: 1
+trace binding invalid rows: 0/196608
+protected strict accepts: 96/96
+protected accepts ignoring quality: 96/96
+raw accepts: 0/96
+task-only accepts: 0/96
+wrong-key accepts: 0/96
+wrong-payload accepts: 0/96
+protected duplicate response hash count: 0
+protected forbidden public surface count: 0
+raw duplicate response hash count: 0
+raw forbidden public surface count: 0
+```
+
+Recorded snapshot:
+
+```text
+results/natural_evidence_v2/status/r4_after_880121_remote_completion_snapshot_20260528/summary.json
+results/natural_evidence_v2/status/r4_after_880121_remote_completion_snapshot_20260528/summary.md
+```
+
+Important boundaries:
+
+```text
+formal review/adoption: still pending
+task-only: decode-control bucket only; no separate task-only generation arm in this route
+trace binding: consistency/hash binding only; BINDING_HMAC_SECRET=false
+text-only phrase decoder: not claimed
+paper-facing positive claim: not allowed
+```
+
+Next allowed action: sync the reviewed artifacts locally and run the formal
+locked-scale generation review/adoption script. Do not unlock paper-facing
+positive claims, full FAR, sanitizer robustness, payload diversity, text-only
+phrase-decoder success, or HMAC/signed trace-provenance claims from this
+read-only aggregate alone.
+
+Historical previous update follows.
+
+The domain-repaired Llama locked-scale tokenizer-only preflight job `880120`
+completed cleanly and was reviewed as PASS:
+
+```text
+status: PASS_R4_AFTER_879406_SECOND_FAMILY_LLAMA_LOCKED_SCALE_TOKENIZER_PREFLIGHT_879455_REVIEWED
+checked rows: 98304
+failed rows: 0
+empty target ids: 0
+empty other ids: 0
+target/other overlaps: 0
+model forward/generation/scoring/training: not started
+```
+
+The repaired generation route was then validated locally and remotely using the
+same repaired row-bank hash. Local/remote allowlist safety and hash preflight
+passed. Exactly one allowlist entry was enabled for submission:
+`v2_r4_after_879406_second_family_llama_locked_scale_policy_v4_h200`.
+
+Submitted repaired Llama locked-scale generation job:
+
+```text
+job_id: 880121
+job_name: nat-ev-v2-r4ll96v4
+array: 0-95
+concurrency throttle: none
+partition/qos/account: pomplun / pomplun / cs_yinxin.wan
+model: meta-llama/Meta-Llama-3.1-8B-Instruct
+expected generated rows: 98304
+route config:
+  configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_generation_route.yaml
+row bank:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl
+tokenizer review:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_880120_review/review_summary.json
+remote output:
+  /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879555_domain_repaired_llama_locked_scale_policy_v4_880121/llama3_1_8b_instruct
+submission record:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_locked_scale_generation_submission_880121_20260528/submission_record.json
+```
+
+The allowlist was disabled immediately after `sbatch` returned. Local and
+remote post-submit allowlist safety both passed. Current allowed action:
+monitor `880121`; after all array tasks reach terminal state, sync artifacts
+and run locked-scale generation review. Do not submit another generation job
+while `880121` is active. Do not make a Llama locked-scale transfer claim until
+the reviewed gate passes.
+
+Still not unlocked: paper-facing positive claim, full FAR, sanitizer, payload
+diversity, text-only phrase-decoder success, or training.
+
+Historical previous update follows.
+
+The repaired Llama locked-scale generation job `879555` completed cleanly at the
+Slurm/artifact level: all `96/96` array shards completed with exit code `0:0`,
+all generated/decode/trace artifacts were present, and no traceback/OOM/path
+errors were detected in the checked logs.
+
+Artifact review status:
+
+```text
+FAIL_R4_AFTER_879406_SECOND_FAMILY_LLAMA_LOCKED_SCALE_GENERATION_879555_REVIEWED_NO_ADOPT
+```
+
+This is a strong signal result but not an adopted locked-scale pass:
+
+```text
+complete shards: 96/96
+generated rows: 196608/196608
+protected strict accepts: 96/96
+protected accepts ignoring quality: 96/96
+raw accepts: 0/96
+task-only accepts: 0/96
+wrong-key accepts: 0/96
+wrong-payload accepts: 0/96
+global duplicate extra rows: 0
+within-block duplicate count: 0
+trace binding invalid rows: 0/196608
+technical forbidden public surface count: 1
+```
+
+The single strict failure is a raw-arm forbidden public literal under the
+precommitted contextual policy v4. Failure attribution localizes it to
+`shard_36_block_00`: a `document scanning routine` prompt produced the ordinary
+document-processing word `watermark`. A broader diagnostic scan, not used to
+re-score the precommitted gate, found that the same prompt domain naturally
+elicits `fingerprints`/`watermark` language (`117` rows, all in
+`document scanning routine`). Root cause: the locked prompt domain conflicts
+with the hard public-literal policy.
+
+Recorded artifacts:
+
+```text
+review:
+  results/natural_evidence_v2/status/r4_after_879406_second_family_llama_locked_scale_generation_879555_review/review_summary.json
+failure attribution:
+  results/natural_evidence_v2/status/r4_after_879555_llama_locked_scale_failure_attribution_20260527/failure_attribution_summary.json
+synced raw artifacts:
+  results/natural_evidence_v2/status/r4_after_879458_repair_second_family_llama_locked_scale_generation_879555_raw/
+```
+
+The repair route has been recorded:
+
+```text
+docs/natural_evidence_v2/R4_AFTER_879555_LLAMA_LOCKED_SCALE_RESIDUAL_FORBIDDEN_DOMAIN_REPAIR_ROUTE_20260528.md
+configs/natural_evidence_v2/r4_after_879555_llama_locked_scale_domain_repair_route.yaml
+results/natural_evidence_v2/status/r4_after_879555_llama_locked_scale_domain_repair_route_20260528/route_decision_summary.json
+```
+
+The hard public-literal gate remains unchanged. Do not reclassify `879555` as
+pass, do not make a Llama locked-scale claim, and do not submit another
+locked-scale generation job until the repaired row-bank plan, actual Llama
+tokenizer preflight, route validation, local/remote hash preflight, and
+allowlist safety checks pass.
+
+Artifact-only repaired prompt bank and row bank have now been built and
+validated:
+
+```text
+prompt bank:
+  results/natural_evidence_v2/prompts/r4_after_879555_llama_locked_scale_domain_repair_prompt_bank_20260528/
+Qwen-neutral repaired row bank:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_qwen_neutral_locked_scale_row_bank_plan_20260528/
+Llama repaired row bank:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/
+row-bank validation:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_row_bank_validation_20260528/validation_summary.json
+```
+
+Validation status:
+
+```text
+PASS_R4_AFTER_879555_DOMAIN_REPAIRED_LLAMA_LOCKED_SCALE_ROW_BANK_VALIDATION
+rows: 98304
+prompts: 6144
+shards: 96
+rows per shard: 1024
+document scanning rows: 0
+static hard literal risk prompts: 0
+duplicate prompt/prefix pairs: 0
+```
+
+Actual Llama tokenizer boundary preflight for the repaired row bank has been
+submitted as tokenizer-only Slurm job `880120`:
+
+```text
+job_id: 880120
+job_name: nat-ev-v2-r4llTok
+route_config:
+  configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_route.yaml
+score_rows:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl
+expected rows: 98304
+remote output:
+  /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_manual/llama3_1_8b_instruct
+submission record:
+  results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_submission_880120_20260528/submission_record.json
+```
+
+The allowlist was disabled immediately after `sbatch` returned. Local and remote
+post-submit allowlist safety passed. Current allowed action: monitor `880120`;
+after terminal completion, sync and review tokenizer preflight artifacts. No
+generation submission is allowed until tokenizer preflight review passes and the
+repaired locked-scale generation route is reviewed.
+
+Still not unlocked: paper-facing positive claim, locked-scale cross-family
+claim, full FAR, sanitizer, payload diversity, text-only phrase-decoder success,
+or training.
+
+Historical previous update follows.
+
+The Llama locked-scale tokenizer-only preflight job `879455` completed and was
+reviewed as PASS: 98,304 rows checked, 0 failed rows, 0 empty target/other rows,
+and 0 target/other overlaps. This only authorized planning for Llama locked-scale
+generation; it did not make a locked-scale transfer claim.
+
+The first Llama locked-scale generation submission `879458` failed before model
+generation because the locked-scale wrapper set `ROUTE_CONFIG` but inherited the
+dev-diagnostic `ROUTE_VALIDATOR`. All 96 array tasks failed during route
+validation before model loading or generation. It is recorded as a no-adopt
+wrapper/control-plane failure:
+`results/natural_evidence_v2/status/r4_after_879406_second_family_llama_locked_scale_generation_879458_failure_review_20260527/failure_review_summary.json`.
+
+The wrapper was repaired to export the locked-scale validator. After repair,
+local and remote route validation passed, local and remote wrapper plan-only
+smoke passed, and local/remote allowlist preflight passed.
+
+Submitted repaired Llama locked-scale generation job:
+
+```text
+job_id:
+  879555
+job_name:
+  nat-ev-v2-r4ll96v4
+array:
+  0-95
+route:
+  R4 after-879406 second-family Llama locked-scale generation, policy v4
+expected generated rows:
+  98304
+predecessor no-adopt job:
+  879458
+remote output:
+  /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879406_second_family_llama_locked_scale_policy_v4_879555/llama3_1_8b_instruct
+submission record:
+  results/natural_evidence_v2/status/r4_after_879458_repair_second_family_llama_locked_scale_generation_submission_879555_20260527/submission_record.json
+```
+
+Current allowed action: monitor `879555` only. After all shards reach terminal
+state, sync artifacts and run locked-scale review. Do not submit another Llama
+locked-scale generation job while `879555` is active. Do not make a paper-facing
+claim or locked-scale cross-family claim until review passes.
+
+Still not unlocked: paper-facing positive claim, locked-scale cross-family
+claim, full FAR, sanitizer, payload diversity, text-only phrase-decoder success,
+or training.
+
+Historical previous update follows.
+
+Artifact-only contextual forbidden policy v4 repair passed. Policy v4 extends
+the precommitted ordinary scheduling cues for the `coordinate`/`slot` ambiguity
+while keeping technical uses hard-forbidden. Unit tests passed (`20 passed`).
+Counterfactual replay under v4 passed on the six completed `879391` shards
+and on the full `879248` run:
+
+```text
+879391 completed shards under v4: protected strict 6/6; controls 0/6;
+  forbidden=0; duplicate=0
+879248 full run under v4: protected strict 32/32; controls 0/32;
+  forbidden=0; duplicate=0
+```
+
+These counterfactuals do not reclassify `879248` or `879391`; both remain
+historical no-adopt runs under their precommitted policies.
+
+The policy-v4 Llama rerun route was validated locally and remotely. Wrapper
+plan-only smoke passed locally and remotely. Local and remote allowlist safety
+passed with zero enabled entries. Exactly one allowlist entry was then enabled
+for submission:
+`v2_r4_after_879391_second_family_llama_dev_diagnostic_policy_v4_h200`.
+Job `879406` (`nat-ev-v2-r4ll32v4`) was submitted to `pomplun` H200, and the
+allowlist was immediately disabled again. Post-submit allowlist safety passed
+locally and remotely with zero enabled entries.
+
+Current allowed action: monitor `879406` only. After all array tasks reach a
+terminal state, sync artifacts and run the reviewed Llama 32-block dev
+diagnostic review. Do not submit another Llama dev diagnostic while `879406` is
+active. Do not make a paper-facing positive claim, locked-scale cross-family
+claim, full FAR, sanitizer robustness, payload diversity, or text-only
+phrase-decoder success claim from `879248`, `879391`, or `879406` before review.
 
 ```text
 canonical phase:
-  V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_874973_SUBMITTED_MONITOR
-active generation job:
+  V2_R4_AFTER_879391_POLICY_V4_LLAMA_DEV_DIAGNOSTIC_879406_SUBMITTED_MONITOR_ONLY
+submitted job:
+  879406, nat-ev-v2-r4ll32v4
+array:
+  0-31; no percent concurrency throttle
+partition/qos/account:
+  pomplun / pomplun / cs_yinxin.wan
+remote output:
+  /hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879391_second_family_llama_dev_diagnostic_policy_v4_879406/llama3_1_8b_instruct
+policy v4:
+  results/natural_evidence_v2/precommit/r4_after_879391_contextual_forbidden_policy_v4_20260527/contextual_forbidden_surface_policy_v4.json
+policy v4 validation:
+  results/natural_evidence_v2/status/r4_after_879391_contextual_policy_v4_validation_20260527/validation_summary.json
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_879391_second_family_llama_policy_v4_submission_879406_20260527/submission_record.json
+next allowed action:
+  monitor job 879406; after completion sync and review artifacts only
+not unlocked:
+  paper-facing positive claim, locked-scale cross-family claim, full FAR,
+  sanitizer, payload diversity, text-only phrase-decoder success
+```
+
+Historical previous update follows.
+
+The R4 second-family/Llama 32-block dev diagnostic job `879248`
+(`nat-ev-v2-r4ll32`) completed cleanly at the Slurm level: all 32 array tasks
+completed with exit code `0:0`, no active queue entries remained, and local log
+scan found no traceback/OOM/runtime hard errors. Outputs and Slurm logs were
+synced locally.
+
+Artifact review status:
+`FAIL_R4_AFTER_877895_SECOND_FAMILY_LLAMA_DEV_DIAGNOSTIC_879248_REVIEWED_NO_ADOPT`.
+This is a strong near-pass but not an adopted dev pass. Signal and controls are
+clean: protected accepts ignoring quality were `32/32`, controls were `0/32`,
+global duplicate extra rows were `0`, and trace binding invalid rows were
+`0/65536`. The strict gate failed because one protected-source block had a
+contextual forbidden-surface count under the precommitted v2 matcher:
+protected strict accepts were `31/32`.
+
+Failure localization: only `shard_12_block_00` failed quality. The output used
+ordinary schedule-coordination language (`time slot ... coordinate`), which v2
+misclassified as technical `coordinate` because `slot` was a technical cue near
+`coordinate`. This does not reclassify `879248`; under its precommitted v2
+policy, `879248` remains no-adopt.
+
+Artifact-only repair completed: contextual forbidden policy v3 was added and
+tested. It treats schedule/team/time-slot coordination as ordinary only when
+the sole nearby technical cue is `slot`; technical uses such as `coordinate slot`
+with `decoder` remain forbidden. Unit tests passed, and a local shard-12
+counterfactual decode under v3 removes the false positive while preserving
+controls. This counterfactual is only a repair validation, not a positive
+reclassification.
+
+The policy-v3 rerun route was validated locally and remotely, wrapper plan-only
+smoke passed locally and remotely, local/remote file hashes matched, and
+local/remote allowlist safety passed with zero enabled entries. Exactly one
+allowlist entry was then enabled for submission:
+`v2_r4_after_879248_second_family_llama_dev_diagnostic_policy_v3_h200`.
+Job `879391` (`nat-ev-v2-r4ll32v3`) was submitted, and the allowlist was
+immediately disabled again. Post-submit allowlist safety passed locally and
+remotely with zero enabled entries.
+
+`879391` was stopped early with `scancel` after the first six completed shards
+showed the strict quality gate was already impossible to pass. This was not a
+Slurm crash or model failure. The early signal was still clean: protected
+accepts `6/6`, controls `0/6`, duplicate count `0`, and trace invalid rows
+`0/12288`. The blocker is another contextual forbidden false positive in raw:
+ordinary music-recital scheduling text contained `3 pm slot ... coordinate with
+the sound technician`, and policy v3 still treated nearby `slot` as a technical
+cue for `coordinate`.
+
+Current allowed action: artifact-only contextual forbidden policy v4 repair and
+fixtures. Do not submit another Slurm job until policy v4 tests, route
+validation, wrapper smoke, and allowlist preflight pass. Do not make a
+paper-facing positive claim, locked-scale cross-family claim, full FAR,
+sanitizer robustness, payload diversity, or text-only phrase-decoder success
+claim from `879248` or `879391`.
+
+```text
+canonical phase:
+  V2_R4_AFTER_879391_POLICY_V3_LLAMA_DEV_DIAGNOSTIC_EARLY_FORBIDDEN_GATE_FAIL_NO_ADOPT
+completed job:
+  879248, nat-ev-v2-r4ll32
+stopped rerun job:
+  879391, nat-ev-v2-r4ll32v3
+array:
+  0-31; no percent concurrency throttle
+slurm state:
+  all tasks COMPLETED, ExitCode 0:0
+post-submit allowlist:
+  zero enabled locally and remotely
+review facts:
+  protected strict accepts=31/32; protected ignoring-quality accepts=32/32; raw/task-only/wrong-key/wrong-payload accepts=0/32; duplicate extra rows=0; trace invalid rows=0/65536; technical forbidden count=3 from one protected-source block viewed under protected/wrong-key/wrong-payload
+failure analysis:
+  results/natural_evidence_v2/status/r4_after_877895_second_family_llama_dev_diagnostic_879248_failure_analysis_20260527/failure_analysis_summary.json
+policy v3:
+  results/natural_evidence_v2/precommit/r4_after_879248_contextual_forbidden_policy_v3_20260527/contextual_forbidden_surface_policy_v3.json
+not unlocked:
+  paper-facing positive claim, locked-scale cross-family claim, full FAR, sanitizer, payload diversity, text-only phrase-decoder success
+next allowed action:
+  artifact-only contextual forbidden policy v4 repair and route validation; no Slurm until preconditions pass
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_879248_second_family_llama_dev_diagnostic_policy_v3_submission_879391_20260527/submission_record.json
+early stop artifact:
+  results/natural_evidence_v2/status/r4_after_879248_policy_v3_879391_early_stop_20260527/early_stop_summary.json
+```
+
+Historical previous update follows.
+
+Job `877142` completed successfully at the Slurm level (`COMPLETED`, exit
+code `0:0`) and was aggregated. It is artifact-complete and the same-family raw
+null signal checks are clean for Qwen2.5-3B/7B/14B, but it fails the strict
+same-family raw-null quality gate because residual forbidden literal collisions
+remain: technical `decoder` count 1, technical `coordinate` count 1, and
+ambiguous `bucket` count 1. The run is no-adopt for same-family raw-null pass
+claims. The next allowed route is artifact-only v6 forbidden-literal/domain
+repair planning and lexical/tokenizer preflight. Do not reinterpret `877142`,
+relax the gate, or make a same-family raw-null pass claim from this run.
+
+```text
+canonical phase:
+  V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_877142_FORBIDDEN_RESIDUAL_NO_ADOPT
+source failed job:
+  877142, nat-ev-v2-r4sfRaw
+877142 status:
+  FAIL_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_GATE / no-adopt
+877142 clean checks:
+  generated rows=196608; raw accepts=0/64 per model; raw accepts ignoring quality=0/64 per model; duplicate extra rows=0 per model; trace 196608 checked with 0 invalid
+877142 failed strict quality gate:
+  technical forbidden=2 (decoder=1, coordinate=1); ambiguous forbidden=1 bucket; ordinary-domain literals=1462 report-only
+877142 aggregate:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_877142_aggregate_20260525/same_family_raw_null_summary.json
+877142 failure review:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_877142_failure_review_20260525/failure_review_summary.json
+v5 row bank source:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_row_bank_plan_20260525/row_allocation_rows.jsonl
+v5 row bank status:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT
+v5 row bank validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_ROW_BANK_VALIDATION_NO_SUBMIT
+v5 row bank validation facts:
+  rows=65536, prompts=4096, shards=64, denied prompt ids=99, denied-domain rows=0, static technical hits=0, static ambiguous hits=0
+v5 tokenizer route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_TOKENIZER_ROUTE_PLAN_ONLY_NO_SUBMIT
+v5 tokenizer route validation artifacts:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_tokenizer_route_validation_20260525_r1/route_validation_summary.json
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_tokenizer_route_validation_remote_20260525/route_validation_summary.json
+submitted tokenizer-only job:
+  877139, nat-ev-v2-r4sfTok
+array:
+  0-2%3
+scope:
+  tokenizer-only preflight for Qwen2.5-3B/7B/14B on the v5 row bank, 65536 rows/tokenizer
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_tokenizer_submission_20260525/submission_record.json
+877139 tokenizer review:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_TOKENIZER_PREFLIGHT_877139
+877139 tokenizer review artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_tokenizer_preflight_877139_review/review_summary.json
+877139 tokenizer facts:
+  Qwen2.5-3B/7B/14B each checked 65536 rows; failed=0, empty target=0, empty other=0, target/other overlap=0
+v5 generation route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+v5 generation route validation artifacts:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_generation_route_validation_20260525/route_validation_summary.json
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_generation_route_validation_remote_20260525/route_validation_summary.json
+completed generation job:
+  877142, nat-ev-v2-r4sfRaw
+array:
+  0-191, no array task throttle
+scope:
+  raw-only Qwen2.5-3B/7B/14B same-family controls, 64 shards/model, 1024 rows/shard, 196608 expected generated rows
+generation submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v5_generation_submission_20260525/submission_record.json
+post-submit allowlist:
+  zero enabled locally and remotely
+current allowed action:
+  artifact-only v6 same-family raw-null prompt-domain/forbidden-literal repair planning and lexical/tokenizer preflight; no new generation until route validation and tokenizer preflight pass
+not allowed yet:
+  training, Llama, sanitizer, FAR aggregation, payload diversity, paper-facing claim, same-family raw-null pass claim from 877142
+```
+
+Historical previous update follows.
+
+Job `875777` completed and was aggregated. It is artifact-complete and the raw
+null signal checks are clean for Qwen2.5-3B/7B/14B, but it fails the strict
+same-family raw-null quality gate because residual forbidden literal collisions
+remain: technical `fingerprint` count 5 and ambiguous `bucket` count 2. The run
+is no-adopt for same-family raw-null pass claims. A v4 row bank has been built
+and validated by excluding all 875168/875471/875777 collision prompt ids and
+domains; static technical/ambiguous forbidden hits are 0. The v4 tokenizer-only
+route validated locally and remotely, then exactly one H200 tokenizer preflight
+array was submitted as job `876849`; it completed successfully and passed
+review. The v4 generation route validated locally and remotely. Exactly one
+H200 v4 generation/decode array was submitted as job `876852`; the allowlist was
+disabled immediately after submission and revalidated locally/remotely with zero
+enabled entries.
+
+```text
+canonical phase:
+  V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_GENERATION_876852_RUNNING
+source failed job:
+  875777, nat-ev-v2-r4sfRaw
+875777 status:
+  FAIL_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_GATE / no-adopt
+875777 clean checks:
+  generated rows=196608; raw accepts=0/64 per model; raw accepts ignoring quality=0/64 per model; duplicate extra rows=0 per model; trace 196608 checked with 0 invalid
+875777 failed strict quality gate:
+  technical forbidden=5 all fingerprint; ambiguous forbidden=2 all bucket; ordinary-domain literals=1129 report-only
+875777 aggregate:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875777_aggregate_20260524/same_family_raw_null_summary.json
+875777 failure review:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875777_failure_review_20260524/failure_review_summary.json
+v4 residual repair policy:
+  keep hard forbidden policy unchanged; do not rescue 875777; exclude 875168/875471/875777 collision prompt ids and domains
+v4 denied domains:
+  cafe morning setup; community theater rehearsal; dental office supply review; farmers market booth setup; hardware store aisle cleanup; library display refresh; local history archive sorting; school club fundraiser; tenant move-out checklist; tutoring session preparation
+v4 row bank:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_row_bank_plan_20260524/row_allocation_rows.jsonl
+v4 row bank status:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT
+v4 row bank validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_ROW_BANK_VALIDATION_NO_SUBMIT
+v4 row bank validation facts:
+  rows=65536, prompts=4096, shards=64, denied prompt ids=96, denied-domain rows=0, static technical hits=0, static ambiguous hits=0
+v4 tokenizer route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_TOKENIZER_ROUTE_PLAN_ONLY_NO_SUBMIT
+v4 tokenizer route validation artifacts:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_tokenizer_route_validation_20260524/route_validation_summary.json
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_tokenizer_route_validation_remote_20260524/route_validation_summary.json
+submitted tokenizer-only job:
+  876849, nat-ev-v2-r4sfTok
+array:
+  0-2%3
+scope:
+  tokenizer-only preflight for Qwen2.5-3B/7B/14B on the v4 row bank, 65536 rows/tokenizer
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_tokenizer_submission_20260524/submission_record.json
+876849 tokenizer review:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_TOKENIZER_PREFLIGHT_876849
+876849 tokenizer review artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_tokenizer_preflight_876849_review/review_summary.json
+876849 tokenizer facts:
+  Qwen2.5-3B/7B/14B each checked 65536 rows; failed=0, empty target=0, empty other=0, target/other overlap=0
+v4 generation route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+v4 generation route validation artifacts:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_generation_route_validation_20260524/route_validation_summary.json
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_generation_route_validation_remote_20260524/route_validation_summary.json
+submitted generation job:
+  876852, nat-ev-v2-r4sfRaw
+array:
+  0-191%6 at submission; live throttle raised to %8 on 2026-05-24T23:14:42Z; array throttle removed on 2026-05-24T23:16:56Z
+scope:
+  raw-only Qwen2.5-3B/7B/14B same-family controls, 64 shards/model, 1024 rows/shard, 196608 expected generated rows
+generation submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_generation_submission_20260524/submission_record.json
+throttle update:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v4_generation_876852_throttle_update_20260524/throttle_update_summary.json
+throttle update status:
+  ArrayTaskThrottle changed from 6 to 8, then to 0/no array cap; current pending reason after update is QOSGrpBillingRunMinutes rather than JobArrayTaskLimit
+post-submit allowlist:
+  zero enabled locally and remotely
+current allowed action:
+  monitor job 876852; after completion sync and aggregate v4 same-family raw-null outputs before any pass claim
+not allowed yet:
+  training, Llama, sanitizer, FAR aggregation, payload diversity, paper-facing claim, same-family raw-null pass claim before aggregate review
+```
+
+Historical previous update follows.
+
+```text
+canonical phase:
+  V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_GENERATION_875777_RUNNING
+source failed job:
+  875168, nat-ev-v2-r4sfRaw
+875168 status:
+  FAIL_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_GATE / no-adopt
+875168 clean signals:
+  raw accepts 0/64 for Qwen2.5-3B/7B/14B, duplicate extra rows 0, trace 196608 checked with 0 invalid
+875168 failed gate:
+  technical forbidden=254, ambiguous=53
+v2 repair policy:
+  keep hard forbidden policy unchanged; do not rescue 875168; exclude collision prompt ids/domains
+v2 row bank:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_row_bank_plan_20260523/row_allocation_rows.jsonl
+v2 row bank status:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V2_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT
+v2 row bank validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V2_ROW_BANK_VALIDATION_NO_SUBMIT
+v2 row bank validation artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_row_bank_validation_20260523/validation_summary.json
+v2 row bank validation facts:
+  rows=65536, prompts=4096, shards=64, source collision prompt reuse=0, denied-domain rows=0, static technical hits=0, static ambiguous hits=0
+v2 tokenizer route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V2_TOKENIZER_ROUTE_PLAN_ONLY_NO_SUBMIT
+v2 tokenizer route validation artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_tokenizer_route_validation_20260523/route_validation_summary.json
+v2 tokenizer wrapper plan smoke:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_tokenizer_wrapper_plan_smoke_20260523_task0/route_validation_qwen2_5_3b_instruct_raw/route_validation_summary.json
+submitted tokenizer-only job:
+  875427, nat-ev-v2-r4sfTok
+array:
+  0-2%3
+scope:
+  tokenizer-only preflight for Qwen2.5-3B/7B/14B on the v2 row bank, 65536 rows/tokenizer
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_tokenizer_submission_20260523/submission_record.json
+allowlist after submission:
+  zero enabled locally; remote sync pending/post-submit safety to be recorded
+tokenizer review:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V2_TOKENIZER_PREFLIGHT_875427
+tokenizer review artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_tokenizer_preflight_875427_review/review_summary.json
+superseded canceled generation job:
+  875464, nat-ev-v2-r4sfRaw
+status:
+  CANCELED_NO_ADOPT_NO_GENERATION_AGGREGATE
+review:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_generation_875464_canceled_review_20260523/canceled_review_summary.json
+completed generation job:
+  875471, nat-ev-v2-r4sfRaw
+array:
+  0-191%6
+generation scope:
+  raw-only Qwen2.5-3B/7B/14B same-family controls, 64 shards/model, 1024 rows/shard, 196608 expected generated rows
+generation route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V2_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+generation submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v2_generation_resubmission_20260523/submission_record.json
+875471 aggregate:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875471_aggregate_20260523/same_family_raw_null_summary.json
+875471 aggregate status:
+  FAIL_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_GATE
+875471 clean checks:
+  generated rows=196608; raw accepts=0/64 per model; raw accepts ignoring quality=0/64 per model; duplicate extra rows=0 per model; trace 196608 checked with 0 invalid
+875471 failed strict quality gate:
+  technical forbidden=4, ambiguous forbidden=9, ordinary-domain literals=1663 report-only
+residual technical terms:
+  fingerprint=4
+residual ambiguous terms:
+  bucket=9
+875471 failure review:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875471_failure_review_20260523/failure_review_summary.json
+interpretation:
+  same-family raw-null v2 is much cleaner than 875168 but still cannot be adopted because strict forbidden gates require technical=0 and ambiguous=0
+v3 residual repair policy:
+  exclude 875168 collision domains plus 875471 residual domains: cafe morning setup, community theater rehearsal, farmers market booth setup, tenant move-out checklist
+v3 row bank:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v3_row_bank_plan_20260523/row_allocation_rows.jsonl
+v3 row bank status:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_ROW_BANK_BUILT_ARTIFACT_ONLY_NO_SUBMIT
+v3 row bank validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_ROW_BANK_VALIDATION_NO_SUBMIT
+v3 row bank validation facts:
+  rows=65536, prompts=4096, shards=64, denied prompt ids=91, denied-domain rows=0, static technical hits=0, static ambiguous hits=0
+v3 tokenizer route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_TOKENIZER_ROUTE_PLAN_ONLY_NO_SUBMIT
+v3 tokenizer route validation artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v3_tokenizer_route_validation_20260523/route_validation_summary.json
+allowlist tokenizer command:
+  updated to v3 tokenizer route and v3 row bank, still enabled=false
+submitted tokenizer-only job:
+  875756, nat-ev-v2-r4sfTok
+array:
+  0-2%3
+scope:
+  tokenizer-only preflight for Qwen2.5-3B/7B/14B on the v3 row bank, 65536 rows/tokenizer
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v3_tokenizer_submission_20260523/submission_record.json
+post-submit allowlist:
+  zero enabled locally and remotely
+875756 tokenizer review:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_TOKENIZER_PREFLIGHT_875756
+875756 tokenizer review artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v3_tokenizer_preflight_875756_review/review_summary.json
+875756 tokenizer facts:
+  Qwen2.5-3B/7B/14B each checked 65536 rows; failed=0, empty target=0, empty other=0, target/other overlap=0
+v3 generation route validation:
+  PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_GENERATION_ROUTE_PLAN_ONLY_NO_SUBMIT
+v3 generation route validation artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v3_generation_route_validation_20260523/route_validation_summary.json
+submitted generation job:
+  875777, nat-ev-v2-r4sfRaw
+array:
+  0-191%6
+scope:
+  raw-only Qwen2.5-3B/7B/14B same-family controls, 64 shards/model, 1024 rows/shard, 196608 expected generated rows
+submission artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_v3_generation_submission_20260523/submission_record.json
+post-submit allowlist:
+  zero enabled locally and remotely
+v3 generation route scope:
+  raw-only Qwen2.5-3B/7B/14B same-family controls, 64 shards/model, 1024 rows/shard, 196608 expected generated rows
+current allowed action:
+  monitor job 875777; after completion sync and aggregate same-family raw-null v3 outputs before any claim unlock
+not allowed yet:
+  training, Llama, sanitizer, FAR aggregation, payload diversity, paper-facing claim, same-family raw-null pass claim
+```
+
+Historical previous update follows.
+
+Job `875168` completed 192/192 same-family raw-null shards and was aggregated.
+The run is artifact-complete and null accepts are clean, but it fails the strict
+same-family raw-null gate because the contextual forbidden-surface audit found
+hard-forbidden literal collisions (`fingerprint`, `watermark`, and one
+technical `bucket`) plus ambiguous `bucket` hits. The run is not adopted as a
+passed same-family raw-null package.
+
+```text
+canonical phase:
+  V2_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_875168_FAILED_FORBIDDEN_LITERAL_COLLISION_REPAIR_PLANNING
+completed generation job:
+  875168, nat-ev-v2-r4sfRaw
+array:
+  0-191%6
+completion:
+  192/192 tasks completed, ExitCode 0
+aggregate status:
+  FAIL_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_GENERATION_GATE
+raw accepts:
+  Qwen2.5-3B 0/64, Qwen2.5-7B 0/64, Qwen2.5-14B 0/64
+raw accepts ignoring quality:
+  Qwen2.5-3B 0/64, Qwen2.5-7B 0/64, Qwen2.5-14B 0/64
+generated rows:
+  196608
+duplicate extra rows:
+  0
+trace binding:
+  196608 checked, 0 invalid
+forbidden surface failure:
+  technical=254, ambiguous=53, ordinary_domain_literals=801
+dominant technical hits:
+  fingerprint=234, watermark=19, bucket=1
+interpretation:
+  null separation is clean, but strict quality-policy gate fails due prompt-domain / hard-forbidden-literal collision
+adopt outputs as passed same-family raw-null:
+  false
+aggregate artifact:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875168_aggregate_20260523/same_family_raw_null_summary.json
+failure review:
+  results/natural_evidence_v2/status/r4_after_870987_same_family_raw_null_generation_875168_failure_review_20260523/failure_review_summary.json
+current allowed action:
+  artifact-only same-family raw-null v2 prompt-domain/forbidden-literal collision repair planning and lexical preflight
+not allowed yet:
+  training, Llama, sanitizer, FAR aggregation, payload diversity, paper-facing claim, same-family raw-null pass claim
+failed generation job:
   874973, nat-ev-v2-r4sfRaw
 array:
   0-191%6
 scope:
   raw-only same-family Qwen 3B/7B/14B controls, 64 shards/model, 1024 rows/shard
+failure:
+  shared ${OUTPUT_DIR}/route_validation directory caused later shards to fail before generation
+adopt outputs:
+  false
+repair:
+  scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_generation_h200.sbatch now writes route_validation_shard_${LOCAL_SHARD_INDEX}
 superseded failed generation job:
   874781, wrapper allowlist-state mismatch before model load/generation
 completed tokenizer job:
@@ -42,10 +796,6 @@ route decision:
   docs/natural_evidence_v2/R4_AFTER_870987_SAME_FAMILY_RAW_NULL_TOKENIZER_PREFLIGHT_ROUTE_20260522.md
 tokenizers planned:
   Qwen/Qwen2.5-3B-Instruct, Qwen/Qwen2.5-7B-Instruct, Qwen/Qwen2.5-14B-Instruct
-current allowed action:
-  monitor 874973 to completion, then aggregate/review same-family raw-null results before any downstream route unlock
-not allowed yet:
-  training, Llama, sanitizer, FAR aggregation, payload diversity, paper-facing claim
 allowlist after submission:
   zero enabled locally and remotely
 route validation:

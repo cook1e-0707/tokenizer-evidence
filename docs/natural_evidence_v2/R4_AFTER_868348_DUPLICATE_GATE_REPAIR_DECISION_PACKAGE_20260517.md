@@ -137,3 +137,4 @@ and avoids reinterpreting the failed run.
 artifact-only allocation feasibility audit for globally unique 32-block
 prompt/prefix rows, plus a reviewed no-submit route decision
 ```
+

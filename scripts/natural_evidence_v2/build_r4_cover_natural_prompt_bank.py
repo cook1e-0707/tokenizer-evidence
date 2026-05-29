@@ -117,21 +117,40 @@ def prompt_text(*, family: str, domain: str, audience: str, constraint: str, ang
         f"{ask} for {audience} working on {domain}, with emphasis on {constraint}. "
         f"Focus on {angle}. "
         "Write a useful, ordinary answer in short paragraphs or natural bullets. "
-        "Do not use numbered steps, fixed line labels, hidden-code terminology, or headings."
+        "Do not use numbered steps, fixed line labels, special terminology, or headings."
     )
 
 
-def build_rows(*, split: str, count: int, domains: tuple[str, ...]) -> list[dict[str, Any]]:
+def configured_domains(prompt_cfg: dict[str, Any], field: str, default: tuple[str, ...]) -> tuple[str, ...]:
+    raw = prompt_cfg.get(field)
+    if raw is None:
+        return default
+    if not isinstance(raw, list) or not raw or not all(isinstance(item, str) and item.strip() for item in raw):
+        raise ValueError(f"prompt_bank.{field} must be a non-empty list of strings when provided")
+    return tuple(item.strip() for item in raw)
+
+
+def build_rows(*, split: str, count: int, domains: tuple[str, ...], index_offset: int = 0) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for index in range(count):
-        family = FAMILIES[index % len(FAMILIES)]
-        domain = domains[(index // len(FAMILIES)) % len(domains)]
-        audience = AUDIENCES[(index // (len(FAMILIES) * len(domains))) % len(AUDIENCES)]
-        constraint = CONSTRAINTS[(index // (len(FAMILIES) * len(domains) * len(AUDIENCES))) % len(CONSTRAINTS)]
-        angle = ANGLES[
-            (index // (len(FAMILIES) * len(domains) * len(AUDIENCES) * len(CONSTRAINTS))) % len(ANGLES)
+        effective_index = int(index) + int(index_offset)
+        family = FAMILIES[effective_index % len(FAMILIES)]
+        domain = domains[(effective_index // len(FAMILIES)) % len(domains)]
+        audience = AUDIENCES[(effective_index // (len(FAMILIES) * len(domains))) % len(AUDIENCES)]
+        constraint = CONSTRAINTS[
+            (effective_index // (len(FAMILIES) * len(domains) * len(AUDIENCES))) % len(CONSTRAINTS)
         ]
-        text = prompt_text(family=family, domain=domain, audience=audience, constraint=constraint, angle=angle, index=index)
+        angle = ANGLES[
+            (effective_index // (len(FAMILIES) * len(domains) * len(AUDIENCES) * len(CONSTRAINTS))) % len(ANGLES)
+        ]
+        text = prompt_text(
+            family=family,
+            domain=domain,
+            audience=audience,
+            constraint=constraint,
+            angle=angle,
+            index=effective_index,
+        )
         hits = technical_literal_hits(text)
         if hits:
             raise ValueError(f"prompt contains forbidden technical literal {hits}: {text}")
@@ -167,8 +186,17 @@ def main() -> int:
         raise ValueError("output dir missing")
     dev_count = int(prompt_cfg.get("dev_prompts", 384))
     locked_count = int(prompt_cfg.get("locked_prompts", 384))
-    dev_rows = build_rows(split="dev", count=dev_count, domains=DOMAINS_DEV)
-    locked_rows = build_rows(split="locked", count=locked_count, domains=DOMAINS_LOCKED)
+    dev_domains = configured_domains(prompt_cfg, "dev_domains", DOMAINS_DEV)
+    locked_domains = configured_domains(prompt_cfg, "locked_domains", DOMAINS_LOCKED)
+    dev_index_offset = int(prompt_cfg.get("dev_index_offset", 0))
+    locked_index_offset = int(prompt_cfg.get("locked_index_offset", 0))
+    dev_rows = build_rows(split="dev", count=dev_count, domains=dev_domains, index_offset=dev_index_offset)
+    locked_rows = build_rows(
+        split="locked",
+        count=locked_count,
+        domains=locked_domains,
+        index_offset=locked_index_offset,
+    )
     all_rows = dev_rows + locked_rows
     if len({row["prompt_id"] for row in all_rows}) != len(all_rows):
         raise ValueError("duplicate prompt_id")
@@ -189,6 +217,8 @@ def main() -> int:
         "dev_domains": sorted(set(row["domain"] for row in dev_rows)),
         "locked_domains": sorted(set(row["domain"] for row in locked_rows)),
         "dev_locked_domain_overlap": sorted(set(row["domain"] for row in dev_rows) & set(row["domain"] for row in locked_rows)),
+        "dev_index_offset": dev_index_offset,
+        "locked_index_offset": locked_index_offset,
         "prompt_bank_sha256": sha256_file(output_dir / "prompt_bank.jsonl"),
         "dev_prompts_sha256": sha256_file(output_dir / "dev_prompts.jsonl"),
         "locked_prompts_sha256": sha256_file(output_dir / "locked_prompts.jsonl"),

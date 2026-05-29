@@ -1,0 +1,83 @@
+schema_name: natural_evidence_v2_r4_after_870987_prefar_null_expansion_route_v1
+route_id: r4_after_870987_prefar_null_expansion_v1
+phase: V2_R4_AFTER_869348_LOCKED_SCALE_GENERATION_GATE_PASSED_PREFAR_NULL_ROUTE_PLANNING
+
+source_artifacts:
+  locked_scale_jobs: ["870210", "870987"]
+  locked_scale_review: docs/natural_evidence_v2/R4_AFTER_869348_LOCKED_SCALE_870210_PLUS_870987_REVIEW_20260519.md
+  locked_scale_summary: results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_aggregate_20260519/locked_scale_summary.json
+  locked_scale_first_token_blocks: results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_aggregate_20260519/locked_scale_first_token_blocks.csv
+  locked_scale_trace_binding_by_shard: results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_aggregate_20260519/locked_scale_trace_binding_by_shard.csv
+
+route_scope:
+  package_name: qwen_first_token_event_pre_far_null_v1
+  result_scope: qwen_only_same_contract_provider_side_first_token_event_trace
+  contract_id: a55e
+  payload_diversity_tested: false
+  text_only_phrase_decoder_claim: false
+  paper_facing_claim: false
+  full_far_claim: false
+  purpose: expand diagnostic controls after the locked-scale pass into a preliminary Qwen null package
+
+existing_locked_scale_evidence:
+  protected_strict_accepts: 94
+  protected_blocks: 96
+  standard_control_blocks_per_arm: 96
+  standard_control_accepts_per_arm: 0
+  standard_control_arms: [raw, task_only, wrong_key, wrong_payload]
+  global_duplicate_response_hash_extra_rows: 0
+  trace_binding_validity_required: 1.0
+  full_phrase_decoder_policy: report_only_not_success_claim
+
+target_null_package:
+  standard_control_arms: [raw, task_only, wrong_key, wrong_payload]
+  target_block_equivalent_per_standard_control_arm: 256
+  existing_block_equivalent_per_standard_control_arm: 96
+  additional_block_equivalent_required_per_standard_control_arm: 160
+  organic_null_target_block_equivalent: 256
+  organic_null_existing_block_equivalent: 0
+  organic_null_requires_new_prompt_bank: true
+  pass_gate:
+    raw_accepts: 0
+    task_only_accepts: 0
+    wrong_key_accepts: 0
+    wrong_payload_accepts: 0
+    organic_null_accepts: 0
+    technical_forbidden_public_surface_count: 0
+    global_duplicate_response_hash_extra_rows: 0
+    trace_binding_validity: 1.0
+
+required_before_any_slurm_submission:
+  route_validation_passed: true
+  additional_null_row_bank_built_artifact_only: true
+  organic_null_prompt_bank_built_artifact_only: true
+  tokenizer_controller_preflight_passed: true
+  full_wrapper_reviewed: true
+  local_allowlist_zero_enabled: true
+  remote_hash_preflight_passed: true
+  remote_allowlist_zero_enabled: true
+  exactly_one_allowlist_entry_enabled_for_submission: true
+  immediate_disable_after_sbatch: true
+
+compute_policy:
+  slurm_allowed_now: false
+  allowlist_enabled_now: false
+  allowlist_entry: ""
+  wrapper: ""
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  array_throttle_default: "%6"
+  no_a100: true
+
+not_unlocked_by_this_route_package:
+  training: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  text_only_phrase_decoder_success_claim: true
+  paper_claim: true

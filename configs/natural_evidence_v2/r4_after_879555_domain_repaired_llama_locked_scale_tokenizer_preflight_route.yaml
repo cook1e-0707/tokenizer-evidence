@@ -1,0 +1,66 @@
+schema_name: natural_evidence_v2_r4_after_879406_second_family_llama_locked_scale_tokenizer_preflight_route_v1
+route_id: r4_after_879406_second_family_llama_locked_scale_tokenizer_preflight_v1
+phase: V2_R4_AFTER_879555_DOMAIN_REPAIRED_LLAMA_LOCKED_SCALE_TOKENIZER_PREFLIGHT_ROUTE_PLANNING_NO_SUBMIT
+
+source_artifacts:
+  qwen_locked_scale_summary: results/natural_evidence_v2/status/r4_after_869348_locked_scale_generation_870210_plus_870987_aggregate_20260519/locked_scale_summary.json
+  llama_dev_review_879406: results/natural_evidence_v2/status/r4_after_879391_second_family_llama_dev_diagnostic_policy_v4_879406_review_r1/review_summary.json
+  llama_locked_scale_row_bank_plan: results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_bank_plan_summary.json
+  row_bank_rows: results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl
+  source_failure_attribution_879555: results/natural_evidence_v2/status/r4_after_879555_llama_locked_scale_failure_attribution_20260527/failure_attribution_summary.json
+  domain_repair_route: results/natural_evidence_v2/status/r4_after_879555_llama_locked_scale_domain_repair_route_20260528/route_decision_summary.json
+  row_bank_validation: results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_row_bank_validation_20260528/validation_summary.json
+
+second_family_tokenizer:
+  tokenizer_id: meta-llama/Meta-Llama-3.1-8B-Instruct
+  model_slug: llama3_1_8b_instruct
+  role: second_family_candidate
+  model_config_reference: configs/model/llama3_1_8b_instruct.yaml
+
+tokenizer_preflight_scope:
+  max_rows_per_tokenizer: 98304
+  tokenizer_count: 1
+  expected_total_checked_rows: 98304
+  run_tokenizer: true
+  model_forward_allowed: false
+  scoring_allowed: false
+  generation_allowed: false
+  training_allowed: false
+  sanitizer_allowed: false
+  far_allowed: false
+  payload_diversity_allowed: false
+  paper_claim_allowed: false
+
+future_tokenizer_gate:
+  checked_rows_per_tokenizer: 98304
+  failed_rows_max: 0
+  empty_target_id_row_count_max: 0
+  empty_other_id_row_count_max: 0
+  target_other_overlap_row_count_max: 0
+
+compute_policy:
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: 30-00:00:00
+  array: "0"
+  allowlist_entry: v2_r4_after_879406_second_family_llama_locked_scale_tokenizer_preflight_h200
+  wrapper: scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_tokenizer_boundary_preflight_h200.sbatch
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_route.yaml SCORE_ROWS=results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl MAX_ROWS=98304 TOKENIZER_NAME=meta-llama/Meta-Llama-3.1-8B-Instruct ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_877895_second_family_llama_tokenizer_route.py sbatch scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_tokenizer_boundary_preflight_h200.sbatch
+  allowlist_enabled_now: false
+  slurm_allowed_now: false
+  exactly_one_submission_when_unlocked: true
+  immediate_disable_after_sbatch: true
+  remote_hash_preflight_required: true
+  zero_enabled_allowlist_required_before_submission: true
+  hermes_notification_required: true
+
+not_unlocked_by_this_route_package:
+  generation: true
+  training: true
+  model_scoring: true
+  sanitizer: true
+  far: true
+  payload_diversity: true
+  paper_claim: true

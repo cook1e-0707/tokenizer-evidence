@@ -1,0 +1,126 @@
+schema_name: natural_evidence_v2_r4_after_864832_cover_bank_aligned_objective_route_v1
+phase: V2_R4_AFTER_864832_COVER_BANK_ALIGNED_OBJECTIVE_ROUTE_ARTIFACT_ONLY
+package_id: r4_after_864832_cover_bank_aligned_objective_route_v1
+
+source_failure:
+  generation_job_id: "864832"
+  teacher_forced_job_id: "864761"
+  review_doc: docs/natural_evidence_v2/R4_METRIC_EXACT_864761_DEV_GENERATION_864832_REVIEW_20260516.md
+  review_summary: results/natural_evidence_v2/status/r4_metric_exact_864761_dev_generation_864832_review/review_summary.json
+  failure_status: FAIL_R4_METRIC_EXACT_864761_DEV_GENERATION_NO_PROTECTED_ACCEPTS_NO_DOWNSTREAM_UNLOCK
+  protected_accepts_format_scrub_all: 0
+  protected_accepts_no_scrub: 0
+  null_accepts_all_modes_all_null_arms: 0
+  max_protected_vs_raw_shallow_feature_auc: 1.0
+  duplicate_response_text_hashes: 358
+  protected_create_a_plan_total: 42693
+  protected_prepare_a_total: 30809
+
+transfer_gap_package:
+  package_dir: results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516
+  summary_json: results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/transfer_gap_repair_summary.json
+  candidate_pressure_phrase_audit: results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/candidate_v3_pressure_phrase_audit.csv
+  cover_bank_missing_surface_audit: results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/cover_bank_missing_surface_audit.csv
+  protected_vs_raw_surface_support_audit: results/natural_evidence_v2/status/r4_after_864832_transfer_gap_repair_package_20260516/protected_vs_raw_surface_support_audit.csv
+  status: PASS_R4_AFTER_864832_TRANSFER_GAP_REPAIR_PACKAGE_ARTIFACT_ONLY_NO_COMPUTE
+  cause_classification: teacher_forced_prefix_native_pressure_did_not_transfer_to_cover_natural_decoder_surfaces_and_created_visible_repetition
+
+selected_repair_route:
+  name: cover_bank_aligned_metric_exact_objective_repair
+  route_type: teacher_forced_training_and_scoring_first
+  target_surfaces_source: precommitted_cover_bank_only
+  training_row_source: precommitted_cover_bank_x_dev_prefix_contexts
+  future_generation_allowed_before_teacher_forced_gate: false
+  same_contract: a55e
+  payload_diversity_tested: false
+
+precommitted_artifacts:
+  surface_bank: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/surface_bank.json
+  surface_bank_sha256: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/surface_bank.sha256
+  codebook: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/codebook.json
+  codebook_sha256: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/codebook.sha256
+  decoder_spec: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/decoder_spec.json
+  decoder_spec_sha256: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/decoder_spec.sha256
+  precommit_manifest: results/natural_evidence_v2/precommit/r4_cover_natural_ecc_precommit_20260512/precommit_manifest.json
+  expected_surface_entry_count: 128
+  expected_num_coordinates: 32
+  expected_contract_id: a55e
+  expected_primary_scrub_mode: all
+
+posthoc_surface_policy:
+  use_864832_transcripts_for_failure_taxonomy_only: true
+  add_864832_observed_phrases_to_bank: false
+  use_candidate_v3_pressure_phrases_as_decoder_surfaces: false
+  use_create_prepare_plan_as_success_surfaces: false
+  manual_transcript_phrase_mining_allowed: false
+  lower_accept_support_margin_gates_allowed: false
+
+future_objective_contract:
+  optimize_exact_decoder_surface_token_sets: true
+  use_human_readable_labels_as_token_targets: false
+  logsumexp_over_target_token_sets: true
+  target_mass_floor_required: true
+  anti_repetition_controls_required: true
+  naturalness_anchor_required: true
+  task_only_protected_pressure_allowed: false
+  base_task_only_scoring_paths_unchanged: true
+
+future_teacher_forced_gate:
+  protected_lift_vs_base_min: 0.15
+  protected_lift_vs_task_only_min: 0.10
+  protected_rank1_min: 0.75
+  protected_median_margin_min: 0.0
+  scorer_boundary_failures_max: 0
+  target_other_overlap_rate_max: 0.0
+  task_only_lift_anomaly_allowed: false
+  visible_repetition_collapse_allowed: false
+
+future_generation_gate:
+  primary_decode_format_scrub: all
+  protected_accepts_format_scrub_all_min_dev_32: 26
+  raw_accepts_max: 0
+  task_only_accepts_max: 0
+  wrong_key_accepts_max: 0
+  wrong_payload_accepts_max: 0
+  forbidden_public_technical_surface_max: 0
+  shallow_structural_auc_max: 0.60
+  duplicate_generated_output_hashes_max: 0
+  duplicate_decode_row_hashes_max: 0
+
+future_compute_policy:
+  allowlist_entry_to_add_later: v2_r4_cover_bank_aligned_teacher_forced_h200
+  allowlist_enabled_now: false
+  slurm_allowed_by_this_package: false
+  model_scoring_allowed_by_this_package: false
+  training_allowed_by_this_package: false
+  generation_allowed_by_this_package: false
+  partition: pomplun
+  qos: pomplun
+  account: cs_yinxin.wan
+  gres: gpu:h200:1
+  max_time: "30-00:00:00"
+  exactly_one_submission_when_unlocked: true
+  remote_hash_preflight_required: true
+  hermes_notification_required: true
+  post_submit_allowlist_shutdown_required: true
+
+required_next_artifact_only_tasks:
+  - implement_or_validate_cover_bank_aligned_row_builder
+  - tokenizer_boundary_preflight_for_cover_bank_rows
+  - plan_only_h200_wrapper_smoke
+  - local_and_remote_allowlist_safety_with_zero_enabled_entries
+  - route_doc_for_exactly_one_teacher_forced_h200_submission
+
+not_unlocked_by_this_route_package:
+  slurm_submission: true
+  tokenizer_validation: true
+  model_scoring: true
+  training: true
+  generation: true
+  qwen_e2e: true
+  llama: true
+  same_family_null: true
+  sanitizer: true
+  far_aggregation: true
+  payload_diversity: true
+  paper_claim: true

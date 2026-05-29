@@ -1,0 +1,45 @@
+schema_name: natural_evidence_v2_r4_candidate_v3_adapter_gain_sweep_plan_v1
+plan_id: r4_after_864832_two_sided_adapter_gain_sweep_20260516
+route_phase: V2_R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_865252_FAILED_GAIN_SWEEP_ROUTE_NO_SUBMIT
+candidate_rows: results/natural_evidence_v2/status/r4_after_864832_two_sided_cover_bank_rows_20260516/cover_bank_aligned_target_only_rows.jsonl
+candidate_rows_sha256: 84088309f8cddc976b51e9d32eeb55f58d0d98e5dca5ccf9831d50d67501534d
+contract_id: a55e
+source_failure_job: 865252
+source_failure_status: FAIL_R4_AFTER_864832_TWO_SIDED_SURFACE_MASS_GATE
+adapter_gain_values:
+  - 0.0
+  - 0.5
+  - 1.0
+  - 1.5
+  - 2.0
+  - 3.0
+  - 4.0
+conditions:
+  - base
+  - task_only
+  - protected_gain_0
+  - protected_gain_0_5
+  - protected_gain_1
+  - protected_gain_1_5
+  - protected_gain_2
+  - protected_gain_3
+  - protected_gain_4
+scoring_only: true
+generation_allowed: false
+training_allowed: false
+qwen_e2e_allowed: false
+llama_allowed: false
+same_family_null_allowed: false
+sanitizer_allowed: false
+far_aggregation_allowed: false
+paper_claim_allowed: false
+allowlist_enablement_allowed: false
+future_compute_requires_reviewed_route: true
+teacher_forced_gate:
+  protected_lift_vs_base_min: 0.15
+  protected_lift_vs_task_only_min: 0.10
+  protected_rank1_min: 0.75
+  protected_median_margin_min_exclusive: 0.0
+  max_single_surface_mass: 0.50
+  per_prefix_min_lift_vs_base: 0.08
+

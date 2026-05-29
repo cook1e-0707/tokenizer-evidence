@@ -415,28 +415,37 @@ allowed_gpu_actions:
   enabled: false
   name: v2_r4_after_870987_prefar_standard_control_generation_h200
 - claim_note: R4 after-870987 pre-FAR organic-null raw-only first-token event null
-    generation. Qwen only, same-contract a55e; requires organic-null v2 row-bank
-    validation, 874307 tokenizer preflight pass, local/remote route validation,
-    and exactly-one submission preflight. No training, no Llama, no sanitizer,
-    no FAR aggregation, no payload-diversity claim, no paper positive claim.
+    generation. Qwen only, same-contract a55e; requires organic-null v2 row-bank validation,
+    874307 tokenizer preflight pass, local/remote route validation, and exactly-one
+    submission preflight. No training, no Llama, no sanitizer, no FAR aggregation,
+    no payload-diversity claim, no paper positive claim.
   command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_prefar_organic_null_generation_h200.sbatch
   enable_condition: r4_after_870987_prefar_organic_null_generation_route_reviewed_tokenizer_passed_and_remote_preflight_passed
   enabled: false
   name: v2_r4_after_870987_prefar_organic_null_generation_h200
-- claim_note: R4 after-870987 same-family raw-null generation. Qwen 3B/7B/14B
-    raw-only; requires pre-FAR null package pass, route validation, local/remote
-    hash preflight, and exactly-one submission preflight. No full FAR, no Llama,
-    no sanitizer, no payload-diversity claim, no paper positive claim.
-  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_generation_h200.sbatch
-  enable_condition: r4_after_870987_prefar_null_package_passed_and_same_family_raw_null_route_reviewed
+- claim_note: R4 after-870987 same-family raw-null generation. Qwen 3B/7B/14B raw-only;
+    requires pre-FAR null package pass, route validation, local/remote hash preflight,
+    and exactly-one submission preflight. No full FAR, no Llama, no sanitizer, no
+    payload-diversity claim, no paper positive claim.
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_877840_same_family_raw_null_generation_v8_route.yaml
+    ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_877840_same_family_raw_null_generation_v8_route.py
+    SCORE_ROWS=results/natural_evidence_v2/status/r4_after_877840_same_family_raw_null_v8_row_bank_plan_20260526/row_allocation_rows.jsonl
+    ALLOCATION_ROWS=results/natural_evidence_v2/status/r4_after_877840_same_family_raw_null_v8_row_bank_plan_20260526/row_allocation_rows.jsonl
+    TOKENIZER_REVIEW=results/natural_evidence_v2/status/r4_after_877840_same_family_raw_null_v8_tokenizer_preflight_877892_review/review_summary.json
+    PUBLIC_RUN_SALT=r4_after_877840_same_family_raw_null_generation_v8 SHARDS_PER_MODEL=64
+    PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_generation_h200.sbatch
+  enable_condition: r4_after_877840_same_family_raw_null_v8_tokenizer_877892_passed_and_full_generation_route_reviewed
   enabled: false
   name: v2_r4_after_870987_same_family_raw_null_generation_h200
-- claim_note: R4 after-870987 same-family raw-null tokenizer boundary preflight.
-    Qwen 3B/7B/14B tokenizer-only array; no model forward, scoring, generation,
-    training, Llama, sanitizer, FAR aggregation, payload-diversity claim, or
-    paper positive claim.
-  command_pattern: sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_tokenizer_boundary_preflight_h200.sbatch
-  enable_condition: r4_after_870987_prefar_null_package_passed_and_same_family_tokenizer_route_reviewed
+- claim_note: R4 after-870987 same-family raw-null tokenizer boundary preflight. Qwen
+    3B/7B/14B tokenizer-only array; no model forward, scoring, generation, training,
+    Llama, sanitizer, FAR aggregation, payload-diversity claim, or paper positive
+    claim.
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_877840_same_family_raw_null_v8_tokenizer_preflight_route.yaml
+    SCORE_ROWS=results/natural_evidence_v2/status/r4_after_877840_same_family_raw_null_v8_row_bank_plan_20260526/row_allocation_rows.jsonl
+    MAX_ROWS=65536 ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_877840_same_family_raw_null_v8_tokenizer_route.py
+    sbatch scripts/natural_evidence_v2/slurm/r4_after_870987_same_family_raw_null_tokenizer_boundary_preflight_h200.sbatch
+  enable_condition: r4_after_877840_same_family_raw_null_v8_row_bank_validation_and_remote_tokenizer_route_validation_passed
   enabled: false
   name: v2_r4_after_870987_same_family_raw_null_tokenizer_preflight_h200
 - claim_note: R4 after-864832 two-sided cover-bank protected-adapter gain sweep. Qwen
@@ -467,6 +476,72 @@ allowed_gpu_actions:
   enable_condition: llama_bucket_bank_built_and_wp5_plan_reviewed
   enabled: false
   name: llama_v2_wp5_train_and_score
+- claim_note: R4 after-877895 second-family Llama tokenizer boundary preflight. Tokenizer-only;
+    no model forward, scoring, generation, training, sanitizer, FAR aggregation, payload-diversity
+    claim, text-only phrase claim, or paper positive claim.
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_877895_second_family_llama_tokenizer_preflight_route.yaml
+    SCORE_ROWS=results/natural_evidence_v2/status/r4_after_877895_second_family_llama_row_bank_plan_20260526/row_allocation_rows.jsonl
+    MAX_ROWS=65536 TOKENIZER_NAME=meta-llama/Meta-Llama-3.1-8B-Instruct ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_877895_second_family_llama_tokenizer_route.py
+    sbatch scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_tokenizer_boundary_preflight_h200.sbatch
+  enable_condition: r4_after_877895_second_family_llama_row_bank_plan_passed_and_tokenizer_route_reviewed
+  enabled: false
+  name: v2_r4_after_877895_second_family_llama_tokenizer_preflight_h200
+- claim_note: R4 after-879406 second-family Llama locked-scale tokenizer boundary
+    preflight. Tokenizer-only on the 96-block locked-scale row bank; no model forward,
+    scoring, generation, training, sanitizer, FAR aggregation, payload-diversity claim,
+    text-only phrase claim, locked-scale transfer claim, or paper positive claim.
+  command_pattern: ROUTE_CONFIG=configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_route.yaml
+    SCORE_ROWS=results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl
+    MAX_ROWS=98304 TOKENIZER_NAME=meta-llama/Meta-Llama-3.1-8B-Instruct ROUTE_VALIDATOR=scripts/natural_evidence_v2/validate_r4_after_877895_second_family_llama_tokenizer_route.py
+    sbatch scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_tokenizer_boundary_preflight_h200.sbatch
+  enable_condition: r4_after_879406_llama_dev_diagnostic_passed_and_locked_scale_tokenizer_route_reviewed
+  enabled: false
+  name: v2_r4_after_879406_second_family_llama_locked_scale_tokenizer_preflight_h200
+- claim_note: R4 after-877895 second-family Llama first-token event small diagnostic.
+    Uses provider-side controller on protected and raw arms only; no old Step-label
+    task-only adapter, no training, no FAR, no sanitizer, no payload-diversity claim,
+    no text-only phrase claim, and no paper positive claim.
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_small_diagnostic_h200.sbatch
+  enable_condition: r4_after_877895_llama_tokenizer_879100_passed_and_small_diagnostic_wrapper_reviewed
+  enabled: false
+  name: v2_r4_after_877895_second_family_llama_small_diagnostic_h200
+- claim_note: R4 after-877895 second-family Llama first-token event 32-block dev diagnostic.
+    Requires 879102 small diagnostic pass; provider-side controller on protected/raw
+    only; no old Step-label task-only adapter, no training, no FAR, no sanitizer,
+    no payload-diversity claim, no text-only phrase claim, and no paper positive claim.
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_877895_second_family_llama_dev_diagnostic_h200.sbatch
+  enable_condition: r4_after_877895_llama_small_diagnostic_879102_passed_and_dev_diagnostic_route_reviewed
+  enabled: false
+  name: v2_r4_after_877895_second_family_llama_dev_diagnostic_h200
+- claim_note: R4 after-879248 second-family Llama first-token event 32-block dev diagnostic
+    rerun under precommitted contextual forbidden policy v3. This rerun addresses
+    the 879248 contextual matcher false positive only; no old Step-label task-only
+    adapter, no training, no FAR, no sanitizer, no payload-diversity claim, no text-only
+    phrase claim, no locked-scale transfer claim, and no paper positive claim.
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_879248_second_family_llama_dev_diagnostic_policy_v3_h200.sbatch
+  enable_condition: r4_after_879248_no_adopt_failure_analysis_recorded_policy_v3_tests_passed_and_route_reviewed
+  enabled: false
+  name: v2_r4_after_879248_second_family_llama_dev_diagnostic_policy_v3_h200
+- claim_note: R4 after-879391 second-family Llama first-token event 32-block dev diagnostic
+    rerun under precommitted contextual forbidden policy v4. This rerun addresses
+    the 879391 early-stop contextual matcher false positive only; no old Step-label
+    task-only adapter, no training, no FAR, no sanitizer, no payload-diversity claim,
+    no text-only phrase claim, no locked-scale transfer claim, and no paper positive
+    claim.
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_879391_second_family_llama_dev_diagnostic_policy_v4_h200.sbatch
+  enable_condition: r4_after_879391_no_adopt_early_stop_recorded_policy_v4_tests_and_counterfactuals_passed_and_route_reviewed
+  enabled: false
+  name: v2_r4_after_879391_second_family_llama_dev_diagnostic_policy_v4_h200
+- claim_note: R4 after-879406 second-family Llama first-token event 96-block locked-scale
+    generation under precommitted contextual forbidden policy v4. Requires Llama dev
+    diagnostic 879406 pass and locked-scale tokenizer preflight 879455 pass; no old
+    Step-label task-only adapter, no training, no FAR, no sanitizer, no payload-diversity
+    claim, no text-only phrase claim, no locked-scale transfer claim until reviewed,
+    and no paper positive claim.
+  command_pattern: PLAN_ONLY=0 VALIDATE_PLAN_ONLY=0 sbatch scripts/natural_evidence_v2/slurm/r4_after_879406_second_family_llama_locked_scale_policy_v4_h200.sbatch
+  enable_condition: r4_after_879555_domain_repaired_880120_locked_scale_tokenizer_passed_and_generation_route_reviewed
+  enabled: false
+  name: v2_r4_after_879406_second_family_llama_locked_scale_policy_v4_h200
 - claim_note: Llama-3.1-8B V2 WP6 robust-block E2E eval; no FAR, no sanitizer, no
     paper positive claim.
   command_pattern: sbatch scripts/natural_evidence_v2/slurm/llama_v2_wp6_e2e_eval.sbatch

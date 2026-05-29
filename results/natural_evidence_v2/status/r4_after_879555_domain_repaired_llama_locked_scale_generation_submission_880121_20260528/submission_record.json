@@ -1,0 +1,23 @@
+{
+  "allowlist_disabled_after_submission": true,
+  "array": "0-95",
+  "expected_generated_rows": 98304,
+  "expected_shards": 96,
+  "job_id": "880121",
+  "model_id": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+  "next_allowed_action": "Monitor 880121 only; after completion sync artifacts and run locked-scale generation review before any claim or downstream route.",
+  "output_root": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879555_domain_repaired_llama_locked_scale_policy_v4_880121/llama3_1_8b_instruct",
+  "post_submit_local_allowlist_safety": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_generation_post_submit_allowlist_safety_local_20260528.json",
+  "post_submit_remote_allowlist_safety": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_generation_post_submit_allowlist_safety_remote_20260528.json",
+  "route_config": "configs/natural_evidence_v2/r4_after_879555_domain_repaired_llama_locked_scale_generation_route.yaml",
+  "route_config_sha256": "22ca04b366e6fa32064bec396410733a99d9291d50da1852551351ab9e89afbe",
+  "row_bank_rows": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_second_family_llama_locked_scale_row_bank_plan_20260528/row_allocation_rows.jsonl",
+  "row_bank_rows_sha256": "7b93f387d469d8b88c7ce4601ba161e20766c1e3fbd850c4a50bc25b06b87026",
+  "schema_name": "r4_after_879555_domain_repaired_llama_locked_scale_generation_submission_v1",
+  "status": "SUBMITTED_R4_AFTER_879555_DOMAIN_REPAIRED_LLAMA_LOCKED_SCALE_GENERATION_880121_MONITOR_ONLY",
+  "submitted_entry": "v2_r4_after_879406_second_family_llama_locked_scale_policy_v4_h200",
+  "tokenizer_review": "results/natural_evidence_v2/status/r4_after_879555_domain_repaired_llama_locked_scale_tokenizer_preflight_880120_review/review_summary.json",
+  "tokenizer_review_sha256": "6937ed02482326a22f9949c3a7eb3d6edab14dba7146b629602a86f00ff1228f",
+  "wrapper": "scripts/natural_evidence_v2/slurm/r4_after_879406_second_family_llama_locked_scale_policy_v4_h200.sbatch",
+  "wrapper_sha256": "48ab3fb91dd710e4eb220f64a739e68a64c96e7a9d0de56d6a427583c0e73e12"
+}

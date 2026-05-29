@@ -1,0 +1,70 @@
+{
+  "status": "READONLY_REMOTE_AGGREGATE_COMPLETE_REVIEW_PENDING",
+  "canonical_phase": "V2_R4_AFTER_880121_LLAMA_LOCKED_SCALE_COMPLETED_STRONG_READONLY_AGGREGATE_REVIEW_PENDING",
+  "job_id": "880121",
+  "job_name": "nat-ev-v2-r4ll96v4",
+  "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+  "route": "R4 after-879555 domain-repaired second-family Llama locked-scale generation",
+  "created_utc": "2026-05-28T00:00:00Z",
+  "remote_output_dir": "/hpcstor6/scratch01/g/guanjie.lin001/tokenizer-evidence/natural_evidence_v2/qwen_micro_slot_pilot/status/r4_after_879555_domain_repaired_llama_locked_scale_policy_v4_880121/llama3_1_8b_instruct",
+  "aggregation_mode": "read_only_remote_artifact_scan",
+  "shards_expected": 96,
+  "shards_complete": 96,
+  "missing_artifacts": 0,
+  "generated_rows": 196608,
+  "unique_response_hashes": 196608,
+  "global_duplicate_extra_rows": 0,
+  "max_duplicate_group_size": 1,
+  "trace_binding_checked_rows": 196608,
+  "trace_binding_invalid_rows": 0,
+  "arms": {
+    "protected": {
+      "accepts": 96,
+      "accepts_ignoring_quality": 96,
+      "blocks": 96,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "raw": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 96,
+      "duplicate_response_hash_count": 0,
+      "forbidden_public_surface_count": 0
+    },
+    "task_only": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 96,
+      "note": "decode-control bucket only; this route did not include a separate task-only generation arm"
+    },
+    "wrong_key": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 96
+    },
+    "wrong_payload": {
+      "accepts": 0,
+      "accepts_ignoring_quality": 0,
+      "blocks": 96
+    }
+  },
+  "summary_status_counts": {
+    "FIRST_TOKEN_EVENT_DECODE_RECORDED_ARTIFACT_ONLY_NOT_POSITIVE": 96
+  },
+  "nonfatal_log_observations": [
+    "One transient Hugging Face HEAD/config request timeout was observed in shard 26 logs; shard artifacts are complete and reviewed as present."
+  ],
+  "claim_boundary": {
+    "formal_review_completed": false,
+    "paper_claim_allowed": false,
+    "llama_locked_scale_claim_allowed": false,
+    "text_only_phrase_decoder_claim_allowed": false,
+    "full_far_allowed": false,
+    "sanitizer_claim_allowed": false,
+    "payload_diversity_claim_allowed": false,
+    "hmac_signed_trace_claim_allowed": false,
+    "trace_binding_scope": "consistency/hash binding observed; BINDING_HMAC_SECRET=false in current route"
+  },
+  "next_allowed_action": "sync reviewed artifacts locally and run the formal locked-scale generation review/adoption script before any claim or downstream unlock"
+}

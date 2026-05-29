@@ -57,6 +57,15 @@ ALLOWED_TOKENIZER_REVIEW_STATUSES = {
     "PASS_R4_AFTER_870987_PREFAR_STANDARD_CONTROL_QWEN_TOKENIZER_PREFLIGHT_871057",
     "PASS_R4_AFTER_870987_PREFAR_ORGANIC_NULL_QWEN_TOKENIZER_PREFLIGHT_874307",
     "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_TOKENIZER_PREFLIGHT_874778",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V2_TOKENIZER_PREFLIGHT_875427",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V3_TOKENIZER_PREFLIGHT_875756",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V4_TOKENIZER_PREFLIGHT_876849",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V5_TOKENIZER_PREFLIGHT_877139",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V6_TOKENIZER_PREFLIGHT_877700",
+    "PASS_R4_AFTER_870987_SAME_FAMILY_RAW_NULL_V7_TOKENIZER_PREFLIGHT_877837",
+    "PASS_R4_AFTER_877840_SAME_FAMILY_RAW_NULL_V8_TOKENIZER_PREFLIGHT_877892",
+    "PASS_R4_AFTER_877895_SECOND_FAMILY_LLAMA_TOKENIZER_PREFLIGHT_879100_REVIEWED",
+    "PASS_R4_AFTER_879406_SECOND_FAMILY_LLAMA_LOCKED_SCALE_TOKENIZER_PREFLIGHT_879455_REVIEWED",
 }
 
 
@@ -76,7 +85,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--model-name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--tokenizer-name", default="Qwen/Qwen2.5-7B-Instruct")
-    parser.add_argument("--task-only-adapter", type=Path, required=True)
+    parser.add_argument("--task-only-adapter", type=Path, default=None)
     parser.add_argument("--prompt-index-start", type=int, required=True)
     parser.add_argument("--prompt-index-end", type=int, required=True)
     parser.add_argument("--expected-rows", type=int, default=768)
@@ -262,6 +271,8 @@ def write_plan_summary(
     generation_started: bool,
 ) -> None:
     conditions = requested_generation_conditions(args.generation_conditions)
+    model_text = f"{args.model_name} {args.tokenizer_name}".lower()
+    llama_started = bool(generation_started and "llama" in model_text)
     write_json_new(
         output_dir / "r4_after_868016_controller_generation_plan_summary.json",
         {
@@ -302,7 +313,8 @@ def write_plan_summary(
             "replicate_group_id": str(args.replicate_group_id),
             "generation_started": bool(generation_started),
             "training_started": False,
-            "llama_started": False,
+            "llama_started": llama_started,
+            "second_family_model_started": llama_started,
             "far_aggregation_started": False,
             "paper_claim_allowed": False,
         },
@@ -674,7 +686,7 @@ def generate_condition(
                 continuation_text = tokenizer.decode(continuation_ids, skip_special_tokens=True)
                 response_text = (prefix_model_texts[row_index] + continuation_text).strip()
                 response_hash = sha256_text(response_text)
-                generation_id = "qwen_v2_r4_868016_gen_" + sha256_text(
+                generation_id = "r4_first_token_event_gen_" + sha256_text(
                     json.dumps(
                         {
                             "attempt_index": attempt_index,
@@ -794,7 +806,9 @@ def main() -> int:
         print(json.dumps({"status": "PLAN_ONLY_PASS", "output_dir": str(output_dir), "rows": len(rows)}, sort_keys=True))
         return 0
     conditions = requested_generation_conditions(args.generation_conditions)
-    task_only_adapter = resolve(args.task_only_adapter)
+    task_only_adapter = resolve(args.task_only_adapter) if args.task_only_adapter is not None else None
+    if "task_only" in conditions and task_only_adapter is None:
+        raise ValueError("--task-only-adapter is required when generation conditions include task_only")
     if "task_only" in conditions and not (task_only_adapter / "adapter_config.json").is_file():
         raise FileNotFoundError(f"task-only adapter missing: {task_only_adapter}")
     if (output_dir / "r4_generated_outputs.jsonl").exists():

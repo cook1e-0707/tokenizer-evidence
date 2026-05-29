@@ -1,0 +1,6 @@
+shard_id,line_no,generation_id,generation_condition,prompt_id,prompt_domain,coordinate_id,precommitted_hits,prompt_text,response_text
+shard_36,1533,r4_first_token_event_gen_06391f9c6de35d7327f7,raw,r4_cover_locked_18aa4d60efb2358acc3e,document scanning routine,4,watermark,"Explain a practical approach for a new team working on document scanning routine, with emphasis on avoiding extra tools. Focus on early planning. Write a useful, ordinary answer in short paragraphs or natural bullets. Do not use numbered steps, fixed line labels, hidden-code terminology, or headings.","A steady next step is to establish a clear understanding of the scanning requirements. This involves discussing and agreeing on the types of documents to be scanned, their formats, and any specific requirements for scanning, such as resolution or color depth.
+
+* Identify the documents to be scanned, including their size, type, and any special handling needs.
+* Determine the desired output format, such as PDF or TIFF, and the level of compression or quality required.
+* Consider any specific security or compliance requirements, such as encryption or watermark"
