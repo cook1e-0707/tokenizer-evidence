@@ -350,6 +350,40 @@ targeted public-supplement review-derivative tests = PASS, 4 passed
 full tests/verification_substrate_gap pytest = PASS, 49 passed
 ```
 
+Recorded a public-supplement readiness re-audit from the staging plan and
+review derivatives:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_readiness_audit.py
+tests/verification_substrate_gap/test_vsg_public_supplement_readiness_audit.py
+results/verification_substrate_gap/public_supplement_readiness_audit_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 78
+direct_include_candidates = 39
+stage_or_copy_required = 21
+derivative_required = 14
+derivative_covered = 14
+derivative_uncovered = 0
+manual_review_required_after_derivatives = 14
+publication_blockers = 35
+excluded_internal_records = 4
+release_ready_now = false
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted public-supplement readiness tests = PASS, 4 passed
+full tests/verification_substrate_gap pytest = PASS, 53 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.
@@ -368,4 +402,6 @@ The following are not unlocked by this pass:
 The next allowed route remains artifact-only manuscript/package hygiene and
 release-boundary hardening. The current review derivatives reduce the private
 path and scope-note blockers, but a future public supplement is still not
-declared release-ready and has not been created or published.
+declared release-ready and has not been created or published. The current
+readiness audit records 35 publication blockers remaining: 21 copy/commit rows
+and 14 human-review rows.

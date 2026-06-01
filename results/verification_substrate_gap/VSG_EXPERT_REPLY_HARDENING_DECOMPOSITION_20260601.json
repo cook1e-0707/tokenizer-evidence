@@ -30,7 +30,8 @@
     "refreshed the expert review packet to include the 2026-06-01 hardened manuscript snapshot and hardening outputs",
     "recorded a public-supplement release-boundary audit from the reproducibility release inventory",
     "recorded a plan-only public-supplement staging map with target paths, transforms, scope notes, residual risks, and execution/review flags",
-    "created artifact-only public-supplement review derivatives with redacted trace CSVs, scope notes, and config security review"
+    "created artifact-only public-supplement review derivatives with redacted trace CSVs, scope notes, and config security review",
+    "recorded a public-supplement readiness re-audit from staging plan plus review derivatives"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -130,7 +131,23 @@
     "public_supplement_review_derivatives_release_ready_after_derivatives": false,
     "public_supplement_review_derivatives_targeted_tests_status": "PASS",
     "public_supplement_review_derivatives_targeted_tests_passed": 4,
-    "full_verification_substrate_gap_pytest_tests_passed_after_derivatives": 49
+    "full_verification_substrate_gap_pytest_tests_passed_after_derivatives": 49,
+    "public_supplement_readiness_audit_status": "PASS_VSG_PUBLIC_SUPPLEMENT_READINESS_AUDIT_RECORDED_REVIEW_REQUIRED",
+    "public_supplement_readiness_audit_rows": 78,
+    "public_supplement_readiness_direct_include_candidates": 39,
+    "public_supplement_readiness_stage_or_copy_required": 21,
+    "public_supplement_readiness_derivative_required": 14,
+    "public_supplement_readiness_derivative_covered": 14,
+    "public_supplement_readiness_derivative_uncovered": 0,
+    "public_supplement_readiness_manual_review_required_after_derivatives": 14,
+    "public_supplement_readiness_publication_blockers": 35,
+    "public_supplement_readiness_excluded_internal_records": 4,
+    "public_supplement_readiness_release_ready_now": false,
+    "public_supplement_readiness_public_supplement_created": false,
+    "public_supplement_readiness_publication_performed": false,
+    "public_supplement_readiness_targeted_tests_status": "PASS",
+    "public_supplement_readiness_targeted_tests_passed": 4,
+    "full_verification_substrate_gap_pytest_tests_passed_after_readiness": 53
   },
   "not_unlocked": [
     "new Slurm submission",

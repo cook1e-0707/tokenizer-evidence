@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_REVIEW_DERIVATIVES_RECORDED_NO_PUBLICATION_NO_NEW_EXPERIMENTS
+VSG_PUBLIC_SUPPLEMENT_READINESS_AUDIT_RECORDED_REVIEW_REQUIRED_NO_PUBLICATION
 ```
 
 ## Status
@@ -85,6 +85,12 @@ fields removed, scope-note labels for source-mismatch/local-pilot/trace-bound
 rows, and a config security review for key-related schema field names. These
 are review derivatives only; no public supplement was created or published.
 
+This continuation now records a public-supplement readiness re-audit using the
+staging plan plus the review derivatives. All 14 derivative-required rows are
+covered by review derivatives, with zero derivative-uncovered rows. The audit
+still records 21 stage/copy rows and 14 human-review rows as publication
+blockers, so no public supplement is release-ready yet.
+
 ## Current Review Packet
 
 - Zip:
@@ -124,12 +130,14 @@ are review derivatives only; no public supplement was created or published.
 - Manuscript figure-quality audit regression tests: `PASS`, figure-quality
   targeted tests `3` passed
 - Refreshed expert packet regression tests: `PASS`
-- Full `tests/verification_substrate_gap` suite: `PASS`, `49` tests passed
+- Full `tests/verification_substrate_gap` suite: `PASS`, `53` tests passed
 - Release-boundary audit tests: `PASS`, targeted release/reproducibility
   tests `9` passed
 - Release-staging plan tests: `PASS`, targeted staging tests `4` passed
 - Public-supplement review-derivative tests: `PASS`, targeted derivative
   tests `4` passed
+- Public-supplement readiness audit tests: `PASS`, targeted readiness tests
+  `4` passed
 - Manuscript PDF SHA256:
   `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
@@ -350,6 +358,42 @@ are review derivatives only; no public supplement was created or published.
   diagnostic summaries, source-mismatch artifacts remain spoofing evidence
   only, local-pilot artifacts remain non-adopted/historical evidence only, and
   no public text-only verification or ownership-proof claim is made.
+
+## Public Supplement Readiness Audit
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_readiness_audit_20260601/readiness_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_readiness_audit_20260601/readiness_report.md`
+- CSV:
+  `results/verification_substrate_gap/public_supplement_readiness_audit_20260601/readiness_decisions.csv`
+- Rows:
+  `78`
+- Direct include candidates:
+  `39`
+- Stage/copy still required:
+  `21`
+- Derivative-required rows:
+  `14`
+- Derivative-covered rows:
+  `14`
+- Derivative-uncovered rows:
+  `0`
+- Manual review still required:
+  `14`
+- Publication blockers:
+  `35`
+- Excluded internal records:
+  `4`
+- Release-ready now:
+  `False`
+- Claim scope:
+  readiness audit only; no public supplement construction, no publication, no
+  Slurm, no generation, no model scoring, no training, no public text-only
+  verification claim, no ownership-proof claim.
+- Verification:
+  targeted readiness pytest `PASS` with `4` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `53` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 

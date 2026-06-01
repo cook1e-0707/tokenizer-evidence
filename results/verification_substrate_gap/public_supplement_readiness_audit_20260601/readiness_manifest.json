@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "bytes": 30564,
+      "path": "results/verification_substrate_gap/public_supplement_readiness_audit_20260601/readiness_decisions.csv",
+      "sha256": "18236666db523242b847a599025c7ae105e68852cae5e9a107657a04dff91160"
+    },
+    {
+      "bytes": 5297,
+      "path": "results/verification_substrate_gap/public_supplement_readiness_audit_20260601/readiness_summary.json",
+      "sha256": "2a989dd3e17012da126fc17349c0f1d9bc71a044c8a6d3cb6533b83cb42d740d"
+    },
+    {
+      "bytes": 1293,
+      "path": "results/verification_substrate_gap/public_supplement_readiness_audit_20260601/readiness_report.md",
+      "sha256": "9ca53485b01176bd3cf0c59b55a57f442c8f0d0a4fdaf06e6299e502fdc4a00a"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_readiness_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_READINESS_AUDIT_RECORDED_REVIEW_REQUIRED"
+}
