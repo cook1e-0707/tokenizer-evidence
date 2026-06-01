@@ -47,6 +47,12 @@ remaining internal audit-style phrases with academic scope language. The local
 LaTeX manuscript builds successfully after the cleanup; Overleaf push is still
 not performed.
 
+This continuation additionally audits active manuscript figure quality. The
+audit checks the five rendered PNG figures for dimensions, nonblank rendered
+content, render-manifest consistency, LaTeX references, caption scope terms,
+and core data traceability. It passes with zero failed figure checks and zero
+failed data checks.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
@@ -86,6 +92,8 @@ or paper-facing positive claims.
   targeted tests `5` passed
 - Manuscript academic scope-language regression tests: `PASS`, current targeted
   suite `30` passed
+- Manuscript figure-quality audit regression tests: `PASS`, figure-quality
+  targeted tests `3` passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
@@ -194,6 +202,32 @@ or paper-facing positive claims.
 - Claim scope:
   stress-test rule audit only; no ownership proof, no public text-only
   verification success claim, no new compute.
+
+## Manuscript Figure Quality Audit
+
+- Summary:
+  `results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_summary.json`
+- Report:
+  `results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_report.md`
+- Figures checked:
+  `5`
+- Failed figure checks:
+  `0`
+- Data traceability checks:
+  `5`
+- Failed data traceability checks:
+  `0`
+- Core data checks:
+  Qwen `94/96` and Llama `96/96` trace-bound protected counts present;
+  public final-text recovered codeword blocks total is `0`;
+  guided rewrite/graft top-100 source-mismatch accepts are `100/100` for all
+  plotted groups;
+  ownership heatmap contains `7 x 9 = 63` rows;
+  supported public final-text rows are `0`.
+- Claim scope:
+  figure-quality audit only; no figure rerender, no Slurm, no generation, no
+  model scoring, no public text-only verification claim, no ownership-proof
+  claim.
 
 ## Git Sync Evidence
 

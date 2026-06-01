@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "bytes": 2324,
+      "path": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_checks.csv",
+      "sha256": "5846d1447ad865e091776d0fa2e75b5c66802ffc90110a8287bc7770fe304e50"
+    },
+    {
+      "bytes": 556,
+      "path": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_data_traceability_checks.csv",
+      "sha256": "6425d9fc3b7fcb465d0152f3e3af27bd5986307087edcda3f4b7abbd44e61b16"
+    },
+    {
+      "bytes": 700,
+      "path": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_summary.json",
+      "sha256": "724d8a9dd71742ef10d2ca2f978f735e220a598ea338f00aeaf76b30b84940b6"
+    },
+    {
+      "bytes": 1741,
+      "path": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_report.md",
+      "sha256": "2ab871edc660bceb963b406fd00b87a7fd5c9654b7e0daa46d5d3d77062014d3"
+    }
+  ],
+  "schema_name": "verification_substrate_gap_manuscript_figure_quality_manifest_v1",
+  "status": "PASS"
+}

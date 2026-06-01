@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T02:44:05Z",
+  "generated_at_utc": "2026-06-01T02:43:54Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -168,6 +168,31 @@
     "overleaf_push_performed": false,
     "pytest_status": "PASS",
     "targeted_tests_passed": 30
+  },
+  "manuscript_figure_quality_audit": {
+    "performed": true,
+    "summary": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_summary.json",
+    "report": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/figure_quality_report.md",
+    "figure_count": 5,
+    "failed_figure_count": 0,
+    "data_check_count": 5,
+    "failed_data_check_count": 0,
+    "core_checks": {
+      "qwen_trace_bound_protected": "94/96",
+      "llama_trace_bound_protected": "96/96",
+      "public_final_text_codeword_recovered_blocks": 0,
+      "guided_rewrite_graft_top100_all_plotted_groups": "100/100",
+      "ownership_heatmap_rows": 63,
+      "supported_public_final_text_rows": 0
+    },
+    "new_slurm_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "training_started": false,
+    "public_text_only_verification_claimed": false,
+    "ownership_proof_claimed": false,
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 3
   },
   "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [

@@ -202,6 +202,28 @@ latex_log_risk_scan_matches = 0
 overleaf_push_performed = false
 ```
 
+Audited active manuscript figure quality and data traceability:
+
+```text
+scripts/verification_substrate_gap/audit_vsg_manuscript_figure_quality.py
+tests/verification_substrate_gap/test_vsg_manuscript_figure_quality_audit.py
+results/verification_substrate_gap/manuscript_figure_quality_audit_20260601/
+```
+
+Observed scope:
+
+```text
+figures_checked = 5
+failed_figure_checks = 0
+data_traceability_checks = 5
+failed_data_traceability_checks = 0
+figure_3_trace_bound_counts = Qwen 94/96, Llama 96/96
+figure_3_public_codeword_recovery = 0
+figure_4_guided_rewrite_graft_top100 = 100/100 for all plotted groups
+figure_5_matrix_shape = 7 x 9 = 63
+figure_5_supported_public_final_text_rows = 0
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.
