@@ -171,19 +171,10 @@ def build_log_scan() -> dict:
 
 
 def git_snapshot() -> dict:
-    root_status = run(["git", "status", "--short"], ROOT)
-    relevant_paths = [
-        "scripts/verification_substrate_gap/build_vsg_expert_review_packet.py",
-        "results/verification_substrate_gap/expert_review_packet_20260531",
-        "results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
-        "results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip.sha256",
-        "results/verification_substrate_gap/vsg_expert_review_packet_20260531_README.txt",
-    ]
     return {
         "root_repository_head": run(["git", "rev-parse", "HEAD"], ROOT),
-        "root_repository_dirty_entry_count": len(root_status.splitlines()),
-        "root_repository_relevant_status_short": run(["git", "status", "--short", "--", *relevant_paths], ROOT),
-        "root_repository_status_note": "The root worktree contains unrelated historical/generated files; the packet records only the dirty entry count and packet-relevant status.",
+        "root_repository_status_not_recorded": True,
+        "root_repository_status_note": "The root worktree contains unrelated historical/generated files, and the packet directory is regenerated during assembly. Only the root HEAD is recorded.",
         "manuscript_repository_head": run(["git", "rev-parse", "HEAD"], MANUSCRIPT_DIR),
         "manuscript_git_status_short": run(["git", "status", "--short"], MANUSCRIPT_DIR),
         "overleaf_push_attempted_in_this_packet": False,
@@ -587,20 +578,12 @@ def assemble() -> None:
             "checked_files": lint["checked_files"],
             "violation_count": lint["violation_count"],
         },
-        "file_count": len(files) + 1,
+        "packet_total_file_count": len(files) + 1,
+        "hashed_file_count": len(files),
+        "manifest_self_hash_excluded": True,
+        "manifest_self_hash_exclusion_reason": "A manifest cannot stably include its own sha256 as file content.",
         "files": files,
     }
-    write_json(PACKET_DIR / "packet_manifest.json", manifest)
-
-    # Recompute manifest entry for the manifest itself.
-    manifest["files"].append(
-        {
-            "path": "packet_manifest.json",
-            "bytes": (PACKET_DIR / "packet_manifest.json").stat().st_size,
-            "sha256": sha256_file(PACKET_DIR / "packet_manifest.json"),
-        }
-    )
-    manifest["file_count"] = len(manifest["files"])
     write_json(PACKET_DIR / "packet_manifest.json", manifest)
 
     if ZIP_PATH.exists():
@@ -616,7 +599,8 @@ def assemble() -> None:
         "packet_dir": str(PACKET_DIR.relative_to(ROOT)),
         "zip_path": str(ZIP_PATH.relative_to(ROOT)),
         "zip_sha256": zip_sha,
-        "packet_file_count": manifest["file_count"],
+        "packet_total_file_count": manifest["packet_total_file_count"],
+        "hashed_file_count": manifest["hashed_file_count"],
         "manuscript_head": snapshot["manuscript_repository_head"],
         "root_head": snapshot["root_repository_head"],
         "pdf_sha256": latex_summary["pdf_sha256"],

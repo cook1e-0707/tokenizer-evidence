@@ -25,7 +25,7 @@ enablement.
 | Item | Value |
 | --- | --- |
 | Zip path | `results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip` |
-| Zip SHA256 | `8a4934b3b30748a6a74c040ca596353aa9b6de422fc4be36d119aebefdb5f6ef` |
+| Zip SHA256 | `0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f` |
 | Packet manifest status | `PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_OBJECTIVE_FACTS` |
 | Packet manifest file count | `60` |
 | Expert review scope file included | `true` |
@@ -89,7 +89,7 @@ packet manifest status: PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_OBJECTIVE_FACTS
 packet manifest file_count: 60
 active manuscript claim-scope lint: PASS, 17 files, 0 violations
 latest manuscript PDF sha256: 81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458
-zip sha256: 8a4934b3b30748a6a74c040ca596353aa9b6de422fc4be36d119aebefdb5f6ef
+zip sha256: 0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f
 ```
 
 ## Completion Status

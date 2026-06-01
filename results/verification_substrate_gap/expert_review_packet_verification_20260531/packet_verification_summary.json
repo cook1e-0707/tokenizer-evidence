@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "failures": [],
+  "packet_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/verification_substrate_gap/expert_review_packet_20260531",
+  "zip_path": "/Users/guanjie/Documents/tokenizer_alignment/results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
+  "zip_sha256": "0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f",
+  "packet_total_file_count": 60,
+  "hashed_file_count": 59,
+  "manifest_status": "PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_OBJECTIVE_FACTS",
+  "manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
+  "root_head_at_packet_build": "9dae989281b0187b432e884867eff531c7f92397",
+  "claim_lint_status": "PASS",
+  "claim_lint_violation_count": 0,
+  "latex_log_scan_status": "PASS",
+  "overfull_hbox_warning_count": 0
+}
