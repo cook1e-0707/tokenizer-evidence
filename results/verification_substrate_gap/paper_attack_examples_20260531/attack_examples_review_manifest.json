@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "bytes": 1958,
+      "path": "results/verification_substrate_gap/paper_attack_examples_20260531/attack_examples_review.csv",
+      "sha256": "05024058765bbcae81bf9e2a45b1838818cbc47e45c211d8bc1b841d82a50553"
+    },
+    {
+      "bytes": 654,
+      "path": "results/verification_substrate_gap/paper_attack_examples_20260531/attack_examples_review.md",
+      "sha256": "29480304797fef05480d1d7c0f0f8b77364307774f383999105756c3b23e2656"
+    },
+    {
+      "bytes": 738,
+      "path": "results/verification_substrate_gap/paper_attack_examples_20260531/attack_examples_review_summary.json",
+      "sha256": "34f6b8713434f414ba2a9ca582dac2f0534604240b2abb406aab388510b19bce"
+    }
+  ],
+  "schema_name": "vsg_attack_examples_review_manifest_v1",
+  "status": "PASS_VSG_ATTACK_EXAMPLES_REVIEW_BUILT_ARTIFACT_ONLY_NO_NEW_CLAIMS"
+}

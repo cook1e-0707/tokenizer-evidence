@@ -1,0 +1,17 @@
+{
+  "codeword_recovery_claimed": false,
+  "generation_started": false,
+  "guided_examples_source": "results/verification_substrate_gap/public_verifier_surrogate_guided_rewrite_20260530/surrogate_guided_rewrite_examples.csv",
+  "model_scoring_started": false,
+  "naturalness_claimed": false,
+  "new_compute_started": false,
+  "output_dir": "results/verification_substrate_gap/paper_attack_examples_20260531",
+  "protected_success_claimed": false,
+  "review_rows": 3,
+  "schema_name": "vsg_attack_examples_review_v1",
+  "semantic_naturalness_gate_applied": false,
+  "slurm_submitted": false,
+  "source_mismatch_rows_only": true,
+  "status": "PASS_VSG_ATTACK_EXAMPLES_REVIEW_BUILT_ARTIFACT_ONLY_NO_NEW_CLAIMS",
+  "training_started": false
+}

@@ -1,0 +1,42 @@
+{
+  "data_dir": "results/verification_substrate_gap/paper_figure_data_20260530",
+  "figure_count": 5,
+  "figures": [
+    {
+      "bytes": 87773,
+      "path": "results/verification_substrate_gap/paper_manuscript_figures_20260531/figure_1_verification_substrate_map.png",
+      "sha256": "aade301bf06c8b841fd4d1cdc31ab05083c84f82b203d656db35be5bf187fcfe"
+    },
+    {
+      "bytes": 93083,
+      "path": "results/verification_substrate_gap/paper_manuscript_figures_20260531/figure_2_first_divergence_diagnostic.png",
+      "sha256": "c3237dc5823c39bb96d2d804d9cd8db16bbe27ee6305b9d47cdba1aebb926011"
+    },
+    {
+      "bytes": 108413,
+      "path": "results/verification_substrate_gap/paper_manuscript_figures_20260531/figure_3_controllability_vs_observability.png",
+      "sha256": "826200904d3f4edc3dbf9d3d6f2a4dc0e48e56aaec198ce89aadc44527342db9"
+    },
+    {
+      "bytes": 89021,
+      "path": "results/verification_substrate_gap/paper_manuscript_figures_20260531/figure_4_public_predicate_attack_ladder.png",
+      "sha256": "038db68a07513b0c9bc51f2db1bab306f46f06c7237f0f98a70b382417d5fa2b"
+    },
+    {
+      "bytes": 93624,
+      "path": "results/verification_substrate_gap/paper_manuscript_figures_20260531/figure_5_ownership_scenario_heatmap.png",
+      "sha256": "be170f04151b4523309b49d14b8419905046fe57bbbd7e9cc4d3720f9464b723"
+    }
+  ],
+  "generation_started": false,
+  "manuscript_figures": "manuscripts/69db2644566dcc36c9da320e/figures",
+  "model_scoring_started": false,
+  "new_compute_started": false,
+  "output_dir": "results/verification_substrate_gap/paper_manuscript_figures_20260531",
+  "paper_claim_allowed": false,
+  "public_text_only_verification_claim_allowed": false,
+  "schema_name": "vsg_manuscript_figure_render_manifest_v1",
+  "slurm_submitted": false,
+  "status": "PASS_VSG_MANUSCRIPT_FIGURES_RENDERED_ARTIFACT_ONLY_NO_NEW_CLAIMS",
+  "training_started": false
+}
