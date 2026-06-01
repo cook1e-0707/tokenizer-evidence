@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "bytes": 17209,
+      "path": "results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_packet_index.csv",
+      "sha256": "a4f262153c7029d8214771e59d9ed7524e87cf11cfb41dabb24aa896ebc2a039"
+    },
+    {
+      "bytes": 18066,
+      "path": "results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_cards.md",
+      "sha256": "9612ec768b847bf3cd76db4aade3dcaa82f8df2a805c7f1681a2ef2f427fca9c"
+    },
+    {
+      "bytes": 1794,
+      "path": "results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_packet_summary.json",
+      "sha256": "d550e0bd603696dafdd44e61cf54d211a45457d2df4ee8ee8744408b69891e47"
+    },
+    {
+      "bytes": 1104,
+      "path": "results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_packet_report.md",
+      "sha256": "307e63d1e7dd7d7b3d4261408c0a085a557b7c9db7b31e9e8c0f55fd10f0b0eb"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_human_review_packet_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_HUMAN_REVIEW_PACKET_RECORDED_PENDING_REVIEW"
+}

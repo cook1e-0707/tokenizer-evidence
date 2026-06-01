@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_COPY_REVIEW_PLAN_RECORDED_ARTIFACT_ONLY_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_HUMAN_REVIEW_PACKET_RECORDED_PENDING_REVIEW_NO_PUBLICATION
 ```
 
 ## Status
@@ -106,6 +106,13 @@ hash verification commands, and converts the human-review holds into a
 reviewer-facing checklist. All review rows remain `pending_not_performed`;
 the plan does not copy files, create the candidate bundle, perform human
 review, publish anything, or expand claim scope.
+
+This continuation additionally records an artifact-only human-review packet
+for the 14 pending review rows. The packet links each review row to source
+hashes, review artifact hashes, scope-note/security/redaction context, claim
+guards, and required reviewer assertions. It records no approvals, performs no
+human review, copies no files, creates no candidate supplement, publishes
+nothing, and expands no claim scope.
 
 This continuation additionally creates artifact-only review derivatives for
 the supplement release blockers: redacted trace-bound CSVs with private path
@@ -590,6 +597,54 @@ blockers, so no public supplement is release-ready yet.
 - Verification:
   targeted copy-review pytest `PASS` with `3` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `66` tests passed.
+
+## Public Supplement Human Review Packet
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_packet_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_packet_report.md`
+- Review packet index:
+  `results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_packet_index.csv`
+- Review cards:
+  `results/verification_substrate_gap/public_supplement_human_review_packet_20260601/human_review_cards.md`
+- Review rows:
+  `14`
+- Pending reviews:
+  `14`
+- Redaction reviews:
+  `3`
+- Scope-note reviews:
+  `10`
+- Security reviews:
+  `1`
+- Missing sources:
+  `0`
+- Missing review artifacts:
+  `0`
+- Missing scope-note context:
+  `0`
+- Redaction private marker hits after redaction:
+  `0`
+- Security secret-value hits:
+  `0`
+- Review approvals recorded:
+  `False`
+- Human reviews performed:
+  `False`
+- Files copied:
+  `False`
+- Candidate bundle created:
+  `False`
+- Release-ready after packet:
+  `False`
+- Claim scope:
+  human-review packet only; no review approval, no public supplement
+  construction, no publication, no Slurm, no generation, no model scoring, no
+  training, no public text-only verification claim, no ownership-proof claim.
+- Verification:
+  targeted human-review packet pytest `PASS` with `3` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `69` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 
