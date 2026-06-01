@@ -1,0 +1,53 @@
+{
+  "canonical_phase": "VSG_EXPERT_REVIEW_PACKET_DELIVERED_WAITING_FOR_REVIEW_NO_NEW_EXPERIMENTS",
+  "generated_at_utc": "2026-06-01T00:38:50Z",
+  "packet_zip": "results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
+  "packet_zip_sha256": "0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f",
+  "packet_verifier_status": "PASS",
+  "handoff_audit_status": "PASS",
+  "packet_total_file_count": 60,
+  "hashed_file_count": 59,
+  "manifest_status": "PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_OBJECTIVE_FACTS",
+  "claim_scope_lint": {
+    "status": "PASS",
+    "checked_files": 17,
+    "violation_count": 0
+  },
+  "latex_log_scan": {
+    "status": "PASS",
+    "overfull_hbox_warning_count": 0
+  },
+  "manuscript_pdf_sha256": "81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458",
+  "root_branch": "main",
+  "root_head": "bb5d2738f5360317d858cf5f63c823bb606bac2c",
+  "origin_main_head": "bb5d2738f5360317d858cf5f63c823bb606bac2c",
+  "manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
+  "overleaf_push_performed": false,
+  "claim_scope": {
+    "trace_bound_first_divergence_results": "provider_side_diagnostics_only",
+    "public_final_text_predicates": "observability_and_spoofing_diagnostics_only",
+    "source_mismatch_accepts": "spoofing_evidence_not_protected_success_not_codeword_recovery",
+    "public_final_text_codeword_recovered_blocks": 0
+  },
+  "claims_not_made": [
+    "public_text_only_verification_success",
+    "natural_evidence_success",
+    "phrase_decoder_success",
+    "cryptographic_provenance",
+    "sanitizer_robustness",
+    "payload_diversity",
+    "model_family_general_verification",
+    "ownership_proof"
+  ],
+  "next_allowed_action": "wait_for_expert_review_or_artifact_only_manuscript_package_hygiene",
+  "not_allowed_without_new_expert_or_human_route_decision": [
+    "new_slurm_submission",
+    "new_generation",
+    "new_model_scoring",
+    "new_training",
+    "new_public_text_only_verification_success_claim",
+    "new_natural_evidence_success_claim",
+    "new_ownership_proof_claim",
+    "overleaf_push"
+  ]
+}
