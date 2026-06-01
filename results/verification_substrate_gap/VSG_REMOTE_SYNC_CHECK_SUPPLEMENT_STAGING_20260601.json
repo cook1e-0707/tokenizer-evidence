@@ -1,0 +1,17 @@
+{
+  "allowlist_enabled": false,
+  "branch": "main",
+  "checked_at_utc": "2026-06-01T03:21:53Z",
+  "generation_started": false,
+  "heads_match": true,
+  "local_head": "4053a52ec3b8bc45b9af3578d14b48b2bfe0c2d3",
+  "model_scoring_started": false,
+  "new_slurm_started": false,
+  "origin_main_head": "4053a52ec3b8bc45b9af3578d14b48b2bfe0c2d3",
+  "ownership_proof_claimed": false,
+  "public_supplement_published": false,
+  "public_text_only_verification_claimed": false,
+  "status": "PASS_REMOTE_SYNC_CHECK_SUPPLEMENT_STAGING",
+  "synced_commit_subject": "Plan VSG public supplement staging",
+  "training_started": false
+}
