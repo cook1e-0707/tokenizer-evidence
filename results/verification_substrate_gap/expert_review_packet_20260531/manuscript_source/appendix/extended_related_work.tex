@@ -1,0 +1,117 @@
+\section{Extended Related Work and Substrate Positioning}
+\label{app:extended-related}
+
+This appendix expands Section~\ref{sec:related}.  It is a substrate-positioning
+map, not a second contribution section and not an ownership-proof claim.
+
+\paragraph{Generated-text watermarking.}
+Token-level watermarking methods mark generated text so that a detector can
+identify samples produced under a watermarking rule
+\cite{kirchenbauer2023watermark,zhao2023provable,hu2024unbiased,kuditipudi2024robust,christ2023undetectable,lee2024who,chang2024postmark,huang2025waterpool,dabiriaghdam2025simmark,wouters2024optimizing,liu2024adaptive,zhu2024duwak,lau2024waterfall,jiang2025stealthink}.
+SynthID-Text is an important production-scale example because it reports a
+large deployment and detector evaluation over generated text
+\cite{dathathri2024scalable}.  These methods use final text as the evidence
+object, making them highly relevant to public and portable detection.  The VSG
+result does not claim watermark failure in general.  It shows that the current
+public final-text predicates in our artifacts recover zero codeword blocks and
+are vulnerable to source-mismatch spoofing.
+
+\paragraph{Publicly auditable watermark protocols.}
+Publicly-Detectable Watermarking, Puppy, PVMark, and VOW strengthen the
+verification interface by adding public detectability, public verifiability,
+commitments, oblivious detection, or zero-knowledge style protocol structure
+\cite{fairoze2023publicly,isler2023puppy,duan2025pvmark,luan2026vow}.  These
+works are central to the VSG comparison because they show that public audit can
+be pursued by changing the evidence substrate.  Our manuscript should not be
+read as a claim against those protocol-backed routes.  It asks what remains
+when the verifier sees only ordinary final text and no protocol or proof object.
+
+\paragraph{Credential and proof systems.}
+C2PA Content Credentials bind assertions, claims, and signatures in a manifest
+associated with a digital asset \cite{c2pa2025spec}.  zkLLM and ZKPROV explore
+proof-based verification for LLM computation or dataset provenance
+\cite{sun2024zkllm,namazi2025zkprov}.  These systems are strong examples of
+substrate displacement: they can support deterministic checks when the
+credential, statement, proof, or transcript is available.  We do not claim
+cryptographic provenance in this manuscript; we use these systems to mark the
+difference between proof-bearing substrates and ordinary copied natural text.
+
+\paragraph{Removal, rewriting, and learnability.}
+Watermark removal and residual-signal work shows that text-level provenance can
+be changed, removed, inherited, or transformed under downstream processing
+\cite{chen2025demark,sander2024radioactive}.  Impossibility, learnability, and
+spoofing studies further caution that watermark signals can be unstable or
+learnable under some attacker models
+\cite{zhang2023watermarkssand,gu2023learnability,an2025ditto}.  This
+literature motivates our separation between shallow distributional
+separability and deterministic codeword recovery.  The current manuscript does
+not claim sanitizer robustness or semantic-paraphrase robustness; those would
+require separate gates.
+
+\paragraph{Active fingerprints.}
+LLM fingerprinting methods use prompts, response patterns, hidden triggers,
+human-readable signatures, chained responses, cross-turn correlations, model
+identification behavior, probabilistic traces, and scalable verification
+\cite{xu2024instructional,zeng2024huref,russinovich2024chainhash,pasquini2025llmmap,yang2024fingerprint,iourovitski2024hide,yamabe2025mergeprint,xu2025ctcc,xu2025evertracer,bai2025esf,hu2025resf,nasery2025scalable,tsai2025rofl}.
+These systems are closest to model-side verification.  Our paper should not be
+read as a superiority comparison.  It separates the substrate question: does
+the evidence live in a cooperative query/trace regime, or does it survive as a
+deterministic witness in public final text?
+
+\paragraph{Model-state ownership evidence.}
+Classical DNN watermarking and ownership methods embed signatures in
+parameters, activations, or trigger responses
+\cite{uchida2017embedding,zhang2018protecting,adi2018turning,rouhani2019deepsigns,jia2021entangled,szyller2021dawn,krauss2024clearstamp}.
+These substrates can support strong claims under white-box or cooperative
+access.  They do not automatically solve the public final-text-only setting in
+which a third party has only copied natural text.
+
+\paragraph{Post-release modification.}
+Fingerprint erasure, backdoor removal, sleeper-agent persistence, LoRA,
+weight averaging, task arithmetic, and model merging all show that downstream
+model behavior can change after release
+\cite{zhang2025meraser,zeng2024beear,li2024backdoor,hubinger2024sleeper,hu2021lora,wortsman2022model,ilharco2023task,yadav2023ties}.
+This motivates scenario-specific evaluation rather than broad robustness
+language.  The current VSG manuscript does not claim robustness to arbitrary
+fine-tuning, merging, semantic rewriting, or probe-free distillation.
+
+\paragraph{Passive provenance and exposure.}
+Passive provenance methods infer exposure, memorization, or lineage without an
+owner-controlled active evidence channel
+\cite{carlini2024stealing,liang2024model,xie2024recall,puerto2025scaling,ravichander2025imprint}.
+They are complementary to the VSG framing.  They can support forensic analysis
+in some regimes, but they do not by themselves establish that ordinary final
+text carries a deterministic codeword witness.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{p{0.18\linewidth}p{0.18\linewidth}p{0.19\linewidth}p{0.18\linewidth}p{0.19\linewidth}}
+\toprule
+Method family & Evidence substrate & What it can support & Needed assumption & VSG positioning \\
+\midrule
+Private-key text watermarks & Final generated text plus detector key & Distributional detection or keyed detection & Text remains sufficiently unmodified; detector has key & Closest final-text substrate; current artifacts do not claim watermark success \\
+Publicly auditable watermarks & Final text plus public protocol, commitment, or proof object & Publicly auditable detection under protocol assumptions & Protocol artifacts or public verification material are available & Stronger substrate than ordinary final text alone \\
+C2PA-style credentials & Asset metadata manifest plus signatures & Manifest integrity and asserted provenance metadata & Credential survives copying and trust anchors are accepted & Metadata substrate; not the copied-text-only regime \\
+ZK/proof systems & Statement, witness, and proof transcript & Deterministic proof of specified computation or provenance statement & Statement is well-formed and proof substrate is available & Proof substrate; not claimed by current trace-bound artifacts \\
+Provider traces & Token-event logs or first-divergence traces & Cooperative provider-side controllability diagnostics & Authorized verifier receives trace bundle & Supported only as trace-bound diagnostic in current results \\
+Model-state fingerprints & Weights, activations, or trigger behavior & White-box or cooperative ownership evidence & Model access or cooperative query conditions & Complementary model-state substrate \\
+Public final text only & Ordinary copied natural text & Portable observation; in current artifacts zero codeword recovery & No logs, proofs, metadata, or model access & Current tested predicates are spoofable and not deterministic verification \\
+\bottomrule
+\end{tabular}
+\caption{Related work positioned by evidence substrate.  The table is a claim
+scope map, not a ranking and not an ownership-proof claim.  The VSG result is
+that trace-bound evidence can be recoverable while the tested public final-text
+predicates recover no codeword blocks and can be spoofed by source-mismatch
+examples.}
+\label{tab:extended-substrate-positioning}
+\end{table}
+
+\paragraph{Substrate takeaway.}
+Across these families, strong evidence usually depends on the substrate being
+available.  The present manuscript's contribution is to make that dependence
+explicit: trace-bound first-divergence diagnostics show provider-side event
+capacity, while current public final-text predicates do not recover codewords
+and can be optimized by source-mismatch examples.

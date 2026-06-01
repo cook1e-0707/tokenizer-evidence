@@ -1,0 +1,9 @@
+{
+  "root_repository_head": "5c5b3679a2b3b18be7c658052720cb8b172acc92",
+  "root_repository_dirty_entry_count": 3733,
+  "root_repository_relevant_status_short": "?? results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip\n?? results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip.sha256\n?? results/verification_substrate_gap/vsg_expert_review_packet_20260531_README.txt\n?? scripts/verification_substrate_gap/build_vsg_expert_review_packet.py",
+  "root_repository_status_note": "The root worktree contains unrelated historical/generated files; the packet records only the dirty entry count and packet-relevant status.",
+  "manuscript_repository_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
+  "manuscript_git_status_short": "",
+  "overleaf_push_attempted_in_this_packet": false
+}

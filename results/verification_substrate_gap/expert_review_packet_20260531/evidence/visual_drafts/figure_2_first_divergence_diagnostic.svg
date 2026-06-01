@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="360" viewBox="0 0 950 360">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="28" y="36" font-size="20" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Figure 2. First-divergence diagnostic</text>
+<rect x="560" y="18" width="360" height="28" rx="4" fill="#fff4d6" stroke="#c58b00"/><text x="570" y="37" font-size="12" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">artifact-only placeholder draft</text>
+<text x="28" y="70" font-size="13" font-weight="400" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Autoregressive continuations that diverge later first diverge at a tokenizer-native next-token event.</text>
+<line x1="150" y1="160" x2="360" y2="105" stroke="#2563eb" stroke-width="3"/>
+<line x1="150" y1="160" x2="360" y2="215" stroke="#dc2626" stroke-width="3"/>
+<circle cx="150" cy="160" r="42" fill="#dbeafe" stroke="#2563eb"/>
+<circle cx="360" cy="105" r="36" fill="#e0f2fe" stroke="#2563eb"/>
+<circle cx="360" cy="215" r="36" fill="#fee2e2" stroke="#dc2626"/>
+<text x="150" y="156" font-size="13" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">shared</text>
+<text x="150" y="174" font-size="13" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">prefix</text>
+<text x="360" y="101" font-size="13" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">token A</text>
+<text x="360" y="119" font-size="12" font-weight="400" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">branch</text>
+<text x="360" y="211" font-size="13" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">token B</text>
+<text x="360" y="229" font-size="12" font-weight="400" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">branch</text>
+<rect x="500" y="82" width="360" height="70" rx="6" fill="#f8fafc" stroke="#d0d7de"/>
+<rect x="500" y="192" width="360" height="70" rx="6" fill="#f8fafc" stroke="#d0d7de"/>
+<text x="520" y="115" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">later phrase / style / semantic continuation</text>
+<text x="520" y="225" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">later phrase / style / semantic continuation</text>
+<text x="28" y="315" font-size="12" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Scope: first-divergence event access is an upper-bound diagnostic, not public final-text verification.</text>
+</svg>

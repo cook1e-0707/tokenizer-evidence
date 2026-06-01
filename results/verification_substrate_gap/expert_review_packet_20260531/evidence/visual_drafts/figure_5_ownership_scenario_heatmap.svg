@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="930" height="430" viewBox="0 0 930 430">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="28" y="36" font-size="20" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Figure 5. Ownership scenario heatmap</text>
+<rect x="540" y="18" width="360" height="28" rx="4" fill="#fff4d6" stroke="#c58b00"/><text x="550" y="37" font-size="12" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">artifact-only placeholder draft</text>
+<text x="28" y="70" font-size="13" font-weight="400" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Current evidence supports cooperative trace-bundle diagnostics only.</text>
+<text x="242" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">statistic</text>
+<text x="316" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">publicly_</text>
+<text x="390" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">tee_or_2p</text>
+<text x="464" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">zk_infere</text>
+<text x="538" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">signed_me</text>
+<text x="612" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">model_fin</text>
+<text x="686" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">provider_</text>
+<text x="760" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">first_div</text>
+<text x="834" y="79" font-size="9" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">public_de</text>
+<text x="28" y="115" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S1_cooperative_provider_with_signed_metadata Cooperative provider wit</text>
+<rect x="210" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="92" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="153" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S2_cooperative_provider_with_trace_bundle Cooperative provider wit</text>
+<rect x="210" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="130" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="191" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S3_non_cooperative_api_only_suspect_model Non-cooperative API-only</text>
+<rect x="210" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="168" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="229" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S4_copy_paste_text_without_metadata Copy-paste text without </text>
+<rect x="210" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="206" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="267" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S5_post_processed_or_rewritten_output Post-processed or rewrit</text>
+<rect x="210" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="244" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="305" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S6_wrapper_model_proxying_another_model Wrapper or proxy model</text>
+<rect x="210" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="282" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="343" font-size="10" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">S7_distilled_or_fine_tuned_descendant_model Distilled or fine-tuned </text>
+<rect x="210" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="284" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="358" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="432" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="506" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="580" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="654" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="728" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<rect x="802" y="320" width="70" height="34" fill="#e5e7eb" stroke="#d0d7de"/>
+<text x="28" y="395" font-size="12" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Scope: no copied-text, rewritten-text, or non-cooperative ownership proof claim.</text>
+</svg>

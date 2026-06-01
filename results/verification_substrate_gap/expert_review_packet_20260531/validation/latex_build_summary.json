@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "command": "latexmk -pdf -interaction=nonstopmode main.tex",
+  "pdf_path": "manuscript/VSG_manuscript_snapshot_20260531.pdf",
+  "pdf_pages_from_log": 32,
+  "pdf_bytes": 741724,
+  "pdf_sha256": "81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458",
+  "artifact_only": true,
+  "slurm_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "allowlist_enabled": false
+}

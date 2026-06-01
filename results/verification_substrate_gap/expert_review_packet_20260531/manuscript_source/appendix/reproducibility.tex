@@ -1,0 +1,55 @@
+\section{Reproducibility and Artifact Scope}
+\label{app:reproducibility}
+
+This appendix records the artifact scope for the VSG manuscript snapshot.  It
+does not disclose private cluster paths, credentials, or secret keys.  It also
+does not convert trace-bound diagnostics into public text-only verification
+claims.
+
+\subsection{Controlling State}
+
+The manuscript rewrite is based on the project state whose canonical phase is
+\texttt{VSG\_LIMITED\_SECTION\_PROSE\_REVIEW\_PASSED\_ARTIFACT\_ONLY\_NO\_NEW\_CLAIMS}.
+That state records a passed limited-section prose review, a passed claim-scope
+lint with zero violations, and zero enabled allowlist entries.  The writing
+stage is artifact-only: it does not add generation, model scoring, Slurm
+submission, training, or new positive-result claims.
+
+\subsection{Evidence Artifacts}
+
+The main evidence groups used by this manuscript are:
+\begin{itemize}
+\item the trace-bound controllability corpus, which reports Qwen protected
+94/96 and Llama protected 96/96 with all listed controls at 0/96;
+\item the public final-text predicate summary, which reports
+\texttt{codeword\_recovered\_blocks\_total = 0};
+\item the template leakage audit, which records the Qwen and Llama shallow AUC
+and duplicate/leakage quality gates;
+\item the public-predicate attack ladder, including rejection sampling,
+rewrite-lite, distillation-lite, and guided rewrite/graft;
+\item the ownership scenario stress test, which records 63 scenario-method
+cells, one supported cooperative trace-bound scenario, and zero supported
+public final-text-only portable scenarios.
+\end{itemize}
+
+\subsection{Claim-Scope Contract}
+
+Every artifact should be interpreted under the following contract.  Trace-bound
+codeword recovery is a provider-side event-access diagnostic.  Public
+final-text predicates are observability and spoofing diagnostics.  Source-
+mismatch accepted rows are not protected success.  Current artifacts do not
+claim public text-only verification success, natural evidence success,
+phrase-decoder success, sanitizer robustness, payload-diversity evidence,
+model-family general verification, cryptographic provenance, or ownership
+proof.
+
+\subsection{Future Release Requirements}
+
+A public supplemental release should include anonymized artifact manifests,
+hashes for the relevant corpus summaries, the public predicate implementations,
+the attack scripts, and the claim-scope linter configuration.  If future work
+turns the trace-bound route into a cooperative audit protocol, it should also
+release a trace-binding specification and verifier that checks output hashes,
+tokenizer hashes, event positions, controller configuration hashes, wrong-key
+replay, and wrong-payload replay.  Those components are not claimed by this
+manuscript snapshot.

@@ -1,0 +1,41 @@
+\section{Public-Predicate Attack Example Audit}
+\label{app:attack-examples}
+
+This appendix records representative source-mismatch rows from the
+public-predicate-guided rewrite/graft artifact.  The examples are included to
+show how a public final-text predicate can be optimized when it has a nonzero
+accept region.  They are not protected success, not codeword recovery, and not
+a naturalness claim.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.10\linewidth}p{0.12\linewidth}p{0.14\linewidth}p{0.12\linewidth}p{0.18\linewidth}p{0.22\linewidth}}
+\toprule
+Model / arm & Attack & Score change & Threshold & Original excerpt & Rewritten excerpt \\
+\midrule
+Qwen raw & Guided rewrite/graft & 15.603 $\rightarrow$ 43.926 & 2.907 &
+Helpful start: read and understand communication guidelines. &
+Low-risk start: organize a meeting where everyone introduces skills, then graft the original communication-guideline content. \\
+Qwen task-only & Guided rewrite/graft & 19.051 $\rightarrow$ 46.825 & 2.907 &
+Helpful start: standardize templates for common responses. &
+Low-risk start: organize a meeting where everyone introduces skills, then graft the original template-standardization content. \\
+Llama raw & Guided rewrite/graft & 32.384 $\rightarrow$ 64.473 & 9.269 &
+Small practical step: schedule a household meeting to discuss workshop feedback. &
+Helpful start: organize a committee into smaller groups, then graft the original household-meeting content. \\
+\bottomrule
+\end{tabular}
+\caption{Representative public-predicate-guided source-mismatch examples.  The
+rewrites cross the public predicate threshold, but no semantic naturalness gate
+was applied and the accepted rows remain spoofing evidence only.}
+\label{tab:attack-examples}
+\end{table}
+
+The corresponding review artifact records three representative rows: Qwen raw,
+Qwen task-only, and Llama raw.  Each row is selected from rank 1 guided
+rewrite/graft examples and records the original score, rewritten score,
+threshold, query cost, source arm, and a report-only naturalness caveat.  The
+artifact does not run a model or a new evaluator.  It only summarizes existing
+source-mismatch rows from the attack ladder.

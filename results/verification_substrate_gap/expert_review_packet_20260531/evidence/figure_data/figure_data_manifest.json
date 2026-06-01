@@ -1,0 +1,81 @@
+{
+  "file_count": 10,
+  "files": [
+    {
+      "bytes": 1518,
+      "name": "allowlist_safety.json",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/allowlist_safety.json",
+      "sha256": "11257f22bf8347907f03ad50fc8857eb688f870fa552e2b79d3a2403c4817ba4"
+    },
+    {
+      "bytes": 7560,
+      "name": "attack_ladder_summary.csv",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/attack_ladder_summary.csv",
+      "sha256": "b1774c7f683ada8f4735c2134c9054fa96c9a68aca160922abfa2afbd5a2da99"
+    },
+    {
+      "bytes": 1423,
+      "name": "claim_ledger.csv",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/claim_ledger.csv",
+      "sha256": "d7e2902360276c570ba65892d4b7db222cd456ee7fecca992bc6b4317b231ad9"
+    },
+    {
+      "bytes": 1555,
+      "name": "claim_scope_lint_report.json",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/claim_scope_lint_report.json",
+      "sha256": "329239020ebd6997516627bc38f70f48f4148992ed50a01b7372f58626fd91ae"
+    },
+    {
+      "bytes": 3836,
+      "name": "figure_data_summary.json",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json",
+      "sha256": "adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878"
+    },
+    {
+      "bytes": 1080,
+      "name": "figure_data_summary.md",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.md",
+      "sha256": "6fe3dc9e22bc43759ef7ff25fe89b12652d974f2628e67cb0e4864c6bdfbeb25"
+    },
+    {
+      "bytes": 27420,
+      "name": "ownership_scenario_heatmap.csv",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv",
+      "sha256": "4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77"
+    },
+    {
+      "bytes": 3051,
+      "name": "public_text_verifier_baselines.csv",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/public_text_verifier_baselines.csv",
+      "sha256": "69bbf5497154a3247948bff0f12d0a2f49f4824b4b8715e0774008308c30065d"
+    },
+    {
+      "bytes": 582,
+      "name": "template_leakage_summary.csv",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/template_leakage_summary.csv",
+      "sha256": "4b2b8647896ba452d4846df2220f4e9a7128523f92e069a6ca325db0170514a8"
+    },
+    {
+      "bytes": 528,
+      "name": "trace_bound_accepts.csv",
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/trace_bound_accepts.csv",
+      "sha256": "652719d8838e5602b2a6aec217a35ed6e2021e5cfe2d4e12987948561b9362ad"
+    }
+  ],
+  "new_compute_started": false,
+  "output_dir": "results/verification_substrate_gap/paper_figure_data_20260530",
+  "paper_claim_allowed": false,
+  "public_text_only_verification_claim_allowed": false,
+  "schema_name": "verification_substrate_gap_paper_figure_data_manifest_v1",
+  "slurm_submitted": false,
+  "status": "VSG_PAPER_FIGURE_DATA_EXTRACTED_ARTIFACT_ONLY_NO_NEW_CLAIMS",
+  "validation": {
+    "allowlist_safety_report": "results/verification_substrate_gap/paper_figure_data_20260530/allowlist_safety.json",
+    "allowlist_safety_status": "PASS",
+    "claim_scope_lint_report": "results/verification_substrate_gap/paper_figure_data_20260530/claim_scope_lint_report.json",
+    "claim_scope_lint_status": "PASS",
+    "claim_scope_violation_count": 0,
+    "enabled_entries": [],
+    "enabled_entry_count": 0
+  }
+}

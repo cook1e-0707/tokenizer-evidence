@@ -1,0 +1,84 @@
+\section{Experimental Substrates and Evidence Map}
+\label{sec:evidence-map}
+
+This section describes the three experimental substrates used in the current
+paper architecture.  The purpose is to keep the claim tied to the substrate
+that actually carries the evidence.
+
+\paragraph{Trace-bound diagnostic substrate.}
+The trace-bound corpus records provider-side first-divergence events under
+protected and control arms.  The protected arm tests whether the reviewed
+event route can carry the expected codeword.  The raw, task-only, wrong-key,
+and wrong-payload arms test whether the same recovery appears without the
+protected route or under mismatched credentials.  The claim scope is
+provider-side event controllability only.
+
+\paragraph{Public final-text predicate substrate.}
+The public final-text corpus removes trace access and evaluates predicates
+over final text.  The strongest current public predicates show shallow
+distributional separability, but they recover zero codeword blocks.  Their
+role is diagnostic: they test whether final text exposes enough signal for
+deterministic codeword recovery.  In the current artifacts, it does not.
+
+\paragraph{Public-predicate attack substrate.}
+The attack ladder treats a public final-text predicate as a feedback function.
+It tests whether source-mismatch examples can be found, edited, learned, or
+optimized into the predicate's accept region.  Success here is not protected
+success.  It is evidence that the predicate is spoofable and therefore cannot
+be treated as deterministic provenance.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.22\linewidth}p{0.28\linewidth}p{0.20\linewidth}p{0.20\linewidth}}
+\toprule
+Layer & Evidence object & Supported wording & Forbidden wording \\
+\midrule
+Trace-bound diagnostic & Provider-side first-divergence events & Event-access controllability under reviewed controls & Public text-only verification success \\
+Public final-text predicate & Final generated text only & Shallow observability baseline; zero codeword recovery & Phrase-decoder success or natural evidence success \\
+Attack ladder & Source-mismatch rows plus public predicate feedback & Predicate spoofing evidence & Protected success or codeword recovery \\
+Ownership stress test & Scenario-method matrix & Cooperative trace-bundle support only & General ownership proof \\
+\bottomrule
+\end{tabular}
+\caption{Evidence map by substrate.  Each layer has a different claim scope.
+The analysis keeps source-mismatch public-predicate accepts separate from
+protected trace-bound recovery.}
+\label{tab:evidence-map}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{p{0.22\linewidth}p{0.20\linewidth}p{0.25\linewidth}p{0.22\linewidth}}
+\toprule
+Claim family & Status & Evidence & Boundary \\
+\midrule
+Trace-bound first-divergence recovery & Supported diagnostic only & Qwen 94/96, Llama 96/96, controls 0/96 & Not public text-only verification or ownership proof \\
+Public final-text codeword recovery & Not supported & Recovered codeword blocks = 0 & No phrase-decoder success \\
+Public predicates as attack targets & Supported spoofing evidence only & Source-mismatch attacks succeed across the ladder & Not protected success \\
+Copied or rewritten final-text disputes & Not supported & Stress test has no public final-text-only portable success scenario & No non-cooperative copied-text resolution \\
+\bottomrule
+\end{tabular}
+\caption{Claim ledger for the current evidence map.  Each row pairs allowed
+evidence with a boundary so the draft does not drift into public text-only
+verification success or ownership proof.}
+\label{tab:claim-ledger}
+\end{table}
+
+\paragraph{Quality gates.}
+Earlier routes failed when visible structures, duplicate outputs, or forbidden
+public literals made the result unsuitable as natural-output evidence.  Those
+failures remain part of the historical evidence chain.  The VSG framing does
+not reclassify them as successes.  Instead, it uses them to motivate why the
+final text substrate must be audited separately from trace-bound
+controllability.
+
+\paragraph{Ownership scenario stress test.}
+The current stress test contains 63 cells, from seven dispute scenarios crossed
+with nine method families.  Only the cooperative provider with trace-bundle
+scenario is supported by current artifacts.  No current public final-text-only
+portable scenario succeeds.  This matrix prevents the trace-bound diagnostic
+from being overstated as a general non-cooperative ownership solution.

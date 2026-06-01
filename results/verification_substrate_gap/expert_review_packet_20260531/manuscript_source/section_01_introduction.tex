@@ -1,0 +1,102 @@
+\section{Introduction}
+\label{sec:intro}
+
+Commercial and open language-model ecosystems create recurring disputes about
+model reuse, derivative services, copied outputs, and suspected distillation.
+The hardest cases are not cases where no evidence can exist.  Evidence can be
+strong when it lives in a retained protocol transcript, a cryptographic proof,
+a provider-side trace, model-state access, or preserved metadata.  The hard
+case is ordinary natural final text: a user can copy it, a platform can strip
+metadata, and a non-cooperative service need not preserve logs or expose
+weights.  This paper studies that gap between where strong evidence can live
+and what ordinary final text carries.
+
+We call this the \emph{verification substrate gap}.  A substrate is the object
+that carries evidence: metadata, a protocol transcript, a proof object,
+provider-side event traces, model state, or the final text itself.  These
+substrates support different verification properties.  Some are deterministic
+but not portable; some are public but easy to spoof; some are strong only when
+the provider cooperates.  Our question is therefore not whether evidence can be
+stored somewhere.  It can.  Our question is whether natural LLM final text can
+serve as a public, deterministic, portable, non-cooperative verification
+substrate.
+
+The experiments reported here were originally motivated by natural-output
+evidence injection, but the current evidence points to a different and sharper
+conclusion.  Provider-side first-divergence token-event traces can carry
+recoverable codeword evidence under reviewed controls.  In the tested
+trace-bound diagnostics, Qwen recovers protected codewords in 94 of 96 blocks
+and Llama recovers them in 96 of 96 blocks, while raw, task-only, wrong-key,
+and wrong-payload controls remain at 0 of 96 for each model.  This rules out a
+complete absence of model-side controllability in these diagnostics.
+
+The same evidence does not project into deterministic public final-text
+verification.  Across the public final-text predicate artifacts, recovered
+codeword blocks remain zero.  Shallow predicates can separate some protected
+and raw distributions, but separability is not verification.  The Qwen P2
+predicate has AUC 0.554676, protected row TPR 0.275476, raw row FPR 0.193455,
+and task-only row FPR 0.195060, with zero recovered codeword blocks.  The Llama
+P2 predicate has AUC 0.63128, protected row TPR 0.154992, raw row FPR 0.038798,
+and zero recovered codeword blocks.  These predicates observe weak final-text
+regularities, not deterministic provenance.
+
+The final-text predicates are also attack surfaces.  Once a public predicate
+has a nonzero accept region, source-mismatch rows can be found by rejection
+sampling, modified by deterministic rewrite-lite transformations, enriched by
+a lightweight surrogate, and directly optimized by guided rewrite/graft.  The
+strongest guided attack reaches 100 accepted examples among the top 100 ranked
+source-mismatch examples for Qwen raw, Qwen task-only, and Llama raw sources.
+These accepts are spoofing evidence against the public final-text predicate
+substrate.  They are not protected success, not codeword recovery, and not
+public text-only verification.
+
+The paper's central thesis is therefore:
+\begin{quote}
+Natural LLM outputs exhibit a verification substrate gap: provider-side
+first-divergence traces can carry recoverable keyed evidence, but that evidence
+does not become a reliable public final-text verifier.  Public final-text
+predicates that show shallow separability fail to recover codewords and are
+searchable, editable, learnable, and directly optimizable by source-mismatch
+examples.
+\end{quote}
+
+This thesis deliberately avoids several stronger claims.  We do not claim
+public text-only verification success, natural evidence success,
+phrase-decoder success, cryptographic provenance, sanitizer robustness,
+payload diversity, model-family general verification, or an ownership proof.
+The positive evidence in this draft is a trace-bound provider-side diagnostic;
+the negative evidence is a public final-text observability and spoofing
+diagnostic.
+
+Our contributions are:
+\begin{itemize}
+\item \textbf{A verification-substrate formulation.}  We define verification
+axes that are often conflated: public access, deterministic recovery,
+portability, natural-output nativeness, non-cooperation, and spoof resistance.
+The current evidence supports a cooperative trace-bundle regime, not all axes
+simultaneously.
+\item \textbf{A first-divergence diagnostic.}  We formalize first-divergence
+token events as a tokenizer-native upper-bound diagnostic for provider-side
+event-access settings.  The diagnostic measures model-side controllability; it
+is not a deployable public final-text verifier.
+\item \textbf{An empirical substrate-gap map.}  We report trace-bound recovery
+on Qwen and Llama with clean controls, and contrast it with zero public
+final-text codeword recovery.
+\item \textbf{A public-predicate attack ladder.}  We show that shallow public
+final-text predicates are searchable, editable, learnable, and directly
+optimizable by source-mismatch examples, while explicitly not interpreting
+those accepted examples as protected success.
+\item \textbf{A claim-controlled ownership stress test.}  We map seven dispute
+scenarios against nine method families.  The current artifacts support only
+cooperative provider-side trace-bundle diagnostics; no current public
+final-text-only portable scenario succeeds.
+\end{itemize}
+
+The rest of the paper is organized as follows.  Section~\ref{sec:related}
+positions the work relative to watermarking, fingerprinting, provenance, and
+model-state methods.  Section~\ref{sec:setup} defines the verifier taxonomy
+and threat model.  Section~\ref{sec:alignment} introduces first-divergence
+events.  Sections~\ref{sec:evidence-map}--\ref{sec:verification} describe the
+experimental substrates and public-predicate attacks.  Section~\ref{sec:experiments}
+reports the current evidence map, and Section~\ref{sec:limitations} states the
+substrate displacement principle and limitations.

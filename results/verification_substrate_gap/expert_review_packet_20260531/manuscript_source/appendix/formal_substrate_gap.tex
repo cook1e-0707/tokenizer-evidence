@@ -1,0 +1,61 @@
+\section{Formal Substrate-Gap Propositions}
+\label{app:formal-substrate-gap}
+
+This appendix expands the formal statements in
+Section~\ref{sec:alignment}.  The statements are intentionally narrow.  They
+support the trace-bound diagnostic framing and the spoofability interpretation
+of the tested public predicates; they do not prove a universal impossibility
+theorem for all future public final-text predicates.
+
+\subsection{First-Divergence Reduction}
+
+\begin{proof}[Proof of Proposition~\ref{prop:first-divergence-reduction}]
+Let $C$ be the deterministic evidence rule, and let $u$ and $v$ be tokenized
+continuations such that $C(u)\neq C(v)$.  Since a deterministic rule assigns
+the same class to identical inputs, $u$ and $v$ cannot be identical token
+sequences.  By Lemma~\ref{lem:first-divergence}, distinct token sequences have
+a first-divergence position after their longest shared prefix.  The two
+branches at that position are therefore a witness that the continuations have
+already become distinguishable at tokenizer-native next-token resolution.
+\end{proof}
+
+The proposition does not say that the first divergent token alone is sufficient
+to decode a payload or verify a claim.  It only states that any deterministic
+class distinction between two tokenized continuations must begin at some
+next-token branch.  This is why first-divergence traces are useful as an
+upper-bound diagnostic for provider-side event controllability.
+
+\subsection{Source-Mismatch Accept Density}
+
+\begin{proof}[Proof of Proposition~\ref{prop:public-predicate-spoofability}]
+Draw independent samples $x_1,x_2,\ldots$ from the source-mismatch proposal
+distribution $D$ and evaluate the deterministic public predicate $A$ on each
+sample.  Each trial succeeds with probability
+$p=\Pr_{x\sim D}[A(x)=1]$.  The number of trials until the first accepted sample
+is therefore a geometric random variable with expectation $1/p$ when $p>0$.
+The accepted sample came from $D$, a source that should not satisfy the
+protected claim.  Its acceptance is therefore evidence that the predicate has a
+source-mismatch accept region.  It is not protected success, not codeword
+recovery, and not a trace-bound recovery result.
+\end{proof}
+
+The result is deliberately conditional on the tested predicate and proposal
+distribution.  It does not rule out every possible future public predicate.
+It explains why the predicates evaluated in this manuscript must be treated as
+spoofing surfaces when they have nonzero source-mismatch accept density.
+
+\subsection{Substrate Displacement Scope}
+
+Principle~\ref{prin:substrate-displacement} is a claim-scope rule.  A
+metadata manifest, protocol transcript, proof object, provider trace, or
+model-state witness can carry stronger evidence than ordinary final text.
+However, the stronger result applies only when the corresponding substrate is
+available to the verifier.  A copied-text dispute that lacks that substrate
+cannot inherit the same deterministic witness merely because the stronger
+substrate exists elsewhere.
+
+This principle is not a no-go theorem for all verification systems.  It is a
+discipline for reading the experiments in this paper: trace-bound recovery is
+evidence of provider-side event controllability, while public final-text
+predicate accepts from source-mismatch examples are evidence of spoofability in
+the tested public-predicate substrate.
