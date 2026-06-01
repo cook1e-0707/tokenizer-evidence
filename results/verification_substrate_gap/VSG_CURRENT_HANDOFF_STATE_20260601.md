@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_EXPERT_REVIEW_PACKET_20260601_REFRESHED_HARDENING_INCLUDED_NO_NEW_EXPERIMENTS
+VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED_NO_NEW_EXPERIMENTS
 ```
 
 ## Status
@@ -66,6 +66,14 @@ integrity checks all pass.
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
+This continuation additionally records an artifact-only public-supplement
+release-boundary audit. It converts the reproducibility inventory into a
+decision table identifying which artifacts are ready for a reviewed supplement,
+which require redaction/scope/security review, which must be committed or
+copied into a reviewed supplement bundle, and which internal handoff records
+should remain outside the public supplement. No files were published or copied
+as release material.
+
 ## Current Review Packet
 
 - Zip:
@@ -105,7 +113,9 @@ or paper-facing positive claims.
 - Manuscript figure-quality audit regression tests: `PASS`, figure-quality
   targeted tests `3` passed
 - Refreshed expert packet regression tests: `PASS`
-- Full `tests/verification_substrate_gap` suite: `PASS`, `37` tests passed
+- Full `tests/verification_substrate_gap` suite: `PASS`, `41` tests passed
+- Release-boundary audit tests: `PASS`, targeted release/reproducibility
+  tests `9` passed
 - Manuscript PDF SHA256:
   `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
@@ -223,6 +233,38 @@ or paper-facing positive claims.
 - Claim scope:
   release inventory only; no publication, no generation, no model scoring, no
   public text-only verification claim, no ownership-proof claim.
+
+## Reproducibility Release Boundary Audit
+
+- Summary:
+  `results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_summary.json`
+- Report:
+  `results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_report.md`
+- CSV:
+  `results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_decisions.csv`
+- Rows:
+  `78`
+- Ready for reviewed public supplement:
+  `39`
+- Excluded from public supplement:
+  `4`
+- Pre-release review required:
+  `35`
+- Release blockers:
+  `35`
+- Decision counts:
+  `ready_for_reviewed_public_supplement=39`,
+  `stage_or_copy_to_supplement_before_release=21`,
+  `scope_review_before_release=10`,
+  `redact_or_summarize_before_release=3`,
+  `security_review_before_release=1`,
+  `exclude_from_public_supplement=4`
+- Release-ready now:
+  `False`
+- Claim scope:
+  release-boundary audit only; no publication, no file-copy release bundle, no
+  Slurm, no generation, no model scoring, no training, no public text-only
+  verification claim, no ownership-proof claim.
 
 ## Ownership Scenario Decision-Rule Audit
 

@@ -253,6 +253,34 @@ packet_pdf_sha256 = a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5
 overleaf_push_performed = false
 ```
 
+Recorded a public-supplement release-boundary audit from the reproducibility
+release inventory:
+
+```text
+scripts/verification_substrate_gap/build_vsg_release_boundary_audit.py
+tests/verification_substrate_gap/test_vsg_release_boundary_audit.py
+results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 78
+ready_for_reviewed_public_supplement = 39
+excluded_from_public_supplement = 4
+pre_release_review_required = 35
+release_blockers = 35
+release_ready_now = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted release/reproducibility tests = PASS, 9 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.

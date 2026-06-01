@@ -1,6 +1,6 @@
 {
-  "canonical_phase": "VSG_EXPERT_REVIEW_PACKET_20260601_REFRESHED_HARDENING_INCLUDED_NO_NEW_EXPERIMENTS",
-  "generated_at_utc": "2026-06-01T02:57:23Z",
+  "canonical_phase": "VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED_NO_NEW_EXPERIMENTS",
+  "generated_at_utc": "2026-06-01T03:09:19Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -56,7 +56,7 @@
     "packet_total_file_count": 87,
     "hashed_file_count": 86,
     "pytest_status": "PASS",
-    "verification_substrate_gap_tests_passed": 37,
+    "verification_substrate_gap_tests_passed": 41,
     "manifest_status": "PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_20260601_HARDENING_INCLUDED",
     "packet_manuscript_head": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
     "packet_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
@@ -165,6 +165,36 @@
     "ownership_proof_claimed": false,
     "pytest_status": "PASS",
     "targeted_tests_passed": 5
+  },
+  "reproducibility_release_boundary_audit": {
+    "performed": true,
+    "summary": "results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_summary.json",
+    "report": "results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_report.md",
+    "csv": "results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_decisions.csv",
+    "row_count": 78,
+    "ready_for_reviewed_public_supplement_count": 39,
+    "excluded_from_public_supplement_count": 4,
+    "pre_release_review_required_count": 35,
+    "release_blocker_count": 35,
+    "release_ready_now": false,
+    "decision_counts": {
+      "exclude_from_public_supplement": 4,
+      "ready_for_reviewed_public_supplement": 39,
+      "redact_or_summarize_before_release": 3,
+      "scope_review_before_release": 10,
+      "security_review_before_release": 1,
+      "stage_or_copy_to_supplement_before_release": 21
+    },
+    "public_supplement_publication_performed": false,
+    "new_slurm_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "training_started": false,
+    "allowlist_enabled": false,
+    "public_text_only_verification_claimed": false,
+    "ownership_proof_claimed": false,
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 9
   },
   "ownership_scenario_decision_rule_audit": {
     "performed": true,

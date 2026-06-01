@@ -27,7 +27,8 @@
     "cleaned active manuscript prose to replace internal audit-style do-not-claim/draft wording with academic scope language",
     "expanded claim-scope linter qualifiers to accept academic outside-evidence-scope wording",
     "audited active manuscript figure quality and data traceability with 5 figures, 0 failed figure checks, 5 data checks, and 0 failed data checks",
-    "refreshed the expert review packet to include the 2026-06-01 hardened manuscript snapshot and hardening outputs"
+    "refreshed the expert review packet to include the 2026-06-01 hardened manuscript snapshot and hardening outputs",
+    "recorded a public-supplement release-boundary audit from the reproducibility release inventory"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -85,7 +86,16 @@
     "refreshed_expert_packet_20260601_manuscript_head": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
     "refreshed_expert_packet_20260601_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
     "full_verification_substrate_gap_pytest_status": "PASS",
-    "full_verification_substrate_gap_pytest_tests_passed": 37
+    "full_verification_substrate_gap_pytest_tests_passed": 41,
+    "release_boundary_audit_status": "PASS_VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED",
+    "release_boundary_audit_rows": 78,
+    "release_boundary_ready_for_reviewed_public_supplement": 39,
+    "release_boundary_excluded_from_public_supplement": 4,
+    "release_boundary_pre_release_review_required": 35,
+    "release_boundary_blockers": 35,
+    "release_boundary_ready_now": false,
+    "release_boundary_targeted_tests_status": "PASS",
+    "release_boundary_targeted_tests_passed": 9
   },
   "not_unlocked": [
     "new Slurm submission",

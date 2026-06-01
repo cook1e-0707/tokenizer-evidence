@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "bytes": 26916,
+      "path": "results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_decisions.csv",
+      "sha256": "f18b3b2318d3f22aa15b541809750833598ca9b34840dd4157fc49c2b61dedec"
+    },
+    {
+      "bytes": 6110,
+      "path": "results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_summary.json",
+      "sha256": "dce30ed246b968675de57e079efa69072554170184b2e4e120d960b8df12113c"
+    },
+    {
+      "bytes": 1464,
+      "path": "results/verification_substrate_gap/reproducibility_release_boundary_audit_20260601/release_boundary_report.md",
+      "sha256": "58f399e0a8f0598d90eae6bc8d13c768e957d64bfd4f5942d73ff9a4c5836e31"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_release_boundary_manifest_v1",
+  "status": "PASS_VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED"
+}
