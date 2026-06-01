@@ -1,0 +1,51 @@
+schema_name: public_text_verifier_stronger_local_pilot_v1
+claim_scope: artifact_only_local_pilot_not_adopted_locked_evidence
+observability_config: configs/verification_substrate_gap/text_only_observability.yaml
+source_scopes:
+  - dev_non_adopted_text_probe
+  - historical_failed_quality_text_probe
+train_cap_per_label: 6000
+test_cap_per_label: 3000
+variants:
+  - variant_id: V0_always_reject_final_text_only
+    regime_id: V0
+    inference_information: [final_text]
+    codeword_recovery_supported: false
+  - variant_id: P0_prefix_template_public_predicate
+    regime_id: V4
+    inference_information: [final_text, public_template_predicate]
+    top_k_openers: 256
+    codeword_recovery_supported: false
+  - variant_id: P2_learned_shallow_public_predicate
+    regime_id: V4
+    inference_information: [final_text, public_learned_predicate]
+    feature_family: word_unigram_bigram
+    raw_fpr_target: 0.01
+    codeword_recovery_supported: false
+  - variant_id: P4_char_ngram_public_predicate
+    regime_id: V4
+    inference_information: [final_text, public_learned_predicate]
+    feature_family: character_ngrams_3_to_5
+    raw_fpr_target: 0.01
+    codeword_recovery_supported: false
+  - variant_id: P5_word_trigram_public_predicate
+    regime_id: V4
+    inference_information: [final_text, public_learned_predicate]
+    feature_family: word_unigram_bigram_trigram
+    raw_fpr_target: 0.01
+    codeword_recovery_supported: false
+  - variant_id: P6_hybrid_char_word_public_predicate
+    regime_id: V4
+    inference_information: [final_text, public_learned_predicate]
+    feature_family: word_unigram_bigram_plus_character_ngrams_3_to_4
+    raw_fpr_target: 0.01
+    codeword_recovery_supported: false
+  - variant_id: P3_strongest_text_only_public_predicate
+    regime_id: V4
+    inference_information: [final_text, public_predicate_selection]
+    select_by: protected_row_tpr_at_raw_fpr_target_across_P0_P2_P4_P5_P6
+    codeword_recovery_supported: false
+gates:
+  codeword_recovered_blocks_required_for_positive: 1
+  public_text_only_positive_claim_allowed: false
+  adopted_locked_evidence_claim_allowed: false

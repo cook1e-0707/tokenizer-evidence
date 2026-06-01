@@ -19,6 +19,12 @@ audit, plus active-manuscript prose-risk tests, so that the objective review
 package and current manuscript remain checkable after future artifact-only
 edits.
 
+This continuation also implemented stronger public final-text predicate
+baselines and ran a local pilot on available non-adopted/historical text
+artifacts. Adopted locked final-text JSONL rows are not currently local, so the
+pilot does not update paper-facing adopted locked evidence and does not create
+a public text-only verification claim.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
@@ -48,6 +54,8 @@ or paper-facing positive claims.
 - LaTeX log scan: `PASS`
 - Overfull hbox warnings: `0`
 - Expert packet and manuscript prose regression tests: `PASS`, 13 tests passed
+- Stronger public-predicate regression tests: `PASS`, total targeted tests now
+  `16` passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
@@ -62,6 +70,24 @@ or paper-facing positive claims.
   without naming internal canonical phase or claim-lint state.
 - Packet refresh:
   not performed in this pass.
+
+## Local Stronger Public-Predicate Pilot
+
+- Summary:
+  `results/verification_substrate_gap/VSG_PUBLIC_TEXT_STRONGER_BASELINE_LOCAL_PILOT_20260601.md`
+- Output directory:
+  `results/verification_substrate_gap/public_text_verifier_stronger_local_pilot_20260601/`
+- New variants:
+  `P4_char_ngram_public_predicate`, `P5_word_trigram_public_predicate`,
+  `P6_hybrid_char_word_public_predicate`
+- Local sources:
+  `qwen_dev_869348_local_text_probe`,
+  `llama_historical_879555_local_text_probe`
+- Codeword recovered blocks:
+  `0`
+- Claim scope:
+  local pilot only; not adopted locked evidence; not public text-only
+  verification success.
 
 ## Git Sync Evidence
 

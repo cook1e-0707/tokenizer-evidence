@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T00:57:32Z",
+  "generated_at_utc": "2026-06-01T01:07:17Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -63,6 +63,26 @@
     "packet_verifier_regression_tests_added": true,
     "handoff_audit_regression_test_added": true,
     "active_manuscript_prose_risk_tests_added": true
+  },
+  "stronger_public_text_predicate_local_pilot": {
+    "performed": true,
+    "summary": "results/verification_substrate_gap/VSG_PUBLIC_TEXT_STRONGER_BASELINE_LOCAL_PILOT_20260601.md",
+    "output_dir": "results/verification_substrate_gap/public_text_verifier_stronger_local_pilot_20260601",
+    "implemented_variants": [
+      "P4_char_ngram_public_predicate",
+      "P5_word_trigram_public_predicate",
+      "P6_hybrid_char_word_public_predicate"
+    ],
+    "source_scopes": [
+      "dev_non_adopted_text_probe",
+      "historical_failed_quality_text_probe"
+    ],
+    "adopted_locked_raw_text_available_locally": false,
+    "adopted_locked_evidence_updated": false,
+    "codeword_recovered_blocks": 0,
+    "public_text_only_verification_claim_allowed": false,
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 16
   },
   "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [
