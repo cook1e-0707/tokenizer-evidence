@@ -1,0 +1,27 @@
+{
+  "schema_name": "vsg_remote_sync_check_packet_refresh_v1",
+  "status": "PASS_REMOTE_SYNC_CHECK",
+  "generated_at_utc": "2026-06-01T03:04:44Z",
+  "non_self_referential_record": true,
+  "non_self_referential_note": "This file records the remote sync state observed before this check record was committed.",
+  "remote_query": {
+    "command": "git ls-remote origin refs/heads/main",
+    "observed_ref": "refs/heads/main",
+    "observed_commit": "b1e96ebd3213b290e69d8fabce96f940bbede658"
+  },
+  "local_sync_at_observation_time": {
+    "head": "b1e96ebd3213b290e69d8fabce96f940bbede658",
+    "origin_main": "b1e96ebd3213b290e69d8fabce96f940bbede658",
+    "matches_remote_query": true
+  },
+  "packet_refresh_verification_at_observation_time": {
+    "commit": "b1e96ebd3213b290e69d8fabce96f940bbede658",
+    "packet_verifier": "PASS",
+    "handoff_audit": "PASS",
+    "zip_sha256": "82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8",
+    "packet_total_file_count": 87,
+    "hashed_file_count": 86,
+    "verification_substrate_gap_pytest": "PASS",
+    "verification_substrate_gap_tests_passed": 37
+  }
+}
