@@ -1,0 +1,28 @@
+{
+  "checked_at_utc": "2026-06-01T04:21:34Z",
+  "branch": "main",
+  "local_head": "012437cc0a82c93ac50969501fddb988bb848538",
+  "origin_main_head": "012437cc0a82c93ac50969501fddb988bb848538",
+  "sync_status": "synced",
+  "synced_subject": "Validate VSG supplement review decisions",
+  "new_slurm_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "allowlist_enabled": false,
+  "overleaf_push_performed": false,
+  "public_supplement_created": false,
+  "files_copied": false,
+  "candidate_bundle_created": false,
+  "human_reviews_performed": false,
+  "review_approvals_created": false,
+  "public_supplement_published": false,
+  "publication_performed": false,
+  "public_text_only_verification_claimed": false,
+  "ownership_proof_claimed": false,
+  "pre_existing_unrelated_dirty_files": [
+    "docs/natural_evidence_v2/CURRENT_STATE.md",
+    "results/natural_evidence_v1/status/gate_status.json",
+    "results/natural_evidence_v2/status/gate_status.json"
+  ]
+}
