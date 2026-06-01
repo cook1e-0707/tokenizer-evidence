@@ -25,6 +25,11 @@ artifacts. Adopted locked final-text JSONL rows are not currently local, so the
 pilot does not update paper-facing adopted locked evidence and does not create
 a public text-only verification claim.
 
+This continuation additionally audited the existing adopted-locked guided
+rewrite/graft attack examples with deterministic readability proxies. The
+audit found `0/60` proxy-readable rows, so the attack remains evidence of
+public-predicate optimizability only, not naturalness-preserving rewriting.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
@@ -56,15 +61,17 @@ or paper-facing positive claims.
 - Expert packet and manuscript prose regression tests: `PASS`, 13 tests passed
 - Stronger public-predicate regression tests: `PASS`, total targeted tests now
   `16` passed
+- Attack naturalness proxy regression tests: `PASS`, total targeted tests now
+  `19` passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
 ## Local Manuscript Hardening After Packet Delivery
 
 - Local manuscript commit:
-  `4d66568ec08325d1d81b5ce060fbfda302e3177d`
-- Local manuscript PDF SHA256 after prose cleanup:
-  `73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b`
+  `3520fd15158f219c1b5e897ec8a7a947eb740dce`
+- Local manuscript PDF SHA256 after prose and attack-scope cleanup:
+  `79766958a53c80717d5ebeac1925edfdc760e454113147e953657a0dc6f24516`
 - Prose-risk change:
   reproducibility appendix now describes frozen artifacts and recorded evidence
   without naming internal canonical phase or claim-lint state.
@@ -88,6 +95,28 @@ or paper-facing positive claims.
 - Claim scope:
   local pilot only; not adopted locked evidence; not public text-only
   verification success.
+
+## Attack Naturalness Proxy Audit
+
+- Summary:
+  `results/verification_substrate_gap/VSG_ATTACK_NATURALNESS_PROXY_AUDIT_20260601.md`
+- Output directory:
+  `results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/`
+- Input:
+  `results/verification_substrate_gap/public_verifier_surrogate_guided_rewrite_20260530/surrogate_guided_rewrite_examples.csv`
+- Rows:
+  `60`
+- Proxy-readable rows:
+  `0`
+- Proxy-failed rows:
+  `60`
+- Main failure counts:
+  `does_not_end_with_sentence_punctuation=60`,
+  `isolated_single_letter_fragment=39`,
+  `known_broken_graft_marker=40`
+- Claim scope:
+  readability proxy only; not semantic naturalness; not protected success; not
+  codeword recovery.
 
 ## Git Sync Evidence
 

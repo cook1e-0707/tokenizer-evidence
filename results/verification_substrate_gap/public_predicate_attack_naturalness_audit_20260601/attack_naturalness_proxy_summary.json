@@ -1,0 +1,28 @@
+{
+  "claim_scope": "proxy readability audit only; not semantic naturalness and not protected success",
+  "codeword_recovery_claimed": false,
+  "fail_reason_counts": {
+    "does_not_end_with_sentence_punctuation": 60,
+    "isolated_single_letter_fragment": 39,
+    "known_broken_graft_marker": 40
+  },
+  "generation_started": false,
+  "groups": 3,
+  "human_evaluation_performed": false,
+  "input_csv": "results/verification_substrate_gap/public_verifier_surrogate_guided_rewrite_20260530/surrogate_guided_rewrite_examples.csv",
+  "model_evaluation_performed": false,
+  "model_scoring_started": false,
+  "new_slurm_started": false,
+  "output_dir": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601",
+  "protected_success_claimed": false,
+  "proxy_fail_rows": 60,
+  "proxy_pass_rate": 0.0,
+  "proxy_pass_rows": 0,
+  "public_text_only_verification_claimed": false,
+  "rows": 60,
+  "schema_name": "verification_substrate_gap_public_predicate_attack_naturalness_proxy_v1",
+  "semantic_naturalness_claimed": false,
+  "source_mismatch_rows_only": true,
+  "status": "PASS_PUBLIC_PREDICATE_ATTACK_NATURALNESS_PROXY_AUDIT_RECORDED_NO_CLAIMS",
+  "training_started": false
+}

@@ -1,0 +1,76 @@
+{
+  "status": "PASS_PUBLIC_PREDICATE_ATTACK_NATURALNESS_PROXY_AUDIT_RECORDED_NO_CLAIMS",
+  "date": "2026-06-01",
+  "new_slurm_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "allowlist_enabled": false,
+  "semantic_naturalness_claimed": false,
+  "human_evaluation_performed": false,
+  "model_evaluation_performed": false,
+  "source_mismatch_rows_only": true,
+  "protected_success_claimed": false,
+  "codeword_recovery_claimed": false,
+  "public_text_only_verification_claimed": false,
+  "input": "results/verification_substrate_gap/public_verifier_surrogate_guided_rewrite_20260530/surrogate_guided_rewrite_examples.csv",
+  "output_dir": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601",
+  "rows": 60,
+  "proxy_pass_rows": 0,
+  "proxy_fail_rows": 60,
+  "proxy_pass_rate": 0.0,
+  "fail_reason_counts": {
+    "does_not_end_with_sentence_punctuation": 60,
+    "isolated_single_letter_fragment": 39,
+    "known_broken_graft_marker": 40
+  },
+  "group_results": [
+    {
+      "source_id": "llama_locked_adopted_880121",
+      "model_family": "llama",
+      "candidate_arm": "raw",
+      "rows": 20,
+      "proxy_pass_rows": 0,
+      "proxy_fail_rows": 20,
+      "proxy_pass_rate": 0.0,
+      "mean_token_jaccard": 0.403244,
+      "mean_broken_graft_marker_count": 1.0
+    },
+    {
+      "source_id": "qwen_locked_adopted_870210_plus_870987",
+      "model_family": "qwen",
+      "candidate_arm": "raw",
+      "rows": 20,
+      "proxy_pass_rows": 0,
+      "proxy_fail_rows": 20,
+      "proxy_pass_rate": 0.0,
+      "mean_token_jaccard": 0.424762,
+      "mean_broken_graft_marker_count": 1.35
+    },
+    {
+      "source_id": "qwen_locked_adopted_870210_plus_870987",
+      "model_family": "qwen",
+      "candidate_arm": "task_only",
+      "rows": 20,
+      "proxy_pass_rows": 0,
+      "proxy_fail_rows": 20,
+      "proxy_pass_rate": 0.0,
+      "mean_token_jaccard": 0.456823,
+      "mean_broken_graft_marker_count": 1.05
+    }
+  ],
+  "verification": {
+    "pytest_command": "uv run pytest tests/verification_substrate_gap/test_public_predicate_attack_naturalness_audit.py tests/verification_substrate_gap/test_public_text_verifier_stronger_baselines.py tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
+    "pytest_status": "PASS",
+    "tests_passed": 19,
+    "claim_scope_lint_status": "PASS",
+    "claim_scope_lint_checked_files": 17,
+    "claim_scope_lint_violation_count": 0,
+    "latex_build_status": "PASS",
+    "latex_pages": 32,
+    "latex_log_risk_scan_matches": 0
+  },
+  "local_manuscript_commit": "3520fd15158f219c1b5e897ec8a7a947eb740dce",
+  "local_manuscript_pdf_sha256": "79766958a53c80717d5ebeac1925edfdc760e454113147e953657a0dc6f24516",
+  "expert_packet_refresh_performed": false
+}

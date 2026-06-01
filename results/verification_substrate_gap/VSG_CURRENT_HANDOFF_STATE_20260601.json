@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T01:07:17Z",
+  "generated_at_utc": "2026-06-01T02:12:57Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -33,10 +33,10 @@
   "packet_manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
   "local_manuscript_hardening_after_packet_delivery": {
     "performed": true,
-    "commit": "4d66568ec08325d1d81b5ce060fbfda302e3177d",
-    "pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b",
+    "commit": "3520fd15158f219c1b5e897ec8a7a947eb740dce",
+    "pdf_sha256": "79766958a53c80717d5ebeac1925edfdc760e454113147e953657a0dc6f24516",
     "packet_refresh_performed": false,
-    "scope": "reproducibility appendix prose cleanup; no claim boundary change"
+    "scope": "reproducibility appendix prose cleanup and attack naturalness proxy limitation update; no claim boundary expansion"
   },
   "overleaf_push_performed": false,
   "claim_scope": {
@@ -83,6 +83,29 @@
     "public_text_only_verification_claim_allowed": false,
     "pytest_status": "PASS",
     "targeted_tests_passed": 16
+  },
+  "attack_naturalness_proxy_audit": {
+    "performed": true,
+    "summary": "results/verification_substrate_gap/VSG_ATTACK_NATURALNESS_PROXY_AUDIT_20260601.md",
+    "output_dir": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601",
+    "input": "results/verification_substrate_gap/public_verifier_surrogate_guided_rewrite_20260530/surrogate_guided_rewrite_examples.csv",
+    "rows": 60,
+    "proxy_pass_rows": 0,
+    "proxy_fail_rows": 60,
+    "proxy_pass_rate": 0.0,
+    "semantic_naturalness_claimed": false,
+    "human_evaluation_performed": false,
+    "model_evaluation_performed": false,
+    "protected_success_claimed": false,
+    "codeword_recovery_claimed": false,
+    "public_text_only_verification_claimed": false,
+    "fail_reason_counts": {
+      "does_not_end_with_sentence_punctuation": 60,
+      "isolated_single_letter_fragment": 39,
+      "known_broken_graft_marker": 40
+    },
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 19
   },
   "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [

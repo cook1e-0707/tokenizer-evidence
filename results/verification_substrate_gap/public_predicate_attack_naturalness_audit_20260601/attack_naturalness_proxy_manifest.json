@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "bytes": 24483,
+      "path": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_rows.csv",
+      "sha256": "ac24d6063bf84062a7171c9268881328cd2b331b31435c948996acc6f3392534"
+    },
+    {
+      "bytes": 449,
+      "path": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_by_group.csv",
+      "sha256": "b6a7e74bc8b827ac926fc52934f8b4d6046fab1dd9e40b7eb8b690a431375504"
+    },
+    {
+      "bytes": 1199,
+      "path": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_summary.json",
+      "sha256": "bd051b53cf4fed617f866316da5dfa5db6f1d101393893fffe4ec6180845069b"
+    },
+    {
+      "bytes": 1279,
+      "path": "results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_report.md",
+      "sha256": "394411ea1424c2e7217635ff0963c0517cd75b5672c6417fdaa6d0246aac2ee4"
+    }
+  ],
+  "schema_name": "verification_substrate_gap_public_predicate_attack_naturalness_proxy_manifest_v1",
+  "status": "PASS_PUBLIC_PREDICATE_ATTACK_NATURALNESS_PROXY_AUDIT_RECORDED_NO_CLAIMS"
+}
