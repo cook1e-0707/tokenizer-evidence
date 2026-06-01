@@ -1,0 +1,28 @@
+{
+  "schema_name": "vsg_remote_sync_check_v1",
+  "status": "PASS_REMOTE_SYNC_CHECK",
+  "generated_at_utc": "2026-06-01T00:45:31Z",
+  "non_self_referential_record": true,
+  "non_self_referential_note": "This file records the remote sync state observed before this check record was committed.",
+  "remote_query": {
+    "command": "git ls-remote origin refs/heads/main",
+    "observed_ref": "refs/heads/main",
+    "observed_commit": "482a94bb5ab4ea427b6c5254e1797ce7b3f5528c"
+  },
+  "local_sync_at_observation_time": {
+    "head": "482a94bb5ab4ea427b6c5254e1797ce7b3f5528c",
+    "origin_main": "482a94bb5ab4ea427b6c5254e1797ce7b3f5528c",
+    "matches_remote_query": true
+  },
+  "expert_packet_verification_at_observation_time": {
+    "handoff_audit_status": "PASS",
+    "failure_count": 0,
+    "zip_sha256": "0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f",
+    "packet_total_file_count": 60
+  },
+  "delivery_index_at_observation_time": {
+    "canonical_phase": "VSG_EXPERT_REVIEW_PACKET_DELIVERED_WAITING_FOR_REVIEW_NO_NEW_EXPERIMENTS",
+    "packet_verifier": "PASS",
+    "handoff_audit": "PASS"
+  }
+}
