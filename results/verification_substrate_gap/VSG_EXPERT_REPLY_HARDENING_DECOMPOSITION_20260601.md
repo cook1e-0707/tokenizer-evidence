@@ -1,6 +1,6 @@
 # VSG Expert Reply Hardening Decomposition - 2026-06-01
 
-Status: `PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_TEST_HARDENING_ADDED`
+Status: `PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_HARDENING_IN_PROGRESS`
 
 This record decomposes the latest expert reply into concrete work items and
 records the artifact-only actions completed in this pass. No Slurm job,
@@ -102,6 +102,63 @@ claim_lint: PASS, 0 violations
 handoff audit failures: 0
 ```
 
+## Additional Work Completed In Later Continuations
+
+Implemented stronger public final-text predicate baselines and ran a local
+pilot on available non-adopted/historical text artifacts:
+
+```text
+scripts/verification_substrate_gap/evaluate_public_text_verifier.py
+configs/verification_substrate_gap/public_text_verifier_stronger_local_pilot.yaml
+tests/verification_substrate_gap/test_public_text_verifier_stronger_baselines.py
+results/verification_substrate_gap/public_text_verifier_stronger_local_pilot_20260601/
+```
+
+Observed scope:
+
+```text
+codeword_recovered_blocks = 0
+adopted_locked_evidence_updated = false
+public_text_only_verification_claim_allowed = false
+```
+
+Audited the existing adopted-locked guided rewrite/graft attack examples with
+deterministic readability proxies:
+
+```text
+scripts/verification_substrate_gap/audit_public_predicate_attack_naturalness.py
+tests/verification_substrate_gap/test_public_predicate_attack_naturalness_audit.py
+results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 60
+proxy_readable_rows = 0
+semantic_naturalness_claimed = false
+protected_success_claimed = false
+codeword_recovery_claimed = false
+```
+
+Recorded a machine-checkable reproducibility release inventory:
+
+```text
+scripts/verification_substrate_gap/build_vsg_reproducibility_release_inventory.py
+tests/verification_substrate_gap/test_vsg_reproducibility_release_inventory.py
+results/verification_substrate_gap/reproducibility_release_inventory_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 78
+missing_files = 0
+private_path_hits = 3
+secret_term_hits = 1
+release_ready_without_review = false
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.
@@ -117,6 +174,6 @@ The following are not unlocked by this pass:
 - ownership proof claim;
 - cryptographic provenance claim.
 
-The expert-suggested stronger public-predicate baselines and naturalness audits
-remain future optional hardening candidates. They require a separate route
-decision because they would go beyond the delivered expert packet snapshot.
+The next allowed route remains artifact-only manuscript/package hygiene and
+release-boundary hardening. The current release inventory shows that a future
+public supplement is not release-ready without anonymization/scope review.

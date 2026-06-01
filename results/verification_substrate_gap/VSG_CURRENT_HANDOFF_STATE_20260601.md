@@ -30,6 +30,13 @@ rewrite/graft attack examples with deterministic readability proxies. The
 audit found `0/60` proxy-readable rows, so the attack remains evidence of
 public-predicate optimizability only, not naturalness-preserving rewriting.
 
+This continuation now also records a machine-checkable reproducibility release
+inventory. The inventory identifies candidate manuscript, evidence, script,
+config, and test artifacts for a future supplemental release, records hashes,
+and flags release blockers such as private-path hits, key/HMAC-related terms,
+and files not tracked by the selected git scopes. It does not publish files or
+expand the claim boundary.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
@@ -63,6 +70,8 @@ or paper-facing positive claims.
   `16` passed
 - Attack naturalness proxy regression tests: `PASS`, total targeted tests now
   `19` passed
+- Reproducibility release inventory regression tests: `PASS`, release inventory
+  targeted tests `5` passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
@@ -117,6 +126,34 @@ or paper-facing positive claims.
 - Claim scope:
   readability proxy only; not semantic naturalness; not protected success; not
   codeword recovery.
+
+## Reproducibility Release Inventory
+
+- Summary:
+  `results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory_summary.json`
+- Report:
+  `results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory_report.md`
+- CSV:
+  `results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory.csv`
+- Rows:
+  `78`
+- Existing files:
+  `78`
+- Missing files:
+  `0`
+- Existing files not tracked by selected git scopes:
+  `31`
+- Rows requiring anonymization/scope review:
+  `18`
+- Private path hits:
+  `3`
+- Secret-term hits:
+  `1`
+- Release-ready without review:
+  `False`
+- Claim scope:
+  release inventory only; no publication, no generation, no model scoring, no
+  public text-only verification claim, no ownership-proof claim.
 
 ## Git Sync Evidence
 

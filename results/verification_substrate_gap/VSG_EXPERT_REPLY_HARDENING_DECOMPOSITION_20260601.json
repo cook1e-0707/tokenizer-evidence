@@ -1,5 +1,5 @@
 {
-  "status": "PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_TEST_HARDENING_ADDED",
+  "status": "PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_HARDENING_IN_PROGRESS",
   "date": "2026-06-01",
   "new_slurm_started": false,
   "generation_started": false,
@@ -14,6 +14,14 @@
     "added active manuscript prose-risk regression tests",
     "polished reproducibility appendix to remove internal state language",
     "recorded expert reply decomposition and execution status"
+  ],
+  "completed_in_later_continuations": [
+    "implemented stronger public final-text predicate baselines",
+    "ran a local non-adopted/historical public-predicate pilot with codeword_recovered_blocks=0",
+    "audited adopted-locked guided rewrite/graft examples with deterministic readability proxies",
+    "recorded attack naturalness proxy result as 0/60 proxy-readable rows",
+    "built reproducibility release inventory with 78 rows, 0 missing files, 3 private-path hits, and 1 secret-term hit",
+    "added reproducibility release inventory regression tests"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -38,7 +46,15 @@
     "latex_pdf_pages": 32,
     "latex_log_risk_scan_matches": 0,
     "local_manuscript_commit": "4d66568ec08325d1d81b5ce060fbfda302e3177d",
-    "local_manuscript_pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b"
+    "local_manuscript_pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b",
+    "latest_targeted_pytest_status": "PASS",
+    "latest_targeted_pytest_tests_passed": 24,
+    "reproducibility_release_inventory_status": "PASS_VSG_REPRODUCIBILITY_RELEASE_INVENTORY_RECORDED_REVIEW_REQUIRED",
+    "reproducibility_release_inventory_rows": 78,
+    "reproducibility_release_inventory_missing_files": 0,
+    "reproducibility_release_inventory_private_path_hits": 3,
+    "reproducibility_release_inventory_secret_term_hits": 1,
+    "reproducibility_release_ready_without_review": false
   },
   "not_unlocked": [
     "new Slurm submission",

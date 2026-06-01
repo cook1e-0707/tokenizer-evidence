@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T02:12:57Z",
+  "generated_at_utc": "2026-06-01T02:24:35Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -106,6 +106,28 @@
     },
     "pytest_status": "PASS",
     "targeted_tests_passed": 19
+  },
+  "reproducibility_release_inventory": {
+    "performed": true,
+    "summary": "results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory_summary.json",
+    "report": "results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory_report.md",
+    "csv": "results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory.csv",
+    "row_count": 78,
+    "existing_file_count": 78,
+    "missing_file_count": 0,
+    "untracked_existing_file_count": 31,
+    "requires_anonymization_review_count": 18,
+    "private_path_hit_count": 3,
+    "secret_term_hit_count": 1,
+    "release_ready_without_review": false,
+    "new_slurm_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "training_started": false,
+    "public_text_only_verification_claimed": false,
+    "ownership_proof_claimed": false,
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 5
   },
   "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [
