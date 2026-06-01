@@ -1,0 +1,75 @@
+{
+  "claim_scope": "plot-ready data extraction only; not paper-facing positive, not public text-only verification success, not ownership proof",
+  "generation_started": false,
+  "model_calls_started": false,
+  "new_compute_started": false,
+  "next_allowed_action": "artifact-only figure/table review or caption drafting with claim-scope lint; no compute without reviewed route decision and allowlist/hash preflight",
+  "output_dir": "results/verification_substrate_gap/paper_figure_data_20260530",
+  "paper_claim_allowed": false,
+  "public_text_only_verification_claim_allowed": false,
+  "schema_name": "verification_substrate_gap_paper_figure_data_v1",
+  "slurm_submitted": false,
+  "status": "VSG_PAPER_FIGURE_DATA_EXTRACTED_ARTIFACT_ONLY_NO_NEW_CLAIMS",
+  "tables": [
+    {
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/trace_bound_accepts.csv",
+      "purpose": "Figure 3 trace-bound controllability",
+      "rows": 2,
+      "source": "results/verification_substrate_gap/corpora/trace_bound_controllability/corpus_manifest.json",
+      "table_id": "trace_bound_accepts"
+    },
+    {
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/public_text_verifier_baselines.csv",
+      "purpose": "Figure 3 public final-text observability",
+      "rows": 8,
+      "source": "results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_results.csv",
+      "table_id": "public_text_verifier_baselines"
+    },
+    {
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/template_leakage_summary.csv",
+      "purpose": "Template leakage audit table",
+      "rows": 2,
+      "sources": [
+        "results/verification_substrate_gap/template_leakage_remote_20260529/protected_vs_raw_classifier.csv",
+        "results/verification_substrate_gap/template_leakage_remote_20260529/format_scrub_duplicate_summary.csv"
+      ],
+      "table_id": "template_leakage_summary"
+    },
+    {
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/attack_ladder_summary.csv",
+      "purpose": "Figure 4 public-predicate attack ladder",
+      "rows": 30,
+      "sources": [
+        "results/verification_substrate_gap/public_verifier_spoofing_remote_20260529/rejection_sampling_curve.csv",
+        "results/verification_substrate_gap/public_verifier_rewrite_spoofing_remote_20260529/rewrite_transform_curve.csv",
+        "results/verification_substrate_gap/public_verifier_distillation_lite_20260530/distillation_lite_curve.csv",
+        "results/verification_substrate_gap/public_verifier_surrogate_guided_rewrite_20260530/surrogate_guided_rewrite_curve.csv"
+      ],
+      "table_id": "attack_ladder_summary"
+    },
+    {
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv",
+      "purpose": "Figure 5 ownership scenario heatmap",
+      "rows": 63,
+      "source": "results/verification_substrate_gap/ownership_scenario_stress_test_20260530/ownership_scenario_stress_test.csv",
+      "table_id": "ownership_scenario_heatmap"
+    },
+    {
+      "path": "results/verification_substrate_gap/paper_figure_data_20260530/claim_ledger.csv",
+      "purpose": "Table 1 claim ledger",
+      "rows": 4,
+      "source": "docs/paper_vsg/VSG_CLAIM_LEDGER_20260530.md",
+      "table_id": "claim_ledger"
+    }
+  ],
+  "training_started": false,
+  "validation": {
+    "allowlist_safety_report": "results/verification_substrate_gap/paper_figure_data_20260530/allowlist_safety.json",
+    "allowlist_safety_status": "PASS",
+    "claim_scope_lint_report": "results/verification_substrate_gap/paper_figure_data_20260530/claim_scope_lint_report.json",
+    "claim_scope_lint_status": "PASS",
+    "claim_scope_violation_count": 0,
+    "enabled_entries": [],
+    "enabled_entry_count": 0
+  }
+}

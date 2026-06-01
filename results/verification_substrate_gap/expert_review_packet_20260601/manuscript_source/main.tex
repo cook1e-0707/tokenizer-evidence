@@ -1,0 +1,87 @@
+\documentclass{article}
+
+\usepackage{neurips_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{principle}[theorem]{Principle}
+
+\newcommand{\tracebound}{trace-bound}
+\newcommand{\finaltext}{public final-text}
+\newcommand{\sourcemismatch}{source-mismatch}
+
+\title{The Verification Substrate Gap in Natural LLM Outputs}
+\author{Anonymous Author(s)}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Natural language model outputs are attractive verification objects because they
+are portable, public, and easy to copy.  They are also a weak substrate for
+deterministic provenance claims: the logs, proofs, model state, and decoding
+events that make evidence strong often do not travel with the text.  We study
+this verification substrate gap using first-divergence token-event diagnostics.
+Under provider-side trace access, protected codewords are recovered in
+94/96 Qwen blocks and 96/96 Llama blocks, with raw, task-only, wrong-key, and
+wrong-payload controls at 0/96.  However, the corresponding public final text
+recovers zero codeword blocks.  Shallow public final-text predicates show some
+distributional separability, but they are searchable, editable, learnable, and
+directly optimizable by source-mismatch examples; guided rewrite/graft attacks
+reach 100/100 accepted top-ranked source-mismatch rows for the tested Qwen raw,
+Qwen task-only, and Llama raw sources.  These results support a substrate-gap
+claim: provider-side traces can expose controllable evidence, while current
+public final-text predicates do not provide public text-only verification
+success, natural evidence success, or an ownership proof.
+\end{abstract}
+
+\input{section_01_introduction}
+\input{section_02_related_work}
+\input{section_03_problem_setup}
+\input{section_04_tokenizer_alignment}
+\input{section_05_bucket_level_injection}
+\input{section_06_deterministic_verification}
+\input{section_07_experiments}
+\input{section_08_discussion_limitations}
+\input{section_09_conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\input{appendix/proofs}
+\input{appendix/formal_substrate_gap}
+\input{appendix/attack_examples}
+\input{appendix/extended_related_work}
+\input{appendix/reproducibility}
+\input{appendix/asset_licenses}
+\input{appendix/reproducibility_commands}
+
+\newpage
+\input{checklist.tex}
+
+\end{document}

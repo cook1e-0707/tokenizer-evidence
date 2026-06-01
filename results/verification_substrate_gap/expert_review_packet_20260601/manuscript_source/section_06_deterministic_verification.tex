@@ -1,0 +1,52 @@
+\section{Public Final-Text Predicates and Attack Model}
+\label{sec:verification}
+
+The public final-text experiments ask whether a third party, given only text,
+can recover a deterministic codeword or at least build a reliable public
+predicate for provenance.  The answer in the current artifacts is negative:
+the predicates recover zero codeword blocks.  The same predicates nevertheless
+have nonzero accept regions, which makes them targets for source-mismatch
+optimization.
+
+\paragraph{Public predicate.}
+A public final-text predicate is any fixed rule in the current artifact set
+that maps final text to a score or accept/reject decision without using
+provider-side traces.  The P2 predicates used in the results are shallow
+surrogates for final-text observability.  They are not claimed to exhaust all
+possible public predicates, and they are not claimed to be deployment-grade
+verifiers.  Their diagnostic role is narrower: if they recover no codeword
+blocks, they do not verify; if they still accept source-mismatch rows, their
+accept region is spoofable.
+
+\paragraph{Attack ladder.}
+We evaluate four increasingly strong public-predicate attacks:
+\begin{description}
+\item[Rejection sampling.] Query the public predicate on existing
+source-mismatch rows and select accepts.
+\item[Rewrite-lite.] Apply deterministic opener or phrasing edits and requery
+the predicate.
+\item[Distillation-lite.] Train or fit a lightweight surrogate ranking signal
+from public predicate feedback, then rank source-mismatch rows.
+\item[Guided rewrite/graft.] Use public predicate feedback to choose and graft
+predicate-favorable text fragments onto source-mismatch rows.
+\end{description}
+
+These attacks do not prove that every public final-text predicate is broken.
+They show that the strongest current final-text surrogate predicates occupy a
+bad regime: they do not recover codewords, but their nonzero accept regions can
+be found or optimized by source-mismatch examples.
+
+\paragraph{Selection-bias boundary.}
+Attack success must not be confused with protected recovery.  The attack
+pipeline selects or modifies source-mismatch text using public predicate
+feedback.  It does not use the protected trace route, does not recover the
+protected codeword, and does not establish natural-output provenance.  Its
+purpose is to stress the public final-text predicate substrate.
+
+\paragraph{Naturalness boundary.}
+The current guided rewrite/graft attacks are artifact-level predicate attacks.
+Their accepted source-mismatch examples should not be described as human-level
+natural or semantically equivalent unless a separate naturalness and semantic
+preservation evaluation is run.  This limitation weakens any claim about
+attack realism, but it does not rescue a predicate that fails codeword recovery
+and accepts source-mismatch rows.

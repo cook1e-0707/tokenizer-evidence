@@ -1,0 +1,18 @@
+{
+  "data_check_count": 5,
+  "failed_data_check_count": 0,
+  "failed_data_checks": [],
+  "failed_figure_count": 0,
+  "failed_figures": [],
+  "figure_count": 5,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "new_slurm_started": false,
+  "output_dir": "results/verification_substrate_gap/manuscript_figure_quality_audit_20260601",
+  "ownership_proof_claimed": false,
+  "public_text_only_verification_claimed": false,
+  "render_manifest": "results/verification_substrate_gap/paper_manuscript_figures_20260531/manuscript_figure_render_manifest.json",
+  "schema_name": "verification_substrate_gap_manuscript_figure_quality_audit_v1",
+  "status": "PASS",
+  "training_started": false
+}

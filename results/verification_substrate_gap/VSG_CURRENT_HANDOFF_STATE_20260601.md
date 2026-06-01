@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT
+VSG_EXPERT_REVIEW_PACKET_20260601_REFRESHED_HARDENING_INCLUDED_NO_NEW_EXPERIMENTS
 ```
 
 ## Status
@@ -53,31 +53,41 @@ content, render-manifest consistency, LaTeX references, caption scope terms,
 and core data traceability. It passes with zero failed figure checks and zero
 failed data checks.
 
+This continuation now also refreshes the expert review packet to the
+2026-06-01 hardened manuscript snapshot. The refreshed packet includes the
+local manuscript commit `c10b3f1e73689d63ceb0a4b3b8ea980974df16c1`, the
+current PDF SHA256
+`a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`,
+the stronger public-text predicate pilot, attack naturalness proxy audit,
+reproducibility release inventory, ownership decision-rule audit, and
+manuscript figure-quality audit. Packet verifier, handoff audit, and zip
+integrity checks all pass.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
 ## Current Review Packet
 
 - Zip:
-  `results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip`
+  `results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip`
 - Zip SHA256:
-  `0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f`
+  `82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8`
 - External README:
-  `results/verification_substrate_gap/vsg_expert_review_packet_20260531_README.txt`
+  `results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt`
 - Packet manifest:
-  `results/verification_substrate_gap/expert_review_packet_20260531/packet_manifest.json`
+  `results/verification_substrate_gap/expert_review_packet_20260601/packet_manifest.json`
 - Packet verifier:
-  `scripts/verification_substrate_gap/verify_vsg_expert_review_packet.py`
+  `scripts/verification_substrate_gap/verify_vsg_expert_review_packet_20260601.py`
 - Handoff audit:
-  `scripts/verification_substrate_gap/audit_vsg_expert_handoff.py`
+  `scripts/verification_substrate_gap/audit_vsg_expert_handoff_20260601.py`
 
 ## Verification Evidence
 
 - Packet verifier status: `PASS`
 - Handoff audit status: `PASS`
-- Packet file count: `60`
-- Hashed file count: `59`
-- Manifest status: `PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_OBJECTIVE_FACTS`
+- Packet file count: `87`
+- Hashed file count: `86`
+- Manifest status: `PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_20260601_HARDENING_INCLUDED`
 - Claim-scope lint: `PASS`, 17 files, 0 violations
 - LaTeX log scan: `PASS`
 - Overfull hbox warnings: `0`
@@ -94,8 +104,10 @@ or paper-facing positive claims.
   suite `30` passed
 - Manuscript figure-quality audit regression tests: `PASS`, figure-quality
   targeted tests `3` passed
+- Refreshed expert packet regression tests: `PASS`
+- Full `tests/verification_substrate_gap` suite: `PASS`, `37` tests passed
 - Manuscript PDF SHA256:
-  `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
+  `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
 ## Local Manuscript Hardening After Packet Delivery
 
@@ -108,7 +120,41 @@ or paper-facing positive claims.
   without naming internal canonical phase or claim-lint state; active manuscript
   prose now avoids internal audit-style `do not claim` and `draft` language.
 - Packet refresh:
-  not performed in this pass.
+  performed as `results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip`.
+
+## Refreshed Expert Review Packet - 2026-06-01
+
+- Builder:
+  `scripts/verification_substrate_gap/build_vsg_expert_review_packet_20260601.py`
+- Verifier:
+  `scripts/verification_substrate_gap/verify_vsg_expert_review_packet_20260601.py`
+- Handoff audit:
+  `scripts/verification_substrate_gap/audit_vsg_expert_handoff_20260601.py`
+- Zip:
+  `results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip`
+- Zip SHA256:
+  `82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8`
+- External Chinese README:
+  `results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt`
+- Packet directory:
+  `results/verification_substrate_gap/expert_review_packet_20260601/`
+- Verification summary:
+  `results/verification_substrate_gap/expert_review_packet_verification_20260601/packet_verification_summary.json`
+- Handoff audit summary:
+  `results/verification_substrate_gap/expert_review_packet_verification_20260601/handoff_audit_summary.json`
+- Packet file count:
+  `87`
+- Hashed file count:
+  `86`
+- Packet manuscript head:
+  `c10b3f1e73689d63ceb0a4b3b8ea980974df16c1`
+- Packet PDF SHA256:
+  `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
+- Included hardening outputs:
+  stronger public-text predicate local pilot, attack naturalness proxy audit,
+  reproducibility release inventory, ownership decision-rule audit,
+  and manuscript figure-quality audit. Current handoff state and expert-reply
+  decomposition remain outside the zip to avoid packet-hash self-reference.
 
 ## Local Stronger Public-Predicate Pilot
 

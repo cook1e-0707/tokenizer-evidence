@@ -1,41 +1,42 @@
 {
   "schema_name": "vsg_expert_delivery_index_v1",
-  "canonical_phase": "VSG_EXPERT_REVIEW_PACKET_DELIVERED_WAITING_FOR_REVIEW_NO_NEW_EXPERIMENTS",
-  "generated_at_utc": "2026-06-01T00:45:00Z",
+  "canonical_phase": "VSG_EXPERT_REVIEW_PACKET_20260601_REFRESHED_HARDENING_INCLUDED_NO_NEW_EXPERIMENTS",
+  "generated_at_utc": "2026-06-01T02:57:23Z",
   "purpose": "single_entry_point_for_current_vsg_expert_review_handoff",
   "state_records": [
     "results/verification_substrate_gap/VSG_CURRENT_HANDOFF_STATE_20260601.md",
     "results/verification_substrate_gap/VSG_CURRENT_HANDOFF_STATE_20260601.json"
   ],
   "expert_packet": {
-    "zip": "results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
-    "zip_sha256": "0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f",
-    "external_chinese_readme": "results/verification_substrate_gap/vsg_expert_review_packet_20260531_README.txt"
+    "zip": "results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip",
+    "zip_sha256": "82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8",
+    "external_chinese_readme": "results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt"
   },
   "verification_artifacts": [
-    "results/verification_substrate_gap/expert_review_packet_verification_20260531/packet_verification_report.md",
-    "results/verification_substrate_gap/expert_review_packet_verification_20260531/packet_verification_summary.json",
-    "results/verification_substrate_gap/expert_handoff_audit_20260531/handoff_audit_report.md",
-    "results/verification_substrate_gap/expert_handoff_audit_20260531/handoff_audit_summary.json"
+    "results/verification_substrate_gap/expert_review_packet_verification_20260601/packet_verification_report.md",
+    "results/verification_substrate_gap/expert_review_packet_verification_20260601/packet_verification_summary.json",
+    "results/verification_substrate_gap/expert_review_packet_verification_20260601/handoff_audit_report.md",
+    "results/verification_substrate_gap/expert_review_packet_verification_20260601/handoff_audit_summary.json"
   ],
   "verification_commands": [
-    "python3 scripts/verification_substrate_gap/verify_vsg_expert_review_packet.py",
-    "python3 scripts/verification_substrate_gap/audit_vsg_expert_handoff.py",
-    "unzip -t results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
-    "shasum -a 256 results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
-    "cat results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip.sha256"
+    "python3 scripts/verification_substrate_gap/verify_vsg_expert_review_packet_20260601.py",
+    "python3 scripts/verification_substrate_gap/audit_vsg_expert_handoff_20260601.py",
+    "unzip -t results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip",
+    "shasum -a 256 results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip",
+    "cat results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip.sha256"
   ],
   "expected_verification_facts": {
     "packet_verifier": "PASS",
     "handoff_audit": "PASS",
-    "packet_total_file_count": 60,
-    "hashed_file_count": 59,
+    "packet_total_file_count": 87,
+    "hashed_file_count": 86,
     "claim_scope_lint_status": "PASS",
     "claim_scope_lint_checked_files": 17,
     "claim_scope_lint_violation_count": 0,
     "latex_log_scan_status": "PASS",
     "overfull_hbox_warning_count": 0,
-    "manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e"
+    "manuscript_head": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
+    "packet_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa"
   },
   "claim_boundary": {
     "trace_bound_first_divergence_results": "provider_side_diagnostics_only",

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="28" y="36" font-size="20" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Figure 1. Verification substrate map</text>
+<rect x="610" y="18" width="360" height="28" rx="4" fill="#fff4d6" stroke="#c58b00"/><text x="620" y="37" font-size="12" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">artifact-only placeholder draft</text>
+<text x="28" y="68" font-size="13" font-weight="400" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Substrate-property map; current evidence taxonomy, not an impossibility theorem.</text>
+<text x="291" y="66" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">public</text>
+<text x="413" y="66" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">deterministic</text>
+<text x="535" y="66" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">portable</text>
+<text x="657" y="66" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">natural</text>
+<text x="779" y="66" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">non-coop</text>
+<text x="901" y="66" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">spoof-hard</text>
+<text x="28" y="111" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">metadata</text>
+<rect x="230" y="82" width="116" height="38" rx="4" fill="#dbeafe" stroke="#d0d7de"/>
+<text x="288" y="106" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">cond</text>
+<rect x="352" y="82" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="410" y="106" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="474" y="82" width="116" height="38" rx="4" fill="#fde68a" stroke="#d0d7de"/>
+<text x="532" y="106" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">fragile</text>
+<rect x="596" y="82" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="654" y="106" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="718" y="82" width="116" height="38" rx="4" fill="#dbeafe" stroke="#d0d7de"/>
+<text x="776" y="106" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">cond</text>
+<rect x="840" y="82" width="116" height="38" rx="4" fill="#dbeafe" stroke="#d0d7de"/>
+<text x="898" y="106" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">cond</text>
+<text x="28" y="157" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">protocol</text>
+<rect x="230" y="128" width="116" height="38" rx="4" fill="#dbeafe" stroke="#d0d7de"/>
+<text x="288" y="152" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">cond</text>
+<rect x="352" y="128" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="410" y="152" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="474" y="128" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="532" y="152" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="596" y="128" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="654" y="152" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="718" y="128" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="776" y="152" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="840" y="128" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="898" y="152" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<text x="28" y="203" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">proof</text>
+<rect x="230" y="174" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="288" y="198" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="352" y="174" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="410" y="198" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="474" y="174" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="532" y="198" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="596" y="174" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="654" y="198" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="718" y="174" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="776" y="198" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="840" y="174" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="898" y="198" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<text x="28" y="249" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">trace</text>
+<rect x="230" y="220" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="288" y="244" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="352" y="220" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="410" y="244" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="474" y="220" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="532" y="244" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="596" y="220" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="654" y="244" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="718" y="220" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="776" y="244" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="840" y="220" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="898" y="244" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<text x="28" y="295" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">model-state</text>
+<rect x="230" y="266" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="288" y="290" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="352" y="266" width="116" height="38" rx="4" fill="#dbeafe" stroke="#d0d7de"/>
+<text x="410" y="290" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">cond</text>
+<rect x="474" y="266" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="532" y="290" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="596" y="266" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="654" y="290" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="718" y="266" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="776" y="290" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<rect x="840" y="266" width="116" height="38" rx="4" fill="#dbeafe" stroke="#d0d7de"/>
+<text x="898" y="290" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">cond</text>
+<text x="28" y="341" font-size="13" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">natural final text</text>
+<rect x="230" y="312" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="288" y="336" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="352" y="312" width="116" height="38" rx="4" fill="#fbcfe8" stroke="#d0d7de"/>
+<text x="410" y="336" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">not shown</text>
+<rect x="474" y="312" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="532" y="336" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="596" y="312" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="654" y="336" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="718" y="312" width="116" height="38" rx="4" fill="#b7e4c7" stroke="#d0d7de"/>
+<text x="776" y="336" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">yes</text>
+<rect x="840" y="312" width="116" height="38" rx="4" fill="#fecaca" stroke="#d0d7de"/>
+<text x="898" y="336" font-size="12" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif" fill="#17202a">no</text>
+<text x="28" y="385" font-size="12" font-weight="700" text-anchor="start" font-family="Arial, sans-serif" fill="#17202a">Badge: trace-bound provider-side diagnostic only; no ownership proof claim.</text>
+</svg>

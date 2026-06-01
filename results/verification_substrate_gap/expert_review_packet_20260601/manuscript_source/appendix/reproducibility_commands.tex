@@ -1,0 +1,90 @@
+\section{Reproducibility Commands}
+\label{app:reproducibility-commands}
+
+This appendix records the commands used to rebuild the current paper assets
+from existing artifacts.  The commands are local paper-asset commands only:
+they do not submit Slurm jobs, do not run generation, do not run model scoring,
+and do not train models.
+
+\subsection{Figure Rendering}
+
+\begingroup\footnotesize
+\begin{verbatim}
+python3 scripts/verification_substrate_gap/render_vsg_manuscript_figures.py
+\end{verbatim}
+\endgroup
+
+The renderer reads:
+
+\begingroup\footnotesize
+\begin{verbatim}
+results/verification_substrate_gap/paper_figure_data_20260530/
+\end{verbatim}
+\endgroup
+
+and writes PNG figures to:
+
+\begingroup\footnotesize
+\begin{verbatim}
+manuscripts/69db2644566dcc36c9da320e/figures/
+results/verification_substrate_gap/paper_manuscript_figures_20260531/
+\end{verbatim}
+\endgroup
+
+\subsection{Attack Example Review}
+
+\begingroup\footnotesize
+\begin{verbatim}
+python3 scripts/verification_substrate_gap/build_vsg_attack_examples_review.py
+\end{verbatim}
+\endgroup
+
+The script reads existing guided rewrite/graft examples and writes a compact
+review table under:
+
+\begingroup\footnotesize
+\begin{verbatim}
+results/verification_substrate_gap/paper_attack_examples_20260531/
+\end{verbatim}
+\endgroup
+
+The output rows remain source-mismatch examples.  They are report-only
+spoofing evidence and are not protected success or codeword recovery.
+
+\subsection{Claim-Scope Lint}
+
+\begingroup\footnotesize
+\begin{verbatim}
+MANUSCRIPT=manuscripts/69db2644566dcc36c9da320e
+python3 scripts/verification_substrate_gap/lint_claim_scope.py \
+  $MANUSCRIPT/main.tex \
+  $MANUSCRIPT/section_01_introduction.tex \
+  $MANUSCRIPT/section_02_related_work.tex \
+  $MANUSCRIPT/section_03_problem_setup.tex \
+  $MANUSCRIPT/section_04_tokenizer_alignment.tex \
+  $MANUSCRIPT/section_05_bucket_level_injection.tex \
+  $MANUSCRIPT/section_06_deterministic_verification.tex \
+  $MANUSCRIPT/section_07_experiments.tex \
+  $MANUSCRIPT/section_08_discussion_limitations.tex \
+  $MANUSCRIPT/section_09_conclusion.tex \
+  $MANUSCRIPT/appendix/proofs.tex \
+  $MANUSCRIPT/appendix/formal_substrate_gap.tex \
+  $MANUSCRIPT/appendix/attack_examples.tex \
+  $MANUSCRIPT/appendix/extended_related_work.tex \
+  $MANUSCRIPT/appendix/reproducibility.tex \
+  $MANUSCRIPT/appendix/asset_licenses.tex \
+  $MANUSCRIPT/appendix/reproducibility_commands.tex
+\end{verbatim}
+\endgroup
+
+\subsection{PDF Build and Log Scan}
+
+\begingroup\footnotesize
+\begin{verbatim}
+cd manuscripts/69db2644566dcc36c9da320e
+latexmk -pdf -interaction=nonstopmode main.tex
+rg -n "undefined|Citation .* undefined|LaTeX Warning: Reference|\
+LaTeX Warning: Citation|Fatal|Emergency stop|! LaTeX Error|\
+There were undefined" main.log
+\end{verbatim}
+\endgroup

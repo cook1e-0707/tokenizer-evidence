@@ -1,0 +1,21 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper reframes the current evidence around a verification substrate gap.
+Provider-side first-divergence traces can carry recoverable keyed evidence
+under reviewed event-access conditions: the tested Qwen and Llama diagnostics
+recover protected codewords while rejecting controls.  The same evidence does
+not become a deterministic public final-text codeword in the current artifacts.
+Public final-text predicates show shallow separability, but they recover zero
+codeword blocks and can be searched, edited, learned, and optimized by
+source-mismatch examples.
+
+The resulting claim is intentionally narrower than an ownership-verification
+claim.  The work supports cooperative trace-bound diagnostics and a negative
+public final-text substrate diagnosis.  It does not support public text-only
+verification success, natural evidence success, phrase-decoder success,
+cryptographic provenance, or an ownership proof.  The main lesson is that
+evidence strength depends on where the evidence lives.  Stronger substrates
+can make verification more deterministic, but they may not travel with ordinary
+natural LLM outputs; final text travels easily, but current public predicates
+do not provide reliable deterministic verification.

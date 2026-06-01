@@ -1,0 +1,27 @@
+\section{Proof Sketches}
+\label{app:proofs}
+
+\subsection{Proof of Lemma~\ref{lem:first-divergence}}
+
+\begin{proof}
+Let $u=(u_1,\ldots,u_m)$ and $v=(v_1,\ldots,v_n)$ be two distinct token
+continuations.  If neither sequence is a prefix of the other, then the set
+\[
+\{t : 1\le t\le \min(m,n),\ u_t\neq v_t\}
+\]
+is nonempty, and the least element is the first-divergence position.  If one
+sequence is a strict prefix of the other, then the first position after the
+shorter sequence ends is the first divergence when end-of-sequence is treated
+as a token.  Thus every pair of distinct tokenized continuations has a first
+divergence after their longest shared token prefix.
+\end{proof}
+
+\subsection{Diagnostic Consequence}
+
+The lemma does not state that final text exposes a reliable public verifier.
+It only states that any token-level difference has an earliest divergent
+event.  This is why first-divergence traces are useful as an upper-bound
+diagnostic: if a provider-side event trace cannot recover a signal, then the
+weaker public final-text view is unlikely to recover that same signal.  If the
+trace recovers a signal while public final text does not, the observed
+bottleneck is public observability rather than event-level controllability.

@@ -1,0 +1,6 @@
+check,status,detail
+figure_3_trace_bound_counts,PASS,trace_bound_accepts.csv contains Qwen 94/96 and Llama 96/96
+figure_3_public_codeword_zero,PASS,public_text_verifier_baselines.csv has zero recovered codeword blocks
+figure_4_guided_attack_top100,PASS,guided rewrite/graft top-100 source-mismatch accepts are 100/100 for all plotted groups
+figure_5_ownership_matrix_shape,PASS,ownership_scenario_heatmap.csv contains 7 scenarios x 9 method families
+figure_5_supported_public_text_zero,PASS,ownership matrix has zero supported public final-text rows

@@ -200,6 +200,7 @@ claim_scope_lint = PASS
 latex_build = PASS
 latex_log_risk_scan_matches = 0
 overleaf_push_performed = false
+full tests/verification_substrate_gap pytest = PASS, 37 passed
 ```
 
 Audited active manuscript figure quality and data traceability:
@@ -222,6 +223,34 @@ figure_3_public_codeword_recovery = 0
 figure_4_guided_rewrite_graft_top100 = 100/100 for all plotted groups
 figure_5_matrix_shape = 7 x 9 = 63
 figure_5_supported_public_final_text_rows = 0
+```
+
+Refreshed the expert review packet so the delivered packet now includes the
+2026-06-01 hardened manuscript snapshot and the new hardening outputs:
+
+```text
+scripts/verification_substrate_gap/build_vsg_expert_review_packet_20260601.py
+scripts/verification_substrate_gap/verify_vsg_expert_review_packet_20260601.py
+scripts/verification_substrate_gap/audit_vsg_expert_handoff_20260601.py
+tests/verification_substrate_gap/test_vsg_expert_packet_20260601.py
+results/verification_substrate_gap/expert_review_packet_20260601/
+results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip
+results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt
+results/verification_substrate_gap/expert_review_packet_verification_20260601/
+```
+
+Observed refreshed packet scope:
+
+```text
+packet_total_file_count = 87
+hashed_file_count = 86
+zip_sha256 = 82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8
+packet_verifier = PASS
+handoff_audit = PASS
+zip_integrity = PASS
+packet_manuscript_head = c10b3f1e73689d63ceb0a4b3b8ea980974df16c1
+packet_pdf_sha256 = a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa
+overleaf_push_performed = false
 ```
 
 ## Remaining Scope After This Pass

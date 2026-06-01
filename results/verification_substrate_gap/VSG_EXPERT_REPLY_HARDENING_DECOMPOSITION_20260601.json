@@ -26,7 +26,8 @@
     "added ownership scenario decision-rule regression tests",
     "cleaned active manuscript prose to replace internal audit-style do-not-claim/draft wording with academic scope language",
     "expanded claim-scope linter qualifiers to accept academic outside-evidence-scope wording",
-    "audited active manuscript figure quality and data traceability with 5 figures, 0 failed figure checks, 5 data checks, and 0 failed data checks"
+    "audited active manuscript figure quality and data traceability with 5 figures, 0 failed figure checks, 5 data checks, and 0 failed data checks",
+    "refreshed the expert review packet to include the 2026-06-01 hardened manuscript snapshot and hardening outputs"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -73,7 +74,18 @@
     "manuscript_figure_quality_figures_checked": 5,
     "manuscript_figure_quality_failed_figures": 0,
     "manuscript_figure_quality_data_checks": 5,
-    "manuscript_figure_quality_failed_data_checks": 0
+    "manuscript_figure_quality_failed_data_checks": 0,
+    "refreshed_expert_packet_20260601_status": "PASS",
+    "refreshed_expert_packet_20260601_zip": "results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip",
+    "refreshed_expert_packet_20260601_zip_sha256": "82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8",
+    "refreshed_expert_packet_20260601_packet_total_file_count": 87,
+    "refreshed_expert_packet_20260601_hashed_file_count": 86,
+    "refreshed_expert_packet_20260601_handoff_audit_status": "PASS",
+    "refreshed_expert_packet_20260601_zip_integrity_status": "PASS",
+    "refreshed_expert_packet_20260601_manuscript_head": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
+    "refreshed_expert_packet_20260601_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
+    "full_verification_substrate_gap_pytest_status": "PASS",
+    "full_verification_substrate_gap_pytest_tests_passed": 37
   },
   "not_unlocked": [
     "new Slurm submission",

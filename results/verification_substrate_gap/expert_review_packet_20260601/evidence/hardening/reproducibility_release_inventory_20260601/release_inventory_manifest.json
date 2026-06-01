@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "bytes": 21176,
+      "path": "results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory.csv",
+      "sha256": "96e268974ae5162aa0e348fa777379833f8fdde72f11a4bed6ec2df07dac2072"
+    },
+    {
+      "bytes": 4431,
+      "path": "results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory_summary.json",
+      "sha256": "509cc5b69295c3c259d42468164e1cbbb299e195b8855bef20ee38a125e5f6e2"
+    },
+    {
+      "bytes": 1677,
+      "path": "results/verification_substrate_gap/reproducibility_release_inventory_20260601/release_inventory_report.md",
+      "sha256": "12bf5a3ca876902f8f52912ae9a90ef3253eae2fe2c50fa3b95e131a514eb0db"
+    }
+  ],
+  "schema_name": "verification_substrate_gap_reproducibility_release_inventory_manifest_v1",
+  "status": "PASS_VSG_REPRODUCIBILITY_RELEASE_INVENTORY_RECORDED_REVIEW_REQUIRED"
+}

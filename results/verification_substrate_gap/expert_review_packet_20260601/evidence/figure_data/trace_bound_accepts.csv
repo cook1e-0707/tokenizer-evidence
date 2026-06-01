@@ -1,0 +1,3 @@
+figure_id,model_family,protected_accepts,protected_blocks,raw_accepts,raw_blocks,task_only_accepts,task_only_blocks,wrong_key_accepts,wrong_key_blocks,wrong_payload_accepts,wrong_payload_blocks,trace_binding_valid,claim_scope
+figure_3_controllability_vs_observability,qwen,94,96,0,96,0,96,0,96,0,96,True,trace_bound_provider_side_diagnostic_not_public_text_only_verification
+figure_3_controllability_vs_observability,llama,96,96,0,96,0,96,0,96,0,96,True,trace_bound_provider_side_diagnostic_not_public_text_only_verification

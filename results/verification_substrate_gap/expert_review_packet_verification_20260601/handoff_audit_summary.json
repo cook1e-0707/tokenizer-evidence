@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "failures": [],
+  "packet_verifier": {
+    "status": "PASS",
+    "failures": [],
+    "packet_dir": "/Users/guanjie/Documents/tokenizer_alignment/results/verification_substrate_gap/expert_review_packet_20260601",
+    "zip_path": "/Users/guanjie/Documents/tokenizer_alignment/results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip",
+    "zip_sha256": "82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8",
+    "packet_total_file_count": 87,
+    "hashed_file_count": 86,
+    "manifest_status": "PASS_PACKET_ASSEMBLED_ARTIFACT_ONLY_20260601_HARDENING_INCLUDED",
+    "manuscript_head": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
+    "root_head_at_packet_build": "54772ac3712192d9ba9cf6729cc616950322b7d8",
+    "claim_lint_status": "PASS",
+    "claim_lint_violation_count": 0,
+    "latex_log_scan_status": "PASS",
+    "overfull_hbox_warning_count": 0,
+    "hardening_summary": {
+      "public_text_stronger_baseline": {
+        "codeword_recovered_blocks_total": 0,
+        "adopted_locked_evidence_updated": false,
+        "public_text_only_verification_claim_allowed": false
+      },
+      "attack_naturalness_proxy": {
+        "rows": 60,
+        "proxy_pass_rows": 0,
+        "semantic_naturalness_claimed": false
+      },
+      "reproducibility_release_inventory": {
+        "row_count": 78,
+        "missing_file_count": 0,
+        "requires_anonymization_review_count": 18,
+        "release_ready_without_review": false
+      },
+      "ownership_decision_rule_audit": {
+        "row_count": 63,
+        "scenario_count": 7,
+        "method_family_count": 9,
+        "failure_count": 0,
+        "supported_public_text_row_count": 0,
+        "supported_trace_bound_row_count": 2
+      },
+      "manuscript_figure_quality_audit": {
+        "figure_count": 5,
+        "failed_figure_count": 0,
+        "data_check_count": 5,
+        "failed_data_check_count": 0
+      }
+    }
+  },
+  "reviewer_facing_file_stats": {
+    "results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt": {
+      "line_count": 126,
+      "byte_count": 4880,
+      "contains_cjk": true
+    },
+    "results/verification_substrate_gap/expert_review_packet_20260601/README_FOR_EXPERT_REVIEW_20260601.md": {
+      "line_count": 126,
+      "byte_count": 4880,
+      "contains_cjk": true
+    },
+    "results/verification_substrate_gap/expert_review_packet_20260601/EXPERT_REVIEW_SCOPE_20260601.md": {
+      "line_count": 74,
+      "byte_count": 2818,
+      "contains_cjk": true
+    },
+    "results/verification_substrate_gap/expert_review_packet_20260601/OBJECTIVE_FACTS_20260601.md": {
+      "line_count": 74,
+      "byte_count": 2450,
+      "contains_cjk": false
+    },
+    "results/verification_substrate_gap/expert_review_packet_20260601/HARDENING_STATUS_20260601.md": {
+      "line_count": 13,
+      "byte_count": 836,
+      "contains_cjk": false
+    }
+  },
+  "audited_files": [
+    "results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt",
+    "results/verification_substrate_gap/expert_review_packet_20260601/README_FOR_EXPERT_REVIEW_20260601.md",
+    "results/verification_substrate_gap/expert_review_packet_20260601/EXPERT_REVIEW_SCOPE_20260601.md",
+    "results/verification_substrate_gap/expert_review_packet_20260601/OBJECTIVE_FACTS_20260601.md",
+    "results/verification_substrate_gap/expert_review_packet_20260601/HARDENING_STATUS_20260601.md"
+  ],
+  "objective_only_scope": {
+    "no_expert_questions": true,
+    "no_route_recommendations": true,
+    "no_new_experiments": true,
+    "no_slurm_generation_scoring_training": true,
+    "overleaf_push_not_performed": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "failure_count": 0,
+  "failures": [],
+  "generation_started": false,
+  "input_csv": "results/verification_substrate_gap/ownership_scenario_stress_test_20260530/ownership_scenario_stress_test.csv",
+  "method_family_count": 9,
+  "model_scoring_started": false,
+  "new_slurm_started": false,
+  "output_dir": "results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601",
+  "ownership_proof_claimed": false,
+  "public_text_only_verification_claimed": false,
+  "row_count": 63,
+  "scenario_count": 7,
+  "schema_name": "verification_substrate_gap_ownership_decision_rule_audit_v1",
+  "status": "PASS",
+  "supported_public_text_row_count": 0,
+  "supported_trace_bound_pairs": [
+    "S2_cooperative_provider_with_trace_bundle::provider_side_trace",
+    "S2_cooperative_provider_with_trace_bundle::first_divergence_diagnostic"
+  ],
+  "supported_trace_bound_row_count": 2,
+  "training_started": false
+}

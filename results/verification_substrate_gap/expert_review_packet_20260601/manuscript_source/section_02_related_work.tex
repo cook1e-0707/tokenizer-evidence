@@ -1,0 +1,104 @@
+\section{Related Work}
+\label{sec:related}
+
+This paper is closest to work on text watermarking, LLM fingerprinting,
+publicly auditable watermark protocols, provenance standards, proof systems,
+model ownership, and extraction diagnostics.  We organize the literature by
+the substrate that carries evidence, because substrate choice determines which
+verification properties can be claimed.
+
+\paragraph{Text watermarking and public final text.}
+Watermarking methods bias or test generated text so that a detector can
+distinguish watermarked samples from unwatermarked samples
+\cite{kirchenbauer2023watermark,zhao2023provable,hu2024unbiased,kuditipudi2024robust,christ2023undetectable,lee2024who,chang2024postmark,huang2025waterpool,dabiriaghdam2025simmark,wouters2024optimizing,liu2024adaptive,zhu2024duwak,lau2024waterfall,jiang2025stealthink}.
+Production-scale systems such as SynthID-Text show that text watermarking can
+be deployed at large scale with a detector-oriented claim
+\cite{dathathri2024scalable}.  This family treats final text as the main
+evidence object, so it is directly relevant to portability and
+non-cooperation.  It also exposes the central substrate risk studied here: if
+a public final-text predicate is observable, an attacker may search, edit,
+paraphrase, or optimize against it.  The present manuscript does not claim
+watermark success, public text-only verification success, or ownership proof;
+it studies why the tested public final-text predicates recover no codeword
+blocks and are spoofable.
+
+\paragraph{Publicly auditable and protocol-backed watermarks.}
+Recent work moves beyond private-key text detectors by designing publicly
+detectable or publicly verifiable watermark protocols
+\cite{fairoze2023publicly,isler2023puppy,duan2025pvmark,luan2026vow}.
+These systems strengthen the verification interface by adding public
+detectability, commitments, zero-knowledge style checks, oblivious detection,
+or protocol participation.  In the VSG taxonomy, that is a substrate shift:
+the evidence is no longer ordinary final text alone, but final text plus a
+stronger protocol or proof object.  This paper is not a replacement for those
+constructions.  It explains why a provider-side trace-bound diagnostic should
+not be promoted into a final-text-only claim unless the stronger substrate is
+actually available.
+
+\paragraph{Metadata, credentials, and proof substrates.}
+Content provenance standards such as C2PA Content Credentials bind assertions,
+claims, and signatures into manifests associated with digital assets
+\cite{c2pa2025spec}.  Proof-oriented LLM work such as zkLLM and ZKPROV studies
+zero-knowledge verification for model computation or dataset provenance
+\cite{sun2024zkllm,namazi2025zkprov}.  These approaches make evidence stronger
+by moving it to a metadata, protocol, or proof substrate.  Cryptographic
+provenance is outside the evidence scope of this manuscript; these systems are
+contrast cases showing how much stronger the evidence object becomes when it
+does not have to survive as ordinary natural text.
+
+\paragraph{Learnability, removal, and spoofing.}
+Removal and residual-signal studies emphasize that provenance detectors should
+not be conflated with deterministic codeword recovery
+\cite{chen2025demark,sander2024radioactive}.  Impossibility and attack work
+also shows that strong claims can fail when the attacker can transform,
+imitate, or learn watermark signals
+\cite{zhang2023watermarkssand,gu2023learnability,an2025ditto}.  Our attack
+ladder has the same cautionary role, but with a narrower target: it does not
+claim a universal impossibility theorem over all public predicates.  It shows
+that the tested public final-text predicates are in a weak position because
+they recover zero codeword blocks while still offering source-mismatch accept
+regions that can be searched, edited, learned, and directly optimized.
+
+\paragraph{Active fingerprints and model-side behavior.}
+Active fingerprints query a model with selected prompts and verify associated
+responses or behaviors
+\cite{xu2024instructional,zeng2024huref,russinovich2024chainhash,pasquini2025llmmap,yang2024fingerprint,yamabe2025mergeprint,xu2025ctcc,xu2025evertracer,bai2025esf,hu2025resf,nasery2025scalable,tsai2025rofl}.
+These methods are closer to model ownership disputes than generic text
+watermarks because they can involve owner-chosen prompts or behaviors.  Their
+verification substrate, however, is often a response pattern, classifier score,
+or query transcript rather than ordinary copied final text alone.  Our work
+does not claim superiority over these methods.  It asks a narrower diagnostic
+question: when evidence is visible in provider-side token events but not in
+public final text, what can and cannot be verified?
+
+\paragraph{Model-state and training-time ownership evidence.}
+Classical DNN watermarking embeds signatures into parameters, activations, or
+trigger responses
+\cite{uchida2017embedding,zhang2018protecting,adi2018turning,rouhani2019deepsigns,jia2021entangled,szyller2021dawn,krauss2024clearstamp}.
+These substrates can be strong when a verifier has white-box or cooperative
+access, but they are less portable with copied text.  Scrubbing, backdoor
+removal, model merging, and task-vector methods show that model-side evidence
+can change under post-release transformation
+\cite{zhang2025meraser,zeng2024beear,li2024backdoor,hubinger2024sleeper,wortsman2022model,ilharco2023task,yadav2023ties}.
+The present paper does not claim robustness to arbitrary fine-tuning,
+semantic rewriting, or probe-free distillation.
+
+\paragraph{Passive provenance and extraction.}
+Model extraction, memorization, and data-provenance studies infer exposure or
+lineage without necessarily injecting a recoverable owner payload
+\cite{carlini2024stealing,liang2024model,xie2024recall,puerto2025scaling,ravichander2025imprint}.
+They motivate the non-cooperative dispute setting, but they usually answer a
+different question from deterministic codeword recovery.  Our public
+final-text experiments should therefore be read as a substrate diagnostic, not
+as a claim that all passive provenance questions are impossible.
+
+\paragraph{Positioning.}
+The contribution here is neither a new public text-only verifier nor an
+ownership-proof construction.  It is a claim-controlled map of which substrate
+currently carries evidence.  Provider-side first-divergence traces show
+controllability under event access; public final-text predicates in the
+current artifacts fail to recover codewords and become source-mismatch
+spoofing targets.  This framing complements prior methods by making explicit
+when a method's evidence object travels with ordinary natural text and when it
+requires a stronger cooperative, metadata, protocol, proof, or model-state
+substrate.

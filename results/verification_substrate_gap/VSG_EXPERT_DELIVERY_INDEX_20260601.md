@@ -10,7 +10,7 @@ experiments, or new claims.
 ## Canonical Handoff State
 
 ```text
-VSG_EXPERT_REVIEW_PACKET_DELIVERED_WAITING_FOR_REVIEW_NO_NEW_EXPERIMENTS
+VSG_EXPERT_REVIEW_PACKET_20260601_REFRESHED_HARDENING_INCLUDED_NO_NEW_EXPERIMENTS
 ```
 
 State record:
@@ -23,19 +23,19 @@ results/verification_substrate_gap/VSG_CURRENT_HANDOFF_STATE_20260601.json
 ## Expert Packet
 
 ```text
-results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip
+results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip
 ```
 
 Zip SHA256:
 
 ```text
-0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f
+82b4007525b3d213bc4920b6b4bd947a7de002fdcf2d9271cc5543a2c32418e8
 ```
 
 External Chinese README:
 
 ```text
-results/verification_substrate_gap/vsg_expert_review_packet_20260531_README.txt
+results/verification_substrate_gap/vsg_expert_review_packet_20260601_README.txt
 ```
 
 ## Packet Contents To Review
@@ -43,33 +43,35 @@ results/verification_substrate_gap/vsg_expert_review_packet_20260531_README.txt
 Inside the zip:
 
 ```text
-manuscript/VSG_manuscript_snapshot_20260531.pdf
+manuscript/VSG_manuscript_snapshot_20260601.pdf
 manuscript_source/
 evidence/figure_data/
 evidence/visual_drafts/
+evidence/hardening/
 validation/
-EXPERT_REVIEW_SCOPE_20260531.md
-OBJECTIVE_FACTS_20260531.md
+EXPERT_REVIEW_SCOPE_20260601.md
+OBJECTIVE_FACTS_20260601.md
+HARDENING_STATUS_20260601.md
 packet_manifest.json
 ```
 
 ## Verification Artifacts
 
 ```text
-results/verification_substrate_gap/expert_review_packet_verification_20260531/packet_verification_report.md
-results/verification_substrate_gap/expert_review_packet_verification_20260531/packet_verification_summary.json
-results/verification_substrate_gap/expert_handoff_audit_20260531/handoff_audit_report.md
-results/verification_substrate_gap/expert_handoff_audit_20260531/handoff_audit_summary.json
+results/verification_substrate_gap/expert_review_packet_verification_20260601/packet_verification_report.md
+results/verification_substrate_gap/expert_review_packet_verification_20260601/packet_verification_summary.json
+results/verification_substrate_gap/expert_review_packet_verification_20260601/handoff_audit_report.md
+results/verification_substrate_gap/expert_review_packet_verification_20260601/handoff_audit_summary.json
 ```
 
 ## Verification Commands
 
 ```bash
-python3 scripts/verification_substrate_gap/verify_vsg_expert_review_packet.py
-python3 scripts/verification_substrate_gap/audit_vsg_expert_handoff.py
-unzip -t results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip
-shasum -a 256 results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip
-cat results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip.sha256
+python3 scripts/verification_substrate_gap/verify_vsg_expert_review_packet_20260601.py
+python3 scripts/verification_substrate_gap/audit_vsg_expert_handoff_20260601.py
+unzip -t results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip
+shasum -a 256 results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip
+cat results/verification_substrate_gap/vsg_expert_review_packet_20260601.zip.sha256
 ```
 
 Expected verification facts:
@@ -77,12 +79,13 @@ Expected verification facts:
 ```text
 packet verifier: PASS
 handoff audit: PASS
-packet total file count: 60
-hashed file count: 59
+packet total file count: 87
+hashed file count: 86
 claim-scope lint: PASS, 17 files, 0 violations
 LaTeX log scan: PASS
 overfull hbox warnings: 0
-manuscript head: 64510b9daf88deb2efd49a26c8046a023fa4904e
+manuscript head: c10b3f1e73689d63ceb0a4b3b8ea980974df16c1
+packet PDF sha256: a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa
 ```
 
 ## Claim Boundary

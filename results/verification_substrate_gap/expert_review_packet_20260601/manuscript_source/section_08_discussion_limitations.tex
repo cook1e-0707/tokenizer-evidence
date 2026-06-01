@@ -1,0 +1,86 @@
+\section{Discussion and Limitations}
+\label{sec:limitations}
+
+\paragraph{Substrate displacement.}
+The central pattern in the evidence is substrate displacement.  Verification
+becomes stronger when evidence is moved to a stronger substrate, but stronger
+substrates often travel less naturally with ordinary LLM outputs.  Metadata can
+be strong if preserved, but it is fragile under copy-paste or platform
+stripping.  Protocol transcripts and proof objects can be deterministic, but
+they require participation and a committed statement.  Provider-side traces can
+recover codewords under authorized event access, but they do not travel with
+public final text.  Natural final text is portable and non-cooperative, but the
+current public predicates either fail codeword recovery or become
+source-mismatch spoofing targets.
+
+\paragraph{No universal impossibility theorem.}
+The paper does not prove that every conceivable public final-text method must
+fail.  It reports a conditional empirical and diagnostic result: in the tested
+artifacts, provider-side first-divergence traces carry recoverable evidence,
+while public final-text predicates recover zero codeword blocks and expose
+spoofable accept regions.  Stronger public final-text schemes would need to
+show deterministic recovery and spoof resistance under their own declared
+substrate and threat model.
+
+\paragraph{P2 and P3 are surrogates, not exhaustive classes.}
+The shallow predicates used in the public final-text experiments are surrogate
+attempts to recover or approximate protected signal from final text.  They are
+useful because they occupy the diagnostic failure mode of interest: no
+codeword recovery, but a nonzero accept region.  They are not presented as an
+exhaustive class of all possible public final-text verifiers.
+
+\paragraph{Trace-bound success is not deployment proof.}
+The trace-bound diagnostic measures event-access controllability.  It should
+not be interpreted as public text-only verification success, natural evidence
+success, phrase-decoder success, signed provenance, cryptographic provenance,
+or an ownership proof.  A deployable cooperative trace-bundle system would also
+need trace binding, key management, audit policy, and release engineering that
+are outside the present evidence scope.
+
+\paragraph{Attack naturalness is not yet established.}
+The guided rewrite/graft attacks show public-predicate optimizability.  The
+current artifact-level result establishes neither semantic preservation,
+human-naturalness, nor indistinguishability from ordinary answers.  A proxy
+readability audit over the guided rewrite/graft examples found 0/60 passing
+rows, mostly due to incomplete sentence endings, isolated single-letter
+fragments, and known broken-graft markers.  Adding a naturalness or
+semantic-preservation filter could strengthen the attack, but it is not
+required to show that a predicate with zero codeword recovery and
+source-mismatch accepts is not a deterministic verifier.
+
+\paragraph{Historical failures remain failures.}
+Earlier routes failed for important reasons: passive evidence lacked enough
+observable symbols, step-labeled outputs exposed brittle structure, phrase
+decoders failed under scrubbed final text, and natural-output diagnostics
+surfaced duplicate or forbidden-quality failures.  The VSG framing does not
+reclassify those artifacts as positives.  It explains why the paper should
+separate trace-bound controllability from public final-text verification.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{p{0.22\linewidth}p{0.19\linewidth}p{0.26\linewidth}p{0.22\linewidth}}
+\toprule
+Route & Status & Bottleneck & Use in VSG \\
+\midrule
+v1 passive mining & Historical failure & Public-symbol survival and observability failed & Motivates substrate-gap framing only \\
+R3 Step-label/fixed-slot route & Historical failure & Visible structure and slot fragility & Not reclassified as positive \\
+R4 phrase/final-text route & Historical failure & Public final-text codeword recovery remains zero & Supports observability gap \\
+R4 trace-bound route & Diagnostic success under trace access & Not public final-text verification & Upper-bound controllability evidence only \\
+\bottomrule
+\end{tabular}
+\caption{Historical failure chain motivating the substrate-gap framing.  The
+chain does not imply public final-text verification success or ownership
+proof.}
+\label{tab:historical-chain}
+\end{table}
+
+\paragraph{Unsupported axes.}
+Unsupported axes include sanitizer robustness, robustness to semantic
+paraphrase, full false-accept-rate guarantees, payload-diversity evidence,
+Llama public-text transfer, model-family general verification, copied-text
+ownership resolution, rewritten-text ownership resolution, and non-cooperative
+ownership proof.  These are future work or out-of-scope axes, not hidden
+successes.

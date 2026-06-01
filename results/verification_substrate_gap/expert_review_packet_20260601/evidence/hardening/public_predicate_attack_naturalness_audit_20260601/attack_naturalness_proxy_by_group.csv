@@ -1,0 +1,4 @@
+source_id,model_family,candidate_arm,rows,proxy_pass_rows,proxy_fail_rows,proxy_pass_rate,mean_length_ratio,mean_token_jaccard,mean_isolated_fragment_count,mean_broken_graft_marker_count
+llama_locked_adopted_880121,llama,raw,20,0,20,0.0,1.224164,0.403244,0.45,1.0
+qwen_locked_adopted_870210_plus_870987,qwen,raw,20,0,20,0.0,1.259425,0.424762,1.65,1.35
+qwen_locked_adopted_870210_plus_870987,qwen,task_only,20,0,20,0.0,1.246867,0.456823,1.6,1.05
