@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED_NO_NEW_EXPERIMENTS
+VSG_PUBLIC_SUPPLEMENT_STAGING_PLAN_RECORDED_NO_PUBLICATION_NO_NEW_EXPERIMENTS
 ```
 
 ## Status
@@ -74,6 +74,11 @@ copied into a reviewed supplement bundle, and which internal handoff records
 should remain outside the public supplement. No files were published or copied
 as release material.
 
+This continuation now also records a plan-only public-supplement staging map.
+It maps every release-boundary row to a future supplement path, transform,
+scope note, residual risk, and execution/review flag. It still performs no
+supplement copying, no publication, no new experiments, and no claim expansion.
+
 ## Current Review Packet
 
 - Zip:
@@ -113,9 +118,10 @@ as release material.
 - Manuscript figure-quality audit regression tests: `PASS`, figure-quality
   targeted tests `3` passed
 - Refreshed expert packet regression tests: `PASS`
-- Full `tests/verification_substrate_gap` suite: `PASS`, `41` tests passed
+- Full `tests/verification_substrate_gap` suite: `PASS`, `45` tests passed
 - Release-boundary audit tests: `PASS`, targeted release/reproducibility
   tests `9` passed
+- Release-staging plan tests: `PASS`, targeted staging tests `4` passed
 - Manuscript PDF SHA256:
   `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
@@ -265,6 +271,41 @@ as release material.
   release-boundary audit only; no publication, no file-copy release bundle, no
   Slurm, no generation, no model scoring, no training, no public text-only
   verification claim, no ownership-proof claim.
+
+## Public Supplement Release Staging Plan
+
+- Summary:
+  `results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_summary.json`
+- Report:
+  `results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_report.md`
+- CSV:
+  `results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_plan.csv`
+- Rows:
+  `78`
+- Direct include candidates:
+  `39`
+- Stage/copy candidates:
+  `21`
+- Redacted derivative candidates:
+  `3`
+- Scope-note gated candidates:
+  `10`
+- Security-review gated candidates:
+  `1`
+- Excluded internal records:
+  `4`
+- Execution-required rows:
+  `35`
+- Manual-review-required rows:
+  `14`
+- Duplicate planned supplement targets:
+  `0`
+- Release-ready after plan:
+  `False`
+- Claim scope:
+  staging plan only; no file copying, no public supplement creation, no
+  publication, no Slurm, no generation, no model scoring, no training, no
+  public text-only verification claim, no ownership-proof claim.
 
 ## Ownership Scenario Decision-Rule Audit
 

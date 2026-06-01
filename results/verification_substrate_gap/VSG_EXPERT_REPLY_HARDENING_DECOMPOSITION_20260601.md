@@ -281,6 +281,41 @@ ownership_proof_claimed = false
 targeted release/reproducibility tests = PASS, 9 passed
 ```
 
+Recorded a plan-only public-supplement staging map from the release-boundary
+audit:
+
+```text
+scripts/verification_substrate_gap/build_vsg_release_staging_plan.py
+tests/verification_substrate_gap/test_vsg_release_staging_plan.py
+results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 78
+direct_include_candidates = 39
+stage_or_copy_candidates = 21
+redacted_derivative_candidates = 3
+scope_note_gated_candidates = 10
+security_review_gated_candidates = 1
+excluded_internal_records = 4
+execution_required_rows = 35
+manual_review_required_rows = 14
+duplicate_planned_targets = 0
+release_ready_after_plan = false
+files_copied = false
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted release-staging tests = PASS, 4 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.

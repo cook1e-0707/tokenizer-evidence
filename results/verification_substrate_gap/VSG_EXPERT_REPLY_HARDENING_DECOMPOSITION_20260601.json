@@ -28,7 +28,8 @@
     "expanded claim-scope linter qualifiers to accept academic outside-evidence-scope wording",
     "audited active manuscript figure quality and data traceability with 5 figures, 0 failed figure checks, 5 data checks, and 0 failed data checks",
     "refreshed the expert review packet to include the 2026-06-01 hardened manuscript snapshot and hardening outputs",
-    "recorded a public-supplement release-boundary audit from the reproducibility release inventory"
+    "recorded a public-supplement release-boundary audit from the reproducibility release inventory",
+    "recorded a plan-only public-supplement staging map with target paths, transforms, scope notes, residual risks, and execution/review flags"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -86,7 +87,7 @@
     "refreshed_expert_packet_20260601_manuscript_head": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
     "refreshed_expert_packet_20260601_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
     "full_verification_substrate_gap_pytest_status": "PASS",
-    "full_verification_substrate_gap_pytest_tests_passed": 41,
+    "full_verification_substrate_gap_pytest_tests_passed": 45,
     "release_boundary_audit_status": "PASS_VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED",
     "release_boundary_audit_rows": 78,
     "release_boundary_ready_for_reviewed_public_supplement": 39,
@@ -95,7 +96,25 @@
     "release_boundary_blockers": 35,
     "release_boundary_ready_now": false,
     "release_boundary_targeted_tests_status": "PASS",
-    "release_boundary_targeted_tests_passed": 9
+    "release_boundary_targeted_tests_passed": 9,
+    "release_staging_plan_status": "PASS_VSG_RELEASE_STAGING_PLAN_RECORDED_PLAN_ONLY",
+    "release_staging_plan_rows": 78,
+    "release_staging_direct_include_candidates": 39,
+    "release_staging_stage_or_copy_candidates": 21,
+    "release_staging_redacted_derivative_candidates": 3,
+    "release_staging_scope_note_gated_candidates": 10,
+    "release_staging_security_review_gated_candidates": 1,
+    "release_staging_excluded_internal_records": 4,
+    "release_staging_execution_required_rows": 35,
+    "release_staging_manual_review_required_rows": 14,
+    "release_staging_duplicate_planned_targets": 0,
+    "release_staging_release_ready_after_plan": false,
+    "release_staging_plan_only": true,
+    "release_staging_files_copied": false,
+    "release_staging_public_supplement_created": false,
+    "release_staging_publication_performed": false,
+    "release_staging_targeted_tests_status": "PASS",
+    "release_staging_targeted_tests_passed": 4
   },
   "not_unlocked": [
     "new Slurm submission",

@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "bytes": 36898,
+      "path": "results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_plan.csv",
+      "sha256": "1db06e38ee07e5ecca2d2bcd0ec9a2881d1e61f70d0a6c3525c2878e90167247"
+    },
+    {
+      "bytes": 1933,
+      "path": "results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_summary.json",
+      "sha256": "6284f9cbd0d3d463d049269e764fedc52e9954dce91f0cc4a8ef7a1199cc992b"
+    },
+    {
+      "bytes": 1318,
+      "path": "results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_report.md",
+      "sha256": "cdc322977a3c86a5f1ed32173362e643c0bbca1d8b02fdc3d3a9c367711aa00a"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_release_staging_manifest_v1",
+  "status": "PASS_VSG_RELEASE_STAGING_PLAN_RECORDED_PLAN_ONLY"
+}
