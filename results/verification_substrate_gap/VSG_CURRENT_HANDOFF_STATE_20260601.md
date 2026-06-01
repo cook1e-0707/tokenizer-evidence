@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_DRY_RUN_MANIFEST_RECORDED_NOT_RELEASE_READY_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_BLOCKER_CHECKLIST_RECORDED_ARTIFACT_ONLY_NO_PUBLICATION
 ```
 
 ## Status
@@ -85,6 +85,12 @@ paths, target supplement paths, review artifacts, and remaining blockers. It
 confirms all dry-run sources and review artifacts exist, but it still performs
 no file copying, creates no public supplement, publishes nothing, and keeps the
 release marked not ready.
+
+This continuation now also records an artifact-only blocker checklist. It
+splits the 35 remaining publication blockers into 21 copy-required rows and 14
+human-review-required rows, with the evidence needed to close each blocker in a
+future reviewed bundle pass. The checklist itself does not close blockers,
+perform reviews, copy files, publish anything, or expand claim scope.
 
 This continuation additionally creates artifact-only review derivatives for
 the supplement release blockers: redacted trace-bound CSVs with private path
@@ -445,6 +451,42 @@ blockers, so no public supplement is release-ready yet.
 - Verification:
   targeted dry-run manifest pytest `PASS` with `4` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `57` tests passed.
+
+## Public Supplement Blocker Checklist
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/blocker_checklist_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/blocker_checklist_report.md`
+- Full checklist:
+  `results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/blocker_checklist.csv`
+- Copy-required checklist:
+  `results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/copy_required_checklist.csv`
+- Human-review checklist:
+  `results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/human_review_checklist.csv`
+- Publication blockers:
+  `35`
+- Copy-required rows:
+  `21`
+- Human-review-required rows:
+  `14`
+- Missing sources:
+  `0`
+- Missing review artifacts:
+  `0`
+- Unclassified blockers:
+  `0`
+- All blockers have resolution track:
+  `True`
+- Release-ready after checklist:
+  `False`
+- Claim scope:
+  blocker checklist only; no public supplement construction, no publication,
+  no Slurm, no generation, no model scoring, no training, no public text-only
+  verification claim, no ownership-proof claim.
+- Verification:
+  targeted blocker-checklist pytest `PASS` with `3` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `60` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 

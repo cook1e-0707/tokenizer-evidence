@@ -423,6 +423,41 @@ targeted public-supplement dry-run manifest tests = PASS, 4 passed
 full tests/verification_substrate_gap pytest = PASS, 57 passed
 ```
 
+Recorded a public-supplement blocker checklist from the dry-run manifest:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_blocker_checklist.py
+tests/verification_substrate_gap/test_vsg_public_supplement_blocker_checklist.py
+results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/
+```
+
+Observed scope:
+
+```text
+publication_blockers = 35
+copy_required = 21
+human_review_required = 14
+missing_sources = 0
+missing_review_artifacts = 0
+unclassified_blockers = 0
+all_blockers_have_resolution_track = true
+blockers_resolved = false
+release_ready_after_checklist = false
+artifact_only = true
+files_copied = false
+human_reviews_performed = false
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted public-supplement blocker checklist tests = PASS, 3 passed
+full tests/verification_substrate_gap pytest = PASS, 60 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.

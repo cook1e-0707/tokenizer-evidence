@@ -1,0 +1,32 @@
+{
+  "files": [
+    {
+      "bytes": 19956,
+      "path": "results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/blocker_checklist.csv",
+      "sha256": "395bffc24a8876f300625bc5f71b003ddd74354ddcef30e2f2941ccc72dd5846"
+    },
+    {
+      "bytes": 9920,
+      "path": "results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/copy_required_checklist.csv",
+      "sha256": "cde6b16ceb424380ef0bab36144055d67bb9120bdea32e1ffe69b0bc6c32f629"
+    },
+    {
+      "bytes": 10278,
+      "path": "results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/human_review_checklist.csv",
+      "sha256": "549c9d3a196febe09bee61fe8f98726171da036bd33af31563a087dd1b96d896"
+    },
+    {
+      "bytes": 1568,
+      "path": "results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/blocker_checklist_summary.json",
+      "sha256": "03e83b9d21d995788d4b721316a906c18cadd001f4b47e4082d93b51f2831d07"
+    },
+    {
+      "bytes": 1143,
+      "path": "results/verification_substrate_gap/public_supplement_blocker_checklist_20260601/blocker_checklist_report.md",
+      "sha256": "cc33eeb76828570b72a1b439b61502dfbc99c847fb13e6dfff286576ef19d0a7"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_blocker_checklist_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_BLOCKER_CHECKLIST_RECORDED_ARTIFACT_ONLY"
+}

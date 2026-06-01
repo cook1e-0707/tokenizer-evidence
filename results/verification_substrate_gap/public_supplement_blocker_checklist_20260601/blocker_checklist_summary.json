@@ -1,0 +1,40 @@
+{
+  "all_blockers_have_resolution_track": true,
+  "all_review_artifacts_present": true,
+  "all_sources_present": true,
+  "allowlist_enabled": false,
+  "artifact_only": true,
+  "blockers_resolved": false,
+  "bundle_action_counts": {
+    "copy_source_to_bundle_after_review": 21,
+    "include_source_after_security_review": 1,
+    "include_source_with_scope_note_after_human_review": 10,
+    "use_redacted_derivative_after_human_review": 3
+  },
+  "copy_required_count": 21,
+  "files_copied": false,
+  "generation_started": false,
+  "human_review_required_count": 14,
+  "human_reviews_performed": false,
+  "missing_review_artifact_count": 0,
+  "missing_source_count": 0,
+  "model_scoring_started": false,
+  "new_slurm_started": false,
+  "output_dir": "results/verification_substrate_gap/public_supplement_blocker_checklist_20260601",
+  "overleaf_push_performed": false,
+  "ownership_proof_claimed": false,
+  "public_supplement_created": false,
+  "public_text_only_verification_claimed": false,
+  "publication_blocker_count": 35,
+  "publication_performed": false,
+  "release_ready_after_checklist": false,
+  "resolution_track_counts": {
+    "copy_required": 21,
+    "human_review_required": 14
+  },
+  "schema_name": "verification_substrate_gap_public_supplement_blocker_checklist_v1",
+  "source_dry_run_manifest": "results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_manifest.csv",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_BLOCKER_CHECKLIST_RECORDED_ARTIFACT_ONLY",
+  "training_started": false,
+  "unclassified_blocker_count": 0
+}
