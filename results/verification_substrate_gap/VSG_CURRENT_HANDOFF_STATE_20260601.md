@@ -44,16 +44,20 @@ or paper-facing positive claims.
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
-## Git State
+## Git Sync Evidence
 
 - Root repository branch: `main`
-- Root repository commit:
-  `bb5d2738f5360317d858cf5f63c823bb606bac2c`
-- `origin/main` commit:
-  `bb5d2738f5360317d858cf5f63c823bb606bac2c`
+- Root repository commit at the pre-state-record sync check:
+  `4e470810ed6a6741fa94206915a2ae0d0b59405b`
+- `origin/main` commit at the pre-state-record sync check:
+  `4e470810ed6a6741fa94206915a2ae0d0b59405b`
 - Manuscript repository commit:
   `64510b9daf88deb2efd49a26c8046a023fa4904e`
 - Overleaf push: not performed.
+
+This file intentionally does not attempt to record the commit hash containing
+itself, because that would be self-referential and unstable. Use `git log` for
+the current state-record commit.
 
 ## Current Claim Scope
 
