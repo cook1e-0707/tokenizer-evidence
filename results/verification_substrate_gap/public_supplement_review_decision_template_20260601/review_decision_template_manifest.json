@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "bytes": 16914,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_template.csv",
+      "sha256": "385e0ccf81992c267f5a8d3738de7017a24526b1cf12edbca510e2bc07ba3b3b"
+    },
+    {
+      "bytes": 1710,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_schema.json",
+      "sha256": "7e6ef3ee94e70969ead349d868d00d87d876ed787322b23bd124f956ce537f2f"
+    },
+    {
+      "bytes": 1517,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_template_summary.json",
+      "sha256": "77cbe9cce8783376e9e37ae536d7f2e50b851ec29097c08d05bce2007b8cd64c"
+    },
+    {
+      "bytes": 1144,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_template_report.md",
+      "sha256": "5119b6f309b8621a6d7680a74874e66148d09e31587cf7030eea8bdbac76b7b3"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_review_decision_template_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISION_TEMPLATE_RECORDED_PENDING_ONLY"
+}

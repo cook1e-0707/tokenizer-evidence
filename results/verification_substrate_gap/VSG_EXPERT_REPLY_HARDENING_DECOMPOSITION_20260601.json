@@ -1,5 +1,5 @@
 {
-  "status": "PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_HARDENING_IN_PROGRESS",
+  "status": "PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_REVIEW_DECISION_TEMPLATE_RECORDED",
   "date": "2026-06-01",
   "new_slurm_started": false,
   "generation_started": false,
@@ -31,7 +31,8 @@
     "recorded a public-supplement release-boundary audit from the reproducibility release inventory",
     "recorded a plan-only public-supplement staging map with target paths, transforms, scope notes, residual risks, and execution/review flags",
     "created artifact-only public-supplement review derivatives with redacted trace CSVs, scope notes, and config security review",
-    "recorded a public-supplement readiness re-audit from staging plan plus review derivatives"
+    "recorded a public-supplement readiness re-audit from staging plan plus review derivatives",
+    "recorded an artifact-only public-supplement review-decision template with 14 pending rows and 0 approvals"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -259,7 +260,31 @@
     "public_supplement_human_review_packet_publication_performed": false,
     "public_supplement_human_review_packet_targeted_tests_status": "PASS",
     "public_supplement_human_review_packet_targeted_tests_passed": 3,
-    "full_verification_substrate_gap_pytest_tests_passed_after_human_review_packet": 69
+    "full_verification_substrate_gap_pytest_tests_passed_after_human_review_packet": 69,
+    "public_supplement_review_decision_template_status": "PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISION_TEMPLATE_RECORDED_PENDING_ONLY",
+    "public_supplement_review_decision_template_rows": 14,
+    "public_supplement_review_decision_template_pending_decisions": 14,
+    "public_supplement_review_decision_template_approved_decisions": 0,
+    "public_supplement_review_decision_template_redaction_reviews": 3,
+    "public_supplement_review_decision_template_scope_note_reviews": 10,
+    "public_supplement_review_decision_template_security_reviews": 1,
+    "public_supplement_review_decision_template_empty_reviewer_ids": 14,
+    "public_supplement_review_decision_template_empty_reviewed_at_utc": 14,
+    "public_supplement_review_decision_template_all_decisions_pending": true,
+    "public_supplement_review_decision_template_schema_written": true,
+    "public_supplement_review_decision_template_records_template_written": true,
+    "public_supplement_review_decision_template_review_approvals_recorded": false,
+    "public_supplement_review_decision_template_human_reviews_performed": false,
+    "public_supplement_review_decision_template_files_copied": false,
+    "public_supplement_review_decision_template_candidate_bundle_created": false,
+    "public_supplement_review_decision_template_publication_blockers_resolved": false,
+    "public_supplement_review_decision_template_release_ready_after_template": false,
+    "public_supplement_review_decision_template_artifact_only": true,
+    "public_supplement_review_decision_template_public_supplement_created": false,
+    "public_supplement_review_decision_template_publication_performed": false,
+    "public_supplement_review_decision_template_targeted_tests_status": "PASS",
+    "public_supplement_review_decision_template_targeted_tests_passed": 3,
+    "full_verification_substrate_gap_pytest_tests_passed_after_review_decision_template": 72
   },
   "not_unlocked": [
     "new Slurm submission",

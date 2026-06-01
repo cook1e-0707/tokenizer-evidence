@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_HUMAN_REVIEW_PACKET_RECORDED_PENDING_REVIEW_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISION_TEMPLATE_RECORDED_PENDING_ONLY_NO_PUBLICATION
 ```
 
 ## Status
@@ -126,6 +126,13 @@ covered by review derivatives, with zero derivative-uncovered rows. The audit
 still records 21 stage/copy rows and 14 human-review rows as publication
 blockers, so no public supplement is release-ready yet.
 
+This continuation additionally records an artifact-only review-decision
+template for the 14 pending human-review rows. The template defines the fields
+required for future approval, rejection, or hold decisions, but every row
+remains `pending_not_performed`; no reviewer identity, review timestamp, hash
+verification, reviewer assertion, approval, file copy, candidate supplement,
+publication, or claim expansion is recorded.
+
 ## Current Review Packet
 
 - Zip:
@@ -173,6 +180,8 @@ blockers, so no public supplement is release-ready yet.
   tests `4` passed
 - Public-supplement readiness audit tests: `PASS`, targeted readiness tests
   `4` passed
+- Public-supplement review-decision template tests: `PASS`, targeted template
+  tests `3` passed
 - Manuscript PDF SHA256:
   `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
@@ -645,6 +654,52 @@ blockers, so no public supplement is release-ready yet.
 - Verification:
   targeted human-review packet pytest `PASS` with `3` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `69` tests passed.
+
+## Public Supplement Review Decision Template
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_template_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_template_report.md`
+- Decision template:
+  `results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_template.csv`
+- Schema:
+  `results/verification_substrate_gap/public_supplement_review_decision_template_20260601/review_decision_schema.json`
+- Decision rows:
+  `14`
+- Pending decisions:
+  `14`
+- Approved decisions:
+  `0`
+- Redaction-review decisions:
+  `3`
+- Scope-note-review decisions:
+  `10`
+- Security-review decisions:
+  `1`
+- Empty reviewer IDs:
+  `14`
+- Empty reviewed-at timestamps:
+  `14`
+- Review approvals recorded:
+  `false`
+- Human reviews performed:
+  `false`
+- Files copied:
+  `false`
+- Candidate supplement bundle created:
+  `false`
+- Publication blockers resolved:
+  `false`
+- Release-ready after template:
+  `false`
+- Claim scope:
+  decision-template only; no review approval, no public supplement
+  construction, no publication, no Slurm, no generation, no model scoring, no
+  training, no public text-only verification claim, no ownership-proof claim.
+- Verification:
+  targeted review-decision template pytest `PASS` with `3` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `72` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 

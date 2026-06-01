@@ -1,0 +1,55 @@
+{
+  "allowed_decisions": [
+    "approved",
+    "rejected",
+    "hold"
+  ],
+  "approval_must_not_claim": [
+    "public text-only verification success",
+    "ownership proof",
+    "protected success for source-mismatch rows",
+    "codeword recovery for public final text",
+    "naturalness-preserving rewrite unless separately reviewed"
+  ],
+  "human_reviews_performed": false,
+  "initial_decision_status": "pending_not_performed",
+  "record_type": "human_review_decision_record",
+  "required_fields_for_any_non_pending_decision": [
+    "review_id",
+    "review_type",
+    "reviewer_id",
+    "reviewed_at_utc",
+    "decision_status",
+    "source_sha256_verified",
+    "review_artifact_sha256_verified",
+    "reviewer_assertion_confirmed",
+    "claim_scope_guard_preserved",
+    "failure_condition"
+  ],
+  "required_truthy_fields_for_approved": [
+    "source_sha256_verified",
+    "review_artifact_sha256_verified",
+    "reviewer_assertion_confirmed",
+    "claim_scope_guard_preserved"
+  ],
+  "review_approvals_recorded": false,
+  "review_type_specific_required_assertions": {
+    "redaction_review": [
+      "private fields removed",
+      "trace-bound-only scope preserved",
+      "redacted derivative hash matches packet index"
+    ],
+    "scope_note_review": [
+      "allowed interpretation present",
+      "forbidden claims preserved",
+      "artifact not reinterpreted as protected success or ownership proof"
+    ],
+    "security_review": [
+      "no literal secret values",
+      "schema/field-name exposure acceptable",
+      "configuration review remains non-claim evidence"
+    ]
+  },
+  "schema_name": "verification_substrate_gap_public_supplement_review_decision_record_v1",
+  "template_only": true
+}

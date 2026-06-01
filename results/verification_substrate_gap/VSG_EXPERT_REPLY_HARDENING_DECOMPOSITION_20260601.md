@@ -1,6 +1,6 @@
 # VSG Expert Reply Hardening Decomposition - 2026-06-01
 
-Status: `PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_HARDENING_IN_PROGRESS`
+Status: `PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_REVIEW_DECISION_TEMPLATE_RECORDED`
 
 This record decomposes the latest expert reply into concrete work items and
 records the artifact-only actions completed in this pass. No Slurm job,
@@ -582,6 +582,49 @@ public_text_only_verification_claimed = false
 ownership_proof_claimed = false
 targeted public-supplement human-review packet tests = PASS, 3 passed
 full tests/verification_substrate_gap pytest = PASS, 69 passed
+```
+
+Recorded an artifact-only review-decision template for the 14 pending
+human-review rows:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_review_decision_template.py
+tests/verification_substrate_gap/test_vsg_public_supplement_review_decision_template.py
+results/verification_substrate_gap/public_supplement_review_decision_template_20260601/
+```
+
+Observed scope:
+
+```text
+status = PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISION_TEMPLATE_RECORDED_PENDING_ONLY
+decision_template_rows = 14
+pending_decisions = 14
+approved_decisions = 0
+redaction_reviews = 3
+scope_note_reviews = 10
+security_reviews = 1
+empty_reviewer_ids = 14
+empty_reviewed_at_utc_fields = 14
+all_decisions_pending = true
+schema_written = true
+decision_records_template_written = true
+review_approvals_recorded = false
+human_reviews_performed = false
+publication_blockers_resolved = false
+release_ready_after_template = false
+artifact_only = true
+files_copied = false
+candidate_bundle_created = false
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted review-decision template tests = PASS, 3 passed
+full tests/verification_substrate_gap pytest = PASS, 72 passed
 ```
 
 ## Remaining Scope After This Pass
