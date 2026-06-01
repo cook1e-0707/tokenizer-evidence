@@ -1,0 +1,27 @@
+{
+  "schema_name": "vsg_remote_sync_check_release_boundary_v1",
+  "status": "PASS_REMOTE_SYNC_CHECK",
+  "generated_at_utc": "2026-06-01T03:12:10Z",
+  "non_self_referential_record": true,
+  "non_self_referential_note": "This file records the remote sync state observed before this check record was committed.",
+  "remote_query": {
+    "command": "git ls-remote origin refs/heads/main",
+    "observed_ref": "refs/heads/main",
+    "observed_commit": "a9bd25e2fc3db9ab67e4160014913e57f2830748"
+  },
+  "local_sync_at_observation_time": {
+    "head": "a9bd25e2fc3db9ab67e4160014913e57f2830748",
+    "origin_main": "a9bd25e2fc3db9ab67e4160014913e57f2830748",
+    "matches_remote_query": true
+  },
+  "release_boundary_verification_at_observation_time": {
+    "commit": "a9bd25e2fc3db9ab67e4160014913e57f2830748",
+    "release_boundary_audit": "PASS_VSG_RELEASE_BOUNDARY_AUDIT_RECORDED_REVIEW_REQUIRED",
+    "row_count": 78,
+    "ready_for_reviewed_public_supplement_count": 39,
+    "release_blocker_count": 35,
+    "release_ready_now": false,
+    "verification_substrate_gap_pytest": "PASS",
+    "verification_substrate_gap_tests_passed": 41
+  }
+}
