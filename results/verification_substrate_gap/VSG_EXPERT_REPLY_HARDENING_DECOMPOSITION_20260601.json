@@ -23,7 +23,9 @@
     "built reproducibility release inventory with 78 rows, 0 missing files, 3 private-path hits, and 1 secret-term hit",
     "added reproducibility release inventory regression tests",
     "audited ownership scenario stress-test decision rules with 63 rows, 0 failures, 2 supported trace-bound rows, and 0 supported public final-text rows",
-    "added ownership scenario decision-rule regression tests"
+    "added ownership scenario decision-rule regression tests",
+    "cleaned active manuscript prose to replace internal audit-style do-not-claim/draft wording with academic scope language",
+    "expanded claim-scope linter qualifiers to accept academic outside-evidence-scope wording"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -50,7 +52,7 @@
     "local_manuscript_commit": "4d66568ec08325d1d81b5ce060fbfda302e3177d",
     "local_manuscript_pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b",
     "latest_targeted_pytest_status": "PASS",
-    "latest_targeted_pytest_tests_passed": 29,
+    "latest_targeted_pytest_tests_passed": 30,
     "reproducibility_release_inventory_status": "PASS_VSG_REPRODUCIBILITY_RELEASE_INVENTORY_RECORDED_REVIEW_REQUIRED",
     "reproducibility_release_inventory_rows": 78,
     "reproducibility_release_inventory_missing_files": 0,
@@ -61,7 +63,11 @@
     "ownership_scenario_decision_rule_rows": 63,
     "ownership_scenario_decision_rule_failures": 0,
     "ownership_scenario_supported_trace_bound_rows": 2,
-    "ownership_scenario_supported_public_text_rows": 0
+    "ownership_scenario_supported_public_text_rows": 0,
+    "latest_local_manuscript_commit": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
+    "latest_local_manuscript_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
+    "manuscript_academic_scope_language_cleanup": true,
+    "overleaf_push_performed": false
   },
   "not_unlocked": [
     "new Slurm submission",

@@ -18,6 +18,14 @@ def test_trace_bound_qualifier_passes() -> None:
     assert lint_text(Path("doc.md"), text) == []
 
 
+def test_academic_scope_qualifier_passes() -> None:
+    text = (
+        "Unsupported axes include sanitizer robustness and ownership proof. "
+        "They are outside the evidence scope of the current artifacts."
+    )
+    assert lint_text(Path("doc.md"), text) == []
+
+
 def test_allow_file_directive_skips_guardrail_file() -> None:
     text = "<!-- claim-lint: allow-file -->\n\npublic verifier\nownership proof\n"
     assert lint_text(Path("guardrails.md"), text) == []

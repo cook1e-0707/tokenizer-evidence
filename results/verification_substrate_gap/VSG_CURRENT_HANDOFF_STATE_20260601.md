@@ -42,6 +42,11 @@ decision rules. The audit confirms the 7 x 9 matrix is complete, has no rule
 failures, restricts support to the cooperative trace-bundle rows, and has zero
 supported public final-text rows.
 
+This continuation also applies a local manuscript prose cleanup that replaces
+remaining internal audit-style phrases with academic scope language. The local
+LaTeX manuscript builds successfully after the cleanup; Overleaf push is still
+not performed.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
@@ -79,18 +84,21 @@ or paper-facing positive claims.
   targeted tests `5` passed
 - Ownership scenario decision-rule audit regression tests: `PASS`, decision-rule
   targeted tests `5` passed
+- Manuscript academic scope-language regression tests: `PASS`, current targeted
+  suite `30` passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
 ## Local Manuscript Hardening After Packet Delivery
 
 - Local manuscript commit:
-  `3520fd15158f219c1b5e897ec8a7a947eb740dce`
+  `c10b3f1e73689d63ceb0a4b3b8ea980974df16c1`
 - Local manuscript PDF SHA256 after prose and attack-scope cleanup:
-  `79766958a53c80717d5ebeac1925edfdc760e454113147e953657a0dc6f24516`
+  `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 - Prose-risk change:
   reproducibility appendix now describes frozen artifacts and recorded evidence
-  without naming internal canonical phase or claim-lint state.
+  without naming internal canonical phase or claim-lint state; active manuscript
+  prose now avoids internal audit-style `do not claim` and `draft` language.
 - Packet refresh:
   not performed in this pass.
 

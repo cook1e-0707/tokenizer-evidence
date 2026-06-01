@@ -178,6 +178,30 @@ supported_trace_bound_rows = 2
 supported_public_final_text_rows = 0
 ```
 
+Cleaned active manuscript prose to replace internal audit-style language with
+academic scope statements:
+
+```text
+manuscripts/69db2644566dcc36c9da320e/section_01_introduction.tex
+manuscripts/69db2644566dcc36c9da320e/section_02_related_work.tex
+manuscripts/69db2644566dcc36c9da320e/section_03_problem_setup.tex
+manuscripts/69db2644566dcc36c9da320e/section_05_bucket_level_injection.tex
+manuscripts/69db2644566dcc36c9da320e/section_08_discussion_limitations.tex
+manuscripts/69db2644566dcc36c9da320e/appendix/extended_related_work.tex
+manuscripts/69db2644566dcc36c9da320e/appendix/asset_licenses.tex
+```
+
+Observed scope:
+
+```text
+local_manuscript_commit = c10b3f1e73689d63ceb0a4b3b8ea980974df16c1
+local_pdf_sha256 = a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa
+claim_scope_lint = PASS
+latex_build = PASS
+latex_log_risk_scan_matches = 0
+overleaf_push_performed = false
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.

@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T02:34:12Z",
+  "generated_at_utc": "2026-06-01T02:44:05Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -33,10 +33,10 @@
   "packet_manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
   "local_manuscript_hardening_after_packet_delivery": {
     "performed": true,
-    "commit": "3520fd15158f219c1b5e897ec8a7a947eb740dce",
-    "pdf_sha256": "79766958a53c80717d5ebeac1925edfdc760e454113147e953657a0dc6f24516",
+    "commit": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
+    "pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
     "packet_refresh_performed": false,
-    "scope": "reproducibility appendix prose cleanup and attack naturalness proxy limitation update; no claim boundary expansion"
+    "scope": "reproducibility appendix prose cleanup, attack naturalness proxy limitation update, and academic scope-language cleanup; no claim boundary expansion"
   },
   "overleaf_push_performed": false,
   "claim_scope": {
@@ -151,6 +151,23 @@
     "ownership_proof_claimed": false,
     "pytest_status": "PASS",
     "targeted_tests_passed": 5
+  },
+  "manuscript_academic_scope_language_cleanup": {
+    "performed": true,
+    "local_manuscript_commit": "c10b3f1e73689d63ceb0a4b3b8ea980974df16c1",
+    "local_pdf_sha256": "a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa",
+    "claim_scope_lint_status": "PASS",
+    "claim_scope_lint_violation_count": 0,
+    "latex_build_status": "PASS",
+    "latex_log_risk_scan_matches": 0,
+    "internal_audit_language_removed": [
+      "We do not claim",
+      "do not claim",
+      "draft"
+    ],
+    "overleaf_push_performed": false,
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 30
   },
   "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [
