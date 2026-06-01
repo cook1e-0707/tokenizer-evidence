@@ -458,6 +458,48 @@ targeted public-supplement blocker checklist tests = PASS, 3 passed
 full tests/verification_substrate_gap pytest = PASS, 60 passed
 ```
 
+Recorded a public-supplement bundle construction preflight from the dry-run
+manifest and blocker checklist:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_bundle_preflight.py
+tests/verification_substrate_gap/test_vsg_public_supplement_bundle_preflight.py
+results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 78
+included_entries = 74
+future_copy_plan_entries = 60
+human_review_holds = 14
+excluded_internal_records = 4
+publication_blockers = 35
+missing_sources = 0
+missing_review_artifacts = 0
+duplicate_candidate_targets = 0
+all_publication_blockers_linked_to_checklist = true
+copy_plan_created = true
+human_review_holds_preserved = true
+candidate_bundle_created = false
+files_copied = false
+human_reviews_performed = false
+publication_blockers_resolved = false
+release_ready_after_preflight = false
+artifact_only = true
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted public-supplement bundle preflight tests = PASS, 3 passed
+full tests/verification_substrate_gap pytest = PASS, 63 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.

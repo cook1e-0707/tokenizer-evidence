@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "bytes": 47191,
+      "path": "results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/bundle_construction_preflight.csv",
+      "sha256": "4ce4e4006541b2babafe2fe7dace63f9b645e653c971cd5cac846a2495642bef"
+    },
+    {
+      "bytes": 34368,
+      "path": "results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/future_copy_plan.csv",
+      "sha256": "138a1eba5d60e8ba4bae3fa5525128ea83850ce925a532d3a823b8f1c5aa80ac"
+    },
+    {
+      "bytes": 12288,
+      "path": "results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/human_review_holds.csv",
+      "sha256": "c5f02dd277ceb2b866531362cd93774446ea80d334a5db18c8e6c0486b39e9e8"
+    },
+    {
+      "bytes": 1193,
+      "path": "results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/excluded_records.csv",
+      "sha256": "0783fbf3eee2dee97f3a103542ad67bbbbae7d5fc88f49b739020b18fd97a230"
+    },
+    {
+      "bytes": 2372,
+      "path": "results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/bundle_preflight_summary.json",
+      "sha256": "1da77dea8ca9f99026abbf5afc54c5ba4040b4742097205c93d0cc5c0ee63df4"
+    },
+    {
+      "bytes": 1346,
+      "path": "results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/bundle_preflight_report.md",
+      "sha256": "1aef1e405551ab62711732d2bc73948b9e3da94bd840afa8cdae1db6a53c35aa"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_bundle_preflight_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_BUNDLE_PREFLIGHT_RECORDED_ARTIFACT_ONLY"
+}

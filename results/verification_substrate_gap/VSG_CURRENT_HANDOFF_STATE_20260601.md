@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_BLOCKER_CHECKLIST_RECORDED_ARTIFACT_ONLY_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_BUNDLE_PREFLIGHT_RECORDED_ARTIFACT_ONLY_NO_PUBLICATION
 ```
 
 ## Status
@@ -91,6 +91,14 @@ splits the 35 remaining publication blockers into 21 copy-required rows and 14
 human-review-required rows, with the evidence needed to close each blocker in a
 future reviewed bundle pass. The checklist itself does not close blockers,
 perform reviews, copy files, publish anything, or expand claim scope.
+
+This continuation additionally records an artifact-only public-supplement
+bundle construction preflight. The preflight converts the dry-run bundle
+manifest and blocker checklist into candidate target paths, source hashes,
+future copy-plan entries, and human-review holds. It confirms no source or
+review-artifact files are missing and no candidate target paths collide, but it
+does not copy files, create the candidate bundle, perform human review, publish
+anything, or expand claim scope.
 
 This continuation additionally creates artifact-only review derivatives for
 the supplement release blockers: redacted trace-bound CSVs with private path
@@ -487,6 +495,50 @@ blockers, so no public supplement is release-ready yet.
 - Verification:
   targeted blocker-checklist pytest `PASS` with `3` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `60` tests passed.
+
+## Public Supplement Bundle Construction Preflight
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/bundle_preflight_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/bundle_preflight_report.md`
+- Full preflight CSV:
+  `results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/bundle_construction_preflight.csv`
+- Future copy plan:
+  `results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/future_copy_plan.csv`
+- Human-review holds:
+  `results/verification_substrate_gap/public_supplement_bundle_preflight_20260601/human_review_holds.csv`
+- Rows:
+  `78`
+- Included entries:
+  `74`
+- Future copy-plan entries:
+  `60`
+- Human-review holds:
+  `14`
+- Excluded internal records:
+  `4`
+- Publication blockers:
+  `35`
+- Missing included sources:
+  `0`
+- Missing review artifacts:
+  `0`
+- Duplicate candidate targets:
+  `0`
+- Candidate bundle created:
+  `False`
+- Files copied:
+  `False`
+- Release-ready after preflight:
+  `False`
+- Claim scope:
+  construction preflight only; no public supplement construction, no
+  publication, no Slurm, no generation, no model scoring, no training, no
+  public text-only verification claim, no ownership-proof claim.
+- Verification:
+  targeted bundle-preflight pytest `PASS` with `3` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `63` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 
