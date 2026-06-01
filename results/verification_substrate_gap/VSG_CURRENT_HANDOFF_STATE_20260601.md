@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISION_TEMPLATE_RECORDED_PENDING_ONLY_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISION_VALIDATION_RECORDED_PENDING_ONLY_NO_PUBLICATION
 ```
 
 ## Status
@@ -133,6 +133,13 @@ remains `pending_not_performed`; no reviewer identity, review timestamp, hash
 verification, reviewer assertion, approval, file copy, candidate supplement,
 publication, or claim expansion is recorded.
 
+This continuation now also records an artifact-only review-decision validator.
+The validator checks pending rows, future approved/rejected/hold rows, expected
+hashes, reviewer identity fields, UTC review timestamps, reviewer assertions,
+claim-scope guards, and approval gates. The current input is still the pending
+template: all 14 rows validate, 0 rows are approved, 0 rows are invalid, and no
+publication blocker is resolved.
+
 ## Current Review Packet
 
 - Zip:
@@ -182,6 +189,8 @@ publication, or claim expansion is recorded.
   `4` passed
 - Public-supplement review-decision template tests: `PASS`, targeted template
   tests `3` passed
+- Public-supplement review-decision validation tests: `PASS`, targeted
+  validation tests `5` passed
 - Manuscript PDF SHA256:
   `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
@@ -700,6 +709,52 @@ publication, or claim expansion is recorded.
 - Verification:
   targeted review-decision template pytest `PASS` with `3` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `72` tests passed.
+
+## Public Supplement Review Decision Validation
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/review_decision_validation_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/review_decision_validation_report.md`
+- Validation CSV:
+  `results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/review_decision_validation.csv`
+- Decision rows:
+  `14`
+- Pending decisions:
+  `14`
+- Approved decisions:
+  `0`
+- Rejected decisions:
+  `0`
+- Hold decisions:
+  `0`
+- Valid decisions:
+  `14`
+- Invalid decisions:
+  `0`
+- All decisions pending:
+  `true`
+- Review approvals recorded in input:
+  `false`
+- Review approvals created by validator:
+  `false`
+- Human reviews performed by validator:
+  `false`
+- Files copied:
+  `false`
+- Candidate supplement bundle created:
+  `false`
+- Publication blockers resolved:
+  `false`
+- Release-ready after validation:
+  `false`
+- Claim scope:
+  decision-validation only; no review approval creation, no public supplement
+  construction, no publication, no Slurm, no generation, no model scoring, no
+  training, no public text-only verification claim, no ownership-proof claim.
+- Verification:
+  targeted review-decision validation pytest `PASS` with `5` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `77` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 

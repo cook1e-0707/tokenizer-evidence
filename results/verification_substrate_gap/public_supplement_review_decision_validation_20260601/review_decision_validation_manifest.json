@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "bytes": 3185,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/review_decision_validation.csv",
+      "sha256": "6d5f589ad21e35677385b3de693e0dffe85c3cf2d2e8ff8c91503b9a5934ab9c"
+    },
+    {
+      "bytes": 1530,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/review_decision_validation_summary.json",
+      "sha256": "b537ae5fe5ba6adb273edb5cc904a7cf5d1fe5e333467e3669bae6efd201b391"
+    },
+    {
+      "bytes": 1015,
+      "path": "results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/review_decision_validation_report.md",
+      "sha256": "d5e02d93cece02ec3efdef7ca6d9b4afaef89bce71945c0c13ed25685f0bbb6b"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_review_decision_validation_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISIONS_VALIDATED_PENDING_ONLY"
+}

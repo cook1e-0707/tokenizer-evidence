@@ -1,6 +1,6 @@
 # VSG Expert Reply Hardening Decomposition - 2026-06-01
 
-Status: `PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_REVIEW_DECISION_TEMPLATE_RECORDED`
+Status: `PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_REVIEW_DECISION_VALIDATION_RECORDED`
 
 This record decomposes the latest expert reply into concrete work items and
 records the artifact-only actions completed in this pass. No Slurm job,
@@ -625,6 +625,48 @@ public_text_only_verification_claimed = false
 ownership_proof_claimed = false
 targeted review-decision template tests = PASS, 3 passed
 full tests/verification_substrate_gap pytest = PASS, 72 passed
+```
+
+Recorded an artifact-only review-decision validator for future filled human
+review decision records:
+
+```text
+scripts/verification_substrate_gap/validate_vsg_public_supplement_review_decisions.py
+tests/verification_substrate_gap/test_vsg_public_supplement_review_decision_validation.py
+results/verification_substrate_gap/public_supplement_review_decision_validation_20260601/
+```
+
+Observed scope:
+
+```text
+status = PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DECISIONS_VALIDATED_PENDING_ONLY
+decision_rows = 14
+pending_decisions = 14
+approved_decisions = 0
+rejected_decisions = 0
+hold_decisions = 0
+valid_decisions = 14
+invalid_decisions = 0
+all_decisions_valid = true
+all_decisions_pending = true
+review_approvals_recorded_in_input = false
+review_approvals_created_by_validator = false
+human_reviews_performed_by_validator = false
+publication_blockers_resolved = false
+release_ready_after_validation = false
+artifact_only = true
+files_copied = false
+candidate_bundle_created = false
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted review-decision validation tests = PASS, 5 passed
+full tests/verification_substrate_gap pytest = PASS, 77 passed
 ```
 
 ## Remaining Scope After This Pass
