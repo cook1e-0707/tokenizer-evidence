@@ -11,6 +11,8 @@
     "added missing-required-file negative test",
     "added manifest_self_hash_excluded negative test",
     "added current handoff audit regression test",
+    "added active manuscript prose-risk regression tests",
+    "polished reproducibility appendix to remove internal state language",
     "recorded expert reply decomposition and execution status"
   ],
   "existing_hardening_already_present": [
@@ -22,15 +24,21 @@
     "reproducibility command appendix"
   ],
   "verification": {
-    "targeted_pytest_command": "uv run pytest tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
+    "targeted_pytest_command": "uv run pytest tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
     "targeted_pytest_status": "PASS",
-    "targeted_pytest_tests_passed": 10,
+    "targeted_pytest_tests_passed": 13,
     "packet_verifier_status": "PASS",
     "handoff_audit_status": "PASS",
     "packet_total_file_count": 60,
     "hashed_file_count": 59,
     "claim_lint_status": "PASS",
-    "claim_lint_violation_count": 0
+    "claim_lint_checked_files": 17,
+    "claim_lint_violation_count": 0,
+    "latex_build_status": "PASS",
+    "latex_pdf_pages": 32,
+    "latex_log_risk_scan_matches": 0,
+    "local_manuscript_commit": "4d66568ec08325d1d81b5ce060fbfda302e3177d",
+    "local_manuscript_pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b"
   },
   "not_unlocked": [
     "new Slurm submission",

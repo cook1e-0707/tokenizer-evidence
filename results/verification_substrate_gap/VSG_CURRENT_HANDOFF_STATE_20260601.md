@@ -15,8 +15,9 @@ stages. The response validates the VSG architecture but does not make the
 manuscript submission-ready.
 
 This pass added regression tests for the expert packet verifier and handoff
-audit so that the objective review package remains checkable after future
-artifact-only edits.
+audit, plus active-manuscript prose-risk tests, so that the objective review
+package and current manuscript remain checkable after future artifact-only
+edits.
 
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
@@ -46,9 +47,21 @@ or paper-facing positive claims.
 - Claim-scope lint: `PASS`, 17 files, 0 violations
 - LaTeX log scan: `PASS`
 - Overfull hbox warnings: `0`
-- Expert packet verifier regression tests: `PASS`, 10 tests passed
+- Expert packet and manuscript prose regression tests: `PASS`, 13 tests passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
+
+## Local Manuscript Hardening After Packet Delivery
+
+- Local manuscript commit:
+  `4d66568ec08325d1d81b5ce060fbfda302e3177d`
+- Local manuscript PDF SHA256 after prose cleanup:
+  `73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b`
+- Prose-risk change:
+  reproducibility appendix now describes frozen artifacts and recorded evidence
+  without naming internal canonical phase or claim-lint state.
+- Packet refresh:
+  not performed in this pass.
 
 ## Git Sync Evidence
 

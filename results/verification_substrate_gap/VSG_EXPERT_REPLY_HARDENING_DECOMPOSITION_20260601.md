@@ -25,6 +25,7 @@ Added regression tests:
 
 ```text
 tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py
+tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py
 ```
 
 The tests cover:
@@ -37,17 +38,50 @@ The tests cover:
 - setting `manifest_self_hash_excluded=false` causes verifier failure;
 - current expert handoff audit passes with no failures;
 - handoff audit continues to assert objective-only scope and no new experiments.
+- active manuscript prose contains no internal placeholder/review phrases;
+- expert-requested substrate-positioning references are both cited and defined;
+- active manuscript uses rendered PNG figures rather than placeholder SVGs.
+
+Updated manuscript prose:
+
+```text
+manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility.tex
+```
+
+The reproducibility appendix no longer names an internal canonical phase or
+claim-scope lint state. It describes the snapshot in terms of frozen artifacts,
+recorded summaries, manifests, review tables, figure inputs, and prose-scope
+checks. This is a local manuscript hardening commit only; it does not refresh
+the delivered expert packet zip.
 
 ## Verification Run
 
 ```text
-uv run pytest tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py
+uv run pytest tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py
 ```
 
 Observed result:
 
 ```text
-10 passed in 0.20s
+13 passed in 0.21s
+```
+
+Manuscript checks:
+
+```text
+python3 scripts/verification_substrate_gap/lint_claim_scope.py <17 active manuscript files>
+latexmk -pdf -interaction=nonstopmode main.tex
+rg -n "undefined|Citation .* undefined|LaTeX Warning: Reference|LaTeX Warning: Citation|Fatal|Emergency stop|! LaTeX Error|There were undefined|Overfull" main.log
+```
+
+Observed result:
+
+```text
+claim-scope lint: PASS, 17 files, 0 violations
+LaTeX build: PASS, 32 pages
+LaTeX log risk scan: no matches
+local manuscript commit: 4d66568ec08325d1d81b5ce060fbfda302e3177d
+local manuscript PDF sha256: 73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b
 ```
 
 Additional direct script checks:

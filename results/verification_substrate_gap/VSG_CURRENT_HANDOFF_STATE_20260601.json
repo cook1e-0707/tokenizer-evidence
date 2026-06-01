@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T00:52:08Z",
+  "generated_at_utc": "2026-06-01T00:57:32Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -30,7 +30,14 @@
   "origin_main_head_at_pre_state_record_sync_check": "4e470810ed6a6741fa94206915a2ae0d0b59405b",
   "state_record_commit_hash_self_reference_excluded": true,
   "state_record_commit_hash_exclusion_reason": "A state file cannot stably record the commit hash that contains itself; use git log for the current state-record commit.",
-  "manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
+  "packet_manuscript_head": "64510b9daf88deb2efd49a26c8046a023fa4904e",
+  "local_manuscript_hardening_after_packet_delivery": {
+    "performed": true,
+    "commit": "4d66568ec08325d1d81b5ce060fbfda302e3177d",
+    "pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b",
+    "packet_refresh_performed": false,
+    "scope": "reproducibility appendix prose cleanup; no claim boundary change"
+  },
   "overleaf_push_performed": false,
   "claim_scope": {
     "trace_bound_first_divergence_results": "provider_side_diagnostics_only",
@@ -50,11 +57,12 @@
   ],
   "expert_reply_hardening_decomposition": "results/verification_substrate_gap/VSG_EXPERT_REPLY_HARDENING_DECOMPOSITION_20260601.md",
   "artifact_test_hardening": {
-    "pytest_command": "uv run pytest tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
+    "pytest_command": "uv run pytest tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
     "status": "PASS",
-    "tests_passed": 10,
+    "tests_passed": 13,
     "packet_verifier_regression_tests_added": true,
-    "handoff_audit_regression_test_added": true
+    "handoff_audit_regression_test_added": true,
+    "active_manuscript_prose_risk_tests_added": true
   },
   "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [
