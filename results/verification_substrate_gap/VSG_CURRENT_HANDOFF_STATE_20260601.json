@@ -1,6 +1,6 @@
 {
   "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
-  "generated_at_utc": "2026-06-01T02:24:35Z",
+  "generated_at_utc": "2026-06-01T02:34:12Z",
   "expert_response_processed": true,
   "expert_response_summary": {
     "architecture_validated": true,
@@ -120,6 +120,29 @@
     "private_path_hit_count": 3,
     "secret_term_hit_count": 1,
     "release_ready_without_review": false,
+    "new_slurm_started": false,
+    "generation_started": false,
+    "model_scoring_started": false,
+    "training_started": false,
+    "public_text_only_verification_claimed": false,
+    "ownership_proof_claimed": false,
+    "pytest_status": "PASS",
+    "targeted_tests_passed": 5
+  },
+  "ownership_scenario_decision_rule_audit": {
+    "performed": true,
+    "summary": "results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_summary.json",
+    "report": "results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_report.md",
+    "row_count": 63,
+    "scenario_count": 7,
+    "method_family_count": 9,
+    "failure_count": 0,
+    "supported_trace_bound_row_count": 2,
+    "supported_public_text_row_count": 0,
+    "supported_trace_bound_pairs": [
+      "S2_cooperative_provider_with_trace_bundle::provider_side_trace",
+      "S2_cooperative_provider_with_trace_bundle::first_divergence_diagnostic"
+    ],
     "new_slurm_started": false,
     "generation_started": false,
     "model_scoring_started": false,

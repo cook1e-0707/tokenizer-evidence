@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "bytes": 25554,
+      "path": "results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_rows.csv",
+      "sha256": "785d6fada4f2fc068e01314f75862360dab96fcf3967dde56774cd011518dfa6"
+    },
+    {
+      "bytes": 920,
+      "path": "results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_summary.json",
+      "sha256": "ce3883c011414464519b2316929a550e5a5a218127d6ef46cb78b927a5b9e316"
+    },
+    {
+      "bytes": 823,
+      "path": "results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_report.md",
+      "sha256": "9374e7a36c1708734b54925925a593c62bb949245b13d2f709dcb87b03e4300e"
+    }
+  ],
+  "schema_name": "verification_substrate_gap_ownership_decision_rule_audit_manifest_v1",
+  "status": "PASS"
+}

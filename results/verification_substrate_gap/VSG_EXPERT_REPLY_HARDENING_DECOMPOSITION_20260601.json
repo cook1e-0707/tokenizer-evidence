@@ -21,7 +21,9 @@
     "audited adopted-locked guided rewrite/graft examples with deterministic readability proxies",
     "recorded attack naturalness proxy result as 0/60 proxy-readable rows",
     "built reproducibility release inventory with 78 rows, 0 missing files, 3 private-path hits, and 1 secret-term hit",
-    "added reproducibility release inventory regression tests"
+    "added reproducibility release inventory regression tests",
+    "audited ownership scenario stress-test decision rules with 63 rows, 0 failures, 2 supported trace-bound rows, and 0 supported public final-text rows",
+    "added ownership scenario decision-rule regression tests"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -48,13 +50,18 @@
     "local_manuscript_commit": "4d66568ec08325d1d81b5ce060fbfda302e3177d",
     "local_manuscript_pdf_sha256": "73d605183ae501f7555e91ccad4fb565fd43c7513714cf3c80936681941ed20b",
     "latest_targeted_pytest_status": "PASS",
-    "latest_targeted_pytest_tests_passed": 24,
+    "latest_targeted_pytest_tests_passed": 29,
     "reproducibility_release_inventory_status": "PASS_VSG_REPRODUCIBILITY_RELEASE_INVENTORY_RECORDED_REVIEW_REQUIRED",
     "reproducibility_release_inventory_rows": 78,
     "reproducibility_release_inventory_missing_files": 0,
     "reproducibility_release_inventory_private_path_hits": 3,
     "reproducibility_release_inventory_secret_term_hits": 1,
-    "reproducibility_release_ready_without_review": false
+    "reproducibility_release_ready_without_review": false,
+    "ownership_scenario_decision_rule_audit_status": "PASS",
+    "ownership_scenario_decision_rule_rows": 63,
+    "ownership_scenario_decision_rule_failures": 0,
+    "ownership_scenario_supported_trace_bound_rows": 2,
+    "ownership_scenario_supported_public_text_rows": 0
   },
   "not_unlocked": [
     "new Slurm submission",

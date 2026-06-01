@@ -37,6 +37,11 @@ and flags release blockers such as private-path hits, key/HMAC-related terms,
 and files not tracked by the selected git scopes. It does not publish files or
 expand the claim boundary.
 
+This continuation additionally audits the ownership scenario stress-test
+decision rules. The audit confirms the 7 x 9 matrix is complete, has no rule
+failures, restricts support to the cooperative trace-bundle rows, and has zero
+supported public final-text rows.
+
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
 
@@ -71,6 +76,8 @@ or paper-facing positive claims.
 - Attack naturalness proxy regression tests: `PASS`, total targeted tests now
   `19` passed
 - Reproducibility release inventory regression tests: `PASS`, release inventory
+  targeted tests `5` passed
+- Ownership scenario decision-rule audit regression tests: `PASS`, decision-rule
   targeted tests `5` passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
@@ -154,6 +161,31 @@ or paper-facing positive claims.
 - Claim scope:
   release inventory only; no publication, no generation, no model scoring, no
   public text-only verification claim, no ownership-proof claim.
+
+## Ownership Scenario Decision-Rule Audit
+
+- Summary:
+  `results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_summary.json`
+- Report:
+  `results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/decision_rule_audit_report.md`
+- Rows:
+  `63`
+- Scenarios:
+  `7`
+- Method families:
+  `9`
+- Rule failures:
+  `0`
+- Supported trace-bound rows:
+  `2`
+- Supported public final-text rows:
+  `0`
+- Supported trace-bound pairs:
+  `S2_cooperative_provider_with_trace_bundle::provider_side_trace`,
+  `S2_cooperative_provider_with_trace_bundle::first_divergence_diagnostic`
+- Claim scope:
+  stress-test rule audit only; no ownership proof, no public text-only
+  verification success claim, no new compute.
 
 ## Git Sync Evidence
 

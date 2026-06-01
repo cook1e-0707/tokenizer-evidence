@@ -159,6 +159,25 @@ secret_term_hits = 1
 release_ready_without_review = false
 ```
 
+Audited the ownership scenario stress-test decision rules:
+
+```text
+scripts/verification_substrate_gap/audit_vsg_ownership_scenario_decision_rules.py
+tests/verification_substrate_gap/test_vsg_ownership_scenario_decision_rules.py
+results/verification_substrate_gap/ownership_scenario_decision_rule_audit_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 63
+scenarios = 7
+method_families = 9
+rule_failures = 0
+supported_trace_bound_rows = 2
+supported_public_final_text_rows = 0
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.
