@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-06-01T03:44:02Z",
+  "branch": "main",
+  "local_head": "ac2e6b3371a28e2de2ee4936a02d063a277093ae",
+  "origin_main_head": "ac2e6b3371a28e2de2ee4936a02d063a277093ae",
+  "sync_status": "synced",
+  "synced_subject": "Plan VSG public supplement dry-run bundle",
+  "new_slurm_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "allowlist_enabled": false,
+  "overleaf_push_performed": false,
+  "public_supplement_created": false,
+  "public_supplement_published": false,
+  "public_text_only_verification_claimed": false,
+  "ownership_proof_claimed": false,
+  "pre_existing_unrelated_dirty_files": [
+    "docs/natural_evidence_v2/CURRENT_STATE.md",
+    "results/natural_evidence_v1/status/gate_status.json",
+    "results/natural_evidence_v2/status/gate_status.json"
+  ]
+}
