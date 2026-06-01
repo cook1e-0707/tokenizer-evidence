@@ -1,0 +1,421 @@
+entry_id,artifact_group,source_path,source_sha256,candidate_bundle_path,planned_supplement_path,target_parent_dir,mkdir_command,copy_command,verify_sha256_command,source_exists,target_exists_now,ready_for_future_copy_after_review,execution_status,claim_scope_guard
+PSP-001,manuscript_source,manuscripts/69db2644566dcc36c9da320e/main.tex,1f59d67aca4269850de37b233c7657e60c8c9974136dc90b5f9cb4986b7efd03,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/main.tex,manuscript_source/main.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/main.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/main.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/main.tex')
+expected = '1f59d67aca4269850de37b233c7657e60c8c9974136dc90b5f9cb4986b7efd03'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-002,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_01_introduction.tex,7bae9397e1ec77f3eb57b91583e724747dd6539116275ca231496658194df99c,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_01_introduction.tex,manuscript_source/section_01_introduction.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_01_introduction.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_01_introduction.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_01_introduction.tex')
+expected = '7bae9397e1ec77f3eb57b91583e724747dd6539116275ca231496658194df99c'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-003,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_02_related_work.tex,db986efdf6e6356a7ef9c4c9068b719a9d5d99795de3ad2953cf2163c8a5bccf,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_02_related_work.tex,manuscript_source/section_02_related_work.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_02_related_work.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_02_related_work.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_02_related_work.tex')
+expected = 'db986efdf6e6356a7ef9c4c9068b719a9d5d99795de3ad2953cf2163c8a5bccf'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-004,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_03_problem_setup.tex,5df4ae73fd0847f62287c77aa978ade587b678e9e2a4a33312e5dce9dce98e13,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_03_problem_setup.tex,manuscript_source/section_03_problem_setup.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_03_problem_setup.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_03_problem_setup.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_03_problem_setup.tex')
+expected = '5df4ae73fd0847f62287c77aa978ade587b678e9e2a4a33312e5dce9dce98e13'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-005,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_04_tokenizer_alignment.tex,13eab833686254997a581d2b7338a9c982964c18d14524e1e152082e89f2fed2,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_04_tokenizer_alignment.tex,manuscript_source/section_04_tokenizer_alignment.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_04_tokenizer_alignment.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_04_tokenizer_alignment.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_04_tokenizer_alignment.tex')
+expected = '13eab833686254997a581d2b7338a9c982964c18d14524e1e152082e89f2fed2'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-006,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_05_bucket_level_injection.tex,d5b4cabd86e77d922edd18c8208413a08aa78faa300d79858e5ea7193169419e,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_05_bucket_level_injection.tex,manuscript_source/section_05_bucket_level_injection.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_05_bucket_level_injection.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_05_bucket_level_injection.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_05_bucket_level_injection.tex')
+expected = 'd5b4cabd86e77d922edd18c8208413a08aa78faa300d79858e5ea7193169419e'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-007,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_06_deterministic_verification.tex,3727263bc453428c9ec7953f08f0e5c67c449c778d3f7519a184ffce9f37dd74,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_06_deterministic_verification.tex,manuscript_source/section_06_deterministic_verification.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_06_deterministic_verification.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_06_deterministic_verification.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_06_deterministic_verification.tex')
+expected = '3727263bc453428c9ec7953f08f0e5c67c449c778d3f7519a184ffce9f37dd74'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-008,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_07_experiments.tex,1b618fc3821847ef904655c0375b05d80a07bd7f4bbeb97d8ed8f29e2a651ea0,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_07_experiments.tex,manuscript_source/section_07_experiments.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_07_experiments.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_07_experiments.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_07_experiments.tex')
+expected = '1b618fc3821847ef904655c0375b05d80a07bd7f4bbeb97d8ed8f29e2a651ea0'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-009,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_08_discussion_limitations.tex,d1c211c2e12b0323198d204cc62db6e38dfddf9d412114c295d2757e59601e9e,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_08_discussion_limitations.tex,manuscript_source/section_08_discussion_limitations.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_08_discussion_limitations.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_08_discussion_limitations.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_08_discussion_limitations.tex')
+expected = 'd1c211c2e12b0323198d204cc62db6e38dfddf9d412114c295d2757e59601e9e'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-010,manuscript_source,manuscripts/69db2644566dcc36c9da320e/section_09_conclusion.tex,7d95943f193f2e9e1f50fceb794945d522e3ad971a965df1c97d9d7e5eabb4ca,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_09_conclusion.tex,manuscript_source/section_09_conclusion.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/section_09_conclusion.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_09_conclusion.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_09_conclusion.tex')
+expected = '7d95943f193f2e9e1f50fceb794945d522e3ad971a965df1c97d9d7e5eabb4ca'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-011,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/proofs.tex,95271362a5e71d16ff763e3e3aed519b653dd60f9ad07e40f8fa0e11fe5c3f78,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/proofs.tex,manuscript_source/appendix/proofs.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/proofs.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/proofs.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/proofs.tex')
+expected = '95271362a5e71d16ff763e3e3aed519b653dd60f9ad07e40f8fa0e11fe5c3f78'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-012,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/formal_substrate_gap.tex,d16746bb9acffcddeb919791bef19c68fd7ec351eaa8291253bb7335478469b0,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/formal_substrate_gap.tex,manuscript_source/appendix/formal_substrate_gap.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/formal_substrate_gap.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/formal_substrate_gap.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/formal_substrate_gap.tex')
+expected = 'd16746bb9acffcddeb919791bef19c68fd7ec351eaa8291253bb7335478469b0'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-013,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/attack_examples.tex,bf6d7a83a868f56635c02dd971e6dc3db6715f494fec6564b9c77a59684997a2,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/attack_examples.tex,manuscript_source/appendix/attack_examples.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/attack_examples.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/attack_examples.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/attack_examples.tex')
+expected = 'bf6d7a83a868f56635c02dd971e6dc3db6715f494fec6564b9c77a59684997a2'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-014,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/extended_related_work.tex,7547a6e7150ee45915960e61e878b896d40c9ad336a8655dec495ccfd44bf735,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/extended_related_work.tex,manuscript_source/appendix/extended_related_work.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/extended_related_work.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/extended_related_work.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/extended_related_work.tex')
+expected = '7547a6e7150ee45915960e61e878b896d40c9ad336a8655dec495ccfd44bf735'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-015,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility.tex,8bc273a0331e05bacb373783387ed96ad1bb3aa9e879bae159838af1ce70e946,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility.tex,manuscript_source/appendix/reproducibility.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility.tex')
+expected = '8bc273a0331e05bacb373783387ed96ad1bb3aa9e879bae159838af1ce70e946'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-016,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/asset_licenses.tex,d026638b4dd409df59600513b7337d183c1f98a0ded24f76f6092975db41a788,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/asset_licenses.tex,manuscript_source/appendix/asset_licenses.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/asset_licenses.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/asset_licenses.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/asset_licenses.tex')
+expected = 'd026638b4dd409df59600513b7337d183c1f98a0ded24f76f6092975db41a788'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-017,manuscript_source,manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility_commands.tex,4107b22a41667b9d0ce02807804b152c8e838ab74200923d6c1a2ac91f5ac9d6,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility_commands.tex,manuscript_source/appendix/reproducibility_commands.tex,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix,cp -p manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility_commands.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility_commands.tex,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility_commands.tex')
+expected = '4107b22a41667b9d0ce02807804b152c8e838ab74200923d6c1a2ac91f5ac9d6'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-018,manuscript_source,manuscripts/69db2644566dcc36c9da320e/references.bib,e80193f704e98ccd4402d8c0ca5cd0a37cbc44e4554d8bb395b5ee2c87d81577,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/references.bib,manuscript_source/references.bib,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/references.bib results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/references.bib,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/references.bib')
+expected = 'e80193f704e98ccd4402d8c0ca5cd0a37cbc44e4554d8bb395b5ee2c87d81577'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-019,manuscript_source,manuscripts/69db2644566dcc36c9da320e/neurips_2026.sty,0c1ad36961fcd9198dcc2558cf2793e1df39973bde8264fd701f5e7970672757,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/neurips_2026.sty,manuscript_source/neurips_2026.sty,results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source,cp -p manuscripts/69db2644566dcc36c9da320e/neurips_2026.sty results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/neurips_2026.sty,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/neurips_2026.sty')
+expected = '0c1ad36961fcd9198dcc2558cf2793e1df39973bde8264fd701f5e7970672757'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-020,manuscript_figures,manuscripts/69db2644566dcc36c9da320e/figures/figure_1_verification_substrate_map.png,aade301bf06c8b841fd4d1cdc31ab05083c84f82b203d656db35be5bf187fcfe,results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_1_verification_substrate_map.png,figures/figure_1_verification_substrate_map.png,results/verification_substrate_gap/public_supplement_candidate_20260601/figures,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures,cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_1_verification_substrate_map.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_1_verification_substrate_map.png,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_1_verification_substrate_map.png')
+expected = 'aade301bf06c8b841fd4d1cdc31ab05083c84f82b203d656db35be5bf187fcfe'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-021,manuscript_figures,manuscripts/69db2644566dcc36c9da320e/figures/figure_2_first_divergence_diagnostic.png,c3237dc5823c39bb96d2d804d9cd8db16bbe27ee6305b9d47cdba1aebb926011,results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_2_first_divergence_diagnostic.png,figures/figure_2_first_divergence_diagnostic.png,results/verification_substrate_gap/public_supplement_candidate_20260601/figures,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures,cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_2_first_divergence_diagnostic.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_2_first_divergence_diagnostic.png,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_2_first_divergence_diagnostic.png')
+expected = 'c3237dc5823c39bb96d2d804d9cd8db16bbe27ee6305b9d47cdba1aebb926011'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-022,manuscript_figures,manuscripts/69db2644566dcc36c9da320e/figures/figure_3_controllability_vs_observability.png,826200904d3f4edc3dbf9d3d6f2a4dc0e48e56aaec198ce89aadc44527342db9,results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_3_controllability_vs_observability.png,figures/figure_3_controllability_vs_observability.png,results/verification_substrate_gap/public_supplement_candidate_20260601/figures,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures,cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_3_controllability_vs_observability.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_3_controllability_vs_observability.png,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_3_controllability_vs_observability.png')
+expected = '826200904d3f4edc3dbf9d3d6f2a4dc0e48e56aaec198ce89aadc44527342db9'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-023,manuscript_figures,manuscripts/69db2644566dcc36c9da320e/figures/figure_4_public_predicate_attack_ladder.png,038db68a07513b0c9bc51f2db1bab306f46f06c7237f0f98a70b382417d5fa2b,results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_4_public_predicate_attack_ladder.png,figures/figure_4_public_predicate_attack_ladder.png,results/verification_substrate_gap/public_supplement_candidate_20260601/figures,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures,cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_4_public_predicate_attack_ladder.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_4_public_predicate_attack_ladder.png,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_4_public_predicate_attack_ladder.png')
+expected = '038db68a07513b0c9bc51f2db1bab306f46f06c7237f0f98a70b382417d5fa2b'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-024,manuscript_figures,manuscripts/69db2644566dcc36c9da320e/figures/figure_5_ownership_scenario_heatmap.png,be170f04151b4523309b49d14b8419905046fe57bbbd7e9cc4d3720f9464b723,results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_5_ownership_scenario_heatmap.png,figures/figure_5_ownership_scenario_heatmap.png,results/verification_substrate_gap/public_supplement_candidate_20260601/figures,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures,cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_5_ownership_scenario_heatmap.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_5_ownership_scenario_heatmap.png,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_5_ownership_scenario_heatmap.png')
+expected = 'be170f04151b4523309b49d14b8419905046fe57bbbd7e9cc4d3720f9464b723'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-025,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/trace_bound_accepts.csv,652719d8838e5602b2a6aec217a35ed6e2021e5cfe2d4e12987948561b9362ad,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/trace_bound_accepts.csv,evidence/figure_data/trace_bound_accepts.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/trace_bound_accepts.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/trace_bound_accepts.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/trace_bound_accepts.csv')
+expected = '652719d8838e5602b2a6aec217a35ed6e2021e5cfe2d4e12987948561b9362ad'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-026,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/public_text_verifier_baselines.csv,69bbf5497154a3247948bff0f12d0a2f49f4824b4b8715e0774008308c30065d,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/public_text_verifier_baselines.csv,evidence/figure_data/public_text_verifier_baselines.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/public_text_verifier_baselines.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/public_text_verifier_baselines.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/public_text_verifier_baselines.csv')
+expected = '69bbf5497154a3247948bff0f12d0a2f49f4824b4b8715e0774008308c30065d'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-027,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/template_leakage_summary.csv,4b2b8647896ba452d4846df2220f4e9a7128523f92e069a6ca325db0170514a8,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/template_leakage_summary.csv,evidence/figure_data/template_leakage_summary.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/template_leakage_summary.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/template_leakage_summary.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/template_leakage_summary.csv')
+expected = '4b2b8647896ba452d4846df2220f4e9a7128523f92e069a6ca325db0170514a8'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-028,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/attack_ladder_summary.csv,b1774c7f683ada8f4735c2134c9054fa96c9a68aca160922abfa2afbd5a2da99,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/attack_ladder_summary.csv,evidence/figure_data/attack_ladder_summary.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/attack_ladder_summary.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/attack_ladder_summary.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/attack_ladder_summary.csv')
+expected = 'b1774c7f683ada8f4735c2134c9054fa96c9a68aca160922abfa2afbd5a2da99'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-029,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv,4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/ownership_scenario_heatmap.csv,evidence/figure_data/ownership_scenario_heatmap.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/ownership_scenario_heatmap.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/ownership_scenario_heatmap.csv')
+expected = '4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-030,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/claim_ledger.csv,d7e2902360276c570ba65892d4b7db222cd456ee7fecca992bc6b4317b231ad9,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/claim_ledger.csv,evidence/figure_data/claim_ledger.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/claim_ledger.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/claim_ledger.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/claim_ledger.csv')
+expected = 'd7e2902360276c570ba65892d4b7db222cd456ee7fecca992bc6b4317b231ad9'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-031,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json,adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_summary.json,evidence/figure_data/figure_data_summary.json,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_summary.json,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_summary.json')
+expected = 'adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-032,figure_data,results/verification_substrate_gap/paper_figure_data_20260530/figure_data_manifest.json,e852ac823131ac2e4f607397eb23acff46a182cf2e6f76c9ab5e76b3ec944e77,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_manifest.json,evidence/figure_data/figure_data_manifest.json,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data,cp -p results/verification_substrate_gap/paper_figure_data_20260530/figure_data_manifest.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_manifest.json,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_manifest.json')
+expected = 'e852ac823131ac2e4f607397eb23acff46a182cf2e6f76c9ab5e76b3ec944e77'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-037,public_text_verifier_baselines,results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_results.csv,338643559be5c2727ef20a8358b43e75c2c2ac4bc2fb6887980da4de623661e1,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_results.csv,evidence/public_text_verifier_baselines/public_text_verifier_results.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_results.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_results.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_results.csv')
+expected = '338643559be5c2727ef20a8358b43e75c2c2ac4bc2fb6887980da4de623661e1'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-038,public_text_verifier_baselines,results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_block_scores.csv,1428a4bfe5b71709bf0852738dc30bd8e7fa5a780d8ccba8ae714ab1ae28d0ad,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv,evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_block_scores.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv')
+expected = '1428a4bfe5b71709bf0852738dc30bd8e7fa5a780d8ccba8ae714ab1ae28d0ad'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-039,public_text_verifier_baselines,results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_summary.json,aac44b890822b893de4961e14b86de3a689a9ef19a4a40627dd567082de84fcb,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_summary.json,evidence/public_text_verifier_baselines/public_text_verifier_summary.json,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_summary.json,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_summary.json')
+expected = 'aac44b890822b893de4961e14b86de3a689a9ef19a4a40627dd567082de84fcb'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-040,public_text_verifier_baselines,results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_report.md,7764ab1010144441d7840dde88da2df322af1f80a1ccbe87da94555bded24e4a,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_report.md,evidence/public_text_verifier_baselines/public_text_verifier_report.md,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines,cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_report.md results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_report.md,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_report.md')
+expected = '7764ab1010144441d7840dde88da2df322af1f80a1ccbe87da94555bded24e4a'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-046,attack_naturalness_proxy_audit,results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_rows.csv,ac24d6063bf84062a7171c9268881328cd2b331b31435c948996acc6f3392534,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv,evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_rows.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv')
+expected = 'ac24d6063bf84062a7171c9268881328cd2b331b31435c948996acc6f3392534'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-047,attack_naturalness_proxy_audit,results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_by_group.csv,b6a7e74bc8b827ac926fc52934f8b4d6046fab1dd9e40b7eb8b690a431375504,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv,evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_by_group.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv')
+expected = 'b6a7e74bc8b827ac926fc52934f8b4d6046fab1dd9e40b7eb8b690a431375504'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-048,attack_naturalness_proxy_audit,results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_summary.json,bd051b53cf4fed617f866316da5dfa5db6f1d101393893fffe4ec6180845069b,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json,evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json')
+expected = 'bd051b53cf4fed617f866316da5dfa5db6f1d101393893fffe4ec6180845069b'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-049,attack_naturalness_proxy_audit,results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_report.md,394411ea1424c2e7217635ff0963c0517cd75b5672c6417fdaa6d0246aac2ee4,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md,evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy,cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_report.md results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md')
+expected = '394411ea1424c2e7217635ff0963c0517cd75b5672c6417fdaa6d0246aac2ee4'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-054,substrate_matrix,results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix.csv,b2a341fadc5a9429d06a7b331582e64cbeabdd3be26d4665411a9f68c5add406,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.csv,evidence/substrate_matrix/substrate_gap_matrix.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix,cp -p results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.csv')
+expected = 'b2a341fadc5a9429d06a7b331582e64cbeabdd3be26d4665411a9f68c5add406'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-055,substrate_matrix,results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix_summary.json,4ac9a865a6dddf8c33af91251b016ffd94b6395f1b808ff1d1dc72477b3ef412,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix_summary.json,evidence/substrate_matrix/substrate_gap_matrix_summary.json,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix,cp -p results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix_summary.json,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix_summary.json')
+expected = '4ac9a865a6dddf8c33af91251b016ffd94b6395f1b808ff1d1dc72477b3ef412'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-056,substrate_matrix,results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix.md,d9298e50a298cbe56c08f8b366702d54de6f8c49f7d23517771b41a3460c2c21,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.md,evidence/substrate_matrix/substrate_gap_matrix.md,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix,cp -p results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix.md results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.md,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.md')
+expected = 'd9298e50a298cbe56c08f8b366702d54de6f8c49f7d23517771b41a3460c2c21'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-057,ownership_stress_test,results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv,4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/ownership_scenario_heatmap.csv,evidence/ownership_stress_test/ownership_scenario_heatmap.csv,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test,cp -p results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/ownership_scenario_heatmap.csv,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/ownership_scenario_heatmap.csv')
+expected = '4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-058,ownership_stress_test,results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json,adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/figure_data_summary.json,evidence/ownership_stress_test/figure_data_summary.json,results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test,cp -p results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/figure_data_summary.json,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/figure_data_summary.json')
+expected = 'adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-059,reproducibility_code,scripts/verification_substrate_gap/lint_claim_scope.py,89da9306d0c05caf494f47bf38454759dbf8051ee4d71cb2940680adfd5c4b1a,results/verification_substrate_gap/public_supplement_candidate_20260601/code/lint_claim_scope.py,code/lint_claim_scope.py,results/verification_substrate_gap/public_supplement_candidate_20260601/code,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code,cp -p scripts/verification_substrate_gap/lint_claim_scope.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/lint_claim_scope.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/lint_claim_scope.py')
+expected = '89da9306d0c05caf494f47bf38454759dbf8051ee4d71cb2940680adfd5c4b1a'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-060,reproducibility_code,scripts/verification_substrate_gap/evaluate_public_text_verifier.py,848ed973719ab8e5a037903eda1b3f306aac2105846aa01004a862ad9d1b7698,results/verification_substrate_gap/public_supplement_candidate_20260601/code/evaluate_public_text_verifier.py,code/evaluate_public_text_verifier.py,results/verification_substrate_gap/public_supplement_candidate_20260601/code,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code,cp -p scripts/verification_substrate_gap/evaluate_public_text_verifier.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/evaluate_public_text_verifier.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/evaluate_public_text_verifier.py')
+expected = '848ed973719ab8e5a037903eda1b3f306aac2105846aa01004a862ad9d1b7698'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-061,reproducibility_code,scripts/verification_substrate_gap/audit_public_predicate_attack_naturalness.py,212b74bfdb193d05b72eca0768123b616a42905b4dd0b1dbde2a3d0d8c119329,results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_public_predicate_attack_naturalness.py,code/audit_public_predicate_attack_naturalness.py,results/verification_substrate_gap/public_supplement_candidate_20260601/code,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code,cp -p scripts/verification_substrate_gap/audit_public_predicate_attack_naturalness.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_public_predicate_attack_naturalness.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_public_predicate_attack_naturalness.py')
+expected = '212b74bfdb193d05b72eca0768123b616a42905b4dd0b1dbde2a3d0d8c119329'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-062,reproducibility_code,scripts/verification_substrate_gap/verify_vsg_expert_review_packet.py,59e16576c48c821086605519776bb4f84334c863429d159f2a7a4c514507567a,results/verification_substrate_gap/public_supplement_candidate_20260601/code/verify_vsg_expert_review_packet.py,code/verify_vsg_expert_review_packet.py,results/verification_substrate_gap/public_supplement_candidate_20260601/code,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code,cp -p scripts/verification_substrate_gap/verify_vsg_expert_review_packet.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/verify_vsg_expert_review_packet.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/verify_vsg_expert_review_packet.py')
+expected = '59e16576c48c821086605519776bb4f84334c863429d159f2a7a4c514507567a'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-063,reproducibility_code,scripts/verification_substrate_gap/audit_vsg_expert_handoff.py,12b69e680308794d588d835fc22b1657be3f0023d5cf1f0c715a60487f54b2b3,results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_vsg_expert_handoff.py,code/audit_vsg_expert_handoff.py,results/verification_substrate_gap/public_supplement_candidate_20260601/code,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code,cp -p scripts/verification_substrate_gap/audit_vsg_expert_handoff.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_vsg_expert_handoff.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_vsg_expert_handoff.py')
+expected = '12b69e680308794d588d835fc22b1657be3f0023d5cf1f0c715a60487f54b2b3'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-064,reproducibility_code,scripts/verification_substrate_gap/build_vsg_reproducibility_release_inventory.py,2f672fcea697b71a01ac4e68f4c51666f37aa7bb3aabf1d74b5e9645c51e41c9,results/verification_substrate_gap/public_supplement_candidate_20260601/code/build_vsg_reproducibility_release_inventory.py,code/build_vsg_reproducibility_release_inventory.py,results/verification_substrate_gap/public_supplement_candidate_20260601/code,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code,cp -p scripts/verification_substrate_gap/build_vsg_reproducibility_release_inventory.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/build_vsg_reproducibility_release_inventory.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/build_vsg_reproducibility_release_inventory.py')
+expected = '2f672fcea697b71a01ac4e68f4c51666f37aa7bb3aabf1d74b5e9645c51e41c9'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-065,reproducibility_config,configs/verification_substrate_gap/public_text_verifier_baselines.yaml,125622ae8cb7ad85c91740175453587d332349d3255faa2161aa8ff391fdf63c,results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_baselines.yaml,configs/public_text_verifier_baselines.yaml,results/verification_substrate_gap/public_supplement_candidate_20260601/configs,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs,cp -p configs/verification_substrate_gap/public_text_verifier_baselines.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_baselines.yaml,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_baselines.yaml')
+expected = '125622ae8cb7ad85c91740175453587d332349d3255faa2161aa8ff391fdf63c'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-066,reproducibility_config,configs/verification_substrate_gap/public_text_verifier_stronger_local_pilot.yaml,1ae03fcd8065a59c21bb780768175e9d54b5d020bd176b7525acc051434cb291,results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_stronger_local_pilot.yaml,configs/public_text_verifier_stronger_local_pilot.yaml,results/verification_substrate_gap/public_supplement_candidate_20260601/configs,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs,cp -p configs/verification_substrate_gap/public_text_verifier_stronger_local_pilot.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_stronger_local_pilot.yaml,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_stronger_local_pilot.yaml')
+expected = '1ae03fcd8065a59c21bb780768175e9d54b5d020bd176b7525acc051434cb291'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-068,reproducibility_config,configs/verification_substrate_gap/template_leakage_audit.yaml,7fda690a9de384d822b7ff4a453872330a5189106076aa694ad1a66ee1235dff,results/verification_substrate_gap/public_supplement_candidate_20260601/configs/template_leakage_audit.yaml,configs/template_leakage_audit.yaml,results/verification_substrate_gap/public_supplement_candidate_20260601/configs,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs,cp -p configs/verification_substrate_gap/template_leakage_audit.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/template_leakage_audit.yaml,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/template_leakage_audit.yaml')
+expected = '7fda690a9de384d822b7ff4a453872330a5189106076aa694ad1a66ee1235dff'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-069,reproducibility_config,configs/verification_substrate_gap/surrogate_guided_rewrite_spoofing.yaml,eb427c209edaadd06d889e5c7ced471763d58ebf0ccb15661b84a27cffdc8b31,results/verification_substrate_gap/public_supplement_candidate_20260601/configs/surrogate_guided_rewrite_spoofing.yaml,configs/surrogate_guided_rewrite_spoofing.yaml,results/verification_substrate_gap/public_supplement_candidate_20260601/configs,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs,cp -p configs/verification_substrate_gap/surrogate_guided_rewrite_spoofing.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/surrogate_guided_rewrite_spoofing.yaml,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/surrogate_guided_rewrite_spoofing.yaml')
+expected = 'eb427c209edaadd06d889e5c7ced471763d58ebf0ccb15661b84a27cffdc8b31'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-070,reproducibility_tests,tests/verification_substrate_gap/test_claim_scope_linter.py,12274bd9effdafb3452ca9af21b260277098a71b61be3bc2d30ca9786eab06b6,results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_claim_scope_linter.py,tests/test_claim_scope_linter.py,results/verification_substrate_gap/public_supplement_candidate_20260601/tests,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests,cp -p tests/verification_substrate_gap/test_claim_scope_linter.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_claim_scope_linter.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_claim_scope_linter.py')
+expected = '12274bd9effdafb3452ca9af21b260277098a71b61be3bc2d30ca9786eab06b6'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-071,reproducibility_tests,tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py,66f4603779d86f4dde991a164d135ebadb0dea15a65d9a5f2cb91a9066f5a70f,results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_expert_packet_verifiers.py,tests/test_vsg_expert_packet_verifiers.py,results/verification_substrate_gap/public_supplement_candidate_20260601/tests,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests,cp -p tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_expert_packet_verifiers.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_expert_packet_verifiers.py')
+expected = '66f4603779d86f4dde991a164d135ebadb0dea15a65d9a5f2cb91a9066f5a70f'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-072,reproducibility_tests,tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py,1f46d8512f93aaac2f6223087b172d98b1bc866736f0f49c18d4b85cbdd60781,results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_manuscript_prose_hardening.py,tests/test_vsg_manuscript_prose_hardening.py,results/verification_substrate_gap/public_supplement_candidate_20260601/tests,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests,cp -p tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_manuscript_prose_hardening.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_manuscript_prose_hardening.py')
+expected = '1f46d8512f93aaac2f6223087b172d98b1bc866736f0f49c18d4b85cbdd60781'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-073,reproducibility_tests,tests/verification_substrate_gap/test_public_text_verifier_stronger_baselines.py,56cbcd4d43e13466907ed48d7d993811ae5000d54f9ee6d60cbd42d93c55558a,results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_text_verifier_stronger_baselines.py,tests/test_public_text_verifier_stronger_baselines.py,results/verification_substrate_gap/public_supplement_candidate_20260601/tests,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests,cp -p tests/verification_substrate_gap/test_public_text_verifier_stronger_baselines.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_text_verifier_stronger_baselines.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_text_verifier_stronger_baselines.py')
+expected = '56cbcd4d43e13466907ed48d7d993811ae5000d54f9ee6d60cbd42d93c55558a'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary
+PSP-074,reproducibility_tests,tests/verification_substrate_gap/test_public_predicate_attack_naturalness_audit.py,2e39f82ea4b15d7bad5c554db0a871ecd6b059cf4474a30be19d694e63008219,results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_predicate_attack_naturalness_audit.py,tests/test_public_predicate_attack_naturalness_audit.py,results/verification_substrate_gap/public_supplement_candidate_20260601/tests,mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests,cp -p tests/verification_substrate_gap/test_public_predicate_attack_naturalness_audit.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_predicate_attack_naturalness_audit.py,"python3 - <<'PY'
+import hashlib, pathlib, sys
+path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_predicate_attack_naturalness_audit.py')
+expected = '2e39f82ea4b15d7bad5c554db0a871ecd6b059cf4474a30be19d694e63008219'
+actual = hashlib.sha256(path.read_bytes()).hexdigest()
+sys.exit(0 if actual == expected else 1)
+PY",True,False,True,not_executed_plan_only,preserves VSG substrate-gap claim boundary

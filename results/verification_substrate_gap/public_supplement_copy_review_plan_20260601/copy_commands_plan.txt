@@ -1,0 +1,783 @@
+# VSG public supplement copy command plan
+# PLAN ONLY: do not execute without a separate reviewed route decision.
+# The generator did not copy files or create a candidate bundle.
+
+# PSP-001 -> manuscript_source/main.tex
+# expected_sha256=1f59d67aca4269850de37b233c7657e60c8c9974136dc90b5f9cb4986b7efd03
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/main.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/main.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/main.tex')
+#   expected = '1f59d67aca4269850de37b233c7657e60c8c9974136dc90b5f9cb4986b7efd03'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-002 -> manuscript_source/section_01_introduction.tex
+# expected_sha256=7bae9397e1ec77f3eb57b91583e724747dd6539116275ca231496658194df99c
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_01_introduction.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_01_introduction.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_01_introduction.tex')
+#   expected = '7bae9397e1ec77f3eb57b91583e724747dd6539116275ca231496658194df99c'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-003 -> manuscript_source/section_02_related_work.tex
+# expected_sha256=db986efdf6e6356a7ef9c4c9068b719a9d5d99795de3ad2953cf2163c8a5bccf
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_02_related_work.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_02_related_work.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_02_related_work.tex')
+#   expected = 'db986efdf6e6356a7ef9c4c9068b719a9d5d99795de3ad2953cf2163c8a5bccf'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-004 -> manuscript_source/section_03_problem_setup.tex
+# expected_sha256=5df4ae73fd0847f62287c77aa978ade587b678e9e2a4a33312e5dce9dce98e13
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_03_problem_setup.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_03_problem_setup.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_03_problem_setup.tex')
+#   expected = '5df4ae73fd0847f62287c77aa978ade587b678e9e2a4a33312e5dce9dce98e13'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-005 -> manuscript_source/section_04_tokenizer_alignment.tex
+# expected_sha256=13eab833686254997a581d2b7338a9c982964c18d14524e1e152082e89f2fed2
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_04_tokenizer_alignment.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_04_tokenizer_alignment.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_04_tokenizer_alignment.tex')
+#   expected = '13eab833686254997a581d2b7338a9c982964c18d14524e1e152082e89f2fed2'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-006 -> manuscript_source/section_05_bucket_level_injection.tex
+# expected_sha256=d5b4cabd86e77d922edd18c8208413a08aa78faa300d79858e5ea7193169419e
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_05_bucket_level_injection.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_05_bucket_level_injection.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_05_bucket_level_injection.tex')
+#   expected = 'd5b4cabd86e77d922edd18c8208413a08aa78faa300d79858e5ea7193169419e'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-007 -> manuscript_source/section_06_deterministic_verification.tex
+# expected_sha256=3727263bc453428c9ec7953f08f0e5c67c449c778d3f7519a184ffce9f37dd74
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_06_deterministic_verification.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_06_deterministic_verification.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_06_deterministic_verification.tex')
+#   expected = '3727263bc453428c9ec7953f08f0e5c67c449c778d3f7519a184ffce9f37dd74'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-008 -> manuscript_source/section_07_experiments.tex
+# expected_sha256=1b618fc3821847ef904655c0375b05d80a07bd7f4bbeb97d8ed8f29e2a651ea0
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_07_experiments.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_07_experiments.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_07_experiments.tex')
+#   expected = '1b618fc3821847ef904655c0375b05d80a07bd7f4bbeb97d8ed8f29e2a651ea0'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-009 -> manuscript_source/section_08_discussion_limitations.tex
+# expected_sha256=d1c211c2e12b0323198d204cc62db6e38dfddf9d412114c295d2757e59601e9e
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_08_discussion_limitations.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_08_discussion_limitations.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_08_discussion_limitations.tex')
+#   expected = 'd1c211c2e12b0323198d204cc62db6e38dfddf9d412114c295d2757e59601e9e'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-010 -> manuscript_source/section_09_conclusion.tex
+# expected_sha256=7d95943f193f2e9e1f50fceb794945d522e3ad971a965df1c97d9d7e5eabb4ca
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/section_09_conclusion.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_09_conclusion.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/section_09_conclusion.tex')
+#   expected = '7d95943f193f2e9e1f50fceb794945d522e3ad971a965df1c97d9d7e5eabb4ca'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-011 -> manuscript_source/appendix/proofs.tex
+# expected_sha256=95271362a5e71d16ff763e3e3aed519b653dd60f9ad07e40f8fa0e11fe5c3f78
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/proofs.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/proofs.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/proofs.tex')
+#   expected = '95271362a5e71d16ff763e3e3aed519b653dd60f9ad07e40f8fa0e11fe5c3f78'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-012 -> manuscript_source/appendix/formal_substrate_gap.tex
+# expected_sha256=d16746bb9acffcddeb919791bef19c68fd7ec351eaa8291253bb7335478469b0
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/formal_substrate_gap.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/formal_substrate_gap.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/formal_substrate_gap.tex')
+#   expected = 'd16746bb9acffcddeb919791bef19c68fd7ec351eaa8291253bb7335478469b0'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-013 -> manuscript_source/appendix/attack_examples.tex
+# expected_sha256=bf6d7a83a868f56635c02dd971e6dc3db6715f494fec6564b9c77a59684997a2
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/attack_examples.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/attack_examples.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/attack_examples.tex')
+#   expected = 'bf6d7a83a868f56635c02dd971e6dc3db6715f494fec6564b9c77a59684997a2'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-014 -> manuscript_source/appendix/extended_related_work.tex
+# expected_sha256=7547a6e7150ee45915960e61e878b896d40c9ad336a8655dec495ccfd44bf735
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/extended_related_work.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/extended_related_work.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/extended_related_work.tex')
+#   expected = '7547a6e7150ee45915960e61e878b896d40c9ad336a8655dec495ccfd44bf735'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-015 -> manuscript_source/appendix/reproducibility.tex
+# expected_sha256=8bc273a0331e05bacb373783387ed96ad1bb3aa9e879bae159838af1ce70e946
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility.tex')
+#   expected = '8bc273a0331e05bacb373783387ed96ad1bb3aa9e879bae159838af1ce70e946'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-016 -> manuscript_source/appendix/asset_licenses.tex
+# expected_sha256=d026638b4dd409df59600513b7337d183c1f98a0ded24f76f6092975db41a788
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/asset_licenses.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/asset_licenses.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/asset_licenses.tex')
+#   expected = 'd026638b4dd409df59600513b7337d183c1f98a0ded24f76f6092975db41a788'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-017 -> manuscript_source/appendix/reproducibility_commands.tex
+# expected_sha256=4107b22a41667b9d0ce02807804b152c8e838ab74200923d6c1a2ac91f5ac9d6
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/appendix/reproducibility_commands.tex results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility_commands.tex
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/appendix/reproducibility_commands.tex')
+#   expected = '4107b22a41667b9d0ce02807804b152c8e838ab74200923d6c1a2ac91f5ac9d6'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-018 -> manuscript_source/references.bib
+# expected_sha256=e80193f704e98ccd4402d8c0ca5cd0a37cbc44e4554d8bb395b5ee2c87d81577
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/references.bib results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/references.bib
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/references.bib')
+#   expected = 'e80193f704e98ccd4402d8c0ca5cd0a37cbc44e4554d8bb395b5ee2c87d81577'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-019 -> manuscript_source/neurips_2026.sty
+# expected_sha256=0c1ad36961fcd9198dcc2558cf2793e1df39973bde8264fd701f5e7970672757
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/neurips_2026.sty results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/neurips_2026.sty
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/manuscript_source/neurips_2026.sty')
+#   expected = '0c1ad36961fcd9198dcc2558cf2793e1df39973bde8264fd701f5e7970672757'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-020 -> figures/figure_1_verification_substrate_map.png
+# expected_sha256=aade301bf06c8b841fd4d1cdc31ab05083c84f82b203d656db35be5bf187fcfe
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_1_verification_substrate_map.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_1_verification_substrate_map.png
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_1_verification_substrate_map.png')
+#   expected = 'aade301bf06c8b841fd4d1cdc31ab05083c84f82b203d656db35be5bf187fcfe'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-021 -> figures/figure_2_first_divergence_diagnostic.png
+# expected_sha256=c3237dc5823c39bb96d2d804d9cd8db16bbe27ee6305b9d47cdba1aebb926011
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_2_first_divergence_diagnostic.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_2_first_divergence_diagnostic.png
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_2_first_divergence_diagnostic.png')
+#   expected = 'c3237dc5823c39bb96d2d804d9cd8db16bbe27ee6305b9d47cdba1aebb926011'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-022 -> figures/figure_3_controllability_vs_observability.png
+# expected_sha256=826200904d3f4edc3dbf9d3d6f2a4dc0e48e56aaec198ce89aadc44527342db9
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_3_controllability_vs_observability.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_3_controllability_vs_observability.png
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_3_controllability_vs_observability.png')
+#   expected = '826200904d3f4edc3dbf9d3d6f2a4dc0e48e56aaec198ce89aadc44527342db9'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-023 -> figures/figure_4_public_predicate_attack_ladder.png
+# expected_sha256=038db68a07513b0c9bc51f2db1bab306f46f06c7237f0f98a70b382417d5fa2b
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_4_public_predicate_attack_ladder.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_4_public_predicate_attack_ladder.png
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_4_public_predicate_attack_ladder.png')
+#   expected = '038db68a07513b0c9bc51f2db1bab306f46f06c7237f0f98a70b382417d5fa2b'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-024 -> figures/figure_5_ownership_scenario_heatmap.png
+# expected_sha256=be170f04151b4523309b49d14b8419905046fe57bbbd7e9cc4d3720f9464b723
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/figures
+# copy: cp -p manuscripts/69db2644566dcc36c9da320e/figures/figure_5_ownership_scenario_heatmap.png results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_5_ownership_scenario_heatmap.png
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/figures/figure_5_ownership_scenario_heatmap.png')
+#   expected = 'be170f04151b4523309b49d14b8419905046fe57bbbd7e9cc4d3720f9464b723'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-025 -> evidence/figure_data/trace_bound_accepts.csv
+# expected_sha256=652719d8838e5602b2a6aec217a35ed6e2021e5cfe2d4e12987948561b9362ad
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/trace_bound_accepts.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/trace_bound_accepts.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/trace_bound_accepts.csv')
+#   expected = '652719d8838e5602b2a6aec217a35ed6e2021e5cfe2d4e12987948561b9362ad'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-026 -> evidence/figure_data/public_text_verifier_baselines.csv
+# expected_sha256=69bbf5497154a3247948bff0f12d0a2f49f4824b4b8715e0774008308c30065d
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/public_text_verifier_baselines.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/public_text_verifier_baselines.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/public_text_verifier_baselines.csv')
+#   expected = '69bbf5497154a3247948bff0f12d0a2f49f4824b4b8715e0774008308c30065d'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-027 -> evidence/figure_data/template_leakage_summary.csv
+# expected_sha256=4b2b8647896ba452d4846df2220f4e9a7128523f92e069a6ca325db0170514a8
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/template_leakage_summary.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/template_leakage_summary.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/template_leakage_summary.csv')
+#   expected = '4b2b8647896ba452d4846df2220f4e9a7128523f92e069a6ca325db0170514a8'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-028 -> evidence/figure_data/attack_ladder_summary.csv
+# expected_sha256=b1774c7f683ada8f4735c2134c9054fa96c9a68aca160922abfa2afbd5a2da99
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/attack_ladder_summary.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/attack_ladder_summary.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/attack_ladder_summary.csv')
+#   expected = 'b1774c7f683ada8f4735c2134c9054fa96c9a68aca160922abfa2afbd5a2da99'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-029 -> evidence/figure_data/ownership_scenario_heatmap.csv
+# expected_sha256=4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/ownership_scenario_heatmap.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/ownership_scenario_heatmap.csv')
+#   expected = '4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-030 -> evidence/figure_data/claim_ledger.csv
+# expected_sha256=d7e2902360276c570ba65892d4b7db222cd456ee7fecca992bc6b4317b231ad9
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/claim_ledger.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/claim_ledger.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/claim_ledger.csv')
+#   expected = 'd7e2902360276c570ba65892d4b7db222cd456ee7fecca992bc6b4317b231ad9'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-031 -> evidence/figure_data/figure_data_summary.json
+# expected_sha256=adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_summary.json
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_summary.json')
+#   expected = 'adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-032 -> evidence/figure_data/figure_data_manifest.json
+# expected_sha256=e852ac823131ac2e4f607397eb23acff46a182cf2e6f76c9ab5e76b3ec944e77
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/figure_data_manifest.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_manifest.json
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/figure_data/figure_data_manifest.json')
+#   expected = 'e852ac823131ac2e4f607397eb23acff46a182cf2e6f76c9ab5e76b3ec944e77'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-037 -> evidence/public_text_verifier_baselines/public_text_verifier_results.csv
+# expected_sha256=338643559be5c2727ef20a8358b43e75c2c2ac4bc2fb6887980da4de623661e1
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines
+# copy: cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_results.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_results.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_results.csv')
+#   expected = '338643559be5c2727ef20a8358b43e75c2c2ac4bc2fb6887980da4de623661e1'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-038 -> evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv
+# expected_sha256=1428a4bfe5b71709bf0852738dc30bd8e7fa5a780d8ccba8ae714ab1ae28d0ad
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines
+# copy: cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_block_scores.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_block_scores.csv')
+#   expected = '1428a4bfe5b71709bf0852738dc30bd8e7fa5a780d8ccba8ae714ab1ae28d0ad'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-039 -> evidence/public_text_verifier_baselines/public_text_verifier_summary.json
+# expected_sha256=aac44b890822b893de4961e14b86de3a689a9ef19a4a40627dd567082de84fcb
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines
+# copy: cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_summary.json
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_summary.json')
+#   expected = 'aac44b890822b893de4961e14b86de3a689a9ef19a4a40627dd567082de84fcb'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-040 -> evidence/public_text_verifier_baselines/public_text_verifier_report.md
+# expected_sha256=7764ab1010144441d7840dde88da2df322af1f80a1ccbe87da94555bded24e4a
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines
+# copy: cp -p results/verification_substrate_gap/public_text_verifier_remote_20260529/public_text_verifier_report.md results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_report.md
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/public_text_verifier_baselines/public_text_verifier_report.md')
+#   expected = '7764ab1010144441d7840dde88da2df322af1f80a1ccbe87da94555bded24e4a'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-046 -> evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv
+# expected_sha256=ac24d6063bf84062a7171c9268881328cd2b331b31435c948996acc6f3392534
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy
+# copy: cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_rows.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_rows.csv')
+#   expected = 'ac24d6063bf84062a7171c9268881328cd2b331b31435c948996acc6f3392534'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-047 -> evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv
+# expected_sha256=b6a7e74bc8b827ac926fc52934f8b4d6046fab1dd9e40b7eb8b690a431375504
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy
+# copy: cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_by_group.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_by_group.csv')
+#   expected = 'b6a7e74bc8b827ac926fc52934f8b4d6046fab1dd9e40b7eb8b690a431375504'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-048 -> evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json
+# expected_sha256=bd051b53cf4fed617f866316da5dfa5db6f1d101393893fffe4ec6180845069b
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy
+# copy: cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_summary.json')
+#   expected = 'bd051b53cf4fed617f866316da5dfa5db6f1d101393893fffe4ec6180845069b'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-049 -> evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md
+# expected_sha256=394411ea1424c2e7217635ff0963c0517cd75b5672c6417fdaa6d0246aac2ee4
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy
+# copy: cp -p results/verification_substrate_gap/public_predicate_attack_naturalness_audit_20260601/attack_naturalness_proxy_report.md results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/attack_naturalness_proxy/attack_naturalness_proxy_report.md')
+#   expected = '394411ea1424c2e7217635ff0963c0517cd75b5672c6417fdaa6d0246aac2ee4'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-054 -> evidence/substrate_matrix/substrate_gap_matrix.csv
+# expected_sha256=b2a341fadc5a9429d06a7b331582e64cbeabdd3be26d4665411a9f68c5add406
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix
+# copy: cp -p results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.csv')
+#   expected = 'b2a341fadc5a9429d06a7b331582e64cbeabdd3be26d4665411a9f68c5add406'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-055 -> evidence/substrate_matrix/substrate_gap_matrix_summary.json
+# expected_sha256=4ac9a865a6dddf8c33af91251b016ffd94b6395f1b808ff1d1dc72477b3ef412
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix
+# copy: cp -p results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix_summary.json
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix_summary.json')
+#   expected = '4ac9a865a6dddf8c33af91251b016ffd94b6395f1b808ff1d1dc72477b3ef412'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-056 -> evidence/substrate_matrix/substrate_gap_matrix.md
+# expected_sha256=d9298e50a298cbe56c08f8b366702d54de6f8c49f7d23517771b41a3460c2c21
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix
+# copy: cp -p results/verification_substrate_gap/substrate_gap_matrix/substrate_gap_matrix.md results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.md
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/substrate_matrix/substrate_gap_matrix.md')
+#   expected = 'd9298e50a298cbe56c08f8b366702d54de6f8c49f7d23517771b41a3460c2c21'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-057 -> evidence/ownership_stress_test/ownership_scenario_heatmap.csv
+# expected_sha256=4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/ownership_scenario_heatmap.csv results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/ownership_scenario_heatmap.csv
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/ownership_scenario_heatmap.csv')
+#   expected = '4b628519e2b8ef1eaaea471978cda15f98879d274020334b324ea9e087b69f77'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-058 -> evidence/ownership_stress_test/figure_data_summary.json
+# expected_sha256=adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test
+# copy: cp -p results/verification_substrate_gap/paper_figure_data_20260530/figure_data_summary.json results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/figure_data_summary.json
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/evidence/ownership_stress_test/figure_data_summary.json')
+#   expected = 'adff4ae4c8832dcc3634053789f925191a4c55cb66155335ba36ab07364ae878'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-059 -> code/lint_claim_scope.py
+# expected_sha256=89da9306d0c05caf494f47bf38454759dbf8051ee4d71cb2940680adfd5c4b1a
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code
+# copy: cp -p scripts/verification_substrate_gap/lint_claim_scope.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/lint_claim_scope.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/lint_claim_scope.py')
+#   expected = '89da9306d0c05caf494f47bf38454759dbf8051ee4d71cb2940680adfd5c4b1a'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-060 -> code/evaluate_public_text_verifier.py
+# expected_sha256=848ed973719ab8e5a037903eda1b3f306aac2105846aa01004a862ad9d1b7698
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code
+# copy: cp -p scripts/verification_substrate_gap/evaluate_public_text_verifier.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/evaluate_public_text_verifier.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/evaluate_public_text_verifier.py')
+#   expected = '848ed973719ab8e5a037903eda1b3f306aac2105846aa01004a862ad9d1b7698'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-061 -> code/audit_public_predicate_attack_naturalness.py
+# expected_sha256=212b74bfdb193d05b72eca0768123b616a42905b4dd0b1dbde2a3d0d8c119329
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code
+# copy: cp -p scripts/verification_substrate_gap/audit_public_predicate_attack_naturalness.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_public_predicate_attack_naturalness.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_public_predicate_attack_naturalness.py')
+#   expected = '212b74bfdb193d05b72eca0768123b616a42905b4dd0b1dbde2a3d0d8c119329'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-062 -> code/verify_vsg_expert_review_packet.py
+# expected_sha256=59e16576c48c821086605519776bb4f84334c863429d159f2a7a4c514507567a
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code
+# copy: cp -p scripts/verification_substrate_gap/verify_vsg_expert_review_packet.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/verify_vsg_expert_review_packet.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/verify_vsg_expert_review_packet.py')
+#   expected = '59e16576c48c821086605519776bb4f84334c863429d159f2a7a4c514507567a'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-063 -> code/audit_vsg_expert_handoff.py
+# expected_sha256=12b69e680308794d588d835fc22b1657be3f0023d5cf1f0c715a60487f54b2b3
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code
+# copy: cp -p scripts/verification_substrate_gap/audit_vsg_expert_handoff.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_vsg_expert_handoff.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/audit_vsg_expert_handoff.py')
+#   expected = '12b69e680308794d588d835fc22b1657be3f0023d5cf1f0c715a60487f54b2b3'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-064 -> code/build_vsg_reproducibility_release_inventory.py
+# expected_sha256=2f672fcea697b71a01ac4e68f4c51666f37aa7bb3aabf1d74b5e9645c51e41c9
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/code
+# copy: cp -p scripts/verification_substrate_gap/build_vsg_reproducibility_release_inventory.py results/verification_substrate_gap/public_supplement_candidate_20260601/code/build_vsg_reproducibility_release_inventory.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/code/build_vsg_reproducibility_release_inventory.py')
+#   expected = '2f672fcea697b71a01ac4e68f4c51666f37aa7bb3aabf1d74b5e9645c51e41c9'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-065 -> configs/public_text_verifier_baselines.yaml
+# expected_sha256=125622ae8cb7ad85c91740175453587d332349d3255faa2161aa8ff391fdf63c
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs
+# copy: cp -p configs/verification_substrate_gap/public_text_verifier_baselines.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_baselines.yaml
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_baselines.yaml')
+#   expected = '125622ae8cb7ad85c91740175453587d332349d3255faa2161aa8ff391fdf63c'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-066 -> configs/public_text_verifier_stronger_local_pilot.yaml
+# expected_sha256=1ae03fcd8065a59c21bb780768175e9d54b5d020bd176b7525acc051434cb291
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs
+# copy: cp -p configs/verification_substrate_gap/public_text_verifier_stronger_local_pilot.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_stronger_local_pilot.yaml
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/public_text_verifier_stronger_local_pilot.yaml')
+#   expected = '1ae03fcd8065a59c21bb780768175e9d54b5d020bd176b7525acc051434cb291'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-068 -> configs/template_leakage_audit.yaml
+# expected_sha256=7fda690a9de384d822b7ff4a453872330a5189106076aa694ad1a66ee1235dff
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs
+# copy: cp -p configs/verification_substrate_gap/template_leakage_audit.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/template_leakage_audit.yaml
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/template_leakage_audit.yaml')
+#   expected = '7fda690a9de384d822b7ff4a453872330a5189106076aa694ad1a66ee1235dff'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-069 -> configs/surrogate_guided_rewrite_spoofing.yaml
+# expected_sha256=eb427c209edaadd06d889e5c7ced471763d58ebf0ccb15661b84a27cffdc8b31
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/configs
+# copy: cp -p configs/verification_substrate_gap/surrogate_guided_rewrite_spoofing.yaml results/verification_substrate_gap/public_supplement_candidate_20260601/configs/surrogate_guided_rewrite_spoofing.yaml
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/configs/surrogate_guided_rewrite_spoofing.yaml')
+#   expected = 'eb427c209edaadd06d889e5c7ced471763d58ebf0ccb15661b84a27cffdc8b31'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-070 -> tests/test_claim_scope_linter.py
+# expected_sha256=12274bd9effdafb3452ca9af21b260277098a71b61be3bc2d30ca9786eab06b6
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests
+# copy: cp -p tests/verification_substrate_gap/test_claim_scope_linter.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_claim_scope_linter.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_claim_scope_linter.py')
+#   expected = '12274bd9effdafb3452ca9af21b260277098a71b61be3bc2d30ca9786eab06b6'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-071 -> tests/test_vsg_expert_packet_verifiers.py
+# expected_sha256=66f4603779d86f4dde991a164d135ebadb0dea15a65d9a5f2cb91a9066f5a70f
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests
+# copy: cp -p tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_expert_packet_verifiers.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_expert_packet_verifiers.py')
+#   expected = '66f4603779d86f4dde991a164d135ebadb0dea15a65d9a5f2cb91a9066f5a70f'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-072 -> tests/test_vsg_manuscript_prose_hardening.py
+# expected_sha256=1f46d8512f93aaac2f6223087b172d98b1bc866736f0f49c18d4b85cbdd60781
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests
+# copy: cp -p tests/verification_substrate_gap/test_vsg_manuscript_prose_hardening.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_manuscript_prose_hardening.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_vsg_manuscript_prose_hardening.py')
+#   expected = '1f46d8512f93aaac2f6223087b172d98b1bc866736f0f49c18d4b85cbdd60781'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-073 -> tests/test_public_text_verifier_stronger_baselines.py
+# expected_sha256=56cbcd4d43e13466907ed48d7d993811ae5000d54f9ee6d60cbd42d93c55558a
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests
+# copy: cp -p tests/verification_substrate_gap/test_public_text_verifier_stronger_baselines.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_text_verifier_stronger_baselines.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_text_verifier_stronger_baselines.py')
+#   expected = '56cbcd4d43e13466907ed48d7d993811ae5000d54f9ee6d60cbd42d93c55558a'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY
+
+# PSP-074 -> tests/test_public_predicate_attack_naturalness_audit.py
+# expected_sha256=2e39f82ea4b15d7bad5c554db0a871ecd6b059cf4474a30be19d694e63008219
+# mkdir: mkdir -p results/verification_substrate_gap/public_supplement_candidate_20260601/tests
+# copy: cp -p tests/verification_substrate_gap/test_public_predicate_attack_naturalness_audit.py results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_predicate_attack_naturalness_audit.py
+# verify:
+#   python3 - <<'PY'
+#   import hashlib, pathlib, sys
+#   path = pathlib.Path('results/verification_substrate_gap/public_supplement_candidate_20260601/tests/test_public_predicate_attack_naturalness_audit.py')
+#   expected = '2e39f82ea4b15d7bad5c554db0a871ecd6b059cf4474a30be19d694e63008219'
+#   actual = hashlib.sha256(path.read_bytes()).hexdigest()
+#   sys.exit(0 if actual == expected else 1)
+#   PY

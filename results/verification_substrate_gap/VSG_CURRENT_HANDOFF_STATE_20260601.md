@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_BUNDLE_PREFLIGHT_RECORDED_ARTIFACT_ONLY_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_COPY_REVIEW_PLAN_RECORDED_ARTIFACT_ONLY_NO_PUBLICATION
 ```
 
 ## Status
@@ -99,6 +99,13 @@ future copy-plan entries, and human-review holds. It confirms no source or
 review-artifact files are missing and no candidate target paths collide, but it
 does not copy files, create the candidate bundle, perform human review, publish
 anything, or expand claim scope.
+
+This continuation now also records an artifact-only public-supplement
+copy/review plan. It converts the future copy plan into comments-only copy and
+hash verification commands, and converts the human-review holds into a
+reviewer-facing checklist. All review rows remain `pending_not_performed`;
+the plan does not copy files, create the candidate bundle, perform human
+review, publish anything, or expand claim scope.
 
 This continuation additionally creates artifact-only review derivatives for
 the supplement release blockers: redacted trace-bound CSVs with private path
@@ -539,6 +546,50 @@ blockers, so no public supplement is release-ready yet.
 - Verification:
   targeted bundle-preflight pytest `PASS` with `3` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `63` tests passed.
+
+## Public Supplement Copy / Review Plan
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_review_plan_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_review_plan_report.md`
+- Copy-command dry run:
+  `results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_command_dry_run.csv`
+- Reviewer-facing checklist:
+  `results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/reviewer_facing_checklist.csv`
+- Copy commands plan:
+  `results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_commands_plan.txt`
+- Copy commands:
+  `60`
+- Review checklist rows:
+  `14`
+- Redaction reviews:
+  `3`
+- Scope-note reviews:
+  `10`
+- Security reviews:
+  `1`
+- Missing copy sources:
+  `0`
+- Existing candidate targets:
+  `0`
+- Missing review artifacts:
+  `0`
+- Pending reviews:
+  `14`
+- Files copied:
+  `False`
+- Candidate bundle created:
+  `False`
+- Release-ready after plan:
+  `False`
+- Claim scope:
+  copy/review plan only; no public supplement construction, no publication,
+  no Slurm, no generation, no model scoring, no training, no public text-only
+  verification claim, no ownership-proof claim.
+- Verification:
+  targeted copy-review pytest `PASS` with `3` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `66` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 

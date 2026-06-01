@@ -500,6 +500,48 @@ targeted public-supplement bundle preflight tests = PASS, 3 passed
 full tests/verification_substrate_gap pytest = PASS, 63 passed
 ```
 
+Recorded a public-supplement copy/review plan from the future copy plan and
+human-review holds:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_copy_review_plan.py
+tests/verification_substrate_gap/test_vsg_public_supplement_copy_review_plan.py
+results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/
+```
+
+Observed scope:
+
+```text
+copy_commands = 60
+review_checklist_rows = 14
+redaction_reviews = 3
+scope_note_reviews = 10
+security_reviews = 1
+missing_copy_sources = 0
+existing_candidate_targets = 0
+missing_review_artifacts = 0
+pending_reviews = 14
+copy_commands_written_as_comments = true
+all_reviews_pending = true
+copy_plan_only = true
+files_copied = false
+candidate_bundle_created = false
+human_reviews_performed = false
+publication_blockers_resolved = false
+release_ready_after_plan = false
+artifact_only = true
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted public-supplement copy/review plan tests = PASS, 3 passed
+full tests/verification_substrate_gap pytest = PASS, 66 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.

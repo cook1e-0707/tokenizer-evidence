@@ -1,0 +1,32 @@
+{
+  "files": [
+    {
+      "bytes": 72151,
+      "path": "results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_command_dry_run.csv",
+      "sha256": "ef3890c0cec7fa3f60cb97a6aac94609ad3176f77f9a36b6779c37b8653d063f"
+    },
+    {
+      "bytes": 12846,
+      "path": "results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/reviewer_facing_checklist.csv",
+      "sha256": "e16dae51088c75e6604f6cc1b0649d055f91289d6d5ac091843a7c69712c20b8"
+    },
+    {
+      "bytes": 52945,
+      "path": "results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_commands_plan.txt",
+      "sha256": "813c1de1a2f4954b1618c8eca6b3f47bc7645771488bdfdf2b59448dd4753777"
+    },
+    {
+      "bytes": 1702,
+      "path": "results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_review_plan_summary.json",
+      "sha256": "c6bfaa3e46e00855513f66683bcb9b6d3e8e127b2172bc8d5fadefd1c12f1bd4"
+    },
+    {
+      "bytes": 1151,
+      "path": "results/verification_substrate_gap/public_supplement_copy_review_plan_20260601/copy_review_plan_report.md",
+      "sha256": "e6660175cd63ee080e59e1ef4a84fbacc6255671baa8668085e671989a0b39b7"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_copy_review_plan_manifest_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_COPY_REVIEW_PLAN_RECORDED_ARTIFACT_ONLY"
+}
