@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_READINESS_AUDIT_RECORDED_REVIEW_REQUIRED_NO_PUBLICATION
+VSG_PUBLIC_SUPPLEMENT_DRY_RUN_MANIFEST_RECORDED_NOT_RELEASE_READY_NO_PUBLICATION
 ```
 
 ## Status
@@ -78,6 +78,13 @@ This continuation now also records a plan-only public-supplement staging map.
 It maps every release-boundary row to a future supplement path, transform,
 scope note, residual risk, and execution/review flag. It still performs no
 supplement copying, no publication, no new experiments, and no claim expansion.
+
+This continuation additionally records an artifact-only dry-run bundle
+manifest. The manifest resolves the readiness audit into future bundle source
+paths, target supplement paths, review artifacts, and remaining blockers. It
+confirms all dry-run sources and review artifacts exist, but it still performs
+no file copying, creates no public supplement, publishes nothing, and keeps the
+release marked not ready.
 
 This continuation additionally creates artifact-only review derivatives for
 the supplement release blockers: redacted trace-bound CSVs with private path
@@ -394,6 +401,50 @@ blockers, so no public supplement is release-ready yet.
 - Verification:
   targeted readiness pytest `PASS` with `4` tests passed; full
   `tests/verification_substrate_gap` pytest `PASS` with `53` tests passed.
+
+## Public Supplement Dry-Run Bundle Manifest
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_report.md`
+- CSV:
+  `results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_manifest.csv`
+- Rows:
+  `78`
+- Dry-run bundle entries:
+  `74`
+- Excluded internal records:
+  `4`
+- Direct include entries:
+  `39`
+- Copy-required entries:
+  `21`
+- Redacted derivative entries:
+  `3`
+- Scope-note review entries:
+  `10`
+- Security-review entries:
+  `1`
+- Manual review required:
+  `14`
+- Publication blockers:
+  `35`
+- Missing dry-run sources:
+  `0`
+- Missing review artifacts:
+  `0`
+- Duplicate planned targets:
+  `0`
+- Release-ready after dry run:
+  `False`
+- Claim scope:
+  dry-run manifest only; no public supplement construction, no publication, no
+  Slurm, no generation, no model scoring, no training, no public text-only
+  verification claim, no ownership-proof claim.
+- Verification:
+  targeted dry-run manifest pytest `PASS` with `4` tests passed; full
+  `tests/verification_substrate_gap` pytest `PASS` with `57` tests passed.
 
 ## Ownership Scenario Decision-Rule Audit
 

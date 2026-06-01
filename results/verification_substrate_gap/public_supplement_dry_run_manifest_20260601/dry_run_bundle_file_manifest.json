@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "bytes": 38061,
+      "path": "results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_manifest.csv",
+      "sha256": "a7116674553c8879e7cadc19f81328d244b0e2e19265fd2e6168ad3e485f4bcf"
+    },
+    {
+      "bytes": 5585,
+      "path": "results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_summary.json",
+      "sha256": "41748075c40070aa2fc411b174e0a66c99f896a4111631885df166dd2ead41ad"
+    },
+    {
+      "bytes": 1544,
+      "path": "results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/dry_run_bundle_report.md",
+      "sha256": "4a53169ca4a7910b66486e93aeb49d8ed0f3006c6395823c368d30f8639c3482"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "schema_name": "verification_substrate_gap_public_supplement_dry_run_manifest_files_v1",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_DRY_RUN_MANIFEST_RECORDED_NOT_RELEASE_READY"
+}

@@ -384,6 +384,45 @@ targeted public-supplement readiness tests = PASS, 4 passed
 full tests/verification_substrate_gap pytest = PASS, 53 passed
 ```
 
+Recorded a public-supplement dry-run bundle manifest from the readiness audit:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_dry_run_manifest.py
+tests/verification_substrate_gap/test_vsg_public_supplement_dry_run_manifest.py
+results/verification_substrate_gap/public_supplement_dry_run_manifest_20260601/
+```
+
+Observed scope:
+
+```text
+rows = 78
+dry_run_bundle_entries = 74
+excluded_internal_records = 4
+direct_include_entries = 39
+copy_required_entries = 21
+redacted_derivative_entries = 3
+scope_note_review_entries = 10
+security_review_entries = 1
+manual_review_required = 14
+publication_blockers = 35
+missing_sources = 0
+missing_review_artifacts = 0
+duplicate_planned_targets = 0
+release_ready_after_dry_run = false
+dry_run_only = true
+files_copied = false
+public_supplement_created = false
+publication_performed = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted public-supplement dry-run manifest tests = PASS, 4 passed
+full tests/verification_substrate_gap pytest = PASS, 57 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.
