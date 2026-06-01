@@ -1,6 +1,13 @@
 {
-  "canonical_phase": "VSG_EXPERT_REVIEW_PACKET_DELIVERED_WAITING_FOR_REVIEW_NO_NEW_EXPERIMENTS",
-  "generated_at_utc": "2026-06-01T00:38:50Z",
+  "canonical_phase": "VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT",
+  "generated_at_utc": "2026-06-01T00:52:08Z",
+  "expert_response_processed": true,
+  "expert_response_summary": {
+    "architecture_validated": true,
+    "submission_ready": false,
+    "next_route": "paper_hardening_artifact_only",
+    "new_experiments_unlocked": false
+  },
   "packet_zip": "results/verification_substrate_gap/vsg_expert_review_packet_20260531.zip",
   "packet_zip_sha256": "0c4d15c058960f2d242f8708be925ccf58c2e43fbf1d55cba6ce4f210ff6884f",
   "packet_verifier_status": "PASS",
@@ -18,7 +25,6 @@
     "overfull_hbox_warning_count": 0
   },
   "manuscript_pdf_sha256": "81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458",
-  "root_branch": "main",
   "root_branch": "main",
   "root_head_at_pre_state_record_sync_check": "4e470810ed6a6741fa94206915a2ae0d0b59405b",
   "origin_main_head_at_pre_state_record_sync_check": "4e470810ed6a6741fa94206915a2ae0d0b59405b",
@@ -42,7 +48,15 @@
     "model_family_general_verification",
     "ownership_proof"
   ],
-  "next_allowed_action": "wait_for_expert_review_or_artifact_only_manuscript_package_hygiene",
+  "expert_reply_hardening_decomposition": "results/verification_substrate_gap/VSG_EXPERT_REPLY_HARDENING_DECOMPOSITION_20260601.md",
+  "artifact_test_hardening": {
+    "pytest_command": "uv run pytest tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
+    "status": "PASS",
+    "tests_passed": 10,
+    "packet_verifier_regression_tests_added": true,
+    "handoff_audit_regression_test_added": true
+  },
+  "next_allowed_action": "artifact_only_manuscript_package_hardening_without_claim_boundary_change_or_new_experiments",
   "not_allowed_without_new_expert_or_human_route_decision": [
     "new_slurm_submission",
     "new_generation",

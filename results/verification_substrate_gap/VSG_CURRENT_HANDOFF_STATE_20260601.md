@@ -3,15 +3,20 @@
 ## Canonical Phase
 
 ```text
-VSG_EXPERT_REVIEW_PACKET_DELIVERED_WAITING_FOR_REVIEW_NO_NEW_EXPERIMENTS
+VSG_MANUSCRIPT_SNAPSHOT_REVIEWED_ARCHITECTURE_VALIDATED_ARTIFACT_TEST_HARDENED_NO_SUBMIT
 ```
 
 ## Status
 
 The Verification Substrate Gap paper package has been rewritten, hardened,
 packaged, independently verified, handoff-audited, committed, and pushed to
-GitHub. The current active state is waiting for expert review of the objective
-packet.
+GitHub. The latest expert response has now been parsed into paper-hardening
+stages. The response validates the VSG architecture but does not make the
+manuscript submission-ready.
+
+This pass added regression tests for the expert packet verifier and handoff
+audit so that the objective review package remains checkable after future
+artifact-only edits.
 
 This state does not unlock new Slurm jobs, generation, model scoring, training,
 or paper-facing positive claims.
@@ -41,6 +46,7 @@ or paper-facing positive claims.
 - Claim-scope lint: `PASS`, 17 files, 0 violations
 - LaTeX log scan: `PASS`
 - Overfull hbox warnings: `0`
+- Expert packet verifier regression tests: `PASS`, 10 tests passed
 - Manuscript PDF SHA256:
   `81a119565a44b5c637380f3770f9ce38fe9266ff28c83d4c23b1e1531fcf3458`
 
@@ -84,8 +90,8 @@ The current artifacts do not claim:
 ## Next Allowed Action
 
 ```text
-Wait for expert review, or perform artifact-only manuscript/package hygiene
-that does not alter the claim boundary or start new experiments.
+Artifact-only manuscript/package hardening that does not alter the claim
+boundary or start new experiments.
 ```
 
 ## Not Allowed Without New Expert/Human Route Decision

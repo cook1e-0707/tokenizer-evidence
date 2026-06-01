@@ -1,0 +1,46 @@
+{
+  "status": "PASS_EXPERT_REPLY_DECOMPOSED_ARTIFACT_ONLY_TEST_HARDENING_ADDED",
+  "date": "2026-06-01",
+  "new_slurm_started": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "training_started": false,
+  "allowlist_enabled": false,
+  "completed_in_this_pass": [
+    "added expert packet verifier regression tests",
+    "added missing-required-file negative test",
+    "added manifest_self_hash_excluded negative test",
+    "added current handoff audit regression test",
+    "recorded expert reply decomposition and execution status"
+  ],
+  "existing_hardening_already_present": [
+    "formal first-divergence reduction and public predicate spoofability framing",
+    "related-work substrate positioning",
+    "attack example appendix",
+    "rendered manuscript figures",
+    "asset/license inventory",
+    "reproducibility command appendix"
+  ],
+  "verification": {
+    "targeted_pytest_command": "uv run pytest tests/verification_substrate_gap/test_vsg_expert_packet_verifiers.py tests/verification_substrate_gap/test_claim_scope_linter.py",
+    "targeted_pytest_status": "PASS",
+    "targeted_pytest_tests_passed": 10,
+    "packet_verifier_status": "PASS",
+    "handoff_audit_status": "PASS",
+    "packet_total_file_count": 60,
+    "hashed_file_count": 59,
+    "claim_lint_status": "PASS",
+    "claim_lint_violation_count": 0
+  },
+  "not_unlocked": [
+    "new Slurm submission",
+    "generation",
+    "model scoring",
+    "training",
+    "allowlist enablement",
+    "public text-only verification success claim",
+    "natural evidence success claim",
+    "ownership proof claim",
+    "cryptographic provenance claim"
+  ]
+}
