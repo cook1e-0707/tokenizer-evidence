@@ -3,7 +3,7 @@
 ## Canonical Phase
 
 ```text
-VSG_PUBLIC_SUPPLEMENT_STAGING_PLAN_RECORDED_NO_PUBLICATION_NO_NEW_EXPERIMENTS
+VSG_PUBLIC_SUPPLEMENT_REVIEW_DERIVATIVES_RECORDED_NO_PUBLICATION_NO_NEW_EXPERIMENTS
 ```
 
 ## Status
@@ -79,6 +79,12 @@ It maps every release-boundary row to a future supplement path, transform,
 scope note, residual risk, and execution/review flag. It still performs no
 supplement copying, no publication, no new experiments, and no claim expansion.
 
+This continuation additionally creates artifact-only review derivatives for
+the supplement release blockers: redacted trace-bound CSVs with private path
+fields removed, scope-note labels for source-mismatch/local-pilot/trace-bound
+rows, and a config security review for key-related schema field names. These
+are review derivatives only; no public supplement was created or published.
+
 ## Current Review Packet
 
 - Zip:
@@ -118,10 +124,12 @@ supplement copying, no publication, no new experiments, and no claim expansion.
 - Manuscript figure-quality audit regression tests: `PASS`, figure-quality
   targeted tests `3` passed
 - Refreshed expert packet regression tests: `PASS`
-- Full `tests/verification_substrate_gap` suite: `PASS`, `45` tests passed
+- Full `tests/verification_substrate_gap` suite: `PASS`, `49` tests passed
 - Release-boundary audit tests: `PASS`, targeted release/reproducibility
   tests `9` passed
 - Release-staging plan tests: `PASS`, targeted staging tests `4` passed
+- Public-supplement review-derivative tests: `PASS`, targeted derivative
+  tests `4` passed
 - Manuscript PDF SHA256:
   `a64c984fac6503b20138805c8a9a323799f6feb1acfdcc1f7bb7310237f5a0fa`
 
@@ -306,6 +314,42 @@ supplement copying, no publication, no new experiments, and no claim expansion.
   staging plan only; no file copying, no public supplement creation, no
   publication, no Slurm, no generation, no model scoring, no training, no
   public text-only verification claim, no ownership-proof claim.
+
+## Public Supplement Review Derivatives
+
+- Summary:
+  `results/verification_substrate_gap/public_supplement_review_derivatives_20260601/review_derivatives_summary.json`
+- Report:
+  `results/verification_substrate_gap/public_supplement_review_derivatives_20260601/review_derivatives_report.md`
+- Manifest:
+  `results/verification_substrate_gap/public_supplement_review_derivatives_20260601/review_derivatives_manifest.json`
+- Redacted trace CSVs:
+  `3`
+- Redacted trace rows:
+  `1920`
+- Dropped private-path field:
+  `source_shard_dir`
+- Private marker hits after redaction:
+  `0`
+- Scope notes:
+  `10`
+- Config security reviews:
+  `1`
+- Security field-name hits:
+  `8`
+- Literal secret-value hits:
+  `0`
+- Public supplement created:
+  `False`
+- Publication performed:
+  `False`
+- Release-ready after derivatives:
+  `False`
+- Claim scope:
+  review derivatives only; redacted trace summaries remain provider-side
+  diagnostic summaries, source-mismatch artifacts remain spoofing evidence
+  only, local-pilot artifacts remain non-adopted/historical evidence only, and
+  no public text-only verification or ownership-proof claim is made.
 
 ## Ownership Scenario Decision-Rule Audit
 

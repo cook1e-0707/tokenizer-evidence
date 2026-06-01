@@ -1,0 +1,44 @@
+{
+  "claim_scope": "configuration review only; no public text-only verification or ownership-proof claim",
+  "field_name_hit_count": 8,
+  "field_name_hits": [
+    {
+      "line": 37,
+      "text": "secret_key_allowed: false"
+    },
+    {
+      "line": 42,
+      "text": "secret_key_allowed: false"
+    },
+    {
+      "line": 47,
+      "text": "secret_key_allowed: false"
+    },
+    {
+      "line": 49,
+      "text": "label: final_text_plus_public_row_bank_no_key"
+    },
+    {
+      "line": 52,
+      "text": "secret_key_allowed: false"
+    },
+    {
+      "line": 57,
+      "text": "secret_key_allowed: false"
+    },
+    {
+      "line": 60,
+      "text": "allowed_information: [final_text, trace, authorized_key, reviewed_row_bank]"
+    },
+    {
+      "line": 62,
+      "text": "secret_key_allowed: true"
+    }
+  ],
+  "manual_review_required": true,
+  "planned_supplement_path": "configs/text_only_observability.yaml",
+  "release_recommendation": "schema_field_review_required_no_literal_secret_values_detected",
+  "secret_value_hit_count": 0,
+  "secret_value_hits": [],
+  "source_path": "configs/verification_substrate_gap/text_only_observability.yaml"
+}

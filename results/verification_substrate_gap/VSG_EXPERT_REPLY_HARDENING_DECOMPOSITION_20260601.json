@@ -29,7 +29,8 @@
     "audited active manuscript figure quality and data traceability with 5 figures, 0 failed figure checks, 5 data checks, and 0 failed data checks",
     "refreshed the expert review packet to include the 2026-06-01 hardened manuscript snapshot and hardening outputs",
     "recorded a public-supplement release-boundary audit from the reproducibility release inventory",
-    "recorded a plan-only public-supplement staging map with target paths, transforms, scope notes, residual risks, and execution/review flags"
+    "recorded a plan-only public-supplement staging map with target paths, transforms, scope notes, residual risks, and execution/review flags",
+    "created artifact-only public-supplement review derivatives with redacted trace CSVs, scope notes, and config security review"
   ],
   "existing_hardening_already_present": [
     "formal first-divergence reduction and public predicate spoofability framing",
@@ -114,7 +115,22 @@
     "release_staging_public_supplement_created": false,
     "release_staging_publication_performed": false,
     "release_staging_targeted_tests_status": "PASS",
-    "release_staging_targeted_tests_passed": 4
+    "release_staging_targeted_tests_passed": 4,
+    "public_supplement_review_derivatives_status": "PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DERIVATIVES_RECORDED_ARTIFACT_ONLY",
+    "public_supplement_review_derivatives_redacted_csv_written_count": 3,
+    "public_supplement_review_derivatives_redacted_rows_total": 1920,
+    "public_supplement_review_derivatives_private_marker_hits_after_redaction": 0,
+    "public_supplement_review_derivatives_scope_note_count": 10,
+    "public_supplement_review_derivatives_security_review_count": 1,
+    "public_supplement_review_derivatives_security_field_name_hit_count": 8,
+    "public_supplement_review_derivatives_security_secret_value_hit_count": 0,
+    "public_supplement_review_derivatives_source_files_copied_without_transform": false,
+    "public_supplement_review_derivatives_public_supplement_created": false,
+    "public_supplement_review_derivatives_publication_performed": false,
+    "public_supplement_review_derivatives_release_ready_after_derivatives": false,
+    "public_supplement_review_derivatives_targeted_tests_status": "PASS",
+    "public_supplement_review_derivatives_targeted_tests_passed": 4,
+    "full_verification_substrate_gap_pytest_tests_passed_after_derivatives": 49
   },
   "not_unlocked": [
     "new Slurm submission",

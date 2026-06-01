@@ -1,0 +1,123 @@
+{
+  "allowlist_enabled": false,
+  "generation_started": false,
+  "model_scoring_started": false,
+  "new_slurm_started": false,
+  "output_dir": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601",
+  "ownership_proof_claimed": false,
+  "private_marker_hits_after_redaction": 0,
+  "public_supplement_created": false,
+  "public_text_only_verification_claimed": false,
+  "publication_performed": false,
+  "redacted_csv_results": [
+    {
+      "bytes": 243819,
+      "derivative_path": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/evidence/trace_bound_controllability_redacted/combined_blocks.csv",
+      "dropped_fields": [
+        "source_shard_dir"
+      ],
+      "input_field_count": 23,
+      "output_field_count": 22,
+      "private_marker_hits_after_redaction": 0,
+      "row_count": 960,
+      "sha256": "e9aaea586d2e019f0a0a85c2f73f43868f577416e4c927d8c9aa804f70e364be",
+      "source_path": "results/verification_substrate_gap/corpora/trace_bound_controllability/combined_blocks.csv"
+    },
+    {
+      "bytes": 120894,
+      "derivative_path": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/evidence/trace_bound_controllability_redacted/qwen_blocks.csv",
+      "dropped_fields": [
+        "source_shard_dir"
+      ],
+      "input_field_count": 23,
+      "output_field_count": 22,
+      "private_marker_hits_after_redaction": 0,
+      "row_count": 480,
+      "sha256": "51c5f39d1aa8910a7f109e8a4443d65e3a16b08d113c7c27ba04a8ae93cd3105",
+      "source_path": "results/verification_substrate_gap/corpora/trace_bound_controllability/qwen_blocks.csv"
+    },
+    {
+      "bytes": 123284,
+      "derivative_path": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/evidence/trace_bound_controllability_redacted/llama_blocks.csv",
+      "dropped_fields": [
+        "source_shard_dir"
+      ],
+      "input_field_count": 23,
+      "output_field_count": 22,
+      "private_marker_hits_after_redaction": 0,
+      "row_count": 480,
+      "sha256": "2a017df490422f42df115ae13312a27932d6bf04e303d1b9d36a2a3641f28d50",
+      "source_path": "results/verification_substrate_gap/corpora/trace_bound_controllability/llama_blocks.csv"
+    }
+  ],
+  "redacted_csv_written_count": 3,
+  "redacted_rows_total": 1920,
+  "release_ready_after_derivatives": false,
+  "review_derivatives_created": true,
+  "schema_name": "verification_substrate_gap_public_supplement_review_derivatives_v1",
+  "scope_note_count": 10,
+  "scope_notes": {
+    "scope_note_count": 10,
+    "scope_note_csv": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/scope_notes.csv",
+    "scope_note_csv_sha256": "cea0848b33f227f580c4702db0a6f803ea553b9fcceaee7c3ad0165e11be7889",
+    "scope_note_md": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/scope_notes.md",
+    "scope_note_md_sha256": "7f52704ecc16d48a297a6ac5cb73fe71713033ec144e1a6fffd2ed208b14c196"
+  },
+  "security_field_name_hit_count": 8,
+  "security_review_count": 1,
+  "security_reviews": [
+    {
+      "claim_scope": "configuration review only; no public text-only verification or ownership-proof claim",
+      "field_name_hit_count": 8,
+      "field_name_hits": [
+        {
+          "line": 37,
+          "text": "secret_key_allowed: false"
+        },
+        {
+          "line": 42,
+          "text": "secret_key_allowed: false"
+        },
+        {
+          "line": 47,
+          "text": "secret_key_allowed: false"
+        },
+        {
+          "line": 49,
+          "text": "label: final_text_plus_public_row_bank_no_key"
+        },
+        {
+          "line": 52,
+          "text": "secret_key_allowed: false"
+        },
+        {
+          "line": 57,
+          "text": "secret_key_allowed: false"
+        },
+        {
+          "line": 60,
+          "text": "allowed_information: [final_text, trace, authorized_key, reviewed_row_bank]"
+        },
+        {
+          "line": 62,
+          "text": "secret_key_allowed: true"
+        }
+      ],
+      "manual_review_required": true,
+      "planned_supplement_path": "configs/text_only_observability.yaml",
+      "release_recommendation": "schema_field_review_required_no_literal_secret_values_detected",
+      "secret_value_hit_count": 0,
+      "secret_value_hits": [],
+      "security_review_json": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/security_review_text_only_observability.json",
+      "security_review_json_sha256": "42267af772a7ea51fdbd71882ee2b4e89e8815d80abff66e1d00f3bf7cb86bb1",
+      "security_review_md": "results/verification_substrate_gap/public_supplement_review_derivatives_20260601/security_review_text_only_observability.md",
+      "security_review_md_sha256": "eacd39b217c182eaa10cdc02ad912ef86a5db0f4d00f39d5d0622897947a638d",
+      "source_path": "configs/verification_substrate_gap/text_only_observability.yaml"
+    }
+  ],
+  "security_secret_value_hit_count": 0,
+  "source_files_copied_without_transform": false,
+  "source_staging_plan": "results/verification_substrate_gap/reproducibility_release_staging_plan_20260601/release_staging_plan.csv",
+  "status": "PASS_VSG_PUBLIC_SUPPLEMENT_REVIEW_DERIVATIVES_RECORDED_ARTIFACT_ONLY",
+  "training_started": false
+}

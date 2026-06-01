@@ -316,6 +316,40 @@ ownership_proof_claimed = false
 targeted release-staging tests = PASS, 4 passed
 ```
 
+Created artifact-only public-supplement review derivatives from the staging
+plan:
+
+```text
+scripts/verification_substrate_gap/build_vsg_public_supplement_review_derivatives.py
+tests/verification_substrate_gap/test_vsg_public_supplement_review_derivatives.py
+results/verification_substrate_gap/public_supplement_review_derivatives_20260601/
+```
+
+Observed scope:
+
+```text
+redacted_csv_written_count = 3
+redacted_rows_total = 1920
+dropped_private_path_field = source_shard_dir
+private_marker_hits_after_redaction = 0
+scope_note_count = 10
+security_review_count = 1
+security_field_name_hit_count = 8
+security_secret_value_hit_count = 0
+source_files_copied_without_transform = false
+public_supplement_created = false
+publication_performed = false
+release_ready_after_derivatives = false
+new_slurm_started = false
+generation_started = false
+model_scoring_started = false
+training_started = false
+public_text_only_verification_claimed = false
+ownership_proof_claimed = false
+targeted public-supplement review-derivative tests = PASS, 4 passed
+full tests/verification_substrate_gap pytest = PASS, 49 passed
+```
+
 ## Remaining Scope After This Pass
 
 The current allowed route remains artifact-only manuscript/package hygiene.
@@ -332,5 +366,6 @@ The following are not unlocked by this pass:
 - cryptographic provenance claim.
 
 The next allowed route remains artifact-only manuscript/package hygiene and
-release-boundary hardening. The current release inventory shows that a future
-public supplement is not release-ready without anonymization/scope review.
+release-boundary hardening. The current review derivatives reduce the private
+path and scope-note blockers, but a future public supplement is still not
+declared release-ready and has not been created or published.
